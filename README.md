@@ -1,3 +1,5 @@
+![Logo](/README-banner.jpg)
+
 # Kholofelo Robyn Rababalela — Introduction to MCP
 
 Freelance Web Developer · Computer Engineering Student 📍 Cape Town, Western Cape, South Africa
