@@ -1,4 +1,4 @@
-![Introduction to MCP](/README-banner.jpg)
+![Introduction to MCP](./README-bannner.jpg)
 
 # Kholofelo Robyn Rababalela — Introduction to MCP
 
