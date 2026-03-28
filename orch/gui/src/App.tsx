@@ -1,121 +1,86 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState, useEffect, useRef } from 'react';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+interface Message {
+  type: string;
+  agent: string;
+  content?: string;
+  reasoning?: string;
+  round: number;
 }
 
-export default App
+const App: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [activeAgent, setActiveAgent] = useState<string | null>(null);
+  const [thinkingAgent, setThinkingAgent] = useState<string | null>(null);
+  const ws = useRef<WebSocket | null>(null);
+
+  useEffect(() => {
+    // 📡 NEURAL LINK CONNECTION
+    ws.current = new WebSocket('ws://localhost:8000/ws/live');
+
+    ws.current.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'thinking') {
+          setThinkingAgent(data.agent);
+          setActiveAgent(null);
+        } else if (data.type === 'response') {
+          setThinkingAgent(null);
+          setActiveAgent(data.agent);
+          
+          // Add to data lake view
+          setMessages((prev) => [...prev, data]);
+          
+          // Highlight temporary and move back to idle after 5s
+          setTimeout(() => setActiveAgent(null), 5000);
+        }
+      } catch (err) {
+        console.error("Neural Link Error:", err);
+      }
+    };
+
+    return () => ws.current?.close();
+  }, []);
+
+  const agentList = ['grok', 'gemini', 'claude', 'copilot'];
+
+  return (
+    <div className="command-center">
+      <div className="main-room">
+        {agentList.map((id) => {
+          const isThinking = thinkingAgent === id;
+          const isResponding = activeAgent === id;
+          const lastMsg = messages.filter(m => m.agent === id).slice(-1)[0];
+
+          return (
+            <div 
+              key={id} 
+              className={`chamber ${isThinking ? 'thinking' : ''} ${isResponding ? 'responding' : ''}`}
+            >
+              <div className="agent-id">{id}</div>
+              {isThinking && <div className="glow-orb" />}
+              <div className="response-text">
+                {isThinking ? "PRODUCING REASONING CHAIN..." : lastMsg?.content || "STANDBY..."}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      <div className="sidebar">
+        <div className="sidebar-title">DEEP REASONING LAKE</div>
+        <div className="thought-lake">
+          {messages.map((m, i) => (
+            <div key={i} className="thought-msg">
+              <div className="thought-header">{m.agent.toUpperCase()} - ROUND {m.round}</div>
+              <div className="thought-body">{m.reasoning}</div>
+            </div>
+          )).reverse()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;

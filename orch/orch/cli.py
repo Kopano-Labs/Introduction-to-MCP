@@ -165,9 +165,15 @@ def learn_insights(session_id: int):
     finally:
         db.close()
 
+@app.command("board")
+def board():
+    """Start the AGI Command Center GUI Backend (API + WebSocket)."""
+    from .api import start_api
+    start_api()
+
 @app.command()
 def version():
-    console.print("orch v0.1.0 – Phase 1 Foundation ✅")
+    console.print("orch v0.5.0 – AGI Command Center Ready 🛰️")
 
 if __name__ == "__main__":
     app()
