@@ -1,0 +1,137 @@
+:root {
+  --bg-deep: #0a0a0f;
+  --bg-card: rgba(18, 18, 25, 0.7);
+  --cyan-glow: #00f2ff;
+  --magenta-glow: #ff00ff;
+  --text-main: #e0e0e0;
+  --text-dim: #888888;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-main);
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.command-center {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(circle at top right, #1a1a2e, #0a0a0f);
+}
+
+.main-room {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.chamber {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.chamber.thinking {
+  border-color: var(--cyan-glow);
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+}
+
+.chamber.responding {
+  border-color: var(--magenta-glow);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);
+}
+
+.agent-id {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--cyan-glow);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.response-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.sidebar {
+  width: 400px;
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.thought-lake {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.thought-msg {
+  padding: 15px;
+  background: rgba(0, 242, 255, 0.03);
+  border-left: 2px solid var(--cyan-glow);
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.thought-header {
+  font-size: 0.7rem;
+  color: var(--cyan-glow);
+  margin-bottom: 5px;
+}
+
+.thought-body {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.glow-orb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cyan-glow);
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.3; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
