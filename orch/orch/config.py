@@ -11,6 +11,16 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     anthropic_api_key: str | None = None
 
+    # WhatsApp / Evolution API
+    whatsapp_api_key: str | None = None
+    whatsapp_instance_url: str | None = None
+    whatsapp_instance_name: str = "main"
+    whatsapp_recipient: str | None = None # The phone number or Group JID to talk to
+    
+    # --- PHASE 5: AIML API (Universal Aggregator) ---
+    aiml_api_key: str | None = None
+    aiml_api_base: str = "https://ai.aimlapi.com"
+    
     # Storage
     # Using a local directory within the project for easier auditing during development
     data_dir: Path = Path("./.orch_data")
