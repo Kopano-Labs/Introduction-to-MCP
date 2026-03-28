@@ -1,0 +1,8 @@
+typer[all]>=0.12
+rich>=13
+pydantic-settings>=2
+python-dotenv>=1
+litellm>=1.40
+sqlalchemy>=2.0
+google-generativeai>=0.8.0
+openai>=1.55.0
