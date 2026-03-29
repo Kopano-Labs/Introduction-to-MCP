@@ -4,8 +4,24 @@
   <h1>Introduction to MCP</h1>
   
   <p><strong>Multi-LLM Model Context Protocol (MCP) Servers & Clients</strong></p>
-  <p><strong>Claude • Grok • Gemini • Copilot</strong></p>
 
+  <!-- LLM Badges -->
+  <p>
+    <a href="https://claude.ai">
+      <img src="https://img.shields.io/badge/Claude-FF6B00?logo=claude&logoColor=white&style=for-the-badge" alt="Claude"/>
+    </a>
+    <a href="https://grok.x.ai">
+      <img src="https://img.shields.io/badge/Grok-000000?logo=x&logoColor=white&style=for-the-badge" alt="Grok"/>
+    </a>
+    <a href="https://gemini.google.com">
+      <img src="https://img.shields.io/badge/Gemini-8E75F5?logo=googlegemini&logoColor=white&style=for-the-badge" alt="Gemini"/>
+    </a>
+    <a href="https://github.com/features/copilot">
+      <img src="https://img.shields.io/badge/Copilot-8957E5?logo=github-copilot&logoColor=white&style=for-the-badge" alt="GitHub Copilot"/>
+    </a>
+  </p>
+
+  <!-- Core Tech Badges -->
   <p>
     <a href="https://www.python.org">
       <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge" alt="Python"/>
@@ -15,9 +31,6 @@
     </a>
     <a href="https://anthropic.com">
       <img src="https://img.shields.io/badge/Anthropic-191919?logo=anthropic&logoColor=white&style=for-the-badge" alt="Anthropic"/>
-    </a>
-    <a href="https://claude.ai">
-      <img src="https://img.shields.io/badge/Claude-FF6B00?logo=claude&logoColor=white&style=for-the-badge" alt="Claude"/>
     </a>
   </p>
 
@@ -30,22 +43,15 @@
 
 ## 👋 About the Project
 
-This repository is a **practical, production-ready introduction** to **Anthropic’s Model Context Protocol (MCP)**.
+This repository is a **practical introduction** to **Anthropic’s Model Context Protocol (MCP)** with **full multi-LLM support**.
 
-It now features **full multi-LLM support**:
+It demonstrates building MCP servers and clients while using:
 - **Claude** (native Anthropic SDK)
 - **Grok** (xAI)
 - **Gemini** (Google)
 - **Copilot** (GitHub)
 
-The `orch/` layer uses these LLMs together to **train and improve orchestration logic**, making the MCP implementation even more powerful and flexible.
-
-You’ll learn how to build **MCP servers + clients** while leveraging the three core primitives:
-- **🛠️ Tools** – Expose functions to any LLM
-- **📦 Resources** – Share files, data & context
-- **📝 Prompts** – Structured, high-quality interactions
-
-Perfect for creating **AI-augmented apps with minimal code**.
+The `orch/` layer uses all four LLMs together to **train and improve orchestration logic**.
 
 ---
 
@@ -55,21 +61,16 @@ Perfect for creating **AI-augmented apps with minimal code**.
   <img src="https://skillicons.dev/icons?i=python,anthropic,claude,fastapi,grok,gemini,copilot,git,vscode,markdown&perline=8" alt="Tech Stack"/>
 </div>
 
-**Core technologies:**
-- **Python** + **`uv`** (modern dependency management)
-- **Anthropic MCP SDK** + **multi-LLM orchestration**
-- Claude, Grok, Gemini & Copilot integration ready
-
 ---
 
 ## ✨ Features
 
-- ⚡ Full MCP server + client with **multi-LLM support**
-- 🌐 Grok • Gemini • Copilot added to train `orch/` layer
-- 🚀 Ultra-modern Python setup (`uv`, `pyproject.toml`)
-- 🤖 Seamless switching between LLMs
-- 📁 Clean, well-documented structure
-- 🔧 Runs in minutes
+- ⚡ Full MCP server + client implementation  
+- 🌐 Multi-LLM support (Claude • Grok • Gemini • Copilot)  
+- 🚀 `orch/` layer trained with all four LLMs  
+- 🧪 Ultra-modern Python setup with `uv`  
+- 📁 Clean, well-documented structure  
+- 🔧 Ready to run in minutes  
 - 🇿🇦 Built in South Africa
 
 ---
