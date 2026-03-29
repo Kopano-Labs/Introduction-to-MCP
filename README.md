@@ -43,6 +43,8 @@
 
 ## 👋 About the Project
 
+[![SafeSkill 91/100](https://img.shields.io/badge/SafeSkill-91%2F100_Verified%20Safe-brightgreen)](https://safeskill.dev/scan/robynawesome-introduction-to-mcp)
+
 This repository is a **practical introduction** to **Anthropic’s Model Context Protocol (MCP)** with **full multi-LLM support**.
 
 It demonstrates building MCP servers and clients while using:
