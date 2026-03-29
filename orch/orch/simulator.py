@@ -3,7 +3,7 @@ from rich.panel import Panel
 from rich.table import Table
 from .agent_manager import load_agents, Agent
 from .llm import call_ai, call_structured_huddle
-from .database import SessionLocal, CouncilSession, NeuralRound, CognitiveBlock, Mentor, get_or_create_mentor, init_db
+from .database import SessionLocal, CouncilSession, NeuralRound, CognitiveBlock, Mentor, get_or_create_mentor, init_db, engine
 from .bridge import bridge
 import time
 import asyncio
@@ -12,7 +12,7 @@ import uuid
 import requests
 import json
 
-# Ensure Data Lake is ready
+# Absolute Relational Init
 init_db()
 
 console = Console()
@@ -23,15 +23,6 @@ def broadcast_to_gui(data: dict):
         requests.post("http://localhost:8000/broadcast", json=data, timeout=0.1)
     except:
         pass 
-
-def parse_cot_response(raw_reply: str) -> tuple[str, str]:
-    """Extract <thought> and <response> blocks"""
-    thought_match = re.search(r'<thought>(.*?)</thought>', raw_reply, re.DOTALL)
-    response_match = re.search(r'<response>(.*?)</response>', raw_reply, re.DOTALL)
-    
-    thought = thought_match.group(1).strip() if thought_match else "No explicit reasoning provided."
-    response = response_match.group(1).strip() if response_match else raw_reply.strip()
-    return thought, response
 
 def run_simulated_discussion(topic: str, agent_ids: list[str], max_rounds: int = 10, whatsapp_mode: bool = False):
     db = SessionLocal()
@@ -70,8 +61,8 @@ def run_simulated_discussion(topic: str, agent_ids: list[str], max_rounds: int =
         
         # Student Thinking
         console.print(f"[bold magenta][ORCH (Student)][/bold magenta] theorizing...", end=" ")
-        student_raw = call_ai(orch_student, prompt)
-        s_reasoning, s_response = parse_cot_response(student_raw)
+        # Using the new (reasoning, response) tuple
+        s_reasoning, s_response = call_ai(orch_student, prompt)
         
         # Save Student Block
         s_mentor_idx = get_or_create_mentor(db, orch_student.id, "Student")
@@ -89,13 +80,12 @@ def run_simulated_discussion(topic: str, agent_ids: list[str], max_rounds: int =
         for m in mentors:
             broadcast_to_gui({"type": "thinking", "agent": m.id, "round": round_num})
             if m.id == "grok":
-                # Use High-Fidelity Structured Logic
                 proof = call_structured_huddle(m, f"Topic: {topic}\nInquiry: {s_response}")
                 huddle_trace.append(f"[GROK_STRUCTURED]: {proof['proposed_synthesis']}")
                 console.print(f"[yellow]✓ Grok provided Structured Proof (Confidence: {proof['confidence_score']}%)[/yellow]")
             else:
-                reply = call_ai(m, f"Topic: {topic}\nStudent says: {s_response}\nProvide 1 sharp logical correction.")
-                huddle_trace.append(f"[{m.id.upper()}]: {reply}")
+                m_reasoning, m_reply = call_ai(m, f"Topic: {topic}\nStudent says: {s_response}\nProvide 1 sharp logical correction.")
+                huddle_trace.append(f"[{m.id.upper()}]: {m_reply}")
                 console.print(f"[cyan]✓ {m.id.upper()} contributed expertise.[/cyan]")
         
         # 5. MASTER SYNTHESIS GATE (HUMAN INPUT)
@@ -108,7 +98,7 @@ def run_simulated_discussion(topic: str, agent_ids: list[str], max_rounds: int =
         
         if user_input.lower() == "auto":
              synthesis_prompt = f"Huddle Trace:\n{full_huddle}\nTopic: {topic}\nProvide the final consolidated lesson for ORCH."
-             final_lesson = call_ai(mentors[0], synthesis_prompt)
+             _, final_lesson = call_ai(mentors[0], synthesis_prompt)
         else:
              final_lesson = user_input
 
@@ -127,8 +117,7 @@ def run_simulated_discussion(topic: str, agent_ids: list[str], max_rounds: int =
         console.print(f"\n[bold magenta][ORCH][/bold magenta] absorbing the Master Synthesis...", end=" ")
         final_prompt = f"Master Synthesis: {final_lesson}\nTopic: {topic}\nExplain what you have learned and how it evolves your internal Goal Consistency."
         
-        final_raw = call_ai(orch_student, final_prompt)
-        f_reasoning, f_response = parse_cot_response(final_raw)
+        f_reasoning, f_response = call_ai(orch_student, final_prompt)
         
         # Save Final Block
         f_block = CognitiveBlock(
