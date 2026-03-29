@@ -1,31 +1,49 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
-interface Message {
-  type: string;
+interface ReasoningBlock {
+  block_id: string;
   agent: string;
-  block_id?: string;
-  content?: string;
-  reasoning?: string;
-  round: number;
-  value_score?: number;
-  improvement_hint?: string;
+  role: string | null;
+  content: string;
+  reasoning: string;
+  value_score: number;
+  override_score: number | null;
+  improvement_hint: string | null;
+  is_student: number;
+}
+
+interface Round {
+  id: string;
+  round_number: number;
+  blocks: ReasoningBlock[];
 }
 
 interface Lesson {
-  id: number;
+  id: string;
   topic: string;
   created_at: string;
-  agents: string[];
+  rounds?: Round[];
+}
+
+interface LiveMessage {
+  type: string;
+  agent: string;
+  block_id: string;
+  content: string;
+  reasoning: string;
+  round: number;
+  value_score?: number;
+  override_score?: number;
+  improvement_hint?: string;
 }
 
 const App: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<LiveMessage[]>([]);
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
   const [thinkingAgent, setThinkingAgent] = useState<string | null>(null);
   const [sessions, setSessions] = useState<Lesson[]>([]);
-  const [selectedSessionId, setSelectedSessionId] = useState<number | null>(null);
-  const [auditMessages, setAuditMessages] = useState<Message[]>([]);
+  const [selectedSession, setSelectedSession] = useState<Lesson | null>(null);
   const [isAuditMode, setIsAuditMode] = useState(false);
   
   const ws = useRef<WebSocket | null>(null);
@@ -46,16 +64,26 @@ const App: React.FC = () => {
           setMessages((prev) => [...prev, data]);
           setTimeout(() => setActiveAgent(null), 5000);
         } else if (data.type === 'override') {
-          // Live sync of Master Overrides
-          setMessages(prev => prev.map(m => 
-            m.block_id === data.block_id 
-              ? { ...m, value_score: data.value_score, improvement_hint: data.improvement_hint } 
-              : m
-          ));
-          setAuditMessages(prev => prev.map(m => 
-            m.block_id === data.block_id 
-              ? { ...m, value_score: data.value_score, improvement_hint: data.improvement_hint } 
-              : m
+          // Live sync of Master Overrides in relational tree
+          if (selectedSession && isAuditMode) {
+            setSelectedSession(prev => {
+              if (!prev) return null;
+              return {
+                ...prev,
+                rounds: prev.rounds?.map(r => ({
+                  ...r,
+                  blocks: r.blocks.map(b => b.block_id === data.block_id 
+                    ? { ...b, override_score: data.override_score, improvement_hint: data.improvement_hint } 
+                    : b
+                  )
+                }))
+              };
+            });
+          }
+          // Also sync live view messages
+          setMessages(prev => prev.map(m => m.block_id === data.block_id 
+            ? { ...m, override_score: data.override_score, improvement_hint: data.improvement_hint } 
+            : m
           ));
         }
       } catch (err) {
@@ -65,7 +93,7 @@ const App: React.FC = () => {
 
     fetchSessions();
     return () => ws.current?.close();
-  }, []);
+  }, [selectedSession, isAuditMode]);
 
   const fetchSessions = async () => {
     try {
@@ -75,23 +103,22 @@ const App: React.FC = () => {
     } catch (err) { console.error("Vault Error:", err); }
   };
 
-  const loadSession = async (id: number) => {
+  const loadSession = async (id: string) => {
     try {
-      setSelectedSessionId(id);
       setIsAuditMode(true);
       const resp = await fetch(`http://127.0.0.1:8000/sessions/${id}`);
       const data = await resp.json();
-      setAuditMessages(data.messages);
+      setSelectedSession(data);
     } catch (err) { console.error("Audit Error:", err); }
   };
 
-  const overrideScore = async (blockId: string, score: number, roundNum: number) => {
-    if (!selectedSessionId) return;
+  const overrideScore = async (blockId: string, score: number) => {
+    if (!selectedSession) return;
     try {
-      await fetch(`http://127.0.0.1:8000/sessions/${selectedSessionId}/round/${roundNum}/block/${blockId}/override`, {
+      await fetch(`http://127.0.0.1:8000/sessions/${selectedSession.id}/override`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ value_score: score })
+        body: JSON.stringify({ block_id: blockId, override_score: score })
       });
     } catch (err) { console.error("Override Error:", err); }
   };
@@ -113,10 +140,10 @@ const App: React.FC = () => {
           {sessions.map((s) => (
             <div 
               key={s.id} 
-              className={`lesson-item ${selectedSessionId === s.id && isAuditMode ? 'active' : ''}`}
+              className={`lesson-item ${selectedSession?.id === s.id && isAuditMode ? 'active' : ''}`}
               onClick={() => loadSession(s.id)}
             >
-              <div className="lesson-topic">SESSION #{s.id}: {s.topic}</div>
+              <div className="lesson-topic">SESSION: {s.topic}</div>
               <div className="lesson-date">{new Date(s.created_at).toLocaleString()}</div>
             </div>
           ))}
@@ -143,35 +170,44 @@ const App: React.FC = () => {
                 <div className="response-text">
                   {isThinking ? (isStudent ? "SYNTHESIZING DEEP REASONING..." : "PROVIDING EXPERT ADVICE...") : lastMsg?.content || "STANDBY..."}
                 </div>
-                {lastMsg?.value_score !== undefined && (
-                   <div className="value-meter"><div className="value-fill" style={{width: `${lastMsg.value_score * 10}%`}} /></div>
+                {(lastMsg?.value_score !== undefined || lastMsg?.override_score !== undefined) && (
+                   <div className="value-meter">
+                     <div className="value-fill" style={{width: `${(lastMsg.override_score ?? lastMsg.value_score ?? 0) * 10}%`}} />
+                   </div>
                 )}
               </div>
             );
           })
         ) : (
-          /* 🕵️ COGNITIVE AUDIT VIEW */
+          /* 🕵️ COGNITIVE AUDIT VIEW (Hierarchical) */
           <div className="audit-container">
-            <div className="sidebar-title">Neural Audit Round-by-Round</div>
-            {auditMessages.map((m, i) => (
-              <div key={m.block_id || i} className={`audit-card ${m.agent === 'orch' ? 'student' : 'mentor'}`}>
-                 <div className="card-header">
-                    <div className="card-agent">{m.agent.toUpperCase()} - ROUND {m.round}</div>
-                    <div className="value-tag">VALUATION: {m.value_score || 0}/10</div>
-                 </div>
-                 <div className="thought-body" style={{color: 'white', marginBottom: '15px'}}>{m.content}</div>
-                 <div className="thought-body">🧠 Reasoning: {m.reasoning}</div>
-                 
-                 <div className="override-container">
-                    <input 
-                      type="range" min="0" max="10" 
-                      value={m.value_score || 0} 
-                      className="glow-knob"
-                      aria-label="Master Override Logic Score"
-                      onChange={(e) => overrideScore(m.block_id!, parseInt(e.target.value), m.round)}
-                    />
-                 </div>
-                 {m.improvement_hint && <div className="improvement-hint">Master Input: {m.improvement_hint}</div>}
+            <div className="sidebar-title">Forensic Audit: {selectedSession?.topic}</div>
+            {selectedSession?.rounds?.map((round) => (
+              <div key={round.id} className="round-section">
+                <div className="sidebar-title" style={{fontSize: '0.7rem', color: 'var(--cyan-glow)', marginTop: '40px'}}>
+                   ROUND {round.round_number} ANALYSIS
+                </div>
+                {round.blocks.map((block) => (
+                  <div key={block.block_id} className={`audit-card ${block.is_student ? 'student' : 'mentor'}`}>
+                    <div className="card-header">
+                      <div className="card-agent">{block.agent.toUpperCase()} </div>
+                      <div className="value-tag">MASTER SCORE: {block.override_score ?? block.value_score ?? 0}/10</div>
+                    </div>
+                    <div className="thought-body" style={{color: 'white', marginBottom: '15px'}}>{block.content}</div>
+                    <div className="thought-body">🧠 Reasoning Trace: {block.reasoning}</div>
+                    
+                    <div className="override-container">
+                      <input 
+                        type="range" min="0" max="10" 
+                        value={block.override_score ?? block.value_score ?? 0} 
+                        className="glow-knob"
+                        aria-label="Master Override Logic Score"
+                        onChange={(e) => overrideScore(block.block_id, parseInt(e.target.value))}
+                      />
+                    </div>
+                    {block.improvement_hint && <div className="improvement-hint">Master Hint: {block.improvement_hint}</div>}
+                  </div>
+                ))}
               </div>
             ))}
           </div>

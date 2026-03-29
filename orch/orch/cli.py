@@ -3,7 +3,7 @@ from rich.console import Console
 from rich.table import Table
 from .agent_manager import Agent, save_agent, load_agents
 from .simulator import run_simulated_discussion
-from .database import SessionLocal, Session, Message
+from .database import SessionLocal, CouncilSession, NeuralRound, CognitiveBlock, Mentor
 from .exporter import export_session_to_jsonl, export_all_to_jsonl
 from .config import settings
 
@@ -38,42 +38,47 @@ def chat_sessions_list():
     """List all archived discussion sessions in the Data Lake."""
     db = SessionLocal()
     try:
-        sessions = db.query(Session).order_by(Session.created_at.desc()).all()
+        sessions = db.query(CouncilSession).order_by(CouncilSession.created_at.desc()).all()
         if not sessions:
             console.print("[yellow]No sessions found in the Data Lake.[/yellow]")
             return
             
-        table = Table(title="Discussion History")
+        table = Table(title="AGI Apprenticeship Vault")
         table.add_column("ID", style="cyan")
         table.add_column("Topic", style="white")
         table.add_column("Created At", style="magenta")
-        table.add_column("Agents", style="green")
         
         for s in sessions:
-            table.add_row(str(s.id), s.topic, s.created_at.strftime("%Y-%m-%d %H:%M"), s.agents)
+            table.add_row(str(s.id), s.title, s.created_at.strftime("%Y-%m-%d %H:%M"))
             
         console.print(table)
     finally:
         db.close()
 
 @chat_app.command("log")
-def chat_log(session_id: int = typer.Option(None, "--session", "-s")):
+def chat_log(session_id: str = typer.Option(None, "--session", "-s")):
     """View the actual discussion history from the Data Lake."""
     db = SessionLocal()
     try:
         session = None
         if session_id:
-            session = db.query(Session).filter(Session.id == session_id).first()
+            session = db.query(CouncilSession).filter(CouncilSession.id == session_id).first()
         else:
-            session = db.query(Session).order_by(Session.created_at.desc()).first()
+            session = db.query(CouncilSession).order_by(CouncilSession.created_at.desc()).first()
             
         if not session:
             console.print("[red]No archived sessions found![/red]")
             return
             
-        console.print(f"📄 [bold blue]LOG: Session #{session.id}[/bold blue] | Topic: {session.topic}")
-        for msg in session.messages:
-            console.print(f"[bold cyan][{msg.agent_id.upper()}][/bold cyan] (Round {msg.round_num}): {msg.content}")
+        console.print(f"📄 [bold blue]AUDIT: Session #{session.id}[/bold blue] | Topic: {session.title}")
+        for rnd in session.rounds:
+            console.print(f"\n[bold yellow]── ROUND {rnd.round_number} ──────────[/bold yellow]")
+            for block in rnd.blocks:
+                mentor = db.query(Mentor).filter(Mentor.id == block.mentor_id).first()
+                prefix = f"[bold magenta][{mentor.name.upper()}][/bold magenta]" if block.is_student else f"[bold cyan][{mentor.name.upper()}][/bold cyan]"
+                console.print(f"{prefix}: {block.content}")
+                if block.reasoning:
+                    console.print(f"[dim italic]🧠 Reasoning: {block.reasoning[:100]}...[/dim italic]")
     finally:
         db.close()
 
@@ -131,7 +136,7 @@ def learn_datasets_list():
     console.print(f"[bold green]✓ Done! Master dataset saved at: {dataset_file}[/bold green]")
 
 @learn_app.command("export")
-def learn_export(session_id: int):
+def learn_export(session_id: str):
     """Export a specific session for fine-tuning."""
     output_path = settings.data_dir / "datasets"
     output_path.mkdir(parents=True, exist_ok=True)
@@ -143,11 +148,11 @@ def learn_export(session_id: int):
          console.print(f"[red]Error: Session #{session_id} not found.[/red]")
 
 @learn_app.command("insights")
-def learn_insights(session_id: int):
+def learn_insights(session_id: str):
     """Analyze a session and extract distilled logical truths."""
     db = SessionLocal()
     try:
-        session = db.query(Session).filter(Session.id == session_id).first()
+        session = db.query(CouncilSession).filter(CouncilSession.id == session_id).first()
         if not session:
             console.print(f"[red]Session #{session_id} not found.[/red]")
             return
@@ -156,7 +161,13 @@ def learn_insights(session_id: int):
         
         # We use a special model call to 'distill' the logic
         moderator_agent = next((a for a in load_agents().values() if a.id == "moderator"), list(load_agents().values())[0])
-        full_text = "\n".join([f"[{m.agent_id}]: {m.content}" for m in session.messages])
+        
+        full_text_list = []
+        for rnd in session.rounds:
+            for block in rnd.blocks:
+                mentor = db.query(Mentor).filter(Mentor.id == block.mentor_id).first()
+                full_text_list.append(f"[{mentor.name}]: {block.content}")
+        full_text = "\n".join(full_text_list)
         
         insight_prompt = f"Distill the following multi-agent discussion into 3-5 core logical 'Truths' or 'Conclusions' for a Knowledge Base:\n\n{full_text}"
         
