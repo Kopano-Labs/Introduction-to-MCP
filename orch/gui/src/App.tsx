@@ -17,7 +17,11 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // 📡 NEURAL LINK CONNECTION
-    ws.current = new WebSocket('ws://localhost:8000/ws/live');
+    ws.current = new WebSocket('ws://127.0.0.1:8000/ws/live');
+
+    ws.current.onopen = () => {
+      console.log("Neural Link Active");
+    };
 
     ws.current.onmessage = (event) => {
       try {
@@ -43,12 +47,13 @@ const App: React.FC = () => {
     return () => ws.current?.close();
   }, []);
 
-  const agentList = ['grok', 'gemini', 'claude', 'copilot'];
+  const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
 
   return (
     <div className="command-center">
       <div className="main-room">
         {agentList.map((id) => {
+          const isStudent = id === 'orch';
           const isThinking = thinkingAgent === id;
           const isResponding = activeAgent === id;
           const lastMsg = messages.filter(m => m.agent === id).slice(-1)[0];
@@ -56,12 +61,13 @@ const App: React.FC = () => {
           return (
             <div 
               key={id} 
-              className={`chamber ${isThinking ? 'thinking' : ''} ${isResponding ? 'responding' : ''}`}
+              className={`chamber ${id} ${isThinking ? 'thinking' : ''} ${isResponding ? 'responding' : ''} ${isStudent ? 'student' : 'mentor'}`}
             >
+              <div className="agent-rank">{isStudent ? "[STUDENT]" : "[MENTOR]"}</div>
               <div className="agent-id">{id}</div>
               {isThinking && <div className="glow-orb" />}
               <div className="response-text">
-                {isThinking ? "PRODUCING REASONING CHAIN..." : lastMsg?.content || "STANDBY..."}
+                {isThinking ? (isStudent ? "SYNTHESIZING DEEP REASONING..." : "PROVIDING EXPERT ADVICE...") : lastMsg?.content || "STANDBY..."}
               </div>
             </div>
           );

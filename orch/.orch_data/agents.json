@@ -26,5 +26,12 @@
     "model": "copilot",
     "persona": "You are Copilot, a helpful and truthful AI.",
     "_api_key": "FALLBACK"
+  },
+  "orch": {
+    "id": "orch",
+    "provider": "gemini",
+    "model": "gemini-1.5-flash",
+    "persona": "A young, curious AGI student learning from the Council of Teachers.",
+    "_api_key": "FALLBACK"
   }
 }

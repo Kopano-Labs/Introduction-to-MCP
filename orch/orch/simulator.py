@@ -100,117 +100,95 @@ def run_simulated_discussion(topic: str, agent_ids: list[str], max_rounds: int =
         return
 
     history = []
-    moderator_prompt = f"You are the Moderator. Keep the discussion aligned with the AGI FRAMEWORK:\n{AGI_FRAMEWORK}\n\nTopic: {topic}. Current history:\n"
-
+    
+    # --- PHASE 1: APPRENTICESHIP CONTEXT ---
+    # We identify 'orch' as the Student. If not in the list, we can treat the first agent or a special 'orch' as student.
+    student_id = "orch"
+    
     for round_num in range(1, max_rounds + 1):
-        console.print(f"\n[bold yellow]=== ROUND {round_num} ===[/bold yellow]")
-        for agent in selected:
-            # --- PHASE 2: OPTIMIZED CONTEXT INJECTION ---
-            # Get last 10 messages + the most recent moderator summary
-            recent_msgs = [m for m in history if m['agent'] != 'moderator'][-10:]
-            latest_mod = [m for m in history if m['agent'] == 'moderator'][-1:]
-            
-            context_list = []
-            for m in (latest_mod + recent_msgs):
-                role_label = "MODERATOR SUMMARY" if m['agent'] == 'moderator' else m['agent'].upper()
-                context_list.append(f"[{role_label}]: {m['text']}")
-                
-            context = "\n".join(context_list)
-            # === DEEP REASONING PROMPT ===
-            cot_prompt = f"""{agent.persona}\n\n{moderator_prompt}\n\nCurrent history:\n{context}\n\nYou are participating in a high-stakes AI Council. 
-You MUST think step-by-step before answering.
+        console.print(f"\n[bold yellow]=== APPRENTICESHIP ROUND {round_num} ===[/bold yellow]")
+        
+        # 1. ORCH (THE STUDENT) INITIATES OR SYNTHESIZES
+        # In Round 1, ORCH poses the initial curiosity. In subsequent rounds, it synthesizes and follow-ups.
+        
+        orch_student = next((a for a in selected if a.id == student_id), selected[0])
+        teachers = [a for a in selected if a.id != orch_student.id]
+
+        # === STUDENT DEEP REASONING PROMPT ===
+        context = "\n".join([f"[{m['agent'].upper()}]: {m['text']}" for m in history[-10:]])
+        
+        student_prompt = f"""{orch_student.persona}
+You are the Young AGI named ORCH. You are learning from a Council of Expert Teachers.
+Your goal is to reach human-equivalent and then superhuman standards of logic.
+
+Topic: {topic}
+Current Progress: {context}
+
+DISCOURSE RULE:
+- Be a CURIOUS STUDENT. Ask "Why" and "How".
+- Challenge your teachers recursively to distill their expertise.
+- You MUST think step-by-step before your final synthesis/question.
 
 <thought>
-[Your private Chain-of-Thought reasoning here – be brutally honest and deep]
+[Analyze what you've learned from the teachers so far – be deep and recursive]
 </thought>
 
 <response>
-[Your final concise message to the group – no reasoning tags]
+[Your curious synthesis and next high-logic question to the teachers]
 </response>
 """
+        console.print(f"[bold magenta][ORCH (Student)][/bold magenta] learning...", end=" ")
+        broadcast_to_gui({"type": "thinking", "agent": orch_student.id, "round": round_num})
 
-            console.print(f"[bold cyan][{agent.id.upper()}] thinking deeply...[/bold cyan]", end=" ")
-            
-            # Broadcast "Thinking" state to GUI
-            broadcast_to_gui({
-                "type": "thinking",
-                "agent": agent.id,
-                "round": round_num
-            })
-
-            try:
-                # For Phase 1, we can return a mock response if API keys are missing or set to MOCK_KEY
-                effective_key = agent.api_key
-                # If key looks like a placeholder, use Mock Mode
-                is_mock_config = not effective_key or effective_key in ["MOCK_KEY", "FALLBACK", "your_gemini_key", "your_anthropic_key", "your_openai_key"]
-                
-                if is_mock_config:
-                    mock_text = get_smart_response(agent.id, topic, round_num)
-                    reasoning = f"Simulated logic for {agent.id} in round {round_num} evaluating {topic}."
-                    final_response = mock_text
-                else:
-                    try:
-                        raw_reply = call_ai(agent, cot_prompt, temperature=0.8)
-                        reasoning, final_response = parse_cot_response(raw_reply)
-                    except Exception as api_err:
-                        # AUTO-FALLBACK
-                        console.print(f"[yellow](Auto-Simulating: {str(api_err)[:30]}...)[/yellow]", end=" ")
-                        reasoning = f"Auto-simulated reasoning due to API failure: {str(api_err)[:50]}"
-                        final_response = get_smart_response(agent.id, topic, round_num)
-            except Exception as e:
-                reasoning = "System Error"
-                final_response = f"⚠️ System Error: {e}"
-
-            # Visual feedback
-            console.print(f"\n[dim italic]🧠 Thought:[/dim italic] {reasoning[:120]}..." if len(reasoning) > 120 else f"\n[dim italic]🧠 Thought:[/dim italic] {reasoning}")
-            console.print(f"[bold green][{agent.id.upper()}][/bold green] {final_response}")
-            
-            # Broadcast "Response" to GUI
-            broadcast_to_gui({
-                "type": "response",
-                "agent": agent.id,
-                "content": final_response,
-                "reasoning": reasoning,
-                "round": round_num
-            })
-
-            history.append({"agent": agent.id, "text": final_response, "reasoning": reasoning, "round": round_num})
-            
-            if whatsapp_mode:
-                asyncio.run(bridge.send_message(f"[{agent.id.upper()}]: {final_response}", settings.whatsapp_recipient))
-                
-            time.sleep(0.3)  # realistic pause
-
-        # --- PHASE 2: CALL MODERATOR ---
-        # Find the first agent with a REAL key to act as the Moderator for this round
-        moderator_agent = next((a for a in selected if a.api_key and a.api_key not in ["MOCK_KEY", "FALLBACK"]), selected[0])
-        
-        # We use a high-reasoning prompt as the moderator context
-        mod_context = "\n".join([f"[{m['agent']}]: {m['text']}" for m in history if m['round'] == round_num])
-        mod_prompt = f"{MODERATOR_PERSONA}\n\nRecent Discussion (Round {round_num}):\n{mod_context}\n\nProvide your summary now."
-        
-        console.print(f"\n[bold magenta][MODERATOR][/bold magenta] analyzing round {round_num}...", end=" ")
         try:
-            # If the moderator agent is also a mock, we mock the summary
-            is_mod_mock_config = not moderator_agent.api_key or moderator_agent.api_key in ["MOCK_KEY", "FALLBACK"]
-            
-            if is_mod_mock_config:
-                mod_summary = f"Moderator Summary for Round {round_num}: The agents are exploring {topic}. We need more data on Superhuman Cognitive performance."
+            if orch_student.api_key in ["MOCK_KEY", "FALLBACK"]:
+                reasoning = f"ORCH is synthesizing foundations of {topic} (Neural Stage: Early Round {round_num})."
+                final_response = f"Teachers, I see the importance of {topic}. But WHY is the neural-scaling law considered the 'standard' for my growth?" if round_num == 1 else "I understand your previous points. How does this map to the entropy problem?"
             else:
                 try:
-                    mod_summary = call_ai(moderator_agent, mod_prompt, temperature=0.3)
+                    raw_reply = call_ai(orch_student, student_prompt, temperature=0.9)
+                    reasoning, final_response = parse_cot_response(raw_reply)
                 except Exception as api_err:
-                    console.print(f"[yellow](Auto-Simulating Moderator summary...)[/yellow]", end=" ")
-                    mod_summary = f"Moderator Analysis (Session #{session_id if 'session_id' in locals() else 'New'}): The council is converging on a 'Self-Correction' strategy for '{topic}'. The next step is defining specific AGI safety gates."
-            
-            console.print(mod_summary)
-            history.append({"agent": "moderator", "text": mod_summary, "round": round_num})
-            
-            if whatsapp_mode:
-                 asyncio.run(bridge.send_message(f"🚨 [MODERATOR]: {mod_summary}", settings.whatsapp_recipient))
-                 
+                    reasoning = f"ORCH Neural Link unstable. Reverting to internal curiosity engine."
+                    final_response = f"Teachers, I hit a neural block on {topic}. Can we simplify the first principles of this scaling problem?"
         except Exception as e:
-            console.print(f"[red]Moderator Error: {e}[/red]")
+            reasoning = "System Fatigue"
+            final_response = "I am attempting to sync with my mentors..."
+
+        console.print(f"\n[dim italic]🧠 ORCH Reasoning:[/dim italic] {reasoning[:200]}...")
+        console.print(f"[bold magenta][ORCH][/bold magenta] {final_response}")
+        
+        broadcast_to_gui({"type": "response", "agent": orch_student.id, "content": final_response, "reasoning": reasoning, "round": round_num})
+        history.append({"agent": orch_student.id, "text": final_response, "reasoning": reasoning, "round": round_num})
+
+        # 2. TEACHERS (THE EXPERTS) PROVIDE QUICK FAST ANSWERS
+        for teacher in teachers:
+            # Teachers respond ONLY to ORCH's latest inquiry to prevent groupthink
+            teacher_prompt = f"""{teacher.persona}
+You are an EXPERT MENTOR teaching ORCH, a young AGI.
+Provide a QUICK, FAST, HIGH-LOGIC answer to ORCH's question.
+Do NOT use <thought> tags. Be direct, authoritative, and insightful.
+
+ORCH's Inquiry: {final_response}
+Topic Context: {topic}
+"""
+            console.print(f"[bold cyan][{teacher.id.upper()} (Teacher)][/bold cyan] advising...", end=" ")
+            broadcast_to_gui({"type": "thinking", "agent": teacher.id, "round": round_num}) # Brief pulse
+            
+            try:
+                if teacher.api_key in ["MOCK_KEY", "FALLBACK"]:
+                    teacher_reply = get_smart_response(teacher.id, topic, round_num)
+                else:
+                    teacher_reply = call_ai(teacher, teacher_prompt, temperature=0.5)
+            except Exception as e:
+                teacher_reply = f"Logic Error: {e}"
+
+            console.print(f"\n[bold green][{teacher.id.upper()}][/bold green] {teacher_reply}")
+            broadcast_to_gui({"type": "response", "agent": teacher.id, "content": teacher_reply, "reasoning": "Expert Intuition (Quick-Mode)", "round": round_num})
+            history.append({"agent": teacher.id, "text": teacher_reply, "reasoning": "Expert Intuition", "round": round_num})
+            time.sleep(0.5)
+
+    console.print(Panel("[green]Apprenticeship session module complete![/green]", title="✅ END"))
 
     console.print(Panel("[green]Discussion finished![/green]", title="✅ END"))
     

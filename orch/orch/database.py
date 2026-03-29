@@ -23,6 +23,7 @@ class Message(Base):
     agent_id = Column(String(100))
     content = Column(Text)
     reasoning = Column(Text)  # Added to capture internal thought processes
+    is_student = Column(Integer, default=0) # Flag for Student Growth Data
     timestamp = Column(DateTime, default=datetime.utcnow)
     
     session = relationship("Session", back_populates="messages")
@@ -56,7 +57,8 @@ def save_discussion(topic: str, agent_ids: list[str], history: list[dict]):
                 round_num=msg.get("round", 0),
                 agent_id=msg.get("agent", "Unknown"),
                 content=msg.get("text", ""),
-                reasoning=msg.get("reasoning", "")  # Now capturing the CoT
+                reasoning=msg.get("reasoning", ""),  # Now capturing the CoT
+                is_student=1 if msg.get("agent") == "orch" else 0
             )
             db.add(new_msg)
         

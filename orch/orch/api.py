@@ -100,5 +100,5 @@ def get_live_session(db: Session = Depends(get_db)):
     return get_session_detail(latest_session.id, db)
 
 def start_api():
-    print("🚀 Starting AGI Command Center API at http://localhost:8000")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    print("🚀 Starting AGI Command Center API at http://127.0.0.1:8000")
+    uvicorn.run(app, host="127.0.0.1", port=8000)
