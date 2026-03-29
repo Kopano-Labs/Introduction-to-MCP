@@ -3,7 +3,8 @@
   
   <h1>Introduction to MCP</h1>
   
-  <p><strong>Building Model Context Protocol Servers & Clients with Anthropic Python SDK</strong></p>
+  <p><strong>Multi-LLM Model Context Protocol (MCP) Servers & Clients</strong></p>
+  <p><strong>Claude • Grok • Gemini • Copilot</strong></p>
 
   <p>
     <a href="https://www.python.org">
@@ -29,38 +30,46 @@
 
 ## 👋 About the Project
 
-This repository is a **clean, practical introduction** to **Anthropic’s Model Context Protocol (MCP)**.
+This repository is a **practical, production-ready introduction** to **Anthropic’s Model Context Protocol (MCP)**.
 
-It demonstrates how to build both **MCP servers** and **MCP clients** using the official Python SDK, focusing on the three core MCP primitives:
+It now features **full multi-LLM support**:
+- **Claude** (native Anthropic SDK)
+- **Grok** (xAI)
+- **Gemini** (Google)
+- **Copilot** (GitHub)
 
-- **🛠️ Tools** – Expose Python functions to Claude  
-- **📦 Resources** – Provide files, data, and API context  
-- **📝 Prompts** – Structure high-quality AI interactions  
+The `orch/` layer uses these LLMs together to **train and improve orchestration logic**, making the MCP implementation even more powerful and flexible.
 
-The goal is to show how you can create **powerful AI-augmented applications with minimal integration code** — perfect for developers who want to move fast.
+You’ll learn how to build **MCP servers + clients** while leveraging the three core primitives:
+- **🛠️ Tools** – Expose functions to any LLM
+- **📦 Resources** – Share files, data & context
+- **📝 Prompts** – Structured, high-quality interactions
+
+Perfect for creating **AI-augmented apps with minimal code**.
 
 ---
 
 ## 🛠️ Tech Stack
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=python,anthropic,claude,fastapi,git,vscode,markdown&perline=7" alt="Tech Stack"/>
+  <img src="https://skillicons.dev/icons?i=python,anthropic,claude,fastapi,grok,gemini,copilot,git,vscode,markdown&perline=8" alt="Tech Stack"/>
 </div>
 
-**Core technologies used:**
-- **Python** + **`uv`** (blazing-fast dependency management)
-- **Anthropic Python SDK** + **Model Context Protocol (MCP)**
-- Ready for **Claude AI** (with mentions of Gemini, Copilot & Grok integration patterns)
+**Core technologies:**
+- **Python** + **`uv`** (modern dependency management)
+- **Anthropic MCP SDK** + **multi-LLM orchestration**
+- Claude, Grok, Gemini & Copilot integration ready
 
 ---
 
 ## ✨ Features
 
-- ⚡ Full MCP server + client implementation  
-- 🚀 Ultra-modern Python tooling (`uv`, `pyproject.toml`)  
-- 🤖 Seamless Claude AI integration  
-- 📁 Clean, well-documented project structure  
-- 🔧 Ready to run in minutes  
+- ⚡ Full MCP server + client with **multi-LLM support**
+- 🌐 Grok • Gemini • Copilot added to train `orch/` layer
+- 🚀 Ultra-modern Python setup (`uv`, `pyproject.toml`)
+- 🤖 Seamless switching between LLMs
+- 📁 Clean, well-documented structure
+- 🔧 Runs in minutes
 - 🇿🇦 Built in South Africa
 
 ---
