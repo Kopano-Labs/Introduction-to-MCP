@@ -1,40 +1,102 @@
-![Introduction to MCP](./README-bannner.jpg)
+<div align="center">
+  <img src="README-bannner.jpg" alt="Introduction to MCP Banner" width="100%" style="border-radius: 12px;"/>
+  
+  <h1>Introduction to MCP</h1>
+  
+  <p><strong>Building Model Context Protocol Servers & Clients with Anthropic Python SDK</strong></p>
 
-# Kholofelo Robyn Rababalela — Introduction to MCP
+  <p>
+    <a href="https://www.python.org">
+      <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge" alt="Python"/>
+    </a>
+    <a href="https://github.com/astral-sh/uv">
+      <img src="https://img.shields.io/badge/uv-Astral-000000?logo=python&logoColor=ffdd54&style=for-the-badge" alt="uv"/>
+    </a>
+    <a href="https://anthropic.com">
+      <img src="https://img.shields.io/badge/Anthropic-191919?logo=anthropic&logoColor=white&style=for-the-badge" alt="Anthropic"/>
+    </a>
+    <a href="https://claude.ai">
+      <img src="https://img.shields.io/badge/Claude-FF6B00?logo=claude&logoColor=white&style=for-the-badge" alt="Claude"/>
+    </a>
+  </p>
 
-Freelance Web Developer · Computer Engineering Student 📍 Cape Town, Western Cape, South Africa
+  <a href="https://github.com/RobynAwesome/Introduction-to-MCP/stargazers">
+    <img src="https://img.shields.io/github/stars/RobynAwesome/Introduction-to-MCP?style=social" alt="GitHub stars"/>
+  </a>
+</div>
 
-## Tech Stack
-Python • uv • Anthropic MCP SDK • Claude AI
+<br>
 
-## About
-A focused project demonstrating how to build both Model Context Protocol (MCP) servers and clients using the Python SDK. This repository explores MCP's three core primitives—tools, resources, and prompts—and shows how they integrate seamlessly with Claude AI to create powerful applications without writing extensive integration code.
+## 👋 About the Project
 
-## Sections
-* **Servers** — Implementation of custom Python MCP servers
-* **Clients** — Building client applications to communicate with the servers
-* **Tools** — Exposing executable Python functions to Claude
-* **Resources** — Providing contextual file and API data to the AI
-* **Prompts** — Structuring interactions for optimal AI responses
+This repository is a **clean, practical introduction** to **Anthropic’s Model Context Protocol (MCP)**.
 
-## Features
-⚡ Built with the official Anthropic Python SDK
-🚀 Fast dependency management and resolution using `uv`
-🤖 Direct integration with Claude AI capabilities
-🔐 Secure local execution of AI-augmented tools
-📱 Fully documented and structured codebase
-🚀 Ready for immediate local deployment
+It demonstrates how to build both **MCP servers** and **MCP clients** using the official Python SDK, focusing on the three core MCP primitives:
 
-## Setup
+- **🛠️ Tools** – Expose Python functions to Claude  
+- **📦 Resources** – Provide files, data, and API context  
+- **📝 Prompts** – Structure high-quality AI interactions  
+
+The goal is to show how you can create **powerful AI-augmented applications with minimal integration code** — perfect for developers who want to move fast.
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=python,anthropic,claude,fastapi,git,vscode,markdown&perline=7" alt="Tech Stack"/>
+</div>
+
+**Core technologies used:**
+- **Python** + **`uv`** (blazing-fast dependency management)
+- **Anthropic Python SDK** + **Model Context Protocol (MCP)**
+- Ready for **Claude AI** (with mentions of Gemini, Copilot & Grok integration patterns)
+
+---
+
+## ✨ Features
+
+- ⚡ Full MCP server + client implementation  
+- 🚀 Ultra-modern Python tooling (`uv`, `pyproject.toml`)  
+- 🤖 Seamless Claude AI integration  
+- 📁 Clean, well-documented project structure  
+- 🔧 Ready to run in minutes  
+- 🇿🇦 Built in South Africa
+
+---
+
+📊 MCP Architecture
+<img src="MCP%20DIAGRAM.png" alt="MCP Diagram">
+
+👩‍💻 About Me
+Kholofelo Robyn Rababalela
+Freelance Web Developer · Computer Engineering Student
+📍 Cape Town, Western Cape, South Africa
+
+🔗 Connect With Me
+
+LinkedIn
+Ko-fi (Support my open-source work)
+PayPal
+
+
+Made with ❤️ in South Africa 🇿🇦
+Star ⭐ this repo if you found it useful!
+
+## 🚀 Quick Start
 
 ```bash
-# Initialize the virtual environment and project
-uv init
+# 1. Clone the repo
+git clone https://github.com/RobynAwesome/Introduction-to-MCP.git
+cd Introduction-to-MCP
 
-# Install the project and dependencies in editable mode
+# 2. Install dependencies with uv
 uv pip install -e .
 
-# Activate the virtual environment (Windows PowerShell)
-.\.venv\Scripts\activate
-# OR if using your specific CLI environment
+# 3. Activate the virtual environment (Windows)
 .\.CLI_Project\Scripts\activate
+# or if using the default venv:
+# .\.venv\Scripts\activate
+
+# 4. Run the example
+python main.py
