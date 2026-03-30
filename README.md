@@ -2,14 +2,14 @@
 
 ![Orch Banner](README-bannner.jpg)
 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-![LiteLLM](https://img.shields.io/badge/LiteLLM-FF6F00?logo=star&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
-![Typer](https://img.shields.io/badge/Typer-000000?logo=fastapi&logoColor=white)
-![MCP](https://img.shields.io/badge/MCP-Model_Context_Protocol-6B46C1)
-![SafeSkill](https://img.shields.io/badge/SafeSkill-Verified-10B981)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+  ![LiteLLM](https://img.shields.io/badge/LiteLLM-FF6F00?logo=star&logoColor=white)
+  ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
+  ![Typer](https://img.shields.io/badge/Typer-000000?logo=fastapi&logoColor=white)
+  ![MCP](https://img.shields.io/badge/MCP-Model_Context_Protocol-6B46C1)
+  ![SafeSkill](https://img.shields.io/badge/SafeSkill-Verified-10B981)
+  ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # 🪐 orch
 
