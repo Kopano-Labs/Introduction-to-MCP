@@ -42,5 +42,5 @@ This roadmap will be updated as we complete items on the engineering TODO list, 
 
 **Connect with the Architect:**
 
-- **LinkedIn:** www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
-- **GitHub:** https://github.com/RobynAwesome/
+- **LinkedIn:** Kholofelo Robyn Rababalela
+- **GitHub:** RobynAwesome
