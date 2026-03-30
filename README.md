@@ -110,18 +110,24 @@ The diagram below shows how ORCH (the apprentice AI student) interacts with ment
 
 ## 🚀 Quick Start
 
-```bash
+```powershell
 # 1. Clone the repo
 git clone https://github.com/RobynAwesome/Introduction-to-MCP.git
 cd Introduction-to-MCP
 
-# 2. Install dependencies with uv
-uv pip install -e .
+# 2. (Recommended) Create a fresh virtual environment
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1          # PowerShell (Windows)
 
-# 3. Activate the virtual environment (Windows)
-.\.CLI_Project\Scripts\activate
-# or if using the default venv:
-# .\.venv\Scripts\activate
+# 3. Install the project in editable mode
+pip install -e .
 
-# 4. Run the example
+# 4. (Important) Set your LLM API keys
+#    Create a .env file in the root and add:
+#    ANTHROPIC_API_KEY=sk-...
+#    GROK_API_KEY=...
+#    GEMINI_API_KEY=...
+#    (or however your core/claude.py expects them)
+
+# 5. Run the example
 python main.py
