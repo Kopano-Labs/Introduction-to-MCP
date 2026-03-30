@@ -4,6 +4,15 @@
 
 ---
 
+# 🪐 orch
+
+**Multi-Agent Orchestration Framework**  
+**Official Reference Implementation for the Model Context Protocol (MCP)**
+
+> Orchestrate intelligent discussions between AI agents from any provider — guided by a smart Moderator AI.
+
+---
+
 ## 🛡️ SafeSkill — Trust Layer for AI Tools
 
 **orch is SafeSkill verified.**
@@ -16,14 +25,7 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
 
 ---
 
-# 🪐 orch
 
-**Multi-Agent Orchestration Framework**  
-**Official Reference Implementation for the Model Context Protocol (MCP)**
-
-> Orchestrate intelligent discussions between AI agents from any provider — guided by a smart Moderator AI.
-
----
 
 ## ✨ Features
 
