@@ -41,38 +41,6 @@ async def main():
         )
         clients["doc_client"] = doc_client
 
-        # --- TEST: List available tools ---
-        print("--- Testing list_tools ---")
-        try:
-            tools = await doc_client.list_tools()
-            if not tools:
-                print("No tools found on the server.")
-            for tool in tools:
-                print(f"  Tool: {tool.name}")
-                print(f"    Description: {tool.description}")
-        except Exception as e:
-            print(f"Error listing tools: {e}")
-        # --- END TEST ---
-
-        # --- TEST: Read document IDs resource ---
-        print("--- Testing doc_ids resource ---")
-        try:
-            doc_ids = await doc_client.read_resource("resource://doc_ids")
-            print(f"  Doc IDs: {doc_ids}")
-        except Exception as e:
-            print(f"Error reading resource: {e}")
-        # --- END TEST ---
-
-        # --- TEST: Get prompt ---
-        print("--- Testing get_prompt ---")
-        try:
-            prompt_result = await doc_client.get_prompt("summarize_doc", {"doc_id": "plan.md"})
-            print(f"  Prompt: {prompt_result}")
-            print("--- Test complete, starting chat ---")
-        except Exception as e:
-            print(f"Error getting prompt: {e}")
-        # --- END TEST ---
-
         for i, server_script in enumerate(server_scripts):
             client_id = f"client_{i}_{server_script}"
             client = await stack.enter_async_context(
