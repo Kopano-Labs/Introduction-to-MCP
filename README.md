@@ -45,11 +45,6 @@
 
 
 [![SafeSkill 91/100](https://img.shields.io/badge/SafeSkill-91%2F100_Verified%20Safe-brightgreen)](https://safeskill.dev/scan/robynawesome-introduction-to-mcp)
-  <p>
-    <a href="https://safeskill.dev/scan/robynawesome-introduction-to-mcp">
-      <img src="https://img.shields.io/badge/SafeSkill-91%2F100_Verified%20Safe-brightgreen" alt="SafeSkill 91/100"/>
-    </a>
-  </p>
 
 
 This repository is a **practical introduction** to **Anthropic’s Model Context Protocol (MCP)** with **full multi-LLM support**.
