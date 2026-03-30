@@ -1,14 +1,4 @@
-# 🪐 orch
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://python.org)
-[![LiteLLM](https://img.shields.io/badge/LiteLLM-FF6F00?logo=star&logoColor=white)](https://litellm.ai)
-[![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](https://sqlite.org)
-
-**Multi-Agent Orchestration Framework**  
-**Official Reference Implementation for the Model Context Protocol (MCP)**
-
-> Orchestrate intelligent discussions between AI agents from any provider — guided by a smart Moderator AI.
 
 ![Orch Banner](README-bannner.jpg)
 
@@ -23,6 +13,15 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
 - ✅ Scanned & protected by SafeSkill
 - ✅ Listed in the SafeSkill registry
 - ✅ Safe to use in production
+
+---
+
+# 🪐 orch
+
+**Multi-Agent Orchestration Framework**  
+**Official Reference Implementation for the Model Context Protocol (MCP)**
+
+> Orchestrate intelligent discussions between AI agents from any provider — guided by a smart Moderator AI.
 
 ---
 
@@ -47,6 +46,10 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
 ![MCP](https://img.shields.io/badge/MCP-Model_Context_Protocol-6B46C1)
 ![SafeSkill](https://img.shields.io/badge/SafeSkill-Verified-10B981)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://python.org)
+[![LiteLLM](https://img.shields.io/badge/LiteLLM-FF6F00?logo=star&logoColor=white)](https://litellm.ai)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](https://sqlite.org)
 
 ---
 
