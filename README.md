@@ -2,8 +2,6 @@
 
 ![Orch Banner](README-bannner.jpg)
 
----
-
 ## 🧰 Tech Stack
 
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
@@ -14,8 +12,6 @@
 ![SafeSkill](https://img.shields.io/badge/SafeSkill-Verified-10B981)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
----
 
 # 🪐 orch
 
