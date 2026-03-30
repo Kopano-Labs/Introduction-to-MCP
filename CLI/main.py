@@ -10,7 +10,11 @@ from core.claude import Claude
 from core.cli_chat import CliChat
 from core.cli import CliApp
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if getattr(sys, 'frozen', False):
+    BASE_DIR = sys._MEIPASS
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Anthropic Config
