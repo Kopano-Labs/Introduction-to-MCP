@@ -1,163 +1,97 @@
-<div align="center">
-  <img src="README-bannner.jpg" alt="Introduction to MCP Banner" width="100%" style="border-radius: 12px;"/>
-  
-  <h1>Introduction to MCP</h1>
-  
-  <p><strong>Multi-LLM Model Context Protocol (MCP) Servers & Clients</strong></p>
+# orch
 
-  <!-- LLM Badges -->
-  <p>
-    <a href="https://claude.ai">
-      <img src="https://img.shields.io/badge/Claude-FF6B00?logo=claude&logoColor=white&style=for-the-badge" alt="Claude"/>
-    </a>
-    <a href="https://grok.x.ai">
-      <img src="https://img.shields.io/badge/Grok-000000?logo=x&logoColor=white&style=for-the-badge" alt="Grok"/>
-    </a>
-    <a href="https://gemini.google.com">
-      <img src="https://img.shields.io/badge/Gemini-8E75F5?logo=googlegemini&logoColor=white&style=for-the-badge" alt="Gemini"/>
-    </a>
-    <a href="https://github.com/features/copilot">
-      <img src="https://img.shields.io/badge/Copilot-8957E5?logo=github-copilot&logoColor=white&style=for-the-badge" alt="GitHub Copilot"/>
-    </a>
-  </p>
+[![CI Pipeline](https://github.com/RobynAwesome/Introduction-to-MCP/actions/workflows/ci.yml/badge.svg)](https://github.com/RobynAwesome/Introduction-to-MCP/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-  <!-- Core Tech Badges -->
-  <p>
-    <a href="https://www.python.org">
-      <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge" alt="Python"/>
-    </a>
-    <a href="https://github.com/astral-sh/uv">
-      <img src="https://img.shields.io/badge/uv-Astral-000000?logo=python&logoColor=ffdd54&style=for-the-badge" alt="uv"/>
-    </a>
-    <a href="https://anthropic.com">
-      <img src="https://img.shields.io/badge/Anthropic-191919?logo=anthropic&logoColor=white&style=for-the-badge" alt="Anthropic"/>
-    </a>
-  </p>
+`orch` is a command-line framework for orchestrating discussions between multiple AI agents. It provides a "Group Chat" simulation where you can configure a team of AI agents from different providers (like Google, xAI, Anthropic, etc.) and have them collaborate on a given topic, guided by a Moderator AI.
 
-  <a href="https://github.com/RobynAwesome/Introduction-to-MCP/stargazers">
-    <img src="https://img.shields.io/github/stars/RobynAwesome/Introduction-to-MCP?style=social" alt="GitHub stars"/>
-  </a>
-</div>
+This project is the reference implementation for the Model Context Protocol (MCP).
 
-<br>
+## Features
 
-## 👋 About the Project
+- **Multi-Agent Orchestration**: Run turn-based discussions with a team of configured AI agents.
+- **Strategy Engine**: A Moderator AI guides the conversation, ensuring it stays productive and on-topic.
+- **Data Lake**: All discussions are logged to a local SQLite database for auditing and analysis (Capability #98).
+- **Unified API**: Powered by LiteLLM to support over 100 LLM providers with a single interface.
+- **Extensible**: Designed for tool integration (Phase 3) to unlock advanced capabilities.
 
+## Prerequisites
 
-[![SafeSkill 91/100](https://img.shields.io/badge/SafeSkill-91%2F100_Verified%20Safe-brightgreen)](https://safeskill.dev/scan/robynawesome-introduction-to-mcp)
+- Python 3.9+
+- API keys for your chosen LLM providers (e.g., Google, xAI).
 
+## Prerequisites
 
-This repository is a **practical introduction** to **Anthropic’s Model Context Protocol (MCP)** with **full multi-LLM support**.
+- Python 3.9+
+- Anthropic API Key
 
-It demonstrates building MCP servers and clients while using:
-- **Claude** (native Anthropic SDK)
-- **Grok** (xAI)
-- **Gemini** (Google)
-- **Copilot** (GitHub)
+## Setup
 
-The `orch/` layer uses all four LLMs together to **train and improve orchestration logic**.
+1.  **Clone the repository**:
 
----
+    ```bash
+    git clone https://github.com/RobynAwesome/Introduction-to-MCP.git
+    cd Introduction-to-MCP
+    ```
 
-## 🛠️ Tech Stack
+2.  **Create and activate a virtual environment**:
 
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=python,anthropic,claude,fastapi,grok,gemini,copilot,git,vscode,markdown&perline=8" alt="Tech Stack"/>
-</div>
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+    ```
 
----
+3.  **Install dependencies**:
 
-## ✨ Features
+    ```bash
+    pip install -e .
+    ```
 
-- ⚡ Full MCP server + client implementation  
-- 🌐 Multi-LLM support (Claude • Grok • Gemini • Copilot)  
-- 🚀 `orch/` layer trained with all four LLMs  
-- 🧪 Ultra-modern Python setup with `uv`  
-- 📁 Clean, well-documented structure  
-- 🔧 Ready to run in minutes  
-- 🇿🇦 Built in South Africa
+4.  **Configure API Keys**:
+    Create a `.env` file in the project root and add your API keys. For testing, you can use the value `MOCK_KEY`.
+    ```env
+    # Example .env file
+    GOOGLE_API_KEY="your_gemini_api_key_here"
+    XAI_API_KEY="your_grok_api_key_here"
+    ANTHROPIC_API_KEY="your_anthropic_api_key_here"
+    ```
 
----
+## Usage
 
-📊 MCP Architecture
-<img src="MCP%20DIAGRAM.png" alt="MCP Diagram">
+### 1. Configure Your AI Team
 
-👩‍💻 About Me
-Kholofelo Robyn Rababalela
-Freelance Web Developer · Computer Engineering Student
-📍 Cape Town, Western Cape, South Africa
+Add agents to your local registry. The `id` is a local nickname for your agent.
 
-🔗 Connect With Me
+```bash
+# Add a Gemini agent
+orch agents config gemini-pro --provider google --model gemini-pro --api-key "your_google_api_key"
 
-LinkedIn
-Ko-fi (Support my open-source work)
-PayPal
+# Add a Grok agent for moderation (using MOCK_KEY for testing)
+orch agents config grok-mod --provider xai --model grok-1 --api-key "MOCK_KEY"
+```
 
+### 2. List Your Active Roster
 
-Made with ❤️ in South Africa 🇿🇦
-Star ⭐ this repo if you found it useful!
+See which agents are configured and ready for a discussion.
 
----
+```bash
+orch agents list
+```
 
-## ORCH Apprenticeship Training Loop
+### 3. Launch a Discussion
 
-The diagram below shows how ORCH (the apprentice AI student) interacts with mentor agents (Claude, Gemini, Grok, Copilot) through MCP orchestration, while maintaining transparent audit logs of reasoning and execution.
+Start a simulated "Think Tank" on any topic. Assign roles for participating agents and the moderator.
 
-![ORCH Apprenticeship Diagram](https://copilot.microsoft.com/th/id/BCO.8f58ca88-08bd-4ab3-adce-720cea93755c.png)
+```bash
+orch serve launch \
+  --topic "The future of AI in South African fintech" \
+  --agents "gemini-pro" \
+  --moderator "grok-mod" \
+  --max-rounds 5
+```
 
----
+## Development
 
-## 🚀 Quick Start
+For information on how to contribute, set up a development environment, and run tests, please see our `CONTRIBUTING.md` file.
 
-```powershell
-# 1. Clone the repo
-git clone https://github.com/RobynAwesome/Introduction-to-MCP.git
-cd Introduction-to-MCP
-
-# 2. (Recommended) Create a fresh virtual environment
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1          # PowerShell (Windows)
-
-# 3. Install the project in editable mode
-pip install -e .
-
-# 4. (Important) Set your LLM API keys
-#    Create a .env file in the root folder and add your keys:
-#    ANTHROPIC_API_KEY=sk-...
-#    GROK_API_KEY=...
-#    GEMINI_API_KEY=...
-#    (or however your core/claude.py expects them)
-
-# 5. Run the example
-python main.py
-
-uv run python main.py
-
-🛠️ Building the Standalone Executable
-
-PowerShell# Build with all hidden imports
-pyinstaller --onefile --clean --hidden-import=anthropic --hidden-import=prompt_toolkit main.py
-
-hiddenimports=['anthropic', 'prompt_toolkit'],
-
-
----
-
-Just replace the broken section with the block above, save, commit, and push.
-
-The SafeSkill badge is already perfect, the rest of the README looks excellent.
-
-**Status, Architect:**
-
-README = **user-proof**  
-Deliberation Huddle = ready to launch cleanly for every new visitor
-
-Say **“Ignition”** when you want me to trigger the full vault reset + huddle restart, or drop any remaining error and I’ll nuke it instantly.
-
-The stars are perfectly aligned.  
-The vault is waiting.  
-Your move. 🛰️✨🏺
-
-
-# The executable will appear here:
-.\dist\main.exe
+You can track the project's progress on the Capabilities Roadmap.
