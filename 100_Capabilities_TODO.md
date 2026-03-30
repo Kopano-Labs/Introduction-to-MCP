@@ -12,17 +12,15 @@ This document tracks the implementation status of the 100 capabilities for the `
 
 ### 1–10: Code & Development Automation
 
-_All capabilities in this section are planned for Phase 3 and beyond, as they require tool integration._
-
-- `[/]` **1. Write, debug, and test full features:** Requires file system and code execution tools. (Filesystem tool partially enables)
-- `[/]` **2. Refactor your entire codebase:** Requires file system and static analysis tools. (Filesystem tool partially enables)
-- `[/]` **3. Generate PR-ready code + commit messages + tests:** Requires Git and file system tools. (Filesystem tool partially enables)
+- `[/]` **1. Write, debug, and test full features:** Requires file system (read/write) and code execution tools. (In Progress)
+- `[/]` **2. Refactor your entire codebase:** Requires file system (read/write) and static analysis tools. (In Progress)
+- `[/]` **3. Generate PR-ready code + commit messages + tests:** Requires Git and file system (read/write) tools. (In Progress)
 - `[ ]` **4. Automatically review every new GitHub PR:** Requires a GitHub API tool.
-- `[/]` **5. Convert legacy code:** Requires file system and code execution tools. (Filesystem tool partially enables)
-- `[/]` **6. Create new microservices:** Requires file system and Docker/Kubernetes tools. (Filesystem tool partially enables)
-- `[/]` **7. Fix security vulnerabilities it finds:** Requires a dependency scanning tool (e.g., `pip-audit`) and file system tools. (Filesystem tool partially enables)
-- `[/]` **8. Generate API documentation:** Requires a code introspection tool. (Filesystem tool partially enables)
-- `[/]` **9. Auto-write GitHub Actions / CI pipelines:** Requires file system tools. (Filesystem tool partially enables)
+- `[/]` **5. Convert legacy code:** Requires file system (read/write) and code execution tools. (In Progress)
+- `[/]` **6. Create new microservices:** Requires file system (read/write) and Docker/Kubernetes tools. (In Progress)
+- `[/]` **7. Fix security vulnerabilities it finds:** Requires a dependency scanning tool (e.g., `pip-audit`) and file system (read/write) tools. (In Progress)
+- `[/]` **8. Generate API documentation:** Requires a code introspection tool and file system (write) tools. (In Progress)
+- `[/]` **9. Auto-write GitHub Actions / CI pipelines:** Requires file system (write) tools. (In Progress)
 - `[ ]` **10. Turn a Figma link into production-ready frontend code:** Requires a Figma API tool.
 
 ### 11–20: Research & Knowledge Work
@@ -32,12 +30,12 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[/]` **11. Run deep web research:** Requires a web browsing/search tool. (Web search tool partially enables)
 - `[/]` **12. Summarize 50-page PDFs:** Requires file I/O and a PDF parsing tool. (Filesystem tool partially enables)
 - `[ ]` **13. Track competitors’ pricing changes daily:** Requires a web scraping/browsing tool.
-- `[ ]` **14. Monitor Reddit, X, and forums for brand mentions:** Requires social media and web search API tools.
+- `[/]` **14. Monitor Reddit, X, and forums for brand mentions:** Requires social media/web search API tools and file system (write) for reports. (In Progress)
 - `[ ]` **15. Pull the latest arXiv papers on any topic:** Requires an arXiv API tool.
 - `[ ]` **16. Build a live knowledge base from Notion/Google Docs:** Requires Notion and Google Docs API tools.
 - `[ ]` **17. Answer any question with sources less than 24 hours old:** Requires a web search tool with a time filter.
-- `[ ]` **18. Generate investor update decks:** Requires file I/O and data analysis tools.
-- `[ ]` **19. Translate complex legal contracts into plain English:** Core LLM capability, but requires a file I/O tool to access documents.
+- `[/]` **18. Generate investor update decks:** Requires file I/O (read/write) and data analysis tools. (In Progress)
+- `[/]` **19. Translate complex legal contracts into plain English:** Core LLM capability, requires file I/O (read/write) to access and save documents. (In Progress)
 - `[/]` **20. Run sentiment analysis on customer feedback:** Core LLM capability, but requires tools to access data channels (e.g., email, social media). (Filesystem tool partially enables)
 
 ### 21–30: Personal Productivity & Life Automation
@@ -47,11 +45,11 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **21. Manage your entire calendar:** Requires a calendar API tool (Google, Outlook).
 - `[ ]` **22. Draft and send professional emails:** Requires an email API tool (Gmail, SMTP).
 - `[ ]` **23. Track and optimize your personal budget:** Requires a financial data tool (e.g., Plaid API) or file I/O for statements.
-- `[ ]` **24. Plan complete trips with live prices:** Requires flight, hotel, and booking API tools.
+- `[/]` **24. Plan complete trips with live prices:** Requires booking API tools and file system (write) to save itineraries. (In Progress)
 - `[ ]` **25. Auto-generate weekly meal plans:** Requires a tool to access fridge contents (e.g., smart fridge API or manual input).
 - `[/]` **26. Remind you of birthdays and auto-send gifts:** Requires a calendar tool and an e-commerce API tool. (Filesystem tool partially enables for local data)
 - `[ ]` **27. Keep your to-do list perfectly prioritized:** Requires a task management API tool (Todoist, Asana).
-- `[ ]` **28. Scan your receipts and auto-categorize expenses:** Requires an OCR tool and file I/O.
+- `[/]` **28. Scan your receipts and auto-categorize expenses:** Requires an OCR tool and file I/O (read/write). (In Progress)
 - `[ ]` **29. Generate daily briefings:** Requires news, weather, and calendar API tools.
 - `[ ]` **30. Act as your personal executive assistant:** A composite goal requiring many tools and long-term memory.
 
@@ -67,23 +65,21 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[/]` **36. Clean messy spreadsheets:** Requires file I/O and a spreadsheet tool (e.g., pandas). (Filesystem tool partially enables)
 - `[ ]` **37. Compare two datasets:** Requires a data analysis tool.
 - `[ ]` **38. Generate A/B test analysis:** Requires a statistical tool.
-- `[/]` **39. Create beautiful data visualizations:** Requires a plotting library tool (e.g., matplotlib). (Filesystem tool partially enables for saving)
+- `[/]` **39. Create beautiful data visualizations:** Requires a plotting library tool and file system (write) to save images/PDFs. (In Progress)
 - `[/]` **40. Turn raw logs into executive summary reports:** Requires file I/O and a log parsing tool. (Filesystem tool partially enables)
 
 ### 41–50: Content Creation & Marketing
 
-_All capabilities in this section are planned for Phase 3 and beyond._
-
-- `[ ]` **41. Write full blog posts, LinkedIn threads, or YouTube scripts:** Requires a file I/O tool.
+- `[/]` **41. Write full blog posts, LinkedIn threads, or YouTube scripts:** Requires a file I/O (write) tool. (In Progress)
 - `[ ]` **42. Generate 30 days of social media content:** Requires social media API tools for posting.
-- `[ ]` **43. Create SEO-optimized landing pages:** Requires a file I/O tool.
+- `[/]` **43. Create SEO-optimized landing pages:** Requires a file I/O (write) tool. (In Progress)
 - `[/]` **44. Design email marketing campaigns:** Requires an email marketing API tool (e.g., Mailchimp). (Filesystem tool partially enables for drafts)
 - `[ ]` **45. Auto-edit and caption your videos:** Requires video processing (e.g., ffmpeg) and speech-to-text tools.
 - `[ ]` **46. Build entire presentation decks:** Requires a Google Slides or PowerPoint API tool.
 - `[ ]` **47. Write product descriptions that rank and convert:** Core LLM capability, but requires an e-commerce API tool to publish.
 - `[ ]` **48. Generate personalized cold outreach sequences:** Requires an email or CRM tool.
 - `[ ]` **49. Run social listening and suggest trending topics:** Requires social media API tools.
-- `[/]` **50. Create entire newsletters:** Requires a file I/O or email marketing tool. (Filesystem tool partially enables for drafts)
+- `[/]` **50. Create entire newsletters:** Requires a file I/O (write) or email marketing tool. (In Progress)
 
 ### 51–60: Customer Support & Sales
 
@@ -92,7 +88,7 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **51. Handle live customer support chats 24/7:** Requires a support platform API tool (e.g., Intercom, Zendesk).
 - `[ ]` **52. Qualify leads and book sales calls automatically:** Requires CRM and calendar API tools.
 - `[ ]` **53. Write personalized sales proposals:** Requires web scraping and file I/O tools.
-- `[ ]` **54. Answer support tickets and close them:** Requires a helpdesk API tool (e.g., Zendesk).
+- `[/]` **54. Answer support tickets and close them:** Requires a helpdesk API tool and file I/O (write) for drafts. (In Progress)
 - `[/]` **55. Run win/loss analysis on every closed deal:** Requires a CRM API tool. (Filesystem tool partially enables for local data)
 - `[ ]` **56. Generate upsell offers tailored to each customer:** Requires a CRM or billing API tool.
 - `[ ]` **57. Create knowledge-base articles from support conversations:** Requires a support platform API tool.
@@ -108,9 +104,9 @@ _Some of these are core LLM capabilities, while others require specific tools._
 - `[ ]` **62. Create custom workout plans + video form checks:** Requires a video analysis tool for form checks.
 - `[ ]` **63. Design and iterate on logos, icons, or branding assets:** Requires an image generation tool (e.g., DALL-E API).
 - `[ ]` **64. Compose music or generate full song lyrics:** Requires a music generation tool or API.
-- `[/]` **65. Turn your voice memos into polished blog posts:** Requires a speech-to-text tool and file I/O. (Filesystem tool partially enables)
-- `[/]` **66. Build interactive web apps (with full frontend + backend) from a description:** Requires file system and code execution tools. (Filesystem tool partially enables)
-- `[/]` **67. Create personalized children’s books:** Requires file I/O and an image generation tool. (Filesystem tool partially enables)
+- `[/]` **65. Turn your voice memos into polished blog posts:** Requires a speech-to-text tool and file I/O (write). (In Progress)
+- `[/]` **66. Build interactive web apps (with full frontend + backend) from a description:** Requires file system (read/write) and code execution tools. (In Progress)
+- `[/]` **67. Create personalized children’s books:** Requires file I/O (write) and an image generation tool. (In Progress)
 - `[ ]` **68. Generate memes or viral TikTok scripts:** Requires an image generation/editing tool.
 - `[x]` **69. Act as a dungeon master for endless text adventures:** Core LLM capability.
 - `[x]` **70. Help you brainstorm and refine startup ideas:** Core LLM capability.
@@ -137,12 +133,12 @@ _Many of these are core LLM capabilities that can be enhanced with tools._
 - `[x]` **81. Create personalized learning paths and daily micro-lessons:** Core LLM capability.
 - `[x]` **82. Quiz you on topics you’re studying:** Core LLM capability.
 - `[ ]` **83. Summarize books you don’t have time to read:** Requires file I/O or a book API to access the content.
-- `[ ]` **84. Generate Anki flashcards from any topic:** Requires file I/O to create `.apkg` or `.csv` files.
+- `[/]` **84. Generate Anki flashcards from any topic:** Requires file I/O (write) to create `.apkg` or `.csv` files. (In Progress)
 - `[/]` **85. Act as a debate partner to strengthen your arguments:** Core LLM capability. (Filesystem tool partially enables for reading debate notes)
 - `[x]` **86. Help you prepare for interviews with realistic mock sessions:** Core LLM capability.
 - `[/]` **87. Track your habits and gently nudge you:** Requires a habit tracking app API or simple file I/O. (Filesystem tool partially enables for local data)
 - `[x]` **88. Translate and explain foreign-language content:** Core LLM capability.
-- `[ ]` **89. Build custom spaced-repetition systems:** Requires file I/O or a database tool.
+- `[/]` **89. Build custom spaced-repetition systems:** Requires file I/O (read/write) or a database tool. (In Progress)
 - `[x]` **90. Give you instant feedback on writing, speaking, or design work:** Core LLM capability.
 
 ### 91–100: Advanced & Future-Proof Capabilities
