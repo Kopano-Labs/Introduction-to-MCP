@@ -50,6 +50,14 @@ def in_memory_db():
     conn.close()
 
 
+def test_agents_list_command_runs_successfully():
+    """
+    Ensures the `orch agents list` command can be invoked without errors.
+    """
+    result = runner.invoke(app, ["agents", "list"])
+    assert result.exit_code == 0
+
+
 def test_agents_list_no_agents():
     """
     Test `orch agents list` when no agents are configured.
