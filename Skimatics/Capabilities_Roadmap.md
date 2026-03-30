@@ -38,6 +38,20 @@ Once the core reasoning engine is stable, we will begin giving agents "tools" (A
 
 ---
 
+## 🌟 Phase 4: Community & Adoption
+
+This phase focuses on fostering a vibrant community around `orch` and preparing for broader adoption.
+
+**Example Capabilities to be Unlocked:**
+
+- **#81. Facilitate community feedback:** Requires enabling GitHub Discussions and providing clear contribution guidelines.
+- **#82. Publish project milestones:** Requires a public roadmap and versioned releases.
+- **#83. Showcase example projects:** Requires creating and documenting practical demonstrations (e.g., ORCH apprenticeship protocol demo).
+- **#84. Provide visual walkthroughs:** Requires recording short tutorial videos.
+- **#85. Guide new contributors:** Requires `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md`.
+
+---
+
 This roadmap will be updated as we complete items on the engineering TODO list, bringing us closer to realizing the full potential of the 100 capabilities.
 
 **Connect with the Architect:**
