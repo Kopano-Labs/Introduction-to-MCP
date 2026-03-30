@@ -9,6 +9,7 @@ from typing import List, Optional
 
 from .agent_manager import load_agents, Agent, save_agents
 from .moderator import Moderator
+from .database import get_db_connection
 
 app = typer.Typer()
 console = Console()
@@ -76,6 +77,20 @@ def launch(
     """
     console.print(Panel(f"[bold blue]Starting discussion on:[/bold blue] [bold yellow]{topic}[/bold yellow]", expand=False))
 
+    # --- Database and Discussion Setup ---
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO discussions (topic) VALUES (?)", (topic,))
+        discussion_id = cursor.lastrowid
+        conn.commit()
+        console.log(f"🗄️  Logging to discussion session [bold cyan]#{discussion_id}[/bold cyan]")
+    except Exception as e:
+        console.print(f"[bold red]Database Error:[/bold red] Could not start discussion session. {e}")
+        if conn:
+            conn.close()
+        raise typer.Exit(code=1)
+
     agents = load_agents()
     selected_agents = []
     for agent_id in agent_ids:
@@ -100,47 +115,68 @@ def launch(
             console.print(f"[bold red]Error:[/bold red] {e}")
             raise typer.Exit(code=1)
 
-    history = []
-    current_prompt = topic # Initial prompt for the first agent
+    try:
+        history = []
+        current_prompt = topic # Initial prompt for the first agent
 
-    for round_num in range(max_rounds):
-        console.print(Panel(f"[bold yellow]--- Round {round_num + 1} ---[/bold yellow]", expand=False))
+        for round_num in range(max_rounds):
+            console.print(Panel(f"[bold yellow]--- Round {round_num + 1} ---[/bold yellow]", expand=False))
 
-        for i, agent in enumerate(selected_agents):
-            with Live(console=console, screen=False, refresh_per_second=4) as live:
-                live.update(Panel(f"[bold blue]Agent {agent.id} is thinking...[/bold blue]", expand=False))
+            for i, agent in enumerate(selected_agents):
+                with Live(console=console, screen=False, refresh_per_second=4) as live:
+                    live.update(Panel(f"[bold blue]Agent {agent.id} is thinking...[/bold blue]", expand=False))
 
-                try:
-                    # If a moderator is active, get the prompt from the moderator
-                    # The moderator intervenes *before* an agent speaks, to give them direction.
-                    # For the very first agent of the very first round, the prompt is the topic.
-                    if moderator_instance and (round_num > 0 or i > 0):
-                        # Moderator provides the prompt for the current agent based on history
-                        moderator_direction = moderator_instance.moderate(topic, history)
-                        current_prompt = moderator_direction
-                        console.print(f"[bold magenta]Moderator's direction for {agent.id}:[/bold magenta] {current_prompt}")
+                    try:
+                        prompt_for_this_turn = current_prompt
 
-                    response_message = agent.generate_response(current_prompt, history)
-                    response_content = response_message.content
+                        # If a moderator is active, get a new prompt from the moderator
+                        if moderator_instance and (round_num > 0 or i > 0):
+                            moderator_direction = moderator_instance.moderate(topic, history)
 
-                    history.append({"role": "assistant", "content": response_content, "name": agent.id})
+                            # Log moderator's action to the database
+                            cursor.execute(
+                                """INSERT INTO messages (discussion_id, round_num, agent_id, agent_model, response, is_moderator_direction)
+                                   VALUES (?, ?, ?, ?, ?, 1)""",
+                                (discussion_id, round_num + 1, moderator_instance.agent.id, moderator_instance.agent.model, moderator_direction)
+                            )
+                            conn.commit()
 
-                    live.update(Panel(
-                        Markdown(f"**{agent.id} ({agent.model}):**\n{response_content}"),
-                        title=f"[bold green]Agent: {agent.id}[/bold green]",
-                        border_style="green"
-                    ))
-                    time.sleep(1) # Simulate reading time
+                            prompt_for_this_turn = moderator_direction
+                            console.print(f"[bold magenta]Moderator's direction for {agent.id}:[/bold magenta] {prompt_for_this_turn}")
 
-                    # If no moderator, the next agent's prompt is the current agent's response.
-                    # If a moderator is active, the moderator will generate the next prompt.
-                    # So, we only update current_prompt here if there's no moderator.
-                    if not moderator_instance:
-                        current_prompt = response_content
+                        response_message = agent.generate_response(prompt_for_this_turn, history)
+                        response_content = response_message.content
 
-                except Exception as e:
-                    live.update(Panel(f"[bold red]Error with agent {agent.id}:[/bold red] {e}", border_style="red"))
-                    console.print(f"[bold red]Discussion halted due to error with agent {agent.id}.[/bold red]")
-                    raise typer.Exit(code=1)
+                        # Log agent's response to the database
+                        cursor.execute(
+                            """INSERT INTO messages (discussion_id, round_num, agent_id, agent_model, prompt, response, is_moderator_direction)
+                               VALUES (?, ?, ?, ?, ?, ?, 0)""",
+                            (discussion_id, round_num + 1, agent.id, agent.model, prompt_for_this_turn, response_content)
+                        )
+                        conn.commit()
 
-    console.print(Panel("[bold green]Discussion Ended.[/bold green]", expand=False))
+                        history.append({"role": "assistant", "content": response_content, "name": agent.id})
+
+                        live.update(Panel(
+                            Markdown(f"**{agent.id} ({agent.model}):**\n{response_content}"),
+                            title=f"[bold green]Agent: {agent.id}[/bold green]",
+                            border_style="green"
+                        ))
+                        time.sleep(1) # Simulate reading time
+
+                        # If no moderator, the next agent's prompt is the current agent's response.
+                        # If a moderator is active, the moderator will generate the next prompt.
+                        if not moderator_instance:
+                            current_prompt = response_content
+
+                    except Exception as e:
+                        live.update(Panel(f"[bold red]Error with agent {agent.id}:[/bold red] {e}", border_style="red"))
+                        console.print(f"[bold red]Discussion halted due to error with agent {agent.id}.[/bold red]")
+                        raise typer.Exit(code=1)
+
+        console.print(Panel("[bold green]Discussion Ended.[/bold green]", expand=False))
+
+    finally:
+        if conn:
+            conn.close()
+            console.log("🗄️  Database connection closed.")
