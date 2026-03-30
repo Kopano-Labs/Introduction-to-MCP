@@ -13,10 +13,34 @@ docs = {
     "spec.txt": "These specifications define the technical requirements for the equipment.",
 }
 
-# TODO: Write a resource to return all doc id's
-# TODO: Write a resource to return the contents of a particular doc
-# TODO: Write a prompt to rewrite a doc in markdown format
-# TODO: Write a prompt to summarize a doc
+@mcp.resource("resource://doc_ids", name="doc_ids", description="Returns a list of all available document IDs.")
+def list_doc_ids():
+    """Returns a list of all document IDs."""
+    return list(docs.keys())
+
+@mcp.resource("resource://docs/{doc_id}", name="document_content", description="Returns the content of a specific document.")
+def get_doc_content(doc_id: str):
+    """Returns the content for a given doc_id."""
+    if doc_id not in docs:
+        raise ValueError(f"Doc with id {doc_id} not found")
+    return docs[doc_id]
+
+@mcp.prompt(name="rewrite_as_markdown", description="Rewrite a document in markdown format.")
+def rewrite_as_markdown(doc_id: str):
+    """Generates a prompt to rewrite a document as markdown."""
+    if doc_id not in docs:
+        raise ValueError(f"Doc with id {doc_id} not found")
+    content = docs[doc_id]
+    return [{"role": "user", "content": f"Please rewrite the following document content into well-formatted markdown:\n\n---\n\n{content}"}]
+
+@mcp.prompt(name="summarize_doc", description="Summarize the contents of a document.")
+def summarize_doc(doc_id: str):
+    """Generates a prompt to summarize a document."""
+    if doc_id not in docs:
+        raise ValueError(f"Doc with id {doc_id} not found")
+    content = docs[doc_id]
+    return [{"role": "user", "content": f"Please provide a concise summary of the following document:\n\n---\n\n{content}"}]
+
 @mcp.tool (
     name="edit_documents",
     description="Edit a doucument by replacing a sting in the document content with a new string",
