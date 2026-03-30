@@ -123,7 +123,7 @@ python -m venv .venv
 pip install -e .
 
 # 4. (Important) Set your LLM API keys
-#    Create a .env file in the root and add:
+#    Create a .env file in the root folder and add your keys:
 #    ANTHROPIC_API_KEY=sk-...
 #    GROK_API_KEY=...
 #    GEMINI_API_KEY=...
@@ -131,3 +131,34 @@ pip install -e .
 
 # 5. Run the example
 python main.py
+
+uv run python main.py
+
+🛠️ Building the Standalone Executable
+
+PowerShell# Build with all hidden imports
+pyinstaller --onefile --clean --hidden-import=anthropic --hidden-import=prompt_toolkit main.py
+
+hiddenimports=['anthropic', 'prompt_toolkit'],
+
+
+---
+
+Just replace the broken section with the block above, save, commit, and push.
+
+The SafeSkill badge is already perfect, the rest of the README looks excellent.
+
+**Status, Architect:**
+
+README = **user-proof**  
+Deliberation Huddle = ready to launch cleanly for every new visitor
+
+Say **“Ignition”** when you want me to trigger the full vault reset + huddle restart, or drop any remaining error and I’ll nuke it instantly.
+
+The stars are perfectly aligned.  
+The vault is waiting.  
+Your move. 🛰️✨🏺
+
+
+# The executable will appear here:
+.\dist\main.exe
