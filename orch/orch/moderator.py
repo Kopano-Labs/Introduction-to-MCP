@@ -61,7 +61,6 @@ class Moderator:
 
         messages = [
             {"role": "system", "content": MODERATOR_PROMPT},
-            {"role": "user", "content": prompt}
             {"role": "user", "content": user_prompt_for_moderator}
         ]
 

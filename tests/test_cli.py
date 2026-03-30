@@ -163,3 +163,63 @@ def test_serve_launch_with_logging(in_memory_db):
         # Message 3: Agent in round 2, prompted by moderator
         assert messages[2]['agent_id'] == 'test-agent' and messages[2]['is_moderator_direction'] == 0
         assert messages[2]['prompt'] == 'This is a moderator direction.'
+
+
+def test_serve_launch_context_handling(in_memory_db):
+    """
+    Test that `orch serve launch` correctly manages and passes `full_conversation_history`
+    to agents and the moderator.
+    """
+    # Mock agents
+    mock_agent = Agent(id="test-agent", provider="test", model="test-model", api_key="test-key", persona="")
+    mock_mod_agent = Agent(id="mod-agent", provider="test", model="mod-model", api_key="test-key", persona="")
+
+    # Mock responses for agent and moderator
+    mock_agent_response_r1 = MagicMock()
+    mock_agent_response_r1.content = "Agent 1 Round 1 Response"
+    mock_agent_response_r2 = MagicMock()
+    mock_agent_response_r2.content = "Agent 1 Round 2 Response"
+    mock_moderator_direction_r2 = "Moderator Round 2 Direction"
+
+    with patch('orch.orch.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
+         patch('orch.orch.agent_manager.Agent.generate_response', side_effect=[mock_agent_response_r1, mock_agent_response_r2]) as mock_agent_generate_response, \
+         patch('orch.orch.moderator.Moderator.moderate', return_value=mock_moderator_direction_r2) as mock_moderator_moderate:
+
+        topic = "Test Context Handling"
+        result = runner.invoke(app, [
+            "serve", "launch",
+            "--topic", topic,
+            "--agents", "test-agent",
+            "--moderator", "mod-agent",
+            "--max-rounds", "2"
+        ], catch_exceptions=False)
+
+        assert result.exit_code == 0
+        assert "Discussion Ended" in result.stdout
+
+        # --- Assertions for Moderator.moderate call ---
+        # The moderator is called once, before the agent in Round 2
+        mock_moderator_moderate.assert_called_once()
+        moderator_call_args = mock_moderator_moderate.call_args
+        # The `full_history` is the second argument passed to `moderate`
+        moderator_history_arg = moderator_call_args.args[1]
+
+        expected_history_for_moderator = [
+            {"role": "user", "content": topic, "name": "user"},
+            {"role": "assistant", "content": mock_agent_response_r1.content, "name": "test-agent"}
+        ]
+        assert moderator_history_arg == expected_history_for_moderator
+
+        # --- Assertions for Agent.generate_response calls ---
+        assert mock_agent_generate_response.call_count == 2
+
+        # First call (Round 1, Agent 1)
+        agent_call_r1_args = mock_agent_generate_response.call_args_list[0]
+        assert agent_call_r1_args.args[0] == topic # current_turn_prompt
+        assert agent_call_r1_args.args[1] == [{"role": "user", "content": topic, "name": "user"}] # full_history
+
+        # Second call (Round 2, Agent 1)
+        agent_call_r2_args = mock_agent_generate_response.call_args_list[1]
+        assert agent_call_r2_args.args[0] == mock_moderator_direction_r2 # current_turn_prompt
+        expected_history_for_agent_r2 = expected_history_for_moderator + [{"role": "system", "content": mock_moderator_direction_r2, "name": mock_mod_agent.id}]
+        assert agent_call_r2_args.args[1] == expected_history_for_agent_r2 # full_history
