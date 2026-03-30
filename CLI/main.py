@@ -41,6 +41,20 @@ async def main():
         )
         clients["doc_client"] = doc_client
 
+        # --- TEST: List available tools ---
+        print("--- Testing list_tools ---")
+        try:
+            tools = await doc_client.list_tools()
+            if not tools:
+                print("No tools found on the server.")
+            for tool in tools:
+                print(f"  Tool: {tool.name}")
+                print(f"    Description: {tool.description}")
+            print("--- Test complete, starting chat ---")
+        except Exception as e:
+            print(f"Error listing tools: {e}")
+        # --- END TEST ---
+
         for i, server_script in enumerate(server_scripts):
             client_id = f"client_{i}_{server_script}"
             client = await stack.enter_async_context(
