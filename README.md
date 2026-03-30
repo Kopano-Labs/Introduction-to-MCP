@@ -1,6 +1,5 @@
 # 🪐 orch
 
-[![CI Pipeline](https://github.com/RobynAwesome/Introduction-to-MCP/actions/workflows/ci.yml/badge.svg)](https://github.com/RobynAwesome/Introduction-to-MCP/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://python.org)
 [![LiteLLM](https://img.shields.io/badge/LiteLLM-FF6F00?logo=star&logoColor=white)](https://litellm.ai)
