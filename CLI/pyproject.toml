@@ -9,7 +9,8 @@ dependencies = [
     "python-dotenv",
     "mcp",
     "pydantic",
-    "pyinstaller"
+    "pyinstaller",
+    "anthropic"
 ]
 
 [project.scripts]
