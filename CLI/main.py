@@ -50,9 +50,28 @@ async def main():
             for tool in tools:
                 print(f"  Tool: {tool.name}")
                 print(f"    Description: {tool.description}")
-            print("--- Test complete, starting chat ---")
         except Exception as e:
             print(f"Error listing tools: {e}")
+        # --- END TEST ---
+
+        # --- TEST: Read document IDs resource ---
+        print("--- Testing doc_ids resource ---")
+        try:
+            doc_ids = await doc_client.read_resource("resource://doc_ids")
+            print(f"  Doc IDs: {doc_ids}")
+            print("--- Test complete, starting chat ---")
+        except Exception as e:
+            print(f"Error reading resource: {e}")
+        # --- END TEST ---
+
+        # --- TEST: Get prompt ---
+        print("--- Testing get_prompt ---")
+        try:
+            prompt_result = await doc_client.get_prompt("summarize_doc", {"doc_id": "plan.md"})
+            print(f"  Prompt: {prompt_result}")
+            print("--- Test complete, starting chat ---")
+        except Exception as e:
+            print(f"Error getting prompt: {e}")
         # --- END TEST ---
 
         for i, server_script in enumerate(server_scripts):
