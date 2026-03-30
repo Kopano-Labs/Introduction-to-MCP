@@ -22,14 +22,14 @@ def list_doc_ids():
 def get_doc_content(doc_id: str):
     """Returns the content for a given doc_id."""
     if doc_id not in docs:
-        raise ValueError(f"Doc with id {doc_id} not found")
+        raise ValueError(f"Document with id '{doc_id}' not found.")
     return docs[doc_id]
 
 @mcp.prompt(name="rewrite_as_markdown", description="Rewrite a document in markdown format.")
 def rewrite_as_markdown(doc_id: str):
     """Generates a prompt to rewrite a document as markdown."""
     if doc_id not in docs:
-        raise ValueError(f"Doc with id {doc_id} not found")
+        raise ValueError(f"Document with id '{doc_id}' not found.")
     content = docs[doc_id]
     return [{"role": "user", "content": f"Please rewrite the following document content into well-formatted markdown:\n\n---\n\n{content}"}]
 
@@ -37,7 +37,7 @@ def rewrite_as_markdown(doc_id: str):
 def summarize_doc(doc_id: str):
     """Generates a prompt to summarize a document."""
     if doc_id not in docs:
-        raise ValueError(f"Doc with id {doc_id} not found")
+        raise ValueError(f"Document with id '{doc_id}' not found.")
     content = docs[doc_id]
     return [{"role": "user", "content": f"Please provide a concise summary of the following document:\n\n---\n\n{content}"}]
 
@@ -51,7 +51,7 @@ def edit_document(
     new_str: str = Field(description="The new text to insert in the old text")
 ):
     if doc_id not in docs:
-        raise ValueError(f"Doc with id{doc_id} not found")
+        raise ValueError(f"Document with id '{doc_id}' not found.")
     
     docs[doc_id] = docs[doc_id].replace(old_str, new_str)
     return docs[doc_id]
@@ -64,7 +64,7 @@ def read_document(
     doc_id: str = Field(description="Id of the document to read"),
 ):
     if doc_id not in docs:
-        raise ValueError(f"Doc with id{doc_id} not found")
+        raise ValueError(f"Document with id '{doc_id}' not found.")
     return docs[doc_id]
 
 if __name__ == "__main__":

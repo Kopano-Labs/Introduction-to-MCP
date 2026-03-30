@@ -1,5 +1,9 @@
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from orch.orchestration import ORCHApprentice
 from orch import logging
+
 
 class DummyMentor:
     def __init__(self, name):
