@@ -223,3 +223,32 @@ def test_serve_launch_context_handling(in_memory_db):
         assert agent_call_r2_args.args[0] == mock_moderator_direction_r2 # current_turn_prompt
         expected_history_for_agent_r2 = expected_history_for_moderator + [{"role": "system", "content": mock_moderator_direction_r2, "name": mock_mod_agent.id}]
         assert agent_call_r2_args.args[1] == expected_history_for_agent_r2 # full_history
+
+
+def test_agents_remove():
+    """
+    Test `orch agents remove` successfully removes an agent.
+    """
+    mock_agent = Agent(id="test-remove", provider="test", model="test", api_key="key", persona="")
+    with patch('orch.orch.cli.load_agents', return_value={"test-remove": mock_agent}), \
+         patch('orch.orch.cli.save_agents') as mock_save:
+
+        result = runner.invoke(app, ["agents", "remove", "test-remove"])
+
+        assert result.exit_code == 0
+        assert "Agent 'test-remove' removed successfully." in result.stdout
+        mock_save.assert_called_once_with({})
+
+
+def test_agents_remove_not_found():
+    """
+    Test `orch agents remove` fails when the agent is not found.
+    """
+    with patch('orch.orch.cli.load_agents', return_value={}), \
+         patch('orch.orch.cli.save_agents') as mock_save:
+
+        result = runner.invoke(app, ["agents", "remove", "non-existent-agent"])
+
+        assert result.exit_code == 1
+        assert "Error: Agent 'non-existent-agent' not found." in result.stdout
+        mock_save.assert_not_called()

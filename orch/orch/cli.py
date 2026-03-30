@@ -3,10 +3,12 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 from rich.live import Live
-from rich.markdown import Markdown
 from rich.table import Table
+from rich.markdown import Markdown
 import time
 from typing import List, Optional
+import json
+from pathlib import Path
 
 from .agent_manager import load_agents, Agent, save_agents
 from .moderator import Moderator
@@ -57,6 +59,24 @@ def agents_list():
         console.print(f"    Model: {agent.model}")
         console.print(f"    Persona: {agent.persona[:50]}...") # Truncate persona for display
         console.print("")
+
+@agents.command(name="remove")
+def agents_remove(
+    agent_id: str = typer.Argument(..., help="The unique ID of the agent to remove.")
+):
+    """
+    Removes a configured AI agent.
+    """
+    agents = load_agents()
+    if agent_id not in agents:
+        console.print(f"[bold red]Error:[/bold red] Agent '{agent_id}' not found.")
+        raise typer.Exit(code=1)
+
+    del agents[agent_id]
+    save_agents(agents)
+    console.print(f"[bold green]Agent '{agent_id}' removed successfully.[/bold green]")
+
+
 
 # --- Serve Commands ---
 @app.command()
@@ -170,6 +190,79 @@ def log_view(
     finally:
         if conn:
             conn.close()
+
+@log.command(name="export")
+def log_export(
+    discussion_id: int = typer.Argument(..., help="The ID of the discussion session to export."),
+    output_file: Optional[Path] = typer.Option(None, "--output", "-o", help="Output JSON file path. Defaults to orch_discussion_<id>.json")
+):
+    """
+    Exports a specific discussion session log to a JSON file.
+    """
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+
+        # Get discussion topic and start_time
+        cursor.execute("SELECT topic, start_time FROM discussions WHERE id = ?", (discussion_id,))
+        discussion_row = cursor.fetchone()
+        if not discussion_row:
+            console.print(f"[bold red]Error:[/bold red] Discussion session with ID '{discussion_id}' not found.")
+            return
+
+        discussion_data = {
+            "id": discussion_id,
+            "topic": discussion_row["topic"],
+            "start_time": discussion_row["start_time"],
+            "messages": []
+        }
+
+        # Get all messages for the discussion
+        cursor.execute(
+            """SELECT round_num, agent_id, agent_model, prompt, response, is_moderator_direction, timestamp
+               FROM messages WHERE discussion_id = ? ORDER BY round_num ASC, timestamp ASC""",
+            (discussion_id,)
+        )
+        message_rows = cursor.fetchall()
+
+        if not message_rows:
+            console.print(f"No messages recorded for discussion session '{discussion_id}'. Exporting discussion metadata only.")
+        
+        for msg_row in message_rows:
+            message_entry = {
+                "round_num": msg_row["round_num"],
+                "agent_id": msg_row["agent_id"],
+                "agent_model": msg_row["agent_model"],
+                "timestamp": msg_row["timestamp"],
+            }
+            if msg_row["is_moderator_direction"]:
+                message_entry["type"] = "moderator_direction"
+                message_entry["direction"] = msg_row["response"] # Moderator direction is in 'response'
+            else:
+                message_entry["type"] = "agent_response"
+                message_entry["prompt"] = msg_row["prompt"]
+                message_entry["response"] = msg_row["response"]
+            
+            discussion_data["messages"].append(message_entry)
+
+        # Determine output file path
+        if output_file is None:
+            file_name = Path.cwd() / f"orch_discussion_{discussion_id}.json"
+        else:
+            file_name = output_file
+
+        try:
+            with open(file_name, "w", encoding="utf-8") as f:
+                json.dump(discussion_data, f, indent=4, ensure_ascii=False)
+            console.print(f"[bold green]Discussion #{discussion_id} exported successfully to:[/bold green] [cyan]{file_name}[/cyan]")
+        except IOError as e:
+            console.print(f"[bold red]Error:[/bold red] Could not write to file '{file_name}'. {e}")
+            raise typer.Exit(code=1)
+
+    finally:
+        if conn:
+            conn.close()
+
 
 # --- Serve Commands ---
 @app.command()
