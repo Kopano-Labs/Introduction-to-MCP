@@ -10,7 +10,8 @@ from core.claude import Claude
 from core.cli_chat import CliChat
 from core.cli import CliApp
 
-load_dotenv()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Anthropic Config
 claude_model = os.getenv("CLAUDE_MODEL", "")
@@ -29,10 +30,11 @@ async def main():
     server_scripts = sys.argv[1:]
     clients = {}
 
+    mcp_server_path = os.path.join(BASE_DIR, "mcp_server.py")
     command, args = (
-        ("uv", ["run", "mcp_server.py"])
+        ("uv", ["run", mcp_server_path])
         if os.getenv("USE_UV", "0") == "1"
-        else ("python", ["mcp_server.py"])
+        else ("python", [mcp_server_path])
     )
 
     async with AsyncExitStack() as stack:
@@ -59,7 +61,11 @@ async def main():
         await cli.run()
 
 
-if __name__ == "__main__":
+def cli_entry():
     if sys.platform == "win32":
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
     asyncio.run(main())
+
+
+if __name__ == "__main__":
+    cli_entry()

@@ -1,12 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "app"
+name = "mcp-cli"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.10"
 dependencies = [
-    "anthropic>=0.51.0",
-    "mcp[cli]>=1.8.0",
-    "prompt-toolkit>=3.0.51",
-    "python-dotenv>=1.1.0",
+    "python-dotenv",
+    "mcp",
+    "pydantic"
 ]
+
+[project.scripts]
+mcp-cli = "main:cli_entry"
