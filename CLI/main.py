@@ -1,6 +1,7 @@
 import asyncio
 import sys
 import os
+import multiprocessing
 from dotenv import load_dotenv
 from contextlib import AsyncExitStack
 
@@ -17,6 +18,15 @@ else:
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
+# --- PYINSTALLER SUBPROCESS ROUTER ---
+if "--mcp-server" in sys.argv:
+    mcp_server_path = os.path.join(BASE_DIR, "mcp_server.py")
+    with open(mcp_server_path, "r", encoding="utf-8") as f:
+        code = f.read()
+    exec(code, {"__name__": "__main__", "__file__": mcp_server_path})
+    sys.exit(0)
+# -------------------------------------
+
 # Anthropic Config
 claude_model = os.getenv("CLAUDE_MODEL", "")
 anthropic_api_key = os.getenv("ANTHROPIC_API_KEY", "")
@@ -31,15 +41,17 @@ assert anthropic_api_key, (
 async def main():
     claude_service = Claude(model=claude_model)
 
-    server_scripts = sys.argv[1:]
+    server_scripts = [arg for arg in sys.argv[1:] if arg != "--mcp-server"]
     clients = {}
 
     mcp_server_path = os.path.join(BASE_DIR, "mcp_server.py")
-    command, args = (
-        ("uv", ["run", mcp_server_path])
-        if os.getenv("USE_UV", "0") == "1"
-        else ("python", [mcp_server_path])
-    )
+    
+    if getattr(sys, 'frozen', False):
+        command = sys.executable
+        args = ["--mcp-server"]
+    else:
+        command = "uv" if os.getenv("USE_UV", "0") == "1" else sys.executable
+        args = ["run", mcp_server_path] if command == "uv" else [mcp_server_path]
 
     async with AsyncExitStack() as stack:
         doc_client = await stack.enter_async_context(
@@ -66,10 +78,9 @@ async def main():
 
 
 def cli_entry():
-    if sys.platform == "win32":
-        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
     asyncio.run(main())
 
 
 if __name__ == "__main__":
+    multiprocessing.freeze_support()
     cli_entry()

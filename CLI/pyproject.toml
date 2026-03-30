@@ -10,7 +10,8 @@ dependencies = [
     "mcp",
     "pydantic",
     "pyinstaller",
-    "anthropic"
+    "anthropic",
+    "prompt_toolkit"
 ]
 
 [project.scripts]
