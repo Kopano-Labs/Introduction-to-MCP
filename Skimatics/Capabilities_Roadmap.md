@@ -2,6 +2,8 @@
 
 This document maps the high-level "100 Capabilities" vision to the concrete engineering phases of the `orch` project. The engineering TODO list contains the steps we must take to unlock these powerful features.
 
+A detailed breakdown of all 100 capabilities and their implementation status can be found in the `100_Capabilities_TODO.md` file.
+
 ---
 
 ## ✅ Phase 1: Foundation (Complete)

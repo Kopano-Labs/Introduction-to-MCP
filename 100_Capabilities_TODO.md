@@ -14,23 +14,23 @@ This document tracks the implementation status of the 100 capabilities for the `
 
 _All capabilities in this section are planned for Phase 3 and beyond, as they require tool integration._
 
-- `[ ]` **1. Write, debug, and test full features:** Requires file system and code execution tools.
-- `[ ]` **2. Refactor your entire codebase:** Requires file system and static analysis tools.
-- `[ ]` **3. Generate PR-ready code + commit messages + tests:** Requires Git and file system tools.
+- `[/]` **1. Write, debug, and test full features:** Requires file system and code execution tools. (Filesystem tool partially enables)
+- `[/]` **2. Refactor your entire codebase:** Requires file system and static analysis tools. (Filesystem tool partially enables)
+- `[/]` **3. Generate PR-ready code + commit messages + tests:** Requires Git and file system tools. (Filesystem tool partially enables)
 - `[ ]` **4. Automatically review every new GitHub PR:** Requires a GitHub API tool.
-- `[ ]` **5. Convert legacy code:** Requires file system and code execution tools.
-- `[ ]` **6. Create new microservices:** Requires file system and Docker/Kubernetes tools.
-- `[ ]` **7. Fix security vulnerabilities it finds:** Requires a dependency scanning tool (e.g., `pip-audit`) and file system tools.
-- `[ ]` **8. Generate API documentation:** Requires a code introspection tool.
-- `[ ]` **9. Auto-write GitHub Actions / CI pipelines:** Requires file system tools.
+- `[/]` **5. Convert legacy code:** Requires file system and code execution tools. (Filesystem tool partially enables)
+- `[/]` **6. Create new microservices:** Requires file system and Docker/Kubernetes tools. (Filesystem tool partially enables)
+- `[/]` **7. Fix security vulnerabilities it finds:** Requires a dependency scanning tool (e.g., `pip-audit`) and file system tools. (Filesystem tool partially enables)
+- `[/]` **8. Generate API documentation:** Requires a code introspection tool. (Filesystem tool partially enables)
+- `[/]` **9. Auto-write GitHub Actions / CI pipelines:** Requires file system tools. (Filesystem tool partially enables)
 - `[ ]` **10. Turn a Figma link into production-ready frontend code:** Requires a Figma API tool.
 
 ### 11–20: Research & Knowledge Work
 
 _All capabilities in this section are planned for Phase 3 and beyond._
 
-- `[ ]` **11. Run deep web research:** Requires a web browsing/search tool.
-- `[ ]` **12. Summarize 50-page PDFs:** Requires file I/O and a PDF parsing tool.
+- `[/]` **11. Run deep web research:** Requires a web browsing/search tool. (Web search tool partially enables)
+- `[/]` **12. Summarize 50-page PDFs:** Requires file I/O and a PDF parsing tool. (Filesystem tool partially enables)
 - `[ ]` **13. Track competitors’ pricing changes daily:** Requires a web scraping/browsing tool.
 - `[ ]` **14. Monitor Reddit, X, and forums for brand mentions:** Requires social media and web search API tools.
 - `[ ]` **15. Pull the latest arXiv papers on any topic:** Requires an arXiv API tool.
@@ -38,7 +38,7 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **17. Answer any question with sources less than 24 hours old:** Requires a web search tool with a time filter.
 - `[ ]` **18. Generate investor update decks:** Requires file I/O and data analysis tools.
 - `[ ]` **19. Translate complex legal contracts into plain English:** Core LLM capability, but requires a file I/O tool to access documents.
-- `[ ]` **20. Run sentiment analysis on customer feedback:** Core LLM capability, but requires tools to access data channels (e.g., email, social media).
+- `[/]` **20. Run sentiment analysis on customer feedback:** Core LLM capability, but requires tools to access data channels (e.g., email, social media). (Filesystem tool partially enables)
 
 ### 21–30: Personal Productivity & Life Automation
 
@@ -49,7 +49,7 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **23. Track and optimize your personal budget:** Requires a financial data tool (e.g., Plaid API) or file I/O for statements.
 - `[ ]` **24. Plan complete trips with live prices:** Requires flight, hotel, and booking API tools.
 - `[ ]` **25. Auto-generate weekly meal plans:** Requires a tool to access fridge contents (e.g., smart fridge API or manual input).
-- `[ ]` **26. Remind you of birthdays and auto-send gifts:** Requires a calendar tool and an e-commerce API tool.
+- `[/]` **26. Remind you of birthdays and auto-send gifts:** Requires a calendar tool and an e-commerce API tool. (Filesystem tool partially enables for local data)
 - `[ ]` **27. Keep your to-do list perfectly prioritized:** Requires a task management API tool (Todoist, Asana).
 - `[ ]` **28. Scan your receipts and auto-categorize expenses:** Requires an OCR tool and file I/O.
 - `[ ]` **29. Generate daily briefings:** Requires news, weather, and calendar API tools.
@@ -63,12 +63,12 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **32. Run SQL queries on your database:** Requires a database connection tool.
 - `[ ]` **33. Build and maintain interactive dashboards:** Requires a dashboarding API tool (e.g., Grafana) or a web framework tool.
 - `[ ]` **34. Detect anomalies in your metrics:** Requires data analysis and statistical tools.
-- `[ ]` **35. Forecast sales, traffic, or expenses:** Requires data analysis and statistical tools.
-- `[ ]` **36. Clean messy spreadsheets:** Requires file I/O and a spreadsheet tool (e.g., pandas).
+- `[/]` **35. Forecast sales, traffic, or expenses:** Requires data analysis and statistical tools. (Filesystem tool partially enables for local data)
+- `[/]` **36. Clean messy spreadsheets:** Requires file I/O and a spreadsheet tool (e.g., pandas). (Filesystem tool partially enables)
 - `[ ]` **37. Compare two datasets:** Requires a data analysis tool.
 - `[ ]` **38. Generate A/B test analysis:** Requires a statistical tool.
-- `[ ]` **39. Create beautiful data visualizations:** Requires a plotting library tool (e.g., matplotlib).
-- `[ ]` **40. Turn raw logs into executive summary reports:** Requires file I/O and a log parsing tool.
+- `[/]` **39. Create beautiful data visualizations:** Requires a plotting library tool (e.g., matplotlib). (Filesystem tool partially enables for saving)
+- `[/]` **40. Turn raw logs into executive summary reports:** Requires file I/O and a log parsing tool. (Filesystem tool partially enables)
 
 ### 41–50: Content Creation & Marketing
 
@@ -77,13 +77,13 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **41. Write full blog posts, LinkedIn threads, or YouTube scripts:** Requires a file I/O tool.
 - `[ ]` **42. Generate 30 days of social media content:** Requires social media API tools for posting.
 - `[ ]` **43. Create SEO-optimized landing pages:** Requires a file I/O tool.
-- `[ ]` **44. Design email marketing campaigns:** Requires an email marketing API tool (e.g., Mailchimp).
+- `[/]` **44. Design email marketing campaigns:** Requires an email marketing API tool (e.g., Mailchimp). (Filesystem tool partially enables for drafts)
 - `[ ]` **45. Auto-edit and caption your videos:** Requires video processing (e.g., ffmpeg) and speech-to-text tools.
 - `[ ]` **46. Build entire presentation decks:** Requires a Google Slides or PowerPoint API tool.
 - `[ ]` **47. Write product descriptions that rank and convert:** Core LLM capability, but requires an e-commerce API tool to publish.
 - `[ ]` **48. Generate personalized cold outreach sequences:** Requires an email or CRM tool.
 - `[ ]` **49. Run social listening and suggest trending topics:** Requires social media API tools.
-- `[ ]` **50. Create entire newsletters:** Requires a file I/O or email marketing tool.
+- `[/]` **50. Create entire newsletters:** Requires a file I/O or email marketing tool. (Filesystem tool partially enables for drafts)
 
 ### 51–60: Customer Support & Sales
 
@@ -93,7 +93,7 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **52. Qualify leads and book sales calls automatically:** Requires CRM and calendar API tools.
 - `[ ]` **53. Write personalized sales proposals:** Requires web scraping and file I/O tools.
 - `[ ]` **54. Answer support tickets and close them:** Requires a helpdesk API tool (e.g., Zendesk).
-- `[ ]` **55. Run win/loss analysis on every closed deal:** Requires a CRM API tool.
+- `[/]` **55. Run win/loss analysis on every closed deal:** Requires a CRM API tool. (Filesystem tool partially enables for local data)
 - `[ ]` **56. Generate upsell offers tailored to each customer:** Requires a CRM or billing API tool.
 - `[ ]` **57. Create knowledge-base articles from support conversations:** Requires a support platform API tool.
 - `[ ]` **58. Detect angry customers and escalate:** Core LLM sentiment analysis plus a support platform tool.
@@ -108,9 +108,9 @@ _Some of these are core LLM capabilities, while others require specific tools._
 - `[ ]` **62. Create custom workout plans + video form checks:** Requires a video analysis tool for form checks.
 - `[ ]` **63. Design and iterate on logos, icons, or branding assets:** Requires an image generation tool (e.g., DALL-E API).
 - `[ ]` **64. Compose music or generate full song lyrics:** Requires a music generation tool or API.
-- `[ ]` **65. Turn your voice memos into polished blog posts:** Requires a speech-to-text tool and file I/O.
-- `[ ]` **66. Build interactive web apps from a description:** Requires file system and code execution tools.
-- `[ ]` **67. Create personalized children’s books:** Requires file I/O and an image generation tool.
+- `[/]` **65. Turn your voice memos into polished blog posts:** Requires a speech-to-text tool and file I/O. (Filesystem tool partially enables)
+- `[/]` **66. Build interactive web apps (with full frontend + backend) from a description:** Requires file system and code execution tools. (Filesystem tool partially enables)
+- `[/]` **67. Create personalized children’s books:** Requires file I/O and an image generation tool. (Filesystem tool partially enables)
 - `[ ]` **68. Generate memes or viral TikTok scripts:** Requires an image generation/editing tool.
 - `[x]` **69. Act as a dungeon master for endless text adventures:** Core LLM capability.
 - `[x]` **70. Help you brainstorm and refine startup ideas:** Core LLM capability.
@@ -121,7 +121,7 @@ _This section is the essence of Phase 3: Tool Integration._
 
 - `[/]` **71. Connect any app that has an API:** In Progress. This is the ultimate goal of the MCP architecture. The framework for adding tools is the next step.
 - `[ ]` **72. Auto-backup and organize your files:** Requires cloud storage API tools (Google Drive, Dropbox).
-- `[ ]` **73. Monitor job boards and apply to roles:** Requires web scraping and email/form-filling tools.
+- `[/]` **73. Monitor job boards and apply to roles:** Requires web scraping and email/form-filling tools. (Filesystem tool partially enables for local data)
 - `[ ]` **74. Keep your CRM perfectly updated:** Requires CRM and email API tools.
 - `[ ]` **75. Auto-post to multiple social platforms:** Requires social media API tools.
 - `[ ]` **76. Sync your tasks between Notion, Todoist, Linear, and Jira:** Requires APIs for each of those services.
@@ -138,9 +138,9 @@ _Many of these are core LLM capabilities that can be enhanced with tools._
 - `[x]` **82. Quiz you on topics you’re studying:** Core LLM capability.
 - `[ ]` **83. Summarize books you don’t have time to read:** Requires file I/O or a book API to access the content.
 - `[ ]` **84. Generate Anki flashcards from any topic:** Requires file I/O to create `.apkg` or `.csv` files.
-- `[x]` **85. Act as a debate partner to strengthen your arguments:** Core LLM capability.
+- `[/]` **85. Act as a debate partner to strengthen your arguments:** Core LLM capability. (Filesystem tool partially enables for reading debate notes)
 - `[x]` **86. Help you prepare for interviews with realistic mock sessions:** Core LLM capability.
-- `[ ]` **87. Track your habits and gently nudge you:** Requires a habit tracking app API or simple file I/O.
+- `[/]` **87. Track your habits and gently nudge you:** Requires a habit tracking app API or simple file I/O. (Filesystem tool partially enables for local data)
 - `[x]` **88. Translate and explain foreign-language content:** Core LLM capability.
 - `[ ]` **89. Build custom spaced-repetition systems:** Requires file I/O or a database tool.
 - `[x]` **90. Give you instant feedback on writing, speaking, or design work:** Core LLM capability.
