@@ -1,0 +1,37 @@
+{
+  "gemini": {
+    "id": "gemini",
+    "provider": "gemini",
+    "model": "gemini",
+    "persona": "You are Gemini, a helpful and truthful AI.",
+    "_api_key": "FALLBACK"
+  },
+  "grok": {
+    "id": "grok",
+    "provider": "xai",
+    "model": "grok",
+    "persona": "You are Grok, a helpful and truthful AI.",
+    "_api_key": "MOCK_KEY"
+  },
+  "claude": {
+    "id": "claude",
+    "provider": "anthropic",
+    "model": "claude",
+    "persona": "You are Claude, a helpful and truthful AI.",
+    "_api_key": "FALLBACK"
+  },
+  "copilot": {
+    "id": "copilot",
+    "provider": "openai",
+    "model": "copilot",
+    "persona": "You are Copilot, a helpful and truthful AI.",
+    "_api_key": "FALLBACK"
+  },
+  "orch": {
+    "id": "orch",
+    "provider": "gemini",
+    "model": "gemini-1.5-flash",
+    "persona": "A young, curious AGI student learning from the Council of Teachers.",
+    "_api_key": "FALLBACK"
+  }
+}

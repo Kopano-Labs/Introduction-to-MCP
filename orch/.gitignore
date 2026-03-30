@@ -1,0 +1,18 @@
+# 🛡️ Neural Vault Security
+.env
+.env.example
+.orch_data/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.db
+orch.db
+orch.db-journal
+.egg-info/
+dist/
+build/
+node_modules/
+gui/dist/
+gui/.env
