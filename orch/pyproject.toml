@@ -24,5 +24,6 @@ dependencies = [
 [project.scripts]
 orch = "orch.cli:app"
 
-[tool.setuptools]
-packages = ["orch"]
+[tool.setuptools.packages.find]
+include = ["orch"]
+exclude = ["CLI", "public", "Skimatics", "certificates"]
