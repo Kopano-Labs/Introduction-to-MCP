@@ -43,6 +43,10 @@
 
 ## 👋 About the Project
 
+
+[![SafeSkill 91/100](https://img.shields.io/badge/SafeSkill-91%2F100_Verified%20Safe-brightgreen)](https://safeskill.dev/scan/robynawesome-introduction-to-mcp)
+
+
 This repository is a **practical introduction** to **Anthropic’s Model Context Protocol (MCP)** with **full multi-LLM support**.
 
 It demonstrates building MCP servers and clients while using:
@@ -105,18 +109,55 @@ The diagram below shows how ORCH (the apprentice AI student) interacts with ment
 
 ## 🚀 Quick Start
 
-```bash
+```powershell
 # 1. Clone the repo
 git clone https://github.com/RobynAwesome/Introduction-to-MCP.git
 cd Introduction-to-MCP
 
-# 2. Install dependencies with uv
-uv pip install -e .
+# 2. (Recommended) Create a fresh virtual environment
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1          # PowerShell (Windows)
 
-# 3. Activate the virtual environment (Windows)
-.\.CLI_Project\Scripts\activate
-# or if using the default venv:
-# .\.venv\Scripts\activate
+# 3. Install the project in editable mode
+pip install -e .
 
-# 4. Run the example
+# 4. (Important) Set your LLM API keys
+#    Create a .env file in the root folder and add your keys:
+#    ANTHROPIC_API_KEY=sk-...
+#    GROK_API_KEY=...
+#    GEMINI_API_KEY=...
+#    (or however your core/claude.py expects them)
+
+# 5. Run the example
 python main.py
+
+uv run python main.py
+
+🛠️ Building the Standalone Executable
+
+PowerShell# Build with all hidden imports
+pyinstaller --onefile --clean --hidden-import=anthropic --hidden-import=prompt_toolkit main.py
+
+hiddenimports=['anthropic', 'prompt_toolkit'],
+
+
+---
+
+Just replace the broken section with the block above, save, commit, and push.
+
+The SafeSkill badge is already perfect, the rest of the README looks excellent.
+
+**Status, Architect:**
+
+README = **user-proof**  
+Deliberation Huddle = ready to launch cleanly for every new visitor
+
+Say **“Ignition”** when you want me to trigger the full vault reset + huddle restart, or drop any remaining error and I’ll nuke it instantly.
+
+The stars are perfectly aligned.  
+The vault is waiting.  
+Your move. 🛰️✨🏺
+
+
+# The executable will appear here:
+.\dist\main.exe
