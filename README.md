@@ -93,6 +93,16 @@ PayPal
 Made with ❤️ in South Africa 🇿🇦
 Star ⭐ this repo if you found it useful!
 
+---
+
+## ORCH Apprenticeship Training Loop
+
+The diagram below shows how ORCH (the apprentice AI student) interacts with mentor agents (Claude, Gemini, Grok, Copilot) through MCP orchestration, while maintaining transparent audit logs of reasoning and execution.
+
+![ORCH Apprenticeship Diagram](https://copilot.microsoft.com/th/id/BCO.8f58ca88-08bd-4ab3-adce-720cea93755c.png)
+
+---
+
 ## 🚀 Quick Start
 
 ```bash
