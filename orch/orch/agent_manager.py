@@ -1,52 +1,67 @@
+from typing import Dict, List, Any
+from pydantic import BaseModel
 import json
 from pathlib import Path
+from litellm import completion
 from rich.console import Console
-from .config import settings
 
 console = Console()
 
-class Agent:
-    def __init__(self, id: str, provider: str, model: str, api_key: str | None = None, persona: str = "", _api_key: str | None = None):
-        self.id = id
-        self.provider = provider
-        self.model = model
-        self.persona = persona or f"You are {id.capitalize()}, a helpful and truthful AI."
-        
-        # --- PHASE 3: AUTO-LOAD FROM .ENV FALLBACK ---
-        # Handle both serialised and direct constructor names
-        self._api_key = _api_key or api_key
-        
-    @property
-    def api_key(self) -> str | None:
-        # If we have a real-looking key in the object, use it
-        placeholders = ["MOCK_KEY", "FALLBACK", "your_gemini_key", "your_anthropic_key", "your_openai_key"]
-        if self._api_key and self._api_key not in placeholders:
-            return self._api_key
-            
-        # Fallback to global settings (.env)
-        key_map = {
-            "gemini": settings.gemini_api_key,
-            "grok": settings.grok_api_key,
-            "xai": settings.grok_api_key,
-            "copilot": settings.openai_api_key,
-            "openai": settings.openai_api_key,
-            "claude": settings.anthropic_api_key,
-            "anthropic": settings.anthropic_api_key,
-            "aiml": settings.aiml_api_key,
-        }
-        return key_map.get(self.id.lower()) or key_map.get(self.provider.lower())
+# Define the path for agent configuration
+AGENT_CONFIG_PATH = Path.home() / ".orch" / "agents.json"
 
-def load_agents() -> dict[str, Agent]:
-    if not settings.agents_file.exists():
+class Agent(BaseModel):
+    id: str
+    provider: str
+    model: str
+    api_key: str
+    persona: str = "You are a helpful AI assistant."
+
+    def generate_response(self, prompt: str, history: List[Dict[str, str]]) -> Any:
+        """
+        Generates a response from the agent using LiteLLM.
+        """
+        messages = [{"role": "system", "content": self.persona}]
+        for msg in history:
+            # Ensure 'role' and 'content' are present, and handle 'name' for display
+            role = msg.get("role", "user") # Default to user if role is missing
+            content = msg.get("content", "")
+            # For LiteLLM, 'name' is usually not part of the standard message dict unless it's a tool call.
+            # We'll just pass role and content.
+            messages.append({"role": role, "content": content})
+        messages.append({"role": "user", "content": prompt})
+
+        try:
+            response = completion(
+                model=self.model,
+                messages=messages,
+                api_key=self.api_key,
+                stream=False, # For now, keep it non-streaming for simplicity in CLI
+            )
+            # LiteLLM response.choices[0].message is a dict-like object
+            return response.choices[0].message
+        except Exception as e:
+            console.log(f"🚨 [bold red]Agent {self.id} failed to generate a response:[/] {e}")
+            raise
+
+def load_agents() -> Dict[str, Agent]:
+    """
+    Loads configured agents from the JSON file.
+    """
+    if not AGENT_CONFIG_PATH.exists():
         return {}
-    with open(settings.agents_file) as f:
-        data = json.load(f)
-    return {k: Agent(**v) for k, v in data.items()}
+    try:
+        with open(AGENT_CONFIG_PATH, "r") as f:
+            agents_data = json.load(f)
+        return {id: Agent(**data) for id, data in agents_data.items()}
+    except json.JSONDecodeError:
+        console.print(f"[bold red]Error:[/bold red] Could not decode agents.json. File might be corrupt.")
+        return {}
 
-def save_agent(agent: Agent):
-    agents = load_agents()
-    agents[agent.id] = agent
-    settings.agents_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(settings.agents_file, "w") as f:
-        json.dump({k: vars(v) for k, v in agents.items()}, f, indent=2)
-    console.print(f"[green]✓ Agent [bold]{agent.id}[/bold] configured[/green]")
+def save_agents(agents: Dict[str, Agent]):
+    """
+    Saves configured agents to the JSON file.
+    """
+    AGENT_CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(AGENT_CONFIG_PATH, "w") as f:
+        json.dump({id: agent.dict() for id, agent in agents.items()}, f, indent=4)

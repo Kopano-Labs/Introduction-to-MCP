@@ -1,190 +1,146 @@
 import typer
 from rich.console import Console
-from rich.table import Table
-from .agent_manager import Agent, save_agent, load_agents
-from .simulator import run_simulated_discussion
-from .database import SessionLocal, CouncilSession, NeuralRound, CognitiveBlock, Mentor
-from .exporter import export_session_to_jsonl, export_all_to_jsonl
-from .config import settings
+from rich.panel import Panel
+from rich.text import Text
+from rich.live import Live
+from rich.markdown import Markdown
+import time
+from typing import List, Optional
 
-app = typer.Typer(rich_markup_mode="rich", help="orch – Multi-AI Collaboration Platform (MCP)")
+from .agent_manager import load_agents, Agent, save_agents
+from .moderator import Moderator
+
+app = typer.Typer()
 console = Console()
 
-# ====================== SERVE ======================
-serve_app = typer.Typer()
-app.add_typer(serve_app, name="serve", help="Simulation Control")
+# --- Agent Management Commands ---
+@app.command()
+def agents():
+    """
+    Manage AI agents.
+    """
+    console.print(Panel("[bold green]Agent Management Commands[/bold green]", expand=False))
 
-@serve_app.command("launch")
-def serve_launch(
-    topic: str = typer.Option(..., "--topic", "-t", help="Discussion topic"),
-    agents: str = typer.Option(..., "--agents", "-a", help="Comma-separated agent IDs e.g. gemini,grok"),
-    max_rounds: int = typer.Option(10, "--max-rounds", "-r"),
-    whatsapp: bool = typer.Option(False, "--whatsapp", "-w", help="Mirror discussion to WhatsApp (Phase 3)"),
+@agents.command(name="config")
+def agents_config(
+    agent_id: str = typer.Argument(..., help="Unique ID for the agent."),
+    provider: str = typer.Option(..., "--provider", "-p", help="LLM provider (e.g., 'openai', 'google', 'anthropic')."),
+    model: str = typer.Option(..., "--model", "-m", help="Specific model name (e.g., 'gpt-4o', 'gemini-1.5-flash-latest')."),
+    api_key: str = typer.Option(..., "--api-key", "-k", help="API key for the LLM provider."),
+    persona: str = typer.Option("You are a helpful AI assistant.", "--persona", "-s", help="The agent's persona or system prompt."),
 ):
-    """Start a new simulation with optional WhatsApp broadcasting."""
-    agent_list = [a.strip() for a in agents.split(",")]
-    run_simulated_discussion(topic, agent_list, max_rounds, whatsapp_mode=whatsapp)
+    """
+    Configures a new AI agent or updates an existing one.
+    """
+    agents = load_agents()
+    new_agent = Agent(id=agent_id, provider=provider, model=model, api_key=api_key, persona=persona)
+    agents[agent_id] = new_agent
+    save_agents(agents)
+    console.print(f"[bold green]Agent '{agent_id}' configured successfully.[/bold green]")
 
-# ====================== CHAT ======================
-chat_app = typer.Typer()
-app.add_typer(chat_app, name="chat", help="Interactive Control")
-
-@chat_app.command("status")
-def chat_status():
-    console.print("[blue]No active session (simulation only in Phase 1)[/blue]")
-
-@chat_app.command("sessions")
-def chat_sessions_list():
-    """List all archived discussion sessions in the Data Lake."""
-    db = SessionLocal()
-    try:
-        sessions = db.query(CouncilSession).order_by(CouncilSession.created_at.desc()).all()
-        if not sessions:
-            console.print("[yellow]No sessions found in the Data Lake.[/yellow]")
-            return
-            
-        table = Table(title="AGI Apprenticeship Vault")
-        table.add_column("ID", style="cyan")
-        table.add_column("Topic", style="white")
-        table.add_column("Created At", style="magenta")
-        
-        for s in sessions:
-            table.add_row(str(s.id), s.title, s.created_at.strftime("%Y-%m-%d %H:%M"))
-            
-        console.print(table)
-    finally:
-        db.close()
-
-@chat_app.command("log")
-def chat_log(session_id: str = typer.Option(None, "--session", "-s")):
-    """View the actual discussion history from the Data Lake."""
-    db = SessionLocal()
-    try:
-        session = None
-        if session_id:
-            session = db.query(CouncilSession).filter(CouncilSession.id == session_id).first()
-        else:
-            session = db.query(CouncilSession).order_by(CouncilSession.created_at.desc()).first()
-            
-        if not session:
-            console.print("[red]No archived sessions found![/red]")
-            return
-            
-        console.print(f"📄 [bold blue]AUDIT: Session #{session.id}[/bold blue] | Topic: {session.title}")
-        for rnd in session.rounds:
-            console.print(f"\n[bold yellow]── ROUND {rnd.round_number} ──────────[/bold yellow]")
-            for block in rnd.blocks:
-                mentor = db.query(Mentor).filter(Mentor.id == block.mentor_id).first()
-                prefix = f"[bold magenta][{mentor.name.upper()}][/bold magenta]" if block.is_student else f"[bold cyan][{mentor.name.upper()}][/bold cyan]"
-                console.print(f"{prefix}: {block.content}")
-                if block.reasoning:
-                    console.print(f"[dim italic]🧠 Reasoning: {block.reasoning[:100]}...[/dim italic]")
-    finally:
-        db.close()
-
-# ====================== AGENTS ======================
-agents_app = typer.Typer()
-app.add_typer(agents_app, name="agents", help="Management")
-
-@agents_app.command("list")
+@agents.command(name="list")
 def agents_list():
+    """
+    Lists all configured AI agents.
+    """
     agents = load_agents()
     if not agents:
-        console.print("[yellow]No agents configured yet.[/yellow]")
+        console.print("No agents configured yet.")
         return
-    table = Table(title="Configured Agents")
-    table.add_column("ID", style="cyan")
-    table.add_column("Provider", style="magenta")
-    table.add_column("Model")
-    for a in agents.values():
-        table.add_row(a.id, a.provider, a.model)
-    console.print(table)
 
-@agents_app.command("config")
-def agents_config(
-    id: str = typer.Argument(..., help="Agent ID e.g. gemini"),
-    provider: str = typer.Option("gemini", "--provider", "-p"),
-    model: str = typer.Option(None, "--model", "-m"),
-    api_key: str = typer.Option(..., "--api-key", "-k", prompt=True, hide_input=True),
-    persona: str = typer.Option("", "--persona"),
-):
-    """Configure a new AI (stores key securely in .env + agents.json)"""
-    agent = Agent(id=id, provider=provider, model=model or id, api_key=api_key, persona=persona)
-    save_agent(agent)
+    console.print(Panel("[bold blue]Configured Agents[/bold blue]", expand=False))
+    for agent_id, agent in agents.items():
+        console.print(f"  [bold cyan]{agent_id}[/bold cyan]")
+        console.print(f"    Provider: {agent.provider}")
+        console.print(f"    Model: {agent.model}")
+        console.print(f"    Persona: {agent.persona[:50]}...") # Truncate persona for display
+        console.print("")
 
-@agents_app.command("inspect")
-def agents_inspect(id: str):
-    agents = load_agents()
-    if id not in agents:
-        console.print(f"[red]Agent {id} not found[/red]")
-        return
-    a = agents[id]
-    console.print(a.__dict__)
-
-# ====================== LEARN ======================
-learn_app = typer.Typer()
-app.add_typer(learn_app, name="learn", help="Knowledge Base")
-
-@learn_app.command("datasets")
-def learn_datasets_list():
-    """List and export training datasets from the Data Lake."""
-    console.print("[blue]Exporting Full Knowledge Base to JSONL...[/blue]")
-    output_path = settings.data_dir / "datasets"
-    output_path.mkdir(parents=True, exist_ok=True)
-    
-    dataset_file = export_all_to_jsonl(output_path)
-    console.print(f"[bold green]✓ Done! Master dataset saved at: {dataset_file}[/bold green]")
-
-@learn_app.command("export")
-def learn_export(session_id: str):
-    """Export a specific session for fine-tuning."""
-    output_path = settings.data_dir / "datasets"
-    output_path.mkdir(parents=True, exist_ok=True)
-    
-    file = export_session_to_jsonl(session_id, output_path)
-    if file:
-        console.print(f"[green]✓ Session #{session_id} exported to: {file}[/green]")
-    else:
-         console.print(f"[red]Error: Session #{session_id} not found.[/red]")
-
-@learn_app.command("insights")
-def learn_insights(session_id: str):
-    """Analyze a session and extract distilled logical truths."""
-    db = SessionLocal()
-    try:
-        session = db.query(CouncilSession).filter(CouncilSession.id == session_id).first()
-        if not session:
-            console.print(f"[red]Session #{session_id} not found.[/red]")
-            return
-            
-        console.print(f"🧠 [bold blue]INSIGHTS: Session #{session_id}[/bold blue] | Analyzing...")
-        
-        # We use a special model call to 'distill' the logic
-        moderator_agent = next((a for a in load_agents().values() if a.id == "moderator"), list(load_agents().values())[0])
-        
-        full_text_list = []
-        for rnd in session.rounds:
-            for block in rnd.blocks:
-                mentor = db.query(Mentor).filter(Mentor.id == block.mentor_id).first()
-                full_text_list.append(f"[{mentor.name}]: {block.content}")
-        full_text = "\n".join(full_text_list)
-        
-        insight_prompt = f"Distill the following multi-agent discussion into 3-5 core logical 'Truths' or 'Conclusions' for a Knowledge Base:\n\n{full_text}"
-        
-        insights = call_ai(moderator_agent, insight_prompt)
-        console.print(Panel(insights, title="💡 Distilled Knowledge"))
-    finally:
-        db.close()
-
-@app.command("board")
-def board():
-    """Start the AGI Command Center GUI Backend (API + WebSocket)."""
-    from .api import start_api
-    start_api()
-
+# --- Serve Commands ---
 @app.command()
-def version():
-    console.print("orch v0.5.0 – AGI Command Center Ready 🛰️")
+def serve():
+    """
+    Commands for the orch server.
+    """
+    console.print(Panel("[bold green]Orch Server Commands[/bold green]", expand=False))
 
-if __name__ == "__main__":
-    app()
+@serve.command()
+def launch(
+    topic: str = typer.Option(..., "--topic", "-t", help="The discussion topic."),
+    agent_ids: List[str] = typer.Option(..., "--agents", "-a", help="Comma-separated list of agent IDs to include in the discussion."),
+    max_rounds: int = typer.Option(5, "--max-rounds", "-r", help="Maximum number of discussion rounds."),
+    moderator_agent_id: Optional[str] = typer.Option(None, "--moderator", "-m", help="ID of the agent to use as the moderator for guiding the discussion."),
+):
+    """
+    Launches a simulated multi-agent discussion.
+    """
+    console.print(Panel(f"[bold blue]Starting discussion on:[/bold blue] [bold yellow]{topic}[/bold yellow]", expand=False))
+
+    agents = load_agents()
+    selected_agents = []
+    for agent_id in agent_ids:
+        if agent_id in agents:
+            selected_agents.append(agents[agent_id])
+        else:
+            console.print(f"[bold red]Error:[/bold red] Agent '{agent_id}' not found.")
+            raise typer.Exit(code=1)
+
+    if not selected_agents:
+        console.print("[bold red]Error:[/bold red] No valid agents selected for the discussion.")
+        raise typer.Exit(code=1)
+
+    console.print(f"[bold green]Agents participating:[/bold green] {', '.join([a.id for a in selected_agents])}")
+
+    moderator_instance: Optional[Moderator] = None
+    if moderator_agent_id:
+        try:
+            moderator_instance = Moderator(agent_id=moderator_agent_id)
+            console.print(f"🤖 Moderator [bold cyan]{moderator_agent_id}[/] will guide the discussion.")
+        except ValueError as e:
+            console.print(f"[bold red]Error:[/bold red] {e}")
+            raise typer.Exit(code=1)
+
+    history = []
+    current_prompt = topic # Initial prompt for the first agent
+
+    for round_num in range(max_rounds):
+        console.print(Panel(f"[bold yellow]--- Round {round_num + 1} ---[/bold yellow]", expand=False))
+
+        for i, agent in enumerate(selected_agents):
+            with Live(console=console, screen=False, refresh_per_second=4) as live:
+                live.update(Panel(f"[bold blue]Agent {agent.id} is thinking...[/bold blue]", expand=False))
+
+                try:
+                    # If a moderator is active, get the prompt from the moderator
+                    # The moderator intervenes *before* an agent speaks, to give them direction.
+                    # For the very first agent of the very first round, the prompt is the topic.
+                    if moderator_instance and (round_num > 0 or i > 0):
+                        # Moderator provides the prompt for the current agent based on history
+                        moderator_direction = moderator_instance.moderate(topic, history)
+                        current_prompt = moderator_direction
+                        console.print(f"[bold magenta]Moderator's direction for {agent.id}:[/bold magenta] {current_prompt}")
+
+                    response_message = agent.generate_response(current_prompt, history)
+                    response_content = response_message.content
+
+                    history.append({"role": "assistant", "content": response_content, "name": agent.id})
+
+                    live.update(Panel(
+                        Markdown(f"**{agent.id} ({agent.model}):**\n{response_content}"),
+                        title=f"[bold green]Agent: {agent.id}[/bold green]",
+                        border_style="green"
+                    ))
+                    time.sleep(1) # Simulate reading time
+
+                    # If no moderator, the next agent's prompt is the current agent's response.
+                    # If a moderator is active, the moderator will generate the next prompt.
+                    # So, we only update current_prompt here if there's no moderator.
+                    if not moderator_instance:
+                        current_prompt = response_content
+
+                except Exception as e:
+                    live.update(Panel(f"[bold red]Error with agent {agent.id}:[/bold red] {e}", border_style="red"))
+                    console.print(f"[bold red]Discussion halted due to error with agent {agent.id}.[/bold red]")
+                    raise typer.Exit(code=1)
+
+    console.print(Panel("[bold green]Discussion Ended.[/bold green]", expand=False))
