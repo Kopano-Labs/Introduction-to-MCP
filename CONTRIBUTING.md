@@ -4,7 +4,7 @@ We welcome contributions to the `orch` project! By participating, you're helping
 
 ## Code of Conduct
 
-Please note that this project is released with a Contributor Code of Conduct. By participating in this project, you agree to abide by its terms. (A `CODE_OF_CONDUCT.md` will be added soon.)
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project, you agree to abide by its terms.
 
 ## How Can I Contribute?
 
