@@ -4,6 +4,7 @@ from rich.panel import Panel
 from rich.text import Text
 from rich.live import Live
 from rich.markdown import Markdown
+from rich.table import Table
 import time
 from typing import List, Optional
 
@@ -56,6 +57,119 @@ def agents_list():
         console.print(f"    Model: {agent.model}")
         console.print(f"    Persona: {agent.persona[:50]}...") # Truncate persona for display
         console.print("")
+
+# --- Serve Commands ---
+@app.command()
+def serve():
+    """
+    Commands for the orch server.
+    """
+    console.print(Panel("[bold green]Orch Server Commands[/bold green]", expand=False))
+
+
+# --- Log Commands ---
+@app.command()
+def log():
+    """
+    Commands for viewing discussion logs.
+    """
+    console.print(Panel("[bold green]Discussion Log Commands[/bold green]", expand=False))
+
+@log.command(name="list")
+def log_list():
+    """
+    Lists all recorded discussion sessions.
+    """
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, topic, start_time FROM discussions ORDER BY start_time DESC")
+        discussions = cursor.fetchall()
+
+        if not discussions:
+            console.print("No discussion sessions found.")
+            return
+
+        table = Table(title="Recorded Discussions")
+        table.add_column("ID", style="cyan")
+        table.add_column("Topic", style="magenta")
+        table.add_column("Start Time", style="green")
+
+        for d in discussions:
+            table.add_row(str(d["id"]), d["topic"], d["start_time"])
+        
+        console.print(table)
+    finally:
+        if conn:
+            conn.close()
+
+@log.command(name="view")
+def log_view(
+    discussion_id: int = typer.Argument(..., help="The ID of the discussion session to view.")
+):
+    """
+    Views the messages and events within a specific discussion session.
+    """
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+
+        # Get discussion topic
+        cursor.execute("SELECT topic, start_time FROM discussions WHERE id = ?", (discussion_id,))
+        discussion = cursor.fetchone()
+        if not discussion:
+            console.print(f"[bold red]Error:[/bold red] Discussion session with ID '{discussion_id}' not found.")
+            return
+
+        console.print(Panel(
+            f"[bold blue]Viewing Discussion:[/bold blue] [bold yellow]{discussion['topic']}[/bold yellow]\n"
+            f"Started: [italic]{discussion['start_time']}[/italic]",
+            expand=False,
+            title=f"Session #{discussion_id}"
+        ))
+
+        # Get all messages for the discussion
+        cursor.execute(
+            """SELECT round_num, agent_id, agent_model, prompt, response, is_moderator_direction, timestamp
+               FROM messages WHERE discussion_id = ? ORDER BY round_num ASC, timestamp ASC""",
+            (discussion_id,)
+        )
+        messages = cursor.fetchall()
+
+        if not messages:
+            console.print("No messages recorded for this discussion session.")
+            return
+
+        current_round = 0
+        for msg in messages:
+            if msg["round_num"] > current_round:
+                current_round = msg["round_num"]
+                console.print(Panel(f"[bold yellow]--- Round {current_round} ---[/bold yellow]", expand=False))
+
+            if msg["is_moderator_direction"]:
+                console.print(
+                    Panel(
+                        f"[bold magenta]Moderator ({msg['agent_id']}):[/bold magenta]\n"
+                        f"{msg['response']}", # Moderator direction is stored in 'response' field
+                        title=f"[bold green]Moderator Direction[/bold green]",
+                        border_style="magenta"
+                    )
+                )
+            else:
+                console.print(
+                    Panel(
+                        Markdown(f"**{msg['agent_id']} ({msg['agent_model']}):**\n"
+                                 f"Prompt: {msg['prompt'] or 'N/A'}\n"
+                                 f"{msg['response']}"),
+                        title=f"[bold green]Agent: {msg['agent_id']}[/bold green]",
+                        border_style="green"
+                    )
+                )
+            console.print("\n") # Add a little spacing between messages
+
+    finally:
+        if conn:
+            conn.close()
 
 # --- Serve Commands ---
 @app.command()
