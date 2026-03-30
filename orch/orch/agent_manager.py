@@ -17,19 +17,21 @@ class Agent(BaseModel):
     api_key: str
     persona: str = "You are a helpful AI assistant."
 
-    def generate_response(self, prompt: str, history: List[Dict[str, str]]) -> Any:
+    def generate_response(self, current_turn_prompt: str, full_history: List[Dict[str, str]]) -> Any:
         """
         Generates a response from the agent using LiteLLM.
+        The full_history includes all previous messages, including system prompts and user inputs.
+        The current_turn_prompt is the specific prompt for this agent's turn.
         """
+        # Start with the agent's persona as a system message
         messages = [{"role": "system", "content": self.persona}]
-        for msg in history:
-            # Ensure 'role' and 'content' are present, and handle 'name' for display
-            role = msg.get("role", "user") # Default to user if role is missing
-            content = msg.get("content", "")
-            # For LiteLLM, 'name' is usually not part of the standard message dict unless it's a tool call.
-            # We'll just pass role and content.
-            messages.append({"role": role, "content": content})
-        messages.append({"role": "user", "content": prompt})
+        
+        # Add the full conversation history, ensuring only 'role' and 'content' are passed to LiteLLM
+        for msg in full_history:
+            messages.append({"role": msg.get("role", "user"), "content": msg.get("content", "")})
+        
+        # Add the specific prompt for this turn as a user message
+        messages.append({"role": "user", "content": current_turn_prompt})
 
         try:
             response = completion(

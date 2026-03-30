@@ -230,8 +230,12 @@ def launch(
             raise typer.Exit(code=1)
 
     try:
-        history = []
-        current_prompt = topic # Initial prompt for the first agent
+        # The canonical history of the discussion, including user prompts, agent responses, and moderator directions.
+        # Each entry will be a dict like {"role": "user", "content": "...", "name": "..."}
+        full_conversation_history: List[Dict[str, str]] = []
+        
+        # Start the conversation with the initial topic as a user message
+        full_conversation_history.append({"role": "user", "content": topic, "name": "user"})
 
         for round_num in range(max_rounds):
             console.print(Panel(f"[bold yellow]--- Round {round_num + 1} ---[/bold yellow]", expand=False))
@@ -241,11 +245,12 @@ def launch(
                     live.update(Panel(f"[bold blue]Agent {agent.id} is thinking...[/bold blue]", expand=False))
 
                     try:
-                        prompt_for_this_turn = current_prompt
+                        current_turn_prompt: str
 
-                        # If a moderator is active, get a new prompt from the moderator
+                        # If a moderator is active, and it's not the very first turn of the very first round,
+                        # the moderator provides the prompt.
                         if moderator_instance and (round_num > 0 or i > 0):
-                            moderator_direction = moderator_instance.moderate(topic, history)
+                            moderator_direction = moderator_instance.moderate(topic, full_conversation_history)
 
                             # Log moderator's action to the database
                             cursor.execute(
@@ -254,34 +259,37 @@ def launch(
                                 (discussion_id, round_num + 1, moderator_instance.agent.id, moderator_instance.agent.model, moderator_direction)
                             )
                             conn.commit()
+                            # Add moderator's direction to the full conversation history
+                            full_conversation_history.append({"role": "system", "content": moderator_direction, "name": moderator_instance.agent.id})
+                            current_turn_prompt = moderator_direction
+                            console.print(f"[bold magenta]Moderator's direction for {agent.id}:[/bold magenta] {current_turn_prompt}")
+                        else:
+                            # For the very first agent's turn, the prompt is the initial topic.
+                            # For subsequent agents without a moderator, the prompt is the previous agent's response.
+                            # We take the content of the last message in the history as the prompt for the current turn.
+                            current_turn_prompt = full_conversation_history[-1]["content"]
 
-                            prompt_for_this_turn = moderator_direction
-                            console.print(f"[bold magenta]Moderator's direction for {agent.id}:[/bold magenta] {prompt_for_this_turn}")
 
-                        response_message = agent.generate_response(prompt_for_this_turn, history)
+                        response_message = agent.generate_response(current_turn_prompt, full_conversation_history)
                         response_content = response_message.content
 
                         # Log agent's response to the database
                         cursor.execute(
                             """INSERT INTO messages (discussion_id, round_num, agent_id, agent_model, prompt, response, is_moderator_direction)
                                VALUES (?, ?, ?, ?, ?, ?, 0)""",
-                            (discussion_id, round_num + 1, agent.id, agent.model, prompt_for_this_turn, response_content)
+                            (discussion_id, round_num + 1, agent.id, agent.model, current_turn_prompt, response_content)
                         )
                         conn.commit()
 
-                        history.append({"role": "assistant", "content": response_content, "name": agent.id})
+                        # Add agent's response to the full conversation history
+                        full_conversation_history.append({"role": "assistant", "content": response_content, "name": agent.id})
 
                         live.update(Panel(
                             Markdown(f"**{agent.id} ({agent.model}):**\n{response_content}"),
                             title=f"[bold green]Agent: {agent.id}[/bold green]",
                             border_style="green"
                         ))
-                        time.sleep(1) # Simulate reading time
-
-                        # If no moderator, the next agent's prompt is the current agent's response.
-                        # If a moderator is active, the moderator will generate the next prompt.
-                        if not moderator_instance:
-                            current_prompt = response_content
+                        time.sleep(1) # Simulate reading time # Simulate reading time
 
                     except Exception as e:
                         live.update(Panel(f"[bold red]Error with agent {agent.id}:[/bold red] {e}", border_style="red"))

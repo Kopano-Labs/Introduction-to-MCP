@@ -2,13 +2,52 @@
 Pytest tests for the orch CLI application.
 """
 import pytest
+import sqlite3
 from typer.testing import CliRunner
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from orch.orch.cli import app
 from orch.orch.agent_manager import Agent
 
 runner = CliRunner()
+
+@pytest.fixture
+def in_memory_db():
+    """
+    Pytest fixture to create and manage an in-memory SQLite database for testing.
+    It creates the schema and patches get_db_connection to use this in-memory DB.
+    """
+    conn = sqlite3.connect(":memory:")
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    # Create schema from database.py
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS discussions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        topic TEXT NOT NULL,
+        start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        discussion_id INTEGER NOT NULL,
+        round_num INTEGER NOT NULL,
+        agent_id TEXT NOT NULL,
+        agent_model TEXT NOT NULL,
+        prompt TEXT,
+        response TEXT NOT NULL,
+        is_moderator_direction INTEGER NOT NULL DEFAULT 0,
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (discussion_id) REFERENCES discussions (id)
+    );
+    """)
+    conn.commit()
+
+    with patch('orch.orch.cli.get_db_connection', return_value=conn):
+        yield conn
+
+    conn.close()
 
 
 def test_agents_list_no_agents():
@@ -68,3 +107,59 @@ def test_agents_config_new_agent():
         assert new_agent.model == model
         assert new_agent.api_key == api_key
         assert new_agent.persona == persona
+
+
+def test_serve_launch_with_logging(in_memory_db):
+    """
+    Test that `orch serve launch` correctly logs the discussion to the database.
+    This verifies capability #98: Explain its own reasoning via audit trails.
+    """
+    # Mock agents
+    mock_agent = Agent(id="test-agent", provider="test", model="test-model", api_key="test-key", persona="")
+    mock_mod_agent = Agent(id="mod-agent", provider="test", model="mod-model", api_key="test-key", persona="")
+
+    # Mock the message object that generate_response returns
+    mock_message = MagicMock()
+    mock_message.content = "This is a test response."
+
+    with patch('orch.orch.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
+         patch('orch.orch.agent_manager.Agent.generate_response', return_value=mock_message), \
+         patch('orch.orch.moderator.Moderator.moderate', return_value="This is a moderator direction."):
+
+        # Run the command for 2 rounds to ensure the moderator is triggered
+        result = runner.invoke(app, [
+            "serve", "launch",
+            "--topic", "Test Logging",
+            "--agents", "test-agent",
+            "--moderator", "mod-agent",
+            "--max-rounds", "2"
+        ], catch_exceptions=False)
+
+        assert result.exit_code == 0
+        assert "Discussion Ended" in result.stdout
+
+        # Verify database entries
+        cursor = in_memory_db.cursor()
+
+        # Check discussion table
+        cursor.execute("SELECT * FROM discussions")
+        discussions = cursor.fetchall()
+        assert len(discussions) == 1
+        assert discussions[0]['topic'] == "Test Logging"
+        discussion_id = discussions[0]['id']
+
+        # Check messages table
+        cursor.execute("SELECT * FROM messages WHERE discussion_id = ? ORDER BY id ASC", (discussion_id,))
+        messages = cursor.fetchall()
+
+        # Expect 3 messages: Agent (R1), Moderator (R2), Agent (R2)
+        assert len(messages) == 3
+
+        # Message 1: Agent in round 1
+        assert messages[0]['agent_id'] == 'test-agent' and messages[0]['is_moderator_direction'] == 0
+        assert messages[0]['prompt'] == 'Test Logging'
+        # Message 2: Moderator in round 2
+        assert messages[1]['agent_id'] == 'mod-agent' and messages[1]['is_moderator_direction'] == 1
+        # Message 3: Agent in round 2, prompted by moderator
+        assert messages[2]['agent_id'] == 'test-agent' and messages[2]['is_moderator_direction'] == 0
+        assert messages[2]['prompt'] == 'This is a moderator direction.'

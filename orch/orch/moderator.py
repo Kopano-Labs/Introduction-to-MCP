@@ -43,22 +43,26 @@ class Moderator:
     def moderate(self, topic: str, history: List[Dict[str, str]]) -> str:
         """
         Analyzes the conversation history and generates a new prompt to guide the discussion.
-
         Args:
             topic: The main topic of the discussion.
-            history: A list of message dictionaries, e.g., [{"role": "assistant", "content": "...", "name": "agent_id"}]
-
+            history: A list of message dictionaries representing the entire conversation.
         Returns:
             A new prompt string for the next agent.
         """
-        # Format the history for the moderator's context.
-        formatted_history = "\n".join([f"[{msg.get('name', msg.get('role'))}]: {msg['content']}" for msg in history])
+        # Format the full history for the moderator's context.
+        # We need to be careful here. The moderator's prompt already defines its role.
+        # The 'history' should be presented as the 'Conversation History' for the moderator to analyze.
+        formatted_history_for_moderator = "\n".join([
+            f"[{msg.get('name', msg.get('role'))}]: {msg['content']}"
+            for msg in history
+        ])
 
-        prompt = f"Discussion Topic: {topic}\n\nConversation History:\n{formatted_history}"
+        user_prompt_for_moderator = f"Discussion Topic: {topic}\n\nConversation History:\n{formatted_history_for_moderator}"
 
         messages = [
             {"role": "system", "content": MODERATOR_PROMPT},
             {"role": "user", "content": prompt}
+            {"role": "user", "content": user_prompt_for_moderator}
         ]
 
         try:
