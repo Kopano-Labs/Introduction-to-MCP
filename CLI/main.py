@@ -59,7 +59,6 @@ async def main():
         try:
             doc_ids = await doc_client.read_resource("resource://doc_ids")
             print(f"  Doc IDs: {doc_ids}")
-            print("--- Test complete, starting chat ---")
         except Exception as e:
             print(f"Error reading resource: {e}")
         # --- END TEST ---
