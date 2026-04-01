@@ -1,7 +1,7 @@
 import httpx
 import os
 
-async def perform_search(query: str) -> str:
+async def perform_search(query: str, search_depth: str = "basic") -> str:
     """Performs a web search using Tavily API (if available) or a mock fallback."""
     api_key = os.getenv("TAVILY_API_KEY")
     if not api_key:
@@ -11,8 +11,9 @@ async def perform_search(query: str) -> str:
     payload = {
         "api_key": api_key,
         "query": query,
-        "search_depth": "basic",
-        "max_results": 3
+        "search_depth": search_depth,
+        "max_results": 5 if search_depth == "advanced" else 3,
+        "include_answer": True if search_depth == "advanced" else False
     }
     try:
         async with httpx.AsyncClient() as client:
@@ -29,10 +30,10 @@ async def perform_search(query: str) -> str:
     except Exception as e:
         return f"Error performing search: {e}"
 
-def search(query: str) -> str:
+def search(query: str, search_depth: str = "basic") -> str:
     """Synchronous wrapper for search."""
     import asyncio
     try:
-        return asyncio.run(perform_search(query))
+        return asyncio.run(perform_search(query, search_depth=search_depth))
     except Exception as e:
         return f"Error in search: {e}"

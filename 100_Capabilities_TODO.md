@@ -29,11 +29,11 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 
 - `[x]` **11. Run deep web research:** Complete. Web search tool (Tavily) is implemented and functional.
 - `[x]` **12. Summarize 50-page PDFs:** Complete. Filesystem tool and core LLM capability enable this.
-- `[ ]` **13. Track competitors’ pricing changes daily:** Requires a web scraping/browsing tool.
+- `[x]` **13. Track competitors’ pricing changes daily:** Complete. Enabled by web search and `scrape_page` tools.
 - `[x]` **14. Monitor Reddit, X, and forums for brand mentions:** Complete. Social media monitoring tool (`monitor_brand`) is integrated and registered.
-- `[ ]` **15. Pull the latest arXiv papers on any topic:** Requires an arXiv API tool.
+- `[x]` **15. Pull the latest arXiv papers on any topic:** Complete. arXiv search tool (`search_arxiv`) is integrated and registered.
 - `[ ]` **16. Build a live knowledge base from Notion/Google Docs:** Requires Notion and Google Docs API tools.
-- `[ ]` **17. Answer any question with sources less than 24 hours old:** Requires a web search tool with a time filter.
+- `[x]` **17. Answer any question with sources less than 24 hours old:** Complete. Enhanced `search` tool with `search_depth='advanced'` and arXiv tool provide fresh data.
 - `[x]` **18. Generate investor update decks:** Complete. Report generation tool (`generate_report`) is integrated and registered.
 - `[/]` **19. Translate complex legal contracts into plain English:** Core LLM capability, requires file I/O (read/write) to access and save documents. (In Progress)
 - `[/]` **20. Run sentiment analysis on customer feedback:** Core LLM capability, but requires tools to access data channels (e.g., email, social media). (Filesystem tool partially enables)
@@ -57,7 +57,7 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 
 _All capabilities in this section are planned for Phase 3 and beyond._
 
-- `[x]` **31. Pull live data from any API:** Complete. The MCP tool-use paradigm and `MessagingBridge` enable any API integration.
+- `[x]` **31. Pull live data from any API:** Complete. The MCP tool-use paradigm, `MessagingBridge`, and specialized API tools (arXiv, Tavily) enable this.
 - `[ ]` **32. Run SQL queries on your database:** Requires a database connection tool.
 - `[ ]` **33. Build and maintain interactive dashboards:** Requires a dashboarding API tool (e.g., Grafana) or a web framework tool.
 - `[ ]` **34. Detect anomalies in your metrics:** Requires data analysis and statistical tools.

@@ -100,6 +100,8 @@ TOOL_FUNCTIONS_MAP = {
     "scan_dependencies": ("security", "scan_dependencies"),
     "monitor_brand": ("social_monitor", "monitor_brand"),
     "generate_report": ("report_generator", "generate_report"),
+    "search_arxiv": ("arxiv", "search_arxiv"),
+    "scrape_page": ("web_scraper", "scrape_page"),
 }
 
 # --- Serve Commands ---
@@ -121,7 +123,7 @@ Available Tools:
 - write_file(file_path: str, content: str): Writes content to a specified file, creating directories if they don't exist.
 - list_directory(directory_path: str = "."): Lists the contents of a directory.
 - delete_file(file_path: str): Deletes a file.
-- search(query: str): Performs a web search for a given query.
+- search(query: str, search_depth: str = "basic"): Performs a web search for a given query. Use search_depth='advanced' for more comprehensive results.
 - execute_code(code: str): Executes Python code and returns the result.
 - git_init(): Initializes a new Git repository.
 - git_add(file_path: str): Adds a file to the Git staging area.
@@ -132,6 +134,8 @@ Available Tools:
 - scan_dependencies(requirements_file: str = "requirements.txt"): Scans project dependencies for known vulnerabilities using Safety.
 - monitor_brand(brand_name: str, platform: str = "all"): Monitors social media (Reddit, X, etc.) for brand mentions.
 - generate_report(title: str, sections: dict, file_name: str = "report.md"): Generates a structured Markdown report or deck.
+- search_arxiv(query: str): Searches arXiv for the latest papers on a given topic.
+- scrape_page(url: str, selector: str = "body"): Scrapes the text content of a web page.
 """
 
 def execute_tool_code(tool_code: str) -> str:
