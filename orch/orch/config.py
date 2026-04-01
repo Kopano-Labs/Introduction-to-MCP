@@ -1,30 +1,19 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-from pathlib import Path
-import os
+"""
+Phase 2: Configuration & Environment Handling
+Architect: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
+GitHub: https://github.com/RobynAwesome/
+"""
+from pydantic_settings import BaseSettings
+from typing import Optional
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+    """Pydantic Settings for secure configuration management."""
+    google_api_key: Optional[str] = None
+    xai_api_key: Optional[str] = None
+    anthropic_api_key: Optional[str] = None
+    db_path: str = "db/datalake.db"
 
-    # API keys (automatically loaded)
-    gemini_api_key: str | None = None
-    grok_api_key: str | None = None
-    openai_api_key: str | None = None
-    anthropic_api_key: str | None = None
-
-    # WhatsApp / Evolution API
-    whatsapp_api_key: str | None = None
-    whatsapp_instance_url: str | None = None
-    whatsapp_instance_name: str = "main"
-    whatsapp_recipient: str | None = None # The phone number or Group JID to talk to
-    
-    # --- PHASE 5: AIML API (Universal Aggregator) ---
-    aiml_api_key: str | None = None
-    aiml_api_base: str = "https://ai.aimlapi.com"
-    
-    # Storage
-    # Using a local directory within the project for easier auditing during development
-    data_dir: Path = Path("./.orch_data")
-    agents_file: Path = Path("./.orch_data/agents.json")
+    class Config:
+        env_file = ".env"
 
 settings = Settings()
-settings.data_dir.mkdir(parents=True, exist_ok=True)

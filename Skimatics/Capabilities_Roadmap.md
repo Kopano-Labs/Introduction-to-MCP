@@ -25,32 +25,31 @@ The core logic for the **Moderator AI** (Strategy Engine) and **Structured Loggi
 
 ---
 
-## 🚀 Phase 3 & Beyond: Tool Integration & Autonomy
+## 🚀 Phase 3: The WhatsApp Gateway & Tool Integration (In Progress)
 
-Once the core reasoning engine is stable, we will begin giving agents "tools" (APIs, file system access, etc.). This is where the majority of the 100 capabilities will come to life.
+This phase focuses on bridging the gap between local CLI simulations and real-world deployment, giving agents "tools" (APIs, file system access, etc.) and connecting them to external interfaces.
 
-**Example Capabilities to be Unlocked:**
+**Key Milestones & Capabilities to be Unlocked:**
 
+- **Gateway Bot:** Implement a single bot bridge (Twilio/WhatsApp Business API) for remote agent interactions.
+- **CI/CD & Hardening:** Setup GitHub Actions, release management (PyPI/Docker), and audit logging.
 - **#1. Write, debug, and test full features:** Requires file system and code execution tools.
 - **#11. Run deep web research:** Requires a web browsing/search tool.
-- **#21. Manage your entire calendar:** Requires a calendar API tool (Google, Outlook).
 - **#31. Pull live data from any API:** The core of the tool-use paradigm.
-- **#41. Write full blog posts:** Requires file I/O tools.
 - **#71. Connect any app that has an API:** The ultimate goal of the MCP architecture.
 
 ---
 
-## 🌟 Phase 4: Community & Adoption
+## 🌟 Phase 4: Data Analysis, Learning & UI (Upcoming)
 
-This phase focuses on fostering a vibrant community around `orch` and preparing for broader adoption.
+This phase focuses on fine-tuning, reasoning extraction, UI dashboards, and fostering a vibrant community around `orch` for broader adoption.
 
-**Example Capabilities to be Unlocked:**
+**Key Milestones & Capabilities to be Unlocked:**
 
-- **#81. Facilitate community feedback:** Requires enabling GitHub Discussions and providing clear contribution guidelines.
-- **#82. Publish project milestones:** Requires a public roadmap and versioned releases.
-- **#83. Showcase example projects:** Requires creating and documenting practical demonstrations (e.g., ORCH apprenticeship protocol demo).
-- **#84. Provide visual walkthroughs:** Requires recording short tutorial videos.
-- **#85. Guide new contributors:** Requires `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md`.
+- **Reasoning Chains:** Extract and store logical structures from successful debates.
+- **Fine-Tuning Prep:** Build `orch learn generate-tuning-data` to export reasoning into JSONL format.
+- **#81. Facilitate community feedback:** Enable GitHub Discussions and Contribution guidelines.
+- **#83. Showcase example projects:** Create and document practical demonstrations (e.g., ORCH apprenticeship protocol demo).
 
 ---
 
@@ -58,5 +57,5 @@ This roadmap will be updated as we complete items on the engineering TODO list, 
 
 **Connect with the Architect:**
 
-- **LinkedIn:** Kholofelo Robyn Rababalela
-- **GitHub:** RobynAwesome
+- **LinkedIn:** www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
+- **GitHub:** https://github.com/RobynAwesome/
