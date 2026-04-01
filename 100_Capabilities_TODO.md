@@ -14,7 +14,7 @@ This document tracks the implementation status of the 100 capabilities for the `
 
 - `[x]` **1. Write, debug, and test full features:** Complete. File system (read/write) and code execution tools are integrated into the async simulation loop.
 - `[x]` **2. Refactor your entire codebase:** Complete. Enabled by the combination of filesystem and code execution tools.
-- `[/]` **3. Generate PR-ready code + commit messages + tests:** In Progress. Requires Git tool integration.
+- `[x]` **3. Generate PR-ready code + commit messages + tests:** Complete. Git tool integration (init, add, commit, status, log) is fully implemented and registered.
 - `[ ]` **4. Automatically review every new GitHub PR:** Requires a GitHub API tool.
 - `[x]` **5. Convert legacy code:** Complete. Enabled by the filesystem and code execution tools.
 - `[x]` **6. Create new microservices:** Complete. Enabled by filesystem and code execution tools.

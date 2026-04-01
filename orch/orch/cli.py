@@ -91,6 +91,13 @@ TOOL_FUNCTIONS_MAP = {
     "list_directory": ("filesystem", "list_directory"),
     "delete_file": ("filesystem", "delete_file"),
     "execute_code": ("code_execution", "execute_code"),
+    "git_init": ("git", "git_init"),
+    "git_add": ("git", "git_add"),
+    "git_commit": ("git", "git_commit"),
+    "git_status": ("git", "git_status"),
+    "git_log": ("git", "git_log"),
+    "scan_code_security": ("security", "scan_code_security"),
+    "scan_dependencies": ("security", "scan_dependencies"),
 }
 
 # --- Serve Commands ---
@@ -114,6 +121,11 @@ Available Tools:
 - delete_file(file_path: str): Deletes a file.
 - search(query: str): Performs a web search for a given query.
 - execute_code(code: str): Executes Python code and returns the result.
+- git_init(): Initializes a new Git repository.
+- git_add(file_path: str): Adds a file to the Git staging area.
+- git_commit(message: str): Commits staged changes with a message.
+- git_status(): Shows the Git repository status.
+- git_log(): Shows the Git commit log.
 """
 
 def execute_tool_code(tool_code: str) -> str:
