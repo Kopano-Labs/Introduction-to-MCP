@@ -36,6 +36,12 @@ class State:
 
 state = State()
 
+# --- MODELS ---
+class OverrideRequest(BaseModel):
+    block_id: int
+    override_score: int
+    improvement_hint: Optional[str] = None
+
 # --- API ENDPOINTS ---
 
 @app.websocket("/ws/live")
@@ -106,16 +112,65 @@ def get_session_detail(session_id: int):
         conn.close()
         raise HTTPException(status_code=404, detail="Session not found")
     
-    cursor.execute("SELECT * FROM audit_logs WHERE discussion_id = ? ORDER BY timestamp ASC", (session_id,))
+    cursor.execute("SELECT * FROM audit_logs WHERE discussion_id = ? ORDER BY round_num ASC, timestamp ASC", (session_id,))
     logs = cursor.fetchall()
     conn.close()
+    
+    # Group logs into rounds for the Forensic Audit GUI
+    rounds_dict = {}
+    for log in logs:
+        r_num = log["round_num"] or 0
+        if r_num not in rounds_dict:
+            rounds_dict[r_num] = {
+                "id": f"round_{r_num}",
+                "round_number": r_num,
+                "blocks": []
+            }
+        
+        rounds_dict[r_num]["blocks"].append({
+            "block_id": log["id"],
+            "agent": log["agent_id"],
+            "model": log["model"],
+            "content": log["message"] or log["prompt"], # Fallback
+            "reasoning": log["prompt"] if log["message"] else "System Logic",
+            "log_type": log["log_type"],
+            "value_score": log["value_score"],
+            "override_score": log["override_score"],
+            "improvement_hint": log["improvement_hint"],
+            "is_student": 1 if log["agent_id"] == "orch" else 0
+        })
     
     return {
         "id": session["id"],
         "topic": session["topic"],
         "created_at": session["created_at"],
-        "logs": [dict(l) for l in logs]
+        "rounds": sorted(rounds_dict.values(), key=lambda x: x["round_number"])
     }
+
+@app.post("/sessions/{session_id}/override")
+async def session_override(session_id: int, request: OverrideRequest):
+    """Master Override Protocol: Human-in-the-loop feedback injection."""
+    from .database import update_log_override
+    try:
+        update_log_override(request.block_id, request.override_score, request.improvement_hint)
+        
+        # Broadcast update to all live Neural Links
+        update = {
+            "type": "override",
+            "discussion_id": session_id,
+            "block_id": request.block_id,
+            "override_score": request.override_score,
+            "improvement_hint": request.improvement_hint
+        }
+        state.updates.append(update)
+        for connection in state.connections:
+            try:
+                await connection.send_json(update)
+            except:
+                pass
+        return {"status": "ok"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # --- STATIC FILE SERVING (GUI) ---
 # Mount the React build directory if it exists

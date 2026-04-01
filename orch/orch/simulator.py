@@ -72,7 +72,7 @@ async def _handle_tool_calls(reply: str, agent_id: str, discussion_id: int, roun
         })
         
         # Log tool result to Data Lake
-        log_interaction(discussion_id, "system", "tool_executor", tool_result, tool_code, "tool_result")
+        log_interaction(discussion_id, "system", "tool_executor", tool_result, tool_code, "tool_result", round_num=round_num)
         
         return f"\n[Tool Result]: {tool_result}"
     return ""
@@ -96,7 +96,7 @@ async def _process_agent_turn(agent, prompt, round_num, discussion_id, topic, hi
         reply = response.content.strip()
 
         # Log to Data Lake
-        log_interaction(discussion_id, agent.model, agent.id, reply, current_turn_prompt, "execution")
+        log_interaction(discussion_id, agent.model, agent.id, reply, current_turn_prompt, "execution", round_num=round_num)
         log_message(discussion_id, round_num, agent.id, agent.model, current_turn_prompt, reply)
 
         console.print(f"[bold cyan]{agent.id}:[/] {reply}\n")
@@ -129,7 +129,7 @@ async def _process_agent_turn(agent, prompt, round_num, discussion_id, topic, hi
             corrected_response = await agent.agenerate_response(correction_prompt, full_history=history + [{"role": "assistant", "name": agent.id, "content": reply, "tool_result": tool_result_str}], topic=topic)
             reply = corrected_response.content.strip()
             # Log corrected turn
-            log_interaction(discussion_id, agent.model, agent.id, reply, correction_prompt, "execution_correction")
+            log_interaction(discussion_id, agent.model, agent.id, reply, correction_prompt, "execution_correction", round_num=round_num)
             console.print(f"[bold green]{agent.id} (Corrected):[/] {reply}\n")
             # Re-handle potential tool calls in the corrected response
             tool_result_str += "\n[Correction]: " + await _handle_tool_calls(reply, agent.id, discussion_id, round_num)
@@ -197,14 +197,14 @@ async def run_simulation(
                     "risk": audit_res
                 })
                 # Log risk
-                log_interaction(discussion_id, auditor.agent.model, auditor.agent.id, audit_res, "Audit Loop", "security_alert")
+                log_interaction(discussion_id, auditor.agent.model, auditor.agent.id, audit_res, "Audit Loop", "security_alert", round_num=round_num)
 
         if moderator:
             prompt = await moderator.amoderate(topic, history)
-            log_interaction(discussion_id, moderator.agent.model, moderator.agent.id, None, prompt, "reasoning")
+            log_interaction(discussion_id, moderator.agent.model, moderator.agent.id, None, prompt, "reasoning", round_num=round_num)
         else:
             prompt = history[-1]["content"] if history else topic
-            log_interaction(discussion_id, "system", "system", None, prompt, "system")
+            log_interaction(discussion_id, "system", "system", None, prompt, "system", round_num=round_num)
 
         await _broadcast({
             "type": "moderator_directive",

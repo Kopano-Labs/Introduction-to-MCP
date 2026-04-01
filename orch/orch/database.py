@@ -12,10 +12,12 @@ from pathlib import Path
 from typing import Optional
 from rich.console import Console
 
+from .config import settings
+
 console = Console()
 
 # Define the path for the SQLite database
-DB_PATH = Path.home() / ".orch" / "orch_datastore.db"
+DB_PATH = Path(settings.db_path)
 
 def get_db_connection():
     """
@@ -64,11 +66,15 @@ def init_db():
     CREATE TABLE IF NOT EXISTS audit_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         discussion_id INTEGER,
+        round_num INTEGER,
         model TEXT NOT NULL,
         agent_id TEXT NOT NULL,
         message TEXT,
         prompt TEXT,
-        log_type TEXT CHECK(log_type IN ('reasoning', 'execution', 'tool_call', 'tool_result', 'system')) NOT NULL,
+        log_type TEXT CHECK(log_type IN ('reasoning', 'execution', 'tool_call', 'tool_result', 'system', 'security_alert', 'execution_correction')) NOT NULL,
+        value_score INTEGER DEFAULT 0,
+        override_score INTEGER,
+        improvement_hint TEXT,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(discussion_id) REFERENCES discussions(id)
     );
@@ -89,18 +95,32 @@ def log_interaction(
     agent_id: str, 
     message: Optional[str], 
     prompt: Optional[str], 
-    log_type: str
+    log_type: str,
+    round_num: Optional[int] = None,
+    value_score: int = 0
 ):
     """
     Inserts a structured log into the audit_logs table.
-    log_type: 'reasoning', 'execution', 'tool_call', 'tool_result', 'system'
+    log_type: 'reasoning', 'execution', 'tool_call', 'tool_result', 'system', 'security_alert', 'execution_correction'
     """
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO audit_logs (discussion_id, model, agent_id, message, prompt, log_type)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, (discussion_id, model, agent_id, message, prompt, log_type))
+        INSERT INTO audit_logs (discussion_id, round_num, model, agent_id, message, prompt, log_type, value_score)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (discussion_id, round_num, model, agent_id, message, prompt, log_type, value_score))
+    conn.commit()
+    conn.close()
+
+def update_log_override(log_id: int, override_score: int, improvement_hint: Optional[str] = None):
+    """Updates the override score and hint for a specific log entry."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE audit_logs 
+        SET override_score = ?, improvement_hint = ?
+        WHERE id = ?
+    """, (override_score, improvement_hint, log_id))
     conn.commit()
     conn.close()
 
