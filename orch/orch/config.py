@@ -3,8 +3,13 @@ Phase 2: Configuration & Environment Handling
 Architect: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
 GitHub: https://github.com/RobynAwesome/
 """
+import os
+from pathlib import Path
 from pydantic_settings import BaseSettings
 from typing import Optional
+
+# Configuration paths
+AGENTS_FILE = Path.home() / ".orch" / "agents.json"
 
 class Settings(BaseSettings):
     """Pydantic Settings for secure configuration management."""

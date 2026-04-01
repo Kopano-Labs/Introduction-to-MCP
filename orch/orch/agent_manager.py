@@ -7,10 +7,8 @@ from rich.console import Console
 
 console = Console()
 
-# Define the path for agent configuration
-AGENT_CONFIG_PATH = Path.home() / ".orch" / "agents.json"
-
 from .memory import memory_manager
+from .config import AGENTS_FILE
 
 class Agent(BaseModel):
     id: str
@@ -82,10 +80,10 @@ def load_agents() -> Dict[str, Agent]:
     """
     Loads configured agents from the JSON file.
     """
-    if not AGENT_CONFIG_PATH.exists():
+    if not AGENTS_FILE.exists():
         return {}
     try:
-        with open(AGENT_CONFIG_PATH, "r") as f:
+        with open(AGENTS_FILE, "r") as f:
             agents_data = json.load(f)
         return {id: Agent(**data) for id, data in agents_data.items()}
     except json.JSONDecodeError:
@@ -96,6 +94,6 @@ def save_agents(agents: Dict[str, Agent]):
     """
     Saves configured agents to the JSON file.
     """
-    AGENT_CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(AGENT_CONFIG_PATH, "w") as f:
+    AGENTS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(AGENTS_FILE, "w") as f:
         json.dump({id: agent.dict() for id, agent in agents.items()}, f, indent=4)
