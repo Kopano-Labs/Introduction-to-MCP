@@ -49,8 +49,8 @@ class MemoryManager:
         conn.close()
         console.log(f"🧠 Memory stored for agent [bold cyan]{agent_id}[/bold cyan]")
 
-    def retrieve(self, agent_id: str, topic: Optional[str] = None, limit: int = 5) -> List[Dict[str, Any]]:
-        """Retrieves relevant memories for an agent."""
+    def retrieve(self, agent_id: str, topic: Optional[str] = None, limit: int = 5, metadata_filter: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """Retrieves relevant memories for an agent with optional metadata filtering."""
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
@@ -62,14 +62,25 @@ class MemoryManager:
             query += " AND (topic LIKE ? OR content LIKE ?)"
             params.extend([f"%{topic}%", f"%{topic}%"])
             
-        query += " ORDER BY timestamp DESC LIMIT ?"
-        params.append(limit)
-        
         cursor.execute(query, params)
         rows = cursor.fetchall()
         conn.close()
         
-        return [dict(row) for row in rows]
+        results = [dict(row) for row in rows]
+
+        # Apply metadata filter in Python for now (SQLite JSON support varies)
+        if metadata_filter:
+            filtered_results = []
+            for res in results:
+                if res['metadata']:
+                    meta = json.loads(res['metadata'])
+                    if all(meta.get(k) == v for k, v in metadata_filter.items()):
+                        filtered_results.append(res)
+            results = filtered_results
+
+        # Sort by timestamp and limit
+        results.sort(key=lambda x: x['timestamp'], reverse=True)
+        return results[:limit]
 
 # Singleton instance
 memory_manager = MemoryManager()

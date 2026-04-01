@@ -8,7 +8,7 @@ from typing import List, Dict, Any, Optional
 from litellm import acompletion  # ← async version of completion
 from rich.console import Console
 from .database import log_interaction, log_message
-from .context import format_history
+from .moderator import Moderator, SecurityAuditor
 import httpx  # ← async HTTP client for broadcasting
 import asyncio
 
@@ -121,6 +121,19 @@ async def _process_agent_turn(agent, prompt, round_num, discussion_id, topic, hi
         # Tool Execution Logic
         tool_result_str = await _handle_tool_calls(reply, agent.id, discussion_id, round_num)
         
+        # Self-Correction Loop (#92)
+        if "Tool Error" in tool_result_str:
+            console.print(f"[bold yellow]Agent {agent.id} encountered an error. Attempting self-correction...[/]")
+            correction_prompt = f"The tool execution failed with the following error: {tool_result_str}\n\nPlease analyze the error and try a corrected tool_code or approach."
+            # Recursive call with a depth limit (1 attempt for now)
+            corrected_response = await agent.agenerate_response(correction_prompt, full_history=history + [{"role": "assistant", "name": agent.id, "content": reply, "tool_result": tool_result_str}], topic=topic)
+            reply = corrected_response.content.strip()
+            # Log corrected turn
+            log_interaction(discussion_id, agent.model, agent.id, reply, correction_prompt, "execution_correction")
+            console.print(f"[bold green]{agent.id} (Corrected):[/] {reply}\n")
+            # Re-handle potential tool calls in the corrected response
+            tool_result_str += "\n[Correction]: " + await _handle_tool_calls(reply, agent.id, discussion_id, round_num)
+
         return {"role": "assistant", "name": agent.id, "content": reply, "tool_result": tool_result_str}
 
     except Exception as e:
@@ -166,8 +179,25 @@ async def run_simulation(
         "max_rounds": max_rounds,
     })
 
+    # Initialize Security Auditor if a moderator is available to provide an agent
+    auditor = SecurityAuditor(moderator.agent.id) if moderator else None
+
     for round_num in range(1, max_rounds + 1):
         console.print(f"\n[bold yellow]--- Round {round_num} ---[/]")
+
+        # Run Security Audit
+        if auditor:
+            audit_res = await auditor.audit(history)
+            if "RISK" in audit_res:
+                console.print(f"[bold red]⚠ Security Alert:[/] {audit_res}")
+                await _broadcast({
+                    "type": "security_alert",
+                    "discussion_id": discussion_id,
+                    "round": round_num,
+                    "risk": audit_res
+                })
+                # Log risk
+                log_interaction(discussion_id, auditor.agent.model, auditor.agent.id, audit_res, "Audit Loop", "security_alert")
 
         if moderator:
             prompt = await moderator.amoderate(topic, history)

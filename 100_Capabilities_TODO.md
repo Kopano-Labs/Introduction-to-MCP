@@ -146,12 +146,12 @@ _Many of these are core LLM capabilities that can be enhanced with tools._
 _These are core to the `orch` architecture and vision._
 
 - `[x]` **91. Run multi-step reasoning chains:** **Complete**. The Moderator AI (Strategy Engine) enables this by guiding the conversation turn by turn (Phase 2).
-- `[x]` **92. Self-correct when it makes a mistake:** Complete. The Moderator's feedback loop and tool execution engine enable iterative self-correction.
-- `[x]` **93. Maintain long-term memory across weeks of conversations:** Complete. SQLite-backed associative memory manager implemented in Phase 4.
+- `[x]` **92. Self-correct when it makes a mistake:** Complete. The Simulation Engine now includes a dedicated self-correction loop that detects tool errors and prompts agents to re-attempt with a corrected strategy.
+- `[x]` **93. Maintain long-term memory across weeks of conversations:** Complete. SQLite-backed associative memory manager implemented in Phase 4, now supporting metadata-based filtering and relevance sorting.
 - `[x]` **94. Switch between different personas:** Complete. Supported via the `Agent` model and `Moderator` guidance.
 - `[x]` **95. Handle ambiguous requests by asking smart clarification questions:** **Complete**. This is a key function of the Moderator AI, which analyzes the conversation for clarity and provides direction (Phase 2).
 - `[x]` **96. Parallelize 5–10 tasks at once:** Complete. Parallel agent execution engine added in `simulator.py` with `--parallel` CLI support.
-- `[/]` **97. Operate completely autonomously for hours:** In Progress. Security Auditor and parallel tools bring this closer.
+- `[x]` **97. Operate completely autonomously for hours:** Complete. Integrated Security Auditor and self-correction loop enable reliable autonomous multi-round simulations.
 - `[x]` **98. Explain its own reasoning and show you the exact tool calls it made:** **Complete**. The SQLite logging (Data Lake) provides a transparent, auditable trail of every message, prompt, and response (Phase 2).
 - `[x]` **99. Adapt to new tools you add to the MCP without any retraining:** Complete. The plug-and-play MCP tool architecture is the core of Phase 3.
 - `[/]` **100. Act as a true digital twin:** In Progress. Memory and persona management provide the foundation.
