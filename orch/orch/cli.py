@@ -109,6 +109,8 @@ TOOL_FUNCTIONS_MAP = {
     "clean_spreadsheet": ("spreadsheet_tool", "clean_spreadsheet"),
     "generate_plot": ("viz_tool", "generate_plot"),
     "analyze_logs": ("log_analyzer", "analyze_logs"),
+    "compare_datasets": ("data_comparator", "compare_datasets"),
+    "analyze_sentiment": ("sentiment_analyzer", "analyze_sentiment"),
 }
 
 # --- Serve Commands ---
@@ -147,6 +149,8 @@ Available Tools:
 - clean_spreadsheet(file_path: str, output_path: str = None): Cleans a CSV or Excel spreadsheet by removing duplicates, handling missing values, and standardizing text casing.
 - generate_plot(data: dict, title: str = "Data Visualization", plot_type: str = "bar", output_path: str = "plot.png"): Generates and saves a data visualization image.
 - analyze_logs(file_path: str): Analyzes a log file and returns a structured Markdown summary.
+- compare_datasets(file1: str, file2: str): Compares two datasets (JSON, JSONL, or CSV) and highlights differences.
+- analyze_sentiment(text: str): Analyzes the sentiment of a given text (positive, negative, or neutral).
 """
 
 def execute_tool_code(tool_code: str) -> str:
@@ -414,74 +418,26 @@ app.add_typer(learn_app, name="learn")
 
 @learn_app.command(name="generate-tuning-data")
 def generate_tuning_data(
-    output_format: str = typer.Option("alpaca", "--format", "-f", help="Export format: 'alpaca', 'jsonl', or 'chatml'."),
-    output_file: Path = typer.Option("tuning_data.json", "--output", "-o", help="Output file path."),
+    output_format: str = typer.Option("chatml", "--format", "-f", help="Export format: 'alpaca', 'raw', or 'chatml'."),
+    output_dir: Path = typer.Option(Path("tuning_data"), "--output-dir", "-o", help="Output directory for generated files."),
     discussion_id: Optional[int] = typer.Option(None, "--discussion", "-d", help="Specific discussion ID to export. If not provided, exports all.")
 ):
     """
-    Generates training/fine-tuning data from recorded discussions.
+    Generates training/fine-tuning data from recorded discussions using the exporter module.
     """
-    conn = get_db_connection()
-    try:
-        cursor = conn.cursor()
-        # Querying from the audit_logs table for 'execution' type to get prompt/response
-        query = "SELECT topic, prompt, message as response FROM audit_logs JOIN discussions ON audit_logs.discussion_id = discussions.id WHERE log_type = 'execution'"
-        params = []
-        if discussion_id:
-            query += " AND discussion_id = ?"
-            params.append(discussion_id)
-        
-        cursor.execute(query, params)
-        rows = cursor.fetchall()
-
-        if not rows:
-            # Fallback to the old 'messages' table if audit_logs is empty
-            query = "SELECT topic, prompt, response FROM messages JOIN discussions ON messages.discussion_id = discussions.id WHERE is_moderator_direction = 0"
-            params = []
-            if discussion_id:
-                query += " AND discussion_id = ?"
-                params.append(discussion_id)
-            cursor.execute(query, params)
-            rows = cursor.fetchall()
-
-        if not rows:
-            console.print("[bold yellow]No training data found in the Data Lake.[/bold yellow]")
-            return
-
-        tuning_data = []
-        for row in rows:
-            if output_format == "alpaca":
-                tuning_data.append({
-                    "instruction": row["prompt"] or f"Discuss the topic: {row['topic']}",
-                    "input": "",
-                    "output": row["response"]
-                })
-            elif output_format == "chatml":
-                # Format as a conversation for ChatML
-                tuning_data.append({
-                    "messages": [
-                        {"role": "system", "content": f"Topic: {row['topic']}"},
-                        {"role": "user", "content": row["prompt"] or "Please provide your input."},
-                        {"role": "assistant", "content": row["response"]}
-                    ]
-                })
-            else: # JSONL
-                tuning_data.append({
-                    "prompt": row["prompt"] or f"Discuss the topic: {row['topic']}",
-                    "completion": row["response"]
-                })
-
-        with open(output_file, "w", encoding="utf-8") as f:
-            if output_format == "alpaca":
-                json.dump(tuning_data, f, indent=4, ensure_ascii=False)
-            else:
-                for entry in tuning_data:
-                    f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-
-        console.print(f"[bold green]Successfully generated {len(tuning_data)} examples in {output_format} format to: [cyan]{output_file}[/cyan][/bold green]")
-    finally:
-        if conn:
-            conn.close()
+    from .exporter import export_session_to_jsonl, export_all_to_jsonl
+    
+    if discussion_id:
+        console.print(f"📦 [bold cyan]Exporting session #{discussion_id} in {output_format} format...[/bold cyan]")
+        output_file = export_session_to_jsonl(discussion_id, output_dir, format=output_format)
+    else:
+        console.print(f"📦 [bold cyan]Exporting all high-quality sessions in {output_format} format...[/bold cyan]")
+        output_file = export_all_to_jsonl(output_dir, format=output_format)
+    
+    if output_file and output_file.exists():
+        console.print(f"[bold green]Successfully generated training data at: [cyan]{output_file}[/cyan][/bold green]")
+    else:
+        console.print("[bold yellow]No training data was generated. Ensure you have discussions in your Data Lake.[/bold yellow]")
 
 
 # --- WhatsApp Commands ---

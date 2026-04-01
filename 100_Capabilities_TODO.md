@@ -36,7 +36,7 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[x]` **17. Answer any question with sources less than 24 hours old:** Complete. Enhanced `search` tool with `search_depth='advanced'` and arXiv tool provide fresh data.
 - `[x]` **18. Generate investor update decks:** Complete. Report generation tool (`generate_report`) is integrated and registered.
 - `[/]` **19. Translate complex legal contracts into plain English:** Core LLM capability, requires file I/O (read/write) to access and save documents. (In Progress)
-- `[/]` **20. Run sentiment analysis on customer feedback:** Core LLM capability, but requires tools to access data channels (e.g., email, social media). (Filesystem tool partially enables)
+- `[x]` **20. Run sentiment analysis on customer feedback:** Complete. Sentiment analysis tool (`analyze_sentiment`) using NLTK VADER is integrated and registered.
 
 ### 21–30: Personal Productivity & Life Automation
 
@@ -63,7 +63,7 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[ ]` **34. Detect anomalies in your metrics:** Requires data analysis and statistical tools.
 - `[/]` **35. Forecast sales, traffic, or expenses:** Requires data analysis and statistical tools. (Filesystem tool partially enables for local data)
 - `[x]` **36. Clean messy spreadsheets:** Complete. Spreadsheet cleaning tool (`clean_spreadsheet`) is integrated and registered.
-- `[ ]` **37. Compare two datasets:** Requires a data analysis tool.
+- `[x]` **37. Compare two datasets:** Complete. Data comparison tool (`compare_datasets`) supporting JSON, JSONL, and CSV formats is integrated and registered.
 - `[ ]` **38. Generate A/B test analysis:** Requires a statistical tool.
 - `[x]` **39. Create beautiful data visualizations:** Complete. Visualization tool (`generate_plot`) is integrated and registered.
 - `[x]` **40. Turn raw logs into executive summary reports:** Complete. Log analysis tool (`analyze_logs`) and report generation tool are integrated and registered.

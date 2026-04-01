@@ -46,6 +46,7 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
 - **Security Auditor** — Built-in automated scanning for prompt injection and sensitive data leaks
 - **WhatsApp Gateway** — Real-time broadcast of agent responses to WhatsApp for mobile monitoring
 - **Data Lake & Fine-Tuning** — Generate high-quality JSONL/Alpaca/ChatML training data from discussion history
+- **Data Analysis Tools** — Built-in sentiment analysis, dataset comparison, and spreadsheet cleaning
 
 ---
 
@@ -107,6 +108,7 @@ orch whatsapp test --message "Neural Link Stable"
   - [x] WhatsApp Messaging Bridge
   - [x] Security Auditor Agent
   - [x] ChatML/JSONL Training Data Export
+  - [x] Sentiment Analysis & Data Comparison Tools
 
 
 Contributing

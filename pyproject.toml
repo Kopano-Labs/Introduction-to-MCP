@@ -14,6 +14,12 @@ dependencies = [
     "uvicorn>=0.22.0",
     "fastapi>=0.100.0",
     "python-dotenv>=1.0.0",
+    "pandas>=2.0.0",
+    "nltk>=3.8.0",
+    "matplotlib>=3.7.0",
+    "beautifulsoup4>=4.12.0",
+    "bandit>=1.7.5",
+    "safety>=2.3.5",
 ]
 
 [project.scripts]
