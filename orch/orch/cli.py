@@ -33,22 +33,55 @@ def agents():
     """
     console.print(Panel("[bold green]Agent Management Commands[/bold green]", expand=False))
 
+# DROP-IN REPLACEMENT for the agents_config command in cli.py
+# Find the @agents_app.command(name="config") block and replace it with this.
+
 @agents_app.command(name="config")
 def agents_config(
     agent_id: str = typer.Argument(..., help="Unique ID for the agent."),
     provider: str = typer.Option(..., "--provider", "-p", help="LLM provider (e.g., 'openai', 'google', 'anthropic')."),
     model: str = typer.Option(..., "--model", "-m", help="Specific model name (e.g., 'gpt-4o', 'gemini-1.5-flash-latest')."),
-    api_key: str = typer.Option(..., "--api-key", "-k", help="API key for the LLM provider."),
+    api_key: Optional[str] = typer.Option(None, "--api-key", "-k", help="API key. If not provided, reads from .env file automatically."),
     persona: str = typer.Option("You are a helpful AI assistant.", "--persona", "-s", help="The agent's persona or system prompt."),
 ):
     """
     Configures a new AI agent or updates an existing one.
+    If --api-key is not provided, the key is read automatically from your .env file.
     """
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    # If no api_key passed, try to resolve from .env based on provider
+    if api_key is None:
+        env_key_map = {
+            "anthropic": "ANTHROPIC_API_KEY",
+            "openai": "OPENAI_API_KEY",
+            "google": "GOOGLE_API_KEY",
+            "xai": "XAI_API_KEY",
+            "groq": "GROQ_API_KEY",
+            "mistral": "MISTRAL_API_KEY",
+        }
+        env_var = env_key_map.get(provider.lower())
+        if env_var:
+            api_key = os.getenv(env_var, "")
+            if api_key:
+                console.print(f"[dim]🔑 Using {env_var} from .env[/dim]")
+            else:
+                console.print(f"[bold yellow]Warning:[/bold yellow] No --api-key provided and {env_var} not found in .env. Agent saved without key.")
+                api_key = ""
+        else:
+            console.print(f"[bold yellow]Warning:[/bold yellow] Unknown provider '{provider}'. No API key resolved. Pass --api-key manually.")
+            api_key = ""
+
     agents = load_agents()
     new_agent = Agent(id=agent_id, provider=provider, model=model, api_key=api_key, persona=persona)
     agents[agent_id] = new_agent
     save_agents(agents)
-    console.print(f"[bold green]Agent '{agent_id}' configured successfully.[/bold green]")
+    console.print(f"[bold green]✅ Agent '{agent_id}' configured successfully.[/bold green]")
+    console.print(f"   Provider : [cyan]{provider}[/cyan]")
+    console.print(f"   Model    : [cyan]{model}[/cyan]")
+    console.print(f"   Key      : [dim]{'set' if api_key else 'not set'}[/dim]")
 
 @agents_app.command(name="list")
 def agents_list():
@@ -111,6 +144,9 @@ TOOL_FUNCTIONS_MAP = {
     "analyze_logs": ("log_analyzer", "analyze_logs"),
     "compare_datasets": ("data_comparator", "compare_datasets"),
     "analyze_sentiment": ("sentiment_analyzer", "analyze_sentiment"),
+    "detect_anomalies": ("anomaly_detector", "detect_anomalies"),
+    "ab_test_analysis": ("ab_tester", "ab_test_analysis"),
+    "forecast_series": ("forecaster", "forecast_series"),
 }
 
 # --- Serve Commands ---
@@ -151,6 +187,9 @@ Available Tools:
 - analyze_logs(file_path: str): Analyzes a log file and returns a structured Markdown summary.
 - compare_datasets(file1: str, file2: str): Compares two datasets (JSON, JSONL, or CSV) and highlights differences.
 - analyze_sentiment(text: str): Analyzes the sentiment of a given text (positive, negative, or neutral).
+- detect_anomalies(): Analyzes the Data Lake for performance anomalies, security alerts, and execution corrections.
+- ab_test_analysis(): Performs A/B testing analysis on agents/models based on historical performance metrics in the Data Lake.
+- forecast_series(file_path: str, column: str, periods: int = 5): Predicts future values for a given column in a CSV or Excel file using a simple linear trend model.
 """
 
 def execute_tool_code(tool_code: str) -> str:
