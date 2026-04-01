@@ -9,6 +9,7 @@ Connect with the Architect:
 """
 import sqlite3
 from pathlib import Path
+from typing import Optional
 from rich.console import Console
 
 console = Console()
@@ -58,6 +59,21 @@ def init_db():
     );
     """)
 
+    # Table for audit logs (Separating reasoning from execution)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS audit_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        discussion_id INTEGER,
+        model TEXT NOT NULL,
+        agent_id TEXT NOT NULL,
+        message TEXT,
+        prompt TEXT,
+        log_type TEXT CHECK(log_type IN ('reasoning', 'execution', 'tool_call', 'tool_result', 'system')) NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(discussion_id) REFERENCES discussions(id)
+    );
+    """)
+
     conn.commit()
     conn.close()
     console.log("🗄️  Database schema initialized successfully.")
@@ -66,6 +82,48 @@ def init_db():
 def setup_database():
     """Wrapper for init_db for external calls."""
     init_db()
+
+def log_interaction(
+    discussion_id: int, 
+    model: str, 
+    agent_id: str, 
+    message: Optional[str], 
+    prompt: Optional[str], 
+    log_type: str
+):
+    """
+    Inserts a structured log into the audit_logs table.
+    log_type: 'reasoning', 'execution', 'tool_call', 'tool_result', 'system'
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO audit_logs (discussion_id, model, agent_id, message, prompt, log_type)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (discussion_id, model, agent_id, message, prompt, log_type))
+    conn.commit()
+    conn.close()
+
+def log_message(
+    discussion_id: int,
+    round_num: int,
+    agent_id: str,
+    agent_model: str,
+    prompt: Optional[str],
+    response: str,
+    is_moderator_direction: int = 0
+):
+    """
+    Inserts a message into the messages table.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT INTO messages (discussion_id, round_num, agent_id, agent_model, prompt, response, is_moderator_direction)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (discussion_id, round_num, agent_id, agent_model, prompt, response, is_moderator_direction))
+    conn.commit()
+    conn.close()
 
 # Initialize the database on module load to ensure tables are ready.
 # In a larger application, this might be called from a specific startup script.

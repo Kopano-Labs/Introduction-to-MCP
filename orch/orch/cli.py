@@ -16,7 +16,7 @@ import importlib
 from .agent_manager import load_agents, Agent, save_agents
 from .moderator import Moderator
 from .database import get_db_connection
-from .database import get_db_connection, setup_database
+from .database import get_db_connection, setup_database, log_message
 from .config import AGENTS_FILE
 
 app = typer.Typer()
@@ -356,7 +356,8 @@ def generate_tuning_data(
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
-        query = "SELECT topic, prompt, response FROM messages JOIN discussions ON messages.discussion_id = discussions.id WHERE is_moderator_direction = 0"
+        # Querying from the audit_logs table for 'execution' type to get prompt/response
+        query = "SELECT topic, prompt, message as response FROM audit_logs JOIN discussions ON audit_logs.discussion_id = discussions.id WHERE log_type = 'execution'"
         params = []
         if discussion_id:
             query += " AND discussion_id = ?"
@@ -364,6 +365,16 @@ def generate_tuning_data(
         
         cursor.execute(query, params)
         rows = cursor.fetchall()
+
+        if not rows:
+            # Fallback to the old 'messages' table if audit_logs is empty
+            query = "SELECT topic, prompt, response FROM messages JOIN discussions ON messages.discussion_id = discussions.id WHERE is_moderator_direction = 0"
+            params = []
+            if discussion_id:
+                query += " AND discussion_id = ?"
+                params.append(discussion_id)
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
 
         if not rows:
             console.print("[bold yellow]No training data found in the Data Lake.[/bold yellow]")

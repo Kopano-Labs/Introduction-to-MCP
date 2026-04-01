@@ -7,7 +7,7 @@ GitHub: https://github.com/RobynAwesome/
 from typing import List, Dict, Any, Optional
 from litellm import acompletion  # ← async version of completion
 from rich.console import Console
-from .datalake import start_discussion, log_interaction
+from .database import log_interaction, log_message
 from .context import format_history
 import httpx  # ← async HTTP client for broadcasting
 
@@ -61,10 +61,7 @@ async def _handle_tool_calls(reply: str, agent_id: str, discussion_id: int, roun
         tool_result = execute_tool_code(tool_code)
         console.print(f"[bold cyan]Tool Result:[/] {tool_result}")
         
-        # Log tool result to Data Lake
-        log_interaction(discussion_id, "system", "tool_executor", tool_result, tool_code, "tool_result")
-        
-        # Broadcast the tool result
+        # Broadcast the moderator's result
         await _broadcast({
             "type": "tool_result",
             "discussion_id": discussion_id,
@@ -72,6 +69,9 @@ async def _handle_tool_calls(reply: str, agent_id: str, discussion_id: int, roun
             "agent": agent_id,
             "result": tool_result
         })
+        
+        # Log tool result to Data Lake
+        log_interaction(discussion_id, "system", "tool_executor", tool_result, tool_code, "tool_result")
         
         return f"\n[Tool Result]: {tool_result}"
     return ""
@@ -91,7 +91,13 @@ async def run_simulation(
     """
     console.print(f"[bold green]Starting Simulation:[/] {topic}")
     if discussion_id is None:
-        discussion_id = start_discussion(topic)
+        from .database import get_db_connection
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO discussions (topic) VALUES (?)", (topic,))
+        discussion_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
     history = []
 
     # Broadcast simulation start so the GUI can initialise its view
@@ -109,10 +115,10 @@ async def run_simulation(
         # Moderator sets the direction for this round
         if moderator:
             prompt = await moderator.amoderate(topic, history)
+            log_interaction(discussion_id, moderator.agent.model, moderator.agent.id, None, prompt, "reasoning")
         else:
             prompt = history[-1]["content"] if history else topic
-        
-        log_interaction(discussion_id, "moderator-model", "moderator", None, prompt, "reasoning")
+            log_interaction(discussion_id, "system", "system", None, prompt, "system")
 
         # Broadcast the moderator's directive so the GUI shows it in real-time
         await _broadcast({
@@ -144,6 +150,7 @@ async def run_simulation(
 
                 # Log to Data Lake
                 log_interaction(discussion_id, agent.model, agent.id, reply, current_turn_prompt, "execution")
+                log_message(discussion_id, round_num, agent.id, agent.model, current_turn_prompt, reply)
 
                 console.print(f"[bold cyan]{agent.id}:[/] {reply}\n")
 
