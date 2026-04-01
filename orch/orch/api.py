@@ -46,13 +46,23 @@ state = State()
 
 # --- API ENDPOINTS ---
 
-@app.websocket("/ws/neural-link")
+@app.websocket("/ws/live")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     state.connections.append(websocket)
     try:
         while True:
             # Keep connection open
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        state.connections.remove(websocket)
+
+@app.websocket("/ws/neural-link")
+async def neural_link_websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    state.connections.append(websocket)
+    try:
+        while True:
             await websocket.receive_text()
     except WebSocketDisconnect:
         state.connections.remove(websocket)

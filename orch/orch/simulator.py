@@ -63,7 +63,11 @@ async def run_simulation(
         console.print(f"\n[bold yellow]--- Round {round_num} ---[/]")
 
         # Moderator sets the direction for this round
-        prompt = moderator.moderate(topic, history)
+        if moderator:
+            prompt = await moderator.amoderate(topic, history)
+        else:
+            prompt = history[-1]["content"] if history else topic
+        
         log_interaction(discussion_id, "moderator-model", "moderator", None, prompt, "reasoning")
 
         # Broadcast the moderator's directive so the GUI shows it in real-time
@@ -79,22 +83,18 @@ async def run_simulation(
 
             # Broadcast that this agent is "thinking" — lets the GUI show a spinner
             await _broadcast({
-                "type": "agent_thinking",
+                "type": "thinking", # Changed from agent_thinking to match App.tsx
                 "discussion_id": discussion_id,
                 "round": round_num,
-                "agent_id": agent.id,
+                "agent": agent.id, # Changed from agent_id to match App.tsx
             })
 
             try:
-                response = await acompletion(   # ← was: completion() (blocking)
-                    model=agent.model,
-                    messages=context_messages,
-                    api_key=getattr(agent, 'api_key', 'MOCK_KEY')
-                )
-                reply = response.choices[0].message.content.strip()
+                response = await agent.agenerate_response(current_turn_prompt, history)
+                reply = response.content.strip()
 
                 # Save to shared history
-                history.append({"role": "user", "name": agent.id, "content": reply})
+                history.append({"role": "assistant", "name": agent.id, "content": reply})
 
                 # Log to Data Lake
                 log_interaction(discussion_id, agent.model, agent.id, reply, prompt, "execution")
@@ -103,10 +103,10 @@ async def run_simulation(
 
                 # Broadcast the agent's response — this is the core Neural Link signal
                 await _broadcast({
-                    "type": "agent_response",
+                    "type": "response", # Changed from agent_response to match App.tsx
                     "discussion_id": discussion_id,
                     "round": round_num,
-                    "agent_id": agent.id,
+                    "agent": agent.id, # Changed from agent_id to match App.tsx
                     "model": agent.model,
                     "content": reply,
                 })
