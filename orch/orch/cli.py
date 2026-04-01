@@ -22,15 +22,18 @@ from .config import AGENTS_FILE
 app = typer.Typer()
 console = Console()
 
+agents_app = typer.Typer()
+app.add_typer(agents_app, name="agents")
+
 # --- Agent Management Commands ---
-@app.command()
+@agents_app.callback()
 def agents():
     """
     Manage AI agents.
     """
     console.print(Panel("[bold green]Agent Management Commands[/bold green]", expand=False))
 
-@agents.command(name="config")
+@agents_app.command(name="config")
 def agents_config(
     agent_id: str = typer.Argument(..., help="Unique ID for the agent."),
     provider: str = typer.Option(..., "--provider", "-p", help="LLM provider (e.g., 'openai', 'google', 'anthropic')."),
@@ -47,7 +50,7 @@ def agents_config(
     save_agents(agents)
     console.print(f"[bold green]Agent '{agent_id}' configured successfully.[/bold green]")
 
-@agents.command(name="list")
+@agents_app.command(name="list")
 def agents_list():
     """
     Lists all configured AI agents.
@@ -65,7 +68,7 @@ def agents_list():
         console.print(f"    Persona: {agent.persona[:50]}...") # Truncate persona for display
         console.print("")
 
-@agents.command(name="remove")
+@agents_app.command(name="remove")
 def agents_remove(
     agent_id: str = typer.Argument(..., help="The unique ID of the agent to remove.")
 ):
@@ -218,14 +221,17 @@ def run_tool(
 
 
 # --- Log Commands ---
-@app.command()
+log_app = typer.Typer()
+app.add_typer(log_app, name="log")
+
+@log_app.callback()
 def log():
     """
     Commands for viewing discussion logs.
     """
     console.print(Panel("[bold green]Discussion Log Commands[/bold green]", expand=False))
 
-@log.command(name="list")
+@log_app.command(name="list")
 def log_list():
     """
     Lists all recorded discussion sessions.
@@ -253,7 +259,7 @@ def log_list():
         if conn:
             conn.close()
 
-@log.command(name="view")
+@log_app.command(name="view")
 def log_view(
     discussion_id: int = typer.Argument(..., help="The ID of the discussion session to view.")
 ):
@@ -321,7 +327,7 @@ def log_view(
         if conn:
             conn.close()
 
-@log.command(name="export")
+@log_app.command(name="export")
 def log_export(
     discussion_id: int = typer.Argument(..., help="The ID of the discussion session to export."),
     output_file: Optional[Path] = typer.Option(None, "--output", "-o", help="Output JSON file path. Defaults to orch_discussion_<id>.json")
