@@ -95,7 +95,7 @@ TOOL_FUNCTIONS_MAP = {
 
 # --- Serve Commands ---
 @app.command()
-def serve():
+def serve_info():
     """
     Commands for the orch server.
     """
@@ -448,15 +448,43 @@ def generate_tuning_data(
             conn.close()
 
 
-# --- Serve Commands ---
-@app.command()
-def serve():
-    """
-    Commands for the orch server.
-    """
-    console.print(Panel("[bold green]Orch Server Commands[/bold green]", expand=False))
+# --- WhatsApp Commands ---
+whatsapp_app = typer.Typer(name="whatsapp", help="Manage and test WhatsApp integration.")
+app.add_typer(whatsapp_app, name="whatsapp")
 
-@serve.command()
+@whatsapp_app.command("test")
+def test_whatsapp(
+    message: str = typer.Option("Test message from orch.", "--message", "-m", help="The message to send."),
+    recipient: Optional[str] = typer.Option(None, "--recipient", "-r", help="Target WhatsApp JID/Number. Defaults to config.")
+):
+    """
+    Tests the WhatsApp MessagingBridge connection.
+    """
+    import asyncio
+    from .bridge import bridge
+    from .config import settings
+    
+    target = recipient or getattr(settings, "whatsapp_recipient", None)
+    if not target:
+        console.print("[bold red]Error:[/bold red] No recipient specified and none found in config.")
+        raise typer.Exit(code=1)
+        
+    console.print(f"[bold cyan]Testing WhatsApp bridge to {target}...[/bold cyan]")
+    
+    async def run_test():
+        success = await bridge.send_message(message, target)
+        if success:
+            console.print("[bold green]Success![/bold green] Message sent via WhatsApp.")
+        else:
+            console.print("[bold red]Failed.[/bold red] Check your API key and instance URL.")
+            
+    asyncio.run(run_test())
+
+# --- Serve Commands ---
+serve_app = typer.Typer(name="serve", help="Commands for the orch server.")
+app.add_typer(serve_app, name="serve")
+
+@serve_app.command("launch")
 def launch(
     topic: str = typer.Option(..., "--topic", "-t", help="The discussion topic."),
     agent_ids: List[str] = typer.Option(..., "--agents", "-a", help="Comma-separated list of agent IDs to include in the discussion."),
@@ -537,7 +565,7 @@ def launch(
         console.print(f"[bold red]Simulation Error:[/bold red] {e}")
         raise typer.Exit(code=1)
 
-@serve.command(name="api")
+@serve_app.command(name="api")
 def start_api_cmd(
     port: int = typer.Option(8000, "--port", "-p", help="Port to run the API on."),
     host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host to run the API on.")

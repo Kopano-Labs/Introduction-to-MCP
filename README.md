@@ -40,46 +40,69 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
 - **Smart Moderator Engine** — An intelligent Moderator AI keeps every discussion productive, on-topic, and goal-oriented
 - **Turn-Based Group Chat** — Realistic “think-tank” simulation with configurable roles
 - **Persistent Data Lake** — Every conversation is automatically logged to SQLite for auditing, replay, and analysis (Capability #98)
-- **Full MCP Compliance** — Reference implementation of Tools, Resources, and Prompts
-- **Local-First & Private** — Runs entirely on your machine with your own API keys
-- **Extensible** — Built for Phase 3 tool integration and custom capabilities
+- **Neural Link WebSocket** — Real-time broadcasting to the React GUI (Neural Link Patch)
+- **Long-term Memory** — Persistent associative memory for agents across sessions
+- **Parallel Execution** — Concurrent agent processing for high-speed multi-agent simulations
+- **Security Auditor** — Built-in automated scanning for prompt injection and sensitive data leaks
+- **WhatsApp Gateway** — Real-time broadcast of agent responses to WhatsApp for mobile monitoring
+- **Data Lake & Fine-Tuning** — Generate high-quality JSONL/Alpaca/ChatML training data from discussion history
 
 ---
 
 ## 🚀 Quick Start
 
 ### 1. Clone & Install
+```bash
+git clone https://github.com/RobynAwesome/Introduction-to-MCP.git
+cd Introduction-to-MCP
+pip install -e .
+```
 
----
-
-2. Add Your API Keys
-Create .env in the project root:
-envGOOGLE_API_KEY="your_gemini_api_key_here"
-XAI_API_KEY="your_grok_api_key_here"
-ANTHROPIC_API_KEY="your_anthropic_api_key_here"
-3. Configure Your AI Team
-Bash# Add agents
+### 2. Configure Your AI Team
+```bash
+# Configure agents
 orch agents config gemini-pro --provider google --model gemini-1.5-pro
 orch agents config grok-mod   --provider xai   --model grok-beta
 
 # See your roster
 orch agents list
-4. Launch a Discussion
-Bashorch serve launch \
+```
+
+### 3. Launch a Discussion
+```bash
+orch serve launch \
   --topic "The future of AI in South African fintech" \
   --agents "gemini-pro" \
   --moderator "grok-mod" \
-  --max-rounds 8
+  --max-rounds 8 \
+  --parallel
+```
 
-📊 Architecture
-<img src="MCP%20DIAGRAM.png" alt="MCP Diagram">
+### 4. Security Audit & Monitoring
+```bash
+# Test WhatsApp integration
+orch whatsapp test --message "Neural Link Stable"
 
-Roadmap
+# Start the AGI Control Plane (API + WebSockets)
+orch serve api
+```
 
-Phase 1: Core Multi-Agent Orchestration (Done)
-Phase 2: Advanced Moderator Strategies + Memory (Done)
-Phase 3: Full Tool Use via MCP & WebSocket Link (Done)
-Phase 4: Data Lake & Fine-Tuning Prep (In Progress)
+---
+
+## 📊 Architecture
+![MCP Diagram](MCP%20DIAGRAM.png)
+
+## 🗺️ Roadmap
+
+- **Phase 1**: Core Multi-Agent Orchestration (✅ Done)
+- **Phase 2**: Advanced Moderator Strategies + Memory (✅ Done)
+- **Phase 3**: Full Tool Use via MCP & WebSocket Link (✅ Done)
+- **Phase 4**: Optimization, Scale & Security (🚀 In Progress - v0.1-alpha)
+  - [x] Long-term Associative Memory
+  - [x] Parallel Agent Execution
+  - [x] WhatsApp Messaging Bridge
+  - [x] Security Auditor Agent
+  - [x] ChatML/JSONL Training Data Export
 
 
 Contributing

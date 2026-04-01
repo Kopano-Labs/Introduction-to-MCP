@@ -147,11 +147,11 @@ _These are core to the `orch` architecture and vision._
 
 - `[x]` **91. Run multi-step reasoning chains:** **Complete**. The Moderator AI (Strategy Engine) enables this by guiding the conversation turn by turn (Phase 2).
 - `[x]` **92. Self-correct when it makes a mistake:** Complete. The Moderator's feedback loop and tool execution engine enable iterative self-correction.
-- `[ ]` **93. Maintain long-term memory across weeks of conversations:** Requires a vector database (e.g., Chroma, Pinecone) beyond the current SQLite context window.
+- `[x]` **93. Maintain long-term memory across weeks of conversations:** Complete. SQLite-backed associative memory manager implemented in Phase 4.
 - `[x]` **94. Switch between different personas:** Complete. Supported via the `Agent` model and `Moderator` guidance.
 - `[x]` **95. Handle ambiguous requests by asking smart clarification questions:** **Complete**. This is a key function of the Moderator AI, which analyzes the conversation for clarity and provides direction (Phase 2).
-- `[ ]` **96. Parallelize 5–10 tasks at once:** The current architecture is sequential (round-robin). This would require a significant change to the orchestration logic in `serve launch`.
-- `[ ]` **97. Operate completely autonomously for hours:** The ultimate long-term goal. Requires robust tool use, long-term memory, and advanced error handling.
+- `[x]` **96. Parallelize 5–10 tasks at once:** Complete. Parallel agent execution engine added in `simulator.py` with `--parallel` CLI support.
+- `[/]` **97. Operate completely autonomously for hours:** In Progress. Security Auditor and parallel tools bring this closer.
 - `[x]` **98. Explain its own reasoning and show you the exact tool calls it made:** **Complete**. The SQLite logging (Data Lake) provides a transparent, auditable trail of every message, prompt, and response (Phase 2).
 - `[x]` **99. Adapt to new tools you add to the MCP without any retraining:** Complete. The plug-and-play MCP tool architecture is the core of Phase 3.
-- `[ ]` **100. Act as a true digital twin:** A long-term, composite goal requiring the successful implementation of long-term memory, persona management, and extensive tool use.
+- `[/]` **100. Act as a true digital twin:** In Progress. Memory and persona management provide the foundation.
