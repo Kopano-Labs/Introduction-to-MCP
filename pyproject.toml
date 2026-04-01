@@ -17,4 +17,8 @@ dependencies = [
 ]
 
 [project.scripts]
-orch = "orch.cli:app"
+orch = "orch.orch.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["orch*"]
