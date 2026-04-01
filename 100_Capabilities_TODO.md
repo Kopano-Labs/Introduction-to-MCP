@@ -18,7 +18,7 @@ This document tracks the implementation status of the 100 capabilities for the `
 - `[ ]` **4. Automatically review every new GitHub PR:** Requires a GitHub API tool.
 - `[x]` **5. Convert legacy code:** Complete. Enabled by the filesystem and code execution tools.
 - `[x]` **6. Create new microservices:** Complete. Enabled by filesystem and code execution tools.
-- `[/]` **7. Fix security vulnerabilities it finds:** In Progress. Requires dependency scanning tools.
+- `[x]` **7. Fix security vulnerabilities it finds:** Complete. Security scanning tools (Bandit for code, Safety for dependencies) are integrated and registered.
 - `[x]` **8. Generate API documentation:** Complete. Enabled by code introspection and filesystem write tools.
 - `[x]` **9. Auto-write GitHub Actions / CI pipelines:** Complete. Enabled by filesystem write tools.
 - `[ ]` **10. Turn a Figma link into production-ready frontend code:** Requires a Figma API tool.
@@ -30,11 +30,11 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 - `[x]` **11. Run deep web research:** Complete. Web search tool (Tavily) is implemented and functional.
 - `[x]` **12. Summarize 50-page PDFs:** Complete. Filesystem tool and core LLM capability enable this.
 - `[ ]` **13. Track competitors’ pricing changes daily:** Requires a web scraping/browsing tool.
-- `[/]` **14. Monitor Reddit, X, and forums for brand mentions:** Requires social media/web search API tools and file system (write) for reports. (In Progress)
+- `[x]` **14. Monitor Reddit, X, and forums for brand mentions:** Complete. Social media monitoring tool (`monitor_brand`) is integrated and registered.
 - `[ ]` **15. Pull the latest arXiv papers on any topic:** Requires an arXiv API tool.
 - `[ ]` **16. Build a live knowledge base from Notion/Google Docs:** Requires Notion and Google Docs API tools.
 - `[ ]` **17. Answer any question with sources less than 24 hours old:** Requires a web search tool with a time filter.
-- `[/]` **18. Generate investor update decks:** Requires file I/O (read/write) and data analysis tools. (In Progress)
+- `[x]` **18. Generate investor update decks:** Complete. Report generation tool (`generate_report`) is integrated and registered.
 - `[/]` **19. Translate complex legal contracts into plain English:** Core LLM capability, requires file I/O (read/write) to access and save documents. (In Progress)
 - `[/]` **20. Run sentiment analysis on customer feedback:** Core LLM capability, but requires tools to access data channels (e.g., email, social media). (Filesystem tool partially enables)
 

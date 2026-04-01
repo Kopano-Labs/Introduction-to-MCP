@@ -98,6 +98,8 @@ TOOL_FUNCTIONS_MAP = {
     "git_log": ("git", "git_log"),
     "scan_code_security": ("security", "scan_code_security"),
     "scan_dependencies": ("security", "scan_dependencies"),
+    "monitor_brand": ("social_monitor", "monitor_brand"),
+    "generate_report": ("report_generator", "generate_report"),
 }
 
 # --- Serve Commands ---
@@ -126,6 +128,10 @@ Available Tools:
 - git_commit(message: str): Commits staged changes with a message.
 - git_status(): Shows the Git repository status.
 - git_log(): Shows the Git commit log.
+- scan_code_security(target_path: str): Scans Python code for security issues using Bandit.
+- scan_dependencies(requirements_file: str = "requirements.txt"): Scans project dependencies for known vulnerabilities using Safety.
+- monitor_brand(brand_name: str, platform: str = "all"): Monitors social media (Reddit, X, etc.) for brand mentions.
+- generate_report(title: str, sections: dict, file_name: str = "report.md"): Generates a structured Markdown report or deck.
 """
 
 def execute_tool_code(tool_code: str) -> str:
