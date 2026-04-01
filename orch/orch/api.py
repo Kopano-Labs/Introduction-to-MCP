@@ -1,11 +1,14 @@
 from fastapi import FastAPI, HTTPException, Request, Depends, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from .database import init_db, get_db_connection
 from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
 import json
 import asyncio
+import os
+from pathlib import Path
 from contextlib import asynccontextmanager
 
 # --- PROACTIVE NEURAL SHIELD: LIFESPAN LIFECYCLE ---
@@ -113,6 +116,19 @@ def get_session_detail(session_id: int):
         "created_at": session["created_at"],
         "logs": [dict(l) for l in logs]
     }
+
+# --- STATIC FILE SERVING (GUI) ---
+# Mount the React build directory if it exists
+gui_dist_path = Path(__file__).parent.parent / "gui" / "dist"
+if gui_dist_path.exists():
+    app.mount("/", StaticFiles(directory=str(gui_dist_path), html=True), name="gui")
+else:
+    @app.get("/")
+    def gui_missing():
+        return {
+            "message": "Orch API is running, but GUI build not found.",
+            "instructions": "Run 'cd orch/gui && npm install && npm run build' to enable the browser interface."
+        }
 
 def start_api():
     uvicorn.run(app, host="0.0.0.0", port=8000)

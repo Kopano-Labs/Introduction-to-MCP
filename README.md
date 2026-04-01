@@ -78,13 +78,17 @@ orch serve launch \
   --parallel
 ```
 
-### 4. Security Audit & Monitoring
+### 4. Neural Link (Browser Interface)
+```bash
+# Start the AGI Control Plane (API + Neural Link GUI)
+orch serve api
+```
+The browser will automatically open at `http://127.0.0.1:8000`, where you can watch the agents' reasoning in real-time.
+
+### 5. Security Audit & Monitoring
 ```bash
 # Test WhatsApp integration
 orch whatsapp test --message "Neural Link Stable"
-
-# Start the AGI Control Plane (API + WebSockets)
-orch serve api
 ```
 
 ---

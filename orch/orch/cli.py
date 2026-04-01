@@ -589,6 +589,8 @@ def launch(
 
     # Run the simulation asynchronously
     try:
+        if use_neural_link:
+            console.print("🔗 [bold cyan]Neural Link Active:[/] Simulation will be broadcast to the Control Plane.")
         asyncio.run(run_simulation(
             topic=topic,
             agents=selected_agents,
@@ -604,12 +606,25 @@ def launch(
 @serve_app.command(name="api")
 def start_api_cmd(
     port: int = typer.Option(8000, "--port", "-p", help="Port to run the API on."),
-    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host to run the API on.")
+    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host to run the API on."),
+    open_browser: bool = typer.Option(True, "--open", help="Automatically open the GUI in the browser.")
 ):
     """
-    Starts the orch AGI Control Plane API.
+    Starts the orch AGI Control Plane API and serves the Neural Link GUI.
     """
     import uvicorn
+    import webbrowser
     from .api import app
-    console.print(Panel(f"[bold green]Starting orch AGI Control Plane API on {host}:{port}...[/bold green]", expand=False))
+    
+    url = f"http://{host}:{port}"
+    console.print(Panel(
+        f"[bold green]Starting orch AGI Control Plane[/bold green]\n"
+        f"🌐 API & GUI: [bold cyan]{url}[/bold cyan]",
+        expand=False
+    ))
+    
+    if open_browser:
+        console.print(f"🚀 Opening {url} in your browser...")
+        webbrowser.open(url)
+        
     uvicorn.run(app, host=host, port=port)
