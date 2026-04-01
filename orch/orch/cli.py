@@ -88,6 +88,8 @@ TOOL_FUNCTIONS_MAP = {
     "search": ("search", "perform_search"),
     "read_file": ("filesystem", "read_file"),
     "write_file": ("filesystem", "write_file"),
+    "list_directory": ("filesystem", "list_directory"),
+    "delete_file": ("filesystem", "delete_file"),
     "execute_code": ("code_execution", "execute_code"),
 }
 
@@ -108,6 +110,8 @@ Example: <tool_code>write_file("path/to/file.txt", "File content here.")</tool_c
 Available Tools:
 - read_file(file_path: str): Reads the content of a specified file.
 - write_file(file_path: str, content: str): Writes content to a specified file, creating directories if they don't exist.
+- list_directory(directory_path: str = "."): Lists the contents of a directory.
+- delete_file(file_path: str): Deletes a file.
 - search(query: str): Performs a web search for a given query.
 - execute_code(code: str): Executes Python code and returns the result.
 """
@@ -374,7 +378,7 @@ app.add_typer(learn_app, name="learn")
 
 @learn_app.command(name="generate-tuning-data")
 def generate_tuning_data(
-    output_format: str = typer.Option("alpaca", "--format", "-f", help="Export format: 'alpaca' or 'jsonl'."),
+    output_format: str = typer.Option("alpaca", "--format", "-f", help="Export format: 'alpaca', 'jsonl', or 'chatml'."),
     output_file: Path = typer.Option("tuning_data.json", "--output", "-o", help="Output file path."),
     discussion_id: Optional[int] = typer.Option(None, "--discussion", "-d", help="Specific discussion ID to export. If not provided, exports all.")
 ):
@@ -416,6 +420,15 @@ def generate_tuning_data(
                     "input": "",
                     "output": row["response"]
                 })
+            elif output_format == "chatml":
+                # Format as a conversation for ChatML
+                tuning_data.append({
+                    "messages": [
+                        {"role": "system", "content": f"Topic: {row['topic']}"},
+                        {"role": "user", "content": row["prompt"] or "Please provide your input."},
+                        {"role": "assistant", "content": row["response"]}
+                    ]
+                })
             else: # JSONL
                 tuning_data.append({
                     "prompt": row["prompt"] or f"Discuss the topic: {row['topic']}",
@@ -450,6 +463,7 @@ def launch(
     max_rounds: int = typer.Option(5, "--max-rounds", "-r", help="Maximum number of discussion rounds."),
     moderator_agent_id: Optional[str] = typer.Option(None, "--moderator", "-m", help="ID of the agent to use as the moderator for guiding the discussion."),
     use_neural_link: bool = typer.Option(True, "--neural-link", help="Whether to use the real-time Neural Link (API/WebSocket)"),
+    parallel: bool = typer.Option(False, "--parallel", "-p", help="Execute agents in parallel within each round.")
 ):
     """
     Launches a simulated multi-agent discussion.
@@ -458,6 +472,8 @@ def launch(
     from .simulator import run_simulation
 
     console.print(Panel(f"[bold blue]Starting discussion on:[/bold blue] [bold yellow]{topic}[/bold yellow]", expand=False))
+    if parallel:
+        console.print("[bold cyan]Mode:[/] [bold green]Parallel Execution[/bold green]")
 
     # --- Database and Discussion Setup ---
     conn = get_db_connection()
@@ -514,7 +530,8 @@ def launch(
             agents=selected_agents,
             moderator=moderator_instance,
             max_rounds=max_rounds,
-            discussion_id=discussion_id
+            discussion_id=discussion_id,
+            parallel=parallel
         ))
     except Exception as e:
         console.print(f"[bold red]Simulation Error:[/bold red] {e}")

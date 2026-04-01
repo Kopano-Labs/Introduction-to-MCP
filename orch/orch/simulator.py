@@ -10,6 +10,7 @@ from rich.console import Console
 from .database import log_interaction, log_message
 from .context import format_history
 import httpx  # ← async HTTP client for broadcasting
+import asyncio
 
 console = Console()
 
@@ -77,17 +78,73 @@ async def _handle_tool_calls(reply: str, agent_id: str, discussion_id: int, roun
     return ""
 
 
+async def _process_agent_turn(agent, prompt, round_num, discussion_id, topic, history, moderator):
+    """
+    Processes a single agent's turn asynchronously.
+    """
+    # Broadcast that this agent is "thinking"
+    await _broadcast({
+        "type": "thinking",
+        "discussion_id": discussion_id,
+        "round": round_num,
+        "agent": agent.id,
+    })
+
+    try:
+        current_turn_prompt = prompt if moderator else (history[-1]["content"] if history else topic)
+        response = await agent.agenerate_response(current_turn_prompt, history, topic=topic)
+        reply = response.content.strip()
+
+        # Log to Data Lake
+        log_interaction(discussion_id, agent.model, agent.id, reply, current_turn_prompt, "execution")
+        log_message(discussion_id, round_num, agent.id, agent.model, current_turn_prompt, reply)
+
+        console.print(f"[bold cyan]{agent.id}:[/] {reply}\n")
+
+        # Broadcast the agent's response
+        await _broadcast({
+            "type": "response",
+            "discussion_id": discussion_id,
+            "round": round_num,
+            "agent": agent.id,
+            "model": agent.model,
+            "content": reply,
+        })
+
+        # WhatsApp Gateway Integration
+        if bridge.is_configured() and getattr(settings, "whatsapp_recipient", None):
+            await bridge.send_message(
+                f"*{agent.id} ({agent.model})*:\n{reply}",
+                settings.whatsapp_recipient
+            )
+
+        # Tool Execution Logic
+        tool_result_str = await _handle_tool_calls(reply, agent.id, discussion_id, round_num)
+        
+        return {"role": "assistant", "name": agent.id, "content": reply, "tool_result": tool_result_str}
+
+    except Exception as e:
+        console.print(f"[bold red]Error calling {agent.id}: {e}[/]")
+        await _broadcast({
+            "type": "agent_error",
+            "discussion_id": discussion_id,
+            "round": round_num,
+            "agent_id": agent.id,
+            "error": str(e),
+        })
+        return None
+
 async def run_simulation(
     topic: str,
     agents: List[Any],
     moderator: Any,
     max_rounds: int,
-    discussion_id: Optional[int] = None
+    discussion_id: Optional[int] = None,
+    parallel: bool = False
 ) -> List[Dict[str, str]]:
     """
-    Executes the async round-robin simulation loop between configured agents,
-    guided by the Moderator AI, logging to the Data Lake and broadcasting
-    every agent thought to the React GUI via the Neural Link.
+    Executes the async simulation loop between configured agents,
+    with optional parallel execution of agents within each round.
     """
     console.print(f"[bold green]Starting Simulation:[/] {topic}")
     if discussion_id is None:
@@ -100,7 +157,7 @@ async def run_simulation(
         conn.close()
     history = []
 
-    # Broadcast simulation start so the GUI can initialise its view
+    # Broadcast simulation start
     await _broadcast({
         "type": "simulation_start",
         "discussion_id": discussion_id,
@@ -112,7 +169,6 @@ async def run_simulation(
     for round_num in range(1, max_rounds + 1):
         console.print(f"\n[bold yellow]--- Round {round_num} ---[/]")
 
-        # Moderator sets the direction for this round
         if moderator:
             prompt = await moderator.amoderate(topic, history)
             log_interaction(discussion_id, moderator.agent.model, moderator.agent.id, None, prompt, "reasoning")
@@ -120,7 +176,6 @@ async def run_simulation(
             prompt = history[-1]["content"] if history else topic
             log_interaction(discussion_id, "system", "system", None, prompt, "system")
 
-        # Broadcast the moderator's directive so the GUI shows it in real-time
         await _broadcast({
             "type": "moderator_directive",
             "discussion_id": discussion_id,
@@ -128,69 +183,25 @@ async def run_simulation(
             "content": prompt,
         })
 
-        for agent in agents:
-            # Broadcast that this agent is "thinking" — lets the GUI show a spinner
-            await _broadcast({
-                "type": "thinking", # Changed from agent_thinking to match App.tsx
-                "discussion_id": discussion_id,
-                "round": round_num,
-                "agent": agent.id, # Changed from agent_id to match App.tsx
-            })
-
-            try:
-                # In non-moderated mode, we use the last response as the prompt.
-                # In moderated mode, the 'prompt' variable holds the moderator's directive.
-                current_turn_prompt = prompt if moderator else (history[-1]["content"] if history else topic)
-
-                response = await agent.agenerate_response(current_turn_prompt, history)
-                reply = response.content.strip()
-
-                # Save to shared history
-                history.append({"role": "assistant", "name": agent.id, "content": reply})
-
-                # Log to Data Lake
-                log_interaction(discussion_id, agent.model, agent.id, reply, current_turn_prompt, "execution")
-                log_message(discussion_id, round_num, agent.id, agent.model, current_turn_prompt, reply)
-
-                console.print(f"[bold cyan]{agent.id}:[/] {reply}\n")
-
-                # Broadcast the agent's response — this is the core Neural Link signal
-                await _broadcast({
-                    "type": "response", # Changed from agent_response to match App.tsx
-                    "discussion_id": discussion_id,
-                    "round": round_num,
-                    "agent": agent.id, # Changed from agent_id to match App.tsx
-                    "model": agent.model,
-                    "content": reply,
-                })
-
-                # --- WhatsApp Gateway Integration ---
-                if bridge.is_configured() and getattr(settings, "whatsapp_recipient", None):
-                    await bridge.send_message(
-                        f"*{agent.id} ({agent.model})*:\n{reply}",
-                        settings.whatsapp_recipient
-                    )
-
-                # --- Tool Execution Logic ---
-                tool_result_str = await _handle_tool_calls(reply, agent.id, discussion_id, round_num)
-                if tool_result_str:
-                    history.append({"role": "system", "name": "tool_executor", "content": tool_result_str})
-
-            except Exception as e:
-                console.print(f"[bold red]Error calling {agent.id}: {e}[/]")
-
-                # Broadcast errors too so the GUI can show an agent as failed
-                await _broadcast({
-                    "type": "agent_error",
-                    "discussion_id": discussion_id,
-                    "round": round_num,
-                    "agent_id": agent.id,
-                    "error": str(e),
-                })
+        if parallel:
+            # Parallel execution using asyncio.gather
+            tasks = [_process_agent_turn(agent, prompt, round_num, discussion_id, topic, history, moderator) for agent in agents]
+            results = await asyncio.gather(*tasks)
+            for res in results:
+                if res:
+                    history.append({"role": res["role"], "name": res["name"], "content": res["content"]})
+                    if res.get("tool_result"):
+                        history.append({"role": "system", "name": "tool_executor", "content": res["tool_result"]})
+        else:
+            # Sequential execution
+            for agent in agents:
+                res = await _process_agent_turn(agent, prompt, round_num, discussion_id, topic, history, moderator)
+                if res:
+                    history.append({"role": res["role"], "name": res["name"], "content": res["content"]})
+                    if res.get("tool_result"):
+                        history.append({"role": "system", "name": "tool_executor", "content": res["tool_result"]})
 
     console.print("[bold green]Simulation Complete.[/]")
-
-    # Broadcast simulation end so the GUI can render a summary state
     await _broadcast({
         "type": "simulation_end",
         "discussion_id": discussion_id,

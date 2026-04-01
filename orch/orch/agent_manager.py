@@ -1,4 +1,4 @@
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from pydantic import BaseModel
 import json
 from pathlib import Path
@@ -10,6 +10,8 @@ console = Console()
 # Define the path for agent configuration
 AGENT_CONFIG_PATH = Path.home() / ".orch" / "agents.json"
 
+from .memory import memory_manager
+
 class Agent(BaseModel):
     id: str
     provider: str
@@ -17,11 +19,18 @@ class Agent(BaseModel):
     api_key: str
     persona: str = "You are a helpful AI assistant."
 
-    async def agenerate_response(self, current_turn_prompt: str, full_history: List[Dict[str, str]]) -> Any:
+    async def agenerate_response(self, current_turn_prompt: str, full_history: List[Dict[str, str]], topic: Optional[str] = None) -> Any:
         """
         Generates an async response from the agent using LiteLLM.
         """
-        messages = [{"role": "system", "content": self.persona}]
+        # Retrieve relevant memories
+        memories = memory_manager.retrieve(self.id, topic=topic)
+        memory_context = ""
+        if memories:
+            memory_context = "\n[Relevant Memories]:\n" + "\n".join([f"- {m['content']}" for m in memories])
+        
+        system_prompt = self.persona + memory_context
+        messages = [{"role": "system", "content": system_prompt}]
         for msg in full_history:
             messages.append({"role": msg.get("role", "user"), "content": msg.get("content", "")})
         messages.append({"role": "user", "content": current_turn_prompt})
@@ -33,6 +42,8 @@ class Agent(BaseModel):
                 api_key=self.api_key,
                 stream=False,
             )
+            # Store this interaction in memory for future recall
+            memory_manager.store(self.id, response.choices[0].message.content, topic=topic)
             return response.choices[0].message
         except Exception as e:
             console.log(f"🚨 [bold red]Agent {self.id} failed to generate a response:[/] {e}")
