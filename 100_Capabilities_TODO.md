@@ -58,15 +58,15 @@ _All capabilities in this section are planned for Phase 3 and beyond._
 _All capabilities in this section are planned for Phase 3 and beyond._
 
 - `[x]` **31. Pull live data from any API:** Complete. The MCP tool-use paradigm, `MessagingBridge`, and specialized API tools (arXiv, Tavily) enable this.
-- `[ ]` **32. Run SQL queries on your database:** Requires a database connection tool.
+- `[x]` **32. Run SQL queries on your database:** Complete. Database tool (`sql_query`) is integrated and registered.
 - `[ ]` **33. Build and maintain interactive dashboards:** Requires a dashboarding API tool (e.g., Grafana) or a web framework tool.
 - `[ ]` **34. Detect anomalies in your metrics:** Requires data analysis and statistical tools.
 - `[/]` **35. Forecast sales, traffic, or expenses:** Requires data analysis and statistical tools. (Filesystem tool partially enables for local data)
-- `[/]` **36. Clean messy spreadsheets:** Requires file I/O and a spreadsheet tool (e.g., pandas). (Filesystem tool partially enables)
+- `[x]` **36. Clean messy spreadsheets:** Complete. Spreadsheet cleaning tool (`clean_spreadsheet`) is integrated and registered.
 - `[ ]` **37. Compare two datasets:** Requires a data analysis tool.
 - `[ ]` **38. Generate A/B test analysis:** Requires a statistical tool.
-- `[/]` **39. Create beautiful data visualizations:** Requires a plotting library tool and file system (write) to save images/PDFs. (In Progress)
-- `[/]` **40. Turn raw logs into executive summary reports:** Requires file I/O and a log parsing tool. (Filesystem tool partially enables)
+- `[x]` **39. Create beautiful data visualizations:** Complete. Visualization tool (`generate_plot`) is integrated and registered.
+- `[x]` **40. Turn raw logs into executive summary reports:** Complete. Log analysis tool (`analyze_logs`) and report generation tool are integrated and registered.
 
 ### 41–50: Content Creation & Marketing
 

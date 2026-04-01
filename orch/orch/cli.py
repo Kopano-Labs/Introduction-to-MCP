@@ -105,6 +105,10 @@ TOOL_FUNCTIONS_MAP = {
     "generate_report": ("report_generator", "generate_report"),
     "search_arxiv": ("arxiv", "search_arxiv"),
     "scrape_page": ("web_scraper", "scrape_page"),
+    "sql_query": ("database_tool", "sql_query"),
+    "clean_spreadsheet": ("spreadsheet_tool", "clean_spreadsheet"),
+    "generate_plot": ("viz_tool", "generate_plot"),
+    "analyze_logs": ("log_analyzer", "analyze_logs"),
 }
 
 # --- Serve Commands ---
@@ -139,6 +143,10 @@ Available Tools:
 - generate_report(title: str, sections: dict, file_name: str = "report.md"): Generates a structured Markdown report or deck.
 - search_arxiv(query: str): Searches arXiv for the latest papers on a given topic.
 - scrape_page(url: str, selector: str = "body"): Scrapes the text content of a web page.
+- sql_query(query: str): Executes a SQL query against the Data Lake SQLite database.
+- clean_spreadsheet(file_path: str, output_path: str = None): Cleans a CSV or Excel spreadsheet by removing duplicates, handling missing values, and standardizing text casing.
+- generate_plot(data: dict, title: str = "Data Visualization", plot_type: str = "bar", output_path: str = "plot.png"): Generates and saves a data visualization image.
+- analyze_logs(file_path: str): Analyzes a log file and returns a structured Markdown summary.
 """
 
 def execute_tool_code(tool_code: str) -> str:
