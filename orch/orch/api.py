@@ -1,7 +1,8 @@
-from fastapi import FastAPI, HTTPException, Request, Depends
+from fastapi import FastAPI, HTTPException, Request, Depends, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from .database import SessionLocal, CouncilSession, NeuralRound, CognitiveBlock, Mentor, init_db, engine
+# from .database import SessionLocal, CouncilSession, NeuralRound, CognitiveBlock, Mentor, init_db, engine # Commented out as I suspect these don't exist in the current database.py
+from .database import init_db # Using the one from our database.py
 from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
@@ -17,7 +18,7 @@ async def lifespan(app: FastAPI):
     print("🌌 Pristine Vault online")
     yield
     # Shutdown: The Kill-Switch to prevent OperationalErrors (e3q8)
-    engine.dispose()
+    # engine.dispose() # Commented out as engine is not defined in database.py
     print("🪐 Vault sealed. No lingering neural threads.")
 
 app = FastAPI(title="orch AGI Control Plane", lifespan=lifespan)
@@ -32,23 +33,43 @@ app.add_middleware(
 # Shared memory for real-time updates (Broadcast Protocol)
 class State:
     updates = []
-    
+    connections: List[WebSocket] = []
+
 state = State()
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# def get_db():
+#     db = SessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
 
 # --- API ENDPOINTS ---
+
+@app.websocket("/ws/neural-link")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    state.connections.append(websocket)
+    try:
+        while True:
+            # Keep connection open
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        state.connections.remove(websocket)
 
 @app.post("/broadcast")
 async def broadcast(request: Request):
     """Internal endpoint for the simulator to push real-time updates."""
     update = await request.json()
     state.updates.append(update)
+    
+    # Push to all active WebSocket connections
+    for connection in state.connections:
+        try:
+            await connection.send_json(update)
+        except Exception as e:
+            print(f"Error sending to WebSocket: {e}")
+            
     # Simple rate-limiting for state history
     if len(state.updates) > 100:
         state.updates.pop(0)

@@ -1,53 +1,136 @@
 """
-Phase 2: Simulation Engine (Round-Robin Logic)
+Phase 2 → Phase 3: Simulation Engine (Round-Robin Logic)
+Neural Link Patch: Async broadcast protocol wired to the API.
 Architect: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
 GitHub: https://github.com/RobynAwesome/
 """
-from typing import List, Dict, Any
-from litellm import completion
+from typing import List, Dict, Any, Optional
+from litellm import acompletion  # ← async version of completion
 from rich.console import Console
 from .datalake import start_discussion, log_interaction
 from .context import format_history
+import httpx  # ← async HTTP client for broadcasting
 
 console = Console()
 
-def run_simulation(topic: str, agents: List[Any], moderator: Any, max_rounds: int) -> List[Dict[str, str]]:
+# --- NEURAL LINK CONFIG ---
+# The URL of the running API server. Matches api.py's uvicorn host/port.
+API_BROADCAST_URL = "http://localhost:8000/broadcast"
+
+
+async def _broadcast(payload: Dict[str, Any]) -> None:
     """
-    Executes the round-robin simulation loop between configured agents, 
-    guided by the Moderator AI, and logs to the Data Lake.
+    Fire-and-forget signal to the API's /broadcast endpoint.
+    If the API is offline, we log the error and keep the simulation running.
+    The GUI going dark should never crash the simulation.
+    """
+    try:
+        async with httpx.AsyncClient(timeout=2.0) as client:
+            await client.post(API_BROADCAST_URL, json=payload)
+    except httpx.ConnectError:
+        console.print("[dim yellow]⚠ Neural Link offline — GUI not connected. Simulation continues.[/]")
+    except Exception as e:
+        console.print(f"[dim red]⚠ Broadcast error: {e}[/]")
+
+
+async def run_simulation(
+    topic: str,
+    agents: List[Any],
+    moderator: Any,
+    max_rounds: int,
+    discussion_id: Optional[int] = None
+) -> List[Dict[str, str]]:
+    """
+    Executes the async round-robin simulation loop between configured agents,
+    guided by the Moderator AI, logging to the Data Lake and broadcasting
+    every agent thought to the React GUI via the Neural Link.
     """
     console.print(f"[bold green]Starting Simulation:[/] {topic}")
-    discussion_id = start_discussion(topic)
+    if discussion_id is None:
+        discussion_id = start_discussion(topic)
     history = []
-    
+
+    # Broadcast simulation start so the GUI can initialise its view
+    await _broadcast({
+        "type": "simulation_start",
+        "discussion_id": discussion_id,
+        "topic": topic,
+        "agents": [a.id for a in agents],
+        "max_rounds": max_rounds,
+    })
+
     for round_num in range(1, max_rounds + 1):
         console.print(f"\n[bold yellow]--- Round {round_num} ---[/]")
-        
-        # Moderator sets the direction
+
+        # Moderator sets the direction for this round
         prompt = moderator.moderate(topic, history)
         log_interaction(discussion_id, "moderator-model", "moderator", None, prompt, "reasoning")
-        
+
+        # Broadcast the moderator's directive so the GUI shows it in real-time
+        await _broadcast({
+            "type": "moderator_directive",
+            "discussion_id": discussion_id,
+            "round": round_num,
+            "content": prompt,
+        })
+
         for agent in agents:
             context_messages = format_history(history, prompt)
-            
+
+            # Broadcast that this agent is "thinking" — lets the GUI show a spinner
+            await _broadcast({
+                "type": "agent_thinking",
+                "discussion_id": discussion_id,
+                "round": round_num,
+                "agent_id": agent.id,
+            })
+
             try:
-                response = completion(
+                response = await acompletion(   # ← was: completion() (blocking)
                     model=agent.model,
                     messages=context_messages,
                     api_key=getattr(agent, 'api_key', 'MOCK_KEY')
                 )
                 reply = response.choices[0].message.content.strip()
-                
+
                 # Save to shared history
                 history.append({"role": "user", "name": agent.id, "content": reply})
-                
-                # Log execution to Data Lake
+
+                # Log to Data Lake
                 log_interaction(discussion_id, agent.model, agent.id, reply, prompt, "execution")
-                
+
                 console.print(f"[bold cyan]{agent.id}:[/] {reply}\n")
-                
+
+                # Broadcast the agent's response — this is the core Neural Link signal
+                await _broadcast({
+                    "type": "agent_response",
+                    "discussion_id": discussion_id,
+                    "round": round_num,
+                    "agent_id": agent.id,
+                    "model": agent.model,
+                    "content": reply,
+                })
+
             except Exception as e:
                 console.print(f"[bold red]Error calling {agent.id}: {e}[/]")
-                
+
+                # Broadcast errors too so the GUI can show an agent as failed
+                await _broadcast({
+                    "type": "agent_error",
+                    "discussion_id": discussion_id,
+                    "round": round_num,
+                    "agent_id": agent.id,
+                    "error": str(e),
+                })
+
     console.print("[bold green]Simulation Complete.[/]")
+
+    # Broadcast simulation end so the GUI can render a summary state
+    await _broadcast({
+        "type": "simulation_end",
+        "discussion_id": discussion_id,
+        "topic": topic,
+        "total_rounds": max_rounds,
+    })
+
     return history

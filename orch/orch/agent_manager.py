@@ -2,7 +2,7 @@ from typing import Dict, List, Any
 from pydantic import BaseModel
 import json
 from pathlib import Path
-from litellm import completion
+from litellm import completion, acompletion
 from rich.console import Console
 
 console = Console()
@@ -16,6 +16,27 @@ class Agent(BaseModel):
     model: str
     api_key: str
     persona: str = "You are a helpful AI assistant."
+
+    async def agenerate_response(self, current_turn_prompt: str, full_history: List[Dict[str, str]]) -> Any:
+        """
+        Generates an async response from the agent using LiteLLM.
+        """
+        messages = [{"role": "system", "content": self.persona}]
+        for msg in full_history:
+            messages.append({"role": msg.get("role", "user"), "content": msg.get("content", "")})
+        messages.append({"role": "user", "content": current_turn_prompt})
+
+        try:
+            response = await acompletion(
+                model=self.model,
+                messages=messages,
+                api_key=self.api_key,
+                stream=False,
+            )
+            return response.choices[0].message
+        except Exception as e:
+            console.log(f"🚨 [bold red]Agent {self.id} failed to generate a response:[/] {e}")
+            raise
 
     def generate_response(self, current_turn_prompt: str, full_history: List[Dict[str, str]]) -> Any:
         """

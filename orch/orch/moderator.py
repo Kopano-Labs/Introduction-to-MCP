@@ -4,7 +4,7 @@ This module contains the Moderator AI responsible for managing discussion flow
 and summarizing rounds in the MCP orchestration.
 """
 from typing import List, Dict
-from litellm import completion
+from litellm import completion, acompletion
 from rich.console import Console
 
 from .agent_manager import Agent, load_agents
@@ -39,6 +39,36 @@ class Moderator:
             raise ValueError(f"Moderator agent '{agent_id}' not found. Please configure it using 'orch agents config'.")
         self.agent: Agent = agents[agent_id]
         console.log(f"🤖 Moderator initialized using agent: [bold cyan]{self.agent.id}[/] ({self.agent.model})")
+
+    async def amoderate(self, topic: str, history: List[Dict[str, str]]) -> str:
+        """
+        Analyzes the conversation history and generates a new prompt to guide the discussion asynchronously.
+        """
+        formatted_history_for_moderator = "\n".join([
+            f"[{msg.get('name', msg.get('role'))}]: {msg['content']}"
+            for msg in history
+        ])
+
+        user_prompt_for_moderator = f"Discussion Topic: {topic}\n\nConversation History:\n{formatted_history_for_moderator}"
+
+        messages = [
+            {"role": "system", "content": MODERATOR_PROMPT},
+            {"role": "user", "content": user_prompt_for_moderator}
+        ]
+
+        try:
+            console.log(f"Moderator [bold cyan]{self.agent.id}[/] is thinking...")
+            response = await acompletion(
+                model=self.agent.model,
+                messages=messages,
+                api_key=self.agent.api_key,
+            )
+            new_direction = response.choices[0].message.content.strip()
+            console.log(f"Moderator generated new direction: \"{new_direction[:70]}...\"")
+            return new_direction
+        except Exception as e:
+            console.log(f"🚨 [bold red]Moderator failed to generate a response:[/] {e}")
+            return f"Please continue the discussion on {topic}."
 
     def moderate(self, topic: str, history: List[Dict[str, str]]) -> str:
         """
