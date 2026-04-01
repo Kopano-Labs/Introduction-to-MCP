@@ -33,6 +33,50 @@ async def _broadcast(payload: Dict[str, Any]) -> None:
         console.print(f"[dim red]⚠ Broadcast error: {e}[/]")
 
 
+from .bridge import bridge
+from .config import settings
+import re
+
+async def _handle_tool_calls(reply: str, agent_id: str, discussion_id: int, round_num: int) -> str:
+    """
+    Detects and executes tool calls within an agent's response.
+    Returns the tool result(s) to be appended to the conversation history.
+    """
+    from .cli import execute_tool_code # Avoid circular import
+    
+    tool_code_match = re.search(r"<tool_code>([\s\S]*?)<\/tool_code>", reply)
+    if tool_code_match:
+        tool_code = tool_code_match.group(1).strip()
+        console.print(f"[bold yellow]Agent {agent_id} is calling a tool:[/] {tool_code}")
+        
+        # Broadcast that a tool is being executed
+        await _broadcast({
+            "type": "tool_execution",
+            "discussion_id": discussion_id,
+            "round": round_num,
+            "agent": agent_id,
+            "tool_code": tool_code
+        })
+        
+        tool_result = execute_tool_code(tool_code)
+        console.print(f"[bold cyan]Tool Result:[/] {tool_result}")
+        
+        # Log tool result to Data Lake
+        log_interaction(discussion_id, "system", "tool_executor", tool_result, tool_code, "tool_result")
+        
+        # Broadcast the tool result
+        await _broadcast({
+            "type": "tool_result",
+            "discussion_id": discussion_id,
+            "round": round_num,
+            "agent": agent_id,
+            "result": tool_result
+        })
+        
+        return f"\n[Tool Result]: {tool_result}"
+    return ""
+
+
 async def run_simulation(
     topic: str,
     agents: List[Any],
@@ -112,6 +156,18 @@ async def run_simulation(
                     "model": agent.model,
                     "content": reply,
                 })
+
+                # --- WhatsApp Gateway Integration ---
+                if bridge.is_configured() and getattr(settings, "whatsapp_recipient", None):
+                    await bridge.send_message(
+                        f"*{agent.id} ({agent.model})*:\n{reply}",
+                        settings.whatsapp_recipient
+                    )
+
+                # --- Tool Execution Logic ---
+                tool_result_str = await _handle_tool_calls(reply, agent.id, discussion_id, round_num)
+                if tool_result_str:
+                    history.append({"role": "system", "name": "tool_executor", "content": tool_result_str})
 
             except Exception as e:
                 console.print(f"[bold red]Error calling {agent.id}: {e}[/]")

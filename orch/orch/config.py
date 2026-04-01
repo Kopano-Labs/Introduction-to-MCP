@@ -13,6 +13,12 @@ class Settings(BaseSettings):
     anthropic_api_key: Optional[str] = None
     db_path: str = "db/datalake.db"
 
+    # WhatsApp Integration (Phase 3)
+    whatsapp_api_key: Optional[str] = None
+    whatsapp_instance_url: Optional[str] = None
+    whatsapp_instance_name: str = "main"
+    whatsapp_recipient: Optional[str] = None # Default recipient JID
+
     class Config:
         env_file = ".env"
 

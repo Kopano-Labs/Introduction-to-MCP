@@ -112,11 +112,9 @@ Available Tools:
 
 def execute_tool_code(tool_code: str) -> str:
     """
-    Commands for the orch server.
     Executes a tool call string like 'read_file("file.txt")'.
     This is a simple implementation for demonstration. A real implementation would use a more robust parser.
     """
-    console.print(Panel("[bold green]Orch Server Commands[/bold green]", expand=False))
     try:
         tool_name_match = re.match(r"(\w+)\(", tool_code)
         if not tool_name_match:
@@ -342,6 +340,62 @@ def log_export(
             conn.close()
 
 
+# --- Learn Commands ---
+learn_app = typer.Typer(help="Tools for training and fine-tuning agents.")
+app.add_typer(learn_app, name="learn")
+
+@learn_app.command(name="generate-tuning-data")
+def generate_tuning_data(
+    output_format: str = typer.Option("alpaca", "--format", "-f", help="Export format: 'alpaca' or 'jsonl'."),
+    output_file: Path = typer.Option("tuning_data.json", "--output", "-o", help="Output file path."),
+    discussion_id: Optional[int] = typer.Option(None, "--discussion", "-d", help="Specific discussion ID to export. If not provided, exports all.")
+):
+    """
+    Generates training/fine-tuning data from recorded discussions.
+    """
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        query = "SELECT topic, prompt, response FROM messages JOIN discussions ON messages.discussion_id = discussions.id WHERE is_moderator_direction = 0"
+        params = []
+        if discussion_id:
+            query += " AND discussion_id = ?"
+            params.append(discussion_id)
+        
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+
+        if not rows:
+            console.print("[bold yellow]No training data found in the Data Lake.[/bold yellow]")
+            return
+
+        tuning_data = []
+        for row in rows:
+            if output_format == "alpaca":
+                tuning_data.append({
+                    "instruction": row["prompt"] or f"Discuss the topic: {row['topic']}",
+                    "input": "",
+                    "output": row["response"]
+                })
+            else: # JSONL
+                tuning_data.append({
+                    "prompt": row["prompt"] or f"Discuss the topic: {row['topic']}",
+                    "completion": row["response"]
+                })
+
+        with open(output_file, "w", encoding="utf-8") as f:
+            if output_format == "alpaca":
+                json.dump(tuning_data, f, indent=4, ensure_ascii=False)
+            else:
+                for entry in tuning_data:
+                    f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+        console.print(f"[bold green]Successfully generated {len(tuning_data)} examples in {output_format} format to: [cyan]{output_file}[/cyan][/bold green]")
+    finally:
+        if conn:
+            conn.close()
+
+
 # --- Serve Commands ---
 @app.command()
 def serve():
@@ -349,7 +403,6 @@ def serve():
     Commands for the orch server.
     """
     console.print(Panel("[bold green]Orch Server Commands[/bold green]", expand=False))
-    console.print(Panel("[bold green]Orch Server Commands[/bold green]", expand=False)) # This is a placeholder
 
 @serve.command()
 def launch(
