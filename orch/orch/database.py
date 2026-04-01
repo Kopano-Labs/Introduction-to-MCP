@@ -63,6 +63,10 @@ def init_db():
     console.log("🗄️  Database schema initialized successfully.")
 
 
+def setup_database():
+    """Wrapper for init_db for external calls."""
+    init_db()
+
 # Initialize the database on module load to ensure tables are ready.
 # In a larger application, this might be called from a specific startup script.
 try:

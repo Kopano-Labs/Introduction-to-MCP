@@ -79,8 +79,6 @@ async def run_simulation(
         })
 
         for agent in agents:
-            context_messages = format_history(history, prompt)
-
             # Broadcast that this agent is "thinking" — lets the GUI show a spinner
             await _broadcast({
                 "type": "thinking", # Changed from agent_thinking to match App.tsx
@@ -90,6 +88,10 @@ async def run_simulation(
             })
 
             try:
+                # In non-moderated mode, we use the last response as the prompt.
+                # In moderated mode, the 'prompt' variable holds the moderator's directive.
+                current_turn_prompt = prompt if moderator else (history[-1]["content"] if history else topic)
+
                 response = await agent.agenerate_response(current_turn_prompt, history)
                 reply = response.content.strip()
 
@@ -97,7 +99,7 @@ async def run_simulation(
                 history.append({"role": "assistant", "name": agent.id, "content": reply})
 
                 # Log to Data Lake
-                log_interaction(discussion_id, agent.model, agent.id, reply, prompt, "execution")
+                log_interaction(discussion_id, agent.model, agent.id, reply, current_turn_prompt, "execution")
 
                 console.print(f"[bold cyan]{agent.id}:[/] {reply}\n")
 

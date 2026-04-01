@@ -429,10 +429,14 @@ def launch(
         raise typer.Exit(code=1)
 
 @serve.command(name="api")
-def start_api_cmd():
+def start_api_cmd(
+    port: int = typer.Option(8000, "--port", "-p", help="Port to run the API on."),
+    host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host to run the API on.")
+):
     """
     Starts the orch AGI Control Plane API.
     """
-    from .api import start_api
-    console.print(Panel("[bold green]Starting orch AGI Control Plane API...[/bold green]", expand=False))
-    start_api()
+    import uvicorn
+    from .api import app
+    console.print(Panel(f"[bold green]Starting orch AGI Control Plane API on {host}:{port}...[/bold green]", expand=False))
+    uvicorn.run(app, host=host, port=port)
