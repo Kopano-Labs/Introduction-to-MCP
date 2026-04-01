@@ -87,7 +87,8 @@ def agents_remove(
 TOOL_FUNCTIONS_MAP = {
     "search": ("search", "perform_search"),
     "read_file": ("filesystem", "read_file"),
-    "write_file": ("write_file", "write_file"),
+    "write_file": ("filesystem", "write_file"),
+    "execute_code": ("code_execution", "execute_code"),
 }
 
 # --- Serve Commands ---
@@ -108,25 +109,51 @@ Available Tools:
 - read_file(file_path: str): Reads the content of a specified file.
 - write_file(file_path: str, content: str): Writes content to a specified file, creating directories if they don't exist.
 - search(query: str): Performs a web search for a given query.
+- execute_code(code: str): Executes Python code and returns the result.
 """
 
 def execute_tool_code(tool_code: str) -> str:
     """
     Executes a tool call string like 'read_file("file.txt")'.
-    This is a simple implementation for demonstration. A real implementation would use a more robust parser.
     """
     try:
-        tool_name_match = re.match(r"(\w+)\(", tool_code)
-        if not tool_name_match:
-            return f"Error: Could not parse tool name from '{tool_code}'."
+        import ast
+
+        # Parse the tool code string into an AST
+        tree = ast.parse(tool_code.strip())
         
-        tool_name = tool_name_match.group(1)
+        # Ensure it's a single function call
+        if not isinstance(tree, ast.Module) or len(tree.body) != 1 or not isinstance(tree.body[0], ast.Expr) or not isinstance(tree.body[0].value, ast.Call):
+            return f"Error: '{tool_code}' is not a valid single tool call."
+            
+        call_node = tree.body[0].value
+        if not isinstance(call_node.func, ast.Name):
+            return f"Error: Complex function calls are not supported."
+            
+        tool_name = call_node.func.id
 
         if tool_name not in TOOL_FUNCTIONS_MAP:
             return f"Error: Tool '{tool_name}' not found."
 
-        # Extract arguments by finding all double-quoted strings
-        args = re.findall(r'"((?:\\"|[^"])*)"', tool_code)
+        # Extract arguments
+        args = []
+        for arg in call_node.args:
+            if isinstance(arg, ast.Constant):
+                args.append(arg.value)
+            elif isinstance(arg, ast.Str): # For older Python versions
+                args.append(arg.s)
+            else:
+                return f"Error: Only literal arguments are supported."
+        
+        # Extract keyword arguments
+        kwargs = {}
+        for kw in call_node.keywords:
+            if isinstance(kw.value, ast.Constant):
+                kwargs[kw.arg] = kw.value.value
+            elif isinstance(kw.value, ast.Str):
+                kwargs[kw.arg] = kw.value.s
+            else:
+                return f"Error: Only literal keyword arguments are supported."
 
         module_name, function_name = TOOL_FUNCTIONS_MAP[tool_name]
         
@@ -134,7 +161,8 @@ def execute_tool_code(tool_code: str) -> str:
         tool_module = importlib.import_module(module_path)
         tool_function = getattr(tool_module, function_name)
 
-        result = tool_function(*args)
+        # Call the tool function
+        result = tool_function(*args, **kwargs)
         return str(result)
     except Exception as e:
         return f"Error executing tool code '{tool_code}': {e}"

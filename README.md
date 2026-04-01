@@ -77,9 +77,9 @@ Bashorch serve launch \
 Roadmap
 
 Phase 1: Core Multi-Agent Orchestration (Done)
-Phase 2: Advanced Moderator Strategies + Memory
-Phase 3: Full Tool Use via MCP
-Phase 4: Distributed agents + Web UI dashboard
+Phase 2: Advanced Moderator Strategies + Memory (Done)
+Phase 3: Full Tool Use via MCP & WebSocket Link (Done)
+Phase 4: Data Lake & Fine-Tuning Prep (In Progress)
 
 
 Contributing

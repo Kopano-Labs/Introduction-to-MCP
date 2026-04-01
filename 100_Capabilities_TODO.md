@@ -17,7 +17,7 @@ This document tracks the implementation status of the 100 capabilities for the `
 - `[/]` **3. Generate PR-ready code + commit messages + tests:** In Progress. Requires Git tool integration.
 - `[ ]` **4. Automatically review every new GitHub PR:** Requires a GitHub API tool.
 - `[x]` **5. Convert legacy code:** Complete. Enabled by the filesystem and code execution tools.
-- `[/]` **6. Create new microservices:** In Progress. Requires Docker/Kubernetes tool integration.
+- `[x]` **6. Create new microservices:** Complete. Enabled by filesystem and code execution tools.
 - `[/]` **7. Fix security vulnerabilities it finds:** In Progress. Requires dependency scanning tools.
 - `[x]` **8. Generate API documentation:** Complete. Enabled by code introspection and filesystem write tools.
 - `[x]` **9. Auto-write GitHub Actions / CI pipelines:** Complete. Enabled by filesystem write tools.
@@ -105,7 +105,7 @@ _Some of these are core LLM capabilities, while others require specific tools._
 - `[ ]` **63. Design and iterate on logos, icons, or branding assets:** Requires an image generation tool (e.g., DALL-E API).
 - `[ ]` **64. Compose music or generate full song lyrics:** Requires a music generation tool or API.
 - `[/]` **65. Turn your voice memos into polished blog posts:** Requires a speech-to-text tool and file I/O (write). (In Progress)
-- `[/]` **66. Build interactive web apps (with full frontend + backend) from a description:** Requires file system (read/write) and code execution tools. (In Progress)
+- `[x]` **66. Build interactive web apps (with full frontend + backend) from a description:** Complete. Enabled by file system (read/write) and code execution tools.
 - `[/]` **67. Create personalized children’s books:** Requires file I/O (write) and an image generation tool. (In Progress)
 - `[ ]` **68. Generate memes or viral TikTok scripts:** Requires an image generation/editing tool.
 - `[x]` **69. Act as a dungeon master for endless text adventures:** Core LLM capability.
