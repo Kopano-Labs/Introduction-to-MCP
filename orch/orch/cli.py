@@ -41,7 +41,7 @@ def agents_config(
     agent_id: str = typer.Argument(..., help="Unique ID for the agent."),
     provider: str = typer.Option(..., "--provider", "-p", help="LLM provider (e.g., 'openai', 'google', 'anthropic')."),
     model: str = typer.Option(..., "--model", "-m", help="Specific model name (e.g., 'gpt-4o', 'gemini-1.5-flash-latest')."),
-    api_key: Optional[str] = typer.Option(None, "--api-key", "-k", help="API key. If not provided, reads from .env file automatically."),
+    Optional[str] = typer.Option(Noneapi_key: , "--api-key", "-k", help="API key. If not provided, reads from .env file automatically."),
     persona: str = typer.Option("You are a helpful AI assistant.", "--persona", "-s", help="The agent's persona or system prompt."),
 ):
     """
