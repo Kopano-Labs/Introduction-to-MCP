@@ -20,6 +20,8 @@ dependencies = [
     "beautifulsoup4>=4.12.0",
     "bandit>=1.7.5",
     "safety>=2.3.5",
+    # pyproject.toml
+    "PyGithub>=2.1.1",
 ]
 
 [project.scripts]
