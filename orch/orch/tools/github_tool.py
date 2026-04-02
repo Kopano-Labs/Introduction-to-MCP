@@ -24,7 +24,7 @@ import textwrap
 from typing import Any
 
 import httpx
-from github import Github, GithubException
+from github import Github, GithubException, Auth
 from github.PullRequest import PullRequest
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
@@ -56,8 +56,8 @@ class GitHubClient:
 
     def __init__(self, token: str) -> None:
         self._token = token
-        self._gh = Github(token)
-
+        self._gh = Github(auth=Auth.Token(token))
+        
     def get_repo(self, owner: str, repo: str):
         return self._gh.get_repo(f"{owner}/{repo}")
 
