@@ -5,27 +5,27 @@ Capabilities unlocked:
   #3  — Smart commit message generation from staged diff
   #4  — Auto PR review (summary, risks, suggestions)
 
-Drop this file at:  orch/tools/github_tool.py
-Register it in:     orch/tools/__init__.py  (see bottom of file)
+Place this file at:  orch/orch/tools/github_tool.py
+Create empty file:   orch/orch/tools/__init__.py
 
-Requirements (add to pyproject.toml dependencies):
-  "PyGithub>=2.1.1",
+No extra dependencies — uses only httpx (already in your venv).
 
 Environment variables (.env):
-  GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx   # classic PAT or fine-grained
-  GITHUB_DEFAULT_OWNER=RobynAwesome        # optional default org/user
-  GITHUB_DEFAULT_REPO=Introduction-to-MCP  # optional default repo
+  GITHUB_TOKEN=github_pat_xxxxxxxxxxxxxxxxxxxx
+  GITHUB_DEFAULT_OWNER=RobynAwesome
+  GITHUB_DEFAULT_REPO=Introduction-to-MCP
 """
 
 from __future__ import annotations
 
+import json
 import os
+import re
+import sys
 import textwrap
 from typing import Any
 
 import httpx
-from github import Github, GithubException, Auth
-from github.PullRequest import PullRequest
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
 
@@ -43,76 +43,79 @@ class GitHubSettings(BaseSettings):
 
 
 def _settings() -> GitHubSettings:
-    """Lazy-load settings so import doesn't fail if .env is missing."""
     return GitHubSettings()  # type: ignore[call-arg]
 
 
 # ---------------------------------------------------------------------------
-# Low-level GitHub client helper
+# Raw HTTP client (httpx only — no PyGithub)
 # ---------------------------------------------------------------------------
 
 class GitHubClient:
-    """Thin wrapper around PyGithub + raw httpx for diff fetching."""
+    BASE = "https://api.github.com"
 
     def __init__(self, token: str) -> None:
-        self._token = token
-        self._gh = Github(auth=Auth.Token(token))
-        
-    def get_repo(self, owner: str, repo: str):
-        return self._gh.get_repo(f"{owner}/{repo}")
+        self._headers = {
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+        }
+        self._diff_headers = {
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github.v3.diff",
+            "X-GitHub-Api-Version": "2022-11-28",
+        }
 
-    def get_pr(self, owner: str, repo: str, pr_number: int) -> PullRequest:
-        return self.get_repo(owner, repo).get_pull(pr_number)
+    def _get(self, path: str, diff: bool = False) -> httpx.Response:
+        headers = self._diff_headers if diff else self._headers
+        url = f"{self.BASE}{path}"
+        resp = httpx.get(url, headers=headers, timeout=30, follow_redirects=True)
+        if resp.status_code >= 400:
+            raise RuntimeError(
+                f"GitHub API {resp.status_code} — {path}\n{resp.text[:400]}"
+            )
+        return resp
+
+    def _post(self, path: str, body: dict) -> httpx.Response:
+        url = f"{self.BASE}{path}"
+        resp = httpx.post(
+            url, headers=self._headers,
+            content=json.dumps(body), timeout=30
+        )
+        if resp.status_code >= 400:
+            raise RuntimeError(
+                f"GitHub API {resp.status_code} — {path}\n{resp.text[:400]}"
+            )
+        return resp
+
+    def get_pr(self, owner: str, repo: str, pr_number: int) -> dict:
+        return self._get(f"/repos/{owner}/{repo}/pulls/{pr_number}").json()
 
     def get_pr_diff(self, owner: str, repo: str, pr_number: int) -> str:
-        """Fetch the raw unified diff for a PR via the GitHub API."""
-        url = f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}"
-        headers = {
-            "Authorization": f"Bearer {self._token}",
-            "Accept": "application/vnd.github.v3.diff",
-            "X-GitHub-Api-Version": "2022-11-28",
-        }
-        with httpx.Client(timeout=30) as client:
-            resp = client.get(url, headers=headers)
-            resp.raise_for_status()
-            return resp.text
+        return self._get(
+            f"/repos/{owner}/{repo}/pulls/{pr_number}", diff=True
+        ).text
+
+    def get_pr_files(self, owner: str, repo: str, pr_number: int) -> list[dict]:
+        return self._get(
+            f"/repos/{owner}/{repo}/pulls/{pr_number}/files"
+        ).json()
 
     def get_commit_diff(self, owner: str, repo: str, sha: str) -> str:
-        """Fetch the diff for a specific commit SHA."""
-        url = f"https://api.github.com/repos/{owner}/{repo}/commits/{sha}"
-        headers = {
-            "Authorization": f"Bearer {self._token}",
-            "Accept": "application/vnd.github.v3.diff",
-            "X-GitHub-Api-Version": "2022-11-28",
-        }
-        with httpx.Client(timeout=30) as client:
-            resp = client.get(url, headers=headers)
-            resp.raise_for_status()
-            return resp.text
+        return self._get(
+            f"/repos/{owner}/{repo}/commits/{sha}", diff=True
+        ).text
 
     def list_open_prs(self, owner: str, repo: str) -> list[dict]:
-        repo_obj = self.get_repo(owner, repo)
-        return [
-            {
-                "number": pr.number,
-                "title": pr.title,
-                "author": pr.user.login,
-                "base": pr.base.ref,
-                "head": pr.head.ref,
-                "created_at": pr.created_at.isoformat(),
-                "changed_files": pr.changed_files,
-                "additions": pr.additions,
-                "deletions": pr.deletions,
-            }
-            for pr in repo_obj.get_pulls(state="open")
-        ]
+        return self._get(f"/repos/{owner}/{repo}/pulls?state=open").json()
 
     def post_pr_comment(
         self, owner: str, repo: str, pr_number: int, body: str
     ) -> str:
-        pr = self.get_pr(owner, repo, pr_number)
-        comment = pr.create_issue_comment(body)
-        return comment.html_url
+        resp = self._post(
+            f"/repos/{owner}/{repo}/issues/{pr_number}/comments",
+            {"body": body}
+        )
+        return resp.json().get("html_url", "")
 
 
 # ---------------------------------------------------------------------------
@@ -124,13 +127,13 @@ class PRReviewResult(BaseModel):
     title: str
     author: str
     summary: str
-    risk_level: str          # LOW | MEDIUM | HIGH | CRITICAL
+    risk_level: str
     risks: list[str]
     suggestions: list[str]
     changed_files: int
     additions: int
     deletions: int
-    diff_preview: str        # first 3000 chars of diff for context
+    diff_preview: str
 
 
 def review_pull_request(
@@ -142,99 +145,82 @@ def review_pull_request(
     """
     Capability #4 — Auto PR Review.
 
-    Fetches the PR metadata and diff, then produces a structured review
-    with a risk assessment, summary, and actionable suggestions.
-
     Args:
         pr_number:    GitHub PR number to review.
         owner:        Repo owner (falls back to GITHUB_DEFAULT_OWNER).
         repo:         Repo name  (falls back to GITHUB_DEFAULT_REPO).
         post_comment: If True, posts the review as a PR comment on GitHub.
-
-    Returns:
-        PRReviewResult — structured review ready to pass to agents.
     """
     cfg = _settings()
     owner = owner or cfg.github_default_owner
-    repo = repo or cfg.github_default_repo
+    repo  = repo  or cfg.github_default_repo
     _require(owner, "owner")
-    _require(repo, "repo")
+    _require(repo,  "repo")
 
     client = GitHubClient(cfg.github_token)
+    pr   = client.get_pr(owner, repo, pr_number)
+    diff = client.get_pr_diff(owner, repo, pr_number)
 
-    try:
-        pr = client.get_pr(owner, repo, pr_number)
-        diff = client.get_pr_diff(owner, repo, pr_number)
-    except GithubException as exc:
-        raise RuntimeError(f"GitHub API error: {exc.status} — {exc.data}") from exc
+    additions     = pr.get("additions", 0)
+    deletions     = pr.get("deletions", 0)
+    changed_files = pr.get("changed_files", 0)
 
-    # --- Heuristic risk scoring -------------------------------------------
-    risk_level, risks = _assess_risk(pr, diff)
-
-    # --- Build suggestions ---------------------------------------------------
-    suggestions = _build_suggestions(pr, diff)
-
-    # --- Summary -------------------------------------------------------------
-    summary = _summarise_pr(pr, diff)
+    risk_level, risks = _assess_risk(additions, deletions, changed_files, diff)
+    suggestions       = _build_suggestions(pr, diff)
+    summary           = _summarise_pr(pr, client, owner, repo, pr_number)
 
     result = PRReviewResult(
-        pr_number=pr.number,
-        title=pr.title,
-        author=pr.user.login,
-        summary=summary,
-        risk_level=risk_level,
-        risks=risks,
-        suggestions=suggestions,
-        changed_files=pr.changed_files,
-        additions=pr.additions,
-        deletions=pr.deletions,
-        diff_preview=diff[:3000],
+        pr_number     = pr["number"],
+        title         = pr["title"],
+        author        = pr["user"]["login"],
+        summary       = summary,
+        risk_level    = risk_level,
+        risks         = risks,
+        suggestions   = suggestions,
+        changed_files = changed_files,
+        additions     = additions,
+        deletions     = deletions,
+        diff_preview  = diff[:3000],
     )
 
     if post_comment:
         body = _format_review_comment(result)
-        url = client.post_pr_comment(owner, repo, pr_number, body)
-        print(f"✅ Review posted: {url}")
+        url  = client.post_pr_comment(owner, repo, pr_number, body)
+        print(f"Review posted: {url}")
 
     return result
 
 
-def _assess_risk(pr: PullRequest, diff: str) -> tuple[str, list[str]]:
-    """Return (risk_level, list_of_risk_reasons) based on heuristics."""
+def _assess_risk(
+    additions: int, deletions: int, changed_files: int, diff: str
+) -> tuple[str, list[str]]:
     risks: list[str] = []
+    total = additions + deletions
 
-    # Size risk
-    if pr.additions + pr.deletions > 1000:
-        risks.append(f"Large changeset: +{pr.additions} / -{pr.deletions} lines")
-    elif pr.additions + pr.deletions > 300:
-        risks.append(f"Medium changeset: +{pr.additions} / -{pr.deletions} lines")
+    if total > 1000:
+        risks.append(f"Large changeset: +{additions} / -{deletions} lines")
+    elif total > 300:
+        risks.append(f"Medium changeset: +{additions} / -{deletions} lines")
 
-    # File count risk
-    if pr.changed_files > 20:
-        risks.append(f"High file churn: {pr.changed_files} files changed")
+    if changed_files > 20:
+        risks.append(f"High file churn: {changed_files} files changed")
 
-    # Sensitive paths
     sensitive = [
         ".env", "secret", "token", "password", "credential",
         "auth", "key", "private", "cert", "pem", "ssh",
     ]
     diff_lower = diff.lower()
-    found_sensitive = [s for s in sensitive if s in diff_lower]
-    if found_sensitive:
-        risks.append(
-            f"Sensitive keywords in diff: {', '.join(found_sensitive)}"
-        )
+    found = [s for s in sensitive if s in diff_lower]
+    if found:
+        risks.append(f"Sensitive keywords in diff: {', '.join(found)}")
 
-    # Test coverage signal
-    if "test" not in diff_lower and pr.additions > 50:
-        risks.append("No test files appear in diff — coverage may be lacking")
+    if "test" not in diff_lower and additions > 50:
+        risks.append("No test files in diff — coverage may be lacking")
 
-    # Migration / schema changes
     if any(kw in diff_lower for kw in ["migrate", "alter table", "drop table", "schema"]):
         risks.append("Database migration or schema change detected")
 
-    # Determine overall level
-    if any("Sensitive" in r or "migration" in r.lower() for r in risks):
+    if any("sensitive" in r.lower() or "migration" in r.lower() for r in risks):
         level = "CRITICAL" if len(risks) >= 3 else "HIGH"
     elif len(risks) >= 2:
         level = "MEDIUM"
@@ -246,60 +232,57 @@ def _assess_risk(pr: PullRequest, diff: str) -> tuple[str, list[str]]:
     return level, risks or ["No significant risks detected"]
 
 
-def _build_suggestions(pr: PullRequest, diff: str) -> list[str]:
+def _build_suggestions(pr: dict, diff: str) -> list[str]:
     suggestions: list[str] = []
     diff_lower = diff.lower()
 
     if "TODO" in diff or "FIXME" in diff:
         suggestions.append("Resolve TODO/FIXME comments before merging")
-
     if "print(" in diff and "logger" not in diff_lower:
-        suggestions.append("Replace print() statements with structured logging")
-
+        suggestions.append("Replace print() with structured logging")
     if "except:" in diff or "except Exception:" in diff:
         suggestions.append("Narrow bare except clauses — catch specific exceptions")
-
     if "time.sleep" in diff:
-        suggestions.append("Replace time.sleep() with async/await or exponential backoff")
-
-    if not pr.body or len(pr.body.strip()) < 30:
+        suggestions.append("Replace time.sleep() with async/await or backoff")
+    if not pr.get("body") or len((pr.get("body") or "").strip()) < 30:
         suggestions.append("Add a meaningful PR description explaining the 'why'")
-
-    if pr.changed_files > 10 and not suggestions:
-        suggestions.append("Consider splitting this PR into smaller, focused changes")
-
-    if "hardcoded" in diff_lower or any(
-        kw in diff for kw in ["localhost", "127.0.0.1", "http://"]
-    ):
-        suggestions.append("Avoid hardcoded URLs/IPs — use config or environment vars")
+    if any(kw in diff for kw in ["localhost", "127.0.0.1", "http://"]):
+        suggestions.append("Avoid hardcoded URLs — use config or environment vars")
 
     return suggestions or ["Code looks clean — no automatic suggestions triggered"]
 
 
-def _summarise_pr(pr: PullRequest, diff: str) -> str:
-    files_preview = ""
+def _summarise_pr(
+    pr: dict, client: GitHubClient, owner: str, repo: str, pr_number: int
+) -> str:
     try:
-        file_names = [f.filename for f in pr.get_files()][:8]
-        files_preview = ", ".join(file_names)
-        if pr.changed_files > 8:
-            files_preview += f" … (+{pr.changed_files - 8} more)"
+        files   = client.get_pr_files(owner, repo, pr_number)
+        names   = [f["filename"] for f in files[:8]]
+        preview = ", ".join(names)
+        total   = pr.get("changed_files", 0)
+        if total > 8:
+            preview += f" … (+{total - 8} more)"
     except Exception:
-        files_preview = "(could not enumerate files)"
+        preview = "(could not enumerate files)"
+
+    additions     = pr.get("additions", 0)
+    deletions     = pr.get("deletions", 0)
+    changed_files = pr.get("changed_files", 0)
+    base          = pr.get("base", {}).get("ref", "?")
+    head          = pr.get("head", {}).get("ref", "?")
+    author        = pr["user"]["login"]
 
     return (
-        f"PR #{pr.number} by @{pr.user.login} targets `{pr.base.ref}` "
-        f"from `{pr.head.ref}`. "
-        f"Changes: +{pr.additions} / -{pr.deletions} lines across "
-        f"{pr.changed_files} file(s). "
-        f"Files touched: {files_preview}."
+        f"PR #{pr['number']} by @{author} targets `{base}` from `{head}`. "
+        f"Changes: +{additions} / -{deletions} lines across {changed_files} file(s). "
+        f"Files touched: {preview}."
     )
 
 
 def _format_review_comment(r: PRReviewResult) -> str:
-    risk_emoji = {"LOW": "🟢", "MEDIUM": "🟡", "HIGH": "🟠", "CRITICAL": "🔴"}
-    emoji = risk_emoji.get(r.risk_level, "⚪")
-    risks_md = "\n".join(f"- {x}" for x in r.risks)
-    sugg_md = "\n".join(f"- {x}" for x in r.suggestions)
+    emoji   = {"LOW": "🟢", "MEDIUM": "🟡", "HIGH": "🟠", "CRITICAL": "🔴"}.get(r.risk_level, "⚪")
+    risks   = "\n".join(f"- {x}" for x in r.risks)
+    suggest = "\n".join(f"- {x}" for x in r.suggestions)
     return textwrap.dedent(f"""
         ## 🤖 orch Auto-Review — PR #{r.pr_number}
 
@@ -309,10 +292,10 @@ def _format_review_comment(r: PRReviewResult) -> str:
         {r.summary}
 
         ### Risks identified
-        {risks_md}
+        {risks}
 
         ### Suggestions
-        {sugg_md}
+        {suggest}
 
         ---
         *Posted automatically by [orch](https://github.com/RobynAwesome/Introduction-to-MCP)*
@@ -324,232 +307,142 @@ def _format_review_comment(r: PRReviewResult) -> str:
 # ---------------------------------------------------------------------------
 
 class CommitMessageResult(BaseModel):
-    subject: str          # ≤72 chars, Conventional Commits format
-    body: str             # wrapped at 72 chars
-    full_message: str     # subject + blank line + body
-    type: str             # feat | fix | chore | refactor | docs | test | ci
-    scope: str            # inferred from changed files
-    breaking: bool        # True if BREAKING CHANGE detected
+    subject:      str
+    body:         str
+    full_message: str
+    type:         str
+    scope:        str
+    breaking:     bool
 
 
 def generate_commit_message(
     diff: str | None = None,
-    sha: str | None = None,
+    sha:  str | None = None,
     owner: str = "",
-    repo: str = "",
+    repo:  str = "",
     extra_context: str = "",
 ) -> CommitMessageResult:
     """
     Capability #3 — Smart commit message generation.
 
     Pass either:
-      - `diff`: raw unified diff string (e.g. from `git diff --staged`)
-      - `sha` + `owner` + `repo`: fetch diff from GitHub for an existing commit
-
-    Args:
-        diff:          Raw unified diff text.
-        sha:           Commit SHA to fetch from GitHub (alternative to diff).
-        owner:         Repo owner (for SHA lookup).
-        repo:          Repo name  (for SHA lookup).
-        extra_context: Optional hint, e.g. "This closes issue #42".
-
-    Returns:
-        CommitMessageResult with Conventional Commits-formatted message.
+      - diff : raw unified diff string (e.g. from `git diff --staged`)
+      - sha  : commit SHA to fetch from GitHub
     """
     if diff is None and sha:
-        cfg = _settings()
+        cfg   = _settings()
         owner = owner or cfg.github_default_owner
-        repo = repo or cfg.github_default_repo
+        repo  = repo  or cfg.github_default_repo
         _require(owner, "owner")
-        _require(repo, "repo")
-        client = GitHubClient(cfg.github_token)
-        diff = client.get_commit_diff(owner, repo, sha)
+        _require(repo,  "repo")
+        diff  = GitHubClient(cfg.github_token).get_commit_diff(owner, repo, sha)
 
     if not diff:
         raise ValueError("Provide either `diff` text or a `sha` to look up.")
 
     commit_type, scope, breaking = _classify_diff(diff)
     subject = _build_subject(diff, commit_type, scope, breaking)
-    body = _build_body(diff, extra_context, breaking)
-    full = f"{subject}\n\n{body}" if body else subject
+    body    = _build_body(diff, extra_context, breaking)
+    full    = f"{subject}\n\n{body}" if body else subject
 
     return CommitMessageResult(
-        subject=subject,
-        body=body,
-        full_message=full,
-        type=commit_type,
-        scope=scope,
-        breaking=breaking,
+        subject=subject, body=body, full_message=full,
+        type=commit_type, scope=scope, breaking=breaking,
     )
 
 
 def _classify_diff(diff: str) -> tuple[str, str, bool]:
-    """Return (type, scope, is_breaking) from diff heuristics."""
     diff_lower = diff.lower()
-    breaking = "breaking change" in diff_lower or "!breaking" in diff_lower
+    breaking   = "breaking change" in diff_lower
 
-    # Type detection (order matters — most specific first)
     if any(kw in diff_lower for kw in ["migration", "alter table", "drop column"]):
-        commit_type = "feat"
-        breaking = True
-    elif "test_" in diff_lower or "_test.py" in diff_lower or "spec." in diff_lower:
-        commit_type = "test"
-    elif any(kw in diff_lower for kw in ["readme", "docstring", "# ", "\"\"\"", "'''"]):
-        commit_type = "docs"
-    elif any(kw in diff_lower for kw in ["github/workflows", "dockerfile", ".yml", "ci"]):
-        commit_type = "ci"
-    elif any(kw in diff_lower for kw in ["fix", "bug", "error", "exception", "traceback"]):
-        commit_type = "fix"
-    elif any(kw in diff_lower for kw in ["refactor", "rename", "move", "extract"]):
-        commit_type = "refactor"
-    elif any(kw in diff_lower for kw in ["add ", "new ", "feature", "implement", "create"]):
-        commit_type = "feat"
-    else:
-        commit_type = "chore"
-
-    # Scope detection from file paths in diff header lines
-    scope = _infer_scope(diff)
-
-    return commit_type, scope, breaking
+        return "feat", _infer_scope(diff), True
+    if "test_" in diff_lower or "_test.py" in diff_lower:
+        return "test", _infer_scope(diff), breaking
+    if any(kw in diff_lower for kw in ["readme", "docstring"]):
+        return "docs", _infer_scope(diff), breaking
+    if any(kw in diff_lower for kw in ["github/workflows", "dockerfile", "ci.yml"]):
+        return "ci", _infer_scope(diff), breaking
+    if any(kw in diff_lower for kw in ["fix", "bug", "error", "exception"]):
+        return "fix", _infer_scope(diff), breaking
+    if any(kw in diff_lower for kw in ["refactor", "rename", "move", "extract"]):
+        return "refactor", _infer_scope(diff), breaking
+    if any(kw in diff_lower for kw in ["add ", "new ", "feature", "implement"]):
+        return "feat", _infer_scope(diff), breaking
+    return "chore", _infer_scope(diff), breaking
 
 
 def _infer_scope(diff: str) -> str:
-    """Extract scope from `diff --git a/x/y.py b/x/y.py` lines."""
-    import re
-    paths: list[str] = re.findall(r"diff --git a/(.+?) b/", diff)
-    if not paths:
-        return ""
-
-    # Find common top-level directory
-    parts = [p.split("/") for p in paths]
-    top_dirs = {p[0] for p in parts if len(p) > 1}
-
-    # Map known dirs to scope names
+    paths    = re.findall(r"diff --git a/(.+?) b/", diff)
+    top_dirs = {p.split("/")[0] for p in paths if "/" in p}
     scope_map = {
-        "orch": "orch",
-        "tests": "tests",
-        "cli": "cli",
-        "tools": "tools",
-        "public": "public",
-        ".github": "ci",
+        "orch": "orch", "tests": "tests", "cli": "cli",
+        "tools": "tools", "public": "public", ".github": "ci",
     }
     for d in top_dirs:
         if d in scope_map:
             return scope_map[d]
-
-    # Fall back to first unique top dir
     return sorted(top_dirs)[0] if top_dirs else ""
 
 
 def _build_subject(
     diff: str, commit_type: str, scope: str, breaking: bool
 ) -> str:
-    """Build the subject line in Conventional Commits format."""
-    import re
+    paths   = re.findall(r"diff --git a/(.+?) b/", diff)
+    desc    = os.path.splitext(os.path.basename(paths[0]))[0].replace("_", " ") if paths else "update"
+    bang    = "!" if breaking else ""
+    scope_s = f"({scope})" if scope else ""
+    prefix  = f"{commit_type}{scope_s}{bang}: "
+    max_d   = 72 - len(prefix)
 
-    # Extract most-changed file as description hint
-    paths: list[str] = re.findall(r"diff --git a/(.+?) b/", diff)
-    desc_hint = ""
-    if paths:
-        # Use filename without extension of most prominent file
-        base = os.path.basename(paths[0])
-        desc_hint = os.path.splitext(base)[0].replace("_", " ")
-
-    bang = "!" if breaking else ""
-    scope_str = f"({scope})" if scope else ""
-    prefix = f"{commit_type}{scope_str}{bang}: "
-
-    # Build a description (max 72 chars total)
-    max_desc = 72 - len(prefix)
-
-    # Try to extract the first meaningful added line as description
-    added_lines = [
-        line[1:].strip()
-        for line in diff.splitlines()
+    added = [
+        line[1:].strip() for line in diff.splitlines()
         if line.startswith("+") and not line.startswith("+++")
         and len(line) > 5
-        and not line[1:].strip().startswith("#")
-        and not line[1:].strip().startswith('"""')
+        and not line[1:].strip().startswith(("#", '"""', "'''"))
     ]
-    if added_lines:
-        candidate = added_lines[0][:max_desc].lower()
-        # Remove common noise
+    if added:
+        candidate = added[0][:max_d].lower()
         for noise in ["def ", "class ", "import ", "from ", "return ", "self."]:
             candidate = candidate.replace(noise, "")
-        desc = candidate.strip() or desc_hint
-    else:
-        desc = desc_hint or "update implementation"
+        desc = candidate.strip() or desc
 
-    # Truncate and clean
-    desc = desc[:max_desc].rstrip(",. ")
-    return f"{prefix}{desc}"
+    return f"{prefix}{desc[:max_d].rstrip(',. ')}"
 
 
 def _build_body(diff: str, extra_context: str, breaking: bool) -> str:
-    """Build the commit body."""
-    lines: list[str] = []
-
-    # Count changes
-    added = sum(1 for l in diff.splitlines() if l.startswith("+") and not l.startswith("+++"))
+    added   = sum(1 for l in diff.splitlines() if l.startswith("+") and not l.startswith("+++"))
     removed = sum(1 for l in diff.splitlines() if l.startswith("-") and not l.startswith("---"))
-    lines.append(f"Changes: +{added} / -{removed} lines")
-
+    lines   = [f"Changes: +{added} / -{removed} lines"]
     if breaking:
-        lines.append("")
-        lines.append("BREAKING CHANGE: review migration steps before deploying.")
-
+        lines += ["", "BREAKING CHANGE: review migration steps before deploying."]
     if extra_context:
-        lines.append("")
-        lines.append(extra_context)
-
-    # Wrap at 72 chars
-    wrapped = []
-    for line in lines:
-        if len(line) <= 72:
-            wrapped.append(line)
-        else:
-            wrapped.extend(textwrap.wrap(line, width=72))
-
-    return "\n".join(wrapped)
+        lines += ["", extra_context]
+    return "\n".join(
+        w for line in lines
+        for w in (textwrap.wrap(line, 72) if len(line) > 72 else [line])
+    )
 
 
 # ---------------------------------------------------------------------------
-# MCP Tool Registration helpers
+# MCP Tool Registration
 # ---------------------------------------------------------------------------
 
 def get_mcp_tool_definitions() -> list[dict[str, Any]]:
-    """
-    Return MCP-compatible tool definitions for both capabilities.
-    Register these in your MCP server's tool registry.
-    """
     return [
         {
             "name": "github_review_pr",
             "description": (
-                "Review a GitHub Pull Request. Returns a structured risk assessment, "
-                "summary, and actionable suggestions. Optionally posts the review "
-                "as a comment on the PR."
+                "Review a GitHub Pull Request. Returns risk assessment, "
+                "summary, and actionable suggestions. Optionally posts as a PR comment."
             ),
             "input_schema": {
                 "type": "object",
                 "properties": {
-                    "pr_number": {
-                        "type": "integer",
-                        "description": "The PR number to review",
-                    },
-                    "owner": {
-                        "type": "string",
-                        "description": "GitHub repo owner (defaults to GITHUB_DEFAULT_OWNER)",
-                    },
-                    "repo": {
-                        "type": "string",
-                        "description": "GitHub repo name (defaults to GITHUB_DEFAULT_REPO)",
-                    },
-                    "post_comment": {
-                        "type": "boolean",
-                        "description": "Post the review as a GitHub comment (default: false)",
-                        "default": False,
-                    },
+                    "pr_number":    {"type": "integer", "description": "PR number to review"},
+                    "owner":        {"type": "string",  "description": "GitHub repo owner"},
+                    "repo":         {"type": "string",  "description": "GitHub repo name"},
+                    "post_comment": {"type": "boolean", "description": "Post review as GitHub comment", "default": False},
                 },
                 "required": ["pr_number"],
             },
@@ -557,32 +450,17 @@ def get_mcp_tool_definitions() -> list[dict[str, Any]]:
         {
             "name": "github_generate_commit_message",
             "description": (
-                "Generate a Conventional Commits-formatted commit message from a diff. "
-                "Pass raw diff text, or a commit SHA to look up from GitHub."
+                "Generate a Conventional Commits message from a diff. "
+                "Pass raw diff text or a commit SHA to look up from GitHub."
             ),
             "input_schema": {
                 "type": "object",
                 "properties": {
-                    "diff": {
-                        "type": "string",
-                        "description": "Raw unified diff text (e.g. from git diff --staged)",
-                    },
-                    "sha": {
-                        "type": "string",
-                        "description": "Commit SHA to fetch diff from GitHub",
-                    },
-                    "owner": {
-                        "type": "string",
-                        "description": "GitHub repo owner (required if using sha)",
-                    },
-                    "repo": {
-                        "type": "string",
-                        "description": "GitHub repo name (required if using sha)",
-                    },
-                    "extra_context": {
-                        "type": "string",
-                        "description": "Optional hint, e.g. 'Closes #42'",
-                    },
+                    "diff":          {"type": "string", "description": "Raw unified diff text"},
+                    "sha":           {"type": "string", "description": "Commit SHA"},
+                    "owner":         {"type": "string", "description": "Repo owner (needed for SHA)"},
+                    "repo":          {"type": "string", "description": "Repo name (needed for SHA)"},
+                    "extra_context": {"type": "string", "description": "Optional hint e.g. 'Closes #42'"},
                 },
                 "required": [],
             },
@@ -591,53 +469,31 @@ def get_mcp_tool_definitions() -> list[dict[str, Any]]:
 
 
 def dispatch_mcp_call(tool_name: str, tool_input: dict[str, Any]) -> dict[str, Any]:
-    """
-    Route an MCP tool call to the correct function.
-    Call this from your MCP server's tool handler.
-
-    Example in your MCP server:
-        result = dispatch_mcp_call(tool_use.name, tool_use.input)
-        return json.dumps(result)
-    """
     if tool_name == "github_review_pr":
-        result = review_pull_request(**tool_input)
-        return result.model_dump()
-
+        return review_pull_request(**tool_input).model_dump()
     if tool_name == "github_generate_commit_message":
-        result = generate_commit_message(**tool_input)
-        return result.model_dump()
-
+        return generate_commit_message(**tool_input).model_dump()
     raise ValueError(f"Unknown tool: {tool_name}")
 
 
 # ---------------------------------------------------------------------------
-# CLI quick-test (python -m orch.tools.github_tool review 42)
+# CLI quick-test
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    import json
-    import sys
-
     cmd = sys.argv[1] if len(sys.argv) > 1 else "help"
 
     if cmd == "review" and len(sys.argv) >= 3:
-        pr_num = int(sys.argv[2])
-        post = "--post" in sys.argv
-        result = review_pull_request(pr_num, post_comment=post)
+        result = review_pull_request(int(sys.argv[2]), post_comment="--post" in sys.argv)
         print(json.dumps(result.model_dump(), indent=2))
 
     elif cmd == "commit" and len(sys.argv) >= 3:
-        # Pass a SHA or pipe diff via stdin
-        sha_or_diff = sys.argv[2]
-        if len(sha_or_diff) == 40:  # looks like a SHA
-            result = generate_commit_message(sha=sha_or_diff)
-        else:
-            result = generate_commit_message(diff=sha_or_diff)
+        arg    = sys.argv[2]
+        result = generate_commit_message(sha=arg) if len(arg) == 40 else generate_commit_message(diff=arg)
         print(result.full_message)
 
     elif cmd == "commit-stdin":
-        diff_text = sys.stdin.read()
-        result = generate_commit_message(diff=diff_text)
+        result = generate_commit_message(diff=sys.stdin.read())
         print(result.full_message)
 
     else:
@@ -650,26 +506,12 @@ if __name__ == "__main__":
 
 
 # ---------------------------------------------------------------------------
-# Registration snippet — paste into orch/tools/__init__.py
-# ---------------------------------------------------------------------------
-# from orch.tools.github_tool import (
-#     get_mcp_tool_definitions,
-#     dispatch_mcp_call,
-#     review_pull_request,
-#     generate_commit_message,
-# )
-#
-# TOOLS = get_mcp_tool_definitions()   # add to your MCP tool registry list
-# ---------------------------------------------------------------------------
-
-
-# ---------------------------------------------------------------------------
 # Utility
 # ---------------------------------------------------------------------------
 
 def _require(value: str, name: str) -> None:
     if not value:
         raise ValueError(
-            f"`{name}` is required. Pass it directly or set the corresponding "
-            f"env var (GITHUB_DEFAULT_{name.upper()})."
+            f"`{name}` is required. Pass it directly or set "
+            f"GITHUB_DEFAULT_{name.upper()} in your .env"
         )
