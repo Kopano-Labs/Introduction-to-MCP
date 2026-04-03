@@ -30,6 +30,13 @@ from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
 
 
+
+def _require(value: str, name: str) -> None:
+    if not value:
+        raise ValueError(
+            f"{name} is required. Pass it directly or set "
+            f"GITHUB_DEFAULT_{name.upper()} in your .env"
+        )
 # ---------------------------------------------------------------------------
 # Settings
 # ---------------------------------------------------------------------------
