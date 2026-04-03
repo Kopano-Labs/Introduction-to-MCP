@@ -30,6 +30,8 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
 - ✅ Listed in the SafeSkill registry
 - ✅ Safe to use in production
 
+[![SafeSkill](https://safeskill.dev/api/badge/robynawesome-introduction-to-mcp)](https://safeskill.dev/scan/robynawesome-introduction-to-mcp)
+
 ---
 
 
