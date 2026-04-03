@@ -1,0 +1,8 @@
+{"ts": "2026-04-03T00:21:01+00:00", "op": "list", "path": ".", "outcome": "ok", "detail": "25 entries"}
+{"ts": "2026-04-03T00:21:01+00:00", "op": "write", "path": "orch_test_output.txt", "outcome": "ok", "detail": "33 bytes"}
+{"ts": "2026-04-03T00:21:01+00:00", "op": "read", "path": "orch_test_output.txt", "outcome": "ok", "detail": "34 bytes"}
+{"ts": "2026-04-03T00:21:01+00:00", "op": "info", "path": "orch_test_output.txt", "outcome": "ok", "detail": ""}
+{"ts": "2026-04-03T00:21:01+00:00", "op": "search", "path": ".", "outcome": "ok", "detail": "1 results for '*.py'"}
+{"ts": "2026-04-03T00:21:01+00:00", "op": "read", "path": "../../etc/passwd", "outcome": "blocked", "detail": "Path '../../etc/passwd' escapes the allowed root 'C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP'. All file operations must stay inside: C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP"}
+{"ts": "2026-04-03T00:21:01+00:00", "op": "read", "path": ".env", "outcome": "blocked", "detail": "Access to '.env' is blocked (sensitive filename). Use environment variables or a secrets manager instead."}
+{"ts": "2026-04-03T00:21:01+00:00", "op": "delete", "path": "orch_test_output.txt", "outcome": "ok", "detail": ""}
