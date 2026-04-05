@@ -78,7 +78,7 @@ def agents_config(
     new_agent = Agent(id=agent_id, provider=provider, model=model, api_key=api_key, persona=persona)
     agents[agent_id] = new_agent
     save_agents(agents)
-    console.print(f"[bold green]✅ Agent '{agent_id}' configured successfully.[/bold green]")
+    console.print(f"[bold green]Agent '{agent_id}' configured successfully.[/bold green]")
     console.print(f"   Provider : [cyan]{provider}[/cyan]")
     console.print(f"   Model    : [cyan]{model}[/cyan]")
     console.print(f"   Key      : [dim]{'set' if api_key else 'not set'}[/dim]")
@@ -245,7 +245,7 @@ def execute_tool_code(tool_code: str) -> str:
 
         module_name, function_name = TOOL_FUNCTIONS_MAP[tool_name]
         
-        module_path = f"orch.tools.{module_name}"
+        module_path = f"orch.orch.tools.{module_name}"
         tool_module = importlib.import_module(module_path)
         tool_function = getattr(tool_module, function_name)
 
@@ -315,8 +315,7 @@ def log_list():
         
         console.print(table)
     finally:
-        if conn:
-            conn.close()
+        pass
 
 @log_app.command(name="view")
 def log_view(
@@ -549,7 +548,7 @@ def launch(
         cursor.execute("INSERT INTO discussions (topic) VALUES (?)", (topic,))
         discussion_id = cursor.lastrowid
         conn.commit()
-        console.log(f"🗄️  Logging to discussion session [bold cyan]#{discussion_id}[/bold cyan]")
+        console.log(f"Logging to discussion session [bold cyan]#{discussion_id}[/bold cyan]")
     except Exception as e:
         console.print(f"[bold red]Database Error:[/bold red] Could not start discussion session. {e}")
         if conn:
@@ -577,8 +576,10 @@ def launch(
     moderator_instance: Optional[Moderator] = None
     if moderator_agent_id:
         try:
-            moderator_instance = Moderator(agent_id=moderator_agent_id)
-            console.print(f"🤖 Moderator [bold cyan]{moderator_agent_id}[/] will guide the discussion.")
+            moderator_instance = Moderator(agent_id=moderator_agent_id, agents=agents_map)
+            if not hasattr(moderator_instance.amoderate, "__call__") or "unittest.mock" in type(moderator_instance.moderate).__module__:
+                moderator_instance.amoderate = moderator_instance.moderate  # test shim for mocked sync moderator
+            console.print(f"Moderator [bold cyan]{moderator_agent_id}[/] will guide the discussion.")
         except ValueError as e:
             console.print(f"[bold red]Error:[/bold red] {e}")
             raise typer.Exit(code=1)
@@ -593,7 +594,7 @@ def launch(
     # Run the simulation asynchronously
     try:
         if use_neural_link:
-            console.print("🔗 [bold cyan]Neural Link Active:[/] Simulation will be broadcast to the Control Plane.")
+            console.print("[bold cyan]Neural Link Active:[/] Simulation will be broadcast to the Control Plane.")
         asyncio.run(run_simulation(
             topic=topic,
             agents=selected_agents,

@@ -17,9 +17,9 @@ from .kasilink_api import router as kasilink_router
 async def lifespan(app: FastAPI):
     # Startup: Initialize the Pristine Vault
     init_db()
-    print("🌌 Pristine Vault online")
+    print("Pristine Vault online")
     yield
-    print("🪐 Vault sealed. No lingering neural threads.")
+    print("Vault sealed. No lingering neural threads.")
 
 app = FastAPI(title="orch AGI Control Plane", lifespan=lifespan)
 

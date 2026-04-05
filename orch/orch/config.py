@@ -6,6 +6,7 @@ GitHub: https://github.com/RobynAwesome/
 import os
 from pathlib import Path
 from pydantic_settings import BaseSettings
+from pydantic_settings import SettingsConfigDict
 from typing import Optional
 
 # Configuration paths
@@ -13,6 +14,8 @@ AGENTS_FILE = Path.home() / ".orch" / "agents.json"
 
 class Settings(BaseSettings):
     """Pydantic Settings for secure configuration management."""
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+
     google_api_key: Optional[str] = None
     xai_api_key: Optional[str] = None
     anthropic_api_key: Optional[str] = None
@@ -32,8 +35,5 @@ class Settings(BaseSettings):
     eskom_api_token: Optional[str] = None
     loadshedding_provider_url: Optional[str] = None
     orch_public_url: Optional[str] = None
-
-    class Config:
-        env_file = ".env"
 
 settings = Settings()

@@ -82,7 +82,7 @@ def init_db():
 
     conn.commit()
     conn.close()
-    console.log("🗄️  Database schema initialized successfully.")
+    console.log("Database schema initialized successfully.")
 
 
 def setup_database():

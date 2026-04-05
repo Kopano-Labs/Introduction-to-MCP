@@ -44,7 +44,7 @@ class Agent(BaseModel):
             memory_manager.store(self.id, response.choices[0].message.content, topic=topic)
             return response.choices[0].message
         except Exception as e:
-            console.log(f"🚨 [bold red]Agent {self.id} failed to generate a response:[/] {e}")
+            console.log(f"[bold red]Agent {self.id} failed to generate a response:[/] {e}")
             raise
 
     def generate_response(self, current_turn_prompt: str, full_history: List[Dict[str, str]]) -> Any:
@@ -73,7 +73,7 @@ class Agent(BaseModel):
             # LiteLLM response.choices[0].message is a dict-like object
             return response.choices[0].message
         except Exception as e:
-            console.log(f"🚨 [bold red]Agent {self.id} failed to generate a response:[/] {e}")
+            console.log(f"[bold red]Agent {self.id} failed to generate a response:[/] {e}")
             raise
 
 def load_agents() -> Dict[str, Agent]:

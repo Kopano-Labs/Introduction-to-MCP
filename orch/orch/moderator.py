@@ -3,7 +3,7 @@ Phase 2: Moderator AI Logic
 This module contains the Moderator AI responsible for managing discussion flow
 and summarizing rounds in the MCP orchestration.
 """
-from typing import List, Dict
+from typing import List, Dict, Optional
 from litellm import completion, acompletion
 from rich.console import Console
 
@@ -26,7 +26,7 @@ class Moderator:
     """
     The Moderator AI manages the flow of conversation between agents.
     """
-    def __init__(self, agent_id: str):
+    def __init__(self, agent_id: str, agents: Optional[Dict[str, Agent]] = None):
         """
         Initializes the Moderator.
 
@@ -34,11 +34,11 @@ class Moderator:
             agent_id: The ID of the agent to be used as the moderator (e.g., 'claude-3-haiku-20240307' or 'gpt-4o').
                       This agent must be configured via `orch agents config`.
         """
-        agents = load_agents()
+        agents = agents or load_agents()
         if agent_id not in agents:
             raise ValueError(f"Moderator agent '{agent_id}' not found. Please configure it using 'orch agents config'.")
         self.agent: Agent = agents[agent_id]
-        console.log(f"🤖 Moderator initialized using agent: [bold cyan]{self.agent.id}[/] ({self.agent.model})")
+        console.log(f"Moderator initialized using agent: [bold cyan]{self.agent.id}[/] ({self.agent.model})")
 
     async def amoderate(self, topic: str, history: List[Dict[str, str]]) -> str:
         """
@@ -67,7 +67,7 @@ class Moderator:
             console.log(f"Moderator generated new direction: \"{new_direction[:70]}...\"")
             return new_direction
         except Exception as e:
-            console.log(f"🚨 [bold red]Moderator failed to generate a response:[/] {e}")
+            console.log(f"[bold red]Moderator failed to generate a response:[/] {e}")
             return f"Please continue the discussion on {topic}."
 
     def moderate(self, topic: str, history: List[Dict[str, str]]) -> str:

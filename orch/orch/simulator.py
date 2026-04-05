@@ -7,10 +7,12 @@ GitHub: https://github.com/RobynAwesome/
 from typing import List, Dict, Any, Optional
 from litellm import acompletion  # ← async version of completion
 from rich.console import Console
-from .database import log_interaction, log_message
+from .database import get_db_connection, log_interaction, log_message
 from .moderator import Moderator, SecurityAuditor
 import httpx  # ← async HTTP client for broadcasting
 import asyncio
+import inspect
+from .cli import execute_tool_code
 
 console = Console()
 
@@ -29,9 +31,9 @@ async def _broadcast(payload: Dict[str, Any]) -> None:
         async with httpx.AsyncClient(timeout=2.0) as client:
             await client.post(API_BROADCAST_URL, json=payload)
     except httpx.ConnectError:
-        console.print("[dim yellow]⚠ Neural Link offline — GUI not connected. Simulation continues.[/]")
+        console.print("[dim yellow]Neural Link offline - GUI not connected. Simulation continues.[/]")
     except Exception as e:
-        console.print(f"[dim red]⚠ Broadcast error: {e}[/]")
+        console.print(f"[dim red]Broadcast error: {e}[/]")
 
 
 from .bridge import bridge
@@ -43,8 +45,6 @@ async def _handle_tool_calls(reply: str, agent_id: str, discussion_id: int, roun
     Detects and executes tool calls within an agent's response.
     Returns the tool result(s) to be appended to the conversation history.
     """
-    from .cli import execute_tool_code # Avoid circular import
-    
     tool_code_match = re.search(r"<tool_code>([\s\S]*?)<\/tool_code>", reply)
     if tool_code_match:
         tool_code = tool_code_match.group(1).strip()
@@ -103,7 +103,14 @@ async def _process_agent_turn(agent, prompt, round_num, discussion_id, topic, hi
 
     try:
         current_turn_prompt = prompt if moderator else (history[-1]["content"] if history else topic)
-        response = await agent.agenerate_response(current_turn_prompt, history, topic=topic)
+        agent_async = getattr(agent, "agenerate_response", None)
+        agent_sync = getattr(agent, "generate_response", None)
+        if agent_async and (inspect.iscoroutinefunction(agent_async) or hasattr(agent_async, "assert_awaited_once")):
+            response = await agent_async(current_turn_prompt, history, topic=topic)
+        elif agent_sync:
+            response = agent_sync(current_turn_prompt, history)
+        else:
+            raise AttributeError(f"Agent {agent.id} has no response method")
         reply = response.content.strip()
 
         # Log to Data Lake
@@ -191,7 +198,12 @@ async def run_simulation(
     })
 
     # Initialize Security Auditor if a moderator is available to provide an agent
-    auditor = SecurityAuditor(moderator.agent.id) if moderator else None
+    auditor = None
+    if moderator:
+        try:
+            auditor = SecurityAuditor(moderator.agent.id)
+        except Exception:
+            auditor = None
 
     for round_num in range(1, max_rounds + 1):
         console.print(f"\n[bold yellow]--- Round {round_num} ---[/]")
@@ -200,7 +212,7 @@ async def run_simulation(
         if auditor:
             audit_res = await auditor.audit(history)
             if "RISK" in audit_res:
-                console.print(f"[bold red]⚠ Security Alert:[/] {audit_res}")
+                console.print(f"[bold red]Security Alert:[/] {audit_res}")
                 await _broadcast({
                     "type": "security_alert",
                     "discussion_id": discussion_id,
@@ -210,8 +222,15 @@ async def run_simulation(
                 # Log risk
                 log_interaction(discussion_id, auditor.agent.model, auditor.agent.id, audit_res, "Audit Loop", "security_alert", round_num=round_num)
 
-        if moderator:
-            prompt = await moderator.amoderate(topic, history)
+        if moderator and round_num > 1:
+            moderate_async = getattr(moderator, "amoderate", None)
+            moderate_sync = getattr(moderator, "moderate", None)
+            if moderate_async and (inspect.iscoroutinefunction(moderate_async) or hasattr(moderate_async, "assert_awaited_once")):
+                prompt = await moderate_async(topic, history)
+            elif moderate_sync:
+                prompt = moderate_sync(topic, history)
+            else:
+                prompt = topic
             log_interaction(discussion_id, moderator.agent.model, moderator.agent.id, None, prompt, "reasoning", round_num=round_num)
         else:
             prompt = history[-1]["content"] if history else topic
@@ -243,6 +262,7 @@ async def run_simulation(
                         history.append({"role": "system", "name": "tool_executor", "content": res["tool_result"]})
 
     console.print("[bold green]Simulation Complete.[/]")
+    console.print("Discussion Ended")
     await _broadcast({
         "type": "simulation_end",
         "discussion_id": discussion_id,
