@@ -12,26 +12,35 @@ priority: critical
 
 # Dashboard
 
-- [[Orch Blueprint]]
+## Start Here
+
 - [[KasiLink Integration Plan]]
-- [[Microsoft Contract Strategy]]
-- [[SA Startup Week Demo]]
 - [[Project Status]]
 - [[Implementation Plan]]
+
+## Strategy
+
+- [[Microsoft Contract Strategy]]
+- [[SA Startup Week Demo]]
 - [[Adoption Checklist]]
+
+## Architecture
+
 - [[CLI Specification]]
 - [[Database Schema]]
 - [[WhatsApp Integration]]
 - [[Neural Link]]
-- [[Phase 1 Walkthrough]]
 
-## Working Areas
+## Mission And Training
 
+- [[Orch Blueprint]]
 - [[Owner Profile]]
 - [[Lead Self Report]]
 - [[Dev2 Behavioral Analysis]]
 - [[Kairos Reference]]
+- [[Phase 1 Walkthrough]]
 
-## Reference
+## Archived Sources
 
-- [[orch-code-implementation/README]]
+- [[06-Reference/orch-code-implemtation/README]]
+- [[06-Reference/Archive/Implementations/orch-blueprint]]

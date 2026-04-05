@@ -1,0 +1,222 @@
+{
+  "main": {
+    "id": "6aa1c7169b22cd8a",
+    "type": "split",
+    "children": [
+      {
+        "id": "1f9a401a7cf227d2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e941e20503e212a1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04-Updates/Project Status.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Project Status"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b8ce684dfda2a672",
+    "type": "split",
+    "children": [
+      {
+        "id": "5a3223b164b3c017",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa8722547db9246a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c0be944e65cf7a16",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "529d3b9f0a1b6651",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "891cb4bfa988de8c",
+    "type": "split",
+    "children": [
+      {
+        "id": "2ae36421f4543b2a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "463921c7bba11d9d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "04-Updates/Project Status.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Project Status"
+            }
+          },
+          {
+            "id": "6a5a5110d9b8ac4d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "04-Updates/Project Status.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Project Status"
+            }
+          },
+          {
+            "id": "f5c1c16f54638402",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "1f2c061174387971",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "c183053cb959d17d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04-Updates/Project Status.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Project Status"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "e941e20503e212a1",
+  "lastOpenFiles": [
+    "02-Strategy/KasiLink Integration Plan.md",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/render.rs",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/main.rs",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/input.rs",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/init.rs",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/args.rs",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/app.rs",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/Cargo.toml",
+    "06-Reference/orch-code-implemtation/rust/crates/claw-cli",
+    "00-Home/Dashboard.md",
+    "06-Reference/Archive/Implementations/orch-training-dev2-behavioral-analysis.md",
+    "06-Reference/Archive/Implementations/orch-owner-profile.md",
+    "06-Reference/Archive/Implementations/orch-lead-self-report.md",
+    "06-Reference/Archive/Implementations/orch-blueprint.md",
+    "06-Reference/Archive/Implementations/kairos.md",
+    "06-Reference/Archive/Implementations/Implementation Plan.txt",
+    "Assets/ORCH Apprenticeship Training Loop.png",
+    "06-Reference/orch-code-implemtation/rust/docs/releases/0.1.0.md",
+    "06-Reference/orch-code-implemtation/assets/omx/omx-readme-review-2.png",
+    "06-Reference/orch-code-implemtation/assets/omx/omx-readme-review-1.png",
+    "06-Reference/orch-code-implemtation/rust/README.md",
+    "06-Reference/orch-code-implemtation/rust/CONTRIBUTING.md",
+    "06-Reference/orch-code-implemtation/assets/wsj-feature.png",
+    "06-Reference/orch-code-implemtation/assets/tweet-screenshot.png",
+    "06-Reference/orch-code-implemtation/assets/star-history.png",
+    "06-Reference/orch-code-implemtation/assets/instructkr.png",
+    "06-Reference/orch-code-implemtation/assets/clawd-hero.jpeg",
+    "06-Reference/orch-code-implemtation/README.md",
+    "06-Reference/orch-code-implemtation/PARITY.md",
+    "06-Reference/orch-code-implemtation/CLAW.md",
+    "05-Training/Owner Profile.md",
+    "orch-code-implemtation/rust/README.md"
+  ]
+}
