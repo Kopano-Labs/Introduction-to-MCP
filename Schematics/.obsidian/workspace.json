@@ -185,6 +185,11 @@
   },
   "active": "e941e20503e212a1",
   "lastOpenFiles": [
+    "04-Updates/dev-tracker.md",
+    "04-Updates/comms-log.md",
+    "04-Updates/task-board.md",
+    "04-Updates/delegation-protocol.md",
+    "04-Updates/index.md",
     "02-Strategy/KasiLink Integration Plan.md",
     "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/render.rs",
     "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/main.rs",

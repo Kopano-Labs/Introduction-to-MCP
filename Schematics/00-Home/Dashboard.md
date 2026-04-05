@@ -17,6 +17,9 @@ priority: critical
 - [[KasiLink Integration Plan]]
 - [[Project Status]]
 - [[Implementation Plan]]
+- [[04-Updates/index]]
+- [[04-Updates/comms-log]]
+- [[04-Updates/dev-tracker]]
 
 ## Strategy
 
