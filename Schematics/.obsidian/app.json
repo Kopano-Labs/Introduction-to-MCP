@@ -1,0 +1,11 @@
+{
+  "strictLineBreaks": true,
+  "readableLineLength": true,
+  "vimMode": false,
+  "showFrontmatter": true,
+  "defaultViewMode": "source",
+  "livePreview": true,
+  "showLineNumber": true,
+  "useTab": true,
+  "tabSize": 4
+}
