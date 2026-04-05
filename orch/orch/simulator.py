@@ -78,6 +78,17 @@ async def _handle_tool_calls(reply: str, agent_id: str, discussion_id: int, roun
     return ""
 
 
+async def run_quick_match(gig_request: dict, providers: list[dict]) -> dict:
+    from .tools.gig_matcher import match_gig
+    return match_gig(
+        gig_request.get("description", ""),
+        gig_request.get("location", ""),
+        gig_request.get("category", ""),
+        gig_request.get("skills", []),
+        providers,
+    )
+
+
 async def _process_agent_turn(agent, prompt, round_num, discussion_id, topic, history, moderator):
     """
     Processes a single agent's turn asynchronously.

@@ -41,7 +41,7 @@ def agents_config(
     agent_id: str = typer.Argument(..., help="Unique ID for the agent."),
     provider: str = typer.Option(..., "--provider", "-p", help="LLM provider (e.g., 'openai', 'google', 'anthropic')."),
     model: str = typer.Option(..., "--model", "-m", help="Specific model name (e.g., 'gpt-4o', 'gemini-1.5-flash-latest')."),
-    Optional[str] = typer.Option(Noneapi_key: , "--api-key", "-k", help="API key. If not provided, reads from .env file automatically."),
+    api_key: Optional[str] = typer.Option(None, "--api-key", "-k", help="API key. If not provided, reads from .env file automatically."),
     persona: str = typer.Option("You are a helpful AI assistant.", "--persona", "-s", help="The agent's persona or system prompt."),
 ):
     """
@@ -147,6 +147,10 @@ TOOL_FUNCTIONS_MAP = {
     "detect_anomalies": ("anomaly_detector", "detect_anomalies"),
     "ab_test_analysis": ("ab_tester", "ab_test_analysis"),
     "forecast_series": ("forecaster", "forecast_series"),
+    "get_loadshedding_status": ("loadshedding", "get_loadshedding_status"),
+    "is_gig_safe": ("loadshedding", "is_gig_safe"),
+    "match_gig": ("gig_matcher", "match_gig"),
+    "rank_providers": ("gig_matcher", "rank_providers"),
 }
 
 # --- Serve Commands ---
@@ -190,6 +194,10 @@ Available Tools:
 - detect_anomalies(): Analyzes the Data Lake for performance anomalies, security alerts, and execution corrections.
 - ab_test_analysis(): Performs A/B testing analysis on agents/models based on historical performance metrics in the Data Lake.
 - forecast_series(file_path: str, column: str, periods: int = 5): Predicts future values for a given column in a CSV or Excel file using a simple linear trend model.
+- get_loadshedding_status(area_id: str): Returns a simplified loadshedding snapshot for an area.
+- is_gig_safe(area_id: str, start_time: str, duration_hours: float = 1.0): Checks whether a gig overlaps with loadshedding.
+- match_gig(description: str, location: str, category: str, skills: list, providers: list): Ranks providers for a gig.
+- rank_providers(providers: list, criteria: dict): Ranks providers against scoring criteria.
 """
 
 def execute_tool_code(tool_code: str) -> str:

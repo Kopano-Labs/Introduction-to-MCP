@@ -1,18 +1,17 @@
 ---
-title: {{title}}
-created: {{date}}
-updated: {{date}}
-author: Robyn
+title: "{{title}}"
+created: 2026-04-05
+updated: 2026-04-05
 tags:
-  -
+  - note
+status: draft
 priority: medium
-status: active
 ---
 
 # {{title}}
 
-> Brief description.
-> See also: [[Related Note]]
+## Summary
 
-## Content
+## Links
 
+- Related: [[Dashboard]]

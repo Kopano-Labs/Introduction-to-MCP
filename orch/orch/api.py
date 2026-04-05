@@ -10,6 +10,7 @@ import asyncio
 import os
 from pathlib import Path
 from contextlib import asynccontextmanager
+from .kasilink_api import router as kasilink_router
 
 # --- PROACTIVE NEURAL SHIELD: LIFESPAN LIFECYCLE ---
 @asynccontextmanager
@@ -24,10 +25,16 @@ app = FastAPI(title="orch AGI Control Plane", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://kasi-link.vercel.app",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(kasilink_router)
 
 # Shared memory for real-time updates (Broadcast Protocol)
 class State:

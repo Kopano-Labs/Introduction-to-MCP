@@ -43,5 +43,29 @@ class MessagingBridge:
             console.print(f"[red]MessagingBridge Failure: {e}[/red]")
             return False
 
+    async def send_gig_notification(self, gig_data: dict, recipient: str) -> bool:
+        title = gig_data.get("title", "New gig")
+        location = gig_data.get("location", "nearby")
+        payout = gig_data.get("payout", "N/A")
+        summary = gig_data.get("summary", "")
+        message = (
+            f"*New KasiLink Gig*\n"
+            f"{title}\n"
+            f"Location: {location}\n"
+            f"Payout: {payout}\n"
+            f"{summary}"
+        ).strip()
+        return await self.send_message(message, recipient)
+
+    async def send_booking_confirmation(self, booking_data: dict, recipient: str) -> bool:
+        message = (
+            f"*Booking Confirmed*\n"
+            f"{booking_data.get('title', 'Service booking')}\n"
+            f"When: {booking_data.get('time', 'TBD')}\n"
+            f"Where: {booking_data.get('location', 'TBD')}\n"
+            f"Reference: {booking_data.get('reference', 'N/A')}"
+        ).strip()
+        return await self.send_message(message, recipient)
+
 # Common instance
 bridge = MessagingBridge()

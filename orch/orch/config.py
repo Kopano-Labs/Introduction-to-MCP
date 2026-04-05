@@ -24,6 +24,15 @@ class Settings(BaseSettings):
     whatsapp_instance_name: str = "main"
     whatsapp_recipient: Optional[str] = None # Default recipient JID
 
+    # KasiLink bridge / Hack Day integration
+    kasilink_frontend_url: Optional[str] = None
+    kasilink_backend_url: Optional[str] = None
+    clerk_secret_key: Optional[str] = None
+    clerk_jwks_url: Optional[str] = None
+    eskom_api_token: Optional[str] = None
+    loadshedding_provider_url: Optional[str] = None
+    orch_public_url: Optional[str] = None
+
     class Config:
         env_file = ".env"
 

@@ -1,15 +1,8 @@
-[
-  "file-explorer",
-  "global-search",
-  "switcher",
-  "graph",
-  "backlink",
-  "outgoing-link",
-  "tag-pane",
-  "page-preview",
-  "templates",
-  "command-palette",
-  "editor-status",
-  "starred",
-  "outline"
-]
+{
+  "file-explorer": true,
+  "search": true,
+  "graph": true,
+  "backlinks": true,
+  "tags": true,
+  "templates": true
+}
