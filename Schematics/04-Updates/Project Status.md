@@ -14,12 +14,12 @@ status: active
 
 # orch Project Status & Capabilities
 
-> Current state of the orch project as of 2026-04-05.
+> Current state of the orch project as of 2026-04-06.
 > See also: [[Implementation Plan]], [[Orch Blueprint]], [[KasiLink Integration Plan]]
 
 ## Current Phase
 
-**Phase 5: Reliability, CI & Adoption Baseline** (v0.2-beta prep)
+**Phase 6: Orch Labs** (Google-Labs-style SA impact layer)
 
 | Phase | Status | Description |
 |-------|--------|-------------|
@@ -27,17 +27,24 @@ status: active
 | Phase 2 | COMPLETE | Advanced Moderator + Memory |
 | Phase 3 | COMPLETE | Full Tool Use via MCP & WebSocket |
 | Phase 4 | COMPLETE | Optimization, Scale, Security, and KasiLink integration layer |
-| Phase 5 | IN PROGRESS | Reliability hardening, CI modernization, and adoption readiness |
+| Phase 5 | COMPLETE | Reliability hardening, CI modernization, and adoption readiness baseline |
+| Phase 6 | IN PROGRESS | Orch Labs layer, SA tool registry, Labs API, and GUI gallery |
+| Phase 7 | PLANNED | All SA languages and speech-impairment-aware access |
+| Phase 8 | PLANNED | Public-impact pilot studio, analytics, and feedback loops |
 
-## Phase 5 Progress
+## Phase 6 Progress
 
 - [x] CLI simulation history flow corrected
 - [x] CLI database test fixture stabilized
 - [x] GitHub Actions updated to Python 3.11/3.12
 - [x] CI compile check added
 - [x] Full suite stabilization
-- [ ] Coverage reporting
-- [ ] Compliance-friendly audit exports
+- [x] Labs registry added
+- [x] Labs API endpoints added
+- [x] Labs GUI mode added
+- [x] Criticality model added for Labs tools and phases
+- [ ] Additional Labs tools beyond initial registry
+- [ ] Deeper accessibility and multilingual runtime implementation
 
 ## What orch Can Do
 
@@ -69,6 +76,12 @@ Broadcasts to React GUI (Neural Link) via WebSockets. Real-time updates via What
 ### Reliability Baseline
 CLI simulation tests now operate against a shared in-memory database fixture, and CI validates the package on modern Python versions with both pytest and compile checks.
 
+### Orch Labs Layer
+`/api/labs/*` now exposes a Labs registry with categories, tool portfolio, roadmap phases, and criticality labels. The GUI now includes an Orch Labs view for South African public-impact experiments.
+
+### South Africa Language And Accessibility Direction
+orch now has explicit roadmap commitment for all official South African languages and speech-impairment-aware support as critical future phases, not optional enhancements.
+
 ## Capabilities Roadmap
 
 The "100 Capabilities" vision maps to the engineering phases:
@@ -76,7 +89,10 @@ The "100 Capabilities" vision maps to the engineering phases:
 - **Phase 2** unlocked: Multi-step reasoning (#91), self-correction (#92), transparent audit trails (#98)
 - **Phase 3** unlocked: File/code tools (#1), web research (#11), API access (#31), app connections (#71)
 - **Phase 4** unlocked: Fine-tuning data, learning extraction, and KasiLink integration
-- **Phase 5** unlocking: external adoption readiness, CI reliability, and release hardening
+- **Phase 5** unlocked: external adoption readiness, CI reliability, and release hardening
+- **Phase 6** unlocking: Labs catalog, experiment visibility, and SA tool packaging
+- **Phase 7** will unlock: multilingual routing, translation, voice/text accessibility
+- **Phase 8** will unlock: pilot analytics, adoption metrics, and community feedback loops
 
 > Detailed breakdown: see `100_Capabilities_TODO.md` in the repo root.
 

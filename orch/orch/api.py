@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 from contextlib import asynccontextmanager
 from .kasilink_api import router as kasilink_router
+from .labs_api import router as labs_router
 
 # --- PROACTIVE NEURAL SHIELD: LIFESPAN LIFECYCLE ---
 @asynccontextmanager
@@ -35,6 +36,7 @@ app.add_middleware(
 )
 
 app.include_router(kasilink_router)
+app.include_router(labs_router)
 
 # Shared memory for real-time updates (Broadcast Protocol)
 class State:

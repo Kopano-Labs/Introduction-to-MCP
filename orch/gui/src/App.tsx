@@ -38,6 +38,46 @@ interface LiveMessage {
   improvement_hint?: string;
 }
 
+interface LabsCategory {
+  id: string;
+  title: string;
+  description: string;
+}
+
+interface LabsTool {
+  id: string;
+  name: string;
+  category: string;
+  criticality: string;
+  status: string;
+  summary: string;
+  impact: string;
+  phase: string;
+}
+
+interface LabsPhase {
+  id: string;
+  title: string;
+  criticality: string;
+  status: string;
+  summary: string;
+  deliverables: string[];
+}
+
+interface LabsOverview {
+  title: string;
+  positioning: string;
+  categories: LabsCategory[];
+  tools: LabsTool[];
+  phases: LabsPhase[];
+  metrics: {
+    categories: number;
+    tools: number;
+    critical_tools: number;
+    live_tools: number;
+  };
+}
+
 const App: React.FC = () => {
   const [messages, setMessages] = useState<LiveMessage[]>([]);
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
@@ -45,13 +85,14 @@ const App: React.FC = () => {
   const [sessions, setSessions] = useState<Lesson[]>([]);
   const [selectedSession, setSelectedSession] = useState<Lesson | null>(null);
   const [isAuditMode, setIsAuditMode] = useState(false);
-  
+  const [viewMode, setViewMode] = useState<'council' | 'labs'>('council');
+  const [labsOverview, setLabsOverview] = useState<LabsOverview | null>(null);
+
   const ws = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    // 📡 NEURAL LINK CONNECTION
     ws.current = new WebSocket('ws://127.0.0.1:8000/ws/live');
-    
+
     ws.current.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
@@ -64,34 +105,45 @@ const App: React.FC = () => {
           setMessages((prev) => [...prev, data]);
           setTimeout(() => setActiveAgent(null), 5000);
         } else if (data.type === 'override') {
-          // Live sync of Master Overrides in relational tree
           if (selectedSession && isAuditMode) {
-            setSelectedSession(prev => {
+            setSelectedSession((prev) => {
               if (!prev) return null;
               return {
                 ...prev,
-                rounds: prev.rounds?.map(r => ({
+                rounds: prev.rounds?.map((r) => ({
                   ...r,
-                  blocks: r.blocks.map(b => b.block_id === data.block_id 
-                    ? { ...b, override_score: data.override_score, improvement_hint: data.improvement_hint } 
-                    : b
-                  )
-                }))
+                  blocks: r.blocks.map((b) =>
+                    b.block_id === data.block_id
+                      ? {
+                          ...b,
+                          override_score: data.override_score,
+                          improvement_hint: data.improvement_hint,
+                        }
+                      : b,
+                  ),
+                })),
               };
             });
           }
-          // Also sync live view messages
-          setMessages(prev => prev.map(m => m.block_id === data.block_id 
-            ? { ...m, override_score: data.override_score, improvement_hint: data.improvement_hint } 
-            : m
-          ));
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.block_id === data.block_id
+                ? {
+                    ...m,
+                    override_score: data.override_score,
+                    improvement_hint: data.improvement_hint,
+                  }
+                : m,
+            ),
+          );
         }
       } catch (err) {
-        console.error("Neural Link Error:", err);
+        console.error('Neural Link Error:', err);
       }
     };
 
     fetchSessions();
+    fetchLabsOverview();
     return () => ws.current?.close();
   }, [selectedSession, isAuditMode]);
 
@@ -100,16 +152,31 @@ const App: React.FC = () => {
       const resp = await fetch('http://127.0.0.1:8000/sessions');
       const data = await resp.json();
       setSessions(data);
-    } catch (err) { console.error("Vault Error:", err); }
+    } catch (err) {
+      console.error('Vault Error:', err);
+    }
+  };
+
+  const fetchLabsOverview = async () => {
+    try {
+      const resp = await fetch('http://127.0.0.1:8000/api/labs/overview');
+      const data = await resp.json();
+      setLabsOverview(data);
+    } catch (err) {
+      console.error('Labs Error:', err);
+    }
   };
 
   const loadSession = async (id: string) => {
     try {
+      setViewMode('council');
       setIsAuditMode(true);
       const resp = await fetch(`http://127.0.0.1:8000/sessions/${id}`);
       const data = await resp.json();
       setSelectedSession(data);
-    } catch (err) { console.error("Audit Error:", err); }
+    } catch (err) {
+      console.error('Audit Error:', err);
+    }
   };
 
   const overrideScore = async (blockId: string, score: number) => {
@@ -118,28 +185,45 @@ const App: React.FC = () => {
       await fetch(`http://127.0.0.1:8000/sessions/${selectedSession.id}/override`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ block_id: blockId, override_score: score })
+        body: JSON.stringify({ block_id: blockId, override_score: score }),
       });
-    } catch (err) { console.error("Override Error:", err); }
+    } catch (err) {
+      console.error('Override Error:', err);
+    }
+  };
+
+  const openCouncil = () => {
+    setViewMode('council');
+    setIsAuditMode(false);
+  };
+
+  const openLabs = () => {
+    setViewMode('labs');
+    setIsAuditMode(false);
   };
 
   const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
+  const criticalityLabel = (value: string) => value.toUpperCase();
 
   return (
     <div className="command-center">
-      {/* 🏺 LESSON VAULT SIDEBAR */}
       <div className="sidebar">
         <div className="sidebar-header">
-          <div className="sidebar-title">LESSON VAULT</div>
+          <div className="sidebar-title">ORCH CONTROL</div>
         </div>
         <div className="lesson-list">
-          <div className={`lesson-item ${!isAuditMode ? 'active' : ''}`} onClick={() => setIsAuditMode(false)}>
-            <div className="lesson-topic">🚀 LIVE COUNCIL</div>
-            <div className="lesson-date">Real-time Apprenticeship</div>
+          <div className={`lesson-item ${viewMode === 'council' && !isAuditMode ? 'active' : ''}`} onClick={openCouncil}>
+            <div className="lesson-topic">LIVE COUNCIL</div>
+            <div className="lesson-date">Real-time apprenticeship</div>
           </div>
+          <div className={`lesson-item ${viewMode === 'labs' ? 'active' : ''}`} onClick={openLabs}>
+            <div className="lesson-topic">ORCH LABS</div>
+            <div className="lesson-date">SA impact experiment studio</div>
+          </div>
+          <div className="sidebar-section-label">SESSION VAULT</div>
           {sessions.map((s) => (
-            <div 
-              key={s.id} 
+            <div
+              key={s.id}
               className={`lesson-item ${selectedSession?.id === s.id && isAuditMode ? 'active' : ''}`}
               onClick={() => loadSession(s.id)}
             >
@@ -151,58 +235,139 @@ const App: React.FC = () => {
       </div>
 
       <div className="main-room">
-        {!isAuditMode ? (
-          /* 🏛️ LIVE COUNCIL ROOM */
+        {viewMode === 'labs' ? (
+          <div className="labs-shell">
+            <section className="labs-hero">
+              <div className="labs-kicker">ORCH LABS</div>
+              <h1>{labsOverview?.title ?? 'Orch Labs'}</h1>
+              <p>{labsOverview?.positioning ?? 'A Google-Labs-style layer for South African public-impact AI tools.'}</p>
+              <div className="labs-metrics">
+                <div className="metric-card">
+                  <span className="metric-value">{labsOverview?.metrics.tools ?? 0}</span>
+                  <span className="metric-label">Tools</span>
+                </div>
+                <div className="metric-card">
+                  <span className="metric-value">{labsOverview?.metrics.critical_tools ?? 0}</span>
+                  <span className="metric-label">Critical</span>
+                </div>
+                <div className="metric-card">
+                  <span className="metric-value">{labsOverview?.metrics.live_tools ?? 0}</span>
+                  <span className="metric-label">Live</span>
+                </div>
+                <div className="metric-card">
+                  <span className="metric-value">{labsOverview?.metrics.categories ?? 0}</span>
+                  <span className="metric-label">Categories</span>
+                </div>
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">Categories</div>
+              <div className="labs-grid categories-grid">
+                {labsOverview?.categories.map((category) => (
+                  <article key={category.id} className="labs-card category-card">
+                    <div className="card-chip">{category.id.replace('-', ' ')}</div>
+                    <h3>{category.title}</h3>
+                    <p>{category.description}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">South Africa Tool Catalog</div>
+              <div className="labs-grid tools-grid">
+                {labsOverview?.tools.map((tool) => (
+                  <article key={tool.id} className="labs-card tool-card">
+                    <div className="tool-card-top">
+                      <div className="card-chip">{tool.phase}</div>
+                      <div className={`criticality-pill ${tool.criticality}`}>{criticalityLabel(tool.criticality)}</div>
+                    </div>
+                    <h3>{tool.name}</h3>
+                    <div className="tool-meta">{tool.category} · {tool.status}</div>
+                    <p>{tool.summary}</p>
+                    <div className="impact-label">Impact</div>
+                    <div className="impact-copy">{tool.impact}</div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">Roadmap Phases</div>
+              <div className="labs-grid phases-grid">
+                {labsOverview?.phases.map((phase) => (
+                  <article key={phase.id} className="labs-card phase-card">
+                    <div className="tool-card-top">
+                      <div className={`criticality-pill ${phase.criticality}`}>{criticalityLabel(phase.criticality)}</div>
+                      <div className="card-chip">{phase.status.replace('_', ' ')}</div>
+                    </div>
+                    <h3>{phase.title}</h3>
+                    <p>{phase.summary}</p>
+                    <div className="deliverables-list">
+                      {phase.deliverables.map((deliverable) => (
+                        <div key={deliverable} className="deliverable-item">
+                          {deliverable}
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
+        ) : !isAuditMode ? (
           agentList.map((id) => {
             const isStudent = id === 'orch';
             const isThinking = thinkingAgent === id;
             const isResponding = activeAgent === id;
-            const lastMsg = messages.filter(m => m.agent === id).slice(-1)[0];
+            const lastMsg = messages.filter((m) => m.agent === id).slice(-1)[0];
 
             return (
-              <div 
-                key={id} 
+              <div
+                key={id}
                 className={`chamber ${id} ${isThinking ? 'thinking' : ''} ${isResponding ? 'responding' : ''} ${isStudent ? 'student' : 'mentor'}`}
               >
-                <div className="agent-rank">{isStudent ? "[STUDENT]" : "[MENTOR]"}</div>
+                <div className="agent-rank">{isStudent ? '[STUDENT]' : '[MENTOR]'}</div>
                 <div className="agent-id">{id}</div>
                 {isThinking && <div className="glow-orb" />}
                 <div className="response-text">
-                  {isThinking ? (isStudent ? "SYNTHESIZING DEEP REASONING..." : "PROVIDING EXPERT ADVICE...") : lastMsg?.content || "STANDBY..."}
+                  {isThinking ? (isStudent ? 'SYNTHESIZING DEEP REASONING...' : 'PROVIDING EXPERT ADVICE...') : lastMsg?.content || 'STANDBY...'}
                 </div>
                 {(lastMsg?.value_score !== undefined || lastMsg?.override_score !== undefined) && (
-                   <div className="value-meter">
-                     <div className="value-fill" style={{width: `${(lastMsg.override_score ?? lastMsg.value_score ?? 0) * 10}%`}} />
-                   </div>
+                  <div className="value-meter">
+                    <div className="value-fill" style={{ width: `${(lastMsg.override_score ?? lastMsg.value_score ?? 0) * 10}%` }} />
+                  </div>
                 )}
               </div>
             );
           })
         ) : (
-          /* 🕵️ COGNITIVE AUDIT VIEW (Hierarchical) */
           <div className="audit-container">
             <div className="sidebar-title">Forensic Audit: {selectedSession?.topic}</div>
             {selectedSession?.rounds?.map((round) => (
               <div key={round.id} className="round-section">
-                <div className="sidebar-title" style={{fontSize: '0.7rem', color: 'var(--cyan-glow)', marginTop: '40px'}}>
-                   ROUND {round.round_number} ANALYSIS
+                <div className="sidebar-title" style={{ fontSize: '0.7rem', color: 'var(--cyan-glow)', marginTop: '40px' }}>
+                  ROUND {round.round_number} ANALYSIS
                 </div>
                 {round.blocks.map((block) => (
                   <div key={block.block_id} className={`audit-card ${block.is_student ? 'student' : 'mentor'}`}>
                     <div className="card-header">
-                      <div className="card-agent">{block.agent.toUpperCase()} </div>
+                      <div className="card-agent">{block.agent.toUpperCase()}</div>
                       <div className="value-tag">MASTER SCORE: {block.override_score ?? block.value_score ?? 0}/10</div>
                     </div>
-                    <div className="thought-body" style={{color: 'white', marginBottom: '15px'}}>{block.content}</div>
-                    <div className="thought-body">🧠 Reasoning Trace: {block.reasoning}</div>
-                    
+                    <div className="thought-body" style={{ color: 'white', marginBottom: '15px' }}>{block.content}</div>
+                    <div className="thought-body">Reasoning Trace: {block.reasoning}</div>
+
                     <div className="override-container">
-                      <input 
-                        type="range" min="0" max="10" 
-                        value={block.override_score ?? block.value_score ?? 0} 
+                      <input
+                        type="range"
+                        min="0"
+                        max="10"
+                        value={block.override_score ?? block.value_score ?? 0}
                         className="glow-knob"
                         aria-label="Master Override Logic Score"
-                        onChange={(e) => overrideScore(block.block_id, parseInt(e.target.value))}
+                        onChange={(e) => overrideScore(block.block_id, parseInt(e.target.value, 10))}
                       />
                     </div>
                     {block.improvement_hint && <div className="improvement-hint">Master Hint: {block.improvement_hint}</div>}

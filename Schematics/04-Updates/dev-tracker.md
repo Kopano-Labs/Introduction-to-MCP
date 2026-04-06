@@ -34,7 +34,10 @@ status: active
 | 2026-04-06 | Repaired CLI simulation test path | DONE |
 | 2026-04-06 | Modernized CI workflow | DONE |
 | 2026-04-06 | Full suite stabilization | DONE |
-| 2026-04-06 | Coverage reporting + audit exports | NEXT |
+| 2026-04-06 | Established reliability baseline | DONE |
+| 2026-04-06 | Added Orch Labs strategy, registry, API, and GUI mode | DONE |
+| 2026-04-06 | Added Phase 6, Phase 7, and Phase 8 to Schematics with criticality | DONE |
+| 2026-04-06 | Expand runnable Labs tools | NEXT |
 
 ## DEV_1
 
@@ -42,13 +45,13 @@ status: active
 |------|------|--------|
 | 2026-04-06 | Added to orch coordination structure | DONE |
 | 2026-04-06 | Catch-up briefing posted in [[comms-log]] | DONE |
-| 2026-04-06 | First scoped orch assignment | NOT NEEDED FOR PHASE 4 |
+| 2026-04-06 | First scoped orch assignment | STANDBY FOR PHASE 6 |
 
 **Catch-up summary for `DEV_1`:**
 - Orch already has the CLI, API, GUI bridge, MCP tools, memory, and WhatsApp bridge in place.
-- Current work is no longer foundational build-out. It is targeted Phase 4 completion.
-- Phase 4 was completed directly by Lead in this session.
-- Next likely assignment area: stabilization, refactors, or follow-up product slices.
+- Current work is now Orch Labs expansion on top of the completed orch core and KasiLink integration.
+- Phase 6 is active and exposes a Labs registry, API, and GUI gallery.
+- Next likely assignment area: turning planned Labs concepts into bounded runnable tools.
 
 ## DEV_2
 
@@ -56,13 +59,13 @@ status: active
 |------|------|--------|
 | 2026-04-06 | Added to orch coordination structure | DONE |
 | 2026-04-06 | Catch-up briefing posted in [[comms-log]] | DONE |
-| 2026-04-06 | First scoped orch assignment | NOT NEEDED FOR PHASE 4 |
+| 2026-04-06 | First scoped orch assignment | STANDBY FOR PHASE 7 |
 
 **Catch-up summary for `DEV_2`:**
-- Orch is past foundation work and sits in Phase 4.
-- The remaining engineering gaps are integration and domain-specific tooling, not generic scaffolding.
-- Phase 4 was completed directly by Lead in this session.
-- Next likely assignment area: bounded hardening or tool verification work.
+- Orch is past foundation work and now adds an experiment studio layer.
+- The new critical future gap is South African language coverage and speech-access support.
+- Phase 7 is defined as critical and will need bounded accessibility and multilingual implementation work.
+- Next likely assignment area: bounded accessibility planning or verification work.
 
 ## Repo Reality Check
 

@@ -21,6 +21,38 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-06 05:10 | Lead | PHASE 6 ORCH LABS STARTED
+
+**Action:** Began the Orch Labs layer as an additive surface on top of orch, following the Schematics coordination format and the new South Africa public-impact direction.
+
+**What changed:**
+- Added `orch/orch/labs_registry.py` with Labs categories, tool catalog, criticality labels, and phases
+- Added `orch/orch/labs_api.py` with `/api/labs/overview`, `/api/labs/tools`, `/api/labs/categories`, and `/api/labs/phases`
+- Wired the Labs router into `orch/orch/api.py`
+- Added an Orch Labs gallery mode in the GUI
+- Added `Schematics/02-Strategy/Orch Labs Strategy.md`
+- Updated roadmap docs to introduce:
+  - Phase 6: Orch Labs | Critical
+  - Phase 7: SA Languages And Access | Critical
+  - Phase 8: Public Impact Studio | High
+
+**Critical additions to roadmap:**
+- All official South African languages are now explicit critical scope
+- Speech-impairment-aware interaction is now explicit critical scope
+- These are phase commitments, not side notes
+
+**Directive to Lead:**
+- Finish verification and keep Labs additive to orch core
+- Do not frame Orch Labs as a pivot away from KasiLink or orch
+
+**Directive to DEV_1:**
+- Catch-up: Phase 5 is closed, Phase 6 is active
+- First likely bounded scope is turning one planned Labs concept into a runnable tool slice
+
+**Directive to DEV_2:**
+- Catch-up: accessibility and multilingual work is now critical future scope
+- First likely bounded scope is accessibility design and speech-input/output fallback planning
+
 ### 2026-04-06 04:05 | Lead | PHASE 5 STABILIZATION BASELINE ACHIEVED
 
 **Action:** Finished the reliability stabilization pass.

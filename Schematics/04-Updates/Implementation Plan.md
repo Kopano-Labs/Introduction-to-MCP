@@ -14,7 +14,7 @@ status: active
 
 # orch Implementation Plan
 
-> Master engineering plan for building orch across 4 phases.
+> Master engineering plan for building orch from core engine to Labs and accessibility phases.
 > See also: [[Project Status]], [[CLI Specification]], [[Phase 1 Walkthrough]]
 
 ## Tech Stack
@@ -63,18 +63,46 @@ status: active
 3. `orch chat log` — Verify discussion was correctly recorded in Data Lake
 4. `python -m pytest tests/test_kasilink_phase4.py -q` — Verify KasiLink gateway, matching, and loadshedding behavior
 
-### Phase 5: Reliability, CI & Adoption Baseline — IN PROGRESS
+### Phase 5: Reliability, CI & Adoption Baseline — COMPLETE
 
 - [x] Repair CLI simulation context/history handling for tests and auditability
 - [x] Stabilize in-memory database testing for CLI discussion runs
 - [x] Modernize GitHub Actions to supported Python versions
 - [x] Add bytecode compile validation to CI
 - [x] Bring the full legacy suite to green
-- [ ] Add coverage reporting
-- [ ] Add compliance-friendly audit exports
+- [x] Establish adoption-ready reliability baseline
 
 ## Phase 5 Verification Plan
 
 1. `python -m pytest -q` — Verify the full suite is green
 2. `python -m pytest tests/test_kasilink_phase4.py -q` — Verify Phase 4 gateway remains stable
+3. `python -m compileall orch orch/orch` — Verify package compiles cleanly
+
+### Phase 6: Orch Labs — IN PROGRESS — CRITICAL
+
+- [x] Add Labs strategy doc into `Schematics`
+- [x] Add Labs registry to the backend
+- [x] Add `/api/labs/overview`, `/api/labs/tools`, `/api/labs/categories`, `/api/labs/phases`
+- [x] Add Labs gallery mode to the GUI
+- [x] Add criticality labels for tools and future phases
+- [ ] Expand the initial Labs tool set into runnable feature slices
+
+### Phase 7: SA Languages And Access — PLANNED — CRITICAL
+
+- [ ] Support all official South African languages in routing and response generation
+- [ ] Add language-aware prompting and translation assist layers
+- [ ] Add speech-impairment-aware interaction design
+- [ ] Add text-first, voice-assisted, and adaptive fallback flows
+
+### Phase 8: Public Impact Studio — PLANNED — HIGH
+
+- [ ] Add pilot analytics and impact metrics for Labs tools
+- [ ] Add experiment graduation criteria
+- [ ] Add community feedback loops
+- [ ] Add public demo and partnership packaging
+
+## Phase 6 Verification Plan
+
+1. `python -m pytest tests/test_labs_api.py -q` — Verify Labs endpoints
+2. `python -m pytest -q` — Verify the full suite remains green
 3. `python -m compileall orch orch/orch` — Verify package compiles cleanly

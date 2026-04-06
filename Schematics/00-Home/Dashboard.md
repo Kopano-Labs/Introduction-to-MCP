@@ -15,7 +15,7 @@ status: active
 # Orch Vault — Dashboard
 
 > Central knowledge base for the Orch multi-agent orchestration system and its integration with KasiLink.
-> Owner: [[Owner Profile | Kholofelo Robyn Rababalela]] · GitHub: RobynAwesome · Phase 4 in progress
+> Owner: [[Owner Profile | Kholofelo Robyn Rababalela]] · GitHub: RobynAwesome · Phase 6 in progress
 
 ---
 
@@ -24,8 +24,8 @@ status: active
 | Priority | Note | Status |
 |----------|------|--------|
 | CRITICAL | [[SA Startup Week Demo]] | April 15-17, 2026 |
-| CRITICAL | [[KasiLink Integration Plan]] | Phase 1 building now |
-| HIGH | [[Project Status]] | Phase 4 in progress |
+| CRITICAL | [[Orch Labs Strategy]] | Phase 6 building now |
+| CRITICAL | [[Project Status]] | Phase 6 in progress |
 | HIGH | [[Adoption Checklist]] | Pre-launch hardening |
 
 ---
@@ -43,6 +43,7 @@ The core identity and vision for what Orch is.
 Where we're going and how we get there.
 
 - [[KasiLink Integration Plan]] — Orch as AI microservice inside KasiLink. Architecture, tool mapping, phase roadmap.
+- [[Orch Labs Strategy]] — Google-Labs-style additive layer for South African AI tools.
 - [[Microsoft Contract Strategy]] — Azure partnership pitch, service mapping, action items.
 - [[SA Startup Week Demo]] — Hack Day demo plan, April 15-17, 2026.
 - [[Adoption Checklist]] — Steps from prototype to external adoption.
@@ -64,8 +65,8 @@ How Orch is built.
 
 Active project coordination and status tracking.
 
-- [[Project Status]] — Current phase (Phase 4), capabilities, and progress checklist.
-- [[Implementation Plan]] — Full 4-phase engineering plan with tech stack.
+- [[Project Status]] — Current phase (Phase 6), capabilities, and progress checklist.
+- [[Implementation Plan]] — Full engineering plan with Labs and accessibility phases.
 - [[Phase 1 Walkthrough]] — Completed Phase 1 tutorial and reference.
 - [[04-Updates/index|Updates Index]] — Hub for coordination files.
 - [[04-Updates/comms-log|Comms Log]] — Agent communication log.
@@ -108,10 +109,10 @@ Code samples and archived source files.
 | Date | Event |
 |------|-------|
 | Apr 15-17, 2026 | SA Startup Week Hack Day — Demo KasiLink + Orch |
-| Apr 30, 2026 | Phase 1 MVP deadline |
-| May 31, 2026 | Phase 2: Polish + Community |
-| Jun 1, 2026 | Phase 3 starts: Azure migration |
-| Sep 30, 2026 | Phase 3 deadline: Microsoft partnership ready |
+| Apr 30, 2026 | Phase 6 baseline: Orch Labs gallery and registry |
+| May 31, 2026 | Phase 7 target: SA languages and accessibility planning |
+| Jun 30, 2026 | Phase 7 target: multilingual and speech-access prototypes |
+| Sep 30, 2026 | Phase 8 target: public-impact pilots and metrics |
 
 ---
 

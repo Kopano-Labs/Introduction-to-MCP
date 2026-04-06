@@ -29,7 +29,10 @@ status: active
 | Phase 2 | DONE | Moderator, memory, and structured logging are in place. |
 | Phase 3 | DONE | MCP tools, API layer, GUI bridge, and WhatsApp flow exist. |
 | Phase 4 | DONE | Optimization, security, and KasiLink integration layer implemented. |
-| Phase 5 | IN PROGRESS | Reliability baseline, CI hardening, and adoption prep underway. |
+| Phase 5 | DONE | Reliability baseline and CI hardening completed. |
+| Phase 6 | IN PROGRESS | Orch Labs layer is being built and exposed in product surfaces. |
+| Phase 7 | PLANNED | All SA languages and accessibility layer. |
+| Phase 8 | PLANNED | Public impact studio and pilot metrics. |
 
 ## Live Priorities
 
@@ -43,20 +46,26 @@ status: active
 | O6 | Critical | Lead | DONE | Begin next roadmap slice after post-implementation stabilization |
 | O7 | Critical | Lead | DONE | Repair CLI simulation reliability path |
 | O8 | High | Lead | DONE | Modernize CI workflow for supported Python versions |
-| O9 | High | Lead | IN PROGRESS | Add coverage reporting and compliance-friendly audit exports |
+| O9 | High | Lead | DONE | Establish reliability and adoption baseline |
+| O10 | Critical | Lead | DONE | Add Orch Labs registry, API surface, and GUI mode |
+| O11 | Critical | Lead | IN PROGRESS | Define SA languages and speech-access phases with criticality |
+| O12 | High | Lead | OPEN | Expand Labs tools into runnable impact slices |
 
-## Active Phase 5 Work
+## Active Phase 6 Work
 
 | Item | Status | Candidate Owner |
 |------|--------|-----------------|
-| CLI simulation reliability | COMPLETE | Lead |
-| CI modernization | COMPLETE | Lead |
-| Full suite stabilization | COMPLETE | Lead |
-| Coverage reporting | OPEN | Lead |
-| Audit exports | OPEN | Lead |
+| Labs registry and API | COMPLETE | Lead |
+| Labs GUI mode | COMPLETE | Lead |
+| SA tool catalog | COMPLETE | Lead |
+| SA language phase definition | IN PROGRESS | Lead |
+| Speech-access phase definition | IN PROGRESS | Lead |
+| Runnable Labs feature expansion | OPEN | DEV_1 |
+| Accessibility implementation prep | OPEN | DEV_2 |
 
 ## Rules For Next Dispatch
 
-1. Phase 5 owns reliability and release readiness, not net-new product features.
-2. `DEV_1` and `DEV_2` should take bounded hardening tasks only.
-3. Lead owns final review and any cross-cutting infrastructure edits.
+1. Phase 6 owns the additive Labs layer and must not break orch core.
+2. Phase 7 is critical and must treat all SA languages and accessibility as first-class scope.
+3. `DEV_1` and `DEV_2` should take bounded Labs or accessibility tasks only.
+4. Lead owns final review and any cross-cutting infrastructure edits.
