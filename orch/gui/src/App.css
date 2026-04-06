@@ -346,6 +346,34 @@ body {
   border-radius: 18px;
 }
 
+.execution-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.execution-progress-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.execution-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan-glow), var(--gold), var(--magenta-glow));
+  transition: width 0.4s ease;
+}
+
+.execution-task.done {
+  color: var(--cyan-glow);
+}
+
+.execution-task.todo {
+  color: var(--text-dim);
+}
+
 .metric-card {
   padding: 18px;
 }
@@ -540,6 +568,13 @@ body {
 .labs-card {
   padding: 22px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.labs-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(84, 227, 194, 0.35);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
 }
 
 .artifact-card,
@@ -571,6 +606,18 @@ body {
   padding: 8px 12px;
   font: inherit;
   cursor: pointer;
+}
+
+.forge-button:focus-visible,
+.ghost-button:focus-visible,
+.forge-input:focus-visible,
+.forge-textarea:focus-visible,
+.forge-select:focus-visible,
+.lesson-item:focus-visible,
+.forge-room-button:focus-visible {
+  outline: 2px solid var(--cyan-glow);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(84, 227, 194, 0.2);
 }
 
 .connector-output {
@@ -744,5 +791,44 @@ body {
   .forge-lanes,
   .forge-controls {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .main-room {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .labs-hero {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .labs-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .forge-summary-strip {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.7rem;
+  }
+
+  .metric-card {
+    padding: 12px;
+  }
+
+  .metric-value {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }

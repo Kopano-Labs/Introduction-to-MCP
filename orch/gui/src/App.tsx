@@ -29,12 +29,46 @@ interface ConsoleAnalytics { sessions: number; requests: number; average_latency
 interface McpConsoleReply { session_id: number; input: string; topic: string; response: string; suggested_actions: string[]; surfaces: string[]; model_used: string; model_options: Array<{ id: string; label: string; model: string }>; analytics: ConsoleAnalytics; }
 interface LabsOverview { title: string; positioning: string; categories: LabsCategory[]; tools: LabsTool[]; phases: LabsPhase[]; languages: LabsLanguage[]; access_modes: AccessMode[]; cowork_surfaces: CoworkSurface[]; orch_code_tracks: OrchCodeTrack[]; orch_interfaces: OrchInterface[]; cloud_stacks: CloudStack[]; connector_workflows: ConnectorWorkflow[]; installer_actions: InstallerAction[]; metrics: { categories: number; tools: number; critical_tools: number; live_tools: number; languages: number; access_modes: number; interfaces: number; cloud_stacks: number; installer_actions: number; }; }
 interface LabsAnalytics { forge: { rooms: number; tasks: number; artifacts: number; completed_tasks: number; creator_throughput: Array<{ owner: string; count: number }>; event_volume: Array<{ event_type: string; count: number }>; }; mcp_console: ConsoleAnalytics; }
+interface ExecutionTask { id: string; label: string; done: boolean; }
+interface ExecutionPhase { id: string; title: string; focus: string; tasks: ExecutionTask[]; }
 
 const apiBase = 'http://127.0.0.1:8000';
 const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
 const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'orch'];
 const criticalityLabel = (value: string) => value.replace('_', ' ').toUpperCase();
+const executionPlan: ExecutionPhase[] = [
+  { id: 'phase-1', title: 'Phase 1', focus: 'Core orchestration foundation', tasks: [
+    { id: 'p1-t1', label: 'Multi-provider agent bootstrap', done: true },
+    { id: 'p1-t2', label: 'Typer CLI command surface', done: true },
+    { id: 'p1-t3', label: 'Session lifecycle flow', done: true },
+    { id: 'p1-t4', label: 'SQLite persistence baseline', done: true },
+  ]},
+  { id: 'phase-2', title: 'Phase 2', focus: 'Moderator and memory intelligence', tasks: [
+    { id: 'p2-t1', label: 'Moderator guidance loop', done: true },
+    { id: 'p2-t2', label: 'Audit log model and scoring', done: true },
+    { id: 'p2-t3', label: 'Historical session export', done: true },
+    { id: 'p2-t4', label: 'Long-term memory retrieval', done: true },
+  ]},
+  { id: 'phase-3', title: 'Phase 3', focus: 'Tools and integrations', tasks: [
+    { id: 'p3-t1', label: 'Tool executor routing', done: true },
+    { id: 'p3-t2', label: 'Security scan tools', done: true },
+    { id: 'p3-t3', label: 'Data analytics tool suite', done: true },
+    { id: 'p3-t4', label: 'KasiLink and Labs APIs', done: true },
+  ]},
+  { id: 'phase-4', title: 'Phase 4', focus: 'Scale, reliability, governance', tasks: [
+    { id: 'p4-t1', label: 'Parallel execution path', done: true },
+    { id: 'p4-t2', label: 'Security auditor checks', done: true },
+    { id: 'p4-t3', label: 'Admin and auth bootstrap', done: true },
+    { id: 'p4-t4', label: 'Braintrust telemetry hooks', done: true },
+  ]},
+  { id: 'phase-5', title: 'Phase 5', focus: 'MORE UI/UX', tasks: [
+    { id: 'p5-t1', label: 'Phase progress cockpit', done: true },
+    { id: 'p5-t2', label: 'Responsive Labs layout tuning', done: true },
+    { id: 'p5-t3', label: 'Accessibility keyboard/focus pass', done: true },
+    { id: 'p5-t4', label: 'Visual polish and motion refinement', done: true },
+  ]},
+];
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<LiveMessage[]>([]);
@@ -69,6 +103,7 @@ const App: React.FC = () => {
   const ws = useRef<WebSocket | null>(null);
 
   const activeRoom = coworkRooms.find((room) => room.id === activeRoomId) ?? coworkRooms[0] ?? null;
+  const completedExecutionTasks = executionPlan.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
 
   const fetchSessions = async () => setSessions(await (await fetch(`${apiBase}/sessions`)).json());
   const fetchLabsOverview = async () => setLabsOverview(await (await fetch(`${apiBase}/api/labs/overview`)).json());
@@ -207,6 +242,40 @@ const App: React.FC = () => {
                 <div className="metric-card"><span className="metric-value">{labsAnalytics?.forge.rooms ?? 0}</span><span className="metric-label">Forge Rooms</span></div>
                 <div className="metric-card"><span className="metric-value">{labsAnalytics?.forge.artifacts ?? 0}</span><span className="metric-label">Artifacts</span></div>
                 <div className="metric-card"><span className="metric-value">{labsAnalytics?.mcp_console.requests ?? 0}</span><span className="metric-label">Console Requests</span></div>
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">20 Task Execution Matrix</div>
+              <article className="labs-card execution-summary-card">
+                <div className="tool-card-top">
+                  <h3>Program Status</h3>
+                  <div className="card-chip">{completedExecutionTasks}/20 complete</div>
+                </div>
+                <div className="execution-progress-track">
+                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionTasks / 20) * 100}%` }} />
+                </div>
+              </article>
+              <div className="labs-grid phases-grid">
+                {executionPlan.map((phase) => {
+                  const complete = phase.tasks.filter((task) => task.done).length;
+                  return (
+                    <article key={phase.id} className="labs-card phase-card">
+                      <div className="tool-card-top">
+                        <h3>{phase.title}</h3>
+                        <div className="card-chip">{complete}/4 complete</div>
+                      </div>
+                      <p>{phase.focus}</p>
+                      <div className="deliverables-list">
+                        {phase.tasks.map((task) => (
+                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
+                            {task.done ? 'DONE' : 'TODO'} · {task.label}
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </section>
 
