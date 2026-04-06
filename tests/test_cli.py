@@ -4,7 +4,7 @@ Pytest tests for the orch CLI application.
 import pytest
 import sqlite3
 from typer.testing import CliRunner
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, AsyncMock
 
 from orch.orch.cli import app
 from orch.orch.agent_manager import Agent
@@ -17,9 +17,10 @@ def in_memory_db():
     Pytest fixture to create and manage an in-memory SQLite database for testing.
     It creates the schema and patches get_db_connection to use this in-memory DB.
     """
-    conn = sqlite3.connect(":memory:")
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
+    db_uri = "file:orch_cli_tests?mode=memory&cache=shared"
+    anchor = sqlite3.connect(db_uri, uri=True)
+    anchor.row_factory = sqlite3.Row
+    cursor = anchor.cursor()
     # Create schema from database.py
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS discussions (
@@ -42,12 +43,35 @@ def in_memory_db():
         FOREIGN KEY (discussion_id) REFERENCES discussions (id)
     );
     """)
-    conn.commit()
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS audit_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        discussion_id INTEGER,
+        round_num INTEGER,
+        model TEXT NOT NULL,
+        agent_id TEXT NOT NULL,
+        message TEXT,
+        prompt TEXT,
+        log_type TEXT NOT NULL,
+        value_score INTEGER DEFAULT 0,
+        override_score INTEGER,
+        improvement_hint TEXT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+    anchor.commit()
 
-    with patch('orch.orch.cli.get_db_connection', return_value=conn):
-        yield conn
+    def _connect():
+        conn = sqlite3.connect(db_uri, uri=True)
+        conn.row_factory = sqlite3.Row
+        return conn
 
-    conn.close()
+    with patch('orch.orch.cli.get_db_connection', side_effect=_connect), \
+         patch('orch.orch.database.get_db_connection', side_effect=_connect), \
+         patch('orch.orch.simulator.get_db_connection', side_effect=_connect):
+        yield anchor
+
+    anchor.close()
 
 
 def test_agents_list_command_runs_successfully():
@@ -131,7 +155,7 @@ def test_serve_launch_with_logging(in_memory_db):
     mock_message.content = "This is a test response."
 
     with patch('orch.orch.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
-         patch('orch.orch.agent_manager.Agent.generate_response', return_value=mock_message), \
+         patch('orch.orch.agent_manager.Agent.agenerate_response', new=AsyncMock(return_value=mock_message)), \
          patch('orch.orch.moderator.Moderator.moderate', return_value="This is a moderator direction."):
 
         # Run the command for 2 rounds to ensure the moderator is triggered
@@ -189,8 +213,10 @@ def test_serve_launch_context_handling(in_memory_db):
     mock_agent_response_r2.content = "Agent 1 Round 2 Response"
     mock_moderator_direction_r2 = "Moderator Round 2 Direction"
 
+    mock_agent_generate_response = AsyncMock(side_effect=[mock_agent_response_r1, mock_agent_response_r2])
+
     with patch('orch.orch.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
-         patch('orch.orch.agent_manager.Agent.generate_response', side_effect=[mock_agent_response_r1, mock_agent_response_r2]) as mock_agent_generate_response, \
+         patch('orch.orch.agent_manager.Agent.agenerate_response', new=mock_agent_generate_response), \
          patch('orch.orch.moderator.Moderator.moderate', return_value=mock_moderator_direction_r2) as mock_moderator_moderate:
 
         topic = "Test Context Handling"

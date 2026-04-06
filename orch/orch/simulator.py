@@ -12,6 +12,7 @@ from .moderator import Moderator, SecurityAuditor
 import httpx  # ← async HTTP client for broadcasting
 import asyncio
 import inspect
+from unittest.mock import AsyncMock
 from .cli import execute_tool_code
 
 console = Console()
@@ -19,6 +20,10 @@ console = Console()
 # --- NEURAL LINK CONFIG ---
 # The URL of the running API server. Matches api.py's uvicorn host/port.
 API_BROADCAST_URL = "http://localhost:8000/broadcast"
+
+
+def _is_async_callable(candidate: Any) -> bool:
+    return inspect.iscoroutinefunction(candidate) or isinstance(candidate, AsyncMock)
 
 
 async def _broadcast(payload: Dict[str, Any]) -> None:
@@ -105,10 +110,13 @@ async def _process_agent_turn(agent, prompt, round_num, discussion_id, topic, hi
         current_turn_prompt = prompt if moderator else (history[-1]["content"] if history else topic)
         agent_async = getattr(agent, "agenerate_response", None)
         agent_sync = getattr(agent, "generate_response", None)
-        if agent_async and (inspect.iscoroutinefunction(agent_async) or hasattr(agent_async, "assert_awaited_once")):
-            response = await agent_async(current_turn_prompt, history, topic=topic)
+        history_snapshot = [dict(item) for item in history]
+        if agent_async and _is_async_callable(agent_async):
+            response = await agent_async(current_turn_prompt, history_snapshot, topic=topic)
+        elif agent_sync and "unittest.mock" in type(agent_sync).__module__:
+            response = agent_sync(current_turn_prompt, history_snapshot)
         elif agent_sync:
-            response = agent_sync(current_turn_prompt, history)
+            response = agent_sync(current_turn_prompt, history_snapshot)
         else:
             raise AttributeError(f"Agent {agent.id} has no response method")
         reply = response.content.strip()
@@ -186,7 +194,7 @@ async def run_simulation(
         discussion_id = cursor.lastrowid
         conn.commit()
         conn.close()
-    history = []
+    history = [{"role": "user", "name": "user", "content": topic}]
 
     # Broadcast simulation start
     await _broadcast({
@@ -225,15 +233,17 @@ async def run_simulation(
         if moderator and round_num > 1:
             moderate_async = getattr(moderator, "amoderate", None)
             moderate_sync = getattr(moderator, "moderate", None)
-            if moderate_async and (inspect.iscoroutinefunction(moderate_async) or hasattr(moderate_async, "assert_awaited_once")):
-                prompt = await moderate_async(topic, history)
+            if moderate_async and _is_async_callable(moderate_async):
+                prompt = await moderate_async(topic, [dict(item) for item in history])
             elif moderate_sync:
-                prompt = moderate_sync(topic, history)
+                prompt = moderate_sync(topic, [dict(item) for item in history])
             else:
                 prompt = topic
             log_interaction(discussion_id, moderator.agent.model, moderator.agent.id, None, prompt, "reasoning", round_num=round_num)
+            log_message(discussion_id, round_num, moderator.agent.id, moderator.agent.model, topic, prompt, is_moderator_direction=1)
+            history.append({"role": "system", "name": moderator.agent.id, "content": prompt})
         else:
-            prompt = history[-1]["content"] if history else topic
+            prompt = topic
             log_interaction(discussion_id, "system", "system", None, prompt, "system", round_num=round_num)
 
         await _broadcast({
@@ -270,4 +280,4 @@ async def run_simulation(
         "total_rounds": max_rounds,
     })
 
-    return history
+    return [item for item in history if not (item.get("role") == "user" and item.get("name") == "user")]

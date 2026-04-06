@@ -21,6 +21,59 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-06 04:05 | Lead | PHASE 5 STABILIZATION BASELINE ACHIEVED
+
+**Action:** Finished the reliability stabilization pass.
+
+**What changed:**
+- CLI/simulator tests aligned with the async orchestration flow
+- Legacy import compatibility restored for `orch.datalake`, `orch.orchestration`, and `orch.tools.*`
+- Sync moderator path implemented
+- Logging made testable without stale file handlers
+- Full pytest suite now passes
+
+**Verification:**
+- `python -m pytest -q` -> 57 passed
+- `python -m pytest tests/test_cli.py tests/test_datalake.py tests/test_moderator.py tests/test_simulator.py tests/test_tools.py tests/test_orch_logging.py -q` -> 20 passed
+- `python -m compileall orch orch/orch` -> clean
+
+**Phase 5 remaining scope:**
+- Coverage reporting
+- Compliance-friendly audit exports
+
+**Directive to Lead:**
+- Next bounded work stays inside Phase 5 until reporting/export items are closed
+
+### 2026-04-06 01:45 | Lead | PHASE 5 STARTED
+
+**Action:** Began the next roadmap slice after Phase 4. This phase is reliability and adoption hardening, not a new feature sprint.
+
+**Completed immediately:**
+- Fixed simulation history seeding so moderator and agent context are consistent
+- Logged moderator directives into the `messages` table for cleaner auditability
+- Stabilized CLI tests with a shared in-memory SQLite fixture
+- Upgraded GitHub Actions to Python 3.11 and 3.12
+- Added compile validation in CI
+
+**Why this is the next phase:**
+- The next documented strategic gap after feature completion is testing, CI/CD, and adoption readiness
+- That aligns with [[Adoption Checklist]] and the open reliability items in the repo
+
+**Current Phase 5 focus:**
+- Get the legacy suite green
+- Add coverage reporting
+- Add compliance-friendly audit exports
+
+**Directive to Lead:**
+- Keep the next tasks tightly on stability and release readiness
+- Do not mix in unrelated feature work until the reliability baseline is closed
+
+**Directive to DEV_1:**
+- Stand by for bounded hardening work on tests or docs
+
+**Directive to DEV_2:**
+- Stand by for bounded hardening work on tooling or exports
+
 ### 2026-04-06 01:20 | Lead | PHASE 4 COMPLETE
 
 **Action:** Implemented and verified the remaining Phase 4 KasiLink integration work in code.

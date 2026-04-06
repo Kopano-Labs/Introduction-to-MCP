@@ -71,8 +71,27 @@ class Moderator:
             return f"Please continue the discussion on {topic}."
 
     def moderate(self, topic: str, history: List[Dict[str, str]]) -> str:
-        # (Existing code...)
-        return f"Please continue the discussion on {topic}."
+        formatted_history_for_moderator = "\n".join([
+            f"[{msg.get('name', msg.get('role'))}]: {msg['content']}"
+            for msg in history
+        ])
+
+        user_prompt_for_moderator = f"Discussion Topic: {topic}\n\nConversation History:\n{formatted_history_for_moderator}"
+        messages = [
+            {"role": "system", "content": MODERATOR_PROMPT},
+            {"role": "user", "content": user_prompt_for_moderator}
+        ]
+
+        try:
+            response = completion(
+                model=self.agent.model,
+                messages=messages,
+                api_key=self.agent.api_key,
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            console.log(f"[bold red]Moderator failed to generate a response:[/] {e}")
+            return f"Please continue the discussion on {topic}."
 
 SECURITY_AUDITOR_PROMPT = """
 You are the Security Auditor for the AI Council. Your mission is to scan the recent conversation for:

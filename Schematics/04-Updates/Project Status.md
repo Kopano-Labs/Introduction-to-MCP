@@ -19,7 +19,7 @@ status: active
 
 ## Current Phase
 
-**Phase 4: Optimization, Scale & Security** (v0.1-alpha)
+**Phase 5: Reliability, CI & Adoption Baseline** (v0.2-beta prep)
 
 | Phase | Status | Description |
 |-------|--------|-------------|
@@ -27,18 +27,17 @@ status: active
 | Phase 2 | COMPLETE | Advanced Moderator + Memory |
 | Phase 3 | COMPLETE | Full Tool Use via MCP & WebSocket |
 | Phase 4 | COMPLETE | Optimization, Scale, Security, and KasiLink integration layer |
+| Phase 5 | IN PROGRESS | Reliability hardening, CI modernization, and adoption readiness |
 
-## Phase 4 Progress
+## Phase 5 Progress
 
-- [x] Long-term Associative Memory (SQLite-backed)
-- [x] Parallel Agent Execution
-- [x] WhatsApp Messaging Bridge
-- [x] Security Auditor Agent
-- [x] ChatML/JSONL Training Data Export
-- [x] Sentiment Analysis
-- [x] KasiLink API Gateway
-- [x] Loadshedding-aware scheduling
-- [x] Gig matching AI
+- [x] CLI simulation history flow corrected
+- [x] CLI database test fixture stabilized
+- [x] GitHub Actions updated to Python 3.11/3.12
+- [x] CI compile check added
+- [x] Full suite stabilization
+- [ ] Coverage reporting
+- [ ] Compliance-friendly audit exports
 
 ## What orch Can Do
 
@@ -67,6 +66,9 @@ Broadcasts to React GUI (Neural Link) via WebSockets. Real-time updates via What
 ### KasiLink Integration Layer
 `/api/kasilink/*` now exposes health, gig matching, sentiment, forecasting, loadshedding, moderation, dashboard, and notification endpoints for the KasiLink frontend/backend bridge.
 
+### Reliability Baseline
+CLI simulation tests now operate against a shared in-memory database fixture, and CI validates the package on modern Python versions with both pytest and compile checks.
+
 ## Capabilities Roadmap
 
 The "100 Capabilities" vision maps to the engineering phases:
@@ -74,6 +76,7 @@ The "100 Capabilities" vision maps to the engineering phases:
 - **Phase 2** unlocked: Multi-step reasoning (#91), self-correction (#92), transparent audit trails (#98)
 - **Phase 3** unlocked: File/code tools (#1), web research (#11), API access (#31), app connections (#71)
 - **Phase 4** unlocked: Fine-tuning data, learning extraction, and KasiLink integration
+- **Phase 5** unlocking: external adoption readiness, CI reliability, and release hardening
 
 > Detailed breakdown: see `100_Capabilities_TODO.md` in the repo root.
 

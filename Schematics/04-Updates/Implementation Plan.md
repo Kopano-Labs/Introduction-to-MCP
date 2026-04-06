@@ -62,3 +62,19 @@ status: active
 2. `orch serve launch --topic "AGI Ethics" --agents "gemini,gpt4"` — Verify local debate begins
 3. `orch chat log` — Verify discussion was correctly recorded in Data Lake
 4. `python -m pytest tests/test_kasilink_phase4.py -q` — Verify KasiLink gateway, matching, and loadshedding behavior
+
+### Phase 5: Reliability, CI & Adoption Baseline — IN PROGRESS
+
+- [x] Repair CLI simulation context/history handling for tests and auditability
+- [x] Stabilize in-memory database testing for CLI discussion runs
+- [x] Modernize GitHub Actions to supported Python versions
+- [x] Add bytecode compile validation to CI
+- [x] Bring the full legacy suite to green
+- [ ] Add coverage reporting
+- [ ] Add compliance-friendly audit exports
+
+## Phase 5 Verification Plan
+
+1. `python -m pytest -q` — Verify the full suite is green
+2. `python -m pytest tests/test_kasilink_phase4.py -q` — Verify Phase 4 gateway remains stable
+3. `python -m compileall orch orch/orch` — Verify package compiles cleanly

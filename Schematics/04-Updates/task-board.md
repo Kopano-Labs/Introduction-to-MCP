@@ -29,6 +29,7 @@ status: active
 | Phase 2 | DONE | Moderator, memory, and structured logging are in place. |
 | Phase 3 | DONE | MCP tools, API layer, GUI bridge, and WhatsApp flow exist. |
 | Phase 4 | DONE | Optimization, security, and KasiLink integration layer implemented. |
+| Phase 5 | IN PROGRESS | Reliability baseline, CI hardening, and adoption prep underway. |
 
 ## Live Priorities
 
@@ -39,18 +40,23 @@ status: active
 | O3 | High | Lead | DONE | Keep project status and coordination docs synchronized |
 | O4 | High | Lead | DONE | Implement Phase 4 KasiLink gateway, loadshedding, and gig matching layer |
 | O5 | High | Lead | DONE | Add test coverage for Phase 4 gateway behavior |
-| O6 | Critical | Lead | NEXT | Begin next roadmap slice after post-implementation stabilization |
+| O6 | Critical | Lead | DONE | Begin next roadmap slice after post-implementation stabilization |
+| O7 | Critical | Lead | DONE | Repair CLI simulation reliability path |
+| O8 | High | Lead | DONE | Modernize CI workflow for supported Python versions |
+| O9 | High | Lead | IN PROGRESS | Add coverage reporting and compliance-friendly audit exports |
 
-## Remaining Phase 4 Gaps
+## Active Phase 5 Work
 
-| Gap | Status | Candidate Owner |
-|-----|--------|-----------------|
-| KasiLink API Gateway integration | COMPLETE | Lead |
-| Loadshedding-aware scheduling | COMPLETE | Lead |
-| Gig matching AI | COMPLETE | Lead |
+| Item | Status | Candidate Owner |
+|------|--------|-----------------|
+| CLI simulation reliability | COMPLETE | Lead |
+| CI modernization | COMPLETE | Lead |
+| Full suite stabilization | COMPLETE | Lead |
+| Coverage reporting | OPEN | Lead |
+| Audit exports | OPEN | Lead |
 
 ## Rules For Next Dispatch
 
-1. Next phase starts only after stabilization checks on the new gateway layer.
-2. `DEV_1` and `DEV_2` should be assigned only bounded post-Phase-4 follow-up work.
-3. Lead owns final review and any cross-cutting integration edits.
+1. Phase 5 owns reliability and release readiness, not net-new product features.
+2. `DEV_1` and `DEV_2` should take bounded hardening tasks only.
+3. Lead owns final review and any cross-cutting infrastructure edits.

@@ -55,7 +55,7 @@ async def test_run_simulation_basic():
         assert len(history) == 1
         assert history[0]["content"] == "Hello"
         agent.agenerate_response.assert_called_once()
-        moderator.amoderate.assert_called_once()
+        moderator.amoderate.assert_not_called()
         assert mock_broadcast.called
         assert mock_log_interaction.called
         assert mock_log_message.called

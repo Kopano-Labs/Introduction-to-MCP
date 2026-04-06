@@ -30,7 +30,11 @@ status: active
 | 2026-04-06 | Summarized current progress and remaining Phase 4 gaps | DONE |
 | 2026-04-06 | Implemented Phase 4 KasiLink gateway + tools | DONE |
 | 2026-04-06 | Added targeted Phase 4 tests | DONE |
-| 2026-04-06 | Begin post-Phase-4 stabilization | NEXT |
+| 2026-04-06 | Began Phase 5 reliability baseline | DONE |
+| 2026-04-06 | Repaired CLI simulation test path | DONE |
+| 2026-04-06 | Modernized CI workflow | DONE |
+| 2026-04-06 | Full suite stabilization | DONE |
+| 2026-04-06 | Coverage reporting + audit exports | NEXT |
 
 ## DEV_1
 
