@@ -195,6 +195,36 @@ const executionPlanDev2Dev3Cycle2: SquadPhase[] = [
     { id: 'p23-t5', label: 'Final QA signoff', owner: 'DEV_2', done: true },
   ]},
 ];
+const executionPlanDev2Dev3LeadPhase: SquadPhase[] = [
+  { id: 'phase-24', title: 'Phase 24', focus: 'Platform Rollout', tasks: [
+    { id: 'p24-t1', label: 'Deployment command validation', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p24-t2', label: 'Environment parity verification', owner: 'DEV_2', done: true },
+    { id: 'p24-t3', label: 'Rollback rehearsal evidence', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p24-t4', label: 'Build package integrity scan', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p24-t5', label: 'Release checklist confirmation', owner: 'DEV_2', done: true },
+  ]},
+  { id: 'phase-25', title: 'Phase 25', focus: 'Observability & Operations', tasks: [
+    { id: 'p25-t1', label: 'Runtime log quality pass', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p25-t2', label: 'Alert threshold verification', owner: 'DEV_2', done: true },
+    { id: 'p25-t3', label: 'Telemetry stream consistency check', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p25-t4', label: 'Incident routing validation', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p25-t5', label: 'Ops signoff note', owner: 'DEV_2', done: true },
+  ]},
+  { id: 'phase-26', title: 'Phase 26', focus: 'Security & Reliability', tasks: [
+    { id: 'p26-t1', label: 'Dependency risk triage', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p26-t2', label: 'Access-control change audit', owner: 'DEV_2', done: true },
+    { id: 'p26-t3', label: 'Backup restore confirmation', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p26-t4', label: 'Failure-mode checklist run', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p26-t5', label: 'Reliability signoff capture', owner: 'DEV_2', done: true },
+  ]},
+  { id: 'phase-27', title: 'Phase 27', focus: 'Lead Solo Phase', tasks: [
+    { id: 'p27-t1', label: 'Cross-phase acceptance review', owner: 'Lead', done: true },
+    { id: 'p27-t2', label: 'Final UX readiness decision', owner: 'Lead', done: true },
+    { id: 'p27-t3', label: 'Quality gate final approval', owner: 'Lead', done: true },
+    { id: 'p27-t4', label: 'Delivery summary and handoff', owner: 'Lead', done: true },
+    { id: 'p27-t5', label: 'Session compliance closeout', owner: 'Lead', done: true },
+  ]},
+];
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<LiveMessage[]>([]);
@@ -234,6 +264,7 @@ const App: React.FC = () => {
   const completedExecutionLeadDev2 = executionPlanLeadDev2.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionDev2Dev3 = executionPlanDev2Dev3.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionDev2Dev3Cycle2 = executionPlanDev2Dev3Cycle2.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
+  const completedExecutionDev2Dev3LeadPhase = executionPlanDev2Dev3LeadPhase.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
 
   const fetchSessions = async () => setSessions(await (await fetch(`${apiBase}/sessions`)).json());
   const fetchLabsOverview = async () => setLabsOverview(await (await fetch(`${apiBase}/api/labs/overview`)).json());
@@ -536,6 +567,47 @@ const App: React.FC = () => {
               </article>
               <div className="labs-grid phases-grid">
                 {executionPlanDev2Dev3Cycle2.map((phase) => {
+                  const complete = phase.tasks.filter((task) => task.done).length;
+                  return (
+                    <article key={phase.id} className="labs-card phase-card">
+                      <div className="tool-card-top">
+                        <h3>{phase.title}</h3>
+                        <div className="card-chip">{complete}/5 complete</div>
+                      </div>
+                      <p>{phase.focus}</p>
+                      <div className="deliverables-list">
+                        {phase.tasks.map((task) => (
+                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
+                            {task.done ? 'DONE' : 'TODO'} · {task.label}
+                            <span className="owner-badge">{task.owner}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">20 Task Matrix (Lead Owns Full Phase)</div>
+              <article className="labs-card execution-summary-card">
+                <div className="tool-card-top">
+                  <h3>Allocation Status</h3>
+                  <div className="card-chip">{completedExecutionDev2Dev3LeadPhase}/20 complete</div>
+                </div>
+                <div className="execution-progress-track">
+                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3LeadPhase / 20) * 100}%` }} />
+                </div>
+                <div className="forge-summary-strip">
+                  <div>DEV_2: 5 tasks</div>
+                  <div>DEV_3: 10 tasks</div>
+                  <div>Lead: 5 tasks</div>
+                  <div>Lead solo: Phase 27</div>
+                </div>
+              </article>
+              <div className="labs-grid phases-grid">
+                {executionPlanDev2Dev3LeadPhase.map((phase) => {
                   const complete = phase.tasks.filter((task) => task.done).length;
                   return (
                     <article key={phase.id} className="labs-card phase-card">
