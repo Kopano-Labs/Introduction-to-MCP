@@ -59,6 +59,14 @@ def test_labs_cowork_exposes_orch_code():
     assert "product-craft" in track_ids
 
 
+def test_labs_overview_exposes_installer_actions():
+    response = client.get("/api/labs/overview")
+    payload = response.json()
+    action_ids = {action["id"] for action in payload["installer_actions"]}
+    assert "install-orch-cli" in action_ids
+    assert "azure-demo-playbook" in action_ids
+
+
 def test_labs_language_plan_prioritizes_accessibility():
     response = client.get(
         "/api/labs/language-plan",
@@ -258,6 +266,36 @@ def test_mcp_console_chat_routes_cli_queries():
     assert "CLI" in payload["surfaces"]
     assert "model_used" in payload
     assert "analytics" in payload
+
+
+def test_mcp_console_models_and_stream_endpoint_work():
+    models_response = client.get("/api/labs/mcp-console/models")
+    assert models_response.status_code == 200
+    assert "models" in models_response.json()
+
+    stream_response = client.post(
+        "/api/labs/mcp-console/stream",
+        json={"message": "How do I install the Orch CLI?", "model_preference": "deterministic"},
+    )
+    assert stream_response.status_code == 200
+    body = stream_response.text
+    assert "data:" in body
+    assert "final" in body
+
+
+def test_connector_actions_execute_playbooks():
+    list_response = client.get("/api/labs/connectors/actions")
+    assert list_response.status_code == 200
+    assert any(action["id"] == "install-vscode" for action in list_response.json()["actions"])
+
+    execute_response = client.post(
+        "/api/labs/connectors/actions/execute",
+        json={"action_id": "azure-demo-playbook"},
+    )
+    assert execute_response.status_code == 200
+    payload = execute_response.json()
+    assert payload["status"] == "ready"
+    assert "az login" in payload["commands"]
 
 
 def test_labs_analytics_endpoint_reports_forge_and_console(isolated_labs_db):

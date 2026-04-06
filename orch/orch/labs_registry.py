@@ -181,6 +181,46 @@ CONNECTOR_WORKFLOWS: list[dict[str, Any]] = [
 ]
 
 
+INSTALLER_ACTIONS: list[dict[str, Any]] = [
+    {
+        "id": "install-vscode",
+        "surface": "ide",
+        "title": "Install VS Code Workspace",
+        "provider": "local",
+        "status": "ready",
+        "summary": "Set up VS Code, workspace opening, recommended extensions, and Orch Labs handoff.",
+        "commands": ["winget install Microsoft.VisualStudioCode", "code ."],
+    },
+    {
+        "id": "install-orch-cli",
+        "surface": "cli",
+        "provider": "local",
+        "title": "Install Orch CLI",
+        "status": "ready",
+        "summary": "Install Orch in editable mode and verify the command surface.",
+        "commands": ["pip install -e .", "orch --help"],
+    },
+    {
+        "id": "azure-demo-playbook",
+        "surface": "azure",
+        "provider": "Azure",
+        "title": "Azure Demo Day Bootstrap",
+        "status": "ready",
+        "summary": "Prepare Azure-first hosting, identity, observability, and AI surfaces for demo day.",
+        "commands": ["az login", "az account show", "azd auth login"],
+    },
+    {
+        "id": "aws-expansion-playbook",
+        "surface": "aws",
+        "provider": "AWS",
+        "title": "AWS Expansion Bootstrap",
+        "status": "ready",
+        "summary": "Prepare AWS parity workflows for Bedrock, Lambda, API Gateway, and S3.",
+        "commands": ["aws configure", "aws sts get-caller-identity"],
+    },
+]
+
+
 ORCH_CODE_TRACKS: list[dict[str, Any]] = [
     {
         "id": "python-core",
@@ -369,6 +409,7 @@ def get_labs_overview() -> dict[str, Any]:
         "orch_interfaces": ORCH_INTERFACES,
         "cloud_stacks": CLOUD_STACKS,
         "connector_workflows": CONNECTOR_WORKFLOWS,
+        "installer_actions": INSTALLER_ACTIONS,
         "metrics": {
             "categories": len(LABS_CATEGORIES),
             "tools": len(LABS_TOOLS),
@@ -378,5 +419,6 @@ def get_labs_overview() -> dict[str, Any]:
             "access_modes": len(ACCESS_MODES),
             "interfaces": len(ORCH_INTERFACES),
             "cloud_stacks": len(CLOUD_STACKS),
+            "installer_actions": len(INSTALLER_ACTIONS),
         },
     }

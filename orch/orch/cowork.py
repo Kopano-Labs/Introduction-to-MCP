@@ -148,6 +148,37 @@ def update_cowork_task(task_id: int, status: str) -> dict[str, Any]:
     return get_cowork_task(task_id)
 
 
+def update_cowork_task_details(
+    task_id: int,
+    title: str,
+    description: str,
+    owner: str,
+    priority: str,
+) -> dict[str, Any]:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT room_id FROM cowork_tasks WHERE id = ?", (task_id,))
+    row = cursor.fetchone()
+    cursor.execute(
+        """
+        UPDATE cowork_tasks
+        SET title = ?, description = ?, owner = ?, priority = ?
+        WHERE id = ?
+        """,
+        (title, description, owner, priority, task_id),
+    )
+    conn.commit()
+    conn.close()
+    if row:
+        record_creator_event(
+            "task_updated",
+            room_id=row["room_id"],
+            task_id=task_id,
+            metadata=json.dumps({"owner": owner, "priority": priority}),
+        )
+    return get_cowork_task(task_id)
+
+
 def reassign_cowork_task(task_id: int, owner: str) -> dict[str, Any]:
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -225,6 +256,37 @@ def add_cowork_artifact(
         room_id=room_id,
         metadata=json.dumps({"artifact_type": artifact_type, "artifact_id": artifact_id}),
     )
+    return get_cowork_artifact(artifact_id)
+
+
+def update_cowork_artifact(
+    artifact_id: int,
+    artifact_type: str,
+    title: str,
+    summary: str,
+    status: str,
+    link: str | None = None,
+) -> dict[str, Any]:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT room_id FROM cowork_artifacts WHERE id = ?", (artifact_id,))
+    row = cursor.fetchone()
+    cursor.execute(
+        """
+        UPDATE cowork_artifacts
+        SET artifact_type = ?, title = ?, summary = ?, status = ?, link = ?
+        WHERE id = ?
+        """,
+        (artifact_type, title, summary, status, link, artifact_id),
+    )
+    conn.commit()
+    conn.close()
+    if row:
+        record_creator_event(
+            "artifact_updated",
+            room_id=row["room_id"],
+            metadata=json.dumps({"artifact_id": artifact_id, "artifact_type": artifact_type, "status": status}),
+        )
     return get_cowork_artifact(artifact_id)
 
 

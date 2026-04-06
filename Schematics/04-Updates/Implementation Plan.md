@@ -109,7 +109,10 @@ status: active
 - [x] Add first Orch Code teaching loop against the current repo
 - [x] Add cowork task reassignment and dispatch summary
 - [x] Add Orch Code lesson-state progression
-- [ ] Add pilot analytics and impact metrics for Labs tools
+- [x] Add pilot analytics and impact metrics for Labs tools
+- [x] Add installer and connector playbook execution cards for IDE, CLI, Azure, and AWS
+- [x] Add MCP Console model selection and streaming surface
+- [x] Add Forge create and edit flows for tasks and artifacts
 - [ ] Add experiment graduation criteria
 - [ ] Add community feedback loops
 - [ ] Add public demo and partnership packaging

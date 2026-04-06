@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from .cowork import (
@@ -12,12 +13,14 @@ from .cowork import (
     list_cowork_rooms,
     move_cowork_task,
     reassign_cowork_task,
+    update_cowork_artifact,
+    update_cowork_task_details,
     update_cowork_task,
 )
 from .labs_registry import get_labs_overview
 from .language_runtime import build_multilingual_response, route_multilingual_prompt, translate_text
 from .launch_config import get_launch_surface_config
-from .mcp_console import answer_mcp_console, get_console_analytics
+from .mcp_console import answer_mcp_console, execute_connector_action, get_connector_actions, get_console_analytics, get_model_options, stream_mcp_console
 from .orch_code import get_orch_code_controls, get_orch_code_profile, teach_repo_patterns, update_lesson_status
 from .sa_access import build_access_plan, execute_access_session
 
@@ -53,6 +56,13 @@ class CoworkTaskRequest(BaseModel):
 
 class CoworkTaskStatusRequest(BaseModel):
     status: str
+
+
+class CoworkTaskEditRequest(BaseModel):
+    title: str
+    description: str
+    owner: str
+    priority: str = "high"
 
 
 class CoworkTaskOwnerRequest(BaseModel):
@@ -93,6 +103,11 @@ class LessonStatusRequest(BaseModel):
 class McpConsoleRequest(BaseModel):
     message: str
     session_id: int | None = None
+    model_preference: str | None = None
+
+
+class ConnectorActionRequest(BaseModel):
+    action_id: str
 
 
 @router.get("/overview")
@@ -131,6 +146,16 @@ def labs_cowork() -> dict:
         "cowork_surfaces": overview["cowork_surfaces"],
         "orch_code_tracks": overview["orch_code_tracks"],
     }
+
+
+@router.get("/connectors/actions")
+def labs_connector_actions() -> dict:
+    return {"actions": get_connector_actions()}
+
+
+@router.post("/connectors/actions/execute")
+def labs_execute_connector_action(request: ConnectorActionRequest) -> dict:
+    return execute_connector_action(request.action_id)
 
 
 @router.get("/language-plan")
@@ -209,6 +234,19 @@ def cowork_update_task_status(task_id: int, request: CoworkTaskStatusRequest) ->
     return {"task": update_cowork_task(task_id, request.status)}
 
 
+@router.post("/cowork/tasks/{task_id}/edit")
+def cowork_edit_task(task_id: int, request: CoworkTaskEditRequest) -> dict:
+    return {
+        "task": update_cowork_task_details(
+            task_id,
+            request.title,
+            request.description,
+            request.owner,
+            request.priority,
+        )
+    }
+
+
 @router.post("/cowork/tasks/{task_id}/owner")
 def cowork_update_task_owner(task_id: int, request: CoworkTaskOwnerRequest) -> dict:
     return {"task": reassign_cowork_task(task_id, request.owner)}
@@ -233,12 +271,31 @@ def cowork_create_artifact(room_id: int, request: CoworkArtifactRequest) -> dict
     }
 
 
+@router.post("/cowork/artifacts/{artifact_id}/edit")
+def cowork_edit_artifact(artifact_id: int, request: CoworkArtifactRequest) -> dict:
+    return {
+        "artifact": update_cowork_artifact(
+            artifact_id,
+            request.artifact_type,
+            request.title,
+            request.summary,
+            request.status,
+            link=request.link,
+        )
+    }
+
+
 @router.get("/analytics")
 def labs_analytics() -> dict:
     return {
         "forge": get_creator_analytics(),
         "mcp_console": get_console_analytics(),
     }
+
+
+@router.get("/mcp-console/models")
+def labs_mcp_console_models() -> dict:
+    return {"models": get_model_options()}
 
 
 @router.post("/orch-code/teach")
@@ -273,4 +330,20 @@ def labs_access_execute(request: AccessExecutionRequest) -> dict:
 
 @router.post("/mcp-console/chat")
 def labs_mcp_console_chat(request: McpConsoleRequest) -> dict:
-    return answer_mcp_console(request.message, session_id=request.session_id)
+    return answer_mcp_console(
+        request.message,
+        session_id=request.session_id,
+        model_preference=request.model_preference,
+    )
+
+
+@router.post("/mcp-console/stream")
+def labs_mcp_console_stream(request: McpConsoleRequest) -> StreamingResponse:
+    return StreamingResponse(
+        stream_mcp_console(
+            request.message,
+            session_id=request.session_id,
+            model_preference=request.model_preference,
+        ),
+        media_type="text/event-stream",
+    )

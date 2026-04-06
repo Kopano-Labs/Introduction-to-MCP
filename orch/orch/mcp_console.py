@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import json
 import time
+from collections.abc import Iterator
 from typing import Any
 
 from .agent_manager import load_agents
 from .database import get_db_connection, init_db
-from .labs_registry import CLOUD_STACKS, CONNECTOR_WORKFLOWS, ORCH_INTERFACES
+from .labs_registry import CLOUD_STACKS, CONNECTOR_WORKFLOWS, INSTALLER_ACTIONS, ORCH_INTERFACES
 from .llm import call_ai_litellm
 
 
@@ -142,13 +144,27 @@ def _build_context(topic: str) -> str:
     )
 
 
-def _model_backed_answer(message: str, topic: str) -> tuple[str | None, str]:
+def _iter_agent_candidates(model_preference: str | None = None):
     agents = load_agents()
-    preferred = ["orch", "copilot", "openai", "claude", "gemini"]
+    preferred = [model_preference] if model_preference else ["orch", "copilot", "openai", "claude", "gemini"]
     for agent_id in preferred:
-        agent = agents.get(agent_id)
-        if not agent or not agent.api_key:
+        if not agent_id:
             continue
+        agent = agents.get(agent_id)
+        if agent and agent.api_key:
+            yield agent_id, agent
+    if model_preference:
+        fallback = ["orch", "copilot", "openai", "claude", "gemini"]
+        for agent_id in fallback:
+            if agent_id == model_preference:
+                continue
+            agent = agents.get(agent_id)
+            if agent and agent.api_key:
+                yield agent_id, agent
+
+
+def _model_backed_answer(message: str, topic: str, model_preference: str | None = None) -> tuple[str | None, str]:
+    for _, agent in _iter_agent_candidates(model_preference):
         prompt = (
             f"{_build_context(topic)}\n\n"
             f"User request: {message}\n\n"
@@ -197,12 +213,57 @@ def get_console_analytics() -> dict[str, Any]:
     }
 
 
-def answer_mcp_console(message: str, session_id: int | None = None) -> dict[str, Any]:
+def get_model_options() -> list[dict[str, str]]:
+    options = []
+    seen = set()
+    for agent_id, agent in _iter_agent_candidates():
+        if agent_id in seen:
+            continue
+        seen.add(agent_id)
+        options.append({"id": agent_id, "label": f"{agent_id}: {agent.model}", "model": agent.model})
+    if not options:
+        options.append({"id": "deterministic", "label": "deterministic fallback", "model": "deterministic-fallback"})
+    return options
+
+
+def get_connector_actions() -> list[dict[str, Any]]:
+    return INSTALLER_ACTIONS
+
+
+def execute_connector_action(action_id: str) -> dict[str, Any]:
+    action = next((item for item in INSTALLER_ACTIONS if item["id"] == action_id), None)
+    if action is None:
+        return {"status": "missing", "action_id": action_id, "message": "Installer action not found."}
+    return {
+        "status": "ready",
+        "action_id": action_id,
+        "title": action["title"],
+        "summary": action["summary"],
+        "commands": action["commands"],
+        "next_steps": [
+            "Run the listed commands in the correct environment.",
+            "Return to Orch Labs and mark the workflow complete.",
+            "Store environment notes inside Forge artifacts if adjustments were needed.",
+        ],
+    }
+
+
+def stream_mcp_console(message: str, session_id: int | None = None, model_preference: str | None = None) -> Iterator[str]:
+    payload = answer_mcp_console(message, session_id=session_id, model_preference=model_preference)
+    words = payload["response"].split()
+    for index, word in enumerate(words, start=1):
+        chunk = {"type": "chunk", "index": index, "content": word + (" " if index < len(words) else "")}
+        yield f"data: {json.dumps(chunk)}\n\n"
+    final_payload = {"type": "final", **payload}
+    yield f"data: {json.dumps(final_payload)}\n\n"
+
+
+def answer_mcp_console(message: str, session_id: int | None = None, model_preference: str | None = None) -> dict[str, Any]:
     rule = _pick_topic(message)
     session_id = _get_or_create_session(session_id)
     _store_message(session_id, "user", message, rule["topic"])
     started = time.perf_counter()
-    model_used, response = _model_backed_answer(message, rule["topic"])
+    model_used, response = _model_backed_answer(message, rule["topic"], model_preference=model_preference)
     if not response:
         response = _fallback_answer(rule, message)
     latency_ms = int((time.perf_counter() - started) * 1000)
@@ -215,5 +276,6 @@ def answer_mcp_console(message: str, session_id: int | None = None) -> dict[str,
         "suggested_actions": rule["actions"],
         "surfaces": ["Orch Labs", "Orch Forge", "Orch Code", "CLI", "MCP", "Azure", "AWS"],
         "model_used": model_used or "deterministic-fallback",
+        "model_options": get_model_options(),
         "analytics": get_console_analytics(),
     }

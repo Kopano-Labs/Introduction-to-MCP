@@ -19,7 +19,7 @@ status: active
 
 ## Current Phase
 
-**Phase 6: Orch Labs** (Google-Labs-style SA impact layer)
+**Phase 8 Expansion On Top Of Phase 6 Orch Labs** (creator execution, connectors, and demo-day packaging)
 
 | Phase | Status | Description |
 |-------|--------|-------------|
@@ -50,6 +50,11 @@ status: active
 - [x] Multilingual routing and phrasebook translation execution added
 - [x] First runnable Cowork Room flow added
 - [x] First Orch Code teaching loop added
+- [x] Forge drag-and-drop lanes and artifact cards added
+- [x] MCP Console persistence, model selection, and streaming surface added
+- [x] Installer and connector playbook actions added for IDE, CLI, Azure, and AWS
+- [x] Forge task and artifact create-edit flows added
+- [x] Azure Demo Day playbook added to Schematics
 - [ ] Additional Labs tools beyond initial registry
 - [ ] Deep model-backed translation quality beyond deterministic runtime routing
 
@@ -105,10 +110,16 @@ orch now has explicit roadmap commitment for all official South African language
 `/api/labs/cowork/rooms`, `/api/labs/cowork/rooms/{id}`, and task endpoints now provide the first runnable Orch Forge execution loop with persisted rooms, lanes, task ownership, and reassignment.
 
 ### Phase 8 Upgrade
-Cowork tasks can now be reassigned with dispatch summaries, and Orch Code lessons can now advance through explicit learning states instead of staying static after the first teach pass.
+Cowork tasks can now be reassigned with dispatch summaries, move across lanes, and be created or edited directly from Forge. Artifact cards for prompts, APIs, screens, and notes are now persisted and editable from the Labs UI.
 
 ### Orch Code Runtime
 `/api/labs/orch-code/teach` and `/api/labs/orch-code/profile` now provide the first teaching loop, grounded in this repo's Python, FastAPI, pytest, React, and Schematics patterns.
+
+### MCP Console Upgrade
+`/api/labs/mcp-console/chat`, `/api/labs/mcp-console/stream`, and `/api/labs/mcp-console/models` now provide persisted chat sessions, model selection, streaming replies, and analytics-ready usage tracking.
+
+### Connector Playbooks
+`/api/labs/connectors/actions` and `/api/labs/connectors/actions/execute` now expose installer and connector execution playbooks for IDE, CLI, Azure, and AWS workflows.
 
 ## Capabilities Roadmap
 

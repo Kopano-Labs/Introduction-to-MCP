@@ -563,6 +563,24 @@ body {
   background: linear-gradient(135deg, rgba(84, 227, 194, 0.95), rgba(243, 201, 105, 0.95));
 }
 
+.ghost-button {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.connector-output {
+  white-space: pre-wrap;
+  margin: 0;
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
 .audit-round {
   font-size: 0.7rem;
   color: var(--cyan-glow);

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
+import { appendStreamChunk, toEditableArtifact, toEditableTask } from './labsUi';
 
 type ViewMode = 'council' | 'labs';
 type LessonState = 'queued' | 'learning' | 'learned' | 'shipping';
@@ -18,14 +19,15 @@ interface OrchCodeTrack { id: string; title: string; priority: string; summary: 
 interface OrchInterface { id: string; name: string; status: string; summary: string; mechanics: string[]; }
 interface CloudStack { id: string; name: string; provider: string; priority: string; status: string; summary: string; focus: string[]; }
 interface ConnectorWorkflow { id: string; name: string; status: string; summary: string; }
+interface InstallerAction { id: string; surface: string; title: string; provider: string; status: string; summary: string; commands: string[]; }
 interface CoworkTask { id: number; room_id: number; title: string; description: string; owner: string; status: string; priority: string; lane: string; }
 interface CoworkArtifact { id: number; room_id: number; artifact_type: string; title: string; summary: string; status: string; link: string | null; }
 interface CoworkRoom { id: number; name: string; mission: string; lead: string; status: string; tasks: CoworkTask[]; artifacts: CoworkArtifact[]; lanes: Record<string, CoworkTask[]>; dispatch_summary: { total_tasks: number; queued: number; in_progress: number; completed: number; owners: string[]; }; artifact_summary: { total_artifacts: number; artifact_types: string[]; }; }
 interface LessonControl { lesson_key: string; title: string; track: string; source: string; status: LessonState; confidence: number; notes: string; }
 interface OrchCodeProfile { title: string; lessons: LessonControl[]; summary: { total_lessons: number; learned_lessons: number; learning_lessons: number; }; control_states: LessonState[]; recommended_next: LessonControl[]; }
 interface ConsoleAnalytics { sessions: number; requests: number; average_latency_ms: number; top_topics: Array<{ topic: string; count: number }>; }
-interface McpConsoleReply { session_id: number; input: string; topic: string; response: string; suggested_actions: string[]; surfaces: string[]; model_used: string; analytics: ConsoleAnalytics; }
-interface LabsOverview { title: string; positioning: string; categories: LabsCategory[]; tools: LabsTool[]; phases: LabsPhase[]; languages: LabsLanguage[]; access_modes: AccessMode[]; cowork_surfaces: CoworkSurface[]; orch_code_tracks: OrchCodeTrack[]; orch_interfaces: OrchInterface[]; cloud_stacks: CloudStack[]; connector_workflows: ConnectorWorkflow[]; metrics: { categories: number; tools: number; critical_tools: number; live_tools: number; languages: number; access_modes: number; interfaces: number; cloud_stacks: number; }; }
+interface McpConsoleReply { session_id: number; input: string; topic: string; response: string; suggested_actions: string[]; surfaces: string[]; model_used: string; model_options: Array<{ id: string; label: string; model: string }>; analytics: ConsoleAnalytics; }
+interface LabsOverview { title: string; positioning: string; categories: LabsCategory[]; tools: LabsTool[]; phases: LabsPhase[]; languages: LabsLanguage[]; access_modes: AccessMode[]; cowork_surfaces: CoworkSurface[]; orch_code_tracks: OrchCodeTrack[]; orch_interfaces: OrchInterface[]; cloud_stacks: CloudStack[]; connector_workflows: ConnectorWorkflow[]; installer_actions: InstallerAction[]; metrics: { categories: number; tools: number; critical_tools: number; live_tools: number; languages: number; access_modes: number; interfaces: number; cloud_stacks: number; installer_actions: number; }; }
 interface LabsAnalytics { forge: { rooms: number; tasks: number; artifacts: number; completed_tasks: number; creator_throughput: Array<{ owner: string; count: number }>; event_volume: Array<{ event_type: string; count: number }>; }; mcp_console: ConsoleAnalytics; }
 
 const apiBase = 'http://127.0.0.1:8000';
@@ -50,8 +52,17 @@ const App: React.FC = () => {
   const [artifactTitle, setArtifactTitle] = useState('Azure Demo Day Connector Pack');
   const [artifactSummary, setArtifactSummary] = useState('Installer guidance and connector workflow notes for IDE, CLI, Azure, AWS, and MCP parity.');
   const [artifactType, setArtifactType] = useState('api');
+  const [taskTitle, setTaskTitle] = useState('Implement connector execution cards');
+  const [taskDescription, setTaskDescription] = useState('Ship click-to-run install and connector playbooks in Orch Labs.');
+  const [taskOwner, setTaskOwner] = useState('DEV_1');
+  const [taskPriority, setTaskPriority] = useState('high');
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [editingArtifactId, setEditingArtifactId] = useState<number | null>(null);
   const [consoleMessage, setConsoleMessage] = useState('How should Orch support MCP chat across IDEs, CLI, operating systems, skills, Azure, and connectors?');
   const [consoleReply, setConsoleReply] = useState<McpConsoleReply | null>(null);
+  const [consoleStream, setConsoleStream] = useState('');
+  const [selectedModel, setSelectedModel] = useState<string>('deterministic');
+  const [connectorResult, setConnectorResult] = useState<string>('');
   const [orchCodeProfile, setOrchCodeProfile] = useState<OrchCodeProfile | null>(null);
   const [labsAnalytics, setLabsAnalytics] = useState<LabsAnalytics | null>(null);
   const [draggedTaskId, setDraggedTaskId] = useState<number | null>(null);
@@ -97,11 +108,67 @@ const App: React.FC = () => {
 
   const postJson = async (url: string, body: object) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   const createCoworkRoom = async () => { const data = await (await postJson(`${apiBase}/api/labs/cowork/rooms`, { name: roomName, mission: roomMission, lead: 'Lead' })).json(); await refreshLabs(data.room.id); };
-  const createArtifact = async () => { if (!activeRoom) return; await postJson(`${apiBase}/api/labs/cowork/rooms/${activeRoom.id}/artifacts`, { artifact_type: artifactType, title: artifactTitle, summary: artifactSummary, status: 'draft', link: 'Orch Forge' }); await refreshLabs(activeRoom.id); };
+  const createArtifact = async () => {
+    if (!activeRoom) return;
+    if (editingArtifactId) {
+      await postJson(`${apiBase}/api/labs/cowork/artifacts/${editingArtifactId}/edit`, { artifact_type: artifactType, title: artifactTitle, summary: artifactSummary, status: 'draft', link: 'Orch Forge' });
+      setEditingArtifactId(null);
+    } else {
+      await postJson(`${apiBase}/api/labs/cowork/rooms/${activeRoom.id}/artifacts`, { artifact_type: artifactType, title: artifactTitle, summary: artifactSummary, status: 'draft', link: 'Orch Forge' });
+    }
+    await refreshLabs(activeRoom.id);
+  };
+  const createOrUpdateTask = async () => {
+    if (!activeRoom) return;
+    if (editingTaskId) {
+      await postJson(`${apiBase}/api/labs/cowork/tasks/${editingTaskId}/edit`, { title: taskTitle, description: taskDescription, owner: taskOwner, priority: taskPriority });
+      setEditingTaskId(null);
+    } else {
+      await postJson(`${apiBase}/api/labs/cowork/rooms/${activeRoom.id}/tasks`, { title: taskTitle, description: taskDescription, owner: taskOwner, priority: taskPriority, lane: 'build' });
+    }
+    await refreshLabs(activeRoom.id);
+  };
   const updateTaskStatus = async (taskId: number, status: string) => { await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/status`, { status }); if (activeRoom) await refreshLabs(activeRoom.id); };
   const updateTaskOwner = async (taskId: number, owner: string) => { await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/owner`, { owner }); if (activeRoom) await refreshLabs(activeRoom.id); };
   const moveTaskToLane = async (taskId: number, lane: string) => { await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/lane`, { lane }); if (activeRoom) await refreshLabs(activeRoom.id); };
-  const sendConsoleMessage = async () => { const data = await (await postJson(`${apiBase}/api/labs/mcp-console/chat`, { message: consoleMessage, session_id: consoleReply?.session_id ?? null })).json(); setConsoleReply(data); await fetchLabsAnalytics(); };
+  const runConnectorAction = async (actionId: string) => {
+    const data = await (await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId })).json();
+    setConnectorResult([data.title, data.summary, ...(data.commands ?? []), ...(data.next_steps ?? [])].join('\n'));
+  };
+  const sendConsoleMessage = async () => {
+    const data = await (await postJson(`${apiBase}/api/labs/mcp-console/chat`, { message: consoleMessage, session_id: consoleReply?.session_id ?? null, model_preference: selectedModel === 'deterministic' ? null : selectedModel })).json();
+    setConsoleReply(data);
+    setConsoleStream(data.response);
+    await fetchLabsAnalytics();
+  };
+  const streamConsoleMessage = async () => {
+    setConsoleStream('');
+    const response = await fetch(`${apiBase}/api/labs/mcp-console/stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: consoleMessage, session_id: consoleReply?.session_id ?? null, model_preference: selectedModel === 'deterministic' ? null : selectedModel }),
+    });
+    const text = await response.text();
+    const chunks = text.split('\n\n').filter(Boolean);
+    let aggregated = '';
+    let finalPayload: McpConsoleReply | null = null;
+    for (const entry of chunks) {
+      const raw = entry.replace(/^data:\s*/, '');
+      const payload = JSON.parse(raw) as { type: string; content?: string } & Partial<McpConsoleReply>;
+      if (payload.type === 'chunk') {
+        aggregated = appendStreamChunk(aggregated, payload);
+        setConsoleStream(aggregated);
+      }
+      if (payload.type === 'final') {
+        finalPayload = payload as McpConsoleReply;
+      }
+    }
+    if (finalPayload) {
+      setConsoleReply(finalPayload);
+      setConsoleStream(finalPayload.response);
+    }
+    await fetchLabsAnalytics();
+  };
   const teachOrchCode = async () => { await postJson(`${apiBase}/api/labs/orch-code/teach`, {}); await fetchOrchCodeControls(); };
   const updateLessonStatus = async (lessonKey: string, status: LessonState, confidence: number) => { await postJson(`${apiBase}/api/labs/orch-code/lessons/${lessonKey}/status`, { status, confidence }); await fetchOrchCodeControls(); };
   const loadSession = async (id: string) => { setViewMode('council'); setIsAuditMode(true); setSelectedSession(await (await fetch(`${apiBase}/sessions/${id}`)).json()); };
@@ -185,6 +252,20 @@ const App: React.FC = () => {
             </section>
 
             <section className="labs-section">
+              <div className="section-heading">Installer And Connector Actions</div>
+              <div className="labs-grid access-grid">
+                {labsOverview?.installer_actions.map((action) => (
+                  <article key={action.id} className="labs-card compact-card">
+                    <div className="tool-card-top"><h3>{action.title}</h3><div className="card-chip">{action.surface}</div></div>
+                    <p>{action.summary}</p>
+                    <button type="button" className="forge-button" onClick={() => void runConnectorAction(action.id)}>Run Playbook</button>
+                  </article>
+                ))}
+              </div>
+              {connectorResult && <article className="labs-card console-reply-card"><pre className="connector-output">{connectorResult}</pre></article>}
+            </section>
+
+            <section className="labs-section">
               <div className="section-heading">South Africa Tool Catalog</div>
               <div className="labs-grid tools-grid">
                 {labsOverview?.tools.map((tool) => (
@@ -248,6 +329,20 @@ const App: React.FC = () => {
                                 <option value="queued">queued</option><option value="in_progress">in progress</option><option value="completed">completed</option>
                               </select>
                             </div>
+                            <button
+                              type="button"
+                              className="ghost-button"
+                              onClick={() => {
+                                const editable = toEditableTask(task);
+                                setEditingTaskId(editable.id);
+                                setTaskTitle(editable.title);
+                                setTaskDescription(editable.description);
+                                setTaskOwner(editable.owner);
+                                setTaskPriority(editable.priority);
+                              }}
+                            >
+                              Edit Task
+                            </button>
                           </div>
                         ))}
                       </div>
@@ -255,12 +350,24 @@ const App: React.FC = () => {
                   </div>
                   <div className="forge-artifact-layout">
                     <article className="labs-card forge-artifact-create">
-                      <div className="tool-card-top"><h3>Add Artifact</h3><div className="card-chip">prompt · api · screen · note</div></div>
+                      <div className="tool-card-top"><h3>{editingTaskId ? 'Edit Task' : 'Add Task'}</h3><div className="card-chip">forge lane work</div></div>
+                      <label className="forge-label"><span>Title</span><input value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} className="forge-input" /></label>
+                      <label className="forge-label"><span>Description</span><textarea value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} className="forge-textarea" rows={3} /></label>
+                      <div className="forge-controls">
+                        <select value={taskOwner} className="forge-select" onChange={(e) => setTaskOwner(e.target.value)}>{ownerOptions.map((owner) => <option key={owner} value={owner}>{owner}</option>)}</select>
+                        <select value={taskPriority} className="forge-select" onChange={(e) => setTaskPriority(e.target.value)}><option value="critical">critical</option><option value="high">high</option><option value="building">building</option></select>
+                      </div>
+                      <button type="button" className="forge-button" onClick={() => void createOrUpdateTask()}>{editingTaskId ? 'Save Task' : 'Add Task'}</button>
+                    </article>
+                    <article className="labs-card forge-artifact-create">
+                      <div className="tool-card-top"><h3>{editingArtifactId ? 'Edit Artifact' : 'Add Artifact'}</h3><div className="card-chip">prompt · api · screen · note</div></div>
                       <label className="forge-label"><span>Type</span><select value={artifactType} className="forge-select" onChange={(e) => setArtifactType(e.target.value)}><option value="prompt">prompt</option><option value="api">api</option><option value="screen">screen</option><option value="note">note</option></select></label>
                       <label className="forge-label"><span>Title</span><input value={artifactTitle} onChange={(e) => setArtifactTitle(e.target.value)} className="forge-input" /></label>
                       <label className="forge-label"><span>Summary</span><textarea value={artifactSummary} onChange={(e) => setArtifactSummary(e.target.value)} className="forge-textarea" rows={3} /></label>
-                      <button type="button" className="forge-button" onClick={() => void createArtifact()}>Add Artifact Card</button>
+                      <button type="button" className="forge-button" onClick={() => void createArtifact()}>{editingArtifactId ? 'Save Artifact' : 'Add Artifact Card'}</button>
                     </article>
+                  </div>
+                  <div className="forge-artifact-layout">
                     <div className="artifact-grid">
                       {activeRoom.artifacts.map((artifact) => (
                         <article key={artifact.id} className="labs-card artifact-card">
@@ -268,6 +375,7 @@ const App: React.FC = () => {
                           <h3>{artifact.title}</h3>
                           <p>{artifact.summary}</p>
                           {artifact.link && <div className="artifact-link">{artifact.link}</div>}
+                          <button type="button" className="ghost-button" onClick={() => { const editable = toEditableArtifact(artifact); setEditingArtifactId(editable.id); setArtifactType(editable.artifact_type); setArtifactTitle(editable.title); setArtifactSummary(editable.summary); }}>Edit Artifact</button>
                         </article>
                       ))}
                     </div>
@@ -300,11 +408,15 @@ const App: React.FC = () => {
                 <div className="section-heading">Universal MCP Console</div>
                 <div className="labs-card forge-room-detail">
                   <div className="tool-card-top"><h3>MCP Chat</h3><div className="criticality-pill high">Model-backed</div></div>
+                  <label className="forge-label"><span>Model</span><select value={selectedModel} className="forge-select" onChange={(e) => setSelectedModel(e.target.value)}>{(consoleReply?.model_options ?? [{ id: 'deterministic', label: 'deterministic fallback', model: 'deterministic-fallback' }]).map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></label>
                   <label className="forge-label"><span>Ask About IDE, OS, CLI, Skills, Connectors, Azure, Or AWS</span><textarea value={consoleMessage} onChange={(e) => setConsoleMessage(e.target.value)} className="forge-textarea" rows={4} /></label>
-                  <button type="button" className="forge-button" onClick={() => void sendConsoleMessage()}>Send To MCP Console</button>
+                  <div className="forge-controls">
+                    <button type="button" className="forge-button" onClick={() => void sendConsoleMessage()}>Send To MCP Console</button>
+                    <button type="button" className="forge-button secondary-button" onClick={() => void streamConsoleMessage()}>Stream Reply</button>
+                  </div>
                   <div className="console-reply-card">
                     <div className="tool-card-top"><div className="card-chip">{consoleReply?.topic ?? 'waiting'}</div><div className="card-chip">{consoleReply?.model_used ?? 'deterministic-fallback'}</div></div>
-                    <p>{consoleReply?.response ?? 'Ask a question to get orchestration guidance and connector next steps.'}</p>
+                    <p>{consoleStream || consoleReply?.response || 'Ask a question to get orchestration guidance and connector next steps.'}</p>
                     {consoleReply && <>
                       <div className="section-heading">Suggested Actions</div>
                       <div className="deliverables-list">{consoleReply.suggested_actions.map((action) => <div key={action} className="deliverable-item">{action}</div>)}</div>
