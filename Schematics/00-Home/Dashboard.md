@@ -1,49 +1,123 @@
 ---
-title: Dashboard
+title: Orch Vault — Dashboard
 created: 2026-04-05
-updated: 2026-04-05
+updated: 2026-04-06
+author: Robyn
 tags:
   - home
   - dashboard
   - moc
-status: active
+  - navigation
 priority: critical
+status: active
 ---
 
-# Dashboard
+# Orch Vault — Dashboard
 
-## Start Here
+> Central knowledge base for the Orch multi-agent orchestration system and its integration with KasiLink.
+> Owner: [[Owner Profile | Kholofelo Robyn Rababalela]] · GitHub: RobynAwesome · Phase 4 in progress
 
-- [[KasiLink Integration Plan]]
-- [[Project Status]]
-- [[Implementation Plan]]
-- [[04-Updates/index]]
-- [[04-Updates/comms-log]]
-- [[04-Updates/dev-tracker]]
+---
 
-## Strategy
+## Active Right Now
 
-- [[Microsoft Contract Strategy]]
-- [[SA Startup Week Demo]]
-- [[Adoption Checklist]]
+| Priority | Note | Status |
+|----------|------|--------|
+| CRITICAL | [[SA Startup Week Demo]] | April 15-17, 2026 |
+| CRITICAL | [[KasiLink Integration Plan]] | Phase 1 building now |
+| HIGH | [[Project Status]] | Phase 4 in progress |
+| HIGH | [[Adoption Checklist]] | Pre-launch hardening |
 
-## Architecture
+---
 
-- [[CLI Specification]]
-- [[Database Schema]]
-- [[WhatsApp Integration]]
-- [[Neural Link]]
+## 01 — Mission
 
-## Mission And Training
+The core identity and vision for what Orch is.
 
-- [[Orch Blueprint]]
-- [[Owner Profile]]
-- [[Lead Self Report]]
-- [[Dev2 Behavioral Analysis]]
-- [[Kairos Reference]]
-- [[Phase 1 Walkthrough]]
+- [[Orch Blueprint]] — Personality, capabilities, and training specification. Source of truth for orch identity.
 
-## Archived Sources
+---
 
-- [[06-Reference/orch-code-implemtation/README]]
-- [[06-Reference/Archive/Implementations/orch-blueprint]]
+## 02 — Strategy
+
+Where we're going and how we get there.
+
+- [[KasiLink Integration Plan]] — Orch as AI microservice inside KasiLink. Architecture, tool mapping, phase roadmap.
+- [[Microsoft Contract Strategy]] — Azure partnership pitch, service mapping, action items.
+- [[SA Startup Week Demo]] — Hack Day demo plan, April 15-17, 2026.
+- [[Adoption Checklist]] — Steps from prototype to external adoption.
+
+---
+
+## 03 — Architecture
+
+How Orch is built.
+
+- [[CLI Specification]] — POSIX-style CLI reference: `serve`, `chat`, `agents`, `learn` commands.
+- [[Database Schema]] — SQLite Data Lake schema: `discussions` and `audit_logs` tables.
+- [[WhatsApp Integration]] — Evolution API bridge setup and configuration.
+- [[Neural Link]] — React/WebSocket real-time agent visualization GUI.
+
+---
+
+## 04 — Updates
+
+Active project coordination and status tracking.
+
+- [[Project Status]] — Current phase (Phase 4), capabilities, and progress checklist.
+- [[Implementation Plan]] — Full 4-phase engineering plan with tech stack.
+- [[Phase 1 Walkthrough]] — Completed Phase 1 tutorial and reference.
+- [[04-Updates/index|Updates Index]] — Hub for coordination files.
+- [[04-Updates/comms-log|Comms Log]] — Agent communication log.
+- [[04-Updates/task-board|Task Board]] — Sprint task tracker.
+- [[04-Updates/dev-tracker|Dev Tracker]] — Developer assignment history.
+- [[04-Updates/delegation-protocol|Delegation Protocol]] — Rules for agent delegation.
+
+---
+
+## 05 — Training
+
+Data and profiles for training the Orch AI system.
+
+- [[Owner Profile]] — Robyn's work ethic, communication style, and management patterns.
+- [[Lead Self Report]] — Claude Opus 4.6 behavioral audit after MVP sprint.
+- [[Dev2 Behavioral Analysis]] — DEV_2 (Gemini) failure patterns and detection strategies.
+- [[Kairos Reference]] — Claude Code's assistant mode architecture (reference).
+
+---
+
+## 06 — Reference
+
+Code samples and archived source files.
+
+- `06-Reference/` — `ci.yml`, `filesystem.py`, `search.py`, `write_file.py`
+- `06-Reference/Archive/` — Original source .txt/.md/.docx files before vault conversion
+- `06-Reference/orch-code-implemtation/` — Reference codebase (Rust + Python)
+
+---
+
+## Assets
+
+- `Assets/ORCH Apprenticeship Training Loop.png`
+- `Assets/Where we are 2026-04-03.jpg`
+
+---
+
+## Calendar
+
+| Date | Event |
+|------|-------|
+| Apr 15-17, 2026 | SA Startup Week Hack Day — Demo KasiLink + Orch |
+| Apr 30, 2026 | Phase 1 MVP deadline |
+| May 31, 2026 | Phase 2: Polish + Community |
+| Jun 1, 2026 | Phase 3 starts: Azure migration |
+| Sep 30, 2026 | Phase 3 deadline: Microsoft partnership ready |
+
+---
+
+## Quick Links
+
+- KasiLink live: https://kasi-link.vercel.app
+- Orch repo: https://github.com/RobynAwesome/Introduction-to-MCP
+- KasiLink repo: https://github.com/RobynAwesome/KasiLink
+- Portfolio: https://kholofelorababalela.vercel.app
