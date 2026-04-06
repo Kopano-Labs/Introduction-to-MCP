@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "1f9a401a7cf227d2",
+        "id": "a8d1f7a46a0340b8",
         "type": "tabs",
         "children": [
           {
-            "id": "e941e20503e212a1",
+            "id": "aeb07f0eec49c382",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "04-Updates/Project Status.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Project Status"
+              "title": "New tab"
             }
           }
         ]
@@ -183,8 +179,9 @@
       "bases:Create new base": false
     }
   },
-  "active": "e941e20503e212a1",
+  "active": "aeb07f0eec49c382",
   "lastOpenFiles": [
+    "04-Updates/Project Status.md",
     "04-Updates/dev-tracker.md",
     "04-Updates/comms-log.md",
     "04-Updates/task-board.md",
