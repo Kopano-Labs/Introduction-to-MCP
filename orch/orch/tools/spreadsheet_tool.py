@@ -33,7 +33,7 @@ def clean_spreadsheet(file_path: str, output_path: str = None) -> str:
         dropped_duplicates = initial_count - len(df)
         
         # 2. Standardize text casing and strip whitespace for string columns
-        for col in df.select_dtypes(include=['object']):
+        for col in df.select_dtypes(include=['object', 'string']):
             df[col] = df[col].astype(str).str.strip().str.title()
             # Handle 'Nan' strings that might have been created from actual NaN values
             df[col] = df[col].replace('Nan', None)

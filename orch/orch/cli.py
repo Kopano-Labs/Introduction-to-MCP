@@ -14,9 +14,8 @@ import re
 import importlib
 
 from .agent_manager import load_agents, Agent, save_agents
-from .moderator import Moderator
 from .database import get_db_connection
-from .database import get_db_connection, setup_database, log_message
+from .database import get_db_connection, setup_database, log_message, register_user, authenticate_user, grant_admin
 from .config import AGENTS_FILE
 
 app = typer.Typer()
@@ -458,6 +457,72 @@ def log_export(
             conn.close()
 
 
+# --- User Commands ---
+user_app = typer.Typer(help="Local user account commands.")
+app.add_typer(user_app, name="user")
+
+
+@user_app.command("register")
+def user_register(
+    email: str = typer.Option(..., "--email", "-e", help="User email address."),
+    password: str = typer.Option(..., "--password", "-p", help="User password."),
+    full_name: Optional[str] = typer.Option(None, "--name", "-n", help="Display name."),
+):
+    """
+    Registers a local Orch user account.
+    """
+    try:
+        user = register_user(email=email, password=password, full_name=full_name)
+        console.print(f"[bold green]User registered:[/bold green] {user['email']}")
+    except ValueError as e:
+        console.print(f"[bold red]Error:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+
+@user_app.command("login")
+def user_login(
+    email: str = typer.Option(..., "--email", "-e", help="User email address."),
+    password: str = typer.Option(..., "--password", "-p", help="User password."),
+):
+    """
+    Verifies local Orch user credentials.
+    """
+    user = authenticate_user(email=email, password=password)
+    if not user:
+        console.print("[bold red]Error:[/bold red] Invalid credentials.")
+        raise typer.Exit(code=1)
+
+    console.print(f"[bold green]Login successful.[/bold green]")
+    console.print(f"  Email: [cyan]{user['email']}[/cyan]")
+    console.print(f"  Role: [cyan]{user['role']}[/cyan]")
+    console.print(f"  God mode: [cyan]{user['god_mode']}[/cyan]")
+
+
+# --- Admin Commands ---
+admin_app = typer.Typer(help="Administrative account bootstrap commands.")
+app.add_typer(admin_app, name="admin")
+
+
+@admin_app.command("grant")
+def admin_grant(
+    email: str = typer.Option(..., "--email", "-e", help="User email address."),
+    god_mode: bool = typer.Option(False, "--god-mode", help="Enable elevated god mode flag."),
+):
+    """
+    Grants admin role to an existing local user account.
+    """
+    try:
+        user = grant_admin(email=email, god_mode=god_mode)
+    except ValueError as e:
+        console.print(f"[bold red]Error:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+    console.print(f"[bold green]Admin granted.[/bold green]")
+    console.print(f"  Email: [cyan]{user['email']}[/cyan]")
+    console.print(f"  Role: [cyan]{user['role']}[/cyan]")
+    console.print(f"  God mode: [cyan]{bool(user['god_mode'])}[/cyan]")
+
+
 # --- Learn Commands ---
 learn_app = typer.Typer(help="Tools for training and fine-tuning agents.")
 app.add_typer(learn_app, name="learn")
@@ -573,9 +638,10 @@ def launch(
 
     console.print(f"[bold green]Agents participating:[/bold green] {', '.join([a.id for a in selected_agents])}")
 
-    moderator_instance: Optional[Moderator] = None
+    moderator_instance: Optional[object] = None
     if moderator_agent_id:
         try:
+            from .moderator import Moderator
             moderator_instance = Moderator(agent_id=moderator_agent_id, agents=agents_map)
             if not hasattr(moderator_instance.amoderate, "__call__") or "unittest.mock" in type(moderator_instance.moderate).__module__:
                 moderator_instance.amoderate = moderator_instance.moderate  # test shim for mocked sync moderator

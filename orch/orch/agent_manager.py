@@ -2,7 +2,6 @@ from typing import Dict, List, Any, Optional
 from pydantic import BaseModel
 import json
 from pathlib import Path
-from litellm import completion, acompletion
 from rich.console import Console
 
 console = Console()
@@ -34,6 +33,8 @@ class Agent(BaseModel):
         messages.append({"role": "user", "content": current_turn_prompt})
 
         try:
+            from litellm import acompletion
+
             response = await acompletion(
                 model=self.model,
                 messages=messages,
@@ -64,6 +65,8 @@ class Agent(BaseModel):
         messages.append({"role": "user", "content": current_turn_prompt})
 
         try:
+            from litellm import completion
+
             response = completion(
                 model=self.model,
                 messages=messages,

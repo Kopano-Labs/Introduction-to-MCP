@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request, Depends, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from .database import init_db, get_db_connection
+from .database import init_db, get_db_connection, register_user, authenticate_user
 from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
@@ -50,6 +50,17 @@ class OverrideRequest(BaseModel):
     block_id: int
     override_score: int
     improvement_hint: Optional[str] = None
+
+
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    full_name: Optional[str] = None
+
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
 
 # --- API ENDPOINTS ---
 
@@ -108,6 +119,25 @@ async def get_updates():
     current = list(state.updates)
     state.updates = []
     return current
+
+
+@app.post("/auth/register")
+def register(request: RegisterRequest):
+    """Register a local Orch user account."""
+    try:
+        user = register_user(request.email, request.password, request.full_name)
+        return {"status": "ok", "user": user}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/auth/login")
+def login(request: LoginRequest):
+    """Authenticate a local Orch user account."""
+    user = authenticate_user(request.email, request.password)
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    return {"status": "ok", "user": user}
 
 @app.get("/sessions")
 def list_sessions():

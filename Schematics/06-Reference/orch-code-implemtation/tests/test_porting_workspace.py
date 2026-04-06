@@ -9,6 +9,7 @@ from src.commands import PORTED_COMMANDS
 from src.parity_audit import run_parity_audit
 from src.port_manifest import build_port_manifest
 from src.query_engine import QueryEnginePort
+from src.task import PortingTask
 from src.tools import PORTED_TOOLS
 
 
@@ -242,6 +243,14 @@ class PortingWorkspaceTests(unittest.TestCase):
         self.assertIn('Bootstrap Graph', graph_result.stdout)
         self.assertIn('mode=direct-connect', direct_result.stdout)
         self.assertIn('mode=deep-link', deep_link_result.stdout)
+
+    def test_tasks_module_import_and_shapes(self) -> None:
+        from src.tasks import default_tasks
+
+        tasks = default_tasks()
+        self.assertGreaterEqual(len(tasks), 1)
+        self.assertTrue(all(isinstance(task, PortingTask) for task in tasks))
+        self.assertTrue(all(task.key and task.description for task in tasks))
 
 
 if __name__ == '__main__':

@@ -8,6 +8,8 @@ Connect with the Architect:
 - GitHub: https://github.com/RobynAwesome/
 """
 import sqlite3
+import hashlib
+import secrets
 from pathlib import Path
 from typing import Optional
 from rich.console import Console
@@ -170,6 +172,21 @@ def init_db():
     );
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL UNIQUE,
+        full_name TEXT,
+        password_hash TEXT NOT NULL,
+        password_salt TEXT NOT NULL,
+        role TEXT NOT NULL DEFAULT 'user',
+        god_mode INTEGER NOT NULL DEFAULT 0,
+        is_active INTEGER NOT NULL DEFAULT 1,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
     conn.commit()
     conn.close()
     console.log("Database schema initialized successfully.")
@@ -178,6 +195,100 @@ def init_db():
 def setup_database():
     """Wrapper for init_db for external calls."""
     init_db()
+
+
+def _hash_password(password: str, salt: str) -> str:
+    return hashlib.sha256(f"{salt}:{password}".encode("utf-8")).hexdigest()
+
+
+def register_user(email: str, password: str, full_name: Optional[str] = None) -> dict:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    normalized_email = email.strip().lower()
+
+    cursor.execute("SELECT id FROM users WHERE email = ?", (normalized_email,))
+    if cursor.fetchone():
+        conn.close()
+        raise ValueError("A user with this email already exists.")
+
+    salt = secrets.token_hex(16)
+    password_hash = _hash_password(password, salt)
+    cursor.execute(
+        """
+        INSERT INTO users (email, full_name, password_hash, password_salt)
+        VALUES (?, ?, ?, ?)
+        """,
+        (normalized_email, full_name, password_hash, salt),
+    )
+    conn.commit()
+    cursor.execute(
+        "SELECT id, email, full_name, role, god_mode, is_active, created_at FROM users WHERE email = ?",
+        (normalized_email,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+    return dict(row)
+
+
+def authenticate_user(email: str, password: str) -> Optional[dict]:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    normalized_email = email.strip().lower()
+    cursor.execute(
+        """
+        SELECT id, email, full_name, password_hash, password_salt, role, god_mode, is_active, created_at
+        FROM users
+        WHERE email = ?
+        """,
+        (normalized_email,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+    if not row:
+        return None
+    if not row["is_active"]:
+        return None
+
+    expected = _hash_password(password, row["password_salt"])
+    if expected != row["password_hash"]:
+        return None
+
+    return {
+        "id": row["id"],
+        "email": row["email"],
+        "full_name": row["full_name"],
+        "role": row["role"],
+        "god_mode": bool(row["god_mode"]),
+        "is_active": bool(row["is_active"]),
+        "created_at": row["created_at"],
+    }
+
+
+def grant_admin(email: str, god_mode: bool = False) -> dict:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    normalized_email = email.strip().lower()
+    cursor.execute(
+        """
+        UPDATE users
+        SET role = 'admin',
+            god_mode = ?,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE email = ?
+        """,
+        (1 if god_mode else 0, normalized_email),
+    )
+    if cursor.rowcount == 0:
+        conn.close()
+        raise ValueError("User not found.")
+    conn.commit()
+    cursor.execute(
+        "SELECT id, email, full_name, role, god_mode, is_active, created_at FROM users WHERE email = ?",
+        (normalized_email,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+    return dict(row)
 
 
 def record_creator_event(
