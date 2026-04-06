@@ -17,13 +17,9 @@ This project is the reference implementation for the Model Context Protocol (MCP
 
 ## Prerequisites
 
-- Python 3.9+
-- API keys for your chosen LLM providers (e.g., Google, xAI).
-
-## Prerequisites
-
-- Python 3.9+
-- Anthropic API Key
+- Python 3.11+
+- Anthropic API key
+- Optional additional provider keys if you extend the client beyond Anthropic-backed flows
 
 ## Setup
 
@@ -41,18 +37,16 @@ This project is the reference implementation for the Model Context Protocol (MCP
     source .venv/bin/activate  # On Windows: .venv\Scripts\activate
     ```
 
-3.  **Install dependencies**:
+3.  **Install the CLI subproject**:
 
     ```bash
-    pip install -e .
+    python -m pip install -e ./CLI
     ```
 
 4.  **Configure API Keys**:
     Create a `.env` file in the project root and add your API keys. For testing, you can use the value `MOCK_KEY`.
     ```env
     # Example .env file
-    GOOGLE_API_KEY="your_gemini_api_key_here"
-    XAI_API_KEY="your_grok_api_key_here"
     ANTHROPIC_API_KEY="your_anthropic_api_key_here"
     ```
 
@@ -63,35 +57,23 @@ This project is the reference implementation for the Model Context Protocol (MCP
 Add agents to your local registry. The `id` is a local nickname for your agent.
 
 ```bash
-# Add a Gemini agent
-orch agents config gemini-pro --provider google --model gemini-pro --api-key "your_google_api_key"
-
-# Add a Grok agent for moderation (using MOCK_KEY for testing)
-orch agents config grok-mod --provider xai --model grok-1 --api-key "MOCK_KEY"
+# Launch the MCP CLI
+mcp-cli
 ```
 
-### 2. List Your Active Roster
-
-See which agents are configured and ready for a discussion.
+Pass additional MCP server scripts as arguments when needed:
 
 ```bash
-orch agents list
-```
-
-### 3. Launch a Discussion
-
-Start a simulated "Think Tank" on any topic. Assign roles for participating agents and the moderator.
-
-```bash
-orch serve launch \
-  --topic "The future of AI in South African fintech" \
-  --agents "gemini-pro" \
-  --moderator "grok-mod" \
-  --max-rounds 5
+mcp-cli path/to/extra_server.py
 ```
 
 ## Development
 
-For information on how to contribute, set up a development environment, and run tests, please see our `CONTRIBUTING.md` file.
+This repository has multiple surfaces:
+
+- `orch`: the main orchestration framework installed from repo root
+- `mcp-cli`: the separate CLI app installed from `./CLI`
+
+For shared contribution guidance, tests, and CI checks, see `CONTRIBUTING.md`.
 
 You can track the project's progress on the Capabilities Roadmap.

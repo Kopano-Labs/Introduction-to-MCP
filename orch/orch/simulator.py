@@ -13,7 +13,7 @@ import httpx  # ← async HTTP client for broadcasting
 import asyncio
 import inspect
 from unittest.mock import AsyncMock
-from .cli import execute_tool_code
+from .tool_runtime import execute_tool_code
 
 console = Console()
 

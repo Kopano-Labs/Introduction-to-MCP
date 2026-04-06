@@ -50,6 +50,17 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
 - **Data Lake & Fine-Tuning** — Generate high-quality JSONL/Alpaca/ChatML training data from discussion history
 - **Data Analysis Tools** — Built-in sentiment analysis, dataset comparison, and spreadsheet cleaning
 
+## Repository Layout
+
+- Root package install: `python -m pip install -e .`
+  This is the primary repo entrypoint and exposes `orch` via `orch.orch.cli:app`.
+- CLI subproject install: `python -m pip install -e ./CLI`
+  This is a separate MCP-focused terminal app exposed as `mcp-cli`.
+- GUI project: `orch/gui`
+  Use `npm run dev`, `npm run lint`, and `npm run build` inside that directory.
+- Demo runbook: [DEMO_DAY_RUNBOOK.md](DEMO_DAY_RUNBOOK.md)
+- 10-phase task map: [DEMO_DAY_10_PHASES_50_TASKS.md](DEMO_DAY_10_PHASES_50_TASKS.md)
+
 ---
 
 ## 🚀 Quick Start
@@ -93,6 +104,15 @@ The browser will automatically open at `http://127.0.0.1:8000`, where you can wa
 # Test WhatsApp integration
 orch whatsapp test --message "Neural Link Stable"
 ```
+
+## Demo Day
+
+- Runbook: [DEMO_DAY_RUNBOOK.md](DEMO_DAY_RUNBOOK.md)
+- 10 phases / 50 tasks: [DEMO_DAY_10_PHASES_50_TASKS.md](DEMO_DAY_10_PHASES_50_TASKS.md)
+- Preflight script: `.\scripts\demo_day_preflight.ps1`
+- Readiness check: `python .\scripts\demo_day_readiness.py --quick`
+- Smoke check: `python .\scripts\demo_day_smoke.py --strict`
+- Launch helper: `.\scripts\demo_day_launch.ps1`
 
 ---
 

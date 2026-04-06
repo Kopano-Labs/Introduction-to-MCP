@@ -75,6 +75,20 @@ orch agents list
 orch serve api --host 127.0.0.1 --port 8000
 ```
 
+Demo-day preflight:
+
+```powershell
+.\scripts\demo_day_preflight.ps1
+```
+
+Optional readiness and smoke checks:
+
+```powershell
+python .\scripts\demo_day_readiness.py --quick
+python .\scripts\demo_day_smoke.py --strict
+.\scripts\demo_day_launch.ps1
+```
+
 API endpoints:
 
 - `POST /auth/register`
@@ -87,3 +101,10 @@ Open:
 ```text
 http://127.0.0.1:8000
 ```
+
+## 6) Demo day flow
+
+Canonical runbook:
+
+- `DEMO_DAY_RUNBOOK.md`
+- `DEMO_DAY_10_PHASES_50_TASKS.md`

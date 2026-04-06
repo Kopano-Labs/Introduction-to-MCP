@@ -17,47 +17,58 @@ status: active
 > Canonical home for the Structure/Schematics/ layer.
 > This mirrors the Anthropic Introduction to MCP vault pattern while staying grounded in KasiLink's repo-backed docs.
 
+## Canonical Notes
+
+- Dashboard: `Schematics/00-Home/Dashboard.md`
+- Mission anchor: `Schematics/01-Mission/Orch Blueprint.md`
+- Delivery truth: `Schematics/04-Updates/Project Status.md`
+- Coordination hub: `Schematics/04-Updates/index.md`
+- Execution plan: `Schematics/04-Updates/Implementation Plan.md`
+- Task board: `Schematics/04-Updates/task-board.md`
+- Reference set: `Schematics/06-Reference/`
+
 ## Active Right Now
 
 | Priority | Note                   | Status                          |
 | -------- | ---------------------- | ------------------------------- |
-| CRITICAL | [[KasiLink Blueprint]] | Mission anchor                  |
-| CRITICAL | [[Execution Map]]      | Current delivery path           |
-| CRITICAL | [[System Map]]         | Architecture and file ownership |
-| HIGH     | [[Coordination Hub]]   | Live planning and status        |
-| HIGH     | [[AI Editor Rules]]    | Orchestration and guardrails    |
+| CRITICAL | [[Orch Blueprint]]     | Mission anchor                  |
+| CRITICAL | [[Project Status]]     | Current delivery path           |
+| CRITICAL | [[Dashboard]]          | Architecture and file ownership |
+| HIGH     | [[04-Updates/index\|Updates Index]] | Live planning and status |
+| HIGH     | [[task-board]]         | Execution ownership             |
 
 ## 01 - Mission
 
-[[KasiLink Blueprint]] - Product identity, mission, user problem, and why the platform exists.
+[[Orch Blueprint]] - Product identity, mission, user problem, and why the platform exists.
 
 ## 02 - Strategy
 
-[[Execution Map]] - Current phase structure, rollout priorities, and the standard path through the repo docs.
+[[Implementation Plan]] - Current phase structure, rollout priorities, and the standard path through the repo docs.
 
 ## 03 - Architecture
 
-[[System Map]] - Route ownership, styling rules, design evidence, information archives, and production surfaces.
+[[Dashboard]] - Route ownership, styling rules, design evidence, information archives, and production surfaces.
 
 ## 04 - Updates
 
-[[Coordination Hub]] - Canonical coordination map into Structure/Updates/.
-[[Execution Note]] - Current execution priorities and hardening direction.
-[[Operating Rules]] - Canonical operating and placement rules.
-[[Collaboration Protocol]] - Delegation and review standard.
-[[Truth Register]] - Normalized corrections to stale legacy claims.
-[[Implementation Gaps]] - Real remaining implementation gaps after the truth pass.
-[[Billing Model]] - Billing, pricing, and provider strategy snapshot.
-[[Project Audit Snapshot]] - Current product and repo inventory summary.
-[[Issue Hub]] - QA and regression synthesis entry point.
+[[04-Updates/index|Updates Index]] - Canonical coordination map into `Schematics/04-Updates/`.
+[[Project Status]] - Current execution priorities and hardening direction.
+[[delegation-protocol]] - Delegation and review standard.
+[[task-board]] - Live ownership queue and next actions.
+[[comms-log]] - Chronological execution log.
+[[dev-tracker]] - Per-role execution history.
+[[Azure Demo Day Playbook]] - Demo-day packaging and Azure-facing delivery guidance.
 
 ## 05 - Training
 
-[[AI Editor Rules]] - Rules for orch, AI editors, and contributors working inside KasiLink.
+[[Lead Self Report]] - Lead execution patterns and operating expectations.
 
 ## 06 - Reference
 
-[[Reference Map]] - Source notes, issue audits, design folders, and Obsidian templates.
+[[CLI Specification]] - CLI source notes and command reference.
+[[Database Schema]] - Data Lake structure and persistence notes.
+[[Neural Link]] - GUI and websocket reference.
+[[WhatsApp Integration]] - Messaging bridge reference.
 
 ## Quick Links
 
