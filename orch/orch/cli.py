@@ -17,6 +17,7 @@ from .agent_manager import load_agents, Agent, save_agents
 from .database import get_db_connection
 from .database import get_db_connection, setup_database, log_message, register_user, authenticate_user, grant_admin
 from .config import AGENTS_FILE
+from .braintrust import status as braintrust_status, log_eval as braintrust_log_eval, log_observation as braintrust_log_observation
 
 app = typer.Typer()
 console = Console()
@@ -526,6 +527,74 @@ def admin_grant(
 # --- Learn Commands ---
 learn_app = typer.Typer(help="Tools for training and fine-tuning agents.")
 app.add_typer(learn_app, name="learn")
+
+# --- Braintrust Commands ---
+braintrust_app = typer.Typer(help="Braintrust evaluation and observation commands.")
+app.add_typer(braintrust_app, name="braintrust")
+
+
+@braintrust_app.command("status")
+def bt_status():
+    """
+    Shows Braintrust Phase 5/6 configuration status loaded from environment.
+    """
+    console.print_json(data=braintrust_status())
+
+
+@braintrust_app.command("eval")
+def bt_eval(
+    name: str = typer.Option(..., "--name", "-n", help="Evaluation name."),
+    input_text: str = typer.Option(..., "--input", "-i", help="Evaluation input text."),
+    output_text: str = typer.Option(..., "--output", "-o", help="Evaluation output text."),
+    score: Optional[float] = typer.Option(None, "--score", "-s", help="Optional score value."),
+    metadata: Optional[str] = typer.Option(None, "--metadata", "-m", help="Optional JSON metadata."),
+):
+    """
+    Logs an evaluation event to local analytics and Braintrust (if configured).
+    """
+    parsed_metadata: Optional[Dict[str, object]] = None
+    if metadata:
+        try:
+            parsed_metadata = json.loads(metadata)
+            if not isinstance(parsed_metadata, dict):
+                raise ValueError("Metadata JSON must be an object.")
+        except Exception as e:
+            console.print(f"[bold red]Error:[/bold red] Invalid --metadata JSON. {e}")
+            raise typer.Exit(code=1)
+
+    result = braintrust_log_eval(
+        name=name,
+        input_text=input_text,
+        output_text=output_text,
+        score=score,
+        metadata=parsed_metadata,
+    )
+    console.print_json(data=result)
+
+
+@braintrust_app.command("observe")
+def bt_observe(
+    event: str = typer.Option(..., "--event", "-e", help="Observation event name."),
+    metadata: Optional[str] = typer.Option(None, "--metadata", "-m", help="Optional JSON metadata."),
+):
+    """
+    Logs an observation event to local analytics and Braintrust Observation (if configured).
+    """
+    parsed_metadata: Optional[Dict[str, object]] = None
+    if metadata:
+        try:
+            parsed_metadata = json.loads(metadata)
+            if not isinstance(parsed_metadata, dict):
+                raise ValueError("Metadata JSON must be an object.")
+        except Exception as e:
+            console.print(f"[bold red]Error:[/bold red] Invalid --metadata JSON. {e}")
+            raise typer.Exit(code=1)
+
+    result = braintrust_log_observation(
+        event_name=event,
+        metadata=parsed_metadata,
+    )
+    console.print_json(data=result)
 
 @learn_app.command(name="generate-tuning-data")
 def generate_tuning_data(

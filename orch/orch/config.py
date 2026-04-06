@@ -36,4 +36,17 @@ class Settings(BaseSettings):
     loadshedding_provider_url: Optional[str] = None
     orch_public_url: Optional[str] = None
 
+    # Braintrust Integration (Phase 5)
+    braintrust_api_key: Optional[str] = None
+    braintrust_project_id: Optional[str] = None
+    braintrust_default_project: Optional[str] = None
+    braintrust_base_url: str = "https://api.braintrust.dev"
+    braintrust_events_path: Optional[str] = None
+
+    # Observation Braintrust Integration (Phase 6)
+    observation_braintrust_api_key: Optional[str] = None
+    observation_braintrust_project_id: Optional[str] = None
+    observation_braintrust_base_url: Optional[str] = None
+    observation_braintrust_events_path: Optional[str] = None
+
 settings = Settings()

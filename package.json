@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "braintrust": "^3.7.1"
+  }
+}

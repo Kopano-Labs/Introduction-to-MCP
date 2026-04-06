@@ -1,0 +1,44 @@
+{
+  "name": "termi-link",
+  "version": "1.1.0",
+  "description": "This library provides terminal links for terminals that support them.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/king8fisher/termi-link.git"
+  },
+  "scripts": {
+    "build": "pnpm test && tsup",
+    "test": "vitest --run",
+    "wtest": "vitest",
+    "prepublishOnly": "pnpm build"
+  },
+  "keywords": [
+    "terminal",
+    "link",
+    "hyperlink",
+    "terminal-link",
+    "terminal-hyperlink",
+    "terminal link",
+    "terminal hyperlink"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "author": "Anton Veretennikov (king8fisher)",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "@vitest/ui": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.2"
+  }
+}
