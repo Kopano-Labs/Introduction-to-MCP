@@ -21,6 +21,35 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-06 07:35 | Lead | PHASE 7 RUNTIME + PHASE 8 FIRST FLOW + ORCH CODE LOOP COMPLETE
+
+**Action:** Converted the Phase 7 and Phase 8 backbones into the first live runtime flows.
+
+**Completed in code:**
+- Added `orch/orch/language_runtime.py`
+- Added `/api/labs/route-prompt` for multilingual routing
+- Added `/api/labs/translate` for deterministic phrasebook translation execution
+- Added `orch/orch/cowork.py` with persisted Cowork Room state in SQLite
+- Added `/api/labs/cowork/rooms`, room-detail, task-create, and task-status endpoints
+- Added `orch/orch/orch_code.py`
+- Added `/api/labs/orch-code/teach` and `/api/labs/orch-code/profile`
+- Expanded `tests/test_labs_api.py` to cover translation, routing, cowork persistence, and Orch Code teaching
+
+**What moved from planned to runnable:**
+- Phase 7 now has live multilingual routing and translation execution
+- Phase 8 now has a first runnable Cowork Room flow
+- Orch Code now has a first teaching loop grounded in the repo's actual stack patterns
+
+**Verification:**
+- `python -m pytest tests/test_labs_api.py -q` -> 10 passed
+- `python -m pytest -q` -> 67 passed
+- `python -m compileall orch/orch` -> clean
+- `npm run build` in `orch/gui` -> clean
+
+**Directive to Lead:**
+- Next highest-value move is deeper model-backed multilingual generation and a richer Cowork UI
+- Keep Orch Code learning tied to repo evidence, not abstract capability claims
+
 ### 2026-04-06 06:05 | Lead | PHASE 7, 8, AND 9 SCAFFOLDING STARTED
 
 **Action:** Started implementation beyond the initial Labs gallery by adding accessibility, cowork, coding-mode, and research backbones.

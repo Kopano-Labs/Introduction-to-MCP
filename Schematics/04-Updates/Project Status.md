@@ -47,8 +47,11 @@ status: active
 - [x] SA language and access API scaffolding added
 - [x] Cowork and Orch Code surface scaffolding added
 - [x] Product-readiness research map added
+- [x] Multilingual routing and phrasebook translation execution added
+- [x] First runnable Cowork Room flow added
+- [x] First Orch Code teaching loop added
 - [ ] Additional Labs tools beyond initial registry
-- [ ] Deeper accessibility and multilingual runtime implementation
+- [ ] Deep model-backed translation quality beyond deterministic runtime routing
 
 ## What orch Can Do
 
@@ -89,8 +92,17 @@ orch now has explicit roadmap commitment for all official South African language
 ### Phase 7 Backbone
 `/api/labs/languages` and `/api/labs/language-plan` now expose the 12 official South African languages, SASL coverage, AAC-aware access modes, and accessibility-first planning logic.
 
+### Phase 7 Runtime
+`/api/labs/route-prompt` and `/api/labs/translate` now provide the first live multilingual routing and deterministic translation execution layer.
+
 ### Phase 8 Backbone
 `/api/labs/cowork` and `/api/labs/launch-config` now expose Cowork Room, Stitch-like canvas direction, Orch Code tracks, and the 50/50 Anthropic/Codex launch-surface mix.
+
+### Phase 8 Runtime
+`/api/labs/cowork/rooms`, `/api/labs/cowork/rooms/{id}`, and task-status endpoints now provide the first runnable Cowork Room execution loop with persisted rooms, lanes, and task ownership.
+
+### Orch Code Runtime
+`/api/labs/orch-code/teach` and `/api/labs/orch-code/profile` now provide the first teaching loop, grounded in this repo's Python, FastAPI, pytest, React, and Schematics patterns.
 
 ## Capabilities Roadmap
 

@@ -1,9 +1,21 @@
+from pathlib import Path
+
+import pytest
 from fastapi.testclient import TestClient
 
+from orch.orch import database
 from orch.orch.api import app
 
 
 client = TestClient(app)
+
+
+@pytest.fixture
+def isolated_labs_db(tmp_path, monkeypatch):
+    db_path = tmp_path / "labs_test.db"
+    monkeypatch.setattr(database, "DB_PATH", db_path)
+    database.init_db()
+    yield db_path
 
 
 def test_labs_overview_endpoint():
@@ -60,3 +72,79 @@ def test_labs_launch_config_exposes_anthropic_codex_mix():
     assert payload["visual_mix"]["anthropic"] == 0.5
     assert payload["visual_mix"]["codex"] == 0.5
     assert payload["cowork"]["stitch_canvas"] is True
+
+
+def test_translate_endpoint_uses_phrasebook():
+    response = client.post(
+        "/api/labs/translate",
+        json={"text": "acknowledged", "target_language": "isiZulu"},
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["translated_text"] == "Kuqinisekisiwe"
+    assert payload["target_language"]["id"] == "zu-za"
+
+
+def test_route_prompt_detects_language():
+    response = client.post(
+        "/api/labs/route-prompt",
+        json={"prompt": "Sawubona, ngicela usizo", "target_language": "English"},
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["language_id"] == "zu-za"
+    assert payload["response_language_id"] == "en-za"
+    assert payload["translation_required"] is True
+
+
+def test_cowork_room_flow_persists_tasks(isolated_labs_db):
+    create_response = client.post(
+        "/api/labs/cowork/rooms",
+        json={"name": "Phase 8 Build Room", "mission": "Ship the first cowork flow", "lead": "Lead"},
+    )
+    assert create_response.status_code == 200
+    room = create_response.json()["room"]
+    assert room["name"] == "Phase 8 Build Room"
+    assert len(room["tasks"]) == 3
+
+    task_response = client.post(
+        f"/api/labs/cowork/rooms/{room['id']}/tasks",
+        json={
+            "title": "Implement room timeline",
+            "description": "Add timeline and dispatch actions.",
+            "owner": "DEV_1",
+            "priority": "critical",
+            "lane": "build",
+        },
+    )
+    assert task_response.status_code == 200
+    task = task_response.json()["task"]
+    assert task["owner"] == "DEV_1"
+
+    update_response = client.post(
+        f"/api/labs/cowork/tasks/{task['id']}/status",
+        json={"status": "in_progress"},
+    )
+    assert update_response.status_code == 200
+    assert update_response.json()["task"]["status"] == "in_progress"
+
+    detail_response = client.get(f"/api/labs/cowork/rooms/{room['id']}")
+    assert detail_response.status_code == 200
+    detail = detail_response.json()["room"]
+    assert any(item["title"] == "Implement room timeline" for item in detail["lanes"]["build"])
+
+
+def test_orch_code_teaching_loop_reads_repo_patterns(isolated_labs_db):
+    teach_response = client.post("/api/labs/orch-code/teach")
+    assert teach_response.status_code == 200
+    payload = teach_response.json()
+    lesson_keys = {lesson["lesson_key"] for lesson in payload["taught_lessons"]}
+    assert "python-fastapi-api" in lesson_keys
+    assert "schematics-discipline" in lesson_keys
+
+    profile_response = client.get("/api/labs/orch-code/profile")
+    assert profile_response.status_code == 200
+    profile = profile_response.json()
+    assert profile["title"] == "Orch Code"
+    assert profile["summary"]["learned_lessons"] >= 1
+    assert "python-core" in profile["tracks"]

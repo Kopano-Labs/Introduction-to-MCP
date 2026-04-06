@@ -92,7 +92,9 @@ status: active
 - [x] Add the 12 official South African languages to the Labs system model
 - [x] Add language-plan API scaffolding
 - [x] Add AAC, adaptive speech, and text-first access modes to the Labs system model
-- [ ] Support all official South African languages in runtime routing and response generation
+- [x] Add first multilingual routing runtime
+- [x] Add deterministic translation execution for core phrases and handoff labels
+- [ ] Support all official South African languages in deeper model-backed response generation
 - [ ] Add language-aware prompting and translation assist layers
 - [ ] Add speech-impairment-aware interaction execution
 - [ ] Add text-first, voice-assisted, and adaptive fallback flows end-to-end
@@ -101,6 +103,8 @@ status: active
 
 - [x] Add Cowork and Orch Code surfaces to the Labs system model
 - [x] Add launch config for 50/50 Anthropic/Codex visual direction with Stitch-inspired cowork support
+- [x] Add persisted Cowork Room flow with rooms, lanes, tasks, and status updates
+- [x] Add first Orch Code teaching loop against the current repo
 - [ ] Add pilot analytics and impact metrics for Labs tools
 - [ ] Add experiment graduation criteria
 - [ ] Add community feedback loops
@@ -118,3 +122,4 @@ status: active
 1. `python -m pytest tests/test_labs_api.py -q` — Verify Labs endpoints
 2. `python -m pytest -q` — Verify the full suite remains green
 3. `python -m compileall orch orch/orch` — Verify package compiles cleanly
+4. `npm run build` from `orch/gui` — Verify the launch surface still builds

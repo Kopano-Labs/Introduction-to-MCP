@@ -80,6 +80,47 @@ def init_db():
     );
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS cowork_rooms (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        mission TEXT NOT NULL,
+        lead TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'active',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS cowork_tasks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        room_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT,
+        owner TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'queued',
+        priority TEXT NOT NULL DEFAULT 'high',
+        lane TEXT NOT NULL DEFAULT 'build',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (room_id) REFERENCES cowork_rooms (id)
+    );
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS orch_code_lessons (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        lesson_key TEXT NOT NULL UNIQUE,
+        title TEXT NOT NULL,
+        track TEXT NOT NULL,
+        source TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'queued',
+        confidence INTEGER NOT NULL DEFAULT 0,
+        notes TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
     conn.commit()
     conn.close()
     console.log("Database schema initialized successfully.")

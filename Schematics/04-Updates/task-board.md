@@ -64,7 +64,10 @@ status: active
 | SA language phase definition | COMPLETE | Lead |
 | Speech-access phase definition | COMPLETE | Lead |
 | Language-plan API | COMPLETE | Lead |
+| Multilingual runtime routing + translation | COMPLETE | Lead |
 | Cowork + Orch Code API scaffolding | COMPLETE | Lead |
+| Runnable Cowork Room flow | COMPLETE | Lead |
+| First Orch Code teaching loop | COMPLETE | Lead |
 | Runnable Labs feature expansion | OPEN | DEV_1 |
 | Accessibility implementation prep | OPEN | DEV_2 |
 | Research backlog ranking | OPEN | Lead |
