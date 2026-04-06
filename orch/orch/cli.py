@@ -1,20 +1,14 @@
 import typer
 from rich.console import Console
 from rich.panel import Panel
-from rich.text import Text
-from rich.live import Live
 from rich.table import Table
 from rich.markdown import Markdown
-import time
-from typing import List, Optional
 from typing import List, Optional, Dict
 import json
 from pathlib import Path
-import re
 import importlib
 
 from .agent_manager import load_agents, Agent, save_agents
-from .database import get_db_connection
 from .database import get_db_connection, setup_database, log_message, register_user, authenticate_user, grant_admin
 from .config import AGENTS_FILE
 from .braintrust import status as braintrust_status, log_eval as braintrust_log_eval, log_observation as braintrust_log_observation

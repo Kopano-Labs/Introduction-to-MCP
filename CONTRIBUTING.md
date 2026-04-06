@@ -44,7 +44,11 @@ If you're looking to contribute code, start by checking our GitHub Issues for is
     ```bash
     pip install -e .
     ```
-4.  **Configure API Keys**: `orch` uses `Pydantic-Settings` for configuration. Create a `.env` file in the root of your project and add your API keys for LLM providers (e.g., `GOOGLE_API_KEY`, `XAI_API_KEY`). For testing without real keys, you can use `MOCK_KEY`.
+4.  **Install Dev Tools**:
+    ```bash
+    python -m pip install pytest ruff
+    ```
+5.  **Configure API Keys**: `orch` uses `Pydantic-Settings` for configuration. Create a `.env` file in the root of your project and add your API keys for LLM providers (e.g., `GOOGLE_API_KEY`, `XAI_API_KEY`). For testing without real keys, you can use `MOCK_KEY`.
     ```env
     # Example .env content
     GOOGLE_API_KEY="your_gemini_api_key_here"
@@ -54,15 +58,16 @@ If you're looking to contribute code, start by checking our GitHub Issues for is
     # WHATSAPP_INSTANCE_NAME="main"
     # WHATSAPP_RECIPIENT="1234567890@s.whatsapp.net"
     ```
-5.  **Run Tests**: Ensure everything is set up correctly by running the tests (once a testing framework is implemented).
+6.  **Run Quality Checks**: Ensure everything is set up correctly by running the same baseline checks used in CI.
     ```bash
-    # Placeholder: command to run tests will go here
+    python -m pytest -q
+    ruff check .
     ```
 
 ## Development Workflow
 
 - **Branching**: Create a new branch for each feature or bug fix: `git checkout -b feature/your-feature-name` or `git checkout -b bugfix/issue-number`.
-- **Coding Style**: Adhere to PEP 8. We will integrate linters in our CI/CD pipeline.
+- **Coding Style**: Adhere to PEP 8 and keep `ruff check .` passing.
 - **Testing**:
   - Add unit tests for new features and bug fixes, especially for orchestration logic, tools, resources, and prompts.
   - Include integration tests simulating multi-LLM workflows.

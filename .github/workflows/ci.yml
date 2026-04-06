@@ -38,3 +38,45 @@ jobs:
       - name: Compile package
         run: |
           python -m compileall orch orch/orch
+
+  cli-package-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate CLI subproject install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ./CLI
+
+  gui-check:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: orch/gui
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: orch/gui/package-lock.json
+
+      - name: Install GUI dependencies
+        run: npm ci
+
+      - name: Lint GUI
+        run: npm run lint
+
+      - name: Build GUI
+        run: npm run build

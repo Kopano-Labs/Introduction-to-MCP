@@ -14,14 +14,13 @@ def sql_query(query: str) -> str:
         return f"Error: Database not found at {DB_PATH}"
 
     try:
-        conn = sqlite3.connect(DB_PATH)
-        # Using pandas for nice formatting
-        df = pd.read_sql_query(query, conn)
-        conn.close()
-        
+        with sqlite3.connect(DB_PATH) as conn:
+            # Using pandas for nice formatting
+            df = pd.read_sql_query(query, conn)
+
         if df.empty:
             return "No results found for the given query."
-            
+
         return df.to_markdown(index=False)
     except Exception as e:
         return f"Error executing SQL query: {e}"

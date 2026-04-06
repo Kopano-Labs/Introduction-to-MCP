@@ -115,26 +115,10 @@ orch whatsapp test --message "Neural Link Stable"
   - [x] Loadshedding-aware scheduling
   - [x] Gig matching AI
 
+## Contributing
 
-Contributing
-See CONTRIBUTING.md — we welcome PRs!
-License
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, testing, and pull request guidance.
+
+## License
+
 MIT © RobynAwesome
-
-Made with ❤️ for the AI agent ecosystem
-Protected by SafeSkill
-textJust paste the whole thing into your `README.md` and push. It will look **professional**, modern, and instantly communicate what `orch` + **SafeSkill** are all about.
-
-Want me to also generate:
-- A better banner image using Grok Imagine?
-- Screenshots/GIFs section?
-- Or a dark-mode friendly version?
-
-Just say the word! 🚀
-
-```bash
-git clone https://github.com/RobynAwesome/Introduction-to-MCP.git
-cd Introduction-to-MCP
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -e .

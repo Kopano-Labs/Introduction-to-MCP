@@ -266,8 +266,6 @@ const App: React.FC = () => {
   const completedExecutionDev2Dev3Cycle2 = executionPlanDev2Dev3Cycle2.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionDev2Dev3LeadPhase = executionPlanDev2Dev3LeadPhase.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
 
-  const fetchSessions = async () => setSessions(await (await fetch(`${apiBase}/sessions`)).json());
-  const fetchLabsOverview = async () => setLabsOverview(await (await fetch(`${apiBase}/api/labs/overview`)).json());
   const fetchLabsAnalytics = async () => setLabsAnalytics(await (await fetch(`${apiBase}/api/labs/analytics`)).json());
   const fetchOrchCodeControls = async () => setOrchCodeProfile(await (await fetch(`${apiBase}/api/labs/orch-code/controls`)).json());
   const fetchCoworkRooms = async () => {
@@ -289,6 +287,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
     ws.current = new WebSocket(`${apiBase.replace('http', 'ws')}/ws/live`);
     ws.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -298,8 +297,42 @@ const App: React.FC = () => {
         setSelectedSession((prev) => prev ? ({ ...prev, rounds: prev.rounds?.map((round) => ({ ...round, blocks: round.blocks.map((block) => block.block_id === data.block_id ? { ...block, override_score: data.override_score, improvement_hint: data.improvement_hint } : block) })) }) : null);
       }
     };
-    void fetchSessions(); void fetchLabsOverview(); void fetchCoworkRooms(); void fetchLabsAnalytics(); void fetchOrchCodeControls();
-    return () => ws.current?.close();
+
+    const loadInitialData = async () => {
+      const [sessionsData, overviewData, analyticsData, orchCodeData, roomsPayload] = await Promise.all([
+        fetch(`${apiBase}/sessions`).then((response) => response.json()),
+        fetch(`${apiBase}/api/labs/overview`).then((response) => response.json()),
+        fetch(`${apiBase}/api/labs/analytics`).then((response) => response.json()),
+        fetch(`${apiBase}/api/labs/orch-code/controls`).then((response) => response.json()),
+        fetch(`${apiBase}/api/labs/cowork/rooms`).then((response) => response.json()),
+      ]);
+
+      if (!isMounted) return;
+
+      setSessions(sessionsData);
+      setLabsOverview(overviewData);
+      setLabsAnalytics(analyticsData);
+      setOrchCodeProfile(orchCodeData);
+      setCoworkRooms(roomsPayload.rooms);
+
+      if (roomsPayload.rooms.length > 0) {
+        const detailPayload = await fetch(`${apiBase}/api/labs/cowork/rooms/${roomsPayload.rooms[0].id}`).then((response) => response.json());
+        if (!isMounted) return;
+
+        const room: CoworkRoom = detailPayload.room;
+        setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
+        setActiveRoomId(room.id);
+      }
+    };
+
+    window.setTimeout(() => {
+      void loadInitialData();
+    }, 0);
+
+    return () => {
+      isMounted = false;
+      ws.current?.close();
+    };
   }, []);
 
   const postJson = async (url: string, body: object) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
