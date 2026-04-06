@@ -28,7 +28,9 @@ status: active
 | 2026-04-06 | Audited `Schematics/` against current repo structure | DONE |
 | 2026-04-06 | Ported KasiLink-style coordination format into `Schematics/04-Updates/` | DONE |
 | 2026-04-06 | Summarized current progress and remaining Phase 4 gaps | DONE |
-| 2026-04-06 | Convert open gaps into explicit assignments | NEXT |
+| 2026-04-06 | Implemented Phase 4 KasiLink gateway + tools | DONE |
+| 2026-04-06 | Added targeted Phase 4 tests | DONE |
+| 2026-04-06 | Begin post-Phase-4 stabilization | NEXT |
 
 ## DEV_1
 
@@ -36,12 +38,13 @@ status: active
 |------|------|--------|
 | 2026-04-06 | Added to orch coordination structure | DONE |
 | 2026-04-06 | Catch-up briefing posted in [[comms-log]] | DONE |
-| 2026-04-06 | First scoped orch assignment | READY |
+| 2026-04-06 | First scoped orch assignment | NOT NEEDED FOR PHASE 4 |
 
 **Catch-up summary for `DEV_1`:**
 - Orch already has the CLI, API, GUI bridge, MCP tools, memory, and WhatsApp bridge in place.
 - Current work is no longer foundational build-out. It is targeted Phase 4 completion.
-- Expected first task area: KasiLink integration path or another clearly isolated Phase 4 slice.
+- Phase 4 was completed directly by Lead in this session.
+- Next likely assignment area: stabilization, refactors, or follow-up product slices.
 
 ## DEV_2
 
@@ -49,12 +52,13 @@ status: active
 |------|------|--------|
 | 2026-04-06 | Added to orch coordination structure | DONE |
 | 2026-04-06 | Catch-up briefing posted in [[comms-log]] | DONE |
-| 2026-04-06 | First scoped orch assignment | READY |
+| 2026-04-06 | First scoped orch assignment | NOT NEEDED FOR PHASE 4 |
 
 **Catch-up summary for `DEV_2`:**
 - Orch is past foundation work and sits in Phase 4.
 - The remaining engineering gaps are integration and domain-specific tooling, not generic scaffolding.
-- Expected first task area: loadshedding-aware scheduling or another bounded Phase 4 implementation slice.
+- Phase 4 was completed directly by Lead in this session.
+- Next likely assignment area: bounded hardening or tool verification work.
 
 ## Repo Reality Check
 

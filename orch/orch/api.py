@@ -72,6 +72,16 @@ async def neural_link_websocket_endpoint(websocket: WebSocket):
     except WebSocketDisconnect:
         state.connections.remove(websocket)
 
+@app.websocket("/ws/kasilink/live")
+async def kasilink_live_websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    state.connections.append(websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        state.connections.remove(websocket)
+
 @app.post("/broadcast")
 async def broadcast(request: Request):
     """Internal endpoint for the simulator to push real-time updates."""

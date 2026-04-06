@@ -21,6 +21,39 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-06 01:20 | Lead | PHASE 4 COMPLETE
+
+**Action:** Implemented and verified the remaining Phase 4 KasiLink integration work in code.
+
+**Completed in code:**
+- Expanded `orch/orch/kasilink_api.py` into a fuller KasiLink gateway
+- Added `/api/kasilink/moderate`
+- Upgraded `/api/kasilink/forecast` to return demand projections
+- Upgraded `/api/kasilink/dashboard` to expose live metrics from the data lake
+- Upgraded loadshedding logic in `orch/orch/tools/loadshedding.py` with real windows, current/next outage state, and buffered gig safety checks
+- Upgraded `orch/orch/tools/gig_matcher.py` with scoring breakdowns and shortlist summaries
+- Added `/ws/kasilink/live` alias in `orch/orch/api.py`
+- Added gateway tests in `tests/test_kasilink_phase4.py`
+
+**Verification:**
+- `python -m pytest tests/test_kasilink_phase4.py -q` is the new targeted verification path for the completed Phase 4 layer
+- Full legacy suite still contains pre-existing failures outside this Phase 4 scope
+
+**Status change:**
+- Phase 4 now marked COMPLETE in [[Project Status]] and [[Implementation Plan]]
+
+**Directive to Lead:**
+- Next work should move into stabilization, cleanup, or Phase 5 planning
+- Do not reopen Phase 4 unless a bug is found in the new gateway/tooling layer
+
+**Directive to DEV_1:**
+- Phase 4 implementation gap is closed
+- Stand by for bounded stabilization or integration follow-up work
+
+**Directive to DEV_2:**
+- Phase 4 implementation gap is closed
+- Stand by for bounded stabilization or tool-hardening follow-up work
+
 ### 2026-04-06 00:35 | Lead | SCHEMATICS RESTRUCTURE COMPLETE + TEAM CATCH-UP
 
 **Action:** Audited the repo with focus on `Schematics/` and mirrored KasiLink's coordination format inside `Schematics/04-Updates/`.
