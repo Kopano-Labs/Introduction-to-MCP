@@ -21,12 +21,12 @@ status: active
 
 ## Active Right Now
 
-| Priority | Note | Status |
-|----------|------|--------|
-| CRITICAL | [[SA Startup Week Demo]] | April 15-17, 2026 |
-| CRITICAL | [[Orch Labs Strategy]] | Phase 6 building now |
-| CRITICAL | [[Project Status]] | Phase 6 in progress |
-| HIGH | [[Adoption Checklist]] | Pre-launch hardening |
+| Priority | Note                     | Status               |
+| -------- | ------------------------ | -------------------- |
+| CRITICAL | [[SA Startup Week Demo]] | April 15-17, 2026    |
+| CRITICAL | [[Orch Labs Strategy]]   | Phase 6 building now |
+| CRITICAL | [[Project Status]]       | Phase 6 in progress  |
+| HIGH     | [[Adoption Checklist]]   | Pre-launch hardening |
 
 ---
 
@@ -107,13 +107,13 @@ Code samples and archived source files.
 
 ## Calendar
 
-| Date | Event |
-|------|-------|
-| Apr 15-17, 2026 | SA Startup Week Hack Day — Demo KasiLink + Orch |
-| Apr 30, 2026 | Phase 6 baseline: Orch Labs gallery and registry |
-| May 31, 2026 | Phase 7 target: SA languages and accessibility planning |
-| Jun 30, 2026 | Phase 7 target: multilingual and speech-access prototypes |
-| Sep 30, 2026 | Phase 8 target: public-impact pilots and metrics |
+| Date            | Event                                                     |
+| --------------- | --------------------------------------------------------- |
+| Apr 15-17, 2026 | SA Startup Week Hack Day — Demo KasiLink + Orch           |
+| Apr 30, 2026    | Phase 6 baseline: Orch Labs gallery and registry          |
+| May 31, 2026    | Phase 7 target: SA languages and accessibility planning   |
+| Jun 30, 2026    | Phase 7 target: multilingual and speech-access prototypes |
+| Sep 30, 2026    | Phase 8 target: public-impact pilots and metrics          |
 
 ---
 
@@ -123,3 +123,4 @@ Code samples and archived source files.
 - Orch repo: https://github.com/RobynAwesome/Introduction-to-MCP
 - KasiLink repo: https://github.com/RobynAwesome/KasiLink
 - Portfolio: https://kholofelorababalela.vercel.app
+- LinkedIn: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7

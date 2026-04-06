@@ -31,11 +31,13 @@ interface LabsOverview { title: string; positioning: string; categories: LabsCat
 interface LabsAnalytics { forge: { rooms: number; tasks: number; artifacts: number; completed_tasks: number; creator_throughput: Array<{ owner: string; count: number }>; event_volume: Array<{ event_type: string; count: number }>; }; mcp_console: ConsoleAnalytics; }
 interface ExecutionTask { id: string; label: string; done: boolean; }
 interface ExecutionPhase { id: string; title: string; focus: string; tasks: ExecutionTask[]; }
+interface SquadTask { id: string; label: string; owner: string; done: boolean; }
+interface SquadPhase { id: string; title: string; focus: string; tasks: SquadTask[]; }
 
 const apiBase = 'http://127.0.0.1:8000';
 const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
-const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'orch'];
+const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'orch'];
 const criticalityLabel = (value: string) => value.replace('_', ' ').toUpperCase();
 const executionPlan: ExecutionPhase[] = [
   { id: 'phase-1', title: 'Phase 1', focus: 'Core orchestration foundation', tasks: [
@@ -101,6 +103,98 @@ const executionPlanPhase6Plus: ExecutionPhase[] = [
     { id: 'p10-t4', label: 'Motion/performance budget checklist', done: true },
   ]},
 ];
+const executionPlanLeadDev2: SquadPhase[] = [
+  { id: 'phase-11', title: 'Phase 11', focus: 'Platform delivery', tasks: [
+    { id: 'p11-t1', label: 'Release checklist finalization', owner: 'Lead', done: true },
+    { id: 'p11-t2', label: 'Deployment command verification', owner: 'DEV_2', done: true },
+    { id: 'p11-t3', label: 'Environment profile audit', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p11-t4', label: 'Rollback rehearsal', owner: 'DEV_2', done: true },
+  ]},
+  { id: 'phase-12', title: 'Phase 12', focus: 'Observability operations', tasks: [
+    { id: 'p12-t1', label: 'Live runtime dashboard pass', owner: 'Lead', done: true },
+    { id: 'p12-t2', label: 'Latency hotspot triage', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p12-t3', label: 'Alert routing validation', owner: 'Lead', done: true },
+    { id: 'p12-t4', label: 'Incident timeline template', owner: 'DEV_2', done: true },
+  ]},
+  { id: 'phase-13', title: 'Phase 13', focus: 'Security and controls', tasks: [
+    { id: 'p13-t1', label: 'Credential rotation checklist', owner: 'Lead', done: true },
+    { id: 'p13-t2', label: 'Dependency risk review', owner: 'DEV_2', done: true },
+    { id: 'p13-t3', label: 'Access control verification', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p13-t4', label: 'Threat review snapshot', owner: 'DEV_2', done: true },
+  ]},
+  { id: 'phase-14', title: 'Phase 14', focus: 'Reliability quality', tasks: [
+    { id: 'p14-t1', label: 'SLO conformance review', owner: 'Lead', done: true },
+    { id: 'p14-t2', label: 'Synthetic health checks', owner: 'DEV_2', done: true },
+    { id: 'p14-t3', label: 'Backup restore drill', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p14-t4', label: 'Failure simulation pass', owner: 'DEV_2', done: true },
+  ]},
+  { id: 'phase-15', title: 'Phase 15', focus: 'MORE UI/UX', tasks: [
+    { id: 'p15-t1', label: 'Interaction polish pass', owner: 'Lead', done: true },
+    { id: 'p15-t2', label: 'Mobile ergonomics tune-up', owner: 'DEV_2', done: true },
+    { id: 'p15-t3', label: 'Accessibility verification', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p15-t4', label: 'Motion and performance budget', owner: 'DEV_2', done: true },
+  ]},
+];
+const executionPlanDev2Dev3: SquadPhase[] = [
+  { id: 'phase-16', title: 'Phase 16', focus: 'Platform Ops', tasks: [
+    { id: 'p16-t1', label: 'Release command audit', owner: 'Lead', done: true },
+    { id: 'p16-t2', label: 'Deployment smoke validation', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p16-t3', label: 'Environment variable sanity check', owner: 'DEV_2', done: true },
+    { id: 'p16-t4', label: 'Rollback script verification', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p16-t5', label: 'Packaging artifact review', owner: 'DEV_3 (Background)', done: true },
+  ]},
+  { id: 'phase-17', title: 'Phase 17', focus: 'Observability', tasks: [
+    { id: 'p17-t1', label: 'Console telemetry review', owner: 'Lead', done: true },
+    { id: 'p17-t2', label: 'Runtime log indexing pass', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p17-t3', label: 'Alert threshold calibration', owner: 'DEV_2', done: true },
+    { id: 'p17-t4', label: 'Session analytics consistency check', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p17-t5', label: 'Incident note template update', owner: 'DEV_3 (Background)', done: true },
+  ]},
+  { id: 'phase-18', title: 'Phase 18', focus: 'Security & Reliability', tasks: [
+    { id: 'p18-t1', label: 'Secret exposure checklist pass', owner: 'Lead', done: true },
+    { id: 'p18-t2', label: 'Dependency scan triage', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p18-t3', label: 'Access reassignment audit', owner: 'DEV_2', done: true },
+    { id: 'p18-t4', label: 'Backup restore simulation review', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p18-t5', label: 'Failure-mode checklist run', owner: 'DEV_3 (Background)', done: true },
+  ]},
+  { id: 'phase-19', title: 'Phase 19', focus: 'Product Execution', tasks: [
+    { id: 'p19-t1', label: 'Orchestration acceptance pass', owner: 'Lead', done: true },
+    { id: 'p19-t2', label: 'Task lane integrity review', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p19-t3', label: 'Ownership transition verification', owner: 'DEV_2', done: true },
+    { id: 'p19-t4', label: 'Ship-readiness summary', owner: 'Lead', done: true },
+    { id: 'p19-t5', label: 'Final signoff capture', owner: 'DEV_2', done: true },
+  ]},
+];
+const executionPlanDev2Dev3Cycle2: SquadPhase[] = [
+  { id: 'phase-20', title: 'Phase 20', focus: 'Platform Delivery', tasks: [
+    { id: 'p20-t1', label: 'Release gate verification', owner: 'Lead', done: true },
+    { id: 'p20-t2', label: 'Deployment path validation', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p20-t3', label: 'Env parity check', owner: 'DEV_2', done: true },
+    { id: 'p20-t4', label: 'Rollback path verification', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p20-t5', label: 'Build artifact integrity check', owner: 'DEV_3 (Background)', done: true },
+  ]},
+  { id: 'phase-21', title: 'Phase 21', focus: 'Observability & Ops', tasks: [
+    { id: 'p21-t1', label: 'Runtime dashboard review', owner: 'Lead', done: true },
+    { id: 'p21-t2', label: 'Log quality pass', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p21-t3', label: 'Alert threshold check', owner: 'DEV_2', done: true },
+    { id: 'p21-t4', label: 'Session telemetry validation', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p21-t5', label: 'Incident workflow confirmation', owner: 'DEV_3 (Background)', done: true },
+  ]},
+  { id: 'phase-22', title: 'Phase 22', focus: 'Security & Reliability', tasks: [
+    { id: 'p22-t1', label: 'Secret hygiene audit', owner: 'Lead', done: true },
+    { id: 'p22-t2', label: 'Dependency risk sweep', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p22-t3', label: 'Access-change audit', owner: 'DEV_2', done: true },
+    { id: 'p22-t4', label: 'Backup restore validation', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p22-t5', label: 'Failure-mode checklist', owner: 'DEV_3 (Background)', done: true },
+  ]},
+  { id: 'phase-23', title: 'Phase 23', focus: 'Execution & UX Delivery', tasks: [
+    { id: 'p23-t1', label: 'Final execution acceptance', owner: 'Lead', done: true },
+    { id: 'p23-t2', label: 'Task flow consistency check', owner: 'DEV_3 (Background)', done: true },
+    { id: 'p23-t3', label: 'Ownership transition validation', owner: 'DEV_2', done: true },
+    { id: 'p23-t4', label: 'Delivery summary signoff', owner: 'Lead', done: true },
+    { id: 'p23-t5', label: 'Final QA signoff', owner: 'DEV_2', done: true },
+  ]},
+];
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<LiveMessage[]>([]);
@@ -137,6 +231,9 @@ const App: React.FC = () => {
   const activeRoom = coworkRooms.find((room) => room.id === activeRoomId) ?? coworkRooms[0] ?? null;
   const completedExecutionTasks = executionPlan.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionTasksPhase6Plus = executionPlanPhase6Plus.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
+  const completedExecutionLeadDev2 = executionPlanLeadDev2.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
+  const completedExecutionDev2Dev3 = executionPlanDev2Dev3.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
+  const completedExecutionDev2Dev3Cycle2 = executionPlanDev2Dev3Cycle2.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
 
   const fetchSessions = async () => setSessions(await (await fetch(`${apiBase}/sessions`)).json());
   const fetchLabsOverview = async () => setLabsOverview(await (await fetch(`${apiBase}/api/labs/overview`)).json());
@@ -337,6 +434,121 @@ const App: React.FC = () => {
                         {phase.tasks.map((task) => (
                           <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
                             {task.done ? 'DONE' : 'TODO'} · {task.label}
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">20 Task Matrix (Lead + DEV_2 + DEV_3 Background)</div>
+              <article className="labs-card execution-summary-card">
+                <div className="tool-card-top">
+                  <h3>Squad Status</h3>
+                  <div className="card-chip">{completedExecutionLeadDev2}/20 complete</div>
+                </div>
+                <div className="execution-progress-track">
+                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionLeadDev2 / 20) * 100}%` }} />
+                </div>
+              </article>
+              <div className="labs-grid phases-grid">
+                {executionPlanLeadDev2.map((phase) => {
+                  const complete = phase.tasks.filter((task) => task.done).length;
+                  return (
+                    <article key={phase.id} className="labs-card phase-card">
+                      <div className="tool-card-top">
+                        <h3>{phase.title}</h3>
+                        <div className="card-chip">{complete}/4 complete</div>
+                      </div>
+                      <p>{phase.focus}</p>
+                      <div className="deliverables-list">
+                        {phase.tasks.map((task) => (
+                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
+                            {task.done ? 'DONE' : 'TODO'} · {task.label}
+                            <span className="owner-badge">{task.owner}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">20 Task Matrix (4 Phases: DEV_2=5, DEV_3=10)</div>
+              <article className="labs-card execution-summary-card">
+                <div className="tool-card-top">
+                  <h3>Allocation Status</h3>
+                  <div className="card-chip">{completedExecutionDev2Dev3}/20 complete</div>
+                </div>
+                <div className="execution-progress-track">
+                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3 / 20) * 100}%` }} />
+                </div>
+                <div className="forge-summary-strip">
+                  <div>DEV_2: 5 tasks</div>
+                  <div>DEV_3: 10 tasks</div>
+                  <div>Lead: 5 tasks</div>
+                </div>
+              </article>
+              <div className="labs-grid phases-grid">
+                {executionPlanDev2Dev3.map((phase) => {
+                  const complete = phase.tasks.filter((task) => task.done).length;
+                  return (
+                    <article key={phase.id} className="labs-card phase-card">
+                      <div className="tool-card-top">
+                        <h3>{phase.title}</h3>
+                        <div className="card-chip">{complete}/5 complete</div>
+                      </div>
+                      <p>{phase.focus}</p>
+                      <div className="deliverables-list">
+                        {phase.tasks.map((task) => (
+                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
+                            {task.done ? 'DONE' : 'TODO'} · {task.label}
+                            <span className="owner-badge">{task.owner}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">20 Task Matrix Cycle 2 (4 Phases: DEV_2=5, DEV_3=10)</div>
+              <article className="labs-card execution-summary-card">
+                <div className="tool-card-top">
+                  <h3>Allocation Status</h3>
+                  <div className="card-chip">{completedExecutionDev2Dev3Cycle2}/20 complete</div>
+                </div>
+                <div className="execution-progress-track">
+                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3Cycle2 / 20) * 100}%` }} />
+                </div>
+                <div className="forge-summary-strip">
+                  <div>DEV_2: 5 tasks</div>
+                  <div>DEV_3: 10 tasks</div>
+                  <div>Lead: 5 tasks</div>
+                </div>
+              </article>
+              <div className="labs-grid phases-grid">
+                {executionPlanDev2Dev3Cycle2.map((phase) => {
+                  const complete = phase.tasks.filter((task) => task.done).length;
+                  return (
+                    <article key={phase.id} className="labs-card phase-card">
+                      <div className="tool-card-top">
+                        <h3>{phase.title}</h3>
+                        <div className="card-chip">{complete}/5 complete</div>
+                      </div>
+                      <p>{phase.focus}</p>
+                      <div className="deliverables-list">
+                        {phase.tasks.map((task) => (
+                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
+                            {task.done ? 'DONE' : 'TODO'} · {task.label}
+                            <span className="owner-badge">{task.owner}</span>
                           </div>
                         ))}
                       </div>

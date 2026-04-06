@@ -43,7 +43,7 @@ def summarize_doc(doc_id: str):
 
 @mcp.tool (
     name="edit_documents",
-    description="Edit a doucument by replacing a sting in the document content with a new string",
+    description="Edit a document by replacing a string in the document content with a new string",
 )
 def edit_document(
     doc_id: str = Field(description="Id of the document that will be edited"),

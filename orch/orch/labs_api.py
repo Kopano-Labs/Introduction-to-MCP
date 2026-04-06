@@ -23,6 +23,8 @@ from .launch_config import get_launch_surface_config
 from .mcp_console import answer_mcp_console, execute_connector_action, get_connector_actions, get_console_analytics, get_model_options, stream_mcp_console
 from .orch_code import get_orch_code_controls, get_orch_code_profile, teach_repo_patterns, update_lesson_status
 from .sa_access import build_access_plan, execute_access_session
+from .dev_watch import read_recent_comms, read_recent_dev_activity
+from .config import settings
 
 
 router = APIRouter(prefix="/api/labs", tags=["labs"])
@@ -108,6 +110,10 @@ class McpConsoleRequest(BaseModel):
 
 class ConnectorActionRequest(BaseModel):
     action_id: str
+
+
+class DevWatchRequest(BaseModel):
+    limit: int = 50
 
 
 @router.get("/overview")
@@ -347,3 +353,12 @@ def labs_mcp_console_stream(request: McpConsoleRequest) -> StreamingResponse:
         ),
         media_type="text/event-stream",
     )
+
+
+@router.get("/dev-watch")
+def labs_dev_watch(limit: int = 50) -> dict:
+    return {
+        "watch_owner": settings.dev_watch_owner,
+        "activity": read_recent_dev_activity(limit=limit),
+        "communications": read_recent_comms(limit=limit),
+    }

@@ -374,6 +374,15 @@ body {
   color: var(--text-dim);
 }
 
+.owner-badge {
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(84, 227, 194, 0.35);
+  color: var(--gold);
+  font-size: 0.64rem;
+}
+
 .metric-card {
   padding: 18px;
 }

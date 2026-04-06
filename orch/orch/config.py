@@ -49,4 +49,10 @@ class Settings(BaseSettings):
     observation_braintrust_base_url: Optional[str] = None
     observation_braintrust_events_path: Optional[str] = None
 
+    # Team activity watcher
+    dev_watch_owner: str = "DEV_3 (Background)"
+    dev_watch_path: str = ".orch_data/dev_watch/dev3_activity.jsonl"
+    dev_watch_comms_path: str = ".orch_data/dev_watch/dev3_communications.jsonl"
+    dev_watch_session_rules_path: str = ".orch_data/session_logs/session_rules.md"
+
 settings = Settings()

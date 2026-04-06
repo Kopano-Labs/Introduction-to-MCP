@@ -88,7 +88,7 @@ You can view the project's current and future capabilities on the Capabilities R
 
 For any questions or discussions, you can reach out to the project architect:
 
-- **LinkedIn:** Kholofelo Robyn Rababalela
-- **GitHub:** RobynAwesome
+- **LinkedIn:** www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
+- **GitHub:** https://github.com/RobynAwesome/
 
 Thank you for your interest in contributing to `orch`!

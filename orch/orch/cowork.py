@@ -4,6 +4,7 @@ import json
 from typing import Any
 
 from .database import get_db_connection, init_db, record_creator_event
+from .dev_watch import record_dev_activity
 
 
 DEFAULT_TASKS = [
@@ -132,19 +133,33 @@ def add_cowork_task(
     conn.commit()
     conn.close()
     record_creator_event("task_created", room_id=room_id, task_id=task_id, metadata=json.dumps({"lane": lane, "owner": owner}))
+    record_dev_activity(
+        event_type="task_created",
+        room_id=room_id,
+        task_id=task_id,
+        owner=owner,
+        payload={"lane": lane, "priority": priority, "title": title},
+    )
     return get_cowork_task(task_id)
 
 
 def update_cowork_task(task_id: int, status: str) -> dict[str, Any]:
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT room_id FROM cowork_tasks WHERE id = ?", (task_id,))
+    cursor.execute("SELECT room_id, owner FROM cowork_tasks WHERE id = ?", (task_id,))
     row = cursor.fetchone()
     cursor.execute("UPDATE cowork_tasks SET status = ? WHERE id = ?", (status, task_id))
     conn.commit()
     conn.close()
     if row:
         record_creator_event("task_status_changed", room_id=row["room_id"], task_id=task_id, metadata=json.dumps({"status": status}))
+        record_dev_activity(
+            event_type="task_status_changed",
+            room_id=row["room_id"],
+            task_id=task_id,
+            owner=row["owner"],
+            payload={"status": status},
+        )
     return get_cowork_task(task_id)
 
 
@@ -157,7 +172,7 @@ def update_cowork_task_details(
 ) -> dict[str, Any]:
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT room_id FROM cowork_tasks WHERE id = ?", (task_id,))
+    cursor.execute("SELECT room_id, owner FROM cowork_tasks WHERE id = ?", (task_id,))
     row = cursor.fetchone()
     cursor.execute(
         """
@@ -176,19 +191,47 @@ def update_cowork_task_details(
             task_id=task_id,
             metadata=json.dumps({"owner": owner, "priority": priority}),
         )
+        record_dev_activity(
+            event_type="task_updated_before",
+            room_id=row["room_id"],
+            task_id=task_id,
+            owner=row["owner"],
+            payload={"title": title, "priority": priority},
+        )
+        record_dev_activity(
+            event_type="task_updated_after",
+            room_id=row["room_id"],
+            task_id=task_id,
+            owner=owner,
+            payload={"title": title, "priority": priority},
+        )
     return get_cowork_task(task_id)
 
 
 def reassign_cowork_task(task_id: int, owner: str) -> dict[str, Any]:
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT room_id FROM cowork_tasks WHERE id = ?", (task_id,))
+    cursor.execute("SELECT room_id, owner FROM cowork_tasks WHERE id = ?", (task_id,))
     row = cursor.fetchone()
     cursor.execute("UPDATE cowork_tasks SET owner = ? WHERE id = ?", (owner, task_id))
     conn.commit()
     conn.close()
     if row:
         record_creator_event("task_owner_changed", room_id=row["room_id"], task_id=task_id, metadata=json.dumps({"owner": owner}))
+        record_dev_activity(
+            event_type="task_owner_changed_from",
+            room_id=row["room_id"],
+            task_id=task_id,
+            owner=row["owner"],
+            payload={"to_owner": owner},
+        )
+        record_dev_activity(
+            event_type="task_owner_changed_to",
+            room_id=row["room_id"],
+            task_id=task_id,
+            owner=owner,
+            payload={"from_owner": row["owner"]},
+        )
     return get_cowork_task(task_id)
 
 
@@ -197,7 +240,7 @@ def move_cowork_task(task_id: int, lane: str) -> dict[str, Any]:
     status = _status_for_lane(lane)
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT room_id FROM cowork_tasks WHERE id = ?", (task_id,))
+    cursor.execute("SELECT room_id, owner FROM cowork_tasks WHERE id = ?", (task_id,))
     row = cursor.fetchone()
     cursor.execute("UPDATE cowork_tasks SET lane = ?, status = ? WHERE id = ?", (lane, status, task_id))
     conn.commit()
@@ -208,6 +251,13 @@ def move_cowork_task(task_id: int, lane: str) -> dict[str, Any]:
             room_id=row["room_id"],
             task_id=task_id,
             metadata=json.dumps({"lane": lane, "status": status}),
+        )
+        record_dev_activity(
+            event_type="task_moved",
+            room_id=row["room_id"],
+            task_id=task_id,
+            owner=row["owner"],
+            payload={"lane": lane, "status": status},
         )
     return get_cowork_task(task_id)
 
