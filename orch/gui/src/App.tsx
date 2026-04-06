@@ -64,17 +64,54 @@ interface LabsPhase {
   deliverables: string[];
 }
 
+interface LabsLanguage {
+  id: string;
+  name: string;
+  family: string;
+  status: string;
+}
+
+interface AccessMode {
+  id: string;
+  name: string;
+  summary: string;
+  criticality: string;
+}
+
+interface CoworkSurface {
+  id: string;
+  name: string;
+  status: string;
+  inspiration: string;
+  summary: string;
+  features: string[];
+}
+
+interface OrchCodeTrack {
+  id: string;
+  title: string;
+  priority: string;
+  summary: string;
+  topics: string[];
+}
+
 interface LabsOverview {
   title: string;
   positioning: string;
   categories: LabsCategory[];
   tools: LabsTool[];
   phases: LabsPhase[];
+  languages: LabsLanguage[];
+  access_modes: AccessMode[];
+  cowork_surfaces: CoworkSurface[];
+  orch_code_tracks: OrchCodeTrack[];
   metrics: {
     categories: number;
     tools: number;
     critical_tools: number;
     live_tools: number;
+    languages: number;
+    access_modes: number;
   };
 }
 
@@ -258,6 +295,14 @@ const App: React.FC = () => {
                   <span className="metric-value">{labsOverview?.metrics.categories ?? 0}</span>
                   <span className="metric-label">Categories</span>
                 </div>
+                <div className="metric-card">
+                  <span className="metric-value">{labsOverview?.metrics.languages ?? 0}</span>
+                  <span className="metric-label">SA Languages</span>
+                </div>
+                <div className="metric-card">
+                  <span className="metric-value">{labsOverview?.metrics.access_modes ?? 0}</span>
+                  <span className="metric-label">Access Modes</span>
+                </div>
               </div>
             </section>
 
@@ -308,6 +353,83 @@ const App: React.FC = () => {
                       {phase.deliverables.map((deliverable) => (
                         <div key={deliverable} className="deliverable-item">
                           {deliverable}
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="labs-section split-section">
+              <div className="split-panel">
+                <div className="section-heading">SA Languages</div>
+                <div className="labs-grid language-grid">
+                  {labsOverview?.languages.map((language) => (
+                    <article key={language.id} className="labs-card compact-card">
+                      <div className="tool-card-top">
+                        <h3>{language.name}</h3>
+                        <div className="card-chip">{language.status.replace('_', ' ')}</div>
+                      </div>
+                      <p>{language.family}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+              <div className="split-panel">
+                <div className="section-heading">Accessibility Modes</div>
+                <div className="labs-grid access-grid">
+                  {labsOverview?.access_modes.map((mode) => (
+                    <article key={mode.id} className="labs-card compact-card">
+                      <div className="tool-card-top">
+                        <h3>{mode.name}</h3>
+                        <div className={`criticality-pill ${mode.criticality}`}>{criticalityLabel(mode.criticality)}</div>
+                      </div>
+                      <p>{mode.summary}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">Cowork</div>
+              <div className="labs-grid cowork-grid">
+                {labsOverview?.cowork_surfaces.map((surface) => (
+                  <article key={surface.id} className="labs-card phase-card">
+                    <div className="tool-card-top">
+                      <div className="card-chip">{surface.inspiration}</div>
+                      <div className="card-chip">{surface.status}</div>
+                    </div>
+                    <h3>{surface.name}</h3>
+                    <p>{surface.summary}</p>
+                    <div className="deliverables-list">
+                      {surface.features.map((feature) => (
+                        <div key={feature} className="deliverable-item">
+                          {feature}
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">Orch Code</div>
+              <div className="labs-grid phases-grid">
+                {labsOverview?.orch_code_tracks.map((track) => (
+                  <article key={track.id} className="labs-card phase-card">
+                    <div className="tool-card-top">
+                      <div className={`criticality-pill ${track.priority}`}>{criticalityLabel(track.priority)}</div>
+                      <div className="card-chip">teach-first</div>
+                    </div>
+                    <h3>{track.title}</h3>
+                    <p>{track.summary}</p>
+                    <div className="deliverables-list">
+                      {track.topics.map((topic) => (
+                        <div key={topic} className="deliverable-item">
+                          {topic}
                         </div>
                       ))}
                     </div>

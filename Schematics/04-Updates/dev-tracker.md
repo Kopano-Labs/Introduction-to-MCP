@@ -37,6 +37,9 @@ status: active
 | 2026-04-06 | Established reliability baseline | DONE |
 | 2026-04-06 | Added Orch Labs strategy, registry, API, and GUI mode | DONE |
 | 2026-04-06 | Added Phase 6, Phase 7, and Phase 8 to Schematics with criticality | DONE |
+| 2026-04-06 | Added Phase 7 language/access planning APIs | DONE |
+| 2026-04-06 | Added Phase 8 cowork and Orch Code surface scaffolding | DONE |
+| 2026-04-06 | Added Phase 9 research note and refinement loop | DONE |
 | 2026-04-06 | Expand runnable Labs tools | NEXT |
 
 ## DEV_1

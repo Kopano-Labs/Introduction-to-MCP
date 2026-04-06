@@ -29,8 +29,9 @@ status: active
 | Phase 4 | COMPLETE | Optimization, Scale, Security, and KasiLink integration layer |
 | Phase 5 | COMPLETE | Reliability hardening, CI modernization, and adoption readiness baseline |
 | Phase 6 | IN PROGRESS | Orch Labs layer, SA tool registry, Labs API, and GUI gallery |
-| Phase 7 | PLANNED | All SA languages and speech-impairment-aware access |
-| Phase 8 | PLANNED | Public-impact pilot studio, analytics, and feedback loops |
+| Phase 7 | IN PROGRESS | All SA languages, SASL coverage, and speech-impairment-aware access |
+| Phase 8 | IN PROGRESS | Cowork surface, Orch Code track, and public-impact studio scaffolding |
+| Phase 9 | IN PROGRESS | Research and refinement loop with product-readiness mapping |
 
 ## Phase 6 Progress
 
@@ -43,6 +44,9 @@ status: active
 - [x] Labs API endpoints added
 - [x] Labs GUI mode added
 - [x] Criticality model added for Labs tools and phases
+- [x] SA language and access API scaffolding added
+- [x] Cowork and Orch Code surface scaffolding added
+- [x] Product-readiness research map added
 - [ ] Additional Labs tools beyond initial registry
 - [ ] Deeper accessibility and multilingual runtime implementation
 
@@ -82,6 +86,12 @@ CLI simulation tests now operate against a shared in-memory database fixture, an
 ### South Africa Language And Accessibility Direction
 orch now has explicit roadmap commitment for all official South African languages and speech-impairment-aware support as critical future phases, not optional enhancements.
 
+### Phase 7 Backbone
+`/api/labs/languages` and `/api/labs/language-plan` now expose the 12 official South African languages, SASL coverage, AAC-aware access modes, and accessibility-first planning logic.
+
+### Phase 8 Backbone
+`/api/labs/cowork` and `/api/labs/launch-config` now expose Cowork Room, Stitch-like canvas direction, Orch Code tracks, and the 50/50 Anthropic/Codex launch-surface mix.
+
 ## Capabilities Roadmap
 
 The "100 Capabilities" vision maps to the engineering phases:
@@ -91,8 +101,9 @@ The "100 Capabilities" vision maps to the engineering phases:
 - **Phase 4** unlocked: Fine-tuning data, learning extraction, and KasiLink integration
 - **Phase 5** unlocked: external adoption readiness, CI reliability, and release hardening
 - **Phase 6** unlocking: Labs catalog, experiment visibility, and SA tool packaging
-- **Phase 7** will unlock: multilingual routing, translation, voice/text accessibility
-- **Phase 8** will unlock: pilot analytics, adoption metrics, and community feedback loops
+- **Phase 7** unlocking: multilingual routing, SASL coverage, AAC-aware access, voice/text accessibility
+- **Phase 8** unlocking: cowork execution, Orch Code teaching tracks, and creator surfaces
+- **Phase 9** unlocking: continuous research, free-vs-premium stack decisions, and roadmap refinement
 
 > Detailed breakdown: see `100_Capabilities_TODO.md` in the repo root.
 

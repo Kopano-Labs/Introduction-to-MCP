@@ -31,8 +31,9 @@ status: active
 | Phase 4 | DONE | Optimization, security, and KasiLink integration layer implemented. |
 | Phase 5 | DONE | Reliability baseline and CI hardening completed. |
 | Phase 6 | IN PROGRESS | Orch Labs layer is being built and exposed in product surfaces. |
-| Phase 7 | PLANNED | All SA languages and accessibility layer. |
-| Phase 8 | PLANNED | Public impact studio and pilot metrics. |
+| Phase 7 | IN PROGRESS | SA languages, SASL, and accessibility scaffolding are in code. |
+| Phase 8 | IN PROGRESS | Cowork and Orch Code surfaces are now defined in code and launch config. |
+| Phase 9 | IN PROGRESS | Research and refinement loop has started with the product Top 50 map. |
 
 ## Live Priorities
 
@@ -48,8 +49,10 @@ status: active
 | O8 | High | Lead | DONE | Modernize CI workflow for supported Python versions |
 | O9 | High | Lead | DONE | Establish reliability and adoption baseline |
 | O10 | Critical | Lead | DONE | Add Orch Labs registry, API surface, and GUI mode |
-| O11 | Critical | Lead | IN PROGRESS | Define SA languages and speech-access phases with criticality |
-| O12 | High | Lead | OPEN | Expand Labs tools into runnable impact slices |
+| O11 | Critical | Lead | DONE | Define SA languages and speech-access phases with criticality |
+| O12 | High | Lead | IN PROGRESS | Expand Labs tools into runnable impact slices |
+| O13 | Critical | Lead | DONE | Add SA language planning, access modes, and launch config APIs |
+| O14 | Critical | Lead | DONE | Add Top 50 product-readiness research note with free vs premium framing |
 
 ## Active Phase 6 Work
 
@@ -58,10 +61,13 @@ status: active
 | Labs registry and API | COMPLETE | Lead |
 | Labs GUI mode | COMPLETE | Lead |
 | SA tool catalog | COMPLETE | Lead |
-| SA language phase definition | IN PROGRESS | Lead |
-| Speech-access phase definition | IN PROGRESS | Lead |
+| SA language phase definition | COMPLETE | Lead |
+| Speech-access phase definition | COMPLETE | Lead |
+| Language-plan API | COMPLETE | Lead |
+| Cowork + Orch Code API scaffolding | COMPLETE | Lead |
 | Runnable Labs feature expansion | OPEN | DEV_1 |
 | Accessibility implementation prep | OPEN | DEV_2 |
+| Research backlog ranking | OPEN | Lead |
 
 ## Rules For Next Dispatch
 

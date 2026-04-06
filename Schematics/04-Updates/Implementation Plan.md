@@ -87,19 +87,31 @@ status: active
 - [x] Add criticality labels for tools and future phases
 - [ ] Expand the initial Labs tool set into runnable feature slices
 
-### Phase 7: SA Languages And Access — PLANNED — CRITICAL
+### Phase 7: SA Languages And Access — IN PROGRESS — CRITICAL
 
-- [ ] Support all official South African languages in routing and response generation
+- [x] Add the 12 official South African languages to the Labs system model
+- [x] Add language-plan API scaffolding
+- [x] Add AAC, adaptive speech, and text-first access modes to the Labs system model
+- [ ] Support all official South African languages in runtime routing and response generation
 - [ ] Add language-aware prompting and translation assist layers
-- [ ] Add speech-impairment-aware interaction design
-- [ ] Add text-first, voice-assisted, and adaptive fallback flows
+- [ ] Add speech-impairment-aware interaction execution
+- [ ] Add text-first, voice-assisted, and adaptive fallback flows end-to-end
 
-### Phase 8: Public Impact Studio — PLANNED — HIGH
+### Phase 8: Public Impact Studio — IN PROGRESS — HIGH
 
+- [x] Add Cowork and Orch Code surfaces to the Labs system model
+- [x] Add launch config for 50/50 Anthropic/Codex visual direction with Stitch-inspired cowork support
 - [ ] Add pilot analytics and impact metrics for Labs tools
 - [ ] Add experiment graduation criteria
 - [ ] Add community feedback loops
 - [ ] Add public demo and partnership packaging
+
+### Phase 9: Research And Refinement Engine — IN PROGRESS — CRITICAL
+
+- [x] Create product-readiness research map with top 50 capabilities
+- [x] Add free vs premium implementation framing
+- [ ] Convert research findings into ranked execution backlog
+- [ ] Add recurring benchmark and research review process
 
 ## Phase 6 Verification Plan
 

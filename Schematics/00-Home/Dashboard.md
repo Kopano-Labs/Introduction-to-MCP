@@ -44,6 +44,7 @@ Where we're going and how we get there.
 
 - [[KasiLink Integration Plan]] — Orch as AI microservice inside KasiLink. Architecture, tool mapping, phase roadmap.
 - [[Orch Labs Strategy]] — Google-Labs-style additive layer for South African AI tools.
+- [[Open Source Product-Ready AI Top 50]] — Research map for free vs premium product capabilities.
 - [[Microsoft Contract Strategy]] — Azure partnership pitch, service mapping, action items.
 - [[SA Startup Week Demo]] — Hack Day demo plan, April 15-17, 2026.
 - [[Adoption Checklist]] — Steps from prototype to external adoption.

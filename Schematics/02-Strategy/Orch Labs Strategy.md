@@ -43,12 +43,21 @@ The target is a Google-Labs-style experience:
 | SME Assistant | Small business growth | High |
 | SA Language Engine | All SA languages | Critical |
 | Speech Access Assistant | Speech impairment support | Critical |
+| Cowork Room | Collaborative execution | High |
+| Orch Code | Coding acceleration and craft learning | Critical |
 
 ## Accessibility Rule
 
 Orch Labs must explicitly plan for:
-- all official South African languages
+- all 12 official South African languages
 - multilingual prompting and response generation
 - speech-impairment-aware interaction
 - text and voice fallback flows
 - inclusion as a design requirement, not a later enhancement
+
+## Launch Surface Direction
+
+The Labs launch surface should combine:
+- Anthropic-style workspace clarity and artifact review
+- Codex-style command-center execution and coding focus
+- Stitch-style fast concept-to-interface iteration
