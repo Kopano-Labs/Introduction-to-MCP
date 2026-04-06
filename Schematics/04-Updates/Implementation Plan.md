@@ -105,7 +105,7 @@ status: active
 
 - [x] Add Cowork and Orch Code surfaces to the Labs system model
 - [x] Add launch config for 50/50 Anthropic/Codex visual direction with Stitch-inspired cowork support
-- [x] Add persisted Cowork Room flow with rooms, lanes, tasks, and status updates
+- [x] Add persisted Orch Forge flow with rooms, lanes, tasks, and status updates
 - [x] Add first Orch Code teaching loop against the current repo
 - [x] Add cowork task reassignment and dispatch summary
 - [x] Add Orch Code lesson-state progression

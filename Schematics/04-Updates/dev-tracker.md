@@ -41,7 +41,7 @@ status: active
 | 2026-04-06 | Added Phase 8 cowork and Orch Code surface scaffolding | DONE |
 | 2026-04-06 | Added Phase 9 research note and refinement loop | DONE |
 | 2026-04-06 | Added multilingual routing and translation runtime | DONE |
-| 2026-04-06 | Added first runnable Cowork Room flow | DONE |
+| 2026-04-06 | Added first runnable Orch Forge flow | DONE |
 | 2026-04-06 | Added first Orch Code teaching loop | DONE |
 | 2026-04-06 | Added multilingual response packaging and access execution | DONE |
 | 2026-04-06 | Added cowork dispatch upgrades and Orch Code progression | DONE |

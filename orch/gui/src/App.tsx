@@ -95,6 +95,42 @@ interface OrchCodeTrack {
   topics: string[];
 }
 
+interface CoworkTask {
+  id: number;
+  room_id: number;
+  title: string;
+  description: string;
+  owner: string;
+  status: string;
+  priority: string;
+  lane: string;
+}
+
+interface CoworkRoom {
+  id: number;
+  name: string;
+  mission: string;
+  lead: string;
+  status: string;
+  tasks: CoworkTask[];
+  lanes: Record<string, CoworkTask[]>;
+  dispatch_summary: {
+    total_tasks: number;
+    queued: number;
+    in_progress: number;
+    completed: number;
+    owners: string[];
+  };
+}
+
+interface McpConsoleReply {
+  input: string;
+  topic: string;
+  response: string;
+  suggested_actions: string[];
+  surfaces: string[];
+}
+
 interface LabsOverview {
   title: string;
   positioning: string;
@@ -124,6 +160,12 @@ const App: React.FC = () => {
   const [isAuditMode, setIsAuditMode] = useState(false);
   const [viewMode, setViewMode] = useState<'council' | 'labs'>('council');
   const [labsOverview, setLabsOverview] = useState<LabsOverview | null>(null);
+  const [coworkRooms, setCoworkRooms] = useState<CoworkRoom[]>([]);
+  const [activeRoomId, setActiveRoomId] = useState<number | null>(null);
+  const [roomName, setRoomName] = useState('Orch Forge Premiere');
+  const [roomMission, setRoomMission] = useState('Launch the first creator-grade cowork flow inside Orch Labs.');
+  const [consoleMessage, setConsoleMessage] = useState('How should Orch support MCP chat across IDEs, CLI, and operating systems?');
+  const [consoleReply, setConsoleReply] = useState<McpConsoleReply | null>(null);
 
   const ws = useRef<WebSocket | null>(null);
 
@@ -181,6 +223,7 @@ const App: React.FC = () => {
 
     fetchSessions();
     fetchLabsOverview();
+    fetchCoworkRooms();
     return () => ws.current?.close();
   }, [selectedSession, isAuditMode]);
 
@@ -201,6 +244,94 @@ const App: React.FC = () => {
       setLabsOverview(data);
     } catch (err) {
       console.error('Labs Error:', err);
+    }
+  };
+
+  const fetchCoworkRooms = async () => {
+    try {
+      const resp = await fetch('http://127.0.0.1:8000/api/labs/cowork/rooms');
+      const data = await resp.json();
+      setCoworkRooms(data.rooms);
+      if (!activeRoomId && data.rooms.length > 0) {
+        fetchCoworkRoomDetail(data.rooms[0].id);
+      }
+    } catch (err) {
+      console.error('Cowork Error:', err);
+    }
+  };
+
+  const fetchCoworkRoomDetail = async (roomId: number) => {
+    try {
+      const resp = await fetch(`http://127.0.0.1:8000/api/labs/cowork/rooms/${roomId}`);
+      const data = await resp.json();
+      const updatedRoom: CoworkRoom = data.room;
+      setCoworkRooms((prev) => {
+        const without = prev.filter((room) => room.id !== roomId);
+        return [updatedRoom, ...without].sort((a, b) => b.id - a.id);
+      });
+      setActiveRoomId(roomId);
+    } catch (err) {
+      console.error('Cowork Detail Error:', err);
+    }
+  };
+
+  const createCoworkRoom = async () => {
+    try {
+      const resp = await fetch('http://127.0.0.1:8000/api/labs/cowork/rooms', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: roomName, mission: roomMission, lead: 'Lead' }),
+      });
+      const data = await resp.json();
+      const room: CoworkRoom = data.room;
+      setCoworkRooms((prev) => [room, ...prev]);
+      setActiveRoomId(room.id);
+    } catch (err) {
+      console.error('Cowork Create Error:', err);
+    }
+  };
+
+  const updateTaskStatus = async (taskId: number, status: string) => {
+    try {
+      await fetch(`http://127.0.0.1:8000/api/labs/cowork/tasks/${taskId}/status`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status }),
+      });
+      if (activeRoomId) {
+        fetchCoworkRoomDetail(activeRoomId);
+      }
+    } catch (err) {
+      console.error('Cowork Status Error:', err);
+    }
+  };
+
+  const updateTaskOwner = async (taskId: number, owner: string) => {
+    try {
+      await fetch(`http://127.0.0.1:8000/api/labs/cowork/tasks/${taskId}/owner`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ owner }),
+      });
+      if (activeRoomId) {
+        fetchCoworkRoomDetail(activeRoomId);
+      }
+    } catch (err) {
+      console.error('Cowork Owner Error:', err);
+    }
+  };
+
+  const sendConsoleMessage = async () => {
+    try {
+      const resp = await fetch('http://127.0.0.1:8000/api/labs/mcp-console/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: consoleMessage }),
+      });
+      const data = await resp.json();
+      setConsoleReply(data);
+    } catch (err) {
+      console.error('MCP Console Error:', err);
     }
   };
 
@@ -241,6 +372,12 @@ const App: React.FC = () => {
 
   const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
   const criticalityLabel = (value: string) => value.toUpperCase();
+  const activeRoom =
+    coworkRooms.find((room) => room.id === activeRoomId && room.dispatch_summary) ??
+    coworkRooms.find((room) => room.dispatch_summary) ??
+    null;
+  const laneOrder = ['research', 'build', 'review'];
+  const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'orch'];
 
   return (
     <div className="command-center">
@@ -393,7 +530,7 @@ const App: React.FC = () => {
             </section>
 
             <section className="labs-section">
-              <div className="section-heading">Cowork</div>
+              <div className="section-heading">Orch Forge</div>
               <div className="labs-grid cowork-grid">
                 {labsOverview?.cowork_surfaces.map((surface) => (
                   <article key={surface.id} className="labs-card phase-card">
@@ -416,6 +553,104 @@ const App: React.FC = () => {
             </section>
 
             <section className="labs-section">
+              <div className="section-heading">Orch Forge Live</div>
+              <div className="forge-shell">
+                <article className="labs-card forge-create-card">
+                  <div className="tool-card-top">
+                    <h3>Premiere A Forge</h3>
+                    <div className="criticality-pill high">LIVE</div>
+                  </div>
+                  <label className="forge-label">
+                    <span>Name</span>
+                    <input value={roomName} onChange={(e) => setRoomName(e.target.value)} className="forge-input" />
+                  </label>
+                  <label className="forge-label">
+                    <span>Mission</span>
+                    <textarea value={roomMission} onChange={(e) => setRoomMission(e.target.value)} className="forge-textarea" rows={3} />
+                  </label>
+                  <button type="button" className="forge-button" onClick={createCoworkRoom}>
+                    Launch Orch Forge
+                  </button>
+                </article>
+
+                <article className="labs-card forge-rooms-card">
+                  <div className="tool-card-top">
+                    <h3>Forge Rooms</h3>
+                    <div className="card-chip">{coworkRooms.length} rooms</div>
+                  </div>
+                  <div className="forge-room-list">
+                    {coworkRooms.map((room) => (
+                      <button
+                        key={room.id}
+                        type="button"
+                        className={`forge-room-button ${activeRoom?.id === room.id ? 'active' : ''}`}
+                        onClick={() => fetchCoworkRoomDetail(room.id)}
+                      >
+                        <span>{room.name}</span>
+                        <span>{room.status}</span>
+                      </button>
+                    ))}
+                  </div>
+                </article>
+              </div>
+
+              {activeRoom && (
+                <article className="labs-card forge-room-detail">
+                  <div className="tool-card-top">
+                    <div>
+                      <div className="section-heading">Active Forge</div>
+                      <h3>{activeRoom.name}</h3>
+                    </div>
+                    <div className="forge-summary-strip">
+                      <div>{activeRoom.dispatch_summary.total_tasks} total</div>
+                      <div>{activeRoom.dispatch_summary.in_progress} active</div>
+                      <div>{activeRoom.dispatch_summary.completed} done</div>
+                    </div>
+                  </div>
+                  <p>{activeRoom.mission}</p>
+                  <div className="forge-lanes">
+                    {laneOrder.map((lane) => (
+                      <div key={lane} className="forge-lane">
+                        <div className="forge-lane-header">{lane}</div>
+                        {(activeRoom.lanes[lane] ?? []).map((task) => (
+                          <div key={task.id} className="forge-task">
+                            <div className="tool-card-top">
+                              <strong>{task.title}</strong>
+                              <div className={`criticality-pill ${task.priority}`}>{criticalityLabel(task.priority)}</div>
+                            </div>
+                            <p>{task.description}</p>
+                            <div className="forge-controls">
+                              <select
+                                value={task.owner}
+                                className="forge-select"
+                                onChange={(e) => updateTaskOwner(task.id, e.target.value)}
+                              >
+                                {ownerOptions.map((owner) => (
+                                  <option key={owner} value={owner}>
+                                    {owner}
+                                  </option>
+                                ))}
+                              </select>
+                              <select
+                                value={task.status}
+                                className="forge-select"
+                                onChange={(e) => updateTaskStatus(task.id, e.target.value)}
+                              >
+                                <option value="queued">queued</option>
+                                <option value="in_progress">in progress</option>
+                                <option value="completed">completed</option>
+                              </select>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              )}
+            </section>
+
+            <section className="labs-section">
               <div className="section-heading">Orch Code</div>
               <div className="labs-grid phases-grid">
                 {labsOverview?.orch_code_tracks.map((track) => (
@@ -435,6 +670,56 @@ const App: React.FC = () => {
                     </div>
                   </article>
                 ))}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">Universal MCP Console</div>
+              <div className="forge-shell">
+                <article className="labs-card forge-create-card">
+                  <div className="tool-card-top">
+                    <h3>MCP Chat</h3>
+                    <div className="criticality-pill high">Cross Platform</div>
+                  </div>
+                  <label className="forge-label">
+                    <span>Ask About IDE, OS, CLI, Skills, Or MCP</span>
+                    <textarea
+                      value={consoleMessage}
+                      onChange={(e) => setConsoleMessage(e.target.value)}
+                      className="forge-textarea"
+                      rows={4}
+                    />
+                  </label>
+                  <button type="button" className="forge-button" onClick={sendConsoleMessage}>
+                    Send To MCP Console
+                  </button>
+                </article>
+
+                <article className="labs-card forge-room-detail">
+                  <div className="tool-card-top">
+                    <h3>Console Reply</h3>
+                    <div className="card-chip">{consoleReply?.topic ?? 'waiting'}</div>
+                  </div>
+                  <p>{consoleReply?.response ?? 'Ask a question to get execution guidance for IDE, operating system, CLI, skills, and MCP workflows.'}</p>
+                  {consoleReply && (
+                    <>
+                      <div className="section-heading">Suggested Actions</div>
+                      <div className="deliverables-list">
+                        {consoleReply.suggested_actions.map((action) => (
+                          <div key={action} className="deliverable-item">
+                            {action}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="section-heading">Surfaces</div>
+                      <div className="forge-summary-strip">
+                        {consoleReply.surfaces.map((surface) => (
+                          <div key={surface}>{surface}</div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </article>
               </div>
             </section>
           </div>

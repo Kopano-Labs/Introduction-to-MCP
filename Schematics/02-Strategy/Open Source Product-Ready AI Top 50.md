@@ -64,7 +64,7 @@ Current product-direction inputs were cross-checked against:
 | 29 | Content provenance | Needed for trust | show source and model origin in UI | markdown source footers | signed provenance + policy layer |
 | 30 | Experiment registry | Powers Labs model | keep `labs_registry.py` evolving | static registry file | admin-managed catalog |
 | 31 | Launch gallery | Makes Labs legible | keep Labs GUI as primary launch page | React/Vite gallery | richer design system |
-| 32 | Cowork mode | Enables team execution | build `cowork-room` next | shared room + task lanes | persistent collaboration service |
+| 32 | Orch Forge mode | Enables team execution | build `orch-forge` next | shared room + task lanes | persistent collaboration service |
 | 33 | Stitch-like canvas | Enables design flow | add canvas surface for prompts/screens | basic cards + layout board | full generative canvas |
 | 34 | Orch Code mode | Turns orch into coding partner | add repo-aware teaching loops | local teaching profiles | premium coding copilots |
 | 35 | Pattern capture | Lets orch learn Robyn's craft | diff-based style memory | repo notes + examples | advanced preference learning |
@@ -109,7 +109,7 @@ Current product-direction inputs were cross-checked against:
 
 1. Add a proper language-routing layer for the 12 official South African languages.
 2. Build the `Speech Access Assistant` around AAC, adaptive speech parsing, and text-first confirmations.
-3. Turn `Cowork Room` into a real execution surface with lanes, assignments, and approvals.
+3. Turn `Orch Forge` into a real execution surface with lanes, assignments, and approvals.
 4. Start `Orch Code` by teaching the stack already used here: Python, FastAPI, pytest, React, TypeScript, SQLite, and Schematics discipline.
 5. Add tracing, evals, and product metrics before expanding the number of Labs tools.
 

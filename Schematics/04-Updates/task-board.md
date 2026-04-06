@@ -68,7 +68,7 @@ status: active
 | Multilingual response packaging | COMPLETE | Lead |
 | Accessibility execution flow | COMPLETE | Lead |
 | Cowork + Orch Code API scaffolding | COMPLETE | Lead |
-| Runnable Cowork Room flow | COMPLETE | Lead |
+| Runnable Orch Forge flow | COMPLETE | Lead |
 | Cowork reassignment + dispatch summary | COMPLETE | Lead |
 | First Orch Code teaching loop | COMPLETE | Lead |
 | Orch Code lesson progression | COMPLETE | Lead |

@@ -60,25 +60,16 @@ ACCESS_MODES: list[dict[str, str]] = [
 
 COWORK_SURFACES: list[dict[str, Any]] = [
     {
-        "id": "cowork-room",
-        "name": "Cowork Room",
-        "status": "planned",
-        "inspiration": "Anthropic Cowork + Codex command center",
-        "summary": "A shared room where orch, Lead, and specialist agents work side by side on bounded tasks.",
+        "id": "orch-forge",
+        "name": "Orch Forge",
+        "status": "building",
+        "inspiration": "Anthropic workspace + Codex command center + Stitch canvas",
+        "summary": "A shared forge where orch, Lead, and specialist agents plan, build, critique, and iterate in one creator surface.",
         "features": [
             "parallel specialist lanes",
             "task inbox and assignment rail",
             "shared context snapshot",
             "approval and merge checkpoints",
-        ],
-    },
-    {
-        "id": "stitch-canvas",
-        "name": "Stitch Canvas",
-        "status": "planned",
-        "inspiration": "Google Stitch",
-        "summary": "An infinite design-and-logic canvas for turning prompts, screenshots, notes, and code into product flows.",
-        "features": [
             "infinite canvas",
             "prompt to UI concepts",
             "artifact cards for screens and APIs",
@@ -199,11 +190,11 @@ LABS_TOOLS: list[dict[str, Any]] = [
     },
     {
         "id": "cowork-room",
-        "name": "Cowork Room",
+        "name": "Orch Forge",
         "category": "creator",
         "criticality": "high",
-        "status": "planned",
-        "summary": "Collaborative AI room for parallel agent work, human review, and team dispatch.",
+        "status": "building",
+        "summary": "Collaborative AI forge for parallel agent work, human review, lane dispatch, and concept-to-build iteration.",
         "impact": "Faster execution without losing control.",
         "phase": "Phase 8",
     },
@@ -254,8 +245,7 @@ LABS_PHASES: list[dict[str, Any]] = [
         "status": "planned",
         "summary": "Run public-impact AI experiments with cowork surfaces, coding assistance, visibility, and metrics.",
         "deliverables": [
-            "Cowork room",
-            "Stitch-like design canvas",
+            "Orch Forge creator surface",
             "Orch Code teaching surface",
             "Impact dashboard",
         ],

@@ -14,6 +14,7 @@ from .cowork import (
 from .labs_registry import get_labs_overview
 from .language_runtime import build_multilingual_response, route_multilingual_prompt, translate_text
 from .launch_config import get_launch_surface_config
+from .mcp_console import answer_mcp_console
 from .orch_code import get_orch_code_profile, teach_repo_patterns, update_lesson_status
 from .sa_access import build_access_plan, execute_access_session
 
@@ -72,6 +73,10 @@ class AccessExecutionRequest(BaseModel):
 class LessonStatusRequest(BaseModel):
     status: str
     confidence: int | None = None
+
+
+class McpConsoleRequest(BaseModel):
+    message: str
 
 
 @router.get("/overview")
@@ -216,3 +221,8 @@ def labs_access_execute(request: AccessExecutionRequest) -> dict:
         preferred_input=request.preferred_input,
         speech_impairment=request.speech_impairment,
     )
+
+
+@router.post("/mcp-console/chat")
+def labs_mcp_console_chat(request: McpConsoleRequest) -> dict:
+    return answer_mcp_console(request.message)

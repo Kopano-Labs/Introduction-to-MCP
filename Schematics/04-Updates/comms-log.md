@@ -49,7 +49,7 @@ status: active
 - Added `orch/orch/language_runtime.py`
 - Added `/api/labs/route-prompt` for multilingual routing
 - Added `/api/labs/translate` for deterministic phrasebook translation execution
-- Added `orch/orch/cowork.py` with persisted Cowork Room state in SQLite
+- Added `orch/orch/cowork.py` with persisted Orch Forge state in SQLite
 - Added `/api/labs/cowork/rooms`, room-detail, task-create, and task-status endpoints
 - Added `orch/orch/orch_code.py`
 - Added `/api/labs/orch-code/teach` and `/api/labs/orch-code/profile`
@@ -57,7 +57,7 @@ status: active
 
 **What moved from planned to runnable:**
 - Phase 7 now has live multilingual routing and translation execution
-- Phase 8 now has a first runnable Cowork Room flow
+- Phase 8 now has a first runnable Orch Forge flow
 - Orch Code now has a first teaching loop grounded in the repo's actual stack patterns
 
 **Verification:**
@@ -83,8 +83,8 @@ status: active
   - 12 official South African languages
   - SASL coverage
   - AAC and adaptive speech modes
-  - Cowork Room
-  - Stitch Canvas direction
+  - Orch Forge
+  - creator-canvas direction
   - Orch Code teaching tracks
 - Added `Schematics/02-Strategy/Open Source Product-Ready AI Top 50.md`
 
@@ -95,7 +95,7 @@ status: active
 
 **Directive to Lead:**
 - Next code work should turn language planning into live multilingual routing
-- Then turn Cowork Room and Orch Code from modeled surfaces into working product flows
+- Then turn Orch Forge and Orch Code from modeled surfaces into working product flows
 
 **Directive to DEV_1:**
 - Catch-up: Cowork and Orch Code are now explicit build targets

@@ -204,3 +204,14 @@ def test_orch_code_lesson_status_can_advance(isolated_labs_db):
     lesson = update_response.json()["lesson"]
     assert lesson["status"] == "learning"
     assert lesson["confidence"] == 91
+
+
+def test_mcp_console_chat_routes_cli_queries():
+    response = client.post(
+        "/api/labs/mcp-console/chat",
+        json={"message": "How do I use the CLI and terminal flow for Orch?"},
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["topic"] == "cli"
+    assert "CLI" in payload["surfaces"]

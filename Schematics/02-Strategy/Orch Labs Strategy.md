@@ -43,7 +43,7 @@ The target is a Google-Labs-style experience:
 | SME Assistant | Small business growth | High |
 | SA Language Engine | All SA languages | Critical |
 | Speech Access Assistant | Speech impairment support | Critical |
-| Cowork Room | Collaborative execution | High |
+| Orch Forge | Collaborative execution + canvas workflow | High |
 | Orch Code | Coding acceleration and craft learning | Critical |
 
 ## Accessibility Rule
@@ -60,4 +60,4 @@ Orch Labs must explicitly plan for:
 The Labs launch surface should combine:
 - Anthropic-style workspace clarity and artifact review
 - Codex-style command-center execution and coding focus
-- Stitch-style fast concept-to-interface iteration
+- Stitch-style fast concept-to-interface iteration inside Orch Forge

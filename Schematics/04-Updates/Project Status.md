@@ -99,10 +99,10 @@ orch now has explicit roadmap commitment for all official South African language
 `/api/labs/multilingual-response` now packages translated response labels and domain glossary hints, while `/api/labs/access/execute` turns accessibility planning into a confirmation-aware execution step for voice, AAC, and text-first flows.
 
 ### Phase 8 Backbone
-`/api/labs/cowork` and `/api/labs/launch-config` now expose Cowork Room, Stitch-like canvas direction, Orch Code tracks, and the 50/50 Anthropic/Codex launch-surface mix.
+`/api/labs/cowork` and `/api/labs/launch-config` now expose Orch Forge, creator-canvas direction, Orch Code tracks, and the 50/50 Anthropic/Codex launch-surface mix.
 
 ### Phase 8 Runtime
-`/api/labs/cowork/rooms`, `/api/labs/cowork/rooms/{id}`, and task-status endpoints now provide the first runnable Cowork Room execution loop with persisted rooms, lanes, and task ownership.
+`/api/labs/cowork/rooms`, `/api/labs/cowork/rooms/{id}`, and task endpoints now provide the first runnable Orch Forge execution loop with persisted rooms, lanes, task ownership, and reassignment.
 
 ### Phase 8 Upgrade
 Cowork tasks can now be reassigned with dispatch summaries, and Orch Code lessons can now advance through explicit learning states instead of staying static after the first teach pass.

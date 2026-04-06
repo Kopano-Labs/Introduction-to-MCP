@@ -18,7 +18,7 @@ def get_launch_surface_config() -> dict[str, Any]:
         "cowork": {
             "enabled": True,
             "stitch_canvas": True,
-            "modes": ["cowork-room", "stitch-canvas", "orch-code"],
+            "modes": ["orch-forge", "orch-code"],
         },
         "launch_sections": [
             "labs hero",
