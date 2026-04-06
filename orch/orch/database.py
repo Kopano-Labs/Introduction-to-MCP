@@ -121,6 +121,55 @@ def init_db():
     );
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS cowork_artifacts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        room_id INTEGER NOT NULL,
+        artifact_type TEXT NOT NULL,
+        title TEXT NOT NULL,
+        summary TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'draft',
+        link TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (room_id) REFERENCES cowork_rooms (id)
+    );
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS mcp_console_sessions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        surface TEXT NOT NULL DEFAULT 'orch_labs',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS mcp_console_messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        session_id INTEGER NOT NULL,
+        role TEXT NOT NULL,
+        topic TEXT,
+        content TEXT NOT NULL,
+        latency_ms INTEGER NOT NULL DEFAULT 0,
+        model_used TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (session_id) REFERENCES mcp_console_sessions (id)
+    );
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS creator_analytics_events (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_type TEXT NOT NULL,
+        room_id INTEGER,
+        task_id INTEGER,
+        metadata TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (room_id) REFERENCES cowork_rooms (id),
+        FOREIGN KEY (task_id) REFERENCES cowork_tasks (id)
+    );
+    """)
+
     conn.commit()
     conn.close()
     console.log("Database schema initialized successfully.")
@@ -129,6 +178,25 @@ def init_db():
 def setup_database():
     """Wrapper for init_db for external calls."""
     init_db()
+
+
+def record_creator_event(
+    event_type: str,
+    room_id: int | None = None,
+    task_id: int | None = None,
+    metadata: str | None = None,
+) -> None:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        INSERT INTO creator_analytics_events (event_type, room_id, task_id, metadata)
+        VALUES (?, ?, ?, ?)
+        """,
+        (event_type, room_id, task_id, metadata),
+    )
+    conn.commit()
+    conn.close()
 
 def log_interaction(
     discussion_id: int, 

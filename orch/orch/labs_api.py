@@ -5,17 +5,20 @@ from pydantic import BaseModel
 
 from .cowork import (
     add_cowork_task,
+    add_cowork_artifact,
     create_cowork_room,
+    get_creator_analytics,
     get_cowork_room,
     list_cowork_rooms,
+    move_cowork_task,
     reassign_cowork_task,
     update_cowork_task,
 )
 from .labs_registry import get_labs_overview
 from .language_runtime import build_multilingual_response, route_multilingual_prompt, translate_text
 from .launch_config import get_launch_surface_config
-from .mcp_console import answer_mcp_console
-from .orch_code import get_orch_code_profile, teach_repo_patterns, update_lesson_status
+from .mcp_console import answer_mcp_console, get_console_analytics
+from .orch_code import get_orch_code_controls, get_orch_code_profile, teach_repo_patterns, update_lesson_status
 from .sa_access import build_access_plan, execute_access_session
 
 
@@ -56,6 +59,18 @@ class CoworkTaskOwnerRequest(BaseModel):
     owner: str
 
 
+class CoworkTaskLaneRequest(BaseModel):
+    lane: str
+
+
+class CoworkArtifactRequest(BaseModel):
+    artifact_type: str
+    title: str
+    summary: str
+    status: str = "draft"
+    link: str | None = None
+
+
 class MultilingualResponseRequest(BaseModel):
     text: str
     preferred_language: str | None = None
@@ -77,6 +92,7 @@ class LessonStatusRequest(BaseModel):
 
 class McpConsoleRequest(BaseModel):
     message: str
+    session_id: int | None = None
 
 
 @router.get("/overview")
@@ -198,6 +214,33 @@ def cowork_update_task_owner(task_id: int, request: CoworkTaskOwnerRequest) -> d
     return {"task": reassign_cowork_task(task_id, request.owner)}
 
 
+@router.post("/cowork/tasks/{task_id}/lane")
+def cowork_update_task_lane(task_id: int, request: CoworkTaskLaneRequest) -> dict:
+    return {"task": move_cowork_task(task_id, request.lane)}
+
+
+@router.post("/cowork/rooms/{room_id}/artifacts")
+def cowork_create_artifact(room_id: int, request: CoworkArtifactRequest) -> dict:
+    return {
+        "artifact": add_cowork_artifact(
+            room_id,
+            request.artifact_type,
+            request.title,
+            request.summary,
+            status=request.status,
+            link=request.link,
+        )
+    }
+
+
+@router.get("/analytics")
+def labs_analytics() -> dict:
+    return {
+        "forge": get_creator_analytics(),
+        "mcp_console": get_console_analytics(),
+    }
+
+
 @router.post("/orch-code/teach")
 def orch_code_teach() -> dict:
     return teach_repo_patterns()
@@ -206,6 +249,11 @@ def orch_code_teach() -> dict:
 @router.get("/orch-code/profile")
 def orch_code_profile() -> dict:
     return get_orch_code_profile()
+
+
+@router.get("/orch-code/controls")
+def orch_code_controls() -> dict:
+    return get_orch_code_controls()
 
 
 @router.post("/orch-code/lessons/{lesson_key}/status")
@@ -225,4 +273,4 @@ def labs_access_execute(request: AccessExecutionRequest) -> dict:
 
 @router.post("/mcp-console/chat")
 def labs_mcp_console_chat(request: McpConsoleRequest) -> dict:
-    return answer_mcp_console(request.message)
+    return answer_mcp_console(request.message, session_id=request.session_id)

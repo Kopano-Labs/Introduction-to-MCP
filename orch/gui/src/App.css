@@ -481,6 +481,23 @@ body {
   gap: 16px;
 }
 
+.forge-artifact-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) 1fr;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.artifact-grid,
+.lesson-control-list {
+  display: grid;
+  gap: 14px;
+}
+
+.artifact-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
 .forge-lane {
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -507,6 +524,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  cursor: grab;
 }
 
 .forge-task p {
@@ -522,6 +540,38 @@ body {
 .labs-card {
   padding: 22px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.artifact-card,
+.lesson-control-card,
+.console-reply-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.artifact-link {
+  margin-top: 14px;
+  color: var(--cyan-glow);
+  font-size: 0.72rem;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.secondary-button {
+  background: linear-gradient(135deg, rgba(84, 227, 194, 0.95), rgba(243, 201, 105, 0.95));
+}
+
+.audit-round {
+  font-size: 0.7rem;
+  color: var(--cyan-glow);
+  margin-top: 40px;
+}
+
+.thought-primary {
+  color: white;
+  margin-bottom: 15px;
 }
 
 .labs-card h3 {
@@ -672,6 +722,7 @@ body {
   }
 
   .forge-shell,
+  .forge-artifact-layout,
   .forge-lanes,
   .forge-controls {
     grid-template-columns: 1fr;

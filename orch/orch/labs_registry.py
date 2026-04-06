@@ -92,6 +92,95 @@ COWORK_SURFACES: list[dict[str, Any]] = [
 ]
 
 
+ORCH_INTERFACES: list[dict[str, Any]] = [
+    {
+        "id": "ide-surface",
+        "name": "IDE Workspace",
+        "status": "building",
+        "summary": "Repo-aware coding surface for VS Code, Cursor, JetBrains, and web editors through Orch Labs orchestration.",
+        "mechanics": ["workspace context", "code actions", "review surfaces", "open file handoff"],
+    },
+    {
+        "id": "os-surface",
+        "name": "Operating System Layer",
+        "status": "building",
+        "summary": "Environment-aware workflow routing across Windows, macOS, Linux, and cloud shells.",
+        "mechanics": ["runtime detection", "path normalization", "shell policy", "install plans"],
+    },
+    {
+        "id": "cli-surface",
+        "name": "CLI Surface",
+        "status": "building",
+        "summary": "Terminal-grade execution path for commands, approvals, logs, and agent orchestration.",
+        "mechanics": ["commands", "plans", "streaming logs", "tool execution"],
+    },
+    {
+        "id": "skills-surface",
+        "name": "Skills Surface",
+        "status": "building",
+        "summary": "Reusable operating knowledge packed as skills with trigger rules and execution guidance.",
+        "mechanics": ["skill discovery", "trigger routing", "workflow injection", "narrow references"],
+    },
+    {
+        "id": "connector-surface",
+        "name": "Connector Surface",
+        "status": "planned",
+        "summary": "Connector workflows for MCP, cloud, docs, data, and productivity systems routed from Orch Labs.",
+        "mechanics": ["connector registry", "capability map", "approval boundaries", "telemetry"],
+    },
+]
+
+
+CLOUD_STACKS: list[dict[str, Any]] = [
+    {
+        "id": "azure-demo-day",
+        "name": "Azure Demo Day Stack",
+        "provider": "Azure",
+        "priority": "critical",
+        "status": "ready_to_expand",
+        "summary": "Azure-first orchestration for model hosting, app surfaces, RBAC, observability, and demo-day delivery.",
+        "focus": ["Azure OpenAI", "App Service or Container Apps", "AI Search", "Application Insights", "RBAC"],
+    },
+    {
+        "id": "aws-bridge",
+        "name": "AWS Expansion Stack",
+        "provider": "AWS",
+        "priority": "high",
+        "status": "planned",
+        "summary": "Secondary cloud option for portability, events, storage, and enterprise buyer conversations.",
+        "focus": ["Bedrock", "Lambda", "API Gateway", "CloudWatch", "S3"],
+    },
+]
+
+
+CONNECTOR_WORKFLOWS: list[dict[str, Any]] = [
+    {
+        "id": "install-ide",
+        "name": "Install IDE Workflow",
+        "status": "building",
+        "summary": "Guide users from Orch Labs into IDE setup, extensions, and workspace connector activation.",
+    },
+    {
+        "id": "install-cli",
+        "name": "Install CLI Workflow",
+        "status": "building",
+        "summary": "Teach CLI setup, shell verification, and execution approvals from one guided surface.",
+    },
+    {
+        "id": "skills-onboarding",
+        "name": "Skills Onboarding Workflow",
+        "status": "building",
+        "summary": "Move from discovery to `SKILL.md` usage with explicit trigger rules and narrow references.",
+    },
+    {
+        "id": "connector-orchestration",
+        "name": "Connector Orchestration Workflow",
+        "status": "planned",
+        "summary": "Route MCP, Azure, AWS, and external tool workflows through Orch Labs with analytics.",
+    },
+]
+
+
 ORCH_CODE_TRACKS: list[dict[str, Any]] = [
     {
         "id": "python-core",
@@ -277,6 +366,9 @@ def get_labs_overview() -> dict[str, Any]:
         "access_modes": ACCESS_MODES,
         "cowork_surfaces": COWORK_SURFACES,
         "orch_code_tracks": ORCH_CODE_TRACKS,
+        "orch_interfaces": ORCH_INTERFACES,
+        "cloud_stacks": CLOUD_STACKS,
+        "connector_workflows": CONNECTOR_WORKFLOWS,
         "metrics": {
             "categories": len(LABS_CATEGORIES),
             "tools": len(LABS_TOOLS),
@@ -284,5 +376,7 @@ def get_labs_overview() -> dict[str, Any]:
             "live_tools": sum(1 for tool in LABS_TOOLS if tool["status"] == "live"),
             "languages": len(SA_LANGUAGE_SUPPORT),
             "access_modes": len(ACCESS_MODES),
+            "interfaces": len(ORCH_INTERFACES),
+            "cloud_stacks": len(CLOUD_STACKS),
         },
     }

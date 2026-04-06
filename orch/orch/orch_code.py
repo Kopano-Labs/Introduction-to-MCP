@@ -129,7 +129,17 @@ def get_orch_code_profile() -> dict[str, Any]:
         "summary": {
             "total_lessons": len(lessons),
             "learned_lessons": sum(1 for lesson in lessons if lesson["status"] == "learned"),
+            "learning_lessons": sum(1 for lesson in lessons if lesson["status"] == "learning"),
         },
+    }
+
+
+def get_orch_code_controls() -> dict[str, Any]:
+    profile = get_orch_code_profile()
+    return {
+        **profile,
+        "control_states": ["queued", "learning", "learned", "shipping"],
+        "recommended_next": recommend_next_lessons(limit=5),
     }
 
 

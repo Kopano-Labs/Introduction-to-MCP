@@ -1,8 +1,6 @@
 from litellm import completion
 from .agent_manager import Agent
 from .config import settings
-from google import genai
-from google.genai import types
 import json
 
 def call_ai(agent: Agent, prompt: str, temperature: float = 0.7) -> tuple[str, str]:
@@ -52,6 +50,9 @@ def call_ai_litellm(agent: Agent, prompt: str, temperature: float = 0.7) -> str:
 
 def call_gemini_thinking(agent: Agent, prompt: str) -> tuple[str, str]:
     """Uses the modern google-genai SDK for High-Thinking and Search."""
+    from google import genai
+    from google.genai import types
+
     client = genai.Client(api_key=agent.api_key)
     # Master Identifier from Blueprint
     model_id = "gemini-3.1-pro-preview" 

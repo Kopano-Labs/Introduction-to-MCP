@@ -1,4 +1,5 @@
 from pathlib import Path
+from uuid import uuid4
 
 import pytest
 from fastapi.testclient import TestClient
@@ -11,11 +12,15 @@ client = TestClient(app)
 
 
 @pytest.fixture
-def isolated_labs_db(tmp_path, monkeypatch):
-    db_path = tmp_path / "labs_test.db"
+def isolated_labs_db(monkeypatch):
+    temp_root = Path(".pytest_tmp")
+    temp_root.mkdir(exist_ok=True)
+    db_path = temp_root / f"labs_test_{uuid4().hex}.db"
     monkeypatch.setattr(database, "DB_PATH", db_path)
     database.init_db()
     yield db_path
+    if db_path.exists():
+        db_path.unlink()
 
 
 def test_labs_overview_endpoint():
@@ -178,6 +183,42 @@ def test_cowork_task_can_be_reassigned(isolated_labs_db):
     assert assign_response.json()["task"]["owner"] == "DEV_2"
 
 
+def test_cowork_task_can_move_lanes_and_add_artifacts(isolated_labs_db):
+    create_response = client.post(
+        "/api/labs/cowork/rooms",
+        json={"name": "Forge Lane Room", "mission": "Move tasks and save artifacts", "lead": "Lead"},
+    )
+    room = create_response.json()["room"]
+    task_id = room["tasks"][0]["id"]
+
+    move_response = client.post(
+        f"/api/labs/cowork/tasks/{task_id}/lane",
+        json={"lane": "review"},
+    )
+    assert move_response.status_code == 200
+    moved_task = move_response.json()["task"]
+    assert moved_task["lane"] == "review"
+    assert moved_task["status"] == "completed"
+
+    artifact_response = client.post(
+        f"/api/labs/cowork/rooms/{room['id']}/artifacts",
+        json={
+            "artifact_type": "api",
+            "title": "Azure Connector Contract",
+            "summary": "Tracks Azure-first orchestration for demo day.",
+            "status": "draft",
+            "link": "Orch Forge",
+        },
+    )
+    assert artifact_response.status_code == 200
+    assert artifact_response.json()["artifact"]["artifact_type"] == "api"
+
+    detail_response = client.get(f"/api/labs/cowork/rooms/{room['id']}")
+    detail = detail_response.json()["room"]
+    assert any(item["id"] == task_id for item in detail["lanes"]["review"])
+    assert any(item["title"] == "Azure Connector Contract" for item in detail["artifacts"])
+
+
 def test_orch_code_teaching_loop_reads_repo_patterns(isolated_labs_db):
     teach_response = client.post("/api/labs/orch-code/teach")
     assert teach_response.status_code == 200
@@ -215,3 +256,21 @@ def test_mcp_console_chat_routes_cli_queries():
     payload = response.json()
     assert payload["topic"] == "cli"
     assert "CLI" in payload["surfaces"]
+    assert "model_used" in payload
+    assert "analytics" in payload
+
+
+def test_labs_analytics_endpoint_reports_forge_and_console(isolated_labs_db):
+    client.post(
+        "/api/labs/cowork/rooms",
+        json={"name": "Analytics Room", "mission": "Track throughput", "lead": "Lead"},
+    )
+    client.post(
+        "/api/labs/mcp-console/chat",
+        json={"message": "How should Orch handle Azure demo day connectors?"},
+    )
+    response = client.get("/api/labs/analytics")
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["forge"]["rooms"] >= 1
+    assert payload["mcp_console"]["requests"] >= 1
