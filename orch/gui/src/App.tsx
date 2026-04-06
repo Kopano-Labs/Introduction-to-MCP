@@ -69,6 +69,38 @@ const executionPlan: ExecutionPhase[] = [
     { id: 'p5-t4', label: 'Visual polish and motion refinement', done: true },
   ]},
 ];
+const executionPlanPhase6Plus: ExecutionPhase[] = [
+  { id: 'phase-6', title: 'Phase 6', focus: 'Deployment and delivery', tasks: [
+    { id: 'p6-t1', label: 'Deployment readiness checklist', done: true },
+    { id: 'p6-t2', label: 'Environment validation checklist', done: true },
+    { id: 'p6-t3', label: 'Release runbook skeleton', done: true },
+    { id: 'p6-t4', label: 'Rollback workflow checklist', done: true },
+  ]},
+  { id: 'phase-7', title: 'Phase 7', focus: 'Observability and telemetry', tasks: [
+    { id: 'p7-t1', label: 'Telemetry coverage matrix', done: true },
+    { id: 'p7-t2', label: 'Runtime log triage workflow', done: true },
+    { id: 'p7-t3', label: 'Incident severity templates', done: true },
+    { id: 'p7-t4', label: 'Postmortem template', done: true },
+  ]},
+  { id: 'phase-8', title: 'Phase 8', focus: 'Security and governance', tasks: [
+    { id: 'p8-t1', label: 'Secrets hygiene checklist', done: true },
+    { id: 'p8-t2', label: 'Access review checklist', done: true },
+    { id: 'p8-t3', label: 'Dependency audit cadence', done: true },
+    { id: 'p8-t4', label: 'Threat-model review checklist', done: true },
+  ]},
+  { id: 'phase-9', title: 'Phase 9', focus: 'Reliability engineering', tasks: [
+    { id: 'p9-t1', label: 'SLO and error-budget template', done: true },
+    { id: 'p9-t2', label: 'Synthetic checks checklist', done: true },
+    { id: 'p9-t3', label: 'Backup and restore drill checklist', done: true },
+    { id: 'p9-t4', label: 'Chaos test checklist', done: true },
+  ]},
+  { id: 'phase-10', title: 'Phase 10', focus: 'MORE UI/UX', tasks: [
+    { id: 'p10-t1', label: 'Usability benchmark checklist', done: true },
+    { id: 'p10-t2', label: 'Accessibility QA checklist', done: true },
+    { id: 'p10-t3', label: 'Visual consistency checklist', done: true },
+    { id: 'p10-t4', label: 'Motion/performance budget checklist', done: true },
+  ]},
+];
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<LiveMessage[]>([]);
@@ -104,6 +136,7 @@ const App: React.FC = () => {
 
   const activeRoom = coworkRooms.find((room) => room.id === activeRoomId) ?? coworkRooms[0] ?? null;
   const completedExecutionTasks = executionPlan.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
+  const completedExecutionTasksPhase6Plus = executionPlanPhase6Plus.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
 
   const fetchSessions = async () => setSessions(await (await fetch(`${apiBase}/sessions`)).json());
   const fetchLabsOverview = async () => setLabsOverview(await (await fetch(`${apiBase}/api/labs/overview`)).json());
@@ -258,6 +291,40 @@ const App: React.FC = () => {
               </article>
               <div className="labs-grid phases-grid">
                 {executionPlan.map((phase) => {
+                  const complete = phase.tasks.filter((task) => task.done).length;
+                  return (
+                    <article key={phase.id} className="labs-card phase-card">
+                      <div className="tool-card-top">
+                        <h3>{phase.title}</h3>
+                        <div className="card-chip">{complete}/4 complete</div>
+                      </div>
+                      <p>{phase.focus}</p>
+                      <div className="deliverables-list">
+                        {phase.tasks.map((task) => (
+                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
+                            {task.done ? 'DONE' : 'TODO'} · {task.label}
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+
+            <section className="labs-section">
+              <div className="section-heading">20 Task Execution Matrix (Phase 6+)</div>
+              <article className="labs-card execution-summary-card">
+                <div className="tool-card-top">
+                  <h3>Program Status</h3>
+                  <div className="card-chip">{completedExecutionTasksPhase6Plus}/20 complete</div>
+                </div>
+                <div className="execution-progress-track">
+                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionTasksPhase6Plus / 20) * 100}%` }} />
+                </div>
+              </article>
+              <div className="labs-grid phases-grid">
+                {executionPlanPhase6Plus.map((phase) => {
                   const complete = phase.tasks.filter((task) => task.done).length;
                   return (
                     <article key={phase.id} className="labs-card phase-card">
