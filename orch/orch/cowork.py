@@ -88,6 +88,15 @@ def update_cowork_task(task_id: int, status: str) -> dict[str, Any]:
     return get_cowork_task(task_id)
 
 
+def reassign_cowork_task(task_id: int, owner: str) -> dict[str, Any]:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE cowork_tasks SET owner = ? WHERE id = ?", (owner, task_id))
+    conn.commit()
+    conn.close()
+    return get_cowork_task(task_id)
+
+
 def get_cowork_task(task_id: int) -> dict[str, Any]:
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -123,5 +132,12 @@ def get_cowork_room(room_id: int) -> dict[str, Any]:
         "research": [dict(task) for task in tasks if task["lane"] == "research"],
         "build": [dict(task) for task in tasks if task["lane"] == "build"],
         "review": [dict(task) for task in tasks if task["lane"] == "review"],
+    }
+    snapshot["dispatch_summary"] = {
+        "total_tasks": len(snapshot["tasks"]),
+        "queued": sum(1 for task in snapshot["tasks"] if task["status"] == "queued"),
+        "in_progress": sum(1 for task in snapshot["tasks"] if task["status"] == "in_progress"),
+        "completed": sum(1 for task in snapshot["tasks"] if task["status"] == "completed"),
+        "owners": sorted({task["owner"] for task in snapshot["tasks"]}),
     }
     return snapshot

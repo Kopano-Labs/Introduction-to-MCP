@@ -54,3 +54,44 @@ def build_access_plan(
             "never assume English when a local language is provided",
         ],
     }
+
+
+def execute_access_session(
+    message: str,
+    preferred_language: str | None = None,
+    preferred_input: str | None = None,
+    speech_impairment: bool = False,
+) -> dict[str, Any]:
+    plan = build_access_plan(
+        preferred_language=preferred_language,
+        preferred_input=preferred_input,
+        speech_impairment=speech_impairment,
+    )
+
+    cleaned_message = " ".join(message.split())
+    confidence = 0.92
+    if speech_impairment and len(cleaned_message.split()) < 3:
+        confidence = 0.61
+    elif preferred_input in {"voice", "speech"} and len(cleaned_message.split()) < 4:
+        confidence = 0.74
+
+    requires_confirmation = confidence < 0.8 or speech_impairment
+    confirmation_prompt = "Confirm this intent before any action."
+    if plan["recommended_mode"]["id"] == "aac":
+        confirmation_prompt = "Confirm using AAC tiles or the text summary before any action."
+    elif plan["recommended_mode"]["id"] == "text-first":
+        confirmation_prompt = "Review the text summary and confirm before any action."
+
+    return {
+        "message": cleaned_message,
+        "language": plan["language"],
+        "recommended_mode": plan["recommended_mode"],
+        "confidence": confidence,
+        "requires_confirmation": requires_confirmation,
+        "confirmation_prompt": confirmation_prompt,
+        "fallbacks": [
+            "text summary",
+            "repeat request with slower pacing",
+            "AAC quick actions",
+        ],
+    }

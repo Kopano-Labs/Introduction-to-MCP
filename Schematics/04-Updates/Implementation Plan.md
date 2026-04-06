@@ -94,6 +94,8 @@ status: active
 - [x] Add AAC, adaptive speech, and text-first access modes to the Labs system model
 - [x] Add first multilingual routing runtime
 - [x] Add deterministic translation execution for core phrases and handoff labels
+- [x] Add multilingual response packaging with glossary assists
+- [x] Add confirmation-aware accessibility execution flow
 - [ ] Support all official South African languages in deeper model-backed response generation
 - [ ] Add language-aware prompting and translation assist layers
 - [ ] Add speech-impairment-aware interaction execution
@@ -105,6 +107,8 @@ status: active
 - [x] Add launch config for 50/50 Anthropic/Codex visual direction with Stitch-inspired cowork support
 - [x] Add persisted Cowork Room flow with rooms, lanes, tasks, and status updates
 - [x] Add first Orch Code teaching loop against the current repo
+- [x] Add cowork task reassignment and dispatch summary
+- [x] Add Orch Code lesson-state progression
 - [ ] Add pilot analytics and impact metrics for Labs tools
 - [ ] Add experiment graduation criteria
 - [ ] Add community feedback loops

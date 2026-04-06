@@ -131,3 +131,35 @@ def get_orch_code_profile() -> dict[str, Any]:
             "learned_lessons": sum(1 for lesson in lessons if lesson["status"] == "learned"),
         },
     }
+
+
+def update_lesson_status(lesson_key: str, status: str, confidence: int | None = None) -> dict[str, Any]:
+    init_db()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    if confidence is None:
+        cursor.execute(
+            """
+            UPDATE orch_code_lessons
+            SET status = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE lesson_key = ?
+            """,
+            (status, lesson_key),
+        )
+    else:
+        cursor.execute(
+            """
+            UPDATE orch_code_lessons
+            SET status = ?, confidence = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE lesson_key = ?
+            """,
+            (status, confidence, lesson_key),
+        )
+    conn.commit()
+    cursor.execute(
+        "SELECT lesson_key, title, track, source, status, confidence, notes FROM orch_code_lessons WHERE lesson_key = ?",
+        (lesson_key,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+    return dict(row) if row else {}

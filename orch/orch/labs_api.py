@@ -3,12 +3,19 @@ from __future__ import annotations
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from .cowork import add_cowork_task, create_cowork_room, get_cowork_room, list_cowork_rooms, update_cowork_task
+from .cowork import (
+    add_cowork_task,
+    create_cowork_room,
+    get_cowork_room,
+    list_cowork_rooms,
+    reassign_cowork_task,
+    update_cowork_task,
+)
 from .labs_registry import get_labs_overview
-from .language_runtime import route_multilingual_prompt, translate_text
+from .language_runtime import build_multilingual_response, route_multilingual_prompt, translate_text
 from .launch_config import get_launch_surface_config
-from .orch_code import get_orch_code_profile, teach_repo_patterns
-from .sa_access import build_access_plan
+from .orch_code import get_orch_code_profile, teach_repo_patterns, update_lesson_status
+from .sa_access import build_access_plan, execute_access_session
 
 
 router = APIRouter(prefix="/api/labs", tags=["labs"])
@@ -42,6 +49,29 @@ class CoworkTaskRequest(BaseModel):
 
 class CoworkTaskStatusRequest(BaseModel):
     status: str
+
+
+class CoworkTaskOwnerRequest(BaseModel):
+    owner: str
+
+
+class MultilingualResponseRequest(BaseModel):
+    text: str
+    preferred_language: str | None = None
+    domain: str = "general"
+    include_glossary: bool = True
+
+
+class AccessExecutionRequest(BaseModel):
+    message: str
+    preferred_language: str | None = None
+    preferred_input: str | None = None
+    speech_impairment: bool = False
+
+
+class LessonStatusRequest(BaseModel):
+    status: str
+    confidence: int | None = None
 
 
 @router.get("/overview")
@@ -114,6 +144,16 @@ def labs_route_prompt(request: RoutePromptRequest) -> dict:
     )
 
 
+@router.post("/multilingual-response")
+def labs_multilingual_response(request: MultilingualResponseRequest) -> dict:
+    return build_multilingual_response(
+        request.text,
+        preferred_language=request.preferred_language,
+        domain=request.domain,
+        include_glossary=request.include_glossary,
+    )
+
+
 @router.get("/cowork/rooms")
 def cowork_rooms() -> dict:
     return {"rooms": list_cowork_rooms()}
@@ -148,6 +188,11 @@ def cowork_update_task_status(task_id: int, request: CoworkTaskStatusRequest) ->
     return {"task": update_cowork_task(task_id, request.status)}
 
 
+@router.post("/cowork/tasks/{task_id}/owner")
+def cowork_update_task_owner(task_id: int, request: CoworkTaskOwnerRequest) -> dict:
+    return {"task": reassign_cowork_task(task_id, request.owner)}
+
+
 @router.post("/orch-code/teach")
 def orch_code_teach() -> dict:
     return teach_repo_patterns()
@@ -156,3 +201,18 @@ def orch_code_teach() -> dict:
 @router.get("/orch-code/profile")
 def orch_code_profile() -> dict:
     return get_orch_code_profile()
+
+
+@router.post("/orch-code/lessons/{lesson_key}/status")
+def orch_code_update_status(lesson_key: str, request: LessonStatusRequest) -> dict:
+    return {"lesson": update_lesson_status(lesson_key, request.status, confidence=request.confidence)}
+
+
+@router.post("/access/execute")
+def labs_access_execute(request: AccessExecutionRequest) -> dict:
+    return execute_access_session(
+        message=request.message,
+        preferred_language=request.preferred_language,
+        preferred_input=request.preferred_input,
+        speech_impairment=request.speech_impairment,
+    )

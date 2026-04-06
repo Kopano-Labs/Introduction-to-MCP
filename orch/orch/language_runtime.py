@@ -48,6 +48,59 @@ PHRASEBOOK = {
         "ss-za": "Sinyatselo lesilandzelako",
         "sasl-za": "Next step",
     },
+    "hello": {
+        "en-za": "Hello",
+        "af-za": "Hallo",
+        "zu-za": "Sawubona",
+        "xh-za": "Molo",
+        "tn-za": "Dumela",
+        "st-za": "Dumela",
+        "nso-za": "Thobela",
+        "ts-za": "Avuxeni",
+        "ve-za": "Ndaa",
+        "nr-za": "Lotjhani",
+        "ss-za": "Sawubona",
+        "sasl-za": "Hello",
+    },
+    "thank_you": {
+        "en-za": "Thank you",
+        "af-za": "Dankie",
+        "zu-za": "Ngiyabonga",
+        "xh-za": "Enkosi",
+        "tn-za": "Ke a leboga",
+        "st-za": "Kea leboha",
+        "nso-za": "Ke a leboga",
+        "ts-za": "Ndzi khensa",
+        "ve-za": "Ndaa",
+        "nr-za": "Ngiyathokoza",
+        "ss-za": "Ngiyabonga",
+        "sasl-za": "Thank you",
+    },
+}
+
+DOMAIN_GLOSSARY = {
+    "jobs": {
+        "booking": {
+            "en-za": "booking",
+            "zu-za": "ukubhukha",
+            "xh-za": "ubhukisho",
+            "af-za": "bespreking",
+        },
+        "provider": {
+            "en-za": "provider",
+            "zu-za": "umhlinzeki",
+            "xh-za": "umnikezeli",
+            "af-za": "verskaffer",
+        },
+    },
+    "utilities": {
+        "loadshedding": {
+            "en-za": "loadshedding",
+            "zu-za": "ukucishwa kukagesi",
+            "xh-za": "ukucinywa kombane",
+            "af-za": "beurtkrag",
+        }
+    },
 }
 
 
@@ -86,6 +139,43 @@ def translate_text(text: str, target_language: str, domain: str = "general") -> 
         "target_language": language,
         "domain": domain,
         "mode": "phrasebook-plus-fallback",
+    }
+
+
+def build_multilingual_response(
+    text: str,
+    preferred_language: str | None = None,
+    domain: str = "general",
+    include_glossary: bool = True,
+) -> dict[str, Any]:
+    target_language = detect_language("", preferred_language=preferred_language)
+    translation = translate_text(text, target_language["id"], domain=domain)
+
+    glossary_terms: list[dict[str, str]] = []
+    if include_glossary and domain in DOMAIN_GLOSSARY:
+        for english_term, localized in DOMAIN_GLOSSARY[domain].items():
+            glossary_terms.append(
+                {
+                    "source": english_term,
+                    "translated": localized.get(target_language["id"], localized.get("en-za", english_term)),
+                }
+            )
+
+    response_labels = {
+        "acknowledged": PHRASEBOOK["acknowledged"].get(target_language["id"], "Acknowledged"),
+        "next_step": PHRASEBOOK["next_step"].get(target_language["id"], "Next step"),
+    }
+
+    return {
+        "language": target_language,
+        "translation": translation,
+        "response_labels": response_labels,
+        "glossary_terms": glossary_terms,
+        "quality": {
+            "mode": "deterministic-assist",
+            "safe_for": ["labels", "handoffs", "guided UI responses"],
+            "not_yet_for": ["full free-form translation", "nuanced legal/medical localization"],
+        },
     }
 
 

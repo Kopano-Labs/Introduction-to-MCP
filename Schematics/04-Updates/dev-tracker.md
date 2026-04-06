@@ -43,6 +43,8 @@ status: active
 | 2026-04-06 | Added multilingual routing and translation runtime | DONE |
 | 2026-04-06 | Added first runnable Cowork Room flow | DONE |
 | 2026-04-06 | Added first Orch Code teaching loop | DONE |
+| 2026-04-06 | Added multilingual response packaging and access execution | DONE |
+| 2026-04-06 | Added cowork dispatch upgrades and Orch Code progression | DONE |
 | 2026-04-06 | Expand runnable Labs tools and deepen multilingual generation | NEXT |
 
 ## DEV_1

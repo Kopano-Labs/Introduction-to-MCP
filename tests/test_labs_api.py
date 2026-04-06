@@ -97,6 +97,33 @@ def test_route_prompt_detects_language():
     assert payload["translation_required"] is True
 
 
+def test_multilingual_response_adds_glossary():
+    response = client.post(
+        "/api/labs/multilingual-response",
+        json={"text": "next step: confirm booking", "preferred_language": "isiZulu", "domain": "jobs"},
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["response_labels"]["next_step"] == "Isinyathelo esilandelayo"
+    assert any(term["source"] == "booking" for term in payload["glossary_terms"])
+
+
+def test_access_execute_requires_confirmation_for_speech_impairment():
+    response = client.post(
+        "/api/labs/access/execute",
+        json={
+            "message": "job tomorrow",
+            "preferred_language": "English",
+            "preferred_input": "voice",
+            "speech_impairment": True,
+        },
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["recommended_mode"]["id"] == "aac"
+    assert payload["requires_confirmation"] is True
+
+
 def test_cowork_room_flow_persists_tasks(isolated_labs_db):
     create_response = client.post(
         "/api/labs/cowork/rooms",
@@ -132,6 +159,23 @@ def test_cowork_room_flow_persists_tasks(isolated_labs_db):
     assert detail_response.status_code == 200
     detail = detail_response.json()["room"]
     assert any(item["title"] == "Implement room timeline" for item in detail["lanes"]["build"])
+    assert detail["dispatch_summary"]["in_progress"] >= 1
+
+
+def test_cowork_task_can_be_reassigned(isolated_labs_db):
+    create_response = client.post(
+        "/api/labs/cowork/rooms",
+        json={"name": "Dispatch Room", "mission": "Route tasks clearly", "lead": "Lead"},
+    )
+    room = create_response.json()["room"]
+    task_id = room["tasks"][0]["id"]
+
+    assign_response = client.post(
+        f"/api/labs/cowork/tasks/{task_id}/owner",
+        json={"owner": "DEV_2"},
+    )
+    assert assign_response.status_code == 200
+    assert assign_response.json()["task"]["owner"] == "DEV_2"
 
 
 def test_orch_code_teaching_loop_reads_repo_patterns(isolated_labs_db):
@@ -148,3 +192,15 @@ def test_orch_code_teaching_loop_reads_repo_patterns(isolated_labs_db):
     assert profile["title"] == "Orch Code"
     assert profile["summary"]["learned_lessons"] >= 1
     assert "python-core" in profile["tracks"]
+
+
+def test_orch_code_lesson_status_can_advance(isolated_labs_db):
+    client.post("/api/labs/orch-code/teach")
+    update_response = client.post(
+        "/api/labs/orch-code/lessons/python-fastapi-api/status",
+        json={"status": "learning", "confidence": 91},
+    )
+    assert update_response.status_code == 200
+    lesson = update_response.json()["lesson"]
+    assert lesson["status"] == "learning"
+    assert lesson["confidence"] == 91
