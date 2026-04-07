@@ -27,6 +27,7 @@ status: active
 | CRITICAL | [[Orch Labs Strategy]]   | Phase 6 building now |
 | CRITICAL | [[Project Status]]       | Phase 6 in progress  |
 | HIGH     | [[Adoption Checklist]]   | Pre-launch hardening |
+| HIGH     | [[DEV_S Reward Program]] | Session governance   |
 
 ---
 
@@ -74,6 +75,7 @@ Active project coordination and status tracking.
 - [[04-Updates/task-board|Task Board]] — Sprint task tracker.
 - [[04-Updates/dev-tracker|Dev Tracker]] — Developer assignment history.
 - [[04-Updates/delegation-protocol|Delegation Protocol]] — Rules for agent delegation.
+- [[04-Updates/DEV_S Reward Program|DEV_S Reward Program]] — Session reset, role reward, and supervision model.
 
 ---
 

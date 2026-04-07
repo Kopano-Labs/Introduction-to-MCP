@@ -15,7 +15,7 @@ status: active
 # orch Project Status & Capabilities
 
 > Current state of the orch project as of 2026-04-06.
-> See also: [[Implementation Plan]], [[Orch Blueprint]], [[KasiLink Integration Plan]]
+> See also: [[Implementation Plan]], [[Orch Blueprint]], [[KasiLink Integration Plan]], [[DEV_S Reward Program]]
 
 ## Current Phase
 

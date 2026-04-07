@@ -21,6 +21,7 @@ status: active
 
 > Rules of engagement for multi-agent work on orch.
 > All developers read this before touching code or updating `Schematics/04-Updates/`.
+> Session governance is additionally defined in [[DEV_S Reward Program]].
 
 ## Roles
 
@@ -30,6 +31,13 @@ status: active
 | **Lead** | Lead | Architecture, audits, reviews, shared infrastructure, delegation, and repo-wide decisions. |
 | **DEV_1** | Assigned dev agent | Executes scoped implementation work, reports progress, and verifies deliverables. |
 | **DEV_2** | Assigned dev agent | Executes scoped implementation work, reports progress, and verifies deliverables. |
+
+## Session Reset And Reward Rule
+
+1. Every new session starts with all DEV_S reset to full permissions.
+2. Reward expands trust, scope, and role breadth inside the session.
+3. Punishment removes permissions and applies stricter supervision.
+4. If a DEV loses role standing, Lead takes over and informs Master.
 
 ## Rules
 
@@ -86,6 +94,7 @@ REPORT: Append one update to [[comms-log]]
 - Ownership and queue: [[task-board]]
 - Detailed progress: [[dev-tracker]]
 - Phase truth: [[Project Status]]
+- Reward policy: [[DEV_S Reward Program]]
 
 ## Security Incident Rule
 
