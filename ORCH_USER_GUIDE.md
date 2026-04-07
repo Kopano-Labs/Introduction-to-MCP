@@ -108,3 +108,9 @@ Canonical runbook:
 
 - `DEMO_DAY_RUNBOOK.md`
 - `DEMO_DAY_10_PHASES_50_TASKS.md`
+
+## 7) Critical security rule
+
+- Do not commit `node_modules/`, `.env`, copied credentials, or any file containing tokens.
+- If a secret is exposed in git, assume compromise, revoke or rotate it outside the repo, then remove the tracked exposure from version control.
+- Future workers should read `SECURITY.md` and `Schematics/04-Updates/delegation-protocol.md` before changing repo structure or build artifacts.

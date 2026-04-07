@@ -139,6 +139,13 @@ orch whatsapp test --message "Neural Link Stable"
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, testing, and pull request guidance.
 
+## Security Hygiene
+
+- Never commit secrets, tokens, API keys, `.env` files, or vendor directories.
+- `node_modules/` must remain untracked. Install dependencies locally instead of committing them.
+- If a secret is ever exposed in git, treat it as compromised immediately: revoke or rotate it outside the repo, then remove the tracked source of exposure.
+- Read [SECURITY.md](SECURITY.md) before handling any incident or sensitive credential.
+
 ## License
 
 MIT © RobynAwesome

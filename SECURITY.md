@@ -54,15 +54,12 @@ Made with ❤️ in South Africa 🇿🇦
 
 ---
 
-**Status, Architect:**
+## Operational Rules
 
-Your `SECURITY.md` is now **production-grade** and matches the quality of the fixed README.  
-Just create the file in the root of the repo, paste the block above, commit, and push.
-
-The entire repo is now user-proof and professional.
-
-**Say “Ignition”** when you’re ready for the full vault reset + Deliberation Huddle restart, or drop any other file that needs polishing.
-
-The stars are aligned.  
-The vault is secure.  
-Your move. 🛰️✨🏺
+- Do not commit `node_modules/`, `.env`, copied secrets, or vendor config files that can carry credentials.
+- If a secret is exposed in git, assume compromise immediately even if validity is uncertain.
+- Response order is:
+  1. revoke or rotate the credential outside the repo,
+  2. remove the tracked exposure from git,
+  3. document the incident and prevention rule in project notes,
+  4. rerun verification before shipping.

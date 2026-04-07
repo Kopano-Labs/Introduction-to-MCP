@@ -21,6 +21,23 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-07 09:10 | Lead | SECRET EXPOSURE CONTAINMENT STARTED
+
+**Action:** Detected a tracked vendor file under `node_modules/debug/.coveralls.yml` containing a publicly exposed credential. Treating the credential as compromised.
+
+**Immediate containment:**
+- Removed tracked `node_modules/` content from git index.
+- Added repo rules to keep `node_modules/` ignored going forward.
+- Began updating security notes, contributor docs, and operator notes so future workers do not repeat the mistake.
+
+**Mandatory rule for all future workers:**
+- Never commit vendor directories, `.env` files, copied credentials, or files that can carry secrets.
+- If a secret appears in git, do not paste it into notes or chat logs. Revoke or rotate it outside the repo, then remove the tracked exposure and document the incident.
+
+**Directive to Lead:**
+- Keep incident handling ahead of feature work until verification is complete.
+- Ensure the final response tells Owner that repo cleanup does not replace external revoke/rotate.
+
 ### 2026-04-06 08:05 | Lead | PHASE 7 AND 8 UPGRADED
 
 **Action:** Deepened the first runtime pass so the new APIs do more than basic scaffolding.

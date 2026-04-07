@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "b3b333517ba98ea7",
+        "id": "a2b06a8bf5e6739b",
         "type": "tabs",
         "children": [
           {
-            "id": "cdb06068f8bb6057",
+            "id": "9b0161a3906bfb63",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02-Strategy/KasiLink Integration Plan.md",
+                "file": "00-Home/Dashboard.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,10 +28,35 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "KasiLink Integration Plan"
+              "title": "Dashboard"
+            }
+          },
+          {
+            "id": "ee860d0362cbc8fa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02-Strategy/Open Source Product-Ready AI Top 50.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Open Source Product-Ready AI Top 50"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -63,7 +88,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "DEmo day",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -84,11 +109,12 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 201.5,
     "collapsed": true
   },
   "right": {
@@ -255,11 +281,16 @@
       "smart-lookup:Smart Lookup: Open lookup view": false
     }
   },
-  "active": "cdb06068f8bb6057",
+  "active": "ee860d0362cbc8fa",
   "lastOpenFiles": [
     "02-Strategy/Microsoft Contract Strategy.md",
-    "02-Strategy/SA Startup Week Demo.md",
     "00-Home/Dashboard.md",
+    "02-Strategy/SA Startup Week Demo.md",
+    "04-Updates/task-board.md",
+    "04-Updates/Project Status.md",
+    "04-Updates/Implementation Plan.md",
+    "03-Architecture/Database Schema.md",
+    "02-Strategy/KasiLink Integration Plan.md",
     "05-Training/Owner Profile.md",
     "05-Training/Lead Self Report.md",
     "05-Training/Kairos Reference.md",
@@ -282,11 +313,6 @@
     "copilot/copilot-custom-prompts/Clip Web Page.md",
     "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
     "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
-    "copilot/copilot-custom-prompts/Remove URLs.md",
-    "copilot/copilot-custom-prompts/Generate glossary.md",
-    "copilot/copilot-custom-prompts/Generate table of contents.md",
-    "copilot/copilot-custom-prompts/Make shorter.md",
     "copilot/copilot-custom-prompts",
     "copilot",
     "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/render.rs",

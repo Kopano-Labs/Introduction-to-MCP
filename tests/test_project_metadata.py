@@ -35,3 +35,14 @@ def test_root_schematics_index_points_to_real_notes():
     assert "[[Orch Blueprint]]" in index
     assert "[[Project Status]]" in index
     assert "[[04-Updates/index\\|Updates Index]]" in index
+
+
+def test_gitignore_blocks_vendor_directories():
+    ignore = Path(".gitignore").read_text(encoding="utf-8")
+    assert "node_modules/" in ignore
+
+
+def test_security_policy_has_vendor_and_secret_rules():
+    security = Path("SECURITY.md").read_text(encoding="utf-8")
+    assert "Do not commit `node_modules/`" in security
+    assert "revoke or rotate" in security

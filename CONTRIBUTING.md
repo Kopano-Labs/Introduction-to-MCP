@@ -64,6 +64,13 @@ If you're looking to contribute code, start by checking our GitHub Issues for is
     ruff check .
     ```
 
+## Security-Critical Repo Rules
+
+- Never commit secrets, API keys, `.env` files, or redacted-looking credentials.
+- Never commit `node_modules/` or other vendored dependency directories. Install dependencies locally.
+- If a secret appears in git history or the index, treat it as compromised immediately: revoke or rotate it outside the repo, then remove the tracked exposure and document the incident.
+- Before opening a PR after any security cleanup, check `git status`, review staged files carefully, and read `SECURITY.md`.
+
 ## Development Workflow
 
 - **Branching**: Create a new branch for each feature or bug fix: `git checkout -b feature/your-feature-name` or `git checkout -b bugfix/issue-number`.

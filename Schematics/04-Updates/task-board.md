@@ -53,6 +53,7 @@ status: active
 | O12 | High | Lead | IN PROGRESS | Expand Labs tools into runnable impact slices |
 | O13 | Critical | Lead | DONE | Add SA language planning, access modes, and launch config APIs |
 | O14 | Critical | Lead | DONE | Add Top 50 product-readiness research note with free vs premium framing |
+| O15 | Critical | Lead | IN PROGRESS | Remove tracked vendor directories, contain secret exposure, and document mandatory prevention rules |
 
 ## Active Phase 6 Work
 
@@ -72,6 +73,7 @@ status: active
 | Cowork reassignment + dispatch summary | COMPLETE | Lead |
 | First Orch Code teaching loop | COMPLETE | Lead |
 | Orch Code lesson progression | COMPLETE | Lead |
+| Secret-exposure containment and doc hardening | IN PROGRESS | Lead |
 | Runnable Labs feature expansion | OPEN | DEV_1 |
 | Accessibility implementation prep | OPEN | DEV_2 |
 | Research backlog ranking | OPEN | Lead |
@@ -82,3 +84,4 @@ status: active
 2. Phase 7 is critical and must treat all SA languages and accessibility as first-class scope.
 3. `DEV_1` and `DEV_2` should take bounded Labs or accessibility tasks only.
 4. Lead owns final review and any cross-cutting infrastructure edits.
+5. Security incidents override feature work until tracked exposure is removed and documented.

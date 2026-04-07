@@ -88,6 +88,9 @@ Broadcasts to React GUI (Neural Link) via WebSockets. Real-time updates via What
 ### Reliability Baseline
 CLI simulation tests now operate against a shared in-memory database fixture, and CI validates the package on modern Python versions with both pytest and compile checks.
 
+### Security Incident Rule
+Tracked vendor directories and committed credentials are treated as critical incidents. `node_modules/` must remain untracked, and any exposed credential must be revoked or rotated outside the repo before the incident is considered closed.
+
 ### Orch Labs Layer
 `/api/labs/*` now exposes a Labs registry with categories, tool portfolio, roadmap phases, and criticality labels. The GUI now includes an Orch Labs view for South African public-impact experiments.
 

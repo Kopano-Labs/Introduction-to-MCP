@@ -40,6 +40,7 @@ status: active
 3. Create new files only inside their assigned directories.
 4. Append status updates to [[comms-log]] when instructed.
 5. Run verification commands for their assigned scope.
+6. Stop immediately and report to Lead if a secret, token, or tracked vendor directory is found in git.
 
 ### What `DEV_1` and `DEV_2` cannot do
 
@@ -48,6 +49,7 @@ status: active
 3. Touch another dev's scoped files.
 4. Change dependencies or global config without explicit approval.
 5. Contact Owner directly about execution details.
+6. Commit `node_modules/`, `.env`, secrets, or vendored config files.
 
 ### Shared infrastructure owned by Lead
 
@@ -61,6 +63,7 @@ status: active
 - `pyproject.toml`
 - `README.md`
 - `Schematics/04-Updates/*`
+- `SECURITY.md`
 
 ## Task Assignment Format
 
@@ -83,6 +86,16 @@ REPORT: Append one update to [[comms-log]]
 - Ownership and queue: [[task-board]]
 - Detailed progress: [[dev-tracker]]
 - Phase truth: [[Project Status]]
+
+## Security Incident Rule
+
+If any worker finds a credential in git or a tracked dependency/vendor directory:
+
+1. Stop normal work.
+2. Notify Lead in [[comms-log]].
+3. Do not paste the raw secret into notes.
+4. Remove the tracked exposure and update the prevention docs.
+5. Require revoke/rotate outside the repo before calling the incident closed.
 
 ## Chain Of Command
 
