@@ -72,7 +72,7 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [ ] verify Labs navigation still reaches interfaces, cloud, actions, tools, forge, and console
 - [ ] verify Forge create, edit, and lane-move actions still work after layout changes
 - [ ] verify MCP Console send and stream still work after layout changes
-- [ ] verify admin login still works after layout changes
+- [x] verify admin login still works after layout changes
 - [ ] verify session loading and audit mode still work after layout changes
 - [ ] verify live logs still show in the correct internal surfaces
 - [ ] verify the public shell does not expose admin-only data when not logged in
@@ -123,6 +123,7 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [ ] verify MCP Console send and stream still work
 - [x] rebuild `orch/gui` cleanly after the full-shell redesign
 - [x] restart Orch and confirm the served GUI reflects the redesign bundle
+- [x] smoke-check root GUI, Labs overview, session vault endpoint, Forge room list, and admin login on the live server
 - [ ] run a browser-level visual pass on desktop and mobile-width layouts
 
 ## Demo Readiness

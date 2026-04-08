@@ -425,3 +425,17 @@ status: active
 **Still open:**
 - browser-level visual QA
 - click-path QA for council, Forge, Console, admin login, and session audit
+
+### 2026-04-09 01:08 | Codex | ORCH API SMOKE PASS AFTER REDESIGN
+
+**Action:** Ran a live server smoke pass against the redesigned Orch runtime.
+
+**Verified:**
+- `POST /auth/login` succeeds for the local admin demo account
+- `GET /sessions` returns archived sessions for vault use
+- `GET /api/labs/cowork/rooms` returns the persisted Forge rooms
+- `POST /api/labs/mcp-console/chat` returns a valid Orch console response
+
+**Still open:**
+- browser click-path verification for the redesigned public shell
+- UI confirmation that session-vault buttons and admin activity preview render correctly

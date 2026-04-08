@@ -98,3 +98,11 @@
 - `http://127.0.0.1:8000/api/labs/overview` returns `200`
 - server logs show the rebuilt JS/CSS assets being served after the redesign build
 - next remaining checks are browser-level visual QA and live interaction QA
+
+## Orch Live Smoke Pass | 2026-04-09 01:08
+
+- `POST /auth/login` succeeds for `admin@orch.local` and returns role `admin`
+- `GET /sessions` returns the archived session list
+- `GET /api/labs/cowork/rooms` returns the persisted Forge rooms
+- `POST /api/labs/mcp-console/chat` returns a valid Orch guidance payload
+- live browser click-path QA is still pending even though the API smoke path is healthy
