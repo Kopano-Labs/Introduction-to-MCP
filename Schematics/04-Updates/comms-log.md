@@ -21,6 +21,36 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-08 22:10 | Lead | ORCH GUI SPLIT, ADMIN AUTH, AND FEED LOG CHECKPOINT
+
+**Action:** Reworked the Orch GUI so the public Labs page behaves like a demo surface, moved internal boards behind admin login, and re-verified runtime feed flow after rebuild.
+
+**Completed locally:**
+- split the GUI navigation into `LIVE COUNCIL`, `ORCH LABS`, and `ADMIN PORTAL`
+- replaced the public Labs metric row with pressable function cards for interfaces, cloud, actions, tools, forge, and console
+- removed public session-vault exposure from the sidebar and replaced it with an internal-access lock note
+- moved internal execution boards, Orch Code controls, creator throughput, and console analytics into the admin portal branch
+- added visible feed-log panels in the sidebar, public Labs console, admin portal, and council view
+- fixed the TypeScript error in the live-feed response handler
+- verified `orch/gui` completes `npm run build`
+- registered local demo admin account `admin@orch.local`
+- granted local demo admin role to `admin@orch.local`
+- restarted Orch on `127.0.0.1:8000` and re-verified `GET /api/kasilink/health` returns `200`
+- verified `POST /auth/login` returns the local demo admin with role `admin`
+- verified a fresh `/broadcast` event appears in `/updates` after restart
+
+**What this changes in the blocker order:**
+- the Orch GUI is no longer blocked on the public/admin layout change
+- admin auth is no longer theoretical for local rehearsal
+- log visibility is now implemented in the GUI layer and the backend feed is active again
+- the next Orch-specific gap is browser QA for visual polish, function-card scrolling, and public/admin copy review
+- the broader end-to-end demo path is still blocked first by valid Clerk configuration in `KasiLink`
+
+**Directive to Lead:**
+- treat the Orch GUI as entering browser verification, not layout design
+- keep the next pass focused on visual QA and live interaction checks, not new surface expansion
+- continue treating Clerk and Atlas as the first external blockers for the full cross-product rehearsal
+
 ### 2026-04-08 20:20 | Lead | ORCH BRIDGE PATH VERIFIED AND APP PROXY ALIGNED
 
 **Action:** Verified the live Orch mount path, corrected the `KasiLink` bridge to match it, and re-ran app verification.

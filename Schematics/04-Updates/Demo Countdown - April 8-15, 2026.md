@@ -44,6 +44,11 @@ status: active
 - Orch API is verified live on `/api/kasilink/health` and `/api/kasilink/dashboard`
 - `KasiLink` bridge now forwards `/api/orch/*` to the mounted `/api/kasilink/*` upstream path
 - public `GET` access for the home-page Orch dashboard and load-shedding widgets is no longer blocked by app-side sign-in checks
+- Orch GUI public/admin split is now in progress with public Labs limited to demo surfaces and internal boards moved behind `ADMIN PORTAL`
+- `orch/gui` now builds cleanly after the public/admin split and live-feed log refactor
+- local demo admin account `admin@orch.local` is registered and granted the `admin` role
+- Orch was restarted on `127.0.0.1:8000` after the GUI rebuild and health still returns `200`
+- a fresh `/broadcast` event now appears in `/updates`, which confirms live feed events are flowing into the runtime again
 - Orch currently reports `whatsapp_bridge_configured: false`
 - current runtime blocker is valid Clerk configuration, which fails before Atlas can be verified
 - Azure tooling validation is currently blocked because `az` and `azd` are not installed in this environment
@@ -53,6 +58,7 @@ status: active
 **Primary work**
 - publish a corrected overlap handoff for the current repo reality
 - confirm Atlas, Clerk, and authenticated QA prerequisites
+- finish the Orch GUI split verification pass in the browser
 - attempt the first local demo-path rehearsal
 - verify Azure playbook readiness locally
 

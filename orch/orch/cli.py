@@ -623,12 +623,12 @@ def start_api_cmd(
     url = f"http://{host}:{port}"
     console.print(Panel(
         f"[bold green]Starting orch AGI Control Plane[/bold green]\n"
-        f"🌐 API & GUI: [bold cyan]{url}[/bold cyan]",
+        f"API & GUI: [bold cyan]{url}[/bold cyan]",
         expand=False
     ))
     
     if open_browser:
-        console.print(f"🚀 Opening {url} in your browser...")
+        console.print(f"Opening {url} in your browser...")
         webbrowser.open(url)
         
     uvicorn.run(app, host=host, port=port)

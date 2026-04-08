@@ -2,13 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { appendStreamChunk, toEditableArtifact, toEditableTask } from './labsUi';
 
-type ViewMode = 'council' | 'labs';
+type ViewMode = 'council' | 'labs' | 'admin';
 type LessonState = 'queued' | 'learning' | 'learned' | 'shipping';
+type LabsSection = 'interfaces' | 'cloud' | 'actions' | 'tools' | 'forge' | 'console';
 
 interface ReasoningBlock { block_id: string; agent: string; role: string | null; content: string; reasoning: string; value_score: number; override_score: number | null; improvement_hint: string | null; is_student: number; }
 interface Round { id: string; round_number: number; blocks: ReasoningBlock[]; }
 interface Lesson { id: string; topic: string; created_at: string; rounds?: Round[]; }
 interface LiveMessage { type: string; agent: string; block_id: string; content: string; reasoning: string; round: number; value_score?: number; override_score?: number; improvement_hint?: string; }
+interface GuiUser { id: number; email: string; full_name?: string | null; role: string; god_mode: boolean; is_active: boolean; created_at: string; }
+interface FeedLogEntry { id: string; type: string; agent?: string; content?: string; reasoning?: string; round?: number; received_at: string; source: 'ws' | 'poll' | 'system'; }
 interface LabsCategory { id: string; title: string; description: string; }
 interface LabsTool { id: string; name: string; category: string; criticality: string; status: string; summary: string; impact: string; phase: string; }
 interface LabsPhase { id: string; title: string; criticality: string; status: string; summary: string; deliverables: string[]; }
@@ -39,6 +42,14 @@ const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
 const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'orch'];
 const criticalityLabel = (value: string) => value.replace('_', ' ').toUpperCase();
+const publicLabsSections: Array<{ id: LabsSection; label: string; blurb: string; metric: (overview: LabsOverview | null, analytics: LabsAnalytics | null) => string; }> = [
+  { id: 'interfaces', label: 'Interfaces', blurb: 'Public surfaces and operator-facing flows.', metric: (overview) => String(overview?.metrics.interfaces ?? 0) },
+  { id: 'cloud', label: 'Cloud', blurb: 'Azure and cross-cloud expansion layers.', metric: (overview) => String(overview?.metrics.cloud_stacks ?? 0) },
+  { id: 'actions', label: 'Actions', blurb: 'Installer and connector playbooks for demos.', metric: (overview) => String(overview?.metrics.installer_actions ?? 0) },
+  { id: 'tools', label: 'Tools', blurb: 'The South Africa tool catalog and live capability pack.', metric: (overview) => String(overview?.metrics.tools ?? 0) },
+  { id: 'forge', label: 'Forge', blurb: 'Pressable room, task, and artifact surfaces.', metric: (_overview, analytics) => String(analytics?.forge.rooms ?? 0) },
+  { id: 'console', label: 'Console', blurb: 'Model-backed MCP guidance for demo operators.', metric: (_overview, analytics) => String(analytics?.mcp_console.requests ?? 0) },
+];
 const executionPlan: ExecutionPhase[] = [
   { id: 'phase-1', title: 'Phase 1', focus: 'Core orchestration foundation', tasks: [
     { id: 'p1-t1', label: 'Multi-provider agent bootstrap', done: true },
@@ -230,10 +241,21 @@ const App: React.FC = () => {
   const [messages, setMessages] = useState<LiveMessage[]>([]);
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
   const [thinkingAgent, setThinkingAgent] = useState<string | null>(null);
+  const [connectionState, setConnectionState] = useState<'connecting' | 'live' | 'error'>('connecting');
+  const [feedLog, setFeedLog] = useState<FeedLogEntry[]>([
+    {
+      id: 'system-ready',
+      type: 'system',
+      content: 'Council room booted. Waiting for websocket or polled updates.',
+      received_at: new Date().toISOString(),
+      source: 'system',
+    },
+  ]);
   const [sessions, setSessions] = useState<Lesson[]>([]);
   const [selectedSession, setSelectedSession] = useState<Lesson | null>(null);
   const [isAuditMode, setIsAuditMode] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('council');
+  const [labsSection, setLabsSection] = useState<LabsSection>('forge');
   const [labsOverview, setLabsOverview] = useState<LabsOverview | null>(null);
   const [coworkRooms, setCoworkRooms] = useState<CoworkRoom[]>([]);
   const [activeRoomId, setActiveRoomId] = useState<number | null>(null);
@@ -256,15 +278,113 @@ const App: React.FC = () => {
   const [orchCodeProfile, setOrchCodeProfile] = useState<OrchCodeProfile | null>(null);
   const [labsAnalytics, setLabsAnalytics] = useState<LabsAnalytics | null>(null);
   const [draggedTaskId, setDraggedTaskId] = useState<number | null>(null);
+  const [adminUser, setAdminUser] = useState<GuiUser | null>(null);
+  const [adminEmail, setAdminEmail] = useState('admin@orch.local');
+  const [adminPassword, setAdminPassword] = useState('demo-admin');
+  const [adminError, setAdminError] = useState<string | null>(null);
+  const [adminLoading, setAdminLoading] = useState(false);
   const ws = useRef<WebSocket | null>(null);
+  const seenFeedIds = useRef<Set<string>>(new Set(['system-ready']));
 
   const activeRoom = coworkRooms.find((room) => room.id === activeRoomId) ?? coworkRooms[0] ?? null;
+  const isAdminLoggedIn = adminUser?.role === 'admin';
   const completedExecutionTasks = executionPlan.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionTasksPhase6Plus = executionPlanPhase6Plus.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionLeadDev2 = executionPlanLeadDev2.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionDev2Dev3 = executionPlanDev2Dev3.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionDev2Dev3Cycle2 = executionPlanDev2Dev3Cycle2.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionDev2Dev3LeadPhase = executionPlanDev2Dev3LeadPhase.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
+  const featuredAgentId = activeAgent ?? thinkingAgent ?? 'orch';
+  const latestTransmission = messages[messages.length - 1] ?? null;
+  const councilCards = agentList.map((id) => {
+    const lastMsg = messages.filter((message) => message.agent === id).slice(-1)[0];
+    const isStudent = id === 'orch';
+    const isThinking = thinkingAgent === id;
+    const isResponding = activeAgent === id;
+
+    return { id, lastMsg, isStudent, isThinking, isResponding };
+  });
+  const featuredCouncilCard = councilCards.find((card) => card.id === featuredAgentId) ?? councilCards[0];
+  const supportCouncilCards = councilCards.filter((card) => card.id !== featuredCouncilCard.id);
+  const latestFeedEntries = feedLog.slice(-10).reverse();
+
+  const pushFeedLog = (entry: FeedLogEntry) => {
+    if (seenFeedIds.current.has(entry.id)) return;
+    seenFeedIds.current.add(entry.id);
+    setFeedLog((prev) => [...prev, entry].slice(-60));
+  };
+
+  const logSystemEvent = (type: string, content: string) => {
+    const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    pushFeedLog({
+      id: `system:${type}:${stamp}`,
+      type,
+      content,
+      received_at: new Date().toISOString(),
+      source: 'system',
+    });
+  };
+
+  const handleLiveEvent = (data: Partial<LiveMessage> & { type?: string }, source: 'ws' | 'poll') => {
+    const entryId = `${data.type ?? 'unknown'}:${data.agent ?? 'system'}:${data.block_id ?? 'no-block'}:${data.round ?? '0'}:${data.content ?? ''}`;
+
+    if (data.type === 'thinking') {
+      setThinkingAgent(data.agent ?? null);
+      setActiveAgent(null);
+    }
+
+    if (data.type === 'response' && data.agent && data.block_id && data.content && data.reasoning && typeof data.round === 'number') {
+      setThinkingAgent(null);
+      setActiveAgent(data.agent);
+      const nextMessage: LiveMessage = {
+        type: 'response',
+        agent: data.agent,
+        block_id: data.block_id,
+        content: data.content,
+        reasoning: data.reasoning,
+        round: data.round,
+        value_score: data.value_score,
+        override_score: data.override_score,
+        improvement_hint: data.improvement_hint,
+      };
+      setMessages((prev) => {
+        if (prev.some((message) => message.block_id === data.block_id)) return prev;
+        return [...prev, nextMessage];
+      });
+      window.setTimeout(() => setActiveAgent((current) => (current === data.agent ? null : current)), 5000);
+    }
+
+    if (data.type === 'override') {
+      setSelectedSession((prev) => prev ? ({
+        ...prev,
+        rounds: prev.rounds?.map((round) => ({
+          ...round,
+          blocks: round.blocks.map((block) => block.block_id === data.block_id
+            ? { ...block, override_score: data.override_score ?? null, improvement_hint: data.improvement_hint ?? null }
+            : block),
+        })),
+      }) : null);
+    }
+
+    pushFeedLog({
+      id: entryId,
+      type: data.type ?? 'unknown',
+      agent: data.agent,
+      content: data.content,
+      reasoning: data.reasoning,
+      round: data.round,
+      received_at: new Date().toISOString(),
+      source,
+    });
+  };
+
+  const scrollToLabsSection = (section: LabsSection) => {
+    setLabsSection(section);
+    const target = document.getElementById(`labs-${section}`);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const fetchLabsAnalytics = async () => setLabsAnalytics(await (await fetch(`${apiBase}/api/labs/analytics`)).json());
   const fetchOrchCodeControls = async () => setOrchCodeProfile(await (await fetch(`${apiBase}/api/labs/orch-code/controls`)).json());
@@ -288,15 +408,43 @@ const App: React.FC = () => {
 
   useEffect(() => {
     let isMounted = true;
-    ws.current = new WebSocket(`${apiBase.replace('http', 'ws')}/ws/live`);
-    ws.current.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === 'thinking') { setThinkingAgent(data.agent); setActiveAgent(null); }
-      if (data.type === 'response') { setThinkingAgent(null); setActiveAgent(data.agent); setMessages((prev) => [...prev, data]); setTimeout(() => setActiveAgent(null), 5000); }
-      if (data.type === 'override') {
-        setSelectedSession((prev) => prev ? ({ ...prev, rounds: prev.rounds?.map((round) => ({ ...round, blocks: round.blocks.map((block) => block.block_id === data.block_id ? { ...block, override_score: data.override_score, improvement_hint: data.improvement_hint } : block) })) }) : null);
+    const savedAdmin = window.localStorage.getItem('orch-admin-user');
+    if (savedAdmin) {
+      try {
+        setAdminUser(JSON.parse(savedAdmin) as GuiUser);
+      } catch {
+        window.localStorage.removeItem('orch-admin-user');
       }
+    }
+
+    ws.current = new WebSocket(`${apiBase.replace('http', 'ws')}/ws/live`);
+    ws.current.onopen = () => {
+      setConnectionState('live');
+      logSystemEvent('connection', 'WebSocket feed connected to the live council.');
     };
+    ws.current.onerror = () => {
+      setConnectionState('error');
+      logSystemEvent('connection-error', 'WebSocket feed reported an error.');
+    };
+    ws.current.onclose = () => {
+      setConnectionState('error');
+      logSystemEvent('connection-closed', 'WebSocket feed closed. Polling fallback remains active.');
+    };
+    ws.current.onmessage = (event) => handleLiveEvent(JSON.parse(event.data), 'ws');
+
+    const pollUpdates = window.setInterval(async () => {
+      try {
+        const response = await fetch(`${apiBase}/updates`);
+        const updates = await response.json();
+        if (!Array.isArray(updates)) return;
+        updates.forEach((update) => handleLiveEvent(update, 'poll'));
+        if (updates.length > 0) {
+          setConnectionState('live');
+        }
+      } catch {
+        setConnectionState((current) => (current === 'live' ? current : 'error'));
+      }
+    }, 4000);
 
     const loadInitialData = async () => {
       const [sessionsData, overviewData, analyticsData, orchCodeData, roomsPayload] = await Promise.all([
@@ -310,14 +458,15 @@ const App: React.FC = () => {
       if (!isMounted) return;
 
       setSessions(sessionsData);
-      setLabsOverview(overviewData);
-      setLabsAnalytics(analyticsData);
-      setOrchCodeProfile(orchCodeData);
-      setCoworkRooms(roomsPayload.rooms);
+        setLabsOverview(overviewData);
+        setLabsAnalytics(analyticsData);
+        setOrchCodeProfile(orchCodeData);
+        setCoworkRooms(roomsPayload.rooms);
+        logSystemEvent('bootstrap', 'Labs overview, analytics, and session vault loaded.');
 
-      if (roomsPayload.rooms.length > 0) {
-        const detailPayload = await fetch(`${apiBase}/api/labs/cowork/rooms/${roomsPayload.rooms[0].id}`).then((response) => response.json());
-        if (!isMounted) return;
+        if (roomsPayload.rooms.length > 0) {
+          const detailPayload = await fetch(`${apiBase}/api/labs/cowork/rooms/${roomsPayload.rooms[0].id}`).then((response) => response.json());
+          if (!isMounted) return;
 
         const room: CoworkRoom = detailPayload.room;
         setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
@@ -331,12 +480,17 @@ const App: React.FC = () => {
 
     return () => {
       isMounted = false;
+      window.clearInterval(pollUpdates);
       ws.current?.close();
     };
   }, []);
 
   const postJson = async (url: string, body: object) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-  const createCoworkRoom = async () => { const data = await (await postJson(`${apiBase}/api/labs/cowork/rooms`, { name: roomName, mission: roomMission, lead: 'Lead' })).json(); await refreshLabs(data.room.id); };
+  const createCoworkRoom = async () => {
+    const data = await (await postJson(`${apiBase}/api/labs/cowork/rooms`, { name: roomName, mission: roomMission, lead: 'Lead' })).json();
+    await refreshLabs(data.room.id);
+    logSystemEvent('forge', `Forge room "${data.room.name}" launched for demo execution.`);
+  };
   const createArtifact = async () => {
     if (!activeRoom) return;
     if (editingArtifactId) {
@@ -346,6 +500,7 @@ const App: React.FC = () => {
       await postJson(`${apiBase}/api/labs/cowork/rooms/${activeRoom.id}/artifacts`, { artifact_type: artifactType, title: artifactTitle, summary: artifactSummary, status: 'draft', link: 'Orch Forge' });
     }
     await refreshLabs(activeRoom.id);
+    logSystemEvent('artifact', `Artifact "${artifactTitle}" saved in ${activeRoom.name}.`);
   };
   const createOrUpdateTask = async () => {
     if (!activeRoom) return;
@@ -356,19 +511,34 @@ const App: React.FC = () => {
       await postJson(`${apiBase}/api/labs/cowork/rooms/${activeRoom.id}/tasks`, { title: taskTitle, description: taskDescription, owner: taskOwner, priority: taskPriority, lane: 'build' });
     }
     await refreshLabs(activeRoom.id);
+    logSystemEvent('task', `Task "${taskTitle}" routed to ${taskOwner} in ${activeRoom.name}.`);
   };
-  const updateTaskStatus = async (taskId: number, status: string) => { await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/status`, { status }); if (activeRoom) await refreshLabs(activeRoom.id); };
-  const updateTaskOwner = async (taskId: number, owner: string) => { await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/owner`, { owner }); if (activeRoom) await refreshLabs(activeRoom.id); };
-  const moveTaskToLane = async (taskId: number, lane: string) => { await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/lane`, { lane }); if (activeRoom) await refreshLabs(activeRoom.id); };
+  const updateTaskStatus = async (taskId: number, status: string) => {
+    await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/status`, { status });
+    if (activeRoom) await refreshLabs(activeRoom.id);
+    logSystemEvent('task-status', `Task ${taskId} moved to ${status}.`);
+  };
+  const updateTaskOwner = async (taskId: number, owner: string) => {
+    await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/owner`, { owner });
+    if (activeRoom) await refreshLabs(activeRoom.id);
+    logSystemEvent('task-owner', `Task ${taskId} reassigned to ${owner}.`);
+  };
+  const moveTaskToLane = async (taskId: number, lane: string) => {
+    await postJson(`${apiBase}/api/labs/cowork/tasks/${taskId}/lane`, { lane });
+    if (activeRoom) await refreshLabs(activeRoom.id);
+    logSystemEvent('task-lane', `Task ${taskId} dropped into the ${lane} lane.`);
+  };
   const runConnectorAction = async (actionId: string) => {
     const data = await (await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId })).json();
     setConnectorResult([data.title, data.summary, ...(data.commands ?? []), ...(data.next_steps ?? [])].join('\n'));
+    logSystemEvent('connector', `${data.title} executed from Orch Labs.`);
   };
   const sendConsoleMessage = async () => {
     const data = await (await postJson(`${apiBase}/api/labs/mcp-console/chat`, { message: consoleMessage, session_id: consoleReply?.session_id ?? null, model_preference: selectedModel === 'deterministic' ? null : selectedModel })).json();
     setConsoleReply(data);
     setConsoleStream(data.response);
     await fetchLabsAnalytics();
+    logSystemEvent('console', `Console reply generated on topic "${data.topic}".`);
   };
   const streamConsoleMessage = async () => {
     setConsoleStream('');
@@ -395,271 +565,156 @@ const App: React.FC = () => {
     if (finalPayload) {
       setConsoleReply(finalPayload);
       setConsoleStream(finalPayload.response);
+      logSystemEvent('console-stream', `Streaming console reply completed on topic "${finalPayload.topic}".`);
     }
     await fetchLabsAnalytics();
   };
-  const teachOrchCode = async () => { await postJson(`${apiBase}/api/labs/orch-code/teach`, {}); await fetchOrchCodeControls(); };
-  const updateLessonStatus = async (lessonKey: string, status: LessonState, confidence: number) => { await postJson(`${apiBase}/api/labs/orch-code/lessons/${lessonKey}/status`, { status, confidence }); await fetchOrchCodeControls(); };
+  const teachOrchCode = async () => {
+    await postJson(`${apiBase}/api/labs/orch-code/teach`, {});
+    await fetchOrchCodeControls();
+    logSystemEvent('orch-code', 'Orch Code teaching pass completed from repo data.');
+  };
+  const updateLessonStatus = async (lessonKey: string, status: LessonState, confidence: number) => {
+    await postJson(`${apiBase}/api/labs/orch-code/lessons/${lessonKey}/status`, { status, confidence });
+    await fetchOrchCodeControls();
+    logSystemEvent('lesson', `${lessonKey} moved to ${status} at ${confidence}% confidence.`);
+  };
   const loadSession = async (id: string) => { setViewMode('council'); setIsAuditMode(true); setSelectedSession(await (await fetch(`${apiBase}/sessions/${id}`)).json()); };
   const overrideScore = async (blockId: string, score: number) => { if (selectedSession) await postJson(`${apiBase}/sessions/${selectedSession.id}/override`, { block_id: blockId, override_score: score }); };
+  const loginAdmin = async () => {
+    setAdminLoading(true);
+    setAdminError(null);
+    try {
+      const response = await postJson(`${apiBase}/auth/login`, { email: adminEmail, password: adminPassword });
+      const data = await response.json();
+      if (!response.ok) {
+        setAdminError(data.detail ?? 'Admin login failed.');
+        return;
+      }
+      if (data.user?.role !== 'admin') {
+        setAdminError('This account is not an admin.');
+        return;
+      }
+      setAdminUser(data.user);
+      window.localStorage.setItem('orch-admin-user', JSON.stringify(data.user));
+      setViewMode('admin');
+      logSystemEvent('admin-login', `Admin session opened for ${data.user.email}.`);
+    } catch {
+      setAdminError('Unable to reach the Orch auth service.');
+    } finally {
+      setAdminLoading(false);
+    }
+  };
+  const logoutAdmin = () => {
+    setAdminUser(null);
+    setAdminError(null);
+    window.localStorage.removeItem('orch-admin-user');
+    setViewMode('labs');
+    logSystemEvent('admin-logout', 'Admin session closed. Returned to public Labs.');
+  };
 
   return (
     <div className="command-center">
       <div className="sidebar">
-        <div className="sidebar-header"><div className="sidebar-title">ORCH CONTROL</div></div>
+        <div className="sidebar-header">
+          <div className="sidebar-title">ORCH CONTROL</div>
+          <div className="sidebar-status-cluster">
+            <div className={`status-pill ${connectionState}`}>
+              {connectionState === 'live' ? 'Live link' : connectionState === 'connecting' ? 'Connecting' : 'Feed interrupted'}
+            </div>
+            <div className="status-pill neutral">{sessions.length} sessions</div>
+            <div className={`status-pill ${isAdminLoggedIn ? 'live' : 'neutral'}`}>
+              {isAdminLoggedIn ? 'Admin unlocked' : 'Public mode'}
+            </div>
+          </div>
+        </div>
         <div className="lesson-list">
           <div className={`lesson-item ${viewMode === 'council' && !isAuditMode ? 'active' : ''}`} onClick={() => { setViewMode('council'); setIsAuditMode(false); }}>
-            <div className="lesson-topic">LIVE COUNCIL</div><div className="lesson-date">Real-time apprenticeship</div>
+            <div className="lesson-topic">LIVE COUNCIL</div><div className="lesson-date">Claude-style reasoning and live council signals</div>
           </div>
           <div className={`lesson-item ${viewMode === 'labs' ? 'active' : ''}`} onClick={() => { setViewMode('labs'); setIsAuditMode(false); }}>
-            <div className="lesson-topic">ORCH LABS</div><div className="lesson-date">Creator orchestration, connectors, and cloud demos</div>
+            <div className="lesson-topic">ORCH LABS</div><div className="lesson-date">Codex-style tool surfaces, connectors, forge, and demos</div>
           </div>
-          <div className="sidebar-section-label">SESSION VAULT</div>
-          {sessions.map((session) => (
+          <div className={`lesson-item ${viewMode === 'admin' ? 'active' : ''}`} onClick={() => { setViewMode('admin'); setIsAuditMode(false); }}>
+            <div className="lesson-topic">ADMIN PORTAL</div><div className="lesson-date">Vault access, internal boards, logs, and governance</div>
+          </div>
+          <div className="sidebar-section-label">{isAdminLoggedIn ? 'SESSION VAULT' : 'INTERNAL ACCESS'}</div>
+          {isAdminLoggedIn ? sessions.map((session) => (
             <div key={session.id} className={`lesson-item ${selectedSession?.id === session.id && isAuditMode ? 'active' : ''}`} onClick={() => void loadSession(session.id)}>
               <div className="lesson-topic">SESSION: {session.topic}</div><div className="lesson-date">{new Date(session.created_at).toLocaleString()}</div>
             </div>
-          ))}
+          )) : (
+            <article className="sidebar-lock-note">
+              <strong>Vault locked</strong>
+              <p>Public visitors can use the demo surfaces. Session history and internal controls now sit behind admin login.</p>
+            </article>
+          )}
+          <div className="sidebar-section-label">ACTIVITY PREVIEW</div>
+          <div className="sidebar-feed-preview">
+            {latestFeedEntries.slice(0, 4).map((entry) => (
+              <article key={entry.id} className="feed-log-card sidebar-feed-card">
+                <div className="feed-log-meta">
+                  <span className="card-chip">{entry.source}</span>
+                  <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
+                </div>
+                <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
+                <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
       <div className="main-room">
         {viewMode === 'labs' ? (
           <div className="labs-shell">
-            <section className="labs-hero">
+            <section className="labs-hero labs-public-hero">
               <div className="labs-kicker">ORCH LABS</div>
               <h1>{labsOverview?.title ?? 'Orch Labs'}</h1>
-              <p>{labsOverview?.positioning ?? 'Execution surfaces for creator-grade AI workflows.'}</p>
-              <div className="labs-metrics">
-                <div className="metric-card"><span className="metric-value">{labsOverview?.metrics.tools ?? 0}</span><span className="metric-label">Tools</span></div>
-                <div className="metric-card"><span className="metric-value">{labsOverview?.metrics.interfaces ?? 0}</span><span className="metric-label">Interfaces</span></div>
-                <div className="metric-card"><span className="metric-value">{labsOverview?.metrics.cloud_stacks ?? 0}</span><span className="metric-label">Cloud Stacks</span></div>
-                <div className="metric-card"><span className="metric-value">{labsAnalytics?.forge.rooms ?? 0}</span><span className="metric-label">Forge Rooms</span></div>
-                <div className="metric-card"><span className="metric-value">{labsAnalytics?.forge.artifacts ?? 0}</span><span className="metric-label">Artifacts</span></div>
-                <div className="metric-card"><span className="metric-value">{labsAnalytics?.mcp_console.requests ?? 0}</span><span className="metric-label">Console Requests</span></div>
+              <p>
+                {labsOverview?.positioning ?? 'Execution surfaces for creator-grade AI workflows.'}
+                {' '}This page is now the public demo layer only. Internal task boards, session vault access, and admin controls belong in the Admin Portal.
+              </p>
+              <div className="hero-note-grid">
+                <article className="signal-card">
+                  <span className="signal-label">Public Mode</span>
+                  <strong>Pressable function routing</strong>
+                  <p>Each tile below jumps to a working surface so the page behaves like a clean Claude plus Codex demo shell instead of a static dashboard.</p>
+                </article>
+                <article className="signal-card">
+                  <span className="signal-label">Activity</span>
+                  <strong>{connectionState === 'live' ? 'Connected to Orch' : 'Fallback logging active'}</strong>
+                  <p>The live feed stays visible in this public surface so users always see motion during demo rehearsal.</p>
+                </article>
+              </div>
+              <div className="labs-metrics labs-function-grid">
+                {publicLabsSections.map((section) => (
+                  <button
+                    key={section.id}
+                    type="button"
+                    className={`metric-card labs-function-card ${labsSection === section.id ? 'active' : ''}`}
+                    onClick={() => scrollToLabsSection(section.id)}
+                  >
+                    <span className="metric-value">{section.metric(labsOverview, labsAnalytics)}</span>
+                    <span className="metric-label">{section.label}</span>
+                    <span className="metric-copy">{section.blurb}</span>
+                  </button>
+                ))}
               </div>
             </section>
 
-            <section className="labs-section">
-              <div className="section-heading">20 Task Execution Matrix</div>
-              <article className="labs-card execution-summary-card">
-                <div className="tool-card-top">
-                  <h3>Program Status</h3>
-                  <div className="card-chip">{completedExecutionTasks}/20 complete</div>
-                </div>
-                <div className="execution-progress-track">
-                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionTasks / 20) * 100}%` }} />
-                </div>
-              </article>
-              <div className="labs-grid phases-grid">
-                {executionPlan.map((phase) => {
-                  const complete = phase.tasks.filter((task) => task.done).length;
-                  return (
-                    <article key={phase.id} className="labs-card phase-card">
-                      <div className="tool-card-top">
-                        <h3>{phase.title}</h3>
-                        <div className="card-chip">{complete}/4 complete</div>
-                      </div>
-                      <p>{phase.focus}</p>
-                      <div className="deliverables-list">
-                        {phase.tasks.map((task) => (
-                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
-                            {task.done ? 'DONE' : 'TODO'} · {task.label}
-                          </div>
-                        ))}
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section className="labs-section">
-              <div className="section-heading">20 Task Execution Matrix (Phase 6+)</div>
-              <article className="labs-card execution-summary-card">
-                <div className="tool-card-top">
-                  <h3>Program Status</h3>
-                  <div className="card-chip">{completedExecutionTasksPhase6Plus}/20 complete</div>
-                </div>
-                <div className="execution-progress-track">
-                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionTasksPhase6Plus / 20) * 100}%` }} />
-                </div>
-              </article>
-              <div className="labs-grid phases-grid">
-                {executionPlanPhase6Plus.map((phase) => {
-                  const complete = phase.tasks.filter((task) => task.done).length;
-                  return (
-                    <article key={phase.id} className="labs-card phase-card">
-                      <div className="tool-card-top">
-                        <h3>{phase.title}</h3>
-                        <div className="card-chip">{complete}/4 complete</div>
-                      </div>
-                      <p>{phase.focus}</p>
-                      <div className="deliverables-list">
-                        {phase.tasks.map((task) => (
-                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
-                            {task.done ? 'DONE' : 'TODO'} · {task.label}
-                          </div>
-                        ))}
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section className="labs-section">
-              <div className="section-heading">20 Task Matrix (Lead + DEV_2 + DEV_3 Background)</div>
-              <article className="labs-card execution-summary-card">
-                <div className="tool-card-top">
-                  <h3>Squad Status</h3>
-                  <div className="card-chip">{completedExecutionLeadDev2}/20 complete</div>
-                </div>
-                <div className="execution-progress-track">
-                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionLeadDev2 / 20) * 100}%` }} />
-                </div>
-              </article>
-              <div className="labs-grid phases-grid">
-                {executionPlanLeadDev2.map((phase) => {
-                  const complete = phase.tasks.filter((task) => task.done).length;
-                  return (
-                    <article key={phase.id} className="labs-card phase-card">
-                      <div className="tool-card-top">
-                        <h3>{phase.title}</h3>
-                        <div className="card-chip">{complete}/4 complete</div>
-                      </div>
-                      <p>{phase.focus}</p>
-                      <div className="deliverables-list">
-                        {phase.tasks.map((task) => (
-                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
-                            {task.done ? 'DONE' : 'TODO'} · {task.label}
-                            <span className="owner-badge">{task.owner}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section className="labs-section">
-              <div className="section-heading">20 Task Matrix (4 Phases: DEV_2=5, DEV_3=10)</div>
-              <article className="labs-card execution-summary-card">
-                <div className="tool-card-top">
-                  <h3>Allocation Status</h3>
-                  <div className="card-chip">{completedExecutionDev2Dev3}/20 complete</div>
-                </div>
-                <div className="execution-progress-track">
-                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3 / 20) * 100}%` }} />
-                </div>
-                <div className="forge-summary-strip">
-                  <div>DEV_2: 5 tasks</div>
-                  <div>DEV_3: 10 tasks</div>
-                  <div>Lead: 5 tasks</div>
-                </div>
-              </article>
-              <div className="labs-grid phases-grid">
-                {executionPlanDev2Dev3.map((phase) => {
-                  const complete = phase.tasks.filter((task) => task.done).length;
-                  return (
-                    <article key={phase.id} className="labs-card phase-card">
-                      <div className="tool-card-top">
-                        <h3>{phase.title}</h3>
-                        <div className="card-chip">{complete}/5 complete</div>
-                      </div>
-                      <p>{phase.focus}</p>
-                      <div className="deliverables-list">
-                        {phase.tasks.map((task) => (
-                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
-                            {task.done ? 'DONE' : 'TODO'} · {task.label}
-                            <span className="owner-badge">{task.owner}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section className="labs-section">
-              <div className="section-heading">20 Task Matrix Cycle 2 (4 Phases: DEV_2=5, DEV_3=10)</div>
-              <article className="labs-card execution-summary-card">
-                <div className="tool-card-top">
-                  <h3>Allocation Status</h3>
-                  <div className="card-chip">{completedExecutionDev2Dev3Cycle2}/20 complete</div>
-                </div>
-                <div className="execution-progress-track">
-                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3Cycle2 / 20) * 100}%` }} />
-                </div>
-                <div className="forge-summary-strip">
-                  <div>DEV_2: 5 tasks</div>
-                  <div>DEV_3: 10 tasks</div>
-                  <div>Lead: 5 tasks</div>
-                </div>
-              </article>
-              <div className="labs-grid phases-grid">
-                {executionPlanDev2Dev3Cycle2.map((phase) => {
-                  const complete = phase.tasks.filter((task) => task.done).length;
-                  return (
-                    <article key={phase.id} className="labs-card phase-card">
-                      <div className="tool-card-top">
-                        <h3>{phase.title}</h3>
-                        <div className="card-chip">{complete}/5 complete</div>
-                      </div>
-                      <p>{phase.focus}</p>
-                      <div className="deliverables-list">
-                        {phase.tasks.map((task) => (
-                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
-                            {task.done ? 'DONE' : 'TODO'} · {task.label}
-                            <span className="owner-badge">{task.owner}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section className="labs-section">
-              <div className="section-heading">20 Task Matrix (Lead Owns Full Phase)</div>
-              <article className="labs-card execution-summary-card">
-                <div className="tool-card-top">
-                  <h3>Allocation Status</h3>
-                  <div className="card-chip">{completedExecutionDev2Dev3LeadPhase}/20 complete</div>
-                </div>
-                <div className="execution-progress-track">
-                  <div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3LeadPhase / 20) * 100}%` }} />
-                </div>
-                <div className="forge-summary-strip">
-                  <div>DEV_2: 5 tasks</div>
-                  <div>DEV_3: 10 tasks</div>
-                  <div>Lead: 5 tasks</div>
-                  <div>Lead solo: Phase 27</div>
-                </div>
-              </article>
-              <div className="labs-grid phases-grid">
-                {executionPlanDev2Dev3LeadPhase.map((phase) => {
-                  const complete = phase.tasks.filter((task) => task.done).length;
-                  return (
-                    <article key={phase.id} className="labs-card phase-card">
-                      <div className="tool-card-top">
-                        <h3>{phase.title}</h3>
-                        <div className="card-chip">{complete}/5 complete</div>
-                      </div>
-                      <p>{phase.focus}</p>
-                      <div className="deliverables-list">
-                        {phase.tasks.map((task) => (
-                          <div key={task.id} className={`deliverable-item execution-task ${task.done ? 'done' : 'todo'}`}>
-                            {task.done ? 'DONE' : 'TODO'} · {task.label}
-                            <span className="owner-badge">{task.owner}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </article>
-                  );
-                })}
+            <section id="labs-interfaces" className="labs-section">
+              <div className="section-heading">Recent Activity</div>
+              <div className="labs-grid access-grid">
+                {latestFeedEntries.slice(0, 6).map((entry) => (
+                  <article key={entry.id} className="labs-card compact-card feed-log-card">
+                    <div className="feed-log-meta">
+                      <span className="card-chip">{entry.source}</span>
+                      <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
+                    </div>
+                    <h3>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</h3>
+                    <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
+                  </article>
+                ))}
               </div>
             </section>
 
@@ -677,7 +732,7 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            <section className="labs-section split-section">
+            <section id="labs-cloud" className="labs-section split-section">
               <div className="split-panel">
                 <div className="section-heading">Cloud Expansion</div>
                 <div className="labs-grid access-grid">
@@ -704,7 +759,7 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            <section className="labs-section">
+            <section id="labs-actions" className="labs-section">
               <div className="section-heading">Installer And Connector Actions</div>
               <div className="labs-grid access-grid">
                 {labsOverview?.installer_actions.map((action) => (
@@ -718,7 +773,7 @@ const App: React.FC = () => {
               {connectorResult && <article className="labs-card console-reply-card"><pre className="connector-output">{connectorResult}</pre></article>}
             </section>
 
-            <section className="labs-section">
+            <section id="labs-tools" className="labs-section">
               <div className="section-heading">South Africa Tool Catalog</div>
               <div className="labs-grid tools-grid">
                 {labsOverview?.tools.map((tool) => (
@@ -734,7 +789,7 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            <section className="labs-section">
+            <section id="labs-forge" className="labs-section">
               <div className="section-heading">Orch Forge Live</div>
               <div className="forge-shell">
                 <article className="labs-card forge-create-card">
@@ -837,26 +892,7 @@ const App: React.FC = () => {
               )}
             </section>
 
-            <section className="labs-section split-section">
-              <div className="split-panel">
-                <div className="section-heading">Orch Code Controls</div>
-                <article className="labs-card forge-room-detail">
-                  <div className="tool-card-top"><h3>{orchCodeProfile?.title ?? 'Orch Code'}</h3><button type="button" className="forge-button secondary-button" onClick={() => void teachOrchCode()}>Teach From Repo</button></div>
-                  <div className="forge-summary-strip"><div>{orchCodeProfile?.summary.total_lessons ?? 0} lessons</div><div>{orchCodeProfile?.summary.learned_lessons ?? 0} learned</div><div>{orchCodeProfile?.summary.learning_lessons ?? 0} in flight</div></div>
-                  <div className="lesson-control-list">
-                    {orchCodeProfile?.lessons.map((lesson) => (
-                      <div key={lesson.lesson_key} className="lesson-control-card">
-                        <div className="tool-card-top"><strong>{lesson.title}</strong><div className="card-chip">{lesson.track}</div></div>
-                        <div className="tool-meta">{lesson.source}</div>
-                        <div className="forge-controls">
-                          <select value={lesson.status} className="forge-select" onChange={(e) => void updateLessonStatus(lesson.lesson_key, e.target.value as LessonState, lesson.confidence)}>{orchCodeProfile.control_states.map((state) => <option key={state} value={state}>{state}</option>)}</select>
-                          <input type="range" min="0" max="100" value={lesson.confidence} className="glow-knob" onChange={(e) => void updateLessonStatus(lesson.lesson_key, lesson.status, Number(e.target.value))} />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </article>
-              </div>
+            <section id="labs-console" className="labs-section split-section">
               <div className="split-panel">
                 <div className="section-heading">Universal MCP Console</div>
                 <div className="labs-card forge-room-detail">
@@ -879,53 +915,322 @@ const App: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </section>
-
-            <section className="labs-section split-section">
               <div className="split-panel">
-                <div className="section-heading">Creator Throughput</div>
-                <div className="labs-grid access-grid">
-                  {labsAnalytics?.forge.creator_throughput.map((entry) => (
-                    <article key={entry.owner} className="labs-card compact-card">
-                      <div className="tool-card-top"><h3>{entry.owner}</h3><div className="card-chip">{entry.count} tasks</div></div>
-                      <p>Measured from persisted Forge ownership and movement events.</p>
-                    </article>
-                  ))}
-                </div>
-              </div>
-              <div className="split-panel">
-                <div className="section-heading">Console Analytics</div>
-                <div className="labs-grid access-grid">
-                  <article className="labs-card compact-card">
-                    <div className="tool-card-top"><h3>Usage</h3><div className="card-chip">{labsAnalytics?.mcp_console.requests ?? 0} requests</div></div>
-                    <p>Sessions: {labsAnalytics?.mcp_console.sessions ?? 0} · Avg latency: {labsAnalytics?.mcp_console.average_latency_ms ?? 0} ms</p>
-                  </article>
-                  {labsAnalytics?.mcp_console.top_topics.map((topic) => (
-                    <article key={topic.topic} className="labs-card compact-card">
-                      <div className="tool-card-top"><h3>{topic.topic}</h3><div className="card-chip">{topic.count}</div></div>
-                      <p>Persisted MCP console topic frequency for workflow prioritization.</p>
-                    </article>
-                  ))}
-                </div>
+                <div className="section-heading">Live Operator Feed</div>
+                <article className="labs-card feed-log-panel">
+                  <div className="feed-log-list">
+                    {latestFeedEntries.map((entry) => (
+                      <article key={entry.id} className="feed-log-card">
+                        <div className="feed-log-meta">
+                          <span className="card-chip">{entry.source}</span>
+                          <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
+                        </div>
+                        <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
+                        <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
+                      </article>
+                    ))}
+                  </div>
+                </article>
               </div>
             </section>
           </div>
-        ) : !isAuditMode ? (
-          agentList.map((id) => {
-            const isStudent = id === 'orch';
-            const isThinking = thinkingAgent === id;
-            const isResponding = activeAgent === id;
-            const lastMsg = messages.filter((message) => message.agent === id).slice(-1)[0];
-            return (
-              <div key={id} className={`chamber ${id} ${isThinking ? 'thinking' : ''} ${isResponding ? 'responding' : ''} ${isStudent ? 'student' : 'mentor'}`}>
-                <div className="agent-rank">{isStudent ? '[STUDENT]' : '[MENTOR]'}</div>
-                <div className="agent-id">{id}</div>
-                {isThinking && <div className="glow-orb" />}
-                <div className="response-text">{isThinking ? (isStudent ? 'SYNTHESIZING DEEP REASONING...' : 'PROVIDING EXPERT ADVICE...') : lastMsg?.content || 'STANDBY...'}</div>
-                {(lastMsg?.value_score !== undefined || lastMsg?.override_score !== undefined) && <div className="value-meter"><div className="value-fill" style={{ width: `${(lastMsg.override_score ?? lastMsg.value_score ?? 0) * 10}%` }} /></div>}
+        ) : viewMode === 'admin' ? (
+          <div className="admin-shell">
+            <section className="admin-hero">
+              <div className="labs-kicker">ADMIN PORTAL</div>
+              <h1>Internal controls and demo governance.</h1>
+              <p>
+                The admin surface now carries the vault, execution boards, lesson controls, and operator analytics that should not appear in the public demo layer.
+              </p>
+              <div className="council-status-row">
+                <article className="signal-card">
+                  <span className="signal-label">Access</span>
+                  <strong>{isAdminLoggedIn ? adminUser?.email : 'Login required'}</strong>
+                </article>
+                <article className="signal-card">
+                  <span className="signal-label">Vault</span>
+                  <strong>{isAdminLoggedIn ? `${sessions.length} sessions unlocked` : 'Locked'}</strong>
+                </article>
+                <article className="signal-card">
+                  <span className="signal-label">Feed Log</span>
+                  <strong>{feedLog.length} events captured</strong>
+                </article>
               </div>
-            );
-          })
+            </section>
+
+            {!isAdminLoggedIn ? (
+              <section className="split-section">
+                <div className="split-panel">
+                  <article className="labs-card admin-login-card">
+                    <div className="tool-card-top"><h3>Admin Login</h3><div className="status-pill connecting">Internal only</div></div>
+                    <p>Use admin login to unlock the session vault, execution boards, lesson controls, and operator analytics for the demo run.</p>
+                    <label className="forge-label"><span>Email</span><input value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} className="forge-input" /></label>
+                    <label className="forge-label"><span>Password</span><input type="password" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} className="forge-input" /></label>
+                    {adminError && <div className="admin-error">{adminError}</div>}
+                    <button type="button" className="forge-button" onClick={() => void loginAdmin()} disabled={adminLoading}>
+                      {adminLoading ? 'Signing in...' : 'Open Admin Portal'}
+                    </button>
+                  </article>
+                </div>
+                <div className="split-panel">
+                  <article className="labs-card admin-login-card">
+                    <div className="tool-card-top"><h3>Moved Off Public</h3><div className="card-chip">safety split</div></div>
+                    <div className="deliverables-list">
+                      <div className="deliverable-item">Session vault and forensic replay</div>
+                      <div className="deliverable-item">Execution matrices and internal planning</div>
+                      <div className="deliverable-item">Orch code lesson controls</div>
+                      <div className="deliverable-item">Creator throughput and console analytics</div>
+                      <div className="deliverable-item">Persistent operator activity log</div>
+                    </div>
+                  </article>
+                  <article className="labs-card admin-login-card">
+                    <div className="tool-card-top"><h3>Today First</h3><div className="card-chip">demo method</div></div>
+                    <div className="deliverables-list">
+                      <div className="deliverable-item">Verify admin login and vault access</div>
+                      <div className="deliverable-item">Check live council and operator log flow</div>
+                      <div className="deliverable-item">Run public Labs surfaces end-to-end</div>
+                      <div className="deliverable-item">Confirm Forge task and artifact persistence</div>
+                      <div className="deliverable-item">Update Schematics at each checkpoint</div>
+                    </div>
+                  </article>
+                </div>
+              </section>
+            ) : (
+              <>
+                <section className="labs-section">
+                  <div className="section-heading">Execution Boards</div>
+                  <div className="labs-grid access-grid">
+                    <article className="labs-card compact-card">
+                      <div className="tool-card-top"><h3>Phase 1-5</h3><div className="card-chip">{completedExecutionTasks}/20 complete</div></div>
+                      <div className="execution-progress-track"><div className="execution-progress-fill" style={{ width: `${(completedExecutionTasks / 20) * 100}%` }} /></div>
+                      <p>Core orchestration foundation, tools, governance, and UX readiness.</p>
+                    </article>
+                    <article className="labs-card compact-card">
+                      <div className="tool-card-top"><h3>Phase 6-10</h3><div className="card-chip">{completedExecutionTasksPhase6Plus}/20 complete</div></div>
+                      <div className="execution-progress-track"><div className="execution-progress-fill" style={{ width: `${(completedExecutionTasksPhase6Plus / 20) * 100}%` }} /></div>
+                      <p>Deployment, observability, security, reliability, and UX delivery checkpoints.</p>
+                    </article>
+                    <article className="labs-card compact-card">
+                      <div className="tool-card-top"><h3>Lead + DEV_2 + DEV_3</h3><div className="card-chip">{completedExecutionLeadDev2}/20 complete</div></div>
+                      <div className="execution-progress-track"><div className="execution-progress-fill" style={{ width: `${(completedExecutionLeadDev2 / 20) * 100}%` }} /></div>
+                      <p>Shared delivery board for release, observability, security, and reliability coverage.</p>
+                    </article>
+                    <article className="labs-card compact-card">
+                      <div className="tool-card-top"><h3>Matrix Cycle A</h3><div className="card-chip">{completedExecutionDev2Dev3}/20 complete</div></div>
+                      <div className="execution-progress-track"><div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3 / 20) * 100}%` }} /></div>
+                      <p>Four-phase allocation with DEV_2 at five tasks and DEV_3 at ten.</p>
+                    </article>
+                    <article className="labs-card compact-card">
+                      <div className="tool-card-top"><h3>Matrix Cycle B</h3><div className="card-chip">{completedExecutionDev2Dev3Cycle2}/20 complete</div></div>
+                      <div className="execution-progress-track"><div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3Cycle2 / 20) * 100}%` }} /></div>
+                      <p>Second internal execution cycle for rollout, ops, security, and delivery validation.</p>
+                    </article>
+                    <article className="labs-card compact-card admin-action-card">
+                      <div className="tool-card-top"><h3>Lead Solo Phase</h3><div className="card-chip">{completedExecutionDev2Dev3LeadPhase}/20 complete</div></div>
+                      <div className="execution-progress-track"><div className="execution-progress-fill" style={{ width: `${(completedExecutionDev2Dev3LeadPhase / 20) * 100}%` }} /></div>
+                      <p>Final acceptance, UX readiness, and delivery summary approval.</p>
+                      <button type="button" className="ghost-button" onClick={logoutAdmin}>Log Out</button>
+                    </article>
+                  </div>
+                </section>
+
+                <section className="labs-section split-section">
+                  <div className="split-panel">
+                    <div className="section-heading">Orch Code Controls</div>
+                    <article className="labs-card forge-room-detail">
+                      <div className="tool-card-top"><h3>{orchCodeProfile?.title ?? 'Orch Code'}</h3><button type="button" className="forge-button secondary-button" onClick={() => void teachOrchCode()}>Teach From Repo</button></div>
+                      <div className="forge-summary-strip"><div>{orchCodeProfile?.summary.total_lessons ?? 0} lessons</div><div>{orchCodeProfile?.summary.learned_lessons ?? 0} learned</div><div>{orchCodeProfile?.summary.learning_lessons ?? 0} in flight</div></div>
+                      <div className="lesson-control-list">
+                        {orchCodeProfile?.lessons.map((lesson) => (
+                          <div key={lesson.lesson_key} className="lesson-control-card">
+                            <div className="tool-card-top"><strong>{lesson.title}</strong><div className="card-chip">{lesson.track}</div></div>
+                            <div className="tool-meta">{lesson.source}</div>
+                            <div className="forge-controls">
+                              <select value={lesson.status} className="forge-select" onChange={(e) => void updateLessonStatus(lesson.lesson_key, e.target.value as LessonState, lesson.confidence)}>{orchCodeProfile.control_states.map((state) => <option key={state} value={state}>{state}</option>)}</select>
+                              <input type="range" min="0" max="100" value={lesson.confidence} className="glow-knob" onChange={(e) => void updateLessonStatus(lesson.lesson_key, lesson.status, Number(e.target.value))} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </div>
+                  <div className="split-panel">
+                    <div className="section-heading">Operator Feed Log</div>
+                    <article className="labs-card feed-log-panel">
+                      <div className="feed-log-list">
+                        {latestFeedEntries.map((entry) => (
+                          <article key={entry.id} className="feed-log-card">
+                            <div className="feed-log-meta">
+                              <span className="card-chip">{entry.source}</span>
+                              <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
+                            </div>
+                            <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
+                            <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
+                          </article>
+                        ))}
+                      </div>
+                    </article>
+                  </div>
+                </section>
+
+                <section className="labs-section split-section">
+                  <div className="split-panel">
+                    <div className="section-heading">Creator Throughput</div>
+                    <div className="labs-grid access-grid">
+                      {labsAnalytics?.forge.creator_throughput.map((entry) => (
+                        <article key={entry.owner} className="labs-card compact-card">
+                          <div className="tool-card-top"><h3>{entry.owner}</h3><div className="card-chip">{entry.count} tasks</div></div>
+                          <p>Measured from persisted Forge ownership and movement events.</p>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="split-panel">
+                    <div className="section-heading">Console Analytics</div>
+                    <div className="labs-grid access-grid">
+                      <article className="labs-card compact-card">
+                        <div className="tool-card-top"><h3>Usage</h3><div className="card-chip">{labsAnalytics?.mcp_console.requests ?? 0} requests</div></div>
+                        <p>Sessions: {labsAnalytics?.mcp_console.sessions ?? 0} · Avg latency: {labsAnalytics?.mcp_console.average_latency_ms ?? 0} ms</p>
+                      </article>
+                      {labsAnalytics?.mcp_console.top_topics.map((topic) => (
+                        <article key={topic.topic} className="labs-card compact-card">
+                          <div className="tool-card-top"><h3>{topic.topic}</h3><div className="card-chip">{topic.count}</div></div>
+                          <p>Persisted MCP console topic frequency for workflow prioritization.</p>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              </>
+            )}
+          </div>
+        ) : !isAuditMode ? (
+          <div className="council-shell">
+            <section className="council-hero">
+              <div className="labs-kicker">Live Council</div>
+              <h1>Demo briefing room for live orchestration.</h1>
+              <p>
+                The council view now behaves like a mission desk: one featured speaker,
+                a support stack, and explicit feed status so quiet moments look intentional
+                instead of broken.
+              </p>
+              <div className="council-status-row">
+                <article className="signal-card">
+                  <span className="signal-label">Link</span>
+                  <strong>{connectionState === 'live' ? 'Connected' : connectionState === 'connecting' ? 'Connecting' : 'Attention needed'}</strong>
+                </article>
+                <article className="signal-card">
+                  <span className="signal-label">Live messages</span>
+                  <strong>{messages.length}</strong>
+                </article>
+                <article className="signal-card">
+                  <span className="signal-label">Session vault</span>
+                  <strong>{isAdminLoggedIn ? `${sessions.length} archived lessons` : 'Admin only'}</strong>
+                </article>
+              </div>
+            </section>
+
+            <section className="council-layout">
+              <article
+                className={`chamber council-focus ${featuredCouncilCard.isThinking ? 'thinking' : ''} ${featuredCouncilCard.isResponding ? 'responding' : ''} ${featuredCouncilCard.isStudent ? 'student' : 'mentor'}`}
+              >
+                <div className="agent-rank">{featuredCouncilCard.isStudent ? '[STUDENT]' : '[MENTOR]'}</div>
+                <div className="agent-id">{featuredCouncilCard.id}</div>
+                {featuredCouncilCard.isThinking && <div className="glow-orb" />}
+                <div className="focus-status-line">
+                  <span className={`status-pill ${featuredCouncilCard.isThinking ? 'thinking' : featuredCouncilCard.isResponding ? 'live' : 'neutral'}`}>
+                    {featuredCouncilCard.isThinking ? 'Reasoning' : featuredCouncilCard.isResponding ? 'Transmitting' : 'Queued'}
+                  </span>
+                  <span className="focus-status-meta">
+                    {featuredCouncilCard.lastMsg ? `Round ${featuredCouncilCard.lastMsg.round}` : 'Awaiting next council trigger'}
+                  </span>
+                </div>
+                <div className="response-text focus-copy">
+                  {featuredCouncilCard.isThinking
+                    ? featuredCouncilCard.isStudent
+                      ? 'Synthesizing the next reasoning pass for the council.'
+                      : 'Preparing the next expert intervention for the panel.'
+                    : featuredCouncilCard.lastMsg?.content ||
+                      'No live signal has been broadcast yet. Start the simulator or post to /broadcast to wake the room.'}
+                </div>
+                <div className="focus-reasoning">
+                  {featuredCouncilCard.lastMsg?.reasoning || 'The featured chamber will show the last reasoning trace here as soon as the feed becomes active.'}
+                </div>
+                {(featuredCouncilCard.lastMsg?.value_score !== undefined || featuredCouncilCard.lastMsg?.override_score !== undefined) && (
+                  <div className="value-meter">
+                    <div
+                      className="value-fill"
+                      style={{ width: `${(featuredCouncilCard.lastMsg.override_score ?? featuredCouncilCard.lastMsg.value_score ?? 0) * 10}%` }}
+                    />
+                  </div>
+                )}
+              </article>
+
+              <div className="council-side-grid">
+                {supportCouncilCards.map((card) => (
+                  <article
+                    key={card.id}
+                    className={`chamber compact-chamber ${card.isThinking ? 'thinking' : ''} ${card.isResponding ? 'responding' : ''} ${card.isStudent ? 'student' : 'mentor'}`}
+                  >
+                    <div className="agent-rank">{card.isStudent ? '[STUDENT]' : '[MENTOR]'}</div>
+                    <div className="tool-card-top">
+                      <div className="agent-id">{card.id}</div>
+                      <div className={`status-pill ${card.isThinking ? 'thinking' : card.isResponding ? 'live' : 'neutral'}`}>
+                        {card.isThinking ? 'Thinking' : card.isResponding ? 'Live' : 'Idle'}
+                      </div>
+                    </div>
+                    <div className="response-text compact-copy">
+                      {card.lastMsg?.content || 'Awaiting council handoff.'}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="council-signal-strip">
+              <article className="signal-card wide">
+                <span className="signal-label">Latest transmission</span>
+                <strong>{latestTransmission?.agent?.toUpperCase() ?? 'No live transmission yet'}</strong>
+                <p>
+                  {latestTransmission?.content ||
+                    'The websocket is connected, but no simulator or broadcast event has pushed fresh council output into the room yet.'}
+                </p>
+              </article>
+              <article className="signal-card">
+                <span className="signal-label">Selected session</span>
+                <strong>{selectedSession?.topic ?? 'Live view active'}</strong>
+                <p>
+                  {selectedSession?.created_at
+                    ? new Date(selectedSession.created_at).toLocaleString()
+                    : 'Choose a session from the vault to switch into forensic audit mode.'}
+                </p>
+              </article>
+              <article className="signal-card">
+                <span className="signal-label">Demo note</span>
+                <strong>Quiet feed is expected</strong>
+                <p>
+                  The council panels animate and re-prioritize when `/broadcast` or the simulator publishes new events.
+                </p>
+              </article>
+            </section>
+            <section className="labs-section">
+              <div className="section-heading">Live Feed Log</div>
+              <article className="labs-card feed-log-panel">
+                <div className="feed-log-list">
+                  {latestFeedEntries.map((entry) => (
+                    <article key={entry.id} className="feed-log-card">
+                      <div className="feed-log-meta">
+                        <span className="card-chip">{entry.source}</span>
+                        <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
+                      </div>
+                      <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
+                      <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
+                    </article>
+                  ))}
+                </div>
+              </article>
+            </section>
+          </div>
         ) : (
           <div className="audit-container">
             <div className="sidebar-title">Forensic Audit: {selectedSession?.topic}</div>

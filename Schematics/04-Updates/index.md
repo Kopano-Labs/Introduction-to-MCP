@@ -27,18 +27,19 @@ status: active
 2. [[Project Status]] - current delivery phase and capability truth
 3. [[Implementation Plan]] - phase-by-phase engineering plan
 4. [[Demo Countdown - April 8-15, 2026]] - day-by-day countdown owners and exit criteria
-5. [[MASTER-TODO Session 3]] - current ownership split and next actions
-6. [[Collaboration Split - Session 3]] - active lane boundaries
-7. [[Reward System Status - Session 3]] - reward truth and next validation steps
-8. [[delegation-protocol]] - team rules of engagement
-9. [[DEV_S Reward Program]] - session reset, permission, and supervision policy
-10. [[task-board]] - live ownership and next actions
-11. [[comms-log]] - chronological status and directives
-12. [[dev-tracker]] - per-role execution history
+5. [[Orch Demo Task List - 2026-04-08]] - current Orch GUI split, logging, and demo verification checklist
+6. [[MASTER-TODO Session 3]] - current ownership split and next actions
+7. [[Collaboration Split - Session 3]] - active lane boundaries
+8. [[Reward System Status - Session 3]] - reward truth and next validation steps
+9. [[delegation-protocol]] - team rules of engagement
+10. [[DEV_S Reward Program]] - session reset, permission, and supervision policy
+11. [[task-board]] - live ownership and next actions
+12. [[comms-log]] - chronological status and directives
+13. [[dev-tracker]] - per-role execution history
 
 ## Workflow
 
-[[Dashboard]] -> [[Project Status]] -> [[Implementation Plan]] -> [[Demo Countdown - April 8-15, 2026]] -> [[MASTER-TODO Session 3]] -> [[Collaboration Split - Session 3]] -> [[Reward System Status - Session 3]] -> [[delegation-protocol]] -> [[DEV_S Reward Program]] -> [[task-board]] -> [[comms-log]] -> [[dev-tracker]]
+[[Dashboard]] -> [[Project Status]] -> [[Implementation Plan]] -> [[Demo Countdown - April 8-15, 2026]] -> [[Orch Demo Task List - 2026-04-08]] -> [[MASTER-TODO Session 3]] -> [[Collaboration Split - Session 3]] -> [[Reward System Status - Session 3]] -> [[delegation-protocol]] -> [[DEV_S Reward Program]] -> [[task-board]] -> [[comms-log]] -> [[dev-tracker]]
 
 ## Canonical Sources
 

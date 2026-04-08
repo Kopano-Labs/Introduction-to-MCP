@@ -1,5 +1,20 @@
 # Dev Tracker
 
+## Orch GUI Demo Split | 2026-04-08 22:10
+
+- Orch GUI now splits into `LIVE COUNCIL`, `ORCH LABS`, and `ADMIN PORTAL`
+- public Labs now uses pressable function cards for interfaces, cloud, actions, tools, forge, and console
+- public session-vault exposure was removed from the sidebar and replaced with an internal-access lock note
+- public Labs now shows recent activity and public operator-feed visibility instead of internal execution boards
+- internal execution boards, Orch Code controls, creator throughput, and console analytics now sit behind the admin portal branch
+- visible feed-log panels now exist in the sidebar, public Labs console, admin portal, and council view
+- the live-feed handler type issue was fixed and `orch/gui` now passes `npm run build`
+- local demo admin account `admin@orch.local` was registered and granted the `admin` role
+- Orch was restarted on `127.0.0.1:8000` after the rebuild and `/api/kasilink/health` returned `200`
+- `/auth/login` now returns the local demo admin with role `admin`
+- `/broadcast` followed by `/updates` now returns the injected live event again, which confirms runtime feed flow after restart
+- next verification gap is browser-level visual QA of the new public/admin split and section-card scroll behavior
+
 ## Demo Hardening Snapshot | 2026-04-08
 
 - `KasiLink` dependencies were restored locally with `npm install`
