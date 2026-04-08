@@ -1,87 +1,66 @@
----
-title: Dev Tracker
-created: 2026-04-06
-updated: 2026-04-06
-author: Lead
-tags:
-  - tracker
-  - progress
-  - audit
-  - team
-priority: high
-audience:
-  - lead
-  - devs
-  - owner
-status: active
----
-
 # Dev Tracker
 
-> Per-role execution tracker for orch.
-> This file starts from the 2026-04-06 `Schematics` audit and catch-up pass.
+## Demo Hardening Snapshot | 2026-04-08
 
-## Lead
+- `KasiLink` dependencies were restored locally with `npm install`
+- `KasiLink` now passes `npm run lint`
+- `KasiLink` now passes `npm run build`
+- Orch API is confirmed live on `/api/kasilink/health` and `/api/kasilink/dashboard`
+- `KasiLink/app/api/orch/[...path]/route.ts` now normalizes upstream requests to the mounted `/api/kasilink/*` router
+- public `GET` requests for the home-page Orch dashboard and load-shedding widgets are no longer blocked by app-side sign-in checks
+- `KasiLink/.env.example` now includes `ORCH_BASE_URL` and `NEXT_PUBLIC_ORCH_BASE_URL`
+- WebSocket support was added to the root `.venv` with `pip install websockets`
+- direct Orch metrics currently report `"whatsapp_bridge_configured": false`
+- live rehearsal in the web app is still blocked first by valid Clerk keys, then by reachable Mongo/Atlas access
+- Chocolatey install attempts for `azure-cli` and `azd` are blocked in the current non-elevated shell by `C:\\ProgramData\\chocolatey` permissions
 
-| Time | Item | Status |
-|------|------|--------|
-| 2026-04-06 | Audited `Schematics/` against current repo structure | DONE |
-| 2026-04-06 | Ported KasiLink-style coordination format into `Schematics/04-Updates/` | DONE |
-| 2026-04-06 | Summarized current progress and remaining Phase 4 gaps | DONE |
-| 2026-04-06 | Implemented Phase 4 KasiLink gateway + tools | DONE |
-| 2026-04-06 | Added targeted Phase 4 tests | DONE |
-| 2026-04-06 | Began Phase 5 reliability baseline | DONE |
-| 2026-04-06 | Repaired CLI simulation test path | DONE |
-| 2026-04-06 | Modernized CI workflow | DONE |
-| 2026-04-06 | Full suite stabilization | DONE |
-| 2026-04-06 | Established reliability baseline | DONE |
-| 2026-04-06 | Added Orch Labs strategy, registry, API, and GUI mode | DONE |
-| 2026-04-06 | Added Phase 6, Phase 7, and Phase 8 to Schematics with criticality | DONE |
-| 2026-04-06 | Added Phase 7 language/access planning APIs | DONE |
-| 2026-04-06 | Added Phase 8 cowork and Orch Code surface scaffolding | DONE |
-| 2026-04-06 | Added Phase 9 research note and refinement loop | DONE |
-| 2026-04-06 | Added multilingual routing and translation runtime | DONE |
-| 2026-04-06 | Added first runnable Orch Forge flow | DONE |
-| 2026-04-06 | Added first Orch Code teaching loop | DONE |
-| 2026-04-06 | Added multilingual response packaging and access execution | DONE |
-| 2026-04-06 | Added cowork dispatch upgrades and Orch Code progression | DONE |
-| 2026-04-06 | Expand runnable Labs tools and deepen multilingual generation | NEXT |
+## Recent Commits
 
-## DEV_1
+- `b8c2235` `session-3-court-refresh-and-4-tier-audits`
+- `d85da42` `record-session-3-build-checkpoint`
+- `9249309` `clarify-session-3-parallel-ownership`
+- `7be1c95` `refine-session-3-reward-handoff`
+- `0f1d03f` `add-session-3-reward-qa-checklist`
+- `29bd592` `wire-session-3-vault-index`
+- `ed13710` `session-3-coordination-layer`
+- `3bdc468` `homepage-csp-hero-polish`
+- `1fdba7a` `followup-external-access-blockers`
+- `7781658` `followup-newsletter-mongo-resilience`
+- `2b0eb74` `phase-14-obsidian-structure-and-ui-audit`
+- `245907a` `phase-13-whatsapp-osint-admin-review`
+- `a50416d` `phase-12-env-integrations-weather-search`
+- `8ef6b3d` `phase-11-botid-anti-bot-hardening`
+- `d13807e` `phase-10-security-hardening`
 
-| Time | Item | Status |
-|------|------|--------|
-| 2026-04-06 | Added to orch coordination structure | DONE |
-| 2026-04-06 | Catch-up briefing posted in [[comms-log]] | DONE |
-| 2026-04-06 | First scoped orch assignment | STANDBY FOR PHASE 6 |
+## Verification Pattern Used
 
-**Catch-up summary for `DEV_1`:**
-- Orch already has the CLI, API, GUI bridge, MCP tools, memory, and WhatsApp bridge in place.
-- Current work is now Orch Labs expansion on top of the completed orch core and KasiLink integration.
-- Phase 6 is active and exposes a Labs registry, API, and GUI gallery.
-- Next likely assignment area: turning planned Labs concepts into bounded runnable tools.
+- targeted eslint on touched files
+- `npm run build`
+- clean dev restart when phase risk touched route/build state
+- smoke checks on changed public routes
 
-## DEV_2
+## Session 3 Verification
 
-| Time | Item | Status |
-|------|------|--------|
-| 2026-04-06 | Added to orch coordination structure | DONE |
-| 2026-04-06 | Catch-up briefing posted in [[comms-log]] | DONE |
-| 2026-04-06 | First scoped orch assignment | STANDBY FOR PHASE 7 |
+- current combined working tree completed `npm run build` successfully on `2026-04-08`
+- `next build` is linting again because the parallel lane restored the normal build script
+- build currently passes with a sizable warning backlog, not hard lint errors
+- data access during build still surfaces the known Atlas allowlist blocker, but the site falls back instead of failing the build
+- parallel Codex report confirms `npm run lint` passes with `73 warnings` and `0 errors`
+- parallel Codex report confirms `npm run build` passes and did not touch untracked Session 3 docs or `lib/bookingSlots.js`
+- latest safe-lane verification shows `npm run lint` now passes with `56 warnings` and `0 errors` on the combined tree
+- booking/court lane targeted eslint now passes with `0` warnings and `0` errors
+- targeted eslint for the safe warning-reduction files also passes with `0` warnings and `0` errors
+- second safe-lane warning-reduction batch passes targeted eslint with `0` warnings and `0` errors
+- court media files were regenerated at `2026-04-08 18:41` and service-worker cache version was bumped
+- hourly booking selection is now enforced in UI and booking APIs for create, guest reserve, and edit flows
+- `app/courts/[id]/page.jsx` now falls back to seeded local courts when Mongo is unavailable or the route uses a local fallback id
+- `components/GiscusComments.jsx` readiness logic was corrected so env validation no longer trips the linted build path
+- second safe-lane cleanup removed unused variables and dead parameters in tournament/admin/profile/analytics utility routes and form pages
 
-**Catch-up summary for `DEV_2`:**
-- Orch is past foundation work and now adds an experiment studio layer.
-- The new critical future gap is South African language coverage and speech-access support.
-- Phase 7 is defined as critical and will need bounded accessibility and multilingual implementation work.
-- Next likely assignment area: bounded accessibility planning or verification work.
+## Local Dev Notes
 
-## Repo Reality Check
-
-| Area | Status |
-|------|--------|
-| CLI package under `CLI/` | Present |
-| Main orchestration package under `orch/orch/` | Present |
-| GUI under `orch/gui/` | Present |
-| Tests under `tests/` | Present |
-| Knowledge base under `Schematics/` | Present |
-| Coordination layer under `Schematics/04-Updates/` | Now present |
+- port `3002` is the normal dev port
+- `.next` should be cleared if Next dev starts surfacing manifest or stale build artifacts
+- `.next-dev-phase*.log` files were only temporary local debugging artifacts and should not remain in the repo root once the debugging pass is complete
+- local Mongo auth is no longer blocked by SRV resolution, but it is still blocked if Atlas has not allowlisted the current machine IP
+- Google Search74 and WhatsApp OSINT provider wiring is in place, but live verification currently fails with `403` until the RapidAPI account has access to those APIs

@@ -35,6 +35,21 @@ status: active
 - Codex Terminal
 - Owner
 
+**Live status**
+- countdown note created
+- stale overlap handoff corrected against the current `KasiLink` repo
+- `KasiLink` dependencies installed
+- `KasiLink` lint passes
+- `KasiLink` build passes
+- Orch API is verified live on `/api/kasilink/health` and `/api/kasilink/dashboard`
+- `KasiLink` bridge now forwards `/api/orch/*` to the mounted `/api/kasilink/*` upstream path
+- public `GET` access for the home-page Orch dashboard and load-shedding widgets is no longer blocked by app-side sign-in checks
+- Orch currently reports `whatsapp_bridge_configured: false`
+- current runtime blocker is valid Clerk configuration, which fails before Atlas can be verified
+- Azure tooling validation is currently blocked because `az` and `azd` are not installed in this environment
+- current repo confirms gig posting/apply/review plus load-shedding and Orch dashboard surfaces
+- current repo does not yet show visible wiring for provider ranking in the gig flow or WhatsApp delivery in the notification flow
+
 **Primary work**
 - publish a corrected overlap handoff for the current repo reality
 - confirm Atlas, Clerk, and authenticated QA prerequisites
@@ -44,7 +59,8 @@ status: active
 **Exit criteria**
 - overlap note explicitly states what is safe to edit and what is stale
 - Atlas blocker is reduced to a concrete owner action, not a vague risk
-- one rehearsal attempt is recorded with pass/fail evidence
+- Orch bridge path and upstream health are verified with evidence
+- one rehearsal attempt is recorded with pass/fail evidence once valid Clerk keys are present
 - one Azure validation pass is recorded with next actions
 
 ### 2026-04-09 | Stabilize Demo Path
@@ -54,7 +70,7 @@ status: active
 - Codex Terminal
 
 **Primary work**
-- fix the highest-severity blocker from the first rehearsal
+- fix the highest-severity blocker from the first rehearsal, which is currently valid Clerk configuration
 - re-run gig creation, data loading, and reasoning visibility checks
 - confirm protected routes and role-gated flows behave correctly
 
@@ -69,12 +85,12 @@ status: active
 - Owner
 
 **Primary work**
-- run authenticated manager and admin mutation QA
+- run authenticated manager/admin QA if that repo is confirmed, otherwise run the current `KasiLink` seeker/provider authenticated marketplace QA
 - verify production-style Clerk flows and MongoDB-backed writes
 - confirm no route silently fails when signed in
 
 **Exit criteria**
-- manager/admin QA checklist has a pass/fail result for each critical mutation flow
+- the active authenticated QA checklist has a pass/fail result for each critical mutation flow
 - every failing mutation has a named owner and next action
 
 ### 2026-04-11 | Azure Surface Hardening

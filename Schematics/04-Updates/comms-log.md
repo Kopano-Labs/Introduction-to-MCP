@@ -21,6 +21,78 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-08 20:20 | Lead | ORCH BRIDGE PATH VERIFIED AND APP PROXY ALIGNED
+
+**Action:** Verified the live Orch mount path, corrected the `KasiLink` bridge to match it, and re-ran app verification.
+
+**Completed locally:**
+- confirmed Orch serves the KasiLink bridge on `/api/kasilink/*`, not on the API root
+- confirmed `GET /api/kasilink/health` returns `200`
+- confirmed `GET /api/kasilink/dashboard` returns `200`
+- patched `KasiLink/app/api/orch/[...path]/route.ts` so `/api/orch/*` now forwards to the mounted `/api/kasilink/*` upstream when `ORCH_BASE_URL` points at the Orch host root
+- removed the app-side sign-in gate for `GET` requests so the public home-page Orch dashboard and load-shedding widgets can resolve without a signed-in Clerk session
+- added missing Orch env keys to `KasiLink/.env.example`
+- installed `websockets` into the root `.venv` so Orch no longer lacks WebSocket support at the package layer
+- verified `npm run lint` still passes
+- verified `npm run build` still passes
+
+**What this changes in the blocker order:**
+- the Orch route mismatch is no longer the first blocker
+- direct Orch health and dashboard endpoints are now proven locally
+- strict in-app rehearsal is still blocked first by valid Clerk configuration
+- Mongo/Atlas reachability remains the next blocker after Clerk
+- Orch dashboard metrics currently report `whatsapp_bridge_configured: false`, so WhatsApp delivery should still be treated as unproven for the demo
+- local `azure-cli` and `azd` installation attempts are blocked in this shell by non-elevated Chocolatey permissions, not by missing package names
+
+**Directive to Lead:**
+- stop spending time on the old `/dashboard` root-path assumption
+- move the live rehearsal queue to Clerk keys, Mongo reachability, and a decision on whether WhatsApp is required in the final script
+
+### 2026-04-08 19:10 | Lead | DEMO COUNTDOWN + KASILINK REALITY CHECK
+
+**Action:** Turned the audit into a dated demo countdown, then verified the current `KasiLink` repo against the requested start-today tasks.
+
+**Completed locally:**
+- Added `Demo Countdown - April 8-15, 2026.md`
+- Corrected the Session 3 overlap note so it reflects the current repo reality
+- Installed missing `KasiLink` dependencies with `npm install`
+- Fixed local lint blockers in:
+  - `app/incidents/page.tsx`
+  - `app/tutoring/page.tsx`
+  - `app/offline/page.tsx`
+  - `components/chat-skins/DiscordSkin.tsx`
+- Hardened `KasiLink/next.config.ts` so nested-workspace build warnings no longer appear
+- Verified `npm run lint` passes
+- Verified `npm run build` passes
+
+**What is now concretely blocked:**
+- `KasiLink` has no local env file present for runtime QA
+- runtime requests fail with `Publishable key not valid` when placeholder Clerk values are used
+- this means Clerk env is the first live blocker; Atlas cannot be meaningfully verified until Clerk env is valid
+- `az` and `azd` are not installed in the current environment, so Azure validation is blocked before login/deploy checks
+- the older Session 3 overlap file set does not exist in the current `KasiLink` tree, which is TypeScript-first and structurally different
+- manager/admin mutation QA cannot be executed against the current `KasiLink` tree because the surface present here is seeker/provider marketplace flow, not the earlier manager/admin app brief
+
+**Current demo-flow truth in the present `KasiLink` repo:**
+- gig posting UI and `POST /api/gigs` exist
+- gig detail/apply/review flow exists
+- load-shedding widget exists and falls back to `/api/load-shedding` when Orch is unavailable
+- Orch dashboard exists and is wired to `/api/orch/dashboard`
+- provider ranking helper exists in `lib/orch-client.ts` but is not yet visibly wired into the active gig-posting flow
+- notification persistence exists via `/api/notifications`, but WhatsApp delivery is not visibly wired into the active `KasiLink` flow in this repo
+
+**Current prerequisite order for the real demo path:**
+1. valid Clerk publishable and secret keys
+2. valid `MONGODB_URI`
+3. Atlas allowlist or otherwise reachable Mongo network path
+4. `ORCH_BASE_URL` for the Orch reasoning/dashboard bridge
+5. Azure CLI / `azd` installation for Azure-specific validation
+
+**Directive to Lead:**
+- stop treating the stale overlap list as a live code collision unless the source repo is identified
+- prioritize env and tooling prerequisites over deeper feature debugging
+- shift QA language to seeker/provider for the current `KasiLink` repo unless a second product repo is supplied
+
 ### 2026-04-07 09:10 | Lead | SECRET EXPOSURE CONTAINMENT STARTED
 
 **Action:** Detected a tracked vendor file under `node_modules/debug/.coveralls.yml` containing a publicly exposed credential. Treating the credential as compromised.
