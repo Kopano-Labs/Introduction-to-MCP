@@ -106,3 +106,10 @@
 - `GET /api/labs/cowork/rooms` returns the persisted Forge rooms
 - `POST /api/labs/mcp-console/chat` returns a valid Orch guidance payload
 - live browser click-path QA is still pending even though the API smoke path is healthy
+
+## Orch Live Event Path | 2026-04-09 01:10
+
+- a synthetic `response` payload was posted to `POST /broadcast`
+- the same payload was returned by `GET /updates`
+- live event transport is healthy after the redesign build and runtime restart
+- browser-side rendering of that event is still pending visual confirmation

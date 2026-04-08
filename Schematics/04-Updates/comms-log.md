@@ -439,3 +439,15 @@ status: active
 **Still open:**
 - browser click-path verification for the redesigned public shell
 - UI confirmation that session-vault buttons and admin activity preview render correctly
+
+### 2026-04-09 01:10 | Codex | ORCH LIVE EVENT PATH VERIFIED
+
+**Action:** Posted a synthetic live council response through the broadcast path after the redesign restart.
+
+**Verified:**
+- `POST /broadcast` accepted the synthetic `response` payload
+- `GET /updates` returned the same payload immediately after
+- the redesigned runtime still transports live council events correctly
+
+**Still open:**
+- browser confirmation that the redesigned council view visually reflects those live events

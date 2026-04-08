@@ -109,6 +109,7 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [x] render a visible live-feed log in the public console section
 - [x] render a visible live-feed log in the council view
 - [x] render a visible operator log in the admin view
+- [x] verify `/broadcast` to `/updates` event flow still works after the redesign
 - [ ] verify that new live events actually appear in all three views during runtime
 
 ## Build And Verification
