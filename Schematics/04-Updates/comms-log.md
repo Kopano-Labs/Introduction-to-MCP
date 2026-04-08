@@ -389,3 +389,39 @@ status: active
 - Stand by for a first Phase 4 slice, likely around loadshedding-aware scheduling or a bounded tool implementation
 
 **Next:** Lead to convert remaining Phase 4 gaps into scoped assignments.
+
+### 2026-04-09 01:03 | Codex | ORCH PUBLIC SHELL REDESIGN CHECKPOINT
+
+**Action:** Reworked the Orch GUI away from the old left-rail dashboard shell toward a cleaner Claude plus Codex inspired public surface.
+
+**Completed in code:**
+- added a sticky top navigation for `LIVE COUNCIL`, `ORCH LABS`, `FORGE`, `CONSOLE`, and `ADMIN`
+- upgraded the visual system with larger hero typography, fresher color balance, and animated ambient background motion
+- removed public activity-preview exposure and kept activity preview in admin-only views
+- kept Forge and Console public-facing while leaving session vault and forensic replay internal
+- added session-vault entry buttons inside admin for audit access
+- rebuilt `orch/gui` successfully after the redesign pass
+
+**Still open:**
+- refresh the live Orch runtime on `127.0.0.1:8000`
+- verify the served GUI matches the rebuilt bundle
+- run browser-level QA for desktop and mobile-width layout
+- verify live council, Forge, Console, admin login, and audit flow after the redesign
+
+**Directive to Lead:**
+- treat the redesign as code-complete for build validation but not yet runtime-complete
+- do not mark the redesign lane done until the served GUI and live flows are verified
+
+### 2026-04-09 01:06 | Codex | ORCH RUNTIME REFRESH COMPLETE
+
+**Action:** Restarted the local Orch API and GUI server after the redesign build.
+
+**Verification:**
+- `orch serve api --host 127.0.0.1 --port 8000` is live again
+- `GET /` returns `200`
+- `GET /api/labs/overview` returns `200`
+- server logs show the rebuilt redesign assets being served to the browser
+
+**Still open:**
+- browser-level visual QA
+- click-path QA for council, Forge, Console, admin login, and session audit

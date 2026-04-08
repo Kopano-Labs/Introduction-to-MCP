@@ -1,7 +1,7 @@
 ---
 title: Orch Demo Task List - 2026-04-08
 created: 2026-04-08
-updated: 2026-04-08
+updated: 2026-04-09
 author: Codex
 tags:
   - orch
@@ -16,7 +16,66 @@ status: active
 
 ## Current Objective
 
-Make the Orch GUI demo-safe by separating public and admin surfaces, turning Labs into a pressable function router, restoring visible logs, and proving the core flows work locally.
+Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a younger South African audience fit, a clean top navigation shell, a distinct admin layer, and working demo-level interactions that can be rehearsed live.
+
+## Active Direction
+
+- [x] keep the public and admin split introduced on 2026-04-08
+- [x] confirm that public activity preview should move out of the public shell and remain admin-only
+- [ ] finish current-market research on youth-facing AI UX signals and competition relevant to South Africa
+- [x] convert the existing left-rail shell into a top-nav information architecture
+- [x] replace dashboard-like filler cards with clearer primary actions and demo routes
+- [x] upgrade the visual language to a fresher motion-led, mobile-first presentation
+- [ ] keep functional surfaces real enough for demo rather than shipping only cosmetic mockups
+
+## Information Architecture
+
+- [x] define the new top navigation for `LIVE COUNCIL`, `ORCH LABS`, `FORGE`, `CONSOLE`, and `ADMIN`
+- [ ] decide which public sections stay on one page versus move behind section switching
+- [x] convert current Labs section buttons into a cleaner navigation or dropdown pattern
+- [x] remove leftover sidebar dependency from the public shell
+- [x] keep session vault access exclusively inside admin-authenticated views
+- [x] move activity preview and operator history fully into the admin surface
+- [x] make the public hero read like a product landing shell, not an internal control room
+
+## Visual Redesign
+
+- [x] introduce a slicker display font pairing that still renders reliably on Windows and the web
+- [x] enlarge hero titles so they fill the available space without breaking mobile layout
+- [x] add a fluid moving background that feels intentional rather than noisy
+- [x] blend Claude-style calm spacing with Codex-style precision and operator cues
+- [x] tune colors and contrast for a younger South African audience without looking juvenile
+- [x] make cards, buttons, chips, and navigation feel consistent across council, labs, and admin
+- [ ] ensure the public surface still looks good when the live feed is quiet
+
+## Public Experience
+
+- [x] rewrite public copy so it speaks to creators, learners, and operators rather than internal staff
+- [x] give the public home state a clear primary call to action
+- [x] make every major public feature pressable and visually obvious
+- [x] keep Forge usable from the public layer if it is part of the demo story
+- [x] keep Console usable from the public layer if it is part of the demo story
+- [x] remove or soften internal planning language from public labels
+- [ ] check that the page feels clean enough that users do not notice section changes as jarring context switches
+
+## Admin Experience
+
+- [x] make the admin portal visibly internal-only from the first screen
+- [x] keep admin login in a distinct visual system from the public shell
+- [ ] preserve working access to session vault, logs, analytics, and execution boards
+- [x] ensure activity preview appears only inside admin
+- [ ] verify admin views still expose the live feed, vault, and internal execution summaries clearly
+
+## Working Functionality
+
+- [ ] verify live council updates still render after the shell redesign
+- [ ] verify Labs navigation still reaches interfaces, cloud, actions, tools, forge, and console
+- [ ] verify Forge create, edit, and lane-move actions still work after layout changes
+- [ ] verify MCP Console send and stream still work after layout changes
+- [ ] verify admin login still works after layout changes
+- [ ] verify session loading and audit mode still work after layout changes
+- [ ] verify live logs still show in the correct internal surfaces
+- [ ] verify the public shell does not expose admin-only data when not logged in
 
 ## Public Surface
 
@@ -28,6 +87,7 @@ Make the Orch GUI demo-safe by separating public and admin surfaces, turning Lab
 - [x] add a public recent-activity section to Labs
 - [x] keep Orch Forge interactive on the public surface
 - [ ] verify the new public Labs layout reads cleanly on desktop
+- [x] retire the old sidebar-based public shell in favor of the redesign
 
 ## Admin And Auth
 
@@ -61,6 +121,9 @@ Make the Orch GUI demo-safe by separating public and admin surfaces, turning Lab
 - [ ] verify section-card scrolling works from every Labs function button
 - [ ] verify Forge create, edit, and lane-move actions still work
 - [ ] verify MCP Console send and stream still work
+- [x] rebuild `orch/gui` cleanly after the full-shell redesign
+- [x] restart Orch and confirm the served GUI reflects the redesign bundle
+- [ ] run a browser-level visual pass on desktop and mobile-width layouts
 
 ## Demo Readiness
 
@@ -72,10 +135,12 @@ Make the Orch GUI demo-safe by separating public and admin surfaces, turning Lab
 - [ ] rehearse one admin login plus vault access walkthrough
 - [ ] capture the next blocker after the first full GUI rehearsal
 - [ ] decide whether any remaining surface needs fresh copy or tighter labeling
+- [ ] decide whether any non-working section should be hidden for demo day rather than shown half-ready
 
 ## Schematics And Handoff
 
 - [x] create a dedicated Orch demo task list in `Schematics`
+- [ ] update this task list as each redesign milestone lands
 - [ ] update `Demo Countdown - April 8-15, 2026` with the Orch GUI split checkpoint
 - [ ] update `dev-tracker.md` with the current GUI refactor status
 - [ ] update `comms-log.md` with the public/admin separation decision

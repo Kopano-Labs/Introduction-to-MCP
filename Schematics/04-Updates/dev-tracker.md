@@ -79,3 +79,22 @@
 - `.next-dev-phase*.log` files were only temporary local debugging artifacts and should not remain in the repo root once the debugging pass is complete
 - local Mongo auth is no longer blocked by SRV resolution, but it is still blocked if Atlas has not allowlisted the current machine IP
 - Google Search74 and WhatsApp OSINT provider wiring is in place, but live verification currently fails with `403` until the RapidAPI account has access to those APIs
+
+## Orch GUI Redesign Checkpoint | 2026-04-09 01:03
+
+- public Orch GUI now uses a sticky top navigation instead of the old left-rail shell
+- public hero states for `LIVE COUNCIL`, `ORCH LABS`, and `ADMIN PORTAL` now use larger editorial titles and motion-led background styling
+- public activity preview was removed from the public shell and kept inside admin-only views
+- public console now keeps results and analytics visible without exposing the internal operator feed
+- admin now exposes activity preview plus session-vault access for forensic replay
+- `orch/gui/src/App.tsx` and `orch/gui/src/App.css` were refactored for the redesign pass
+- `orch/gui` passes `npm run build` after the redesign
+- runtime refresh on `127.0.0.1:8000` is still the next verification step
+
+## Orch Runtime Refresh | 2026-04-09 01:06
+
+- `orch serve api --host 127.0.0.1 --port 8000` was relaunched locally
+- root GUI request on `http://127.0.0.1:8000` returns `200`
+- `http://127.0.0.1:8000/api/labs/overview` returns `200`
+- server logs show the rebuilt JS/CSS assets being served after the redesign build
+- next remaining checks are browser-level visual QA and live interaction QA

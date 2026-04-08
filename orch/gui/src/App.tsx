@@ -42,14 +42,6 @@ const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
 const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'orch'];
 const criticalityLabel = (value: string) => value.replace('_', ' ').toUpperCase();
-const publicLabsSections: Array<{ id: LabsSection; label: string; blurb: string; metric: (overview: LabsOverview | null, analytics: LabsAnalytics | null) => string; }> = [
-  { id: 'interfaces', label: 'Interfaces', blurb: 'Public surfaces and operator-facing flows.', metric: (overview) => String(overview?.metrics.interfaces ?? 0) },
-  { id: 'cloud', label: 'Cloud', blurb: 'Azure and cross-cloud expansion layers.', metric: (overview) => String(overview?.metrics.cloud_stacks ?? 0) },
-  { id: 'actions', label: 'Actions', blurb: 'Installer and connector playbooks for demos.', metric: (overview) => String(overview?.metrics.installer_actions ?? 0) },
-  { id: 'tools', label: 'Tools', blurb: 'The South Africa tool catalog and live capability pack.', metric: (overview) => String(overview?.metrics.tools ?? 0) },
-  { id: 'forge', label: 'Forge', blurb: 'Pressable room, task, and artifact surfaces.', metric: (_overview, analytics) => String(analytics?.forge.rooms ?? 0) },
-  { id: 'console', label: 'Console', blurb: 'Model-backed MCP guidance for demo operators.', metric: (_overview, analytics) => String(analytics?.mcp_console.requests ?? 0) },
-];
 const executionPlan: ExecutionPhase[] = [
   { id: 'phase-1', title: 'Phase 1', focus: 'Core orchestration foundation', tasks: [
     { id: 'p1-t1', label: 'Multi-provider agent bootstrap', done: true },
@@ -307,6 +299,54 @@ const App: React.FC = () => {
   const featuredCouncilCard = councilCards.find((card) => card.id === featuredAgentId) ?? councilCards[0];
   const supportCouncilCards = councilCards.filter((card) => card.id !== featuredCouncilCard.id);
   const latestFeedEntries = feedLog.slice(-10).reverse();
+  const activeTopView: ViewMode = isAuditMode ? 'admin' : viewMode;
+  const openView = (nextView: ViewMode) => {
+    setIsAuditMode(false);
+    setViewMode(nextView);
+  };
+  const openLabsSurface = (section?: LabsSection) => {
+    setIsAuditMode(false);
+    setViewMode('labs');
+    if (section) {
+      window.setTimeout(() => scrollToLabsSection(section), 80);
+    }
+  };
+  const publicLaunchers: Array<{ label: string; detail: string; value: string; action: () => void; active: boolean }> = [
+    {
+      label: 'Live Council',
+      detail: 'Follow the council and the current reasoning handoff.',
+      value: connectionState === 'live' ? 'Live' : connectionState === 'connecting' ? 'Linking' : 'Recover',
+      action: () => openView('council'),
+      active: activeTopView === 'council',
+    },
+    {
+      label: 'Interfaces',
+      detail: 'Public routes, audience fit, and surface mechanics.',
+      value: String(labsOverview?.metrics.interfaces ?? 0),
+      action: () => openLabsSurface('interfaces'),
+      active: viewMode === 'labs' && labsSection === 'interfaces' && !isAuditMode,
+    },
+    {
+      label: 'Forge',
+      detail: 'Create rooms, route work, and keep demos tangible.',
+      value: String(labsAnalytics?.forge.rooms ?? 0),
+      action: () => openLabsSurface('forge'),
+      active: viewMode === 'labs' && labsSection === 'forge' && !isAuditMode,
+    },
+    {
+      label: 'Console',
+      detail: 'Ask Orch how to move across tools, clouds, and MCP.',
+      value: String(labsAnalytics?.mcp_console.requests ?? 0),
+      action: () => openLabsSurface('console'),
+      active: viewMode === 'labs' && labsSection === 'console' && !isAuditMode,
+    },
+  ];
+  const audienceSignals = [
+    'Mobile-first, quick to scan, and comfortable inside chat-native flows.',
+    'Calm enough for trust, sharp enough to feel current and creative.',
+    'Built for creators, learners, operators, and founders moving fast.',
+  ];
+  const adminFeedPreview = latestFeedEntries.slice(0, 8);
 
   const pushFeedLog = (entry: FeedLogEntry) => {
     if (seenFeedIds.current.has(entry.id)) return;
@@ -579,7 +619,7 @@ const App: React.FC = () => {
     await fetchOrchCodeControls();
     logSystemEvent('lesson', `${lessonKey} moved to ${status} at ${confidence}% confidence.`);
   };
-  const loadSession = async (id: string) => { setViewMode('council'); setIsAuditMode(true); setSelectedSession(await (await fetch(`${apiBase}/sessions/${id}`)).json()); };
+  const loadSession = async (id: string) => { setViewMode('admin'); setIsAuditMode(true); setSelectedSession(await (await fetch(`${apiBase}/sessions/${id}`)).json()); };
   const overrideScore = async (blockId: string, score: number) => { if (selectedSession) await postJson(`${apiBase}/sessions/${selectedSession.id}/override`, { block_id: blockId, override_score: score }); };
   const loginAdmin = async () => {
     setAdminLoading(true);
@@ -614,105 +654,72 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="command-center">
-      <div className="sidebar">
-        <div className="sidebar-header">
-          <div className="sidebar-title">ORCH CONTROL</div>
-          <div className="sidebar-status-cluster">
+    <div className={`command-center ${activeTopView === 'admin' ? 'theme-admin' : 'theme-public'}`}>
+      <div className="main-room">
+        <header className="orch-topbar">
+          <button type="button" className="brand-lockup" onClick={() => openView('council')}>
+            <span className="brand-mark">OR</span>
+            <span className="brand-copy">
+              <strong>Orch</strong>
+              <span>South African AI operating shell</span>
+            </span>
+          </button>
+          <nav className="topbar-nav" aria-label="Primary">
+            <button type="button" className={`nav-button ${activeTopView === 'council' ? 'active' : ''}`} onClick={() => openView('council')}>Live Council</button>
+            <button type="button" className={`nav-button ${activeTopView === 'labs' ? 'active' : ''}`} onClick={() => openView('labs')}>Orch Labs</button>
+            <button type="button" className={`nav-button ${viewMode === 'labs' && labsSection === 'forge' && !isAuditMode ? 'active' : ''}`} onClick={() => openLabsSurface('forge')}>Forge</button>
+            <button type="button" className={`nav-button ${viewMode === 'labs' && labsSection === 'console' && !isAuditMode ? 'active' : ''}`} onClick={() => openLabsSurface('console')}>Console</button>
+            <button type="button" className={`nav-button ${activeTopView === 'admin' ? 'active' : ''}`} onClick={() => openView('admin')}>Admin</button>
+          </nav>
+          <div className="topbar-status">
             <div className={`status-pill ${connectionState}`}>
-              {connectionState === 'live' ? 'Live link' : connectionState === 'connecting' ? 'Connecting' : 'Feed interrupted'}
+              {connectionState === 'live' ? 'Live link' : connectionState === 'connecting' ? 'Connecting' : 'Attention'}
             </div>
             <div className="status-pill neutral">{sessions.length} sessions</div>
             <div className={`status-pill ${isAdminLoggedIn ? 'live' : 'neutral'}`}>
               {isAdminLoggedIn ? 'Admin unlocked' : 'Public mode'}
             </div>
           </div>
-        </div>
-        <div className="lesson-list">
-          <div className={`lesson-item ${viewMode === 'council' && !isAuditMode ? 'active' : ''}`} onClick={() => { setViewMode('council'); setIsAuditMode(false); }}>
-            <div className="lesson-topic">LIVE COUNCIL</div><div className="lesson-date">Claude-style reasoning and live council signals</div>
-          </div>
-          <div className={`lesson-item ${viewMode === 'labs' ? 'active' : ''}`} onClick={() => { setViewMode('labs'); setIsAuditMode(false); }}>
-            <div className="lesson-topic">ORCH LABS</div><div className="lesson-date">Codex-style tool surfaces, connectors, forge, and demos</div>
-          </div>
-          <div className={`lesson-item ${viewMode === 'admin' ? 'active' : ''}`} onClick={() => { setViewMode('admin'); setIsAuditMode(false); }}>
-            <div className="lesson-topic">ADMIN PORTAL</div><div className="lesson-date">Vault access, internal boards, logs, and governance</div>
-          </div>
-          <div className="sidebar-section-label">{isAdminLoggedIn ? 'SESSION VAULT' : 'INTERNAL ACCESS'}</div>
-          {isAdminLoggedIn ? sessions.map((session) => (
-            <div key={session.id} className={`lesson-item ${selectedSession?.id === session.id && isAuditMode ? 'active' : ''}`} onClick={() => void loadSession(session.id)}>
-              <div className="lesson-topic">SESSION: {session.topic}</div><div className="lesson-date">{new Date(session.created_at).toLocaleString()}</div>
-            </div>
-          )) : (
-            <article className="sidebar-lock-note">
-              <strong>Vault locked</strong>
-              <p>Public visitors can use the demo surfaces. Session history and internal controls now sit behind admin login.</p>
-            </article>
-          )}
-          <div className="sidebar-section-label">ACTIVITY PREVIEW</div>
-          <div className="sidebar-feed-preview">
-            {latestFeedEntries.slice(0, 4).map((entry) => (
-              <article key={entry.id} className="feed-log-card sidebar-feed-card">
-                <div className="feed-log-meta">
-                  <span className="card-chip">{entry.source}</span>
-                  <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
-                </div>
-                <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
-                <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="main-room">
+        </header>
         {viewMode === 'labs' ? (
           <div className="labs-shell">
             <section className="labs-hero labs-public-hero">
               <div className="labs-kicker">ORCH LABS</div>
-              <h1>{labsOverview?.title ?? 'Orch Labs'}</h1>
+              <h1>Build, test, and show the next move.</h1>
               <p>
-                {labsOverview?.positioning ?? 'Execution surfaces for creator-grade AI workflows.'}
-                {' '}This page is now the public demo layer only. Internal task boards, session vault access, and admin controls belong in the Admin Portal.
+                Orch Labs is now the public demo shell: cleaner, faster to scan, and built around real actions instead of internal dashboards.
+                Session history, activity preview, and governance stay in the Admin portal.
               </p>
               <div className="hero-note-grid">
                 <article className="signal-card">
-                  <span className="signal-label">Public Mode</span>
-                  <strong>Pressable function routing</strong>
-                  <p>Each tile below jumps to a working surface so the page behaves like a clean Claude plus Codex demo shell instead of a static dashboard.</p>
+                  <span className="signal-label">Made for</span>
+                  <strong>Young South African AI users</strong>
+                  <p>Fast-scanning structure, chat-native cues, and direct routes into the surfaces that matter.</p>
                 </article>
                 <article className="signal-card">
-                  <span className="signal-label">Activity</span>
-                  <strong>{connectionState === 'live' ? 'Connected to Orch' : 'Fallback logging active'}</strong>
-                  <p>The live feed stays visible in this public surface so users always see motion during demo rehearsal.</p>
+                  <span className="signal-label">Design Rule</span>
+                  <strong>Public stays polished, admin stays internal</strong>
+                  <p>The page carries real functionality without exposing the operator backplane or activity preview.</p>
                 </article>
               </div>
-              <div className="labs-metrics labs-function-grid">
-                {publicLabsSections.map((section) => (
-                  <button
-                    key={section.id}
-                    type="button"
-                    className={`metric-card labs-function-card ${labsSection === section.id ? 'active' : ''}`}
-                    onClick={() => scrollToLabsSection(section.id)}
-                  >
-                    <span className="metric-value">{section.metric(labsOverview, labsAnalytics)}</span>
-                    <span className="metric-label">{section.label}</span>
-                    <span className="metric-copy">{section.blurb}</span>
+              <div className="labs-metrics labs-function-grid top-launch-grid">
+                {publicLaunchers.map((launcher) => (
+                  <button key={launcher.label} type="button" className={`metric-card labs-function-card ${launcher.active ? 'active' : ''}`} onClick={launcher.action}>
+                    <span className="metric-value">{launcher.value}</span>
+                    <span className="metric-label">{launcher.label}</span>
+                    <span className="metric-copy">{launcher.detail}</span>
                   </button>
                 ))}
               </div>
             </section>
 
             <section id="labs-interfaces" className="labs-section">
-              <div className="section-heading">Recent Activity</div>
+              <div className="section-heading">Public Interfaces</div>
               <div className="labs-grid access-grid">
-                {latestFeedEntries.slice(0, 6).map((entry) => (
-                  <article key={entry.id} className="labs-card compact-card feed-log-card">
-                    <div className="feed-log-meta">
-                      <span className="card-chip">{entry.source}</span>
-                      <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
-                    </div>
-                    <h3>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</h3>
-                    <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
+                {audienceSignals.map((signal) => (
+                  <article key={signal} className="labs-card compact-card">
+                    <div className="card-chip">audience fit</div>
+                    <p>{signal}</p>
                   </article>
                 ))}
               </div>
@@ -916,17 +923,33 @@ const App: React.FC = () => {
                 </div>
               </div>
               <div className="split-panel">
-                <div className="section-heading">Live Operator Feed</div>
+                <div className="section-heading">Console Posture</div>
                 <article className="labs-card feed-log-panel">
                   <div className="feed-log-list">
-                    {latestFeedEntries.map((entry) => (
-                      <article key={entry.id} className="feed-log-card">
+                    <article className="feed-log-card">
+                      <div className="feed-log-meta">
+                        <span className="card-chip">requests</span>
+                        <span className="feed-log-time">{labsAnalytics?.mcp_console.requests ?? 0}</span>
+                      </div>
+                      <strong>Public guidance stays outcome-focused.</strong>
+                      <p>Detailed activity preview has moved to admin. Public users see answers and suggested actions, not operator logs.</p>
+                    </article>
+                    <article className="feed-log-card">
+                      <div className="feed-log-meta">
+                        <span className="card-chip">sessions</span>
+                        <span className="feed-log-time">{labsAnalytics?.mcp_console.sessions ?? 0}</span>
+                      </div>
+                      <strong>Conversation memory remains live.</strong>
+                      <p>Console sessions and latency metrics are still available without exposing the admin feed.</p>
+                    </article>
+                    {labsAnalytics?.mcp_console.top_topics.map((topic) => (
+                      <article key={topic.topic} className="feed-log-card">
                         <div className="feed-log-meta">
-                          <span className="card-chip">{entry.source}</span>
-                          <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
+                          <span className="card-chip">topic</span>
+                          <span className="feed-log-time">{topic.count}</span>
                         </div>
-                        <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
-                        <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
+                        <strong>{topic.topic}</strong>
+                        <p>Frequently requested guidance route in the public console.</p>
                       </article>
                     ))}
                   </div>
@@ -1055,10 +1078,10 @@ const App: React.FC = () => {
                     </article>
                   </div>
                   <div className="split-panel">
-                    <div className="section-heading">Operator Feed Log</div>
+                    <div className="section-heading">Activity Preview</div>
                     <article className="labs-card feed-log-panel">
                       <div className="feed-log-list">
-                        {latestFeedEntries.map((entry) => (
+                        {adminFeedPreview.map((entry) => (
                           <article key={entry.id} className="feed-log-card">
                             <div className="feed-log-meta">
                               <span className="card-chip">{entry.source}</span>
@@ -1075,13 +1098,13 @@ const App: React.FC = () => {
 
                 <section className="labs-section split-section">
                   <div className="split-panel">
-                    <div className="section-heading">Creator Throughput</div>
-                    <div className="labs-grid access-grid">
-                      {labsAnalytics?.forge.creator_throughput.map((entry) => (
-                        <article key={entry.owner} className="labs-card compact-card">
-                          <div className="tool-card-top"><h3>{entry.owner}</h3><div className="card-chip">{entry.count} tasks</div></div>
-                          <p>Measured from persisted Forge ownership and movement events.</p>
-                        </article>
+                    <div className="section-heading">Session Vault</div>
+                    <div className="vault-session-list">
+                      {sessions.map((session) => (
+                        <button key={session.id} type="button" className="vault-session-button" onClick={() => void loadSession(session.id)}>
+                          <span>{session.topic}</span>
+                          <strong>{new Date(session.created_at).toLocaleString()}</strong>
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -1098,6 +1121,12 @@ const App: React.FC = () => {
                           <p>Persisted MCP console topic frequency for workflow prioritization.</p>
                         </article>
                       ))}
+                      {labsAnalytics?.forge.creator_throughput.map((entry) => (
+                        <article key={entry.owner} className="labs-card compact-card">
+                          <div className="tool-card-top"><h3>{entry.owner}</h3><div className="card-chip">{entry.count} tasks</div></div>
+                          <p>Measured from persisted Forge ownership and movement events.</p>
+                        </article>
+                      ))}
                     </div>
                   </div>
                 </section>
@@ -1108,11 +1137,10 @@ const App: React.FC = () => {
           <div className="council-shell">
             <section className="council-hero">
               <div className="labs-kicker">Live Council</div>
-              <h1>Demo briefing room for live orchestration.</h1>
+              <h1>Fast local AI, framed for live decisions.</h1>
               <p>
-                The council view now behaves like a mission desk: one featured speaker,
-                a support stack, and explicit feed status so quiet moments look intentional
-                instead of broken.
+                The council now reads like a stage instead of a dashboard: one featured voice,
+                a visible support bench, and clear state changes so quiet moments still feel deliberate.
               </p>
               <div className="council-status-row">
                 <article className="signal-card">
@@ -1207,28 +1235,22 @@ const App: React.FC = () => {
               </article>
               <article className="signal-card">
                 <span className="signal-label">Demo note</span>
-                <strong>Quiet feed is expected</strong>
+                <strong>Quiet feed still looks intentional</strong>
                 <p>
                   The council panels animate and re-prioritize when `/broadcast` or the simulator publishes new events.
                 </p>
               </article>
             </section>
             <section className="labs-section">
-              <div className="section-heading">Live Feed Log</div>
-              <article className="labs-card feed-log-panel">
-                <div className="feed-log-list">
-                  {latestFeedEntries.map((entry) => (
-                    <article key={entry.id} className="feed-log-card">
-                      <div className="feed-log-meta">
-                        <span className="card-chip">{entry.source}</span>
-                        <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
-                      </div>
-                      <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
-                      <p>{entry.content || entry.reasoning || 'No payload captured for this event.'}</p>
-                    </article>
-                  ))}
-                </div>
-              </article>
+              <div className="labs-grid access-grid">
+                {publicLaunchers.map((launcher) => (
+                  <button key={launcher.label} type="button" className={`metric-card labs-function-card ${launcher.active ? 'active' : ''}`} onClick={launcher.action}>
+                    <span className="metric-value">{launcher.value}</span>
+                    <span className="metric-label">{launcher.label}</span>
+                    <span className="metric-copy">{launcher.detail}</span>
+                  </button>
+                ))}
+              </div>
             </section>
           </div>
         ) : (
