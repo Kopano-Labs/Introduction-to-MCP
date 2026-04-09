@@ -451,3 +451,24 @@ status: active
 
 **Still open:**
 - browser confirmation that the redesigned council view visually reflects those live events
+
+### 2026-04-09 06:58 | Codex | ORCH FIVE-TASK BROWSER CHECKPOINT
+
+**Action:** Rebuilt Orch after fixing the vault ordering issue, restarted the live runtime, and reran the five UI tasks against the rendered app in headless Chromium.
+
+**Verified:**
+- first load has no JSX or CSS regression indicators and no browser-side console or page errors
+- desktop and mobile-width layouts render cleanly with the redesigned topbar and hero intact
+- Labs function cards scroll users into the intended sections from the public shell
+- public users do not see admin-only session vault or activity-preview data before admin login
+- admin login plus first vault click now opens a real forensic audit with `2` rounds and `3` audit events
+
+**Code and runtime notes:**
+- `/sessions` now sorts audited discussions ahead of empty stored sessions and exposes audit density metadata for the vault list
+- the audit view now shows an explicit empty-state message if a stored session has no forensic rounds instead of looking broken
+- the live GUI is serving bundle `index-DB2HU5hl.js` after the rebuild
+
+**Still open:**
+- live-event rendering proof across council, console, and admin
+- Forge create or edit or lane-move click-path QA
+- MCP Console send and stream click-path QA

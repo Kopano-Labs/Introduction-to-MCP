@@ -113,3 +113,12 @@
 - the same payload was returned by `GET /updates`
 - live event transport is healthy after the redesign build and runtime restart
 - browser-side rendering of that event is still pending visual confirmation
+
+## Orch Five-Task Browser Pass | 2026-04-09 06:58
+
+- rebuilt `orch/gui` after the vault ordering and empty-audit-state fix
+- restarted Orch on `127.0.0.1:8000` and confirmed the new `index-DB2HU5hl.js` bundle is live
+- `/sessions` now returns audited sessions first and includes `audit_events` plus `round_count`
+- browser verification passed for first-load stability, desktop/mobile visual layout, Labs launcher scrolling, public/admin data separation, and session-vault audit loading
+- first admin vault click now opens a real two-round forensic audit instead of an empty latest session shell
+- remaining Orch GUI verification work is focused on live-event rendering in all three views plus Forge and MCP Console interaction QA

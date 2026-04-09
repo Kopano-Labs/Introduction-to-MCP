@@ -1725,6 +1725,20 @@ body {
   font-size: 0.78rem;
 }
 
+.vault-session-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.vault-session-copy small {
+  color: var(--text-dim);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .forge-label {
   display: flex;
   flex-direction: column;
@@ -1778,6 +1792,10 @@ body {
 .audit-card {
   border-radius: 22px;
   padding: 18px;
+}
+
+.audit-empty-card {
+  max-width: 720px;
 }
 
 .thought-primary {

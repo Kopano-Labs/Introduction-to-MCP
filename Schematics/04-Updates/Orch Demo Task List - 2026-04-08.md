@@ -73,9 +73,9 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [ ] verify Forge create, edit, and lane-move actions still work after layout changes
 - [ ] verify MCP Console send and stream still work after layout changes
 - [x] verify admin login still works after layout changes
-- [ ] verify session loading and audit mode still work after layout changes
+- [x] verify session loading and audit mode still work after layout changes
 - [ ] verify live logs still show in the correct internal surfaces
-- [ ] verify the public shell does not expose admin-only data when not logged in
+- [x] verify the public shell does not expose admin-only data when not logged in
 
 ## Public Surface
 
@@ -83,10 +83,10 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [x] remove public session-vault exposure from the left rail
 - [x] replace decorative Labs metrics with pressable function cards
 - [x] define public section anchors for interfaces, cloud, actions, tools, forge, and console
-- [x] add a public activity preview to the sidebar
-- [x] add a public recent-activity section to Labs
+- [x] remove public activity preview from the public shell and keep operator history inside admin
+- [x] keep public live context inside the Console surface instead of a generic recent-activity panel
 - [x] keep Orch Forge interactive on the public surface
-- [ ] verify the new public Labs layout reads cleanly on desktop
+- [x] verify the new public Labs layout reads cleanly on desktop
 - [x] retire the old sidebar-based public shell in favor of the redesign
 
 ## Admin And Auth
@@ -118,14 +118,14 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [x] patch the Windows Orch CLI startup banner so local serve does not crash on emoji output
 - [x] rebuild `orch/gui` cleanly after the public/admin split
 - [x] restart Orch and refresh the served GUI bundle
-- [ ] verify no JSX or CSS regressions on first load
-- [ ] verify section-card scrolling works from every Labs function button
+- [x] verify no JSX or CSS regressions on first load
+- [x] verify section-card scrolling works from every Labs function button
 - [ ] verify Forge create, edit, and lane-move actions still work
 - [ ] verify MCP Console send and stream still work
 - [x] rebuild `orch/gui` cleanly after the full-shell redesign
 - [x] restart Orch and confirm the served GUI reflects the redesign bundle
 - [x] smoke-check root GUI, Labs overview, session vault endpoint, Forge room list, and admin login on the live server
-- [ ] run a browser-level visual pass on desktop and mobile-width layouts
+- [x] run a browser-level visual pass on desktop and mobile-width layouts
 
 ## Demo Readiness
 
@@ -143,9 +143,9 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 
 - [x] create a dedicated Orch demo task list in `Schematics`
 - [ ] update this task list as each redesign milestone lands
-- [ ] update `Demo Countdown - April 8-15, 2026` with the Orch GUI split checkpoint
-- [ ] update `dev-tracker.md` with the current GUI refactor status
-- [ ] update `comms-log.md` with the public/admin separation decision
+- [x] update `Demo Countdown - April 8-15, 2026` with the Orch GUI split checkpoint
+- [x] update `dev-tracker.md` with the current GUI refactor status
+- [x] update `comms-log.md` with the public/admin separation decision
 - [x] note the admin demo account in docs once verified
 - [x] record the build result after the current TypeScript fix
 - [x] record the runtime verification result after the next GUI restart

@@ -1,7 +1,7 @@
 ---
 title: Demo Countdown - April 8-15, 2026
 created: 2026-04-08
-updated: 2026-04-08
+updated: 2026-04-09
 author: Codex
 tags:
   - demo
@@ -75,14 +75,22 @@ status: active
 - Lead
 - Codex Terminal
 
+**Live status**
+- Orch GUI now passes browser QA for first-load stability, desktop/mobile layout, Labs launcher scrolling, public/admin boundary, and session-vault audit loading
+- `/sessions` now prioritizes discussions with real audit data and exposes round plus audit-event counts in the vault
+- admin login plus vault access now opens a real two-round forensic audit instead of landing on the empty latest session by default
+- next Orch blockers are live-event rendering confirmation across all three views, Forge interaction QA, and MCP Console interaction QA
+
 **Primary work**
 - fix the highest-severity blocker from the first rehearsal, which is currently valid Clerk configuration
 - re-run gig creation, data loading, and reasoning visibility checks
 - confirm protected routes and role-gated flows behave correctly
+- finish the remaining Orch interaction checks now that the shell, auth gate, and vault walkthrough are verified
 
 **Exit criteria**
 - demo path completes locally without unknown blockers
 - auth failures, empty-data failures, and missing env failures are either fixed or assigned with owner/date
+- the five-task Orch browser checkpoint is recorded with evidence and the next blocker is explicit
 
 ### 2026-04-10 | Authenticated QA Day
 

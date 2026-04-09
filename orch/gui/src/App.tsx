@@ -8,7 +8,7 @@ type LabsSection = 'interfaces' | 'cloud' | 'actions' | 'tools' | 'forge' | 'con
 
 interface ReasoningBlock { block_id: string; agent: string; role: string | null; content: string; reasoning: string; value_score: number; override_score: number | null; improvement_hint: string | null; is_student: number; }
 interface Round { id: string; round_number: number; blocks: ReasoningBlock[]; }
-interface Lesson { id: string; topic: string; created_at: string; rounds?: Round[]; }
+interface Lesson { id: string; topic: string; created_at: string; rounds?: Round[]; audit_events?: number; round_count?: number; }
 interface LiveMessage { type: string; agent: string; block_id: string; content: string; reasoning: string; round: number; value_score?: number; override_score?: number; improvement_hint?: string; }
 interface GuiUser { id: number; email: string; full_name?: string | null; role: string; god_mode: boolean; is_active: boolean; created_at: string; }
 interface FeedLogEntry { id: string; type: string; agent?: string; content?: string; reasoning?: string; round?: number; received_at: string; source: 'ws' | 'poll' | 'system'; }
@@ -681,14 +681,42 @@ const App: React.FC = () => {
             </div>
           </div>
         </header>
-        {viewMode === 'labs' ? (
+        {isAuditMode ? (
+          <div className="audit-container">
+            <div className="sidebar-title">Forensic Audit: {selectedSession?.topic}</div>
+            {selectedSession?.rounds?.length ? (
+              selectedSession.rounds.map((round) => (
+                <div key={round.id} className="round-section">
+                  <div className="sidebar-title audit-round">ROUND {round.round_number} ANALYSIS</div>
+                  {round.blocks.map((block) => (
+                    <div key={block.block_id} className={`audit-card ${block.is_student ? 'student' : 'mentor'}`}>
+                      <div className="card-header"><div className="card-agent">{block.agent.toUpperCase()}</div><div className="value-tag">MASTER SCORE: {block.override_score ?? block.value_score ?? 0}/10</div></div>
+                      <div className="thought-body thought-primary">{block.content}</div>
+                      <div className="thought-body">Reasoning Trace: {block.reasoning}</div>
+                      <div className="override-container"><input type="range" min="0" max="10" value={block.override_score ?? block.value_score ?? 0} className="glow-knob" aria-label="Master Override Logic Score" onChange={(e) => void overrideScore(block.block_id, parseInt(e.target.value, 10))} /></div>
+                      {block.improvement_hint && <div className="improvement-hint">Master Hint: {block.improvement_hint}</div>}
+                    </div>
+                  ))}
+                </div>
+              ))
+            ) : (
+              <article className="audit-card audit-empty-card">
+                <div className="tool-card-top">
+                  <h3>No forensic rounds recorded yet</h3>
+                  <div className="card-chip">vault waiting</div>
+                </div>
+                <p>This session was stored without an audit trail. Pick a session with recorded rounds from the vault or run a fresh live council session before demo.</p>
+              </article>
+            )}
+          </div>
+        ) : viewMode === 'labs' ? (
           <div className="labs-shell">
             <section className="labs-hero labs-public-hero">
               <div className="labs-kicker">ORCH LABS</div>
               <h1>Build, test, and show the next move.</h1>
               <p>
                 Orch Labs is now the public demo shell: cleaner, faster to scan, and built around real actions instead of internal dashboards.
-                Session history, activity preview, and governance stay in the Admin portal.
+                Session history and governance stay in the Admin portal.
               </p>
               <div className="hero-note-grid">
                 <article className="signal-card">
@@ -1102,7 +1130,10 @@ const App: React.FC = () => {
                     <div className="vault-session-list">
                       {sessions.map((session) => (
                         <button key={session.id} type="button" className="vault-session-button" onClick={() => void loadSession(session.id)}>
-                          <span>{session.topic}</span>
+                          <span className="vault-session-copy">
+                            <span>{session.topic}</span>
+                            <small>{session.audit_events ? `${session.round_count ?? 0} rounds · ${session.audit_events} audit events` : 'stored session · no audit trail yet'}</small>
+                          </span>
                           <strong>{new Date(session.created_at).toLocaleString()}</strong>
                         </button>
                       ))}
@@ -1133,7 +1164,7 @@ const App: React.FC = () => {
               </>
             )}
           </div>
-        ) : !isAuditMode ? (
+        ) : (
           <div className="council-shell">
             <section className="council-hero">
               <div className="labs-kicker">Live Council</div>
@@ -1252,24 +1283,6 @@ const App: React.FC = () => {
                 ))}
               </div>
             </section>
-          </div>
-        ) : (
-          <div className="audit-container">
-            <div className="sidebar-title">Forensic Audit: {selectedSession?.topic}</div>
-            {selectedSession?.rounds?.map((round) => (
-              <div key={round.id} className="round-section">
-                <div className="sidebar-title audit-round">ROUND {round.round_number} ANALYSIS</div>
-                {round.blocks.map((block) => (
-                  <div key={block.block_id} className={`audit-card ${block.is_student ? 'student' : 'mentor'}`}>
-                    <div className="card-header"><div className="card-agent">{block.agent.toUpperCase()}</div><div className="value-tag">MASTER SCORE: {block.override_score ?? block.value_score ?? 0}/10</div></div>
-                    <div className="thought-body thought-primary">{block.content}</div>
-                    <div className="thought-body">Reasoning Trace: {block.reasoning}</div>
-                    <div className="override-container"><input type="range" min="0" max="10" value={block.override_score ?? block.value_score ?? 0} className="glow-knob" aria-label="Master Override Logic Score" onChange={(e) => void overrideScore(block.block_id, parseInt(e.target.value, 10))} /></div>
-                    {block.improvement_hint && <div className="improvement-hint">Master Hint: {block.improvement_hint}</div>}
-                  </div>
-                ))}
-              </div>
-            ))}
           </div>
         )}
       </div>

@@ -151,7 +151,20 @@ def list_sessions():
     """Retrieve all historical AGI Lessons from the Vault."""
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, topic, start_time as created_at FROM discussions ORDER BY start_time DESC")
+    cursor.execute("""
+        SELECT
+            discussions.id,
+            discussions.topic,
+            discussions.start_time AS created_at,
+            COUNT(audit_logs.id) AS audit_events,
+            COUNT(DISTINCT audit_logs.round_num) AS round_count
+        FROM discussions
+        LEFT JOIN audit_logs ON audit_logs.discussion_id = discussions.id
+        GROUP BY discussions.id, discussions.topic, discussions.start_time
+        ORDER BY
+            CASE WHEN COUNT(audit_logs.id) > 0 THEN 0 ELSE 1 END,
+            discussions.start_time DESC
+    """)
     sessions = cursor.fetchall()
     conn.close()
     return [dict(s) for s in sessions]
