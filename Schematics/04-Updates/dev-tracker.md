@@ -122,3 +122,11 @@
 - browser verification passed for first-load stability, desktop/mobile visual layout, Labs launcher scrolling, public/admin data separation, and session-vault audit loading
 - first admin vault click now opens a real two-round forensic audit instead of an empty latest session shell
 - remaining Orch GUI verification work is focused on live-event rendering in all three views plus Forge and MCP Console interaction QA
+
+## Orch Blocker Pass | 2026-04-09 07:23
+
+- rebuilt `orch/gui` with a public console live-relay panel so runtime events render in council, console, and admin
+- hardened Forge room rendering so shallow room-list payloads no longer crash the page during task refresh
+- replaced drag-only lane movement with an explicit lane selector on each Forge task for demo-safe interaction
+- browser QA now passes for live-event rendering across all three views, Forge create/edit/lane move, and MCP Console send/stream
+- next Orch work is no longer about broken interaction paths; it is about copy polish, South Africa youth-fit research, and full click-path rehearsal

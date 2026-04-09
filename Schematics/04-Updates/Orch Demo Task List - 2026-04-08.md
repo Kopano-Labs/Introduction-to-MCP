@@ -26,7 +26,7 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [x] convert the existing left-rail shell into a top-nav information architecture
 - [x] replace dashboard-like filler cards with clearer primary actions and demo routes
 - [x] upgrade the visual language to a fresher motion-led, mobile-first presentation
-- [ ] keep functional surfaces real enough for demo rather than shipping only cosmetic mockups
+- [x] keep functional surfaces real enough for demo rather than shipping only cosmetic mockups
 
 ## Information Architecture
 
@@ -62,19 +62,19 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 
 - [x] make the admin portal visibly internal-only from the first screen
 - [x] keep admin login in a distinct visual system from the public shell
-- [ ] preserve working access to session vault, logs, analytics, and execution boards
+- [x] preserve working access to session vault, logs, analytics, and execution boards
 - [x] ensure activity preview appears only inside admin
-- [ ] verify admin views still expose the live feed, vault, and internal execution summaries clearly
+- [x] verify admin views still expose the live feed, vault, and internal execution summaries clearly
 
 ## Working Functionality
 
-- [ ] verify live council updates still render after the shell redesign
+- [x] verify live council updates still render after the shell redesign
 - [ ] verify Labs navigation still reaches interfaces, cloud, actions, tools, forge, and console
-- [ ] verify Forge create, edit, and lane-move actions still work after layout changes
-- [ ] verify MCP Console send and stream still work after layout changes
+- [x] verify Forge create, edit, and lane-move actions still work after layout changes
+- [x] verify MCP Console send and stream still work after layout changes
 - [x] verify admin login still works after layout changes
 - [x] verify session loading and audit mode still work after layout changes
-- [ ] verify live logs still show in the correct internal surfaces
+- [x] verify live logs still show in the correct internal surfaces
 - [x] verify the public shell does not expose admin-only data when not logged in
 
 ## Public Surface
@@ -110,7 +110,7 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [x] render a visible live-feed log in the council view
 - [x] render a visible operator log in the admin view
 - [x] verify `/broadcast` to `/updates` event flow still works after the redesign
-- [ ] verify that new live events actually appear in all three views during runtime
+- [x] verify that new live events actually appear in all three views during runtime
 
 ## Build And Verification
 
@@ -120,8 +120,8 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [x] restart Orch and refresh the served GUI bundle
 - [x] verify no JSX or CSS regressions on first load
 - [x] verify section-card scrolling works from every Labs function button
-- [ ] verify Forge create, edit, and lane-move actions still work
-- [ ] verify MCP Console send and stream still work
+- [x] verify Forge create, edit, and lane-move actions still work
+- [x] verify MCP Console send and stream still work
 - [x] rebuild `orch/gui` cleanly after the full-shell redesign
 - [x] restart Orch and confirm the served GUI reflects the redesign bundle
 - [x] smoke-check root GUI, Labs overview, session vault endpoint, Forge room list, and admin login on the live server
@@ -135,18 +135,23 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [ ] verify a quiet websocket still leaves meaningful visible logs
 - [ ] rehearse one public Labs walkthrough from top to bottom
 - [ ] rehearse one admin login plus vault access walkthrough
-- [ ] capture the next blocker after the first full GUI rehearsal
+- [x] capture the next blocker after the first full GUI rehearsal
 - [ ] decide whether any remaining surface needs fresh copy or tighter labeling
 - [ ] decide whether any non-working section should be hidden for demo day rather than shown half-ready
 
 ## Schematics And Handoff
 
 - [x] create a dedicated Orch demo task list in `Schematics`
-- [ ] update this task list as each redesign milestone lands
+- [x] update this task list as each redesign milestone lands
 - [x] update `Demo Countdown - April 8-15, 2026` with the Orch GUI split checkpoint
 - [x] update `dev-tracker.md` with the current GUI refactor status
 - [x] update `comms-log.md` with the public/admin separation decision
 - [x] note the admin demo account in docs once verified
 - [x] record the build result after the current TypeScript fix
 - [x] record the runtime verification result after the next GUI restart
-- [ ] commit the next clean Schematics checkpoint after verification
+- [x] commit the next clean Schematics checkpoint after verification
+
+## Current Blocker
+
+- full GUI interaction blockers are cleared as of `2026-04-09 07:23`
+- next blocker is product polish: finish youth-facing AI UX research for South Africa, tighten copy, and rehearse the exact public and admin click paths

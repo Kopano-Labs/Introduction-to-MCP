@@ -472,3 +472,23 @@ status: active
 - live-event rendering proof across council, console, and admin
 - Forge create or edit or lane-move click-path QA
 - MCP Console send and stream click-path QA
+
+### 2026-04-09 07:23 | Codex | ORCH BLOCKER PASS CLOSED
+
+**Action:** Closed the remaining Orch GUI blockers by patching the public console relay and hardening Forge refresh plus lane control, then reran the live browser suite.
+
+**Verified:**
+- `POST /broadcast` now appears in the live council, the public console relay, and the admin activity preview
+- Forge task create and edit no longer blank the page during refresh
+- Forge lane movement now works through an explicit pressable lane selector on each task
+- MCP Console send and stream both return live replies in browser QA
+
+**Code notes:**
+- `orch/gui/src/App.tsx` now renders a public-safe live relay inside Console Posture
+- Forge room state now tolerates the shallow room list payload during refresh before the detailed room payload lands
+- the live GUI is serving bundle `index-BLUCRsia.js`
+
+**Next:**
+- tighten copy and narrative for the demo walkthrough
+- finish the South Africa youth-facing AI UX research summary in `Schematics`
+- rehearse one public path and one admin path without introducing new features

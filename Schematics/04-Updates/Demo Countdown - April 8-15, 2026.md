@@ -79,18 +79,23 @@ status: active
 - Orch GUI now passes browser QA for first-load stability, desktop/mobile layout, Labs launcher scrolling, public/admin boundary, and session-vault audit loading
 - `/sessions` now prioritizes discussions with real audit data and exposes round plus audit-event counts in the vault
 - admin login plus vault access now opens a real two-round forensic audit instead of landing on the empty latest session by default
-- next Orch blockers are live-event rendering confirmation across all three views, Forge interaction QA, and MCP Console interaction QA
+- live-event rendering now passes across council, public console, and admin after the console relay patch
+- Forge create/edit flows now survive live refresh, and lane movement is pressable through an explicit lane control instead of drag-only behavior
+- MCP Console send and stream both return live replies in browser QA
+- next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and full-walkthrough rehearsal
 
 **Primary work**
 - fix the highest-severity blocker from the first rehearsal, which is currently valid Clerk configuration
 - re-run gig creation, data loading, and reasoning visibility checks
 - confirm protected routes and role-gated flows behave correctly
 - finish the remaining Orch interaction checks now that the shell, auth gate, and vault walkthrough are verified
+- move from blocker removal into guided rehearsal and narrative cleanup
 
 **Exit criteria**
 - demo path completes locally without unknown blockers
 - auth failures, empty-data failures, and missing env failures are either fixed or assigned with owner/date
 - the five-task Orch browser checkpoint is recorded with evidence and the next blocker is explicit
+- Orch GUI blocker list is reduced to zero functional UI failures
 
 ### 2026-04-10 | Authenticated QA Day
 

@@ -26,6 +26,7 @@ interface InstallerAction { id: string; surface: string; title: string; provider
 interface CoworkTask { id: number; room_id: number; title: string; description: string; owner: string; status: string; priority: string; lane: string; }
 interface CoworkArtifact { id: number; room_id: number; artifact_type: string; title: string; summary: string; status: string; link: string | null; }
 interface CoworkRoom { id: number; name: string; mission: string; lead: string; status: string; tasks: CoworkTask[]; artifacts: CoworkArtifact[]; lanes: Record<string, CoworkTask[]>; dispatch_summary: { total_tasks: number; queued: number; in_progress: number; completed: number; owners: string[]; }; artifact_summary: { total_artifacts: number; artifact_types: string[]; }; }
+type CoworkRoomSummary = Pick<CoworkRoom, 'id' | 'name' | 'mission' | 'lead' | 'status'> & Partial<Omit<CoworkRoom, 'id' | 'name' | 'mission' | 'lead' | 'status'>>;
 interface LessonControl { lesson_key: string; title: string; track: string; source: string; status: LessonState; confidence: number; notes: string; }
 interface OrchCodeProfile { title: string; lessons: LessonControl[]; summary: { total_lessons: number; learned_lessons: number; learning_lessons: number; }; control_states: LessonState[]; recommended_next: LessonControl[]; }
 interface ConsoleAnalytics { sessions: number; requests: number; average_latency_ms: number; top_topics: Array<{ topic: string; count: number }>; }
@@ -42,6 +43,9 @@ const agentList = ['orch', 'grok', 'gemini', 'claude', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
 const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'orch'];
 const criticalityLabel = (value: string) => value.replace('_', ' ').toUpperCase();
+const hasCoworkRoomDetail = (room: CoworkRoomSummary | null | undefined): room is CoworkRoom => (
+  Boolean(room?.tasks && room?.artifacts && room?.lanes && room?.dispatch_summary && room?.artifact_summary)
+);
 const executionPlan: ExecutionPhase[] = [
   { id: 'phase-1', title: 'Phase 1', focus: 'Core orchestration foundation', tasks: [
     { id: 'p1-t1', label: 'Multi-provider agent bootstrap', done: true },
@@ -249,7 +253,7 @@ const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('council');
   const [labsSection, setLabsSection] = useState<LabsSection>('forge');
   const [labsOverview, setLabsOverview] = useState<LabsOverview | null>(null);
-  const [coworkRooms, setCoworkRooms] = useState<CoworkRoom[]>([]);
+  const [coworkRooms, setCoworkRooms] = useState<CoworkRoomSummary[]>([]);
   const [activeRoomId, setActiveRoomId] = useState<number | null>(null);
   const [roomName, setRoomName] = useState('Orch Forge Premiere');
   const [roomMission, setRoomMission] = useState('Launch the first creator-grade cowork flow inside Orch Labs.');
@@ -278,7 +282,10 @@ const App: React.FC = () => {
   const ws = useRef<WebSocket | null>(null);
   const seenFeedIds = useRef<Set<string>>(new Set(['system-ready']));
 
-  const activeRoom = coworkRooms.find((room) => room.id === activeRoomId) ?? coworkRooms[0] ?? null;
+  const activeRoomCandidate = coworkRooms.find((room) => room.id === activeRoomId) ?? coworkRooms[0] ?? null;
+  const activeRoom = hasCoworkRoomDetail(activeRoomCandidate)
+    ? activeRoomCandidate
+    : coworkRooms.find((room) => hasCoworkRoomDetail(room)) ?? null;
   const isAdminLoggedIn = adminUser?.role === 'admin';
   const completedExecutionTasks = executionPlan.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
   const completedExecutionTasksPhase6Plus = executionPlanPhase6Plus.reduce((sum, phase) => sum + phase.tasks.filter((task) => task.done).length, 0);
@@ -299,6 +306,7 @@ const App: React.FC = () => {
   const featuredCouncilCard = councilCards.find((card) => card.id === featuredAgentId) ?? councilCards[0];
   const supportCouncilCards = councilCards.filter((card) => card.id !== featuredCouncilCard.id);
   const latestFeedEntries = feedLog.slice(-10).reverse();
+  const consoleFeedPreview = latestFeedEntries.filter((entry) => entry.source !== 'system').slice(0, 3);
   const activeTopView: ViewMode = isAuditMode ? 'admin' : viewMode;
   const openView = (nextView: ViewMode) => {
     setIsAuditMode(false);
@@ -871,6 +879,9 @@ const App: React.FC = () => {
                               <select value={task.status} className="forge-select" onChange={(e) => void updateTaskStatus(task.id, e.target.value)}>
                                 <option value="queued">queued</option><option value="in_progress">in progress</option><option value="completed">completed</option>
                               </select>
+                              <select value={task.lane} className="forge-select" onChange={(e) => void moveTaskToLane(task.id, e.target.value)}>
+                                {laneOrder.map((lane) => <option key={lane} value={lane}>{lane}</option>)}
+                              </select>
                             </div>
                             <button
                               type="button"
@@ -954,6 +965,33 @@ const App: React.FC = () => {
                 <div className="section-heading">Console Posture</div>
                 <article className="labs-card feed-log-panel">
                   <div className="feed-log-list">
+                    <article className="feed-log-card">
+                      <div className="feed-log-meta">
+                        <span className="card-chip">live relay</span>
+                        <span className="feed-log-time">{consoleFeedPreview.length} signals</span>
+                      </div>
+                      <strong>Public console now receives live council signals.</strong>
+                      <p>Visitors can see fresh runtime output without opening the internal admin activity preview.</p>
+                    </article>
+                    {consoleFeedPreview.length > 0 ? consoleFeedPreview.map((entry) => (
+                      <article key={entry.id} className="feed-log-card">
+                        <div className="feed-log-meta">
+                          <span className="card-chip">{entry.source}</span>
+                          <span className="feed-log-time">{new Date(entry.received_at).toLocaleTimeString()}</span>
+                        </div>
+                        <strong>{entry.agent ? entry.agent.toUpperCase() : entry.type.toUpperCase()}</strong>
+                        <p>{entry.content || entry.reasoning || 'Live council event captured.'}</p>
+                      </article>
+                    )) : (
+                      <article className="feed-log-card">
+                        <div className="feed-log-meta">
+                          <span className="card-chip">idle</span>
+                          <span className="feed-log-time">waiting</span>
+                        </div>
+                        <strong>No live council signal yet.</strong>
+                        <p>Broadcast through `/broadcast` or start the simulator to light up the console relay.</p>
+                      </article>
+                    )}
                     <article className="feed-log-card">
                       <div className="feed-log-meta">
                         <span className="card-chip">requests</span>
