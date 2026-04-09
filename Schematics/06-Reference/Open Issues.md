@@ -31,10 +31,12 @@ status: active
 - provider-ranking visibility is still not clearly proven in the wider gig flow
 - the Orch-only route is strong, but the bridge back into the full KasiLink story is still incomplete
 - Microsoft readiness is only `2/6` required checks and `1/3` optional checks ready in the current local runtime
+- reward/referral remains documentation-only in the current workspace and should stay out of the live demo script until it has real code, auth, and data paths
 
 ## Product And Verification Gaps
 
 - reward system still needs end-to-end verification after overlapping referral work stabilizes
+- reward system currently has no live runtime implementation in this workspace, so the blocker is product and code creation before QA
 - youth-facing South Africa AI UX research summary still needs to be finalized inside Schematics
 - some legacy status notes were written against older repo states and should not be treated as live truth without cross-checking against [Now](../00-Home/Now.md)
 

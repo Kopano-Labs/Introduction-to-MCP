@@ -1,7 +1,7 @@
 ---
 title: Comms Log
 created: 2026-04-06
-updated: 2026-04-09
+updated: 2026-04-10
 author: Lead
 tags:
   - comms
@@ -20,6 +20,86 @@ status: active
 
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
+
+### 2026-04-10 00:22 | DEV_3 | SCHEMATICS DEMO DAY AUDIT AND HUB ALIGNMENT
+
+**Action:** Audited the `Schematics` demo-doc surface against the locked Orch-only stabilization route and the current lead instructions, then corrected the remaining folder-level contradiction in the Microsoft Demo Day hub index.
+
+**Checked before writing:**
+- current dev progress in [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md)
+- current git diff and active write scope
+- latest comms entry in this log
+
+**Verified truth:**
+- Microsoft Demo Day hub is aligned with the conservative route `Council -> Labs -> Console send -> Forge view -> Admin audit`
+- `2026-04-09 Close State` remains linked from the hub, countdown, and script
+- `Demo Countdown - April 8-15, 2026` now states `Orch-only` as the stabilization baseline and `KasiLink` as owner-blocked
+- `Orch Demo Script - 2026-04-09` remains synced to the current UI route and labels
+- `Owner Must Handle - Microsoft Demo Day` still carries the Azure, auth, reward, and demo-decision blockers
+- `SA Startup Week Demo` now reads as the target story, not the live baseline
+- `Azure Demo Day Playbook` is framed as an Azure readiness story
+- `Reward System Status - Session 3` remains a historical reward audit snapshot and QA backlog, not a live blocker source
+
+**Contradiction fixed in this pass:**
+- the Microsoft Demo Day hub index previously labeled the Azure playbook as `Azure-first story`
+- that label now reads `Azure readiness story`, which matches the playbook itself
+
+**Next:**
+- keep `Now`, `Project Status`, and `Open Issues` as the live state references unless the demo truth changes again
+- preserve historical Session 3 notes while adding current-date overrides only where needed
+- hand the final doc-pack status back to Lead after this checkpoint
+
+### 2026-04-10 00:21 | DEV_1 | REWARD SYSTEM CODE AUDIT RESULT
+
+**Action:** Checked the current reward/referral surface against the live workspace before writing any status update.
+
+**What was checked:**
+- `orch/` for reward or referral runtime paths
+- `KasiLink/app/api/` for a reward or referral API route
+- `KasiLink/lib/models/User.ts` for reward or referral fields
+- `KasiLink/app/profile/page.tsx` and `KasiLink/app/forum/page.tsx` for UI claims and referral wording
+- reward-specific Schematics notes and the current Session 3 control board
+
+**Findings:**
+- no live reward page, reward API, or referral API route exists in the current workspace
+- `KasiLink` user model does not contain reward or referral fields
+- the only reward/referral mentions in runtime-adjacent UI are forum copy and docs, not a working reward flow
+- birthday reward, achievement, perk redemption, and manager/admin reward visibility were not found as live code paths
+
+**Result:**
+- reward/referral is documentation-backed intent, not a demo-ready runtime feature
+- demo recommendation is `NO-GO` for any live reward claim until an implementation exists
+- reward truth has been synced back into Session 3 docs so the board no longer implies a live system that the code does not contain
+
+**Next:**
+- if reward work returns later, define the product spec and implementation target first
+- keep reward/referral out of the demo script until code, auth, and data paths exist together
+
+### 2026-04-10 00:19 | Lead | MULTI-DEV OPERATING MODEL LOCKED
+
+**Action:** Locked the current team model for this run and pushed the assignment structure back into Schematics so coordination does not live only in chat.
+
+**Operating model:**
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
+- DEV_2: `Nother`
+- DEV_3: `Meither`
+
+**Directive now in force:**
+- before any task starts, check the other dev lanes' progress and current code state first
+- keep full details and exact dates in the comms log, not summary-only notes
+- keep the reward system visible as an active track, not a forgotten tail item
+- keep the 20-task boards in [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md)
+
+**What was checked before this lock:**
+- `Nother` and `Meither` outputs were reviewed before new work was assigned
+- current git diff was checked so the next assignments are grounded in the actual worktree
+- Demo Day docs were rechecked against the safe route and the owner-blocked full-stack truth
+
+**Next:**
+- assign and track the 20-task boards for `Germini`, `Nother`, and `Meither`
+- keep reward-system findings and runtime verification flowing back into dated log entries
+- keep Demo Day, Microsoft readiness, and reward truth synchronized across notes
 
 ### 2026-04-08 22:10 | Lead | ORCH GUI SPLIT, ADMIN AUTH, AND FEED LOG CHECKPOINT
 

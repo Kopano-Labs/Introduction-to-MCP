@@ -27,7 +27,106 @@
 - [x] Azure Developer CLI `azd` installed locally after Session 3
 - [x] Session 3 notes reconciled into current top-level Schematics status notes
 - [ ] Azure sign-in and Microsoft env/resource wiring still remain open
-- [ ] reward system still needs end-to-end authenticated QA
+- [ ] reward system has no live implementation yet, so authenticated QA is blocked until product and code exist
+
+## 2026-04-10 Operating Override | Lead And Dev Model
+
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
+- DEV_2: `Nother`
+- DEV_3: `Meither`
+- Standing rule: before starting any task, check current `git status`, active diffs, latest `comms-log.md` entry, and the other dev lanes' current progress.
+- Logging rule: every major checkpoint must be written into [comms-log](comms-log.md) with exact date, time, action, verification, and next blocker truth.
+- Reward rule: reward and referral findings must stay explicit in this board and in [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md).
+
+### DEV_1 | Germini | Reward System, Product Truth, And Demo Narrative
+
+- [x] check current dev progress, diffs, and latest comms before touching reward work
+- [x] map the live reward and referral code paths that actually exist
+- [x] identify auth and data dependencies blocking end-to-end reward QA
+- [x] verify reward page claims against backend fields and current UI truth
+- [x] verify the referral API contract and expected request plus response behavior
+- [x] verify the 5-level referral ladder against code, not assumptions
+- [x] inspect birthday reward behavior and confirm whether product intent is documented
+- [x] inspect placeholder achievements and classify each one as real, placeholder, or deferred
+- [x] inspect perk redemption logic and record what is proven versus unproven
+- [x] inspect manager and admin reward visibility requirements
+- [x] inspect any rewards wording that still says `coming soon` and decide whether it is true
+- [x] build the end-to-end reward QA checklist for live authenticated verification
+- [x] define exact owner actions needed before real reward verification can happen
+- [x] define fallback wording if the reward system is out of the demo script
+- [x] sync reward-system truth into [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md)
+- [x] sync reward blockers into the live Schematics control notes after verification
+- [x] add a dated reward update into [comms-log](comms-log.md)
+- [x] separate proven reward behavior from product assumptions in one clean summary
+- [x] produce a reward go or no-go recommendation for demo use
+- [x] hand off exact next reward actions to Lead
+
+### DEV_1 Reward Audit Result | 2026-04-10
+
+- no live reward or referral code path exists in the current workspace
+- auth and data blockers are real, but the larger blocker is that the reward implementation itself is absent
+- reward page claims, referral API claims, ladder claims, and `coming soon` wording are documentation-only until code lands
+- birthday rewards, placeholder achievements, perk redemption, and manager/admin reward visibility are not proven in runtime code
+- reward/referral is a `NO-GO` for the live demo script until it has an actual implementation to verify
+
+### DEV_2 | Nother | Runtime, Verification, And Route Hardening
+
+- [ ] check current dev progress, diffs, and latest comms before touching runtime work
+- [ ] confirm `Council -> Labs` is the first safe-route handoff
+- [ ] confirm `Labs` emphasizes `Console`, then `Forge`, then `Admin`
+- [ ] confirm `Console` keeps `Send` primary and `Stream` explicitly optional
+- [ ] confirm `Forge` reads as view-first and not edit-first
+- [ ] confirm `Admin` stays clearly internal and second in the script
+- [ ] get the local Orch runtime stable on `127.0.0.1:8000`
+- [ ] verify `GET /updates`
+- [ ] verify `GET /sessions`
+- [ ] verify `POST /auth/login`
+- [ ] verify `POST /api/labs/mcp-console/chat`
+- [ ] verify `GET /api/labs/microsoft-readiness`
+- [ ] verify `GET /api/labs/cowork/rooms`
+- [ ] verify `POST /broadcast` flows back into `GET /updates`
+- [ ] rerun the GUI production build without sandbox or process-spawn false positives
+- [ ] separate real code regressions from environment and runtime failures
+- [ ] record exact command evidence with date and time in [comms-log](comms-log.md)
+- [ ] update the blocker list for any remaining runtime verification gaps
+- [ ] re-check other dev changes before applying any verification fix
+- [ ] hand off the final verification verdict to Lead
+
+### DEV_3 | Meither | Schematics, Obsidian, And Status Synchronization
+
+- [ ] check current dev progress, diffs, and latest comms before touching docs
+- [ ] keep the Microsoft Demo Day hub aligned with the locked safe route
+- [ ] keep [2026-04-09 Close State](../Microsoft%20Demo%20Day!/2026-04-09%20Close%20State.md) linked and accurate
+- [ ] keep the countdown baseline honest about `Orch-only` versus owner-blocked `KasiLink`
+- [ ] keep the Orch Demo Script synced with the actual UI route and labels
+- [ ] keep the owner checklist synced with real Azure, auth, and reward blockers
+- [ ] keep [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md) marked as target story, not current live baseline
+- [ ] keep [Azure Demo Day Playbook](../Microsoft%20Demo%20Day!/Azure%20Demo%20Day%20Playbook.md) framed as readiness story
+- [ ] keep Obsidian links clean across the Demo Day folder
+- [ ] update [comms-log](comms-log.md) after each major checkpoint with full dated detail
+- [ ] keep [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md) synced with current truth
+- [ ] keep this master board current as task ownership shifts
+- [ ] keep `Now`, `Project Status`, and `Open Issues` aligned if demo state changes
+- [ ] capture agent outputs into readable human handoff notes
+- [ ] record explicit fallback wording for blocked routes and owner-blocked Azure claims
+- [ ] track owner-blocked items with dates and exact prerequisite wording
+- [ ] flag contradictions between code truth and doc truth immediately
+- [ ] preserve historical notes while adding current-dated overrides
+- [ ] prepare the next session start-here summary if today rolls over
+- [ ] hand off the final doc pack status to Lead
+
+### DEV_3 Checkpoint - 2026-04-10
+
+- [x] current progress, git diff, and latest comms were checked before doc edits
+- [x] Microsoft Demo Day hub and folder index were aligned with the locked safe route and readiness story
+- [x] the countdown baseline was kept honest about `Orch-only` versus owner-blocked `KasiLink`
+- [x] the Orch Demo Script and owner checklist remained synced with the current UI route and blocker wording
+- [x] `SA Startup Week Demo` stayed marked as the target story
+- [x] `Azure Demo Day Playbook` was kept framed as a readiness story
+- [x] a dated comms-log checkpoint was written with the contradiction that was fixed
+- [x] historical notes were preserved while current-date overrides remained in place
+- [ ] next-session start-here summary should be prepared if the date rolls over
 
 ## Historical Ownership Board
 

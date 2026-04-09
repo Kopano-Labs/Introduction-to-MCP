@@ -51,6 +51,7 @@ status: active
 - `whatsapp_bridge_configured: false` for the full KasiLink narrative
 - Azure sign-in is still incomplete in the local demo shell
 - Azure OpenAI, App Insights, and hosting env/resource values are still missing
+- reward/referral is documentation-only in this workspace and is `NO-GO` for the live demo script until code exists
 - product polish: copy tightening, youth-fit research summary, and reconnecting the Orch-only route to the bigger KasiLink story
 
 ## Open These In Order
