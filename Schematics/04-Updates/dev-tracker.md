@@ -151,3 +151,24 @@
 - `orch/gui` passes `npm run build` with the Microsoft readiness surface enabled
 - live Orch runtime now returns `2/6` required Microsoft checks ready and `1/3` optional checks ready on `http://127.0.0.1:8000/api/labs/microsoft-readiness`
 - current Microsoft blockers are no longer missing tooling; they are Azure sign-in plus real env/resource values for Azure OpenAI, App Insights, and hosting
+
+## Orch Routed Motion Rebuild | 2026-04-09 17:02
+
+- `framer-motion` is now installed in `orch/gui`
+- the old single-file shell is being replaced with separate page surfaces for `council`, `labs`, `forge`, `console`, and `admin`
+- new GUI file structure now includes `src/pages/*`, `src/components/*`, and `src/types.ts`
+- routing is being moved to hash-based page state so each top-nav surface behaves like its own page without needing server route changes
+- the redesign direction now leans on builder-grade AI patterns: Claude-style split panes, Cursor-grade action density, Perplexity-style proof cards, and a stronger motion layer
+- current state is implementation-in-progress only; build and runtime verification still need to be rerun after the page split lands
+
+## Orch Routed Motion Rebuild Verified | 2026-04-09 18:18
+
+- `orch/gui/src/App.tsx` was rebuilt around lazy-loaded page chunks instead of the previous monolithic shell
+- new page components now live under `src/pages/` for `CouncilPage`, `LabsPage`, `ForgePage`, `ConsolePage`, and `AdminPage`
+- new shared motion/navigation infrastructure now lives under `src/components/` with a persistent animated backdrop and a route-aware top nav
+- `npm run build` now passes after the page split and Vite outputs separate chunks for the new page surfaces
+- `node tests/labs-ui-smoke.mjs` still passes after the refactor
+- local runtime on `http://127.0.0.1:8000` now serves the routed shell successfully
+- headless screenshots confirm distinct desktop renders for `#/council`, `#/forge`, and `#/admin`
+- headless Chromium mobile capture confirms the routed shell still stacks cleanly on a narrow viewport
+- live smoke checks still pass for `GET /api/labs/overview`, `GET /api/labs/cowork/rooms`, `POST /auth/login`, and `POST /api/labs/mcp-console/chat`

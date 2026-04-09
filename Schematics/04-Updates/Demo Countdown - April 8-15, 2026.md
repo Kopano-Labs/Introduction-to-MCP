@@ -85,6 +85,8 @@ status: active
 - locked Orch-only public and admin rehearsal paths are now recorded with timing and presenter notes
 - Azure CLI and Azure Developer CLI now work locally in a non-admin install path, and Orch Labs now exposes a live Microsoft readiness report
 - current Microsoft readiness is `2/6` required checks and `1/3` optional checks on the local runtime; remaining blockers are Azure sign-in plus real Azure OpenAI, App Insights, and hosting env values
+- the GUI shell is now split into routed pages for council, labs, forge, console, and admin with a persistent Framer Motion background and separate build chunks
+- routed desktop renders are verified for `#/council`, `#/forge`, and `#/admin`, and a narrow mobile capture also renders cleanly
 - next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and reconnecting the Orch shell to the wider KasiLink story
 
 **Primary work**

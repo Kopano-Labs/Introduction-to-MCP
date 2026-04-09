@@ -139,6 +139,17 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [ ] decide whether any remaining surface needs fresh copy or tighter labeling
 - [ ] decide whether any non-working section should be hidden for demo day rather than shown half-ready
 
+## Routed Page Split And Motion Pass
+
+- [x] split the top nav surfaces into their own routed pages instead of one long mixed shell
+- [x] rebuild `LIVE COUNCIL` as its own presentation page with a deliberate idle state
+- [x] rebuild `ORCH LABS` as its own overview page with proof-first cards and quick launches
+- [x] rebuild `FORGE` as its own focused execution page
+- [x] rebuild `CONSOLE` as its own split-pane interaction page
+- [x] rebuild `ADMIN` as its own clearly internal-only page
+- [x] add a persistent Framer Motion background and page-transition system
+- [x] rerun build, live runtime, and browser QA after the routed split lands
+
 ## Schematics And Handoff
 
 - [x] create a dedicated Orch demo task list in `Schematics`
@@ -155,4 +166,5 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 
 - full GUI interaction blockers are cleared as of `2026-04-09 07:23`
 - locked Orch-only rehearsal paths now exist for public and admin as of `2026-04-09 08:15`
-- next blocker is product polish: finish youth-facing AI UX research for South Africa, tighten copy, and connect the Orch-only script back to the wider KasiLink demo story
+- new routed shell and motion layer are verified as of `2026-04-09 18:18`
+- next blocker is product polish plus routed-shell click-path rehearsal: tighten copy, rerun the full public/admin demo through the new pages, and connect the Orch-only script back to the wider KasiLink demo story

@@ -533,3 +533,32 @@ status: active
 - `az login` has not been completed in this environment yet
 - Azure OpenAI, App Insights, and hosting env values are still missing
 - Microsoft-backed demo claims should stay at readiness/proof level until those real resources are connected
+
+### 2026-04-09 17:02 | Codex | ORCH PAGE-SPLIT AND MOTION PASS IN PROGRESS
+
+**Action:** Started the next GUI rewrite by splitting the shell into separate page components and adding Framer Motion as the animation layer.
+
+**In progress now:**
+- `LIVE COUNCIL`, `ORCH LABS`, `FORGE`, `CONSOLE`, and `ADMIN` are being rebuilt as their own routed surfaces instead of one long shell
+- a new component/page structure is replacing the oversized monolithic `App.tsx`
+- the redesign direction now explicitly blends Claude-style split views, builder-grade action density, and heavier ambient motion
+
+**Not verified yet:**
+- fresh TypeScript build after the page split
+- live server render on `127.0.0.1:8000`
+- browser QA for the new routed shell
+
+### 2026-04-09 18:18 | Codex | ORCH PAGE-SPLIT AND MOTION PASS VERIFIED
+
+**Action:** Finished the routed GUI rebuild, verified the new page chunks, and confirmed the local runtime still serves the redesigned shell.
+
+**Verified:**
+- `npm run build` passes after the page split and now emits separate page chunks for council, labs, forge, console, and admin
+- `node tests/labs-ui-smoke.mjs` still passes
+- local runtime serves `http://127.0.0.1:8000` successfully after the redesign build
+- headless captures confirm distinct desktop renders for `#/council`, `#/forge`, and `#/admin`
+- headless Chromium mobile capture confirms the new shell still stacks cleanly on a narrow viewport
+- key live APIs still respond: `GET /api/labs/overview`, `GET /api/labs/cowork/rooms`, `POST /auth/login`, `POST /api/labs/mcp-console/chat`
+
+**Still open:**
+- deeper click-path QA through the new routed shell should be rerun before the final demo lock
