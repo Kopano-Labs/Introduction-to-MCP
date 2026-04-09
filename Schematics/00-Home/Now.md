@@ -36,10 +36,10 @@ status: active
 
 ## Demo Day Position
 
-- Safe live route: [[Orch Demo Script - 2026-04-09]]
-- Countdown and ownership: [[Demo Countdown - April 8-15, 2026]]
-- UI verification detail: [[Orch Demo Task List - 2026-04-08]]
-- Phase and capability truth: [[Project Status]]
+- Safe live route: [Orch Demo Script - 2026-04-09](../04-Updates/Orch%20Demo%20Script%20-%202026-04-09.md)
+- Countdown and ownership: [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md)
+- UI verification detail: [Orch Demo Task List - 2026-04-08](../04-Updates/Orch%20Demo%20Task%20List%20-%202026-04-08.md)
+- Phase and capability truth: [Project Status](../04-Updates/Project%20Status.md)
 
 ## Biggest Open Blockers
 
@@ -51,12 +51,12 @@ status: active
 
 ## Open These In Order
 
-1. [[Project Status]]
-2. [[Demo Countdown - April 8-15, 2026]]
-3. [[Orch Demo Script - 2026-04-09]]
-4. [[Open Issues]]
-5. [[Repo Documents Index]]
-6. [[05-Training/index|Training Index]]
+1. [Project Status](../04-Updates/Project%20Status.md)
+2. [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md)
+3. [Orch Demo Script - 2026-04-09](../04-Updates/Orch%20Demo%20Script%20-%202026-04-09.md)
+4. [Open Issues](../06-Reference/Open%20Issues.md)
+5. [Repo Documents Index](../06-Reference/Repo%20Documents%20Index.md)
+6. [Training Index](../05-Training/index.md)
 
 ## Repo Structure Rule
 

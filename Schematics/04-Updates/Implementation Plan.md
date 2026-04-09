@@ -15,7 +15,7 @@ status: active
 # orch Implementation Plan
 
 > Master engineering plan for building orch from core engine to Labs and accessibility phases.
-> See also: [[Project Status]], [[CLI Specification]], [[Phase 1 Walkthrough]]
+> See also: [Project Status](Project%20Status.md), [CLI Specification](../03-Architecture/CLI%20Specification.md), [Phase 1 Walkthrough](Phase%201%20Walkthrough.md)
 
 ## Tech Stack
 

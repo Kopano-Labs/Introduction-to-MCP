@@ -15,7 +15,7 @@ status: complete
 # Phase 1 Walkthrough: orch Foundation
 
 > The foundational CLI and orchestration logic.
-> See also: [[Project Status]], [[CLI Specification]], [[Implementation Plan]]
+> See also: [Project Status](Project%20Status.md), [CLI Specification](../03-Architecture/CLI%20Specification.md), [Implementation Plan](Implementation%20Plan.md)
 
 ## Status: COMPLETE
 

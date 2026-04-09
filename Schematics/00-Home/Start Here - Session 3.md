@@ -12,8 +12,8 @@
 ## Current Rule
 
 - Do not overwrite files actively being edited by another lane without first reconciling ownership.
-- Use [[MASTER-TODO Session 3]] as the live board.
-- Use [[Collaboration Split - Session 3]] before touching any overlapping file.
+- Use [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md) as the live board.
+- Use [Collaboration Split - Session 3](../04-Updates/Collaboration%20Split%20-%20Session%203.md) before touching any overlapping file.
 
 ## What Is Stable
 
@@ -42,13 +42,13 @@
 
 ## Open These Next
 
-1. [[Now]]
-2. [[MASTER-TODO Session 3]]
-3. [[Collaboration Split - Session 3]]
-4. [[Reward System Status - Session 3]]
-5. [[Open Issues]]
-6. [[4-Tier Interface Audit Schema - Session 3]]
-7. [[Guest Interface Audit - Session 3]]
-8. [[User Interface Audit - Session 3]]
-9. [[Manager Interface Audit - Session 3]]
-10. [[Admin Interface Audit - Session 3]]
+1. [Now](Now.md)
+2. [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md)
+3. [Collaboration Split - Session 3](../04-Updates/Collaboration%20Split%20-%20Session%203.md)
+4. [Reward System Status - Session 3](../04-Updates/Reward%20System%20Status%20-%20Session%203.md)
+5. [Open Issues](../06-Reference/Open%20Issues.md)
+6. [4-Tier Interface Audit Schema - Session 3](../03-Architecture/4-Tier%20Interface%20Audit%20Schema%20-%20Session%203.md)
+7. [Guest Interface Audit - Session 3](../06-Reference/Guest%20Interface%20Audit%20-%20Session%203.md)
+8. [User Interface Audit - Session 3](../06-Reference/User%20Interface%20Audit%20-%20Session%203.md)
+9. [Manager Interface Audit - Session 3](../06-Reference/Manager%20Interface%20Audit%20-%20Session%203.md)
+10. [Admin Interface Audit - Session 3](../06-Reference/Admin%20Interface%20Audit%20-%20Session%203.md)

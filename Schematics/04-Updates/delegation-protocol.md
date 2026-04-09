@@ -21,7 +21,7 @@ status: active
 
 > Rules of engagement for multi-agent work on orch.
 > All developers read this before touching code or updating `Schematics/04-Updates/`.
-> Session governance is additionally defined in [[DEV_S Reward Program]].
+> Session governance is additionally defined in [DEV_S Reward Program](DEV_S%20Reward%20Program.md).
 
 ## Roles
 
@@ -54,7 +54,7 @@ status: active
 1. Edit only files explicitly listed in their assignment scope.
 2. Read any file in the repo before writing code.
 3. Create new files only inside their assigned directories.
-4. Append status updates to [[comms-log]] when instructed.
+4. Append status updates to [comms-log](comms-log.md) when instructed.
 5. Run verification commands for their assigned scope.
 6. Stop immediately and report to Lead if a secret, token, or tracked vendor directory is found in git.
 
@@ -99,18 +99,18 @@ REPORT: Append one update to [[comms-log]]
 
 ## Communication
 
-- Live status: [[comms-log]]
-- Ownership and queue: [[task-board]]
-- Detailed progress: [[dev-tracker]]
-- Phase truth: [[Project Status]]
-- Reward policy: [[DEV_S Reward Program]]
+- Live status: [comms-log](comms-log.md)
+- Ownership and queue: [task-board](task-board.md)
+- Detailed progress: [dev-tracker](dev-tracker.md)
+- Phase truth: [Project Status](Project%20Status.md)
+- Reward policy: [DEV_S Reward Program](DEV_S%20Reward%20Program.md)
 
 ## Security Incident Rule
 
 If any worker finds a credential in git or a tracked dependency/vendor directory:
 
 1. Stop normal work.
-2. Notify Lead in [[comms-log]].
+2. Notify Lead in [comms-log](comms-log.md).
 3. Do not paste the raw secret into notes.
 4. Remove the tracked exposure and update the prevention docs.
 5. Require revoke/rotate outside the repo before calling the incident closed.

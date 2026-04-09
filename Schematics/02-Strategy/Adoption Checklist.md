@@ -15,7 +15,7 @@ status: active
 # Prototype to External Adoption Checklist
 
 > Steps to take orch from prototype to production-ready.
-> See also: [[Project Status]], [[KasiLink Integration Plan]]
+> See also: [Project Status](../04-Updates/Project%20Status.md), [KasiLink Integration Plan](KasiLink%20Integration%20Plan.md)
 
 ## Technical Hardening
 

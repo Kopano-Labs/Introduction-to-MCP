@@ -15,7 +15,7 @@ status: active
 # orch Data Lake Schema
 
 > SQLite schema for audit logging and discussion persistence.
-> See also: [[Project Status]], [[Implementation Plan]]
+> See also: [Project Status](../04-Updates/Project%20Status.md), [Implementation Plan](../04-Updates/Implementation%20Plan.md)
 
 ## Tables
 

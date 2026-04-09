@@ -64,6 +64,7 @@ Future Codex passes must:
 - preserve Obsidian usability first
 - treat repo-root doc references as contracts
 - produce a readable map, not only a cleaner tree
+- treat repeated user prompts as a sign the earlier pass was too shallow or looked lazy from the user's side
 
 ## Commit Identity Memory Rule
 

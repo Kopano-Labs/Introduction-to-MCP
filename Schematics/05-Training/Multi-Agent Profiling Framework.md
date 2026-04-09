@@ -100,9 +100,9 @@ Every profile should answer:
 
 ## Current Training Linkage
 
-- [[Owner Profile]]
-- [[Robyn Operator Profile - Session 3]]
-- [[Lead Self Report]]
-- [[Codex Terminal Operational Profile]]
-- [[Dev2 Behavioral Analysis]]
-- [[Claude Codex Gemini Session Analysis]]
+- [Owner Profile](Owner%20Profile.md)
+- [Robyn Operator Profile - Session 3](Robyn%20Operator%20Profile%20-%20Session%203.md)
+- [Lead Self Report](Lead%20Self%20Report.md)
+- [Codex Terminal Operational Profile](Codex%20Terminal%20Operational%20Profile.md)
+- [Dev2 Behavioral Analysis](Dev2%20Behavioral%20Analysis.md)
+- [Claude Codex Gemini Session Analysis](Claude%20Codex%20Gemini%20Session%20Analysis.md)

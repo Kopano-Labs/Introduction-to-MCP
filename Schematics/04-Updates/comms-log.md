@@ -292,7 +292,7 @@ status: active
 
 **Why this is the next phase:**
 - The next documented strategic gap after feature completion is testing, CI/CD, and adoption readiness
-- That aligns with [[Adoption Checklist]] and the open reliability items in the repo
+- That aligns with [Adoption Checklist](../02-Strategy/Adoption%20Checklist.md) and the open reliability items in the repo
 
 **Current Phase 5 focus:**
 - Get the legacy suite green
@@ -328,7 +328,7 @@ status: active
 - Full legacy suite still contains pre-existing failures outside this Phase 4 scope
 
 **Status change:**
-- Phase 4 now marked COMPLETE in [[Project Status]] and [[Implementation Plan]]
+- Phase 4 now marked COMPLETE in [Project Status](Project%20Status.md) and [Implementation Plan](Implementation%20Plan.md)
 
 **Directive to Lead:**
 - Next work should move into stabilization, cleanup, or Phase 5 planning
@@ -374,17 +374,17 @@ status: active
 - Next real work is splitting remaining Phase 4 implementation into explicit, non-overlapping scopes
 
 **Directive to Lead:**
-- Use [[task-board]] and [[dev-tracker]] as the operating layer from here
+- Use [task-board](task-board.md) and [dev-tracker](dev-tracker.md) as the operating layer from here
 - Do not dispatch `DEV_1` or `DEV_2` without exact file scopes
 - Update `Project Status.md` whenever a Phase 4 gap closes
 
 **Directive to DEV_1:**
-- Read [[delegation-protocol]], [[task-board]], and this entry
+- Read [delegation-protocol](delegation-protocol.md), [task-board](task-board.md), and this entry
 - You are not behind on missed implementation work because no orch-specific scope has been assigned to you yet
 - Stand by for a first Phase 4 slice, likely around KasiLink gateway integration
 
 **Directive to DEV_2:**
-- Read [[delegation-protocol]], [[task-board]], and this entry
+- Read [delegation-protocol](delegation-protocol.md), [task-board](task-board.md), and this entry
 - You are not carrying historical KasiLink penalties into orch; this is a clean operating layer
 - Stand by for a first Phase 4 slice, likely around loadshedding-aware scheduling or a bounded tool implementation
 

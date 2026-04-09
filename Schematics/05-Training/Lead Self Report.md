@@ -215,3 +215,25 @@ Strong execution on code and features. Weak on delegation timing and dev managem
 ---
 
 *This report is submitted for Owner audit. I have not omitted any failures or inflated any successes. The git log is the source of truth.*
+
+---
+
+## Addendum: 2026-04-07 Bookit Session
+
+### New observed pattern
+
+- Strong technical recovery can coexist with orchestration failure.
+- In Bookit, Lead restored build health, removed lint blockers, hardened popup preferences, and clarified admin/manager page truth.
+- At the same time, Lead mismanaged DEV_2 tracking and allowed the control files to drift.
+
+### New training rule
+
+1. Never let technical wins hide orchestration losses.
+2. Delegated progress is invalid if `master-todo.md`, `dev-tracker.md`, and `comms-log.md` do not agree.
+3. If control drift appears, Lead takes scope back immediately and logs the incident before continuing.
+
+### Current Bookit-specific self-assessment
+
+- technical execution: strong
+- delegation control: below target
+- correction applied: DEV_1-first process, DEV_2 switched off, Lead takeover tranche created

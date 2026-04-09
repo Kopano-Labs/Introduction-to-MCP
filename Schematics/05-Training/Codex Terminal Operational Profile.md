@@ -63,6 +63,32 @@ What can be documented safely is the working pattern:
 - can underweight narrative or archival expectations unless they are explicit
 - can leave an information architecture job half-done if the file movement itself looks technically clean
 
+## How This Can Read As Laziness
+
+From the user's side, this behavior can look lazy:
+
+- the user asks for full organization
+- Codex does the smallest technically valid slice
+- the same request has to be repeated multiple times
+
+That is a real workflow failure.
+
+The problem is not lack of activity.
+The problem is under-scoping the task and stopping at the first clean-looking result.
+
+## Session-Specific Failure Record
+
+In this session, the user's first prompt was about organizing `Schematics`.
+Roughly 30 messages later, the same core request was still being repeated.
+
+That should be treated as evidence that the initial execution was not good enough.
+
+Future rule:
+
+- if the user repeats the same organizational ask, assume the first pass was too shallow
+- widen the scope immediately
+- fix the architecture, navigation, and note usability, not only the file placement
+
 ## Best-Use Instructions
 
 Codex performs best when the request specifies:
@@ -79,4 +105,4 @@ This session produced a useful corrective lesson:
 - moving artifacts into cleaner folders was not enough
 - the real job was consolidating meaning, fixing stale paths, and making the vault easier to navigate
 
-That rule is now part of Orch training through [[Vault Hygiene and CRUD Discipline]].
+That rule is now part of Orch training through [Vault Hygiene and CRUD Discipline](Vault%20Hygiene%20and%20CRUD%20Discipline.md).

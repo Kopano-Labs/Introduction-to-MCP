@@ -14,7 +14,7 @@ status: active
 # orch CLI Specification
 
 > POSIX-style CLI for orchestrating multi-agent AI simulations.
-> See also: [[Orch Blueprint]], [[Implementation Plan]], [[Phase 1 Walkthrough]]
+> See also: [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [Implementation Plan](../04-Updates/Implementation%20Plan.md), [Phase 1 Walkthrough](../04-Updates/Phase%201%20Walkthrough.md)
 
 ## Usage
 

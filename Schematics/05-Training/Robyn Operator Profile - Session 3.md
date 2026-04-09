@@ -64,7 +64,7 @@ Example:
 
 ## Relationship To Existing Owner Profile
 
-Use [[Owner Profile]] for the broader long-running collaboration pattern.
+Use [Owner Profile](Owner%20Profile.md) for the broader long-running collaboration pattern.
 
 Use this note for the sharper current-session rule set:
 

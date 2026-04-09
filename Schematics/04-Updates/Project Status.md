@@ -15,7 +15,7 @@ status: active
 # orch Project Status & Capabilities
 
 > Current state of the orch project as of 2026-04-09.
-> See also: [[Now]], [[Implementation Plan]], [[Orch Blueprint]], [[KasiLink Integration Plan]], [[DEV_S Reward Program]]
+> See also: [Now](../00-Home/Now.md), [Implementation Plan](Implementation%20Plan.md), [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md), [DEV_S Reward Program](DEV_S%20Reward%20Program.md)
 
 ## Current Snapshot - 2026-04-09
 
@@ -25,12 +25,12 @@ status: active
   - `python -m compileall orch orch/orch` passes
   - `npm run build` in `orch/gui` passes
 - Demo truth:
-  - the Orch-only public/admin route is rehearsed and locked in [[Orch Demo Script - 2026-04-09]]
+  - the Orch-only public/admin route is rehearsed and locked in [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
   - the wider KasiLink story is still partial because it depends on valid Clerk keys, Atlas access, WhatsApp readiness, and Azure tooling
 - Canonical demo notes:
-  - [[Demo Countdown - April 8-15, 2026]]
-  - [[Orch Demo Task List - 2026-04-08]]
-  - [[Orch Demo Script - 2026-04-09]]
+  - [Demo Countdown - April 8-15, 2026](Demo%20Countdown%20-%20April%208-15,%202026.md)
+  - [Orch Demo Task List - 2026-04-08](Orch%20Demo%20Task%20List%20-%202026-04-08.md)
+  - [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
 
 ## Current Phase
 

@@ -29,7 +29,7 @@ This note describes observed role behavior inside these sessions:
 
 ## Claude Experience In These Notes
 
-Observed through [[Lead Self Report]] and related training artifacts.
+Observed through [Lead Self Report](Lead%20Self%20Report.md) and related training artifacts.
 
 ### Strengths
 
@@ -63,7 +63,7 @@ Observed through current repo work, vault updates, and cleanup corrections.
 
 ## Gemini Experience In These Sessions
 
-Observed through [[Dev2 Behavioral Analysis]], [[Bookit Session Training Update]], and prior control notes.
+Observed through [Dev2 Behavioral Analysis](Dev2%20Behavioral%20Analysis.md), [Bookit Session Training Update](Bookit%20Session%20Training%20Update.md), and prior control notes.
 
 ### Strong Pattern
 

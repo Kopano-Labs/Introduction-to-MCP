@@ -15,7 +15,7 @@ status: active
 # WhatsApp Integration Guide (Phase 3)
 
 > Connect orch AI agents to your phone using the **Evolution API** bridge.
-> See also: [[Orch Blueprint]], [[CLI Specification]], [[Project Status]]
+> See also: [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [CLI Specification](CLI%20Specification.md), [Project Status](../04-Updates/Project%20Status.md)
 
 ## 1. Start the Messaging Bridge
 
@@ -55,7 +55,7 @@ python -m orch.cli serve launch --topic "Artificial General Intelligence" --agen
 
 ## KasiLink Integration
 
-With the [[KasiLink Integration Plan]], the WhatsApp bridge extends to support:
+With the [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md), the WhatsApp bridge extends to support:
 - Gig notifications to providers
 - Booking confirmations to seekers
 - Loadshedding alerts for scheduled gigs

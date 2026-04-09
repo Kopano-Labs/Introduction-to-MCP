@@ -15,7 +15,7 @@ status: active
 # Open Issues
 
 > Consolidated blocker ledger for current Orch and demo work.
-> See also: [[Now]], [[Project Status]], [[Demo Countdown - April 8-15, 2026]]
+> See also: [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md)
 
 ## Critical External Blockers
 
@@ -35,20 +35,20 @@ status: active
 
 - reward system still needs end-to-end verification after overlapping referral work stabilizes
 - youth-facing South Africa AI UX research summary still needs to be finalized inside Schematics
-- some legacy status notes were written against older repo states and should not be treated as live truth without cross-checking against [[Now]]
+- some legacy status notes were written against older repo states and should not be treated as live truth without cross-checking against [Now](../00-Home/Now.md)
 
 ## Documentation Gaps Closed In This Pass
 
 - stale `STRUCTURE/...` references in key Session 3 notes were corrected
-- a canonical current-state note now exists in [[Now]]
-- repo-root docs now have a stable Obsidian map in [[Repo Documents Index]]
+- a canonical current-state note now exists in [Now](../00-Home/Now.md)
+- repo-root docs now have a stable Obsidian map in [Repo Documents Index](Repo%20Documents%20Index.md)
 - README architecture image path was repaired after the asset move
 
 ## Working Rule
 
 If a blocker changes the live demo route, update:
 
-1. [[Now]]
-2. [[Project Status]]
-3. [[Demo Countdown - April 8-15, 2026]]
+1. [Now](../00-Home/Now.md)
+2. [Project Status](../04-Updates/Project%20Status.md)
+3. [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md)
 4. this note

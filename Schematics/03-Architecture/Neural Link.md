@@ -15,7 +15,7 @@ status: active
 # Neural Link — Real-Time Agent Visualization
 
 > The React GUI that shows AI agents thinking and responding in real-time.
-> See also: [[Project Status]], [[CLI Specification]]
+> See also: [Project Status](../04-Updates/Project%20Status.md), [CLI Specification](CLI%20Specification.md)
 
 ## Overview
 
@@ -43,4 +43,4 @@ The Neural Link is orch's real-time visualization layer. It connects to the Fast
 
 ## KasiLink Integration
 
-The Neural Link concept adapts into KasiLink's **AI Dashboard** — showing users how Orch agents process gig matching decisions transparently. See [[KasiLink Integration Plan]].
+The Neural Link concept adapts into KasiLink's **AI Dashboard** — showing users how Orch agents process gig matching decisions transparently. See [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md).

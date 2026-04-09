@@ -138,6 +138,6 @@ Current product-direction inputs were cross-checked against:
 
 ## Links
 
-- Related: [[Dashboard]]
-- Related: [[Orch Labs Strategy]]
-- Related: [[Implementation Plan]]
+- Related: [Dashboard](../00-Home/Dashboard.md)
+- Related: [Orch Labs Strategy](Orch%20Labs%20Strategy.md)
+- Related: [Implementation Plan](../04-Updates/Implementation%20Plan.md)

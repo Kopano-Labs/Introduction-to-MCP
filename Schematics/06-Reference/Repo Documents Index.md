@@ -54,7 +54,7 @@ These files are useful reference, but they are not the current source of truth:
 - `EXECUTION_20_TASKS_DEV2_DEV3_LEAD_PHASE.md`
 - `EXECUTION_20_TASKS_DEV2_DEV3_LEAD_PHASE_CYCLE2.md`
 
-Use [[Now]] and [[Project Status]] for current truth.
+Use [Now](../00-Home/Now.md) and [Project Status](../04-Updates/Project%20Status.md) for current truth.
 
 ## Organization Rule
 

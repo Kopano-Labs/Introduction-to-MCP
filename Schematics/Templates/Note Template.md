@@ -14,4 +14,4 @@ priority: medium
 
 ## Links
 
-- Related: [[Dashboard]]
+- Related: [Dashboard](../00-Home/Dashboard.md)
