@@ -16,7 +16,7 @@ status: active
 # KasiLink + Orch Integration Plan
 
 > Orch as a subsidiary AI feature within KasiLink — powering AI capabilities without replacing KasiLink's objective.
-> See also: [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [Microsoft Contract Strategy](Microsoft%20Contract%20Strategy.md), [SA Startup Week Demo](SA%20Startup%20Week%20Demo.md)
+> See also: [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [Microsoft Contract Strategy](Microsoft%20Contract%20Strategy.md), [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md)
 
 ## Context
 

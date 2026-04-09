@@ -26,20 +26,21 @@ status: active
 1. [Dashboard](../00-Home/Dashboard.md) - repo navigation and home
 2. [Project Status](Project%20Status.md) - current delivery phase and capability truth
 3. [Implementation Plan](Implementation%20Plan.md) - phase-by-phase engineering plan
-4. [Demo Countdown - April 8-15, 2026](Demo%20Countdown%20-%20April%208-15,%202026.md) - day-by-day countdown owners and exit criteria
-5. [Orch Demo Task List - 2026-04-08](Orch%20Demo%20Task%20List%20-%202026-04-08.md) - current Orch GUI split, logging, and demo verification checklist
-6. [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md) - current ownership split and next actions
-7. [Collaboration Split - Session 3](Collaboration%20Split%20-%20Session%203.md) - active lane boundaries
-8. [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md) - reward truth and next validation steps
-9. [delegation-protocol](delegation-protocol.md) - team rules of engagement
-10. [DEV_S Reward Program](DEV_S%20Reward%20Program.md) - session reset, permission, and supervision policy
-11. [task-board](task-board.md) - live ownership and next actions
-12. [comms-log](comms-log.md) - chronological status and directives
-13. [dev-tracker](dev-tracker.md) - per-role execution history
+4. [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) - canonical demo hub, owner checklist, script, and Azure path
+5. [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) - day-by-day countdown owners and exit criteria
+6. [Orch Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Orch%20Demo%20Task%20List%20-%202026-04-08.md) - current Orch GUI split, logging, and demo verification checklist
+7. [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md) - current ownership split and next actions
+8. [Collaboration Split - Session 3](Collaboration%20Split%20-%20Session%203.md) - active lane boundaries
+9. [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md) - reward truth and next validation steps
+10. [delegation-protocol](delegation-protocol.md) - team rules of engagement
+11. [DEV_S Reward Program](DEV_S%20Reward%20Program.md) - session reset, permission, and supervision policy
+12. [task-board](task-board.md) - live ownership and next actions
+13. [comms-log](comms-log.md) - chronological status and directives
+14. [dev-tracker](dev-tracker.md) - per-role execution history
 
 ## Workflow
 
-[Dashboard](../00-Home/Dashboard.md) -> [Project Status](Project%20Status.md) -> [Implementation Plan](Implementation%20Plan.md) -> [Demo Countdown - April 8-15, 2026](Demo%20Countdown%20-%20April%208-15,%202026.md) -> [Orch Demo Task List - 2026-04-08](Orch%20Demo%20Task%20List%20-%202026-04-08.md) -> [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md) -> [Collaboration Split - Session 3](Collaboration%20Split%20-%20Session%203.md) -> [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md) -> [delegation-protocol](delegation-protocol.md) -> [DEV_S Reward Program](DEV_S%20Reward%20Program.md) -> [task-board](task-board.md) -> [comms-log](comms-log.md) -> [dev-tracker](dev-tracker.md)
+[Dashboard](../00-Home/Dashboard.md) -> [Project Status](Project%20Status.md) -> [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) -> [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) -> [Orch Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Orch%20Demo%20Task%20List%20-%202026-04-08.md) -> [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md) -> [Collaboration Split - Session 3](Collaboration%20Split%20-%20Session%203.md) -> [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md) -> [delegation-protocol](delegation-protocol.md) -> [DEV_S Reward Program](DEV_S%20Reward%20Program.md) -> [task-board](task-board.md) -> [comms-log](comms-log.md) -> [dev-tracker](dev-tracker.md)
 
 ## Canonical Sources
 

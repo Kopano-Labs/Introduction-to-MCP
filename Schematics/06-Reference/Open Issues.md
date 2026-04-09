@@ -15,7 +15,7 @@ status: active
 # Open Issues
 
 > Consolidated blocker ledger for current Orch and demo work.
-> See also: [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md)
+> See also: [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md), [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
 
 ## Critical External Blockers
 
@@ -51,5 +51,5 @@ If a blocker changes the live demo route, update:
 
 1. [Now](../00-Home/Now.md)
 2. [Project Status](../04-Updates/Project%20Status.md)
-3. [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md)
+3. [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
 4. this note

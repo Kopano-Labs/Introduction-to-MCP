@@ -14,6 +14,9 @@ status: active
 
 # Demo Countdown - April 8-15, 2026
 
+> Hub: [Microsoft Demo Day!](index.md)
+> Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
+
 ## Window
 
 - Demo window: `2026-04-15` to `2026-04-17`
@@ -22,7 +25,7 @@ status: active
 
 ## Assumptions
 
-- Demo success still means the flow in `02-Strategy/SA Startup Week Demo.md` must work: gig post, provider ranking, load-shedding safety, WhatsApp notification, and transparent reasoning.
+- Demo success still means the flow in [SA Startup Week Demo](SA%20Startup%20Week%20Demo.md) must work: gig post, provider ranking, load-shedding safety, WhatsApp notification, and transparent reasoning.
 - Azure remains the buyer-facing story for Demo Day.
 - Reward and referral work stays behind demo-path hardening unless the final live script requires it.
 
@@ -51,7 +54,7 @@ status: active
 - a fresh `/broadcast` event now appears in `/updates`, which confirms live feed events are flowing into the runtime again
 - Orch currently reports `whatsapp_bridge_configured: false`
 - current runtime blocker is valid Clerk configuration, which fails before Atlas can be verified
-- Azure tooling validation is currently blocked because `az` and `azd` are not installed in this environment
+- Azure tooling validation was blocked on `2026-04-08`, then resolved on `2026-04-09` when `az` and `azd` were installed locally in a non-admin path
 - current repo confirms gig posting/apply/review plus load-shedding and Orch dashboard surfaces
 - current repo does not yet show visible wiring for provider ranking in the gig flow or WhatsApp delivery in the notification flow
 

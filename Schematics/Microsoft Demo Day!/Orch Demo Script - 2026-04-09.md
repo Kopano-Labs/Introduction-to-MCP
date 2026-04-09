@@ -14,6 +14,9 @@ status: active
 
 # Orch Demo Script - 2026-04-09
 
+> Hub: [Microsoft Demo Day!](index.md)
+> Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
+
 ## Purpose
 
 Lock a safe Orch-only demo path that can be shown immediately while the wider KasiLink end-to-end flow still depends on Clerk, Atlas, provider-ranking visibility, and WhatsApp readiness.

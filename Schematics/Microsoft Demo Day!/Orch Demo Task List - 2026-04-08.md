@@ -14,6 +14,9 @@ status: active
 
 # Orch Demo Task List - 2026-04-08
 
+> Hub: [Microsoft Demo Day!](index.md)
+> Owner decisions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
+
 ## Current Objective
 
 Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a younger South African audience fit, a clean top navigation shell, a distinct admin layer, and working demo-level interactions that can be rehearsed live.
@@ -31,7 +34,7 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 ## Information Architecture
 
 - [x] define the new top navigation for `LIVE COUNCIL`, `ORCH LABS`, `FORGE`, `CONSOLE`, and `ADMIN`
-- [ ] decide which public sections stay on one page versus move behind section switching
+- [x] decide which public sections stay on one page versus move behind section switching
 - [x] convert current Labs section buttons into a cleaner navigation or dropdown pattern
 - [x] remove leftover sidebar dependency from the public shell
 - [x] keep session vault access exclusively inside admin-authenticated views
@@ -69,7 +72,7 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 ## Working Functionality
 
 - [x] verify live council updates still render after the shell redesign
-- [ ] verify Labs navigation still reaches interfaces, cloud, actions, tools, forge, and console
+- [x] verify Labs navigation still reaches interfaces, cloud, actions, tools, forge, and console
 - [x] verify Forge create, edit, and lane-move actions still work after layout changes
 - [x] verify MCP Console send and stream still work after layout changes
 - [x] verify admin login still works after layout changes

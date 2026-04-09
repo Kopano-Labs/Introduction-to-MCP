@@ -1,0 +1,53 @@
+---
+title: Microsoft Demo Day!
+created: 2026-04-09
+updated: 2026-04-09
+author: Codex
+tags:
+  - demo
+  - microsoft
+  - azure
+  - startup-week
+  - hub
+priority: critical
+status: active
+---
+
+# Microsoft Demo Day!
+
+> Canonical Obsidian hub for Demo Day planning, owner actions, Azure readiness, script, and rehearsal material.
+> Open this folder first for anything related to the April 15-17, 2026 demo.
+
+## Current Truth
+
+- Safe live route: Orch-only public plus admin script is rehearsed and documented.
+- Microsoft readiness: local tooling is installed, the readiness endpoint is live, and current status is `2/6` required checks plus `1/3` optional checks ready.
+- Wider KasiLink story: still partial until Clerk, Atlas, provider-ranking proof, and WhatsApp readiness are fully handled.
+
+## Read Order
+
+1. [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
+2. [Demo Countdown - April 8-15, 2026](Demo%20Countdown%20-%20April%208-15,%202026.md)
+3. [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
+4. [Azure Demo Day Playbook](Azure%20Demo%20Day%20Playbook.md)
+5. [SA Startup Week Demo](SA%20Startup%20Week%20Demo.md)
+6. [Orch Demo Task List - 2026-04-08](Orch%20Demo%20Task%20List%20-%202026-04-08.md)
+7. [Microsoft Contract Strategy](../02-Strategy/Microsoft%20Contract%20Strategy.md)
+8. [Now](../00-Home/Now.md)
+9. [Project Status](../04-Updates/Project%20Status.md)
+10. [Open Issues](../06-Reference/Open%20Issues.md)
+
+## Files In This Folder
+
+- [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md) - direct owner checklist and Azure-specific actions
+- [Demo Countdown - April 8-15, 2026](Demo%20Countdown%20-%20April%208-15,%202026.md) - day-by-day execution plan and ownership
+- [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md) - safe live route already rehearsed
+- [Orch Demo Task List - 2026-04-08](Orch%20Demo%20Task%20List%20-%202026-04-08.md) - detailed GUI and rehearsal verification ledger
+- [Azure Demo Day Playbook](Azure%20Demo%20Day%20Playbook.md) - Azure-first story, services, and execution track
+- [SA Startup Week Demo](SA%20Startup%20Week%20Demo.md) - ideal end-to-end demo story and success criteria
+
+## Obsidian Rule
+
+- Add new Demo Day notes here first.
+- Keep current-state links synchronized with [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), and [Open Issues](../06-Reference/Open%20Issues.md).
+- Treat this folder as the demo MOC, not as an archive dump.

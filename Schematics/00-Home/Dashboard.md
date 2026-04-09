@@ -25,9 +25,10 @@ status: active
 | Priority | Note                     | Status               |
 | -------- | ------------------------ | -------------------- |
 | CRITICAL | [Now](Now.md) | Canonical one-note snapshot |
+| CRITICAL | [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) | Demo hub, owner checklist, and Azure path |
 | CRITICAL | [Project Status](../04-Updates/Project%20Status.md) | Current phase and delivery truth |
-| CRITICAL | [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
-| HIGH     | [Orch Demo Script - 2026-04-09](../04-Updates/Orch%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
+| CRITICAL | [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
+| HIGH     | [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
 | HIGH     | [Training Index](../05-Training/index.md) | Profiling and orchestration corpus |
 
 ---
@@ -48,7 +49,7 @@ Where we're going and how we get there.
 - [Orch Labs Strategy](../02-Strategy/Orch%20Labs%20Strategy.md) — Google-Labs-style additive layer for South African AI tools.
 - [Open Source Product-Ready AI Top 50](../02-Strategy/Open%20Source%20Product-Ready%20AI%20Top%2050.md) — Research map for free vs premium product capabilities.
 - [Microsoft Contract Strategy](../02-Strategy/Microsoft%20Contract%20Strategy.md) — Azure partnership pitch, service mapping, action items.
-- [SA Startup Week Demo](../02-Strategy/SA%20Startup%20Week%20Demo.md) — Hack Day demo plan, April 15-17, 2026.
+- [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md) — Hack Day demo plan, April 15-17, 2026.
 - [Adoption Checklist](../02-Strategy/Adoption%20Checklist.md) — Steps from prototype to external adoption.
 - [Orch Concept And Future Foresight](../02-Strategy/Orch%20Concept%20And%20Future%20Foresight.md) — long-range framing for Orch as an AI-native operating layer.
 
@@ -74,8 +75,9 @@ Active project coordination and status tracking.
 - [Implementation Plan](../04-Updates/Implementation%20Plan.md) — Full engineering plan with Labs and accessibility phases.
 - [Phase 1 Walkthrough](../04-Updates/Phase%201%20Walkthrough.md) — Completed Phase 1 tutorial and reference.
 - [Updates Index](../04-Updates/index.md) — Hub for coordination files.
-- [Demo Countdown - April 8-15, 2026](../04-Updates/Demo%20Countdown%20-%20April%208-15,%202026.md) — Demo day owners, blockers, and exit criteria.
-- [Orch Demo Script - 2026-04-09](../04-Updates/Orch%20Demo%20Script%20-%202026-04-09.md) — locked Orch-only demo route.
+- [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) — demo MOC for script, countdown, owner checklist, and Azure playbook.
+- [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) — Demo day owners, blockers, and exit criteria.
+- [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md) — locked Orch-only demo route.
 - [Comms Log](../04-Updates/comms-log.md) — Agent communication log.
 - [Task Board](../04-Updates/task-board.md) — Sprint task tracker.
 - [Dev Tracker](../04-Updates/dev-tracker.md) — Developer assignment history.

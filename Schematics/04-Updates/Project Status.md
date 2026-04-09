@@ -26,12 +26,13 @@ status: active
   - `npm run build` in `orch/gui` passes
   - `GET /api/labs/microsoft-readiness` returns live readiness with `2/6` required checks and `1/3` optional checks ready
 - Demo truth:
-  - the Orch-only public/admin route is rehearsed and locked in [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
+  - the Orch-only public/admin route is rehearsed and locked in [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md)
   - the wider KasiLink story is still partial because it depends on valid Clerk keys, Atlas access, WhatsApp readiness, Azure sign-in, and real Azure env/resource values
 - Canonical demo notes:
-  - [Demo Countdown - April 8-15, 2026](Demo%20Countdown%20-%20April%208-15,%202026.md)
-  - [Orch Demo Task List - 2026-04-08](Orch%20Demo%20Task%20List%20-%202026-04-08.md)
-  - [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
+  - [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
+  - [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
+  - [Orch Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Orch%20Demo%20Task%20List%20-%202026-04-08.md)
+  - [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md)
 
 ## Current Phase
 
