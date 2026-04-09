@@ -492,3 +492,28 @@ status: active
 - tighten copy and narrative for the demo walkthrough
 - finish the South Africa youth-facing AI UX research summary in `Schematics`
 - rehearse one public path and one admin path without introducing new features
+
+### 2026-04-09 08:15 | Codex | ORCH SCRIPT REHEARSAL LOCKED
+
+**Action:** Ran one public rehearsal and one admin rehearsal against the live Orch UI, then converted the passing click path into a locked Orch-only demo script.
+
+**Verified public path:**
+- `LIVE COUNCIL` shows a fresh live signal
+- `ORCH LABS` opens cleanly
+- `CONSOLE` returns a live reply with `Send To MCP Console`
+- `FORGE` opens the active execution room without breaking
+
+**Verified admin path:**
+- `ADMIN` login succeeds for `admin@orch.local`
+- `Activity Preview` shows the fresh live signal
+- first audited vault session opens a real forensic audit with `2` rounds and `3` cards
+
+**Recorded:**
+- public rehearsal time: `5.1s` in local headless execution
+- admin rehearsal time: `1.7s` in local headless execution
+- current safe route is documented in `Schematics/04-Updates/Orch Demo Script - 2026-04-09.md`
+
+**Next:**
+- tighten youth-facing copy and visual language
+- finish the South Africa AI UX research note
+- reconnect this safe Orch-only route to the full KasiLink Demo Day story

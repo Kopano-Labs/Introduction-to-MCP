@@ -130,3 +130,12 @@
 - replaced drag-only lane movement with an explicit lane selector on each Forge task for demo-safe interaction
 - browser QA now passes for live-event rendering across all three views, Forge create/edit/lane move, and MCP Console send/stream
 - next Orch work is no longer about broken interaction paths; it is about copy polish, South Africa youth-fit research, and full click-path rehearsal
+
+## Orch Script Rehearsal | 2026-04-09 08:15
+
+- locked an Orch-only public path: Live Council -> Orch Labs -> Console -> Forge
+- locked an Orch-only admin path: Admin -> login -> Activity Preview -> Session Vault -> Forensic Audit
+- public rehearsal passed locally in `5.1s` headless runtime with live signal visibility, console reply, and Forge room visibility
+- admin rehearsal passed locally in `1.7s` headless runtime with live activity preview and a real audited session opening successfully
+- current safe demo route is now documented in `Schematics/04-Updates/Orch Demo Script - 2026-04-09.md`
+- next work is to tighten copy and reconnect this Orch-only script to the wider KasiLink end-to-end story

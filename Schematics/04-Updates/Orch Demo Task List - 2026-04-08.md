@@ -133,8 +133,8 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - [ ] verify the admin page clearly reads as internal-only
 - [ ] verify the live council never looks broken when idle
 - [ ] verify a quiet websocket still leaves meaningful visible logs
-- [ ] rehearse one public Labs walkthrough from top to bottom
-- [ ] rehearse one admin login plus vault access walkthrough
+- [x] rehearse one public Labs walkthrough from top to bottom
+- [x] rehearse one admin login plus vault access walkthrough
 - [x] capture the next blocker after the first full GUI rehearsal
 - [ ] decide whether any remaining surface needs fresh copy or tighter labeling
 - [ ] decide whether any non-working section should be hidden for demo day rather than shown half-ready
@@ -154,4 +154,5 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 ## Current Blocker
 
 - full GUI interaction blockers are cleared as of `2026-04-09 07:23`
-- next blocker is product polish: finish youth-facing AI UX research for South Africa, tighten copy, and rehearse the exact public and admin click paths
+- locked Orch-only rehearsal paths now exist for public and admin as of `2026-04-09 08:15`
+- next blocker is product polish: finish youth-facing AI UX research for South Africa, tighten copy, and connect the Orch-only script back to the wider KasiLink demo story

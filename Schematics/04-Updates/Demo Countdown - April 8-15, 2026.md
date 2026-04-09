@@ -82,7 +82,8 @@ status: active
 - live-event rendering now passes across council, public console, and admin after the console relay patch
 - Forge create/edit flows now survive live refresh, and lane movement is pressable through an explicit lane control instead of drag-only behavior
 - MCP Console send and stream both return live replies in browser QA
-- next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and full-walkthrough rehearsal
+- locked Orch-only public and admin rehearsal paths are now recorded with timing and presenter notes
+- next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and reconnecting the Orch shell to the wider KasiLink story
 
 **Primary work**
 - fix the highest-severity blocker from the first rehearsal, which is currently valid Clerk configuration
@@ -90,12 +91,14 @@ status: active
 - confirm protected routes and role-gated flows behave correctly
 - finish the remaining Orch interaction checks now that the shell, auth gate, and vault walkthrough are verified
 - move from blocker removal into guided rehearsal and narrative cleanup
+- lock the exact Orch-only public and admin script while wider integration risk remains
 
 **Exit criteria**
 - demo path completes locally without unknown blockers
 - auth failures, empty-data failures, and missing env failures are either fixed or assigned with owner/date
 - the five-task Orch browser checkpoint is recorded with evidence and the next blocker is explicit
 - Orch GUI blocker list is reduced to zero functional UI failures
+- one public path and one admin path are rehearsed and written down as the current safe demo route
 
 ### 2026-04-10 | Authenticated QA Day
 
