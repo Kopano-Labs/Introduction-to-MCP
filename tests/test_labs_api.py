@@ -295,7 +295,19 @@ def test_connector_actions_execute_playbooks():
     assert execute_response.status_code == 200
     payload = execute_response.json()
     assert payload["status"] == "ready"
-    assert "az login" in payload["commands"]
+    assert "readiness" in payload
+    assert any(command.startswith("az ") for command in payload["commands"])
+
+
+def test_microsoft_readiness_endpoint_reports_shape():
+    response = client.get("/api/labs/microsoft-readiness")
+    assert response.status_code == 200
+    payload = response.json()
+    assert "summary" in payload
+    assert "tooling" in payload
+    assert "env" in payload
+    assert "next_steps" in payload
+    assert "az" in payload["tooling"]
 
 
 def test_labs_analytics_endpoint_reports_forge_and_console(isolated_labs_db):

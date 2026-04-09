@@ -15,6 +15,7 @@ dependencies = [
     "rich>=13",
     "pydantic-settings>=2",
     "python-dotenv>=1",
+    "azure-monitor-opentelemetry>=1.8",
     "litellm>=1.40",
     "sqlalchemy>=2.0",
     "google-generativeai>=0.8.0",

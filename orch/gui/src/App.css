@@ -799,6 +799,18 @@ body {
   gap: 14px;
 }
 
+.microsoft-readiness-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.microsoft-readiness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
 .artifact-grid {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }

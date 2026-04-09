@@ -25,6 +25,7 @@ from .orch_code import get_orch_code_controls, get_orch_code_profile, teach_repo
 from .sa_access import build_access_plan, execute_access_session
 from .dev_watch import read_recent_comms, read_recent_dev_activity
 from .config import settings
+from .microsoft_readiness import gather_microsoft_readiness
 
 
 router = APIRouter(prefix="/api/labs", tags=["labs"])
@@ -297,6 +298,11 @@ def labs_analytics() -> dict:
         "forge": get_creator_analytics(),
         "mcp_console": get_console_analytics(),
     }
+
+
+@router.get("/microsoft-readiness")
+def labs_microsoft_readiness() -> dict:
+    return gather_microsoft_readiness()
 
 
 @router.get("/mcp-console/models")

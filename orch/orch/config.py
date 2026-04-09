@@ -5,6 +5,7 @@ GitHub: https://github.com/RobynAwesome/
 """
 import os
 from pathlib import Path
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings
 from pydantic_settings import SettingsConfigDict
 from typing import Optional
@@ -35,6 +36,27 @@ class Settings(BaseSettings):
     eskom_api_token: Optional[str] = None
     loadshedding_provider_url: Optional[str] = None
     orch_public_url: Optional[str] = None
+
+    # Microsoft / Azure demo readiness
+    azure_subscription_id: Optional[str] = None
+    azure_resource_group: Optional[str] = None
+    azure_app_service_name: Optional[str] = None
+    azure_container_app_name: Optional[str] = None
+    azure_openai_endpoint: Optional[str] = None
+    azure_openai_api_key: Optional[str] = None
+    azure_openai_deployment: Optional[str] = None
+    azure_ai_search_endpoint: Optional[str] = None
+    azure_ai_search_key: Optional[str] = None
+    azure_ai_search_index_name: Optional[str] = None
+    azure_tenant_id: Optional[str] = None
+    azure_client_id: Optional[str] = None
+    azure_app_insights_connection_string: Optional[str] = Field(
+        default=None,
+        validation_alias=AliasChoices(
+            "AZURE_APP_INSIGHTS_CONNECTION_STRING",
+            "APPLICATIONINSIGHTS_CONNECTION_STRING",
+        ),
+    )
 
     # Braintrust Integration (Phase 5)
     braintrust_api_key: Optional[str] = None

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { appendStreamChunk, toEditableArtifact, toEditableTask } from './labsUi';
+import { clientTelemetryConfigured, trackClientEvent } from './telemetry';
 
 type ViewMode = 'council' | 'labs' | 'admin';
 type LessonState = 'queued' | 'learning' | 'learned' | 'shipping';
@@ -33,6 +34,27 @@ interface ConsoleAnalytics { sessions: number; requests: number; average_latency
 interface McpConsoleReply { session_id: number; input: string; topic: string; response: string; suggested_actions: string[]; surfaces: string[]; model_used: string; model_options: Array<{ id: string; label: string; model: string }>; analytics: ConsoleAnalytics; }
 interface LabsOverview { title: string; positioning: string; categories: LabsCategory[]; tools: LabsTool[]; phases: LabsPhase[]; languages: LabsLanguage[]; access_modes: AccessMode[]; cowork_surfaces: CoworkSurface[]; orch_code_tracks: OrchCodeTrack[]; orch_interfaces: OrchInterface[]; cloud_stacks: CloudStack[]; connector_workflows: ConnectorWorkflow[]; installer_actions: InstallerAction[]; metrics: { categories: number; tools: number; critical_tools: number; live_tools: number; languages: number; access_modes: number; interfaces: number; cloud_stacks: number; installer_actions: number; }; }
 interface LabsAnalytics { forge: { rooms: number; tasks: number; artifacts: number; completed_tasks: number; creator_throughput: Array<{ owner: string; count: number }>; event_volume: Array<{ event_type: string; count: number }>; }; mcp_console: ConsoleAnalytics; }
+interface MicrosoftEnvStatus { configured: boolean; missing: string[]; }
+interface MicrosoftReadiness {
+  summary: { required_ready: number; required_total: number; optional_ready: number; optional_total: number; demo_ready: boolean; };
+  tooling: {
+    az: { installed: boolean; version: string | null; path: string | null; healthy: boolean; error: string; };
+    azd: { installed: boolean; version: string | null; path: string | null; healthy: boolean; error: string; };
+    python_packages: { azure_monitor_opentelemetry: boolean; azure_identity: boolean; };
+    telemetry: { attempted: boolean; configured: boolean; reason: string; };
+  };
+  azure_account: { logged_in: boolean; subscription_name: string | null; subscription_id: string | null; tenant_id: string | null; reason: string; };
+  env: {
+    azure_openai: MicrosoftEnvStatus;
+    app_insights: MicrosoftEnvStatus;
+    hosting: MicrosoftEnvStatus;
+    azure_ai_search: MicrosoftEnvStatus;
+    managed_identity: MicrosoftEnvStatus;
+  };
+  frontend: { application_insights_web: { installed: boolean; version: string | null; }; };
+  commands: string[];
+  next_steps: string[];
+}
 interface ExecutionTask { id: string; label: string; done: boolean; }
 interface ExecutionPhase { id: string; title: string; focus: string; tasks: ExecutionTask[]; }
 interface SquadTask { id: string; label: string; owner: string; done: boolean; }
@@ -271,6 +293,7 @@ const App: React.FC = () => {
   const [consoleStream, setConsoleStream] = useState('');
   const [selectedModel, setSelectedModel] = useState<string>('deterministic');
   const [connectorResult, setConnectorResult] = useState<string>('');
+  const [microsoftReadiness, setMicrosoftReadiness] = useState<MicrosoftReadiness | null>(null);
   const [orchCodeProfile, setOrchCodeProfile] = useState<OrchCodeProfile | null>(null);
   const [labsAnalytics, setLabsAnalytics] = useState<LabsAnalytics | null>(null);
   const [draggedTaskId, setDraggedTaskId] = useState<number | null>(null);
@@ -308,13 +331,18 @@ const App: React.FC = () => {
   const latestFeedEntries = feedLog.slice(-10).reverse();
   const consoleFeedPreview = latestFeedEntries.filter((entry) => entry.source !== 'system').slice(0, 3);
   const activeTopView: ViewMode = isAuditMode ? 'admin' : viewMode;
+  const microsoftRequiredRatio = microsoftReadiness
+    ? `${microsoftReadiness.summary.required_ready}/${microsoftReadiness.summary.required_total}`
+    : '0/6';
   const openView = (nextView: ViewMode) => {
     setIsAuditMode(false);
     setViewMode(nextView);
+    trackClientEvent('orch_view_opened', { view: nextView });
   };
   const openLabsSurface = (section?: LabsSection) => {
     setIsAuditMode(false);
     setViewMode('labs');
+    trackClientEvent('orch_labs_opened', { section: section ?? 'default' });
     if (section) {
       window.setTimeout(() => scrollToLabsSection(section), 80);
     }
@@ -333,6 +361,13 @@ const App: React.FC = () => {
       value: String(labsOverview?.metrics.interfaces ?? 0),
       action: () => openLabsSurface('interfaces'),
       active: viewMode === 'labs' && labsSection === 'interfaces' && !isAuditMode,
+    },
+    {
+      label: 'Cloud',
+      detail: 'Check Azure tooling, auth, telemetry, and env readiness.',
+      value: microsoftRequiredRatio,
+      action: () => openLabsSurface('cloud'),
+      active: viewMode === 'labs' && labsSection === 'cloud' && !isAuditMode,
     },
     {
       label: 'Forge',
@@ -436,6 +471,7 @@ const App: React.FC = () => {
 
   const fetchLabsAnalytics = async () => setLabsAnalytics(await (await fetch(`${apiBase}/api/labs/analytics`)).json());
   const fetchOrchCodeControls = async () => setOrchCodeProfile(await (await fetch(`${apiBase}/api/labs/orch-code/controls`)).json());
+  const fetchMicrosoftReadiness = async () => setMicrosoftReadiness(await (await fetch(`${apiBase}/api/labs/microsoft-readiness`)).json());
   const fetchCoworkRooms = async () => {
     const data = await (await fetch(`${apiBase}/api/labs/cowork/rooms`)).json();
     setCoworkRooms(data.rooms);
@@ -452,6 +488,7 @@ const App: React.FC = () => {
     if (roomId) await fetchCoworkRoomDetail(roomId);
     await fetchLabsAnalytics();
     await fetchOrchCodeControls();
+    await fetchMicrosoftReadiness();
   };
 
   useEffect(() => {
@@ -495,12 +532,13 @@ const App: React.FC = () => {
     }, 4000);
 
     const loadInitialData = async () => {
-      const [sessionsData, overviewData, analyticsData, orchCodeData, roomsPayload] = await Promise.all([
+      const [sessionsData, overviewData, analyticsData, orchCodeData, roomsPayload, microsoftReadinessData] = await Promise.all([
         fetch(`${apiBase}/sessions`).then((response) => response.json()),
         fetch(`${apiBase}/api/labs/overview`).then((response) => response.json()),
         fetch(`${apiBase}/api/labs/analytics`).then((response) => response.json()),
         fetch(`${apiBase}/api/labs/orch-code/controls`).then((response) => response.json()),
         fetch(`${apiBase}/api/labs/cowork/rooms`).then((response) => response.json()),
+        fetch(`${apiBase}/api/labs/microsoft-readiness`).then((response) => response.json()),
       ]);
 
       if (!isMounted) return;
@@ -510,6 +548,7 @@ const App: React.FC = () => {
         setLabsAnalytics(analyticsData);
         setOrchCodeProfile(orchCodeData);
         setCoworkRooms(roomsPayload.rooms);
+        setMicrosoftReadiness(microsoftReadinessData);
         logSystemEvent('bootstrap', 'Labs overview, analytics, and session vault loaded.');
 
         if (roomsPayload.rooms.length > 0) {
@@ -578,7 +617,20 @@ const App: React.FC = () => {
   };
   const runConnectorAction = async (actionId: string) => {
     const data = await (await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId })).json();
-    setConnectorResult([data.title, data.summary, ...(data.commands ?? []), ...(data.next_steps ?? [])].join('\n'));
+    const readinessLines = data.readiness
+      ? [
+          `Required checks: ${data.readiness.summary.required_ready}/${data.readiness.summary.required_total}`,
+          `Azure CLI: ${data.readiness.tooling.az.healthy ? data.readiness.tooling.az.version : 'missing or broken'}`,
+          `Azure Developer CLI: ${data.readiness.tooling.azd.healthy ? data.readiness.tooling.azd.version : 'missing or broken'}`,
+          `Azure login: ${data.readiness.azure_account.logged_in ? data.readiness.azure_account.subscription_name : 'not signed in'}`,
+          `Server telemetry: ${data.readiness.tooling.telemetry.configured ? 'configured' : data.readiness.tooling.telemetry.reason}`,
+        ]
+      : [];
+    setConnectorResult([data.title, data.summary, ...readinessLines, ...(data.commands ?? []), ...(data.next_steps ?? [])].join('\n'));
+    if (data.readiness) {
+      setMicrosoftReadiness(data.readiness as MicrosoftReadiness);
+    }
+    trackClientEvent('orch_connector_action', { action_id: actionId });
     logSystemEvent('connector', `${data.title} executed from Orch Labs.`);
   };
   const sendConsoleMessage = async () => {
@@ -778,6 +830,44 @@ const App: React.FC = () => {
             <section id="labs-cloud" className="labs-section split-section">
               <div className="split-panel">
                 <div className="section-heading">Cloud Expansion</div>
+                {microsoftReadiness && (
+                  <article className="labs-card microsoft-readiness-card">
+                    <div className="tool-card-top">
+                      <h3>Microsoft Demo Readiness</h3>
+                      <div className={`criticality-pill ${microsoftReadiness.summary.demo_ready ? 'building' : 'high'}`}>
+                        {microsoftReadiness.summary.demo_ready ? 'READY' : microsoftRequiredRatio}
+                      </div>
+                    </div>
+                    <p>
+                      Live visibility into local Azure tooling, sign-in state, telemetry wiring, and env readiness for the Microsoft-backed demo path.
+                    </p>
+                    <div className="microsoft-readiness-grid">
+                      <article className="signal-card">
+                        <span className="signal-label">Toolchain</span>
+                        <strong>{microsoftReadiness.tooling.az.healthy && microsoftReadiness.tooling.azd.healthy ? 'az + azd live' : 'Fix CLI layer'}</strong>
+                        <p>{microsoftReadiness.tooling.az.version ?? 'az missing'} · {microsoftReadiness.tooling.azd.version ?? 'azd missing'}</p>
+                      </article>
+                      <article className="signal-card">
+                        <span className="signal-label">Azure Auth</span>
+                        <strong>{microsoftReadiness.azure_account.logged_in ? microsoftReadiness.azure_account.subscription_name ?? 'Signed in' : 'Not signed in'}</strong>
+                        <p>{microsoftReadiness.azure_account.logged_in ? 'Subscription context is available for demo checks.' : 'Run az login before claiming live Azure hosting.'}</p>
+                      </article>
+                      <article className="signal-card">
+                        <span className="signal-label">Telemetry</span>
+                        <strong>{microsoftReadiness.tooling.telemetry.configured ? 'Server wired' : 'Server pending'}</strong>
+                        <p>{clientTelemetryConfigured ? 'Browser App Insights env is armed.' : 'Browser App Insights env is still missing.'}</p>
+                      </article>
+                      <article className="signal-card">
+                        <span className="signal-label">Azure OpenAI</span>
+                        <strong>{microsoftReadiness.env.azure_openai.configured ? 'Configured' : 'Missing env'}</strong>
+                        <p>{microsoftReadiness.env.azure_openai.configured ? 'Endpoint, key, and model deployment are present.' : microsoftReadiness.env.azure_openai.missing.join(', ')}</p>
+                      </article>
+                    </div>
+                    <div className="deliverables-list">
+                      {microsoftReadiness.next_steps.map((step) => <div key={step} className="deliverable-item">{step}</div>)}
+                    </div>
+                  </article>
+                )}
                 <div className="labs-grid access-grid">
                   {labsOverview?.cloud_stacks.map((stack) => (
                     <article key={stack.id} className="labs-card phase-card">

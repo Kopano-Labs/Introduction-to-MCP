@@ -9,6 +9,8 @@ from .agent_manager import load_agents
 from .database import get_db_connection, init_db
 from .labs_registry import CLOUD_STACKS, CONNECTOR_WORKFLOWS, INSTALLER_ACTIONS, ORCH_INTERFACES
 from .llm import call_ai_litellm
+from .microsoft_readiness import gather_microsoft_readiness
+from .telemetry import log_demo_event
 
 
 TOPIC_RULES = [
@@ -234,6 +236,27 @@ def execute_connector_action(action_id: str) -> dict[str, Any]:
     action = next((item for item in INSTALLER_ACTIONS if item["id"] == action_id), None)
     if action is None:
         return {"status": "missing", "action_id": action_id, "message": "Installer action not found."}
+    if action_id == "azure-demo-playbook":
+        readiness = gather_microsoft_readiness()
+        log_demo_event(
+            "azure_demo_playbook_checked",
+            required_ready=readiness["summary"]["required_ready"],
+            required_total=readiness["summary"]["required_total"],
+        )
+        return {
+            "status": "ready",
+            "action_id": action_id,
+            "title": action["title"],
+            "summary": (
+                f"{action['summary']} "
+                f"Required Microsoft checks: {readiness['summary']['required_ready']}/"
+                f"{readiness['summary']['required_total']}."
+            ),
+            "commands": readiness["commands"],
+            "next_steps": readiness["next_steps"],
+            "readiness": readiness,
+        }
+    log_demo_event("connector_action_checked", action_id=action_id)
     return {
         "status": "ready",
         "action_id": action_id,

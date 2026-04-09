@@ -2,5 +2,28 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
     "braintrust": "^3.7.1"
-  }
+  },
+  "name": "introduction-to-mcp",
+  "version": "1.0.0",
+  "description": "![Orch Banner](README-bannner.jpg)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobynAwesome/Introduction-to-MCP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues"
+  },
+  "homepage": "https://github.com/RobynAwesome/Introduction-to-MCP#readme"
 }

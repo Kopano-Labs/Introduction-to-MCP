@@ -15,18 +15,26 @@ import uvicorn
 import json
 import asyncio
 import os
+import logging
 from pathlib import Path
 from contextlib import asynccontextmanager
 from .kasilink_api import router as kasilink_router
 from .labs_api import router as labs_router
+from .telemetry import configure_server_telemetry, log_demo_event
+
+logger = logging.getLogger("orch.api")
 
 # --- PROACTIVE NEURAL SHIELD: LIFESPAN LIFECYCLE ---
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    telemetry_state = configure_server_telemetry()
+    logger.info("Orch startup telemetry configured=%s reason=%s", telemetry_state["configured"], telemetry_state["reason"])
+    log_demo_event("orch_api_startup", telemetry_configured=telemetry_state["configured"])
     # Startup: Initialize the Pristine Vault
     init_db()
     print("Pristine Vault online")
     yield
+    log_demo_event("orch_api_shutdown")
     print("Vault sealed. No lingering neural threads.")
 
 app = FastAPI(title="orch AGI Control Plane", lifespan=lifespan)
@@ -107,6 +115,12 @@ async def broadcast(request: Request):
     """Internal endpoint for the simulator to push real-time updates."""
     update = await request.json()
     state.updates.append(update)
+    log_demo_event(
+        "broadcast_received",
+        update_type=update.get("type", "unknown"),
+        agent=update.get("agent", "system"),
+        active_connections=len(state.connections),
+    )
     
     # Push to all active WebSocket connections
     for connection in state.connections:
@@ -144,6 +158,7 @@ def login(request: LoginRequest):
     user = authenticate_user(request.email, request.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
+    log_demo_event("auth_login_success", role=user.get("role", "unknown"))
     return {"status": "ok", "user": user}
 
 @app.get("/sessions")
@@ -231,6 +246,7 @@ async def session_override(session_id: int, request: OverrideRequest):
             "override_score": request.override_score,
             "improvement_hint": request.improvement_hint
         }
+        log_demo_event("session_override", session_id=session_id, block_id=request.block_id, override_score=request.override_score)
         state.updates.append(update)
         for connection in state.connections:
             try:
