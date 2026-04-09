@@ -21,6 +21,12 @@ status: active
 
 Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a younger South African audience fit, a clean top navigation shell, a distinct admin layer, and working demo-level interactions that can be rehearsed live.
 
+## April 8 Closeout
+
+- functional April 8 blocker-removal work is complete on the Codex side
+- the remaining April 8 gap is outside the GUI shell and sits in owner-supplied Clerk plus Atlas access for the wider KasiLink path
+- the unchecked items below now belong to April 9 polish, copy, research, or owner decisions rather than core April 8 functional breakage
+
 ## Active Direction
 
 - [x] keep the public and admin split introduced on 2026-04-08
@@ -170,4 +176,5 @@ Turn Orch into a demo-grade public AI surface with a Claude plus Codex feel, a y
 - full GUI interaction blockers are cleared as of `2026-04-09 07:23`
 - locked Orch-only rehearsal paths now exist for public and admin as of `2026-04-09 08:15`
 - new routed shell and motion layer are verified as of `2026-04-09 18:18`
+- April 8 functional work is closed on the Codex side
 - next blocker is product polish plus routed-shell click-path rehearsal: tighten copy, rerun the full public/admin demo through the new pages, and connect the Orch-only script back to the wider KasiLink demo story

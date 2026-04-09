@@ -26,6 +26,17 @@ status: active
 - Orch Labs already exposes the Microsoft readiness surface.
 - App Insights wiring exists in both backend and GUI, but it is not active until real connection strings are supplied.
 
+## Minimum Needed To Close 2026-04-08
+
+Without the items below, the April 8 countdown row stays owner-blocked even though the repo, Orch shell, and local rehearsal route are already working.
+
+- [ ] provide valid Clerk publishable and secret keys
+- [ ] allowlist the current machine in Atlas or otherwise provide live Mongo reachability
+- [ ] approve whether Demo Day is `ORCH-ONLY SAFE ROUTE` or `FULL KASILINK STORY`
+- [ ] if you want Microsoft presented as a live connected stack, complete Azure sign-in and real env/resource wiring
+
+Use the existing backend and GUI `.env.example` files as the source for what values still need to be filled with real secrets and resource identifiers.
+
 ## Owner Blockers You Must Clear
 
 ### Access And Credentials

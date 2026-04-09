@@ -21,6 +21,7 @@ status: active
 ## Current Truth
 
 - Safe live route: Orch-only public plus admin script is rehearsed and documented.
+- April 8 is closed for Codex-owned work; the only remaining close items are owner-supplied auth, data, and Microsoft account decisions.
 - Microsoft readiness: local tooling is installed, the readiness endpoint is live, and current status is `2/6` required checks plus `1/3` optional checks ready.
 - Wider KasiLink story: still partial until Clerk, Atlas, provider-ranking proof, and WhatsApp readiness are fully handled.
 

@@ -38,6 +38,11 @@ status: active
 - Codex Terminal
 - Owner
 
+**Close state**
+- Codex-owned April 8 work is closed as of `2026-04-09`.
+- The only remaining gap to fully close this row is owner-supplied Clerk plus Atlas access so a real in-app KasiLink rehearsal can run.
+- Until that is cleared, the safe live route remains the rehearsed Orch-only script in [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md).
+
 **Live status**
 - countdown note created
 - stale overlap handoff corrected against the current `KasiLink` repo
@@ -47,7 +52,7 @@ status: active
 - Orch API is verified live on `/api/kasilink/health` and `/api/kasilink/dashboard`
 - `KasiLink` bridge now forwards `/api/orch/*` to the mounted `/api/kasilink/*` upstream path
 - public `GET` access for the home-page Orch dashboard and load-shedding widgets is no longer blocked by app-side sign-in checks
-- Orch GUI public/admin split is now in progress with public Labs limited to demo surfaces and internal boards moved behind `ADMIN PORTAL`
+- Orch GUI public/admin split was started on `2026-04-08` and completed plus verified on `2026-04-09`, with public Labs limited to demo surfaces and internal boards moved behind `ADMIN PORTAL`
 - `orch/gui` now builds cleanly after the public/admin split and live-feed log refactor
 - local demo admin account `admin@orch.local` is registered and granted the `admin` role
 - Orch was restarted on `127.0.0.1:8000` after the GUI rebuild and health still returns `200`
@@ -66,11 +71,16 @@ status: active
 - verify Azure playbook readiness locally
 
 **Exit criteria**
-- overlap note explicitly states what is safe to edit and what is stale
-- Atlas blocker is reduced to a concrete owner action, not a vague risk
-- Orch bridge path and upstream health are verified with evidence
-- one rehearsal attempt is recorded with pass/fail evidence once valid Clerk keys are present
-- one Azure validation pass is recorded with next actions
+- [done] overlap note explicitly states what is safe to edit and what is stale
+- [done] Atlas blocker is reduced to a concrete owner action, not a vague risk
+- [done] Orch bridge path and upstream health are verified with evidence
+- [owner-blocked] one rehearsal attempt is recorded with pass/fail evidence once valid Clerk keys are present
+- [done] one Azure validation pass is recorded with next actions
+
+**Closeout on `2026-04-09`**
+- April 8 is closed for Codex-owned execution.
+- Remaining closure items are now centralized in [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md).
+- Full end-to-end KasiLink rehearsal is still blocked by external auth and data access, not by an unknown engineering failure.
 
 ### 2026-04-09 | Stabilize Demo Path
 
@@ -79,6 +89,7 @@ status: active
 - Codex Terminal
 
 **Live status**
+- April 8 is now closed for Codex-owned work, and the remaining full-stack gap is explicitly tracked as owner-supplied Clerk plus Atlas access
 - Orch GUI now passes browser QA for first-load stability, desktop/mobile layout, Labs launcher scrolling, public/admin boundary, and session-vault audit loading
 - `/sessions` now prioritizes discussions with real audit data and exposes round plus audit-event counts in the vault
 - admin login plus vault access now opens a real two-round forensic audit instead of landing on the empty latest session by default
@@ -93,7 +104,7 @@ status: active
 - next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and reconnecting the Orch shell to the wider KasiLink story
 
 **Primary work**
-- fix the highest-severity blocker from the first rehearsal, which is currently valid Clerk configuration
+- hold the full KasiLink rehearsal until valid Clerk configuration and Atlas reachability are supplied, and use the day to keep the owner handoff exact while the Orch-safe route stays presentable
 - re-run gig creation, data loading, and reasoning visibility checks
 - confirm protected routes and role-gated flows behave correctly
 - finish the remaining Orch interaction checks now that the shell, auth gate, and vault walkthrough are verified
@@ -101,7 +112,7 @@ status: active
 - lock the exact Orch-only public and admin script while wider integration risk remains
 
 **Exit criteria**
-- demo path completes locally without unknown blockers
+- demo path completes locally without unknown blockers, or the remaining blockers are reduced to named owner actions with a safe fallback route
 - auth failures, empty-data failures, and missing env failures are either fixed or assigned with owner/date
 - the five-task Orch browser checkpoint is recorded with evidence and the next blocker is explicit
 - Orch GUI blocker list is reduced to zero functional UI failures
