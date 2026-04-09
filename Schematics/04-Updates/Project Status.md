@@ -24,9 +24,10 @@ status: active
   - `python -m pytest tests/test_labs_api.py -q` passes
   - `python -m compileall orch orch/orch` passes
   - `npm run build` in `orch/gui` passes
+  - `GET /api/labs/microsoft-readiness` returns live readiness with `2/6` required checks and `1/3` optional checks ready
 - Demo truth:
   - the Orch-only public/admin route is rehearsed and locked in [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
-  - the wider KasiLink story is still partial because it depends on valid Clerk keys, Atlas access, WhatsApp readiness, and Azure tooling
+  - the wider KasiLink story is still partial because it depends on valid Clerk keys, Atlas access, WhatsApp readiness, Azure sign-in, and real Azure env/resource values
 - Canonical demo notes:
   - [Demo Countdown - April 8-15, 2026](Demo%20Countdown%20-%20April%208-15,%202026.md)
   - [Orch Demo Task List - 2026-04-08](Orch%20Demo%20Task%20List%20-%202026-04-08.md)
@@ -72,6 +73,7 @@ Phase 6 is operational enough to demo. Phase 7, Phase 8, and Phase 9 remain acti
 - [x] Installer and connector playbook actions added for IDE, CLI, Azure, and AWS
 - [x] Forge task and artifact create-edit flows added
 - [x] Azure Demo Day playbook added to Schematics
+- [x] Microsoft readiness endpoint, Labs card, and telemetry hooks added
 - [ ] Additional Labs tools beyond initial registry
 - [ ] Deep model-backed translation quality beyond deterministic runtime routing
 
@@ -140,6 +142,9 @@ Cowork tasks can now be reassigned with dispatch summaries, move across lanes, a
 
 ### Connector Playbooks
 `/api/labs/connectors/actions` and `/api/labs/connectors/actions/execute` now expose installer and connector execution playbooks for IDE, CLI, Azure, and AWS workflows.
+
+### Microsoft Demo Readiness Surface
+`/api/labs/microsoft-readiness` now reports local Azure CLI and `azd` health, sign-in state, required env coverage, and next actions for the Microsoft-facing demo story. The Orch Labs cloud view also surfaces this status, and telemetry wiring is ready when Application Insights connection strings are present.
 
 ## Capabilities Roadmap
 

@@ -21,8 +21,8 @@ status: active
 
 - valid Clerk publishable and secret keys for the wider authenticated rehearsal
 - Atlas allowlist access for the current machine
-- Azure CLI `az` not installed locally
-- Azure Developer CLI `azd` not installed locally
+- Azure sign-in is not complete yet in the local demo shell
+- Azure OpenAI, App Insights, and hosting env/resource values are still missing
 
 ## Demo-Path Gaps
 
@@ -30,6 +30,7 @@ status: active
 - `whatsapp_bridge_configured: false` remains unresolved for the broader narrative
 - provider-ranking visibility is still not clearly proven in the wider gig flow
 - the Orch-only route is strong, but the bridge back into the full KasiLink story is still incomplete
+- Microsoft readiness is only `2/6` required checks and `1/3` optional checks ready in the current local runtime
 
 ## Product And Verification Gaps
 

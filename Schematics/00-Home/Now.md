@@ -28,8 +28,9 @@ status: active
 
 | Area | State | Truth |
 |------|-------|-------|
-| Orch API + GUI | PASS | `tests/test_labs_api.py` passes, `npm run build` in `orch/gui` passes, and compile checks pass. |
+| Orch API + GUI | PASS | `tests/test_labs_api.py` passes, `npm run build` in `orch/gui` passes, compile checks pass, and `/api/labs/microsoft-readiness` returns live status. |
 | Orch-only demo route | PASS | Public and admin rehearsal paths were locked and passed on `2026-04-09`. |
+| Microsoft readiness | PARTIAL | Local tooling is installed and the live readiness endpoint works, but only `2/6` required checks and `1/3` optional checks are ready. |
 | Full KasiLink story | PARTIAL | Wider buyer story still depends on external auth, data, and integration blockers. |
 | Vault organization | IN PROGRESS | Schematics is the canonical Obsidian layer; root docs are now being indexed instead of moved casually. |
 | Training corpus | ACTIVE | Human, AI, and orchestration profiles are being consolidated into a current training index. |
@@ -46,7 +47,8 @@ status: active
 - valid Clerk keys for the wider authenticated rehearsal
 - Atlas allowlist and live Mongo reachability
 - `whatsapp_bridge_configured: false` for the full KasiLink narrative
-- Azure CLI `az` and Azure Developer CLI `azd` are not installed locally
+- Azure sign-in is still incomplete in the local demo shell
+- Azure OpenAI, App Insights, and hosting env/resource values are still missing
 - product polish: copy tightening, youth-fit research summary, and reconnecting the Orch-only route to the bigger KasiLink story
 
 ## Open These In Order

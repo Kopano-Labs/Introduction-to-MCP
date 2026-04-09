@@ -94,3 +94,7 @@ status: active
 - add current-session training notes for Codex, Robyn, multi-agent profiling, and Claude/Codex/Gemini role analysis
 - remove stale `STRUCTURE/...` references from active Schematics notes
 - reduce VS Code Explorer clutter through editor nesting instead of moving root repo files
+- complete `az login` and `azd auth login` in the live demo shell
+- populate Azure OpenAI, App Insights, and hosting values in the local env before claiming the Microsoft path is demo-ready
+- decide explicitly whether Azure AI Search and managed identity are `IN DEMO` or `DEFERRED`
+- keep Microsoft-facing claims at readiness/proof level until required checks move from `2/6` to `6/6`
