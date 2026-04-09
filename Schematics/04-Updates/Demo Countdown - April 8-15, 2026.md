@@ -83,6 +83,8 @@ status: active
 - Forge create/edit flows now survive live refresh, and lane movement is pressable through an explicit lane control instead of drag-only behavior
 - MCP Console send and stream both return live replies in browser QA
 - locked Orch-only public and admin rehearsal paths are now recorded with timing and presenter notes
+- Azure CLI and Azure Developer CLI now work locally in a non-admin install path, and Orch Labs now exposes a live Microsoft readiness report
+- current Microsoft readiness is `2/6` required checks and `1/3` optional checks on the local runtime; remaining blockers are Azure sign-in plus real Azure OpenAI, App Insights, and hosting env values
 - next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and reconnecting the Orch shell to the wider KasiLink story
 
 **Primary work**

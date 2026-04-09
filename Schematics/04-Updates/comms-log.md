@@ -517,3 +517,19 @@ status: active
 - tighten youth-facing copy and visual language
 - finish the South Africa AI UX research note
 - reconnect this safe Orch-only route to the full KasiLink Demo Day story
+
+### 2026-04-09 16:46 | Codex | MICROSOFT READINESS CHECKPOINT
+
+**Action:** Installed local Microsoft demo tooling without admin rights, wired live Azure readiness checks into Orch Labs, and verified the new surface with tests, GUI build, and a live API hit.
+
+**Verified:**
+- `az version` now works through the per-user wrapper at `C:\Users\rkhol\.local\bin\az.bat`
+- `azd version` now works through `C:\Users\rkhol\.local\bin\azd.exe`
+- `python -m pytest tests/test_labs_api.py` passes with `21` tests
+- `npm run build` passes in `orch/gui`
+- `GET http://127.0.0.1:8000/api/labs/microsoft-readiness` returns live readiness with `2/6` required checks ready and `1/3` optional checks ready
+
+**Still open:**
+- `az login` has not been completed in this environment yet
+- Azure OpenAI, App Insights, and hosting env values are still missing
+- Microsoft-backed demo claims should stay at readiness/proof level until those real resources are connected

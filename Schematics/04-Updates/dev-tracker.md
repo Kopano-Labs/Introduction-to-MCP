@@ -139,3 +139,15 @@
 - admin rehearsal passed locally in `1.7s` headless runtime with live activity preview and a real audited session opening successfully
 - current safe demo route is now documented in `Schematics/04-Updates/Orch Demo Script - 2026-04-09.md`
 - next work is to tighten copy and reconnect this Orch-only script to the wider KasiLink end-to-end story
+
+## Microsoft Demo Readiness | 2026-04-09 16:46
+
+- installed Azure CLI per-user through `C:\Users\rkhol\.local\azure-cli-venv` with wrapper entrypoint `C:\Users\rkhol\.local\bin\az.bat`
+- installed Azure Developer CLI per-user as `C:\Users\rkhol\.local\bin\azd.exe`
+- Orch backend now exposes `GET /api/labs/microsoft-readiness` and the Azure playbook connector now returns live readiness instead of a static checklist
+- backend telemetry hooks now use `azure-monitor-opentelemetry` when `AZURE_APP_INSIGHTS_CONNECTION_STRING` is present
+- GUI now includes browser-side Application Insights wiring plus a Microsoft readiness card inside Orch Labs cloud view
+- `python -m pytest tests/test_labs_api.py` now passes with `21` tests including the new readiness endpoint coverage
+- `orch/gui` passes `npm run build` with the Microsoft readiness surface enabled
+- live Orch runtime now returns `2/6` required Microsoft checks ready and `1/3` optional checks ready on `http://127.0.0.1:8000/api/labs/microsoft-readiness`
+- current Microsoft blockers are no longer missing tooling; they are Azure sign-in plus real env/resource values for Azure OpenAI, App Insights, and hosting
