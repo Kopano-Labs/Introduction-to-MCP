@@ -1,8 +1,8 @@
 ---
 title: Project Status
 created: 2026-04-03
-updated: 2026-04-06
-author: Robyn
+updated: 2026-04-09
+author: Codex
 tags:
   - updates
   - status
@@ -14,12 +14,29 @@ status: active
 
 # orch Project Status & Capabilities
 
-> Current state of the orch project as of 2026-04-06.
-> See also: [[Implementation Plan]], [[Orch Blueprint]], [[KasiLink Integration Plan]], [[DEV_S Reward Program]]
+> Current state of the orch project as of 2026-04-09.
+> See also: [[Now]], [[Implementation Plan]], [[Orch Blueprint]], [[KasiLink Integration Plan]], [[DEV_S Reward Program]]
+
+## Current Snapshot - 2026-04-09
+
+- Delivery mode: `demo hardening`
+- Verified local state:
+  - `python -m pytest tests/test_labs_api.py -q` passes
+  - `python -m compileall orch orch/orch` passes
+  - `npm run build` in `orch/gui` passes
+- Demo truth:
+  - the Orch-only public/admin route is rehearsed and locked in [[Orch Demo Script - 2026-04-09]]
+  - the wider KasiLink story is still partial because it depends on valid Clerk keys, Atlas access, WhatsApp readiness, and Azure tooling
+- Canonical demo notes:
+  - [[Demo Countdown - April 8-15, 2026]]
+  - [[Orch Demo Task List - 2026-04-08]]
+  - [[Orch Demo Script - 2026-04-09]]
 
 ## Current Phase
 
-**Phase 8 Expansion On Top Of Phase 6 Orch Labs** (creator execution, connectors, and demo-day packaging)
+**Demo Hardening Across Phases 6-9**
+
+Phase 6 is operational enough to demo. Phase 7, Phase 8, and Phase 9 remain active in parallel while the immediate focus is stabilizing the live Orch route for Demo Day.
 
 | Phase | Status | Description |
 |-------|--------|-------------|

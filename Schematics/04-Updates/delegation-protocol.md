@@ -1,7 +1,7 @@
 ---
 title: Delegation Protocol
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-04-09
 author: Lead
 tags:
   - delegation
@@ -41,6 +41,14 @@ status: active
 
 ## Rules
 
+### Commit identity rule
+
+1. All commits from this repo must use the Owner identity.
+2. Commit as `RobynAwesome <rkholofelo@gmail.com>`.
+3. Do not improvise a different author name or email.
+4. Before committing, verify git identity if there is any doubt.
+5. If a worker cannot commit under the Owner identity, stop and fix that first.
+
 ### What `DEV_1` and `DEV_2` can do
 
 1. Edit only files explicitly listed in their assignment scope.
@@ -58,6 +66,7 @@ status: active
 4. Change dependencies or global config without explicit approval.
 5. Contact Owner directly about execution details.
 6. Commit `node_modules/`, `.env`, secrets, or vendored config files.
+7. Commit under any name or email other than `RobynAwesome <rkholofelo@gmail.com>`.
 
 ### Shared infrastructure owned by Lead
 

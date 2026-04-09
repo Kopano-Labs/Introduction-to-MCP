@@ -1,81 +1,49 @@
 ---
-title: KasiLink Schematics Dashboard
+title: Introduction to MCP - Root Index
 created: 2026-04-06
-updated: 2026-04-06
-author: RobynAwesome
+updated: 2026-04-09
+author: Codex
 tags:
   - home
-  - dashboard
-  - schematics
+  - index
   - navigation
 priority: critical
 status: active
 ---
 
-# KasiLink Schematics Dashboard
+# Introduction to MCP - Root Index
 
-> Canonical home for the Structure/Schematics/ layer.
-> This mirrors the Anthropic Introduction to MCP vault pattern while staying grounded in KasiLink's repo-backed docs.
+> Repo-root entry note for GitHub and Obsidian.
+> Canonical current-state reading starts in [[Schematics/00-Home/Now|Now]].
 
-## Canonical Notes
+## Open First
 
-- Dashboard: `Schematics/00-Home/Dashboard.md`
-- Mission anchor: `Schematics/01-Mission/Orch Blueprint.md`
-- Delivery truth: `Schematics/04-Updates/Project Status.md`
-- Coordination hub: `Schematics/04-Updates/index.md`
-- Execution plan: `Schematics/04-Updates/Implementation Plan.md`
-- Task board: `Schematics/04-Updates/task-board.md`
-- Reference set: `Schematics/06-Reference/`
+- [[Schematics/00-Home/Now|Now]]
+- [[Schematics/00-Home/Dashboard|Orch Vault - Dashboard]]
+- [[Schematics/04-Updates/Project Status|Project Status]]
+- [[Schematics/04-Updates/Demo Countdown - April 8-15, 2026|Demo Countdown - April 8-15, 2026]]
+- [[Schematics/06-Reference/Repo Documents Index|Repo Documents Index]]
 
-## Active Right Now
+## Current Truth
 
-| Priority | Note                   | Status                          |
-| -------- | ---------------------- | ------------------------------- |
-| CRITICAL | [[Orch Blueprint]]     | Mission anchor                  |
-| CRITICAL | [[Project Status]]     | Current delivery path           |
-| CRITICAL | [[Dashboard]]          | Architecture and file ownership |
-| HIGH     | [[04-Updates/index\|Updates Index]] | Live planning and status |
-| HIGH     | [[task-board]]         | Execution ownership             |
+- Phases 1 through 5 are complete.
+- Phases 6 through 9 are active in parallel.
+- Current operating mode is `demo hardening`.
+- The Orch-only demo route is rehearsed and safe.
+- The full KasiLink story is still partially blocked by external dependencies.
 
-## 01 - Mission
+## Root Docs That Stay At Root
 
-[[Orch Blueprint]] - Product identity, mission, user problem, and why the platform exists.
+- `README.md`
+- `DEMO_DAY_RUNBOOK.md`
+- `DEMO_DAY_10_PHASES_50_TASKS.md`
+- `100_Capabilities_TODO.md`
+- `ORCH_USER_GUIDE.md`
+- `EXECUTION_20_TASKS*.md`
 
-## 02 - Strategy
+These are indexed inside Obsidian through [[Schematics/06-Reference/Repo Documents Index|Repo Documents Index]] rather than moved casually.
 
-[[Implementation Plan]] - Current phase structure, rollout priorities, and the standard path through the repo docs.
+## Rule
 
-## 03 - Architecture
-
-[[Dashboard]] - Route ownership, styling rules, design evidence, information archives, and production surfaces.
-
-## 04 - Updates
-
-[[04-Updates/index|Updates Index]] - Canonical coordination map into `Schematics/04-Updates/`.
-[[Project Status]] - Current execution priorities and hardening direction.
-[[delegation-protocol]] - Delegation and review standard.
-[[task-board]] - Live ownership queue and next actions.
-[[comms-log]] - Chronological execution log.
-[[dev-tracker]] - Per-role execution history.
-[[Azure Demo Day Playbook]] - Demo-day packaging and Azure-facing delivery guidance.
-
-## 05 - Training
-
-[[Lead Self Report]] - Lead execution patterns and operating expectations.
-
-## 06 - Reference
-
-[[CLI Specification]] - CLI source notes and command reference.
-[[Database Schema]] - Data Lake structure and persistence notes.
-[[Neural Link]] - GUI and websocket reference.
-[[WhatsApp Integration]] - Messaging bridge reference.
-
-## Quick Links
-
-- Main structure map: ../../index.md
-- Mission spec: ../../technical-Specifications.md
-- Updates hub: ../../Updates/index.md
-- Issues hub: ../../Issues/index.md
-- Obsidian guide: ../../Obsidian/index.md
-- Live production: https://kasilink.com
-- Portfolio: https://kholofelorababalela.vercel.app/
+- Do not mistake file movement for actual organization.
+- Schematics is the place for indexing, summarizing, and cross-linking repo documents.

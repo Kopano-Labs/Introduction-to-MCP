@@ -1,7 +1,7 @@
 ---
 title: Orch Vault — Dashboard
 created: 2026-04-05
-updated: 2026-04-06
+updated: 2026-04-09
 author: Robyn
 tags:
   - home
@@ -15,7 +15,8 @@ status: active
 # Orch Vault — Dashboard
 
 > Central knowledge base for the Orch multi-agent orchestration system and its integration with KasiLink.
-> Owner: [[Owner Profile | Kholofelo Robyn Rababalela]] · GitHub: RobynAwesome · Phase 6 in progress
+> Owner: [[Owner Profile | Kholofelo Robyn Rababalela]] · GitHub: RobynAwesome
+> Current operating mode: `demo hardening` across Phase 6, Phase 7, Phase 8, and Phase 9.
 
 ---
 
@@ -23,11 +24,11 @@ status: active
 
 | Priority | Note                     | Status               |
 | -------- | ------------------------ | -------------------- |
-| CRITICAL | [[SA Startup Week Demo]] | April 15-17, 2026    |
-| CRITICAL | [[Orch Labs Strategy]]   | Phase 6 building now |
-| CRITICAL | [[Project Status]]       | Phase 6 in progress  |
-| HIGH     | [[Adoption Checklist]]   | Pre-launch hardening |
-| HIGH     | [[DEV_S Reward Program]] | Session governance   |
+| CRITICAL | [[Now]] | Canonical one-note snapshot |
+| CRITICAL | [[Project Status]] | Current phase and delivery truth |
+| CRITICAL | [[Demo Countdown - April 8-15, 2026]] | Demo timeline and blockers |
+| HIGH     | [[Orch Demo Script - 2026-04-09]] | Safe live route |
+| HIGH     | [[05-Training/index|Training Index]] | Profiling and orchestration corpus |
 
 ---
 
@@ -49,6 +50,7 @@ Where we're going and how we get there.
 - [[Microsoft Contract Strategy]] — Azure partnership pitch, service mapping, action items.
 - [[SA Startup Week Demo]] — Hack Day demo plan, April 15-17, 2026.
 - [[Adoption Checklist]] — Steps from prototype to external adoption.
+- [[Orch Concept And Future Foresight]] — long-range framing for Orch as an AI-native operating layer.
 
 ---
 
@@ -67,10 +69,13 @@ How Orch is built.
 
 Active project coordination and status tracking.
 
-- [[Project Status]] — Current phase (Phase 6), capabilities, and progress checklist.
+- [[Project Status]] — current phase stack, capability truth, and demo-hardening status.
+- [[Now]] — current one-note snapshot.
 - [[Implementation Plan]] — Full engineering plan with Labs and accessibility phases.
 - [[Phase 1 Walkthrough]] — Completed Phase 1 tutorial and reference.
 - [[04-Updates/index|Updates Index]] — Hub for coordination files.
+- [[Demo Countdown - April 8-15, 2026]] — Demo day owners, blockers, and exit criteria.
+- [[Orch Demo Script - 2026-04-09]] — locked Orch-only demo route.
 - [[04-Updates/comms-log|Comms Log]] — Agent communication log.
 - [[04-Updates/task-board|Task Board]] — Sprint task tracker.
 - [[04-Updates/dev-tracker|Dev Tracker]] — Developer assignment history.
@@ -83,9 +88,15 @@ Active project coordination and status tracking.
 
 Data and profiles for training the Orch AI system.
 
+- [[05-Training/index|Training Index]] — master map for human, AI, and orchestration notes.
 - [[Owner Profile]] — Robyn's work ethic, communication style, and management patterns.
+- [[Robyn Operator Profile - Session 3]] — current-session operational expectations.
 - [[Lead Self Report]] — Claude Opus 4.6 behavioral audit after MVP sprint.
+- [[Codex Terminal Operational Profile]] — operational profile for this Codex agent.
 - [[Dev2 Behavioral Analysis]] — DEV_2 (Gemini) failure patterns and detection strategies.
+- [[Claude Codex Gemini Session Analysis]] — observed role-fit lessons across sessions.
+- [[Multi-Agent Profiling Framework]] — reusable profiling rubric.
+- [[Vault Hygiene and CRUD Discipline]] — Obsidian-safe organization rule set.
 - [[Kairos Reference]] — Claude Code's assistant mode architecture (reference).
 
 ---
@@ -94,6 +105,8 @@ Data and profiles for training the Orch AI system.
 
 Code samples and archived source files.
 
+- [[Repo Documents Index]] — map of loose root docs and why they stay at repo root.
+- [[Open Issues]] — current blocker ledger.
 - `06-Reference/` — `ci.yml`, `filesystem.py`, `search.py`, `write_file.py`
 - `06-Reference/Archive/` — Original source .txt/.md/.docx files before vault conversion
 - `06-Reference/orch-code-implemtation/` — Reference codebase (Rust + Python)

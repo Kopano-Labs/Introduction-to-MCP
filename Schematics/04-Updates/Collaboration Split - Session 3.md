@@ -27,8 +27,8 @@ Do not overwrite active parallel edits until ownership is reconciled.
 
 Plus two live documentation files:
 
-- `STRUCTURE/04-Updates/Project Status.md`
-- `STRUCTURE/06-Reference/Open Issues.md`
+- `Schematics/04-Updates/Project Status.md`
+- `Schematics/06-Reference/Open Issues.md`
 
 ## Current Repo Reality Check
 

@@ -58,6 +58,8 @@ SafeSkill is the leading **trust layer for AI tools**. It automatically scans ev
   This is a separate MCP-focused terminal app exposed as `mcp-cli`.
 - GUI project: `orch/gui`
   Use `npm run dev`, `npm run lint`, and `npm run build` inside that directory.
+- Obsidian vault: `Schematics`
+  This is the canonical status, training, and strategy layer for repo-backed documentation.
 - Demo runbook: [DEMO_DAY_RUNBOOK.md](DEMO_DAY_RUNBOOK.md)
 - 10-phase task map: [DEMO_DAY_10_PHASES_50_TASKS.md](DEMO_DAY_10_PHASES_50_TASKS.md)
 
@@ -117,7 +119,7 @@ orch whatsapp test --message "Neural Link Stable"
 ---
 
 ## 📊 Architecture
-![MCP Diagram](MCP%20DIAGRAM.png)
+![MCP Diagram](Schematics/Assets/visuals/MCP%20DIAGRAM.png)
 
 ## 🗺️ Roadmap
 

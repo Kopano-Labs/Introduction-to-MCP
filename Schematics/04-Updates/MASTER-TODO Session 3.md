@@ -47,8 +47,8 @@ Next:
 - [ ] confirm whether any deeper reward/referral changes are intended beyond share URL normalization
 
 Known active file set:
-- `STRUCTURE/04-Updates/Project Status.md`
-- `STRUCTURE/06-Reference/Open Issues.md`
+- `Schematics/04-Updates/Project Status.md`
+- `Schematics/06-Reference/Open Issues.md`
 - `app/api/referral/route.js`
 - `app/api/rss/route.js`
 - `app/layout.jsx`

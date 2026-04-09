@@ -1,5 +1,12 @@
 {
   "python.REPL.enableREPLSmartSend": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "index.md": "README.md,ORCH_USER_GUIDE.md,100_Capabilities_TODO.md,BRAINTRUST_SETUP.md,CONTRIBUTING.md,DEMO_DAY_10_PHASES_50_TASKS.md,DEMO_DAY_RUNBOOK.md,EXECUTION_20_TASKS*.md,RELEASE.md,SECURITY.md",
+    "package.json": "package-lock.json",
+    "main.py": "main.spec"
+  },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",

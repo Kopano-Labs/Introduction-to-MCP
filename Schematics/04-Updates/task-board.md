@@ -1,7 +1,7 @@
 ---
 title: Task Board
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-04-09
 author: Lead
 tags:
   - tasks
@@ -85,3 +85,12 @@ status: active
 3. `DEV_1` and `DEV_2` should take bounded Labs or accessibility tasks only.
 4. Lead owns final review and any cross-cutting infrastructure edits.
 5. Security incidents override feature work until tracked exposure is removed and documented.
+
+## Task Addendum - 2026-04-09
+
+- create one canonical current-state note for Obsidian navigation
+- add a repo-doc index so root markdown files are organized without breaking tests or README references
+- add an open-issues note that consolidates current blockers and demo gaps
+- add current-session training notes for Codex, Robyn, multi-agent profiling, and Claude/Codex/Gemini role analysis
+- remove stale `STRUCTURE/...` references from active Schematics notes
+- reduce VS Code Explorer clutter through editor nesting instead of moving root repo files
