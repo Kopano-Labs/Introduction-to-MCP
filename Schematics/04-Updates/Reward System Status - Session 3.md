@@ -1,5 +1,9 @@
 # Reward System Status - Session 3
 
+> [!important]
+> Historical Session 3 reward audit.
+> Use [Now](../00-Home/Now.md) and [Open Issues](../06-Reference/Open%20Issues.md) for current live blockers. Keep this note as the reward-specific audit snapshot and QA backlog.
+
 Status: `AMBER`
 
 ## Confirmed
@@ -20,7 +24,8 @@ Status: `AMBER`
 - birthday reward points behavior
 - manager dashboard wording versus live rewards implementation
 
-## Next
+## Next Current Follow-Through
 
-- reconcile with the parallel lane touching referral code
-- run end-to-end reward QA after that lane pauses
+- run end-to-end reward QA once valid auth and data access are available
+- verify manager and admin reward visibility plus wording against live behavior
+- replace placeholders with real tracked signals or explicitly defer them

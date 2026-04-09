@@ -1,12 +1,15 @@
 ---
 title: 4-Tier Interface Audit Schema - Session 3
-status: active
+status: historical
 owner: Codex Terminal
 ---
 
 # 4-Tier Interface Audit Schema - Session 3
 
-Required sections:
+> Historical Session 3 audit schema.
+> The linked notes remain useful as QA backlog and route-by-route reference, but they are not the live project control notes.
+
+Required sections in each audit note:
 
 1. Mission
 2. Primary Routes

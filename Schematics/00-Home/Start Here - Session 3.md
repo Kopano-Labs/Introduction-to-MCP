@@ -1,7 +1,11 @@
 # Start Here - Session 3
 
+> [!important]
+> Historical Session 3 entrypoint preserved for audit trail.
+> For current live truth use [Now](Now.md), [Project Status](../04-Updates/Project%20Status.md), [task-board](../04-Updates/task-board.md), and [Open Issues](../06-Reference/Open%20Issues.md).
+
 > [!info]
-> This note is the Session 3 entrypoint for anyone joining the project now.
+> This note is the Session 3 archive entrypoint for anyone reviewing that work now.
 
 ## Identity Split
 
@@ -14,6 +18,7 @@
 - Do not overwrite files actively being edited by another lane without first reconciling ownership.
 - Use [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md) as the live board.
 - Use [Collaboration Split - Session 3](../04-Updates/Collaboration%20Split%20-%20Session%203.md) before touching any overlapping file.
+- This note is no longer the live control layer; it is the preserved Session 3 handoff entrypoint.
 
 ## What Is Stable
 
@@ -21,13 +26,13 @@
 - Post-phase follow-ups for newsletter, Mongo resilience, homepage polish, and external-access blockers were completed and committed.
 - `Schematics` already contains the main handoff vault, route inventory, button inventory, and 4-tier UI audit.
 
-## What Is Active Right Now
+## What Was Active In Session 3
 
 - Parallel edits are already present in live app/config files.
 - Session 3 is focused on coordination, clean handoff visibility, reward-system status, and preventing cross-interference.
 - Parallel Codex has explicitly confirmed it stayed out of the untracked Session 3 docs and `lib/bookingSlots.js` lane.
 
-## Newest Session 3 Checkpoint
+## Session 3 Checkpoint Captured Here
 
 - 4-tier Obsidian audit schema created.
 - Guest, User, Manager, and Admin interface audit notes created.
@@ -40,7 +45,7 @@
 - Targeted eslint for the booking/court lane passes with `0` errors and `0` warnings.
 - Full `npm run build` passes; Atlas allowlist warning remains external and non-fatal.
 
-## Open These Next
+## Open These Next For Current Truth
 
 1. [Now](Now.md)
 2. [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md)

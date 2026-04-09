@@ -1,7 +1,12 @@
 # MASTER TODO Session 3
 
+> [!important]
+> Historical Session 3 workboard preserved as evidence.
+> Current live control notes are [Now](../00-Home/Now.md), [task-board](task-board.md), [Open Issues](../06-Reference/Open%20Issues.md), and [Project Status](Project%20Status.md).
+> Open checkboxes below should be read as Session 3 snapshot state unless they are explicitly marked as completed after Session 3.
+
 > [!summary]
-> Live master tracker for the current work split. This file exists to stop cross-interference between `Codex Terminal`, `Codex App`, and the user.
+> Historical master tracker for the Session 3 work split. This file exists to preserve how cross-interference was managed between `Codex Terminal`, `Codex App`, and the user.
 
 ## Color Key
 
@@ -10,7 +15,21 @@
 - `RED` = blocked / external dependency
 - `BLUE` = handoff / needs owner confirmation
 
-## Ownership Board
+## Current Reading Rule
+
+- Treat this file as a historical lane snapshot from `2026-04-08`.
+- Do not treat its parallel-lane file lists as current live collisions without checking current git status.
+- Current cross-note truth has already been reconciled into the top-level Schematics control notes.
+
+## Current Follow-Through Since Session 3
+
+- [x] Azure CLI `az` installed locally after Session 3
+- [x] Azure Developer CLI `azd` installed locally after Session 3
+- [x] Session 3 notes reconciled into current top-level Schematics status notes
+- [ ] Azure sign-in and Microsoft env/resource wiring still remain open
+- [ ] reward system still needs end-to-end authenticated QA
+
+## Historical Ownership Board
 
 ### `AMBER` Codex Terminal
 
@@ -28,8 +47,8 @@
 - [x] fix `GiscusComments` env-readiness bug that was breaking linted builds
 - [x] reduce a safe subset of warning backlog outside the overlapping Codex App lane
 - [x] complete a second safe warning-reduction batch across untouched API/form utility files
-- [ ] keep ownership lanes current while parallel work is active
-- [ ] update this board after each safe session checkpoint
+- [x] keep ownership lanes current while parallel work was active
+- [x] update this board after each safe session checkpoint
 
 Next:
 - keep docs and handoff lane isolated
@@ -39,6 +58,8 @@ Next:
 - verify reward-system completion after conflict risk is gone
 
 ### `AMBER` Codex App / Parallel Lane
+
+> Historical overlap snapshot only. Validate against current repo status before acting on it.
 
 - [ ] finish current overlapping edits already present in git status
 - [ ] publish a short handoff note for changed files and intended next actions
@@ -83,8 +104,10 @@ Next:
 - [ ] Atlas allowlist access for the current dev machine
 - [ ] RapidAPI access/subscription for `whatsapp-osint`
 - [ ] RapidAPI access/subscription for `google-search74`
-- [ ] install Azure CLI `az`
-- [ ] install Azure Developer CLI `azd`
+- [x] install Azure CLI `az` after Session 3
+- [x] install Azure Developer CLI `azd` after Session 3
+- [ ] complete `az login` and `azd auth login`
+- [ ] add Azure OpenAI, App Insights, and hosting env/resource values
 
 ### `AMBER` Reward System
 
@@ -130,7 +153,7 @@ Next:
 - [x] create collaboration split note
 - [x] create reward-system status note
 - [x] mirror Session 3 notes to external `Schematics`
-- [ ] reconcile Session 3 notes back into existing top-level status files after parallel lane ends
+- [x] reconcile Session 3 notes back into existing top-level status files after parallel lane ends
 
 ## Session 3 Checkpoints
 
