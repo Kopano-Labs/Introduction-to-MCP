@@ -1,0 +1,102 @@
++--------------------- Traceback (most recent call last) ---------------------+
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\orch\orch\cli.py:624 in start_api_cmd                                   |
+|                                                                             |
+|   621     from .api import app                                              |
+|   622                                                                       |
+|   623     url = f"http://{host}:{port}"                                     |
+| > 624     console.print(Panel(                                              |
+|   625         f"[bold green]Starting orch AGI Control Plane[/bold green]\n" |
+|   626         f"\U0001f310 API & GUI: [bold cyan]{url}[/bold cyan]",                |
+|   627         expand=False                                                  |
+|                                                                             |
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\.venv\Lib\site-packages\rich\console.py:1697 in print                   |
+|                                                                             |
+|   1694                 overflow = "ignore"                                  |
+|   1695             crop = False                                             |
+|   1696         render_hooks = self._render_hooks[:]                         |
+| > 1697         with self:                                                   |
+|   1698             renderables = self._collect_renderables(                 |
+|   1699                 objects,                                             |
+|   1700                 sep,                                                 |
+|                                                                             |
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\.venv\Lib\site-packages\rich\console.py:870 in __exit__                 |
+|                                                                             |
+|    867                                                                      |
+|    868     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any |
+|    869         """Exit buffer context."""                                   |
+| >  870         self._exit_buffer()                                          |
+|    871                                                                      |
+|    872     def begin_capture(self) -> None:                                 |
+|    873         """Begin capturing console output. Call :meth:`end_capture`  |
+|                                                                             |
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\.venv\Lib\site-packages\rich\console.py:826 in _exit_buffer             |
+|                                                                             |
+|    823     def _exit_buffer(self) -> None:                                  |
+|    824         """Leave buffer context, and render content if required."""  |
+|    825         self._buffer_index -= 1                                      |
+| >  826         self._check_buffer()                                         |
+|    827                                                                      |
+|    828     def set_live(self, live: "Live") -> bool:                        |
+|    829         """Set Live instance. Used by Live context manager (no need  |
+|                                                                             |
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\.venv\Lib\site-packages\rich\console.py:2042 in _check_buffer           |
+|                                                                             |
+|   2039             return                                                   |
+|   2040                                                                      |
+|   2041         try:                                                         |
+| > 2042             self._write_buffer()                                     |
+|   2043         except BrokenPipeError:                                      |
+|   2044             self.on_broken_pipe()                                    |
+|   2045                                                                      |
+|                                                                             |
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\.venv\Lib\site-packages\rich\console.py:2078 in _write_buffer           |
+|                                                                             |
+|   2075                             if self.no_color and self._color_system: |
+|   2076                                 buffer = list(Segment.remove_color(b |
+|   2077                                                                      |
+| > 2078                             legacy_windows_render(buffer, LegacyWind |
+|   2079                         else:                                        |
+|   2080                             # Either a non-std stream on legacy Wind |
+|   2081                             text = self._render_buffer(self._buffer[ |
+|                                                                             |
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\.venv\Lib\site-packages\rich\_windows_renderer.py:19 in                 |
+| legacy_windows_render                                                       |
+|                                                                             |
+|   16             if style:                                                  |
+|   17                 term.write_styled(text, style)                         |
+|   18             else:                                                      |
+| > 19                 term.write_text(text)                                  |
+|   20         else:                                                          |
+|   21             control_codes: Sequence[ControlCode] = control             |
+|   22             for control_code in control_codes:                         |
+|                                                                             |
+| C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to                 |
+| MCP\.venv\Lib\site-packages\rich\_win32_console.py:402 in write_text        |
+|                                                                             |
+|   399         Args:                                                         |
+|   400             text (str): The text to write to the console              |
+|   401         """                                                           |
+| > 402         self.write(text)                                              |
+|   403         self.flush()                                                  |
+|   404                                                                       |
+|   405     def write_styled(self, text: str, style: Style) -> None:          |
+|                                                                             |
+| C:\Python314\Lib\encodings\cp1252.py:19 in encode                           |
+|                                                                             |
+|    16                                                                       |
+|    17 class IncrementalEncoder(codecs.IncrementalEncoder):                  |
+|    18     def encode(self, input, final=False):                             |
+| >  19         return codecs.charmap_encode(input,self.errors,encoding_table |
+|    20                                                                       |
+|    21 class IncrementalDecoder(codecs.IncrementalDecoder):                  |
+|    22     def decode(self, input, final=False):                             |
++-----------------------------------------------------------------------------+
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f310' in 
+position 0: character maps to <undefined>

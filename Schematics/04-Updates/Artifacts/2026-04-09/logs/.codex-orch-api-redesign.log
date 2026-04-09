@@ -1,0 +1,575 @@
+[06:56:05] Database schema initialized successfully.            database.py:192
++----------------------------------+
+| Starting orch AGI Control Plane  |
+| API & GUI: http://127.0.0.1:8000 |
++----------------------------------+
+Opening http://127.0.0.1:8000 in your browser...
+[06:56:11] Database schema initialized successfully.            database.py:192
+Pristine Vault online
+INFO:     127.0.0.1:57269 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52871 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57269 - "GET /assets/index-DB2HU5hl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52131 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62214 - "GET /assets/index-DB2HU5hl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57269 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52131 - "GET /sessions HTTP/1.1" 200 OK
+[06:56:12] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:49301 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.pyINFO:     127.0.0.1:61326 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+:192
+INFO:     127.0.0.1:58415 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65478 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65479 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59611 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59611 - "GET /assets/index-DB2HU5hl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52350 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59611 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52350 - "GET /api/labs/overview HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+[06:57:05] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:60181 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+          INFO:     127.0.0.1:51829 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+ Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:54911 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54911 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54911 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54911 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54911 - "GET /sessions/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58101 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58101 - "GET /assets/index-DB2HU5hl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52774 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58101 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52774 - "GET /api/labs/overview HTTP/1.1" 200 OK
+[06:57:11] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:49639 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61407 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50327 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50327 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54911 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59221 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53197 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53426 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49572 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57595 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55361 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65509 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54673 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63039 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52499 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54283 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54283 - "GET /assets/index-DB2HU5hl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60002 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54283 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60002 - "GET /api/labs/overview HTTP/1.1" 200 OK
+[07:09:31] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63380 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           INFO:     127.0.0.1:64835 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:56449 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56449 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49619 - "POST /broadcast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56449 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64901 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64901 - "GET /assets/index-DB2HU5hl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63881 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64901 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63881 - "GET /api/labs/overview HTTP/1.1" 200 OK
+[07:10:15] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63762 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:INFO:     127.0.0.1:53102 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+192
+INFO:     127.0.0.1:59496 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59496 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59798 - "POST /broadcast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60800 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59496 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59496 - "POST /api/labs/cowork/rooms/3/tasks HTTP/1.1" 200 OK
+[07:10:17] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59496 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59496 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59496 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59496 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52557 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56416 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56416 - "GET /assets/index-DB2HU5hl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60342 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56416 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60342 - "GET /api/labs/overview HTTP/1.1" 200 OK
+[07:11:34] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192INFO:     127.0.0.1:50544 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:62330 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:52846 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52846 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53905 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56050 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62033 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61762 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61762 - "GET /assets/index-BwrvtAwI.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62634 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61762 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62634 - "GET /api/labs/overview HTTP/1.1" 200 OK
+[07:13:40] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            INFO:     127.0.0.1:52136 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+database.py:192
+           Database schema initialized successfully.           INFO:     127.0.0.1:60036 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+ database.py:192
+INFO:     127.0.0.1:53690 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53690 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53900 - "POST /broadcast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53690 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64183 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64183 - "GET /assets/index-BwrvtAwI.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50551 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+[07:13:43] Database schema initialized successfully.           INFO:     127.0.0.1:50551 - "GET /api/labs/overview HTTP/1.1" 200 OK
+ INFO:     127.0.0.1:64183 - "GET /sessions HTTP/1.1" 200 OK
+database.py:192
+           Database schema initialized successfully.            database.py:192
+          INFO:     127.0.0.1:54000 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+ Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            INFO:     127.0.0.1:56205 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+database.py:192
+INFO:     127.0.0.1:63850 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63850 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63850 - "POST /api/labs/cowork/rooms/3/tasks HTTP/1.1" 200 OK
+[07:13:44] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63850 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63850 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63850 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63850 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54904 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54904 - "GET /assets/index-BwrvtAwI.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49803 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49803 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54904 - "GET /sessions HTTP/1.1" 200 OK
+[07:13:59] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:INFO:     127.0.0.1:63099 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:60374 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57354 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57354 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+[07:14:00] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:57354 - "POST /api/labs/mcp-console/chat HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:57354 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57354 - "POST /api/labs/mcp-console/stream HTTP/1.1" 200 OK
+[07:14:01] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:57354 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59494 - "GET /updates HTTP/1.1" 200 OK
+[07:14:26] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:62354 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61892 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63226 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62740 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62740 - "GET /assets/index-BwrvtAwI.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59236 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59236 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62740 - "GET /sessions HTTP/1.1" 200 OK
+[07:15:27] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192INFO:     127.0.0.1:50174 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:49794 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54235 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54235 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54717 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54717 - "GET /assets/index-BwrvtAwI.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54844 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54844 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54717 - "GET /sessions HTTP/1.1" 200 OK
+[07:16:04] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59778 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            INFO:     127.0.0.1:61127 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+database.py:192
+INFO:     127.0.0.1:64885 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64885 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64885 - "POST /api/labs/cowork/tasks/14/edit HTTP/1.1" 200 OK
+[07:16:06] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:64885 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64885 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:64885 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:64885 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52626 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65492 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65492 - "GET /assets/index-BwrvtAwI.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50243 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50243 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65492 - "GET /sessions HTTP/1.1" 200 OK
+[07:17:07] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192INFO:     127.0.0.1:51340 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.           INFO:     127.0.0.1:58067 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+ database.py:192
+INFO:     127.0.0.1:58886 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "POST /api/labs/cowork/tasks/14/edit HTTP/1.1" 200 OK
+[07:17:09] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58886 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58886 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58886 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54433 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57173 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57173 - "GET /assets/index-BwrvtAwI.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52182 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52182 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57173 - "GET /sessions HTTP/1.1" 200 OK
+[07:18:02] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:52404 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58814 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58484 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58484 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58484 - "POST /api/labs/cowork/tasks/14/edit HTTP/1.1" 200 OK
+[07:18:03] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58484 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58484 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58484 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58484 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57142 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59219 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59860 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61593 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61593 - "GET /assets/index-CpgE9CC8.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53714 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53714 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61593 - "GET /sessions HTTP/1.1" 200 OK
+[07:19:45] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:INFO:     127.0.0.1:51536 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:52951 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:64805 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64805 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64109 - "POST /broadcast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64805 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49530 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56302 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49530 - "GET /assets/index-CpgE9CC8.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56302 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49530 - "GET /sessions HTTP/1.1" 200 OK
+[07:19:47] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:58325 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63516 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "POST /api/labs/cowork/rooms/3/tasks HTTP/1.1" 200 OK
+[07:19:48] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59501 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59501 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59501 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "POST /api/labs/cowork/tasks/15/edit HTTP/1.1" 200 OK
+[07:19:49] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59501 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59501 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59501 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55295 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55295 - "GET /assets/index-CpgE9CC8.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63398 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63398 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55295 - "GET /sessions HTTP/1.1" 200 OK
+[07:20:10] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:62535 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           INFO:     127.0.0.1:51914 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63726 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63726 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+[07:20:11] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63726 - "POST /api/labs/mcp-console/chat HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63726 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63726 - "POST /api/labs/mcp-console/stream HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+[07:20:12] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63726 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65049 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65051 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50763 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53393 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53393 - "GET /assets/index-BLUCRsia.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62890 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62890 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53393 - "GET /sessions HTTP/1.1" 200 OK
+[07:21:40] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:57088 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:64412 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61426 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61426 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57089 - "POST /broadcast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61426 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58041 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58041 - "GET /assets/index-BLUCRsia.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49415 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49415 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58041 - "GET /sessions HTTP/1.1" 200 OK
+[07:21:42] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:59638 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:62028 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "POST /api/labs/cowork/rooms/3/tasks HTTP/1.1" 200 OK
+[07:21:43] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "POST /api/labs/cowork/tasks/16/edit HTTP/1.1" 200 OK
+[07:21:44] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "POST /api/labs/cowork/tasks/16/lane HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:61855 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59441 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59441 - "GET /assets/index-BLUCRsia.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53926 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53926 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59441 - "GET /sessions HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:INFO:     127.0.0.1:58706 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:53844 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63694 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63694 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+[07:21:45] Database schema initialized successfully.            database.py:192
+[07:21:46] Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63694 - "POST /api/labs/mcp-console/chat HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63694 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63694 - "POST /api/labs/mcp-console/stream HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:63694 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57717 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57717 - "GET /assets/index-BLUCRsia.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62355 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62355 - "GET /api/labs/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57717 - "GET /sessions HTTP/1.1" 200 OK
+[07:22:13] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:INFO:     127.0.0.1:59043 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:50060 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+[07:22:15] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:56732 - "POST /api/labs/mcp-console/chat HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:56732 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "POST /api/labs/mcp-console/stream HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:56732 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63797 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63699 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62494 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51871 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51397 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58542 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60932 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59049 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60826 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57647 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53235 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64982 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65224 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63930 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58135 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57118 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61833 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56253 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52613 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54560 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53824 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61184 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62248 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55982 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63861 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58952 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60998 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50061 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55968 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56658 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52000 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56227 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60638 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50925 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60004 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52732 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64251 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64251 - "GET /assets/index-BLUCRsia.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56832 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64251 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56832 - "GET /api/labs/overview HTTP/1.1" 200 OK
+[08:15:11] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192INFO:     127.0.0.1:53552 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:64855 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57879 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57879 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59166 - "POST /broadcast HTTP/1.1" 200 OK
+[08:15:12] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:57879 - "POST /api/labs/mcp-console/chat HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:57879 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51453 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51453 - "GET /assets/index-BLUCRsia.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60394 - "GET /assets/index-DnHcW6xt.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51453 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60394 - "GET /api/labs/overview HTTP/1.1" 200 OK
+[08:15:29] Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192INFO:     127.0.0.1:61464 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:64275 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64807 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64807 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61465 - "POST /broadcast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64807 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64807 - "GET /sessions/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62368 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53935 - "GET /api/labs/microsoft-readiness HTTP/1.1" 404 Not Found

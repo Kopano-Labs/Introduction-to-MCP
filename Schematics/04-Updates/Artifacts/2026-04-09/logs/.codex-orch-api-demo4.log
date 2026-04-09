@@ -1,0 +1,68 @@
+[00:09:34] Database schema initialized successfully.            database.py:192
++----------------------------------+
+| Starting orch AGI Control Plane  |
+| API & GUI: http://127.0.0.1:8000 |
++----------------------------------+
+Opening http://127.0.0.1:8000 in your browser...
+[00:09:39] Database schema initialized successfully.            database.py:192
+Pristine Vault online
+INFO:     127.0.0.1:60393 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59746 - "GET /api/kasilink/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60393 - "GET /assets/index-BvPeDrNa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60393 - "GET /assets/index-CfZr9eau.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52085 - "GET /assets/index-BvPeDrNa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60393 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49782 - "GET /api/labs/overview HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.           INFO:     127.0.0.1:64875 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+ database.py:INFO:     127.0.0.1:54807 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+192
+INFO:     127.0.0.1:54819 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54809 - "GET /api/kasilink/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56463 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56464 - "POST /broadcast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56465 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54819 - "GET /updates HTTP/1.1" 200 OK
