@@ -48,7 +48,7 @@ Use the existing backend and GUI `.env.example` files as the source for what val
 
 ### Access And Credentials
 
-- [ ] provide valid Clerk publishable and secret keys for live authenticated rehearsal
+- [x] provide valid Clerk publishable and secret keys for live authenticated rehearsal ✅ 2026-04-10
 - [ ] allowlist the current machine in Atlas or otherwise provide live Mongo reachability
 - [ ] decide whether RapidAPI-backed WhatsApp and Google Search providers are required in the live story
 - [ ] if WhatsApp is in the live story, ensure the needed provider subscriptions or keys are active
