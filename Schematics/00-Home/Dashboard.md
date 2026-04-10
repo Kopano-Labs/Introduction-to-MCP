@@ -1,7 +1,7 @@
 ---
 title: Orch Vault — Dashboard
 created: 2026-04-05
-updated: 2026-04-09
+updated: 2026-04-10
 author: Robyn
 tags:
   - home
@@ -29,7 +29,37 @@ status: active
 | CRITICAL | [Project Status](../04-Updates/Project%20Status.md) | Current phase and delivery truth |
 | CRITICAL | [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
 | HIGH     | [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
+| HIGH     | [Schematics Root Index](../index.md) | Whole-vault map and standing second-brain rules |
 | HIGH     | [Training Index](../05-Training/index.md) | Profiling and orchestration corpus |
+
+---
+
+## 00 — Operating Constitution
+
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
+- DEV_2: `Nother`
+- DEV_3: `Meither`
+- DEV_4: `Cicero`
+- Multi-dev sessions start with the standing dev roster on standby and 20-task boards visible in [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md).
+- Before any task begins, Lead checks current dev progress, live diffs, and the latest [comms-log](../04-Updates/comms-log.md).
+- All current sessions are `pre-sessions` and training data for Orch.
+- Lead may be `Codex`, `Claude`, or `Codex + Claude`.
+- Lead target: `60% management / 40% coding`.
+- Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
+- If a fact is not proven by the vault or official research, ask Master instead of guessing.
+
+---
+
+## Critical Systems
+
+- [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) - dated session reconstruction with direct-vs-reconstructed evidence
+- [08-IDEA'S AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md) - incubation-only idea bank with competitor comparison and implementation options
+- [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md) - Orch development ladder from observer to co-lead
+- [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md) - lead discipline, session smoothness, hierarchy, and token doctrine
+- [11-AI HALUCINATION - CRITICAL](../11-AI%20HALUCINATION%20-%20CRITICAL/index.md) - permanent critical hallucination audit system
+- [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md) - planning archive for plan-mode outputs that should not stay only in chat
+- [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md) - successes, failures, hierarchy events, and self-reflection logs
 
 ---
 
@@ -91,6 +121,7 @@ Active project coordination and status tracking.
 Data and profiles for training the Orch AI system.
 
 - [Training Index](../05-Training/index.md) — master map for human, AI, and orchestration notes.
+- [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md) — active logbook for dev outcomes, hierarchy breaches, token use, and lead self-reflection.
 - [Owner Profile](../05-Training/Owner%20Profile.md) — Robyn's work ethic, communication style, and management patterns.
 - [Robyn Operator Profile - Session 3](../05-Training/Robyn%20Operator%20Profile%20-%20Session%203.md) — current-session operational expectations.
 - [Lead Self Report](../05-Training/Lead%20Self%20Report.md) — Claude Opus 4.6 behavioral audit after MVP sprint.
@@ -107,11 +138,28 @@ Data and profiles for training the Orch AI system.
 
 Code samples and archived source files.
 
+- [Schematics Root Index](../index.md) — whole-vault map and standing rules.
 - [Repo Documents Index](../06-Reference/Repo%20Documents%20Index.md) — map of loose root docs and why they stay at repo root.
 - [Open Issues](../06-Reference/Open%20Issues.md) — current blocker ledger.
 - `06-Reference/` — `ci.yml`, `filesystem.py`, `search.py`, `write_file.py`
 - `06-Reference/Archive/` — Original source .txt/.md/.docx files before vault conversion
 - `06-Reference/orch-code-implemtation/` — Reference codebase (Rust + Python)
+
+---
+
+## New Read Order For Master
+
+1. [Now](Now.md)
+2. [Project Status](../04-Updates/Project%20Status.md)
+3. [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
+4. [Open Issues](../06-Reference/Open%20Issues.md)
+5. [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
+6. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
+7. [11-AI HALUCINATION - CRITICAL](../11-AI%20HALUCINATION%20-%20CRITICAL/index.md)
+8. [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)
+9. [08-IDEA'S AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md)
+10. [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md)
+11. [Training Index](../05-Training/index.md)
 
 ---
 

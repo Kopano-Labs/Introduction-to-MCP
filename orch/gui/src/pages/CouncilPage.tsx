@@ -51,8 +51,8 @@ export function CouncilPage({
           </div>
           <p className="hero-copy-text">{liveCopy}</p>
           <div className="hero-actions">
-            <button type="button" className="action-button primary" onClick={() => onNavigate('console')}>Open Console</button>
-            <button type="button" className="action-button secondary" onClick={() => onNavigate('forge')}>Launch Forge</button>
+            <button type="button" className="action-button primary" onClick={() => onNavigate('labs')}>Open Labs</button>
+            <button type="button" className="action-button secondary" onClick={() => onNavigate('console')}>Open Console</button>
           </div>
           <div className="hero-stat-row">
             <article className="glass-stat">
@@ -101,7 +101,7 @@ export function CouncilPage({
             </span>
           </div>
           <h2>{featuredCard.id.toUpperCase()}</h2>
-          <p className="card-lead">{featuredCard.lastMsg?.content ?? 'No live signal yet. Start the simulator or post to `/broadcast` to light up the council.'}</p>
+          <p className="card-lead">{featuredCard.lastMsg?.content ?? 'No live signal yet. Seed one `/broadcast` event before presenting so the council opens with visible proof instead of waiting.'}</p>
           <div className="reasoning-rail">
             <span className="reasoning-label">Reasoning trace</span>
             <p>{featuredCard.lastMsg?.reasoning ?? 'Support voices remain visible so the room still feels alive while waiting for the next trigger.'}</p>

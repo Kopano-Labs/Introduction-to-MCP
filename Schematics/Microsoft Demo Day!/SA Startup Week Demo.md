@@ -20,13 +20,15 @@ priority: high
 
 - April 15-17, 2026
 
-## Demo Flow
+## Target Story
 
 1. User posts a gig in KasiLink.
 2. Orch ranks providers and explains the choice.
 3. Orch checks load-shedding safety for the slot.
 4. KasiLink sends a WhatsApp notification.
 5. The dashboard shows transparent AI reasoning.
+
+This is the intended end-to-end story for the April 15-17 demo window, not the current 2026-04-09 safe route.
 
 ## Current Practical Status
 

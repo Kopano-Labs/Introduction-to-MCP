@@ -50,6 +50,8 @@ Status: `RED`
 - reward and referral are now a named standing track in the multi-dev operating model
 - every reward-system checkpoint must also be written into [comms-log](comms-log.md) with exact date and full detail
 - reward-system truth must stay mirrored in [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md) until the live control notes absorb it
+- current live note truth remains: there is no proven reward runtime in this workspace
+- `DEV_1` drafted the QA checklist structure and is now on standby pending real code-path access
 
 ## Current Required Follow-Through
 

@@ -57,7 +57,7 @@ export function AdminPage({
             <span className="headline-line">Real audit trails.</span>
           </div>
           <p className="hero-copy-text">
-            Public stays polished. Admin stays operational. This page carries activity preview, vault access, and the forensic replay needed for the demo without leaking internal context into the front stage.
+            This route is intentionally second. Public stays polished, admin stays operational, and the audit trail stays behind the wall.
           </p>
         </div>
         <div className="quick-launch-grid compact">
@@ -111,7 +111,7 @@ export function AdminPage({
               <div className="deliverable-pill">Activity preview and operator relay</div>
               <div className="deliverable-pill">Session vault and forensic replay</div>
               <div className="deliverable-pill">Admin telemetry and cloud truth</div>
-              <div className="deliverable-pill">Governance and override controls</div>
+              <div className="deliverable-pill">Governance controls and optional score overrides</div>
             </div>
           </motion.article>
         </section>
@@ -237,7 +237,7 @@ export function AdminPage({
                 ) : (
                   <motion.div key="empty" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}>
                     <h2>Select a session</h2>
-                    <p>Choose a session from the vault to open its rounds, reasoning blocks, and score override controls.</p>
+                    <p>Choose a session from the vault to open its rounds, reasoning blocks, and optional score override controls.</p>
                   </motion.div>
                 )}
               </AnimatePresence>

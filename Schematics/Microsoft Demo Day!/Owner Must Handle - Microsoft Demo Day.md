@@ -1,7 +1,7 @@
 ---
 title: Owner Must Handle - Microsoft Demo Day
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-10
 author: Codex
 tags:
   - owner
@@ -21,10 +21,17 @@ status: active
 ## Already Done For You
 
 - Orch-only demo route is written and rehearsed in [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md).
+- The conservative live route is locked as `Council -> Labs -> Console send -> Forge view -> Admin audit`.
 - Azure CLI `az` and Azure Developer CLI `azd` are installed locally in a non-admin path.
 - `/api/labs/microsoft-readiness` exists and reports live readiness.
 - Orch Labs already exposes the Microsoft readiness surface.
 - App Insights wiring exists in both backend and GUI, but it is not active until real connection strings are supplied.
+
+## Safe Default If You Do Nothing Else
+
+- The demo can still run on the Orch-only safe route.
+- If the full KasiLink path is not ready, present the Orch shell and say the wider marketplace path is still being connected with production credentials and live data access.
+- If Azure is not fully wired, present Microsoft as `readiness and buyer narrative`, not as a fully connected live Azure stack.
 
 ## Minimum Needed To Close 2026-04-08
 
@@ -53,6 +60,7 @@ Use the existing backend and GUI `.env.example` files as the source for what val
 - [ ] decide whether reward/referral is `IN SCRIPT` or `DEFERRED`
 - [ ] decide whether Azure AI Search is `IN DEMO` or `DEFERRED`
 - [ ] decide whether managed identity plus RBAC is `IN DEMO` or `DEFERRED`
+- [ ] approve the fallback line for any blocked full-stack dependency instead of leaving it vague on the day
 
 ## Azure Implemented Features You Still Must Handle
 
@@ -115,6 +123,13 @@ This is also optional for the current state and should not be claimed unless you
 - [ ] approve the safe route in [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
 - [ ] approve the owner-facing fallback line if the full KasiLink route is not ready
 - [ ] choose whether to present Microsoft as `readiness and buyer narrative` or as `fully connected live Azure stack`
+
+## Owner Fallback Wording
+
+Use these lines if the wider stack is still partial:
+
+- KasiLink fallback: `Today we are showing the Orch shell that powers the operating model while the wider KasiLink marketplace path finishes with production credentials and live data access.`
+- Microsoft fallback: `Today Microsoft is shown as a real readiness path with live tooling and surfaced checks; we are not claiming the full Azure stack is connected until sign-in and resource wiring are complete.`
 
 ## Day-Of-Demo Owner Checklist
 

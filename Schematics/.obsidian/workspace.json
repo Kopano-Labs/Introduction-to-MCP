@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "7f0cbd451da257ea",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "e5345a394c5c7658",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-Home/Dashboard.md",
+                "file": "Microsoft Demo Day!/Owner Must Handle - Microsoft Demo Day.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Dashboard"
+              "title": "Owner Must Handle - Microsoft Demo Day"
             }
           }
         ]
@@ -63,7 +63,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "DEmo day",
+                "query": "microsoft",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -84,11 +84,12 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 403.5,
+    "width": 233.5,
     "collapsed": true
   },
   "right": {
@@ -222,13 +223,24 @@
               "icon": "lucide-file-signature",
               "title": "Footnotes"
             }
+          },
+          {
+            "id": "f006943aba094693",
+            "type": "leaf",
+            "state": {
+              "type": "smart-connections-visualizer",
+              "state": {},
+              "icon": "git-fork",
+              "title": "Smart connections visualizer"
+            }
           }
         ],
         "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 473.5
+    "width": 255.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -255,38 +267,39 @@
       "smart-lookup:Smart Lookup: Open lookup view": false
     }
   },
-  "active": "e5345a394c5c7658",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
-    "04-Updates/Orch Demo Task List - 2026-04-08.md",
-    "02-Strategy/Open Source Product-Ready AI Top 50.md",
-    "02-Strategy/Orch Labs Strategy.md",
-    "02-Strategy/Microsoft Contract Strategy.md",
-    "00-Home/Dashboard.md",
-    "02-Strategy/SA Startup Week Demo.md",
-    "04-Updates/task-board.md",
-    "04-Updates/Project Status.md",
-    "04-Updates/Implementation Plan.md",
-    "03-Architecture/Database Schema.md",
-    "02-Strategy/KasiLink Integration Plan.md",
-    "05-Training/Owner Profile.md",
-    "05-Training/Lead Self Report.md",
-    "05-Training/Kairos Reference.md",
-    "05-Training/Dev2 Behavioral Analysis.md",
-    "Templates/Note Template.md",
+    "10-SESSION IMPROVEMENTS/Official Research - Communication And One-On-Ones.md",
+    "08-IDEA'S AT BIRTH/2026-04-10 - Platform Signals Crosswalk For Orch.md",
+    "12-PLAN MODE SESSIONS/index.md",
+    "12-PLAN MODE SESSIONS/2026-04-10 0146 - Session Number Pending - Additive Schematics Constitution.md",
+    "12-PLAN MODE SESSIONS/2026-04-09 0815 - Session Number Pending - Demo Path Stabilization.md",
+    "12-PLAN MODE SESSIONS",
+    "2026-04-06.md",
+    "08-IDEA'S AT BIRTH/2026-04-10 - Hosted Event Winners And Demo Signals.md",
+    "06-Reference/orch-code-implemtation/src/voice/index.md",
+    "06-Reference/orch-code-implemtation/src/plugins/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/outputStyles/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/native_ts/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/moreright/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/migrations/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/memdir/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/keybindings/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/hooks/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/entrypoints/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/coordinator/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/constants/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/components/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/cli/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/buddy/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/bridge/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/bootstrap/__pycache__/index.md",
+    "06-Reference/orch-code-implemtation/src/assistant/__pycache__/index.md",
+    "Assets/visuals/index.md",
     "Assets/Where we are 2026-04-03.jpg",
     "Assets/ORCH Apprenticeship Training Loop.png",
-    "Excalidraw/Drawing 2026-04-06 12.22.27.excalidraw.md",
-    "2026-04-06.md",
-    "01-Mission/Orch Blueprint.md",
     "Excalidraw",
-    "copilot/copilot-conversations/Summarize_the_recent_updates_from_note.@20260406_122120.md",
-    "04-Updates/comms-log.md",
-    "04-Updates/dev-tracker.md",
-    "copilot/copilot-conversations/Roast_my_writing_in_note_and_give_concrete_actionable_feedback@20260406_121244.md",
     "copilot/copilot-conversations",
-    "06-Reference/orch-code-implemtation/rust/README.md",
-    "06-Reference/orch-code-implemtation/CLAW.md",
-    "copilot/copilot-custom-prompts/Make longer.md",
     "copilot/copilot-custom-prompts",
     "copilot",
     "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/render.rs",
@@ -294,7 +307,6 @@
     "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/input.rs",
     "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/init.rs",
     "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/args.rs",
-    "06-Reference/orch-code-implemtation/rust/crates/claw-cli/src/app.rs",
     "06-Reference/orch-code-implemtation/assets/omx/omx-readme-review-2.png",
     "06-Reference/orch-code-implemtation/assets/omx/omx-readme-review-1.png",
     "06-Reference/orch-code-implemtation/assets/wsj-feature.png",

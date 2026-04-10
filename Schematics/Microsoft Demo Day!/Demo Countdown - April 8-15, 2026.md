@@ -1,7 +1,7 @@
 ---
 title: Demo Countdown - April 8-15, 2026
 created: 2026-04-08
-updated: 2026-04-09
+updated: 2026-04-10
 author: Codex
 tags:
   - demo
@@ -16,17 +16,19 @@ status: active
 
 > Hub: [Microsoft Demo Day!](index.md)
 > Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
+> Close state: [2026-04-09 Close State](2026-04-09%20Close%20State.md)
 
 ## Window
 
 - Demo window: `2026-04-15` to `2026-04-17`
 - Countdown plan owner: Lead
-- Execution baseline: `orch` plus `KasiLink`
+- Execution baseline: `Council -> Labs -> Console send -> Forge view -> Admin audit`; `KasiLink` remains owner-blocked until promoted
 
 ## Assumptions
 
-- Demo success still means the flow in [SA Startup Week Demo](SA%20Startup%20Week%20Demo.md) must work: gig post, provider ranking, load-shedding safety, WhatsApp notification, and transparent reasoning.
-- Azure remains the buyer-facing story for Demo Day.
+- Demo success for the stabilization day means the Orch-only route is polished, rehearsed, and documented.
+- The full flow in [SA Startup Week Demo](SA%20Startup%20Week%20Demo.md) remains the longer-term target: gig post, provider ranking, load-shedding safety, WhatsApp notification, and transparent reasoning.
+- Azure remains the buyer-facing readiness story for Demo Day unless the owner explicitly promotes it further.
 - Reward and referral work stays behind demo-path hardening unless the final live script requires it.
 
 ## Day-By-Day Plan
@@ -88,8 +90,14 @@ status: active
 - Lead
 - Codex Terminal
 
+**Close state**
+- The day is closed when the Orch-only conservative route is polished, rehearsed, and documented as `Council -> Labs -> Console send -> Forge view -> Admin audit`.
+- The full KasiLink route remains explicitly owner-blocked until valid Clerk access, Atlas reachability, and wider marketplace proof are supplied.
+- Microsoft stays framed as `readiness story`, not as a fully connected live Azure stack.
+
 **Live status**
 - April 8 is now closed for Codex-owned work, and the remaining full-stack gap is explicitly tracked as owner-supplied Clerk plus Atlas access
+- the conservative route is locked as `Council -> Labs -> Console send -> Forge view -> Admin audit`
 - Orch GUI now passes browser QA for first-load stability, desktop/mobile layout, Labs launcher scrolling, public/admin boundary, and session-vault audit loading
 - `/sessions` now prioritizes discussions with real audit data and exposes round plus audit-event counts in the vault
 - admin login plus vault access now opens a real two-round forensic audit instead of landing on the empty latest session by default
@@ -103,13 +111,26 @@ status: active
 - routed desktop renders are verified for `#/council`, `#/forge`, and `#/admin`, and a narrow mobile capture also renders cleanly
 - next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and reconnecting the Orch shell to the wider KasiLink story
 
+**Core live route**
+- `Council` opens with visible AI state and a seeded signal if the room is quiet
+- `Labs` acts as the public launch pad and shows the honest Microsoft readiness card
+- `Console send` is the main live answer path
+- `Forge view` shows the active room, tasks, and artifacts without requiring edits
+- `Admin audit` stays clearly internal and comes last
+
+**Excluded from the core route**
+- full KasiLink gig-post to provider-ranking story
+- WhatsApp delivery
+- reward and referral flows
+- Azure AI Search
+- managed identity plus RBAC storytelling
+
 **Primary work**
-- hold the full KasiLink rehearsal until valid Clerk configuration and Atlas reachability are supplied, and use the day to keep the owner handoff exact while the Orch-safe route stays presentable
-- re-run gig creation, data loading, and reasoning visibility checks
-- confirm protected routes and role-gated flows behave correctly
-- finish the remaining Orch interaction checks now that the shell, auth gate, and vault walkthrough are verified
-- move from blocker removal into guided rehearsal and narrative cleanup
-- lock the exact Orch-only public and admin script while wider integration risk remains
+- hold the full KasiLink rehearsal until valid Clerk configuration and Atlas reachability are supplied
+- tighten public and admin copy so quiet states still read as intentional during the demo
+- align the countdown, script, and owner checklist around the same safe-route truth
+- reduce every remaining blocker to a named owner action with fallback wording
+- finish the five-surface Orch verification pass without changing existing endpoints
 
 **Exit criteria**
 - demo path completes locally without unknown blockers, or the remaining blockers are reduced to named owner actions with a safe fallback route

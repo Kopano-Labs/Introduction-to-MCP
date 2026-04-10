@@ -1,7 +1,7 @@
 ---
 title: Delegation Protocol
 created: 2026-04-06
-updated: 2026-04-09
+updated: 2026-04-10
 author: Lead
 tags:
   - delegation
@@ -28,9 +28,24 @@ status: active
 | Role | Identity | Responsibility |
 |------|----------|----------------|
 | **Owner** | Robyn | Final authority. Reviews status, direction, and structural changes. |
-| **Lead** | Lead | Architecture, audits, reviews, shared infrastructure, delegation, and repo-wide decisions. |
-| **DEV_1** | Assigned dev agent | Executes scoped implementation work, reports progress, and verifies deliverables. |
-| **DEV_2** | Assigned dev agent | Executes scoped implementation work, reports progress, and verifies deliverables. |
+| **Lead** | `Codex`, `Claude`, or `Codex + Claude` | Architecture, audits, reviews, shared infrastructure, delegation, and repo-wide decisions. |
+| **DEV_1** | `Germini (Google AI, external by Master)` | Executes scoped implementation work, reports progress, and verifies deliverables. |
+| **DEV_2** | `Nother` | Executes scoped implementation work, reports progress, and verifies deliverables. |
+| **DEV_3** | `Meither` | Executes scoped implementation work, reports progress, and verifies deliverables. |
+| **DEV_4** | `Cicero` | Executes research, governance, and verification work within scoped boundaries. |
+
+## Standing Session Startup Rule
+
+1. In multi-dev sessions, the standing team is `Germini`, `Nother`, `Meither`, and `Cicero`.
+2. Do not invent new ad-hoc spawn roles as the default vault model.
+3. Start sessions with devs on standby and 20-task boards visible in [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md).
+4. Before any task starts, Lead checks:
+   - current dev progress
+   - current code and diff state
+   - latest [comms-log](comms-log.md)
+5. All current sessions are `pre-sessions` and training data for Orch.
+6. Lead target is `60% management / 40% coding`.
+7. Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
 
 ## Session Reset And Reward Rule
 
@@ -49,7 +64,7 @@ status: active
 4. Before committing, verify git identity if there is any doubt.
 5. If a worker cannot commit under the Owner identity, stop and fix that first.
 
-### What `DEV_1` and `DEV_2` can do
+### What `DEV_1` through `DEV_4` can do
 
 1. Edit only files explicitly listed in their assignment scope.
 2. Read any file in the repo before writing code.
@@ -58,7 +73,7 @@ status: active
 5. Run verification commands for their assigned scope.
 6. Stop immediately and report to Lead if a secret, token, or tracked vendor directory is found in git.
 
-### What `DEV_1` and `DEV_2` cannot do
+### What `DEV_1` through `DEV_4` cannot do
 
 1. Edit shared infrastructure without Lead approval.
 2. Rewrite or delete past comms entries.
@@ -67,6 +82,20 @@ status: active
 5. Contact Owner directly about execution details.
 6. Commit `node_modules/`, `.env`, secrets, or vendored config files.
 7. Commit under any name or email other than `RobynAwesome <rkholofelo@gmail.com>`.
+8. Guess when vault evidence or official research is missing.
+
+## Chain Of Command Rule
+
+1. DEV_S report to Lead only.
+2. If a DEV goes directly to Owner about execution details, that is a hierarchy breach.
+3. A hierarchy breach is logged as a Lead-management failure in training notes and session-improvement notes.
+4. Master should ultimately communicate only with Lead in multi-dev sessions.
+
+## Pre-Session Training Rule
+
+1. Treat current sessions as Orch training data, not only task execution.
+2. Log dev successes, failures, hierarchy breaches, and token use into Orch training notes.
+3. Capture management errors as training evidence for future Orch behavior.
 
 ### Shared infrastructure owned by Lead
 
@@ -104,6 +133,10 @@ REPORT: Append one update to [[comms-log]]
 - Detailed progress: [dev-tracker](dev-tracker.md)
 - Phase truth: [Project Status](Project%20Status.md)
 - Reward policy: [DEV_S Reward Program](DEV_S%20Reward%20Program.md)
+- Session reconstruction: [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
+- Lead/process doctrine: [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
+- Hallucination governance: [11-AI HALUCINATION - CRITICAL](../11-AI%20HALUCINATION%20-%20CRITICAL/index.md)
+- Orch training logs: [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
 
 ## Security Incident Rule
 
@@ -122,7 +155,9 @@ Owner
   -> Lead
       -> DEV_1
       -> DEV_2
+      -> DEV_3
+      -> DEV_4
 ```
 
-`DEV_1` and `DEV_2` report to Lead only.
+`DEV_1`, `DEV_2`, `DEV_3`, and `DEV_4` report to Lead only.
 Lead updates Owner through the coordination docs.

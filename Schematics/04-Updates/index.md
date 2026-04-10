@@ -1,7 +1,7 @@
 ---
-title: Schematics Updates Control Center
+title: 04-Updates Index
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-04-10
 author: Codex
 tags:
   - updates
@@ -16,10 +16,19 @@ audience:
 status: active
 ---
 
-# Schematics Updates Control Center
+# 04-Updates Index
 
 > **Purpose:** Single entry point for the planning, status, and coordination files inside `Schematics/04-Updates/`.
 > **Rule:** These files are the execution layer for orch. Product intent still lives in [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [Project Status](Project%20Status.md), and [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md).
+
+## Standing Note
+
+- all current sessions are `pre-sessions` and Orch training data
+- the standing dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
+- Lead can be `Codex`, `Claude`, or `Codex + Claude`
+- Lead manages first and codes second
+- token-saving mode applies outside Plan Mode and outside Lead-only sessions
+- if truth is not proven by the vault or official research, ask Master instead of guessing
 
 ## Read Order
 
@@ -37,10 +46,15 @@ status: active
 12. [task-board](task-board.md) - live ownership and next actions
 13. [comms-log](comms-log.md) - chronological status and directives
 14. [dev-tracker](dev-tracker.md) - per-role execution history
+15. [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) - reconstructed day-by-day session evidence
+16. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md) - lead doctrine, hierarchy, and token discipline
+17. [11-AI HALUCINATION - CRITICAL](../11-AI%20HALUCINATION%20-%20CRITICAL/index.md) - mandatory hallucination incident system
+18. [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md) - Orch training extraction from live sessions
+19. [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md) - archived plan-mode outputs and planning history
 
 ## Workflow
 
-[Dashboard](../00-Home/Dashboard.md) -> [Project Status](Project%20Status.md) -> [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) -> [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) -> [Orch Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Orch%20Demo%20Task%20List%20-%202026-04-08.md) -> [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md) -> [Collaboration Split - Session 3](Collaboration%20Split%20-%20Session%203.md) -> [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md) -> [delegation-protocol](delegation-protocol.md) -> [DEV_S Reward Program](DEV_S%20Reward%20Program.md) -> [task-board](task-board.md) -> [comms-log](comms-log.md) -> [dev-tracker](dev-tracker.md)
+[Dashboard](../00-Home/Dashboard.md) -> [Project Status](Project%20Status.md) -> [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) -> [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) -> [MASTER-TODO Session 3](MASTER-TODO%20Session%203.md) -> [delegation-protocol](delegation-protocol.md) -> [task-board](task-board.md) -> [comms-log](comms-log.md) -> [dev-tracker](dev-tracker.md) -> [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) -> [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md) -> [11-AI HALUCINATION - CRITICAL](../11-AI%20HALUCINATION%20-%20CRITICAL/index.md) -> [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
 
 ## Canonical Sources
 
@@ -52,3 +66,7 @@ status: active
 - Live coordination: [comms-log](comms-log.md)
 - Team ownership: [task-board](task-board.md)
 - Detailed role tracking: [dev-tracker](dev-tracker.md)
+- Session reconstruction: [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
+- Lead/process doctrine: [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
+- Hallucination governance: [11-AI HALUCINATION - CRITICAL](../11-AI%20HALUCINATION%20-%20CRITICAL/index.md)
+- Plan archive: [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)

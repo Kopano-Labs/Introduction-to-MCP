@@ -1,0 +1,46 @@
+---
+title: Archive Index
+created: 2026-04-10
+updated: 2026-04-10
+author: Codex
+tags:
+  - index
+  - archive
+status: active
+---
+
+# Archive
+
+> Auto-generated index for this archive folder.
+> Purpose: Archived source material retained for historical comparison.
+
+## Standing Note
+
+- this folder is part of Orch's second brain
+- all current sessions are pre-session training data for Orch
+- the standing dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
+- Lead manages first and codes second
+- token-saving mode applies outside Plan Mode and outside Lead-only sessions with Master
+- if something is unknown and not proven by the vault or official research, ask Master instead of guessing
+
+## Parent
+
+- [Parent Index](../index.md)
+
+## Direct Children
+
+### Folders
+- Implementations
+
+### Files
+- MCP System Architecture.docx
+- schema.sql
+- source-adoption-checklist.txt
+- source-cli-specification.txt
+- source-neural-link-patch.txt
+- source-whatsapp-guide.txt
+
+## Use Rule
+
+- Use for comparison and recovery, not as the default live truth layer.
+

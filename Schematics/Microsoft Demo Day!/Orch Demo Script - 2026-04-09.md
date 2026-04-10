@@ -1,7 +1,7 @@
 ---
 title: Orch Demo Script - 2026-04-09
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-10
 author: Codex
 tags:
   - orch
@@ -16,6 +16,7 @@ status: active
 
 > Hub: [Microsoft Demo Day!](index.md)
 > Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
+> Close state: [2026-04-09 Close State](2026-04-09%20Close%20State.md)
 
 ## Purpose
 
@@ -23,9 +24,11 @@ Lock a safe Orch-only demo path that can be shown immediately while the wider Ka
 
 ## Locked Story
 
+- Core route: `Council -> Labs -> Console send -> Forge view -> Admin audit`
 - Public path: live reasoning, practical guidance, and creator execution surfaces
 - Admin path: internal oversight, audit visibility, and forensic replay
-- Not in this Orch-only script: full KasiLink gig post, provider ranking, load-shedding check, and WhatsApp delivery
+- Microsoft framing: readiness surface with honest gaps, not a fake fully connected Azure claim
+- Not in this Orch-only script: full KasiLink gig post, provider ranking, load-shedding check, WhatsApp delivery, reward/referral, Azure AI Search, and managed identity storytelling
 
 ## Public Path
 
@@ -37,13 +40,15 @@ Target live narration time: `45-60` seconds
 2. Point at `Latest transmission`
    Line: this is the current AI handoff, not a fake static card.
 3. Click `ORCH LABS`
-   Line: this is the public operating shell for creators, learners, and operators.
-4. Click `CONSOLE`
+   Line: this is the public launch pad for the demo, not an admin surface pretending to be public.
+4. Point at the `Microsoft path` card
+   Line: the Microsoft story here is honest readiness; the toolchain is real, and any missing cloud wiring stays visible.
+5. Click `CONSOLE`
    Prompt: `Show a short creator workflow for Orch Labs`
    Line: Orch can answer operational questions without exposing internal admin logs.
-5. Click `FORGE`
-   Line: Forge is the creator execution surface with rooms, tasks, artifacts, and lane control.
-6. Stop the public path there
+6. Click `FORGE`
+   Line: Forge is the execution view; the room, tasks, and artifacts stay visible even if we do not edit live.
+7. Stop the public path there
    Line: the public side stays polished; governance stays behind admin.
 
 ## Admin Path
@@ -82,10 +87,11 @@ Rehearsal date: `2026-04-09`
 
 ## Presenter Notes
 
-- Use `Send To MCP Console` in the main script, not `Stream Reply`
+- Use `Send Live Prompt` in the main script, not `Stream Reply (Optional)`
 - Keep Forge mostly read-only during the core demo; task edit and lane movement now work, but they are optional proof points, not required story beats
 - Do not open admin before the public story is clear
 - If the live council is quiet, say so directly and seed a fresh signal before continuing
+- Keep the Microsoft card grounded: local tooling and readiness are real, but live Azure sign-in and env wiring are still owner steps unless completed
 
 ## Optional Proof Points
 

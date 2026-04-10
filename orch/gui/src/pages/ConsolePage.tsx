@@ -38,7 +38,7 @@ export function ConsolePage({
             <span className="headline-line">Watch the answer land.</span>
           </div>
           <p className="hero-copy-text">
-            This page borrows from Claude artifacts and builder tools: input on the left, outcome on the right, and the live relay always visible underneath.
+            The conservative live route uses Send on the left and proof on the right. Streaming stays available, but it is a secondary proof point instead of the main demo beat.
           </p>
         </div>
         <div className="quick-launch-grid compact">
@@ -78,8 +78,8 @@ export function ConsolePage({
             <textarea rows={6} value={consoleMessage} onChange={(event) => onConsoleMessageChange(event.target.value)} />
           </label>
           <div className="button-row">
-            <button type="button" className="action-button primary" onClick={onSend}>Send To MCP Console</button>
-            <button type="button" className="action-button secondary" onClick={onStream}>Stream Reply</button>
+            <button type="button" className="action-button primary" onClick={onSend}>Send Live Prompt</button>
+            <button type="button" className="action-button secondary" onClick={onStream}>Stream Reply (Optional)</button>
           </div>
         </motion.article>
 
@@ -90,7 +90,7 @@ export function ConsolePage({
           </div>
           <h2>{consoleReply?.model_used ?? 'deterministic-fallback'}</h2>
           <div className="console-output-panel tall">
-            <p>{consoleStream || consoleReply?.response || 'Send a message to see structured console guidance, suggested actions, and surface routing.'}</p>
+            <p>{consoleStream || consoleReply?.response || 'Send a message to show grounded guidance, suggested actions, and surface routing.'}</p>
           </div>
           {consoleReply && (
             <>
@@ -127,7 +127,7 @@ export function ConsolePage({
                 <span>Relay</span>
                 <span>idle</span>
               </div>
-              <p>Broadcast through `/broadcast` or start the simulator to watch signals flow into the public console.</p>
+              <p>If the relay is quiet, seed one `/broadcast` event before presenting and continue with Send.</p>
             </article>
           )}
         </div>

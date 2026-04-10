@@ -1,7 +1,7 @@
 ---
 title: Open Issues
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-10
 author: Codex
 tags:
   - reference
@@ -16,6 +16,14 @@ status: active
 
 > Consolidated blocker ledger for current Orch and demo work.
 > See also: [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md), [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
+
+## Active Operating Truth
+
+- standing roster: `Codex` / `Germini` / `Nother` / `Meither` / `Cicero`
+- current sessions are `pre-sessions` and training data for Orch
+- reward/referral is still `NO-GO` for live demo use in this workspace
+- token-saving mode is now part of the standing governance doctrine
+- hallucination, hierarchy, and lead-failure logging now belong to the permanent second-brain system
 
 ## Critical External Blockers
 
@@ -55,3 +63,4 @@ If a blocker changes the live demo route, update:
 2. [Project Status](../04-Updates/Project%20Status.md)
 3. [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
 4. this note
+5. [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) if the blocker changes session history or handoff truth

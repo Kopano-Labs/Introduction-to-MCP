@@ -27,7 +27,7 @@
 - [x] Azure Developer CLI `azd` installed locally after Session 3
 - [x] Session 3 notes reconciled into current top-level Schematics status notes
 - [ ] Azure sign-in and Microsoft env/resource wiring still remain open
-- [ ] reward system has no live implementation yet, so authenticated QA is blocked until product and code exist
+- [ ] reward system still needs end-to-end authenticated QA
 
 ## 2026-04-10 Operating Override | Lead And Dev Model
 
@@ -35,23 +35,36 @@
 - DEV_1: `Germini (Google AI)`
 - DEV_2: `Nother`
 - DEV_3: `Meither`
+- DEV_4: `Cicero`
+- `DEV_1` is run externally by Master and must not be confused with a local spawned sub-agent in this Codex session.
 - Standing rule: before starting any task, check current `git status`, active diffs, latest `comms-log.md` entry, and the other dev lanes' current progress.
 - Logging rule: every major checkpoint must be written into [comms-log](comms-log.md) with exact date, time, action, verification, and next blocker truth.
 - Reward rule: reward and referral findings must stay explicit in this board and in [Reward System Status - Session 3](Reward%20System%20Status%20-%20Session%203.md).
+
+### Standing Doctrine Added 2026-04-10
+
+- the standing multi-dev team is now `Germini`, `Nother`, `Meither`, and `Cicero`
+- no additional ad-hoc spawn roles are the default vault model
+- when `Codex` or `Claude` leads, sessions start with the standing dev team on standby and their 20-task boards visible first
+- all current sessions are `pre-sessions` and training data for Orch
+- lead can be `Codex`, `Claude`, or `Codex + Claude`
+- lead target is `60% management / 40% coding`
+- token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master
+- if vault evidence or official research does not prove a claim, stop guessing and ask Master
 
 ### DEV_1 | Germini | Reward System, Product Truth, And Demo Narrative
 
 - [x] check current dev progress, diffs, and latest comms before touching reward work
 - [x] map the live reward and referral code paths that actually exist
 - [x] identify auth and data dependencies blocking end-to-end reward QA
-- [x] verify reward page claims against backend fields and current UI truth
-- [x] verify the referral API contract and expected request plus response behavior
-- [x] verify the 5-level referral ladder against code, not assumptions
-- [x] inspect birthday reward behavior and confirm whether product intent is documented
-- [x] inspect placeholder achievements and classify each one as real, placeholder, or deferred
-- [x] inspect perk redemption logic and record what is proven versus unproven
-- [x] inspect manager and admin reward visibility requirements
-- [x] inspect any rewards wording that still says `coming soon` and decide whether it is true
+- [x] verify reward page claims against backend fields and current UI truth for the current workspace surface
+- [x] verify the referral API contract and expected request plus response behavior for the current workspace surface
+- [x] verify the 5-level referral ladder against code, not assumptions for the current workspace surface
+- [x] inspect birthday reward behavior and confirm whether product intent is documented for the current workspace surface
+- [x] inspect placeholder achievements and classify each one as real, placeholder, or deferred for the current workspace surface
+- [x] inspect perk redemption logic and record what is proven versus unproven for the current workspace surface
+- [x] inspect manager and admin reward visibility requirements for the current workspace surface
+- [x] inspect any rewards wording that still says `coming soon` and decide whether it is true for the current workspace surface
 - [x] build the end-to-end reward QA checklist for live authenticated verification
 - [x] define exact owner actions needed before real reward verification can happen
 - [x] define fallback wording if the reward system is out of the demo script
@@ -62,13 +75,10 @@
 - [x] produce a reward go or no-go recommendation for demo use
 - [x] hand off exact next reward actions to Lead
 
-### DEV_1 Reward Audit Result | 2026-04-10
+**Current lane state:** `STANDBY`
 
-- no live reward or referral code path exists in the current workspace
-- auth and data blockers are real, but the larger blocker is that the reward implementation itself is absent
-- reward page claims, referral API claims, ladder claims, and `coming soon` wording are documentation-only until code lands
-- birthday rewards, placeholder achievements, perk redemption, and manager/admin reward visibility are not proven in runtime code
-- reward/referral is a `NO-GO` for the live demo script until it has an actual implementation to verify
+- DEV_1 completed the documentation-and-truth tranche that was possible from the current workspace.
+- No further reward verification should be assigned until real reward/referral code paths are present or a concrete KasiLink reward codebase slice is supplied.
 
 ### DEV_2 | Nother | Runtime, Verification, And Route Hardening
 
@@ -116,17 +126,32 @@
 - [ ] prepare the next session start-here summary if today rolls over
 - [ ] hand off the final doc pack status to Lead
 
-### DEV_3 Checkpoint - 2026-04-10
+### DEV_4 | Cicero | Governance, Research, And Orch Training System
 
-- [x] current progress, git diff, and latest comms were checked before doc edits
-- [x] Microsoft Demo Day hub and folder index were aligned with the locked safe route and readiness story
-- [x] the countdown baseline was kept honest about `Orch-only` versus owner-blocked `KasiLink`
-- [x] the Orch Demo Script and owner checklist remained synced with the current UI route and blocker wording
-- [x] `SA Startup Week Demo` stayed marked as the target story
-- [x] `Azure Demo Day Playbook` was kept framed as a readiness story
-- [x] a dated comms-log checkpoint was written with the contradiction that was fixed
-- [x] historical notes were preserved while current-date overrides remained in place
-- [ ] next-session start-here summary should be prepared if the date rolls over
+- [x] check current dev progress, diffs, and latest comms before touching governance work
+- [x] verify the standing team roster stays exact across live control notes
+- [x] verify `DEV_1` remains `Germini (Google AI)` everywhere
+- [x] verify `DEV_4` remains `Cicero` everywhere
+- [x] map which folders in `Schematics` still lack `index.md`
+- [x] build the additive-only folder index rollout plan
+- [x] compile official-source management research for lead doctrine
+- [x] compile official-source Microsoft startup and platform signals
+- [x] compile official-source AWS startup and agentic-platform signals
+- [x] compile official-source OpenAI agent platform signals
+- [x] compile official-source Anthropic agent and MCP signals
+- [x] compile Africa-first hosted-event and startup proof signals from official sources
+- [x] create the incubation process for [08-IDEA'S AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md)
+- [x] create the staged progression ladder for [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md)
+- [x] create the lead self-reflection doctrine for [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
+- [x] create the hallucination taxonomy and protocol scaffolding for [11-AI HALUCINATION - CRITICAL](../11-AI%20HALUCINATION%20-%20CRITICAL/index.md)
+- [x] scrape historical hallucination and fabrication references from `Schematics`
+- [x] mirror governance changes into [dev-tracker](dev-tracker.md) and [comms-log](comms-log.md)
+- [x] keep reward `NO-GO` truth explicit in governance and demo notes
+- [x] hand off the research and governance pack status to Lead
+
+**Current lane state:** `SUBSTANTIAL PASS COMPLETE`
+
+- remaining work is now refinement, continued research deepening, and clean review before commit
 
 ## Historical Ownership Board
 
@@ -150,6 +175,7 @@
 - [x] update this board after each safe session checkpoint
 
 Next:
+
 - keep docs and handoff lane isolated
 - visually QA the new court imagery and hourly booking flow on real mobile breakpoints
 - continue warning reduction only in untouched files
@@ -160,113 +186,4 @@ Next:
 
 > Historical overlap snapshot only. Validate against current repo status before acting on it.
 
-- [ ] finish current overlapping edits already present in git status
-- [ ] publish a short handoff note for changed files and intended next actions
-- [x] confirm current lane is mainly site-url/env normalization and nav/search cleanup
-- [x] confirm parallel lane did not touch untracked Session 3 docs or `lib/bookingSlots.js`
-- [ ] confirm whether any deeper reward/referral changes are intended beyond share URL normalization
-
-Known active file set:
-- `Schematics/04-Updates/Project Status.md`
-- `Schematics/06-Reference/Open Issues.md`
-- `app/api/referral/route.js`
-- `app/api/rss/route.js`
-- `app/layout.jsx`
-- `app/robots.js`
-- `app/sitemap.js`
-- `components/BottomNavbar.jsx`
-- `components/SearchModal.jsx`
-- `lib/config/env.js`
-- `lib/constants.js`
-- `lib/integrations/stripe.js`
-- `lib/notificationSender.js`
-- `lib/sendBookingConfirmation.js`
-- `package.json`
-
-Next:
-- complete feature/code lane safely
-- verify centralized `SITE_URL` behavior across metadata, RSS, robots, sitemap, Stripe, email, and referral links
-- verify search modal and bottom navbar route-change behavior after refactor
-- avoid editing Session 3 coordination notes unless reconciling with this board
-
-### `BLUE` User / Client
-
-- [ ] decide when overlapping code lane is stable enough for merge/review
-- [ ] provide or activate any blocked external access still needed
-- [ ] approve reward-system completion scope if it expands beyond current UX/API
-
-## Priority Work Still Open
-
-### `RED` External / Access Blockers
-
-- [ ] valid Clerk publishable key and secret key for live rehearsal
-- [ ] Atlas allowlist access for the current dev machine
-- [ ] RapidAPI access/subscription for `whatsapp-osint`
-- [ ] RapidAPI access/subscription for `google-search74`
-- [x] install Azure CLI `az` after Session 3
-- [x] install Azure Developer CLI `azd` after Session 3
-- [ ] complete `az login` and `azd auth login`
-- [ ] add Azure OpenAI, App Insights, and hosting env/resource values
-
-### `AMBER` Reward System
-
-- [x] reward page exists
-- [x] rewards API exists
-- [x] referral data model exists on `User`
-- [x] referral API exists with `GET` and `POST` handlers
-- [x] 5-level referral point ladder is implemented in code
-- [ ] verify `/api/referral` end-to-end with real authenticated users after parallel lane stabilizes
-- [ ] replace placeholder achievements with real tracked signals
-- [ ] verify perk redemption logic and manager/admin visibility
-- [ ] verify rewards copy, progression rules, and data truth against bookings/history
-- [ ] review birthday reward interaction with `referralPoints` and confirm product intent
-- [ ] review manager dashboard messaging where rewards/profile still says "coming soon"
-- [ ] add reward-system QA checklist to admin/handoff docs once code lane is stable
-
-### `AMBER` QA / Product Safety
-
-- [x] confirm current working tree is buildable with active parallel lane
-- [x] confirm lint currently passes with warnings only and no hard errors in the parallel report
-- [x] confirm the live Orch API mount path is `/api/kasilink/*`
-- [x] align `KasiLink` Orch proxy routing with the mounted upstream path
-- [x] allow public `GET` bridge access for the home-page Orch dashboard and load-shedding widgets
-- [x] confirm the booking/court change set passes targeted eslint with no warnings
-- [x] confirm court detail routes can fall back to seeded local court data during Mongo outages
-- [x] confirm the latest safe-lane warning-reduction files pass targeted eslint cleanly
-- [x] confirm the second safe-lane warning batch reduced the combined lint report to `56` warnings
-- [ ] reduce existing lint warning backlog now that `next build` is linting again
-- [ ] run a real in-app demo rehearsal once valid Clerk keys are present
-- [ ] confirm Mongo-backed writes once Clerk and Atlas access are live
-- [ ] decide whether WhatsApp delivery is required in the demo script now that Orch reports `whatsapp_bridge_configured: false`
-- [ ] full authenticated manager mutation sweep
-- [ ] full authenticated admin mutation sweep
-- [ ] confirm popup preference toggle fix end-to-end
-- [ ] confirm mobile dimensions and macOS menu fixes on real breakpoints
-- [ ] confirm local fixtures redesign parity against live fixtures standard
-- [ ] visually approve the regenerated court imagery on live court pages
-- [ ] verify service worker cache rollover serves the new court assets on real devices
-
-### `BLUE` Documentation / Handoff
-
-- [x] create Session 3 start-here note
-- [x] create collaboration split note
-- [x] create reward-system status note
-- [x] mirror Session 3 notes to external `Schematics`
-- [x] reconcile Session 3 notes back into existing top-level status files after parallel lane ends
-
-## Session 3 Checkpoints
-
-- [x] Session 3 bootstrap started
-- [x] `STRUCTURE` reviewed for current state
-- [x] reward-system state audited at code level
-- [x] master board created
-- [x] current working tree build verified
-- [x] 4-tier audit pack added
-- [x] court media refresh and hourly booking pass implemented
-- [x] fallback court detail route support added for local/offline data mode
-- [x] safe-lane warning cleanup checkpoint added
-- [x] second safe-lane warning cleanup checkpoint added
-- [x] Orch bridge mount path verified and app proxy aligned
-- [ ] ownership board reconciled with Codex App output
-- [ ] reward lane resumed safely
-- [ ] merge/review checkpoint logged
+- [ ] finish current overlapping edits already presen

@@ -84,24 +84,24 @@ export function ForgePage({
             <span className="headline-line">Ship with receipts.</span>
           </div>
           <p className="hero-copy-text">
-            Forge is now its own page so the demo can breathe: rooms, lanes, task movement, and artifacts all stay visible without fighting the rest of the shell.
+            Forge is the execution view in the safe route: open the active room, show tasks and artifacts, and only edit if you need an optional proof point.
           </p>
         </div>
         <div className="quick-launch-grid compact">
           <article className="quick-launch-card static">
             <span className="stat-label">Rooms</span>
             <strong>{coworkRooms.length}</strong>
-            <p>Live workspaces ready for demo routing.</p>
+            <p>Prepared workspaces ready for demo routing.</p>
           </article>
           <article className="quick-launch-card static">
             <span className="stat-label">Tasks</span>
             <strong>{activeRoom?.dispatch_summary.total_tasks ?? 0}</strong>
-            <p>Tracked execution steps in the selected room.</p>
+            <p>Current room workload visible without requiring live edits.</p>
           </article>
           <article className="quick-launch-card static">
             <span className="stat-label">Artifacts</span>
             <strong>{activeRoom?.artifact_summary.total_artifacts ?? 0}</strong>
-            <p>Living outputs attached to the current work lane.</p>
+            <p>Outputs stay attached to the room so the story has receipts.</p>
           </article>
         </div>
       </motion.section>
@@ -110,9 +110,9 @@ export function ForgePage({
         <motion.article className="glass-card composer-card" layout>
           <div className="card-topline">
             <span className="eyebrow">New room</span>
-            <span className="signal-chip neutral">live</span>
+            <span className="signal-chip neutral">optional</span>
           </div>
-          <h2>Launch a forge room</h2>
+          <h2>Optional room creation</h2>
           <label className="field-shell">
             <span>Name</span>
             <input value={roomName} onChange={(event) => onRoomNameChange(event.target.value)} />
@@ -129,7 +129,7 @@ export function ForgePage({
             <span className="eyebrow">Rooms</span>
             <span className="signal-chip neutral">{coworkRooms.length}</span>
           </div>
-          <h2>Switch rooms</h2>
+          <h2>Open the active room</h2>
           <div className="room-rail">
             {coworkRooms.map((room) => (
               <button key={room.id} type="button" className={`room-chip ${activeRoom?.id === room.id ? 'active' : ''}`} onClick={() => onSelectRoom(room.id)}>
@@ -147,9 +147,9 @@ export function ForgePage({
             <motion.article className="glass-card composer-card" layout>
               <div className="card-topline">
                 <span className="eyebrow">Task composer</span>
-                <span className="signal-chip live">{editingTaskId ? 'edit' : 'new'}</span>
+                <span className="signal-chip neutral">{editingTaskId ? 'edit' : 'optional'}</span>
               </div>
-              <h2>{editingTaskId ? 'Edit task' : 'Add task'}</h2>
+              <h2>{editingTaskId ? 'Edit task' : 'Optional task edit'}</h2>
               <label className="field-shell">
                 <span>Title</span>
                 <input value={taskTitle} onChange={(event) => onTaskTitleChange(event.target.value)} />
@@ -182,9 +182,9 @@ export function ForgePage({
             <motion.article className="glass-card composer-card" layout>
               <div className="card-topline">
                 <span className="eyebrow">Artifact composer</span>
-                <span className="signal-chip neutral">{editingArtifactId ? 'edit' : 'new'}</span>
+                <span className="signal-chip neutral">{editingArtifactId ? 'edit' : 'optional'}</span>
               </div>
-              <h2>{editingArtifactId ? 'Edit artifact' : 'Add artifact'}</h2>
+              <h2>{editingArtifactId ? 'Edit artifact' : 'Optional artifact edit'}</h2>
               <label className="field-shell">
                 <span>Type</span>
                 <select value={artifactType} onChange={(event) => onArtifactTypeChange(event.target.value)}>
@@ -210,7 +210,7 @@ export function ForgePage({
 
           <motion.section className="glass-card lane-board" layout>
             <div className="card-topline">
-              <span className="eyebrow">Execution board</span>
+              <span className="eyebrow">Active room board</span>
               <span className="signal-chip neutral">{activeRoom.dispatch_summary.total_tasks} tasks</span>
             </div>
             <div className="lane-board-header">

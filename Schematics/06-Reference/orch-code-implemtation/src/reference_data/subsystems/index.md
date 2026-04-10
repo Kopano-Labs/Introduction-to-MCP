@@ -1,0 +1,69 @@
+---
+title: subsystems Index
+created: 2026-04-10
+updated: 2026-04-10
+author: Codex
+tags:
+  - index
+  - code-reference
+status: active
+---
+
+# subsystems
+
+> Auto-generated index for this imported-reference folder.
+> Purpose: Imported reference codebase preserved inside Schematics for study and comparison.
+
+## Standing Note
+
+- this folder is part of Orch's second brain
+- all current sessions are pre-session training data for Orch
+- the standing dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
+- Lead manages first and codes second
+- token-saving mode applies outside Plan Mode and outside Lead-only sessions with Master
+- if something is unknown and not proven by the vault or official research, ask Master instead of guessing
+
+## Parent
+
+- [Parent Index](../index.md)
+
+## Direct Children
+
+### Folders
+- none
+
+### Files
+- assistant.json
+- bootstrap.json
+- bridge.json
+- buddy.json
+- cli.json
+- components.json
+- constants.json
+- coordinator.json
+- entrypoints.json
+- hooks.json
+- keybindings.json
+- memdir.json
+- migrations.json
+- moreright.json
+- native_ts.json
+- outputStyles.json
+- plugins.json
+- remote.json
+- schemas.json
+- screens.json
+- server.json
+- services.json
+- skills.json
+- state.json
+- types.json
+- upstreamproxy.json
+- utils.json
+- vim.json
+- voice.json
+
+## Use Rule
+
+- Treat this tree as reference-only unless Master explicitly asks to sync or study it.
+

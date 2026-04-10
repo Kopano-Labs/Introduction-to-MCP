@@ -29,11 +29,12 @@ We are executing Phase 8 expansion on top of the Phase 6 Orch Labs foundation, w
 - current readiness is `2/6` required checks and `1/3` optional checks ready
 - remaining blockers are Azure sign-in plus real Azure OpenAI, App Insights, and hosting env values
 
-## Azure-First Story
+## Azure Readiness Story
 
 - Host the Labs API and GUI on Azure app surfaces that can demo reliably.
-- Use Azure identity, observability, and AI services as the public buyer-facing story.
+- Use Azure identity, observability, and AI services as the public buyer-facing readiness story.
 - Keep AWS parity visible, but do not let it dilute the Demo Day message.
+- Do not claim a fully connected Azure production stack until the owner steps in the checklist are complete.
 
 ## Execution Tracks
 
