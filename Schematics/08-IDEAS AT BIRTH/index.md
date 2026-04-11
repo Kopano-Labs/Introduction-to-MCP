@@ -1,5 +1,5 @@
 ---
-title: 08-IDEA'S AT BIRTH Index
+title: 08-IDEAS AT BIRTH Index
 created: 2026-04-10
 updated: 2026-04-10
 author: Codex
@@ -12,7 +12,7 @@ priority: high
 status: active
 ---
 
-# 08-IDEA'S AT BIRTH Index
+# 08-IDEAS AT BIRTH Index
 
 > These are ideas still in incubation.
 > Nothing in this folder is approved roadmap work by default.

@@ -36,7 +36,7 @@ status: active
 
 - [07-Sessions By Day](../../07-Sessions%20By%20Day/index.md)
 - [10-SESSION IMPROVEMENTS](../../10-SESSION%20IMPROVEMENTS/index.md)
-- [11-AI HALUCINATION - CRITICAL](../../11-AI%20HALUCINATION%20-%20CRITICAL/index.md)
+- [11-AI HALLUCINATION - CRITICAL](../../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 
 ## Logging Rule
 

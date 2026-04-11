@@ -12,10 +12,10 @@
 
 - new folders added and populated for:
   - `07-Sessions By Day`
-  - `08-IDEA'S AT BIRTH`
+  - `08-IDEAS AT BIRTH`
   - `09-ORCH PROGRESSION`
   - `10-SESSION IMPROVEMENTS`
-  - `11-AI HALUCINATION - CRITICAL`
+  - `11-AI HALLUCINATION - CRITICAL`
   - `12-PLAN MODE SESSIONS`
   - `05-Training/Orch Train Logs`
 - all folders under `Schematics` now have `index.md`

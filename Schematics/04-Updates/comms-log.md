@@ -21,6 +21,28 @@ status: active
 > Chronological command log for orch coordination.
 > Newest entries stay at the top.
 
+### 2026-04-11 time not confirmed | Lead | KASILINK MAIN RECOVERED AND STRUCTURE-DRIVEN HARDENING SHIPPED
+
+**Action:**
+
+- re-established `main` as the canonical KasiLink delivery branch
+- preserved recovery history instead of overwriting it blindly
+- pushed Structure-driven route hardening to `main` at commit `ea64d58`
+- verified the production Vercel deployment started from that commit
+
+**Verified:**
+
+- `npm run lint` passed on the shipped worktree
+- `npm run build` passed on the shipped worktree
+- `npm test` passed with the Vitest-native script path
+- Vercel production deployment started for commit `ea64d58`
+
+**Next:**
+
+- continue the UI reconciliation pass for `/`, `/marketplace`, `/forum`, and `/verified`
+- keep updating `Structure/Design/route-audit-matrix.md`
+- keep writing session truth into `Schematics/07-Sessions By Day/2026-04-11.md`
+
 ### 2026-04-10 10:30 | DEV_1 | REWARD QA CHECKLIST DRAFTED & STANDBY
 
 **Action:** Identified auth (Clerk) and data (Atlas MongoDB) dependencies blocking the end-to-end reward QA based on `Dashboard.md` protocols. Drafted the reward QA checklist structure.

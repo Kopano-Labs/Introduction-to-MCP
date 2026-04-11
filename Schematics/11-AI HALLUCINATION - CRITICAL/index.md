@@ -1,7 +1,7 @@
 ---
-title: 11-AI HALUCINATION - CRITICAL Index
+title: 11-AI HALLUCINATION - CRITICAL Index
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-04-11
 author: Codex
 tags:
   - hallucination
@@ -12,7 +12,7 @@ priority: critical
 status: active
 ---
 
-# 11-AI HALUCINATION - CRITICAL Index
+# 11-AI HALLUCINATION - CRITICAL Index
 
 > Permanent critical red-alert system for hallucination tracking across `Codex`, `Claude`, `Germini`, `Nother`, `Meither`, `Cicero`, and future `Orch`.
 
@@ -38,9 +38,12 @@ status: active
 - [Hallucination Solutions Library](Solutions/Hallucination%20Solutions%20Library.md)
 - [Hallucination Database Master](Database/Hallucination%20Database%20Master.md)
 
-## First Required Incident
+## Incidents
 
 - [2026-04-10 0146 - DEV Role Mapping Hallucination From Cicero To Germini](Incidents/2026-04-10%200146%20-%20DEV%20Role%20Mapping%20Hallucination%20From%20Cicero%20To%20Germini.md)
+- [2026-04-11 0057 - Assumed Instruction Hallucination From Claude](Incidents/2026-04-11%200057%20-%20Assumed%20Instruction%20Hallucination%20From%20Claude.md) — CRITICAL — Claude acted without instruction, consumed tokens at overflow rates
+- [2026-04-11 0057 - Capability Hallucination Edge Browser From Claude](Incidents/2026-04-11%200057%20-%20Capability%20Hallucination%20Edge%20Browser%20From%20Claude.md) — MID — 8 rounds of impossible browser attempts, ~R238 wasted
+- [2026-04-11 0057 - False Instruction Attribution Token Audit From Claude](Incidents/2026-04-11%200057%20-%20False%20Instruction%20Attribution%20Token%20Audit%20From%20Claude.md) — CRITICAL — Claude claimed Master asked for token audit when Master said only "WHY?" — **3rd hallucination same session = recurring pattern**
 
 ## Connected Systems
 
