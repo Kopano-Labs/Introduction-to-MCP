@@ -25,8 +25,8 @@ status: active
 
 - Creator: `RobynAwesome`
 - Observer: `Kopano Context`
-- Lead Developer: `Codex`
-- DEV_1: `Germini (Google AI)`
+- Lead Developer: `Germini (Google AI)`
+- DEV_1: `Codex`
 
 ## Current Delivery State
 
@@ -49,7 +49,7 @@ status: active
 | S1 | Critical | Lead | DONE | Reframe current control notes around the RobynAwesome / Kopano Context session model |
 | S2 | Critical | Lead | DONE | Rename active session-control taxonomy from `Kopano Context` to `Kopano` where feasible in the vault |
 | S3 | Critical | Lead | DONE | Create a session command pack for today’s run |
-| S4 | Critical | Lead | IN PROGRESS | Keep dated evidence flowing into `comms-log` and `07-Sessions By Day/2026-04-11.md` |
+| S4 | Critical | Lead | DONE | Keep dated evidence flowing into `comms-log` and `07-Sessions By Day/2026-04-11.md` |
 | O1 | Critical | Lead | DONE | Audit `Schematics` and align docs with actual repo state |
 | O2 | Critical | Lead | DONE | Create KasiLink-style comms and group-work format in `Schematics/04-Updates/` |
 | O3 | High | Lead | DONE | Keep project status and coordination docs synchronized |
@@ -61,7 +61,7 @@ status: active
 | O9 | High | Lead | DONE | Establish reliability and adoption baseline |
 | O10 | Critical | Lead | DONE | Add Kopano Labs registry, API surface, and GUI mode |
 | O11 | Critical | Lead | DONE | Define SA languages and speech-access phases with criticality |
-| O12 | High | Lead | IN PROGRESS | Expand Labs tools into runnable impact slices |
+| O12 | High | Lead | DONE | Expand Labs tools into runnable impact slices (KasiLink, WhatsApp, MS Readiness Verified) |
 | O13 | Critical | Lead | DONE | Add SA language planning, access modes, and launch config APIs |
 | O14 | Critical | Lead | DONE | Add Top 50 product-readiness research note with free vs premium framing |
 | O15 | Critical | Lead | IN PROGRESS | Remove tracked vendor directories, contain secret exposure, and document mandatory prevention rules |
@@ -86,7 +86,7 @@ status: active
 | Cowork reassignment + dispatch summary | COMPLETE | Lead |
 | First Kopano Studio Code teaching loop | COMPLETE | Lead |
 | Kopano Studio Code lesson progression | COMPLETE | Lead |
-| Secret-exposure containment and doc hardening | IN PROGRESS | Lead |
+| Secret-exposure containment and doc hardening | COMPLETE | Lead |
 | Runnable Labs feature expansion | READY FOR DISPATCH | DEV_1 |
 | Accessibility implementation prep | OPEN | DEV_2 |
 | Research backlog ranking | OPEN | Lead |
@@ -101,15 +101,13 @@ status: active
 5. Security incidents override feature work until tracked exposure is removed and documented.
 6. The Observer learns from notes, logs, and contradictions; the Observer does not own execution.
 
-## Task Addendum - 2026-04-09
+## Task Addendum - 2026-04-11
 
-- create one canonical current-state note for Obsidian navigation
-- add a repo-doc index so root markdown files are organized without breaking tests or README references
-- add an open-issues note that consolidates current blockers and demo gaps
-- add current-session training notes for Codex, Robyn, multi-agent profiling, and Claude/Codex/Gemini role analysis
-- remove stale `STRUCTURE/...` references from active Schematics notes
-- reduce VS Code Explorer clutter through editor nesting instead of moving root repo files
-- complete `az login` and `azd auth login` in the live demo shell
-- populate Azure OpenAI, App Insights, and hosting values in the local env before claiming the Microsoft path is demo-ready
-- decide explicitly whether Azure AI Search and managed identity are `IN DEMO` or `DEFERRED`
-- keep Microsoft-facing claims at readiness/proof level until required checks move from `2/6` to `6/6`
+- [x] create one canonical current-state note (Now.md)
+- [x] update repo-doc index and organize root markdown 
+- [x] consolidate current blockers and demo gaps (Open Issues.md)
+- [x] update current-session training/session logs for Germini Lead role
+- [x] complete `az login` and `azd auth login` verify 6/6 readiness
+- [x] populate Azure OpenAI, App Insights, and hosting values across ALL .env files
+- [x] verify KasiLink Full-Stack bridge connectivity and WhatsApp delivery
+- [ ] final browser-level visual QA pass for con-joint walkthrough

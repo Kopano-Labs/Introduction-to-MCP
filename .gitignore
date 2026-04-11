@@ -14,3 +14,7 @@ KasiLink
 # Dependency directories must never be committed.
 node_modules/
 **/node_modules/
+
+# Second Brain
+Schematics/
+

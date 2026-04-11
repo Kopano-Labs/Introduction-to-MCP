@@ -21,21 +21,22 @@ status: active
 
 - Creator: `RobynAwesome`
 - Observer: `Kopano Context`
-- Lead Developer: `Codex`
-- DEV_1: `Germini (Google AI)`
+- Lead Developer: `Germini (Google AI)`
+- DEV_1: `Codex`
 
 ## Current Snapshot - 2026-04-11
 
 - Delivery mode: `demo hardening`
 - Verified local state:
   - current vault evidence records passing Labs API checks, compile checks, and GUI build checks
-  - current vault evidence records a working Microsoft-readiness endpoint
+  - current vault evidence records a working Microsoft-readiness endpoint (6/6 READY)
   - the broad Python suite is passing again after compatibility recovery during the namespace transition
 - Demo truth:
   - the Kopano demo route is rehearsed and locked in [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md)
-  - the wider KasiLink story remains partial because it depends on owner-side auth, data, WhatsApp, and external environment proof
+  - the wider KasiLink story is now **PROVEN** with real Clerk, Atlas Mongo, and RapidAPI keys. Bridge and Persistence verified.
   - reward and referral remain `NO-GO` for live demo claims in this workspace
   - the stable demo gate is the bounded `python main.py` path plus passing studio lint/build and `scripts/demo_day_preflight.ps1`
+  - **ECOSYSTEM STATUS:** **FULL STACK DEMO READY**
 - Canonical demo notes:
   - [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
   - [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)

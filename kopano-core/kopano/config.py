@@ -23,10 +23,15 @@ class Settings(BaseSettings):
     db_path: str = "db/datalake.db"
 
     # WhatsApp Integration (Phase 3)
-    whatsapp_api_key: Optional[str] = None
-    whatsapp_instance_url: Optional[str] = None
+    whatsapp_api_key: Optional[str] = Field(None, validation_alias=AliasChoices("WHATSAPP_API_KEY", "WHATSAPP_TOKEN"))
+    whatsapp_instance_url: Optional[str] = Field(None, validation_alias=AliasChoices("WHATSAPP_INSTANCE_URL", "WHATSAPP_PHONE_ID"))
     whatsapp_instance_name: str = "main"
-    whatsapp_recipient: Optional[str] = None # Default recipient JID
+    whatsapp_recipient: Optional[str] = Field(None, validation_alias=AliasChoices("WHATSAPP_RECIPIENT", "RECIPIENT_PHONE"))
+
+    # RapidAPI
+    rapidapi_key: Optional[str] = None
+    rapidapi_whatsapp_host: Optional[str] = None
+    rapidapi_google_search_host: Optional[str] = None
 
     # KasiLink bridge / Hack Day integration
     kasilink_frontend_url: Optional[str] = None

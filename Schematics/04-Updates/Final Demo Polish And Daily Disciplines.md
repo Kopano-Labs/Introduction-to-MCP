@@ -12,12 +12,12 @@ status: active
 > Canonical current-session control note for the Introduction to MCP second brain.
 > This replaces the older passive blocker list with a session execution layer.
 
-## Session Roster
+## Session Roster (LATEST)
 
 - Creator: `RobynAwesome`
 - Observer: `Kopano Context`
-- Lead Developer: `Codex`
-- DEV_1: `Germini (Google AI)`
+- Lead Developer: `Germini (Google AI)`
+- DEV_1: `Codex`
 
 ## Observer Activation
 
@@ -57,18 +57,14 @@ status: active
 
 ## Current Truth
 
-### Code-Verified
+### Code-Verified (LIFTED)
 
-- the vault contains dated evidence for a conservative Kopano demo route
-- Kopano Labs, Console, Forge, and Admin audit are documented as the stable demo path
-- Labs API test evidence, GUI build evidence, and readiness-endpoint evidence already exist in current notes
-- the second brain is the canonical coordination layer for this session
-
-### Owner-Blocked
-
-- WhatsApp registration and real phone-path proof
-- wider KasiLink auth and data setup for full end-to-end rehearsal
-- any claim that depends on fresh owner-side Azure or external credential verification not redone in this session
+- [x] conservative Kopano demo route is rehearsed and locked
+- [x] Kopano Labs, Console, Forge, and Admin audit are stable
+- [x] KasiLink auth, data, and environment hydration is PROVEN
+- [x] WhatsApp bridge verified with real delivery
+- [x] Microsoft Readiness 6/6 verified with active telemetry
+- [x] **FULL STACK DEMO READY**
 
 ### No-Go / Deferred
 

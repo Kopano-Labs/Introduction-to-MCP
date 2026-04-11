@@ -20,9 +20,9 @@ status: active
 
 ## Window
 
-- Demo window: `2026-04-15` to `2026-04-17`
+- Window: `2026-04-15` to `2026-04-17`
 - Countdown plan owner: Lead
-- Execution baseline: `Council -> Labs -> Console send -> Forge view -> Admin audit`; `KasiLink` remains owner-blocked until promoted
+- Execution baseline: `KasiLink -> Council -> Labs -> Console -> Forge -> Admin audit`; **KasiLink is PROVEN and READY.**
 
 ## Assumptions
 

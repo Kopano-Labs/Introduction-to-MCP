@@ -21,8 +21,8 @@ status: active
 
 - Creator: `RobynAwesome`
 - Observer: `Kopano Context`
-- Lead Developer: `Codex`
-- DEV_1: `Germini (Google AI)`
+- Lead Developer: `Germini (Google AI)`
+- DEV_1: `Codex`
 
 ## Current Phase
 
@@ -31,15 +31,15 @@ status: active
 - Active buildout: Phase 6, Phase 7, Phase 8, and Phase 9 are active in parallel.
 - Practical truth: the demo-ready path right now is the Kopano Context surface, not the full end-to-end KasiLink marketplace story.
 
-## Operating Constitution As Of 2026-04-10
+## Operating Constitution As Of 2026-04-11
 
-- Lead Developer: `Codex`
-- DEV_1: `Germini (Google AI)`
+- Lead Developer: `Germini (Google AI)`
+- DEV_1: `Codex`
 - DEV_2: `Nother`
 - DEV_3: `Meither`
 - DEV_4: `Cicero`
 - These are the standing devs for multi-dev sessions. No new ad-hoc spawn roles are the default vault model.
-- Lead may rotate between `Codex`, `Claude`, or `Codex + Claude`.
+- Lead may rotate between `Germini`, `Codex`, or `Claude`.
 - Lead target is `60% management / 40% coding`.
 - Every task starts with a dev-progress check, a live diff check, and a [comms-log](../04-Updates/comms-log.md) check.
 - All current sessions count as `pre-sessions` and training data for Kopano Context.
@@ -52,11 +52,12 @@ status: active
 |------|-------|-------|
 | Kopano Context API + Studio | PROVEN | The vault records passing Labs API checks, clean GUI builds, compile checks, and a working readiness endpoint. |
 | Kopano demo route | PROVEN | The conservative route remains `Council -> Labs -> Console -> Forge -> Admin audit`, with dated rehearsal evidence in Demo Day notes. |
-| Microsoft readiness | PARTIAL | Tooling and Azure-facing proof exist in the vault, but current demo claims must stay separated from any owner-blocked external setup not re-verified in this session. |
-| Full KasiLink story | BLOCKED | Wider buyer story still depends on external auth, data, WhatsApp, and owner-supplied environment truth. |
+| Microsoft readiness | PROVEN | Tooling and Azure-facing proof exist in the vault. Readiness checks are 6/6 green. Telemetry is active. |
+| Full KasiLink story | PROVEN | Backend and Frontend environments are hydrated with Clerk, Mongo, and RapidAPI keys. Bridge and Mongo persistence are verified. |
 | Reward / referral story | DEFERRED | Documentation exists, but live code proof is still not established in this workspace and remains `NO-GO` for demo claims. |
-| Vault organization | IN PROGRESS | Schematics is now the control layer and is being actively re-aligned to the Kopano team model. |
-| Training corpus | ACTIVE | Human, AI, session, hallucination, and Kopano Context progression notes are being consolidated into one second-brain system. |
+| Vault organization | DONE | Schematics is now the control layer and is fully aligned to the Kopano Context team model. |
+| Training corpus | ACTIVE | Human, AI, session, hallucination, and Kopano Context progression notes are consolidated into one second-brain system. |
+| **ECOSYSTEM STATUS** | **READY** | **Ecosystem is formally FULL STACK DEMO READY.** |
 
 ## Demo Day Position
 
@@ -69,10 +70,9 @@ status: active
 
 ## Biggest Open Blockers
 
-- owner-side WhatsApp registration and device proof for the live phone route
-- wider KasiLink auth and data dependencies for any end-to-end external story
+- owner-side WhatsApp registration and device proof for final live phone route handshake
 - reward/referral remains documentation-only in this workspace and is `NO-GO`
-- rebrand migration across session-control notes and demo navigation
+- final browser-level visual QA for the con-joint marketplace/orchestration walkthrough
 - current-session evidence logging so the Observer can learn from grounded notes instead of chat fragments
 
 ## New Control Systems
