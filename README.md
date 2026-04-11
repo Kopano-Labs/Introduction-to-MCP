@@ -32,7 +32,7 @@
 - ✅ Listed in the SafeSkill registry
 - ✅ Safe to use in production
 
-![Kopano SafeSkill Verified 100/100](C:\Users\rkhol\.gemini\antigravity\brain\79115bdc-0feb-4063-bbee-ccc05612dfb8\safeskill_verified_100_badge_1775890696534.png)
+![Kopano SafeSkill Verified 100/100](README-safeskill-verified.png)
 
 ---
 
