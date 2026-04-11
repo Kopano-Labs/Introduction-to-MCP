@@ -2,18 +2,25 @@
 ![Kopano Context Banner](README-bannner.jpg)
 
    ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-    ![LiteLLM](https://img.shields.io/badge/LiteLLM-FF6F00?logo=star&logoColor=white)
-    ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
-    ![Typer](https://img.shields.io/badge/Typer-000000?logo=fastapi&logoColor=white)
-    ![MCP](https://img.shields.io/badge/MCP-Model_Context_Protocol-6B46C1)
-    ![SafeSkill](https://img.shields.io/badge/SafeSkill-Verified-10B981)
-    ![Microsoft Ready](https://img.shields.io/badge/Microsoft-Demo_Ready-blue?logo=microsoft)
-    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+   ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+   ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
+   ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+   ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
+   ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)
+   ![Azure](https://img.shields.io/badge/Azure-0078D4?logo=microsoft-azure&logoColor=white)
+   ![Clerk](https://img.shields.io/badge/Clerk-6C47FF?logo=clerk&logoColor=white)
+   ![LiteLLM](https://img.shields.io/badge/LiteLLM-FF6F00?logo=star&logoColor=white)
+   ![MCP](https://img.shields.io/badge/MCP-Model_Context_Protocol-6B46C1)
+   ![SafeSkill](https://img.shields.io/badge/SafeSkill-Verified-10B981)
+   ![Microsoft Ready](https://img.shields.io/badge/Microsoft-Demo_Ready-blue?logo=microsoft)
+   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # 🌍 Kopano Context
 
 **Full-Stack Multi-Agent Orchestration & South African Impact Ecosystem**
 **Official Reference Implementation for the Model Context Protocol (MCP)**
+
+📧 **Contact:** [rkholofelo@context.kopanolabs.com](mailto:rkholofelo@context.kopanolabs.com)
 
 > *Orchestrating intelligent discussions. Unifying social context. Empowering South African innovation.*
 >
@@ -58,6 +65,13 @@
 - **Persistent Data Lake** — High-fidelity logging to SQLite for auditing, replay, and JSONL training data generation.
 - **Microsoft Staging** — Native support for Azure OpenAI, application insights telemetry, and `azd` deployment.
 - **Long-term Memory** — Persistent associative memory ensures agents recall context across sessions.
+
+---
+
+## 🌐 Production Surface
+- **Kopano Context Studio:** [www.context.kopanolabs.com](https://www.context.kopanolabs.com)
+- **Kasilink Market:** [www.kasilink.co.za](https://www.kasilink.co.za) (Beta)
+- **Support & Governance:** [rkholofelo@context.kopanolabs.com](mailto:rkholofelo@context.kopanolabs.com)
 
 ---
 

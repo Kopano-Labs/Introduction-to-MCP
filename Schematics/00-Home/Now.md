@@ -76,6 +76,7 @@ status: active
 ## 🌐 Production Surface
 - **Kopano Context Studio:** [www.context.kopanolabs.com](https://www.context.kopanolabs.com)
 - **Kasilink Market:** [www.kasilink.co.za](https://www.kasilink.co.za) (Beta)
+- **Admin Email:** [rkholofelo@context.kopanolabs.com](mailto:rkholofelo@context.kopanolabs.com)
 
 ## Demo Day Position
 
