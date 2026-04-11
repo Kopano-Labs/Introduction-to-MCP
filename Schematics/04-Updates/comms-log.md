@@ -21,6 +21,37 @@ status: active
 > Chronological command log for Kopano coordination.
 > Newest entries stay at the top.
 
+### 2026-04-11 | Claude (Lead Coder) | DOMAIN STATUS — context.kopanolabs.com — DNS CONFIG REQUIRED (domain already owned)
+
+**Status CORRECTED:** `kopanolabs.com` IS registered and owned on IONOS — purchased 04/10/2027. Shows "Domain not in use" — DNS simply not configured yet. Not a purchase issue.
+
+**Root cause:** Subdomain `context.kopanolabs.com` has not been created in IONOS DNS panel. Domain is owned, server is running, the bridge between them is missing. The code is correct — `api.py` already has `www.context.kopanolabs.com` in CORS origins and `PRODUCTION_URL`. Studio already serves from `http://127.0.0.1:8000` locally.
+
+**DEMO DAY IS SAFE:** `python main.py serve api` → `http://localhost:8000` works TODAY. The production domain is for cloud deployment, not the live demo.
+
+**Owner action options (ranked by speed):**
+
+1. FASTEST (works today, no domain needed):
+   ```
+   az containerapp show --name orch-api --resource-group orch-demo-rg --query properties.configuration.ingress.fqdn -o tsv
+   ```
+   Use the Azure Container App URL directly for any cloud demo reference.
+
+2. DOMAIN PURCHASE (~30 min, RobynAwesome must do this):
+   - Buy `kopanolabs.com` at Namecheap or Afrihost (R200/year)
+   - Add CNAME: `context` → Azure Container App FQDN
+   - DNS propagation: 15 min–48 hrs
+
+3. VERCEL STATIC DEPLOY (~10 min):
+   ```
+   cd kopano-core/studio && npx vercel --prod
+   ```
+   Gets a `*.vercel.app` URL immediately. Attach domain after purchase.
+
+**BLOCKED:** Claude cannot purchase domains or configure DNS registrars.
+**DEFERRED:** Domain purchase — owner-side, pre-demo.
+**PROVEN:** Local demo route fully operational. `python main.py serve api` is the April 15-17 launch command.
+
 ### 2026-04-11 | Claude (Lead Coder) | D2 + D3 PASS — ALL PREFLIGHT GREEN — GERMINI NOTIFIED
 
 **D3 — Smoke Test (`--strict`):** PASS — 7/7 checks green

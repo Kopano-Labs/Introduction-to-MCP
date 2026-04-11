@@ -230,7 +230,7 @@ export interface LabsOverview {
   access_modes: AccessMode[];
   cowork_surfaces: CoworkSurface[];
   orch_code_tracks: OrchCodeTrack[];
-  orch_interfaces: OrchInterface[];
+  kopano_interfaces: OrchInterface[];
   cloud_stacks: CloudStack[];
   connector_workflows: ConnectorWorkflow[];
   installer_actions: InstallerAction[];

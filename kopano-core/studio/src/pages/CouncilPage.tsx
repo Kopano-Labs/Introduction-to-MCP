@@ -11,7 +11,7 @@ interface CouncilPageProps {
   onNavigate: (page: PageId) => void;
 }
 
-const heroLines = ['Fast local AI,', 'framed for live', 'decisions.'];
+const heroLines = ['Many voices.', 'One council.', 'Real answers.'];
 
 export function CouncilPage({
   connectionState,
@@ -22,7 +22,7 @@ export function CouncilPage({
   sessionCount,
   onNavigate,
 }: CouncilPageProps) {
-  const liveStateLabel = connectionState === 'live' ? 'Council is live' : connectionState === 'connecting' ? 'Linking the room' : 'Signal needs attention';
+  const liveStateLabel = connectionState === 'live' ? 'Council is live' : connectionState === 'connecting' ? 'Bringing the room together' : 'Connection needs attention';
   const liveCopy = latestTransmission?.content
     ?? 'The live council listens intentionally. Watch real-time reasoning and agent orchestration as tasks are actively evaluated across multiple models.';
 

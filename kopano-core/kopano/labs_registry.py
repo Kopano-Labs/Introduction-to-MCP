@@ -406,7 +406,7 @@ def get_labs_overview() -> dict[str, Any]:
         "access_modes": ACCESS_MODES,
         "cowork_surfaces": COWORK_SURFACES,
         "orch_code_tracks": ORCH_CODE_TRACKS,
-        "orch_interfaces": ORCH_INTERFACES,
+        "kopano_interfaces": ORCH_INTERFACES,
         "cloud_stacks": CLOUD_STACKS,
         "connector_workflows": CONNECTOR_WORKFLOWS,
         "installer_actions": INSTALLER_ACTIONS,

@@ -13,16 +13,16 @@ interface LabsPageProps {
 
 const interfaceDNA = [
   {
-    title: 'Cursor + Codex clarity',
-    copy: 'Fast action rails, code-grade structure, and direct controls that feel like tools instead of brochure cards.',
+    title: 'Built for the kasi',
+    copy: 'Fast action rails, direct controls, and zero jargon. If it takes more than one tap to understand, it gets simplified.',
   },
   {
-    title: 'Claude artifact calm',
-    copy: 'Split surfaces, live previews, and enough breathing room for people to understand what is happening at a glance.',
+    title: 'Always show your work',
+    copy: 'Every agent response surfaces its reasoning. Split views and live previews keep what is happening visible at every step.',
   },
   {
-    title: 'Perplexity trust cues',
-    copy: 'Readable typography, proof-first summaries, and scannable evidence that makes the platform feel reliable under pressure.',
+    title: 'Proof before claim',
+    copy: 'Readable output, evidence-first summaries, and scannable audit trails — because trust is built through transparency, not promises.',
   },
 ];
 
@@ -50,7 +50,7 @@ export function LabsPage({
             <span className="headline-line">Show real proof.</span>
           </div>
           <p className="hero-copy-text">
-            This is the safe public launch pad for the demo: clear proof, fast paths into Console and Forge, and a Microsoft readiness surface that stays honest about what is live versus what still needs owner wiring.
+            Your full toolkit in one place — fast paths into Console and Forge, a live Microsoft readiness surface, and guided playbooks that stay honest about what is live versus what is still being built.
           </p>
         </div>
         <div className="quick-launch-grid">
@@ -155,7 +155,7 @@ export function LabsPage({
           </div>
           <h2>Public-facing surfaces</h2>
           <div className="catalog-grid">
-            {labsOverview?.orch_interfaces.slice(0, 4).map((item) => (
+            {labsOverview?.kopano_interfaces.slice(0, 4).map((item) => (
               <article key={item.id} className="catalog-tile">
                 <strong>{item.name}</strong>
                 <p>{item.summary}</p>
