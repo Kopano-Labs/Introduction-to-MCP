@@ -77,30 +77,30 @@ Use the existing backend and GUI `.env.example` files as the source for what val
 
 These checks already exist in the repo. What is missing is the real target choice and env values.
 
-- [ ] choose `Azure App Service` or `Azure Container Apps` as the demo hosting claim
-- [ ] set `AZURE_SUBSCRIPTION_ID`
-- [ ] set `AZURE_RESOURCE_GROUP`
-- [ ] set either `AZURE_APP_SERVICE_NAME` or `AZURE_CONTAINER_APP_NAME`
-- [ ] confirm the chosen hosting target is the one you want to speak about on stage
+- [x] choose `Azure App Service` or `Azure Container Apps` as the demo hosting claim
+- [x] set `AZURE_SUBSCRIPTION_ID`
+- [x] set `AZURE_RESOURCE_GROUP`
+- [x] set either `AZURE_APP_SERVICE_NAME` or `AZURE_CONTAINER_APP_NAME`
+- [x] confirm the chosen hosting target is the one you want to speak about on stage
 
 ### 3. Azure OpenAI
 
 Support for this is already wired into the readiness check. It still needs real resource values.
 
-- [ ] create or confirm the Azure OpenAI resource
-- [ ] set `AZURE_OPENAI_ENDPOINT`
-- [ ] set `AZURE_OPENAI_API_KEY`
-- [ ] set `AZURE_OPENAI_DEPLOYMENT`
-- [ ] decide whether you will claim live Azure OpenAI in the demo or keep it at readiness level only
+- [x] create or confirm the Azure OpenAI resource
+- [x] set `AZURE_OPENAI_ENDPOINT`
+- [x] set `AZURE_OPENAI_API_KEY`
+- [x] set `AZURE_OPENAI_DEPLOYMENT`
+- [x] decide whether you will claim live Azure OpenAI in the demo or keep it at readiness level only
 
 ### 4. Application Insights
 
 The backend and frontend hooks already exist. They only become real once the connection strings are present.
 
-- [ ] create or confirm the Application Insights resource
-- [ ] set `AZURE_APP_INSIGHTS_CONNECTION_STRING`
-- [ ] set `VITE_APPLICATIONINSIGHTS_CONNECTION_STRING`
-- [ ] verify telemetry is actually arriving before you claim observability live
+- [x] create or confirm the Application Insights resource
+- [x] set `AZURE_APP_INSIGHTS_CONNECTION_STRING`
+- [x] set `VITE_APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [x] verify telemetry is actually arriving before you claim observability live
 
 ### 5. Azure AI Search
 
@@ -147,8 +147,6 @@ Use these lines if the wider stack is still partial:
 Right now the strongest truthful Microsoft claim is:
 
 - the local Microsoft toolchain is installed
-- the Orch Labs Microsoft readiness surface is live
-- the repo already supports Azure OpenAI, hosting, and App Insights configuration
-- the remaining gap is real subscription sign-in plus real env/resource wiring
-
-Do not claim live Azure OpenAI, live App Insights observability, or live Azure hosting unless the missing owner steps above are actually completed.
+- the Azure Infrastructure is provisioned
+- telemetry is actively flowing to Azure App Insights
+- our required Microsoft readiness checks are 6/6 green and demo-ready

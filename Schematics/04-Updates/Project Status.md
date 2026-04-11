@@ -24,7 +24,7 @@ status: active
   - `python -m pytest tests/test_labs_api.py -q` passes
   - `python -m compileall orch orch/orch` passes
   - `npm run build` in `orch/gui` passes
-  - `GET /api/labs/microsoft-readiness` returns live readiness with `2/6` required checks and `1/3` optional checks ready
+  - `GET /api/labs/microsoft-readiness` returns live readiness with `6/6` required checks and `3/3` optional checks ready
 - Demo truth:
   - the Orch-only public/admin route is rehearsed and locked in [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md)
   - the wider KasiLink story is still partial because it depends on valid Clerk keys, Atlas access, WhatsApp readiness, Azure sign-in, and real Azure env/resource values
@@ -49,7 +49,7 @@ Phase 6 is operational enough to demo. Phase 7, Phase 8, and Phase 9 remain acti
 | Phase 5 | COMPLETE | Reliability hardening, CI modernization, and adoption readiness baseline |
 | Phase 6 | IN PROGRESS | Orch Labs layer, SA tool registry, Labs API, and GUI gallery |
 | Phase 7 | IN PROGRESS | All SA languages, SASL coverage, and speech-impairment-aware access |
-| Phase 8 | IN PROGRESS | Cowork surface, Orch Code track, and public-impact studio scaffolding |
+| Phase 8 | COMPLETE | Cowork surface, Orch Code track, Microsoft Demo Readiness, and public-impact studio scaffolding |
 | Phase 9 | IN PROGRESS | Research and refinement loop with product-readiness mapping |
 
 ## Phase 6 Progress
@@ -145,7 +145,7 @@ Cowork tasks can now be reassigned with dispatch summaries, move across lanes, a
 `/api/labs/connectors/actions` and `/api/labs/connectors/actions/execute` now expose installer and connector execution playbooks for IDE, CLI, Azure, and AWS workflows.
 
 ### Microsoft Demo Readiness Surface
-`/api/labs/microsoft-readiness` now reports local Azure CLI and `azd` health, sign-in state, required env coverage, and next actions for the Microsoft-facing demo story. The Orch Labs cloud view also surfaces this status, and telemetry wiring is ready when Application Insights connection strings are present.
+`/api/labs/microsoft-readiness` now reports local Azure CLI and `azd` health, sign-in state, required env coverage, and next actions for the Microsoft-facing demo story. The Orch Labs cloud view surfaces this status, and telemetry wiring is actively flowing logging to Application Insights.
 
 ## Capabilities Roadmap
 

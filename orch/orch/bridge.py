@@ -20,21 +20,27 @@ class MessagingBridge:
             console.print("[yellow]MessagingBridge: WhatsApp not configured. Skipping external send.[/yellow]")
             return False
             
-        endpoint = f"{self.api_url}/message/sendText/{self.instance_name}"
+        endpoint = f"https://{self.api_key}/send" if self.api_key else "https://whin2.p.rapidapi.com/send"
+        
+        # Override with pure RapidAPI config if available in env
+        rapidapi_key = getattr(settings, "rapidapi_key", self.api_url) # fallback to old env vars
+        rapidapi_host = getattr(settings, "rapidapi_whatsapp_host", self.api_key)
+        
         headers = {
-            "apikey": self.api_key,
+            "x-rapidapi-key": rapidapi_key,
+            "x-rapidapi-host": rapidapi_host,
             "Content-Type": "application/json"
         }
+        
+        # Whin API payload format
         payload = {
-            "number": recipient, # Target JID or Phone Number
-            "options": {"delay": 1200, "presence": "composing"},
             "text": text
         }
         
         try:
             async with httpx.AsyncClient() as client:
-                response = await client.post(endpoint, json=payload, headers=headers)
-                if response.status_code == 201:
+                response = await client.post(f"https://{rapidapi_host}/send", json=payload, headers=headers)
+                if response.status_code in [200, 201]:
                     return True
                 else:
                     console.print(f"[red]WhatsApp Error ({response.status_code}): {response.text}[/red]")

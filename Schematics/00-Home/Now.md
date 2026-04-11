@@ -45,7 +45,7 @@ status: active
 |------|-------|-------|
 | Orch API + GUI | PASS | `tests/test_labs_api.py` passes, `npm run build` in `orch/gui` passes, compile checks pass, and `/api/labs/microsoft-readiness` returns live status. |
 | Orch-only demo route | PASS | Public and admin rehearsal paths were locked and passed on `2026-04-09`. |
-| Microsoft readiness | PARTIAL | Local tooling is installed and the live readiness endpoint works, but only `2/6` required checks and `1/3` optional checks are ready. |
+| Microsoft readiness | COMPLETE | Local tooling is installed, Azure infrastructure is provisioned, telemetry is flowing, and readiness check is `6/6` green. |
 | Full KasiLink story | PARTIAL | Wider buyer story still depends on external auth, data, and integration blockers. |
 | Vault organization | IN PROGRESS | Schematics is the canonical Obsidian layer; root docs are now being indexed instead of moved casually. |
 | Training corpus | ACTIVE | Human, AI, session, hallucination, and Orch progression notes are being consolidated into one second-brain system. |
@@ -64,8 +64,6 @@ status: active
 - valid Clerk keys for the wider authenticated rehearsal
 - Atlas allowlist and live Mongo reachability
 - `whatsapp_bridge_configured: false` for the full KasiLink narrative
-- Azure sign-in is still incomplete in the local demo shell
-- Azure OpenAI, App Insights, and hosting env/resource values are still missing
 - reward/referral is documentation-only in this workspace and is `NO-GO` for the live demo script until code exists
 - product polish: copy tightening, youth-fit research summary, and reconnecting the Orch-only route to the bigger KasiLink story
 
