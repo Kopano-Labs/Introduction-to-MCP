@@ -89,10 +89,12 @@ status: active
 
 ## Biggest Open Blockers
 
-- owner-side WhatsApp registration and device proof for final live phone route handshake
-- [DONE] reward/referral implemented in full (DB schema + API endpoints).
-- final browser-level visual QA for the con-joint marketplace/orchestration walkthrough
-- current-session evidence logging so the Observer can learn from grounded notes instead of chat fragments
+- [DONE] final v5 deployment and inspector URL recording (Phase 20 tasks closed).
+- [DONE] whole-vault re-organization of `Structure/` to the 00-15 Schematics standard. 
+- [DONE] current-session evidence logging active in Folder 07.
+- [DONE] Navbar.tsx (18.7KB) refactored into modular components.
+- [PENDING] owner-side WhatsApp registration and device proof for final live phone route handshake.
+- [PENDING] final browser-level visual QA for the con-joint marketplace/orchestration walkthrough.
 
 ## New Control Systems
 

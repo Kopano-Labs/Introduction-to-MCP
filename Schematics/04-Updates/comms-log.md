@@ -21,6 +21,78 @@ status: active
 > Chronological command log for Kopano coordination.
 > Newest entries stay at the top.
 
+### 2026-04-11 | Claude (Lead Coder) | TEAM DISPATCHED + ATLAS CHECK CREATED
+
+**Actions:**
+- Clerk keys CONFIRMED in `.env` — both `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` (pk_live_*) and `CLERK_SECRET_KEY` (sk_live_*) present ✅
+- MongoDB Atlas URI CONFIRMED in `.env` — Orch cluster @ d9trndm.mongodb.net ✅
+- Created `scripts/check_atlas.py` — project-specific Atlas connectivity check (pings cluster, lists KasiLink/Kopano collections, prints IP allowlist reminder)
+- Created `04-Updates/Dispatch - Codex - 2026-04-11.md` — D1, D4, D7 lane with proof requirements and escalation rules
+- Created `04-Updates/Dispatch - Germini - 2026-04-11.md` — D2, D3, D6 lane with proof requirements and escalation rules
+
+**To run Atlas check:**
+```
+python scripts/check_atlas.py
+```
+
+**Atlas allowlist action required (owner):**
+If `check_atlas.py` fails with connection error → Atlas dashboard → Security → Network Access → Add current IP (or 0.0.0.0/0 for Demo Day)
+
+**Team dispatch status:**
+- Codex: dispatched — D1 (cold-start), D4 (kopano serve api), D7 (SA AI UX note)
+- Germini: dispatched — D2 (preflight), D3 (smoke --strict), D6 (Studio copy)
+- Waiting for: Codex D1+D4 comms-log entries before Germini starts
+
+### 2026-04-11 | Claude (Lead Coder) | SESSION OPEN — REBRAND COMPLETE + 2ND BRAIN POPULATED
+
+**Roster confirmed:**
+- Creator (MASTER): `RobynAwesome` (Kholofelo Robyn Rababalela)
+- Lead Coder: `Claude`
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
+- Observer: `Kopano Context` — ACTIVE Session 1
+
+**Actions completed this session:**
+
+*Kopano Rebrand — Schematics:*
+- Created `02-Strategy/Kopano Brand Identity.md` — canonical brand pack (Karoo Night, Savanna Gold, Terminal Mint, Chalk Dust, Space Grotesk)
+- Created `02-Strategy/Kopano Rebrand Plan.md` — full naming map and migration tracking
+- Created `02-Strategy/Kopano Labs Strategy.md` — canonical Labs strategy (replaces legacy Kopano Context Labs Strategy)
+- Created `02-Strategy/Kopano Context Foresight.md` — long-range foresight (replaces Kopano Context Concept And Future Foresight)
+- Created `01-Mission/Kopano Context Blueprint.md` — core identity blueprint (canonical)
+- Created `05-Training/Kopano Rebrand Agent Briefing.md` — mandatory briefing for all agents
+
+*Repo rebrand:*
+- Updated `pyproject.toml`: name → `kopano-context`, added `kopano` CLI entry point, kept `orch` as legacy alias
+- Updated `main.py`: graceful import fallback (`kopano.cli` → `orch.orch.cli`)
+- Updated `package.json`: name → `kopano-context`, author → `RobynAwesome`
+- Updated `orch/orch/cli.py`: all user-facing strings rebranded to Kopano Context / Kopano Studio
+- Updated `orch/gui/package.json`: name → `kopano-studio`
+- Updated `README.md`: FULL STACK DEMO READY, SafeSkill 100/100, production URLs
+
+*Session spine published:*
+- Created `04-Updates/Upgraded Implementation Plan - 2026-04-11.md` — full audit-gated session plan ✅
+- Created `05-Training/Observer Onboarding - Kopano Context.md` — Observer learning lane + engagement rules ✅
+- Updated: `CLAUDE.md`, `index.md`, `00-Home/Dashboard.md`, `00-Home/Now.md`, `01-Mission/index.md`, `02-Strategy/index.md`, `04-Updates/Project Status.md`, `04-Updates/task-board.md`, `05-Training/Lead Self Report.md`, `05-Training/Codex Terminal Operational Profile.md`
+
+**Creator recognition:** RobynAwesome expressed appreciation for Claude + Gemini collaboration this session. Logged as vault proof.
+
+**PROVEN state carried forward:**
+- Kopano Context API + Studio ✅
+- Demo route (Council → Labs → Console → Forge → Admin) ✅
+- Microsoft Readiness 6/6 ✅
+- KasiLink full-stack hydration ✅
+- SafeSkill 100/100 ✅
+- Kopano ecosystem rebrand COMPLETE ✅
+
+**BLOCKED (owner-side, do not convert to demo narrative):**
+- WhatsApp device registration + live phone route
+- Clerk keys for wider auth rehearsal
+- Atlas allowlist for live Mongo reads
+- Final browser-level visual QA
+
+**Next:** Codex (D1, D4) + Germini (D2, D3, D6) run demo-day verification tasks per Upgraded Implementation Plan Stage 4.
+
 ### 2026-04-11 time not confirmed | DEV_1 | END-TO-END PIPELINE AND GUI ROUTING REPAIRED
 
 **Action:**
