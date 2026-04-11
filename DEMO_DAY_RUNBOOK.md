@@ -4,11 +4,13 @@
 
 Deliver one clean end-to-end demo using the main `python main.py` surface:
 
-1. configure agents,
-2. start the API/GUI,
-3. launch a discussion,
-4. show live updates in the browser,
-5. fall back cleanly if a live provider is unavailable.
+1. verify full-stack environment hydration,
+2. configure agents,
+3. start the API/GUI,
+4. verify KasiLink bridge and MongoDB persistence,
+5. test WhatsApp delivery,
+6. launch a live discussion mesh,
+7. show real-time telemetry and auditing.
 
 ## Supported Surfaces
 
@@ -41,33 +43,44 @@ python .\scripts\demo_day_smoke.py --strict
 
 ## Golden Path
 
-### 1. Configure agents
+### 1. Verification & Configuration
 
 ```powershell
+# Verify Microsoft Readiness 6/6
+python .\scripts\demo_day_readiness.py --quick
+
+# Configure agents
 python main.py agents config gemini-pro --provider google --model gemini-1.5-pro
 python main.py agents config grok-mod --provider xai --model grok-beta
 python main.py agents list
+
+# Test WhatsApp connectivity
+python main.py whatsapp test --message "Ecosystem Online" --recipient "+27..."
 ```
 
 ### 2. Start API and GUI
 
 ```powershell
+# Set environment and launch
 .\scripts\demo_day_launch.ps1
 ```
 
-Open:
+Open: `http://127.0.0.1:8000`
 
-```text
-http://127.0.0.1:8000
+### 3. Verify KasiLink Bridge
+
+```powershell
+# Health check via python one-liner or browser
+# http://127.0.0.1:8000/api/kasilink/health
 ```
 
-### 3. Launch discussion in a second shell
+### 4. Launch discussion in a second shell
 
 ```powershell
 python main.py serve launch --topic "The future of AI in South African fintech" --agents "gemini-pro" --moderator "grok-mod" --max-rounds 4 --parallel
 ```
 
-### 4. Show the audience
+### 5. Show the audience
 
 - live response updates in the GUI
 - moderator guidance between rounds
