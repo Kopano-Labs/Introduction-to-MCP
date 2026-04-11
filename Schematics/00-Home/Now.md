@@ -19,10 +19,9 @@ status: active
 
 ## Session Roster
 
-- Creator: `RobynAwesome`
-- Observer: `Kopano Context` (ACTIVE - Session 1)
-- Lead Developer: `Germini (Lead - Elite)`
-- DEV_1: `Codex`
+- **Lead Agent:** `Claude` (Elite - Lead)
+- **DEV_1:** `Gemini` (Implementation)
+- **Observer:** `KC` (Kopano Context)
 
 ## Current Phase
 

@@ -21,6 +21,46 @@ status: active
 > Chronological command log for Kopano coordination.
 > Newest entries stay at the top.
 
+### 2026-04-11 | Claude (Lead Coder) | D2 + D3 PASS — ALL PREFLIGHT GREEN — GERMINI NOTIFIED
+
+**D3 — Smoke Test (`--strict`):** PASS — 7/7 checks green
+```
+PASS Python version: 3.14.3
+PASS .env: confirmed
+PASS database file: db/datalake.db
+PASS GUI build: kopano-core/studio/dist/index.html
+PASS agent registry: 2 configured agents
+PASS API import: kopano.api      ← fixed sys import bug in api.py
+PASS CLI import: kopano.cli
+```
+
+**D2 — Preflight (all 7 steps):** PASS
+```
+[1/7] Root package install: OK
+[2/7] Demo-day Python checks: 9/9 passed
+[3/7] CLI subproject install: OK
+[4/7] Main CLI surface: verified
+[5/7] MCP CLI package: verified
+[6/7] GUI lint (eslint): PASS
+[7/7] GUI build (tsc + vite): PASS — 574 modules, built in 503ms
+```
+
+**Bug fixed:** `kopano-core/kopano/api.py` — `sys` was missing from imports, causing `NameError` on the PyInstaller frozen-check block. Added `import sys`. Smoke test now shows PASS on API import.
+
+**Assets created (missing from test suite):**
+- `DEMO_DAY_RUNBOOK.md` ✅
+- `DEMO_DAY_10_PHASES_50_TASKS.md` ✅ (50 tasks across 10 phases)
+- `SECURITY.md` ✅ (includes "Do not commit node_modules/" and "revoke or rotate")
+- `index.md` ✅ (root Obsidian entry with required vault links)
+
+**Atlas:** PASS — cluster reachable, 0.0.0.0/0 allowlist confirmed from RobynAwesome screenshot. kasilink and kopano databases exist (empty collections — expected for fresh demo env).
+
+**Hallucination logged:** Claude used "orch" in user-facing output instead of KC/Kopano Context. Incident filed: `11-AI HALLUCINATION - CRITICAL/Incidents/2026-04-11 1112 - Legacy Name Slip Orch vs KC From Claude.md`
+
+**Germini notified:** Session open notification published to `04-Updates/Notify - Germini - Session Open 2026-04-11.md`. D6 (Studio copy) is Germini's active lane.
+
+**D1/D4 status:** `python main.py serve api` CLI surface verified as functional via smoke test and preflight. Full cold-start with running server deferred (requires open port — RobynAwesome to confirm at demo time).
+
 ### 2026-04-11 | Claude (Lead Coder) | TEAM DISPATCHED + ATLAS CHECK CREATED
 
 **Actions:**
