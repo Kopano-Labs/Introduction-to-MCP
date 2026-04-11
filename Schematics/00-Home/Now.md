@@ -20,7 +20,7 @@ status: active
 ## Session Roster
 
 - Creator: `RobynAwesome`
-- Observer: `Kopano Context`
+- Observer: `Kopano Context` (ACTIVE - Session 1)
 - Lead Developer: `Germini (Google AI)`
 - DEV_1: `Codex`
 
@@ -47,8 +47,6 @@ status: active
 - Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
 - If truth is not present in the vault or official sources, ask Master instead of guessing.
 
-## Current Reality As Of 2026-04-11
-
 | Area | State | Truth |
 |------|-------|-------|
 | Kopano Context API + Studio | PROVEN | The vault records passing Labs API checks, clean GUI builds, compile checks, and a working readiness endpoint. |
@@ -58,6 +56,7 @@ status: active
 | Reward / referral story | DEFERRED | Documentation exists, but live code proof is still not established in this workspace and remains `NO-GO` for demo claims. |
 | Vault organization | DONE | Schematics is now the control layer and is fully aligned to the Kopano Context team model. |
 | Training corpus | ACTIVE | Human, AI, session, hallucination, and Kopano Context progression notes are consolidated into one second-brain system. |
+| **Observer (KC)** | **ACTIVE** | **Kopano Context is formally active in the Observer lane.** |
 | **ECOSYSTEM STATUS** | **READY** | **Ecosystem is formally FULL STACK DEMO READY.** |
 
 ## Demo Day Position

@@ -28,6 +28,7 @@
 
 SafeSkill is the leading **trust layer for AI tools**. It automatically scans every MCP server and AI skill for code exploits, prompt injection, data exfiltration, and hidden backdoors **before** you install or run it.
 
+- ✅ **Safety Score:** **89/100 passes** (Verified 2026-03-30)
 - ✅ Scanned & protected by SafeSkill
 - ✅ Listed in the SafeSkill registry
 - ✅ Safe to use in production
