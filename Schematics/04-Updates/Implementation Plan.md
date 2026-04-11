@@ -1,7 +1,7 @@
 ---
 title: Implementation Plan
 created: 2026-04-03
-updated: 2026-04-06
+updated: 2026-04-11
 author: Robyn
 tags:
   - updates
@@ -12,10 +12,38 @@ priority: high
 status: active
 ---
 
-# orch Implementation Plan
+# Kopano Context Implementation Plan
 
 > Master engineering plan for building orch from core engine to Labs and accessibility phases.
 > See also: [Project Status](Project%20Status.md), [CLI Specification](../03-Architecture/CLI%20Specification.md), [Phase 1 Walkthrough](Phase%201%20Walkthrough.md)
+
+## Current Session Execution Sequence
+
+### Stage 1 - Vault Truth Reconciliation
+
+- update current control notes before any new product claim
+- align roster, blockers, and demo truth
+
+### Stage 2 - Naming Migration And Backlink Repair
+
+- rename active session-control taxonomy from legacy `Orch` naming to `Kopano`
+- repair active note links and navigation hubs
+
+### Stage 3 - Team Dispatch Through Schematics
+
+- publish current-session task scopes
+- set proof requirements and escalation paths
+
+### Stage 4 - Logging And Observer Teaching Loop
+
+- write dated evidence into `comms-log`
+- update the day note
+- require the Observer to learn from evidence and contradictions
+
+### Stage 5 - Carryover
+
+- leave next-blocker truth explicit
+- preserve historical evidence while keeping current notes current
 
 ## Tech Stack
 

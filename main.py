@@ -15,7 +15,7 @@ Usage:
 
 The legacy `orch` command is also available for backwards compatibility.
 """
-from orch.orch.cli import app
+from kopano.cli import app
 
 
 def main():

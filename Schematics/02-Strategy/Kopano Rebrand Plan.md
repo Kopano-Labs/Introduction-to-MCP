@@ -109,6 +109,7 @@ status: active
 - **Operating model:** Lead (Codex), DEV roster, hierarchy, session protocol, hallucination system — all unchanged
 - **KasiLink integration:** Kopano Context remains the AI microservice layer inside KasiLink
 - **SafeSkill:** Trust layer terminology stays — now branded as Kopano SafeSkill
+- **Python package namespace for now:** code still imports from `orch.*` until Robyn completes the package-folder rewrite
 - **Microsoft Demo Day target:** April 15-17, 2026 — unchanged
 - **GitHub identity:** `RobynAwesome` — unchanged
 - **Commit identity:** `RobynAwesome <rkholofelo@gmail.com>` — unchanged

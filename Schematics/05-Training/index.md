@@ -1,7 +1,7 @@
 ---
 title: 05-Training Index
 created: 2026-04-09
-updated: 2026-04-10
+updated: 2026-04-11
 author: Codex
 tags:
   - training
@@ -31,7 +31,7 @@ status: active
 - [Multi-Agent Profiling Framework](Multi-Agent%20Profiling%20Framework.md) - shared rubric for profiling people, agents, and workflows
 - [Claude Codex Gemini Session Analysis](Claude%20Codex%20Gemini%20Session%20Analysis.md) - cross-model behavior and role-fit summary
 - [Kopano Train Logs](Kopano%20Train%20Logs/index.md) - active logbook for lead quality, dev outcomes, hierarchy breaches, and token discipline
-- [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md) - staged ladder for Kopano capability growth
+- [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md) - staged ladder for Kopano capability growth
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md) - critical hallucination governance system
 
 ## Human Profiles

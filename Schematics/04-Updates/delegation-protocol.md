@@ -1,7 +1,7 @@
 ---
 title: Delegation Protocol
 created: 2026-04-06
-updated: 2026-04-10
+updated: 2026-04-11
 author: Lead
 tags:
   - delegation
@@ -19,7 +19,7 @@ status: active
 
 # Delegation Protocol
 
-> Rules of engagement for multi-agent work on orch.
+> Rules of engagement for multi-agent work on Kopano Context.
 > All developers read this before touching code or updating `Schematics/04-Updates/`.
 > Session governance is additionally defined in [DEV_S Reward Program](DEV_S%20Reward%20Program.md).
 
@@ -27,7 +27,8 @@ status: active
 
 | Role | Identity | Responsibility |
 |------|----------|----------------|
-| **Owner** | Robyn | Final authority. Reviews status, direction, and structural changes. |
+| **Owner** | `RobynAwesome` | Final authority. Reviews status, direction, and structural changes. |
+| **Observer** | `Kopano Context` | Learns from evidence, summarizes contradictions, and studies AI-to-AI exchanges without execution ownership. |
 | **Lead** | `Codex`, `Claude`, or `Codex + Claude` | Architecture, audits, reviews, shared infrastructure, delegation, and repo-wide decisions. |
 | **DEV_1** | `Germini (Google AI, external by Master)` | Executes scoped implementation work, reports progress, and verifies deliverables. |
 | **DEV_2** | `Nother` | Executes scoped implementation work, reports progress, and verifies deliverables. |
@@ -43,7 +44,7 @@ status: active
    - current dev progress
    - current code and diff state
    - latest [comms-log](comms-log.md)
-5. All current sessions are `pre-sessions` and training data for Orch.
+5. All current sessions are `pre-sessions` and training data for Kopano Context.
 6. Lead target is `60% management / 40% coding`.
 7. Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
 
@@ -93,8 +94,8 @@ status: active
 
 ## Pre-Session Training Rule
 
-1. Treat current sessions as Orch training data, not only task execution.
-2. Log dev successes, failures, hierarchy breaches, and token use into Orch training notes.
+1. Treat current sessions as Kopano training data, not only task execution.
+2. Log dev successes, failures, hierarchy breaches, and token use into Kopano training notes.
 3. Capture management errors as training evidence for future Orch behavior.
 
 ### Shared infrastructure owned by Lead
@@ -136,7 +137,7 @@ REPORT: Append one update to [[comms-log]]
 - Session reconstruction: [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
 - Lead/process doctrine: [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - Hallucination governance: [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
-- Orch training logs: [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
+- Kopano training logs: [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
 
 ## Security Incident Rule
 

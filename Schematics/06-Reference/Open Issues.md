@@ -1,7 +1,7 @@
 ---
 title: Open Issues
 created: 2026-04-09
-updated: 2026-04-10
+updated: 2026-04-11
 author: Codex
 tags:
   - reference
@@ -14,16 +14,17 @@ status: active
 
 # Open Issues
 
-> Consolidated blocker ledger for current Orch and demo work.
+> Consolidated blocker ledger for current Kopano Context and demo work.
 > See also: [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md), [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
 
 ## Active Operating Truth
 
 - standing roster: `Codex` / `Germini` / `Nother` / `Meither` / `Cicero`
-- current sessions are `pre-sessions` and training data for Orch
+- current sessions are `pre-sessions` and training data for Kopano Context
 - reward/referral is still `NO-GO` for live demo use in this workspace
 - token-saving mode is now part of the standing governance doctrine
 - hallucination, hierarchy, and lead-failure logging now belong to the permanent second-brain system
+- product brand is `Kopano`, but the live Python namespace still remains `orch.*` until the code rewrite is complete
 
 ## Critical External Blockers
 
@@ -37,7 +38,7 @@ status: active
 - full KasiLink buyer story is not yet locked end-to-end
 - `whatsapp_bridge_configured: false` remains unresolved for the broader narrative
 - provider-ranking visibility is still not clearly proven in the wider gig flow
-- the Orch-only route is strong, but the bridge back into the full KasiLink story is still incomplete
+- the Kopano route is strong, but the bridge back into the full KasiLink story is still incomplete
 - Microsoft readiness is only `2/6` required checks and `1/3` optional checks ready in the current local runtime
 - reward/referral remains documentation-only in the current workspace and should stay out of the live demo script until it has real code, auth, and data paths
 
@@ -60,7 +61,8 @@ status: active
 If a blocker changes the live demo route, update:
 
 1. [Now](../00-Home/Now.md)
-2. [Project Status](../04-Updates/Project%20Status.md)
-3. [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
-4. this note
-5. [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) if the blocker changes session history or handoff truth
+2. [Final Demo Polish And Daily Disciplines](../04-Updates/Final%20Demo%20Polish%20And%20Daily%20Disciplines.md)
+3. [Project Status](../04-Updates/Project%20Status.md)
+4. [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
+5. this note
+6. [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) if the blocker changes session history or handoff truth

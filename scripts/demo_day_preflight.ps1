@@ -17,7 +17,7 @@ Write-Host "[5/7] Verifying MCP CLI package install" -ForegroundColor Cyan
 python -m pip show mcp-cli | Out-Null
 
 Write-Host "[6/7] Linting GUI" -ForegroundColor Cyan
-Push-Location orch/gui
+Push-Location kopano-core/studio
 npm run lint
 
 Write-Host "[7/7] Building GUI" -ForegroundColor Cyan

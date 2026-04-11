@@ -1,7 +1,7 @@
 ---
 title: Azure Demo Day Playbook
 created: 2026-04-06
-updated: 2026-04-09
+updated: 2026-04-11
 author: Robyn
 tags:
   - azure
@@ -24,7 +24,7 @@ status: active
 ├──────────────────────────────────────────────────────┤
 │  Kopano-Only Safe Route .......... █████████████ 100%  │
 │  Full KasiLink Story ........... ███████░░░░░░ 60%   │
-│  Azure / Microsoft Surface ..... █████████████ 100%  │
+│  Azure / Microsoft Surface ..... ██████████░░░ 85%   │
 │  Demo Narrative & Script ....... █████████░░░░ 75%   │
 │  Schematics Documentation ...... ██████████░░░ 85%   │
 └──────────────────────────────────────────────────────┘
@@ -39,22 +39,22 @@ We are executing Phase 8 expansion on top of the Phase 6 Kopano Labs foundation,
 - local Azure CLI `az` is installed and working
 - local Azure Developer CLI `azd` is installed and working
 - Kopano Labs exposes `/api/labs/microsoft-readiness`
-- current readiness is `6/6` required checks and `3/3` optional checks ready
-- remaining blockers are limited to KasiLink database connectivity
+- the vault contains strong Azure-readiness proof, but current session truth should stay conservative unless the full check set is re-verified again live
+- remaining blockers still include owner-side sign-in, environment truth, and broader KasiLink connectivity where applicable
 
 ## Azure Readiness Story
 
 - Host the Labs API and GUI on Azure app surfaces that can demo reliably.
 - Use Azure identity, observability, and AI services as the public buyer-facing readiness story.
 - Keep AWS parity visible, but do not let it dilute the Demo Day message.
-- Azure infrastructure is now fully provisioned and verified.
+- Azure is a strong demo story, but current live claims must remain evidence-bound to the latest verified session state.
 
 ## Execution Tracks
 
 ### Track 1: Application Surface
 
 - Verify the FastAPI control plane can run cleanly as the main demo backend.
-- Verify the Kopano Labs GUI is buildable and deployable from `kopano/gui`.
+- Verify the Kopano Labs GUI is buildable and deployable from the current GUI workspace.
 - Keep Forge, Kopano Code, and MCP Console as the demo centerpiece.
 
 ### Track 2: Azure Services
@@ -80,7 +80,7 @@ az account show
 azd auth login
 pip install -e .
 kopano serve api
-cd kopano/gui
+cd orch/gui
 npm run build
 ```
 
@@ -94,7 +94,7 @@ npm run build
 
 > The strongest **truthful** claim you can make:
 >
-> *"Kopano is 100% ready for an Azure-backed demo. We have live resources in South Africa North for observability and Sweden Central for AI. Our readiness score is 6/6, and our telemetry is wired directly into Microsoft's monitoring stack."*
+> *"Kopano has a strong Azure-backed demo story with local tooling, readiness instrumentation, and documented cloud proof. We should only claim the full connected path after the live check set is re-verified in the current session."*
 
 ## Bottom Line
 
@@ -103,10 +103,10 @@ npm run build
 | **Kopano demo shell** | **A+** | Hardened, timed, 100% ready |
 | **Engineering quality** | **A** | Azure SDK, Mongo drivers, and Telemetry all landed |
 | **Documentation** | **A** | Schematics vault is current as of April 11 midnight |
-| **Azure / Microsoft story** | **A+** | **6/6 checks pass.** Real resources live. |
+| **Azure / Microsoft story** | **A-** | Strong documented readiness story; live claims should stay conservative until re-verified in-session. |
 | **Full KasiLink story** | **C** | Still blocked by Atlas Mongo connectivity |
 | **Narrative readiness** | **B-** | Safe route exists; full KasiLink narrative is the remaining gap |
 | **Overall Demo Day readiness** | **A** | **Ready to demo Kopano shell and Azure story now.** |
 
 > [!IMPORTANT]
-> **Azure is no longer the bottleneck.** The primary risk is now **Atlas MongoDB connectivity**. If you can allowlist the demo machine in Atlas today, we can close the 60% → 100% gap for the KasiLink story by tomorrow.
+> Azure is a strong part of the demo story, but the full live claim should stay evidence-bound. The broader risk stack still includes owner-side auth, Atlas MongoDB connectivity, and wider KasiLink proof.

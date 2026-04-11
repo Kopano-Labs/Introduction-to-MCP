@@ -1,7 +1,7 @@
 ---
 title: Now
 created: 2026-04-09
-updated: 2026-04-10
+updated: 2026-04-11
 author: Codex
 tags:
   - home
@@ -16,6 +16,13 @@ status: active
 
 > Canonical one-note snapshot for where **Kopano Context** stands right now.
 > If you only open one note, open this one first.
+
+## Session Roster
+
+- Creator: `RobynAwesome`
+- Observer: `Kopano Context`
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
 
 ## Current Phase
 
@@ -39,40 +46,41 @@ status: active
 - Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
 - If truth is not present in the vault or official sources, ask Master instead of guessing.
 
-## Current Reality As Of 2026-04-09
+## Current Reality As Of 2026-04-11
 
 | Area | State | Truth |
 |------|-------|-------|
-| Kopano Context API + Studio | PASS | `tests/test_labs_api.py` passes, `npm run build` in `orch/gui` passes, compile checks pass, and `/api/labs/microsoft-readiness` returns live status. |
-| Kopano Context-only demo route | PASS | Public and admin rehearsal paths were locked and passed on `2026-04-09`. |
-| Microsoft readiness | COMPLETE | Local tooling is installed, Azure infrastructure is provisioned, telemetry is flowing, and readiness check is `6/6` green. |
-| Full KasiLink story | PARTIAL | Wider buyer story still depends on external auth, data, and integration blockers. |
-| Vault organization | IN PROGRESS | Schematics is the canonical Obsidian layer; root docs are now being indexed instead of moved casually. |
+| Kopano Context API + Studio | PROVEN | The vault records passing Labs API checks, clean GUI builds, compile checks, and a working readiness endpoint. |
+| Kopano demo route | PROVEN | The conservative route remains `Council -> Labs -> Console -> Forge -> Admin audit`, with dated rehearsal evidence in Demo Day notes. |
+| Microsoft readiness | PARTIAL | Tooling and Azure-facing proof exist in the vault, but current demo claims must stay separated from any owner-blocked external setup not re-verified in this session. |
+| Full KasiLink story | BLOCKED | Wider buyer story still depends on external auth, data, WhatsApp, and owner-supplied environment truth. |
+| Reward / referral story | DEFERRED | Documentation exists, but live code proof is still not established in this workspace and remains `NO-GO` for demo claims. |
+| Vault organization | IN PROGRESS | Schematics is now the control layer and is being actively re-aligned to the Kopano team model. |
 | Training corpus | ACTIVE | Human, AI, session, hallucination, and Orch progression notes are being consolidated into one second-brain system. |
 
 ## Demo Day Position
 
 - Demo hub: [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
-- Safe live route: [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md)
+- Safe live route: [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md)
 - Countdown and ownership: [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
-- UI verification detail: [Orch Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Orch%20Demo%20Task%20List%20-%202026-04-08.md)
+- UI verification detail: [Kopano Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Task%20List%20-%202026-04-08.md)
 - Owner checklist: [Owner Must Handle - Microsoft Demo Day](../Microsoft%20Demo%20Day!/Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
 - Phase and capability truth: [Project Status](../04-Updates/Project%20Status.md)
 
 ## Biggest Open Blockers
 
-- valid Clerk keys for the wider authenticated rehearsal
-- Atlas allowlist and live Mongo reachability
-- `whatsapp_bridge_configured: false` for the full KasiLink narrative
-- reward/referral is documentation-only in this workspace and is `NO-GO` for the live demo script until code exists
-- product polish: copy tightening, youth-fit research summary, and reconnecting the Kopano Context-only route to the bigger KasiLink story
+- owner-side WhatsApp registration and device proof for the live phone route
+- wider KasiLink auth and data dependencies for any end-to-end external story
+- reward/referral remains documentation-only in this workspace and is `NO-GO`
+- rebrand migration across session-control notes and demo navigation
+- current-session evidence logging so the Observer can learn from grounded notes instead of chat fragments
 
 ## New Control Systems
 
 - [Schematics Root Index](../index.md)
 - [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
 - [08-IDEAS AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md)
-- [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md)
+- [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md)
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 - [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)

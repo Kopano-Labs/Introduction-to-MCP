@@ -21,6 +21,13 @@ status: active
 > Live ownership board for Kopano Context.
 > Current source of truth is the audit completed on 2026-04-06 against `Schematics`, `README.md`, and the active codebase layout.
 
+## Session Roster
+
+- Creator: `RobynAwesome`
+- Observer: `Kopano Context`
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
+
 ## Current Delivery State
 
 | Area | Status | Notes |
@@ -39,6 +46,10 @@ status: active
 
 | ID | Priority | Owner | Status | Scope |
 |----|----------|-------|--------|-------|
+| S1 | Critical | Lead | DONE | Reframe current control notes around the RobynAwesome / Kopano Context session model |
+| S2 | Critical | Lead | DONE | Rename active session-control taxonomy from `Orch` to `Kopano` where feasible in the vault |
+| S3 | Critical | Lead | DONE | Create a session command pack for today’s run |
+| S4 | Critical | Lead | IN PROGRESS | Keep dated evidence flowing into `comms-log` and `07-Sessions By Day/2026-04-11.md` |
 | O1 | Critical | Lead | DONE | Audit `Schematics` and align docs with actual repo state |
 | O2 | Critical | Lead | DONE | Create KasiLink-style comms and group-work format in `Schematics/04-Updates/` |
 | O3 | High | Lead | DONE | Keep project status and coordination docs synchronized |
@@ -85,6 +96,7 @@ status: active
 3. `DEV_1` and `DEV_2` should take bounded Labs or accessibility tasks only.
 4. Lead owns final review and any cross-cutting infrastructure edits.
 5. Security incidents override feature work until tracked exposure is removed and documented.
+6. The Observer learns from notes, logs, and contradictions; the Observer does not own execution.
 
 ## Task Addendum - 2026-04-09
 

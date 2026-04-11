@@ -67,9 +67,9 @@ def main() -> int:
 
     print("\nCanonical demo commands")
     print("-----------------------")
-    print("1. orch agents list")
-    print("2. orch serve api --host 127.0.0.1 --port 8000")
-    print('3. orch serve launch --topic "The future of AI in South African fintech" --agents "gemini-pro" --moderator "grok-mod" --max-rounds 3')
+    print("1. kopano agents list")
+    print("2. kopano serve api --host 127.0.0.1 --port 8000")
+    print('3. kopano serve launch --topic "The future of AI in South African fintech" --agents "gemini-pro" --moderator "grok-mod" --max-rounds 3')
     print("4. Open http://127.0.0.1:8000")
 
     return 1 if failures else 0

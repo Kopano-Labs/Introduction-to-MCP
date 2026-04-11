@@ -1,5 +1,18 @@
 # Dev Tracker
 
+## Session Reframe Layer | 2026-04-11
+
+- current control truth is now anchored in `Final Demo Polish And Daily Disciplines.md`
+- current command truth is now anchored in `Session Command Pack - 2026-04-11.md`
+- `Creator = RobynAwesome`, `Observer = Kopano Context`, `Lead = Codex`, `DEV_1 = Germini`
+- `09-ORCH PROGRESSION` was renamed to `09-KOPANO PROGRESSION` for active vault control
+- product branding remains `Kopano`, while the live Python package namespace still remains `orch.*` until Robyn completes the code rewrite
+
+## Historical Naming Rule
+
+- historical entries below may still say `Orch` because they record the truth of earlier sessions
+- treat those entries as evidence, not as the current naming contract
+
 ## Lead Review Of DEV_1 Lane | 2026-04-10 01:46
 
 - rechecked `DEV_1` against `dev-tracker`, `MASTER-TODO Session 3`, and `comms-log` before assigning more work
@@ -13,7 +26,7 @@
 - new folders added and populated for:
   - `07-Sessions By Day`
   - `08-IDEAS AT BIRTH`
-  - `09-ORCH PROGRESSION`
+  - `09-KOPANO PROGRESSION`
   - `10-SESSION IMPROVEMENTS`
   - `11-AI HALLUCINATION - CRITICAL`
   - `12-PLAN MODE SESSIONS`

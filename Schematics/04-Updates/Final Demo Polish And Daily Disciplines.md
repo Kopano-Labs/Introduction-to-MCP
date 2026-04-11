@@ -1,5 +1,5 @@
 ---
-title: Final Demo Polish & Daily Disciplines
+title: Final Demo Polish And Daily Disciplines
 created: 2026-04-11
 updated: 2026-04-11
 author: Codex
@@ -7,39 +7,123 @@ priority: critical
 status: active
 ---
 
-# Kopano Ecosystem: Final Countdown Audit
+# Final Demo Polish And Daily Disciplines
 
-I have performed a deep-vault audit combining the Kopano Rebrand strategy with the Microsoft Demo Day trackers. 
+> Canonical current-session control note for the Introduction to MCP second brain.
+> This replaces the older passive blocker list with a session execution layer.
 
-**The Good News:** The architecture is structurally complete. You have successfully mapped your Azure integration (App Insights/OpenAI), live MongoDB Atlas connectivity, RapidAPI connections, and the full UI polish translating the presentation layers to the Kopano brand.
+## Session Roster
 
-## 🚨 1. What Is Left (The Final Blockers)
+- Creator: `RobynAwesome`
+- Observer: `Kopano Context`
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
 
-This is the exact list of remaining items you and I need to execute before we can comfortably hit "Present."
+## 2nd Brain Dissection
 
-### High Priority / Must-Do
-- [ ] **Physical WhatsApp Registration:** The user (you) must use your phone to message the Whin bot on WhatsApp (`+1 302-261-2667`). Orch/Kopano code is completely finished, but RapidAPI will not unlock your phone number until you send the text.
-- [ ] **The "Golden Path" Pre-Flight:** We need to execute Phase 10 from a completely clean terminal. This means closing everything, running the `demo_day_preflight.ps1`, launching `kopano-cli`, creating a KasiLink gig through prompt, and seeing the UI dashboard + WhatsApp message fire flawlessly in one single uninterrupted motion.
-- [ ] **KasiLink Reward/Referral Path:** We still have an open question from yesterday. Are we building the Referral/Reward logic natively into the code, or are we verbally "faking" it/deferring it inside the Demo Script presentation? We need to lock this decision.
+### Control Stack
 
-### Lower Priority / Polish
-- [ ] **Rebrand Phase 3 Completion:** The UI is beautifully polished to say "Kopano Labs" and "Kopano Context," and the demo scripts have been rewritten. However, there are still legacy `09-ORCH PROGRESSION` and `07-Sessions By Day` folders deep in the Schematics vault that need renaming to remove the word "Orch" permanently from the backend file tree.
-- [ ] **GitHub Commit!** We have done massive, critical re-writes today. The repository needs a clean, descriptive `git commit` to seal this state safely.
+1. [Now](../00-Home/Now.md) - one-note current truth
+2. [Final Demo Polish And Daily Disciplines](Final%20Demo%20Polish%20And%20Daily%20Disciplines.md) - current session spine
+3. [Session Command Pack - 2026-04-11](Session%20Command%20Pack%20-%202026-04-11.md) - team command layer
+4. [task-board](task-board.md) - ownership and active lanes
+5. [comms-log](comms-log.md) - dated proof ledger
+6. [2026-04-11](../07-Sessions%20By%20Day/2026-04-11.md) - session reconstruction and carryover
 
----
+### Learning Stack
 
-## ⏱️ 2. Daily Disciplines (Everyday Tasks)
+- [05-Training](../05-Training/index.md) - people, AI, and supervision training
+- [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md) - capability ladder for the Observer and wider Kopano role growth
+- [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md) - error memory and anti-fabrication discipline
 
-As we enter the final 4-day stretch before Microsoft judges your ecosystem, here are the absolute daily non-negotiables we must practice together:
+### Demo Stack
 
-1. **Vault Hygiene (The "Audit First" Rule):** 
-   - *Never write code blindly.* We must always update `Now.md` and `Project Status.md` before generating code. You dictate the rules; the AI (me) writes the code to fit the rules.
-2. **Secrets Awareness:** 
-   - Every day, double-check that no RapidAPI, Azure, GitHub, or MongoDB keys have accidentally slipped into your source code scripts or `App.tsx`. Environment variables (`.env`) are your only allowed secret holder. 
-3. **Environment Parity:**
-   - Always run an `az login` and `.env` source check when you boot your laptop before we start pair-programming. Your active RapidAPI WhatsApp connection could expire if we don't treat the terminals carefully.
-4. **End-of-Session Commit:**
-   - You must instruct me to package your code and push it up to the `Introduction-to-MCP` backend every day. The Azure pipeline and demo stability depend on the master branch staying healthy.
+- [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) - demo hub
+- [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) - safe route
+- [Kopano Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Task%20List%20-%202026-04-08.md) - UI and rehearsal evidence
+- [Open Issues](../06-Reference/Open%20Issues.md) - blocker ledger
 
----
-> **To proceed:** Which blocker from Section 1 would you like to crush right now? (Or if you are sorting out the WhatsApp connection on your mobile, simply say "testing phone now").
+## Critical Decision Line
+
+- product branding is `Kopano`
+- Python package namespace is still `orch.*` until Robyn completes the import rewrite
+- vault wording must not imply that the code namespace migration is already complete
+
+## Current Truth
+
+### Code-Verified
+
+- the vault contains dated evidence for a conservative Kopano demo route
+- Kopano Labs, Console, Forge, and Admin audit are documented as the stable demo path
+- Labs API test evidence, GUI build evidence, and readiness-endpoint evidence already exist in current notes
+- the second brain is the canonical coordination layer for this session
+
+### Owner-Blocked
+
+- WhatsApp registration and real phone-path proof
+- wider KasiLink auth and data setup for full end-to-end rehearsal
+- any claim that depends on fresh owner-side Azure or external credential verification not redone in this session
+
+### No-Go / Deferred
+
+- reward and referral are still documentation truth only in this workspace
+- do not present reward or referral as live product capability
+- do not silently convert blocked product work into fake demo narrative
+
+## Session Implementation Stages
+
+### Stage 1 - Vault Truth Reconciliation
+
+- align [Now](../00-Home/Now.md), [Project Status](Project%20Status.md), [task-board](task-board.md), and [comms-log](comms-log.md)
+- standardize the session roster and creator identity
+- separate `PROVEN`, `BLOCKED`, and `DEFERRED` claims
+
+**Acceptance:** the active control notes tell the same current-state story.
+
+### Stage 2 - Naming Migration And Backlink Repair
+
+- rename the active progression folder to `09-KOPANO PROGRESSION`
+- rename current Demo Day control files from `Orch` to `Kopano`
+- repair active hub links and navigation notes
+
+**Acceptance:** no active navigation note points at `09-ORCH PROGRESSION` or the old demo file names.
+
+### Stage 3 - Team Dispatch Through Schematics
+
+- publish today’s command pack
+- define lane scope, proof requirement, and escalation path
+- make the Observer role instructional, not executive
+
+**Acceptance:** a new session command note exists and can drive the team without chat context.
+
+### Stage 4 - Logging And Observer Teaching Loop
+
+- log the reframe in [comms-log](comms-log.md)
+- add today’s session evidence in [2026-04-11](../07-Sessions%20By%20Day/2026-04-11.md)
+- require the Observer to summarize evidence and contradictions from notes
+
+**Acceptance:** today’s note shows objective, blockers, and evidence expectations.
+
+### Stage 5 - End-Of-Session Carryover
+
+- leave the next execution turn with a dated handoff
+- keep the next blocker list explicit
+- preserve historical notes while keeping current control notes current
+
+**Acceptance:** the next operator can open `Now`, this note, and the session command pack and continue cleanly.
+
+## Immediate Critical Queue
+
+1. keep the 2nd Brain coherent while Robyn handles the live code namespace rewrite
+2. protect the demo script from unproven reward, referral, and owner-blocked claims
+3. keep WhatsApp and wider KasiLink dependencies explicitly marked as owner-blocked
+4. train the Observer from logs, contradictions, and AI-to-AI handoffs
+5. leave every next blocker as a dated note, not a chat-only memory
+
+## Daily Disciplines
+
+1. Audit first: update vault truth before claiming new work.
+2. Separate proven system behavior from owner-blocked external dependencies.
+3. Keep secrets out of notes and source files.
+4. Log dated evidence in `comms-log` instead of leaving truth in chat.
+5. Teach the Observer from evidence, not from guesses.

@@ -26,7 +26,7 @@ status: active
 
 ## Assumptions
 
-- Demo success for the stabilization day means the Orch-only route is polished, rehearsed, and documented.
+- Demo success for the stabilization day means the Kopano route is polished, rehearsed, and documented.
 - The full flow in [SA Startup Week Demo](SA%20Startup%20Week%20Demo.md) remains the longer-term target: gig post, provider ranking, load-shedding safety, WhatsApp notification, and transparent reasoning.
 - Azure remains the buyer-facing readiness story for Demo Day unless the owner explicitly promotes it further.
 - Reward and referral work stays behind demo-path hardening unless the final live script requires it.
@@ -43,7 +43,7 @@ status: active
 **Close state**
 - Codex-owned April 8 work is closed as of `2026-04-09`.
 - The only remaining gap to fully close this row is owner-supplied Clerk plus Atlas access so a real in-app KasiLink rehearsal can run.
-- Until that is cleared, the safe live route remains the rehearsed Orch-only script in [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md).
+- Until that is cleared, the safe live route remains the rehearsed Kopano script in [Kopano Demo Script - 2026-04-09](Kopano%20Demo%20Script%20-%202026-04-09.md).
 
 **Live status**
 - countdown note created
@@ -91,7 +91,7 @@ status: active
 - Codex Terminal
 
 **Close state**
-- The day is closed when the Orch-only conservative route is polished, rehearsed, and documented as `Council -> Labs -> Console send -> Forge view -> Admin audit`.
+- The day is closed when the Kopano conservative route is polished, rehearsed, and documented as `Council -> Labs -> Console send -> Forge view -> Admin audit`.
 - The full KasiLink route remains explicitly owner-blocked until valid Clerk access, Atlas reachability, and wider marketplace proof are supplied.
 - Microsoft stays framed as `readiness story`, not as a fully connected live Azure stack.
 
@@ -104,7 +104,7 @@ status: active
 - live-event rendering now passes across council, public console, and admin after the console relay patch
 - Forge create/edit flows now survive live refresh, and lane movement is pressable through an explicit lane control instead of drag-only behavior
 - MCP Console send and stream both return live replies in browser QA
-- locked Orch-only public and admin rehearsal paths are now recorded with timing and presenter notes
+- locked Kopano public and admin rehearsal paths are now recorded with timing and presenter notes
 - Azure CLI and Azure Developer CLI now work locally in a non-admin install path, and Orch Labs now exposes a live Microsoft readiness report
 - current Microsoft readiness is `2/6` required checks and `1/3` optional checks on the local runtime; remaining blockers are Azure sign-in plus real Azure OpenAI, App Insights, and hosting env values
 - the GUI shell is now split into routed pages for council, labs, forge, console, and admin with a persistent Framer Motion background and separate build chunks

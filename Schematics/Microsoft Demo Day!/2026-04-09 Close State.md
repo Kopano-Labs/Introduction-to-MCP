@@ -15,12 +15,12 @@ status: active
 # 2026-04-09 Close State
 
 > Hub: [Microsoft Demo Day!](index.md)
-> Script: [Orch Demo Script - 2026-04-09](Orch%20Demo%20Script%20-%202026-04-09.md)
+> Script: [Kopano Demo Script - 2026-04-09](Kopano%20Demo%20Script%20-%202026-04-09.md)
 > Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
 
 ## Day Definition
 
-`2026-04-09 | Stabilize Demo Path` is closed when the Orch-only route is polished, rehearsed, and documented without unknown blockers.
+`2026-04-09 | Stabilize Demo Path` is closed when the Kopano route is polished, rehearsed, and documented without unknown blockers.
 
 ## Locked Route
 
@@ -48,7 +48,7 @@ status: active
 
 ## Honest Current State
 
-- Orch shell is ready for the conservative demo route.
+- Kopano shell is ready for the conservative demo route.
 - The wider KasiLink story still depends on valid Clerk access, Atlas reachability, and additional production proof.
 - Microsoft is currently a live readiness surface with installed tooling, not yet a fully connected Azure production path.
 

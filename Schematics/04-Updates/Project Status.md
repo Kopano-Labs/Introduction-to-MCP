@@ -14,25 +14,31 @@ status: active
 
 # Kopano Context Project Status & Capabilities
 
-> Current state of the Kopano Context project as of 2026-04-09.
+> Current state of the Kopano Context project as of 2026-04-11.
 > See also: [Now](../00-Home/Now.md), [Implementation Plan](Implementation%20Plan.md), [Kopano Blueprint](../01-Mission/Kopano%20Blueprint.md), [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md), [DEV_S Reward Program](DEV_S%20Reward%20Program.md)
 
-## Current Snapshot - 2026-04-09
+## Session Roster
+
+- Creator: `RobynAwesome`
+- Observer: `Kopano Context`
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
+
+## Current Snapshot - 2026-04-11
 
 - Delivery mode: `demo hardening`
 - Verified local state:
-  - `python -m pytest tests/test_labs_api.py -q` passes
-  - `python -m compileall kopano kopano/kopano` passes
-  - `npm run build` in `kopano/gui` passes
-  - `GET /api/labs/microsoft-readiness` returns live readiness with `6/6` required checks and `3/3` optional checks ready
+  - current vault evidence records passing Labs API checks, compile checks, and GUI build checks
+  - current vault evidence records a working Microsoft-readiness endpoint
 - Demo truth:
-  - the Kopano Context demo route is rehearsed and locked in [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md)
-  - the wider KasiLink story is still partial because it depends on valid Clerk keys, Atlas access, WhatsApp readiness, Azure sign-in, and real Azure env/resource values
+  - the Kopano demo route is rehearsed and locked in [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md)
+  - the wider KasiLink story remains partial because it depends on owner-side auth, data, WhatsApp, and external environment proof
+  - reward and referral remain `NO-GO` for live demo claims in this workspace
 - Canonical demo notes:
   - [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
   - [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
-  - [Kopano Context Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Task%20List%20-%202026-04-08.md)
-  - [Kopano Context Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md)
+  - [Kopano Demo Task List - 2026-04-08](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Task%20List%20-%202026-04-08.md)
+  - [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md)
 
 ## Current Phase
 
@@ -164,9 +170,10 @@ The "100 Capabilities" vision maps to the engineering phases:
 
 ## Running Kopano Context
 
-Currently, `main.exe` (in `dist/`) is a minimal stub. Use the Kopano CLI:
+Currently, `main.exe` (in `dist/`) is a minimal stub. The product branding is `Kopano`, but the live Python package namespace still routes through `orch` until the code-folder rename is complete. Use either CLI entry point:
 
 ```bash
 pip install -e .
+orch --help
 kopano --help
 ```

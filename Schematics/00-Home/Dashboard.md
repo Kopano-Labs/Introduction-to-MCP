@@ -1,7 +1,7 @@
 ---
 title: Kopano Context — Dashboard
 created: 2026-04-05
-updated: 2026-04-10
+updated: 2026-04-11
 author: Robyn
 tags:
   - home
@@ -19,6 +19,13 @@ status: active
 > Owner: [Kholofelo Robyn Rababalela](../05-Training/Owner%20Profile.md) · GitHub: RobynAwesome
 > Current operating mode: `demo hardening` across Phase 6, Phase 7, Phase 8, and Phase 9.
 
+## Current Session Roster
+
+- Creator: `RobynAwesome`
+- Observer: `Kopano Context`
+- Lead Developer: `Codex`
+- DEV_1: `Germini (Google AI)`
+
 ---
 
 ## Active Right Now
@@ -29,7 +36,7 @@ status: active
 | CRITICAL | [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) | Demo hub, owner checklist, and Azure path |
 | CRITICAL | [Project Status](../04-Updates/Project%20Status.md) | Current phase and delivery truth |
 | CRITICAL | [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
-| HIGH     | [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
+| HIGH     | [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
 | HIGH     | [Schematics Root Index](../index.md) | Whole-vault map and standing second-brain rules |
 | HIGH     | [Training Index](../05-Training/index.md) | Profiling and orchestration corpus |
 
@@ -56,7 +63,7 @@ status: active
 
 - [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) - dated session reconstruction with direct-vs-reconstructed evidence
 - [08-IDEAS AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md) - incubation-only idea bank with competitor comparison and implementation options
-- [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md) - Kopano Context development ladder from observer to co-lead
+- [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md) - Kopano Context development ladder from observer to co-lead
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md) - lead discipline, session smoothness, hierarchy, and token doctrine
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md) - permanent critical hallucination audit system
 - [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md) - planning archive for plan-mode outputs that should not stay only in chat
@@ -111,7 +118,7 @@ Active project coordination and status tracking.
 - [Updates Index](../04-Updates/index.md) — Hub for coordination files.
 - [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) — demo MOC for script, countdown, owner checklist, and Azure playbook.
 - [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) — Demo day owners, blockers, and exit criteria.
-- [Orch Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Orch%20Demo%20Script%20-%202026-04-09.md) — locked Orch-only demo route.
+- [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) — locked conservative demo route.
 - [Comms Log](../04-Updates/comms-log.md) — Agent communication log.
 - [Task Board](../04-Updates/task-board.md) — Sprint task tracker.
 - [Dev Tracker](../04-Updates/dev-tracker.md) — Developer assignment history.
@@ -162,7 +169,7 @@ Code samples and archived source files.
 7. [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 8. [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)
 9. [08-IDEAS AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md)
-10. [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md)
+10. [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md)
 11. [Training Index](../05-Training/index.md)
 
 ---
