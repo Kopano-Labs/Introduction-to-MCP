@@ -90,7 +90,7 @@ status: active
 ## Biggest Open Blockers
 
 - owner-side WhatsApp registration and device proof for final live phone route handshake
-- reward/referral remains documentation-only in this workspace and is `NO-GO`
+- [DONE] reward/referral implemented in full (DB schema + API endpoints).
 - final browser-level visual QA for the con-joint marketplace/orchestration walkthrough
 - current-session evidence logging so the Observer can learn from grounded notes instead of chat fragments
 
