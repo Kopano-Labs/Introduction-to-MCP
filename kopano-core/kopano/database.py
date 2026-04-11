@@ -176,10 +176,14 @@ def init_db():
         password_hash TEXT NOT NULL,
         password_salt TEXT NOT NULL,
         role TEXT NOT NULL DEFAULT 'user',
+        reward_points INTEGER NOT NULL DEFAULT 0,
+        referral_code TEXT UNIQUE,
+        referred_by INTEGER,
         god_mode INTEGER NOT NULL DEFAULT 0,
         is_active INTEGER NOT NULL DEFAULT 1,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (referred_by) REFERENCES users (id)
     );
     """)
 
@@ -209,16 +213,20 @@ def register_user(email: str, password: str, full_name: Optional[str] = None) ->
 
     salt = secrets.token_hex(16)
     password_hash = _hash_password(password, salt)
+    
+    # Generate a unique referral code
+    referral_code = f"KC-{secrets.token_hex(4).upper()}"
+    
     cursor.execute(
         """
-        INSERT INTO users (email, full_name, password_hash, password_salt)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO users (email, full_name, password_hash, password_salt, referral_code)
+        VALUES (?, ?, ?, ?, ?)
         """,
-        (normalized_email, full_name, password_hash, salt),
+        (normalized_email, full_name, password_hash, salt, referral_code),
     )
     conn.commit()
     cursor.execute(
-        "SELECT id, email, full_name, role, god_mode, is_active, created_at FROM users WHERE email = ?",
+        "SELECT id, email, full_name, role, reward_points, referral_code, referred_by, god_mode, is_active, created_at FROM users WHERE email = ?",
         (normalized_email,),
     )
     row = cursor.fetchone()
@@ -232,7 +240,7 @@ def authenticate_user(email: str, password: str) -> Optional[dict]:
     normalized_email = email.strip().lower()
     cursor.execute(
         """
-        SELECT id, email, full_name, password_hash, password_salt, role, god_mode, is_active, created_at
+        SELECT id, email, full_name, password_hash, password_salt, role, reward_points, referral_code, referred_by, god_mode, is_active, created_at
         FROM users
         WHERE email = ?
         """,

@@ -7,6 +7,12 @@ param envName string = 'prod'
 @description('The name of the Kopano Context core application.')
 param appName string = 'kopano-context'
 
+@description('The administrative email for the ecosystem.')
+param adminEmail string = 'rkholofelo@context.kopanolabs.com'
+
+@description('The official production domain.')
+param customDomain string = 'www.context.kopanolabs.com'
+
 var uniqueSuffix = uniqueString(resourceGroup().id)
 var vaultName = 'kv-${appName}-${uniqueSuffix}'
 var planName = 'asp-${appName}-${envName}'
@@ -62,6 +68,14 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'KOPANO_ENV'
           value: envName
+        }
+        {
+          name: 'ADMIN_EMAIL'
+          value: adminEmail
+        }
+        {
+          name: 'PRODUCTION_URL'
+          value: 'https://${customDomain}'
         }
         {
           name: 'AZURE_OPENAI_KEY'

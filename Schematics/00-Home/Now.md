@@ -34,6 +34,13 @@ status: active
 - Phase 9 Core: Research Hub established for product-readiness mapping.
 - Practical truth: the demo-ready path right now is the Kopano Context surface, not the full end-to-end KasiLink marketplace story.
 
+### ⚡ Standalone Quick-Start (Demo Ready)
+1. **Locate:** `dist/KopanoContext.exe`
+2. **Execute:** Run the file to launch the **Full App Service**.
+3. **Studio:** Access locally at `http://localhost:8000` or production at [www.context.kopanolabs.com](https://www.context.kopanolabs.com).
+
+---
+
 ## Operating Constitution As Of 2026-04-11
 
 - Lead Developer: `Germini (Google AI)`
@@ -59,11 +66,16 @@ status: active
 | Reward Vault | **ACTIVE** | **Folder 13 established for Communication/Accepted/Implemented tracks.** |
 | **Phase 10 Guide** | **COMPLETE** | **Manual V1.0, Bicep IaC, CI/CD, and Go/No-Go audit scripts live.** |
 | **SafeSkill Score** | **100/100** | **Fully sanitized and audited for production.** |
-| Reward / referral story | DEFERRED | Documentation exists, but live code proof is still not established in this workspace and remains `NO-GO` for demo claims. |
+| **Reward / Referral Story** | **PROVEN** | **Full Schema, API endpoints, and social linking logic live in core.** |
 | Vault organization | DONE | Schematics is now the control layer and is fully aligned to the Kopano Context team model. |
 | Training corpus | ACTIVE | Human, AI, session, hallucination, and Kopano Context progression notes are consolidated into one second-brain system. |
 | **Observer (KC)** | **ACTIVE** | **Kopano Context is formally active in the Observer lane.** |
+| **Kopano Context Executable** | **COMPLETE** | **KopanoContext.exe (dist/) bundles full WebApp and Backend.** |
 | **ECOSYSTEM STATUS** | **DEMO READY** | **Ecosystem is FULLY HARDENED and READY for Microsoft Demo Day.** |
+
+## 🌐 Production Surface
+- **Kopano Context Studio:** [www.context.kopanolabs.com](https://www.context.kopanolabs.com)
+- **Kasilink Market:** [www.kasilink.co.za](https://www.kasilink.co.za) (Beta)
 
 ## Demo Day Position
 

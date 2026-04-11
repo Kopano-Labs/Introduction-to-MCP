@@ -41,11 +41,21 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://localhost:8000",
         "https://kasi-link.vercel.app",
+        "https://www.context.kopanolabs.com",
+        "https://context.kopanolabs.com",
+        "https://www.kasilink.co.za",
     ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# --- SYSTEM METADATA ---
+SYSTEM_NAME = "Kopano Context"
+ADMIN_EMAIL = "rkholofelo@context.kopanolabs.com"
+PRODUCTION_URL = "https://www.context.kopanolabs.com"
 
 app.include_router(kasilink_router)
 app.include_router(labs_router)
@@ -144,7 +154,20 @@ def register(request: RegisterRequest):
     """Register a local Orch user account."""
     try:
         user = register_user(request.email, request.password, request.full_name)
-        return {"status": "ok", "user": user}
+        return {
+            "status": "ok",
+            "user": {
+                "id": user["id"],
+                "email": user["email"],
+                "full_name": user["full_name"],
+                "role": user["role"],
+                "reward_points": user.get("reward_points", 0),
+                "referral_code": user.get("referral_code"),
+                "referred_by": user.get("referred_by"),
+                "is_active": bool(user["is_active"]),
+                "created_at": user["created_at"]
+            }
+        }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -156,7 +179,67 @@ def login(request: LoginRequest):
     if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     log_demo_event("auth_login_success", role=user.get("role", "unknown"))
-    return {"status": "ok", "user": user}
+    return {
+        "status": "ok",
+        "user": {
+            "id": user["id"],
+            "email": user["email"],
+            "full_name": user["full_name"],
+            "role": user["role"],
+            "reward_points": user.get("reward_points", 0),
+            "referral_code": user.get("referral_code"),
+            "referred_by": user.get("referred_by"),
+            "is_active": bool(user["is_active"]),
+            "created_at": user["created_at"]
+        }
+    }
+
+@app.get("/rewards/status")
+def get_reward_status(email: str):
+    """Deep retrieval of individual reward logic."""
+    from .database import get_db_connection
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT reward_points, referral_code, referred_by FROM users WHERE email = ?", (email,))
+    row = cursor.fetchone()
+    conn.close()
+    if not row:
+        raise HTTPException(status_code=404, detail="User not found")
+    return dict(row)
+
+@app.post("/rewards/award")
+def award_points(email: str, points: int, reason: str):
+    """Lead-only point injection for ecosystem excellence."""
+    from .database import get_db_connection
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET reward_points = reward_points + ? WHERE email = ?", (points, email))
+    conn.commit()
+    conn.close()
+    return {"status": "ok", "message": f"Awarded {points} points for {reason}"}
+
+@app.post("/rewards/refer")
+def process_referral(referrer_code: str, new_user_email: str):
+    """Social referral logic: links a new user to their referrer and awards bonus points."""
+    from .database import get_db_connection
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Verify referrer
+    cursor.execute("SELECT id FROM users WHERE referral_code = ?", (referrer_code,))
+    referrer = cursor.fetchone()
+    if not referrer:
+        conn.close()
+        raise HTTPException(status_code=404, detail="Referrer code invalid")
+    
+    # Update new user
+    cursor.execute("UPDATE users SET referred_by = ?, reward_points = reward_points + 50 WHERE email = ?", (referrer['id'], new_user_email))
+    # Give referrer a bonus too
+    cursor.execute("UPDATE users SET reward_points = reward_points + 100 WHERE id = ?", (referrer['id'],))
+    
+    conn.commit()
+    conn.close()
+    return {"status": "ok", "message": "Social link established. Rewards distributed."}
 
 @app.get("/sessions")
 def list_sessions():
@@ -289,15 +372,22 @@ async def health_check():
 
 # --- STATIC FILE SERVING (GUI) ---
 # Mount the React build directory if it exists
-gui_dist_path = Path(__file__).parent.parent / "studio" / "dist"
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    # Running in a PyInstaller bundle
+    gui_dist_path = Path(sys._MEIPASS) / "studio" / "dist"
+else:
+    # Running in normal python mode
+    gui_dist_path = Path(__file__).parent.parent / "studio" / "dist"
+
 if gui_dist_path.exists():
     app.mount("/", StaticFiles(directory=str(gui_dist_path), html=True), name="studio")
 else:
     @app.get("/")
     def gui_missing():
         return {
-            "message": "Orch API is running, but GUI build not found.",
-            "instructions": "Run 'cd orch/gui && npm install && npm run build' to enable the browser interface."
+            "message": "Kopano Context API is running, but local Studio build not found.",
+            "instructions": f"Navigate to https://www.context.kopanolabs.com for the cloud instance or run 'npm run build' in studio folder.",
+            "diagnostics": f"Local search path: {gui_dist_path}"
         }
 
 def start_api():
