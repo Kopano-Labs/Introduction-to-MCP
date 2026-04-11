@@ -12,6 +12,7 @@ import uvicorn
 import json
 import asyncio
 import os
+import sys
 import logging
 from pathlib import Path
 from contextlib import asynccontextmanager

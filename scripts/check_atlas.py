@@ -49,7 +49,7 @@ client = None
 exit_code = 0
 
 try:
-    print("🔌  Connecting to Atlas cluster...")
+    print("[*]  Connecting to Atlas cluster...")
     client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=6000)
 
     # Lightweight ping — no data read, just proves the server responded
