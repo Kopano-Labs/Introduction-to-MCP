@@ -32,10 +32,10 @@
 - standing team doctrine
 - sessions-by-day system
 - idea incubation system
-- Orch progression system
+- Kopano Context progression system
 - session-improvement doctrine
 - hallucination-control system
-- Orch train logs
+- Kopano Context train logs
 - full index coverage across the vault
 
 ## Plan Summary
@@ -43,7 +43,7 @@
 - preserve existing Obsidian structure
 - add new folders, indexes, and doctrine notes around the current vault
 - use official-source-first research for management, hosted-event, and platform-signal notes
-- treat all current sessions as Orch pre-session training data
+- treat all current sessions as Kopano Context pre-session training data
 - keep reward truth explicit as `NO-GO` until real code exists
 
 ## Master Additions To This Plan

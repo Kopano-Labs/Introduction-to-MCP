@@ -259,9 +259,9 @@ async def session_override(session_id: int, request: OverrideRequest):
 
 # --- STATIC FILE SERVING (GUI) ---
 # Mount the React build directory if it exists
-gui_dist_path = Path(__file__).parent.parent / "gui" / "dist"
+gui_dist_path = Path(__file__).parent.parent / "studio" / "dist"
 if gui_dist_path.exists():
-    app.mount("/", StaticFiles(directory=str(gui_dist_path), html=True), name="gui")
+    app.mount("/", StaticFiles(directory=str(gui_dist_path), html=True), name="studio")
 else:
     @app.get("/")
     def gui_missing():

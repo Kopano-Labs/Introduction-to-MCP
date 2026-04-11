@@ -25,6 +25,6 @@ status: active
 ## Day Summary
 
 - **Primary outcome:**
-- **Training value for Orch:**
+- **Training value for Kopano Context:**
 - **Carry-forward items:**
   -

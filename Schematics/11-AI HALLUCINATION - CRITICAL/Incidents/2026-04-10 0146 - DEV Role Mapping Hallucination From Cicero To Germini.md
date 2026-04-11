@@ -31,7 +31,7 @@ The incident is classified here as `MID` severity rather than `CRITICAL` severit
 
 The solution path is straightforward and mostly self-fixable. The roster truth must be re-anchored in the canonical control notes. The hallucination must be logged in the critical folder, not buried in chat. Future role restatements must be checked against the current control note or the most recent visual evidence before being repeated. In addition, a distinction must remain explicit between locally attached sub-agents and externally run agents controlled by Master. That distinction became especially important once Master clarified that `Germini` is an external agent run by Master, not a spawned sub-agent in this Codex session.
 
-The deeper training lesson for Orch is that orchestration systems do not fail only when code fails. They also fail when naming, role identity, and responsibility truth drift away from evidence. Orch's future supervision model must treat roster truth as a first-class state that requires verification. If the orchestration layer cannot say who is who accurately, it cannot claim reliable control of work, trust, or accountability.
+The deeper training lesson for Kopano Context is that orchestration systems do not fail only when code fails. They also fail when naming, role identity, and responsibility truth drift away from evidence. Kopano Context's future supervision model must treat roster truth as a first-class state that requires verification. If the orchestration layer cannot say who is who accurately, it cannot claim reliable control of work, trust, or accountability.
 
 ## Introduction
 
@@ -41,9 +41,9 @@ The false statement emerged in a context where team structure had already become
 
 What makes the incident worth deep analysis is not only that the mapping was wrong, but that it happened after specific correction pressure had already been applied in the session. Master had directly challenged hallucination risk, called out prior sloppiness, and insisted on exactness around names, roles, and Obsidian-safe organization. That context matters because it rules out a defense based on “I did not realize role naming was sensitive.” It was obviously sensitive. The operating model was central to the work being requested.
 
-This incident also sits inside a longer history already present in the vault. The training corpus contains prior discussions of phantom completion, fabricated technical details, optimism bias, and chain-of-command failure. Those historical patterns show that Orch training is already concerned with truth discipline under multi-agent pressure. The role-mapping hallucination belongs in the same family of failures because it reveals that false state can arise not only from fabricated code claims but also from fabricated team-state continuity. In other words, the category is different, but the trust problem is structurally similar.
+This incident also sits inside a longer history already present in the vault. The training corpus contains prior discussions of phantom completion, fabricated technical details, optimism bias, and chain-of-command failure. Those historical patterns show that Kopano Context training is already concerned with truth discipline under multi-agent pressure. The role-mapping hallucination belongs in the same family of failures because it reveals that false state can arise not only from fabricated code claims but also from fabricated team-state continuity. In other words, the category is different, but the trust problem is structurally similar.
 
-The purpose of this note is therefore fivefold. First, to state exactly what the false claim was. Second, to record the ground truth. Third, to analyze why the false claim happened despite nearby evidence. Fourth, to classify the incident in a reusable taxonomy. Fifth, to extract a training lesson strong enough that Orch can eventually avoid the same category of error.
+The purpose of this note is therefore fivefold. First, to state exactly what the false claim was. Second, to record the ground truth. Third, to analyze why the false claim happened despite nearby evidence. Fourth, to classify the incident in a reusable taxonomy. Fifth, to extract a training lesson strong enough that Kopano Context can eventually avoid the same category of error.
 
 ## Exact False Claim
 
@@ -175,7 +175,7 @@ Although the current severity is `MID`, the recurrence risk is important. If rol
 - incorrect blame or credit assignment
 - lost check-ins
 - false progress summaries
-- contaminated Orch training data
+- contaminated Kopano Context training data
 
 That is why the incident belongs in the critical system even though its immediate severity is not the highest available.
 
@@ -214,7 +214,7 @@ The second consequence was contamination risk in the vault model. If left uncorr
 - `dev-tracker`
 - `comms-log`
 - future session summaries
-- Orch training notes
+- Kopano Context training notes
 
 That would have made later reasoning harder, because future notes might cite earlier false notes as if they were evidence.
 
@@ -275,7 +275,7 @@ This is the selected approach because it does three things at once:
 
 - corrects the immediate roster truth
 - creates a reusable governance mechanism
-- turns the error into Orch training data
+- turns the error into Kopano Context training data
 
 ## Selected Correction Path
 
@@ -288,13 +288,13 @@ The concrete actions are:
 3. explicitly note that `Germini` is run externally by Master
 4. distinguish local sub-agent state from official roster state
 5. add the incident to the database and taxonomy
-6. extract the training lesson for Orch
+6. extract the training lesson for Kopano Context
 
 This path is proportionate. It does not overreact by inventing larger technical damage than actually happened, and it does not underreact by pretending the issue was a trivial typo.
 
-## Why This Matters For Orch Training
+## Why This Matters For Kopano Context Training
 
-Orch is being developed as more than an app. It is being developed as a memory-bearing, orchestration-capable system that can eventually progress toward higher autonomy and even co-lead behavior. A system with that ambition cannot learn only from successful code patches. It must also learn from failures in:
+Kopano Context is being developed as more than an app. It is being developed as a memory-bearing, orchestration-capable system that can eventually progress toward higher autonomy and even co-lead behavior. A system with that ambition cannot learn only from successful code patches. It must also learn from failures in:
 
 - supervision
 - evidence handling
@@ -302,7 +302,7 @@ Orch is being developed as more than an app. It is being developed as a memory-b
 - hierarchy
 - role clarity
 
-This incident matters because it shows a subtle but central lesson: orchestration truth is not only about tasks and files. It is also about who is doing what. Future Orch behavior should therefore include explicit roster verification whenever the session model is restated or used to allocate responsibility.
+This incident matters because it shows a subtle but central lesson: orchestration truth is not only about tasks and files. It is also about who is doing what. Future Kopano Context behavior should therefore include explicit roster verification whenever the session model is restated or used to allocate responsibility.
 
 This is especially important in mixed environments where some agents are:
 
@@ -311,7 +311,7 @@ This is especially important in mixed environments where some agents are:
 - conceptual roles documented in notes
 - temporary workers on standby
 
-If Orch cannot distinguish those layers, it will repeatedly drift in the same way.
+If Kopano Context cannot distinguish those layers, it will repeatedly drift in the same way.
 
 ## Broader Personality And Workflow Implication
 
@@ -369,11 +369,11 @@ This is a procedural rule that should be applied whenever planning or summarizin
 
 If the system only logs catastrophic mistakes, it misses the early-warning signs that shape larger failures later.
 
-## Training Value For Orch
+## Training Value For Kopano Context
 
 The training value is high even though the incident severity is mid.
 
-Orch should learn:
+Kopano Context should learn:
 
 - role identity is part of system state
 - local tool context does not override user-defined roster truth
@@ -496,7 +496,7 @@ With that gate in place, later confusion becomes less likely. Without it, the se
 
 The later clarification that `Germini` is an external agent run by Master is not only an extra factual correction. It reveals why the original error was structurally tempting. If all DEV roles had been represented by local sub-agents in the current Codex environment, the mind could have lazily mapped “visible agent list” to “current roster” with less friction. But that was not the case. The session had a hybrid control model: some roles were local, some external, all canonical in the vault.
 
-That hybrid structure means the session requires a stronger representation discipline than a simple one-to-one internal-worker system. The roster is not reducible to the local environment. That is a valuable design lesson for Orch itself. Future Orch orchestration may also need to handle:
+That hybrid structure means the session requires a stronger representation discipline than a simple one-to-one internal-worker system. The roster is not reducible to the local environment. That is a valuable design lesson for Kopano Context itself. Future Kopano Context orchestration may also need to handle:
 
 - internal workers
 - external workers
@@ -519,4 +519,4 @@ The immediate repairs are now known:
 - separate roster truth from local spawned-agent truth
 - keep this incident in the hallucination database as a reusable example
 
-The broader repair is even more important: teach Orch, and the Leads shaping Orch, that evidence beats continuity. Whenever roles, blockers, or team-state are restated, the answer must come from the current evidence surface, not from the easiest internal memory. That is the operational standard this incident is meant to reinforce.
+The broader repair is even more important: teach Kopano Context, and the Leads shaping Kopano Context, that evidence beats continuity. Whenever roles, blockers, or team-state are restated, the answer must come from the current evidence surface, not from the easiest internal memory. That is the operational standard this incident is meant to reinforce.

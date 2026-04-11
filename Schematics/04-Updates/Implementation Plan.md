@@ -14,7 +14,7 @@ status: active
 
 # Kopano Context Implementation Plan
 
-> Master engineering plan for building orch from core engine to Labs and accessibility phases.
+> Master engineering plan for building Kopano Context from core engine to Labs and accessibility phases.
 > See also: [Project Status](Project%20Status.md), [CLI Specification](../03-Architecture/CLI%20Specification.md), [Phase 1 Walkthrough](Phase%201%20Walkthrough.md)
 
 ## Current Session Execution Sequence
@@ -26,7 +26,7 @@ status: active
 
 ### Stage 2 - Naming Migration And Backlink Repair
 
-- rename active session-control taxonomy from legacy `Orch` naming to `Kopano`
+- rename active session-control taxonomy from legacy `Kopano Context` naming to `Kopano`
 - repair active note links and navigation hubs
 
 ### Stage 3 - Team Dispatch Through Schematics
@@ -56,9 +56,9 @@ status: active
 
 ### Phase 1: The Foundation (Simulated CLI Chat) — COMPLETE
 
-- **Entry Point:** `orch.py` with subcommand structure: `serve`, `chat`, `agents`, `learn`
-- **Agent Manager:** `orch agents config` to securely store API keys
-- **Simulation Engine:** `orch serve launch --group-simulated true` for round-robin terminal discussions
+- **Entry Point:** `Kopano Context.py` with subcommand structure: `serve`, `chat`, `agents`, `learn`
+- **Agent Manager:** `Kopano Context agents config` to securely store API keys
+- **Simulation Engine:** `Kopano Context serve launch --group-simulated true` for round-robin terminal discussions
 
 ### Phase 2: Data Lake & Strategy Engine — COMPLETE
 
@@ -86,9 +86,9 @@ status: active
 
 ## Verification Plan
 
-1. `orch agents config gemini --api-key "..."` — Verify key is saved
-2. `orch serve launch --topic "AGI Ethics" --agents "gemini,gpt4"` — Verify local debate begins
-3. `orch chat log` — Verify discussion was correctly recorded in Data Lake
+1. `Kopano Context agents config gemini --api-key "..."` — Verify key is saved
+2. `Kopano Context serve launch --topic "AGI Ethics" --agents "gemini,gpt4"` — Verify local debate begins
+3. `Kopano Context chat log` — Verify discussion was correctly recorded in Data Lake
 4. `python -m pytest tests/test_kasilink_phase4.py -q` — Verify KasiLink gateway, matching, and loadshedding behavior
 
 ### Phase 5: Reliability, CI & Adoption Baseline — COMPLETE
@@ -104,9 +104,9 @@ status: active
 
 1. `python -m pytest -q` — Verify the full suite is green
 2. `python -m pytest tests/test_kasilink_phase4.py -q` — Verify Phase 4 gateway remains stable
-3. `python -m compileall orch orch/orch` — Verify package compiles cleanly
+3. `python -m compileall Kopano Context Kopano Context/Kopano Context` — Verify package compiles cleanly
 
-### Phase 6: Orch Labs — IN PROGRESS — CRITICAL
+### Phase 6: Kopano Context Labs — IN PROGRESS — CRITICAL
 
 - [x] Add Labs strategy doc into `Schematics`
 - [x] Add Labs registry to the backend
@@ -131,12 +131,12 @@ status: active
 
 ### Phase 8: Public Impact Studio — IN PROGRESS — HIGH
 
-- [x] Add Cowork and Orch Code surfaces to the Labs system model
+- [x] Add Cowork and Kopano Context Code surfaces to the Labs system model
 - [x] Add launch config for 50/50 Anthropic/Codex visual direction with Stitch-inspired cowork support
-- [x] Add persisted Orch Forge flow with rooms, lanes, tasks, and status updates
-- [x] Add first Orch Code teaching loop against the current repo
+- [x] Add persisted Kopano Context Forge flow with rooms, lanes, tasks, and status updates
+- [x] Add first Kopano Context Code teaching loop against the current repo
 - [x] Add cowork task reassignment and dispatch summary
-- [x] Add Orch Code lesson-state progression
+- [x] Add Kopano Context Code lesson-state progression
 - [x] Add pilot analytics and impact metrics for Labs tools
 - [x] Add installer and connector playbook execution cards for IDE, CLI, Azure, and AWS
 - [x] Add MCP Console model selection and streaming surface
@@ -156,5 +156,5 @@ status: active
 
 1. `python -m pytest tests/test_labs_api.py -q` — Verify Labs endpoints
 2. `python -m pytest -q` — Verify the full suite remains green
-3. `python -m compileall orch orch/orch` — Verify package compiles cleanly
-4. `npm run build` from `orch/gui` — Verify the launch surface still builds
+3. `python -m compileall Kopano Context Kopano Context/Kopano Context` — Verify package compiles cleanly
+4. `npm run build` from `Kopano Context/gui` — Verify the launch surface still builds

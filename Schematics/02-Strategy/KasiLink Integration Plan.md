@@ -7,16 +7,16 @@ tags:
   - strategy
   - kasilink
   - integration
-  - orch
+  - Kopano Context
   - township
 priority: critical
 status: active
 ---
 
-# KasiLink + Orch Integration Plan
+# KasiLink + Kopano Context Integration Plan
 
-> Orch as a subsidiary AI feature within KasiLink — powering AI capabilities without replacing KasiLink's objective.
-> See also: [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [Microsoft Contract Strategy](Microsoft%20Contract%20Strategy.md), [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md)
+> Kopano Context as a subsidiary AI feature within KasiLink — powering AI capabilities without replacing KasiLink's objective.
+> See also: [Kopano Context Blueprint](../01-Mission/Kopano Context%20Blueprint.md), [Microsoft Contract Strategy](Microsoft%20Contract%20Strategy.md), [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md)
 
 ## Context
 
@@ -24,7 +24,7 @@ status: active
 
 **KasiLink** (kasi-link.vercel.app) — Next.js/TypeScript PWA connecting township youth with local gigs. Clerk auth, MongoDB Atlas, Vercel deployment. MVP target: end of April 2026.
 
-**Orch** (this repo) — Python multi-agent orchestration framework with FastAPI, 20+ tools, MCP, WhatsApp bridge. Phase 4 in progress.
+**Kopano Context** (this repo) — Python multi-agent orchestration framework with FastAPI, 20+ tools, MCP, WhatsApp bridge. Phase 4 in progress.
 
 ## Strategic Focus
 
@@ -37,10 +37,10 @@ status: active
 ```
 KasiLink (Next.js on Vercel)
     |
-    |--- /api/orch/[...proxy]/route.ts (forwards Clerk JWT)
+    |--- /api/Kopano Context/[...proxy]/route.ts (forwards Clerk JWT)
     |
     v
-Orch FastAPI (Railway / Azure)
+Kopano Context FastAPI (Railway / Azure)
     |--- /api/kasilink/match        -> AI gig matching
     |--- /api/kasilink/sentiment    -> Review scoring
     |--- /api/kasilink/forecast     -> Demand forecasting
@@ -53,7 +53,7 @@ Orch FastAPI (Railway / Azure)
 
 ## Tool Mapping
 
-| Orch Tool | KasiLink Feature | Hack Day? |
+| Kopano Context Tool | KasiLink Feature | Hack Day? |
 |-----------|-----------------|-----------|
 | sentiment_analyzer | Review sentiment scoring | YES |
 | forecaster | Demand forecasting per area | YES |
@@ -67,7 +67,7 @@ Orch FastAPI (Railway / Azure)
 ## Phased Roadmap
 
 ### Phase 1: Hack Day + MVP (April 5-30, 2026)
-- Orch KasiLink API gateway
+- Kopano Context KasiLink API gateway
 - Deploy to Railway
 - AI gig matching + loadshedding + WhatsApp notifications
 - **Deliverable:** SA Startup Week demo
@@ -88,11 +88,11 @@ Orch FastAPI (Railway / Azure)
 
 | File | Action |
 |------|--------|
-| `orch/orch/kasilink_api.py` | CREATE |
-| `orch/orch/tools/loadshedding.py` | CREATE |
-| `orch/orch/tools/gig_matcher.py` | CREATE |
-| `orch/orch/config.py` | MODIFY |
-| `orch/orch/api.py` | MODIFY |
-| `orch/orch/bridge.py` | MODIFY |
-| `orch/orch/simulator.py` | MODIFY |
-| `orch/orch/cli.py` | MODIFY |
+| `Kopano Context/Kopano Context/kasilink_api.py` | CREATE |
+| `Kopano Context/Kopano Context/tools/loadshedding.py` | CREATE |
+| `Kopano Context/Kopano Context/tools/gig_matcher.py` | CREATE |
+| `Kopano Context/Kopano Context/config.py` | MODIFY |
+| `Kopano Context/Kopano Context/api.py` | MODIFY |
+| `Kopano Context/Kopano Context/bridge.py` | MODIFY |
+| `Kopano Context/Kopano Context/simulator.py` | MODIFY |
+| `Kopano Context/Kopano Context/cli.py` | MODIFY |

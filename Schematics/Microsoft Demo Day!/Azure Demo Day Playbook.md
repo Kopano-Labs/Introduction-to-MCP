@@ -80,7 +80,7 @@ az account show
 azd auth login
 pip install -e .
 kopano serve api
-cd orch/gui
+cd kopano-core/studio
 npm run build
 ```
 

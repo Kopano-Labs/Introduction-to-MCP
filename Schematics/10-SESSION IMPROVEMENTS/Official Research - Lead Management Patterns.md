@@ -11,14 +11,14 @@
 - Atlassian Team Playbook
 - Atlassian communication-planning guidance
 
-## Signals That Matter Most For Orch
+## Signals That Matter Most For Kopano Context
 
 - effective teams need psychological safety, dependability, role clarity, and meaning
 - managers are expected to coach, communicate, clear blockers, and create clarity
 - recurring check-ins and explicit expectations reduce silent drift
 - communication systems should be repeatable, not personality-dependent
 
-## Orch Translation
+## Kopano Context Translation
 
 - Lead must coach and check, not only build
 - role clarity belongs in the vault, not just chat

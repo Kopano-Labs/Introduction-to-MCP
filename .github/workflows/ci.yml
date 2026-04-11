@@ -1,4 +1,4 @@
-name: orch CI Pipeline
+name: Kopano CI Pipeline
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
 
       - name: Compile package
         run: |
-          python -m compileall orch orch/orch
+          python -m compileall kopano-core kopano-core/kopano
 
   cli-package-check:
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: orch/gui
+        working-directory: kopano-core/studio
 
     steps:
       - uses: actions/checkout@v4
@@ -70,7 +70,7 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
-          cache-dependency-path: orch/gui/package-lock.json
+          cache-dependency-path: kopano-core/studio/package-lock.json
 
       - name: Install GUI dependencies
         run: npm ci

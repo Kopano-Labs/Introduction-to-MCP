@@ -3,11 +3,16 @@ import tomllib
 
 
 def test_pyproject_files_are_valid_toml():
-    for path in [
+    candidates = [
         Path("pyproject.toml"),
         Path("CLI/pyproject.toml"),
-        Path("orch/pyproject.toml"),
-    ]:
+    ]
+    if Path("kopano-core/pyproject.toml").exists():
+        candidates.append(Path("kopano-core/pyproject.toml"))
+    if Path("orch/pyproject.toml").exists():
+        candidates.append(Path("orch/pyproject.toml"))
+
+    for path in candidates:
         data = tomllib.loads(path.read_text(encoding="utf-8"))
         assert "project" in data
 
@@ -32,9 +37,9 @@ def test_demo_day_artifacts_exist():
 
 def test_root_schematics_index_points_to_real_notes():
     index = Path("index.md").read_text(encoding="utf-8")
-    assert "[[Orch Blueprint]]" in index
-    assert "[[Project Status]]" in index
-    assert "[[04-Updates/index\\|Updates Index]]" in index
+    assert "[[Schematics/00-Home/Now|Now]]" in index
+    assert "[[Schematics/04-Updates/Project Status|Project Status]]" in index
+    assert "[[Schematics/06-Reference/Repo Documents Index|Repo Documents Index]]" in index
 
 
 def test_gitignore_blocks_vendor_directories():

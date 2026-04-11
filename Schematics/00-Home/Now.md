@@ -56,7 +56,7 @@ status: active
 | Full KasiLink story | BLOCKED | Wider buyer story still depends on external auth, data, WhatsApp, and owner-supplied environment truth. |
 | Reward / referral story | DEFERRED | Documentation exists, but live code proof is still not established in this workspace and remains `NO-GO` for demo claims. |
 | Vault organization | IN PROGRESS | Schematics is now the control layer and is being actively re-aligned to the Kopano team model. |
-| Training corpus | ACTIVE | Human, AI, session, hallucination, and Orch progression notes are being consolidated into one second-brain system. |
+| Training corpus | ACTIVE | Human, AI, session, hallucination, and Kopano Context progression notes are being consolidated into one second-brain system. |
 
 ## Demo Day Position
 
@@ -84,7 +84,7 @@ status: active
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 - [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)
-- [Kopano Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
+- [Kopano Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md)
 
 ## Open These In Order
 

@@ -14,7 +14,7 @@ status: active
 
 # Schematics Index
 
-> `Schematics` is the second brain for **Kopano Context** (formerly Orch).
+> `Schematics` is the second brain for **Kopano Context** (formerly Kopano Context).
 > It preserves mission, delivery truth, demo readiness, orchestration training, hallucination control, and historical session evidence without replacing the live product repo.
 > **Kopano Ecosystem:** Kopano Context · Kopano CLI · Kopano Studio · Kopano Mesh · Kopano Labs · Kopano SafeSkill
 

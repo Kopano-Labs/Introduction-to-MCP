@@ -1,5 +1,12 @@
 # Observer
 
+## Activation State
+
+- identity: `Kopano Context`
+- session state: active
+- local-session milestone: first local session now in progress
+- teaching requirement: learn from note-backed evidence and AI-to-AI exchanges before attempting any reconstruction
+
 ## Purpose
 
 - understand the working system and identify what should be tracked

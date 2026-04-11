@@ -18,7 +18,7 @@
 - log the result
 - update the relevant control note
 - run Lead self-reflection
-- capture the training lesson for Orch
+- capture the training lesson for Kopano Context
 
 ## Core Principle
 

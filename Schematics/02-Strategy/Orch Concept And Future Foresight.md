@@ -1,27 +1,27 @@
 ---
-title: Orch Concept And Future Foresight
+title: Kopano Context Concept And Future Foresight
 created: 2026-04-09
 updated: 2026-04-09
 author: Codex
 tags:
   - strategy
   - foresight
-  - orch
+  - Kopano Context
   - future
 priority: high
 status: active
 ---
 
-# Orch Concept And Future Foresight
+# Kopano Context Concept And Future Foresight
 
-> Strategic note on what Orch is becoming beyond the current demo push.
-> See also: [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [Orch Labs Strategy](Orch%20Labs%20Strategy.md), [Project Status](../04-Updates/Project%20Status.md), [Open Source Product-Ready AI Top 50](Open%20Source%20Product-Ready%20AI%20Top%2050.md)
+> Strategic note on what Kopano Context is becoming beyond the current demo push.
+> See also: [Kopano Context Blueprint](../01-Mission/Kopano Context%20Blueprint.md), [Kopano Context Labs Strategy](Kopano Context%20Labs%20Strategy.md), [Project Status](../04-Updates/Project%20Status.md), [Open Source Product-Ready AI Top 50](Open%20Source%20Product-Ready%20AI%20Top%2050.md)
 
-## Orch As A Concept
+## Kopano Context As A Concept
 
-Orch is not just a chat app, and not just a tool-calling framework.
+Kopano Context is not just a chat app, and not just a tool-calling framework.
 
-At its strongest, Orch is:
+At its strongest, Kopano Context is:
 
 - an orchestration layer for multiple AI roles
 - a memory system for human and AI collaboration patterns
@@ -33,7 +33,7 @@ At its strongest, Orch is:
 
 Most AI products stop at answer generation.
 
-Orch aims to go further:
+Kopano Context aims to go further:
 
 - coordinate multiple roles
 - track how those roles behave
@@ -42,7 +42,7 @@ Orch aims to go further:
 
 ## Why This Matters For South Africa
 
-The current strategy already points Orch toward practical South African impact:
+The current strategy already points Kopano Context toward practical South African impact:
 
 - jobs and income support
 - load-shedding resilience
@@ -50,14 +50,14 @@ The current strategy already points Orch toward practical South African impact:
 - education and youth opportunity
 - multilingual and accessibility-first interaction
 
-That makes Orch more than an internal dev tool.
+That makes Kopano Context more than an internal dev tool.
 It becomes a public-impact operating layer.
 
 ## Near-Term Future
 
 - stabilize the demo story
-- turn the Orch-only route into a confident live presentation
-- reconnect Orch to the wider KasiLink flow once auth and data blockers are cleared
+- turn the Kopano Context-only route into a confident live presentation
+- reconnect Kopano Context to the wider KasiLink flow once auth and data blockers are cleared
 - strengthen telemetry, observability, and Azure-facing buyer narrative
 
 ## Mid-Term Future
@@ -69,7 +69,7 @@ It becomes a public-impact operating layer.
 
 ## Long-Term Future
 
-The strongest form of Orch looks like a collaboration operating system:
+The strongest form of Kopano Context looks like a collaboration operating system:
 
 - humans with distinct working styles
 - AI leads and workers with tracked reliability
@@ -80,7 +80,7 @@ The strongest form of Orch looks like a collaboration operating system:
 
 ## Foresight Rule
 
-If Orch keeps:
+If Kopano Context keeps:
 
 - truth
 - memory

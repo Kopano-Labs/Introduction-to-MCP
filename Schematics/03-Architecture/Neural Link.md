@@ -19,7 +19,7 @@ status: active
 
 ## Overview
 
-The Neural Link is orch's real-time visualization layer. It connects to the FastAPI backend via WebSocket and renders agent activity as it happens.
+The Neural Link is Kopano Context's real-time visualization layer. It connects to the FastAPI backend via WebSocket and renders agent activity as it happens.
 
 ## Key Features
 
@@ -43,4 +43,4 @@ The Neural Link is orch's real-time visualization layer. It connects to the Fast
 
 ## KasiLink Integration
 
-The Neural Link concept adapts into KasiLink's **AI Dashboard** — showing users how Orch agents process gig matching decisions transparently. See [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md).
+The Neural Link concept adapts into KasiLink's **AI Dashboard** — showing users how Kopano Context agents process gig matching decisions transparently. See [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md).

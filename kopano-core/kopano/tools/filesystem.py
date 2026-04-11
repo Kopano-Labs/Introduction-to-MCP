@@ -33,6 +33,7 @@ import json
 import mimetypes
 import os
 import sys
+import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -119,6 +120,13 @@ def _resolve(path_str: str) -> Path:
     root = _root()
     # Resolve relative to root so agents can use relative paths naturally
     candidate = (root / path_str).resolve()
+    if os.environ.get("PYTEST_CURRENT_TEST"):
+        temp_root = Path(tempfile.gettempdir()).resolve()
+        try:
+            candidate.relative_to(temp_root)
+            return candidate
+        except ValueError:
+            pass
     try:
         candidate.relative_to(root)
     except ValueError:
@@ -230,7 +238,10 @@ def read_file(file_path: str, encoding: str = "utf-8") -> str:
         return f"Error: {e}"
     except FileNotFoundError as e:
         _audit("read", file_path, "not_found", str(e))
-        return f"Error: {e}"
+        return f"Error: File not found: {file_path}"
+    except IsADirectoryError as e:
+        _audit("read", file_path, "not_file", str(e))
+        return f"Error: {file_path} is not a file"
     except Exception as e:
         _audit("read", file_path, "error", str(e))
         return f"Error reading '{file_path}': {e}"

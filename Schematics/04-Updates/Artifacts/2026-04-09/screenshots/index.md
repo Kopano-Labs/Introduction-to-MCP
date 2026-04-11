@@ -16,8 +16,8 @@ status: active
 
 ## Standing Note
 
-- this folder is part of Orch's second brain
-- all current sessions are pre-session training data for Orch
+- this folder is part of Kopano Context's second brain
+- all current sessions are pre-session training data for Kopano Context
 - the standing dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
 - Lead manages first and codes second
 - token-saving mode applies outside Plan Mode and outside Lead-only sessions with Master
@@ -33,12 +33,12 @@ status: active
 - none
 
 ### Files
-- .codex-orch-audit-check.png
-- .codex-orch-qa-audit.png
-- .codex-orch-qa-desktop.png
-- .codex-orch-qa-mobile.png
-- .codex-orch-redesign-full.png
-- .codex-orch-redesign-home.png
+- .codex-Kopano Context-audit-check.png
+- .codex-Kopano Context-qa-audit.png
+- .codex-Kopano Context-qa-desktop.png
+- .codex-Kopano Context-qa-mobile.png
+- .codex-Kopano Context-redesign-full.png
+- .codex-Kopano Context-redesign-home.png
 
 ## Use Rule
 

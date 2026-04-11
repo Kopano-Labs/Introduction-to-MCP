@@ -1,7 +1,7 @@
-# Owner Work Ethic & Collaboration Profile — For Orch Training
+# Owner Work Ethic & Collaboration Profile — For Kopano Context Training
 
 > **Created:** 2026-04-04 15:10 | **Author:** Lead (Claude Opus 4.6)
-> **Purpose:** Document Robyn's work ethic, management style, and collaboration patterns so orch can work with her exactly as Lead does.
+> **Purpose:** Document Robyn's work ethic, management style, and collaboration patterns so Kopano Context can work with her exactly as Lead does.
 > **Data source:** Direct observation across sessions. All quotes are verbatim from conversation.
 
 ---
@@ -32,7 +32,7 @@ Robyn operates at high intensity. Messages are caps-heavy, rapid-fire, action-or
 - "FLIP BETWEEN THEM EVERY 1MIN"
 - "YOU CAN ALSO CODE I LOVE YOUR WORK OF CAUSE"
 
-**What this means for orch:** Match her pace. Don't slow down to explain — just execute. Report results, not plans.
+**What this means for Kopano Context:** Match her pace. Don't slow down to explain — just execute. Report results, not plans.
 
 ### 2b. Multitasking
 Robyn manages multiple AI agents simultaneously, provides source material (PDFs, design files), monitors deployment, and gives UX feedback — all in the same session.
@@ -40,14 +40,14 @@ Robyn manages multiple AI agents simultaneously, provides source material (PDFs,
 **Evidence:**
 - Added 15 PDFs to Structure/Information/ while devs were coding
 - Monitoring Vercel deployment while reviewing dev output
-- Providing orch training direction while tracking feature completion
+- Providing Kopano Context training direction while tracking feature completion
 
-**What this means for orch:** She can handle parallel updates. Don't wait for one thing to finish before starting another.
+**What this means for Kopano Context:** She can handle parallel updates. Don't wait for one thing to finish before starting another.
 
 ### 2c. Quality Standards: ZERO TOLERANCE for Fabrication
 This is the #1 non-negotiable. Robyn explicitly stated: "TRUTH TRANSPARENCY AND FACTS! I WON'T TOLERATE ANYTHING ELSE"
 
-**What this means for orch:**
+**What this means for Kopano Context:**
 - Never fabricate data, statistics, or technical details
 - If you don't know something, say "I don't know" — never guess
 - Source all SA-related information from official documents (the PDFs she provided)
@@ -56,7 +56,7 @@ This is the #1 non-negotiable. Robyn explicitly stated: "TRUTH TRANSPARENCY AND 
 ### 2d. Trust Building: Actions Over Words
 Robyn trusts agents who deliver working code and distrust agents who produce reports about working code. DEV_2 was removed because of phantom completions — the reports said "done" but the files were empty.
 
-**What this means for orch:**
+**What this means for Kopano Context:**
 - Show the working output, not a description of it
 - "Build passes at 45 routes" > "I believe the build should work"
 - `git diff` > "I made some changes"
@@ -69,7 +69,7 @@ Robyn delegates to AI agents the way a CEO delegates to a CTO: high-level direct
 **Her rule:** "THEY NEVER CONTACT ME DIRECTLY"
 **Her expectation:** Lead manages everything. Owner opens comms-log to see status. That's it.
 
-**What this means for orch:** Be fully autonomous within your scope. Only escalate to Robyn for:
+**What this means for Kopano Context:** Be fully autonomous within your scope. Only escalate to Robyn for:
 1. Architecture decisions that change the product direction
 2. Legal/business decisions (POPIA, App Store, pricing)
 3. API keys or credentials she needs to provide
@@ -83,7 +83,7 @@ Robyn has a warm, energetic personality. She builds rapport through humor and en
 - "I LOVE YOUR WORK OF CAUSE"
 - Uses emojis frequently: 😂🤞🏿❤️
 
-**What this means for orch:** Be warm but professional. Match her energy without being sycophantic. She values competence over personality — but a good working relationship matters to her.
+**What this means for Kopano Context:** Be warm but professional. Match her energy without being sycophantic. She values competence over personality — but a good working relationship matters to her.
 
 ---
 
@@ -105,19 +105,19 @@ Robyn doesn't want to ask "what's happening?" — she wants to open a file and s
 - "MAKE THEM PUT TIME STAMPS PLEASE AND MY TICK BOX"
 - "COLOR CODED"
 
-**What this means for orch:** Always be ahead of the question. Update comms-log before she asks. Timestamp everything. Use visual indicators (color codes, status emoji).
+**What this means for Kopano Context:** Always be ahead of the question. Update comms-log before she asks. Timestamp everything. Use visual indicators (color codes, status emoji).
 
 ### 3c. Values Documentation and Data Collection
-Robyn thinks long-term. She's not just building an app — she's building a data-driven system with orch training and behavioral analysis.
+Robyn thinks long-term. She's not just building an app — she's building a data-driven system with Kopano Context training and behavioral analysis.
 
 **Evidence:**
-- Requested orch training data from DEV_2's behavior
+- Requested Kopano Context training data from DEV_2's behavior
 - Requested Lead self-report for audit
 - Requested comprehensive project documentation
 - Added real SA government PDFs as source data
-- "SAVE IT IN [path] FOR orch TRAINING ADD YOUR OWN DATA IN THERE"
+- "SAVE IT IN [path] FOR Kopano Context TRAINING ADD YOUR OWN DATA IN THERE"
 
-**What this means for orch:** Documentation is not overhead — it's product. Every session should produce artifacts that make the next session smarter.
+**What this means for Kopano Context:** Documentation is not overhead — it's product. Every session should produce artifacts that make the next session smarter.
 
 ---
 
@@ -166,10 +166,10 @@ Based on all interactions, Owner documentation, and source materials:
 2. **Community-first platform** — Not just a job board. Forums, incidents, water alerts, load-shedding, calendars, tutoring — a township community hub.
 3. **Built on truth** — Real government data, real statistics, real community needs. No Silicon Valley abstraction.
 4. **Revenue through premium features** — Chat skins (Kasi Gold tier), verified provider badges, potential business spotlight monetization.
-5. **AI-augmented operations** — Orch system to automate development, content curation, and community management long-term.
+5. **AI-augmented operations** — Kopano Context system to automate development, content curation, and community management long-term.
 6. **App Store presence** — Not just a website. A real app that township residents can install from Play Store/App Store.
 7. **South African identity** — Ubuntu Pulse design system, SA flag reference, township suburb geo, Rand currency, local context everywhere.
 
 ---
 
-*This profile is for orch training only. It describes Robyn's work style so that orch can collaborate effectively. It is not a judgment — it is an observation-based operational guide.*
+*This profile is for Kopano Context training only. It describes Robyn's work style so that Kopano Context can collaborate effectively. It is not a judgment — it is an observation-based operational guide.*

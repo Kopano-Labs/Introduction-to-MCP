@@ -1,4 +1,4 @@
-from kopano import logging
+from . import logging
 
 
 class ORCHApprentice:

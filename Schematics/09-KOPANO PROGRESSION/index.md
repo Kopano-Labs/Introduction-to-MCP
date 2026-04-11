@@ -4,7 +4,7 @@ created: 2026-04-10
 updated: 2026-04-11
 author: Codex
 tags:
-  - orch
+  - Kopano Context
   - progression
   - training
   - governance
@@ -36,7 +36,7 @@ status: active
 ## Evidence Sources
 
 - [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
-- [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
+- [Kopano Context Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md)
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 

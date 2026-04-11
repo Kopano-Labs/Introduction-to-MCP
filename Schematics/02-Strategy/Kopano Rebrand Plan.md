@@ -14,9 +14,9 @@ status: active
 
 # Kopano Rebrand Plan
 
-> Orch is being retired as the public-facing brand identity.
+> Kopano Context is being retired as the public-facing brand identity.
 > The new ecosystem name is **Kopano** — derived from the Sesotho/Setswana word for "gathering" or "meeting together."
-> This document is the canonical plan for migrating all Schematics references from "Orch" to the Kopano ecosystem naming.
+> This document is the canonical plan for migrating all Schematics references from "Kopano Context" to the Kopano ecosystem naming.
 
 ---
 
@@ -24,14 +24,14 @@ status: active
 
 | Old Name | New Name | Role |
 |----------|----------|------|
-| Orch (core framework) | **Kopano Context** | Core orchestration framework and repository |
-| Orch CLI | **Kopano CLI** | Terminal command-line interface |
+| Kopano Context (core framework) | **Kopano Context** | Core orchestration framework and repository |
+| Kopano Context CLI | **Kopano CLI** | Terminal command-line interface |
 | Neural Link (GUI) | **Kopano Studio** | Next.js React GUI and agent visualization dashboard |
-| Orch mesh / multi-agent network | **Kopano Mesh** | Multi-agent network (Gemini, Grok, others in parallel) |
-| Orch Labs | **Kopano Labs** | Product studio — experiment gallery and SA impact tools |
-| Orch Core (engine) | **kopano-core** | Internal orchestration engine (lowercase, repo-style) |
-| Orch Forge | **Kopano Forge** | Collaborative execution + canvas workflow tool |
-| Orch Code | **Kopano Code** | Coding acceleration and craft learning tool |
+| Kopano Context mesh / multi-agent network | **Kopano Mesh** | Multi-agent network (Gemini, Grok, others in parallel) |
+| Kopano Context Labs | **Kopano Labs** | Product studio — experiment gallery and SA impact tools |
+| Kopano Context Core (engine) | **kopano-core** | Internal orchestration engine (lowercase, repo-style) |
+| Kopano Context Forge | **Kopano Forge** | Collaborative execution + canvas workflow tool |
+| Kopano Context Code | **Kopano Code** | Coding acceleration and craft learning tool |
 
 ---
 
@@ -81,12 +81,12 @@ status: active
 | File | Action |
 |------|--------|
 | `CLAUDE.md` | Update vault purpose, folder map, key file references |
-| `index.md` | Update root description and all "Orch" references |
-| `00-Home/Dashboard.md` | Update all "Orch" → Kopano ecosystem names |
+| `index.md` | Update root description and all "Kopano Context" references |
+| `00-Home/Dashboard.md` | Update all "Kopano Context" → Kopano ecosystem names |
 | `00-Home/Now.md` | Update current state snapshot naming |
-| `01-Mission/Orch Blueprint.md` | Rewrite as Kopano Context Blueprint |
-| `02-Strategy/Orch Labs Strategy.md` | Rewrite as Kopano Labs Strategy |
-| `02-Strategy/Orch Concept And Future Foresight.md` | Update naming throughout |
+| `01-Mission/Kopano Context Blueprint.md` | Rewrite as Kopano Context Blueprint |
+| `02-Strategy/Kopano Context Labs Strategy.md` | Rewrite as Kopano Labs Strategy |
+| `02-Strategy/Kopano Context Concept And Future Foresight.md` | Update naming throughout |
 | `02-Strategy/Kopano Brand Identity.md` | **NEW** — canonical brand identity document |
 
 ### Phase 2 — High Priority (follow-up session)
@@ -94,13 +94,13 @@ status: active
 |------|--------|
 | `04-Updates/Project Status.md` | Update naming in status tables |
 | `Microsoft Demo Day!/` files | Update demo scripts for new brand |
-| `05-Training/` profile files | Update Orch references in agent profiles |
+| `05-Training/` profile files | Update Kopano Context references in agent profiles |
 | `09-ORCH PROGRESSION/` index | Update folder references |
 
 ### Phase 3 — Backlog (systematic sweep)
 - All remaining files in 04-Updates, 07-Sessions By Day, 10-SESSION IMPROVEMENTS
 - Folder renames: `09-ORCH PROGRESSION` → `09-KOPANO PROGRESSION`
-- README in `/06-Reference/orch-code-implemtation`
+- README in `/06-Reference/Kopano Context-code-implemtation`
 
 ---
 
@@ -109,7 +109,7 @@ status: active
 - **Operating model:** Lead (Codex), DEV roster, hierarchy, session protocol, hallucination system — all unchanged
 - **KasiLink integration:** Kopano Context remains the AI microservice layer inside KasiLink
 - **SafeSkill:** Trust layer terminology stays — now branded as Kopano SafeSkill
-- **Python package namespace for now:** code still imports from `orch.*` until Robyn completes the package-folder rewrite
+- **Python package namespace for now:** code still imports from `Kopano Context.*` until Robyn completes the package-folder rewrite
 - **Microsoft Demo Day target:** April 15-17, 2026 — unchanged
 - **GitHub identity:** `RobynAwesome` — unchanged
 - **Commit identity:** `RobynAwesome <rkholofelo@gmail.com>` — unchanged
@@ -125,7 +125,7 @@ status: active
 5. [x] Update `index.md`
 6. [x] Create `01-Mission/Kopano Context Blueprint.md` (new canonical; legacy kept as archive)
 7. [x] Create `02-Strategy/Kopano Labs Strategy.md` (new canonical; legacy kept as archive)
-8. [x] Create `02-Strategy/Kopano Context Foresight.md` (replaces Orch Concept And Future Foresight)
+8. [x] Create `02-Strategy/Kopano Context Foresight.md` (replaces Kopano Context Concept And Future Foresight)
 9. [x] Update `00-Home/Dashboard.md`
 10. [x] Update `00-Home/Now.md`
 11. [x] Update `02-Strategy/index.md`

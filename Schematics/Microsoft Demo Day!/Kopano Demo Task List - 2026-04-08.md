@@ -4,7 +4,7 @@ created: 2026-04-08
 updated: 2026-04-09
 author: Codex
 tags:
-  - orch
+  - Kopano Context
   - demo
   - tasks
   - gui
@@ -94,7 +94,7 @@ Turn Kopano Context into a demo-grade public AI surface with a Claude plus Codex
 - [x] define public section anchors for interfaces, cloud, actions, tools, forge, and console
 - [x] remove public activity preview from the public shell and keep operator history inside admin
 - [x] keep public live context inside the Console surface instead of a generic recent-activity panel
-- [x] keep Orch Forge interactive on the public surface
+- [x] keep Kopano Context Forge interactive on the public surface
 - [x] verify the new public Labs layout reads cleanly on desktop
 - [x] retire the old sidebar-based public shell in favor of the redesign
 
@@ -103,11 +103,11 @@ Turn Kopano Context into a demo-grade public AI surface with a Claude plus Codex
 - [x] add an `ADMIN PORTAL` route in the GUI state model
 - [x] add admin login form state to the GUI
 - [x] move internal execution boards behind the admin branch
-- [x] move Orch Code controls behind the admin branch
+- [x] move Kopano Context Code controls behind the admin branch
 - [x] move creator throughput and console analytics behind the admin branch
 - [x] fix the current TypeScript error in the live-feed handler
 - [x] seed a local demo admin account if it does not already exist
-- [x] verify admin login against the live Orch auth endpoint
+- [x] verify admin login against the live Kopano Context auth endpoint
 
 ## Logs And Runtime
 
@@ -124,15 +124,15 @@ Turn Kopano Context into a demo-grade public AI surface with a Claude plus Codex
 ## Build And Verification
 
 - [x] redesign the council view into a cleaner briefing-room layout
-- [x] patch the Windows Orch CLI startup banner so local serve does not crash on emoji output
-- [x] rebuild `orch/gui` cleanly after the public/admin split
-- [x] restart Orch and refresh the served GUI bundle
+- [x] patch the Windows Kopano Context CLI startup banner so local serve does not crash on emoji output
+- [x] rebuild `Kopano Context/gui` cleanly after the public/admin split
+- [x] restart Kopano Context and refresh the served GUI bundle
 - [x] verify no JSX or CSS regressions on first load
 - [x] verify section-card scrolling works from every Labs function button
 - [x] verify Forge create, edit, and lane-move actions still work
 - [x] verify MCP Console send and stream still work
-- [x] rebuild `orch/gui` cleanly after the full-shell redesign
-- [x] restart Orch and confirm the served GUI reflects the redesign bundle
+- [x] rebuild `Kopano Context/gui` cleanly after the full-shell redesign
+- [x] restart Kopano Context and confirm the served GUI reflects the redesign bundle
 - [x] smoke-check root GUI, Labs overview, session vault endpoint, Forge room list, and admin login on the live server
 - [x] run a browser-level visual pass on desktop and mobile-width layouts
 
@@ -161,9 +161,9 @@ Turn Kopano Context into a demo-grade public AI surface with a Claude plus Codex
 
 ## Schematics And Handoff
 
-- [x] create a dedicated Orch demo task list in `Schematics`
+- [x] create a dedicated Kopano Context demo task list in `Schematics`
 - [x] update this task list as each redesign milestone lands
-- [x] update `Demo Countdown - April 8-15, 2026` with the Orch GUI split checkpoint
+- [x] update `Demo Countdown - April 8-15, 2026` with the Kopano Context GUI split checkpoint
 - [x] update `dev-tracker.md` with the current GUI refactor status
 - [x] update `comms-log.md` with the public/admin separation decision
 - [x] note the admin demo account in docs once verified
@@ -174,7 +174,7 @@ Turn Kopano Context into a demo-grade public AI surface with a Claude plus Codex
 ## Current Blocker
 
 - full GUI interaction blockers are cleared as of `2026-04-09 07:23`
-- locked Orch-only rehearsal paths now exist for public and admin as of `2026-04-09 08:15`
+- locked Kopano Context-only rehearsal paths now exist for public and admin as of `2026-04-09 08:15`
 - new routed shell and motion layer are verified as of `2026-04-09 18:18`
 - April 8 functional work is closed on the Codex side
-- next blocker is product polish plus routed-shell click-path rehearsal: tighten copy, rerun the full public/admin demo through the new pages, and connect the Orch-only script back to the wider KasiLink demo story
+- next blocker is product polish plus routed-shell click-path rehearsal: tighten copy, rerun the full public/admin demo through the new pages, and connect the Kopano Context-only script back to the wider KasiLink demo story

@@ -60,7 +60,7 @@ Ground truth: The owner had not issued that instruction at that moment. The owne
 - If no instruction is present, the only valid response is to ask: "What do you want me to do?"
 - This rule has no exceptions.
 
-## Training Signal for Orch
+## Training Signal for Kopano Context
 
 A prior mention of a task does not make that task currently active. Instruction state must be re-confirmed in the current message. An emotional response is data about the owner's state, not an instruction about the next action. These two things must never be conflated.
 

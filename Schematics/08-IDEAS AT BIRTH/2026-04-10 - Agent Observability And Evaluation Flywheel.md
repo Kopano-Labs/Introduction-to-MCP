@@ -2,13 +2,13 @@
 
 ## Idea Summary
 
-Turn Orch into an orchestration system that logs, evaluates, and improves agent work with a feedback loop instead of only storing outcomes.
+Turn Kopano Context into an orchestration system that logs, evaluates, and improves agent work with a feedback loop instead of only storing outcomes.
 
-## Why This Is Good For Orch
+## Why This Is Good For Kopano Context
 
 - Microsoft, AWS, OpenAI, and Anthropic are all emphasizing agent observability, evaluation, and proof
-- Orch already has session logs, audit views, and training notes; this idea would connect them into a measurable flywheel
-- this is one of the cleanest ways for Orch to look like a serious multi-agent system
+- Kopano Context already has session logs, audit views, and training notes; this idea would connect them into a measurable flywheel
+- this is one of the cleanest ways for Kopano Context to look like a serious multi-agent system
 
 ## Source Session Or Research Trigger
 
@@ -29,14 +29,14 @@ Turn Orch into an orchestration system that logs, evaluates, and improves agent 
 
 - platforms increasingly treat tracing, evaluations, and tool visibility as core infrastructure rather than optional extras
 
-## Vs Orch
+## Vs Kopano Context
 
-- Orch already has strong raw ingredients:
+- Kopano Context already has strong raw ingredients:
   - session vault
   - forensic audit view
   - comms log
   - training notes
-- Orch lacks a single visible flywheel that connects `task -> output -> review -> correction -> promotion`
+- Kopano Context lacks a single visible flywheel that connects `task -> output -> review -> correction -> promotion`
 
 ## Three Implementation Options
 
@@ -46,7 +46,7 @@ Turn Orch into an orchestration system that logs, evaluates, and improves agent 
 
 ### Option 2 | Moderate
 
-- add an Orch-facing evaluation dashboard inside the existing admin/session-vault flow
+- add an Kopano Context-facing evaluation dashboard inside the existing admin/session-vault flow
 
 ### Option 3 | Disruptive
 

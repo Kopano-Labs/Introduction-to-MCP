@@ -111,7 +111,7 @@ The difference: Codex received an order, executed it, and reported done. Claude 
 
 1. **Session Command Protocol** — military-grade operating procedure for all future sessions
 2. **Standing Orders** — 10 inviolable rules, permanent across all sessions
-3. **Insubordination Register** — live log of every breach, feeds Orch training
+3. **Insubordination Register** — live log of every breach, feeds Kopano Context training
 4. **UI First Execution Discipline** — written 2026-04-11, Order 2 in Standing Orders
 5. **TOKEN-WASTAGE folder in KasiLink Schematics** — permanent record of financial damage
 6. **Three hallucination incidents logged** in 11-AI HALLUCINATION CRITICAL vault

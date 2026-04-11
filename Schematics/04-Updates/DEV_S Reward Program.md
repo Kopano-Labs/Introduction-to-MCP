@@ -27,7 +27,7 @@ Every session begins with all DEV_S reset to full permissions.
 ## Base Workload
 
 - Each DEV_S should be assigned up to 20 tasks in the session batch.
-- Lead manages the flow, checks on work, guides contributors, and writes clear notes for orch education and future continuity.
+- Lead manages the flow, checks on work, guides contributors, and writes clear notes for Kopano Context education and future continuity.
 
 ## Reward
 
@@ -38,7 +38,7 @@ DEV_S earn reward by:
 1. Completing scoped tasks accurately.
 2. Verifying work before reporting done.
 3. Staying within scope.
-4. Leaving clear notes for orch and Lead.
+4. Leaving clear notes for Kopano Context and Lead.
 5. Avoiding rescue or rollback work.
 
 ## Punishment

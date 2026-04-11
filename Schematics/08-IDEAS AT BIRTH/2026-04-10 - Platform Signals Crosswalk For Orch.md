@@ -1,13 +1,13 @@
-# 2026-04-10 - Platform Signals Crosswalk For Orch
+# 2026-04-10 - Platform Signals Crosswalk For Kopano Context
 
 ## Idea Summary
 
-Create a single crosswalk note that compares Microsoft, AWS, OpenAI, and Anthropic signals against Orch's current state so platform research turns into action instead of isolated summaries.
+Create a single crosswalk note that compares Microsoft, AWS, OpenAI, and Anthropic signals against Kopano Context's current state so platform research turns into action instead of isolated summaries.
 
-## Why This Is Good For Orch
+## Why This Is Good For Kopano Context
 
 - one-note comparison helps avoid platform tunnel vision
-- it shows what Orch already has, what is partial, and what is still missing
+- it shows what Kopano Context already has, what is partial, and what is still missing
 - it helps decide what belongs in the demo, what belongs in readiness, and what belongs in incubation
 
 ## Source Session Or Research Trigger
@@ -20,31 +20,31 @@ Create a single crosswalk note that compares Microsoft, AWS, OpenAI, and Anthrop
 ### Microsoft
 
 - strongest signals: agents, Azure AI Foundry, observability, tracing, secure orchestration
-- Orch status: partial
+- Kopano Context status: partial
 
 ### AWS
 
 - strongest signals: agent runtime control, observability, secure scaling, startup execution readiness
-- Orch status: partial
+- Kopano Context status: partial
 
 ### OpenAI
 
 - strongest signals: tool-backed agents, Responses workflows, structured output, evals
-- Orch status: partial
+- Kopano Context status: partial
 
 ### Anthropic
 
 - strongest signals: effective agents, MCP, context discipline, reliable tool use
-- Orch status: partial to conceptually strong
+- Kopano Context status: partial to conceptually strong
 
-## Vs Orch
+## Vs Kopano Context
 
-- strongest current Orch advantages:
+- strongest current Kopano Context advantages:
   - human-readable control notes
   - session memory
   - forensic audit framing
   - governance-aware orchestration
-- biggest current Orch gaps:
+- biggest current Kopano Context gaps:
   - explicit eval flywheel
   - stronger runtime observability narrative
   - clearer interop story
@@ -58,11 +58,11 @@ Create a single crosswalk note that compares Microsoft, AWS, OpenAI, and Anthrop
 
 ### Option 2 | Moderate
 
-- use the crosswalk to define a quarterly Orch capability checklist
+- use the crosswalk to define a quarterly Kopano Context capability checklist
 
 ### Option 3 | Disruptive
 
-- rebuild the product roadmap around platform symmetry instead of Orch's own proof path
+- rebuild the product roadmap around platform symmetry instead of Kopano Context's own proof path
 
 ## Lowest-Risk Option
 

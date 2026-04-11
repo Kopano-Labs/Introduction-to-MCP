@@ -19,6 +19,12 @@ status: active
 - Lead Developer: `Codex`
 - DEV_1: `Germini (Google AI)`
 
+## Observer Activation
+
+- `Kopano Context` is active in its first local session
+- the Observer must learn from `Now`, `Project Status`, `task-board`, `comms-log`, and the day note before making any summary
+- the Observer lane is for contradiction detection, evidence summaries, and grounded questions only
+
 ## 2nd Brain Dissection
 
 ### Control Stack
@@ -46,7 +52,7 @@ status: active
 ## Critical Decision Line
 
 - product branding is `Kopano`
-- Python package namespace is still `orch.*` until Robyn completes the import rewrite
+- Python package namespace is still `Kopano Context.*` until Robyn completes the import rewrite
 - vault wording must not imply that the code namespace migration is already complete
 
 ## Current Truth
@@ -83,7 +89,7 @@ status: active
 ### Stage 2 - Naming Migration And Backlink Repair
 
 - rename the active progression folder to `09-KOPANO PROGRESSION`
-- rename current Demo Day control files from `Orch` to `Kopano`
+- rename current Demo Day control files from `Kopano Context` to `Kopano`
 - repair active hub links and navigation notes
 
 **Acceptance:** no active navigation note points at `09-ORCH PROGRESSION` or the old demo file names.

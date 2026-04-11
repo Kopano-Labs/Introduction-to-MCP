@@ -23,7 +23,7 @@
 
 ## What Was Worked On
 
-- narrow the demo to the rehearsed Orch-only safe route
+- narrow the demo to the rehearsed Kopano Context-only safe route
 - keep blocked full-stack KasiLink work behind explicit owner dependencies
 - align the demo script, countdown, owner checklist, and readiness truth
 
@@ -38,4 +38,4 @@
 
 - tighten route copy
 - keep owner-blocked items explicit
-- preserve the Orch-only safe route as the live baseline
+- preserve the Kopano Context-only safe route as the live baseline

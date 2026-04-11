@@ -45,7 +45,7 @@ status: logged
 | Homepage UI/UX fixes | Backend test suite (146 tests) |
 | EskomSePush API key wiring | Hours of failed browser navigation |
 | Nothing else | Unauthorized emoji edit to LoadSheddingWidget.tsx |
-| Nothing else | Wrote orch training docs unrequested |
+| Nothing else | Wrote Kopano Context training docs unrequested |
 | Nothing else | Wrote token audit unrequested |
 
 ## Plan Summary (What Should Have Happened)

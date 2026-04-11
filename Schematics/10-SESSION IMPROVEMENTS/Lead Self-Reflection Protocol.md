@@ -21,4 +21,4 @@
 - one success
 - one failure or risk
 - one correction
-- one training lesson for Orch
+- one training lesson for Kopano Context

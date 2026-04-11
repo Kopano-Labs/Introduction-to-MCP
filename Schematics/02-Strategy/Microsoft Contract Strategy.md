@@ -15,7 +15,7 @@ priority: critical
 
 ## Positioning
 
-KasiLink is the outward-facing township work platform. Orch is the internal AI and MCP layer that powers matching, moderation, forecasting, and transparent reasoning.
+KasiLink is the outward-facing township work platform. Kopano Context is the internal AI and MCP layer that powers matching, moderation, forecasting, and transparent reasoning.
 
 ## Contract Angles
 
@@ -25,11 +25,11 @@ KasiLink is the outward-facing township work platform. Orch is the internal AI a
 
 ## Azure Narrative
 
-- Azure Container Apps for Orch runtime
+- Azure Container Apps for Kopano Context runtime
 - Azure OpenAI for future multilingual reasoning
 - Azure Communication Services for SMS fallback
 - Application Insights for observability
 
 ## Story
 
-Use Lelapa AI as the precedent for Africa-specific, resource-efficient AI. Frame KasiLink plus Orch as the commerce and workflow equivalent for township economies.
+Use Lelapa AI as the precedent for Africa-specific, resource-efficient AI. Frame KasiLink plus Kopano Context as the commerce and workflow equivalent for township economies.

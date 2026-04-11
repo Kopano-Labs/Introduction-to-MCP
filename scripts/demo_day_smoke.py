@@ -7,10 +7,28 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-GUI_DIST = ROOT / "orch" / "gui" / "dist" / "index.html"
+GUI_DIST_CANDIDATES = [
+    ROOT / "kopano-core" / "studio" / "dist" / "index.html",
+    ROOT / "orch" / "gui" / "dist" / "index.html",
+]
 ENV_FILE = ROOT / ".env"
-DB_FILE = ROOT / "db" / "datalake.db"
+DB_FILE_CANDIDATES = [
+    ROOT / "db" / "datalake.db",
+    ROOT / "kopano-core" / "db" / "datalake.db",
+]
 AGENTS_FILE = Path.home() / ".orch" / "agents.json"
+
+for import_root in [ROOT / "kopano-core", ROOT]:
+    import_root_str = str(import_root)
+    if import_root.exists() and import_root_str not in sys.path:
+        sys.path.insert(0, import_root_str)
+
+
+def first_existing(paths: list[Path]) -> Path:
+    for path in paths:
+        if path.exists():
+            return path
+    return paths[0]
 
 
 def check_file(path: Path, label: str) -> tuple[bool, str]:
@@ -22,16 +40,26 @@ def check_file(path: Path, label: str) -> tuple[bool, str]:
 def check_imports() -> list[tuple[bool, str]]:
     checks: list[tuple[bool, str]] = []
     try:
-        from orch.orch.api import app as _api_app  # noqa: F401
+        try:
+            from kopano.api import app as _api_app  # noqa: F401
 
-        checks.append((True, "PASS API import: orch.orch.api"))
+            checks.append((True, "PASS API import: kopano.api"))
+        except Exception:
+            from orch.orch.api import app as _api_app  # noqa: F401
+
+            checks.append((True, "PASS API import: orch.orch.api"))
     except Exception as exc:
         checks.append((False, f"WARN API import failed: {exc}"))
 
     try:
-        from orch.orch.cli import app as _cli_app  # noqa: F401
+        try:
+            from kopano.cli import app as _cli_app  # noqa: F401
 
-        checks.append((True, "PASS CLI import: orch.orch.cli"))
+            checks.append((True, "PASS CLI import: kopano.cli"))
+        except Exception:
+            from orch.orch.cli import app as _cli_app  # noqa: F401
+
+            checks.append((True, "PASS CLI import: orch.orch.cli"))
     except Exception as exc:
         checks.append((False, f"WARN CLI import failed: {exc}"))
 
@@ -54,11 +82,13 @@ def check_agents() -> tuple[bool, str]:
 
 
 def run_checks() -> list[tuple[bool, str]]:
+    gui_dist = first_existing(GUI_DIST_CANDIDATES)
+    db_file = first_existing(DB_FILE_CANDIDATES)
     checks = [
         (sys.version_info >= (3, 11), f"{'PASS' if sys.version_info >= (3, 11) else 'WARN'} Python version: {sys.version.split()[0]}"),
         check_file(ENV_FILE, ".env"),
-        check_file(DB_FILE, "database file"),
-        check_file(GUI_DIST, "GUI build"),
+        check_file(db_file, "database file"),
+        check_file(gui_dist, "GUI build"),
         check_agents(),
     ]
     checks.extend(check_imports())

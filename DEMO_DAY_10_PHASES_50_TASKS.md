@@ -7,20 +7,20 @@ This is the execution map for the next demo-day push. Each phase has five concre
 - Verify Python version is 3.11+.
 - Verify editable root install with `python -m pip install -e .`.
 - Verify CLI subproject install with `python -m pip install -e ./CLI`.
-- Verify GUI dependencies install in `orch/gui`.
+- Verify GUI dependencies install in `kopano-core/studio`.
 - Verify `.env` is present with the required provider keys.
 
 ## Phase 2 - Core CLI Readiness
 
-- Run `python -m orch --help`.
-- Run `orch agents list`.
-- Validate `orch user register --help`.
-- Validate `orch admin grant --help`.
-- Validate `orch serve launch --help`.
+- Run `python main.py --help`.
+- Run `python main.py agents list`.
+- Validate `python main.py user register --help`.
+- Validate `python main.py admin grant --help`.
+- Validate `python main.py serve launch --help`.
 
 ## Phase 3 - API And GUI Readiness
 
-- Run `orch serve api --help`.
+- Run `python main.py serve api --help`.
 - Verify the API host/port defaults.
 - Build the GUI with `npm run build`.
 - Lint the GUI with `npm run lint`.

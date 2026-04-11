@@ -12,7 +12,7 @@ status: active
 
 # 03-Architecture Index
 
-> Technical reference layer for how Orch is built.
+> Technical reference layer for how Kopano Context is built.
 
 ## Key Notes
 

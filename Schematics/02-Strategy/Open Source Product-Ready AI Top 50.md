@@ -16,12 +16,12 @@ priority: critical
 
 ## Summary
 
-This is the working research map for turning orch into a product-ready, open-source AI platform with a Labs layer, coding surface, cowork mode, and South Africa-first accessibility.
+This is the working research map for turning Kopano Context into a product-ready, open-source AI platform with a Labs layer, coding surface, cowork mode, and South Africa-first accessibility.
 
 The framing used here is:
 - `Free` means open-source, self-hostable, or zero-cost starter path
 - `Premium` means hosted, enterprise, or paid acceleration path
-- `Implement in orch` means the concrete place this should land in the current repo and roadmap
+- `Implement in Kopano Context` means the concrete place this should land in the current repo and roadmap
 
 Current product-direction inputs were cross-checked against:
 - Anthropic Claude Code and Claude Cowork product surfaces
@@ -31,12 +31,12 @@ Current product-direction inputs were cross-checked against:
 
 ## Top 50
 
-| #   | Capability                | Why it matters                   | Implement in orch                                 | Free baseline                              | Premium path                        |
+| #   | Capability                | Why it matters                   | Implement in Kopano Context                                 | Free baseline                              | Premium path                        |
 | --- | ------------------------- | -------------------------------- | ------------------------------------------------- | ------------------------------------------ | ----------------------------------- |
 | 1   | Multi-model routing       | Prevents vendor lock-in          | Keep LiteLLM core and add routing policies        | LiteLLM + env-based config                 | managed routing with spend controls |
 | 2   | Local model fallback      | Gives offline resilience         | Add Ollama path for low-risk tasks                | Ollama local runtime                       | Ollama cloud or managed inference   |
 | 3   | Hosted frontier fallback  | Needed for hard tasks            | Keep Anthropic/OpenAI/Google adapters             | pay-as-you-go APIs                         | enterprise contracts                |
-| 4   | Prompt versioning         | Makes changes auditable          | Add prompt registry to `orch/orch/`               | Git + markdown prompts                     | Langfuse prompt management          |
+| 4   | Prompt versioning         | Makes changes auditable          | Add prompt registry to `Kopano Context/Kopano Context/`               | Git + markdown prompts                     | Langfuse prompt management          |
 | 5   | Tracing                   | Required for debugging agents    | Instrument every run and tool call                | structured JSON logs                       | Langfuse cloud tracing              |
 | 6   | Eval harness              | Stops regressions                | Add eval suites for Labs tools                    | pytest + golden cases                      | managed eval dashboards             |
 | 7   | Human review checkpoints  | Needed for trust                 | Keep override/review loop in API and GUI          | manual review cards                        | approval workflows + audit trails   |
@@ -64,11 +64,11 @@ Current product-direction inputs were cross-checked against:
 | 29  | Content provenance        | Needed for trust                 | show source and model origin in UI                | markdown source footers                    | signed provenance + policy layer    |
 | 30  | Experiment registry       | Powers Labs model                | keep `labs_registry.py` evolving                  | static registry file                       | admin-managed catalog               |
 | 31  | Launch gallery            | Makes Labs legible               | keep Labs GUI as primary launch page              | React/Vite gallery                         | richer design system                |
-| 32  | Orch Forge mode           | Enables team execution           | build `orch-forge` next                           | shared room + task lanes                   | persistent collaboration service    |
+| 32  | Kopano Context Forge mode           | Enables team execution           | build `Kopano Context-forge` next                           | shared room + task lanes                   | persistent collaboration service    |
 | 33  | Stitch-like canvas        | Enables design flow              | add canvas surface for prompts/screens            | basic cards + layout board                 | full generative canvas              |
-| 34  | Orch Code mode            | Turns orch into coding partner   | add repo-aware teaching loops                     | local teaching profiles                    | premium coding copilots             |
-| 35  | Pattern capture           | Lets orch learn Robyn's craft    | diff-based style memory                           | repo notes + examples                      | advanced preference learning        |
-| 36  | Test-first coding         | Keeps code quality high          | teach orch to run and write tests                 | pytest + npm build                         | hosted CI intelligence              |
+| 34  | Kopano Context Code mode            | Turns Kopano Context into coding partner   | add repo-aware teaching loops                     | local teaching profiles                    | premium coding copilots             |
+| 35  | Pattern capture           | Lets Kopano Context learn Robyn's craft    | diff-based style memory                           | repo notes + examples                      | advanced preference learning        |
+| 36  | Test-first coding         | Keeps code quality high          | teach Kopano Context to run and write tests                 | pytest + npm build                         | hosted CI intelligence              |
 | 37  | Visual diff review        | Needed for UI work               | add preview/review artifacts                      | screenshots + Vite build                   | rich visual review tooling          |
 | 38  | Preview environments      | Needed for launch safety         | expand build/serve flow                           | local previews                             | Vercel/managed previews             |
 | 39  | Mobile-ready UX           | Required for SA reach            | keep responsive Labs UI                           | responsive web                             | full mobile clients                 |
@@ -86,7 +86,7 @@ Current product-direction inputs were cross-checked against:
 
 ## Free Vs Premium Stack Direction
 
-### Best Free-first baseline for orch
+### Best Free-first baseline for Kopano Context
 
 - Models: LiteLLM + Ollama local fallback
 - Backend: FastAPI
@@ -105,12 +105,12 @@ Current product-direction inputs were cross-checked against:
 - Higher-capability inference burst: frontier hosted models
 - Enterprise identity, RBAC, audit, and support: paid control plane upgrades
 
-## What To Build Next In orch
+## What To Build Next In Kopano Context
 
 1. Add a proper language-routing layer for the 12 official South African languages.
 2. Build the `Speech Access Assistant` around AAC, adaptive speech parsing, and text-first confirmations.
-3. Turn `Orch Forge` into a real execution surface with lanes, assignments, and approvals.
-4. Start `Orch Code` by teaching the stack already used here: Python, FastAPI, pytest, React, TypeScript, SQLite, and Schematics discipline.
+3. Turn `Kopano Context Forge` into a real execution surface with lanes, assignments, and approvals.
+4. Start `Kopano Context Code` by teaching the stack already used here: Python, FastAPI, pytest, React, TypeScript, SQLite, and Schematics discipline.
 5. Add tracing, evals, and product metrics before expanding the number of Labs tools.
 
 ## Research Notes
@@ -121,7 +121,7 @@ Current product-direction inputs were cross-checked against:
 - Langfuse is positioned as an open-source LLM engineering platform with tracing, evals, prompt management, and metrics.
 - Ollama currently positions itself as the easiest way to build with open models, with both local and cloud paths.
 - Qdrant explicitly positions itself as open-source with enterprise-grade deployment options.
-- Nango is relevant if orch needs robust customer-facing integrations and MCP-friendly API connectivity at scale.
+- Nango is relevant if Kopano Context needs robust customer-facing integrations and MCP-friendly API connectivity at scale.
 
 ## Sources
 
@@ -139,5 +139,5 @@ Current product-direction inputs were cross-checked against:
 ## Links
 
 - Related: [Dashboard](../00-Home/Dashboard.md)
-- Related: [Orch Labs Strategy](Orch%20Labs%20Strategy.md)
+- Related: [Kopano Context Labs Strategy](Kopano Context%20Labs%20Strategy.md)
 - Related: [Implementation Plan](../04-Updates/Implementation%20Plan.md)

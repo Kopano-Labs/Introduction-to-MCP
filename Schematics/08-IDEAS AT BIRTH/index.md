@@ -20,8 +20,8 @@ status: active
 ## Standing Note
 
 - ideas here must start as research-backed entries, not hype
-- every idea should explain why it matters for Orch specifically
-- every idea must compare `competitor/platform signal vs Orch`
+- every idea should explain why it matters for Kopano Context specifically
+- every idea must compare `competitor/platform signal vs Kopano Context`
 - every idea must offer `3 implementation options`
 - if an idea would radically break or reshape the app, it needs a deeper review gate before promotion
 - if a fact is not proven by the vault or official sources, ask Master instead of guessing
@@ -36,12 +36,12 @@ status: active
 6. [2026-04-10 - AWS Startup AI Signals](2026-04-10%20-%20AWS%20Startup%20AI%20Signals.md)
 7. [2026-04-10 - OpenAI Startup AI Signals](2026-04-10%20-%20OpenAI%20Startup%20AI%20Signals.md)
 8. [2026-04-10 - Anthropic Startup AI Signals](2026-04-10%20-%20Anthropic%20Startup%20AI%20Signals.md)
-9. [2026-04-10 - Platform Signals Crosswalk For Orch](2026-04-10%20-%20Platform%20Signals%20Crosswalk%20For%20Orch.md)
+9. [2026-04-10 - Platform Signals Crosswalk For Kopano Context](2026-04-10%20-%20Platform%20Signals%20Crosswalk%20For%20Orch.md)
 
 ## Promotion Flow
 
 1. enter the idea here with evidence
-2. compare it against Orch's current state
+2. compare it against Kopano Context's current state
 3. define three implementation options
 4. classify it as low-risk, moderate, or disruptive
 5. decide: `incubate`, `validate`, `defer`, or `reject`

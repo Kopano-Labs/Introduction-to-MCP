@@ -46,7 +46,7 @@
 - the standing multi-dev team is now `Germini`, `Nother`, `Meither`, and `Cicero`
 - no additional ad-hoc spawn roles are the default vault model
 - when `Codex` or `Claude` leads, sessions start with the standing dev team on standby and their 20-task boards visible first
-- all current sessions are `pre-sessions` and training data for Orch
+- all current sessions are `pre-sessions` and training data for Kopano Context
 - lead can be `Codex`, `Claude`, or `Codex + Claude`
 - lead target is `60% management / 40% coding`
 - token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master
@@ -88,7 +88,7 @@
 - [ ] confirm `Console` keeps `Send` primary and `Stream` explicitly optional
 - [ ] confirm `Forge` reads as view-first and not edit-first
 - [ ] confirm `Admin` stays clearly internal and second in the script
-- [ ] get the local Orch runtime stable on `127.0.0.1:8000`
+- [ ] get the local Kopano Context runtime stable on `127.0.0.1:8000`
 - [ ] verify `GET /updates`
 - [ ] verify `GET /sessions`
 - [ ] verify `POST /auth/login`
@@ -108,8 +108,8 @@
 - [ ] check current dev progress, diffs, and latest comms before touching docs
 - [ ] keep the Microsoft Demo Day hub aligned with the locked safe route
 - [ ] keep [2026-04-09 Close State](../Microsoft%20Demo%20Day!/2026-04-09%20Close%20State.md) linked and accurate
-- [ ] keep the countdown baseline honest about `Orch-only` versus owner-blocked `KasiLink`
-- [ ] keep the Orch Demo Script synced with the actual UI route and labels
+- [ ] keep the countdown baseline honest about `Kopano Context-only` versus owner-blocked `KasiLink`
+- [ ] keep the Kopano Context Demo Script synced with the actual UI route and labels
 - [ ] keep the owner checklist synced with real Azure, auth, and reward blockers
 - [ ] keep [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md) marked as target story, not current live baseline
 - [ ] keep [Azure Demo Day Playbook](../Microsoft%20Demo%20Day!/Azure%20Demo%20Day%20Playbook.md) framed as readiness story
@@ -126,7 +126,7 @@
 - [ ] prepare the next session start-here summary if today rolls over
 - [ ] hand off the final doc pack status to Lead
 
-### DEV_4 | Cicero | Governance, Research, And Orch Training System
+### DEV_4 | Cicero | Governance, Research, And Kopano Context Training System
 
 - [x] check current dev progress, diffs, and latest comms before touching governance work
 - [x] verify the standing team roster stays exact across live control notes

@@ -17,7 +17,7 @@
 - explicit expectations reduce silent drift
 - good communication systems are designed, not improvised
 
-## Orch Translation
+## Kopano Context Translation
 
 - Lead should run regular check-ins instead of waiting for devs to self-escalate
 - blockers belong in the vault with dates and next actions

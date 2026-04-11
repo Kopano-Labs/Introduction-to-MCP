@@ -71,7 +71,7 @@ Git reported **80+ LF → CRLF warnings** across Schematics files. This is not a
 | `.obsidian/` | 1 | `workspace.json` |
 | `00-Home/` | 2 | `Dashboard.md`, `Now.md` |
 | `04-Updates/` | 5 | `MASTER-TODO Session 3.md`, `comms-log.md`, `dev-tracker.md`, `index.md`, `delegation-protocol.md` |
-| `05-Training/` | 3 | `index.md`, `Orch Train Logs/index.md`, `Pre-Session Training Doctrine.md` |
+| `05-Training/` | 3 | `index.md`, `Kopano Context Train Logs/index.md`, `Pre-Session Training Doctrine.md` |
 | `07-Sessions By Day/` | 2 | `index.md`, `2026-04-11.md` |
 | `08-IDEAS AT BIRTH/` | 10 | `index.md`, `Idea Entry Protocol.md`, 8× dated signal notes |
 | `09-ORCH PROGRESSION/` | 1 | `index.md` |
@@ -106,7 +106,7 @@ These files were committed for the first time in this session. They represent th
 | File | Purpose |
 |------|---------|
 | `After Action Report 2026-04-11.md` | Full postmortem of the R953 session failure |
-| `Insubordination Register.md` | Live log of every breach, feeds Orch training |
+| `Insubordination Register.md` | Live log of every breach, feeds Kopano Context training |
 | `Session Command Protocol.md` | Military-grade operating procedure for all sessions |
 | `Standing Orders.md` | 10 inviolable rules, permanent across all sessions |
 | `UI First Execution Discipline.md` | Order 2 — UI work executes before backend work |
@@ -137,7 +137,7 @@ These files were committed for the first time in this session. They represent th
 | `2026-04-10 - Hosted Event Winners And Demo Signals.md` | Event strategy |
 | `2026-04-10 - Microsoft Startup AI Signals.md` | Microsoft competitive signal |
 | `2026-04-10 - OpenAI Startup AI Signals.md` | OpenAI competitive signal |
-| `2026-04-10 - Platform Signals Crosswalk For Orch.md` | Cross-platform analysis |
+| `2026-04-10 - Platform Signals Crosswalk For Kopano Context.md` | Cross-platform analysis |
 
 ### Other New Files
 

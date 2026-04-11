@@ -30,10 +30,12 @@ status: active
 - Verified local state:
   - current vault evidence records passing Labs API checks, compile checks, and GUI build checks
   - current vault evidence records a working Microsoft-readiness endpoint
+  - the broad Python suite is passing again after compatibility recovery during the namespace transition
 - Demo truth:
   - the Kopano demo route is rehearsed and locked in [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md)
   - the wider KasiLink story remains partial because it depends on owner-side auth, data, WhatsApp, and external environment proof
   - reward and referral remain `NO-GO` for live demo claims in this workspace
+  - the stable demo gate is the bounded `python main.py` path plus passing studio lint/build and `scripts/demo_day_preflight.ps1`
 - Canonical demo notes:
   - [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
   - [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
@@ -170,10 +172,10 @@ The "100 Capabilities" vision maps to the engineering phases:
 
 ## Running Kopano Context
 
-Currently, `main.exe` (in `dist/`) is a minimal stub. The product branding is `Kopano`, but the live Python package namespace still routes through `orch` until the code-folder rename is complete. Use either CLI entry point:
+Currently, `main.exe` (in `dist/`) is a minimal stub. The product branding is `Kopano`, but the live Python package namespace still routes through `Kopano Context` until the code-folder rename is complete. Use either CLI entry point:
 
 ```bash
 pip install -e .
-orch --help
+Kopano Context --help
 kopano --help
 ```

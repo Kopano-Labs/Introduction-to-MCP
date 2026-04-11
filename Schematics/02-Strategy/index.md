@@ -17,7 +17,7 @@ status: active
 ## Kopano Brand (New — Read First)
 
 - [Kopano Brand Identity](Kopano%20Brand%20Identity.md) — canonical brand pack: naming, colors, typography, logo concepts
-- [Kopano Rebrand Plan](Kopano%20Rebrand%20Plan.md) — migration plan tracking all Orch → Kopano file updates
+- [Kopano Rebrand Plan](Kopano%20Rebrand%20Plan.md) — migration plan tracking all Kopano Context → Kopano file updates
 - [Kopano Labs Strategy](Kopano%20Labs%20Strategy.md) — product studio and SA impact tool roadmap
 - [Kopano Context Foresight](Kopano%20Context%20Foresight.md) — long-range framing for Kopano as AI-native operating layer
 
@@ -30,8 +30,8 @@ status: active
 
 ## Legacy (Archived Reference)
 
-- [Orch Labs Strategy](Orch%20Labs%20Strategy.md) — superseded by Kopano Labs Strategy
-- [Orch Concept And Future Foresight](Orch%20Concept%20And%20Future%20Foresight.md) — superseded by Kopano Context Foresight
+- [Kopano Context Labs Strategy](Kopano Context%20Labs%20Strategy.md) — superseded by Kopano Labs Strategy
+- [Kopano Context Concept And Future Foresight](Kopano Context%20Concept%20And%20Future%20Foresight.md) — superseded by Kopano Context Foresight
 
 ## Use This Folder For
 

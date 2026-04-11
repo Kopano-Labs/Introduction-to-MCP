@@ -52,7 +52,7 @@ status: active
 16. [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) - reconstructed day-by-day session evidence
 17. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md) - lead doctrine, hierarchy, and token discipline
 18. [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md) - mandatory hallucination incident system
-19. [Kopano Train Logs](../05-Training/Orch%20Train%20Logs/index.md) - training extraction from live sessions
+19. [Kopano Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md) - training extraction from live sessions
 20. [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md) - archived plan-mode outputs and planning history
 
 ## Workflow

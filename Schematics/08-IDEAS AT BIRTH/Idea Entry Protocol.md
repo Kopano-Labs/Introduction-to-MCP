@@ -3,16 +3,16 @@
 ## Purpose
 
 - stop ideas from entering the vault as raw excitement only
-- make every idea prove why Orch should care
+- make every idea prove why Kopano Context should care
 
 ## Required Entry Sections
 
 1. idea summary
-2. why this idea is good for Orch
+2. why this idea is good for Kopano Context
 3. source session or source research
 4. official source pack
 5. competitor or platform comparison
-6. `vs Orch`
+6. `vs Kopano Context`
 7. three implementation options
 8. lowest-risk option
 9. disruptive-risk assessment

@@ -2,12 +2,12 @@
 
 ## Idea Summary
 
-Use Anthropic's agent engineering and MCP direction as a benchmark for Orch's long-context, tool-discipline, and interop posture.
+Use Anthropic's agent engineering and MCP direction as a benchmark for Kopano Context's long-context, tool-discipline, and interop posture.
 
-## Why This Is Good For Orch
+## Why This Is Good For Kopano Context
 
 - Anthropic's public material is unusually explicit about what makes agents effective
-- Orch already cares about memory, orchestration discipline, and tool governance
+- Kopano Context already cares about memory, orchestration discipline, and tool governance
 - MCP remains one of the clearest interop signals in the current agent ecosystem
 
 ## Source Session Or Research Trigger
@@ -29,21 +29,21 @@ Use Anthropic's agent engineering and MCP direction as a benchmark for Orch's lo
 - interoperability through MCP
 - reliability and safety as operating expectations
 
-## Vs Orch
+## Vs Kopano Context
 
-- Orch already has a strong memory-oriented vault and multi-surface control story
-- Orch partially fits the Anthropic agent discipline model through explicit notes, audits, and process doctrine
-- Orch still needs a clearer, reusable interop and evaluation narrative beyond the current internal control notes
+- Kopano Context already has a strong memory-oriented vault and multi-surface control story
+- Kopano Context partially fits the Anthropic agent discipline model through explicit notes, audits, and process doctrine
+- Kopano Context still needs a clearer, reusable interop and evaluation narrative beyond the current internal control notes
 
 ## Three Implementation Options
 
 ### Option 1 | Low Risk
 
-- explicitly frame Orch notes, audits, and tool layers in MCP-compatible language without changing the runtime path
+- explicitly frame Kopano Context notes, audits, and tool layers in MCP-compatible language without changing the runtime path
 
 ### Option 2 | Moderate
 
-- create an Orch interop map that shows how session memory, console, labs, and future tool layers relate to MCP-style capabilities
+- create an Kopano Context interop map that shows how session memory, console, labs, and future tool layers relate to MCP-style capabilities
 
 ### Option 3 | Disruptive
 

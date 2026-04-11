@@ -12,7 +12,7 @@ priority: medium
 status: active
 ---
 
-# orch Data Lake Schema
+# Kopano Context Data Lake Schema
 
 > SQLite schema for audit logging and discussion persistence.
 > See also: [Project Status](../04-Updates/Project%20Status.md), [Implementation Plan](../04-Updates/Implementation%20Plan.md)
@@ -51,6 +51,6 @@ CREATE TABLE IF NOT EXISTS audit_logs (
 
 ## Phase 4 Additions
 
-Additional tables added in Phase 4 (see `orch/orch/database.py`):
+Additional tables added in Phase 4 (see `Kopano Context/Kopano Context/database.py`):
 - `messages` — Individual agent responses per round
 - `long_term_memory` — Agent associative memory (topic, content, metadata)

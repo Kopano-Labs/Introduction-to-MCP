@@ -14,14 +14,14 @@ status: active
 
 # 11-AI HALLUCINATION - CRITICAL Index
 
-> Permanent critical red-alert system for hallucination tracking across `Codex`, `Claude`, `Germini`, `Nother`, `Meither`, `Cicero`, and future `Orch`.
+> Permanent critical red-alert system for hallucination tracking across `Codex`, `Claude`, `Germini`, `Nother`, `Meither`, `Cicero`, and future `Kopano Context`.
 
 ## Standing Note
 
 - if Master calls out a hallucination, it must be logged here
 - this system exists to force researcher-mode, not defensive-mode
 - each incident must separate claim, truth, evidence source, root cause, and fix ownership
-- all major incidents feed Orch's future supervision training
+- all major incidents feed Kopano Context's future supervision training
 
 ## Read Order
 
@@ -48,5 +48,5 @@ status: active
 ## Connected Systems
 
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
-- [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
+- [Kopano Context Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md)
 - [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)

@@ -96,17 +96,17 @@ status: active
 
 1. Treat current sessions as Kopano training data, not only task execution.
 2. Log dev successes, failures, hierarchy breaches, and token use into Kopano training notes.
-3. Capture management errors as training evidence for future Orch behavior.
+3. Capture management errors as training evidence for future Kopano Context behavior.
 
 ### Shared infrastructure owned by Lead
 
-- `orch/orch/config.py`
-- `orch/orch/api.py`
-- `orch/orch/cli.py`
-- `orch/orch/orchestration.py`
-- `orch/orch/moderator.py`
-- `orch/orch/agent_manager.py`
-- `orch/gui/src/App.tsx`
+- `Kopano Context/Kopano Context/config.py`
+- `Kopano Context/Kopano Context/api.py`
+- `Kopano Context/Kopano Context/cli.py`
+- `Kopano Context/Kopano Context/orchestration.py`
+- `Kopano Context/Kopano Context/moderator.py`
+- `Kopano Context/Kopano Context/agent_manager.py`
+- `Kopano Context/gui/src/App.tsx`
 - `pyproject.toml`
 - `README.md`
 - `Schematics/04-Updates/*`
@@ -137,7 +137,7 @@ REPORT: Append one update to [[comms-log]]
 - Session reconstruction: [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
 - Lead/process doctrine: [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - Hallucination governance: [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
-- Kopano training logs: [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
+- Kopano training logs: [Kopano Context Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md)
 
 ## Security Incident Rule
 

@@ -24,7 +24,7 @@ status: active
 - reward/referral is still `NO-GO` for live demo use in this workspace
 - token-saving mode is now part of the standing governance doctrine
 - hallucination, hierarchy, and lead-failure logging now belong to the permanent second-brain system
-- product brand is `Kopano`, but the live Python namespace still remains `orch.*` until the code rewrite is complete
+- product brand is `Kopano`, but the live Python namespace still remains `Kopano Context.*` until the code rewrite is complete
 
 ## Critical External Blockers
 

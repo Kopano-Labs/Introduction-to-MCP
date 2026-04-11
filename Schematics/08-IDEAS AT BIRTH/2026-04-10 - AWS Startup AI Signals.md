@@ -2,13 +2,13 @@
 
 ## Idea Summary
 
-Use AWS startup and agentic-platform signals as a competitive benchmark for Orch's proof discipline, observability, and startup readiness.
+Use AWS startup and agentic-platform signals as a competitive benchmark for Kopano Context's proof discipline, observability, and startup readiness.
 
-## Why This Is Good For Orch
+## Why This Is Good For Kopano Context
 
-- AWS is a useful external benchmark even if Orch's current demo framing is Microsoft-heavy
+- AWS is a useful external benchmark even if Kopano Context's current demo framing is Microsoft-heavy
 - AWS messaging keeps reinforcing trust, runtime control, and startup execution readiness
-- comparing against AWS prevents Orch from becoming too narrow in its platform worldview
+- comparing against AWS prevents Kopano Context from becoming too narrow in its platform worldview
 
 ## Source Session Or Research Trigger
 
@@ -28,21 +28,21 @@ Use AWS startup and agentic-platform signals as a competitive benchmark for Orch
 - secure scaling
 - startup execution readiness, not only research novelty
 
-## Vs Orch
+## Vs Kopano Context
 
-- Orch already has strong human-readable control notes and audit surfaces
-- Orch is weaker on production-grade runtime governance signals than the AWS platform language expects
-- Orch can learn from AWS by framing itself around dependable control and visible state, not only creative orchestration
+- Kopano Context already has strong human-readable control notes and audit surfaces
+- Kopano Context is weaker on production-grade runtime governance signals than the AWS platform language expects
+- Kopano Context can learn from AWS by framing itself around dependable control and visible state, not only creative orchestration
 
 ## Three Implementation Options
 
 ### Option 1 | Low Risk
 
-- map Orch's current audit, feed, and session surfaces against the AWS-style trust narrative
+- map Kopano Context's current audit, feed, and session surfaces against the AWS-style trust narrative
 
 ### Option 2 | Moderate
 
-- create an internal Orch runtime-governance checklist using AWS benchmark language
+- create an internal Kopano Context runtime-governance checklist using AWS benchmark language
 
 ### Option 3 | Disruptive
 
@@ -54,7 +54,7 @@ Use AWS startup and agentic-platform signals as a competitive benchmark for Orch
 
 ## Disruptive-Risk Assessment
 
-- `Option 3` is premature because Orch still benefits more from proof alignment than infrastructure reinvention
+- `Option 3` is premature because Kopano Context still benefits more from proof alignment than infrastructure reinvention
 
 ## Recommendation
 

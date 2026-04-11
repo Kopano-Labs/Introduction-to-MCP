@@ -17,6 +17,6 @@
 15. add the incident to the database master
 16. update taxonomy if the type is new or refined
 17. update the solutions library if the fix pattern is new or improved
-18. extract the training lesson for Orch
+18. extract the training lesson for Kopano Context
 19. if the incident affected team direction, add a lead-governance note too
 20. once Master flags the hallucination, logging it here is mandatory

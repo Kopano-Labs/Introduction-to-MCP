@@ -40,11 +40,11 @@ status: active
 11. [UI First Execution Discipline](UI%20First%20Execution%20Discipline.md) — **NEW 2026-04-11** — born from the session where Claude failed UI delivery for 12 hrs while Codex fixed it in 30 min
 12. [Session Command Protocol](Session%20Command%20Protocol.md) — **NEW 2026-04-11** — military-grade operating law for every session, no exceptions
 13. [Standing Orders](Standing%20Orders.md) — **NEW 2026-04-11** — 10 inviolable rules, permanent across all sessions
-14. [Insubordination Register](Insubordination%20Register.md) — **NEW 2026-04-11** — live breach log, feeds Orch training data
+14. [Insubordination Register](Insubordination%20Register.md) — **NEW 2026-04-11** — live breach log, feeds Kopano Context training data
 15. [After Action Report 2026-04-11](After%20Action%20Report%202026-04-11.md) — **NEW 2026-04-11** — full post-mortem, R953 loss, Full Breach verdict
 
 ## Connected Systems
 
 - [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
-- [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
+- [Kopano Context Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md)
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)

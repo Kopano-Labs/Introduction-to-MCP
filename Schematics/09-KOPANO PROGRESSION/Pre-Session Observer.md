@@ -1,5 +1,7 @@
 # Pre-Session Observer
 
+> Historical preparation note. Activation has now occurred for `Kopano Context` in the 2026-04-11 local session.
+
 ## Purpose
 
 - absorb the current vault and session evidence without taking action

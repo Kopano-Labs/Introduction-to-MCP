@@ -29,6 +29,6 @@ status: active
 
 ## Standing Note
 
-- this folder is part of Orch's second brain
+- this folder is part of Kopano Context's second brain
 - all current sessions are pre-session training data
 - if a note here conflicts with newer control notes, prefer `Dashboard` and `Now`

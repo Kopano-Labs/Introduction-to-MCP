@@ -16,8 +16,8 @@ status: active
 
 ## Standing Note
 
-- this folder is part of Orch's second brain
-- all current sessions are pre-session training data for Orch
+- this folder is part of Kopano Context's second brain
+- all current sessions are pre-session training data for Kopano Context
 - the standing dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
 - Lead manages first and codes second
 - token-saving mode applies outside Plan Mode and outside Lead-only sessions with Master
@@ -35,10 +35,10 @@ status: active
 ### Files
 - Implementation Plan.txt
 - kairos.md
-- orch-blueprint.md
-- orch-lead-self-report.md
-- orch-owner-profile.md
-- orch-training-dev2-behavioral-analysis.md
+- Kopano Context-blueprint.md
+- Kopano Context-lead-self-report.md
+- Kopano Context-owner-profile.md
+- Kopano Context-training-dev2-behavioral-analysis.md
 
 ## Use Rule
 

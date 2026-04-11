@@ -14,12 +14,12 @@ status: active
 
 # 07-Sessions By Day Index
 
-> Daily session ledger for Orch's second brain.
+> Daily session ledger for Kopano Context's second brain.
 > If there were multiple sessions on one date, they belong in the same day file with separate time entries.
 
 ## Standing Note
 
-- all current sessions are `pre-sessions` and training data for Orch
+- all current sessions are `pre-sessions` and training data for Kopano Context
 - this folder is the dated memory layer for what actually happened, not what was later remembered loosely
 - each day note should separate `direct log evidence` from `reconstructed from vault context`
 - if a session time is unknown, say `time not confirmed` instead of guessing
@@ -39,10 +39,10 @@ status: active
 | --- | --- | --- | --- |
 | [2026-04-11](2026-04-11.md) | strong | direct git + Vercel + Structure notes | main-branch recovery, route hardening, and production deployment discipline |
 | [2026-04-10](2026-04-10.md) | strong | direct comms + current control notes | standing team lock, reward standby, Schematics constitution rollout |
-| [2026-04-09](2026-04-09.md) | strong | direct comms + demo notes | Orch route hardening, rehearsals, Microsoft readiness |
-| [2026-04-08](2026-04-08.md) | strong | direct comms + historical snapshot | KasiLink reality check, Orch bridge verification, GUI split |
+| [2026-04-09](2026-04-09.md) | strong | direct comms + demo notes | Kopano Context route hardening, rehearsals, Microsoft readiness |
+| [2026-04-08](2026-04-08.md) | strong | direct comms + historical snapshot | KasiLink reality check, Kopano Context bridge verification, GUI split |
 | [2026-04-07](2026-04-07.md) | moderate | direct comms | secret exposure containment |
-| [2026-04-06](2026-04-06.md) | moderate | direct comms | Phase 7/8 runtime activation and Orch Code loop |
+| [2026-04-06](2026-04-06.md) | moderate | direct comms | Phase 7/8 runtime activation and Kopano Context Code loop |
 
 ## Source Notes
 

@@ -67,7 +67,7 @@ status: active
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md) - lead discipline, session smoothness, hierarchy, and token doctrine
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md) - permanent critical hallucination audit system
 - [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md) - planning archive for plan-mode outputs that should not stay only in chat
-- [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md) - successes, failures, hierarchy events, and self-reflection logs
+- [Kopano Context Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md) - successes, failures, hierarchy events, and self-reflection logs
 
 ---
 
@@ -76,7 +76,7 @@ status: active
 The core identity and vision for what Kopano Context is.
 
 - [Kopano Context Blueprint](../01-Mission/Kopano%20Context%20Blueprint.md) — Personality, capabilities, and training specification. Source of truth for Kopano identity.
-- [Orch Blueprint](../01-Mission/Orch%20Blueprint.md) — Legacy identity document (archived reference).
+- [Kopano Context Blueprint](../01-Mission/Kopano Context%20Blueprint.md) — Legacy identity document (archived reference).
 
 ---
 
@@ -84,10 +84,10 @@ The core identity and vision for what Kopano Context is.
 
 Where we're going and how we get there.
 
-- [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md) — Orch as AI microservice inside KasiLink. Architecture, tool mapping, phase roadmap.
+- [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md) — Kopano Context as AI microservice inside KasiLink. Architecture, tool mapping, phase roadmap.
 - [Kopano Labs Strategy](../02-Strategy/Kopano%20Labs%20Strategy.md) — Google-Labs-style additive layer for South African AI tools.
 - [Kopano Brand Identity](../02-Strategy/Kopano%20Brand%20Identity.md) — Canonical brand pack: naming, colors, typography, logo concepts, taglines.
-- [Kopano Rebrand Plan](../02-Strategy/Kopano%20Rebrand%20Plan.md) — Migration plan tracking all Orch → Kopano file updates.
+- [Kopano Rebrand Plan](../02-Strategy/Kopano%20Rebrand%20Plan.md) — Migration plan tracking all Kopano Context → Kopano file updates.
 - [Open Source Product-Ready AI Top 50](../02-Strategy/Open%20Source%20Product-Ready%20AI%20Top%2050.md) — Research map for free vs premium product capabilities.
 - [Microsoft Contract Strategy](../02-Strategy/Microsoft%20Contract%20Strategy.md) — Azure partnership pitch, service mapping, action items.
 - [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md) — Hack Day demo plan, April 15-17, 2026.
@@ -98,7 +98,7 @@ Where we're going and how we get there.
 
 ## 03 — Architecture
 
-How Orch is built.
+How Kopano Context is built.
 
 - [CLI Specification](../03-Architecture/CLI%20Specification.md) — POSIX-style CLI reference: `serve`, `chat`, `agents`, `learn` commands.
 - [Database Schema](../03-Architecture/Database%20Schema.md) — SQLite Data Lake schema: `discussions` and `audit_logs` tables.
@@ -129,10 +129,10 @@ Active project coordination and status tracking.
 
 ## 05 — Training
 
-Data and profiles for training the Orch AI system.
+Data and profiles for training the Kopano Context AI system.
 
 - [Training Index](../05-Training/index.md) — master map for human, AI, and orchestration notes.
-- [Kopano Train Logs](../05-Training/Orch%20Train%20Logs/index.md) — active logbook for dev outcomes, hierarchy breaches, token use, and lead self-reflection.
+- [Kopano Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md) — active logbook for dev outcomes, hierarchy breaches, token use, and lead self-reflection.
 - [Owner Profile](../05-Training/Owner%20Profile.md) — Robyn's work ethic, communication style, and management patterns.
 - [Robyn Operator Profile - Session 3](../05-Training/Robyn%20Operator%20Profile%20-%20Session%203.md) — current-session operational expectations.
 - [Lead Self Report](../05-Training/Lead%20Self%20Report.md) — Claude Opus 4.6 behavioral audit after MVP sprint.
@@ -154,7 +154,7 @@ Code samples and archived source files.
 - [Open Issues](../06-Reference/Open%20Issues.md) — current blocker ledger.
 - `06-Reference/` — `ci.yml`, `filesystem.py`, `search.py`, `write_file.py`
 - `06-Reference/Archive/` — Original source .txt/.md/.docx files before vault conversion
-- `06-Reference/orch-code-implemtation/` — Reference codebase (Rust + Python)
+- `06-Reference/Kopano Context-code-implemtation/` — Reference codebase (Rust + Python)
 
 ---
 

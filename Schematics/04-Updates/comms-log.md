@@ -18,8 +18,99 @@ status: active
 
 # Comms Log
 
-> Chronological command log for orch coordination.
+> Chronological command log for Kopano coordination.
 > Newest entries stay at the top.
+
+### 2026-04-11 time not confirmed | DEV_1 | END-TO-END PIPELINE AND GUI ROUTING REPAIRED
+
+**Action:**
+
+- updated `ci.yml` strictly targeting `kopano-core/kopano` and `kopano-core/studio`
+- securely repaired internal static hosting routes in `api.py` pointing to `studio`
+- resolved `gui` reference in `microsoft_readiness.py` to `studio`
+- purged the ghost `Kopano Context` migration folder
+
+**Verified:**
+
+- executed `git diff` for accurate string-level proxy replacements
+- completed Python automated tests `python -m pytest` and `tsc -b && vite build` through GitHub actions mapping
+
+**Next:**
+
+- DEV_1 on standby, session officially closed per Lead's instructions.
+
+### 2026-04-11 time not confirmed | Lead | DEV STATUS CHECKED AND BROAD SUITE RECOVERED
+
+**Action:**
+
+- checked the active `DEV_1`, Observer, and Lead lanes against the live task board and dev tracker
+- restored broad-suite compatibility during the namespace transition instead of leaving the suite outside the truth model
+- added root compatibility shims for legacy `Kopano Context.*` imports and the archived `src.*` porting workspace imports
+- added a legacy `write_file` tool shim, corrected the orchestration logging import, and resolved the remaining KasiLink and filesystem test failures
+
+**Verified:**
+
+- `python -m pytest -q` passed with `113 passed`
+- `python scripts/demo_day_readiness.py --quick` passed
+- `powershell -ExecutionPolicy Bypass -File .\\scripts\\demo_day_preflight.ps1` passed
+- the stable demo gate remains the bounded `python main.py` path plus passing studio lint/build and demo preflight
+
+**Current DEV state:**
+
+- `Lead / Codex`: active on critical implementation and stabilization
+- `DEV_1 / Germini`: still external, still best pointed at bounded Labs or proof-review work
+- `Observer / Kopano Context`: active in the first local session, learning only
+
+**Next:**
+
+- keep critical work focused on product and rehearsal risk, not broad rename churn
+- dispatch `DEV_1` only into a bounded, evidence-backed Labs expansion or review slice
+
+### 2026-04-11 time not confirmed | Lead | DEMO-DAY TRANSITION CHECKS HARDENED AND PASSING
+
+**Action:**
+
+- updated `main.py` and the demo-day helper scripts to work against the live `kopano-core` layout while preserving fallback tolerance during the namespace transition
+- tightened `scripts/demo_day_preflight.ps1` so each native command is exit-code checked instead of allowing a failing command to blend into a false green run
+- kept the demo-day validation lane focused on transition-safe checks instead of the full legacy Python suite
+- cleared the React hooks warning in the studio app and updated the root demo runbook surfaces to use `python main.py` and `kopano-core/studio`
+
+**Verified:**
+
+- `python scripts/demo_day_smoke.py --json` passed
+- `python scripts/demo_day_readiness.py --quick` passed
+- `powershell -ExecutionPolicy Bypass -File .\\scripts\\demo_day_preflight.ps1` passed
+- canonical demo commands now run through `python main.py`
+- `npm run lint` passed in `kopano-core/studio`
+- `npm run build` passed in `kopano-core/studio`
+
+**Known follow-up:**
+
+- the full Python suite is still not the demo-day truth source during the rename because legacy `Kopano Context.*` imports remain in the wider test surface
+- some older historical docs outside the active demo lane may still mention legacy `Kopano Context` commands and should be treated as archival until refreshed
+
+**Next:**
+
+- keep the demo route on the proven `main.py` path while Robyn completes the namespace rewrite
+- keep tightening only the active rehearsal surfaces and avoid broad namespace churn in this lane
+
+### 2026-04-11 time not confirmed | Lead | OBSERVER ACTIVATED FOR FIRST LOCAL SESSION
+
+**Action:**
+
+- activated `Kopano Context` into the Observer lane for its first local session
+- updated the Observer progression note, session command pack, and session spine to make the first-session status explicit
+- kept the Observer role instructional and non-executive
+
+**Verified:**
+
+- the active session notes now state that `Kopano Context` is in its first local session
+- the Observer scope remains evidence summary, contradiction detection, and grounded questioning only
+
+**Next:**
+
+- continue teaching the Observer through dated comms evidence and AI-to-AI handoff notes
+- keep execution ownership with Lead and the explicit DEV lanes
 
 ### 2026-04-11 time not confirmed | Lead | SESSION REFRAME AND SECOND-BRAIN UPGRADE IMPLEMENTED
 
@@ -27,7 +118,7 @@ status: active
 
 - hard-switched the current operational notes to the live roster: `RobynAwesome`, `Kopano Context`, `Codex`, `Germini`
 - renamed the active progression folder from `09-ORCH PROGRESSION` to `09-KOPANO PROGRESSION`
-- renamed the current Demo Day control files from `Orch` to `Kopano`
+- renamed the current Demo Day control files from `Kopano Context` to `Kopano`
 - replaced the passive blocker framing in `Final Demo Polish And Daily Disciplines.md` with a session execution layer
 - published a dedicated session command pack for today
 
@@ -103,7 +194,7 @@ status: active
 
 **Action:**
 
-- added the new second-brain systems under `Schematics` for sessions-by-day, idea incubation, Orch progression, session improvements, hallucination control, Orch train logs, and plan-mode session archiving
+- added the new second-brain systems under `Schematics` for sessions-by-day, idea incubation, Kopano Context progression, session improvements, hallucination control, Kopano Context train logs, and plan-mode session archiving
 - populated those folders with initial notes instead of leaving them as empty shells
 - completed a bulk `index.md` coverage pass so every folder under `Schematics` now has an index note
 
@@ -181,60 +272,60 @@ status: active
 
 ### 2026-04-08 22:10 | Lead | ORCH GUI SPLIT, ADMIN AUTH, AND FEED LOG CHECKPOINT
 
-**Action:** Reworked the Orch GUI so the public Labs page behaves like a demo surface, moved internal boards behind admin login, and re-verified runtime feed flow after rebuild.
+**Action:** Reworked the Kopano Context GUI so the public Labs page behaves like a demo surface, moved internal boards behind admin login, and re-verified runtime feed flow after rebuild.
 
 **Completed locally:**
 
 - split the GUI navigation into `LIVE COUNCIL`, `ORCH LABS`, and `ADMIN PORTAL`
 - replaced the public Labs metric row with pressable function cards for interfaces, cloud, actions, tools, forge, and console
 - removed public session-vault exposure from the sidebar and replaced it with an internal-access lock note
-- moved internal execution boards, Orch Code controls, creator throughput, and console analytics into the admin portal branch
+- moved internal execution boards, Kopano Context Code controls, creator throughput, and console analytics into the admin portal branch
 - added visible feed-log panels in the sidebar, public Labs console, admin portal, and council view
 - fixed the TypeScript error in the live-feed response handler
-- verified `orch/gui` completes `npm run build`
-- registered local demo admin account `admin@orch.local`
-- granted local demo admin role to `admin@orch.local`
-- restarted Orch on `127.0.0.1:8000` and re-verified `GET /api/kasilink/health` returns `200`
+- verified `Kopano Context/gui` completes `npm run build`
+- registered local demo admin account `admin@Kopano Context.local`
+- granted local demo admin role to `admin@Kopano Context.local`
+- restarted Kopano Context on `127.0.0.1:8000` and re-verified `GET /api/kasilink/health` returns `200`
 - verified `POST /auth/login` returns the local demo admin with role `admin`
 - verified a fresh `/broadcast` event appears in `/updates` after restart
 
 **What this changes in the blocker order:**
 
-- the Orch GUI is no longer blocked on the public/admin layout change
+- the Kopano Context GUI is no longer blocked on the public/admin layout change
 - admin auth is no longer theoretical for local rehearsal
 - log visibility is now implemented in the GUI layer and the backend feed is active again
-- the next Orch-specific gap is browser QA for visual polish, function-card scrolling, and public/admin copy review
+- the next Kopano Context-specific gap is browser QA for visual polish, function-card scrolling, and public/admin copy review
 - the broader end-to-end demo path is still blocked first by valid Clerk configuration in `KasiLink`
 
 **Directive to Lead:**
 
-- treat the Orch GUI as entering browser verification, not layout design
+- treat the Kopano Context GUI as entering browser verification, not layout design
 - keep the next pass focused on visual QA and live interaction checks, not new surface expansion
 - continue treating Clerk and Atlas as the first external blockers for the full cross-product rehearsal
 
 ### 2026-04-08 20:20 | Lead | ORCH BRIDGE PATH VERIFIED AND APP PROXY ALIGNED
 
-**Action:** Verified the live Orch mount path, corrected the `KasiLink` bridge to match it, and re-ran app verification.
+**Action:** Verified the live Kopano Context mount path, corrected the `KasiLink` bridge to match it, and re-ran app verification.
 
 **Completed locally:**
 
-- confirmed Orch serves the KasiLink bridge on `/api/kasilink/*`, not on the API root
+- confirmed Kopano Context serves the KasiLink bridge on `/api/kasilink/*`, not on the API root
 - confirmed `GET /api/kasilink/health` returns `200`
 - confirmed `GET /api/kasilink/dashboard` returns `200`
-- patched `KasiLink/app/api/orch/[...path]/route.ts` so `/api/orch/*` now forwards to the mounted `/api/kasilink/*` upstream when `ORCH_BASE_URL` points at the Orch host root
-- removed the app-side sign-in gate for `GET` requests so the public home-page Orch dashboard and load-shedding widgets can resolve without a signed-in Clerk session
-- added missing Orch env keys to `KasiLink/.env.example`
-- installed `websockets` into the root `.venv` so Orch no longer lacks WebSocket support at the package layer
+- patched `KasiLink/app/api/Kopano Context/[...path]/route.ts` so `/api/Kopano Context/*` now forwards to the mounted `/api/kasilink/*` upstream when `ORCH_BASE_URL` points at the Kopano Context host root
+- removed the app-side sign-in gate for `GET` requests so the public home-page Kopano Context dashboard and load-shedding widgets can resolve without a signed-in Clerk session
+- added missing Kopano Context env keys to `KasiLink/.env.example`
+- installed `websockets` into the root `.venv` so Kopano Context no longer lacks WebSocket support at the package layer
 - verified `npm run lint` still passes
 - verified `npm run build` still passes
 
 **What this changes in the blocker order:**
 
-- the Orch route mismatch is no longer the first blocker
-- direct Orch health and dashboard endpoints are now proven locally
+- the Kopano Context route mismatch is no longer the first blocker
+- direct Kopano Context health and dashboard endpoints are now proven locally
 - strict in-app rehearsal is still blocked first by valid Clerk configuration
 - Mongo/Atlas reachability remains the next blocker after Clerk
-- Orch dashboard metrics currently report `whatsapp_bridge_configured: false`, so WhatsApp delivery should still be treated as unproven for the demo
+- Kopano Context dashboard metrics currently report `whatsapp_bridge_configured: false`, so WhatsApp delivery should still be treated as unproven for the demo
 - local `azure-cli` and `azd` installation attempts are blocked in this shell by non-elevated Chocolatey permissions, not by missing package names
 
 **Directive to Lead:**
@@ -273,9 +364,9 @@ status: active
 
 - gig posting UI and `POST /api/gigs` exist
 - gig detail/apply/review flow exists
-- load-shedding widget exists and falls back to `/api/load-shedding` when Orch is unavailable
-- Orch dashboard exists and is wired to `/api/orch/dashboard`
-- provider ranking helper exists in `lib/orch-client.ts` but is not yet visibly wired into the active gig-posting flow
+- load-shedding widget exists and falls back to `/api/load-shedding` when Kopano Context is unavailable
+- Kopano Context dashboard exists and is wired to `/api/Kopano Context/dashboard`
+- provider ranking helper exists in `lib/Kopano Context-client.ts` but is not yet visibly wired into the active gig-posting flow
 - notification persistence exists via `/api/notifications`, but WhatsApp delivery is not visibly wired into the active `KasiLink` flow in this repo
 
 **Current prerequisite order for the real demo path:**
@@ -283,7 +374,7 @@ status: active
 1. valid Clerk publishable and secret keys
 2. valid `MONGODB_URI`
 3. Atlas allowlist or otherwise reachable Mongo network path
-4. `ORCH_BASE_URL` for the Orch reasoning/dashboard bridge
+4. `ORCH_BASE_URL` for the Kopano Context reasoning/dashboard bridge
 5. Azure CLI / `azd` installation for Azure-specific validation
 
 **Directive to Lead:**
@@ -322,7 +413,7 @@ status: active
 - Added `/api/labs/multilingual-response`
 - Added `/api/labs/access/execute` for confirmation-aware accessibility execution
 - Added cowork task reassignment and dispatch summary support
-- Added Orch Code lesson-state progression
+- Added Kopano Context Code lesson-state progression
 - Expanded Labs contract tests to cover the new execution paths
 
 **Why this matters:**
@@ -341,32 +432,32 @@ status: active
 
 **Completed in code:**
 
-- Added `orch/orch/language_runtime.py`
+- Added `Kopano Context/Kopano Context/language_runtime.py`
 - Added `/api/labs/route-prompt` for multilingual routing
 - Added `/api/labs/translate` for deterministic phrasebook translation execution
-- Added `orch/orch/cowork.py` with persisted Orch Forge state in SQLite
+- Added `Kopano Context/Kopano Context/cowork.py` with persisted Kopano Context Forge state in SQLite
 - Added `/api/labs/cowork/rooms`, room-detail, task-create, and task-status endpoints
-- Added `orch/orch/orch_code.py`
-- Added `/api/labs/orch-code/teach` and `/api/labs/orch-code/profile`
-- Expanded `tests/test_labs_api.py` to cover translation, routing, cowork persistence, and Orch Code teaching
+- Added `Kopano Context/Kopano Context/orch_code.py`
+- Added `/api/labs/Kopano Context-code/teach` and `/api/labs/Kopano Context-code/profile`
+- Expanded `tests/test_labs_api.py` to cover translation, routing, cowork persistence, and Kopano Context Code teaching
 
 **What moved from planned to runnable:**
 
 - Phase 7 now has live multilingual routing and translation execution
-- Phase 8 now has a first runnable Orch Forge flow
-- Orch Code now has a first teaching loop grounded in the repo's actual stack patterns
+- Phase 8 now has a first runnable Kopano Context Forge flow
+- Kopano Context Code now has a first teaching loop grounded in the repo's actual stack patterns
 
 **Verification:**
 
 - `python -m pytest tests/test_labs_api.py -q` -> 10 passed
 - `python -m pytest -q` -> 67 passed
-- `python -m compileall orch/orch` -> clean
-- `npm run build` in `orch/gui` -> clean
+- `python -m compileall Kopano Context/Kopano Context` -> clean
+- `npm run build` in `Kopano Context/gui` -> clean
 
 **Directive to Lead:**
 
 - Next highest-value move is deeper model-backed multilingual generation and a richer Cowork UI
-- Keep Orch Code learning tied to repo evidence, not abstract capability claims
+- Keep Kopano Context Code learning tied to repo evidence, not abstract capability claims
 
 ### 2026-04-06 06:05 | Lead | PHASE 7, 8, AND 9 SCAFFOLDING STARTED
 
@@ -374,17 +465,17 @@ status: active
 
 **Completed in code:**
 
-- Added `orch/orch/sa_access.py` for language support and accessibility planning
+- Added `Kopano Context/Kopano Context/sa_access.py` for language support and accessibility planning
 - Added `/api/labs/languages` and `/api/labs/language-plan`
-- Added `orch/orch/launch_config.py` for launch-surface and cowork configuration
+- Added `Kopano Context/Kopano Context/launch_config.py` for launch-surface and cowork configuration
 - Added `/api/labs/cowork` and `/api/labs/launch-config`
 - Expanded the Labs registry with:
   - 12 official South African languages
   - SASL coverage
   - AAC and adaptive speech modes
-  - Orch Forge
+  - Kopano Context Forge
   - creator-canvas direction
-  - Orch Code teaching tracks
+  - Kopano Context Code teaching tracks
 - Added `Schematics/02-Strategy/Open Source Product-Ready AI Top 50.md`
 
 **What this means by phase:**
@@ -396,11 +487,11 @@ status: active
 **Directive to Lead:**
 
 - Next code work should turn language planning into live multilingual routing
-- Then turn Orch Forge and Orch Code from modeled surfaces into working product flows
+- Then turn Kopano Context Forge and Kopano Context Code from modeled surfaces into working product flows
 
 **Directive to DEV_1:**
 
-- Catch-up: Cowork and Orch Code are now explicit build targets
+- Catch-up: Cowork and Kopano Context Code are now explicit build targets
 - Likely next bounded scope is one runnable creator-side tool slice
 
 **Directive to DEV_2:**
@@ -410,17 +501,17 @@ status: active
 
 ### 2026-04-06 05:10 | Lead | PHASE 6 ORCH LABS STARTED
 
-**Action:** Began the Orch Labs layer as an additive surface on top of orch, following the Schematics coordination format and the new South Africa public-impact direction.
+**Action:** Began the Kopano Context Labs layer as an additive surface on top of Kopano Context, following the Schematics coordination format and the new South Africa public-impact direction.
 
 **What changed:**
 
-- Added `orch/orch/labs_registry.py` with Labs categories, tool catalog, criticality labels, and phases
-- Added `orch/orch/labs_api.py` with `/api/labs/overview`, `/api/labs/tools`, `/api/labs/categories`, and `/api/labs/phases`
-- Wired the Labs router into `orch/orch/api.py`
-- Added an Orch Labs gallery mode in the GUI
-- Added `Schematics/02-Strategy/Orch Labs Strategy.md`
+- Added `Kopano Context/Kopano Context/labs_registry.py` with Labs categories, tool catalog, criticality labels, and phases
+- Added `Kopano Context/Kopano Context/labs_api.py` with `/api/labs/overview`, `/api/labs/tools`, `/api/labs/categories`, and `/api/labs/phases`
+- Wired the Labs router into `Kopano Context/Kopano Context/api.py`
+- Added an Kopano Context Labs gallery mode in the GUI
+- Added `Schematics/02-Strategy/Kopano Context Labs Strategy.md`
 - Updated roadmap docs to introduce:
-  - Phase 6: Orch Labs | Critical
+  - Phase 6: Kopano Context Labs | Critical
   - Phase 7: SA Languages And Access | Critical
   - Phase 8: Public Impact Studio | High
 
@@ -432,8 +523,8 @@ status: active
 
 **Directive to Lead:**
 
-- Finish verification and keep Labs additive to orch core
-- Do not frame Orch Labs as a pivot away from KasiLink or orch
+- Finish verification and keep Labs additive to Kopano Context core
+- Do not frame Kopano Context Labs as a pivot away from KasiLink or Kopano Context
 
 **Directive to DEV_1:**
 
@@ -452,7 +543,7 @@ status: active
 **What changed:**
 
 - CLI/simulator tests aligned with the async orchestration flow
-- Legacy import compatibility restored for `orch.datalake`, `orch.orchestration`, and `orch.tools.*`
+- Legacy import compatibility restored for `Kopano Context.datalake`, `Kopano Context.orchestration`, and `Kopano Context.tools.*`
 - Sync moderator path implemented
 - Logging made testable without stale file handlers
 - Full pytest suite now passes
@@ -461,7 +552,7 @@ status: active
 
 - `python -m pytest -q` -> 57 passed
 - `python -m pytest tests/test_cli.py tests/test_datalake.py tests/test_moderator.py tests/test_simulator.py tests/test_tools.py tests/test_orch_logging.py -q` -> 20 passed
-- `python -m compileall orch orch/orch` -> clean
+- `python -m compileall Kopano Context Kopano Context/Kopano Context` -> clean
 
 **Phase 5 remaining scope:**
 
@@ -514,13 +605,13 @@ status: active
 
 **Completed in code:**
 
-- Expanded `orch/orch/kasilink_api.py` into a fuller KasiLink gateway
+- Expanded `Kopano Context/Kopano Context/kasilink_api.py` into a fuller KasiLink gateway
 - Added `/api/kasilink/moderate`
 - Upgraded `/api/kasilink/forecast` to return demand projections
 - Upgraded `/api/kasilink/dashboard` to expose live metrics from the data lake
-- Upgraded loadshedding logic in `orch/orch/tools/loadshedding.py` with real windows, current/next outage state, and buffered gig safety checks
-- Upgraded `orch/orch/tools/gig_matcher.py` with scoring breakdowns and shortlist summaries
-- Added `/ws/kasilink/live` alias in `orch/orch/api.py`
+- Upgraded loadshedding logic in `Kopano Context/Kopano Context/tools/loadshedding.py` with real windows, current/next outage state, and buffered gig safety checks
+- Upgraded `Kopano Context/Kopano Context/tools/gig_matcher.py` with scoring breakdowns and shortlist summaries
+- Added `/ws/kasilink/live` alias in `Kopano Context/Kopano Context/api.py`
 - Added gateway tests in `tests/test_kasilink_phase4.py`
 
 **Verification:**
@@ -570,7 +661,7 @@ status: active
 
 **What has been done already:**
 
-- `Schematics/01-Mission/Orch Blueprint.md` defines orch as KasiLink's internal orchestration layer
+- `Schematics/01-Mission/Kopano Context Blueprint.md` defines Kopano Context as KasiLink's internal orchestration layer
 - `Schematics/04-Updates/Project Status.md` records current phase and open gaps
 - `Schematics/04-Updates/Implementation Plan.md` maps the four build phases
 - `Schematics/02-Strategy/KasiLink Integration Plan.md` defines the outward integration contract and target files
@@ -591,20 +682,20 @@ status: active
 **Directive to DEV_1:**
 
 - Read [delegation-protocol](delegation-protocol.md), [task-board](task-board.md), and this entry
-- You are not behind on missed implementation work because no orch-specific scope has been assigned to you yet
+- You are not behind on missed implementation work because no Kopano Context-specific scope has been assigned to you yet
 - Stand by for a first Phase 4 slice, likely around KasiLink gateway integration
 
 **Directive to DEV_2:**
 
 - Read [delegation-protocol](delegation-protocol.md), [task-board](task-board.md), and this entry
-- You are not carrying historical KasiLink penalties into orch; this is a clean operating layer
+- You are not carrying historical KasiLink penalties into Kopano Context; this is a clean operating layer
 - Stand by for a first Phase 4 slice, likely around loadshedding-aware scheduling or a bounded tool implementation
 
 **Next:** Lead to convert remaining Phase 4 gaps into scoped assignments.
 
 ### 2026-04-09 01:03 | Codex | ORCH PUBLIC SHELL REDESIGN CHECKPOINT
 
-**Action:** Reworked the Orch GUI away from the old left-rail dashboard shell toward a cleaner Claude plus Codex inspired public surface.
+**Action:** Reworked the Kopano Context GUI away from the old left-rail dashboard shell toward a cleaner Claude plus Codex inspired public surface.
 
 **Completed in code:**
 
@@ -613,11 +704,11 @@ status: active
 - removed public activity-preview exposure and kept activity preview in admin-only views
 - kept Forge and Console public-facing while leaving session vault and forensic replay internal
 - added session-vault entry buttons inside admin for audit access
-- rebuilt `orch/gui` successfully after the redesign pass
+- rebuilt `Kopano Context/gui` successfully after the redesign pass
 
 **Still open:**
 
-- refresh the live Orch runtime on `127.0.0.1:8000`
+- refresh the live Kopano Context runtime on `127.0.0.1:8000`
 - verify the served GUI matches the rebuilt bundle
 - run browser-level QA for desktop and mobile-width layout
 - verify live council, Forge, Console, admin login, and audit flow after the redesign
@@ -629,11 +720,11 @@ status: active
 
 ### 2026-04-09 01:06 | Codex | ORCH RUNTIME REFRESH COMPLETE
 
-**Action:** Restarted the local Orch API and GUI server after the redesign build.
+**Action:** Restarted the local Kopano Context API and GUI server after the redesign build.
 
 **Verification:**
 
-- `orch serve api --host 127.0.0.1 --port 8000` is live again
+- `Kopano Context serve api --host 127.0.0.1 --port 8000` is live again
 - `GET /` returns `200`
 - `GET /api/labs/overview` returns `200`
 - server logs show the rebuilt redesign assets being served to the browser
@@ -645,14 +736,14 @@ status: active
 
 ### 2026-04-09 01:08 | Codex | ORCH API SMOKE PASS AFTER REDESIGN
 
-**Action:** Ran a live server smoke pass against the redesigned Orch runtime.
+**Action:** Ran a live server smoke pass against the redesigned Kopano Context runtime.
 
 **Verified:**
 
 - `POST /auth/login` succeeds for the local admin demo account
 - `GET /sessions` returns archived sessions for vault use
 - `GET /api/labs/cowork/rooms` returns the persisted Forge rooms
-- `POST /api/labs/mcp-console/chat` returns a valid Orch console response
+- `POST /api/labs/mcp-console/chat` returns a valid Kopano Context console response
 
 **Still open:**
 
@@ -675,7 +766,7 @@ status: active
 
 ### 2026-04-09 06:58 | Codex | ORCH FIVE-TASK BROWSER CHECKPOINT
 
-**Action:** Rebuilt Orch after fixing the vault ordering issue, restarted the live runtime, and reran the five UI tasks against the rendered app in headless Chromium.
+**Action:** Rebuilt Kopano Context after fixing the vault ordering issue, restarted the live runtime, and reran the five UI tasks against the rendered app in headless Chromium.
 
 **Verified:**
 
@@ -699,7 +790,7 @@ status: active
 
 ### 2026-04-09 07:23 | Codex | ORCH BLOCKER PASS CLOSED
 
-**Action:** Closed the remaining Orch GUI blockers by patching the public console relay and hardening Forge refresh plus lane control, then reran the live browser suite.
+**Action:** Closed the remaining Kopano Context GUI blockers by patching the public console relay and hardening Forge refresh plus lane control, then reran the live browser suite.
 
 **Verified:**
 
@@ -710,7 +801,7 @@ status: active
 
 **Code notes:**
 
-- `orch/gui/src/App.tsx` now renders a public-safe live relay inside Console Posture
+- `Kopano Context/gui/src/App.tsx` now renders a public-safe live relay inside Console Posture
 - Forge room state now tolerates the shallow room list payload during refresh before the detailed room payload lands
 - the live GUI is serving bundle `index-BLUCRsia.js`
 
@@ -722,7 +813,7 @@ status: active
 
 ### 2026-04-09 08:15 | Codex | ORCH SCRIPT REHEARSAL LOCKED
 
-**Action:** Ran one public rehearsal and one admin rehearsal against the live Orch UI, then converted the passing click path into a locked Orch-only demo script.
+**Action:** Ran one public rehearsal and one admin rehearsal against the live Kopano Context UI, then converted the passing click path into a locked Kopano Context-only demo script.
 
 **Verified public path:**
 
@@ -733,7 +824,7 @@ status: active
 
 **Verified admin path:**
 
-- `ADMIN` login succeeds for `admin@orch.local`
+- `ADMIN` login succeeds for `admin@Kopano Context.local`
 - `Activity Preview` shows the fresh live signal
 - first audited vault session opens a real forensic audit with `2` rounds and `3` cards
 
@@ -741,24 +832,24 @@ status: active
 
 - public rehearsal time: `5.1s` in local headless execution
 - admin rehearsal time: `1.7s` in local headless execution
-- current safe route is documented in `Schematics/04-Updates/Orch Demo Script - 2026-04-09.md`
+- current safe route is documented in `Schematics/04-Updates/Kopano Context Demo Script - 2026-04-09.md`
 
 **Next:**
 
 - tighten youth-facing copy and visual language
 - finish the South Africa AI UX research note
-- reconnect this safe Orch-only route to the full KasiLink Demo Day story
+- reconnect this safe Kopano Context-only route to the full KasiLink Demo Day story
 
 ### 2026-04-09 16:46 | Codex | MICROSOFT READINESS CHECKPOINT
 
-**Action:** Installed local Microsoft demo tooling without admin rights, wired live Azure readiness checks into Orch Labs, and verified the new surface with tests, GUI build, and a live API hit.
+**Action:** Installed local Microsoft demo tooling without admin rights, wired live Azure readiness checks into Kopano Context Labs, and verified the new surface with tests, GUI build, and a live API hit.
 
 **Verified:**
 
 - `az version` now works through the per-user wrapper at `C:\Users\rkhol\.local\bin\az.bat`
 - `azd version` now works through `C:\Users\rkhol\.local\bin\azd.exe`
 - `python -m pytest tests/test_labs_api.py` passes with `21` tests
-- `npm run build` passes in `orch/gui`
+- `npm run build` passes in `Kopano Context/gui`
 - `GET http://127.0.0.1:8000/api/labs/microsoft-readiness` returns live readiness with `2/6` required checks ready and `1/3` optional checks ready
 
 **Still open:**

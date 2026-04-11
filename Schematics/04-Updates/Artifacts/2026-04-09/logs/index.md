@@ -16,8 +16,8 @@ status: active
 
 ## Standing Note
 
-- this folder is part of Orch's second brain
-- all current sessions are pre-session training data for Orch
+- this folder is part of Kopano Context's second brain
+- all current sessions are pre-session training data for Kopano Context
 - the standing dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
 - Lead manages first and codes second
 - token-saving mode applies outside Plan Mode and outside Lead-only sessions with Master
@@ -35,18 +35,18 @@ status: active
 ### Files
 - .codex-kasilink-demo.err.log
 - .codex-kasilink-demo.log
-- .codex-orch-api-demo.err.log
-- .codex-orch-api-demo.log
-- .codex-orch-api-demo2.err.log
-- .codex-orch-api-demo2.log
-- .codex-orch-api-demo3.err.log
-- .codex-orch-api-demo3.log
-- .codex-orch-api-demo4.err.log
-- .codex-orch-api-demo4.log
-- .codex-orch-api-redesign.err.log
-- .codex-orch-api-redesign.log
-- .codex-orch-api.err.log
-- .codex-orch-api.log
+- .codex-Kopano Context-api-demo.err.log
+- .codex-Kopano Context-api-demo.log
+- .codex-Kopano Context-api-demo2.err.log
+- .codex-Kopano Context-api-demo2.log
+- .codex-Kopano Context-api-demo3.err.log
+- .codex-Kopano Context-api-demo3.log
+- .codex-Kopano Context-api-demo4.err.log
+- .codex-Kopano Context-api-demo4.log
+- .codex-Kopano Context-api-redesign.err.log
+- .codex-Kopano Context-api-redesign.log
+- .codex-Kopano Context-api.err.log
+- .codex-Kopano Context-api.log
 
 ## Use Rule
 

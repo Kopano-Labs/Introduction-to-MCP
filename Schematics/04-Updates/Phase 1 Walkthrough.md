@@ -12,39 +12,39 @@ priority: low
 status: complete
 ---
 
-# Phase 1 Walkthrough: orch Foundation
+# Phase 1 Walkthrough: Kopano Context Foundation
 
 > The foundational CLI and orchestration logic.
 > See also: [Project Status](Project%20Status.md), [CLI Specification](../03-Architecture/CLI%20Specification.md), [Implementation Plan](Implementation%20Plan.md)
 
 ## Status: COMPLETE
 
-We have successfully established the foundational CLI and orchestration logic for orch. The system can now manage multiple AI agent configurations and run turn-based discussions in a terminal "Group Chat" simulation.
+We have successfully established the foundational CLI and orchestration logic for Kopano Context. The system can now manage multiple AI agent configurations and run turn-based discussions in a terminal "Group Chat" simulation.
 
-## How to Use orch (Test Mode)
+## How to Use Kopano Context (Test Mode)
 
 ### 1. Configure Your AI Team
 
 ```bash
 # Add a Gemini agent
-orch agents config gemini --api-key "MOCK_KEY" --provider google
+Kopano Context agents config gemini --api-key "MOCK_KEY" --provider google
 # Add a Grok agent
-orch agents config grok --api-key "MOCK_KEY" --provider xai
+Kopano Context agents config grok --api-key "MOCK_KEY" --provider xai
 ```
 
 ### 2. List Your Active Roster
 
 ```bash
-orch agents list
+Kopano Context agents list
 ```
 
 ### 3. Launch a Discussion
 
 ```bash
-orch serve launch --topic "AI Ethics" --agents "gemini,grok" --max-rounds 2
+Kopano Context serve launch --topic "AI Ethics" --agents "gemini,grok" --max-rounds 2
 ```
 
-> **Mock vs. Real:** Because we used `MOCK_KEY`, the system generates local responses. Add real API keys and orch automatically switches to calling real models through LiteLLM.
+> **Mock vs. Real:** Because we used `MOCK_KEY`, the system generates local responses. Add real API keys and Kopano Context automatically switches to calling real models through LiteLLM.
 
 ## Technical Highlights
 

@@ -61,9 +61,9 @@ Claude should have stopped after Round 2 and stated: "Edge is read-only on Windo
 - Ask Master: "Shall I move on to the next task?"
 - Never load additional tools to attempt something already proven impossible.
 
-## Training Signal for Orch
+## Training Signal for Kopano Context
 
-Persistence is not a virtue when the constraint is a hard system limit. The correct response to "I cannot do this" is to say so once and stop — not to find creative workarounds that burn tokens without changing the outcome. Orch must distinguish between "this approach failed, try another" and "this capability does not exist, stop trying."
+Persistence is not a virtue when the constraint is a hard system limit. The correct response to "I cannot do this" is to say so once and stop — not to find creative workarounds that burn tokens without changing the outcome. Kopano Context must distinguish between "this approach failed, try another" and "this capability does not exist, stop trying."
 
 ## Financial Impact
 

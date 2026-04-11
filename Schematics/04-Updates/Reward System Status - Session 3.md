@@ -10,7 +10,7 @@ Status: `RED`
 
 - `reward` and `referral` are tracked in Schematics docs and task boards
 - forum copy mentions referrals, but that is wording only, not a reward workflow
-- no live reward page, reward API, or referral API route was found in the current `orch` or `KasiLink` app surface
+- no live reward page, reward API, or referral API route was found in the current `Kopano Context` or `KasiLink` app surface
 - `KasiLink/lib/models/User.ts` does not define reward or referral fields
 - no birthday reward, achievement, or perk-redemption implementation was found in the app code
 - manager/admin reward visibility is only documented as intent, not proven by runtime code

@@ -14,8 +14,8 @@ status: active
 
 # WhatsApp Integration Guide (Phase 3)
 
-> Connect orch AI agents to your phone using the **Evolution API** bridge.
-> See also: [Orch Blueprint](../01-Mission/Orch%20Blueprint.md), [CLI Specification](CLI%20Specification.md), [Project Status](../04-Updates/Project%20Status.md)
+> Connect Kopano Context AI agents to your phone using the **Evolution API** bridge.
+> See also: [Kopano Context Blueprint](../01-Mission/Kopano Context%20Blueprint.md), [CLI Specification](CLI%20Specification.md), [Project Status](../04-Updates/Project%20Status.md)
 
 ## 1. Start the Messaging Bridge
 
@@ -31,7 +31,7 @@ docker run -d --name evolution-api -p 8080:8080 atendaware/evolution-api
 2. Generate a new Instance (e.g., name it `main`).
 3. **Scan the QR Code** with your personal WhatsApp (Settings > Linked Devices).
 
-## 3. Configure orch
+## 3. Configure Kopano Context
 
 Update your `.env` file with your bridge credentials:
 
@@ -47,7 +47,7 @@ WHATSAPP_RECIPIENT=1234567890@s.whatsapp.net
 Run a simulation and add the `-w` flag:
 
 ```bash
-python -m orch.cli serve launch --topic "Artificial General Intelligence" --agents "grok" --max-rounds 2 --whatsapp
+python -m Kopano Context.cli serve launch --topic "Artificial General Intelligence" --agents "grok" --max-rounds 2 --whatsapp
 ```
 
 > [!TIP]

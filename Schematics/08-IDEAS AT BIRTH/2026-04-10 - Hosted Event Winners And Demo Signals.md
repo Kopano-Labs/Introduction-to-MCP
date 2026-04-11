@@ -2,11 +2,11 @@
 
 ## Idea Summary
 
-Build a reusable demo-day filter for Orch by studying what official hosted events and winners tend to reward.
+Build a reusable demo-day filter for Kopano Context by studying what official hosted events and winners tend to reward.
 
-## Why This Is Good For Orch
+## Why This Is Good For Kopano Context
 
-- Orch is already in a demo-hardening phase
+- Kopano Context is already in a demo-hardening phase
 - a winner-pattern note keeps the product story disciplined
 - it reduces the risk of showing too much blocked scope and too little proven value
 
@@ -37,17 +37,17 @@ Build a reusable demo-day filter for Orch by studying what official hosted event
 - platform-name dropping without visible implementation
 - weak fallback story when a blocked dependency appears
 
-## Vs Orch
+## Vs Kopano Context
 
-- Orch is strong when it narrows to the rehearsed route and shows its control surfaces clearly
-- Orch is weak when it tries to stretch the demo into the blocked full KasiLink stack without live proof
-- Orch can differentiate by treating orchestration quality, auditable sessions, and governance clarity as product value
+- Kopano Context is strong when it narrows to the rehearsed route and shows its control surfaces clearly
+- Kopano Context is weak when it tries to stretch the demo into the blocked full KasiLink stack without live proof
+- Kopano Context can differentiate by treating orchestration quality, auditable sessions, and governance clarity as product value
 
 ## Three Implementation Options
 
 ### Option 1 | Low Risk
 
-- keep the current Orch-only route and add a strict “live vs readiness vs blocked” explanation layer
+- keep the current Kopano Context-only route and add a strict “live vs readiness vs blocked” explanation layer
 
 ### Option 2 | Moderate
 

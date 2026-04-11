@@ -47,7 +47,7 @@ status: active
 | ID | Priority | Owner | Status | Scope |
 |----|----------|-------|--------|-------|
 | S1 | Critical | Lead | DONE | Reframe current control notes around the RobynAwesome / Kopano Context session model |
-| S2 | Critical | Lead | DONE | Rename active session-control taxonomy from `Orch` to `Kopano` where feasible in the vault |
+| S2 | Critical | Lead | DONE | Rename active session-control taxonomy from `Kopano Context` to `Kopano` where feasible in the vault |
 | S3 | Critical | Lead | DONE | Create a session command pack for today’s run |
 | S4 | Critical | Lead | IN PROGRESS | Keep dated evidence flowing into `comms-log` and `07-Sessions By Day/2026-04-11.md` |
 | O1 | Critical | Lead | DONE | Audit `Schematics` and align docs with actual repo state |
@@ -65,6 +65,8 @@ status: active
 | O13 | Critical | Lead | DONE | Add SA language planning, access modes, and launch config APIs |
 | O14 | Critical | Lead | DONE | Add Top 50 product-readiness research note with free vs premium framing |
 | O15 | Critical | Lead | IN PROGRESS | Remove tracked vendor directories, contain secret exposure, and document mandatory prevention rules |
+| O16 | Critical | Lead | DONE | Restore broad Python suite collection and compatibility during namespace transition |
+| O17 | Critical | Lead | DONE | Lock the stable demo gate to `python main.py` plus passing studio and preflight checks |
 
 ## Active Phase 6 Work
 
@@ -85,9 +87,10 @@ status: active
 | First Kopano Studio Code teaching loop | COMPLETE | Lead |
 | Kopano Studio Code lesson progression | COMPLETE | Lead |
 | Secret-exposure containment and doc hardening | IN PROGRESS | Lead |
-| Runnable Labs feature expansion | OPEN | DEV_1 |
+| Runnable Labs feature expansion | READY FOR DISPATCH | DEV_1 |
 | Accessibility implementation prep | OPEN | DEV_2 |
 | Research backlog ranking | OPEN | Lead |
+| Broad-suite compatibility and rehearsal gate recovery | COMPLETE | Lead |
 
 ## Rules For Next Dispatch
 

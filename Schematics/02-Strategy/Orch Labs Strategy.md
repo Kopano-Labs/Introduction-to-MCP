@@ -1,5 +1,5 @@
 ---
-title: Orch Labs Strategy
+title: Kopano Context Labs Strategy
 created: 2026-04-06
 updated: 2026-04-06
 author: Codex
@@ -12,15 +12,15 @@ priority: critical
 status: active
 ---
 
-# Orch Labs Strategy
+# Kopano Context Labs Strategy
 
-> Orch Labs is an added layer on top of orch.
-> orch remains the engine. Orch Labs is the visible experiment studio.
+> Kopano Context Labs is an added layer on top of Kopano Context.
+> Kopano Context remains the engine. Kopano Context Labs is the visible experiment studio.
 
 ## Model
 
-- **orch core:** orchestration, moderation, memory, auditability, APIs
-- **Orch Labs:** a gallery of experiments and AI tools
+- **Kopano Context core:** orchestration, moderation, memory, auditability, APIs
+- **Kopano Context Labs:** a gallery of experiments and AI tools
 - **SA impact tools:** tools built to improve South African lives
 
 ## Labs Standard
@@ -43,12 +43,12 @@ The target is a Google-Labs-style experience:
 | SME Assistant | Small business growth | High |
 | SA Language Engine | All SA languages | Critical |
 | Speech Access Assistant | Speech impairment support | Critical |
-| Orch Forge | Collaborative execution + canvas workflow | High |
-| Orch Code | Coding acceleration and craft learning | Critical |
+| Kopano Context Forge | Collaborative execution + canvas workflow | High |
+| Kopano Context Code | Coding acceleration and craft learning | Critical |
 
 ## Accessibility Rule
 
-Orch Labs must explicitly plan for:
+Kopano Context Labs must explicitly plan for:
 - all 12 official South African languages
 - multilingual prompting and response generation
 - speech-impairment-aware interaction
@@ -60,4 +60,4 @@ Orch Labs must explicitly plan for:
 The Labs launch surface should combine:
 - Anthropic-style workspace clarity and artifact review
 - Codex-style command-center execution and coding focus
-- Stitch-style fast concept-to-interface iteration inside Orch Forge
+- Stitch-style fast concept-to-interface iteration inside Kopano Context Forge

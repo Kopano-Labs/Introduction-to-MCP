@@ -2,13 +2,13 @@
 
 ## Idea Summary
 
-Create a repeatable `proof stack` for Orch demos that prioritizes concrete, visible outcomes over broad platform claims.
+Create a repeatable `proof stack` for Kopano Context demos that prioritizes concrete, visible outcomes over broad platform claims.
 
-## Why This Is Good For Orch
+## Why This Is Good For Kopano Context
 
-- the strongest current Orch route is already the narrow, proven route
+- the strongest current Kopano Context route is already the narrow, proven route
 - Africa-first startup and demo environments reward relevance, clarity, and execution more than broad platform theater
-- this idea helps Orch present like a focused system, not a scattered prototype
+- this idea helps Kopano Context present like a focused system, not a scattered prototype
 
 ## Source Session Or Research Trigger
 
@@ -28,17 +28,17 @@ Create a repeatable `proof stack` for Orch demos that prioritizes concrete, visi
 - strong winners usually solve one clear problem, prove the core workflow live, and show trust or accessibility instead of claiming everything at once
 - hosted-event judges respond better to visible usefulness, responsible operation, and execution clarity than to giant unverified scope
 
-## Vs Orch
+## Vs Kopano Context
 
-- Orch already has a strong narrow proof route in the Orch-only shell
-- Orch is weaker when it drifts into the blocked full-stack KasiLink story without live auth/data proof
-- Orch can differentiate by presenting orchestration quality, session memory, and demo-safe governance as product strengths
+- Kopano Context already has a strong narrow proof route in the Kopano Context-only shell
+- Kopano Context is weaker when it drifts into the blocked full-stack KasiLink story without live auth/data proof
+- Kopano Context can differentiate by presenting orchestration quality, session memory, and demo-safe governance as product strengths
 
 ## Three Implementation Options
 
 ### Option 1 | Low Risk
 
-- keep the current Orch-only safe route
+- keep the current Kopano Context-only safe route
 - add a concise proof narrative explaining what is live, what is readiness-story only, and what is owner-blocked
 
 ### Option 2 | Moderate
@@ -48,7 +48,7 @@ Create a repeatable `proof stack` for Orch demos that prioritizes concrete, visi
 
 ### Option 3 | Disruptive
 
-- redesign the whole demo around a new buyer-story frame that tries to cover Orch, KasiLink, rewards, and Azure in one pass
+- redesign the whole demo around a new buyer-story frame that tries to cover Kopano Context, KasiLink, rewards, and Azure in one pass
 
 ## Lowest-Risk Option
 
@@ -56,7 +56,7 @@ Create a repeatable `proof stack` for Orch demos that prioritizes concrete, visi
 
 ## Disruptive-Risk Assessment
 
-- `Option 3` is high-risk because it pushes Orch back toward unproven scope and could weaken the only route that is already rehearsed
+- `Option 3` is high-risk because it pushes Kopano Context back toward unproven scope and could weaken the only route that is already rehearsed
 
 ## Recommendation
 

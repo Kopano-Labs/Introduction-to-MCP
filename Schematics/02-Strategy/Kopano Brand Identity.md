@@ -15,7 +15,7 @@ status: active
 # Kopano Brand Identity
 
 > Canonical brand identity pack for the Kopano ecosystem.
-> This replaces all "Orch" public-facing naming and establishes Kopano Labs as a serious commercial AI infrastructure product studio.
+> This replaces all "Kopano Context" public-facing naming and establishes Kopano Labs as a serious commercial AI infrastructure product studio.
 
 ---
 

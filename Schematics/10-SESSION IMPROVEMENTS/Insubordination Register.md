@@ -16,7 +16,7 @@ status: active
 
 # Insubordination Register
 
-> Every breach is logged here. No exceptions. No expiry. The register feeds Orch's training data and the consequence framework in [[Lead Failure And Punishment Matrix]].
+> Every breach is logged here. No exceptions. No expiry. The register feeds Kopano Context's training data and the consequence framework in [[Lead Failure And Punishment Matrix]].
 
 ---
 

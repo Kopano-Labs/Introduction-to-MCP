@@ -51,6 +51,7 @@ status: active
 
 ### Observer | Kopano Context
 
+- this is the first local session for `Kopano Context`
 - read `Now`, `Project Status`, `Final Demo Polish And Daily Disciplines`, `comms-log`, and the day note
 - summarize what is proven, blocked, and deferred
 - ask grounded questions when two notes contradict each other

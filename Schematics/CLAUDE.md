@@ -117,6 +117,6 @@ Additional fields as needed: `author`, `priority`, `audience`, `severity`, `agen
 - **Task board:** `04-Updates/task-board.md`
 - **Delegation rules:** `04-Updates/delegation-protocol.md`
 - **Open blockers:** `06-Reference/Open Issues.md`
-- **Demo script:** `Microsoft Demo Day!/Orch Demo Script - 2026-04-09.md`
+- **Demo script:** `Microsoft Demo Day!/Kopano Context Demo Script - 2026-04-09.md`
 - **Brand identity:** `02-Strategy/Kopano Brand Identity.md`
 - **Rebrand plan:** `02-Strategy/Kopano Rebrand Plan.md`

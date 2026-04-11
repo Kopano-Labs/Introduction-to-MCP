@@ -2,12 +2,12 @@
 
 ## Idea Summary
 
-Track Microsoft's strongest current startup-AI signals and use them as a benchmark for what Orch should show, emulate, or deliberately defer.
+Track Microsoft's strongest current startup-AI signals and use them as a benchmark for what Kopano Context should show, emulate, or deliberately defer.
 
-## Why This Is Good For Orch
+## Why This Is Good For Kopano Context
 
 - Microsoft is central to the current demo story
-- Orch already exposes Microsoft readiness inside Labs
+- Kopano Context already exposes Microsoft readiness inside Labs
 - this note helps separate live Microsoft-fit proof from inflated Azure claims
 
 ## Source Session Or Research Trigger
@@ -31,11 +31,11 @@ Track Microsoft's strongest current startup-AI signals and use them as a benchma
 - open agentic web / interoperable agent ecosystems
 - enterprise trust and secure orchestration
 
-## Vs Orch
+## Vs Kopano Context
 
-- Orch already has multi-surface orchestration, audits, and a visible readiness card
-- Orch partially has Microsoft alignment through readiness telemetry and App Insights hooks
-- Orch still lacks real Azure sign-in, live Azure OpenAI resource proof, and deeper enterprise-grade tracing
+- Kopano Context already has multi-surface orchestration, audits, and a visible readiness card
+- Kopano Context partially has Microsoft alignment through readiness telemetry and App Insights hooks
+- Kopano Context still lacks real Azure sign-in, live Azure OpenAI resource proof, and deeper enterprise-grade tracing
 
 ## Three Implementation Options
 
@@ -49,7 +49,7 @@ Track Microsoft's strongest current startup-AI signals and use them as a benchma
 
 ### Option 3 | Disruptive
 
-- reposition the whole product around Azure before the current Orch proof stack is fully stable
+- reposition the whole product around Azure before the current Kopano Context proof stack is fully stable
 
 ## Lowest-Risk Option
 

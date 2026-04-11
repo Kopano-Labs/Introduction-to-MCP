@@ -51,31 +51,31 @@ status: active
 - `KasiLink` dependencies installed
 - `KasiLink` lint passes
 - `KasiLink` build passes
-- Orch API is verified live on `/api/kasilink/health` and `/api/kasilink/dashboard`
-- `KasiLink` bridge now forwards `/api/orch/*` to the mounted `/api/kasilink/*` upstream path
-- public `GET` access for the home-page Orch dashboard and load-shedding widgets is no longer blocked by app-side sign-in checks
-- Orch GUI public/admin split was started on `2026-04-08` and completed plus verified on `2026-04-09`, with public Labs limited to demo surfaces and internal boards moved behind `ADMIN PORTAL`
-- `orch/gui` now builds cleanly after the public/admin split and live-feed log refactor
-- local demo admin account `admin@orch.local` is registered and granted the `admin` role
-- Orch was restarted on `127.0.0.1:8000` after the GUI rebuild and health still returns `200`
+- Kopano Context API is verified live on `/api/kasilink/health` and `/api/kasilink/dashboard`
+- `KasiLink` bridge now forwards `/api/Kopano Context/*` to the mounted `/api/kasilink/*` upstream path
+- public `GET` access for the home-page Kopano Context dashboard and load-shedding widgets is no longer blocked by app-side sign-in checks
+- Kopano Context GUI public/admin split was started on `2026-04-08` and completed plus verified on `2026-04-09`, with public Labs limited to demo surfaces and internal boards moved behind `ADMIN PORTAL`
+- `Kopano Context/gui` now builds cleanly after the public/admin split and live-feed log refactor
+- local demo admin account `admin@Kopano Context.local` is registered and granted the `admin` role
+- Kopano Context was restarted on `127.0.0.1:8000` after the GUI rebuild and health still returns `200`
 - a fresh `/broadcast` event now appears in `/updates`, which confirms live feed events are flowing into the runtime again
-- Orch currently reports `whatsapp_bridge_configured: false`
+- Kopano Context currently reports `whatsapp_bridge_configured: false`
 - current runtime blocker is valid Clerk configuration, which fails before Atlas can be verified
 - Azure tooling validation was blocked on `2026-04-08`, then resolved on `2026-04-09` when `az` and `azd` were installed locally in a non-admin path
-- current repo confirms gig posting/apply/review plus load-shedding and Orch dashboard surfaces
+- current repo confirms gig posting/apply/review plus load-shedding and Kopano Context dashboard surfaces
 - current repo does not yet show visible wiring for provider ranking in the gig flow or WhatsApp delivery in the notification flow
 
 **Primary work**
 - publish a corrected overlap handoff for the current repo reality
 - confirm Atlas, Clerk, and authenticated QA prerequisites
-- finish the Orch GUI split verification pass in the browser
+- finish the Kopano Context GUI split verification pass in the browser
 - attempt the first local demo-path rehearsal
 - verify Azure playbook readiness locally
 
 **Exit criteria**
 - [done] overlap note explicitly states what is safe to edit and what is stale
 - [done] Atlas blocker is reduced to a concrete owner action, not a vague risk
-- [done] Orch bridge path and upstream health are verified with evidence
+- [done] Kopano Context bridge path and upstream health are verified with evidence
 - [owner-blocked] one rehearsal attempt is recorded with pass/fail evidence once valid Clerk keys are present
 - [done] one Azure validation pass is recorded with next actions
 
@@ -98,18 +98,18 @@ status: active
 **Live status**
 - April 8 is now closed for Codex-owned work, and the remaining full-stack gap is explicitly tracked as owner-supplied Clerk plus Atlas access
 - the conservative route is locked as `Council -> Labs -> Console send -> Forge view -> Admin audit`
-- Orch GUI now passes browser QA for first-load stability, desktop/mobile layout, Labs launcher scrolling, public/admin boundary, and session-vault audit loading
+- Kopano Context GUI now passes browser QA for first-load stability, desktop/mobile layout, Labs launcher scrolling, public/admin boundary, and session-vault audit loading
 - `/sessions` now prioritizes discussions with real audit data and exposes round plus audit-event counts in the vault
 - admin login plus vault access now opens a real two-round forensic audit instead of landing on the empty latest session by default
 - live-event rendering now passes across council, public console, and admin after the console relay patch
 - Forge create/edit flows now survive live refresh, and lane movement is pressable through an explicit lane control instead of drag-only behavior
 - MCP Console send and stream both return live replies in browser QA
 - locked Kopano public and admin rehearsal paths are now recorded with timing and presenter notes
-- Azure CLI and Azure Developer CLI now work locally in a non-admin install path, and Orch Labs now exposes a live Microsoft readiness report
+- Azure CLI and Azure Developer CLI now work locally in a non-admin install path, and Kopano Context Labs now exposes a live Microsoft readiness report
 - current Microsoft readiness is `2/6` required checks and `1/3` optional checks on the local runtime; remaining blockers are Azure sign-in plus real Azure OpenAI, App Insights, and hosting env values
 - the GUI shell is now split into routed pages for council, labs, forge, console, and admin with a persistent Framer Motion background and separate build chunks
 - routed desktop renders are verified for `#/council`, `#/forge`, and `#/admin`, and a narrow mobile capture also renders cleanly
-- next Orch blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and reconnecting the Orch shell to the wider KasiLink story
+- next Kopano Context blockers are no longer functional UI failures; they are demo-story polish, copy tightening, and reconnecting the Kopano Context shell to the wider KasiLink story
 
 **Core live route**
 - `Council` opens with visible AI state and a seeded signal if the room is quiet
@@ -130,13 +130,13 @@ status: active
 - tighten public and admin copy so quiet states still read as intentional during the demo
 - align the countdown, script, and owner checklist around the same safe-route truth
 - reduce every remaining blocker to a named owner action with fallback wording
-- finish the five-surface Orch verification pass without changing existing endpoints
+- finish the five-surface Kopano Context verification pass without changing existing endpoints
 
 **Exit criteria**
 - demo path completes locally without unknown blockers, or the remaining blockers are reduced to named owner actions with a safe fallback route
 - auth failures, empty-data failures, and missing env failures are either fixed or assigned with owner/date
-- the five-task Orch browser checkpoint is recorded with evidence and the next blocker is explicit
-- Orch GUI blocker list is reduced to zero functional UI failures
+- the five-task Kopano Context browser checkpoint is recorded with evidence and the next blocker is explicit
+- Kopano Context GUI blocker list is reduced to zero functional UI failures
 - one public path and one admin path are rehearsed and written down as the current safe demo route
 
 ### 2026-04-10 | Authenticated QA Day

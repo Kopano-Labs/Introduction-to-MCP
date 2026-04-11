@@ -10,7 +10,21 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-GUI_DIR = ROOT / "orch" / "gui"
+GUI_DIR_CANDIDATES = [
+    ROOT / "kopano-core" / "studio",
+    ROOT / "orch" / "gui",
+]
+CODE_DIR_CANDIDATES = [
+    ROOT / "kopano-core" / "kopano",
+    ROOT / "orch" / "orch",
+]
+
+
+def first_existing(paths: list[Path]) -> Path:
+    for path in paths:
+        if path.exists():
+            return path
+    return paths[0]
 
 
 @dataclass
@@ -35,17 +49,32 @@ def main() -> int:
     parser.add_argument("--quick", action="store_true", help="Skip slower optional checks and focus on core readiness.")
     args = parser.parse_args()
 
+    gui_dir = first_existing(GUI_DIR_CANDIDATES)
+    code_dir = first_existing(CODE_DIR_CANDIDATES)
     checks: list[CheckResult] = []
 
-    checks.append(run_check("Python tests", [sys.executable, "-m", "pytest", "-q"], ROOT))
-    checks.append(run_check("Compile sanity", [sys.executable, "-m", "compileall", "orch/orch"], ROOT))
+    checks.append(
+        run_check(
+            "Demo-day Python checks",
+            [
+                sys.executable,
+                "-m",
+                "pytest",
+                "tests/test_project_metadata.py",
+                "tests/test_demo_day_assets.py",
+                "-q",
+            ],
+            ROOT,
+        )
+    )
+    checks.append(run_check("Compile sanity", [sys.executable, "-m", "compileall", str(code_dir.relative_to(ROOT))], ROOT))
 
     npm = shutil.which("npm")
     if npm:
-        checks.append(run_check("GUI lint", [npm, "run", "lint"], GUI_DIR))
-        checks.append(run_check("GUI build", [npm, "run", "build"], GUI_DIR))
+        checks.append(run_check("GUI lint", [npm, "run", "lint"], gui_dir))
+        checks.append(run_check("GUI build", [npm, "run", "build"], gui_dir))
         if not args.quick:
-            checks.append(run_check("GUI smoke", [npm, "run", "test:ui"], GUI_DIR))
+            checks.append(run_check("GUI smoke", [npm, "run", "test:ui"], gui_dir))
     else:
         checks.append(skip_check("GUI lint", ["npm", "run", "lint"]))
         checks.append(skip_check("GUI build", ["npm", "run", "build"]))
@@ -67,9 +96,9 @@ def main() -> int:
 
     print("\nCanonical demo commands")
     print("-----------------------")
-    print("1. kopano agents list")
-    print("2. kopano serve api --host 127.0.0.1 --port 8000")
-    print('3. kopano serve launch --topic "The future of AI in South African fintech" --agents "gemini-pro" --moderator "grok-mod" --max-rounds 3')
+    print("1. python main.py agents list")
+    print("2. python main.py serve api --host 127.0.0.1 --port 8000")
+    print('3. python main.py serve launch --topic "The future of AI in South African fintech" --agents "gemini-pro" --moderator "grok-mod" --max-rounds 3')
     print("4. Open http://127.0.0.1:8000")
 
     return 1 if failures else 0

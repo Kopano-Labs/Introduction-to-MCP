@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { appendStreamChunk } from './labsUi';
 import type { EditableArtifact, EditableTask } from './labsUi';
@@ -131,15 +131,15 @@ const App = () => {
   const consoleFeedPreview = latestFeedEntries.filter((entry) => entry.source !== 'system').slice(0, 4);
   const adminFeedPreview = latestFeedEntries.slice(0, 8);
 
-  const pushFeedLog = (entry: FeedLogEntry) => {
+  const pushFeedLog = useCallback((entry: FeedLogEntry) => {
     if (seenFeedIds.current.has(entry.id)) {
       return;
     }
     seenFeedIds.current.add(entry.id);
     setFeedLog((prev) => [...prev, entry].slice(-60));
-  };
+  }, []);
 
-  const logSystemEvent = (type: string, content: string) => {
+  const logSystemEvent = useCallback((type: string, content: string) => {
     const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
     pushFeedLog({
       id: `system:${type}:${stamp}`,
@@ -148,7 +148,7 @@ const App = () => {
       received_at: new Date().toISOString(),
       source: 'system',
     });
-  };
+  }, [pushFeedLog]);
 
   const navigate = (nextPage: PageId) => {
     const nextHash = `#/${nextPage}`;
@@ -194,7 +194,7 @@ const App = () => {
     await fetchMicrosoftReadiness();
   };
 
-  const handleLiveEvent = (data: Partial<LiveMessage> & { type?: string }, source: 'ws' | 'poll') => {
+  const handleLiveEvent = useCallback((data: Partial<LiveMessage> & { type?: string }, source: 'ws' | 'poll') => {
     const entryId = `${data.type ?? 'unknown'}:${data.agent ?? 'system'}:${data.block_id ?? 'no-block'}:${data.round ?? '0'}:${data.content ?? ''}`;
 
     if (data.type === 'thinking') {
@@ -249,7 +249,7 @@ const App = () => {
       received_at: new Date().toISOString(),
       source,
     });
-  };
+  }, [pushFeedLog]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -353,7 +353,7 @@ const App = () => {
       window.clearInterval(pollUpdates);
       ws.current?.close();
     };
-  }, []);
+  }, [handleLiveEvent, logSystemEvent]);
 
   const createCoworkRoom = async () => {
     const data = await (await postJson(`${apiBase}/api/labs/cowork/rooms`, { name: roomName, mission: roomMission, lead: 'Lead' })).json();

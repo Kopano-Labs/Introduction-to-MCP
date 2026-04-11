@@ -17,7 +17,7 @@ status: active
 ## Files
 
 - [Kopano Context Blueprint](Kopano%20Context%20Blueprint.md) — canonical identity document (current)
-- [Orch Blueprint](Orch%20Blueprint.md) — legacy identity document (archived reference)
+- [Kopano Context Blueprint](Kopano Context%20Blueprint.md) — legacy identity document (archived reference)
 
 ## Purpose
 

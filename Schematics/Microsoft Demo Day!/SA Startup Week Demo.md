@@ -23,8 +23,8 @@ priority: high
 ## Target Story
 
 1. User posts a gig in KasiLink.
-2. Orch ranks providers and explains the choice.
-3. Orch checks load-shedding safety for the slot.
+2. Kopano Context ranks providers and explains the choice.
+3. Kopano Context checks load-shedding safety for the slot.
 4. KasiLink sends a WhatsApp notification.
 5. The dashboard shows transparent AI reasoning.
 
@@ -32,7 +32,7 @@ This is the intended end-to-end story for the April 15-17 demo window, not the c
 
 ## Current Practical Status
 
-- Orch-only public plus admin route is the safe live path right now.
+- Kopano Context-only public plus admin route is the safe live path right now.
 - The full end-to-end KasiLink flow is still partial until Clerk, Atlas, provider-ranking proof, and WhatsApp readiness are closed.
 - Microsoft should currently be framed as a strong buyer-ready path with live readiness evidence, not as a fully connected Azure production stack unless the missing owner steps are completed.
 
