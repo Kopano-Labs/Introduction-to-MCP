@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
-    "braintrust": "^3.7.1"
+    "braintrust": "^3.7.1",
+    "mongodb": "^7.1.1"
   },
   "name": "introduction-to-mcp",
   "version": "1.0.0",
@@ -10,7 +11,6 @@
   "directories": {
     "test": "tests"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

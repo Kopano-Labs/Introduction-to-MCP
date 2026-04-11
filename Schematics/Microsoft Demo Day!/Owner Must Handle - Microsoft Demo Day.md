@@ -37,10 +37,11 @@ status: active
 
 Without the items below, the April 8 countdown row stays owner-blocked even though the repo, Orch shell, and local rehearsal route are already working.
 
-- [ ] provide valid Clerk publishable and secret keys
-- [ ] allowlist the current machine in Atlas or otherwise provide live Mongo reachability
+- [x] provide valid Clerk publishable and secret keys ✅ 2026-04-11
+- [x] allowlist the current machine in Atlas or otherwise provide live Mongo reachability ✅ 2026-04-11
 - [ ] approve whether Demo Day is `ORCH-ONLY SAFE ROUTE` or `FULL KASILINK STORY`
-- [ ] if you want Microsoft presented as a live connected stack, complete Azure sign-in and real env/resource wiring
+      (Demo Day should be ORCH AND KASILINK STORY CON-JOINT YET ALWAYS FOCUSED ON ORCH )
+- [x] if you want Microsoft presented as a live connected stack, complete Azure sign-in and real env/resource wiring ✅ 2026-04-11
 
 Use the existing backend and GUI `.env.example` files as the source for what values still need to be filled with real secrets and resource identifiers.
 
@@ -48,9 +49,10 @@ Use the existing backend and GUI `.env.example` files as the source for what val
 
 ### Access And Credentials
 
-- [x] provide valid Clerk publishable and secret keys for live authenticated rehearsal ✅ 2026-04-10
-- [ ] allowlist the current machine in Atlas or otherwise provide live Mongo reachability
+- [x] provide valid Clerk publishable and secret keys for live authenticated rehearsal ✅ 2026-04-11
+- [x] allowlist the current machine in Atlas or otherwise provide live Mongo reachability ✅ 2026-04-11
 - [ ] decide whether RapidAPI-backed WhatsApp and Google Search providers are required in the live story
+      (THEY ARE REQUIRED BOTH!)
 - [ ] if WhatsApp is in the live story, ensure the needed provider subscriptions or keys are active
 
 ### Demo Decisions You Must Make

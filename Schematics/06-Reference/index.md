@@ -23,6 +23,7 @@ status: active
 
 ## Also In This Folder
 
+- [Git Evidence 2026-04-11](Git%20Evidence%202026-04-11.md) — parsed VS Code git log, repo structure, CRLF hygiene, governance commit manifest
 - interface audits from Session 3
 - reward QA checklist snapshot
 - imported implementation references

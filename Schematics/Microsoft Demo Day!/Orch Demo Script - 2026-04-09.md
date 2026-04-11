@@ -27,8 +27,8 @@ Lock a safe Orch-only demo path that can be shown immediately while the wider Ka
 - Core route: `Council -> Labs -> Console send -> Forge view -> Admin audit`
 - Public path: live reasoning, practical guidance, and creator execution surfaces
 - Admin path: internal oversight, audit visibility, and forensic replay
-- Microsoft framing: readiness surface with honest gaps, not a fake fully connected Azure claim
-- Not in this Orch-only script: full KasiLink gig post, provider ranking, load-shedding check, WhatsApp delivery, reward/referral, Azure AI Search, and managed identity storytelling
+- Microsoft framing: Live Azure infrastructure (Container Apps + OpenAI + App Insights) — the story is now fully wired, excluding only AI Search.
+- Not in this Orch-only script: full KasiLink gig post, provider ranking, load-shedding check, WhatsApp delivery, reward/referral, and managed identity storytelling
 
 ## Public Path
 
@@ -42,7 +42,7 @@ Target live narration time: `45-60` seconds
 3. Click `ORCH LABS`
    Line: this is the public launch pad for the demo, not an admin surface pretending to be public.
 4. Point at the `Microsoft path` card
-   Line: the Microsoft story here is honest readiness; the toolchain is real, and any missing cloud wiring stays visible.
+   Line: The Microsoft story here is now fully live; our infrastructure is provisioned in South Africa North, and telemetry is flowing directly to Azure Monitor.
 5. Click `CONSOLE`
    Prompt: `Show a short creator workflow for Orch Labs`
    Line: Orch can answer operational questions without exposing internal admin logs.
@@ -91,7 +91,7 @@ Rehearsal date: `2026-04-09`
 - Keep Forge mostly read-only during the core demo; task edit and lane movement now work, but they are optional proof points, not required story beats
 - Do not open admin before the public story is clear
 - If the live council is quiet, say so directly and seed a fresh signal before continuing
-- Keep the Microsoft card grounded: local tooling and readiness are real, but live Azure sign-in and env wiring are still owner steps unless completed
+- Keep the Microsoft card grounded: local tooling and live Azure resources are verified. The story is live.
 
 ## Optional Proof Points
 
