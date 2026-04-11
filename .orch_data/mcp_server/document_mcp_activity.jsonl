@@ -1,4 +1,0 @@
-{"timestamp": "2026-04-06T09:42:34.161868+00:00", "event_type": "list_doc_ids", "payload": {"count": 6}}
-{"timestamp": "2026-04-06T09:42:34.164008+00:00", "event_type": "read_document", "payload": {"doc_id": "plan.md"}}
-{"timestamp": "2026-04-06T09:42:34.165715+00:00", "event_type": "edit_document", "payload": {"doc_id": "plan.md", "old_str_len": 5, "new_str_len": 6}}
-{"timestamp": "2026-04-06T09:42:34.167035+00:00", "event_type": "summarize_doc", "payload": {"doc_id": "spec.txt"}}

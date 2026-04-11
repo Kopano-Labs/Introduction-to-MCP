@@ -1,7 +1,0 @@
-{"timestamp": "2026-04-06T09:24:37.367041+00:00", "event_type": "task_created", "room_id": 2, "task_id": 8, "owner": "DEV_3 (Background)", "payload": {"lane": "build", "priority": "high", "title": "DEV3 tracked task"}}
-{"timestamp": "2026-04-06T09:24:37.385843+00:00", "event_type": "task_status_changed", "room_id": 2, "task_id": 8, "owner": "DEV_3 (Background)", "payload": {"status": "in_progress"}}
-{"timestamp": "2026-04-06T09:24:37.402154+00:00", "event_type": "task_moved", "room_id": 2, "task_id": 8, "owner": "DEV_3 (Background)", "payload": {"lane": "review", "status": "completed"}}
-{"timestamp": "2026-04-06T09:41:48.962227+00:00", "event_type": "task_created", "room_id": 3, "task_id": 12, "owner": "DEV_3 (Background)", "payload": {"lane": "build", "priority": "high", "title": "Validate DEV3 watch"}}
-{"timestamp": "2026-04-06T09:41:48.975836+00:00", "event_type": "task_status_changed", "room_id": 3, "task_id": 12, "owner": "DEV_3 (Background)", "payload": {"status": "in_progress"}}
-{"timestamp": "2026-04-06T09:41:48.987266+00:00", "event_type": "task_moved", "room_id": 3, "task_id": 12, "owner": "DEV_3 (Background)", "payload": {"lane": "review", "status": "completed"}}
-{"timestamp": "2026-04-06T09:41:48.999418+00:00", "event_type": "task_owner_changed_from", "room_id": 3, "task_id": 12, "owner": "DEV_3 (Background)", "payload": {"to_owner": "Lead"}}

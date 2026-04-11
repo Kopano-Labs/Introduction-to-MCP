@@ -1,5 +1,0 @@
-{"timestamp": "2026-04-06T09:04:34.379838+00:00", "event_type": "task_created", "room_id": 1, "task_id": 4, "owner": "DEV_2", "payload": {"lane": "build", "priority": "high", "title": "Watcher task"}}
-{"timestamp": "2026-04-06T09:04:34.395327+00:00", "event_type": "task_status_changed", "room_id": 1, "task_id": 4, "owner": "DEV_2", "payload": {"status": "in_progress"}}
-{"timestamp": "2026-04-06T09:04:34.408618+00:00", "event_type": "task_moved", "room_id": 1, "task_id": 4, "owner": "DEV_2", "payload": {"lane": "review", "status": "completed"}}
-{"timestamp": "2026-04-06T09:04:34.422839+00:00", "event_type": "task_owner_changed_from", "room_id": 1, "task_id": 4, "owner": "DEV_2", "payload": {"to_owner": "Lead"}}
-{"timestamp": "2026-04-06T09:05:33.946247+00:00", "event_type": "task_owner_changed_to", "room_id": 1, "task_id": 1, "owner": "DEV_2", "payload": {"from_owner": "Lead"}}
