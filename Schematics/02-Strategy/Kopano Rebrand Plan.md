@@ -95,11 +95,11 @@ status: active
 | `04-Updates/Project Status.md` | Update naming in status tables |
 | `Microsoft Demo Day!/` files | Update demo scripts for new brand |
 | `05-Training/` profile files | Update Kopano Context references in agent profiles |
-| `09-ORCH PROGRESSION/` index | Update folder references |
+| `09-KC PROGRESSION/` index | Update folder references |
 
 ### Phase 3 — Backlog (systematic sweep)
 - All remaining files in 04-Updates, 07-Sessions By Day, 10-SESSION IMPROVEMENTS
-- Folder renames: `09-ORCH PROGRESSION` → `09-KOPANO PROGRESSION`
+- Folder renames: `09-KC PROGRESSION` → `09-KOPANO PROGRESSION`
 - README in `/06-Reference/Kopano Context-code-implemtation`
 
 ---

@@ -5,7 +5,7 @@
 - current control truth is now anchored in `Final Demo Polish And Daily Disciplines.md`
 - current command truth is now anchored in `Session Command Pack - 2026-04-11.md`
 - `Creator = RobynAwesome`, `Observer = Kopano Context`, `Lead = Codex`, `DEV_1 = Germini`
-- `09-ORCH PROGRESSION` was renamed to `09-KOPANO PROGRESSION` for active vault control
+- `09-KC PROGRESSION` was renamed to `09-KOPANO PROGRESSION` for active vault control
 - product branding remains `Kopano`, while the live Python package namespace still remains `Kopano Context.*` until Robyn completes the code rewrite
 
 ## DEV Lane Check | 2026-04-11

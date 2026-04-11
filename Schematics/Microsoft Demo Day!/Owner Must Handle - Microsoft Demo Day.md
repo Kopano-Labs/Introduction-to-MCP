@@ -39,8 +39,8 @@ Without the items below, the April 8 countdown row stays owner-blocked even thou
 
 - [x] provide valid Clerk publishable and secret keys ✅ 2026-04-11
 - [x] allowlist the current machine in Atlas or otherwise provide live Mongo reachability ✅ 2026-04-11
-- [ ] approve whether Demo Day is `ORCH-ONLY SAFE ROUTE` or `FULL KASILINK STORY`
-      (Demo Day should be ORCH AND KASILINK STORY CON-JOINT YET ALWAYS FOCUSED ON ORCH )
+- [ ] approve whether Demo Day is `KC-ONLY SAFE ROUTE` or `FULL KASILINK STORY`
+      (Demo Day should be KC AND KASILINK STORY CON-JOINT YET ALWAYS FOCUSED ON KC )
 - [x] if you want Microsoft presented as a live connected stack, complete Azure sign-in and real env/resource wiring ✅ 2026-04-11
 
 Use the existing backend and GUI `.env.example` files as the source for what values still need to be filled with real secrets and resource identifiers.
@@ -57,7 +57,7 @@ Use the existing backend and GUI `.env.example` files as the source for what val
 
 ### Demo Decisions You Must Make
 
-- [ ] decide whether Demo Day is `ORCH-ONLY SAFE ROUTE` or `FULL KASILINK STORY`
+- [ ] decide whether Demo Day is `KC-ONLY SAFE ROUTE` or `FULL KASILINK STORY`
 - [ ] decide whether WhatsApp is `IN SCRIPT` or `DEFERRED`
 - [ ] decide whether reward/referral is `IN SCRIPT` or `DEFERRED`
 - [ ] decide whether Azure AI Search is `IN DEMO` or `DEFERRED`

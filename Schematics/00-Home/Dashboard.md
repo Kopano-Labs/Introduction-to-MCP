@@ -176,7 +176,7 @@ Code samples and archived source files.
 
 ## Assets
 
-- `Assets/ORCH Apprenticeship Training Loop.png`
+- `Assets/KC Apprenticeship Training Loop.png`
 - `Assets/Where we are 2026-04-03.jpg`
 
 ---

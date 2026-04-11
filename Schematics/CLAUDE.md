@@ -100,7 +100,7 @@ Additional fields as needed: `author`, `priority`, `audience`, `severity`, `agen
 | `06-Reference` | Archives, open issues, code reference |
 | `07-Sessions By Day` | Dated session reconstruction and evidence |
 | `08-IDEAS AT BIRTH` | Incubation-only idea bank |
-| `09-ORCH PROGRESSION` | Kopano Context capability ladder: Observer → Co-Lead |
+| `09-KC PROGRESSION` | Kopano Context capability ladder: Observer → Co-Lead |
 | `10-SESSION IMPROVEMENTS` | Lead doctrine, hierarchy, token discipline |
 | `11-AI HALLUCINATION - CRITICAL` | Hallucination governance with protocols, taxonomy, incidents |
 | `12-PLAN MODE SESSIONS` | Archived plan-mode outputs |

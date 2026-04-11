@@ -141,7 +141,7 @@
 - [x] compile official-source Anthropic agent and MCP signals
 - [x] compile Africa-first hosted-event and startup proof signals from official sources
 - [x] create the incubation process for [08-IDEAS AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md)
-- [x] create the staged progression ladder for [09-ORCH PROGRESSION](../09-ORCH%20PROGRESSION/index.md)
+- [x] create the staged progression ladder for [09-KC PROGRESSION](../09-KC%20PROGRESSION/index.md)
 - [x] create the lead self-reflection doctrine for [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - [x] create the hallucination taxonomy and protocol scaffolding for [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 - [x] scrape historical hallucination and fabrication references from `Schematics`

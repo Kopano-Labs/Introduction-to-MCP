@@ -33,7 +33,7 @@ status: active
 
 1. FASTEST (works today, no domain needed):
    ```
-   az containerapp show --name orch-api --resource-group orch-demo-rg --query properties.configuration.ingress.fqdn -o tsv
+   az containerapp show --name KC-api --resource-group KC-demo-rg --query properties.configuration.ingress.fqdn -o tsv
    ```
    Use the Azure Container App URL directly for any cloud demo reference.
 
@@ -86,7 +86,7 @@ PASS CLI import: kopano.cli
 
 **Atlas:** PASS — cluster reachable, 0.0.0.0/0 allowlist confirmed from RobynAwesome screenshot. kasilink and kopano databases exist (empty collections — expected for fresh demo env).
 
-**Hallucination logged:** Claude used "orch" in user-facing output instead of KC/Kopano Context. Incident filed: `11-AI HALLUCINATION - CRITICAL/Incidents/2026-04-11 1112 - Legacy Name Slip Orch vs KC From Claude.md`
+**Hallucination logged:** Claude used "KC" in user-facing output instead of KC/Kopano Context. Incident filed: `11-AI HALLUCINATION - CRITICAL/Incidents/2026-04-11 1112 - Legacy Name Slip KC vs KC From Claude.md`
 
 **Germini notified:** Session open notification published to `04-Updates/Notify - Germini - Session Open 2026-04-11.md`. D6 (Studio copy) is Germini's active lane.
 
@@ -96,7 +96,7 @@ PASS CLI import: kopano.cli
 
 **Actions:**
 - Clerk keys CONFIRMED in `.env` — both `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` (pk_live_*) and `CLERK_SECRET_KEY` (sk_live_*) present ✅
-- MongoDB Atlas URI CONFIRMED in `.env` — Orch cluster @ d9trndm.mongodb.net ✅
+- MongoDB Atlas URI CONFIRMED in `.env` — KC cluster @ d9trndm.mongodb.net ✅
 - Created `scripts/check_atlas.py` — project-specific Atlas connectivity check (pings cluster, lists KasiLink/Kopano collections, prints IP allowlist reminder)
 - Created `04-Updates/Dispatch - Codex - 2026-04-11.md` — D1, D4, D7 lane with proof requirements and escalation rules
 - Created `04-Updates/Dispatch - Germini - 2026-04-11.md` — D2, D3, D6 lane with proof requirements and escalation rules
@@ -134,11 +134,11 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - Created `05-Training/Kopano Rebrand Agent Briefing.md` — mandatory briefing for all agents
 
 *Repo rebrand:*
-- Updated `pyproject.toml`: name → `kopano-context`, added `kopano` CLI entry point, kept `orch` as legacy alias
-- Updated `main.py`: graceful import fallback (`kopano.cli` → `orch.orch.cli`)
+- Updated `pyproject.toml`: name → `kopano-context`, added `kopano` CLI entry point, kept `KC` as legacy alias
+- Updated `main.py`: graceful import fallback (`kopano.cli` → `KC.KC.cli`)
 - Updated `package.json`: name → `kopano-context`, author → `RobynAwesome`
-- Updated `orch/orch/cli.py`: all user-facing strings rebranded to Kopano Context / Kopano Studio
-- Updated `orch/gui/package.json`: name → `kopano-studio`
+- Updated `KC/KC/cli.py`: all user-facing strings rebranded to Kopano Context / Kopano Studio
+- Updated `KC/gui/package.json`: name → `kopano-studio`
 - Updated `README.md`: FULL STACK DEMO READY, SafeSkill 100/100, production URLs
 
 *Session spine published:*
@@ -260,7 +260,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 **Action:**
 
 - hard-switched the current operational notes to the live roster: `RobynAwesome`, `Kopano Context`, `Codex`, `Germini`
-- renamed the active progression folder from `09-ORCH PROGRESSION` to `09-KOPANO PROGRESSION`
+- renamed the active progression folder from `09-KC PROGRESSION` to `09-KOPANO PROGRESSION`
 - renamed the current Demo Day control files from `Kopano Context` to `Kopano`
 - replaced the passive blocker framing in `Final Demo Polish And Daily Disciplines.md` with a session execution layer
 - published a dedicated session command pack for today
@@ -413,7 +413,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - keep reward-system findings and runtime verification flowing back into dated log entries
 - keep Demo Day, Microsoft readiness, and reward truth synchronized across notes
 
-### 2026-04-08 22:10 | Lead | ORCH GUI SPLIT, ADMIN AUTH, AND FEED LOG CHECKPOINT
+### 2026-04-08 22:10 | Lead | KC GUI SPLIT, ADMIN AUTH, AND FEED LOG CHECKPOINT
 
 **Action:** Reworked the Kopano Context GUI so the public Labs page behaves like a demo surface, moved internal boards behind admin login, and re-verified runtime feed flow after rebuild.
 
@@ -446,7 +446,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - keep the next pass focused on visual QA and live interaction checks, not new surface expansion
 - continue treating Clerk and Atlas as the first external blockers for the full cross-product rehearsal
 
-### 2026-04-08 20:20 | Lead | ORCH BRIDGE PATH VERIFIED AND APP PROXY ALIGNED
+### 2026-04-08 20:20 | Lead | KC BRIDGE PATH VERIFIED AND APP PROXY ALIGNED
 
 **Action:** Verified the live Kopano Context mount path, corrected the `KasiLink` bridge to match it, and re-ran app verification.
 
@@ -569,7 +569,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 
 - Next upgrade should focus on model-backed multilingual generation and a richer Cowork UI
 
-### 2026-04-06 07:35 | Lead | PHASE 7 RUNTIME + PHASE 8 FIRST FLOW + ORCH CODE LOOP COMPLETE
+### 2026-04-06 07:35 | Lead | PHASE 7 RUNTIME + PHASE 8 FIRST FLOW + KC CODE LOOP COMPLETE
 
 **Action:** Converted the Phase 7 and Phase 8 backbones into the first live runtime flows.
 
@@ -836,7 +836,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 
 **Next:** Lead to convert remaining Phase 4 gaps into scoped assignments.
 
-### 2026-04-09 01:03 | Codex | ORCH PUBLIC SHELL REDESIGN CHECKPOINT
+### 2026-04-09 01:03 | Codex | KC PUBLIC SHELL REDESIGN CHECKPOINT
 
 **Action:** Reworked the Kopano Context GUI away from the old left-rail dashboard shell toward a cleaner Claude plus Codex inspired public surface.
 
@@ -861,7 +861,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - treat the redesign as code-complete for build validation but not yet runtime-complete
 - do not mark the redesign lane done until the served GUI and live flows are verified
 
-### 2026-04-09 01:06 | Codex | ORCH RUNTIME REFRESH COMPLETE
+### 2026-04-09 01:06 | Codex | KC RUNTIME REFRESH COMPLETE
 
 **Action:** Restarted the local Kopano Context API and GUI server after the redesign build.
 
@@ -877,7 +877,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - browser-level visual QA
 - click-path QA for council, Forge, Console, admin login, and session audit
 
-### 2026-04-09 01:08 | Codex | ORCH API SMOKE PASS AFTER REDESIGN
+### 2026-04-09 01:08 | Codex | KC API SMOKE PASS AFTER REDESIGN
 
 **Action:** Ran a live server smoke pass against the redesigned Kopano Context runtime.
 
@@ -893,7 +893,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - browser click-path verification for the redesigned public shell
 - UI confirmation that session-vault buttons and admin activity preview render correctly
 
-### 2026-04-09 01:10 | Codex | ORCH LIVE EVENT PATH VERIFIED
+### 2026-04-09 01:10 | Codex | KC LIVE EVENT PATH VERIFIED
 
 **Action:** Posted a synthetic live council response through the broadcast path after the redesign restart.
 
@@ -907,7 +907,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 
 - browser confirmation that the redesigned council view visually reflects those live events
 
-### 2026-04-09 06:58 | Codex | ORCH FIVE-TASK BROWSER CHECKPOINT
+### 2026-04-09 06:58 | Codex | KC FIVE-TASK BROWSER CHECKPOINT
 
 **Action:** Rebuilt Kopano Context after fixing the vault ordering issue, restarted the live runtime, and reran the five UI tasks against the rendered app in headless Chromium.
 
@@ -931,7 +931,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - Forge create or edit or lane-move click-path QA
 - MCP Console send and stream click-path QA
 
-### 2026-04-09 07:23 | Codex | ORCH BLOCKER PASS CLOSED
+### 2026-04-09 07:23 | Codex | KC BLOCKER PASS CLOSED
 
 **Action:** Closed the remaining Kopano Context GUI blockers by patching the public console relay and hardening Forge refresh plus lane control, then reran the live browser suite.
 
@@ -954,7 +954,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - finish the South Africa youth-facing AI UX research summary in `Schematics`
 - rehearse one public path and one admin path without introducing new features
 
-### 2026-04-09 08:15 | Codex | ORCH SCRIPT REHEARSAL LOCKED
+### 2026-04-09 08:15 | Codex | KC SCRIPT REHEARSAL LOCKED
 
 **Action:** Ran one public rehearsal and one admin rehearsal against the live Kopano Context UI, then converted the passing click path into a locked Kopano Context-only demo script.
 
@@ -1001,7 +1001,7 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 - Azure OpenAI, App Insights, and hosting env values are still missing
 - Microsoft-backed demo claims should stay at readiness/proof level until those real resources are connected
 
-### 2026-04-09 17:02 | Codex | ORCH PAGE-SPLIT AND MOTION PASS IN PROGRESS
+### 2026-04-09 17:02 | Codex | KC PAGE-SPLIT AND MOTION PASS IN PROGRESS
 
 **Action:** Started the next GUI rewrite by splitting the shell into separate page components and adding Framer Motion as the animation layer.
 

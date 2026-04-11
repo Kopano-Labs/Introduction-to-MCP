@@ -88,7 +88,7 @@ status: active
 - rename current Demo Day control files from `Kopano Context` to `Kopano`
 - repair active hub links and navigation notes
 
-**Acceptance:** no active navigation note points at `09-ORCH PROGRESSION` or the old demo file names.
+**Acceptance:** no active navigation note points at `09-KC PROGRESSION` or the old demo file names.
 
 ### Stage 3 - Team Dispatch Through Schematics
 

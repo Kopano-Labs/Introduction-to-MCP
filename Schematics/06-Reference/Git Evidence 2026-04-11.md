@@ -74,7 +74,7 @@ Git reported **80+ LF → CRLF warnings** across Schematics files. This is not a
 | `05-Training/` | 3 | `index.md`, `Kopano Context Train Logs/index.md`, `Pre-Session Training Doctrine.md` |
 | `07-Sessions By Day/` | 2 | `index.md`, `2026-04-11.md` |
 | `08-IDEAS AT BIRTH/` | 10 | `index.md`, `Idea Entry Protocol.md`, 8× dated signal notes |
-| `09-ORCH PROGRESSION/` | 1 | `index.md` |
+| `09-KC PROGRESSION/` | 1 | `index.md` |
 | `10-SESSION IMPROVEMENTS/` | 6 | `index.md`, `After Action Report 2026-04-11.md`, `Insubordination Register.md`, `Session Command Protocol.md`, `Standing Orders.md`, `UI First Execution Discipline.md` |
 | `11-AI HALLUCINATION - CRITICAL/` | 15 | All subfolders: Database, Incidents, Protocols, Solutions, Taxonomy + their index files |
 | `12-PLAN MODE SESSIONS/` | 2 | `index.md`, `2026-04-11 0057 - Session Number Pending - UI Failure And Token Wastage.md` |

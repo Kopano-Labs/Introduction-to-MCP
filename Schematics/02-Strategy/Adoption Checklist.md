@@ -80,7 +80,7 @@ status: active
 - [ ] Enable GitHub Discussions for feedback
 - [x] Add CONTRIBUTING.md and CODE_OF_CONDUCT.md
 - [ ] Publish milestones (v1.0 goals)
-- [ ] Add example projects (ORCH apprenticeship protocol demo)
+- [ ] Add example projects (KC apprenticeship protocol demo)
 - [ ] Record short walkthrough videos
 
 ## Priority Roadmap

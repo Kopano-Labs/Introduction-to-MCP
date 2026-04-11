@@ -121,7 +121,7 @@ status: active
 | Atlas allowlist confirmation for live Mongo reads | OWNER-BLOCKED |
 | Final browser-level visual QA | OWNER-BLOCKED — owner must be present |
 | Portfolio UI components (Projects, About, AISection) | DEFERRED — post-Demo Day |
-| Code namespace migration `orch.*` → `kopano.*` | OWNER-LED — in progress |
+| Code namespace migration `KC.*` → `kopano.*` | OWNER-LED — in progress |
 
 ## Evidence Standard
 
