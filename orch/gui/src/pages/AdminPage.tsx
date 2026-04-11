@@ -57,7 +57,7 @@ export function AdminPage({
             <span className="headline-line">Real audit trails.</span>
           </div>
           <p className="hero-copy-text">
-            This route is intentionally second. Public stays polished, admin stays operational, and the audit trail stays behind the wall.
+            Access deeper telemetry, session analytics, and forensic auditing traces behind the secure backend layer.
           </p>
         </div>
         <div className="quick-launch-grid compact">
@@ -104,7 +104,7 @@ export function AdminPage({
           <motion.article className="glass-card" layout>
             <div className="card-topline">
               <span className="eyebrow">Why it is split</span>
-              <span className="signal-chip neutral">demo rule</span>
+              <span className="signal-chip neutral">architecture</span>
             </div>
             <h2>What lives behind the wall</h2>
             <div className="deliverable-stack">
@@ -230,7 +230,7 @@ export function AdminPage({
                           <span>Vault</span>
                           <span>waiting</span>
                         </div>
-                        <p>This session has no forensic rounds yet. Pick another session or run a fresh live council flow before demo.</p>
+                        <p>This session has no recorded forensic rounds. Select an active session to view its auditable reasoning traces.</p>
                       </div>
                     )}
                   </motion.div>

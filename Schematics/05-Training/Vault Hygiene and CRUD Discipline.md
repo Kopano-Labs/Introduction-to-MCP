@@ -14,7 +14,7 @@ status: active
 
 # Vault Hygiene and CRUD Discipline
 
-> Training rule for future Orch work: organization is not the same thing as moving files.
+> Training rule for future Kopano work: organization is not the same thing as moving files.
 > A repo-backed Obsidian vault only stays useful when cleanup is done as full CRUD plus link maintenance.
 
 ## Failure Mode This Note Corrects

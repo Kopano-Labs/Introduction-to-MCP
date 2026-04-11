@@ -4,9 +4,9 @@
     "braintrust": "^3.7.1",
     "mongodb": "^7.1.1"
   },
-  "name": "introduction-to-mcp",
-  "version": "1.0.0",
-  "description": "![Orch Banner](README-bannner.jpg)",
+  "name": "kopano-context",
+  "version": "0.1.0",
+  "description": "Kopano Context — Multi-Agent Orchestration Framework. Official reference implementation for the Model Context Protocol (MCP).",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -18,9 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/RobynAwesome/Introduction-to-MCP.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["mcp", "multi-agent", "orchestration", "kopano", "ai", "llm", "south-africa", "kasilink"],
+  "author": "RobynAwesome <rkholofelo@gmail.com>",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues"

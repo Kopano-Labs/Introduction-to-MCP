@@ -26,7 +26,7 @@ She expects:
 - actual consolidation, not cosmetic cleanup
 - one document she can open and trust
 - Obsidian-safe structure that respects how she works in the vault
-- AI profiling that becomes reusable Orch training data
+- AI profiling that becomes reusable Kopano training data
 - directness, truth, and speed
 
 ## Current Friction Trigger
@@ -47,7 +47,7 @@ Example:
 - she expects AI agents to produce archival knowledge, not just code
 - she prefers one strong source-of-truth note over many fragmented status notes
 
-## Collaboration Guidance For Orch
+## Collaboration Guidance For Kopano
 
 - when Robyn says "organize", assume she means structure plus meaning
 - when a vault is involved, index and cross-link before moving anything important

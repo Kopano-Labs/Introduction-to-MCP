@@ -28,9 +28,9 @@ const ConsolePage = lazy(async () => ({ default: (await import('./pages/ConsoleP
 const AdminPage = lazy(async () => ({ default: (await import('./pages/AdminPage')).AdminPage }));
 
 const apiBase = 'http://127.0.0.1:8000';
-const agentList = ['orch', 'claude', 'grok', 'gemini', 'copilot'];
+const agentList = ['kopano', 'claude', 'grok', 'gemini', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
-const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'orch'];
+const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'kopano'];
 
 const pageHeadlines: Record<PageId, string> = {
   council: 'Council',
@@ -84,24 +84,24 @@ const App = () => {
   const [microsoftReadiness, setMicrosoftReadiness] = useState<MicrosoftReadiness | null>(null);
   const [coworkRooms, setCoworkRooms] = useState<CoworkRoomSummary[]>([]);
   const [activeRoomId, setActiveRoomId] = useState<number | null>(null);
-  const [roomName, setRoomName] = useState('Orch Forge Premiere');
-  const [roomMission, setRoomMission] = useState('Launch the first creator-grade cowork flow inside Orch Labs.');
+  const [roomName, setRoomName] = useState('Kopano Context Premiere');
+  const [roomMission, setRoomMission] = useState('Launch the first creator-grade cowork flow inside Kopano Labs.');
   const [artifactTitle, setArtifactTitle] = useState('Azure Demo Day Connector Pack');
   const [artifactSummary, setArtifactSummary] = useState('Installer guidance and connector workflow notes for IDE, CLI, Azure, and MCP parity.');
   const [artifactType, setArtifactType] = useState('api');
   const [taskTitle, setTaskTitle] = useState('Implement connector execution cards');
-  const [taskDescription, setTaskDescription] = useState('Ship click-to-run install and connector playbooks in Orch Labs.');
+  const [taskDescription, setTaskDescription] = useState('Ship click-to-run install and connector playbooks in Kopano Labs.');
   const [taskOwner, setTaskOwner] = useState('DEV_1');
   const [taskPriority, setTaskPriority] = useState('high');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingArtifactId, setEditingArtifactId] = useState<number | null>(null);
-  const [consoleMessage, setConsoleMessage] = useState('How should Orch support MCP chat across IDEs, CLI, operating systems, skills, Azure, and connectors?');
+  const [consoleMessage, setConsoleMessage] = useState('How should Kopano support MCP chat across IDEs, CLI, operating systems, skills, Azure, and connectors?');
   const [consoleReply, setConsoleReply] = useState<McpConsoleReply | null>(null);
   const [consoleStream, setConsoleStream] = useState('');
   const [selectedModel, setSelectedModel] = useState('deterministic');
   const [connectorResult, setConnectorResult] = useState('');
   const [adminUser, setAdminUser] = useState<GuiUser | null>(null);
-  const [adminEmail, setAdminEmail] = useState('admin@orch.local');
+  const [adminEmail, setAdminEmail] = useState('admin@kopano.local');
   const [adminPassword, setAdminPassword] = useState('demo-admin');
   const [adminError, setAdminError] = useState<string | null>(null);
   const [adminLoading, setAdminLoading] = useState(false);
@@ -113,14 +113,14 @@ const App = () => {
     ? activeRoomCandidate
     : coworkRooms.find((room) => hasCoworkRoomDetail(room)) ?? null;
   const isAdminLoggedIn = adminUser?.role === 'admin';
-  const featuredAgentId = activeAgent ?? thinkingAgent ?? 'orch';
+  const featuredAgentId = activeAgent ?? thinkingAgent ?? 'kopano';
   const latestTransmission = messages[messages.length - 1] ?? null;
   const councilCards = agentList.map((id) => {
     const lastMsg = messages.filter((message) => message.agent === id).slice(-1)[0];
     return {
       id,
       lastMsg,
-      isStudent: id === 'orch',
+      isStudent: id === 'kopano',
       isThinking: thinkingAgent === id,
       isResponding: activeAgent === id,
     };
@@ -273,12 +273,12 @@ const App = () => {
 
   useEffect(() => {
     let isMounted = true;
-    const savedAdmin = window.localStorage.getItem('orch-admin-user');
+    const savedAdmin = window.localStorage.getItem('kopano-admin-user');
     if (savedAdmin) {
       try {
         setAdminUser(JSON.parse(savedAdmin) as GuiUser);
       } catch {
-        window.localStorage.removeItem('orch-admin-user');
+        window.localStorage.removeItem('kopano-admin-user');
       }
     }
 
@@ -372,7 +372,7 @@ const App = () => {
         title: artifactTitle,
         summary: artifactSummary,
         status: 'draft',
-        link: 'Orch Forge',
+        link: 'Kopano Context',
       });
       setEditingArtifactId(null);
     } else {
@@ -381,7 +381,7 @@ const App = () => {
         title: artifactTitle,
         summary: artifactSummary,
         status: 'draft',
-        link: 'Orch Forge',
+        link: 'Kopano Context',
       });
     }
 
@@ -457,7 +457,7 @@ const App = () => {
       setMicrosoftReadiness(data.readiness as MicrosoftReadiness);
     }
     trackClientEvent('orch_connector_action', { action_id: actionId });
-    logSystemEvent('connector', `${data.title} executed from Orch Labs.`);
+    logSystemEvent('connector', `${data.title} executed from Kopano Labs.`);
   };
 
   const sendConsoleMessage = async () => {
@@ -538,11 +538,11 @@ const App = () => {
         return;
       }
       setAdminUser(data.user);
-      window.localStorage.setItem('orch-admin-user', JSON.stringify(data.user));
+      window.localStorage.setItem('kopano-admin-user', JSON.stringify(data.user));
       navigate('admin');
       logSystemEvent('admin-login', `Admin session opened for ${data.user.email}.`);
     } catch {
-      setAdminError('Unable to reach the Orch auth service.');
+      setAdminError('Unable to reach the Kopano auth service.');
     } finally {
       setAdminLoading(false);
     }
@@ -552,7 +552,7 @@ const App = () => {
     setAdminUser(null);
     setSelectedSession(null);
     setAdminError(null);
-    window.localStorage.removeItem('orch-admin-user');
+    window.localStorage.removeItem('kopano-admin-user');
     navigate('labs');
     logSystemEvent('admin-logout', 'Admin session closed. Returned to public Labs.');
   };

@@ -1,7 +1,7 @@
 ---
 title: Task Board
 created: 2026-04-06
-updated: 2026-04-09
+updated: 2026-04-11
 author: Lead
 tags:
   - tasks
@@ -18,7 +18,7 @@ status: active
 
 # Task Board
 
-> Live ownership board for orch.
+> Live ownership board for Kopano Context.
 > Current source of truth is the audit completed on 2026-04-06 against `Schematics`, `README.md`, and the active codebase layout.
 
 ## Current Delivery State
@@ -30,9 +30,9 @@ status: active
 | Phase 3 | DONE | MCP tools, API layer, GUI bridge, and WhatsApp flow exist. |
 | Phase 4 | DONE | Optimization, security, and KasiLink integration layer implemented. |
 | Phase 5 | DONE | Reliability baseline and CI hardening completed. |
-| Phase 6 | IN PROGRESS | Orch Labs layer is being built and exposed in product surfaces. |
+| Phase 6 | IN PROGRESS | Kopano Labs layer is being built and exposed in product surfaces. |
 | Phase 7 | IN PROGRESS | SA languages, SASL, and accessibility scaffolding are in code. |
-| Phase 8 | IN PROGRESS | Cowork and Orch Code surfaces are now defined in code and launch config. |
+| Phase 8 | IN PROGRESS | Cowork and Kopano Studio Code surfaces are now defined in code and launch config. |
 | Phase 9 | IN PROGRESS | Research and refinement loop has started with the product Top 50 map. |
 
 ## Live Priorities
@@ -48,7 +48,7 @@ status: active
 | O7 | Critical | Lead | DONE | Repair CLI simulation reliability path |
 | O8 | High | Lead | DONE | Modernize CI workflow for supported Python versions |
 | O9 | High | Lead | DONE | Establish reliability and adoption baseline |
-| O10 | Critical | Lead | DONE | Add Orch Labs registry, API surface, and GUI mode |
+| O10 | Critical | Lead | DONE | Add Kopano Labs registry, API surface, and GUI mode |
 | O11 | Critical | Lead | DONE | Define SA languages and speech-access phases with criticality |
 | O12 | High | Lead | IN PROGRESS | Expand Labs tools into runnable impact slices |
 | O13 | Critical | Lead | DONE | Add SA language planning, access modes, and launch config APIs |
@@ -68,11 +68,11 @@ status: active
 | Multilingual runtime routing + translation | COMPLETE | Lead |
 | Multilingual response packaging | COMPLETE | Lead |
 | Accessibility execution flow | COMPLETE | Lead |
-| Cowork + Orch Code API scaffolding | COMPLETE | Lead |
-| Runnable Orch Forge flow | COMPLETE | Lead |
+| Cowork + Kopano Studio Code API scaffolding | COMPLETE | Lead |
+| Runnable Kopano Studio Forge flow | COMPLETE | Lead |
 | Cowork reassignment + dispatch summary | COMPLETE | Lead |
-| First Orch Code teaching loop | COMPLETE | Lead |
-| Orch Code lesson progression | COMPLETE | Lead |
+| First Kopano Studio Code teaching loop | COMPLETE | Lead |
+| Kopano Studio Code lesson progression | COMPLETE | Lead |
 | Secret-exposure containment and doc hardening | IN PROGRESS | Lead |
 | Runnable Labs feature expansion | OPEN | DEV_1 |
 | Accessibility implementation prep | OPEN | DEV_2 |
@@ -80,7 +80,7 @@ status: active
 
 ## Rules For Next Dispatch
 
-1. Phase 6 owns the additive Labs layer and must not break orch core.
+1. Phase 6 owns the additive Labs layer and must not break Kopano Context core.
 2. Phase 7 is critical and must treat all SA languages and accessibility as first-class scope.
 3. `DEV_1` and `DEV_2` should take bounded Labs or accessibility tasks only.
 4. Lead owns final review and any cross-cutting infrastructure edits.

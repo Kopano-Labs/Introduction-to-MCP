@@ -2,20 +2,20 @@
 
 ## Purpose
 
-- define why current work is treated as `pre-session` data for Orch
-- ensure governance, hallucination control, demo proof, and team management are all part of Orch's future learning set
+- define why current work is treated as `pre-session` data for Kopano
+- ensure governance, hallucination control, demo proof, and team management are all part of Kopano's future learning set
 
 ## Doctrine
 
-- Orch is not only being trained on code output.
-- Orch is also being trained on:
+- Kopano is not only being trained on code output.
+- Kopano is also being trained on:
   - delegation quality
   - failure recovery
   - proof discipline
   - hallucination control
   - hierarchy respect
   - token management
-- Every current session should leave behind evidence that a future Orch lead could study.
+- Every current session should leave behind evidence that a future Kopano lead could study.
 
 ## Current Training Inputs
 
@@ -28,4 +28,4 @@
 
 ## Rule
 
-- if a session produces a lesson that would matter to a future Orch lead, it belongs in this corpus
+- if a session produces a lesson that would matter to a future Kopano lead, it belongs in this corpus

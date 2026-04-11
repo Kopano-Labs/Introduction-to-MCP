@@ -18,7 +18,7 @@
 
 ## DEV_4 | Cicero
 
-- **Current role:** governance, research, index coverage, and Orch-training scaffolding
+- **Current role:** governance, research, index coverage, and Kopano-training scaffolding
 - **Expected evidence:** official-source notes, governance doctrine, hallucination taxonomy support
 
 ## Legacy Historical Failure Signals

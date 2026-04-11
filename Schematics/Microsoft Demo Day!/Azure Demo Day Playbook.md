@@ -7,7 +7,7 @@ tags:
   - azure
   - demo-day
   - playbook
-  - orch-labs
+  - kopano-labs
 priority: critical
 status: active
 ---
@@ -22,7 +22,7 @@ status: active
 │          DEMO DAY READINESS DASHBOARD                │
 │             (April 11 Evening Update)                │
 ├──────────────────────────────────────────────────────┤
-│  Orch-Only Safe Route .......... █████████████ 100%  │
+│  Kopano-Only Safe Route .......... █████████████ 100%  │
 │  Full KasiLink Story ........... ███████░░░░░░ 60%   │
 │  Azure / Microsoft Surface ..... █████████████ 100%  │
 │  Demo Narrative & Script ....... █████████░░░░ 75%   │
@@ -32,13 +32,13 @@ status: active
 
 ## Current Position
 
-We are executing Phase 8 expansion on top of the Phase 6 Orch Labs foundation, with Phase 7 and Phase 9 still active in parallel.
+We are executing Phase 8 expansion on top of the Phase 6 Kopano Labs foundation, with Phase 7 and Phase 9 still active in parallel.
 
 ## Current Readiness
 
 - local Azure CLI `az` is installed and working
 - local Azure Developer CLI `azd` is installed and working
-- Orch Labs exposes `/api/labs/microsoft-readiness`
+- Kopano Labs exposes `/api/labs/microsoft-readiness`
 - current readiness is `6/6` required checks and `3/3` optional checks ready
 - remaining blockers are limited to KasiLink database connectivity
 
@@ -54,8 +54,8 @@ We are executing Phase 8 expansion on top of the Phase 6 Orch Labs foundation, w
 ### Track 1: Application Surface
 
 - Verify the FastAPI control plane can run cleanly as the main demo backend.
-- Verify the Orch Labs GUI is buildable and deployable from `orch/gui`.
-- Keep Forge, Orch Code, and MCP Console as the demo centerpiece.
+- Verify the Kopano Labs GUI is buildable and deployable from `kopano/gui`.
+- Keep Forge, Kopano Code, and MCP Console as the demo centerpiece.
 
 ### Track 2: Azure Services
 
@@ -67,7 +67,7 @@ We are executing Phase 8 expansion on top of the Phase 6 Orch Labs foundation, w
 
 ### Track 3: Demo Narrative
 
-- Show Orch Labs as the command center
+- Show Kopano Labs as the command center
 - Show Forge as the creator execution surface
 - Show MCP Console as the install, connector, and orchestration layer
 - Show Azure as the deployment and buyer-readiness backbone
@@ -79,8 +79,8 @@ az login
 az account show
 azd auth login
 pip install -e .
-orch serve api
-cd orch/gui
+kopano serve api
+cd kopano/gui
 npm run build
 ```
 
@@ -94,19 +94,19 @@ npm run build
 
 > The strongest **truthful** claim you can make:
 >
-> *"Orch is 100% ready for an Azure-backed demo. We have live resources in South Africa North for observability and Sweden Central for AI. Our readiness score is 6/6, and our telemetry is wired directly into Microsoft's monitoring stack."*
+> *"Kopano is 100% ready for an Azure-backed demo. We have live resources in South Africa North for observability and Sweden Central for AI. Our readiness score is 6/6, and our telemetry is wired directly into Microsoft's monitoring stack."*
 
 ## Bottom Line
 
 | Dimension | Grade | Notes |
 |-----------|-------|-------|
-| **Orch demo shell** | **A+** | Hardened, timed, 100% ready |
+| **Kopano demo shell** | **A+** | Hardened, timed, 100% ready |
 | **Engineering quality** | **A** | Azure SDK, Mongo drivers, and Telemetry all landed |
 | **Documentation** | **A** | Schematics vault is current as of April 11 midnight |
 | **Azure / Microsoft story** | **A+** | **6/6 checks pass.** Real resources live. |
 | **Full KasiLink story** | **C** | Still blocked by Atlas Mongo connectivity |
 | **Narrative readiness** | **B-** | Safe route exists; full KasiLink narrative is the remaining gap |
-| **Overall Demo Day readiness** | **A** | **Ready to demo Orch shell and Azure story now.** |
+| **Overall Demo Day readiness** | **A** | **Ready to demo Kopano shell and Azure story now.** |
 
 > [!IMPORTANT]
 > **Azure is no longer the bottleneck.** The primary risk is now **Atlas MongoDB connectivity**. If you can allowlist the demo machine in Atlas today, we can close the 60% → 100% gap for the KasiLink story by tomorrow.

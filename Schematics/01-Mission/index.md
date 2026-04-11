@@ -12,16 +12,17 @@ status: active
 
 # 01-Mission Index
 
-> Identity layer for Orch.
+> Identity layer for **Kopano Context**.
 
 ## Files
 
-- [Orch Blueprint](Orch%20Blueprint.md)
+- [Kopano Context Blueprint](Kopano%20Context%20Blueprint.md) — canonical identity document (current)
+- [Orch Blueprint](Orch%20Blueprint.md) — legacy identity document (archived reference)
 
 ## Purpose
 
-- define what Orch is
-- define how Orch should think, behave, and train
+- define what Kopano Context is
+- define how Kopano Context should think, behave, and train
 
 ## Standing Note
 

@@ -116,9 +116,9 @@ def agents_remove(
 @app.command()
 def serve_info():
     """
-    Commands for the orch server.
+    Commands for the Kopano Context server.
     """
-    console.print(Panel("[bold green]Orch Server Commands[/bold green]", expand=False))
+    console.print(Panel("[bold green]Kopano Context — Server Commands[/bold green]", expand=False))
 
 
 tools_app = typer.Typer(name="tools", help="Manage and run agent tools.")
@@ -133,9 +133,9 @@ def run_tool(
     Dynamically loads and runs a specified tool function.
     
     Examples:
-    - orch tools run search "The future of AI"
-    - orch tools run read_file "my_document.txt"
-    - orch tools run write_file "new_blog_post.md" "# My New Post"
+    - kopano tools run search "The future of AI"
+    - kopano tools run read_file "my_document.txt"
+    - kopano tools run write_file "new_blog_post.md" "# My New Post"
     """
     tool_code = f'{tool_name}(' + ', '.join(f'"{arg}"' for arg in tool_args) + ')'
     console.print(f"Executing: [yellow]{tool_code}[/yellow]")
@@ -253,7 +253,7 @@ def log_view(
 @log_app.command(name="export")
 def log_export(
     discussion_id: int = typer.Argument(..., help="The ID of the discussion session to export."),
-    output_file: Optional[Path] = typer.Option(None, "--output", "-o", help="Output JSON file path. Defaults to orch_discussion_<id>.json")
+    output_file: Optional[Path] = typer.Option(None, "--output", "-o", help="Output JSON file path. Defaults to kopano_discussion_<id>.json")
 ):
     """
     Exports a specific discussion session log to a JSON file.
@@ -306,7 +306,7 @@ def log_export(
 
         # Determine output file path
         if output_file is None:
-            file_name = Path.cwd() / f"orch_discussion_{discussion_id}.json"
+            file_name = Path.cwd() / f"kopano_discussion_{discussion_id}.json"
         else:
             file_name = output_file
 
@@ -335,7 +335,7 @@ def user_register(
     full_name: Optional[str] = typer.Option(None, "--name", "-n", help="Display name."),
 ):
     """
-    Registers a local Orch user account.
+    Registers a local Kopano Context user account.
     """
     try:
         user = register_user(email=email, password=password, full_name=full_name)
@@ -351,7 +351,7 @@ def user_login(
     password: str = typer.Option(..., "--password", "-p", help="User password."),
 ):
     """
-    Verifies local Orch user credentials.
+    Verifies local Kopano Context user credentials.
     """
     user = authenticate_user(email=email, password=password)
     if not user:
@@ -491,7 +491,7 @@ app.add_typer(whatsapp_app, name="whatsapp")
 
 @whatsapp_app.command("test")
 def test_whatsapp(
-    message: str = typer.Option("Test message from orch.", "--message", "-m", help="The message to send."),
+    message: str = typer.Option("Test message from Kopano Context.", "--message", "-m", help="The message to send."),
     recipient: Optional[str] = typer.Option(None, "--recipient", "-r", help="Target WhatsApp JID/Number. Defaults to config.")
 ):
     """
@@ -518,7 +518,7 @@ def test_whatsapp(
     asyncio.run(run_test())
 
 # --- Serve Commands ---
-serve_app = typer.Typer(name="serve", help="Commands for the orch server.")
+serve_app = typer.Typer(name="serve", help="Commands for Kopano Context server (launch discussions, start Kopano Studio).")
 app.add_typer(serve_app, name="serve")
 
 @serve_app.command("launch")
@@ -527,7 +527,7 @@ def launch(
     agent_ids: List[str] = typer.Option(..., "--agents", "-a", help="Comma-separated list of agent IDs to include in the discussion."),
     max_rounds: int = typer.Option(5, "--max-rounds", "-r", help="Maximum number of discussion rounds."),
     moderator_agent_id: Optional[str] = typer.Option(None, "--moderator", "-m", help="ID of the agent to use as the moderator for guiding the discussion."),
-    use_neural_link: bool = typer.Option(True, "--neural-link", help="Whether to use the real-time Neural Link (API/WebSocket)"),
+    use_neural_link: bool = typer.Option(True, "--neural-link", help="Whether to use real-time Kopano Studio (API/WebSocket)"),
     parallel: bool = typer.Option(False, "--parallel", "-p", help="Execute agents in parallel within each round.")
 ):
     """
@@ -594,7 +594,7 @@ def launch(
     # Run the simulation asynchronously
     try:
         if use_neural_link:
-            console.print("[bold cyan]Neural Link Active:[/] Simulation will be broadcast to the Control Plane.")
+            console.print("[bold cyan]Kopano Studio Active:[/] Simulation will be broadcast to the Control Plane.")
         asyncio.run(run_simulation(
             topic=topic,
             agents=selected_agents,
@@ -614,16 +614,16 @@ def start_api_cmd(
     open_browser: bool = typer.Option(True, "--open", help="Automatically open the GUI in the browser.")
 ):
     """
-    Starts the orch AGI Control Plane API and serves the Neural Link GUI.
+    Starts the Kopano Context AGI Control Plane API and serves Kopano Studio (GUI).
     """
     import uvicorn
     import webbrowser
     from .api import app
-    
+
     url = f"http://{host}:{port}"
     console.print(Panel(
-        f"[bold green]Starting orch AGI Control Plane[/bold green]\n"
-        f"API & GUI: [bold cyan]{url}[/bold cyan]",
+        f"[bold green]Starting Kopano Context — AGI Control Plane[/bold green]\n"
+        f"API & Kopano Studio: [bold cyan]{url}[/bold cyan]",
         expand=False
     ))
     

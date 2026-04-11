@@ -14,7 +14,7 @@ status: active
 
 # Bookit Session Training Update
 
-> Session record for Bookit 5s Arena. This note captures orchestration behavior, technical recovery, reward decisions, punishment decisions, and continuity lessons for orch.
+> Session record for Bookit 5s Arena. This note captures orchestration behavior, technical recovery, reward decisions, punishment decisions, and continuity lessons for kopano.
 
 ## Project
 
@@ -117,7 +117,7 @@ status: active
 - Lead remains under strict supervision for delegation control
 - no delegated progress may be claimed unless all control files agree
 
-## Lessons For Orch
+## Lessons For Kopano
 
 1. Check the strongest DEV first each cycle.
 2. Reward evidence discipline, not just useful technical output.

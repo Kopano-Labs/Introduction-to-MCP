@@ -1,7 +1,7 @@
 ---
 title: Codex Terminal Operational Profile
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-11
 author: Codex
 tags:
   - training
@@ -105,4 +105,4 @@ This session produced a useful corrective lesson:
 - moving artifacts into cleaner folders was not enough
 - the real job was consolidating meaning, fixing stale paths, and making the vault easier to navigate
 
-That rule is now part of Orch training through [Vault Hygiene and CRUD Discipline](Vault%20Hygiene%20and%20CRUD%20Discipline.md).
+That rule is now part of Kopano Context training through [Vault Hygiene and CRUD Discipline](Vault%20Hygiene%20and%20CRUD%20Discipline.md).

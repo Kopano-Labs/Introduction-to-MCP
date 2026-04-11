@@ -1,10 +1,10 @@
 ---
-title: Orch Demo Script - 2026-04-09
+title: Kopano Demo Script - 2026-04-09
 created: 2026-04-09
 updated: 2026-04-10
 author: Codex
 tags:
-  - orch
+  - kopano
   - demo
   - script
   - rehearsal
@@ -12,7 +12,7 @@ priority: critical
 status: active
 ---
 
-# Orch Demo Script - 2026-04-09
+# Kopano Demo Script - 2026-04-09
 
 > Hub: [Microsoft Demo Day!](index.md)
 > Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
@@ -20,7 +20,7 @@ status: active
 
 ## Purpose
 
-Lock a safe Orch-only demo path that can be shown immediately while the wider KasiLink end-to-end flow still depends on Clerk, Atlas, provider-ranking visibility, and WhatsApp readiness.
+Lock a safe Kopano-only demo path that can be shown immediately while the wider KasiLink end-to-end flow still depends on Clerk, Atlas, provider-ranking visibility, and WhatsApp readiness.
 
 ## Locked Story
 
@@ -28,14 +28,14 @@ Lock a safe Orch-only demo path that can be shown immediately while the wider Ka
 - Public path: live reasoning, practical guidance, and creator execution surfaces
 - Admin path: internal oversight, audit visibility, and forensic replay
 - Microsoft framing: Live Azure infrastructure (Container Apps + OpenAI + App Insights) — the story is now fully wired, excluding only AI Search.
-- Not in this Orch-only script: full KasiLink gig post, provider ranking, load-shedding check, WhatsApp delivery, reward/referral, and managed identity storytelling
+- Not in this Kopano-only script: full KasiLink gig post, provider ranking, load-shedding check, WhatsApp delivery, reward/referral, and managed identity storytelling
 
 ## Public Path
 
 Target live narration time: `45-60` seconds
 
 1. Start on `LIVE COUNCIL`
-   Line: Orch does not hide its AI state; the live council shows the reasoning trail in motion.
+   Line: Kopano does not hide its AI state; the live council shows the reasoning trail in motion.
    Presenter note: pre-seed one fresh signal through the simulator or `/broadcast` before speaking.
 2. Point at `Latest transmission`
    Line: this is the current AI handoff, not a fake static card.
@@ -44,8 +44,8 @@ Target live narration time: `45-60` seconds
 4. Point at the `Microsoft path` card
    Line: The Microsoft story here is now fully live; our infrastructure is provisioned in South Africa North, and telemetry is flowing directly to Azure Monitor.
 5. Click `CONSOLE`
-   Prompt: `Show a short creator workflow for Orch Labs`
-   Line: Orch can answer operational questions without exposing internal admin logs.
+   Prompt: `Show a short creator workflow for Kopano Labs`
+   Line: Kopano can answer operational questions without exposing internal admin logs.
 6. Click `FORGE`
    Line: Forge is the execution view; the room, tasks, and artifacts stay visible even if we do not edit live.
 7. Stop the public path there
@@ -57,7 +57,7 @@ Target live narration time: `30-45` seconds
 
 1. Click `ADMIN`
    Line: internal governance is separated from the public experience.
-2. Sign in with `admin@orch.local` / `demo-admin`
+2. Sign in with `admin@kopano.local` / `demo-admin`
 3. Show `Activity Preview`
    Line: the operator feed captures live council signals without exposing them publicly.
 4. Click the first audited session in `SESSION VAULT`
@@ -101,5 +101,5 @@ Rehearsal date: `2026-04-09`
 
 ## Current Gap
 
-- the Orch shell is ready for a guided demo
+- the Kopano shell is ready for a guided demo
 - the full Startup Week end-to-end story still needs the wider KasiLink integration path to be rehearsed separately

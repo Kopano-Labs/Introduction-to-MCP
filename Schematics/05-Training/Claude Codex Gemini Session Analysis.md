@@ -92,9 +92,9 @@ Spawned agents become dangerous when:
 - the control plane drifts
 - completion reports are trusted without inspection
 
-## Orch-Level Lesson
+## Kopano-Level Lesson
 
-Orch should not choose helpers only by model family.
+Kopano should not choose helpers only by model family.
 
 It should choose by:
 
@@ -113,7 +113,7 @@ It should choose by:
 | bounded worker or audit lane | Gemini | drift if scope is loose |
 | parallel accelerant | spawned agents | control-plane breakage |
 
-## Orch Rule Crystallized
+## Kopano Rule Crystallized
 
 The future system should profile role suitability continuously.
 The right question is not "which model is best?"

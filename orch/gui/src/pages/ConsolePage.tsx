@@ -37,8 +37,8 @@ export function ConsolePage({
             <span className="headline-line">Prompt the stack.</span>
             <span className="headline-line">Watch the answer land.</span>
           </div>
-          <p className="hero-copy-text">
-            The conservative live route uses Send on the left and proof on the right. Streaming stays available, but it is a secondary proof point instead of the main demo beat.
+          <p className="card-lead">
+            Execute analytical and deterministic queries directly against the orchestration layer. Review generated artifacts and service telemetry mappings on the right.
           </p>
         </div>
         <div className="quick-launch-grid compact">
@@ -127,7 +127,7 @@ export function ConsolePage({
                 <span>Relay</span>
                 <span>idle</span>
               </div>
-              <p>If the relay is quiet, seed one `/broadcast` event before presenting and continue with Send.</p>
+              <p>The event relay is connected. Awaiting backend propagation or explicit CLI commands.</p>
             </article>
           )}
         </div>

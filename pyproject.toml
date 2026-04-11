@@ -1,7 +1,7 @@
 [project]
-name = "introduction-to-mcp"
+name = "kopano-context"
 version = "0.1.0"
-description = "Add your description here"
+description = "Kopano Context — Multi-Agent Orchestration Framework. Official reference implementation for the Model Context Protocol (MCP)."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -20,11 +20,13 @@ dependencies = [
     "beautifulsoup4>=4.12.0",
     "bandit>=1.7.5",
     "safety>=2.3.5",
-    # pyproject.toml
     "PyGithub>=2.1.1",
 ]
 
 [project.scripts]
+# Primary Kopano CLI entry point
+kopano = "orch.orch.cli:app"
+# Legacy alias — kept for backwards compatibility during transition
 orch = "orch.orch.cli:app"
 
 [tool.setuptools.packages.find]

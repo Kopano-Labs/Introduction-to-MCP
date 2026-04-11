@@ -3,7 +3,7 @@ import type { ConnectionState, PageId } from '../types';
 
 const pageLabels: Array<{ id: PageId; label: string; short: string }> = [
   { id: 'council', label: 'Live Council', short: 'Council' },
-  { id: 'labs', label: 'Orch Labs', short: 'Labs' },
+  { id: 'labs', label: 'Kopano Labs', short: 'Labs' },
   { id: 'forge', label: 'Forge', short: 'Forge' },
   { id: 'console', label: 'Console', short: 'Console' },
   { id: 'admin', label: 'Admin', short: 'Admin' },
@@ -37,7 +37,7 @@ export function AppTopNav({
           <span>OR</span>
         </span>
         <span className="brand-copy">
-          <strong>Orch</strong>
+          <strong>Kopano</strong>
           <span>South African AI operating shell</span>
         </span>
       </motion.button>

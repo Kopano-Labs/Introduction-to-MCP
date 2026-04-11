@@ -43,7 +43,7 @@ export function LabsPage({
     <div className="page-layout labs-layout">
       <motion.section className="hero-panel hero-labs" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72 }}>
         <div className="hero-copy">
-          <span className="eyebrow">Orch Labs</span>
+          <span className="eyebrow">Kopano Labs</span>
           <div className="headline-stack">
             <span className="headline-line">Prompt less.</span>
             <span className="headline-line">Move faster.</span>
@@ -123,7 +123,7 @@ export function LabsPage({
               </div>
             </>
           ) : (
-            <p>Readiness is loading from the local Orch runtime so the Microsoft claim stays tied to evidence.</p>
+            <p>Readiness is loading from the local Kopano runtime so the Microsoft claim stays tied to evidence.</p>
           )}
         </motion.article>
 

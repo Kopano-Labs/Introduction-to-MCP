@@ -5,7 +5,9 @@
 
 ## Vault Purpose
 
-Schematics is the Obsidian-based second brain for the Orch multi-agent orchestration system and its integration with KasiLink (a township gig-economy marketplace). It serves as the living operating system for project coordination, training data capture, and demo preparation.
+Schematics is the Obsidian-based second brain for the **Kopano Context** multi-agent orchestration system and its integration with KasiLink (a township gig-economy marketplace). It serves as the living operating system for project coordination, training data capture, and demo preparation.
+
+**Kopano Ecosystem:** Kopano Context (core framework) · Kopano CLI · Kopano Studio (GUI) · Kopano Mesh (multi-agent network) · Kopano Labs (product studio) · Kopano SafeSkill (trust layer)
 
 ## Roles
 
@@ -30,7 +32,7 @@ Do not invent new ad-hoc roles. This is the standing roster.
 
 1. **Token-saving mode** is mandatory outside Plan Mode and Lead-only sessions with Master.
 2. **Never guess.** If a fact is not in the vault or official sources, ask Master.
-3. **All sessions are pre-sessions** and training data for Orch.
+3. **All sessions are pre-sessions** and training data for Kopano Context.
 4. **Check before tasking.** Every task starts with a dev-progress check, live diff check, and comms-log check.
 5. **DEV_S report to Lead only.** Direct DEV-to-Owner contact about execution details is a hierarchy breach.
 6. **Commit identity:** All commits use `RobynAwesome <rkholofelo@gmail.com>`. No exceptions.
@@ -90,15 +92,15 @@ Additional fields as needed: `author`, `priority`, `audience`, `severity`, `agen
 | Folder | Purpose |
 |--------|---------|
 | `00-Home` | Current truth and navigation (Dashboard, Now) |
-| `01-Mission` | Orch identity and blueprint |
+| `01-Mission` | Kopano Context identity and blueprint |
 | `02-Strategy` | Product direction, partnerships, adoption |
-| `03-Architecture` | CLI, database, WhatsApp, Neural Link GUI |
+| `03-Architecture` | CLI, database, WhatsApp, Kopano Studio GUI |
 | `04-Updates` | Live coordination: comms-log, task-board, dev-tracker, project status |
 | `05-Training` | Human/AI profiles, training logs, profiling framework |
 | `06-Reference` | Archives, open issues, code reference |
 | `07-Sessions By Day` | Dated session reconstruction and evidence |
 | `08-IDEAS AT BIRTH` | Incubation-only idea bank |
-| `09-ORCH PROGRESSION` | Capability ladder: Observer → Co-Lead |
+| `09-ORCH PROGRESSION` | Kopano Context capability ladder: Observer → Co-Lead |
 | `10-SESSION IMPROVEMENTS` | Lead doctrine, hierarchy, token discipline |
 | `11-AI HALLUCINATION - CRITICAL` | Hallucination governance with protocols, taxonomy, incidents |
 | `12-PLAN MODE SESSIONS` | Archived plan-mode outputs |
@@ -116,3 +118,5 @@ Additional fields as needed: `author`, `priority`, `audience`, `severity`, `agen
 - **Delegation rules:** `04-Updates/delegation-protocol.md`
 - **Open blockers:** `06-Reference/Open Issues.md`
 - **Demo script:** `Microsoft Demo Day!/Orch Demo Script - 2026-04-09.md`
+- **Brand identity:** `02-Strategy/Kopano Brand Identity.md`
+- **Rebrand plan:** `02-Strategy/Kopano Rebrand Plan.md`

@@ -14,11 +14,11 @@ status: active
 
 # Multi-Agent Profiling Framework
 
-> Reusable profiling framework for people, AI agents, and collaboration systems inside Orch.
+> Reusable profiling framework for people, AI agents, and collaboration systems inside Kopano.
 
 ## Why Profile At All
 
-Orch is not only a tool executor.
+Kopano is not only a tool executor.
 It is a coordination system.
 
 Coordination improves when the system knows:
@@ -96,7 +96,7 @@ Every profile should answer:
 2. what breaks trust fastest
 3. what operating conditions make it succeed
 4. what constraints make it safe
-5. what one rule future Orch runs should remember
+5. what one rule future Kopano runs should remember
 
 ## Current Training Linkage
 

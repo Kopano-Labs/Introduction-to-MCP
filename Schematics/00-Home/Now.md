@@ -14,7 +14,7 @@ status: active
 
 # Now
 
-> Canonical one-note snapshot for where Orch stands right now.
+> Canonical one-note snapshot for where **Kopano Context** stands right now.
 > If you only open one note, open this one first.
 
 ## Current Phase
@@ -22,7 +22,7 @@ status: active
 - Delivery mode: `demo hardening`
 - Stable foundation: Phases 1 through 5 are complete.
 - Active buildout: Phase 6, Phase 7, Phase 8, and Phase 9 are active in parallel.
-- Practical truth: the demo-ready path right now is the Orch surface, not the full end-to-end KasiLink marketplace story.
+- Practical truth: the demo-ready path right now is the Kopano Context surface, not the full end-to-end KasiLink marketplace story.
 
 ## Operating Constitution As Of 2026-04-10
 
@@ -35,7 +35,7 @@ status: active
 - Lead may rotate between `Codex`, `Claude`, or `Codex + Claude`.
 - Lead target is `60% management / 40% coding`.
 - Every task starts with a dev-progress check, a live diff check, and a [comms-log](../04-Updates/comms-log.md) check.
-- All current sessions count as `pre-sessions` and training data for Orch.
+- All current sessions count as `pre-sessions` and training data for Kopano Context.
 - Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
 - If truth is not present in the vault or official sources, ask Master instead of guessing.
 
@@ -43,8 +43,8 @@ status: active
 
 | Area | State | Truth |
 |------|-------|-------|
-| Orch API + GUI | PASS | `tests/test_labs_api.py` passes, `npm run build` in `orch/gui` passes, compile checks pass, and `/api/labs/microsoft-readiness` returns live status. |
-| Orch-only demo route | PASS | Public and admin rehearsal paths were locked and passed on `2026-04-09`. |
+| Kopano Context API + Studio | PASS | `tests/test_labs_api.py` passes, `npm run build` in `orch/gui` passes, compile checks pass, and `/api/labs/microsoft-readiness` returns live status. |
+| Kopano Context-only demo route | PASS | Public and admin rehearsal paths were locked and passed on `2026-04-09`. |
 | Microsoft readiness | COMPLETE | Local tooling is installed, Azure infrastructure is provisioned, telemetry is flowing, and readiness check is `6/6` green. |
 | Full KasiLink story | PARTIAL | Wider buyer story still depends on external auth, data, and integration blockers. |
 | Vault organization | IN PROGRESS | Schematics is the canonical Obsidian layer; root docs are now being indexed instead of moved casually. |
@@ -65,7 +65,7 @@ status: active
 - Atlas allowlist and live Mongo reachability
 - `whatsapp_bridge_configured: false` for the full KasiLink narrative
 - reward/referral is documentation-only in this workspace and is `NO-GO` for the live demo script until code exists
-- product polish: copy tightening, youth-fit research summary, and reconnecting the Orch-only route to the bigger KasiLink story
+- product polish: copy tightening, youth-fit research summary, and reconnecting the Kopano Context-only route to the bigger KasiLink story
 
 ## New Control Systems
 
@@ -76,7 +76,7 @@ status: active
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 - [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)
-- [Orch Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
+- [Kopano Train Logs](../05-Training/Orch%20Train%20Logs/index.md)
 
 ## Open These In Order
 

@@ -24,7 +24,7 @@ export function CouncilPage({
 }: CouncilPageProps) {
   const liveStateLabel = connectionState === 'live' ? 'Council is live' : connectionState === 'connecting' ? 'Linking the room' : 'Signal needs attention';
   const liveCopy = latestTransmission?.content
-    ?? 'Quiet moments should still feel intentional. The council keeps the stage warm with visible state, a listening orb, and a living relay of what just happened.';
+    ?? 'The live council listens intentionally. Watch real-time reasoning and agent orchestration as tasks are actively evaluated across multiple models.';
 
   return (
     <div className="page-layout council-layout">
@@ -101,10 +101,10 @@ export function CouncilPage({
             </span>
           </div>
           <h2>{featuredCard.id.toUpperCase()}</h2>
-          <p className="card-lead">{featuredCard.lastMsg?.content ?? 'No live signal yet. Seed one `/broadcast` event before presenting so the council opens with visible proof instead of waiting.'}</p>
+          <p className="card-lead">{featuredCard.lastMsg?.content ?? 'No live signal yet. Agents are standing by for prompt routing or internal API execution commands.'}</p>
           <div className="reasoning-rail">
             <span className="reasoning-label">Reasoning trace</span>
-            <p>{featuredCard.lastMsg?.reasoning ?? 'Support voices remain visible so the room still feels alive while waiting for the next trigger.'}</p>
+            <p>{featuredCard.lastMsg?.reasoning ?? 'Reasoning flows will appear here once an agent receives and processes a valid payload.'}</p>
           </div>
         </motion.article>
 
@@ -157,7 +157,7 @@ export function CouncilPage({
                 <span>System</span>
                 <span>waiting</span>
               </div>
-              <p>The relay is ready. The next websocket or polled event will appear here with motion instead of dead air.</p>
+              <p>The event relay is active. Real-time background network events and orchestration handoffs will appear here.</p>
             </article>
           )}
         </div>
