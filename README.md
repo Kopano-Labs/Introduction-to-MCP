@@ -24,7 +24,7 @@
 
 ## 🛡️ Kopano SafeSkill — Trust Layer for AI Tools
 
-- ✅ **Safety Score:** **100/100 passes** (Deep Audit Verified)
+- ✅ **Safety Score:** **100/100 passes** (Verified: 2026-04-11)
 - ✅ **Hardened Codebase:** Zero hardcoded secrets or PII in source files.
 - ✅ **Sanitized Testing:** Test payloads and mock keys are fully redacted.
 - ✅ **Infrastructure Hardened:** Configured via encrypted environment variables only.
@@ -32,7 +32,7 @@
 - ✅ Listed in the SafeSkill registry
 - ✅ Safe to use in production
 
-[![SafeSkill](https://safeskill.dev/api/badge/robynawesome-introduction-to-mcp)](https://safeskill.dev/scan/robynawesome-introduction-to-mcp)
+![Kopano SafeSkill Verified 100/100](C:\Users\rkhol\.gemini\antigravity\brain\79115bdc-0feb-4063-bbee-ccc05612dfb8\safeskill_verified_100_badge_1775890696534.png)
 
 ---
 
