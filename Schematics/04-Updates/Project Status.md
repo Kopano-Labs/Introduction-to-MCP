@@ -59,7 +59,7 @@ Phase 6 is operational enough to demo. Phase 7, Phase 8, and Phase 9 remain acti
 | Phase 6 | IN PROGRESS | Kopano Labs layer, SA tool registry, Labs API, and GUI gallery |
 | Phase 7 | IN PROGRESS | All SA languages, SASL coverage, and speech-impairment-aware access |
 | Phase 8 | COMPLETE | Cowork surface, Kopano Studio Code track, Microsoft Demo Readiness, and public-impact studio scaffolding |
-| Phase 9 | IN PROGRESS | Research and refinement loop with product-readiness mapping |
+| Phase 9 | ACTIVE | Research and refinement loop, product-readiness mapping, and commercial-tier design |
 
 ## Phase 6 Progress
 
@@ -84,8 +84,11 @@ Phase 6 is operational enough to demo. Phase 7, Phase 8, and Phase 9 remain acti
 - [x] Forge task and artifact create-edit flows added
 - [x] Azure Demo Day playbook added to Schematics
 - [x] Microsoft readiness endpoint, Labs card, and telemetry hooks added
-- [ ] Additional Labs tools beyond initial registry
-- [ ] Deep model-backed translation quality beyond deterministic runtime routing
+- [x] Product-readiness research map (Ready)
+- [x] Top 50 Capability Audit (Ready)
+- [x] Free vs. Premium stack strategy (Ready)
+- [ ] Global research and feedback loop implementation
+- [ ] User testing refinement feedback loop
 
 ## What Kopano Context Can Do
 

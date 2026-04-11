@@ -29,6 +29,7 @@ status: active
 - Delivery mode: `demo hardening`
 - Stable foundation: Phases 1 through 5 are complete.
 - Active buildout: Phase 6, Phase 7, Phase 8, and Phase 9 are active in parallel.
+- Phase 9 Core: Research Hub established for product-readiness mapping.
 - Practical truth: the demo-ready path right now is the Kopano Context surface, not the full end-to-end KasiLink marketplace story.
 
 ## Operating Constitution As Of 2026-04-11
@@ -81,6 +82,7 @@ status: active
 - [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
 - [08-IDEAS AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md)
 - [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md)
+- [Phase 9 - Research Hub](../09-KOPANO%20PROGRESSION/Phase%209%20-%20Research%20Hub.md)
 - [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
 - [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)
