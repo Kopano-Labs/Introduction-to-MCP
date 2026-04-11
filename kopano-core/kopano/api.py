@@ -1,8 +1,5 @@
 """
-orch AGI Control Plane API
-Author Links:
-- LinkedIn: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
-- GitHub: https://github.com/RobynAwesome/
+Kopano AGI Control Plane API
 """
 
 from fastapi import FastAPI, HTTPException, Request, Depends, WebSocket, WebSocketDisconnect

@@ -2,10 +2,6 @@
 Phase 2: Data Lake & Strategy Engine
 This module handles the structured logging of all discussions to a local SQLite database.
 It provides the schema and functions for creating, connecting to, and writing to the database.
-
-Connect with the Architect:
-- LinkedIn: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
-- GitHub: https://github.com/RobynAwesome/
 """
 import sqlite3
 import hashlib

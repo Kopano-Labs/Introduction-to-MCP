@@ -96,7 +96,7 @@ def test_agents_list_with_agents():
     """
     Test `orch agents list` with a configured agent.
     """
-    mock_agent = Agent(id="gemini-test", provider="google", model="gemini-pro", api_key="mock-key", persona="")
+    mock_agent = Agent(id="gemini-test", provider="google", model="gemini-pro", api_key="[REDACTED_MOCK_KEY]", persona="")
     with patch('orch.orch.cli.load_agents', return_value={"gemini-test": mock_agent}):
         result = runner.invoke(app, ["agents", "list"])
         assert result.exit_code == 0
@@ -115,7 +115,7 @@ def test_agents_config_new_agent():
         agent_id = "test-gpt"
         provider = "openai"
         model = "gpt-4o"
-        api_key = "sk-12345"
+        api_key = "[REDACTED_MOCK_KEY]"
         persona = "A helpful assistant."
 
         result = runner.invoke(app, [
@@ -147,8 +147,8 @@ def test_serve_launch_with_logging(in_memory_db):
     This verifies capability #98: Explain its own reasoning via audit trails.
     """
     # Mock agents
-    mock_agent = Agent(id="test-agent", provider="test", model="test-model", api_key="test-key", persona="")
-    mock_mod_agent = Agent(id="mod-agent", provider="test", model="mod-model", api_key="test-key", persona="")
+    mock_agent = Agent(id="test-agent", provider="test", model="test-model", api_key="[REDACTED_MOCK_KEY]", persona="")
+    mock_mod_agent = Agent(id="mod-agent", provider="test", model="mod-model", api_key="[REDACTED_MOCK_KEY]", persona="")
 
     # Mock the message object that generate_response returns
     mock_message = MagicMock()
@@ -203,8 +203,8 @@ def test_serve_launch_context_handling(in_memory_db):
     to agents and the moderator.
     """
     # Mock agents
-    mock_agent = Agent(id="test-agent", provider="test", model="test-model", api_key="test-key", persona="")
-    mock_mod_agent = Agent(id="mod-agent", provider="test", model="mod-model", api_key="test-key", persona="")
+    mock_agent = Agent(id="test-agent", provider="test", model="test-model", api_key="[REDACTED_MOCK_KEY]", persona="")
+    mock_mod_agent = Agent(id="mod-agent", provider="test", model="mod-model", api_key="[REDACTED_MOCK_KEY]", persona="")
 
     # Mock responses for agent and moderator
     mock_agent_response_r1 = MagicMock()
@@ -263,7 +263,7 @@ def test_agents_remove():
     """
     Test `orch agents remove` successfully removes an agent.
     """
-    mock_agent = Agent(id="test-remove", provider="test", model="test", api_key="key", persona="")
+    mock_agent = Agent(id="test-remove", provider="test", model="test", api_key="[REDACTED_MOCK_KEY]", persona="")
     with patch('orch.orch.cli.load_agents', return_value={"test-remove": mock_agent}), \
          patch('orch.orch.cli.save_agents') as mock_save:
 
