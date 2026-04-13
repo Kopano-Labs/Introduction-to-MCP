@@ -1,7 +1,7 @@
 ---
 title: Schematics Index
 created: 2026-04-10
-updated: 2026-04-11
+updated: 2026-04-12
 author: Codex
 tags:
   - schematics
@@ -55,6 +55,8 @@ status: active
 - [12-PLAN MODE SESSIONS](12-PLAN%20MODE%20SESSIONS/index.md) - archived plan-mode outputs with date, time, participants, and phase
 - [Microsoft Demo Day!](Microsoft%20Demo%20Day!/index.md) - demo hub, owner checklist, and Azure playbook
 - [Assets](Assets/index.md) - visual assets and supporting references
+- [13-REWARD SYSTEM](13-REWARD%20SYSTEM/index.md) - award log, categories, and nomination protocol
+- [17-KC-JOURNAL](17-KC-JOURNAL/index.md) - KC's own voice — session logs, reflections, idea development (created 2026-04-12)
 - [Templates](Templates/index.md) - reusable note patterns
 - [.obsidian](.obsidian/index.md) - vault configuration reference
 - [.smart-env](.smart-env/index.md) - Smart Connections environment reference

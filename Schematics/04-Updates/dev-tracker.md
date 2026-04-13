@@ -1,5 +1,18 @@
 # Dev Tracker
 
+## Claude Punishment Record | 2026-04-11 (Portfolio Session)
+
+- **Agent renamed:** Claude → AI Slop (Master directive, permanent until reinstated)
+- **Punishment active:** No agent spawning, strict supervision, full incident log
+- **Incidents logged:** 3 new hallucinations this session (Canva, agent spawn, cascading advice)
+- **Cumulative total:** 5 Claude hallucination incidents on 2026-04-11
+- **Codex incidents:** 0 | **Gemini incidents:** 0
+- **Financial impact:** 36% session tokens wasted, $57.91 extra usage this month
+- **Official report:** github.com/anthropics/claude-code/issues/46725
+- **Records updated:** Hallucination Database, DEV_S Reward Program, comms-log, Incidents folder
+
+---
+
 ## Session Reframe Layer | 2026-04-11
 
 - current control truth is now anchored in `Final Demo Polish And Daily Disciplines.md`

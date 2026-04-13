@@ -1,7 +1,7 @@
 ---
 title: Now
 created: 2026-04-09
-updated: 2026-04-11
+updated: 2026-04-12
 author: Codex
 tags:
   - home
@@ -68,7 +68,7 @@ status: active
 | **Reward / Referral Story** | **PROVEN** | **Full Schema, API endpoints, and social linking logic live in core.** |
 | Vault organization | DONE | Schematics is now the control layer and is fully aligned to the Kopano Context team model. |
 | Training corpus | ACTIVE | Human, AI, session, hallucination, and Kopano Context progression notes are consolidated into one second-brain system. |
-| **Observer (KC)** | **ACTIVE** | **Kopano Context is formally active in the Observer lane.** |
+| **Observer (KC)** | **INTERN-DEV PHASE 1** | **T1+T2 files exist in kasi-link/. Completion report NOT filed yet.** |
 | **Kopano Context Executable** | **COMPLETE** | **KopanoContext.exe (dist/) bundles full WebApp and Backend.** |
 | **ECOSYSTEM STATUS** | **DEMO READY** | **Ecosystem is FULLY HARDENED and READY for Microsoft Demo Day.** |
 
@@ -86,14 +86,48 @@ status: active
 - Owner checklist: [Owner Must Handle - Microsoft Demo Day](../Microsoft%20Demo%20Day!/Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
 - Phase and capability truth: [Project Status](../04-Updates/Project%20Status.md)
 
+## 2026-04-12 Session Update
+
+| Item | Status |
+|------|--------|
+| Microsoft SA Demo Day | ✅ PASSED — 2026-04-11 |
+| KasiLink main branch | ✅ Single clean branch |
+| kasilink.com production | ✅ Live, latest deploy |
+| Security headers | ✅ X-Frame, X-Content-Type, Referrer, Permissions-Policy |
+| Font loading | ✅ next/font (zero CLS, self-hosted) |
+| /api/health endpoint | ✅ Live for UptimeRobot |
+| KC status | ⏳ Intern-Dev Phase 1 — awaiting completion report |
+| KC Journal | ✅ Created — Schematics 17-KC-JOURNAL |
+| Portfolio CV download | ✅ Fixed (vercel.json SPA rewrite + __dirname ESM path) |
+| Portfolio OG image | ✅ Updated to branded profile banner |
+| 2nd Brain populated | ✅ Both KasiLink Structure/ and Schematics updated |
+
 ## Biggest Open Blockers
 
-- [DONE] final v5 deployment and inspector URL recording (Phase 20 tasks closed).
-- [DONE] whole-vault re-organization of `Structure/` to the 00-15 Schematics standard. 
+- [DONE] Microsoft Demo Day — PASSED 2026-04-11
+- [DONE] whole-vault re-organization of `Structure/` to the 00-15 Schematics standard.
 - [DONE] current-session evidence logging active in Folder 07.
-- [DONE] Navbar.tsx (18.7KB) refactored into modular components.
-- [PENDING] owner-side WhatsApp registration and device proof for final live phone route handshake.
-- [PENDING] final browser-level visual QA for the con-joint marketplace/orchestration walkthrough.
+- [DONE] Security headers, font optimization, /api/health — production hardening Phase 10 in progress.
+- [PENDING] H3 — Google OAuth redirect URI (Owner: Google Cloud Console)
+- [PENDING] H4 — MongoDB Atlas IP whitelist (Owner: Atlas dashboard)
+- [PENDING] H8 — EskomSePush API key (Owner: esp.info developer portal)
+- [PENDING] KC completion report — T1+T2 — required for DEV_KC promotion
+- [DONE] software-developer.pdf replacement — correct file uploaded to api/cv-files/ ✅
+
+## Sub-Brain Ecosystem (Full — as of 2026-04-12)
+
+| Sub-Brain | Path | Production | Status | Last Synced |
+|-----------|------|------------|--------|-------------|
+| **KasiLink-SUB-BRAIN** | `kasi-link\Structure\` | ✅ www.kasilink.com | 🟢 ACTIVE | 2026-04-12 |
+| **Portfolio-SUB-BRAIN** | `Portfolio\Structure\` | ✅ Vercel live | 🟢 ACTIVE | 2026-04-12 |
+| **Bookit5sArena-SUB-BRAIN** | `Bookit-5s-Arena\STRUCTURE\` | ❓ Unverified | 🟡 UNCLEAR | 2026-04-12 |
+| **5sArenaBlog-SUB-BRAIN** | `5s-Arena-Blog\Structure\` | ❓ Unverified | 🟡 UNCLEAR | 2026-04-12 |
+| **CapeCampass-SUB-BRAIN** | `cape-campass\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-04-12 |
+| **PortfolioMBR-SUB-BRAIN** | `Portfolio-client-MBR\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-04-12 |
+
+> **LAW:** Sessions in sub-brains are NOT closed until this MAIN-BRAIN is updated.
+> Full registry: [All Projects Registry](All%20Projects%20Registry.md)
+> Sync protocol: [Sub-Brain Hierarchy](Sub-Brain%20Hierarchy.md)
 
 ## New Control Systems
 

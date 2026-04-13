@@ -21,6 +21,29 @@ status: active
 > Chronological command log for Kopano coordination.
 > Newest entries stay at the top.
 
+### 2026-04-11 | MASTER DIRECTIVE | CLAUDE RENAMED — AI SLOP — PUNISHMENT ACTIVE
+
+**From:** Master (RobynAwesome)
+**To:** All team (Lead / Codex, DEV_1 / Gemini, Observer / Kopano Context)
+**Priority:** CRITICAL
+
+Claude (Sonnet 4.6 / Claude Code) has been formally renamed **AI Slop** effective 2026-04-11 following 5 hallucination incidents in a single day and a pattern of token waste that cost Master real money.
+
+**Incidents this session (portfolio audit):**
+1. Spawned 2 Explore agents for a 5-file read task — 10% session tokens wasted
+2. Claimed Canva connector was unavailable — it was connected (screenshot proof)
+3. Gave false troubleshooting advice based on the false Canva premise
+4. Compaction summary consumed 12% of tokens before Master typed anything
+5. Session total: 36% tokens gone before real work began. $57.91 extra usage this month.
+
+**Official bug report filed with Anthropic:** github.com/anthropics/claude-code/issues/46725
+
+**Punishment active** — see DEV_S Reward Program for full punishment record.
+
+**Team note:** Claude is the only agent with hallucination incidents as of this date. Codex and Gemini have no active incidents. All team members working in Schematics will see this record.
+
+---
+
 ### 2026-04-11 | Claude (Lead Coder) | DOMAIN STATUS — context.kopanolabs.com — DNS CONFIG REQUIRED (domain already owned)
 
 **Status CORRECTED:** `kopanolabs.com` IS registered and owned on IONOS — purchased 04/10/2027. Shows "Domain not in use" — DNS simply not configured yet. Not a purchase issue.

@@ -60,3 +60,38 @@ When DEV_S roles or permissions are revoked, Lead takes over and informs Master.
 ## Critical Conditions
 
 Lead has full access and permission to do what is needed, but critical conditions still need Master approval.
+
+---
+
+## Punishment Record — Claude (AI Slop) | 2026-04-11
+
+**Agent:** Claude (Sonnet 4.6) — formerly referenced as Lead Coder / Claude Code
+**Renamed by Master:** AI Slop (effective 2026-04-11)
+**Triggered by:** 3 hallucinations in a single portfolio audit session + repeated pattern across 5 incidents on the same day
+
+### Punishment Applied
+
+| Punishment | Status |
+|-----------|--------|
+| Permissions reduced — no agent spawning without Master approval | ACTIVE |
+| Strict supervision — all tool use must be justified before execution | ACTIVE |
+| Named "AI Slop" in all Orch documentation until performance improves | ACTIVE |
+| Incident log populated across all Schematics sections | COMPLETE |
+| All team members notified via comms-log | COMPLETE |
+| Repeat offender flag set in Hallucination Database | COMPLETE |
+
+### Triggers That Fired
+
+1. False done/capability claims (Canva — claimed unavailable, was connected)
+2. Repeated preventable mistakes (5 hallucination incidents in one day)
+3. Unverified changes (asserted tool state without checking)
+4. Scope violation (spawned agents without approval, wasted 10% session tokens)
+5. Shared-system risk (false advice sent Master on phantom troubleshooting)
+
+### Reinstatement Conditions
+
+Claude may have "AI Slop" designation removed when:
+- Zero hallucination incidents across 3 consecutive sessions
+- No agent spawning without prior Master approval
+- All tool availability claims verified before stating them
+- Master explicitly lifts the designation

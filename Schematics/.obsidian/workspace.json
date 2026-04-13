@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Microsoft Demo Day!/Owner Must Handle - Microsoft Demo Day.md",
+                "file": "05-Training/Owner Profile.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Owner Must Handle - Microsoft Demo Day"
+              "title": "Owner Profile"
             }
           }
         ]
@@ -84,12 +84,12 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 233.5
+    "width": 233.5,
+    "collapsed": true
   },
   "right": {
     "id": "891cb4bfa988de8c",
@@ -238,8 +238,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 255.5,
-    "collapsed": true
+    "width": 348.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -268,6 +267,11 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "00-Home/Dashboard.md",
+    "00-Home/Sub-Brain Hierarchy.md",
+    "00-Home/All Projects Registry.md",
+    "04-Updates/Project Status.md",
+    "Microsoft Demo Day!/Owner Must Handle - Microsoft Demo Day.md",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/top_level.txt",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/SOURCES.txt",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/dependency_links.txt",
@@ -299,11 +303,6 @@
     "13-REWARD SYSTEM/Implemented/Phase 10 Autonomy.md",
     "13-REWARD SYSTEM/Accepted/The SA Link-Up.md",
     "13-REWARD SYSTEM/Communication/Negotiation - Germini Lead - 2026-04-11.md",
-    "13-REWARD SYSTEM/Implemented",
-    "04-Updates/Reward System Status - 2026-04-11.md",
-    "09-KOPANO PROGRESSION/Observer Activation Protocol.md",
-    "09-KOPANO PROGRESSION/Research Note - SA Localization.md",
-    "09-KOPANO PROGRESSION/Research Note - Free vs Premium Stack.md",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",

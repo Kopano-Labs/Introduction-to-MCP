@@ -56,6 +56,16 @@ status: active
 - repo-root docs now have a stable Obsidian map in [Repo Documents Index](Repo%20Documents%20Index.md)
 - README architecture image path was repaired after the asset move
 
+## Sub-Brain Sync Status
+
+| Sub-Brain | Last Synced | Sync State |
+|-----------|-------------|------------|
+| KasiLink (`kasi-link/Structure/`) | 2026-04-12 | ✅ Synced — KasiLink Sub-Brain Sync.md in 02-Strategy |
+| Portfolio (`C:\Users\rkhol\Portfolio\`) | 2026-04-12 | ✅ Synced — session log + Now.md updated |
+| KC Intern-Dev (`kasi-link/Structure/05-Training/KC-Intern-Dev/`) | 2026-04-12 | ⏳ Partial — completion report still blank |
+
+> Full sync law: [Sub-Brain Hierarchy](../00-Home/Sub-Brain%20Hierarchy.md)
+
 ## Working Rule
 
 If a blocker changes the live demo route, update:
