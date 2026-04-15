@@ -9,7 +9,7 @@ tags:
 status: active
 ---
 
-# services
+# server
 
 > Auto-generated index for this imported-reference folder.
 > Purpose: Imported reference codebase preserved inside Schematics for study and comparison.

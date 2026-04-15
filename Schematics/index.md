@@ -40,26 +40,24 @@ status: active
 
 ## Top-Level Map
 
-- [00-Home](00-Home/index.md) - front door, dashboard, and live current-state notes
-- [01-Mission](01-Mission/index.md) - Kopano Context identity and intent
-- [02-Strategy](02-Strategy/index.md) - product direction, Microsoft framing, and long-range positioning
-- [03-Architecture](03-Architecture/index.md) - system design and technical reference
-- [04-Updates](04-Updates/index.md) - control notes, tasking, comms, and active delivery truth
-- [05-Training](05-Training/index.md) - people, AI, and orchestration training corpus
-- [06-Reference](06-Reference/index.md) - archives, imported references, and blocker ledgers
-- [07-Sessions By Day](07-Sessions%20By%20Day/index.md) - dated session reconstruction and evidence trail
-- [08-IDEAS AT BIRTH](08-IDEA'S%20AT%20BIRTH/index.md) - incubation-only ideas with research gates
-- [09-KOPANO PROGRESSION](09-KOPANO%20PROGRESSION/index.md) - Kopano Context capability ladder from observer to co-lead
-- [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/index.md) - lead doctrine, hierarchy control, and token discipline
-- [11-AI HALLUCINATION - CRITICAL](11-AI%20HALLUCINATION%20-%20CRITICAL/index.md) - mandatory hallucination audit system
-- [12-PLAN MODE SESSIONS](12-PLAN%20MODE%20SESSIONS/index.md) - archived plan-mode outputs with date, time, participants, and phase
-- [Microsoft Demo Day!](Microsoft%20Demo%20Day!/index.md) - demo hub, owner checklist, and Azure playbook
-- [Assets](Assets/index.md) - visual assets and supporting references
-- [13-REWARD SYSTEM](13-REWARD%20SYSTEM/index.md) - award log, categories, and nomination protocol
-- [17-KC-JOURNAL](17-KC-JOURNAL/index.md) - KC's own voice — session logs, reflections, idea development (created 2026-04-12)
-- [Templates](Templates/index.md) - reusable note patterns
-- [.obsidian](.obsidian/index.md) - vault configuration reference
-- [.smart-env](.smart-env/index.md) - Smart Connections environment reference
+- [00-Home](00-Home/00-Home%20-%20Index.md) - front door, dashboard, and live current-state notes
+- [01-Mission](01-Mission/01-Mission%20-%20Index.md) - Kopano Context identity and intent
+- [02-Strategy](02-Strategy/02-Strategy%20-%20Index.md) - product direction, Microsoft framing, and long-range positioning
+- [03-Architecture](03-Architecture/03-Architecture%20-%20Index.md) - system design and technical reference
+- [04-Updates](04-Updates/04-Updates%20-%20Index.md) - control notes, tasking, comms, and active delivery truth
+- [05-Training](05-Training/05-Training%20-%20Index.md) - people, AI, and orchestration training corpus
+- [06-Reference](06-Reference/06-Reference%20-%20Index.md) - archives, imported references, and blocker ledgers
+- [07-Sessions By Day](07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md) - dated session reconstruction and evidence trail
+- [08-IDEAS AT BIRTH](08-IDEAS%20AT%20BIRTH/08-IDEAS%20AT%20BIRTH%20-%20Index.md) - incubation-only ideas with research gates
+- [09-KOPANO PROGRESSION](09-KOPANO%20PROGRESSION/09-KOPANO%20PROGRESSION%20-%20Index.md) - Kopano Context capability ladder from observer to co-lead
+- [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md) - lead doctrine, hierarchy control, and token discipline
+- [11-AI HALLUCINATION - CRITICAL](11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md) - mandatory hallucination audit system
+- [12-PLAN MODE SESSIONS](12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md) - archived plan-mode outputs with date, time, participants, and phase
+- [Microsoft Demo Day!](Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%20-%20Index.md) - demo hub, owner checklist, and Azure playbook
+- [Assets](Assets/Assets%20-%20Index.md) - visual assets and supporting references
+- [13-REWARD SYSTEM](13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md) - award log, categories, and nomination protocol
+- [17-KC-JOURNAL](17-KC-JOURNAL/17-KC-JOURNAL%20-%20Index.md) - KC's own voice — session logs, reflections, idea development (created 2026-04-12)
+- [Templates](Templates/Templates%20-%20Index.md) - reusable note patterns
 
 ## Usage Rule
 

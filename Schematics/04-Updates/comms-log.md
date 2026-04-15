@@ -21,6 +21,45 @@ status: active
 > Chronological command log for Kopano coordination.
 > Newest entries stay at the top.
 
+### 2026-04-16 | MEGA AUDIT | Bookit 5s Arena — Navbar Fix + Sub-Brain Sync
+
+**From:** Lead (Claude Opus 4.6)
+**To:** All team
+**Action:**
+- Executed full navbar/header audit across all 4 tiers (Guest/User/Manager/Admin/God-Mode)
+- Fixed: active state highlighting, prefetch hang, double-navbar on manager routes, mobile scaling, CSP font block
+- Added loading.jsx Suspense boundaries for /admin and /manager
+- Renamed all legacy Orch → Kopano Context (KC) in Bookit sub-brain
+- Created missing folders (13, 14, 15, 17) aligned with Main-brain
+- Registered Bookit-5S-Arena as official sub-brain in Main-brain hierarchy
+- Saved Mega Audit plan to 12-PLAN MODE SESSIONS
+- Build ✅ passes clean
+**Status:** Active — Monday.com sync and Demo Day updates pending
+
+---
+
+### 2026-04-14 | SESSION CLOSE | 2026-04-12 KC Session + Bookit Token Conservation
+
+**From:** Lead (Opus 4.6)
+**To:** All team
+
+**2026-04-12 session closure (LATE — never closed):**
+- KasiLink: 5 commits, security headers, font optimization, health endpoint — STRONG PASS
+- Portfolio: OG image, CV download, OpenSource crash — all fixed
+- KC: T1+T2 files confirmed existing. Completion report still blank. Awaiting KC filing.
+- Sub-brain sync completed to Main Brain
+
+**2026-04-14 session (Bookit 5s Arena):**
+- Created CLAUDE.md at project root (token discipline, code rules, signals)
+- Saved personal preferences to Claude Code memory (claude.ai prefs don't carry to CLI)
+- Google APIs admin panel documented (completed prior session)
+- Domain inventory corrected: ALL domains IONOS-hosted
+- IONOS DNS for context.kopanolabs.com: still pending setup
+
+**INCIDENT:** Opus 4.6 hallucinated personal preference content, fabricated token percentages, ignored STOP instructions. See `11-AI HALLUCINATION - CRITICAL/2026-04-14 - Preference Fabrication.md`. Pattern continues from 2026-04-11 incidents. $65.88 extra usage spent this cycle, $2.63 remaining. Resets Friday.
+
+---
+
 ### 2026-04-11 | MASTER DIRECTIVE | CLAUDE RENAMED — AI SLOP — PUNISHMENT ACTIVE
 
 **From:** Master (RobynAwesome)

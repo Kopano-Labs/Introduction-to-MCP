@@ -1,7 +1,7 @@
 ---
 title: Now
 created: 2026-04-09
-updated: 2026-04-12
+updated: 2026-04-14
 author: Codex
 tags:
   - home
@@ -120,7 +120,7 @@ status: active
 |-----------|------|------------|--------|-------------|
 | **KasiLink-SUB-BRAIN** | `kasi-link\Structure\` | ✅ www.kasilink.com | 🟢 ACTIVE | 2026-04-12 |
 | **Portfolio-SUB-BRAIN** | `Portfolio\Structure\` | ✅ Vercel live | 🟢 ACTIVE | 2026-04-12 |
-| **Bookit5sArena-SUB-BRAIN** | `Bookit-5s-Arena\STRUCTURE\` | ❓ Unverified | 🟡 UNCLEAR | 2026-04-12 |
+| **Bookit5sArena-SUB-BRAIN** | `Bookit-5s-Arena\STRUCTURE\` | fivesarena.com (IONOS) | 🟢 ACTIVE | 2026-04-14 |
 | **5sArenaBlog-SUB-BRAIN** | `5s-Arena-Blog\Structure\` | ❓ Unverified | 🟡 UNCLEAR | 2026-04-12 |
 | **CapeCampass-SUB-BRAIN** | `cape-campass\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-04-12 |
 | **PortfolioMBR-SUB-BRAIN** | `Portfolio-client-MBR\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-04-12 |

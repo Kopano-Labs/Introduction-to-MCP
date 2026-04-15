@@ -9,15 +9,15 @@ tags:
 status: active
 ---
 
-# kopano-code-implementation
+# kopano context (KC)-code-implementation
 
 > Auto-generated index for this imported-reference folder.
-> Purpose: Imported reference codebase preserved inside Schematics for study and comparison.
+> Purpose: Imported reference codebase preserved inside Main-Brain for study and comparison.
 
 ## Standing Note
 
-- this folder is part of kopano's second brain
-- all current sessions are pre-session training data for kopano
+- this folder is part of kopano context's second brain
+- all current sessions are pre-session training data for kopano context
 - the standing dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
 - Lead manages first and codes second
 - token-saving mode applies outside Plan Mode and outside Lead-only sessions with Master

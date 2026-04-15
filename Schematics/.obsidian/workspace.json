@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "4509724f8bf84da7",
+        "id": "8d4d41f7622239b7",
         "type": "tabs",
         "children": [
           {
-            "id": "e7a7b303c61786dc",
+            "id": "bec3e15851055d9f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05-Training/Owner Profile.md",
+                "file": "08-IDEAS AT BIRTH/2026-04-10 - Agent Observability And Evaluation Flywheel.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Owner Profile"
+              "title": "2026-04-10 - Agent Observability And Evaluation Flywheel"
             }
           }
         ]
@@ -63,7 +63,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "microsoft",
+                "query": "`anthropic.com/engineering/building-effective-agents`",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -84,12 +84,12 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 233.5,
-    "collapsed": true
+    "width": 233.5
   },
   "right": {
     "id": "891cb4bfa988de8c",
@@ -265,11 +265,30 @@
       "smart-lookup:Smart Lookup: Open lookup view": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "bec3e15851055d9f",
   "lastOpenFiles": [
+    "08-IDEAS AT BIRTH/2026-04-10 - Anthropic Startup AI Signals.md",
+    "08-IDEAS AT BIRTH/2026-04-10 - Agent Observability And Evaluation Flywheel.md",
+    "08-IDEAS AT BIRTH/2026-04-10 - Africa-First Demo Proof Stack.md",
+    "08-IDEAS AT BIRTH/Idea Entry Protocol.md",
+    "08-IDEAS AT BIRTH/08-IDEAS AT BIRTH - Index.md",
     "00-Home/Dashboard.md",
-    "00-Home/Sub-Brain Hierarchy.md",
+    "06-Reference/kopano-code-implementation/src/utils/index.md",
+    "06-Reference/kopano-code-implementation/src/services/index.md",
+    "06-Reference/kopano-code-implementation/src/server/index.md",
+    "06-Reference/kopano-code-implementation/index.md",
+    "06-Reference/kopano-code-implementation/src/index.md",
     "00-Home/All Projects Registry.md",
+    "00-Home/Now.md",
+    "00-Home/Start Here - Session 3.md",
+    "00-Home/Sub-Brain Hierarchy.md",
+    "00-Home/00-Home - Index.md",
+    "09-KOPANO PROGRESSION/KC-Session-Log-2026-04-12.md",
+    "09-KOPANO PROGRESSION/Intern Dev.md",
+    "07-Sessions By Day/2026-04-12.md",
+    "07-Sessions By Day/2026-04-11.md",
+    "05-Training/Robyn Operator Profile - Session 3.md",
+    "05-Training/Owner Profile.md",
     "04-Updates/Project Status.md",
     "Microsoft Demo Day!/Owner Must Handle - Microsoft Demo Day.md",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/top_level.txt",
@@ -282,27 +301,8 @@
     "15-LEGACY ARCHIVE/main.spec",
     "15-LEGACY ARCHIVE/index.md",
     "15-LEGACY ARCHIVE/SECURITY.md",
-    "15-LEGACY ARCHIVE/RELEASE.md",
-    "15-LEGACY ARCHIVE/ORCH_USER_GUIDE.md",
-    "15-LEGACY ARCHIVE/EXECUTION_20_TASKS_PHASE6_PLUS.md",
-    "15-LEGACY ARCHIVE/EXECUTION_20_TASKS_LEAD_DEV2.md",
-    "15-LEGACY ARCHIVE/EXECUTION_20_TASKS_DEV2_DEV3_LEAD_PHASE_CYCLE2.md",
-    "15-LEGACY ARCHIVE/EXECUTION_20_TASKS_DEV2_DEV3_LEAD_PHASE.md",
-    "15-LEGACY ARCHIVE/EXECUTION_20_TASKS_DEV2_DEV3_CYCLE2.md",
-    "15-LEGACY ARCHIVE/EXECUTION_20_TASKS_DEV2_DEV3.md",
-    "15-LEGACY ARCHIVE/EXECUTION_20_TASKS.md",
-    "15-LEGACY ARCHIVE/DEMO_DAY_RUNBOOK.md",
-    "15-LEGACY ARCHIVE/DEMO_DAY_10_PHASES_50_TASKS.md",
-    "15-LEGACY ARCHIVE/CONTRIBUTING.md",
-    "15-LEGACY ARCHIVE/BRAINTRUST_SETUP.md",
-    "15-LEGACY ARCHIVE/100_Capabilities_TODO.md",
     "15-LEGACY ARCHIVE",
-    "14-PRODUCTION HARDENING (PHASE 10)/Azure Infrastructure Guide.md",
-    "14-PRODUCTION HARDENING (PHASE 10)/Kopano Context Operational Manual.md",
     "14-PRODUCTION HARDENING (PHASE 10)",
-    "13-REWARD SYSTEM/Implemented/Phase 10 Autonomy.md",
-    "13-REWARD SYSTEM/Accepted/The SA Link-Up.md",
-    "13-REWARD SYSTEM/Communication/Negotiation - Germini Lead - 2026-04-11.md",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",
