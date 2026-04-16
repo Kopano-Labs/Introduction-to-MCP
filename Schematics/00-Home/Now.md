@@ -1,7 +1,7 @@
 ---
 title: Now
 created: 2026-04-09
-updated: 2026-04-14
+updated: 2026-04-16
 author: Codex
 tags:
   - home
@@ -74,8 +74,9 @@ status: active
 
 ## 🌐 Production Surface
 - **Kopano Context Studio:** [www.context.kopanolabs.com](https://www.context.kopanolabs.com)
-- **Kasilink Market:** [www.kasilink.co.za](https://www.kasilink.co.za) (Beta)
-- **Admin Email:** [rkholofelo@context.kopanolabs.com](mailto:rkholofelo@context.kopanolabs.com)
+- **KasiLink Marketplace:** [www.kasilink.com](https://www.kasilink.com) ✅ Live
+- **KasiLink Demo Leaderboard:** [www.kasilink.com/demo](https://www.kasilink.com/demo) ✅ Live (Idea #011)
+- **Admin Email:** [rkholofelo@kopanolabs.com](mailto:rkholofelo@kopanolabs.com)
 
 ## Demo Day Position
 
@@ -86,17 +87,28 @@ status: active
 - Owner checklist: [Owner Must Handle - Microsoft Demo Day](../Microsoft%20Demo%20Day!/Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
 - Phase and capability truth: [Project Status](../04-Updates/Project%20Status.md)
 
-## 2026-04-12 Session Update
+## 2026-04-16 Session Update — DEMO DAY (Lovable Hackathon)
 
 | Item | Status |
 |------|--------|
 | Microsoft SA Demo Day | ✅ PASSED — 2026-04-11 |
+| Lovable Hackathon (Cape Town 2.0) | 🔥 TODAY — deadline 16:30 |
+| KasiLink ↔ KC connection | ✅ Footer + Studio wired to context.kopanolabs.com |
+| Idea #010 Utility Rescheduler | ✅ SHIPPED — live on /gigs/new |
+| Idea #011 Demo Leaderboard | ✅ SHIPPED — live at kasilink.com/demo |
+| KC Demo readiness (4/4 checks) | ✅ PASS — Python + GUI lint + build |
+| kasilink.com production | ✅ Live — latest deploy on main |
+| Stale kasilink.co.za URL | ✅ Fixed → kasilink.com in Now.md + README |
+| KC status | ⏳ Intern-Dev Phase 1 — completion report pending |
+
+## 2026-04-12 Session Update
+
+| Item | Status |
+|------|--------|
 | KasiLink main branch | ✅ Single clean branch |
-| kasilink.com production | ✅ Live, latest deploy |
 | Security headers | ✅ X-Frame, X-Content-Type, Referrer, Permissions-Policy |
 | Font loading | ✅ next/font (zero CLS, self-hosted) |
 | /api/health endpoint | ✅ Live for UptimeRobot |
-| KC status | ⏳ Intern-Dev Phase 1 — awaiting completion report |
 | KC Journal | ✅ Created — Schematics 17-KC-JOURNAL |
 | Portfolio CV download | ✅ Fixed (vercel.json SPA rewrite + __dirname ESM path) |
 | Portfolio OG image | ✅ Updated to branded profile banner |
