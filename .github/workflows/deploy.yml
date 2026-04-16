@@ -2,7 +2,7 @@ name: "Kopano Context: Production Hardening Deployment"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch:
 
 permissions:
