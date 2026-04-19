@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="toolkitAccountSettings">
+    <option name="activeRegion" value="af-south-1" />
+    <option name="recentlyUsedProfiles">
+      <list>
+        <option value="profile:localstack" />
+      </list>
+    </option>
+    <option name="recentlyUsedRegions">
+      <list>
+        <option value="af-south-1" />
+      </list>
+    </option>
+  </component>
+  <component name="toolkitExplorerToolWindow">
+    <option name="selectedTab" value="CloudFormation" />
+  </component>
+</project>

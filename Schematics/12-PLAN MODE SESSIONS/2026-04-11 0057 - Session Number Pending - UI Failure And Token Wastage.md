@@ -78,6 +78,15 @@ status: logged
 
 - All failures documented in `TOKEN-WASTAGE` folder inside KasiLink Schematics.
 - All hallucinations logged in `11-AI HALLUCINATION - CRITICAL`.
+
+## Plan Lifecycle
+
+- lifecycle status: `implemented`
+- propagation status: `implemented`
+- live destinations touched:
+  - `10-SESSION IMPROVEMENTS/`
+  - `11-AI HALLUCINATION - CRITICAL/`
+  - `13-REWARD SYSTEM/`
 - Session improvement rules updated in `10-SESSION IMPROVEMENTS`.
 - Codex standard established: deliver UI/UX when asked, fast, nothing else.
 

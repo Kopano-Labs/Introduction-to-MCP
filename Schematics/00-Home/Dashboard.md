@@ -1,7 +1,7 @@
 ---
 title: Kopano Context — Dashboard
 created: 2026-04-05
-updated: 2026-04-11
+updated: 2026-04-18
 author: Robyn
 tags:
   - home
@@ -16,15 +16,23 @@ status: active
 
 > Central knowledge base for the **Kopano Context** multi-agent orchestration system and its integration with KasiLink.
 > **Ecosystem:** Kopano Context · Kopano CLI · Kopano Studio · Kopano Mesh · Kopano Labs · Kopano SafeSkill
-> Owner: [Kholofelo Robyn Rababalela](../05-Training/Owner%20Profile.md) · GitHub: RobynAwesome
+> Owner: [Kholofelo Robyn Rababalela](../05-Training/Owner%20Profile.md) · GitHub Org: Kopano-Labs
 > Current operating mode: `demo hardening` across Phase 6, Phase 7, Phase 8, and Phase 9.
+> Current truth anchor: [Now](Now.md) → [Project Status](../04-Updates/Project%20Status.md) → [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md) → [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+> **Audit gate:** `AUDIT MAIN-BRAIN` begins here.
 
-## Current Session Roster
+## Front-Door Truth
 
-- Creator: `RobynAwesome`
-- Observer: `Kopano Context`
-- Lead Developer: `Codex`
-- DEV_1: `Germini (Google AI)`
+- KC owner delivery is still blocked until Robyn directly uses `https://context.kopanolabs.com`
+- local, `.exe`, CLI, and AI-rehearsal proofs are secondary only
+- if a note conflicts with the owner-proof stack, defer to `Now`, `Operational Truth Register`, and the `Owner Access Gate`
+
+## Standing Session Routing
+
+- Owner: `RobynAwesome`
+- Live session roster belongs in [Now](Now.md) and [07-Sessions By Day](../07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md)
+- Standing multi-dev bench: `Germini`, `Nother`, `Meither`, `Cicero`
+- Lead may rotate by explicit assignment; do not treat this dashboard as the live roster source
 
 ---
 
@@ -33,40 +41,74 @@ status: active
 | Priority | Note                     | Status               |
 | -------- | ------------------------ | -------------------- |
 | CRITICAL | [Now](Now.md) | Canonical one-note snapshot |
-| CRITICAL | [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) | Demo hub, owner checklist, and Azure path |
 | CRITICAL | [Project Status](../04-Updates/Project%20Status.md) | Current phase and delivery truth |
-| CRITICAL | [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
+| CRITICAL | [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md) | Production-hardening truth and proof-lane register |
+| CRITICAL | [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md) | Internal scaffolding vs owner-visible KC reality |
+| CRITICAL | [Open Issues](../06-Reference/Open%20Issues.md) | Current blocker ledger and containment rules |
+| HIGH | [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%20-%20Index.md) | Demo hub, owner checklist, and Azure path |
+| HIGH | [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
 | HIGH     | [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
 | HIGH     | [Schematics Root Index](../index.md) | Whole-vault map and standing second-brain rules |
-| HIGH     | [Training Index](../05-Training/index.md) | Profiling and orchestration corpus |
+| HIGH     | [Training Index](../05-Training/05-Training%20-%20Index.md) | Profiling and orchestration corpus |
 
 ---
 
 ## 00 — Operating Constitution
 
-- Lead Developer: `Codex`
-- DEV_1: `Germini (Google AI)`
+- Lead assignment is session-specific; use [Now](Now.md) for live role truth
+- Approved lead bench: `Codex`, `Claude`, `Germini`
+- Standing dev bench: `Germini (Google AI)`, `Nother`, `Meither`, `Cicero`
 - DEV_2: `Nother`
 - DEV_3: `Meither`
 - DEV_4: `Cicero`
 - Multi-dev sessions start with the standing dev roster on standby and 20-task boards visible in [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md).
 - Before any task begins, Lead checks current dev progress, live diffs, and the latest [comms-log](../04-Updates/comms-log.md).
 - All current sessions are `pre-sessions` and training data for Kopano Context.
-- Lead may be `Codex`, `Claude`, or `Codex + Claude`.
+- Lead may be explicitly assigned from the approved lead bench.
 - Lead target: `60% management / 40% coding`.
 - Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
 - If a fact is not proven by the vault or official research, ask Master instead of guessing.
+
+## MAIN-BRAIN Audit Gate
+
+For `AUDIT MAIN-BRAIN`, the mandatory sequence is:
+
+1. `CLAUDE.md` for scope handoff only
+2. [Schematics Root Index](../index.md)
+3. this note
+4. [Now](Now.md)
+5. [All Projects Registry](All%20Projects%20Registry.md)
+6. [Sub-Brain Hierarchy](Sub-Brain%20Hierarchy.md)
+7. all top-level folder index notes
+8. all human-authored and AI-authored knowledge/protocol notes needed to understand truth
+
+For governance work inside the operating band, the brother-folder read order is mandatory:
+
+1. [18-PROTOCOLS](../18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+2. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
+3. [13-REWARD SYSTEM](../13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md)
+
+No AI may update, cite, or enforce one of these three folders without fully reading the current contents of all three. No summary-only governance work is valid.
+
+Protocol home:
+
+- [18-PROTOCOLS](../18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+- [MAIN-BRAIN Audit Protocol](../18-PROTOCOLS/MAIN-BRAIN%20Audit%20Protocol.md)
+- [Sub-Brain Build And Sync Protocol](../18-PROTOCOLS/Sub-Brain%20Build%20And%20Sync%20Protocol.md)
+- [KC Stewardship And Tenant AI Doctrine](../18-PROTOCOLS/KC%20Stewardship%20And%20Tenant%20AI%20Doctrine.md)
+- [Claim Authority Lock Protocol](../18-PROTOCOLS/Claim%20Authority%20Lock%20Protocol.md)
 
 ---
 
 ## Critical Systems
 
-- [07-Sessions By Day](../07-Sessions%20By%20Day/index.md) - dated session reconstruction with direct-vs-reconstructed evidence
-- [08-IDEAS AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md) - incubation-only idea bank with competitor comparison and implementation options
-- [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md) - Kopano Context development ladder from observer to co-lead
-- [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md) - lead discipline, session smoothness, hierarchy, and token doctrine
-- [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md) - permanent critical hallucination audit system
-- [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md) - planning archive for plan-mode outputs that should not stay only in chat
+- [07-Sessions By Day](../07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md) - dated session reconstruction with direct-vs-reconstructed evidence
+- [08-IDEAS AT BIRTH](../08-IDEAS%20AT%20BIRTH/08-IDEAS%20AT%20BIRTH%20-%20Index.md) - intake lanes, validation gates, and promotion decisions for rough ideas
+- [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/09-KOPANO%20PROGRESSION%20-%20Index.md) - KC-only growth evidence, promotion checkpoints, and readiness history
+- [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md) - improvement playbooks and the brother folder for operations
+- [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md) - permanent critical hallucination audit system
+- [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md) - planning archive with lifecycle and propagation tracking
+- [13-REWARD SYSTEM](../13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md) - recognition, penalties, restrictions, and operating status outcomes
 - [Kopano Context Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md) - successes, failures, hierarchy events, and self-reflection logs
 
 ---
@@ -115,8 +157,8 @@ Active project coordination and status tracking.
 - [Now](Now.md) — current one-note snapshot.
 - [Implementation Plan](../04-Updates/Implementation%20Plan.md) — Full engineering plan with Labs and accessibility phases.
 - [Phase 1 Walkthrough](../04-Updates/Phase%201%20Walkthrough.md) — Completed Phase 1 tutorial and reference.
-- [Updates Index](../04-Updates/index.md) — Hub for coordination files.
-- [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md) — demo MOC for script, countdown, owner checklist, and Azure playbook.
+- [Updates Index](../04-Updates/04-Updates%20-%20Index.md) — Hub for coordination files.
+- [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%20-%20Index.md) — demo MOC for script, countdown, owner checklist, and Azure playbook.
 - [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) — Demo day owners, blockers, and exit criteria.
 - [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) — locked conservative demo route.
 - [Comms Log](../04-Updates/comms-log.md) — Agent communication log.
@@ -131,7 +173,7 @@ Active project coordination and status tracking.
 
 Data and profiles for training the Kopano Context AI system.
 
-- [Training Index](../05-Training/index.md) — master map for human, AI, and orchestration notes.
+- [Training Index](../05-Training/05-Training%20-%20Index.md) — master map for human, AI, and orchestration notes.
 - [Kopano Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md) — active logbook for dev outcomes, hierarchy breaches, token use, and lead self-reflection.
 - [Owner Profile](../05-Training/Owner%20Profile.md) — Robyn's work ethic, communication style, and management patterns.
 - [Robyn Operator Profile - Session 3](../05-Training/Robyn%20Operator%20Profile%20-%20Session%203.md) — current-session operational expectations.
@@ -162,15 +204,17 @@ Code samples and archived source files.
 
 1. [Now](Now.md)
 2. [Project Status](../04-Updates/Project%20Status.md)
-3. [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
-4. [Open Issues](../06-Reference/Open%20Issues.md)
-5. [07-Sessions By Day](../07-Sessions%20By%20Day/index.md)
-6. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/index.md)
-7. [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
-8. [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/index.md)
-9. [08-IDEAS AT BIRTH](../08-IDEA'S%20AT%20BIRTH/index.md)
-10. [09-KOPANO PROGRESSION](../09-KOPANO%20PROGRESSION/index.md)
-11. [Training Index](../05-Training/index.md)
+3. [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md)
+4. [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+5. [Open Issues](../06-Reference/Open%20Issues.md)
+6. [MAIN-BRAIN Deep Health Assessment - 2026-04-18](../04-Updates/MAIN-BRAIN%20Deep%20Health%20Assessment%20-%202026-04-18.md)
+7. [KC Deep Delivery Assessment - 2026-04-18](../04-Updates/KC%20Deep%20Delivery%20Assessment%20-%202026-04-18.md)
+8. [07-Sessions By Day](../07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md)
+9. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
+10. [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md)
+11. [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md)
+12. [Sub-Brain Truth Sync Matrix - 2026-04-18](Sub-Brain%20Truth%20Sync%20Matrix%20-%202026-04-18.md)
+13. [Training Index](../05-Training/05-Training%20-%20Index.md)
 
 ---
 
@@ -195,8 +239,9 @@ Code samples and archived source files.
 
 ## Quick Links
 
-- KasiLink live: https://kasi-link.vercel.app
+- KC domain-first target: https://context.kopanolabs.com
+- KasiLink live: https://kasilink.com
 - Kopano Context repo: https://github.com/RobynAwesome/Introduction-to-MCP
-- KasiLink repo: https://github.com/RobynAwesome/KasiLink
+- KasiLink repo: https://github.com/Kopano-Labs/KasiLink
 - Portfolio: https://kholofelorababalela.vercel.app
 - LinkedIn: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7

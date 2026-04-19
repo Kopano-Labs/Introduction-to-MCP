@@ -1,7 +1,7 @@
 ---
 title: Final Demo Polish And Daily Disciplines
 created: 2026-04-11
-updated: 2026-04-11
+updated: 2026-04-18
 author: Codex
 priority: critical
 status: active
@@ -9,10 +9,16 @@ status: active
 
 # Final Demo Polish And Daily Disciplines
 
-> Canonical current-session control note for the Introduction to MCP second brain.
-> This replaces the older passive blocker list with a session execution layer.
+> Historical demo-control note for the Introduction to MCP second brain.
+> Useful for understanding the demo-hardening session model, but it is not the primary source for current KC owner-delivery truth.
 
-## Session Roster (LATEST)
+## Reading Rule
+
+- use this note as historical demo-execution evidence
+- defer current truth to [Now](../00-Home/Now.md), [Project Status](Project%20Status.md), [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md), and [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+- no line in this note may be used by itself as proof that KC owner delivery is complete
+
+## Session Roster Reference
 
 - Creator: `RobynAwesome`
 - Observer: `Kopano Context`
@@ -55,22 +61,23 @@ status: active
 - Python package namespace is still `Kopano Context.*` until Robyn completes the import rewrite
 - vault wording must not imply that the code namespace migration is already complete
 
-## Current Truth
+## Demo-Hardening Truth Snapshot
 
 ### Code-Verified (LIFTED)
 
 - [x] conservative Kopano demo route is rehearsed and locked
 - [x] Kopano Labs, Console, Forge, and Admin audit are stable
-- [x] KasiLink auth, data, and environment hydration is PROVEN
-- [x] WhatsApp bridge verified with real delivery
-- [x] Microsoft Readiness 6/6 verified with active telemetry
-- [x] **FULL STACK DEMO READY**
+- [x] KasiLink auth, data, and environment hydration was treated as demo-ready in this session context
+- [x] WhatsApp bridge was treated as verified for demo context
+- [x] Microsoft Readiness was treated as verified for demo context
+- [x] demo route was treated as ready for rehearsal context
 
 ### No-Go / Deferred
 
 - reward and referral are still documentation truth only in this workspace
 - do not present reward or referral as live product capability
 - do not silently convert blocked product work into fake demo narrative
+- do not use this note to override the current owner-access gate
 
 ## Session Implementation Stages
 

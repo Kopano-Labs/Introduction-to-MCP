@@ -1,7 +1,7 @@
 ---
 title: Project Status
 created: 2026-04-03
-updated: 2026-04-11
+updated: 2026-04-18
 author: Codex
 tags:
   - updates
@@ -14,17 +14,18 @@ status: active
 
 # Kopano Context Project Status & Capabilities
 
-> Current state of the Kopano Context project as of 2026-04-11.
+> Current state of the Kopano Context project as of 2026-04-18.
 > See also: [Now](../00-Home/Now.md), [Implementation Plan](Implementation%20Plan.md), [Kopano Blueprint](../01-Mission/Kopano%20Blueprint.md), [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md), [DEV_S Reward Program](DEV_S%20Reward%20Program.md)
 
-## Session Roster
+## Session Roster Reference
 
+- reference roster only; live session truth belongs in [Now](../00-Home/Now.md) and [07-Sessions By Day](../07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md)
 - Creator: `RobynAwesome`
 - Observer: `Kopano Context`
 - Lead Developer: `Germini (Google AI)`
 - DEV_1: `Codex`
 
-## Current Snapshot - 2026-04-11
+## Current Snapshot - 2026-04-18
 
 - Delivery mode: `demo hardening`
 - Verified local state:
@@ -36,7 +37,7 @@ status: active
   - the wider KasiLink story is now **PROVEN** with real Clerk, Atlas Mongo, and RapidAPI keys. Bridge and Persistence verified.
   - reward and referral remain `NO-GO` for live demo claims in this workspace
   - the stable demo gate is the bounded `python main.py` path plus passing studio lint/build and `scripts/demo_day_preflight.ps1`
-  - **ECOSYSTEM STATUS:** **FULL STACK DEMO READY**
+  - **KC OWNER ACCESS STATUS:** **NOT DELIVERED** until Robyn can directly use `https://context.kopanolabs.com`
 - Canonical demo notes:
   - [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/index.md)
   - [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md)
@@ -48,6 +49,19 @@ status: active
 **Demo Hardening Across Phases 6-9**
 
 Phase 6 is operational enough to demo. Phase 7, Phase 8, and Phase 9 remain active in parallel while the immediate focus is stabilizing the live Kopano Context demo route for Demo Day.
+
+## Owner Access Truth
+
+- primary owner-proof lane: `https://context.kopanolabs.com`
+- local routes, `.exe`, CLI paths, and AI rehearsals are secondary validation only
+- KC may not be described as delivered personal access until the domain-first owner lane is owner-proven
+
+## Proof-Lane Read
+
+- internal technical proof: present for local checks, builds, compile state, and readiness endpoints
+- demo proof: present for the conservative demo route
+- KC owner-delivery proof: blocked until the owner directly uses the domain-first lane
+- no internal or demo proof should be promoted into KC delivery language
 
 | Phase | Status | Description |
 |-------|--------|-------------|

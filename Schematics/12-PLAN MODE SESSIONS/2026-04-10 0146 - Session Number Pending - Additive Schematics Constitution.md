@@ -68,3 +68,12 @@
 - keep plan-mode sessions archived here instead of only in chat
 - continue reconciling current-state notes with the new systems
 - keep populating the new folders so they are operational, not skeletal
+
+## Plan Lifecycle
+
+- lifecycle status: `partially_propagated`
+- propagation status: `partially_propagated`
+- live destinations touched:
+  - `index.md`
+  - `00-Home/Dashboard.md`
+  - multiple top-level folder indexes

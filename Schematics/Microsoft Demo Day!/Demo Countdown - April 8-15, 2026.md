@@ -1,7 +1,7 @@
 ---
 title: Demo Countdown - April 8-15, 2026
 created: 2026-04-08
-updated: 2026-04-10
+updated: 2026-04-18
 author: Codex
 tags:
   - demo
@@ -18,11 +18,18 @@ status: active
 > Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
 > Close state: [2026-04-09 Close State](2026-04-09%20Close%20State.md)
 
+## Reading Rule
+
+- this is a dated demo-countdown note
+- use it for execution history and timeline reconstruction
+- do not use it as current proof that KC owner delivery is complete
+- current truth belongs in [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md), and [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+
 ## Window
 
 - Window: `2026-04-15` to `2026-04-17`
 - Countdown plan owner: Lead
-- Execution baseline: `KasiLink -> Council -> Labs -> Console -> Forge -> Admin audit`; **KasiLink is PROVEN and READY.**
+- Execution baseline for the demo period: `KasiLink -> Council -> Labs -> Console -> Forge -> Admin audit`; this is demo-context evidence, not current KC owner-delivery proof.
 
 ## Assumptions
 

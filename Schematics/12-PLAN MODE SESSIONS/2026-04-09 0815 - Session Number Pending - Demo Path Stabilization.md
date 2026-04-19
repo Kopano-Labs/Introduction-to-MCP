@@ -39,3 +39,12 @@
 - tighten route copy
 - keep owner-blocked items explicit
 - preserve the Kopano Context-only safe route as the live baseline
+
+## Plan Lifecycle
+
+- lifecycle status: `implemented`
+- propagation status: `partially_propagated`
+- live destinations touched:
+  - `00-Home/Dashboard.md`
+  - `04-Updates/Project Status.md`
+  - `Microsoft Demo Day!/`
