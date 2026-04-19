@@ -40,9 +40,15 @@ status: active
 
 - prefer stable note names over frequent renames
 - when root docs are externally referenced, index them from Schematics instead of moving them
-- use one canonical "open this first" note so the vault has a clear entry point
+- use one canonical audit gate so the vault has a clear entry point
 - when adding a new note cluster, also add an index note for that cluster
 - fix stale path references immediately once the vault naming changes
+
+## Front-Door Discipline
+
+- `AUDIT MAIN-BRAIN` starts at `00-Home/Dashboard.md`
+- `CLAUDE.md` is scope handoff for Claude-facing workflow, not the audit destination
+- every top-level folder guide should reinforce the same doctrine locally
 
 ## Verification Checklist
 

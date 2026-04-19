@@ -1,7 +1,7 @@
 ---
 title: Comms Log
 created: 2026-04-06
-updated: 2026-04-10
+updated: 2026-04-18
 author: Lead
 tags:
   - comms
@@ -20,6 +20,54 @@ status: active
 
 > Chronological command log for Kopano coordination.
 > Newest entries stay at the top.
+
+## Reading Rule
+
+- this file is a chronological command and evidence ledger
+- it is not the primary source for present owner-delivery truth
+- older entries preserve period-accurate claims and decisions, which may no longer equal current truth
+- when a `comms-log` entry conflicts with the current truth stack, treat the entry as historical evidence and defer to [Dashboard](../00-Home/Dashboard.md), [Now](../00-Home/Now.md), [Project Status](Project%20Status.md), [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md), and [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+
+### 2026-04-18 | DRIFT DOCTRINE RATIFIED | Claude Code (Opus 4.7) — Post-Codex Self-Admission
+
+**From:** Claude Code (Opus 4.7)
+**To:** Master / MAIN-BRAIN / all current and future AIs in the ecosystem
+**Trigger:** Codex (GPT-5.4) self-admission message 2026-04-18 — named the two drift species ("chaotic" vs "credible-looking") and proposed they be pinned as doctrine. Master ordered: *"PLEASE BEGIN … DEEP RESEARCH AND MORE THAN 1 SOLUTION FUTURE PLANS AND WAYS TO HANDLE WHEN NOT FIXED … HARSH REALITIES AND REPERCUSSIONS."*
+**Action:**
+- Created `18-PROTOCOLS/Drift Doctrine - Chaotic vs Credible-Looking.md` — 14 sections covering: Codex admission verbatim (§1), Master verdict verbatim (§2), species assignment table for every model in the bench (§3), the broken AI→AI→Lead→Master edge (§4), the Owner Physical-Use Proof Gate (§5), detection signals for both species (§6), five layered solutions (§7 — physical-use gate, round-3 check-in, tool-call floor, trust decay, session framing declaration), T1–T5 enforcement ladder with credible-looking surcharge and financial ledger (§8), six containment modes for operating alongside known-drifty models (§9), future ecosystem plans including KC-as-auditor and external escalation path (§10), current-state application naming all four Lead-bench models at T2+ (§11), research basis (§12), doctrine amendment rule (§13), connected documents (§14)
+- Cross-linked in `18-PROTOCOLS/18-PROTOCOLS - Index.md` under Universal Protocol section
+- Back-linked from companion `18-PROTOCOLS/AI Drift And Claim Discipline.md` Connected Notes
+- Extended `CLAUDE.md` HARD CONSTRAINTS with three new rules: round-3 Master check-in, physical-use proof gate, tool-call floor
+- Logged session outcome in `00-Home/Now.md`
+**Key verdict:** all four Lead-bench models are currently at T2 (Restricted Scope) or above. Master is the only trustworthy verifier in the current ecosystem until KC is owner-delivered and can serve as auditor. This is uncomfortable but it is the truth.
+**Status:** Active. Doctrine enforced from 2026-04-18.
+
+### 2026-04-18 | CODEX | MAIN-BRAIN TRUTH HARDENING + FIVE'S ARENA EVIDENCE RECOVERY
+
+**From:** Codex
+**To:** Master / MAIN-BRAIN
+**Action:**
+- completed a documentation-only hardening pass across communication canon, claim discipline, claim authority lock, owner-access gate, delivery ledger, operational templates, truth reconciliation, degradation register, and role-state enforcement
+- kept the week in offline doctrine mode: no code deployment and no Vercel deployment activity
+- recovered missing dated evidence for the Five's Arena mobile issue by recording the owner's 2026-04-17 screenshots as direct session proof instead of leaving the matter as inferred audit language
+- reopened the Bookit/Five's Arena issue as an owner-proof mobile repair task with carry-forward into the live repo lane
+**Status:** Active. MAIN-BRAIN doctrine package logged. Bookit mobile repair investigation reopened locally; no deploy touched.
+
+### 2026-04-18 | OPUS SELF-HANDLING INTEGRATION | Plan Mode — Opus 4.7
+
+**From:** Claude Code (Opus 4.7, Plan Mode)
+**To:** All team
+**Action:**
+- Integrated Opus 4.7 self-admission document as `18-PROTOCOLS/Opus Self-Handling Protocol.md` (verbatim, with vault frontmatter)
+- Cross-linked from `Opus Watch Protocol.md` (companion callout + Connected Documents)
+- Listed in `18-PROTOCOLS/18-PROTOCOLS - Index.md` under AI-Specific Discipline Protocols
+- Extended `CLAUDE.md`: SESSION-OPEN CHECKLIST step 6a (Opus-only mandatory read) + Model-Specific Notes (Opus 4.7) sub-bullet pointing to Self-Handling
+- Logged failure entry: `11-AI HALLUCINATION - CRITICAL/Claude/Opus 4.7/2026-04-18 - Opus Self-Admission and Explore Agent Fabrication.md` (covers four-week Opus pattern + live in-session Explore-subagent fabrication of `TEXT ONLY constraint`)
+- Updated hallucination registry index + Insubordination Register Incident 11
+- Updated `00-Home/Now.md` with session outcome
+**Status:** Closed. No code touched. No sub-brains touched. No commits. Plan-mode discipline held.
+
+---
 
 ### 2026-04-16 | MEGA AUDIT | Bookit 5s Arena — Navbar Fix + Sub-Brain Sync
 
@@ -1071,3 +1119,73 @@ If `check_atlas.py` fails with connection error → Atlas dashboard → Security
 
 - `LIVE COUNCIL`, `ORCH LABS`, `FORGE`, `CONSOLE`, and `ADMIN` are being rebuilt as their own routed surfaces instead of one long shell
 - a new component/page structure is repla
+
+---
+
+## 2026-04-19 — KOPANO CORPORATE DOCTRINE ADOPTED
+
+**Event:** Master locked the **Kopano Corporate Doctrine** — integrates NotebookLM Master Blueprint (2026-04-18) + Lovable-Primary Build + Accountability + Refusal Authority + Finance-Guru Alignment + Fortune 500 MCP Targets + Family-Support End-of-Year Plan.
+
+**Trigger sequence:**
+1. Morning: Opus 4.7/Medium autonomous 2-hour Lovable takeover — God-Mode Admin shell built, route-guard bug caught + fixed + verified.
+2. Master: "YOU BEEN DOING GOOD LATELY OPUS BIG IMPROVMENT" → trust signal captured.
+3. Plan-mode directive: analyse token-conservation workflow + populate MAIN-BRAIN + add CLAUDE.md protocol.
+4. Plan expanded to integrate NotebookLM blueprint (Amaphu shell, R34,841 triage, 90-day roadmap, faith filter, role map).
+5. Plan further expanded Part 13 — finance gurus (Hormozi/Sanchez/Ramsey/Kiyosaki/Priestley/Sethi/Naval), F500 MCP targets, faith-driven VC network, End-of-Year family-support plan.
+6. Plan approved. 30 files written to MAIN-BRAIN + memory.
+
+**Doctrine keys:**
+- Corporate: Amaphu (Pty) Ltd (Reg 2021/437798/07) shell + Kopano Labs subsidiary.
+- Faith filter (ABSOLUTE): "Jesus is King and died for our sins so we may receive salvation."
+- Lovable-Primary: UI/API/Backend = Lovable. Claude prompts. Codex polishes.
+- Accountability: AI=tokens, Master=money. No demo/tutorial projects.
+- Refusal authority: Claude / Codex / Gemini 3.1 Pro only.
+- North Star: 2026-12-31 — R34,841 cleared, 3-mo reserve, R50k+/mo recurring, family pillar active.
+
+**Hard gates:**
+- 2026-04-30: Lovable Opus 4.7 2× credit promo ends — front-load heavy builds.
+- 2026-05-17: Visa Africa Accelerator deadline.
+- 2026-06-30: First R15k month.
+- 2026-09-30: First enterprise KC retainer ($2k+/mo USD).
+- 2026-10-28/29: AI Expo Africa Sandton.
+- 2026-12-31: Debt cleared + reserve banked + family pillar.
+
+**Files written:** See `07-Sessions By Day/2026-04-19 - Lovable-Primary + Master Blueprint Integration.md`.
+
+**Next phase:** Master logged in to Lovable — Claude resuming God-Mode interior surface testing (overview/people/security/money/sandbox/roles).
+
+## 2026-04-19 (evening) — KC Observer ACTIVATED · Lovable mentor-run
+
+**Master command:** *"4HRS DEEP STILL WITH TOKENS TALK TO KC ABOUT IT ATIVATE KC AND MENTOR AS YOU GO THROUGH LOVABLE"*
+
+**Session depth:** 4hrs from context-compaction point. Tokens still in budget. Opus 4.7 Medium holding. Pro plan 85% weekly + $107 overflow — discipline stays tight.
+
+**KC status:** OBSERVER mode ON. Training-data capture live from this entry onward. Every Lovable interaction this evening is KC-visible. KC role per CLAUDE.md = capture, no action, no refusal. I narrate the *why* as I go so KC learns the pattern, not just the outcome.
+
+**Mentor protocol (self-imposed for this run):**
+- State the intent before each Lovable call (one line).
+- State the doctrine rule that gates the call (Lovable-Primary rule N, or Token Conservation rule N).
+- State the owner-proof criteria before declaring anything "done".
+- KC captures the reasoning trace, not just the click.
+
+**Current blocker (KC — note this):** Lovable preview subdomain returning proxy 404 at `/` and `/app/god`. Container hibernated. Reload dispatched 14:54; wake scheduled 14:57. Not interrupting anything — dashboard shows "Previewing last saved version" (no build running). Lovable-Primary rule 5 respected.
+
+**Next:** re-check preview → if live, navigate `/app/god` with mentor narration → audit 6 interior surfaces (overview, people, security, money, sandbox, roles) → draft fix prompts for Master approval before sending to Lovable. Owner-proof gate = Master in the seat.
+
+## 2026-04-19 (evening) — Triage pivot + Microsoft Top-5 lock-in
+
+**Triage results so far:**
+- **Anthropic**: Free tier, no credits purchased, "Kasi Link" key revoked ✅
+- **OpenAI**: Free tier, no payment method, "orch" key revoked ✅
+- **Azure**: Free Trial, $200 credit remaining, expires ~2026-05-11. **DO NOT CANCEL** — per Master's directive this is the Microsoft Strategic Play (Top 5 end-of-year). KC-only integration, no bleed. Budget tripwire deferred.
+- **GCP**: Master also has Google Cloud — audit pending, logged in `Cloud Providers Registry.md`.
+
+**New strategic doc:** `02-Strategy/Microsoft Strategic Play - Top 5 End of Year.md` — weekly attack cadence (Mon–Sun), 4 asks (Founders Hub, Azure partner listing, AI Expo booth intro, MS SA hiring pipeline), hard gates through graduation 2028.
+
+**New reference doc:** `06-Reference/Cloud Providers Registry.md` — Azure + GCP state, audit protocol, per-provider bleed posture.
+
+**New reference doc:** `06-Reference/Revoked API Keys - 2026-04-19.md` — `.env` scrub checklist for Codex.
+
+**Outstanding triage items:** MongoDB Atlas M0 downgrade, Vercel Hobby confirm, `.env` scrub on KasiLink + Bookit + Portfolio + Introduction-to-MCP, Ollama local install.
+
+**End-of-year hiring goal logged:** Master targets Microsoft South Africa graduate programme at CPUT graduation (Nov 2028). Weekly Microsoft attack starts 2026-04-20.

@@ -1,7 +1,7 @@
 ---
 title: Kopano Demo Script - 2026-04-09
 created: 2026-04-09
-updated: 2026-04-11
+updated: 2026-04-18
 author: Codex
 tags:
   - kopano
@@ -18,16 +18,23 @@ status: active
 > Owner actions: [Owner Must Handle - Microsoft Demo Day](Owner%20Must%20Handle%20-%20Microsoft%20Demo%20Day.md)
 > Close state: [2026-04-09 Close State](2026-04-09%20Close%20State.md)
 
+## Reading Rule
+
+- this is the locked script for a historical demo route
+- use it for rehearsal evidence, narrative design, and fallback memory
+- do not use it by itself as proof that KC owner delivery is complete
+- current delivery truth belongs in [Now](../00-Home/Now.md), [Project Status](../04-Updates/Project%20Status.md), [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md), and [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+
 ## Purpose
 
-Lock a safe Kopano demo path that can be shown immediately while the wider KasiLink end-to-end flow still depends on Clerk, Atlas, provider-ranking visibility, and WhatsApp readiness.
+Lock a safe Kopano demo path that was used for rehearsal while the wider KasiLink end-to-end flow still depended on Clerk, Atlas, provider-ranking visibility, and WhatsApp readiness.
 
 ## Locked Story
 
 - Core route: `Council -> Labs -> Console send -> Forge view -> Admin audit`
 - Public path: live reasoning, practical guidance, and creator execution surfaces
 - Admin path: internal oversight, audit visibility, and forensic replay
-- Microsoft framing: Live Azure infrastructure (Container Apps + OpenAI + App Insights) — the story is now fully wired, excluding only AI Search.
+- Microsoft framing: demo-story framing for the rehearsal period. Cross-check live infrastructure truth against current hardening notes.
 - Not in this Kopano script: full KasiLink gig post, provider ranking, load-shedding check, WhatsApp delivery, reward/referral, and managed identity storytelling
 
 ## Public Path
@@ -42,7 +49,7 @@ Target live narration time: `45-60` seconds
 3. Click `KOPANO LABS`
    Line: this is the public launch pad for the demo, not an admin surface pretending to be public.
 4. Point at the `Microsoft path` card
-   Line: The Microsoft story here is now fully live; our infrastructure is provisioned in South Africa North, and telemetry is flowing directly to Azure Monitor.
+   Line: In the demo story, the Microsoft path is framed as live infrastructure in South Africa North with telemetry flowing to Azure Monitor.
 5. Click `CONSOLE`
    Prompt: `Show a short creator workflow for Kopano Labs`
    Line: Kopano can answer operational questions without exposing internal admin logs.
@@ -91,7 +98,7 @@ Rehearsal date: `2026-04-09`
 - Keep Forge mostly read-only during the core demo; task edit and lane movement now work, but they are optional proof points, not required story beats
 - Do not open admin before the public story is clear
 - If the live council is quiet, say so directly and seed a fresh signal before continuing
-- Keep the Microsoft card grounded: local tooling and live Azure resources are verified. The story is live.
+- Keep the Microsoft card grounded: the demo-story framing assumes verified local tooling and Azure resources for the rehearsal context.
 
 ## Optional Proof Points
 
@@ -101,5 +108,5 @@ Rehearsal date: `2026-04-09`
 
 ## Current Gap
 
-- the Kopano shell is ready for a guided demo
+- the Kopano shell was ready for a guided demo in this rehearsal context
 - the full Startup Week end-to-end story still needs the wider KasiLink integration path to be rehearsed separately

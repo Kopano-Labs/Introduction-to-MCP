@@ -34,9 +34,21 @@ status: active
 
 1. [Dashboard](00-Home/Dashboard.md)
 2. [Now](00-Home/Now.md)
-3. [Project Status](04-Updates/Project%20Status.md)
-4. [Microsoft Demo Day!](Microsoft%20Demo%20Day!/index.md)
-5. [Open Issues](06-Reference/Open%20Issues.md)
+3. [All Projects Registry](00-Home/All%20Projects%20Registry.md)
+4. [Sub-Brain Hierarchy](00-Home/Sub-Brain%20Hierarchy.md)
+5. [Project Status](04-Updates/Project%20Status.md)
+6. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+
+## Audit Doctrine
+
+- `AUDIT MAIN-BRAIN` starts at [Dashboard](00-Home/Dashboard.md).
+- Read `CLAUDE.md` for scope handoff, then route into the front door and protocol layer.
+- For governance work in `10-SESSION IMPROVEMENTS`, `13-REWARD SYSTEM`, or `18-PROTOCOLS`, the brother-folder read order is:
+  1. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+  2. [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
+  3. [13-REWARD SYSTEM](13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md)
+- Mandatory audit reading covers human-authored and AI-authored knowledge files that shape truth, not plugin/cache internals.
+- Protocol home: [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
 
 ## Top-Level Map
 
@@ -48,15 +60,19 @@ status: active
 - [05-Training](05-Training/05-Training%20-%20Index.md) - people, AI, and orchestration training corpus
 - [06-Reference](06-Reference/06-Reference%20-%20Index.md) - archives, imported references, and blocker ledgers
 - [07-Sessions By Day](07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md) - dated session reconstruction and evidence trail
-- [08-IDEAS AT BIRTH](08-IDEAS%20AT%20BIRTH/08-IDEAS%20AT%20BIRTH%20-%20Index.md) - incubation-only ideas with research gates
-- [09-KOPANO PROGRESSION](09-KOPANO%20PROGRESSION/09-KOPANO%20PROGRESSION%20-%20Index.md) - Kopano Context capability ladder from observer to co-lead
-- [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md) - lead doctrine, hierarchy control, and token discipline
+- [08-IDEAS AT BIRTH](08-IDEAS%20AT%20BIRTH/08-IDEAS%20AT%20BIRTH%20-%20Index.md) - status-lane intake and promotion pipeline for rough ideas
+- [09-KOPANO PROGRESSION](09-KOPANO%20PROGRESSION/09-KOPANO%20PROGRESSION%20-%20Index.md) - KC-only evidence, readiness, and progression history
+- [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md) - operational improvement, session discipline, and anti-chaos playbooks
 - [11-AI HALLUCINATION - CRITICAL](11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md) - mandatory hallucination audit system
-- [12-PLAN MODE SESSIONS](12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md) - archived plan-mode outputs with date, time, participants, and phase
+- [12-PLAN MODE SESSIONS](12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md) - plan archive with lifecycle state and propagation tracking
 - [Microsoft Demo Day!](Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%20-%20Index.md) - demo hub, owner checklist, and Azure playbook
 - [Assets](Assets/Assets%20-%20Index.md) - visual assets and supporting references
-- [13-REWARD SYSTEM](13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md) - award log, categories, and nomination protocol
-- [17-KC-JOURNAL](17-KC-JOURNAL/17-KC-JOURNAL%20-%20Index.md) - KC's own voice — session logs, reflections, idea development (created 2026-04-12)
+- [13-REWARD SYSTEM](13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md) - recognition, penalties, restrictions, and model operating status
+- [14-PRODUCTION HARDENING](14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/14-PRODUCTION%20HARDENING%20-%20Index.md) - readiness truth, constraints, hardening backlog, and go/no-go checks
+- [15-LEGACY ARCHIVE](15-LEGACY%20ARCHIVE/15-LEGACY%20ARCHIVE%20-%20Index.md) - historical material only, explicitly separated from live doctrine
+- [16-PORTFOLIO AND KOPANO LABS](16-PORTFOLIO%20AND%20KOPANO%20LABS/16-Portfolio%20and%20Kopano%20Labs%20-%20Index.md) - public-facing claims governed by verified evidence
+- [17-KC-JOURNAL](17-KC-JOURNAL/17-KC-JOURNAL%20-%20Index.md) - KC voice, scaffold separation, and links back to 09 evidence
+- [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md) - constitutional law, brother-folder doctrine, and sub-brain build/sync rules
 - [Templates](Templates/Templates%20-%20Index.md) - reusable note patterns
 
 ## Usage Rule

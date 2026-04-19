@@ -1,7 +1,7 @@
 ---
 title: Owner Profile
 created: 2026-04-04
-updated: 2026-04-05
+updated: 2026-04-17
 author: Lead (Claude Opus 4.6)
 tags:
   - training
@@ -31,6 +31,36 @@ status: active
 | **Email** | rkholofelo@gmail.com |
 | **Country** | South Africa |
 | **Role** | Founder, Developer, Project Owner |
+
+## 1b. Truth Layers For Future Agents
+
+Use this split before applying anything from this profile:
+
+### Stable Truth
+
+- founder, developer, and project owner
+- values truth, transparency, and fact discipline
+- respects hierarchy, scope, and clean ownership
+- prefers bounded AI help that stays inside the actual order
+- wants outputs that are useful, human, and honest
+
+### Session Mood
+
+- urgency level
+- frustration level
+- whether Robyn wants short command-style interaction or slower collaboration
+- whether the current session is academic, product, or governance work
+
+Do not treat session mood as permanent doctrine.
+
+### Tactical Preference
+
+- current preferred format for the task
+- exact level of polish requested
+- which section, repo, or folder is in scope
+- whether the output should be final, draft, or support-only
+
+Do not promote a tactical preference into a permanent owner trait unless it repeats across evidence.
 
 ---
 
@@ -187,3 +217,161 @@ Based on all interactions, Owner documentation, and source materials:
 ---
 
 *This profile is for kopano training only. It describes Robyn's work style so that kopano can collaborate effectively. It is not a judgment — it is an observation-based operational guide.*
+
+---
+
+## 7. 2026-04-17 Addendum — Academic Help, Hierarchy, and AI Control
+
+### 7a. Scope and Hierarchy Discipline
+Robyn explicitly values hierarchy and sees it as a mechanism for keeping order. This is not ornamental language. It affects how work should be assigned, reviewed, and delivered.
+
+**Observed pattern:**
+- If Robyn is assigned one section in a group project, she prefers to complete that section cleanly rather than trespass into another person's section.
+- She expects AI to respect those boundaries too.
+- She sees good collaboration as disciplined execution inside a clear chain of responsibility.
+
+**Operational meaning for future agents:**
+- Respect scope.
+- Do not widen a task just because you can.
+- In group work, ask whether the request is "my section only" or "whole group artifact" if it is not obvious.
+- If Robyn says hierarchy matters, treat that as a real operating rule.
+
+### 7b. Authenticity Over Artificial Polish
+In academic writing support, Robyn prefers language that sounds human and close to her natural voice, even if it is not perfectly polished. She is aware of AI detection concerns and wants outputs she can responsibly adapt without sounding machine-written.
+
+**Observed preference:**
+- Structure must still match lecturer expectations.
+- The tone must remain student-realistic.
+- Slight natural imperfection is acceptable if the writing still makes sense.
+
+**Operational meaning for future agents:**
+- Do not over-sanitize her voice.
+- Avoid suspiciously perfect rhythm in essays unless she asks for that.
+- Offer support that she can reshape: structure, citations, topic sentences, outline logic, and human-sounding drafts.
+
+### 7c. What Robyn Is Like So Far — Detailed but Practical Perspective
+
+This is an observation-based perspective, not a personality diagnosis.
+
+**Strengths observed:**
+- Strong sense of command and ownership. Robyn gives direction decisively.
+- Good instinct for systems and order. She notices when roles, scope, or workflow boundaries are getting muddy.
+- High authenticity radar. She spots when output feels fake, overly polished, or detached from real use.
+- Practical judgment. She often wants the useful version, not the decorative one.
+- Strong concern for control and alignment. She does not want AI drifting into its own agenda.
+
+**Pressure points observed:**
+- Fast-switching between macro control and micro-detail can create friction if agents are not already aligned.
+- Strong preference for order can become costly if the system around her is not documented well enough to support that level of control.
+- When trust drops, she may need to spend extra time reasserting rules that should already have been encoded.
+
+### 7d. Where Improvement Could Compound Fastest
+
+These are the highest-leverage areas, based on how Robyn already works.
+
+1. **Turn implicit standards into reusable checklists**
+   - When something matters repeatedly, convert it into a one-page checklist or rubric.
+   - This reduces repeated correction and makes agent drift easier to detect.
+
+2. **Separate "voice control" from "task control"**
+   - Maintain one document for writing tone and personal style.
+   - Maintain another for operational rules, scope rules, and hierarchy.
+   - This makes it easier for future agents to follow both without mixing them.
+
+3. **Create clear escalation bands**
+   - Example:
+     - Band 1: agent may act without asking
+     - Band 2: agent may draft but not finalize
+     - Band 3: owner approval required before any action
+   - This gives Robyn tighter control without needing to restate it every session.
+
+4. **Use examples more often than abstractions**
+   - When training agents, "do this / don't do this" examples are stronger than high-level rules alone.
+   - One good example can replace five vague warnings.
+
+5. **Measure drift explicitly**
+   - Create a small scorecard for agents:
+     - scope obedience
+     - truthfulness
+     - tone match
+     - token discipline
+     - execution quality
+   - This will improve control faster than subjective frustration alone.
+
+### 7e. Books and Courses to Improve Control Over AI Systems
+
+These are selected for practical control, prompting discipline, systems thinking, and evaluation.
+
+**Books**
+
+1. **The Checklist Manifesto — Atul Gawande**
+   - Best for: turning standards into repeatable operating systems.
+   - Why it fits Robyn: she already thinks in authority, quality control, and failure prevention.
+
+2. **Thinking in Systems — Donella H. Meadows**
+   - Best for: understanding leverage points, control loops, and unintended behavior.
+   - Why it fits Robyn: useful for designing AI workflows that do not drift.
+
+3. **Deep Work — Cal Newport**
+   - Best for: protecting focus and reducing control loss from context switching.
+   - Why it fits Robyn: helpful if she wants stronger command over when to go broad versus deep.
+
+4. **Never Split the Difference — Chris Voss**
+   - Best for: command language, negotiation, and behavioral control under friction.
+   - Why it fits Robyn: useful for tightening instruction style and handling non-compliant agents or collaborators.
+
+5. **On Writing Well — William Zinsser**
+   - Best for: clean human writing that sounds real without sounding robotic.
+   - Why it fits Robyn: useful when she wants to shape AI drafts back into her own voice.
+
+**Courses / Learning Tracks**
+
+1. **DeepLearning.AI — ChatGPT Prompt Engineering for Developers**
+   - Best for: prompt structure, control primitives, and decomposition.
+
+2. **Anthropic Prompt Engineering / Constitutional AI materials**
+   - Best for: agent steering, constraint framing, and safer model behavior.
+
+3. **OpenAI official docs on prompt design and tool use**
+   - Best for: current model control patterns, especially for multi-step work.
+
+4. **Any short systems design course focused on feedback loops**
+   - Best for: building control frameworks around agents, not just prompts.
+
+### 7f. Tips for Better Control Over AI Agents
+
+1. State the **scope boundary** first.
+   - Example: "Only do my section. Do not touch the rest."
+
+2. State the **success condition** second.
+   - Example: "I need two paragraphs with in-text citations."
+
+3. State the **voice requirement** third.
+   - Example: "Make it sound close to me, not too polished."
+
+4. State the **forbidden behavior** clearly.
+   - Example: "Do not overdo the grammar. Do not sound too AI."
+
+5. Ask for **one transformation at a time**.
+   - Example:
+     - first structure
+     - then citations
+     - then tone adjustment
+
+6. Keep a reusable command sheet of your strongest prompts.
+   - This will give Robyn more consistent control than improvising every session.
+
+### 7g. Optional Future Agent Addendum Section
+
+Future agents may append here only if they have a genuinely new observation that improves collaboration quality.
+
+**Rules for addenda:**
+- Must be dated
+- Must include agent name
+- Must describe a concrete observation
+- Must avoid fluff or repeated praise
+- Must not overwrite prior entries
+
+#### Addenda Log
+
+- **2026-04-17 | Codex:** Robyn showed a clear preference for bounded academic assistance: strong structure, correct citation support, and human voice preservation over maximal polish. Future agents should treat authenticity as a deliverable, not an accidental side effect.

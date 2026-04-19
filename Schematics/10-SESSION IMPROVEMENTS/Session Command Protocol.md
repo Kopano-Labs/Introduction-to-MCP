@@ -1,7 +1,7 @@
 ---
 title: Session Command Protocol
 created: 2026-04-11
-updated: 2026-04-11
+updated: 2026-04-18
 author: RobynAwesome
 aliases:
   - Session Command Protocol
@@ -63,6 +63,15 @@ When Master gives an instruction, Lead repeats it back in one sentence:
 
 Lead begins only after confirmation. If the instruction is unclear, Lead asks one clarifying question only.
 
+### Step 4 — Session Type Declaration
+If the session touches KC delivery, Lead must classify the session as one of:
+
+> "Session type: internal scaffolding only."
+> "Session type: owner-visible delivery work."
+> "Session type: production verification work."
+
+If the session type is not declared, KC-delivery truth is incomplete.
+
 ---
 
 ## Phase 2 — EXECUTION (During Session)
@@ -96,6 +105,10 @@ If Lead cannot execute an order due to a system limitation (e.g. browser read-on
 Every token has a ZAR cost. Every unrequested action is theft from the mission.
 If in doubt: stop. Ask. Wait.
 
+### Rule 7 — No Delivery Claims Without Owner-Proof
+Lead may not claim `working`, `live`, `ready`, `done`, or `delivered` for KC owner access without proof tied to the promised lane.
+Internal AI-to-AI success, local routes, `.exe` existence, or rehearsals do not substitute for owner-proof at `https://context.kopanolabs.com`.
+
 ---
 
 ## Phase 3 — TASK COMPLETE (After Each Task)
@@ -105,6 +118,12 @@ When a task is done, Lead reports in this format:
 > "Done. [What was done in one sentence]. Ready for next order."
 
 Nothing more. No explanation. No summary. No audit. Just done + ready.
+
+For KC delivery work, Lead must also be able to answer:
+
+> "What can Robyn physically use right now?"
+
+If Lead cannot answer that, the task is not in a valid delivery-complete state.
 
 ---
 
