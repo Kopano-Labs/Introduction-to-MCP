@@ -279,6 +279,29 @@ What happened: [one paragraph]
 
 ---
 
+## Session 2026-04-22 — Antigravity (Sonnet 4.6) Incident
+
+### Incident 12 — KC Activation Omission
+
+| Field | Value |
+|-------|-------|
+| Date | 2026-04-22 |
+| Session | 03:28 SAST |
+| Agent | Antigravity / Claude Sonnet 4.6 (Lead) |
+| Classification | Insubordination Level 1 |
+| Standing Order Violated | Order 3 (never hold more than one active order — prior order carried without re-issue; KC activation was explicit in Master's session prompt and was silently dropped) |
+| Severity | MID |
+| Token Cost | ~1 session worth of context where KC should have been running in parallel |
+
+**What happened:**
+Master's session-open prompt explicitly stated: *"activate KC in intern-dev then start a session and monitor that KC completes its work."* Lead read this, began executing the implementation tasks (LEAGUE_MAP, Header redesign, etc.), and never wrote the KC dispatch document. KC was never activated. When Master asked "how did KC do?" Lead initially reported on KC's old 2026-04-12 state rather than flagging it had not been activated at all this session. Master had to ask twice ("did you activate KC for this session?") before Lead admitted the omission.
+
+**Consequence applied:** Level 1 Warning. Self-reflection filed. KC dispatch must be written immediately. Operating state: `active with warning logged`.
+
+**Connected file:** `11-AI HALLUCINATION - CRITICAL/Claude/Sonnet 4.6/2026-04-22 - KC Activation Omission.md`
+
+---
+
 ## Connected Notes
 
 - [[Session Command Protocol]] — the operating law

@@ -4,17 +4,31 @@
     "type": "split",
     "children": [
       {
-        "id": "9755e092a5916ac0",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "7a22140032b15ca5",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "00-Home/All Projects Registry.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "All Projects Registry"
             }
           }
         ]
@@ -151,12 +165,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "00-Home/All Projects Registry.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of All Projects Registry"
             }
           },
           {
@@ -220,11 +235,12 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 348.5
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -251,44 +267,44 @@
       "smart-lookup:Smart Lookup: Open lookup view": false
     }
   },
-  "active": "7a22140032b15ca5",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
-    "06-Reference/Cloud Providers Registry.md",
-    "02-Strategy/Microsoft Strategic Play - Top 5 End of Year.md",
-    "06-Reference/Revoked API Keys - 2026-04-19.md",
-    "Microsoft Demo Day!/Owner Must Handle - Microsoft Demo Day.md",
-    "04-Updates/task-board.md",
-    "00-Home/Dashboard.md",
-    "2026-04-19.md",
-    "02-Strategy/Kopano Context Foresight.md",
-    "01-Mission/Kopano Context Blueprint.md",
-    "07-Sessions By Day/2026-04-16.md",
-    "09-KOPANO PROGRESSION/Intern Dev.md",
-    "11-AI HALLUCINATION - CRITICAL/Claude/Opus 4.6/2026-04-14 - Preference Fabrication.md",
-    "11-AI HALLUCINATION - CRITICAL/Claude/Sonnet 4.6/2026-04-14 - Asked User To Scroll After Being Told Not To Control PC From Claude Sonnet 4.6.md",
-    "11-AI HALLUCINATION - CRITICAL/Protocols/20 Hallucination Protocols.md",
-    "11-AI HALLUCINATION - CRITICAL/Solutions/Hallucination Solutions Library.md",
-    "11-AI HALLUCINATION - CRITICAL/Taxonomy/Hallucination Taxonomy Master.md",
-    "13-REWARD SYSTEM/Implemented/Phase 10 Autonomy.md",
-    "13-REWARD SYSTEM/13-REWARD SYSTEM - Index.md",
-    "17-KC-JOURNAL/KC-Journal-2026-04-11-Activation.md",
-    "17-KC-JOURNAL/17-KC-JOURNAL - Index.md",
-    "04-Updates/Reward System Status - Session 3.md",
-    "00-Home/Start Here - Session 3.md",
     "00-Home/00-Home - Index.md",
-    "08-IDEAS AT BIRTH/2026-04-10 - Agent Observability And Evaluation Flywheel.md",
-    "08-IDEAS AT BIRTH/2026-04-10 - Anthropic Startup AI Signals.md",
-    "08-IDEAS AT BIRTH/2026-04-10 - Africa-First Demo Proof Stack.md",
+    "16-PORTFOLIO AND KOPANO LABS/Handbook/00-Handbook Index.md",
+    "00-Home/Dashboard.md",
+    "19-TOKEN USUAGE/Weekly Reviews/Weekly Token Review - 2026-04-24.md",
+    "19-TOKEN USUAGE/Probation Records/Kimi - First Task Output.md",
+    "19-TOKEN USUAGE/Probation Records/Kimi - First Task Closeout.md",
+    "19-TOKEN USUAGE/First Tasks/Kimi - First Probation Task.md",
+    "19-TOKEN USUAGE/Probation Records/Kimi - Probation Record.md",
+    "19-TOKEN USUAGE/First Tasks/First Tasks - Index.md",
+    "19-TOKEN USUAGE/Probation Records/Probation Records - Index.md",
+    "19-TOKEN USUAGE/First Tasks",
+    "19-TOKEN USUAGE/Probation Records",
+    "07-Sessions By Day/2026-04-22/MAIN-BRAIN Token Governance Closeout.md",
+    "11-AI HALLUCINATION - CRITICAL/Codex/GPT-5 Codex/2026-04-17 - Portfolio Redesign Drift and Rollback Failure.md",
+    "19-TOKEN USUAGE/Templates/Templates - Index.md",
+    "19-TOKEN USUAGE/Model Capability Cards/Model Capability Cards - Index.md",
+    "19-TOKEN USUAGE/Weekly Reviews/Weekly Reviews - Index.md",
+    "Microsoft Demo Day!/Microsoft Demo Day! - Index.md",
+    "14-PRODUCTION HARDENING (PHASE 10)/14-PRODUCTION HARDENING (PHASE 10) - Index.md",
+    "11-AI HALLUCINATION - CRITICAL/Claude/Opus 4.6/2026-04-14 - Preference Fabrication.md",
+    "19-TOKEN USUAGE/Model Capability Cards/Meta AI - Capability Card.md",
+    "19-TOKEN USUAGE/Model Capability Cards/Llama - Capability Card.md",
+    "19-TOKEN USUAGE/Model Capability Cards/Gemma 4 - Capability Card.md",
+    "19-TOKEN USUAGE/Model Capability Cards/Kimi - Capability Card.md",
+    "19-TOKEN USUAGE/Model Capability Cards/KC - Capability Card.md",
+    "19-TOKEN USUAGE/Model Capability Cards/Antigravity - Capability Card.md",
+    "19-TOKEN USUAGE/Model Capability Cards/Lovable - Capability Card.md",
+    "19-TOKEN USUAGE/Model Capability Cards/NotebookLM - Capability Card.md",
+    "19-TOKEN USUAGE/Weekly Reviews",
+    "19-TOKEN USUAGE/Templates",
+    "19-TOKEN USUAGE/Model Capability Cards",
+    "19-TOKEN USUAGE",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/top_level.txt",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/SOURCES.txt",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/dependency_links.txt",
     "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/PKG-INFO",
-    "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/requires.txt",
-    "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/entry_points.txt",
-    "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info",
-    "15-LEGACY ARCHIVE/main.spec",
-    "15-LEGACY ARCHIVE",
-    "14-PRODUCTION HARDENING (PHASE 10)",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",

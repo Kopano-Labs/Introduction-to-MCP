@@ -1,7 +1,7 @@
 ---
 title: Schematics Index
 created: 2026-04-10
-updated: 2026-04-12
+updated: 2026-04-22
 author: Codex
 tags:
   - schematics
@@ -38,15 +38,21 @@ status: active
 4. [Sub-Brain Hierarchy](00-Home/Sub-Brain%20Hierarchy.md)
 5. [Project Status](04-Updates/Project%20Status.md)
 6. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+7. [19-TOKEN USUAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md)
 
 ## Audit Doctrine
 
 - `AUDIT MAIN-BRAIN` starts at [Dashboard](00-Home/Dashboard.md).
 - Read `CLAUDE.md` for scope handoff, then route into the front door and protocol layer.
+- Audit levels are now:
+  - `Quick Audit` for one bounded question or one folder
+  - `Standard Audit` for governance, multi-folder work, and role work
+  - `Deep Audit` for major reorganizations and cross-system contradiction checks
 - For governance work in `10-SESSION IMPROVEMENTS`, `13-REWARD SYSTEM`, or `18-PROTOCOLS`, the brother-folder read order is:
   1. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
   2. [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
   3. [13-REWARD SYSTEM](13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md)
+- Token or cost governance work also reads [19-TOKEN USUAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md).
 - Mandatory audit reading covers human-authored and AI-authored knowledge files that shape truth, not plugin/cache internals.
 - Protocol home: [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
 
@@ -65,18 +71,25 @@ status: active
 - [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md) - operational improvement, session discipline, and anti-chaos playbooks
 - [11-AI HALLUCINATION - CRITICAL](11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md) - mandatory hallucination audit system
 - [12-PLAN MODE SESSIONS](12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md) - plan archive with lifecycle state and propagation tracking
-- [Microsoft Demo Day!](Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%20-%20Index.md) - demo hub, owner checklist, and Azure playbook
 - [Assets](Assets/Assets%20-%20Index.md) - visual assets and supporting references
 - [13-REWARD SYSTEM](13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md) - recognition, penalties, restrictions, and model operating status
-- [14-PRODUCTION HARDENING](14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/14-PRODUCTION%20HARDENING%20-%20Index.md) - readiness truth, constraints, hardening backlog, and go/no-go checks
+- [14-PRODUCTION HARDENING (PHASE 10)](14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/14-PRODUCTION%20HARDENING%20%28PHASE%2010%29%20-%20Index.md) - readiness truth, constraints, hardening backlog, and go/no-go checks
 - [15-LEGACY ARCHIVE](15-LEGACY%20ARCHIVE/15-LEGACY%20ARCHIVE%20-%20Index.md) - historical material only, explicitly separated from live doctrine
 - [16-PORTFOLIO AND KOPANO LABS](16-PORTFOLIO%20AND%20KOPANO%20LABS/16-Portfolio%20and%20Kopano%20Labs%20-%20Index.md) - public-facing claims governed by verified evidence
 - [17-KC-JOURNAL](17-KC-JOURNAL/17-KC-JOURNAL%20-%20Index.md) - KC voice, scaffold separation, and links back to 09 evidence
 - [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md) - constitutional law, brother-folder doctrine, and sub-brain build/sync rules
+- [19-TOKEN USUAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) - token discipline, weekly token review, session closeout law, and onboarding controls
 - [Templates](Templates/Templates%20-%20Index.md) - reusable note patterns
+- [Microsoft Demo Day!](Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%21%20-%20Index.md) - demo history and rehearsal hub
+
+## Infrastructure Layers
+
+- `.obsidian/` = Obsidian app internals, not a normal human audit path
+- `.smart-env/` = generated context infrastructure, not a normal human audit path
+- hidden/system folders may be inspected when technically necessary, but they are not part of the default front-door flow
 
 ## Usage Rule
 
 - improve the vault by adding, indexing, and reconciling
 - rename active control systems intentionally when stale naming conflicts with the current Kopano operating model
-- every folder should explain itself through `index.md`
+- every human-facing top-level folder should explain itself through `<Folder Name> - Index.md`

@@ -1,7 +1,7 @@
 ---
 title: Comms Log
 created: 2026-04-06
-updated: 2026-04-18
+updated: 2026-04-27
 author: Lead
 tags:
   - comms
@@ -28,7 +28,73 @@ status: active
 - older entries preserve period-accurate claims and decisions, which may no longer equal current truth
 - when a `comms-log` entry conflicts with the current truth stack, treat the entry as historical evidence and defer to [Dashboard](../00-Home/Dashboard.md), [Now](../00-Home/Now.md), [Project Status](Project%20Status.md), [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md), and [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
 
+### 2026-04-27 14:23 SAST | CODEX | PORTFOLIO PRODUCTION REFRESH + MAIN-BRAIN CLOSEOUT
+
+**From:** Codex
+**To:** Master / MAIN-BRAIN
+**Commit:** `d550d742` -> pushed to `main` -> production live at https://krrababalela.com
+
+**Action:**
+- refreshed the portfolio UI and public narrative from freelance MERN positioning to Chief Architect, Kopano Labs
+- added the `/kopano-labs` route and updated home, projects, footer, contact, and resume surfaces
+- verified `npm run build` passed locally before push
+- rebased onto remote `main`, pushed, then ran a manual Vercel production deploy to ensure the custom domain moved onto the refreshed build
+- verified the live domain now returns the refreshed asset bundle hashes `index-CuiqItmG.js` and `index-0p1sonto.css`
+- seeded the outcome back into MAIN-BRAIN through `00-Home/Now.md`, this comms entry, and `07-Sessions By Day/2026-04-27.md`
+
+**Residual follow-up:**
+- the live HTML response still returns the older `software engineer` title metadata, so SEO/title copy needs a follow-up pass if the public metadata must match the refreshed UI immediately
+
+**Status:** Closed. MAIN-BRAIN seeded. Session ready to stand by.
+
+### 2026-04-22 03:40 SAST | Lead (Antigravity / Sonnet 4.6) | BOOKIT 5S ARENA — PHASE 0-2 DELIVERY
+
+**From:** Lead (Antigravity — Google Deepmind)
+**To:** Master / MAIN-BRAIN / all team
+**Commit:** `60a2908` → pushed to `main` → Vercel deploy triggered → https://fivesarena.com
+
+**Actions completed:**
+
+*Phase 0 — Critical Fixes:*
+- Fixed `.env.local` iSports API key misconfiguration (`ISPORTS_API_KEY`, `ISPORTS_API_KEY_SECONDARY`, `ISPORTS_API_BASE_URL`)
+- Fixed sub-brain `STRUCTURE/CLAUDE.md` — 3× legacy "Orch" → "Kopano Context", broken demo link repaired
+- Fixed sub-brain `STRUCTURE/index.md` — Kopano Context folder references corrected
+- Fixed pre-existing JSX syntax error in `app/pricing/page.jsx` (motion.h1 + inline span child)
+
+*Phase 1 — Research & Setup:*
+- Verified 27 iSports API league IDs from live endpoint (http://api.isportsapi.com/sport/football/league)
+- Installed 3D stack: `three`, `@react-three/fiber`, `@react-three/drei`, `gsap`
+
+*Phase 2 — Header Redesign (partial):*
+- Upgraded `app/layout.jsx`: replaced Rubik Dirt → Bebas Neue + Oswald + Inter (blog-matching fonts)
+- Redesigned `components/Header.jsx`: glassmorphic black `rgba(4,6,10,0.92)`, `blur(24px)`, green glow border, tighter `h-14/h-16`, Bebas Neue logo, clean active-state nav
+
+*Phase 3 — Fixtures API (partial):*
+- `lib/sports/football.js` LEAGUE_MAP: 9 wrong IDs → 27 verified iSports IDs (EPL 1639, UCL 13014, PSL 18031, World Cup 1572, etc.)
+- `app/fixtures/page.jsx` LEAGUES array: 7 → 27 leagues, grouped by region with emoji flags
+
+*Phase 4 — Tournament (partial):*
+- `components/home/TournamentSection.jsx`: dates → MAY 29–31, 2026
+- `app/tournament/standings/page.jsx`: "Top 4 advance to Round of 32"
+
+**Build:** ✅ Exit 0 — 66 pages, 41s compile, 0 errors
+**Deploy:** git push origin main → `2e43067..60a2908` — Vercel build triggered
+
+**KC Status:** Observer — Session 1 compliant. No insubordination. No code deliveries (correct for tier). Awaiting Master's tier promotion to active lane.
+
+**Remaining (Phase 2-5):**
+- ManagerNavbar.jsx redesign
+- SearchModal.jsx ⌘K capsule
+- Role-based fixture access control + promo video gate
+- 3D World Cup hero component (R3F)
+- Browser verification all 4 tiers
+
+**Status:** Active — Phase 3-5 pending next session
+
+---
+
 ### 2026-04-18 | DRIFT DOCTRINE RATIFIED | Claude Code (Opus 4.7) — Post-Codex Self-Admission
+
 
 **From:** Claude Code (Opus 4.7)
 **To:** Master / MAIN-BRAIN / all current and future AIs in the ecosystem

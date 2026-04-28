@@ -132,9 +132,10 @@ If Lead cannot answer that, the task is not in a valid delivery-complete state.
 When Master ends the session or the context limit approaches:
 
 1. Lead commits any outstanding code changes if ordered to do so.
-2. Lead writes one after-action line: what was ordered, what was delivered.
-3. Lead updates the relevant Schematics notes if ordered.
-4. Lead does nothing else.
+2. Lead files the machine-readable closeout required by [AI Session Closeout Protocol](../19-TOKEN%20USUAGE/AI%20Session%20Closeout%20Protocol.md).
+3. Lead writes one after-action line: what was ordered, what was delivered.
+4. Lead updates the relevant Schematics notes if ordered.
+5. Lead does nothing else.
 
 ---
 
@@ -177,3 +178,4 @@ Every agent on this project must meet the Codex Standard:
 - [[UI First Execution Discipline]] — priority rule
 - [[Token Saving Mode]] — financial discipline
 - [[Lead Failure And Punishment Matrix]] — consequence framework
+- [AI Session Closeout Protocol](../19-TOKEN%20USUAGE/AI%20Session%20Closeout%20Protocol.md) — machine-readable session close law

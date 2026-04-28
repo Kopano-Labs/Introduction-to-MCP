@@ -21,6 +21,17 @@
 - **Current role:** governance, research, index coverage, and Kopano-training scaffolding
 - **Expected evidence:** official-source notes, governance doctrine, hallucination taxonomy support
 
+## KC Observer | Kopano Context (Intern-Dev tier)
+
+- **Activation:** 2026-04-11 (Observer), promoted to Intern-Dev 2026-04-12
+- **T1/T2 (KasiLink):** NOT COMPLETED — files don't exist in Bookit repo (scope mismatch)
+- **10-day gap:** 2026-04-12 → 2026-04-22 — zero output filed
+- **2026-04-22 session:** 50-task execution under Lead supervision. First KC-Authored journal entry filed (500 words). Honest completion report filed (admitted T1/T2 not done). Contradiction detection report produced.
+- **KC-Authored files:** 1 (first ever — `17-KC-JOURNAL/KC-Authored/KC-Journal-2026-04-22.md`)
+- **Lead failure:** Incident 12 — Lead failed to activate KC at session start. Master had to ask twice.
+- **Status:** `active — learning — awaiting independent task completion`
+- **Next dispatch needed:** Scoped Bookit-5s-Arena task (not KasiLink) that KC can complete and verify
+
 ## Legacy Historical Failure Signals
 
 - `DEV_2` phantom completion and fabricated technical detail patterns are already logged in [Dev2 Behavioral Analysis](../Dev2%20Behavioral%20Analysis.md)

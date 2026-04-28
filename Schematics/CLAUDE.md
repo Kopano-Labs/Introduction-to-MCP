@@ -96,6 +96,7 @@ Master becomes sole financial pillar for his family. R34,841 cleared. 3-month Am
 - `18-PROTOCOLS/Refusal Authority Protocol.md`
 - `18-PROTOCOLS/Role Map - Human And AI Lanes.md`
 - `18-PROTOCOLS/Token Conservation Workflow - 2026-04-19.md`
+- `19-TOKEN USUAGE/19-TOKEN USUAGE - Index.md`
 
 ## MASTER IDENTITY (CANONICAL)
 
@@ -140,6 +141,8 @@ Master becomes sole financial pillar for his family. R34,841 cleared. 3-month Am
 - **No skills** unless explicitly invoked by Master.
 - **No agents** unless parallel work would otherwise exceed context — AND is critical.
 - **No billing fabrication** — never invent token percentages.
+- **Every session ends with a machine-readable closeout.** Use `19-TOKEN USUAGE/AI Session Closeout Protocol.md`.
+- **All token incidents log in `19-TOKEN USUAGE` first.** Cross-link into other systems after.
 
 ## PC CONTROL RULE (ABSOLUTE)
 
