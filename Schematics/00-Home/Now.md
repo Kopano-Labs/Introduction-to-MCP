@@ -1,7 +1,7 @@
 ---
 title: Now
 created: 2026-04-09
-updated: 2026-04-18
+updated: 2026-04-27
 author: Codex
 tags:
   - home
@@ -111,8 +111,18 @@ As of 2026-04-18, the owner still does not have a clear, working, trusted access
 - **Kopano Labs Corporate:** [kopano-labs.lovable.app](https://kopano-labs.lovable.app) ✅ Live (Lovable — submitted to hackathon)
 - **KasiLink Marketplace:** [kasilink.com](https://kasilink.com) ✅ Live — deploy `dpl_2pPcfAQq4tYazCAArPZyuE5eXCRj`
 - **KasiLink Demo Leaderboard:** [kasilink.com/demo](https://kasilink.com/demo) ✅ Live (Idea #011)
+- **Portfolio:** [krrababalela.com](https://krrababalela.com) ✅ Live — Kopano Labs refresh deployed on 2026-04-27; live HTML title still returns older `software engineer` metadata copy
 - **Admin Email:** [rkholofelo@kopanolabs.com](mailto:rkholofelo@kopanolabs.com)
 - **GitHub (new org):** [github.com/Kopano-Labs/KasiLink](https://github.com/Kopano-Labs/KasiLink)
+
+## 2026-04-27 Session Update — Portfolio Production Refresh
+
+| Item | Status |
+|------|--------|
+| `portfolio-src` public positioning refresh | ✅ Deployed — hero, about, projects, footer, contact, and resume surfaces rewritten around Chief Architect and Kopano Labs |
+| `/kopano-labs` route | ✅ Live — portfolio-side studio summary page added |
+| Git + production | ✅ `d550d742` pushed to `main`; live domain verified at `https://krrababalela.com` |
+| Residual follow-up | ⚠ Live HTML still returns older `software engineer` title metadata despite the refreshed UI bundle |
 
 ## Demo Day Position
 
