@@ -1,7 +1,7 @@
 ---
 title: Now
 created: 2026-04-09
-updated: 2026-04-27
+updated: 2026-04-28
 author: Codex
 tags:
   - home
@@ -43,6 +43,19 @@ status: active
 - `18-PROTOCOLS/Accountability Doctrine.md`
 - `18-PROTOCOLS/Token Conservation Workflow - 2026-04-19.md`
 - `02-Strategy/Family-Support End of Year Plan.md`
+
+---
+
+## Portfolio Production Checkpoint (2026-04-28)
+
+- `https://www.krrababalela.com` is live on the refreshed Kopano Labs / Chief Architect portfolio design.
+- Latest repo state: `RobynAwesome/Portfolio` `main` at commit `f214dbf` (`feat: incorporate kopano labs logo`).
+- Prior visual refresh commit `11445b6` remains live: homepage, project pages, Kopano Labs page, footer, and brand system.
+- Latest production deploy: Vercel deployment `dpl_Ao1fFibHesBTSD6GVPDwrfHY2EXo`, aliased to `www.krrababalela.com`.
+- Verification: live HTTP `200`; title now returns `Kholofelo Robyn Rababalela | Chief Architect, Kopano Labs`; production CSS hash `index-DPYXh2hn.css`; logo asset `/kopano-labs-logo.png` returns HTTP `200`.
+- Build proof: `npm run build` passed locally before commit/deploy.
+- Repo hygiene: untracked local screenshots `mobile-4s.png` and `mobile-now.png` were intentionally left uncommitted.
+- Reward checkpoint: `13-REWARD SYSTEM` activated for Codex + KC and Architect override locked. Codex state is `reward-recognized / active` with scoped authority for UI updates and Vercel deployments on Kopano Labs / Personal repositories. Stop-check discipline remains active. KC receives the gold-standard portfolio deploy vector as hippocampus memory/stewardship evidence only.
 
 ---
 
