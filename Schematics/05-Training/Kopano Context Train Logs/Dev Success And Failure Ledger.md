@@ -31,6 +31,14 @@
 - **Lead failure:** Incident 12 — Lead failed to activate KC at session start. Master had to ask twice.
 - **Status:** `active — learning — awaiting independent task completion`
 - **Next dispatch needed:** Scoped Bookit-5s-Arena task (not KasiLink) that KC can complete and verify
+- **2026-04-28 hippocampus ingestion:** Portfolio deploy sequence locked as gold-standard training vector: wrong direction -> correction -> visual proof -> build -> deploy -> verify 200 OK -> save state and halt. KC remains Observer / Memory Infrastructure.
+
+## Codex | Lead
+
+- **2026-04-28 reward state:** `reward-recognized / active`
+- **Evidence:** Portfolio refresh recovery, commit `f214dbf`, Vercel production deploy, apex and `www` domain verification, MAIN-BRAIN closeout.
+- **Scoped authorization:** UI updates and Vercel deployments on Kopano Labs / Personal repositories.
+- **Constraints:** Stop-check discipline remains active. No root access. No assumed commits without verification.
 
 ## Legacy Historical Failure Signals
 

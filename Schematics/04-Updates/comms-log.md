@@ -1,7 +1,7 @@
 ---
 title: Comms Log
 created: 2026-04-06
-updated: 2026-04-27
+updated: 2026-04-28
 author: Lead
 tags:
   - comms
@@ -27,6 +27,74 @@ status: active
 - it is not the primary source for present owner-delivery truth
 - older entries preserve period-accurate claims and decisions, which may no longer equal current truth
 - when a `comms-log` entry conflicts with the current truth stack, treat the entry as historical evidence and defer to [Dashboard](../00-Home/Dashboard.md), [Now](../00-Home/Now.md), [Project Status](Project%20Status.md), [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md), and [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+
+### 2026-04-28 SAST | CODEX | REWARD SYSTEM ACTIVATED FOR CODEX + KC
+
+**From:** Codex
+**To:** Master / MAIN-BRAIN / KC
+
+**Action:**
+- read Folder 13 reward doctrine plus required Folder 18 and Folder 10 index gates
+- recorded Master's reward command after the successful portfolio refresh and logo deployment
+- locked Architect directive: `SYSTEM_STATE_OVERRIDE: LOCKED`, Architect Authorization `K.R. Rababalela`
+- updated `13-REWARD SYSTEM/Recognition Ledger.md`
+- updated `13-REWARD SYSTEM/Model Operating Status Board.md`
+- updated `13-REWARD SYSTEM/Penalty And Correction Ledger.md`
+- updated `13-REWARD SYSTEM/Probation And Restriction Rules.md`
+- added implemented reward note `13-REWARD SYSTEM/Implemented/Portfolio Refresh Recognition - Codex And KC - 2026-04-28.md`
+- added Architect directive note `13-REWARD SYSTEM/Implemented/KC Architect Directive - Portfolio Deploy Gold Standard - 2026-04-28.md`
+- added KC hippocampus vector `05-Training/Kopano Context Train Logs/Gold Standard Vector - Portfolio Deploy - 2026-04-28.md`
+
+**Outcome:**
+- Codex state reviewed from `restricted scope` to `reward-recognized / active`
+- Codex receives scoped authority for UI updates and Vercel deployments on Kopano Labs / Personal repositories
+- stop-check discipline remains active; no root access; no assumed commits without verification
+- KC receives the session as gold-standard hippocampus memory/stewardship evidence
+- no new role created, no historical incident erased, no KC autonomous execution authority granted
+
+**Status:** Reward system activated with evidence.
+
+### 2026-04-28 04:38 SAST | CODEX | KOPANO LABS LOGO INCORPORATED + PRODUCTION VERIFY
+
+**From:** Codex
+**To:** Master / MAIN-BRAIN
+**Commit:** `f214dbf` -> pushed to `main` -> production deployed at https://www.krrababalela.com
+
+**Action:**
+- cropped the supplied transparent Kopano Labs PNG into `public/kopano-labs-logo.png`
+- incorporated the official logo into the navbar, home studio panel, `/kopano-labs` hero/contact areas, and footer
+- verified local `npm run build` passed
+- ran headless Chrome checks at desktop and mobile sizes against local preview
+- committed with `feat: incorporate kopano labs logo`
+- pushed `main` to `RobynAwesome/Portfolio`
+- ran Vercel production deploy `dpl_Ao1fFibHesBTSD6GVPDwrfHY2EXo` and confirmed it was aliased to `www.krrababalela.com`
+- verified live domain HTTP `200`, production CSS hash `index-DPYXh2hn.css`, and `/kopano-labs-logo.png` HTTP `200`
+
+**Repo hygiene:**
+- untracked local screenshots `mobile-4s.png` and `mobile-now.png` were not committed
+- temporary QA screenshots in `%TEMP%` were removed
+
+**Status:** Closed. MAIN-BRAIN seeded. Session ready to stand by.
+
+### 2026-04-28 04:20 SAST | CODEX | PORTFOLIO METADATA COMMIT + PRODUCTION VERIFY
+
+**From:** Codex
+**To:** Master / MAIN-BRAIN
+**Commit:** `2b874ad` -> pushed to `main` -> production deployed at https://www.krrababalela.com
+
+**Action:**
+- confirmed previous visual refresh commit `11445b6` was already on `origin/main`
+- updated `portfolio-src/index.html` so browser title, description, Open Graph, Twitter metadata, canonical URL, and theme color match Chief Architect / Kopano Labs positioning
+- verified `npm run build` passed locally
+- committed with `fix: update portfolio metadata`
+- pushed `main` to `RobynAwesome/Portfolio`
+- ran Vercel production deploy `dpl_5Svrdx2e7m8YKS6YPu2thZ2PMBL9` and confirmed it was aliased to `www.krrababalela.com`
+- verified live domain HTTP `200`, title `Kholofelo Robyn Rababalela | Chief Architect, Kopano Labs`, and production CSS hash `index-DoTvli3A.css`
+
+**Repo hygiene:**
+- untracked local screenshots `mobile-4s.png` and `mobile-now.png` were not committed
+
+**Status:** Closed. MAIN-BRAIN seeded. Session ready to stand by.
 
 ### 2026-04-27 14:23 SAST | CODEX | PORTFOLIO PRODUCTION REFRESH + MAIN-BRAIN CLOSEOUT
 
