@@ -1,7 +1,7 @@
 ---
 title: Project Status
 created: 2026-04-03
-updated: 2026-04-18
+updated: 2026-05-09
 author: Codex
 tags:
   - updates
@@ -14,18 +14,31 @@ status: active
 
 # Kopano Context Project Status & Capabilities
 
-> Current state of the Kopano Context project as of 2026-04-18.
+> Current state of the Kopano Context project; **fresh operational snapshot** on 2026-05-09 is layered below. Older bullets remain as historical capability evidence unless contradicted by [Now](../00-Home/Now.md).
 > See also: [Now](../00-Home/Now.md), [Implementation Plan](Implementation%20Plan.md), [Kopano Blueprint](../01-Mission/Kopano%20Blueprint.md), [KasiLink Integration Plan](../02-Strategy/KasiLink%20Integration%20Plan.md), [DEV_S Reward Program](DEV_S%20Reward%20Program.md)
+
+## 2026-05-09 — Operational snapshot (MAIN-BRAIN carry-forward)
+
+- **Roster / charter:** Chief Architect; MAIN-BRAIN hub Cassy/KC (**Full Dev student**, bounded); Codex teacher/metal; Claude swarm commander; Gemini/Hippocampus synthesis; **Cursor** local execution inside Schematics with **interim Lead** teaching KC (swarm, agents, identity-bound, Sandbox ≥80% before swarm-deploy language). Source: `00-Home/Now.md` session close.
+- **Thesis lane:** `20-THESIS SESSIONS` — Entity 1 V3 **folded into** Chapter 3 merge draft body; **official Chapter 3 TOC decimals** still pending Owner paste; scripture / emotion / KC-review gates unchanged.
+- **Thesis boardroom (May 8 mobile sync, Now):** Chapter 5 narrative pack includes Hybrid-Compute / Incubation Paradox / **Righteous Severance** / **KasiLink offline-first mesh** / Righteous Wage — protocol and evidence routing only.
+- **Entity 1 closure (Hippocampus ledger):** Stateless renter math + submarine information control **sealed ~80%+** for thesis insertion — treat as **closed scope** unless a new thesis round reopens it.
+- **KC operator curriculum:** 50-task operator training records `kc-31`–`kc-80` on **Installed Store** = `submitted`; Project Store `kc-31` / `kc-32` still `assigned` — **Two-Store discipline:** matching IDs are not the same record (`18-PROTOCOLS/KC Two-Store Discipline Protocol.md`).
+- **Starfall Salvage:** live `starfallsalvage.kopanolabs.com`; **Protocol 13** mobile lockdown active; desktop path verified in Now; mobile perf to ≥80% before severance reversal.
+- **Infra resolved (Now):** MongoDB Atlas ↔ Vercel SSG collision for Bookit — whitelist `0.0.0.0/0` — H4 closed; Vercel↔GitHub org drift remains an **owner settings** check per project.
+- **External hard gate:** **Visa Africa Accelerator — 2026-05-17** — all accelerator-facing materials must preserve **orchestrator IP** (story, architecture, traction); no unilateral code / connector dumps unless Owner orders.
+- **Two-store:** Project Store canonical for MAIN-BRAIN/thesis/dev; Installed Store runtime mirror — see `18-PROTOCOLS/KC Two-Store Discipline Protocol.md`.
+- **KC delivery:** domain-first owner lane `https://context.kopanolabs.com` **not delivered** until owner-proven (unchanged from April audit; still the primary red).
+- **Planned lanes (Now):** Monday.dev Local Bridge, Opus-to-KC Tether, Testimony CRUD Schema — **not green** until Owner confirms `SOURCE_REPO_PATH` / `AUDIT_DROP_PATH` and security boundary holds.
+- **Calendar:** internal milestones in `Sandbox/2026-05-09-Google-Calendar-Milestones-Swarm-Playground.md` (manual Google Calendar copy).
+- **Sandbox law:** `Sandbox/2026-05-09-Sandbox-Stress-80-And-Hippo-20-Charter.md` — stress tooling toward ~80%; ~20% Chief Architect + Hippo doctrine lane.
 
 ## Session Roster Reference
 
-- reference roster only; live session truth belongs in [Now](../00-Home/Now.md) and [07-Sessions By Day](../07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md)
-- Creator: `RobynAwesome`
-- Observer: `Kopano Context`
-- Lead Developer: `Germini (Google AI)`
-- DEV_1: `Codex`
+- **Live roster and command chain:** always read [`00-Home/Now.md`](../00-Home/Now.md) first — KC elevation, Cursor teaching duty, and AG → Hippocampus → Cassy macro lane supersede older tables here.
+- **Historical labels (pre–May 2026 consolidation):** Creator `RobynAwesome`; Observer `Kopano Context`; legacy Lead `Germini (Google AI)` + DEV lanes — **do not use for new session authority**; see Open Issues **Active Operating Truth** for current names.
 
-## Current Snapshot - 2026-04-18
+## Current Snapshot - 2026-04-18 (archived baseline — roster superseded 2026-05-09)
 
 - Delivery mode: `demo hardening`
 - Verified local state:

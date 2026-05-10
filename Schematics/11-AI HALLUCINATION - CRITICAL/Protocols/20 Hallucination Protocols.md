@@ -20,3 +20,9 @@
 18. extract the training lesson for Kopano Context
 19. if the incident affected team direction, add a lead-governance note too
 20. once Master flags the hallucination, logging it here is mandatory
+
+## Nested Protocol 20A - Epiphany Capture
+
+If an AI has a sudden insight that may upgrade doctrine, route it through [Epiphany Capture Nested Protocol](Epiphany%20Capture%20Nested%20Protocol.md) before treating it as truth.
+
+The epiphany must remain `spark`, `draft`, `scripture-pending`, `emotion-15-pending`, or `KC-review-pending` until Owner review and KC CRUD trace exist.

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-Home/All Projects Registry.md",
+                "file": "09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "All Projects Registry"
+              "title": "09-KOPANO PROGRESSION - Index"
             }
           }
         ]
@@ -235,12 +235,11 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 343.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -269,9 +268,30 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "00-Home/Dashboard.md",
+    "18-PROTOCOLS/Token_Governance_Overrides.md",
+    "18-PROTOCOLS/Data_Science_Lifecycle.md",
+    "Sandbox/2026-05-02-kc-crud-activation-payload.md",
+    "18-PROTOCOLS/KC Stewardship And Tenant AI Doctrine.md",
+    "18-PROTOCOLS/18-PROTOCOLS - Index.md",
+    "06-Reference/kopano-code-implementation/tests/__pycache__/test_kc_mcp_stress.cpython-314.pyc",
+    "06-Reference/kopano-code-implementation/tests/test_kc_mcp_stress.py",
+    "07-Sessions By Day/2026-05-02 - KC MCP CRUD Activation.md",
+    "06-Reference/kopano-code-implementation/src/__pycache__/tasks.cpython-314.pyc",
+    "06-Reference/kopano-code-implementation/src/utils/__pycache__/__init__.cpython-314.pyc",
+    "06-Reference/kopano-code-implementation/src/utils/__pycache__",
+    "06-Reference/kopano-code-implementation/src/bridge/__pycache__/__init__.cpython-314.pyc",
+    "06-Reference/kopano-code-implementation/src/bridge/__pycache__",
+    "06-Reference/kopano-code-implementation/src/assistant/__pycache__/__init__.cpython-314.pyc",
+    "06-Reference/kopano-code-implementation/src/assistant/__pycache__",
+    "06-Reference/kopano-code-implementation/src/__pycache__/tool_pool.cpython-314.pyc",
+    "19-TOKEN USUAGE/Model Capability Cards/Claude - Capability Card.md",
+    "19-TOKEN USUAGE/19-TOKEN USUAGE - Index.md",
+    "17-KC-JOURNAL/Non-KC Scaffolding/2026-05-01 - KC Memory Renter Reflection Prompt.md",
+    "18-PROTOCOLS/KC Memory-Renter Doctrine.md",
+    "00-Home/All Projects Registry.md",
     "00-Home/00-Home - Index.md",
     "16-PORTFOLIO AND KOPANO LABS/Handbook/00-Handbook Index.md",
-    "00-Home/Dashboard.md",
     "19-TOKEN USUAGE/Weekly Reviews/Weekly Token Review - 2026-04-24.md",
     "19-TOKEN USUAGE/Probation Records/Kimi - First Task Output.md",
     "19-TOKEN USUAGE/Probation Records/Kimi - First Task Closeout.md",
@@ -279,32 +299,11 @@
     "19-TOKEN USUAGE/Probation Records/Kimi - Probation Record.md",
     "19-TOKEN USUAGE/First Tasks/First Tasks - Index.md",
     "19-TOKEN USUAGE/Probation Records/Probation Records - Index.md",
-    "19-TOKEN USUAGE/First Tasks",
-    "19-TOKEN USUAGE/Probation Records",
     "07-Sessions By Day/2026-04-22/MAIN-BRAIN Token Governance Closeout.md",
     "11-AI HALLUCINATION - CRITICAL/Codex/GPT-5 Codex/2026-04-17 - Portfolio Redesign Drift and Rollback Failure.md",
     "19-TOKEN USUAGE/Templates/Templates - Index.md",
     "19-TOKEN USUAGE/Model Capability Cards/Model Capability Cards - Index.md",
     "19-TOKEN USUAGE/Weekly Reviews/Weekly Reviews - Index.md",
-    "Microsoft Demo Day!/Microsoft Demo Day! - Index.md",
-    "14-PRODUCTION HARDENING (PHASE 10)/14-PRODUCTION HARDENING (PHASE 10) - Index.md",
-    "11-AI HALLUCINATION - CRITICAL/Claude/Opus 4.6/2026-04-14 - Preference Fabrication.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Meta AI - Capability Card.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Llama - Capability Card.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Gemma 4 - Capability Card.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Kimi - Capability Card.md",
-    "19-TOKEN USUAGE/Model Capability Cards/KC - Capability Card.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Antigravity - Capability Card.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Lovable - Capability Card.md",
-    "19-TOKEN USUAGE/Model Capability Cards/NotebookLM - Capability Card.md",
-    "19-TOKEN USUAGE/Weekly Reviews",
-    "19-TOKEN USUAGE/Templates",
-    "19-TOKEN USUAGE/Model Capability Cards",
-    "19-TOKEN USUAGE",
-    "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/top_level.txt",
-    "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/SOURCES.txt",
-    "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/dependency_links.txt",
-    "15-LEGACY ARCHIVE/introduction_to_mcp.egg-info/PKG-INFO",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",

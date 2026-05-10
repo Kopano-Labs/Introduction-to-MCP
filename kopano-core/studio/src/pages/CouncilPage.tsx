@@ -11,8 +11,6 @@ interface CouncilPageProps {
   onNavigate: (page: PageId) => void;
 }
 
-const heroLines = ['Many voices.', 'One council.', 'Real answers.'];
-
 export function CouncilPage({
   connectionState,
   featuredCard,
@@ -24,72 +22,31 @@ export function CouncilPage({
 }: CouncilPageProps) {
   const liveStateLabel = connectionState === 'live' ? 'Council is live' : connectionState === 'connecting' ? 'Bringing the room together' : 'Connection needs attention';
   const liveCopy = latestTransmission?.content
-    ?? 'The live council listens intentionally. Watch real-time reasoning and agent orchestration as tasks are actively evaluated across multiple models.';
+    ?? 'No live transmission yet.';
 
   return (
     <div className="page-layout council-layout">
       <motion.section
-        className="hero-panel hero-council"
+        className="hero-panel ops-hero hero-council"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="hero-copy">
-          <span className="eyebrow">Live Council</span>
-          <div className="headline-stack">
-            {heroLines.map((line, index) => (
-              <motion.span
-                key={line}
-                className="headline-line"
-                initial={{ opacity: 0, y: 44 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.08 * index, duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {line}
-              </motion.span>
-            ))}
-          </div>
-          <p className="hero-copy-text">{liveCopy}</p>
-          <div className="hero-actions">
-            <button type="button" className="action-button primary" onClick={() => onNavigate('labs')}>Open Labs</button>
-            <button type="button" className="action-button secondary" onClick={() => onNavigate('console')}>Open Console</button>
-          </div>
-          <div className="hero-stat-row">
-            <article className="glass-stat">
-              <span className="stat-label">Link</span>
-              <strong>{liveStateLabel}</strong>
-            </article>
-            <article className="glass-stat">
-              <span className="stat-label">Signals</span>
-              <strong>{feedPreview.length}</strong>
-            </article>
-            <article className="glass-stat">
-              <span className="stat-label">Vault</span>
-              <strong>{sessionCount} sessions</strong>
-            </article>
-          </div>
+        <div className="ops-title">
+          <span className="eyebrow">Council</span>
+          <h2>Live agents</h2>
+          <p>{liveCopy}</p>
         </div>
-
-        <motion.div
-          className="hero-orb-shell"
-          animate={{ y: [0, -10, 0], rotate: [0, 3, 0] }}
-          transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <motion.div
-            className={`hero-orb ${connectionState}`}
-            animate={{ scale: [1, 1.08, 1], opacity: [0.74, 1, 0.78] }}
-            transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="hero-orb-ring"
-            animate={{ scale: [0.92, 1.18], opacity: [0.44, 0] }}
-            transition={{ duration: 2.6, repeat: Infinity, ease: 'easeOut' }}
-          />
-          <div className="orb-caption">
-            <span>{featuredCard.id.toUpperCase()}</span>
-            <strong>{featuredCard.isResponding ? 'Speaking now' : featuredCard.isThinking ? 'Reasoning' : 'Standing by'}</strong>
-          </div>
-        </motion.div>
+        <div className="ops-stat-grid">
+          <article className="glass-stat"><span className="stat-label">Link</span><strong>{liveStateLabel}</strong></article>
+          <article className="glass-stat"><span className="stat-label">Signals</span><strong>{feedPreview.length}</strong></article>
+          <article className="glass-stat"><span className="stat-label">Sessions</span><strong>{sessionCount}</strong></article>
+          <article className="glass-stat"><span className="stat-label">Focus</span><strong>{featuredCard.id.toUpperCase()}</strong></article>
+        </div>
+        <div className="ops-actions">
+          <button type="button" className="action-button ghost" onClick={() => onNavigate('labs')}>Labs</button>
+          <button type="button" className="action-button primary" onClick={() => onNavigate('console')}>Console</button>
+        </div>
       </motion.section>
 
       <div className="feature-grid">
