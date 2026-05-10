@@ -26,6 +26,7 @@ const LabsPage = lazy(async () => ({ default: (await import('./pages/LabsPage'))
 const ForgePage = lazy(async () => ({ default: (await import('./pages/ForgePage')).ForgePage }));
 const ConsolePage = lazy(async () => ({ default: (await import('./pages/ConsolePage')).ConsolePage }));
 const AdminPage = lazy(async () => ({ default: (await import('./pages/AdminPage')).AdminPage }));
+const TrainingPage = lazy(async () => ({ default: (await import('./pages/TrainingPage')).TrainingPage }));
 
 const apiBase = 'http://127.0.0.1:8000';
 const agentList = ['kopano', 'claude', 'grok', 'gemini', 'copilot'];
@@ -33,6 +34,7 @@ const laneOrder = ['research', 'build', 'review'];
 const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'kopano'];
 
 const pageHeadlines: Record<PageId, string> = {
+  training: 'CRUD',
   council: 'Council',
   labs: 'Labs',
   forge: 'Forge',
@@ -50,10 +52,10 @@ const readPageFromHash = (): PageId => {
   }
 
   const raw = window.location.hash.replace(/^#\/?/, '').trim().toLowerCase();
-  if (raw === 'labs' || raw === 'forge' || raw === 'console' || raw === 'admin' || raw === 'council') {
+  if (raw === 'training' || raw === 'labs' || raw === 'forge' || raw === 'console' || raw === 'admin' || raw === 'council') {
     return raw;
   }
-  return 'council';
+  return 'training';
 };
 
 const pageTransition = {
@@ -257,7 +259,7 @@ const App = () => {
     };
 
     if (!window.location.hash) {
-      window.location.hash = '#/council';
+      window.location.hash = '#/training';
     }
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
@@ -579,18 +581,23 @@ const App = () => {
         <AppTopNav
           page={page}
           connectionState={connectionState}
-          sessionCount={sessions.length}
-          isAdminLoggedIn={isAdminLoggedIn}
           onNavigate={navigate}
         />
 
-        <div className="page-caption-row">
+        <div className={`page-caption-row ${page === 'training' ? 'sovereign-caption-row' : ''}`}>
           <span className="eyebrow">Now showing</span>
           <h1>{pageHeadlines[page]}</h1>
-          <div className="badge-cluster">
-            <span className="status-badge neutral">{clientTelemetryConfigured ? 'Browser telemetry armed' : 'Browser telemetry pending'}</span>
-            <span className="status-badge neutral">{microsoftReadiness ? `${microsoftReadiness.summary.required_ready}/${microsoftReadiness.summary.required_total} Microsoft checks ready` : 'Loading Microsoft checks'}</span>
-          </div>
+          {page === 'training' ? (
+            <div className="badge-cluster">
+              <span className="status-badge live">Local executable lane</span>
+              <span className="status-badge neutral">owner-proof unproven</span>
+            </div>
+          ) : (
+            <div className="badge-cluster">
+              <span className="status-badge neutral">{clientTelemetryConfigured ? 'Browser telemetry armed' : 'Browser telemetry pending'}</span>
+              <span className="status-badge neutral">{microsoftReadiness ? `${microsoftReadiness.summary.required_ready}/${microsoftReadiness.summary.required_total} Microsoft checks ready` : 'Loading Microsoft checks'}</span>
+            </div>
+          )}
         </div>
 
         <main className="page-stage">
@@ -605,6 +612,10 @@ const App = () => {
                 exit="exit"
                 transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
               >
+                {page === 'training' && (
+                  <TrainingPage />
+                )}
+
                 {page === 'council' && (
                   <CouncilPage
                     connectionState={connectionState}

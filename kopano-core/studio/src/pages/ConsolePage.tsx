@@ -30,32 +30,24 @@ export function ConsolePage({
 
   return (
     <div className="page-layout console-layout">
-      <motion.section className="hero-panel hero-console" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72 }}>
-        <div className="hero-copy">
+      <motion.section className="hero-panel ops-hero hero-console" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72 }}>
+        <div className="ops-title">
           <span className="eyebrow">Console</span>
-          <div className="headline-stack">
-            <span className="headline-line">Prompt the stack.</span>
-            <span className="headline-line">Watch the answer land.</span>
-          </div>
-          <p className="card-lead">
-            Execute analytical and deterministic queries directly against the orchestration layer. Review generated artifacts and service telemetry mappings on the right.
-          </p>
+          <h2>Runtime request</h2>
+          <p>Send a request and inspect the returned artifact.</p>
         </div>
-        <div className="quick-launch-grid compact">
+        <div className="ops-stat-grid">
           <article className="quick-launch-card static">
             <span className="stat-label">Requests</span>
             <strong>{labsAnalytics?.mcp_console.requests ?? 0}</strong>
-            <p>Console calls made from the current runtime.</p>
           </article>
           <article className="quick-launch-card static">
             <span className="stat-label">Sessions</span>
             <strong>{labsAnalytics?.mcp_console.sessions ?? 0}</strong>
-            <p>Persistent conversation sessions for demo continuity.</p>
           </article>
           <article className="quick-launch-card static">
             <span className="stat-label">Latency</span>
             <strong>{labsAnalytics?.mcp_console.average_latency_ms ?? 0}ms</strong>
-            <p>Average response time for the current console path.</p>
           </article>
         </div>
       </motion.section>
@@ -66,7 +58,7 @@ export function ConsolePage({
             <span className="eyebrow">Compose</span>
             <span className="signal-chip live">MCP</span>
           </div>
-          <h2>Ask the orchestration layer</h2>
+          <h2>Request</h2>
           <label className="field-shell">
             <span>Model</span>
             <select value={selectedModel} onChange={(event) => onModelChange(event.target.value)}>
@@ -78,8 +70,8 @@ export function ConsolePage({
             <textarea rows={6} value={consoleMessage} onChange={(event) => onConsoleMessageChange(event.target.value)} />
           </label>
           <div className="button-row">
-            <button type="button" className="action-button primary" onClick={onSend}>Send Live Prompt</button>
-            <button type="button" className="action-button secondary" onClick={onStream}>Stream Reply (Optional)</button>
+            <button type="button" className="action-button primary" onClick={onSend}>Send</button>
+            <button type="button" className="action-button ghost" onClick={onStream}>Stream</button>
           </div>
         </motion.article>
 
@@ -88,7 +80,7 @@ export function ConsolePage({
             <span className="eyebrow">Artifact</span>
             <span className="signal-chip neutral">{consoleReply?.topic ?? 'waiting'}</span>
           </div>
-          <h2>{consoleReply?.model_used ?? 'deterministic-fallback'}</h2>
+          <h2>{consoleReply?.model_used ?? 'No response'}</h2>
           <div className="console-output-panel tall">
             <p>{consoleStream || consoleReply?.response || 'Send a message to show grounded guidance, suggested actions, and surface routing.'}</p>
           </div>

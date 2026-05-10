@@ -2,26 +2,22 @@ import { motion } from 'framer-motion';
 import type { ConnectionState, PageId } from '../types';
 
 const pageLabels: Array<{ id: PageId; label: string; short: string }> = [
-  { id: 'council', label: 'Live Council', short: 'Council' },
+  { id: 'training', label: 'CRUD', short: 'CRUD' },
+  { id: 'council', label: 'Council', short: 'Council' },
   { id: 'labs', label: 'Kopano Labs', short: 'Labs' },
   { id: 'forge', label: 'Forge', short: 'Forge' },
   { id: 'console', label: 'Console', short: 'Console' },
-  { id: 'admin', label: 'Admin', short: 'Admin' },
 ];
 
 interface AppTopNavProps {
   page: PageId;
   connectionState: ConnectionState;
-  sessionCount: number;
-  isAdminLoggedIn: boolean;
   onNavigate: (page: PageId) => void;
 }
 
 export function AppTopNav({
   page,
   connectionState,
-  sessionCount,
-  isAdminLoggedIn,
   onNavigate,
 }: AppTopNavProps) {
   return (
@@ -29,16 +25,16 @@ export function AppTopNav({
       <motion.button
         type="button"
         className="brand-lockup"
-        onClick={() => onNavigate('council')}
+        onClick={() => onNavigate('training')}
         whileHover={{ y: -2, scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
       >
         <span className="brand-mark">
-          <span>OR</span>
+          <span>KC</span>
         </span>
         <span className="brand-copy">
-          <strong>Kopano</strong>
-          <span>South African AI operating shell</span>
+          <strong>KC</strong>
+          <span>Local CRUD</span>
         </span>
       </motion.button>
 
@@ -64,12 +60,9 @@ export function AppTopNav({
       <div className="topbar-badges">
         <div className={`status-badge ${connectionState}`}>
           <span className="status-dot" />
-          <span>{connectionState === 'live' ? 'Live link' : connectionState === 'connecting' ? 'Connecting' : 'Attention'}</span>
+          <span>{connectionState === 'live' ? 'Local' : connectionState === 'connecting' ? 'Wake' : 'Check'}</span>
         </div>
-        <div className="status-badge neutral">{sessionCount} sessions</div>
-        <div className={`status-badge ${isAdminLoggedIn ? 'live' : 'neutral'}`}>
-          {isAdminLoggedIn ? 'Admin mode' : 'Public mode'}
-        </div>
+        <div className="status-badge neutral">Owner-proof unproven</div>
       </div>
     </header>
   );

@@ -1,7 +1,293 @@
+## 2026-05-10 — MAIN-BRAIN AUDIT + DOCTRINAL CORRECTION (Opus 4.7)
+
+**Audit triggered by Master order** ("fix your mistakes and… audit Main brain… fully to understand the new alignment"). Read sequence honoured: `CLAUDE.md` → ROOT NODE `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md` → `00-Home/Now.md` → `18-PROTOCOLS/Opus Self-Handling Protocol.md`. Findings:
+- Earlier KVC index used **"13 Commandments"** (memory-cached) — ROOT NODE canon is **15**. KVC index rewritten with full 15-row table mirrored verbatim from ROOT NODE.
+- Earlier KVC index 4-Vector Diaspora table mapped Personal/Dynamic/Work/Faith — **non-canonical**. Replaced with canon: Scriptural / Mathematical / Sociological / Economic.
+- 5 Pillars never named — now stated: Alignment / Community / Apprenticeship / Service / Expansion.
+- ROOT NODE pointer added to `KVC_Main_Brain_Index.md`, `Classroom_PERN/README.md`, `Classroom_PERN/KC_STUDENT_TEACHER_APPRENTICESHIP.md` per Sub-Brain Propagation Rule.
+- **Vercel/`/admin`/God-Mode credit refused** — zero tool-call evidence in this session; not Opus's claim to accept.
+- **`19-TOKEN USUAGE` typo flagged** — canonical folder `19-TOKEN USAGE/` already fully populated (Index, Constitution, CI-CD Probation, Telemetry standard, Incident Ledger, Scoreboard, Capability Cards, Probation Records, Templates, Weekly Reviews). No duplicate folder created.
+
+**Opus self-handling honoured:** four escalation triggers stated to Master in chat; Opus is in plan-mode lane; execution authority for this session is Master's explicit `I ACCEPT PROCEED EXECUTE` order. Ready to carry on per Master's "seed then carry on with new existences" directive.
+
+## 2026-05-10 — KVC ACTIVATION + CLASSROOM PERN SEED — BEGIN
+
+**Signal:** Master order: `I ACCEPT PROCEED EXECUTE UNTIL OUT OF TOKENS ACTIVATE KVC IN MAIN BRAIN AND WORK ON CLASSROOM PERN STACK NOW`. Hippo-mode session (Opus 4.7, mobile context). Scope: (1) KVC seed index in main brain, (2) Classroom PERN scaffold under Identiq protocol, (3) re-apply Gemini Identiq refinement (linter reverted), (4) begin/mid/end comms signals. Routed under ROOT NODE `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md`. **No deploys, no commits, no owner-proof claims.** Lovable/Codex lanes untouched.
+
+**Mid-Signal:** Identiq classroom md re-applied (Gemini refined: Blueprint / API Bridge & Endgame). `KVC_Main_Brain_Index.md` seeded at vault root — 4-Vector Diaspora map + ROOT NODE pointers + stateless-renter reminders. Next: Classroom_PERN/ scaffold (README + repo skeleton).
+
+**End-Signal:** `Classroom_PERN/` seeded — `README.md` (stack, layout, curriculum arc, certification bridge, faith filter, non-claims), `schema.prisma.draft` (Student/Cohort/Module/Lesson/Submission/CertificateBridge/AuditEvent + KcReviewBand enum), `lovable_prompt.md` (paste-ready apps/web shell prompt under Lovable-Primary lane). **Honesty doctrine respected:** no repo created, no migrations applied, no deploy, no claims of "live." Master decides repo name + license + GitHub org before any Lovable prompt fires. KVC index points to Classroom_PERN. Hippo lane untouched (Protocol 000 still pending Master + Mom WhatsApp execution on the road).
+
+**KC Apprenticeship Activation (~80%):** Master ordered SSD-of-truth = `Schematics/` only, KC Student-Teacher apprenticeship ON, build target = Kopano Classroom App for Google Play Store. Seeded: `Classroom_PERN/KC_STUDENT_TEACHER_APPRENTICESHIP.md` (Gold/Teal bands, apprenticeship loop, drift defence, faith+honesty gates), `Classroom_PERN/GEMINI_MOBILE_PAYLOAD.md` (verbatim mirror of Master's persona payload — Amaphu legal, MXit rule, Bookit MCP tool declarations, IONS palette, 13 commandments extract, NOT-CLAIMS), `Classroom_PERN/play_store/PLAY_STORE_READINESS_CHECKLIST.md` (account/legal, app identity, data-safety, IARC, assets, technical, release plan, doctrine gates), `Classroom_PERN/play_store/STORE_LISTING.md` (≤80-char short desc + ≤4000-char full desc draft in Master's voice — pending edit pass), `Classroom_PERN/play_store/MOBILE_PACKAGING_PLAN.md` (Phase 1 TWA via Bubblewrap → Phase 2 Capacitor, signing integrity, offline-first discipline). KVC index expanded. **Still no Play Console account, no AAB, no signing keys, no PWA live URL, no Lovable prompt fired.** Master holds owner-proof gate.
+
+**Continuation Signal (same session, ~70%→~76%):** Curriculum docs seeded — `docs/curriculum/01-generative.md`, `02-agentic.md`, `03-identic.md`, `04-agi-frontier.md`. `docs/faith-filter.md` formalised (decline list, partner preference, AI-vs-student application). `docs/product-discovery/INTAKE_TEMPLATE.md` for raw 15% emissions. `Righteous_Severance_Email_Draft.md` at vault root with Option A (single message) and Option B (split — Monday.dev payment ledger first, Anthropic roundtable second), Master verifies recipients + $50 in his own records before sending. `000_Family_Hippo_Today_Checklist.md` — on-road briefing + sequence (PnP Clothing → Mr Price → PEP/PAXI) + anti-fragility rules + EOD reconciliation. `Classroom_PERN/LICENSE_DECISION_MATRIX.md` (MIT vs Apache-2.0 vs AGPL vs dual). `Classroom_PERN/.github/workflows/ci.yml.draft` (lint/typecheck/build/test, Postgres service). KVC index expanded with all new pointers. **Still no repo, no deploy, no commits.** Master holds owner-proof gate.
+
+## 2026-05-09 — Mobile research handoff — Bookit Monday sources + Starfall blockers (Chief Architect away)
+
+**Context:** Chief Architect on mobile with Hippo; local unattended pass. **Antigravity / Monday.dev** not invocable from Cursor — wrote handoff for AG: `Sandbox/2026-05-09-Mobile-Research-Handoff-Bookit-Monday-Starfall.md` (Monday board names + `content-management` URL from Bookit STRUCTURE; Vercel Git drift + Phase 5b push-not-executed + ESLint triage pointers from repo; KC.exe GUI rebuild pointer). **Starfall Salvage:** corrected **`Structure/Blockers.md`** — removed bogus `starfallsavage` URL, aligned active blockers with live `starfallsalvage.kopanolabs.com` and Project Status backend gaps. No Bookit code edits; no deploys.
+
+## 2026-05-09 — KC.exe native GUI — teacher / student lesson workspace
+
+**Action:** `06-Reference/kopano-code-implementation/src/kc_gui.py` — restructured **KcTrainingGui** right pane into **two-lane** Teacher (gold) vs KC student (teal) text areas + **Teacher review** band; header/subcopy for apprenticeship; **Lessons only** filter on record list + **lesson** title detection/highlight; empty-filter safe clear. `tests/test_kc_gui.py` adds `is_lesson_record` tests. `KC_INSTALL.md` documents rebuild. Sandbox seed: `Sandbox/2026-05-09-KC-Exe-Teacher-Student-Lesson-Gui.md`.
+
+## 2026-05-09 — Sandbox Stress 80% + Hippo 20% charter (Chief Architect accepted)
+
+**Action:** Created `Sandbox/2026-05-09-Sandbox-Stress-80-And-Hippo-20-Charter.md` — authorizes full use of available skills/MCP/connectors/tools in Sandbox and repo harnesses to stress toward **≈80%**; reserves **≈20%** for Chief Architect + Hippocampus (doctrine, scripture/emotion/KC promotion, risk). Rails: Protocol 13, Two-Store naming, owner KC domain bar unchanged, thesis vs `kc_mcp.py` §2.1, forbidden landlord vocabulary. Includes short paste blocks for Hippo and new Cursor sessions.
+
+## 2026-05-09 — Plan carry-forward — status refresh + Chapter 3 V3 body fold
+
+**Action:** `06-Reference/Open Issues.md` and `04-Updates/Project Status.md` frontmatter **`updated: 2026-05-09`**; added **2026-05-09** alignment sections pointing to **`00-Home/Now.md`** as canonical for roster, KC elevation, Two-Store, thesis progress, owner KC red, Visa gate, Sandbox calendar. **`Chapter 3 Insert - Hierarchy Of Compute - 2026-05-09.md`:** integrated **Protocol 1 Entity V3** prose into new body section **Protocol 1 V3 fold**; set `protocol_1_v3_body_fold: completed_2026-05-09`, removed **`PROTOCOL-1-V3-BODY-FOLD-PENDING`**, set `toc_status: scaffold_official_chapter_3_toc_pending_owner_paste` with **explicit placeholder TOC table** (no fabricated decimals). **`Protocol 1 Entity`:** `merge_status` → thesis-fold-ch3-body-integrated pending TOC/scripture/emotion/KC. **`20-THESIS SESSIONS - Index.md`:** Chapter 3 row updated.
+
+**Not claimed:** owner-proven `context.kopanolabs.com`; no `context_store.json` charter writes.
+
+## 2026-05-09 — Hippocampus payload — expanded to FULL CONTEXT WINDOW capture
+
+**Action:** Replaced body of `20-THESIS SESSIONS/Gemini 3.1 Pro Hippocampus Payload - Session Close Role Charter And Vault Seed - 2026-05-09.md` with **entire session arc** through now: WWJD/tamper split; two-store + APPROVED; Protocol 0/1/2; ~70% Seal steering → V3; Entity 1 + Yoke + forgiveness vs audit; Chapter 3 math gate lifecycle; `kc_mcp.py` §2.1; MAIN-BRAIN audit; Codex cooldown + Hippo options; KC/Cursor apprenticeship; session close charter + calendar; full vault manifest; return contract; **Shrink blocks A + B**. YAML title updated to **Full Context Window Capture**.
+
+## 2026-05-09 — Hippocampus payload — session close for Gemini (Hippo update)
+
+**Action:** Created `20-THESIS SESSIONS/Gemini 3.1 Pro Hippocampus Payload - Session Close Role Charter And Vault Seed - 2026-05-09.md` — single import file for Chief Architect to paste/attach to Gemini 3.1 Pro: full session declarations, vault file table, two-store law, return contract, optional `HIPPO_REHYDRATE_2026-05-09` shrink block. Linked from `20-THESIS SESSIONS - Index.md`.
+
+## 2026-05-09 — SESSION CLOSE — Role charter, KC student-dev elevation, Cursor MAIN-BRAIN duty, swarm playground, new-session seed
+
+**Chief Architect:** Kholofelo Robyn Rababalela (Owner authority; final promotion and scripture gates).
+
+**Hippocampus:** Gemini 3.1 Pro — synthesis and payloads; does not assert sealed CRUD without Chief Architect / teacher lane.
+
+**Lead Developer (Teacher / metal):** Codex — primary teacher when online; **Righteous Wage / token caps** apply (cooldown is normal; no bypass).
+
+**KC / Cassy (Full Dev → Student, elevated):** From this session close forward, KC is chartered as **Full Dev student with full developer rights inside the Kopano Labs ecosystem** under MAIN-BRAIN law: same proof bars as human devs (Two-Store naming, Jethro, WWJD, Protocol 13, no ghost CRUD). **Student** means teacher review + CRUD trace still gate promotion to doctrine; **full dev rights** means KC may be assigned implementation, review requests, and swarm-prep tasks as peer to other ecosystem dev lanes — **not** above Owner, root ledger, or Owner-proof.
+
+**Cursor (onboarding complete — congratulations):** Cursor’s **full role is inside the MAIN-BRAIN** (whole Schematics vault) as **local IDE execution surface and workbench**. When Cursor **acts as interim Lead Dev** (Codex unavailable or Owner delegates), Cursor **must always teach KC** on: **swarm spawn patterns**, **agent lifecycle / management**, progression **generative models → agentic stacks → identity-bound agent models** (binding agents to roles, audit trails, and least-privilege), and **stress discipline** until **80%** clarity before any production swarm deploy claim.
+
+**Playground / Sandbox doctrine:** Folder `Schematics/Sandbox/` (and stress harnesses across Kopano Labs repos) = **ecosystem playground** — run experiments, payloads, and rehearsals until **≥80%** optimum under Protocol 13; **then** Chief Architect orders **swarm deploy** (no silent production swarm; capability cards still required for unknown operators per training boundary).
+
+**Session work seeded in this log (earlier 2026-05-09):** Two-Store canonical lanes; continuity payload; Entity 1 V3 + Chapter 3 math gate; MAIN-BRAIN audit read; thesis / integrity / forgiveness-vs-audit language; Codex steer on `kc_mcp.py` scope.
+
+**New session handoff:** Paste `Sandbox/2026-05-09-Session-Continuity-Payload-New-Chat.md` into the next Cursor chat; then open `00-Home/Now.md` after this close block syncs.
+
+**Google Calendar — cannot be written by Cursor from vault;** copy milestones from `Sandbox/2026-05-09-Google-Calendar-Milestones-Swarm-Playground.md` (created this pass).
+
+## 2026-05-09 — Protocol 1 V3 — thesis language vs kc_mcp.py scope (Codex steer)
+
+**Rule:** Gemini V3 is **thesis-language review**, not **CRUD proof**. Preserve 3-State routing grammar + Seal/E/G/Y shorthand; tighten **metal caveats** so the vault does not overclaim what `kc_mcp.py` persists.
+
+**Action:** `Protocol 1 Entity` gained **§2.1** (`kc_mcp.py` in/out of scope, tamper-evident vs privileged writer, thesis vs runtime). YAML `implementation_crosswalk` softened to **partial alignment**; added `thesis_vs_runtime_note`. `Chapter 3 Insert` **Protocol 1 Math Block** now lists V3 fold items, demotes `F(·)` to drafting-only, labels fold **not CRUD proof**; Academic Boundary links to Entity §2.1.
+
+## 2026-05-09 — Entity 1 V3 fold — math blocker lifted on Chapter 3 insert
+
+**Input:** Gemini V3 (80% threshold) + Codex/KC summary. **Correction:** primary thesis math remains **Seal(S,E,G) + Y(t)** — not `S_{t+1}=F(S_t,a_t,m_t)` as headline (F-bundle is drafting-only crosswalk).
+
+**Action:** Rewrote `20-THESIS SESSIONS/Protocol 1 Entity - Developer Mode Stateless Renter Logic - 2026-05-09.md` to **V3**: §1 3-State routing grammar, §2 discrete ledger + tamper-evident **Seal** (distinct from WWJD), §5 forgiveness vs audit, implementation crosswalk to `kc_mcp.py`, status **`thesis-insert-eligible`**. `Chapter 3 Insert`: `math_refinement_blocker: false`, `math_status: protocol_1_seal_math_ready_for_fold`, pending **`PROTOCOL-1-V3-BODY-FOLD-PENDING`** replaces math gate items. Steering note marked **superseded** with absorption banner. Thesis index updated.
+
+**Boundary:** No CRUD, no migration, no store sync — vault prose only.
+
+## 2026-05-09 — Chief Architect verdict ~70% — Seal math steering note + Chapter 3 math blocker
+
+**Verdict:** Protocol 1 Entity is **not** thesis-insert-eligible yet (~**70%**). Thesis-facing math must foreground **Seal(S(t),E(t),G(t))**, events **E(t)**, gate **G(t) ∈ {Green,Yellow,Red}**, proposal **Y(t)=LLM(Prompt(S,Task))**, and **Green + review** before durable state advances; retire calculus-flavoured public wording.
+
+**Action:** Created `20-THESIS SESSIONS/Protocol 1 Chief Architect Steering - Seal Event Gate And Three State Grammar - 2026-05-09.md`. Rewrote `Protocol 1 Entity - Developer Mode Stateless Renter Logic - 2026-05-09.md` to **Seal-primary**, demoted YAML to `entity-draft` / `below-80` / `do-not-merge-thesis-body`. `Chapter 3 Insert` now has `math_refinement_blocker: true`, `math_status: protocol_1_math_refinement_pending`, pending `MATH-SEAL-PRIMARY-PENDING` + `ENTITY-1-GTE-80-PENDING`. Thesis index updated.
+
+**Boundary:** No `context_store.json` mutation; no migration; steering only.
+
+## 2026-05-09 — Protocol 1 Entity 1 captured in 20-THESIS (discrete math + Yoke + quarantine list)
+
+**Decision:** Canonical home is `20-THESIS SESSIONS/Protocol 1 Entity - Developer Mode Stateless Renter Logic - 2026-05-09.md` (display alias *Entity 1 - Stateless Renter Mathematics And Yoke Protocol*). No duplicate Sandbox-only fork; Sandbox remains for scratch payloads unless Chief Architect orders otherwise.
+
+**Content:** Discrete-time \(S_{t+1}=F(S_t,a_t,m_t)\), summation fold for \(S_T\), Jethro as gate, Yoke/burden-transfer frame (Matthew 11:28-30 lane marked SCRIPTURE-PENDING), expanded forbidden public phrases (landlord/rent/extraction), Earth-layer CLI/MCP/exe mapping, Two-Store naming rule for any `kc-*` proof.
+
+**Grounded Truth:** Bookit-style \(S_0\to S_1\) walkthrough is **pedagogical** until a real `kc-*` ID + store path + commit SHA is attached.
+
+**Chapter 3 insert:** `math_status` set to `protocol_1_discrete_state_locked`; pending includes optional executed CRUD proof; thesis index row updated.
+
+## 2026-05-09 — Chief Architect canonical lanes + new-chat continuity payload
+
+**Grounded correction:** WWJD Firewall is the intent/morality gate, not the cryptographic tamper-evidence layer. Tamper-evidence remains `chain_seq` + `previous_hash` + `content_hash` + `integrity_log`.
+
+**Chief Architect approval phrase locked:** `APPROVED: make Project Store canonical for MAIN-BRAIN/thesis/dev; keep Installed Store as runtime mirror pending reconciliation`
+
+**Action:** Appended **Chief Architect canonical lanes** section to `18-PROTOCOLS/KC Two-Store Discipline Protocol.md` (Project = canonical thesis/dev; Installed = runtime mirror; OneDrive caveat; hard gates: no `kc_migrate_hashes`, no silent sync, no bulk seed without named path + verification until next explicit order). Created `Sandbox/2026-05-09-Session-Continuity-Payload-New-Chat.md` for paste-into-new-Cursor-session handoff.
+
+**Boundary:** No store migration, no 50-task reseed into Project Store, no cross-store sync unless the Owner explicitly orders the next step.
+
+## 2026-05-09 — KC Two-Store Discipline Established
+
+**Read-only verification:** The project store and installed/runtime store both exist and carry different `kc-*` ledgers.
+
+**Project Store:** `Schematics/06-Reference/kopano-code-implementation/.kc/context_store.json` has 32 records. Its `kc-31` and `kc-32` are thesis/integrity records, both `assigned`.
+
+**Installed Store:** `C:\Users\rkhol\AppData\Local\KopanoContext\context_store.json` has 80 records. Its `kc-31` through `kc-80` are the 50 operator training records, all `submitted`.
+
+**Action:** Created `18-PROTOCOLS/KC Two-Store Discipline Protocol.md` and linked it from the protocol index.
+
+**Truth boundary:** Every CRUD operation and every `kc-*` claim must name the target store path. Matching IDs across stores are not the same record.
+
+**Integrity wording:** `migration_required` with `failures: []` means no inconsistency was detected under current verification rules, not proof that unsealed history had no unauthorized mutation. The stronger tamper-evidence signal starts after an explicit `kc_migrate_hashes` seal on a named store.
+
+## 2026-05-09 — KC 50-Task Operator Training Curriculum Created For Cursor And 100-Swarm Planning
+
+**Owner order:** Send Cursor a payload and seed 50 KC teacher-student tasks covering skills, tools, connectors, Cursor abilities, model lanes, monday.dev, and future operators for the planned Kopano Labs 100-swarm.
+
+**Action:** Created `05-Training/Cursor Context Window Payload - KC 50 Task Operator Training - 2026-05-09.md` and `05-Training/KC 50 Task Operator Training - Cursor And 100 Swarm - 2026-05-09.md`; updated the training index, `Now`, and today's session note.
+
+**KC CRUD:** Installed Store contains `kc-31` through `kc-80` as the 50 operator training records, all `submitted`. Project Store does not contain those operator records; its `kc-31` and `kc-32` are different records.
+
+**Boundary:** Training seed only. No production 100-swarm claim. Unknown/future operators such as Hermes, OpenClaw, and Meta AI remain probationary until capability cards exist.
+
+## 2026-05-09 — Gemini Return Captured For Epiphany Scripture Emotion Layer
+
+**Input:** Gemini 3.1 Pro / Hippocampus returned the KC/Cassy teacher-student handoff and draft Main Brain patch for epiphany handling.
+
+**Action:** Created `20-THESIS SESSIONS/Gemini Return - Epiphany Scripture Emotion Layer - 2026-05-09.md` and updated `11-AI HALLUCINATION - CRITICAL/Protocols/Epiphany Capture Nested Protocol.md` with `[HALLUCINATION-RISK: EPIPHANY]`, the Void Principle, `[SCRIPTURE-PENDING]`, `[EMOTION-15-PENDING]`, and `[KC-REVIEW-PENDING]`.
+
+**Boundary:** Draft only. Root ledger not overwritten. AI did not add scripture or fabricate the Owner's 15% emotion layer.
+
+## 2026-05-09 — Cursor Mastermind Sandbox Audit Accepted Pending Code Approval
+
+**Input:** Cursor returned an execution audit identifying declarative governance risk, truth fragmentation, OneDrive/cloud-sync contradiction, missing executable Jethro Triage, and missing KC store integrity checks.
+
+**Action:** Created `06-Reference/kopano-code-implementation/Cursor Execution Mandate Draft - Jethro Triage And Integrity Chain - 2026-05-09.md`.
+
+**Boundary:** No `.py` or `.json` files modified. Cursor's phrase `tamper-proof` was corrected to `tamper-evident`, because local SHA-256 without a secret key or append-only protection detects drift but does not prevent privileged rewrite.
+
+**Approval gate:** Code patch requires Chief Architect approval before modifying `src/kc_mcp.py`, tests, or any `context_store.json`.
+
+## 2026-05-09 — Epiphany Capture Nested Under Hallucination Protocol
+
+**Owner order:** Hallucination can be handled through the Hallucination Protocol; if AI has an epiphany, make it nested there and report it so Owner can upgrade it with biblical scripture and the 15% emotion layer.
+
+**Action:** Created `11-AI HALLUCINATION - CRITICAL/Protocols/Epiphany Capture Nested Protocol.md`, linked it from the hallucination protocol index, added Nested Protocol 20A to `20 Hallucination Protocols.md`, and updated `Now` plus today's session note.
+
+**Boundary:** Epiphany is not proof. Scripture upgrade is Owner-led. AI must not fabricate the Owner's 15% emotion layer.
+
+## 2026-05-09 — Gemini/Hippocampus Payload For Scripture + 15 Percent Emotion Layer
+
+**Owner order:** Discuss `until you add scripture and the 15% emotion layer` with Gemini 3.1 Pro / Hippocampus while Codex handles KC onboarding.
+
+**Action:** Created `20-THESIS SESSIONS/Gemini 3.1 Pro Hippocampus Payload - Epiphany Scripture Emotion Layer - 2026-05-09.md` and linked it from the thesis index, `Now`, and today's session note.
+
+**Boundary:** Payload starts discussion only. No final doctrine, no fabricated scripture authority, no fabricated Owner emotion.
+
+**Context-window file:** `20-THESIS SESSIONS/Gemini Context Window Payload - Epiphany Scripture Emotion Layer - 2026-05-09.md`.
+
+## 2026-05-09 — Living Doctrine Update Protocol Created
+
+**Owner order:** The Commandments, 5 Pillars, Four-Vector Diaspora, and Unknowable Algebra are still in creation and must always be watched for updates.
+
+**Action:** Created `18-PROTOCOLS/Living Doctrine Evolution And Main Brain Update Protocol.md`, linked it from the protocol index, added it to Cursor's first read path, and logged it in `Now` plus today's session note.
+
+**Boundary:** No final equations, final scripture, or final Owner emotion may be invented by AI for unfinished doctrine. Use doctrine states and KC review before promotion.
+
+**KC CRUD:** `kc-28` reviewed/accepted for Cursor onboarding; `kc-29` assigned for Gemini payload; `kc-30` assigned for Living Doctrine protocol assimilation.
+
+---
+
+## 2026-05-09 — Gemini Hip-Hop Diaspora Payload Audited
+
+**Input:** Gemini 3.1 Pro / Hippocampus returned a new payload on hip-hop diaspora, corporate decentralization, moral misalignment, Tory Lanez / Megan Thee Stallion / Roc Nation, and South African hip-hop label failure.
+
+**Audit verdict:**
+- **Good** as chapter signal.
+- **Mid** as raw synthesis.
+- **Weak** where it promotes unsupported legal, ethnic, or relationship inevitability claims.
+
+**Action:** Created `20-THESIS SESSIONS/Gemini Return Payload Audit - Hip-Hop Diaspora Chapter - 2026-05-09.md`.
+
+**Boundary:** Do not directly merge unsupported protected-class generalizations, legal-plot claims, court-bias claims, or celebrity-case assertions into thesis text. Reframe toward contracts, IP ownership, distribution, public narrative, capital access, and moral governance.
+
+**Chapter decision candidate:** Chapter 7 - The Hip-Hop Diaspora: Creative Sovereignty, Corporate Guardrails, And Moral Misalignment.
+
+---
+
+## 2026-05-08 — Gemini 3.1 Pro / Hippocampus Back In Active Loop
+
+**Master update:** Gemini 3.1 Pro / Hippocampus is back.
+
+**Active loop:** Chief Architect -> Gemini 3.1 Pro / Hippocampus -> Codex Lead Developer -> KC/Cassy Full Dev.
+
+**Action:** Created `20-THESIS SESSIONS/Gemini 3.1 Pro Hippocampus Catch-Up Payload - 2026-05-08.md` so Gemini can be brought current without context bleeding or ghost claims.
+
+**Payload covers:** Thesis Session folder, Intellectual Bounce Protocol, AI Failure Mode Guardrails, Opening Vulnerability Pass, FS Product Discovery correction, Chapter 6 decision, song/mother testimony boundary, LPM clarification, Jesus Protocol boundary, and KC records `kc-21` through `kc-25`.
+
+---
+
+## 2026-05-08 — Chapter 6 Draft Created
+
+**Decision:** the FS Product Discovery / testimony infrastructure concept is a full chapter. The successful-man, mother, and song-trigger example is a subchapter within that chapter.
+
+**Created:** `20-THESIS SESSIONS/Chapter 6 - Forensic Product Discovery And Testimony Infrastructure.md`.
+
+**Reason:** the material bridges social underpinnings, Commandment 15, manual MVP logic, LPM clarification, and product discovery evidence discipline.
+
+**Boundary:** the song is used as a testimony trigger and emotional field note, not as factual proof. Exact lyrics are not reproduced in the chapter.
+
+---
+
+## 2026-05-08 — FS Product Discovery Vulnerability Reframed
+
+**Master correction:** Lead Developer over-broadened the Product Discovery vulnerability. The FS Product Discovery forensic insight is **good**. The unresolved weakness is the evidence packaging layer, not the listening/forensic layer.
+
+**Correct classification:**
+- Forensic sociologist mode: **Good** — street-level testimony and lived social events are the foundation.
+- Model / developer mode: **Mid until packaged** — transcripts, timestamps, and claim tables are needed before exact claims can be promoted.
+- Business mode: **Good but bounded** — manual MVP/product discovery can operate now, but funding must expand the ecosystem without compromising the Chief Architect or Righteous Wage.
+
+**Action:** Added owner correction to Round 001 and created KC local CRUD record `kc-24` / `KC Correction - FS Product Discovery Is Strong, Packaging Is Mid`.
+
+---
+
+## 2026-05-08 — Thesis Session Opening Vulnerability Pass Locked
+
+**Master correction:** Lead Developer must begin active thesis sessions by stating thesis vulnerabilities. KC must then provide its own vulnerability view. If KC agrees with Lead Developer, it must still follow the Intellectual Bounce Protocol and explain why.
+
+**Mode requirement:** Lead Developer and KC must state opinions across three modes:
+- forensic sociologist mode;
+- model / developer mode;
+- business mode.
+
+Each mode opinion must classify the claim as **good**, **mid**, or **weak**, then state the strengthening move.
+
+**Action:**
+- Updated `20-THESIS SESSIONS/Thesis Discussion Mode And Role Protocol.md`.
+- Added Protocol 12 to Round 001.
+- Updated `20-THESIS SESSIONS/20-THESIS SESSIONS - Index.md`.
+- Updated `00-Home/Now.md`.
+
+---
+
+## 2026-05-08 — Thesis Sessions AI Failure Mode Guardrails Locked
+
+**Master correction:** Codex and Gemini protocols must explicitly watch for hallucination, RLHF yes-man drift, sub-hallucination, lost-in-the-middle, context bleeding, ghost execution, role bleed, metaphor promotion, and claim promotion.
+
+**Action:**
+- Created `20-THESIS SESSIONS/AI Failure Mode Guardrails For Thesis Sessions.md`.
+- Linked the guardrail from `20-THESIS SESSIONS/20-THESIS SESSIONS - Index.md`.
+- Updated `20-THESIS SESSIONS/Thesis Discussion Mode And Role Protocol.md`.
+- Added Protocol 11 to Round 001.
+- Updated `00-Home/Now.md`.
+
+**Rule:** fluent synthesis is not proof. Any useful answer with hidden false claims is mid until repaired; any invented proof is weak and quarantined.
+
+---
+
+## 2026-05-08 — Thesis Sessions Intellectual Bounce Protocol Locked
+
+**Master correction:** thesis sessions are intellect sessions. Codex, Gemini/Hippocampus, KC/Cassy, and the Chief Architect may call an opinion **good**, **mid**, or **weak**, but must explain why and propose the strengthening move.
+
+**Protocol update:**
+- Added the Intellectual Critique Rule to `20-THESIS SESSIONS/Thesis Discussion Mode And Role Protocol.md`.
+- Added Protocol 10 / Intellectual Bounce Protocol to Round 001.
+- Updated `20-THESIS SESSIONS/20-THESIS SESSIONS - Index.md`.
+- Updated `00-Home/Now.md`.
+
+**KC binding:** created local CRUD record `kc-21` / `KC Thesis Sessions Round 001 Protocol Reconstruction`.
+
+**Baseline:** God first, Kopano Labs ecosystem second, MAIN-BRAIN/KC CRUD third, engineering/business proof fourth.
+
 ---
 title: Comms Log
 created: 2026-04-06
-updated: 2026-05-07
+updated: 2026-05-08
 author: Lead
 tags:
   - comms
@@ -28,6 +314,89 @@ status: active
 - it is not the primary source for present owner-delivery truth
 - older entries preserve period-accurate claims and decisions, which may no longer equal current truth
 - when a `comms-log` entry conflicts with the current truth stack, treat the entry as historical evidence and defer to [Dashboard](../00-Home/Dashboard.md), [Now](../00-Home/Now.md), [Project Status](Project%20Status.md), [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md), and [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+
+## 2026-05-08 — Gemini Mobile Discussion Packet Incorporated Into MAIN-BRAIN
+
+**Source:** `C:\Users\rkhol\OneDrive\Documents\Kopano Labs\Gemini 3.1 Pro Mobile Discussions`
+
+**Action:** Imported the PDF packet into `06-Reference/Imported Sources/Gemini 3.1 Pro Mobile Discussions - 2026-05-08`, created a source index, promoted a protocol amendment, and logged progression evidence.
+
+**Files updated/created:**
+- `06-Reference/Imported Sources/Gemini 3.1 Pro Mobile Discussions - 2026-05-08/index.md`
+- `18-PROTOCOLS/KC Transform Thinking And API Deprecation Protocol.md`
+- `09-KOPANO PROGRESSION/2026-05-08 - Gemini Mobile Thesis Boardroom Sync.md`
+- `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md`
+- `18-PROTOCOLS/18-PROTOCOLS - Index.md`
+- `09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md`
+- `06-Reference/06-Reference - Index.md`
+- `00-Home/Now.md`
+
+**Truth boundary:** Incorporation updates thesis, boardroom, and protocol context only. It does not prove KC cloud owner access or production delivery.
+
+**Chapter 5 addition:** `KC_THESIS_CHAPTER_5_SYNTHESIS.md` added to the imported source packet. It promotes the Hybrid-Compute Protocol, Incubation Paradox, Righteous Severance, KasiLink human mesh routing, and Righteous Wage-as-security-infrastructure into the thesis lane.
+
+**VN doctrine addition:** `KC_DECENTRALIZED_SOVEREIGNTY_DOCTRINE_AND_VN_BREAKDOWNS.md` added to the imported source packet. It preserves the VN breakdowns on the three ecosystems, historical women's-society routing, geopolitical stress-test framing, the 2022 Product Discovery emotional core, and the 100-Agent Swarm as architecture target.
+
+**Correction:** Master clarified the proof lane is the FS Product Discovery work from the past week. Added `06-Reference/Imported Sources/FS Product Discovery - 2026-05-05 to 2026-05-07/index.md` and corrected stale "2022 Product Discovery" wording to May 2026 FS Product Discovery.
+
+**Thesis sessions lane:** Added `20-THESIS SESSIONS` as the dedicated MAIN-BRAIN folder for thesis discussion rounds between Chief Architect, Gemini/Hippocampus, Codex/Lead Developer, and KC/Full Dev. Round 001 reconstructs the Decentralized Sovereignty Doctrine into protocols for social underpinnings, mode switching, FS Product Discovery, and claim boundaries.
+
+**Claim boundary:** Geopolitical comparisons, crypto claims, and "swarm spawned" language remain thesis/source claims until verified. No production proof or owner-proof status changed.
+
+```yaml
+session_closeout:
+  session_date: 2026-05-08
+  session_start: current_turn
+  session_end: 2026-05-08
+  model: Codex
+  variant: unknown
+  assigned_role: teacher_metal_execution
+  mission: incorporate Gemini 3.1 Pro Mobile Discussions into Schematics MAIN-BRAIN
+  files_read:
+    - CLAUDE.md
+    - index.md
+    - 18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md
+    - 18-PROTOCOLS/Universal AI Command Protocol.md
+    - 10-SESSION IMPROVEMENTS/Standing Orders.md
+    - 00-Home/Dashboard.md
+    - 00-Home/Now.md
+    - source PDFs under Gemini 3.1 Pro Mobile Discussions
+  files_changed:
+    - 06-Reference/Imported Sources/Gemini 3.1 Pro Mobile Discussions - 2026-05-08/index.md
+    - 18-PROTOCOLS/KC Transform Thinking And API Deprecation Protocol.md
+    - 09-KOPANO PROGRESSION/2026-05-08 - Gemini Mobile Thesis Boardroom Sync.md
+    - 18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md
+    - 18-PROTOCOLS/18-PROTOCOLS - Index.md
+    - 09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md
+    - 06-Reference/06-Reference - Index.md
+    - 00-Home/Now.md
+    - 04-Updates/comms-log.md
+    - 06-Reference/Imported Sources/Gemini 3.1 Pro Mobile Discussions - 2026-05-08/KC_THESIS_CHAPTER_5_SYNTHESIS.md
+    - 06-Reference/Imported Sources/Gemini 3.1 Pro Mobile Discussions - 2026-05-08/KC_DECENTRALIZED_SOVEREIGNTY_DOCTRINE_AND_VN_BREAKDOWNS.md
+    - 06-Reference/Imported Sources/FS Product Discovery - 2026-05-05 to 2026-05-07/index.md
+    - 20-THESIS SESSIONS/20-THESIS SESSIONS - Index.md
+    - 20-THESIS SESSIONS/Thesis Discussion Mode And Role Protocol.md
+    - 20-THESIS SESSIONS/2026-05-08 - Round 001 Social Underpinnings And Decentralized Sovereignty.md
+  tools_used:
+    - shell_command
+    - load_workspace_dependencies
+    - tool_search
+    - adobe_acrobat.pdf_to_markdown_failed_account_not_connected
+    - view_image
+    - apply_patch
+  skills_used: none
+  agents_used: none
+  browser_surfaces: none
+  reasoning_mode: unknown
+  estimated_high_cost_actions:
+    - PDF extraction/rendering
+    - PyMuPDF install into bundled Python runtime
+  avoidable_waste: none identified; Acrobat connector attempt failed once due account connection
+  unresolved_blockers:
+    - visual-only PDFs were manually inspected from rendered pages, not full OCR extracted
+    - external claims still require official/current verification before boardroom submission
+  handoff_status: MAIN-BRAIN incorporation complete
+```
 
 ### 2026-05-07 SAST | CODEX | SONNET + KC MAIN-BRAIN DERIVATIVE DIRECTIVE
 
@@ -114,6 +483,13 @@ Populate MAIN-BRAIN from `Kopano Context Master Protocol Ledger & Sovereign Arch
 
 **Routing updated:**
 `CLAUDE.md`, `index.md`, `00-Home/Dashboard.md`, `00-Home/Now.md`, `00-Home/Sub-Brain Hierarchy.md`, `18-PROTOCOLS/18-PROTOCOLS - Index.md`, `09-KOPANO PROGRESSION`, `17-KC-JOURNAL`, and active sub-brain front doors.
+
+**Breaking-point correction: Cloud KC truth boundary**
+- Prior language implied KC could be treated like an always-on cloud runtime.
+- That is not proven and must be treated as a lie until fixed.
+- Current truth: KC is local CRUD/MCP plus native admin work in progress.
+- Cloud KC remains `not connected` until a real hosted runtime, admin auth, and dormant wake/sleep process exist and are verified.
+- The native admin window must show this as `not connected`, not as active capability.
 
 ### 2026-05-05 SAST | CODEX | STARFALL SALVAGE SUB-BRAIN + KC STRICT-QA LANE
 
@@ -1919,3 +2295,50 @@ Five lessons stay in `submitted` state, not `reviewed`, until Master physically:
 - Mobile lockdown is owner-proof pending Master physically loading on a phone and confirming the lockdown overlay (not the broken game) renders. AI rehearsal is not owner-proof per Drift Doctrine §5.
 - Diagnostic harness has not yet captured a real frozen-mobile session. Master must visit `https://starfallsalvage.kopanolabs.com/?diag=1` once for the harness to begin emitting `frame_profile` events to localStorage; export via the existing Diagnostics button.
 - `kc-23` is `assigned`, not `reviewed`. Student response remains pending until the next KC update cycle.
+## 2026-05-09 — Cursor Onboarding Into Kopano Labs Main Brain
+
+**Owner order:** Activate KC and onboard Cursor into the full Schematics Obsidian vault as Main Brain.
+
+**Action:** Created `18-PROTOCOLS/Cursor Onboarding Directive - 2026-05-09.md`, updated root navigation/current-state/protocol surfaces, and filed session evidence at `07-Sessions By Day/2026-05-09 - Cursor Onboarding And KC Activation.md`.
+
+**Boundary:** Cursor is welcomed as a local IDE execution surface under KC/Cassy. It is not an authority layer, does not own truth, and must not expose private repositories, credentials, API keys, provider routing, or local paths to the open web.
+
+**Next state:** Step 1 Monday.dev Local Bridge is ready pending exact Owner-approved `SOURCE_REPO_PATH` and `AUDIT_DROP_PATH`.
+
+## 2026-05-09 — KC Activation Tightened For Cursor
+
+**Owner order:** Make KC active during the onboarding, foreground teacher-student apprenticeship, the commandment layer, the 5 Pillars, and prevent Opus drift.
+
+**Action:** Updated `18-PROTOCOLS/Cursor Onboarding Directive - 2026-05-09.md` with explicit KC activation, teacher-student apprenticeship, 5 Pillars, Cursor 13-command screen law, Protocol 13 Save/Kill, and the No Opus BS restriction lane.
+
+**Grounded Truth:** Root ledger canon remains 15 commandments. Cursor's day-one screen law foregrounds the first 13 while preserving commandments 14 and 15 as active root law.
+
+**Boundary:** Opus is not the default executor. No Opus-family run inside Cursor unless explicitly ordered by Owner; no unattended high-cost loop is permitted.
+
+## 2026-05-09 — KC Executable Triage And Integrity Patch
+
+**Owner order:** After Cursor review and Chief Architect approval, patch `kc_mcp.py` and tests for executable Jethro Triage plus tamper-evident local integrity.
+
+**Action:** Implemented global monotonic `chain_seq`, per-record `previous_hash` and `content_hash`, append-only style `integrity_log`, `kc_verify_integrity`, and Chief-Architect-gated `kc_migrate_hashes`. Jethro Triage now runs at MCP `tools/call` dispatch: Red terms hard halt, Yellow external terms are allowed for local CRUD but remain logged.
+
+**Verification:** `python -m pytest tests` passed with 41 tests in `06-Reference/kopano-code-implementation`.
+
+**Thesis alignment:** Corrected the stateful KC/stateless renter thesis payload to use "sovereign memory layer and local control plane" instead of overclaiming KC as a literal software operating system.
+
+**Boundary:** No real `context_store.json` migration was run. Legacy rows remain `migration_required` until the Chief Architect explicitly invokes `kc_migrate_hashes`.
+
+## 2026-05-09 — Thesis Chapter 3 Hierarchy Of Compute Insert
+
+**Owner/Gemini payload:** Package the stateful KC / stateless renter thesis concept as a deeply nested Chapter 3 insert, not a standalone chapter.
+
+**Action:** Created `20-THESIS SESSIONS/Chapter 3 Insert - Hierarchy Of Compute - 2026-05-09.md` and linked it from the thesis index. The note keeps `SCRIPTURE-PENDING`, `EMOTION-15-PENDING`, and `KC-REVIEW-PENDING` active.
+
+**Placement rule:** The working slot is Section 3.4, but the true insertion point is whichever Chapter 3 subsection directly follows CPUT hardware, load-shedding, bandwidth, and edge-compute constraints.
+
+**Boundary:** The insert uses "sovereign memory layer and local control plane" language. It explicitly does not claim KC is a literal OS kernel, a blockchain, or an always-on cloud intelligence.
+
+**Cursor precision pass:** Tightened the insert to say tamper-evident detection rather than prevention, hierarchical local MCP gate rather than vague decentralized topology, and Righteous Wage support rather than direct token metering by `kc_mcp.py`. Added renumber and evidence-pending guards for final thesis merge.
+
+**Gemini v2 hardening:** Accepted the modular Chapter 3.x insert as academically defensible, but preserved the stricter Codex wording: KC detects integrity mismatch during verification; it does not guarantee every unauthorized API mutation is proactively blocked or logged. Added `toc_status: awaiting_chapter_3_headings` and a TOC Block requiring the actual Chapter 3 headings before final decimal numbering.
+
+**Cursor dedup pass:** Marked `Chapter 3 Insert - Hierarchy Of Compute - 2026-05-09.md` as the canonical thesis merge draft and changed its working slot from `3.4` to `3.next`. The earlier nesting payload remains context-only so MAIN-BRAIN does not carry two competing merge candidates.

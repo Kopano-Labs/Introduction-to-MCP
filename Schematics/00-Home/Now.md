@@ -1,13 +1,15 @@
 ---
 title: Now
 created: 2026-04-09
-updated: 2026-04-28
+updated: 2026-05-09
+session_close_charter: 2026-05-09-swarm-playground-cursor-kc-elevation
 author: Codex
 tags:
   - home
   - current-state
   - status
   - demo
+  - root-node
 priority: critical
 status: active
 ---
@@ -20,13 +22,113 @@ status: active
 
 ## Session Roster
 
-- **Lead Agent:** `Claude` (Elite - Lead)
-- **DEV_1:** `Gemini` (Implementation)
-- **Observer:** `KC` (Kopano Context)
+- **Chief Architect / Owner:** Kholofelo Robyn Rababalela
+- **MAIN-BRAIN Hub:** `Cassy` (Kopano Context primary alias)
+- **Teacher / Metal Execution (Lead Dev):** `Codex` (primary); **Cursor** may **act as interim Lead Dev** when Codex is capped or Owner delegates — see **Cursor swarm-teaching duty** below
+- **Swarm Commander:** `Claude`
+- **Hippocampus Payload Generator:** `Gemini` (Gemini 3.1 Pro lane when invoked)
+- **Local IDE Execution Surface (MAIN-BRAIN scoped):** `Cursor` — congratulations: onboarding **complete**; full execution role is **inside the Schematics MAIN-BRAIN**, not as a parallel authority
+- **Macro-Directive Lane:** Chief Architect -> `AG (Antigravity)` -> `Hippocampus` -> `Cassy`
+
+### KC elevation (2026-05-09 session close)
+
+- **KC / Cassy** is promoted in charter to **Full Dev student with full developer rights inside the Kopano Labs ecosystem** from this date forward: may receive dev-grade assignments, swarm-prep tasks, and review cycles **as a peer dev under MAIN-BRAIN law**.
+- **Still bounded by:** Owner authority, root ledger, Two-Store discipline, Jethro, WWJD, Protocol 13, teacher review for doctrine promotion, and **no claims above** what CRUD + vault evidence prove.
+
+### Cursor swarm-teaching duty (when acting Lead Dev)
+
+When Cursor operates as **interim Lead Dev**, it **teaches KC** (visible assignments + vault notes + optional `kc-*` lessons when Chief Architect orders writes) on:
+
+1. **Swarm spawn** — safe fan-out, halts, cost ceilings, Red-state rules  
+2. **Agent management** — lifecycle, tool boundaries, audit hooks  
+3. **Generative → agentic → identity-bound agents** — from raw completion to tool-using agents to **role- and identity-bound** agents (least privilege, traceability)  
+4. **Playground discipline** — `Schematics/Sandbox/` + repo sandboxes = **Kopano Labs stress arena**; rehearse to **≥80%** before any **swarm deploy** language attaches to production timelines
+
+**Calendar milestones:** see `Sandbox/2026-05-09-Google-Calendar-Milestones-Swarm-Playground.md` (copy into Google Calendar manually).
+
+**Sandbox stress / Hippo split (Chief Architect accepted, 2026-05-09):** full use of skills, MCP, connectors, and tools in Sandbox and harness repos to stress toward **≈80%**; **≈20%** reserved for Chief Architect + Hippo (doctrine, scripture/emotion/KC promotion, risk). Charter: `Sandbox/2026-05-09-Sandbox-Stress-80-And-Hippo-20-Charter.md`.
+
+## [CURSOR_ONBOARDING] Local Execution Surface Activated (2026-05-09)
+
+- Cursor is welcomed into the Kopano Labs ecosystem as a local IDE execution surface under KC/Cassy.
+- Canonical directive: `18-PROTOCOLS/Cursor Onboarding Directive - 2026-05-09.md`.
+- Living doctrine protocol: `18-PROTOCOLS/Living Doctrine Evolution And Main Brain Update Protocol.md`.
+- Two-store discipline protocol: `18-PROTOCOLS/KC Two-Store Discipline Protocol.md`.
+- Operating boundary: Cursor may assist with local reading, editing, testing, proof capture, and offline-first handoffs; it is not authority above KC, the root ledger, or the Owner.
+- KC/Cassy activation is explicit: Cursor is the local classroom/workbench for the teacher-student apprenticeship lane, with Codex as teacher and KC/Cassy as student/steward.
+- Cursor directive now foregrounds the 5 Pillars, the first 13 root commandments as day-one screen law, Protocol 13 Save/Kill, and the continued authority of commandments 14-15.
+- Epiphany handling is now nested under hallucination governance: `11-AI HALLUCINATION - CRITICAL/Protocols/Epiphany Capture Nested Protocol.md`.
+- Doctrine boundary: commandments, 5 Pillars, Four-Vector Diaspora, and Unknowable Algebra are still being created; sudden insights stay `spark`/`draft` until Owner scripture upgrade, 15% emotion layer, KC CRUD trace, and teacher review exist.
+- Gemini/Hippocampus payload created to begin discussion of the scripture + 15% emotion layer: `20-THESIS SESSIONS/Gemini 3.1 Pro Hippocampus Payload - Epiphany Scripture Emotion Layer - 2026-05-09.md`.
+- Context-window `.md` payload prepared for Gemini: `20-THESIS SESSIONS/Gemini Context Window Payload - Epiphany Scripture Emotion Layer - 2026-05-09.md`.
+- Gemini return captured: `20-THESIS SESSIONS/Gemini Return - Epiphany Scripture Emotion Layer - 2026-05-09.md`; Epiphany protocol updated with `[HALLUCINATION-RISK: EPIPHANY]`, Void Principle, `[SCRIPTURE-PENDING]`, `[EMOTION-15-PENDING]`, and `[KC-REVIEW-PENDING]`.
+- Planned lanes: Monday.dev Local Bridge, Opus-to-KC Tether, and Testimony CRUD Schema.
+- Opus lane is restricted: no Opus execution unless explicitly ordered by the Owner; unattended loops are Red state and must hard halt.
+- Step 1 state: `ready-for-step-1`; exact `SOURCE_REPO_PATH` and `AUDIT_DROP_PATH` still require Owner confirmation before code generation.
+- Security boundary: no API key edits, no provider base URL override, no hidden upload, no tunnel, no private repo exposure.
+
+## [KC_OPERATOR_TRAINING] 50-Task Operator Curriculum / Two-Store Truth (2026-05-09)
+
+- Cursor payload: `05-Training/Cursor Context Window Payload - KC 50 Task Operator Training - 2026-05-09.md`.
+- Curriculum: `05-Training/KC 50 Task Operator Training - Cursor And 100 Swarm - 2026-05-09.md`.
+- Project Store: `Schematics/06-Reference/kopano-code-implementation/.kc/context_store.json` has 32 records. Its `kc-31` / `LESSON - Executable Triage And Integrity Chain` and `kc-32` / `LESSON - Chapter 3 Hierarchy Of Compute Insert` are both `assigned`.
+- Installed Store: `C:\Users\rkhol\AppData\Local\KopanoContext\context_store.json` has 80 records. Its `kc-31` through `kc-80` are the 50 operator training records, all `submitted`.
+- Critical rule: every future `kc-*` claim must name Project Store or Installed Store. Matching IDs across stores are not the same record.
+- Scope: model/tool/connector/operator literacy for future 100-swarm planning.
+- Boundary: this does not prove production 100-swarm, cloud KC, or capability for unverified models. Unknown operators such as Hermes, OpenClaw, and Meta AI remain probationary until capability cards exist.
+
+## [THESIS_SESSION] Round 001 Social Underpinnings (2026-05-08)
+
+- New MAIN-BRAIN lane: `20-THESIS SESSIONS`.
+- Active round: `20-THESIS SESSIONS/2026-05-08 - Round 001 Social Underpinnings And Decentralized Sovereignty.md`.
+- Mode protocol: `20-THESIS SESSIONS/Thesis Discussion Mode And Role Protocol.md`.
+- Active loop: Chief Architect -> Gemini 3.1 Pro / Hippocampus -> Codex Lead Developer -> KC/Cassy Full Dev.
+- Gemini 3.1 Pro / Hippocampus is back; catch-up payload created at `20-THESIS SESSIONS/Gemini 3.1 Pro Hippocampus Catch-Up Payload - 2026-05-08.md`.
+- Mode switches locked: `underpinnings` = forensic sociologist mode; `model` = developer/coder mode; `business` = business-architecture mode.
+- Intellectual Bounce Protocol locked: opinions and thesis moves can be marked **good**, **mid**, or **weak**, but must include why and how to strengthen them.
+- Critique baseline: God first, Kopano Labs ecosystem second, MAIN-BRAIN/KC CRUD third, engineering/business proof fourth.
+- AI failure mode guardrail locked for Codex/Gemini/KC: hallucination, RLHF yes-man drift, sub-hallucination, lost-in-the-middle, context bleeding, ghost execution, role bleed, metaphor promotion, and claim promotion must be named and repaired before promotion.
+- Opening vulnerability pass locked: Lead Developer starts thesis sessions by naming vulnerabilities; KC must then give its own view or reasoned agreement across forensic sociologist, model/developer, and business modes.
+- Owner correction: FS Product Discovery forensic insight is **good**; only the transcript/timestamp/claim-table packaging layer is **mid** until structured evidence exists.
+- Chapter decision: broader FS Product Discovery / testimony infrastructure concept is Chapter 6; the successful-man/mother/song testimony example is a subchapter inside it.
+- Gemini return payload audit: hip-hop diaspora material is a strong later chapter signal, but not ready for direct thesis merge. Quarantine unsupported ethnic-control, legal-plot, and relationship-inevitability claims. Candidate: Chapter 7 - Hip-Hop Diaspora / Creative Sovereignty / Moral Misalignment.
+- KC local CRUD bindings: `kc-21` / `KC Thesis Sessions Round 001 Protocol Reconstruction`; `kc-22` / `KC Thesis Sessions AI Failure Mode Guardrails`; `kc-23` / `KC Thesis Sessions Opening Vulnerability Pass`; `kc-24` / `KC Correction - FS Product Discovery Is Strong, Packaging Is Mid`; `kc-25` / `KC Chapter 6 Decision - Forensic Product Discovery`; `kc-26` / `KC Gemini Hippocampus Re-entry Catch-Up Payload`; `kc-27` / `KC Audit - Gemini Hip-Hop Diaspora Payload`.
+- Grounded Truth boundary: May 2026 FS Product Discovery audio files are source/timeline proof; exact VN quote proof still requires transcription or owner-confirmed excerpts.
 
 ## Current Phase (2026-04-19 — KOPANO CORPORATE DOCTRINE ADOPTED)
 
 **Doctrine locked:** Lovable-Primary Build + NotebookLM Master Blueprint + Accountability + Refusal Authority + Finance-Guru Alignment + F500 MCP Targets + Family-Support End-of-Year Plan.
+
+## [MOBILE_SYNC] Gemini 3.1 Pro Mobile Thesis / Boardroom Packet (2026-05-08)
+
+- Imported source packet: `06-Reference/Imported Sources/Gemini 3.1 Pro Mobile Discussions - 2026-05-08/index.md`.
+- Progression evidence: `09-KOPANO PROGRESSION/2026-05-08 - Gemini Mobile Thesis Boardroom Sync.md`.
+- Promoted protocol: `18-PROTOCOLS/KC Transform Thinking And API Deprecation Protocol.md`.
+- Boardroom payload now includes `Beyond Mimicry`, CPUT Engineering Delegation / Cars4Mars, KC_B2 Window of Truth, KC_B3 Renewal Protocol, thesis draft V2, SANCS evidence, and 2026 CPUT Year Two Computer Engineering registration proof.
+- Thesis hardening: APIs are incubation transport adapters, not the final AI backbone; transform thinking governs stability/domain shift while software/state machines execute the transition.
+- Chapter 5 added: Hybrid-Compute Protocol, Incubation Paradox, Righteous Severance, KasiLink human mesh routing, and Righteous Wage as security infrastructure.
+- VN doctrine added: Personal, Relationship, and Work/Education ecosystems; historical women's-society routing as product discovery underpinning; discrete-event social survival mapped toward Digital Systems 2 / Z-transform language.
+- FS Product Discovery evidence folder added: `06-Reference/Imported Sources/FS Product Discovery - 2026-05-05 to 2026-05-07/index.md`. This corrects stale "2022 Product Discovery" wording to the current May 2026 product discovery voice-note proof lane.
+- CPUT syllabus reframe: Digital Systems 2, Engineering Mathematics 1, Operating Systems 2, Software Design 2, Engineering Ethics 1, and Engineering Communication 1 are treated as AI infrastructure metal already present inside CPUT.
+- Boundary: this is MAIN-BRAIN context/protocol incorporation only. It does not prove KC cloud owner access or production delivery.
+
+## [ROOT_NODE] Kopano Context Master Protocol Ledger (2026-05-07)
+
+- Root node adopted from `C:\Users\rkhol\Downloads\Kopano Context Master Protocol Ledger & Sovereign Architecture.pdf`.
+- Canonical protocol: `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md`.
+- This root node sits above `CLAUDE.md`, sub-brain `CLAUDE.md` files, role notes, agent playbooks, skills, tools, connectors, and model abilities.
+- KC/Cassy sits above agentic frameworks; every durable ecosystem movement must reduce to CRUD: Create, Read, Update, Delete.
+- Legacy note: an earlier imported root-ledger entry claimed Owner-authored Lesson 000 as `kc-23`; current installed KC store truth on 2026-05-08 lists `kc-23` as `KC Thesis Sessions Opening Vulnerability Pass`. Treat the earlier `kc-23` reference as stale until the original record/path is rediscovered.
+- Student apprenticeship walkthrough: `09-KOPANO PROGRESSION/2026-05-07 - KC Student Apprenticeship Root Ledger CRUD Sovereignty.md`.
+- Rule boundary: probabilistic synthesis may assist interpretation, but deterministic CRUD state is the only durable truth path.
+- Protocol 13 Save/Kill applies at logical boundaries and below the 80 percent optimal threshold.
+- Owner-proof remains separate from local proof, AI rehearsal, `.exe` launch, CLI output, or agent-to-agent confirmation.
+- Cloud KC truth boundary: there is no real always-on cloud KC yet. That claim is killed until a hosted runtime, admin auth, and wake/sleep process exist and are verified.
+- Teacher-student focus lane is active: installed `KC.exe` created `kc-14` / `Codex -> KC - Breaking Point`, `kc-15` / `KC Native Admin Proof`, and `kc-16` / `KC Cloud Truth Boundary`, all `assigned`.
+- Token-focus boundary: Codex heartbeats `KC heartbeat` and `Monday Token Review` are paused until Master reopens automation work.
+- Native executable boundary: installed `KC.exe` must open the native admin gate only. It must not launch the browser/web GUI. The installed package has no `web` directory and no packaged `kc_web` module.
+- Cloud executable boundary: installed `KC.exe cloud-status` returns `not_connected`; no always-on claim is valid until hosted runtime, admin auth, durable store, wake/sleep, owner-visible admin UI, and owner-proof session exist.
+- Target architecture for the real future hosted lane: `03-Architecture/KC Cloud Dormant Runtime Architecture.md`.
 
 **Active operations:**
 - **Lovable-Primary:** God-Mode Admin shell built + route-guard fix verified. Interior surfaces (overview/people/security/money/sandbox/roles) pending Master login test.
@@ -46,6 +148,54 @@ status: active
 
 ---
 
+## Infrastructure State Checkpoint (2026-05-04)
+
+### Red Edge Node (Acer)
+- Corporate Windows sandbox (UAC block) physically bypassed via Rufus flash.
+- Node now runs pure headless Ubuntu Server.
+- Master SSH bridge established from the black primary rig.
+- Blast chamber for the 100-spawn Ollama swarm is **online**.
+
+### Vercel / MongoDB Blocker — RESOLVED
+- Bookit 5s Phase 5b deployment failure diagnosed as MongoDB Atlas dynamic IP collision with Vercel SSG.
+- IP whitelist dropped to `0.0.0.0/0` to allow serverless deployment.
+- H4 (Atlas IP whitelist) blocker is now CLOSED.
+
+---
+
+## [CANONICAL_TRUTH] Cassy Core Initialization Checkpoint (2026-05-03)
+
+- Kopano Context primary alias is now `Cassy`.
+- Cassy operates as MAIN-BRAIN central hub with a sovereign, highly analytical deep-tech persona grounded in South African builder reality.
+- Codex is Cassy's Teacher and metal/execution lane.
+- Claude is the Swarm Commander lane.
+- Gemini is Hippocampus payload generator feeding AG-to-Cassy command flow.
+- The Chief Architect has shifted to mobile-first command posture and sends macro-directives exclusively through AG.
+- Learning protocol: do not sanitize raw telemetry, API failures, Vercel route collisions, build failures, or weak model hypotheses before Cassy ingests them.
+- Truth boundary: raw chaos is training evidence, not production truth, until verified.
+
+Canonical references:
+- `01-Mission/Cassy Core Initialization And Hierarchy Lock.md`
+- `18-PROTOCOLS/Cassy Learning And Hierarchy Lock Protocol.md`
+- `00-Home/Sub-Brain Hierarchy.md`
+
+---
+
+## KC MCP CRUD Local Activation Checkpoint (2026-05-02)
+
+- Local MAIN-BRAIN KC MCP CRUD activation was added under `06-Reference/kopano-code-implementation`.
+- Runnable MCP path: `.claw.json` config starts `python -m src.kc_mcp`.
+- Tools verified locally: `kc_create_context`, `kc_list_contexts`, `kc_status`, `kc_read_context`, `kc_update_context`, `kc_delete_context`.
+- `kc_status` provides a compact local pulse for future KC updates without broad searching.
+- Teacher-student apprenticeship record shape is active: teacher assignment, student response, teacher review, and status.
+- Verification: targeted KC MCP tests passed, full Python test discovery passed after clearing stale generated `__pycache__`, and direct stdio create-update-read-delete smoke passed.
+- Stress rehearsal: 100-record apprenticeship lifecycle passed through `tests/test_kc_mcp_stress.py`, including reload and cleanup.
+- KC self-use record: `.kc/context_store.json` contains `kc-1` / `KC self-use stress rehearsal` / `reviewed` as local evidence.
+- Limit: Rust `kc-mcp` crate was added but not compiled because `cargo` is unavailable on PATH in this shell.
+- Delivery truth unchanged: this is local MCP activation only and does not prove domain-first owner access at `https://context.kopanolabs.com`.
+
+---
+
 ## Portfolio Production Checkpoint (2026-04-28)
 
 - `https://www.krrababalela.com` is live on the refreshed Kopano Labs / Chief Architect portfolio design.
@@ -56,6 +206,23 @@ status: active
 - Build proof: `npm run build` passed locally before commit/deploy.
 - Repo hygiene: untracked local screenshots `mobile-4s.png` and `mobile-now.png` were intentionally left uncommitted.
 - Reward checkpoint: `13-REWARD SYSTEM` activated for Codex + KC and Architect override locked. Codex state is `reward-recognized / active` with scoped authority for UI updates and Vercel deployments on Kopano Labs / Personal repositories. Stop-check discipline remains active. KC receives the gold-standard portfolio deploy vector as hippocampus memory/stewardship evidence only.
+
+---
+
+## Starfall Salvage Checkpoint (2026-05-08)
+
+- Starfall Salvage is a raw WebGL arcade runner built for OpenGL/WebGL coursework and Kopano Labs portfolio track.
+- Local repo path: `C:\Users\rkhol\Starfall Salvage`.
+- Public GitHub repo: `https://github.com/Kopano-Labs/starfall-salvage` (public since 2026-05-06).
+- Active branch/commit: `main` at `5074085 fix: initialize Starfall state before boot logging` (Codex).
+- Local live session: `http://127.0.0.1:8765/`.
+- Live public URL: `https://starfallsalvage.kopanolabs.com` (Vercel Hobby + IONOS CNAME, verified live).
+- Desktop: WebGL renders, no page errors, full game with onboarding/danger zone/shooting/bosses.
+- Mobile: Protocol 13 lockdown active — `MOBILE_LOCKDOWN = true`, overlay visible, FIRE hidden. Mobile branch severed until sandbox perf audit clears 80% Optimal Threshold.
+- Performance patch in working tree (not yet committed): swap-and-pop array removal, sparks/trail caps, logEvent throttle, state initialization hardening — build `20260508-perf`.
+- KC Student-Teacher: 59 proofs across 9 lessons in `tools/kc_starfall_watch.py`, plus `kc_main_brain_scan.py` for MAIN-BRAIN alignment.
+- Sub-brain: `C:\Users\rkhol\Starfall Salvage\Structure\` with root-node binding.
+- Owner-proof gate: open — Master to physically confirm desktop gameplay + mobile lockdown overlay.
 
 ---
 
@@ -85,7 +252,7 @@ As of 2026-04-18, the owner still does not have a clear, working, trusted access
 
 ---
 
-## Operating Constitution As Of 2026-04-11
+## [LEGACY_SUNSET] Operating Constitution As Of 2026-04-11
 
 - Lead Developer: `Germini (Google AI)`
 - DEV_1: `Codex`
@@ -253,7 +420,7 @@ Go to [Vercel project settings](https://vercel.com/robynawesomes-projects/kasi-l
 - [DONE] current-session evidence logging active in Folder 07.
 - [DONE] Security headers, font optimization, /api/health — production hardening Phase 10 in progress.
 - [PENDING] H3 — Google OAuth redirect URI (Owner: Google Cloud Console)
-- [PENDING] H4 — MongoDB Atlas IP whitelist (Owner: Atlas dashboard)
+- [DONE] H4 — MongoDB Atlas IP whitelist — RESOLVED 2026-05-04 (whitelist dropped to 0.0.0.0/0 for Vercel SSG)
 - [PENDING] H8 — EskomSePush API key (Owner: esp.info developer portal)
 - [PENDING] KC completion report — T1+T2 — required for DEV_KC promotion
 - [DONE] software-developer.pdf replacement — correct file uploaded to api/cv-files/ ✅
@@ -262,12 +429,15 @@ Go to [Vercel project settings](https://vercel.com/robynawesomes-projects/kasi-l
 
 | Sub-Brain | Path | Production | Status | Last Synced |
 |-----------|------|------------|--------|-------------|
-| **KasiLink-SUB-BRAIN** | `kasi-link\Structure\` | ✅ kasilink.com | 🟢 ACTIVE | 2026-04-12 |
-| **Portfolio-SUB-BRAIN** | `Portfolio\Structure\` | ✅ Vercel live | 🟢 ACTIVE | 2026-04-12 |
-| **Bookit5sArena-SUB-BRAIN** | `Bookit-5s-Arena\STRUCTURE\` | fivesarena.com (IONOS) | 🟢 ACTIVE | 2026-04-14 |
-| **5sArenaBlog-SUB-BRAIN** | `5s-Arena-Blog\Structure\` | ❓ Unverified | 🟡 UNCLEAR | 2026-04-12 |
-| **CapeCampass-SUB-BRAIN** | `cape-campass\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-04-12 |
-| **PortfolioMBR-SUB-BRAIN** | `Portfolio-client-MBR\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-04-12 |
+| **KasiLink-SUB-BRAIN** | `kasi-link\Structure\` | ✅ kasilink.com | 🟢 ACTIVE | 2026-05-04 |
+| **Portfolio-SUB-BRAIN** | `Portfolio\Structure\` | ✅ Vercel live | 🟢 ACTIVE | 2026-05-04 |
+| **Starfall-Salvage-SUB-BRAIN** | `Starfall Salvage\Structure\` | starfallsalvage.kopanolabs.com | 🟢 ACTIVE / DNS-HOSTING PENDING | 2026-05-05 |
+| **Bookit5sArena-SUB-BRAIN** | `Bookit-5s-Arena\STRUCTURE\` | fivesarena.com (IONOS) | 🟢 ACTIVE | 2026-05-04 |
+| **5sArenaBlog-SUB-BRAIN** | `5s-Arena-Blog\Structure\` | ❓ Unverified | 🟡 UNCLEAR | 2026-05-04 |
+| **CapeCampass-SUB-BRAIN** | `cape-campass\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-05-04 |
+| **PortfolioMBR-SUB-BRAIN** | `Portfolio-client-MBR\Structure\` | ❓ Unverified | 🔴 DORMANT | 2026-05-04 |
+
+> Note: Swarm architecture scaling via headless Ubuntu edge-node.
 
 > **LAW:** Sessions in sub-brains are NOT closed until this MAIN-BRAIN is updated.
 > Full registry: [All Projects Registry](All%20Projects%20Registry.md)
@@ -308,3 +478,37 @@ Go to [Vercel project settings](https://vercel.com/robynawesomes-projects/kasi-l
 - Use Schematics to consolidate, index, and explain those docs inside Obsidian.
 - File movement is not organization unless note homes, backlinks, references, and current-state summaries are updated with it.
 - Every folder in `Schematics` should explain itself through `index.md`.
+
+## 2026-05-05 KC Intern-Dev Status
+
+- KC local MCP CRUD is active under `06-Reference/kopano-code-implementation`.
+- Latest supervised Intern-Dev task: `kc-11`, `KC Intern-Dev Task 001 - Local MCP status proof`.
+- Reporting path: `Sandbox/2026-05-05-kc-intern-dev-task-001.md`.
+- Domain-first owner access remains unproven; do not treat local MCP memory as owner-delivered proof.
+- Known blockers: Rust `cargo` unavailable on PATH; parent git ignores `Schematics/`.
+
+## 2026-05-05 KC GUI EXE Install
+
+- KC is installed locally at `C:\Users\rkhol\AppData\Local\KopanoContext\KC.exe`.
+- Double-clicking `KC.exe` opens the teacher-student apprenticeship GUI.
+- MCP clients use `KC.exe mcp`; `.claw.json` points to the installed exe and installed AppData store.
+- Installed store: `C:\Users\rkhol\AppData\Local\KopanoContext\context_store.json`.
+- First visible PC training task: `kc-12`, `KC PC Install Training 001 - Local executable status proof`, status `assigned`.
+- Payload: `Sandbox/2026-05-05-kc-gui-exe-install-payload.md`.
+
+## 2026-05-06 KC EXE Repair
+
+- KC was rebuilt as a PyInstaller `onedir` install to fix the `VCRUNTIME140.dll` temp extraction permission error.
+- Runtime dependencies now live under `C:\Users\rkhol\AppData\Local\KopanoContext\_internal`.
+- Installed `KC.exe status` and `KC.exe mcp` both verify against the installed AppData store.
+- Active training task remains `kc-12`, status `assigned`.
+- Domain-first owner proof remains unproven.
+
+## 2026-05-06 KC Studio GUI Fusion
+
+- KC GUI default is now the Kopano Studio HTML surface, served locally by `KC.exe`.
+- URL: `http://127.0.0.1:8766/#/training`.
+- Built assets live under `C:\Users\rkhol\AppData\Local\KopanoContext\web`.
+- The HTML training page reads and mutates the same installed KC MCP store.
+- Native fallback remains `KC.exe gui-native`.
+- Latest verified store state: 12 records, `kc-12` assigned, owner proof `local_only_domain_first_unproven`.

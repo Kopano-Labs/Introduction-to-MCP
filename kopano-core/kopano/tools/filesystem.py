@@ -577,6 +577,9 @@ def _human_size(size: int) -> str:
 # ---------------------------------------------------------------------------
 
 def get_mcp_tool_definitions() -> list[dict[str, Any]]:
+    from .bookit_tools import tool_definitions as _bookit_tool_definitions
+    from .sqlite_audit import tool_definitions as _sqlite_audit_tools
+
     return [
         {
             "name": "fs_read_file",
@@ -687,11 +690,20 @@ def get_mcp_tool_definitions() -> list[dict[str, Any]]:
                 "required": [],
             },
         },
-    ]
+    ] + _sqlite_audit_tools() + _bookit_tool_definitions()
 
 
 def dispatch_mcp_call(tool_name: str, tool_input: dict[str, Any]) -> str:
     """Route an MCP tool call to the correct function."""
+    if tool_name.startswith("kc_sqlite_"):
+        from .sqlite_audit import dispatch as _sqlite_dispatch
+
+        return _sqlite_dispatch(tool_name, tool_input)
+    if tool_name.startswith("bookit_") or tool_name == "validate_qr_checkin":
+        from .bookit_tools import dispatch as _bookit_dispatch
+
+        return _bookit_dispatch(tool_name, tool_input)
+
     dispatch = {
         "fs_read_file":      lambda i: read_file(**i),
         "fs_write_file":     lambda i: write_file(**i),
