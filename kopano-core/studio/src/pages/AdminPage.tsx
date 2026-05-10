@@ -48,33 +48,24 @@ export function AdminPage({
 }: AdminPageProps) {
   return (
     <div className="page-layout admin-layout">
-      <motion.section className="hero-panel hero-admin" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72 }}>
-        <div className="hero-copy">
-          <span className="eyebrow">Admin portal</span>
-          <div className="headline-stack">
-            <span className="headline-line">Internal only.</span>
-            <span className="headline-line">Visible control.</span>
-            <span className="headline-line">Real audit trails.</span>
-          </div>
-          <p className="hero-copy-text">
-            Access deeper telemetry, session analytics, and forensic auditing traces behind the secure backend layer.
-          </p>
+      <motion.section className="hero-panel ops-hero hero-admin" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72 }}>
+        <div className="ops-title">
+          <span className="eyebrow">Admin</span>
+          <h2>Audit controls</h2>
+          <p>Authenticate to inspect sessions, events, and overrides.</p>
         </div>
-        <div className="quick-launch-grid compact">
+        <div className="ops-stat-grid">
           <article className="quick-launch-card static">
             <span className="stat-label">Access</span>
             <strong>{isAdminLoggedIn ? adminUser?.email : 'Locked'}</strong>
-            <p>Only admin unlocks the vault and internal feed.</p>
           </article>
           <article className="quick-launch-card static">
-            <span className="stat-label">Vault</span>
+            <span className="stat-label">Sessions</span>
             <strong>{sessions.length}</strong>
-            <p>Stored sessions available for forensic replay.</p>
           </article>
           <article className="quick-launch-card static">
-            <span className="stat-label">Signals</span>
+            <span className="stat-label">Events</span>
             <strong>{adminFeedPreview.length}</strong>
-            <p>Recent runtime events visible to operators.</p>
           </article>
         </div>
       </motion.section>
@@ -103,10 +94,10 @@ export function AdminPage({
 
           <motion.article className="glass-card" layout>
             <div className="card-topline">
-              <span className="eyebrow">Why it is split</span>
-              <span className="signal-chip neutral">architecture</span>
+              <span className="eyebrow">Scope</span>
+              <span className="signal-chip neutral">locked</span>
             </div>
-            <h2>What lives behind the wall</h2>
+            <h2>Internal actions</h2>
             <div className="deliverable-stack">
               <div className="deliverable-pill">Activity preview and operator relay</div>
               <div className="deliverable-pill">Session vault and forensic replay</div>

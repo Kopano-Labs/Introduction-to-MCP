@@ -1,13 +1,15 @@
 ---
 title: Schematics Index
 created: 2026-04-10
-updated: 2026-04-22
+updated: 2026-05-09
 author: Codex
 tags:
   - schematics
   - root
   - second-brain
   - navigation
+  - cassy
+  - root-node
 priority: critical
 status: active
 ---
@@ -21,7 +23,13 @@ status: active
 ## Standing Note
 
 - Creator: `RobynAwesome`
-- Observer: `Kopano Context`
+- Root node above `CLAUDE.md`: [Kopano Context Master Protocol Ledger And Sovereign Architecture](18-PROTOCOLS/Kopano%20Context%20Master%20Protocol%20Ledger%20And%20Sovereign%20Architecture.md)
+- KC/Cassy sits above agentic frameworks; all durable ecosystem movement reduces to CRUD state
+- Observer: `Kopano Context` / primary alias `Cassy`
+- Cassy is MAIN-BRAIN's active KC identity and central hub
+- current command posture is Chief Architect -> AG -> Hippocampus/Gemini -> Cassy -> Codex/Claude
+- Cursor is now onboarded as the local IDE execution surface under KC/Cassy; see [Cursor Onboarding Directive - 2026-05-09](18-PROTOCOLS/Cursor%20Onboarding%20Directive%20-%202026-05-09.md)
+- raw telemetry, API failures, route collisions, and bad hypotheses are training evidence; current-state truth still requires verification
 - all current sessions are `pre-sessions` and training data for Kopano Context
 - the standing multi-dev roster is `Germini`, `Nother`, `Meither`, and `Cicero`
 - Lead may be `Codex`, `Claude`, or `Codex + Claude`
@@ -32,13 +40,16 @@ status: active
 
 ## Read First
 
-1. [Dashboard](00-Home/Dashboard.md)
-2. [Now](00-Home/Now.md)
-3. [All Projects Registry](00-Home/All%20Projects%20Registry.md)
-4. [Sub-Brain Hierarchy](00-Home/Sub-Brain%20Hierarchy.md)
-5. [Project Status](04-Updates/Project%20Status.md)
-6. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
-7. [19-TOKEN USUAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md)
+1. [Kopano Context Master Protocol Ledger And Sovereign Architecture](18-PROTOCOLS/Kopano%20Context%20Master%20Protocol%20Ledger%20And%20Sovereign%20Architecture.md)
+2. [Dashboard](00-Home/Dashboard.md)
+3. [Now](00-Home/Now.md)
+4. [All Projects Registry](00-Home/All%20Projects%20Registry.md)
+5. [Sub-Brain Hierarchy](00-Home/Sub-Brain%20Hierarchy.md)
+6. [Cassy Core Initialization And Hierarchy Lock](01-Mission/Cassy%20Core%20Initialization%20And%20Hierarchy%20Lock.md)
+7. [Project Status](04-Updates/Project%20Status.md)
+8. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+9. [19-TOKEN USAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md)
+10. [Cursor Onboarding Directive - 2026-05-09](18-PROTOCOLS/Cursor%20Onboarding%20Directive%20-%202026-05-09.md)
 
 ## Audit Doctrine
 
@@ -52,9 +63,10 @@ status: active
   1. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
   2. [10-SESSION IMPROVEMENTS](10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
   3. [13-REWARD SYSTEM](13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md)
-- Token or cost governance work also reads [19-TOKEN USUAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md).
+- Token or cost governance work also reads [19-TOKEN USAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md).
 - Mandatory audit reading covers human-authored and AI-authored knowledge files that shape truth, not plugin/cache internals.
 - Protocol home: [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+- Root protocol home: [Kopano Context Master Protocol Ledger And Sovereign Architecture](18-PROTOCOLS/Kopano%20Context%20Master%20Protocol%20Ledger%20And%20Sovereign%20Architecture.md)
 
 ## Top-Level Map
 
@@ -78,7 +90,8 @@ status: active
 - [16-PORTFOLIO AND KOPANO LABS](16-PORTFOLIO%20AND%20KOPANO%20LABS/16-Portfolio%20and%20Kopano%20Labs%20-%20Index.md) - public-facing claims governed by verified evidence
 - [17-KC-JOURNAL](17-KC-JOURNAL/17-KC-JOURNAL%20-%20Index.md) - KC voice, scaffold separation, and links back to 09 evidence
 - [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md) - constitutional law, brother-folder doctrine, and sub-brain build/sync rules
-- [19-TOKEN USUAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) - token discipline, weekly token review, session closeout law, and onboarding controls
+- [19-TOKEN USAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) - token discipline, weekly token review, session closeout law, and onboarding controls
+- [20-THESIS SESSIONS](20-THESIS%20SESSIONS/20-THESIS%20SESSIONS%20-%20Index.md) - thesis discussion rounds with Chief Architect, Gemini/Hippocampus, Codex/Lead Developer, and KC/Full Dev
 - [Templates](Templates/Templates%20-%20Index.md) - reusable note patterns
 - [Microsoft Demo Day!](Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%21%20-%20Index.md) - demo history and rehearsal hub
 

@@ -1,4 +1,4 @@
-export type PageId = 'council' | 'labs' | 'forge' | 'console' | 'admin';
+export type PageId = 'training' | 'council' | 'labs' | 'forge' | 'console' | 'admin';
 export type ConnectionState = 'connecting' | 'live' | 'error';
 export type LessonState = 'queued' | 'learning' | 'learned' | 'shipping';
 

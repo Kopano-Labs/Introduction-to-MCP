@@ -75,33 +75,24 @@ export function ForgePage({
 }: ForgePageProps) {
   return (
     <div className="page-layout forge-layout">
-      <motion.section className="hero-panel hero-forge" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72 }}>
-        <div className="hero-copy">
+      <motion.section className="hero-panel ops-hero hero-forge" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72 }}>
+        <div className="ops-title">
           <span className="eyebrow">Forge</span>
-          <div className="headline-stack">
-            <span className="headline-line">Build in public.</span>
-            <span className="headline-line">Route with intent.</span>
-            <span className="headline-line">Ship with receipts.</span>
-          </div>
-          <p className="hero-copy-text">
-            Forge is the execution view in the safe route: open the active room, show tasks and artifacts, and only edit if you need an optional proof point.
-          </p>
+          <h2>Rooms and tasks</h2>
+          <p>Open the active room, update tasks, and attach artifacts.</p>
         </div>
-        <div className="quick-launch-grid compact">
+        <div className="ops-stat-grid">
           <article className="quick-launch-card static">
             <span className="stat-label">Rooms</span>
             <strong>{coworkRooms.length}</strong>
-            <p>Prepared workspaces ready for demo routing.</p>
           </article>
           <article className="quick-launch-card static">
             <span className="stat-label">Tasks</span>
             <strong>{activeRoom?.dispatch_summary.total_tasks ?? 0}</strong>
-            <p>Current room workload visible without requiring live edits.</p>
           </article>
           <article className="quick-launch-card static">
             <span className="stat-label">Artifacts</span>
             <strong>{activeRoom?.artifact_summary.total_artifacts ?? 0}</strong>
-            <p>Outputs stay attached to the room so the story has receipts.</p>
           </article>
         </div>
       </motion.section>
@@ -112,7 +103,7 @@ export function ForgePage({
             <span className="eyebrow">New room</span>
             <span className="signal-chip neutral">optional</span>
           </div>
-          <h2>Optional room creation</h2>
+          <h2>New room</h2>
           <label className="field-shell">
             <span>Name</span>
             <input value={roomName} onChange={(event) => onRoomNameChange(event.target.value)} />
@@ -129,7 +120,7 @@ export function ForgePage({
             <span className="eyebrow">Rooms</span>
             <span className="signal-chip neutral">{coworkRooms.length}</span>
           </div>
-          <h2>Open the active room</h2>
+          <h2>Rooms</h2>
           <div className="room-rail">
             {coworkRooms.map((room) => (
               <button key={room.id} type="button" className={`room-chip ${activeRoom?.id === room.id ? 'active' : ''}`} onClick={() => onSelectRoom(room.id)}>
@@ -149,7 +140,7 @@ export function ForgePage({
                 <span className="eyebrow">Task composer</span>
                 <span className="signal-chip neutral">{editingTaskId ? 'edit' : 'optional'}</span>
               </div>
-              <h2>{editingTaskId ? 'Edit task' : 'Optional task edit'}</h2>
+              <h2>{editingTaskId ? 'Edit task' : 'Task'}</h2>
               <label className="field-shell">
                 <span>Title</span>
                 <input value={taskTitle} onChange={(event) => onTaskTitleChange(event.target.value)} />
@@ -184,7 +175,7 @@ export function ForgePage({
                 <span className="eyebrow">Artifact composer</span>
                 <span className="signal-chip neutral">{editingArtifactId ? 'edit' : 'optional'}</span>
               </div>
-              <h2>{editingArtifactId ? 'Edit artifact' : 'Optional artifact edit'}</h2>
+              <h2>{editingArtifactId ? 'Edit artifact' : 'Artifact'}</h2>
               <label className="field-shell">
                 <span>Type</span>
                 <select value={artifactType} onChange={(event) => onArtifactTypeChange(event.target.value)}>

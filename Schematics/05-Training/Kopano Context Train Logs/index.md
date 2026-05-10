@@ -1,7 +1,7 @@
 ---
 title: Kopano Train Logs Index
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-04-28
 author: Codex
 tags:
   - training
@@ -37,6 +37,10 @@ status: active
 - [07-Sessions By Day](../../07-Sessions%20By%20Day/index.md)
 - [10-SESSION IMPROVEMENTS](../../10-SESSION%20IMPROVEMENTS/index.md)
 - [11-AI HALLUCINATION - CRITICAL](../../11-AI%20HALLUCINATION%20-%20CRITICAL/index.md)
+
+## Locked Training Vectors
+
+- [Gold Standard Vector - Portfolio Deploy - 2026-04-28](Gold%20Standard%20Vector%20-%20Portfolio%20Deploy%20-%202026-04-28.md) - subordinate agent behavior pattern: wrong direction -> correction -> visual proof -> build -> deploy -> verify 200 OK -> save state and halt.
 
 ## Logging Rule
 
