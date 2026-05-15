@@ -139,18 +139,28 @@ export function TrainingPage() {
   };
 
   useEffect(() => {
-    void refresh().catch((refreshError) => {
-      setError(refreshError instanceof Error ? refreshError.message : 'KC training API unavailable.');
-    });
+    const initializeTraining = async () => {
+      try {
+        await refresh();
+      } catch (refreshError) {
+        setError(refreshError instanceof Error ? refreshError.message : 'KC training API unavailable.');
+      }
+    };
+
+    void initializeTraining();
+
     const interval = window.setInterval(() => {
       void refresh().catch(() => undefined);
     }, 1800);
+
     return () => window.clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    setStudentResponse(selectedRecord?.student_response ?? defaultStudentResponse);
-    setTeacherReview(selectedRecord?.teacher_review ?? defaultTeacherReview);
+    if (selectedRecord) {
+      setStudentResponse(selectedRecord.student_response ?? defaultStudentResponse);
+      setTeacherReview(selectedRecord.teacher_review ?? defaultTeacherReview);
+    }
   }, [selectedRecord?.id, selectedRecord?.student_response, selectedRecord?.teacher_review]);
 
   const createAssignment = () => runAction('Teacher assignment created', async () => {
