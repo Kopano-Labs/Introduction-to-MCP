@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopano.context/swarm/kc_review_log_v1",
+  "title": "kc_review_log_v1",
+  "type": "object",
+  "required": ["schema", "ts", "role", "phase", "summary"],
+  "properties": {
+    "schema": { "const": "kc_review_log_v1" },
+    "ts": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T" },
+    "role": { "type": "string", "enum": ["student", "teacher", "system"] },
+    "phase": { "type": "string", "minLength": 1 },
+    "agent_id": { "type": ["string", "null"] },
+    "summary": { "type": "string", "minLength": 1 },
+    "commands": { "type": ["array", "null"], "items": { "type": "string" } },
+    "exit_code": { "type": ["integer", "null"] },
+    "git_sha": { "type": ["string", "null"] },
+    "branch": { "type": ["string", "null"] },
+    "evidence_urls": { "type": ["array", "null"], "items": { "type": "string", "minLength": 1 } },
+    "ref_review_id": { "type": ["string", "null"] },
+    "teacher_verdict": { "type": ["string", "null"], "enum": ["approved", "rejected", null] }
+  },
+  "additionalProperties": false
+}

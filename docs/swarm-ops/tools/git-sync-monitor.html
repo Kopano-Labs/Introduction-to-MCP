@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Sync Monitor — Kopano Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[data-theme="light"]{
+  --color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;
+  --color-border:#d4d1ca;--color-text:#28251d;--color-text-muted:#6a6964;
+  --color-primary:#01696f;--color-primary-hover:#0c4e54;--color-primary-highlight:#cedcd8;
+  --color-success:#437a22;--color-error:#a12c7b;--color-warning:#964219;--color-blue:#006494;
+  --shadow-sm:0 1px 2px oklch(0.2 0.01 80/0.06);--radius-lg:0.75rem;--font-body:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+[data-theme="dark"]{
+  --color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;
+  --color-border:#393836;--color-text:#cdccca;--color-text-muted:#797876;
+  --color-primary:#4f98a3;--color-primary-hover:#227f8b;--color-primary-highlight:#313b3b;
+  --color-success:#6daa45;--color-error:#d163a7;--color-warning:#bb653b;--color-blue:#5591c7;
+  --shadow-sm:0 1px 2px oklch(0 0 0/0.2);--radius-lg:0.75rem;--font-body:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+html{font-family:var(--font-body);font-size:14px;color:var(--color-text);background:var(--color-bg);-webkit-font-smoothing:antialiased}
+body{min-height:100dvh;display:flex;flex-direction:column}
+:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.25rem;background:var(--color-surface);border-bottom:1px solid var(--color-border);position:sticky;top:0;z-index:10}
+.logo{font-weight:700;font-size:0.875rem;display:flex;align-items:center;gap:0.5rem}
+.repo-badge{background:var(--color-primary-highlight);color:var(--color-primary);padding:0.15rem 0.6rem;border-radius:9999px;font-family:var(--font-mono);font-size:11px}
+.content{display:flex;flex:1;min-height:0}
+.sidebar{width:220px;flex-shrink:0;background:var(--color-surface);border-right:1px solid var(--color-border);padding:0.75rem 0}
+.sidebar-section{padding:0.35rem 1rem;font-size:10px;font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.06em}
+.nav-item{display:flex;align-items:center;gap:0.5rem;padding:0.45rem 1rem;font-size:13px;color:var(--color-text-muted);cursor:pointer;border-left:2px solid transparent}
+.nav-item:hover,.nav-item:focus{background:var(--color-surface-2);color:var(--color-text)}
+.nav-item.active{background:var(--color-primary-highlight);color:var(--color-primary);border-left-color:var(--color-primary)}
+.main{flex:1;overflow-y:auto;padding:1.25rem 1.5rem}
+.panel{display:none;flex-direction:column;gap:1rem}
+.panel.active{display:flex}
+h1{font-size:1.35rem;font-weight:700;margin-bottom:0.25rem}
+.sub{color:var(--color-text-muted);font-size:13px;margin-bottom:0.5rem;line-height:1.45}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:0.75rem}
+.kpi{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:0.75rem;box-shadow:var(--shadow-sm)}
+.kpi-label{font-size:10px;text-transform:uppercase;color:var(--color-text-muted);letter-spacing:0.05em}
+.kpi-value{font-family:var(--font-mono);font-weight:700;font-size:0.95rem;margin-top:0.25rem}
+.kpi-sub{font-size:11px;color:var(--color-text-muted);margin-top:0.2rem;line-height:1.35}
+.kpi.v .kpi-value{color:var(--color-success)}
+.kpi.w .kpi-value{color:var(--color-warning)}
+.kpi.x .kpi-value{color:var(--color-error)}
+.alert{display:flex;gap:0.6rem;padding:0.75rem;border-radius:var(--radius-lg);border:1px solid;font-size:13px;line-height:1.45}
+.alert-amber{background:#564942;border-color:var(--color-warning);color:var(--color-warning)}
+.alert-red{background:#4c3d46;border-color:var(--color-error);color:var(--color-error)}
+.alert-blue{background:#3a4550;border-color:var(--color-blue);color:var(--color-blue)}
+.card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.card-h{padding:0.65rem 1rem;border-bottom:1px solid var(--color-border);font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:0.5rem}
+.card-b{padding:0.75rem 1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}.sidebar{display:none}}
+table.data{width:100%;border-collapse:collapse;font-size:11px}
+table.data th{text-align:left;padding:0.4rem 0.5rem;color:var(--color-text-muted);font-weight:600;font-family:var(--font-body);font-size:10px;text-transform:uppercase;border-bottom:1px solid var(--color-border)}
+table.data td{padding:0.45rem 0.5rem;border-top:1px solid var(--color-border);vertical-align:middle;color:var(--color-text-muted);font-family:var(--font-mono);font-size:11px}
+table.data td.path{font-family:var(--font-body);color:var(--color-blue)}
+.terminal{background:#0d0d0b;border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;margin-top:0.5rem}
+.terminal-bar{display:flex;align-items:center;justify-content:space-between;padding:0.35rem 0.65rem;background:#1a1a17;font-size:11px;color:#888}
+.copy-btn{font-size:11px;padding:0.15rem 0.45rem;border-radius:4px;color:#aaa;cursor:pointer;border:none;background:transparent;font:inherit}
+.copy-btn:hover{background:#fff1;color:#fff}
+.terminal-body{padding:0.65rem 0.85rem;font-family:var(--font-mono);font-size:11.5px;line-height:1.65;overflow-x:auto;white-space:pre-wrap;color:#c8c6c3}
+.badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:9999px;font-size:10px;font-weight:600;font-family:var(--font-body);text-transform:uppercase;letter-spacing:0.04em}
+.badge-g{background:#3a4435;color:var(--color-success)}.badge-a{background:#564942;color:var(--color-warning)}
+.badge-r{background:#4c3d46;color:var(--color-error)}.badge-b{background:#3a4550;color:var(--color-blue)}.badge-n{background:var(--color-surface-2);color:var(--color-text-muted)}
+.checklist{display:flex;flex-direction:column;gap:0.45rem}
+.check{display:flex;gap:0.55rem;align-items:flex-start;padding:0.55rem 0.7rem;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;background:var(--color-surface)}
+.check.done{opacity:0.72}.check.done .cl{text-decoration:line-through;color:var(--color-text-muted)}
+.cb{width:17px;height:17px;border:2px solid var(--color-border);border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:10px;line-height:1;color:#fff}
+.check.done .cb{background:var(--color-success);border-color:var(--color-success)}
+.check.done .cb::after{content:'✓'}
+.cl{font-size:13px;font-weight:500}.cm{font-size:11px;color:var(--color-text-muted);font-family:var(--font-mono);margin-top:3px;line-height:1.35}
+.theme-btn{padding:0.35rem 0.5rem;border-radius:6px;color:var(--color-text-muted);cursor:pointer;border:none;background:transparent;font:inherit}
+.theme-btn:hover{background:var(--color-surface-2);color:var(--color-text)}
+details.step{border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);margin-bottom:0.5rem}
+details.step summary{cursor:pointer;padding:0.65rem 0.85rem;font-weight:600;font-size:13px;list-style:none;display:flex;align-items:center;gap:0.5rem}
+details.step summary::-webkit-details-marker{display:none}
+details.step[open] summary{border-bottom:1px solid var(--color-border)}
+.step-body{padding:0.75rem}
+.tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--color-border);margin-bottom:0.75rem}
+.tab{padding:0.45rem 1rem;font-size:13px;font-weight:500;color:var(--color-text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;font:inherit}
+.tab:hover{color:var(--color-text)}
+.tab.active{color:var(--color-primary);border-bottom-color:var(--color-primary)}
+.tab-panel{display:none;flex-direction:column;gap:0.75rem}
+.tab-panel.active{display:flex}
+.prio{font-size:12px;padding:0.6rem 0.85rem;border-left:3px solid var(--color-warning);background:var(--color-surface-2);border-radius:0 var(--radius-lg) var(--radius-lg) 0}
+code.inline{font-family:var(--font-mono);font-size:12px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">
+    <span aria-hidden="true">◎</span> Git Sync Monitor
+    <span class="repo-badge">Introduction-to-MCP</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;justify-content:flex-end">
+    <span style="font-size:11px;color:var(--color-text-muted);font-family:var(--font-mono);max-width:min(420px,45vw);text-align:right">example branch <code class="inline">codex/kc-sovereign-gui-full-dev</code> — set remote to <em>your</em> fork if <code class="inline">origin</code> is upstream</span>
+    <button type="button" class="theme-btn" id="themeBtn" title="Toggle light/dark">◐</button>
+  </div>
+</header>
+<div class="content">
+<nav class="sidebar" id="sidebar" role="navigation" aria-label="Sections">
+  <div class="sidebar-section">Audit</div>
+  <div class="nav-item active" tabindex="0" role="button" data-view="overview">Overview</div>
+  <div class="nav-item" tabindex="0" role="button" data-view="remote">Remote config</div>
+  <div class="nav-item" tabindex="0" role="button" data-view="sha">SHA trace</div>
+  <div class="nav-item" tabindex="0" role="button" data-view="gitignore">.gitignore</div>
+  <div class="sidebar-section">Proof</div>
+  <div class="nav-item" tabindex="0" role="button" data-view="proof">Proof receipts</div>
+  <div class="nav-item" tabindex="0" role="button" data-view="comms">Comms-log debt</div>
+  <div class="nav-item" tabindex="0" role="button" data-view="logs">kc_log_append</div>
+</nav>
+<main class="main">
+
+<!-- ========== OVERVIEW ========== -->
+<section class="panel active" id="view-overview" aria-labelledby="ov-h">
+  <h1 id="ov-h">Overview — proof bar at a glance</h1>
+  <p class="sub">Static dashboard. Pair with <code class="inline">python scripts/git_sync_monitor.py</code> and <a href="../SWARM_OPERATIONS.md" style="color:var(--color-primary)">SWARM_OPERATIONS.md</a>. KPI defaults are <strong>placeholders</strong> — tick items in Proof after you verify.</p>
+
+  <div class="kpi-row">
+    <div class="kpi w" id="kpi-push"><div class="kpi-label">Remote push</div><div class="kpi-value">⚠ verify</div><div class="kpi-sub">Branch must exist on the remote you use for receipts (<code class="inline">git ls-remote</code>).</div></div>
+    <div class="kpi w" id="kpi-sha"><div class="kpi-label">SHA status</div><div class="kpi-value">⚠ unverified</div><div class="kpi-sub">Confirm short SHA on GitHub; prefer full 40-char in API URLs.</div></div>
+    <div class="kpi w" id="kpi-comms"><div class="kpi-label">comms-log debt</div><div class="kpi-value">⚠ check</div><div class="kpi-sub">Vault <code class="inline">Schematics/…</code> may be ignored — see Comms panel.</div></div>
+    <div class="kpi v" id="kpi-docs"><div class="kpi-label">docs/swarm-ops</div><div class="kpi-value">✓ target</div><div class="kpi-sub">Canonical tracked doctrine + logs path in git.</div></div>
+    <div class="kpi w" id="kpi-swarm"><div class="kpi-label">Swarm proof</div><div class="kpi-value">⚠ pending</div><div class="kpi-sub">Durable <code class="inline">--evidence-url</code> + JSONL append (Kimi <code class="inline">kimi-ack</code> or <code class="inline">mainbrain</code>).</div></div>
+    <div class="kpi w" id="kpi-py"><div class="kpi-label">pytest</div><div class="kpi-value">run locally</div><div class="kpi-sub"><code class="inline">pytest tests/test_kc_log_append.py -q</code></div></div>
+  </div>
+
+  <div class="prio"><strong>Hard priority #1 — push first.</strong> Example: <code class="inline">git push -u origin codex/kc-sovereign-gui-full-dev</code> (only if <code class="inline">origin</code> is <em>your</em> fork). Until that branch exists on the remote you use for receipts, SHA URLs, CI on PRs, and external auditors cannot chain. If <code class="inline">origin</code> is <code class="inline">Kopano-Labs/…</code>, use <code class="inline">git push -u fork HEAD</code> instead.</div>
+
+  <div class="card">
+    <div class="card-h">Full artifact status <span class="badge badge-a">edit badges after verify</span></div>
+    <div class="card-b" style="overflow-x:auto;padding:0">
+      <table class="data">
+        <thead><tr><th>Artifact</th><th>Location</th><th>Git</th><th>External</th><th>Proof bar</th></tr></thead>
+        <tbody>
+          <tr><td>SWARM_OPERATIONS.md</td><td class="path">docs/swarm-ops/</td><td><span class="badge badge-g">intended tracked</span></td><td><span class="badge badge-a">needs remote</span></td><td><span class="badge badge-n">doctrine</span></td></tr>
+          <tr><td>PAYLOAD_KIMI_300_ACTIVATION.md</td><td class="path">docs/swarm-ops/</td><td><span class="badge badge-g">intended tracked</span></td><td><span class="badge badge-a">needs remote</span></td><td><span class="badge badge-r">Kimi exec</span></td></tr>
+          <tr><td>KC Review Log.jsonl</td><td class="path">docs/swarm-ops/logs/</td><td><span class="badge badge-g">bootstrap</span></td><td><span class="badge badge-a">needs remote</span></td><td><span class="badge badge-r">runtime rows</span></td></tr>
+          <tr><td>KC Main Brain Log.jsonl</td><td class="path">docs/swarm-ops/logs/</td><td><span class="badge badge-g">bootstrap</span></td><td><span class="badge badge-a">needs remote</span></td><td><span class="badge badge-r">ack receipt</span></td></tr>
+          <tr><td>kc_log_append.py</td><td class="path">scripts/</td><td><span class="badge badge-g">tooling</span></td><td><span class="badge badge-n">n/a</span></td><td><span class="badge badge-a">append + commit</span></td></tr>
+          <tr><td>comms-log.md</td><td class="path">Schematics/04-Updates/</td><td><span class="badge badge-a">often ignored</span></td><td><span class="badge badge-r">mirror only?</span></td><td><span class="badge badge-r">doctrine rows</span></td></tr>
+          <tr><td>DEMO_DAY_RUNBOOK.md</td><td class="path">repo root</td><td><span class="badge badge-g">if tracked</span></td><td><span class="badge badge-a">needs remote</span></td><td><span class="badge badge-n">gate text</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REMOTE ========== -->
+<section class="panel" id="view-remote" aria-labelledby="rm-h">
+  <h1 id="rm-h">Remote config — four steps</h1>
+  <p class="sub">Sequential unblockers. Replace <code class="inline">OWNER/REPO</code>, <code class="inline">FULLSHA</code>, and remote name with your fork if needed.</p>
+
+  <details class="step" open>
+    <summary>1 — List remotes + URLs</summary>
+    <div class="step-body">
+      <div class="terminal" style="margin-top:0"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git remote -v">copy</button></div><div class="terminal-body">git remote -v</div></div>
+      <p class="sub" style="margin-top:0.5rem">Expect your <strong>push</strong> target to be the fork where you open PRs (e.g. <code class="inline">RobynAwesome/Introduction-to-MCP</code>), not necessarily <code class="inline">Kopano-Labs/…</code>.</p>
+    </div>
+  </details>
+
+  <details class="step" open>
+    <summary>2 — Branch + upstream tracking</summary>
+    <div class="step-body">
+      <div class="terminal" style="margin-top:0"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git branch -vv&#10;git status -sb">copy</button></div><div class="terminal-body">git branch -vv
+git status -sb</div></div>
+    </div>
+  </details>
+
+  <details class="step" open>
+    <summary>3 — Push (unblocks SHA / CI / PR receipts)</summary>
+    <div class="step-body">
+      <div class="alert alert-amber" style="margin-bottom:0.6rem"><strong>Example</strong> (only if <code class="inline">origin</code> is already your fork):</div>
+      <div class="terminal" style="margin-top:0"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git push -u origin codex/kc-sovereign-gui-full-dev">copy</button></div><div class="terminal-body">git push -u origin codex/kc-sovereign-gui-full-dev</div></div>
+      <p class="sub" style="margin:0.75rem 0 0.35rem">If <code class="inline">origin</code> is upstream org, use your fork remote instead:</p>
+      <div class="terminal"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git push -u fork HEAD">copy</button></div><div class="terminal-body">git push -u fork HEAD</div></div>
+    </div>
+  </details>
+
+  <details class="step" open>
+    <summary>4 — Confirm commit on GitHub API (after push)</summary>
+    <div class="step-body">
+      <p class="sub">Use <strong>full 40-character</strong> SHA when possible; short prefixes can be ambiguous.</p>
+      <div class="terminal"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="curl -s &quot;https://api.github.com/repos/OWNER/REPO/commits/4ec8344&quot; | head -c 500&#10;# Prefer full 40-char SHA once you have it:&#10;# curl -s &quot;https://api.github.com/repos/OWNER/REPO/commits/FULLSHA40...&quot; | head -c 500">copy</button></div><div class="terminal-body">curl -s "https://api.github.com/repos/OWNER/REPO/commits/4ec8344" | head -c 500
+# Prefer full 40-char SHA once you have it:
+# curl -s "https://api.github.com/repos/OWNER/REPO/commits/FULLSHA40..." | head -c 500
+# Browse (same short SHA example):
+# https://github.com/OWNER/REPO/commit/4ec8344</div></div>
+      <p class="sub" style="margin-top:0.5rem">Private repos often return <code class="inline">404</code> to anonymous API — use an authenticated client or the web UI.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ========== SHA TRACE ========== -->
+<section class="panel" id="view-sha" aria-labelledby="sh-h">
+  <h1 id="sh-h">SHA trace</h1>
+  <p class="sub">Three views: local object, remote ref, fork delta.</p>
+  <div class="tabs" role="tablist">
+    <button type="button" class="tab active" data-sha-tab="local" role="tab" aria-selected="true">Local trace</button>
+    <button type="button" class="tab" data-sha-tab="remote" role="tab">Remote verify</button>
+    <button type="button" class="tab" data-sha-tab="fork" role="tab">Fork history</button>
+  </div>
+  <div class="tab-panel active" id="sha-local" role="tabpanel">
+    <div class="terminal"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git log --oneline -15&#10;git show --stat HEAD&#10;git cat-file -t HEAD&#10;git rev-parse HEAD">copy</button></div><div class="terminal-body">git log --oneline -15
+git show --stat HEAD
+git cat-file -t HEAD
+git rev-parse HEAD</div></div>
+  </div>
+  <div class="tab-panel" id="sha-remote" role="tabpanel">
+    <p class="sub"><strong>Remote verify</strong> = <code class="inline">git ls-remote</code> (refs on the server) <em>plus</em> GitHub API (commit object) after push.</p>
+    <div class="terminal"><div class="terminal-bar">shell · ls-remote<button type="button" class="copy-btn" data-copy="git ls-remote origin &quot;refs/heads/*&quot;&#10;git ls-remote origin HEAD&#10;git ls-remote origin &quot;refs/heads/codex/kc-sovereign-gui-full-dev&quot;">copy</button></div><div class="terminal-body">git ls-remote origin "refs/heads/*"
+git ls-remote origin HEAD
+git ls-remote origin "refs/heads/codex/kc-sovereign-gui-full-dev"</div></div>
+    <div class="terminal" style="margin-top:0.65rem"><div class="terminal-bar">shell · API (replace OWNER/REPO)<button type="button" class="copy-btn" data-copy="curl -s &quot;https://api.github.com/repos/OWNER/REPO/commits/4ec8344&quot; | head -c 500&#10;curl -s &quot;https://api.github.com/repos/OWNER/REPO/commits/$(git rev-parse HEAD)&quot; | head -c 500">copy</button></div><div class="terminal-body">curl -s "https://api.github.com/repos/OWNER/REPO/commits/4ec8344" | head -c 500
+curl -s "https://api.github.com/repos/OWNER/REPO/commits/$(git rev-parse HEAD)" | head -c 500</div></div>
+    <p class="sub">Short SHA <code class="inline">4ec8344</code> is an <strong>example prefix</strong>; prefer the full 40-character hash for receipts. Private repos may return <code class="inline">404</code> without auth.</p>
+  </div>
+  <div class="tab-panel" id="sha-fork" role="tabpanel">
+    <div class="terminal"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git fetch origin&#10;git log --oneline --graph --decorate -20 --all&#10;git diff origin/main...HEAD --name-only">copy</button></div><div class="terminal-body">git fetch origin
+git log --oneline --graph --decorate -20 --all
+git diff origin/main...HEAD --name-only</div></div>
+    <p class="sub">Replace <code class="inline">origin/main</code> with your default branch if needed. Expect <code class="inline">docs/swarm-ops/*</code> in the diff when swarm doctrine is your delta.</p>
+  </div>
+</section>
+
+<!-- ========== GITIGNORE ========== -->
+<section class="panel" id="view-gitignore" aria-labelledby="ig-h">
+  <h1 id="ig-h">.gitignore audit</h1>
+  <div class="grid2">
+    <div class="card"><div class="card-h">Ignored vs tracked</div><div class="card-b" style="padding:0">
+      <div class="terminal" style="border:none;border-radius:0;box-shadow:none;margin:0">
+        <div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git check-ignore -v Schematics/&#10;git check-ignore -v docs/swarm-ops/SWARM_OPERATIONS.md || echo &quot;(no output on second = not ignored)&quot;">copy</button></div>
+        <div class="terminal-body" style="font-size:11px">git check-ignore -v Schematics/
+git check-ignore -v docs/swarm-ops/SWARM_OPERATIONS.md || echo "(no output on second = not ignored)"</div>
+      </div>
+    </div></div>
+    <div class="card"><div class="card-h">Inventory ignored trees</div><div class="card-b" style="padding:0">
+      <div class="terminal" style="border:none;border-radius:0;box-shadow:none;margin:0">
+        <div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git ls-files --others --ignored --exclude-standard --directory | head -25">copy</button></div>
+        <div class="terminal-body" style="font-size:11px">git ls-files --others --ignored --exclude-standard --directory | head -25</div>
+      </div>
+    </div></div>
+  </div>
+  <div class="card" style="margin-top:0.5rem">
+    <div class="card-h">Optional pre-commit: block tracked files inside ignored paths</div>
+    <div class="card-b" style="padding:0">
+      <div class="terminal" style="border:none;border-radius:0">
+        <div class="terminal-bar">bash · install to <code class="inline">.git/hooks/pre-commit</code><button type="button" class="copy-btn" data-copy="#!/bin/sh&#10;git ls-files | while IFS= read -r f; do&#10;  if git check-ignore -q &quot;$f&quot; 2&gt;/dev/null; then&#10;    echo &quot;tracked but ignored: $f&quot;; exit 1&#10;  fi&#10;done">copy</button></div>
+        <div class="terminal-body" style="font-size:11px">#!/bin/sh
+git ls-files | while IFS= read -r f; do
+  if git check-ignore -q "$f" 2>/dev/null; then
+    echo "tracked but ignored: $f"; exit 1
+  fi
+done</div>
+      </div>
+      <p class="sub" style="padding:0.65rem 1rem 0.75rem">On Windows without bash, skip or use WSL/Git Bash for the same loop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROOF ========== -->
+<section class="panel" id="view-proof" aria-labelledby="pf-h">
+  <h1 id="pf-h">Proof receipts</h1>
+  <p class="sub">Four items start <strong>done</strong> (assumes repo contains committed doctrine + bootstraps). Five stay open until you run git + Kimi + log append. Click rows to toggle.</p>
+  <div class="checklist" id="proofChecks">
+    <div class="check done" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">SWARM_OPERATIONS.md in docs/swarm-ops/</div><div class="cm">committed artifact</div></div></div>
+    <div class="check done" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">PAYLOAD_KIMI_300_ACTIVATION.md committed</div><div class="cm">docs/swarm-ops/</div></div></div>
+    <div class="check done" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">KC Review Log.jsonl bootstrap</div><div class="cm">docs/swarm-ops/logs/</div></div></div>
+    <div class="check done" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">KC Main Brain Log.jsonl bootstrap + kc_log_append.py</div><div class="cm">scripts/ + tests/</div></div></div>
+    <div class="check" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">Push: branch visible on canonical remote</div><div class="cm">git push -u &lt;remote&gt; &lt;branch&gt;</div></div></div>
+    <div class="check" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">SHA confirmed (GitHub UI or API non-404)</div><div class="cm">prefer full 40-char SHA in receipts</div></div></div>
+    <div class="check" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">Kimi (swarm) acknowledgement captured</div><div class="cm">durable thread or hosted capture → evidence URL</div></div></div>
+    <div class="check" role="button" tabindex="0"><div class="cb"></div><div><div class="cl"><code class="inline">swarm_ack</code> (or <code class="inline">kimi_ack</code>) log entry + commit JSONL</div><div class="cm"><code class="inline">mainbrain --kind swarm_ack</code> or <code class="inline">kimi-ack</code> → then <code class="inline">git add</code> / <code class="inline">git commit</code> log file</div></div></div>
+    <div class="check" role="button" tabindex="0"><div class="cb"></div><div><div class="cl">comms-log doctrine entries recovered / mirrored</div><div class="cm">git add -p <em>or</em> docs/swarm-ops canonical + Obsidian mirror</div></div></div>
+  </div>
+
+  <div class="card"><div class="card-h">mainbrain — <code class="inline">swarm_ack</code> (copy)</div><div class="card-b" style="padding:0">
+    <div class="terminal" style="border:none;border-radius:0">
+      <div class="terminal-bar">powershell<button type="button" class="copy-btn" data-copy="python scripts/kc_log_append.py mainbrain ^&#10;  --kind swarm_ack ^&#10;  --summary &quot;Kimi acknowledged activation&quot; ^&#10;  --exit-code 0 ^&#10;  --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md ^&#10;  --evidence-url &quot;https://YOUR-DURABLE-EVIDENCE&quot; ^&#10;  --strict-proof">copy</button></div>
+      <div class="terminal-body" style="font-size:11px">python scripts/kc_log_append.py mainbrain ^
+  --kind swarm_ack ^
+  --summary "Kimi acknowledged activation" ^
+  --exit-code 0 ^
+  --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md ^
+  --evidence-url "https://YOUR-DURABLE-EVIDENCE" ^
+  --strict-proof</div></div>
+  </div></div>
+  <div class="card"><div class="card-h">kimi-ack (preferred structured Kimi row)</div><div class="card-b" style="padding:0">
+    <div class="terminal" style="border:none;border-radius:0">
+      <div class="terminal-bar">powershell<button type="button" class="copy-btn" data-copy="python scripts/kc_log_append.py kimi-ack ^&#10;  --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md ^&#10;  --status acknowledged ^&#10;  --notes &quot;Swarm initiated&quot; ^&#10;  --exit-code 0 ^&#10;  --evidence-url &quot;https://YOUR-DURABLE-EVIDENCE&quot; ^&#10;  --strict-proof">copy</button></div>
+      <div class="terminal-body" style="font-size:11px">python scripts/kc_log_append.py kimi-ack ^
+  --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md ^
+  --status acknowledged ^
+  --notes "Swarm initiated" ^
+  --exit-code 0 ^
+  --evidence-url "https://YOUR-DURABLE-EVIDENCE" ^
+  --strict-proof</div></div>
+  </div></div>
+</section>
+
+<!-- ========== COMMS ========== -->
+<section class="panel" id="view-comms" aria-labelledby="cm-h">
+  <h1 id="cm-h">Comms-log debt</h1>
+  <div class="alert alert-red" style="margin-bottom:0.75rem"><strong>Schematics/</strong> is often <code class="inline">.gitignore</code>d. <code class="inline">git add -p Schematics/04-Updates/comms-log.md</code> only works if that path is already tracked (e.g. added before ignore). Otherwise keep canonical entries under <code class="inline">docs/swarm-ops/</code> and mirror into Obsidian manually.</div>
+  <div class="terminal"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="git add -p -- Schematics/04-Updates/comms-log.md&#10;git diff --staged -- Schematics/04-Updates/comms-log.md">copy</button></div><div class="terminal-body">git add -p -- Schematics/04-Updates/comms-log.md
+git diff --staged -- Schematics/04-Updates/comms-log.md</div></div>
+  <p class="sub" style="margin-top:0.75rem">Isolate only doctrine hunks (Swarm Ops seed + Kimi 300 activation); skip unrelated noise with <code class="inline">s</code>plit / <code class="inline">n</code> skip in the patch UI.</p>
+</section>
+
+<!-- ========== LOGS / SCHEMA ========== -->
+<section class="panel" id="view-logs" aria-labelledby="lg-h">
+  <h1 id="lg-h">kc_log_append — subcommands + schema</h1>
+  <p class="sub">From repo root. JSONL paths default to <code class="inline">docs/swarm-ops/logs/</code>.</p>
+  <div class="terminal"><div class="terminal-bar">shell<button type="button" class="copy-btn" data-copy="python scripts/kc_log_append.py validate&#10;python scripts/kc_log_append.py proof-check">copy</button></div><div class="terminal-body">python scripts/kc_log_append.py validate
+python scripts/kc_log_append.py proof-check</div></div>
+
+  <div class="card" style="margin-top:0.75rem"><div class="card-h">review — KC Review Log (<code class="inline">kc_review_log_v1</code>)</div>
+    <div class="card-b" style="overflow-x:auto;padding:0.5rem 0.75rem">
+      <table class="data">
+        <thead><tr><th>Field</th><th>Required</th><th>Optional</th><th>Auto-filled</th></tr></thead>
+        <tbody>
+          <tr><td>schema</td><td>—</td><td>—</td><td><code class="inline">kc_review_log_v1</code></td></tr>
+          <tr><td>ts</td><td>—</td><td>—</td><td>ISO8601 UTC</td></tr>
+          <tr><td>role</td><td><code class="inline">--role student|teacher</code></td><td>—</td><td>—</td></tr>
+          <tr><td>phase</td><td><code class="inline">--phase</code></td><td>—</td><td>—</td></tr>
+          <tr><td>summary</td><td><code class="inline">--summary</code></td><td>—</td><td>—</td></tr>
+          <tr><td>commands</td><td>—</td><td><code class="inline">--commands …</code></td><td>—</td></tr>
+          <tr><td>exit_code</td><td>—</td><td><code class="inline">--exit-code</code></td><td>—</td></tr>
+          <tr><td>git_sha</td><td>—</td><td><code class="inline">--git-sha</code></td><td>from <code class="inline">git rev-parse HEAD</code> when omitted (if git works)</td></tr>
+          <tr><td>branch</td><td>—</td><td><code class="inline">--branch</code></td><td>—</td></tr>
+          <tr><td>evidence_urls</td><td>—</td><td><code class="inline">--evidence-url</code> (repeat)</td><td>—</td></tr>
+          <tr><td>ref_review_id</td><td>—</td><td><code class="inline">--ref-review-id</code></td><td>—</td></tr>
+          <tr><td>teacher_verdict</td><td>—</td><td><code class="inline">--teacher-verdict approved|rejected</code></td><td>—</td></tr>
+          <tr><td>agent_id</td><td>—</td><td><code class="inline">--agent-id</code></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-h">mainbrain — KC Main Brain Log (<code class="inline">kc_main_brain_log_v1</code>)</div>
+    <div class="card-b" style="overflow-x:auto;padding:0.5rem 0.75rem">
+      <table class="data">
+        <thead><tr><th>Field</th><th>Required</th><th>Optional</th><th>Auto-filled</th></tr></thead>
+        <tbody>
+          <tr><td>schema</td><td>—</td><td>—</td><td><code class="inline">kc_main_brain_log_v1</code></td></tr>
+          <tr><td>ts</td><td>—</td><td>—</td><td>ISO8601 UTC</td></tr>
+          <tr><td>kind</td><td><code class="inline">--kind</code> (e.g. <code class="inline">swarm_ack</code>)</td><td>—</td><td>—</td></tr>
+          <tr><td>summary</td><td><code class="inline">--summary</code></td><td>—</td><td>—</td></tr>
+          <tr><td>commands</td><td>—</td><td><code class="inline">--commands …</code></td><td>—</td></tr>
+          <tr><td>exit_code</td><td>—</td><td><code class="inline">--exit-code</code></td><td>—</td></tr>
+          <tr><td>git_sha</td><td>—</td><td><code class="inline">--git-sha</code></td><td>from <code class="inline">git rev-parse HEAD</code> when omitted (if git works)</td></tr>
+          <tr><td>evidence_urls</td><td>—</td><td><code class="inline">--evidence-url</code> (repeat)</td><td>—</td></tr>
+          <tr><td>payload_ref</td><td>—</td><td><code class="inline">--payload-ref</code></td><td>—</td></tr>
+          <tr><td>kimi_ack</td><td>—</td><td>—</td><td>set via <code class="inline">kimi-ack</code> subcommand</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-h">review example (teacher)</div><div class="card-b" style="padding:0">
+    <div class="terminal" style="border:none;border-radius:0">
+      <div class="terminal-bar">powershell<button type="button" class="copy-btn" data-copy="python scripts/kc_log_append.py review ^&#10;  --role teacher ^&#10;  --phase review_decision ^&#10;  --summary &quot;Proof bar satisfied&quot; ^&#10;  --teacher-verdict approved ^&#10;  --evidence-url &quot;https://github.com/OWNER/REPO/commit/FULLSHA&quot;">copy</button></div>
+      <div class="terminal-body" style="font-size:11px">python scripts/kc_log_append.py review ^
+  --role teacher ^
+  --phase review_decision ^
+  --summary "Proof bar satisfied" ^
+  --teacher-verdict approved ^
+  --evidence-url "https://github.com/OWNER/REPO/commit/FULLSHA"</div></div>
+  </div></div>
+
+  <div class="card"><div class="card-h">mainbrain example (<code class="inline">swarm_ack</code>, bash)</div><div class="card-b" style="padding:0">
+    <div class="terminal" style="border:none;border-radius:0">
+      <div class="terminal-bar">bash<button type="button" class="copy-btn" data-copy="python scripts/kc_log_append.py mainbrain \&#10;  --kind swarm_ack \&#10;  --summary &quot;Kimi acknowledged activation&quot; \&#10;  --exit-code 0 \&#10;  --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md \&#10;  --evidence-url &quot;https://YOUR-DURABLE-EVIDENCE&quot; \&#10;  --strict-proof">copy</button></div>
+      <div class="terminal-body" style="font-size:11px">python scripts/kc_log_append.py mainbrain \
+  --kind swarm_ack \
+  --summary "Kimi acknowledged activation" \
+  --exit-code 0 \
+  --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md \
+  --evidence-url "https://YOUR-DURABLE-EVIDENCE" \
+  --strict-proof</div></div>
+  </div></div>
+</section>
+
+</main>
+</div>
+<script>
+(function () {
+  var panels = document.querySelectorAll('.panel');
+  var items = document.querySelectorAll('.nav-item[data-view]');
+  function show(id) {
+    panels.forEach(function (p) { p.classList.toggle('active', p.id === 'view-' + id); });
+    items.forEach(function (n) { n.classList.toggle('active', n.getAttribute('data-view') === id); });
+  }
+  document.getElementById('sidebar').addEventListener('click', function (e) {
+    var t = e.target.closest('.nav-item[data-view]');
+    if (!t) return;
+    show(t.getAttribute('data-view'));
+  });
+  document.getElementById('sidebar').addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var t = e.target.closest('.nav-item[data-view]');
+    if (!t) return;
+    e.preventDefault();
+    show(t.getAttribute('data-view'));
+  });
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      if (!text) return;
+      var decoded = text.replace(/&#10;/g, '\n');
+      navigator.clipboard.writeText(decoded).then(function () {
+        var o = btn.textContent;
+        btn.textContent = 'copied';
+        setTimeout(function () { btn.textContent = o; }, 1200);
+      });
+    });
+  });
+  document.querySelectorAll('#proofChecks .check').forEach(function (row) {
+    row.addEventListener('click', function () { row.classList.toggle('done'); });
+    row.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); row.classList.toggle('done'); }
+    });
+  });
+  document.querySelectorAll('[data-sha-tab]').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var id = tab.getAttribute('data-sha-tab');
+      document.querySelectorAll('[data-sha-tab]').forEach(function (t) { t.classList.toggle('active', t === tab); t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+      document.querySelectorAll('#view-sha .tab-panel').forEach(function (p) {
+        p.classList.toggle('active', p.id === 'sha-' + id);
+      });
+    });
+  });
+  var dark = true;
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    dark = !dark;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KC Swarm Console — Wireframe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root,[data-theme="light"]{
+      --bg:#f7f6f2;--surface:#fbfbf9;--surface2:#f3f0ec;--surface3:#eae6df;--border:#d6d0c6;
+      --text:#1f1d18;--muted:#6f6a61;--faint:#a39c91;--primary:#0f6d74;--primary2:#d7e6e3;
+      --ok:#497b2d;--okbg:#d7e2cf;--warn:#a2621d;--warnbg:#e8d7c6;--err:#a53573;--errbg:#e9d0db;
+      --blue:#2c6da3;--bluebg:#d0deeb;--shadow:0 12px 40px rgba(15,20,20,.08);
+      --xs:12px;--sm:14px;--base:16px;--lg:20px;--xl:28px;--mono:'JetBrains Mono',monospace;--body:'Inter',sans-serif;
+    }
+    [data-theme="dark"]{
+      --bg:#111110;--surface:#171716;--surface2:#1d1d1b;--surface3:#2a2a27;--border:#353530;
+      --text:#e6e1d8;--muted:#a39d93;--faint:#6f6b63;--primary:#5aa2aa;--primary2:#23383a;
+      --ok:#84bb62;--okbg:#263124;--warn:#d59a55;--warnbg:#3b3125;--err:#df74ad;--errbg:#402733;
+      --blue:#7eb2db;--bluebg:#233445;--shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    html,body{height:100%}
+    body{font-family:var(--body);font-size:var(--base);background:var(--bg);color:var(--text);line-height:1.5}
+    button,input,textarea,select{font:inherit;color:inherit}
+    textarea,input{background:transparent;border:none;outline:none}
+    button{border:none;background:none;cursor:pointer}
+    a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}
+    .banner{font-size:12px;padding:10px 16px;background:var(--warnbg);color:var(--warn);border-bottom:1px solid var(--border)}
+    .app{display:grid;grid-template-columns:72px 280px 1fr 330px;min-height:calc(100vh - 44px)}
+    .rail,.sidebar,.main,.right{border-right:1px solid var(--border)}
+    .rail{background:var(--surface);display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 10px}
+    .brand{width:42px;height:42px;border-radius:14px;background:linear-gradient(180deg,var(--primary),#173336);display:grid;place-items:center;color:white;box-shadow:var(--shadow)}
+    .railbtn{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--muted);transition:.18s ease}
+    .railbtn.active,.railbtn:hover{background:var(--primary2);color:var(--primary)}
+    .sidebar{background:var(--surface);padding:18px 16px;display:flex;flex-direction:column;gap:14px}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .workspace{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:14px;background:var(--surface2)}
+    .workspace .dot{width:10px;height:10px;border-radius:999px;background:var(--ok)}
+    .title{font-size:var(--sm);font-weight:700}
+    .sub{font-size:var(--xs);color:var(--muted)}
+    .theme{padding:8px;border-radius:10px;color:var(--muted)} .theme:hover{background:var(--surface3)}
+    .search{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:14px;background:var(--surface2)}
+    .search input{width:100%;font-size:var(--sm)}
+    .block{display:flex;flex-direction:column;gap:8px}
+    .block h3{font-size:var(--xs);text-transform:uppercase;letter-spacing:.08em;color:var(--faint);padding:2px 8px}
+    .nav{display:flex;flex-direction:column;gap:4px}
+    .item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:12px;color:var(--muted);transition:.18s ease}
+    .item:hover,.item.active{background:var(--surface2);color:var(--text)}
+    .item .left{display:flex;gap:10px;align-items:center}
+    .badge{padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700}
+    .b-ok{background:var(--okbg);color:var(--ok)} .b-warn{background:var(--warnbg);color:var(--warn)} .b-err{background:var(--errbg);color:var(--err)} .b-blue{background:var(--bluebg);color:var(--blue)}
+    .panel{margin-top:auto;padding:14px;border:1px solid var(--border);border-radius:16px;background:var(--surface2);display:flex;flex-direction:column;gap:10px}
+    .panel h4{font-size:var(--sm)}
+    .smallbtn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:12px;background:var(--primary);color:white;font-weight:600}
+    .smallbtn.alt{background:var(--surface3);color:var(--text)}
+    .main{background:var(--bg);display:grid;grid-template-rows:auto 1fr auto;min-width:0}
+    .mainhead{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(0,0,0,0.02)}
+    .headleft h1{font-size:var(--xl);line-height:1.1}
+    .headleft p{font-size:var(--sm);color:var(--muted);margin-top:4px}
+    .headright{display:flex;gap:10px;align-items:center}
+    .chip{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
+    .chip .live{width:8px;height:8px;border-radius:999px;background:var(--ok)}
+    .ghost{padding:10px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+    .composer-wrap{padding:20px 22px 10px;overflow:auto;display:flex;flex-direction:column;gap:16px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
+    .hero .card{padding:18px}
+    .hero h2{font-size:22px;line-height:1.2;margin-bottom:8px}
+    .hero p{font-size:var(--sm);color:var(--muted);max-width:70ch}
+    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .pill{padding:8px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--border);font-size:12px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .kpi{padding:16px}
+    .kpi .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin-bottom:6px}
+    .kpi .value{font-family:var(--mono);font-size:20px;font-weight:700}
+    .kpi .desc{font-size:12px;color:var(--muted);margin-top:6px}
+    .split{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    .sectionhead{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    .sectionhead h3{font-size:15px}
+    .sectionbody{padding:16px 18px}
+    .table{width:100%;border-collapse:collapse;font-size:12px}
+    .table th,.table td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+    .table th{color:var(--faint);text-transform:uppercase;letter-spacing:.06em;font-size:11px}
+    .table tr:last-child td{border-bottom:none}
+    .connectorlist,.skills{display:flex;flex-direction:column;gap:10px}
+    .row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--border);border-radius:14px;background:var(--surface2)}
+    .row .meta{font-size:12px;color:var(--muted);margin-top:3px}
+    .iconline{display:flex;align-items:center;gap:10px}
+    .ic{width:32px;height:32px;border-radius:10px;background:var(--surface3);display:grid;place-items:center;color:var(--primary);flex-shrink:0}
+    .chat{padding:12px 22px 22px}
+    .composer{background:var(--surface);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);background:var(--surface2)}
+    .toolrow{display:flex;gap:8px;flex-wrap:wrap}
+    .toolchip{padding:8px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--border);font-size:12px;color:var(--muted)}
+    .editor{padding:16px}
+    .editor textarea{width:100%;min-height:130px;resize:vertical;font-size:16px;line-height:1.55;color:var(--text)}
+    .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+    .leftactions,.rightactions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .send{padding:12px 16px;border-radius:14px;background:var(--primary);color:#fff;font-weight:700}
+    .soft{padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid var(--border)}
+    .promptline{font-size:12px;color:var(--muted)}
+    .right{background:var(--surface);padding:18px 16px;display:flex;flex-direction:column;gap:14px}
+    .stack{display:flex;flex-direction:column;gap:12px}
+    .skill{padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--surface2)}
+    .skill h4{font-size:14px;margin-bottom:6px}
+    .skill p{font-size:12px;color:var(--muted)}
+    .ci{font-family:var(--mono);font-size:11px;white-space:pre-wrap;background:#0d0f10;color:#d7ddd8;border-radius:14px;padding:14px;overflow:auto;border:1px solid #223036}
+    .footer-note{font-size:12px;color:var(--muted)}
+    @media (max-width: 1320px){.app{grid-template-columns:72px 260px 1fr}.right{display:none}.split,.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width: 980px){.app{grid-template-columns:1fr}.rail,.sidebar,.right{display:none}.main{border-right:none}}
+  </style>
+</head>
+<body>
+  <div class="banner"><strong>Wireframe only.</strong> Verify stack and URLs against your deployed Kopano Context / Studio. Use a BFF for model and orchestration credentials; do not ship secrets in the browser. <a href="../KC_SWARM_CONSOLE_ARCHITECTURE.md">Architecture</a> · <a href="../KC_SWARM_CONSOLE_WIREFRAME_SPEC.md">IA spec</a></div>
+  <div class="app">
+    <aside class="rail">
+      <div class="brand" aria-label="KC">KC</div>
+      <button class="railbtn active" title="Console">⌘</button>
+      <button class="railbtn" title="Swarm">◎</button>
+      <button class="railbtn" title="Proof">✓</button>
+      <button class="railbtn" title="CI">∿</button>
+      <button class="railbtn" title="Settings">⚙</button>
+    </aside>
+    <aside class="sidebar">
+      <div class="topline">
+        <div class="workspace">
+          <span class="dot"></span>
+          <div>
+            <div class="title">KC → Cassey</div>
+            <div class="sub">https://kopanocontext.kopanolabs.com</div>
+          </div>
+        </div>
+        <button class="theme" data-theme-toggle aria-label="Toggle theme">◐</button>
+      </div>
+      <div class="search"><span>⌕</span><input value="Search tools, skills, agents" /></div>
+      <div class="block">
+        <h3>Modes</h3>
+        <div class="nav">
+          <div class="item active"><div class="left"><span>✦</span><span>Context Chat</span></div><span class="badge b-blue">Live</span></div>
+          <div class="item"><div class="left"><span>◎</span><span>Swarm Control</span></div><span class="badge b-warn">Gate</span></div>
+          <div class="item"><div class="left"><span>✓</span><span>Proof Validator</span></div><span class="badge b-err">2 gaps</span></div>
+          <div class="item"><div class="left"><span>∿</span><span>CI Enforcer</span></div><span class="badge b-ok">Ready</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <h3>Connectors</h3>
+        <div class="nav">
+          <div class="item"><div class="left"><span>⌁</span><span>Web / research</span></div><span class="badge b-ok">On</span></div>
+          <div class="item"><div class="left"><span>⌘</span><span>Git / GitHub</span></div><span class="badge b-ok">Bound</span></div>
+          <div class="item"><div class="left"><span>⌂</span><span>Kopano Context API</span></div><span class="badge b-warn">Wire</span></div>
+          <div class="item"><div class="left"><span>⟲</span><span>JSONL ledger</span></div><span class="badge b-ok">Seeded</span></div>
+          <div class="item"><div class="left"><span>⬡</span><span>Swarm receipts</span></div><span class="badge b-err">Pending</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>UX rule</h4>
+        <div class="sub">One dominant prompt. Side rails for connectors, proof, swarm—same family as <a href="git-sync-monitor.html">Git Sync Monitor</a> and <a href="../GIT_AND_PROOF_NOTEBOOK.md">proof notebook</a>.</div>
+        <button class="smallbtn">Open KC session</button>
+        <button class="smallbtn alt">Open Cassey persona</button>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="mainhead">
+        <div class="headleft">
+          <h1>KC Swarm Console</h1>
+          <p>Unified surface: chat, connectors, skills, git sync, JSONL validate and proof-check, swarm dispatch.</p>
+        </div>
+        <div class="headright">
+          <div class="chip"><span class="live"></span><span>API via your BFF (Studio / Next)</span></div>
+          <button class="ghost">Open schema</button>
+        </div>
+      </header>
+      <section class="composer-wrap">
+        <div class="hero">
+          <div class="card">
+            <h2>One calm context window</h2>
+            <p>Keep the composer primary. Route KC → Cassey on the server. Expose <strong>Web, Fetch, Git, Swarm, Proof</strong> as secondary chips—supportive, not a second dashboard. Add web depth through server-side search or fetch (or MCP), not raw provider keys in the browser. Merge sync status, <code>python scripts/kc_log_append.py validate</code>, and <code>proof-check</code> into one Proof strip or drawer. See <a href="../KC_SWARM_CONSOLE_ARCHITECTURE.md">KC_SWARM_CONSOLE_ARCHITECTURE.md</a> for BFF + CI notes.</p>
+            <div class="pillrow">
+              <div class="pill">single prompt</div>
+              <div class="pill">BFF to Kopano Context</div>
+              <div class="pill">receipts before complete</div>
+              <div class="pill">git-sync + JSONL</div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>Connection map</h2>
+            <div class="connectorlist">
+              <div class="row"><div><div class="iconline"><div class="ic">KC</div><strong>Prompt surface</strong></div><div class="meta">Operator types here (like this chat window)</div></div><span class="badge b-blue">Primary</span></div>
+              <div class="row"><div><div class="iconline"><div class="ic">C</div><strong>Cassey</strong></div><div class="meta">Teacher or student depth profile</div></div><span class="badge b-ok">Persona</span></div>
+              <div class="row"><div><div class="iconline"><div class="ic">W</div><strong>Web tools</strong></div><div class="meta">Search, fetch, citations (server-mediated)</div></div><span class="badge b-ok">Tool</span></div>
+              <div class="row"><div><div class="iconline"><div class="ic">S</div><strong>Swarm</strong></div><div class="meta">External workers, ACK, JSONL</div></div><span class="badge b-warn">Gate</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card kpi"><div class="label">Route</div><div class="value">KC→Cassey</div><div class="desc">Persona and policy on server</div></div>
+          <div class="card kpi"><div class="label">Host</div><div class="value">HTTPS</div><div class="desc">kopanocontext.kopanolabs.com via BFF</div></div>
+          <div class="card kpi"><div class="label">Proof</div><div class="value">JSONL</div><div class="desc">validate + proof-check + receipts</div></div>
+          <div class="card kpi"><div class="label">CI</div><div class="value">GHA</div><div class="desc">.github/workflows/swarm-proof.yml</div></div>
+        </div>
+        <div class="split">
+          <div class="card">
+            <div class="sectionhead"><h3>Layout regions</h3><span class="badge b-blue">wireframe</span></div>
+            <div class="sectionbody">
+              <table class="table">
+                <thead><tr><th>Region</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td>Left rail</td><td>Context, Swarm, Proof, CI modes</td></tr>
+                  <tr><td>Sidebar</td><td>Connectors, skills, status badges</td></tr>
+                  <tr><td>Center</td><td>KPI or sync summary, validator, composer</td></tr>
+                  <tr><td>Right rail</td><td>Notes, CI YAML, receipts (optional)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="sectionhead"><h3>Unified CLI (this repo)</h3><span class="badge b-ok">today</span></div>
+            <div class="sectionbody">
+              <div class="ci">python scripts/git_sync_monitor.py
+python scripts/kc_log_append.py validate
+python scripts/kc_log_append.py proof-check</div>
+              <p style="margin-top:10px;font-size:12px;color:var(--muted)">Optional: one thin wrapper (for example <code>kc_swarm_doctor.py</code>) that chains the above. A separate <code>proof_gate.py</code> is not required for the current gate if workflows already call validate and proof-check.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="chat">
+        <div class="composer">
+          <div class="toolbar">
+            <div class="toolrow">
+              <div class="toolchip">Prompt</div>
+              <div class="toolchip">Web</div>
+              <div class="toolchip">Fetch</div>
+              <div class="toolchip">Git</div>
+              <div class="toolchip">Swarm</div>
+              <div class="toolchip">Proof</div>
+              <div class="toolchip">Teacher depth</div>
+            </div>
+            <div class="promptline">KC gateway · receipts enforced · see SWARM_OPERATIONS.md</div>
+          </div>
+          <div class="editor">
+            <textarea spellcheck="false">Prompt KC → Cassey: audit branch and remote, run proof-check narrative, refuse swarm-complete without evidence URLs.</textarea>
+            <div class="actions">
+              <div class="leftactions">
+                <button class="soft">＋ Connector</button>
+                <button class="soft">◎ Swarm plan</button>
+                <button class="soft">✓ Validate</button>
+              </div>
+              <div class="rightactions">
+                <button class="soft">Save draft</button>
+                <button class="send">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <aside class="right">
+      <div class="stack">
+        <div class="skill"><h4>Implementation order</h4><p>Shell UI, then BFF route (for example POST /api/kc/chat), then Kopano Context, tool adapters, receipt store, then tighten CI (extend swarm-proof.yml as needed).</p></div>
+        <div class="skill"><h4>CI (this repo)</h4>
+          <div class="ci"># .github/workflows/swarm-proof.yml — pattern
+on:
+  pull_request:
+    branches: [master, main]
+    paths:
+      - "docs/swarm-ops/**"
+      - "scripts/kc_log_append.py"
+      - "tests/test_kc_log_append.py"
+jobs:
+  swarm-jsonl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python scripts/kc_log_append.py validate
+          python scripts/kc_log_append.py proof-check</div>
+        </div>
+        <div class="skill"><h4>Stricter gate (optional)</h4><p>Branch filters for codex/*, grep for swarm-complete without evidence, or require kimi-ack rows before merge—only what your doctrine needs. A future <code>proof_gate.py</code> could centralize extra rules; today extend <code>proof-check</code> or the workflow above.</p></div>
+        <div class="skill"><h4>External references</h4><p><a href="https://kopanolabs.com">Kopano Labs</a> (orchestration narrative). <a href="https://developers.google.com/learn/pathways/solution-ai-gemini-getting-started-web">Gemini web pathway</a> (prototype vs server-side production). <a href="https://cursor.com">Cursor</a> (focused workspace / agents positioning).</p></div>
+        <div class="footer-note"><a href="../SWARM_OPERATIONS.md">SWARM_OPERATIONS.md</a> · <a href="../KC_SWARM_CONSOLE_ARCHITECTURE.md">Architecture</a> · <a href="git-sync-monitor.html">git-sync-monitor.html</a></div>
+      </div>
+    </aside>
+  </div>
+  <script>
+    (function(){
+      const t=document.querySelector('[data-theme-toggle]');
+      const r=document.documentElement;
+      let d='dark';
+      r.setAttribute('data-theme', d);
+      t&&t.addEventListener('click',()=>{
+        d=d==='dark'?'light':'dark';
+        r.setAttribute('data-theme',d);
+      });
+    })();
+  </script>
+</body>
+</html>

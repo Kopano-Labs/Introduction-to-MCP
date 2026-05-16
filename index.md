@@ -6,6 +6,7 @@
 
 ## Quick Navigation
 
+- [Swarm ops navigation (source of truth)](docs/swarm-ops/NAVIGATION.md) — index of doctrine, payloads, logs, CLI
 - [[Schematics/00-Home/Now|Now]] — current project state snapshot
 - [[Schematics/04-Updates/Project Status|Project Status]] — phase truth and capability table
 - [[Schematics/06-Reference/Repo Documents Index|Repo Documents Index]] — all repo-level documents indexed

@@ -16,7 +16,18 @@ powershell -ExecutionPolicy Bypass -File .\scripts\demo_day_preflight.ps1
 # 3. Run smoke test
 python scripts/demo_day_smoke.py --strict
 
-# 4. Launch the stack
+# 4. Swarm logs — validate + proof gate (must pass before "demo ready")
+python scripts/kc_log_append.py validate
+python scripts/kc_log_append.py proof-check
+
+# 5. Append KC student audit (strict proof — real CI/job URL required)
+python scripts/kc_log_append.py review --strict-proof --role student --phase audit \
+  --summary "Demo preflight + smoke complete" \
+  --commands python scripts/demo_day_smoke.py --strict \
+  --exit-code 0 \
+  --evidence-url "<PASTE_CI_OR_ARTIFACT_URL>"
+
+# 6. Launch the stack
 python main.py serve api
 ```
 
@@ -74,8 +85,7 @@ Client-facing demos are **audit-before-presentation** (**Protocol 13**). Narrati
 
 **Machine-checkable demo stack (this repo):** Run every step in **Pre-Demo Checklist** above; capture and retain **stdout** (or equivalent), **CI job URLs**, and any **prod/staging probe** output referenced in the checklist. Claims of “demo ready” without those attachments fail the gate until receipts are filed.
 
-**KC apprenticeship logs (optional but recommended):** After checklist steps, append a student audit line:  
-`python scripts/kc_log_append.py review --role student --phase audit --summary "Demo preflight complete" --commands python scripts/demo_day_smoke.py --strict --exit-code 0`
+**KC apprenticeship logs (mandatory for swarm doctrine demos):** After steps 1–4, append a **strict-proof** student audit (real `--evidence-url`). Until `validate` + `proof-check` pass and a new audit row is appended, treat demo readiness as **unverified**. Canonical navigation: [docs/swarm-ops/NAVIGATION.md](./docs/swarm-ops/NAVIGATION.md).
 
 ---
 

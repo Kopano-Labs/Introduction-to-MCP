@@ -1,0 +1,29 @@
+# Optional: fail PRs that touch swarm logs or doctrine without passing JSONL gates.
+# Adjust branch filters to match how you merge swarm work (e.g. add codex/*).
+
+name: Swarm proof gate
+
+on:
+  pull_request:
+    branches: [master, main]
+    paths:
+      - "docs/swarm-ops/**"
+      - "scripts/kc_log_append.py"
+      - "scripts/kc_guard.py"
+      - "scripts/git_sync_monitor.py"
+      - "tests/test_kc_log_append.py"
+      - "tests/test_kc_guard.py"
+
+jobs:
+  swarm-jsonl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate KC JSONL + proof-check
+        run: |
+          python scripts/kc_log_append.py validate
+          python scripts/kc_log_append.py proof-check
+
+      - name: KC guard (sync + validate + proof)
+        run: python scripts/kc_guard.py all

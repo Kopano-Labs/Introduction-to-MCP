@@ -40,6 +40,18 @@ A milestone or deliverable is **accepted** only when applicable rows below are f
 
 **Classification:** Until the proof bar is met, status is **unknown / not verified**—regardless of internal optimism or swarm scale.
 
+### Automated verification (repo tooling)
+
+The append-only JSONL logs under `docs/swarm-ops/logs/` can be checked locally without relying on human discipline alone:
+
+| Command | Purpose |
+|---------|---------|
+| `python scripts/kc_log_append.py validate` | Structural validation (unknown keys, required shapes, ISO `ts` prefix). |
+| `python scripts/kc_log_append.py proof-check` | `validate` plus **gates**: last `role=student` + `phase=audit` row must include `exit_code` and non-empty `evidence_urls`; last non-`bootstrap` Main Brain row must also carry `exit_code` + `evidence_urls`. |
+| `--strict-proof` on `review` / `mainbrain` / `kimi-ack` | Fail the append if `exit_code` or evidence URLs are missing (warns when `git_sha` absent). |
+
+Standard external paste-back for Kimi: [KIMI_ACK_FORMAT.md](./KIMI_ACK_FORMAT.md) and `python scripts/kc_log_append.py kimi-ack …`.
+
 **Cross-links (receipts & precedent):**
 
 - [Kimi 300 activation payload](./PAYLOAD_KIMI_300_ACTIVATION.md) (paste into Kimi; manual execution)
