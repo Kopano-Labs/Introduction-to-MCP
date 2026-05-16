@@ -66,6 +66,19 @@ Council  →  Labs  →  Console  →  Forge  →  Admin Audit
 
 ---
 
+## Swarm proof & verification gate (doctrine)
+
+Client-facing demos are **audit-before-presentation** (**Protocol 13**). Narrative-only “green” is not evidence. **Honest handoff:** seed Main Brain receipts before claiming demo-ready.
+
+**Canonical SOP:** [Swarm Ops & Proof Doctrine](./docs/swarm-ops/SWARM_OPERATIONS.md) — proof bar (commands, exit/HTTP, logs/CI URLs, SHA, prod probes; chat-only proofs excluded), Kimi-external vs Cursor-local boundary, handoff envelope.
+
+**Machine-checkable demo stack (this repo):** Run every step in **Pre-Demo Checklist** above; capture and retain **stdout** (or equivalent), **CI job URLs**, and any **prod/staging probe** output referenced in the checklist. Claims of “demo ready” without those attachments fail the gate until receipts are filed.
+
+**KC apprenticeship logs (optional but recommended):** After checklist steps, append a student audit line:  
+`python scripts/kc_log_append.py review --role student --phase audit --summary "Demo preflight complete" --commands python scripts/demo_day_smoke.py --strict --exit-code 0`
+
+---
+
 ## Emergency Recovery
 
 If the API crashes during demo:

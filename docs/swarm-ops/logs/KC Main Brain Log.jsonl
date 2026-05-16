@@ -1,0 +1,1 @@
+{"schema":"kc_main_brain_log_v1","ts":"2026-05-16T12:00:00Z","kind":"bootstrap","summary":"KC Main Brain Log initialized; append orchestrator receipts via scripts/kc_log_append.py mainbrain","commands":null,"exit_code":null,"git_sha":null,"evidence_urls":null,"payload_ref":null}

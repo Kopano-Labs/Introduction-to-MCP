@@ -10,6 +10,9 @@
 - [[Schematics/04-Updates/Project Status|Project Status]] — phase truth and capability table
 - [[Schematics/06-Reference/Repo Documents Index|Repo Documents Index]] — all repo-level documents indexed
 - [[Schematics/04-Updates/comms-log|Comms Log]] — dated evidence ledger
+- [Swarm Ops & Proof Doctrine](docs/swarm-ops/SWARM_OPERATIONS.md) — proof bar; Kimi external vs Cursor; handoff envelope (git-tracked; mirror into vault as needed)
+- [Kimi 300 activation payload](docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md) — manual ISIS initiation (pending Kimi acknowledgement + logs)
+- [KC JSONL logs + schema](docs/swarm-ops/logs/README.md)
 - [[Schematics/04-Updates/task-board|Task Board]] — active ownership lanes
 
 ## Repo Structure
