@@ -5,6 +5,7 @@
 | Artifact | Path | Role |
 |----------|------|------|
 | Doctrine (proof bar, Kimi vs Cursor, handoff) | [SWARM_OPERATIONS.md](./SWARM_OPERATIONS.md) | Rules |
+| Verified prod hosts (DNS/HTTP probe) | [VERIFIED_ENDPOINTS.md](./VERIFIED_ENDPOINTS.md) | Use in proof rows; re-probe before demos |
 | Git + proof notebook (commands aligned to repo) | [GIT_AND_PROOF_NOTEBOOK.md](./GIT_AND_PROOF_NOTEBOOK.md) | Reference |
 | Kimi activation payload | [PAYLOAD_KIMI_300_ACTIVATION.md](./PAYLOAD_KIMI_300_ACTIVATION.md) | External paste |
 | Kimi ACK capture format | [KIMI_ACK_FORMAT.md](./KIMI_ACK_FORMAT.md) | Standard receipt text |

@@ -5,7 +5,7 @@
 **Doctrine + proof bar:** [SWARM_OPERATIONS.md](./SWARM_OPERATIONS.md)  
 **Git + JSONL mechanics:** [GIT_AND_PROOF_NOTEBOOK.md](./GIT_AND_PROOF_NOTEBOOK.md)
 
-This document captures the **design intent** behind the unified KC Swarm Console: one surface that merges sync awareness, JSONL validation, proof gating, connector registry, skills, swarm dispatch, and a **single central composer** aimed at orchestration behind `https://kopanocontext.kopanolabs.com`.
+This document captures the **design intent** behind the unified KC Swarm Console: one surface that merges sync awareness, JSONL validation, proof gating, connector registry, skills, swarm dispatch, and a **single central composer** aimed at orchestration behind **`https://context.kopanolabs.com`** (verified HTTP 200; see [VERIFIED_ENDPOINTS.md](./VERIFIED_ENDPOINTS.md)). Legacy hostname `kopanocontext.kopanolabs.com` did **not** resolve on last probe—do not wire new BFF targets to it until DNS is fixed.
 
 > **Verify** product stack claims (Next.js version, CI layout, public APIs) against your own Kopano Context / Studio repositories and runbooks. Marketing pages summarize direction; they are not a substitute for internal specs.
 
@@ -48,7 +48,7 @@ Google’s learning content for Gemini in the browser emphasizes that **direct w
 **Recommended shape**
 
 - The SPA or Studio shell **POST**s to your app, e.g. `POST /api/kc/chat`.  
-- A **route handler / BFF** (e.g. Next.js Route Handler or server action) holds **service credentials**, attaches `workspaceId`, `persona: "cassey"`, tool permissions, and proof requirements, then calls **`https://kopanocontext.kopanolabs.com`** (or the internal gateway in front of it).  
+- A **route handler / BFF** (e.g. Next.js Route Handler or server action) holds **service credentials**, attaches `workspaceId`, `persona: "cassey"`, tool permissions, and proof requirements, then calls **`https://context.kopanolabs.com`** (or the internal gateway in front of it).  
 - The handler **streams** the model/tool response back into the same central composer.
 
 That preserves an IDE-like chat feel while keeping **credentials and policy on the server**.

@@ -6,7 +6,7 @@ tags: [swarm, kimi, proof, protocol-13, handoff, kopano-labs]
 
 # Swarm Ops & Proof Doctrine
 
-**Org context:** [kopanolabs.com](https://kopanolabs.com)
+**Org context:** [kopanolabs.com](https://kopanolabs.com) (HTTP 200 on last probe). **Product context (preferred prod probe):** [context.kopanolabs.com](https://context.kopanolabs.com). See [VERIFIED_ENDPOINTS.md](./VERIFIED_ENDPOINTS.md) for DNS/HTTP status—do not assume `kopanocontext.kopanolabs.com` resolves.
 
 **Repo copy (this path):** version-controlled doctrine and JSONL append targets live under `docs/swarm-ops/`. If you use Obsidian under `Schematics/`, mirror or link these files there so wikilinks resolve in-vault.
 
@@ -21,7 +21,7 @@ This standard governs how multi-agent and high-fanout work is **scoped**, **hand
 | **Kimi / multi-agent swarm** | **External** orchestration runner (platform, job queue, or ops environment). Work products, logs, and artifacts exist **outside** any single IDE workspace. |
 | **Cursor (IDE agent)** | **Local** assistant on a checked-out tree: edits, reviews, and **locally invoked** commands under the developer’s control. |
 
-**Non-negotiable boundary:** Cursor in a given workspace does **not** start, host, or attest to a Kimi swarm run. **“Swarm complete”** is satisfied only with **external-runner receipts** that meet the proof bar below—IDE chat transcripts, summaries, or assistant assertions **alone** are insufficient.
+**Non-negotiable boundary:** Cursor in a given workspace does **not** start, host, or attest to a Kimi swarm run. There is **no** “Kimi core swarm spawn” API in this repository—swarm activation is **manual paste** into Kimi (or another external UI) plus JSONL/comms receipts. **“Swarm complete”** is satisfied only with **external-runner receipts** that meet the proof bar below—IDE chat transcripts, summaries, or assistant assertions **alone** are insufficient.
 
 ### Protocol 13 & honest handoff
 
