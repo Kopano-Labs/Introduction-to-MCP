@@ -20,6 +20,7 @@ import type {
   MicrosoftReadiness,
   PageId,
 } from './types';
+import { getApiBase, getWsLiveUrl } from './apiBase';
 
 const CouncilPage = lazy(async () => ({ default: (await import('./pages/CouncilPage')).CouncilPage }));
 const LabsPage = lazy(async () => ({ default: (await import('./pages/LabsPage')).LabsPage }));
@@ -28,8 +29,9 @@ const ConsolePage = lazy(async () => ({ default: (await import('./pages/ConsoleP
 const AdminPage = lazy(async () => ({ default: (await import('./pages/AdminPage')).AdminPage }));
 const TrainingPage = lazy(async () => ({ default: (await import('./pages/TrainingPage')).TrainingPage }));
 
-const apiBase = 'http://127.0.0.1:8000';
-const agentList = ['kopano', 'claude', 'grok', 'gemini', 'copilot'];
+const apiBase = getApiBase();
+/** Cassey = teacher lane; kopano = KC student; remainder = multi-provider mesh. */
+const agentList = ['cassey', 'kopano', 'claude', 'grok', 'gemini', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
 const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'kopano'];
 
@@ -67,7 +69,7 @@ const pageTransition = {
 const App = () => {
   const [page, setPage] = useState<PageId>(readPageFromHash);
   const [messages, setMessages] = useState<LiveMessage[]>([]);
-  const [activeAgent, setActiveAgent] = useState<string | null>(null);
+  const [activeAgent, setActiveAgent] = useState<string | null>('cassey');
   const [thinkingAgent, setThinkingAgent] = useState<string | null>(null);
   const [connectionState, setConnectionState] = useState<ConnectionState>('connecting');
   const [feedLog, setFeedLog] = useState<FeedLogEntry[]>([
@@ -97,7 +99,10 @@ const App = () => {
   const [taskPriority, setTaskPriority] = useState('high');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingArtifactId, setEditingArtifactId] = useState<number | null>(null);
-  const [consoleMessage, setConsoleMessage] = useState('How should Kopano support MCP chat across IDEs, CLI, operating systems, skills, Azure, and connectors?');
+  const [consoleMessage, setConsoleMessage] = useState(
+    'Cassey (teacher): guide a KC apprenticeship turn — cite web sources when needed, prefer MCP tools over prose, '
+      + 'and keep claims bounded to what connectors can verify.',
+  );
   const [consoleReply, setConsoleReply] = useState<McpConsoleReply | null>(null);
   const [consoleStream, setConsoleStream] = useState('');
   const [selectedModel, setSelectedModel] = useState('deterministic');
@@ -284,7 +289,7 @@ const App = () => {
       }
     }
 
-    ws.current = new WebSocket(`${apiBase.replace('http', 'ws')}/ws/live`);
+    ws.current = new WebSocket(getWsLiveUrl(apiBase));
     ws.current.onopen = () => {
       setConnectionState('live');
       logSystemEvent('connection', 'WebSocket feed connected to the live council.');

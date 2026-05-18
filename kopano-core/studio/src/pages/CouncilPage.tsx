@@ -1,6 +1,18 @@
 import { motion } from 'framer-motion';
 import type { ConnectionState, CouncilCard, FeedLogEntry, LiveMessage, PageId } from '../types';
 
+const councilVoiceLabel = (id: string) => {
+  const map: Record<string, string> = {
+    cassey: 'Cassey',
+    kopano: 'KC',
+    claude: 'Claude',
+    grok: 'Grok',
+    gemini: 'Gemini',
+    copilot: 'Copilot',
+  };
+  return map[id] ?? id;
+};
+
 interface CouncilPageProps {
   connectionState: ConnectionState;
   featuredCard: CouncilCard;
@@ -41,7 +53,7 @@ export function CouncilPage({
           <article className="glass-stat"><span className="stat-label">Link</span><strong>{liveStateLabel}</strong></article>
           <article className="glass-stat"><span className="stat-label">Signals</span><strong>{feedPreview.length}</strong></article>
           <article className="glass-stat"><span className="stat-label">Sessions</span><strong>{sessionCount}</strong></article>
-          <article className="glass-stat"><span className="stat-label">Focus</span><strong>{featuredCard.id.toUpperCase()}</strong></article>
+          <article className="glass-stat"><span className="stat-label">Focus</span><strong>{councilVoiceLabel(featuredCard.id)}</strong></article>
         </div>
         <div className="ops-actions">
           <button type="button" className="action-button ghost" onClick={() => onNavigate('labs')}>Labs</button>
@@ -57,7 +69,7 @@ export function CouncilPage({
               {featuredCard.isResponding ? 'Responding' : featuredCard.isThinking ? 'Thinking' : 'Idle'}
             </span>
           </div>
-          <h2>{featuredCard.id.toUpperCase()}</h2>
+          <h2>{councilVoiceLabel(featuredCard.id)}</h2>
           <p className="card-lead">{featuredCard.lastMsg?.content ?? 'No live signal yet. Agents are standing by for prompt routing or internal API execution commands.'}</p>
           <div className="reasoning-rail">
             <span className="reasoning-label">Reasoning trace</span>
@@ -80,7 +92,7 @@ export function CouncilPage({
                 transition={{ delay: 0.06 * index }}
               >
                 <div className="support-card-top">
-                  <strong>{card.id.toUpperCase()}</strong>
+                  <strong>{councilVoiceLabel(card.id)}</strong>
                   <span className={`signal-chip ${card.isResponding ? 'live' : card.isThinking ? 'thinking' : 'idle'}`}>
                     {card.isResponding ? 'Live' : card.isThinking ? 'Thinking' : 'Idle'}
                   </span>

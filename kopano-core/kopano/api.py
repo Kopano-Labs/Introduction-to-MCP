@@ -42,10 +42,14 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
         "http://localhost:8000",
         "https://kasi-link.vercel.app",
         "https://www.context.kopanolabs.com",
         "https://context.kopanolabs.com",
+        "https://kopanocontext.kopanolabs.com",
+        "https://www.kopanocontext.kopanolabs.com",
         "https://www.kasilink.co.za",
     ],
     allow_credentials=True,
@@ -56,7 +60,7 @@ app.add_middleware(
 # --- SYSTEM METADATA ---
 SYSTEM_NAME = "Kopano Context"
 ADMIN_EMAIL = "rkholofelo@context.kopanolabs.com"
-PRODUCTION_URL = "https://www.context.kopanolabs.com"
+PRODUCTION_URL = "https://context.kopanolabs.com"
 
 app.include_router(kasilink_router)
 app.include_router(labs_router)
@@ -387,7 +391,7 @@ else:
     def gui_missing():
         return {
             "message": "Kopano Context API is running, but local Studio build not found.",
-            "instructions": f"Navigate to https://www.context.kopanolabs.com for the cloud instance or run 'npm run build' in studio folder.",
+            "instructions": f"Navigate to {PRODUCTION_URL} for the cloud instance or run 'npm run build' in the studio folder.",
             "diagnostics": f"Local search path: {gui_dist_path}"
         }
 

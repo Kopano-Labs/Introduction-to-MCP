@@ -68,6 +68,19 @@ if ($Probe) {
         Write-Host "`n  If commit is 404: not on $owner/$repo (unpushed, wrong remote, or use GITHUB_OWNER/REPO for your fork)." -ForegroundColor Yellow
     }
     Write-Host ""
+    Write-Host "=== Kopano host probes (public HTTPS) ==="
+    $kopanoHosts = @(
+        "https://context.kopanolabs.com/",
+        "https://kopanolabs.com/",
+        "https://kopanocontext.kopanolabs.com/"
+    )
+    foreach ($u in $kopanoHosts) {
+        $code = (& curl.exe -sS -o NUL -w "%{http_code}" --connect-timeout 10 $u) 2>$null
+        if (-not $code) { $code = "000" }
+        Write-Host "  GET $u -> HTTP $code"
+    }
+    Write-Host "  See docs/swarm-ops/VERIFIED_ENDPOINTS.md for interpretation (000 often = DNS failure)."
+    Write-Host ""
 }
 
 Write-Host "Tip: if your public fork is RobynAwesome but origin is Kopano-Labs, run:"

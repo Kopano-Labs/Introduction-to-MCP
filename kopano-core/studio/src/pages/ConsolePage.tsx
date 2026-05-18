@@ -59,6 +59,9 @@ export function ConsolePage({
             <span className="signal-chip live">MCP</span>
           </div>
           <h2>Request</h2>
+          <p className="card-lead" style={{ marginTop: '-0.35rem', marginBottom: '0.75rem', opacity: 0.88 }}>
+            Teacher <strong>Cassey</strong> · apprentice <strong>KC</strong> — same depth habit as your IDE: long context, tools-first, cite the web when the connector stack allows it.
+          </p>
           <label className="field-shell">
             <span>Model</span>
             <select value={selectedModel} onChange={(event) => onModelChange(event.target.value)}>

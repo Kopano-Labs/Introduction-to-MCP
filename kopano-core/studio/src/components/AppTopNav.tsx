@@ -33,8 +33,8 @@ export function AppTopNav({
           <span>KC</span>
         </span>
         <span className="brand-copy">
-          <strong>KC</strong>
-          <span>Local CRUD</span>
+          <strong>Kopano Context</strong>
+          <span>Cassey · Council · Console</span>
         </span>
       </motion.button>
 

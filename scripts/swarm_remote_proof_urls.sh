@@ -77,6 +77,16 @@ if [[ "${PROBE}" -eq 1 ]]; then
     echo "  If commit is 404: object is not on ${OWNER}/${REPO} (unpushed, wrong remote, or wrong fork)." >&2
   fi
   echo ""
+  echo "=== Kopano host probes (public HTTPS) ==="
+  for u in \
+    "https://context.kopanolabs.com/" \
+    "https://kopanolabs.com/" \
+    "https://kopanocontext.kopanolabs.com/"; do
+    code="$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 10 "${u}" || echo "000")"
+    echo "  GET ${u} -> HTTP ${code}"
+  done
+  echo "  See docs/swarm-ops/VERIFIED_ENDPOINTS.md for interpretation (000 often = DNS failure)."
+  echo ""
 fi
 
 echo "Tip: if your public fork is RobynAwesome but origin is Kopano-Labs, re-run with:"

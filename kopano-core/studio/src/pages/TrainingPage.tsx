@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
+import { getApiBase } from '../apiBase';
 
 type KcStatusName = 'assigned' | 'in_progress' | 'submitted' | 'reviewed' | 'promoted';
 
@@ -52,6 +53,8 @@ const statusLabel: Record<KcStatusName, string> = {
   reviewed: 'Reviewed',
   promoted: 'Promoted',
 };
+
+const apiRoot = getApiBase();
 
 const postJson = async (url: string, body: object) => {
   const response = await fetch(url, {
@@ -107,7 +110,7 @@ export function TrainingPage() {
   const historicalRecords = payload.records.filter((record) => !activeQueue.some((activeRecord) => activeRecord.id === record.id));
 
   const refresh = async () => {
-    const response = await fetch('/api/kc/training');
+    const response = await fetch(`${apiRoot}/api/kc/training`);
     if (!response.ok) {
       throw new Error(`KC training API returned ${response.status}`);
     }
@@ -154,7 +157,7 @@ export function TrainingPage() {
   }, [selectedRecord?.id, selectedRecord?.student_response, selectedRecord?.teacher_review]);
 
   const createAssignment = () => runAction('Teacher assignment created', async () => {
-    const data = await postJson('/api/kc/records', { title, teacher_context: teacherContext }) as { record: KcRecord };
+    const data = await postJson(`${apiRoot}/api/kc/records`, { title, teacher_context: teacherContext }) as { record: KcRecord };
     setSelectedId(data.record.id);
   });
 
@@ -162,7 +165,7 @@ export function TrainingPage() {
     if (!selectedRecord) {
       return;
     }
-    void runAction(`Student response submitted for ${selectedRecord.id}`, () => postJson(`/api/kc/records/${selectedRecord.id}/submit`, {
+    void runAction(`Student response submitted for ${selectedRecord.id}`, () => postJson(`${apiRoot}/api/kc/records/${selectedRecord.id}/submit`, {
       student_response: studentResponse,
     }));
   };
@@ -171,7 +174,7 @@ export function TrainingPage() {
     if (!selectedRecord) {
       return;
     }
-    void runAction(`Teacher review added for ${selectedRecord.id}`, () => postJson(`/api/kc/records/${selectedRecord.id}/review`, {
+    void runAction(`Teacher review added for ${selectedRecord.id}`, () => postJson(`${apiRoot}/api/kc/records/${selectedRecord.id}/review`, {
       teacher_review: teacherReview,
     }));
   };
@@ -180,10 +183,10 @@ export function TrainingPage() {
     if (!selectedRecord) {
       return;
     }
-    void runAction(`${selectedRecord.id} promoted`, () => postJson(`/api/kc/records/${selectedRecord.id}/promote`, {}));
+    void runAction(`${selectedRecord.id} promoted`, () => postJson(`${apiRoot}/api/kc/records/${selectedRecord.id}/promote`, {}));
   };
 
-  const seedStarter = () => runAction('Starter training task seeded', () => postJson('/api/kc/seed-training', {}));
+  const seedStarter = () => runAction('Starter training task seeded', () => postJson(`${apiRoot}/api/kc/seed-training`, {}));
 
   return (
     <div className="training-layout sovereign-training">
