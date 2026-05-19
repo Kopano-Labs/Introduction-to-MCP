@@ -37,6 +37,8 @@ python scripts/kc_log_append.py kimi-ack \
 
 `--evidence-url` must be a **real** Kimi (or external runner) artifact: share link, export, job URL, etc. Placeholder or in-repo-only URLs do not satisfy the proof bar.
 
+**Do not use a “demo bypass” URL** (e.g. `demo-bypass-receipt-placeholder` on your own site). `--strict-proof` rejects obvious bypass markers. That keeps CI and auditors honest: either you have an external Kimi receipt, or swarm status stays `manual-execution-required`.
+
 ## Unlock strict gate
 
 After a genuine external receipt exists:

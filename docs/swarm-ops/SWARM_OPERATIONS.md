@@ -95,7 +95,7 @@ Use for swarm → lead → Cursor (or inverse) transitions. Attach files or link
 
 ## Manual initiation payloads (ISIS / Kimi)
 
-Directives intended for paste into **Kimi** (or another external swarm UI) are **vaulted** in-repo at [PAYLOAD_KIMI_300_ACTIVATION.md](./PAYLOAD_KIMI_300_ACTIVATION.md). Cursor does **not** invoke Kimi.
+Directives intended for paste into **Kimi** (or another external swarm UI) are **vaulted** in-repo at [PAYLOAD_KIMI_300_ACTIVATION.md](./PAYLOAD_KIMI_300_ACTIVATION.md). Cursor does **not** invoke Kimi. **No demo-bypass receipts:** do not append `kimi-ack` with placeholder URLs to “unblock” CI; `--strict-proof` rejects common bypass patterns. Use a real external artifact or leave `--require-swarm-ack` off until you have one.
 
 After Kimi acknowledges or produces work products, **seed execution logs** that satisfy the **Proof bar** into your Obsidian **comms-log** (and append machine lines to **`docs/swarm-ops/logs/KC Main Brain Log.jsonl`** via `python scripts/kc_log_append.py mainbrain …` from repo root). Student/teacher audits go to **`docs/swarm-ops/logs/KC Review Log.jsonl`** (`kc_log_append.py review`). Until receipts land, swarm status stays **manual-execution-required** / unverified regardless of rhetoric.
 

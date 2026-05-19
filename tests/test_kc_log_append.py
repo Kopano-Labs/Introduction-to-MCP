@@ -96,6 +96,26 @@ def test_strict_proof_requires_evidence(tmp_path: Path) -> None:
     assert "strict-proof" in r.stderr
 
 
+def test_strict_proof_rejects_demo_bypass_url(tmp_path: Path) -> None:
+    (tmp_path / "docs/swarm-ops/logs").mkdir(parents=True)
+    (tmp_path / "docs/swarm-ops/logs/KC Main Brain Log.jsonl").write_text("", encoding="utf-8")
+    r = _run(
+        tmp_path,
+        "kimi-ack",
+        "--payload-ref",
+        "docs/swarm-ops/PAYLOAD.md",
+        "--status",
+        "acknowledged",
+        "--exit-code",
+        "0",
+        "--evidence-url",
+        "https://context.kopanolabs.com/demo-bypass-receipt-placeholder",
+        "--strict-proof",
+    )
+    assert r.returncode == 1
+    assert "demo bypass" in r.stderr.lower()
+
+
 def test_validate_and_proof_check(tmp_path: Path) -> None:
     (tmp_path / "docs/swarm-ops/logs").mkdir(parents=True)
     review = tmp_path / "docs/swarm-ops/logs/KC Review Log.jsonl"

@@ -188,6 +188,14 @@ def validate_jsonl_file(path: Path) -> list[str]:
     return all_errs
 
 
+_STRICT_PROOF_BYPASS_MARKERS = (
+    "demo-bypass",
+    "demo_bypass",
+    "placeholder-receipt",
+    "your-durable-evidence",
+)
+
+
 def _strict_proof_errors(record: dict, *, label: str) -> list[str]:
     errs: list[str] = []
     if record.get("exit_code") is None:
@@ -195,6 +203,16 @@ def _strict_proof_errors(record: dict, *, label: str) -> list[str]:
     urls = record.get("evidence_urls")
     if not urls or not isinstance(urls, list) or len(urls) == 0:
         errs.append(f"{label}strict-proof: at least one --evidence-url is required")
+    elif isinstance(urls, list):
+        for u in urls:
+            if not isinstance(u, str) or not u.strip():
+                continue
+            low = u.lower()
+            if any(m in low for m in _STRICT_PROOF_BYPASS_MARKERS):
+                errs.append(
+                    f"{label}strict-proof: evidence URL looks like a demo bypass, not an "
+                    f"external operator receipt ({u!r})",
+                )
     return errs
 
 
