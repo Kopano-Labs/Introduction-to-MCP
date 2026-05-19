@@ -1,0 +1,18 @@
+{
+  "git_sha": "35c7a3273f4c994d392a5860a5060d4a30ad9d65",
+  "max_phase_stewarded": 4,
+  "store_path": "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\kopano-core\\.kc\\context_store.json",
+  "status_counts": {
+    "promoted": 32,
+    "reviewed": 1,
+    "assigned": 117
+  },
+  "last_run": {
+    "skipped": 0,
+    "submitted": 33,
+    "reviewed": 33,
+    "promoted": 32,
+    "no_handler": 27
+  },
+  "compare_url": "https://github.com/Kopano-Labs/Introduction-to-MCP/compare/master...codex/kc-sovereign-gui-full-dev?expand=1"
+}

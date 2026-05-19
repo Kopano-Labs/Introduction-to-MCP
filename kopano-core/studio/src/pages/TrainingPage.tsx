@@ -188,6 +188,15 @@ export function TrainingPage() {
 
   const seedStarter = () => runAction('Starter training task seeded', () => postJson(`${apiRoot}/api/kc/seed-training`, {}));
 
+  const seedApprenticeship150 = () => runAction(
+    'Apprenticeship 150 seeded',
+    () => postJson(`${apiRoot}/api/kc/seed-apprenticeship-150?replace=true`, {}),
+  );
+
+  const runStewardHint = () => {
+    pushEvent('Steward: run python scripts/kc_apprenticeship_steward.py --max-phase 4 --promote');
+  };
+
   return (
     <div className="training-layout sovereign-training">
       <motion.section
@@ -353,6 +362,8 @@ export function TrainingPage() {
             <div className="dock-actions">
               <button type="button" className="quiet-button" onClick={() => void createAssignment()}>Create</button>
               <button type="button" className="quiet-button" onClick={() => void seedStarter()}>Seed</button>
+              <button type="button" className="quiet-button" onClick={() => void seedApprenticeship150()}>Activate 150</button>
+              <button type="button" className="quiet-button" onClick={runStewardHint}>Steward CLI</button>
               <button type="button" className="quiet-button danger" disabled={!selectedRecord} onClick={promote}>Promote</button>
             </div>
           </details>

@@ -19,6 +19,11 @@ python scripts/demo_day_smoke.py --strict
 # 4. Swarm logs — validate + proof gate (must pass before "demo ready")
 python scripts/kc_log_append.py validate
 python scripts/kc_log_append.py proof-check
+python scripts/kc_guard.py all --no-check-doc-hosts
+
+# 4b. KC Student Apprenticeship 150 (manifest + local store + machine steward)
+python scripts/kc_apprenticeship_activate.py
+python scripts/kc_apprenticeship_steward.py --max-phase 4 --promote
 
 # 5. Append KC student audit (strict proof — real CI/job URL required)
 python scripts/kc_log_append.py review --strict-proof --role student --phase audit \
