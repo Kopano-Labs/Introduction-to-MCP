@@ -177,7 +177,7 @@ Chained (fail fast):
 python scripts/kc_log_append.py validate && python scripts/kc_log_append.py proof-check
 ```
 
-**Unified wrapper (this repo):** `python scripts/kc_guard.py all` runs `git_sync_monitor.py` (plus required-file presence), then `validate`, then `proof-check`. Optional: `all --require-swarm-ack` after you mandate Kimi / swarm ACK rows. See [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md) for CI + branch protection notes.
+**Unified wrapper (this repo):** `python scripts/kc_guard.py all` runs `git_sync_monitor.py` (plus required-file presence), then `validate`, then `proof-check`, then **doc host drift** (dead/unlisted `kopanolabs.com` URLs in swarm-ops docs; skip with `--no-check-doc-hosts`). Optional: `all --require-swarm-ack` after a real `kimi_ack` or `swarm_ack` row with `evidence_urls`. See [KIMI_ACK_FORMAT.md](./KIMI_ACK_FORMAT.md) and [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md).
 
 **Not supported:** `python scripts/kc_log_append.py --strict-proof --validate` — `--strict-proof` is an **append** flag on `review` / `mainbrain` / `kimi-ack`, not a global paired with `validate`. Use **`kc_guard.py`** for a single orchestrated entrypoint; add a heavier `kc_swarm_doctor.py` later only if you need extra diagnostics.
 

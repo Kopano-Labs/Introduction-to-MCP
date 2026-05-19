@@ -24,3 +24,25 @@ The append tool writes `kc_main_brain_log_v1` with `kind: "kimi_ack"` and a `kim
 | `notes` | no | Free text |
 
 The `summary` field duplicates the bracket block for grep-friendly audits.
+
+## CLI (strict proof)
+
+```bash
+python scripts/kc_log_append.py kimi-ack \
+  --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md \
+  --status acknowledged \
+  --evidence-url "https://<durable-external-artifact-not-in-git>" \
+  --strict-proof
+```
+
+`--evidence-url` must be a **real** Kimi (or external runner) artifact: share link, export, job URL, etc. Placeholder or in-repo-only URLs do not satisfy the proof bar.
+
+## Unlock strict gate
+
+After a genuine external receipt exists:
+
+```bash
+python scripts/kc_guard.py all --require-swarm-ack
+```
+
+`--require-swarm-ack` accepts Main Brain rows with `kind` **`kimi_ack`** (this subcommand) or **`swarm_ack`** (`mainbrain --kind swarm_ack`), each with non-empty `evidence_urls`.

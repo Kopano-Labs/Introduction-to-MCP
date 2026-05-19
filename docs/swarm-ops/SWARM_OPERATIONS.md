@@ -48,6 +48,8 @@ The append-only JSONL logs under `docs/swarm-ops/logs/` can be checked locally w
 |---------|---------|
 | `python scripts/kc_log_append.py validate` | Structural validation (unknown keys, required shapes, ISO `ts` prefix). |
 | `python scripts/kc_log_append.py proof-check` | `validate` plus **gates**: last `role=student` + `phase=audit` row must include `exit_code` and non-empty `evidence_urls`; last non-`bootstrap` Main Brain row must also carry `exit_code` + `evidence_urls`. |
+| `python scripts/kc_guard.py all` | Sync monitor + `validate` + `proof-check` + doc host drift (see [VERIFIED_ENDPOINTS.md](./VERIFIED_ENDPOINTS.md)). |
+| `python scripts/kc_guard.py all --require-swarm-ack` | Above plus at least one `kimi_ack` or `swarm_ack` row with `evidence_urls` (after real Kimi receipt). |
 | `--strict-proof` on `review` / `mainbrain` / `kimi-ack` | Fail the append if `exit_code` or evidence URLs are missing (warns when `git_sha` absent). |
 
 Standard external paste-back for Kimi: [KIMI_ACK_FORMAT.md](./KIMI_ACK_FORMAT.md) and `python scripts/kc_log_append.py kimi-ack …`.

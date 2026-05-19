@@ -14,6 +14,8 @@
 - [Swarm Ops & Proof Doctrine](docs/swarm-ops/SWARM_OPERATIONS.md) — proof bar; Kimi external vs Cursor; handoff envelope (git-tracked; mirror into vault as needed)
 - [Kimi 300 activation payload](docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md) — manual ISIS initiation (pending Kimi acknowledgement + logs)
 - [KC JSONL logs + schema](docs/swarm-ops/logs/README.md)
+- [Verified prod endpoints](docs/swarm-ops/VERIFIED_ENDPOINTS.md) — DNS/HTTP probe table; re-run before demos
+- [Kimi ACK format + unlock](docs/swarm-ops/KIMI_ACK_FORMAT.md)
 - [[Schematics/04-Updates/task-board|Task Board]] — active ownership lanes
 
 ## Repo Structure

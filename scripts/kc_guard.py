@@ -19,6 +19,7 @@ Examples:
   python scripts/kc_guard.py all
   python scripts/kc_guard.py all --strict-unpushed
   python scripts/kc_guard.py all --require-swarm-ack
+  python scripts/kc_guard.py all --no-check-doc-hosts   # skip kopanolabs URL drift scan
   python scripts/kc_guard.py watch --interval 10
 """
 
@@ -247,7 +248,7 @@ def cmd_all(
     strict_unpushed: bool,
     fetch: bool,
     require_swarm_ack: bool,
-    check_doc_hosts: bool,
+    check_doc_hosts: bool = True,
 ) -> int:
     code = cmd_status(root, strict_unpushed=strict_unpushed, fetch=fetch)
     if code != 0:
@@ -336,9 +337,9 @@ def _build_parser() -> argparse.ArgumentParser:
         help="After proof-check, require swarm_ack or kimi_ack + evidence_urls in Main Brain log.",
     )
     pa.add_argument(
-        "--check-doc-hosts",
+        "--no-check-doc-hosts",
         action="store_true",
-        help="After proof-check, forbid dead/unlisted kopanolabs.com URLs in swarm-ops docs.",
+        help="Skip dead/unlisted kopanolabs.com URL scan in swarm-ops docs (default: check runs).",
     )
 
     pw = sub.add_parser("watch", help="Loop: all (same flags as all)")
@@ -350,9 +351,9 @@ def _build_parser() -> argparse.ArgumentParser:
         help="After proof-check, require swarm_ack or kimi_ack + evidence_urls in Main Brain log.",
     )
     pw.add_argument(
-        "--check-doc-hosts",
+        "--no-check-doc-hosts",
         action="store_true",
-        help="After proof-check, forbid dead/unlisted kopanolabs.com URLs in swarm-ops docs.",
+        help="Skip dead/unlisted kopanolabs.com URL scan in swarm-ops docs (default: check runs).",
     )
     return p
 
@@ -365,7 +366,7 @@ def main(argv: list[str] | None = None) -> int:
     fetch = bool(getattr(args, "fetch", False))
     strict = bool(getattr(args, "strict_unpushed", False))
     require_ack = bool(getattr(args, "require_swarm_ack", False))
-    check_hosts = bool(getattr(args, "check_doc_hosts", False))
+    check_hosts = not bool(getattr(args, "no_check_doc_hosts", False))
 
     if args.cmd == "status":
         return cmd_status(root, strict_unpushed=strict, fetch=fetch)

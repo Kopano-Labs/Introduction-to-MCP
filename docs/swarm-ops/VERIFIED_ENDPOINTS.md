@@ -1,6 +1,6 @@
 # Verified endpoints (DNS / HTTP probe)
 
-**Last probe:** 2026-05-16 (operator network, `curl --connect-timeout 10`).
+**Last probe:** 2026-05-19 (operator network, `curl --connect-timeout 10`; context and kopanolabs.com HTTP 200).
 
 Use this table for **prod probes** in handoff envelopes and proof rows. Re-run probes before demo day; DNS and deploys change.
 
