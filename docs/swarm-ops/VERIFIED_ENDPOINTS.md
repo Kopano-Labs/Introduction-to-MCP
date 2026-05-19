@@ -31,6 +31,6 @@ curl -sS -o /dev/null -w "%{http_code} %{url_effective}\n" --connect-timeout 10 
 
 ## Code references (may lag DNS)
 
-`kopano-core/kopano/api.py` CORS may still list legacy hostnames for transitional deploys. Align new config with **`context.kopanolabs.com`**.
+`kopano-core/kopano/api.py` CORS and `PRODUCTION_URL` target **`context.kopanolabs.com`** (dead `kopanocontext.*` / `www.context.*` origins removed).
 
 **CI:** `python scripts/kc_guard.py all --check-doc-hosts` fails if swarm-ops `*.md` / `tools/*.html` contain `https://` URLs to dead hosts (`kopanocontext.*`, `www.context.*`) or unlisted `*.kopanolabs.com` hosts. The denylist table in this file is exempt (it documents dead hosts on purpose).
