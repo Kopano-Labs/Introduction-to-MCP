@@ -15,6 +15,9 @@ KasiLink
 node_modules/
 **/node_modules/
 
+# KC local apprenticeship store (manifest is tracked; seeded JSON is local)
+kopano-core/.kc/
+
 # Second Brain
 Schematics/
 

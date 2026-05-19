@@ -1,0 +1,1063 @@
+{
+  "schema": "kc_apprenticeship_v1",
+  "task_count": 150,
+  "phases": 10,
+  "tasks_per_phase": 15,
+  "stewards": [
+    "KC",
+    "Cursor"
+  ],
+  "protocol": "Schematics/18-PROTOCOLS/KC-Student-Teacher-Apprenticeship-Protocol.md",
+  "tasks": [
+    {
+      "code": "KCA-0101",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T01: Define what counts as external proof vs local-only work",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0101. Student (kopano/Cassy): Define what counts as external proof vs local-only work. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0102",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T02: Read SWARM_OPERATIONS.md proof bar section",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0102. Student (kopano/Cassy): Read SWARM_OPERATIONS.md proof bar section. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0103",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T03: List forbidden claims (fake swarm, demo-bypass URLs)",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0103. Student (kopano/Cassy): List forbidden claims (fake swarm, demo-bypass URLs). Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0104",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T04: Run kc_log_append.py validate on Review Log",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0104. Student (kopano/Cassy): Run kc_log_append.py validate on Review Log. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0105",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T05: Run kc_log_append.py proof-check without strict mode",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0105. Student (kopano/Cassy): Run kc_log_append.py proof-check without strict mode. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0106",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T06: Run proof-check with --strict-proof on a clean row",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0106. Student (kopano/Cassy): Run proof-check with --strict-proof on a clean row. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0107",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T07: Append a student_audit row with real pytest evidence only",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0107. Student (kopano/Cassy): Append a student_audit row with real pytest evidence only. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0108",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T08: Explain difference between kimi_ack and swarm_ack",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0108. Student (kopano/Cassy): Explain difference between kimi_ack and swarm_ack. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0109",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T09: Document why Kimi is out-of-repo manual",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0109. Student (kopano/Cassy): Document why Kimi is out-of-repo manual. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0110",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T10: Link VERIFIED_ENDPOINTS.md from index.md",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0110. Student (kopano/Cassy): Link VERIFIED_ENDPOINTS.md from index.md. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0111",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T11: Verify context.kopanolabs.com probe in runbook",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0111. Student (kopano/Cassy): Verify context.kopanolabs.com probe in runbook. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0112",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T12: Reject NXDOMAIN hosts in doc drift check",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0112. Student (kopano/Cassy): Reject NXDOMAIN hosts in doc drift check. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0113",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T13: Capture CI workflow URL after push",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0113. Student (kopano/Cassy): Capture CI workflow URL after push. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0114",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T14: Write one-line receipt for guard pass",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0114. Student (kopano/Cassy): Write one-line receipt for guard pass. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0115",
+      "phase": 1,
+      "phase_title": "Proof bar and receipts",
+      "title": "KC \u2014 P1 T15: Summarize graduation Law 4 from apprenticeship protocol",
+      "teacher_context": "Phase 1 (Proof bar and receipts). Task KCA-0115. Student (kopano/Cassy): Summarize graduation Law 4 from apprenticeship protocol. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0201",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T01: Locate KC Review Log and Main Brain Log paths",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0201. Student (kopano/Cassy): Locate KC Review Log and Main Brain Log paths. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0202",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T02: Validate JSONL schema for review entries",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0202. Student (kopano/Cassy): Validate JSONL schema for review entries. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0203",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T03: Append a mainbrain note with bounded scope",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0203. Student (kopano/Cassy): Append a mainbrain note with bounded scope. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0204",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T04: Use review --commands with quoted pytest strings",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0204. Student (kopano/Cassy): Use review --commands with quoted pytest strings. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0205",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T05: Avoid demo-bypass markers in evidence_urls",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0205. Student (kopano/Cassy): Avoid demo-bypass markers in evidence_urls. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0206",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T06: Cross-check log entry timestamps are ISO-8601",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0206. Student (kopano/Cassy): Cross-check log entry timestamps are ISO-8601. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0207",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T07: Explain Save/Kill/Watch in teacher review text",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0207. Student (kopano/Cassy): Explain Save/Kill/Watch in teacher review text. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0208",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T08: Mirror one comms-log decision into Review Log",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0208. Student (kopano/Cassy): Mirror one comms-log decision into Review Log. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0209",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T09: Tag entry with apprenticeship phase id",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0209. Student (kopano/Cassy): Tag entry with apprenticeship phase id. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0210",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T10: Keep student_response under 500 words",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0210. Student (kopano/Cassy): Keep student_response under 500 words. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0211",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T11: Reference file paths not line numbers only",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0211. Student (kopano/Cassy): Reference file paths not line numbers only. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0212",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T12: Link PR compare URL when gh auth unavailable",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0212. Student (kopano/Cassy): Link PR compare URL when gh auth unavailable. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0213",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T13: Record store_path for KC context store",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0213. Student (kopano/Cassy): Record store_path for KC context store. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0214",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T14: Note strict-proof failure modes",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0214. Student (kopano/Cassy): Note strict-proof failure modes. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0215",
+      "phase": 2,
+      "phase_title": "JSONL stewardship logs",
+      "title": "KC \u2014 P2 T15: Archive a completed task id in review notes",
+      "teacher_context": "Phase 2 (JSONL stewardship logs). Task KCA-0215. Student (kopano/Cassy): Archive a completed task id in review notes. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0301",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T01: Run kc_guard.py status",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0301. Student (kopano/Cassy): Run kc_guard.py status. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0302",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T02: Run kc_guard.py validate",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0302. Student (kopano/Cassy): Run kc_guard.py validate. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0303",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T03: Run kc_guard.py proof",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0303. Student (kopano/Cassy): Run kc_guard.py proof. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0304",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T04: Run kc_guard.py all with doc-host check",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0304. Student (kopano/Cassy): Run kc_guard.py all with doc-host check. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0305",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T05: Run kc_guard.py all --no-check-doc-hosts",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0305. Student (kopano/Cassy): Run kc_guard.py all --no-check-doc-hosts. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0306",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T06: Understand --require-swarm-ack optional gate",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0306. Student (kopano/Cassy): Understand --require-swarm-ack optional gate. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0307",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T07: Run git_sync_monitor.py once",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0307. Student (kopano/Cassy): Run git_sync_monitor.py once. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0308",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T08: Fix gitignore guard if Schematics noise appears",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0308. Student (kopano/Cassy): Fix gitignore guard if Schematics noise appears. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0309",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T09: Run pytest for kc_guard tests",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0309. Student (kopano/Cassy): Run pytest for kc_guard tests. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0310",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T10: Run pytest for kc_log_append tests",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0310. Student (kopano/Cassy): Run pytest for kc_log_append tests. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0311",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T11: Document exit codes in runbook",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0311. Student (kopano/Cassy): Document exit codes in runbook. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0312",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T12: Wire guard into DEMO_DAY_RUNBOOK.md",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0312. Student (kopano/Cassy): Wire guard into DEMO_DAY_RUNBOOK.md. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0313",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T13: Explain watch mode for long sessions",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0313. Student (kopano/Cassy): Explain watch mode for long sessions. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0314",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T14: Do not enable swarm ack without external receipt",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0314. Student (kopano/Cassy): Do not enable swarm ack without external receipt. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0315",
+      "phase": 3,
+      "phase_title": "kc_guard and local gates",
+      "title": "KC \u2014 P3 T15: Post guard summary to Training student_response",
+      "teacher_context": "Phase 3 (kc_guard and local gates). Task KCA-0315. Student (kopano/Cassy): Post guard summary to Training student_response. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0401",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T01: Open Training page in Kopano Studio",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0401. Student (kopano/Cassy): Open Training page in Kopano Studio. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0402",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T02: Confirm VITE_KC_API_BASE_URL override",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0402. Student (kopano/Cassy): Confirm VITE_KC_API_BASE_URL override. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0403",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T03: GET /api/kc/training returns status + records",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0403. Student (kopano/Cassy): GET /api/kc/training returns status + records. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0404",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T04: Create teacher assignment via UI",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0404. Student (kopano/Cassy): Create teacher assignment via UI. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0405",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T05: Submit student response for one task",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0405. Student (kopano/Cassy): Submit student response for one task. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0406",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T06: Add teacher review with Save verdict",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0406. Student (kopano/Cassy): Add teacher review with Save verdict. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0407",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T07: Promote one record to graduated state",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0407. Student (kopano/Cassy): Promote one record to graduated state. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0408",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T08: Seed starter when store empty",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0408. Student (kopano/Cassy): Seed starter when store empty. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0409",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T09: Refresh queue every 1.8s without errors",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0409. Student (kopano/Cassy): Refresh queue every 1.8s without errors. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0410",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T10: Show active vs reviewed counts",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0410. Student (kopano/Cassy): Show active vs reviewed counts. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0411",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T11: Handle API offline message gracefully",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0411. Student (kopano/Cassy): Handle API offline message gracefully. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0412",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T12: Link Training page to apprenticeship manifest",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0412. Student (kopano/Cassy): Link Training page to apprenticeship manifest. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0413",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T13: Use kopano lane as student identity",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0413. Student (kopano/Cassy): Use kopano lane as student identity. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0414",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T14: Use cassey lane as teacher identity in copy",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0414. Student (kopano/Cassy): Use cassey lane as teacher identity in copy. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0415",
+      "phase": 4,
+      "phase_title": "Studio Training surface",
+      "title": "KC \u2014 P4 T15: Export one promoted record summary to JSONL",
+      "teacher_context": "Phase 4 (Studio Training surface). Task KCA-0415. Student (kopano/Cassy): Export one promoted record summary to JSONL. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0501",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T01: Read VERIFIED_ENDPOINTS.md table",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0501. Student (kopano/Cassy): Read VERIFIED_ENDPOINTS.md table. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0502",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T02: Run swarm_remote_proof_urls.ps1 --probe",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0502. Student (kopano/Cassy): Run swarm_remote_proof_urls.ps1 --probe. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0503",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T03: Run swarm_remote_proof_urls.sh --probe",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0503. Student (kopano/Cassy): Run swarm_remote_proof_urls.sh --probe. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0504",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T04: Record HTTP status for context host",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0504. Student (kopano/Cassy): Record HTTP status for context host. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0505",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T05: Document NXDOMAIN for retired hosts",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0505. Student (kopano/Cassy): Document NXDOMAIN for retired hosts. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0506",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T06: Align PRODUCTION_URL in api.py",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0506. Student (kopano/Cassy): Align PRODUCTION_URL in api.py. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0507",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T07: Trim dead CORS origins",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0507. Student (kopano/Cassy): Trim dead CORS origins. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0508",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T08: Add kopanolabs.com to CORS allowlist",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0508. Student (kopano/Cassy): Add kopanolabs.com to CORS allowlist. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0509",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T09: Update studio apiBase default",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0509. Student (kopano/Cassy): Update studio apiBase default. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0510",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T10: Probe local 127.0.0.1:8000 health",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0510. Student (kopano/Cassy): Probe local 127.0.0.1:8000 health. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0511",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T11: Never claim cryptographic proof",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0511. Student (kopano/Cassy): Never claim cryptographic proof. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0512",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T12: Store probe output path in evidence",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0512. Student (kopano/Cassy): Store probe output path in evidence. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0513",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T13: Re-run probes after DNS change",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0513. Student (kopano/Cassy): Re-run probes after DNS change. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0514",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T14: Update doctrine when host changes",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0514. Student (kopano/Cassy): Update doctrine when host changes. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0515",
+      "phase": 5,
+      "phase_title": "Verified endpoints and DNS",
+      "title": "KC \u2014 P5 T15: Submit probe receipt as student work",
+      "teacher_context": "Phase 5 (Verified endpoints and DNS). Task KCA-0515. Student (kopano/Cassy): Submit probe receipt as student work. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0601",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T01: Read swarm-proof.yml triggers",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0601. Student (kopano/Cassy): Read swarm-proof.yml triggers. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0602",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T02: Confirm push to feature branch runs CI",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0602. Student (kopano/Cassy): Confirm push to feature branch runs CI. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0603",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T03: List jobs: validate, proof, guard, pytest",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0603. Student (kopano/Cassy): List jobs: validate, proof, guard, pytest. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0604",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T04: Fix failing pytest before push",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0604. Student (kopano/Cassy): Fix failing pytest before push. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0605",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T05: Keep commits scoped to apprenticeship",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0605. Student (kopano/Cassy): Keep commits scoped to apprenticeship. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0606",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T06: Avoid committing Schematics noise",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0606. Student (kopano/Cassy): Avoid committing Schematics noise. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0607",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T07: Use compare URL when gh 401",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0607. Student (kopano/Cassy): Use compare URL when gh 401. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0608",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T08: Document HEAD sha in review log",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0608. Student (kopano/Cassy): Document HEAD sha in review log. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0609",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T09: Do not amend pushed commits",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0609. Student (kopano/Cassy): Do not amend pushed commits. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0610",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T10: Run full guard before push",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0610. Student (kopano/Cassy): Run full guard before push. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0611",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T11: Tag commit message with apprenticeship",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0611. Student (kopano/Cassy): Tag commit message with apprenticeship. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0612",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T12: Link workflow run in evidence_urls",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0612. Student (kopano/Cassy): Link workflow run in evidence_urls. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0613",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T13: Note branch tracks origin",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0613. Student (kopano/Cassy): Note branch tracks origin. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0614",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T14: Verify no secrets in diff",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0614. Student (kopano/Cassy): Verify no secrets in diff. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0615",
+      "phase": 6,
+      "phase_title": "CI and branch hygiene",
+      "title": "KC \u2014 P6 T15: Student: summarize last green CI run",
+      "teacher_context": "Phase 6 (CI and branch hygiene). Task KCA-0615. Student (kopano/Cassy): Student: summarize last green CI run. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0701",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T01: Read KC-Student-Teacher-Apprenticeship-Protocol",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0701. Student (kopano/Cassy): Read KC-Student-Teacher-Apprenticeship-Protocol. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0702",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T02: State Law 1: no unsupervised writes",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0702. Student (kopano/Cassy): State Law 1: no unsupervised writes. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0703",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T03: State Law 5: KC is brain not worker",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0703. Student (kopano/Cassy): State Law 5: KC is brain not worker. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0704",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T04: List teacher assignments table",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0704. Student (kopano/Cassy): List teacher assignments table. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0705",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T05: Identify Cursor as AG student surface",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0705. Student (kopano/Cassy): Identify Cursor as AG student surface. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0706",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T06: Identify KC as memory not executor",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0706. Student (kopano/Cassy): Identify KC as memory not executor. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0707",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T07: Reject 300-node fiction in code claims",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0707. Student (kopano/Cassy): Reject 300-node fiction in code claims. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0708",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T08: Map 50 demo tasks to apprenticeship phases",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0708. Student (kopano/Cassy): Map 50 demo tasks to apprenticeship phases. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0709",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T09: Explain 150 = 10\u00d715 stewardship expansion",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0709. Student (kopano/Cassy): Explain 150 = 10\u00d715 stewardship expansion. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0710",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T10: No kimi-ack without manual external step",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0710. Student (kopano/Cassy): No kimi-ack without manual external step. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0711",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T11: Honesty about local-only owner_proof",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0711. Student (kopano/Cassy): Honesty about local-only owner_proof. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0712",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T12: Cross-link NAVIGATION.md",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0712. Student (kopano/Cassy): Cross-link NAVIGATION.md. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0713",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T13: Update apprenticeship status in manifest",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0713. Student (kopano/Cassy): Update apprenticeship status in manifest. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0714",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T14: Teacher review: Watch on risky scope",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0714. Student (kopano/Cassy): Teacher review: Watch on risky scope. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0715",
+      "phase": 7,
+      "phase_title": "Doctrine and honesty",
+      "title": "KC \u2014 P7 T15: Promote only after evidence attached",
+      "teacher_context": "Phase 7 (Doctrine and honesty). Task KCA-0715. Student (kopano/Cassy): Promote only after evidence attached. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0801",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T01: List labs_api routes at high level",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0801. Student (kopano/Cassy): List labs_api routes at high level. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0802",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T02: Open Labs page without console errors",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0802. Student (kopano/Cassy): Open Labs page without console errors. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0803",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T03: Describe KasiLink bridge purpose",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0803. Student (kopano/Cassy): Describe KasiLink bridge purpose. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0804",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T04: Note Microsoft readiness surface",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0804. Student (kopano/Cassy): Note Microsoft readiness surface. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0805",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T05: MCP console: ask one grounded question",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0805. Student (kopano/Cassy): MCP console: ask one grounded question. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0806",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T06: Cowork room: create read-only inspection",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0806. Student (kopano/Cassy): Cowork room: create read-only inspection. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0807",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T07: SA language route: name target language",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0807. Student (kopano/Cassy): SA language route: name target language. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0808",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T08: Forge page: state mission in one sentence",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0808. Student (kopano/Cassy): Forge page: state mission in one sentence. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0809",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T09: Council page: one agent message test",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0809. Student (kopano/Cassy): Council page: one agent message test. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0810",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T10: Admin page: list what is configurable",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0810. Student (kopano/Cassy): Admin page: list what is configurable. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0811",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T11: Telemetry: confirm client events optional",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0811. Student (kopano/Cassy): Telemetry: confirm client events optional. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0812",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T12: Do not store API keys in student_response",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0812. Student (kopano/Cassy): Do not store API keys in student_response. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0813",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T13: Reference labs from teacher_context",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0813. Student (kopano/Cassy): Reference labs from teacher_context. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0814",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T14: Submit integration smoke notes",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0814. Student (kopano/Cassy): Submit integration smoke notes. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0815",
+      "phase": 8,
+      "phase_title": "Labs and integration touchpoints",
+      "title": "KC \u2014 P8 T15: Teacher: Save if bounded and reproducible",
+      "teacher_context": "Phase 8 (Labs and integration touchpoints). Task KCA-0815. Student (kopano/Cassy): Teacher: Save if bounded and reproducible. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0901",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T01: Name four lifecycle stages from protocol",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0901. Student (kopano/Cassy): Name four lifecycle stages from protocol. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0902",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T02: Count promoted records in store",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0902. Student (kopano/Cassy): Count promoted records in store. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0903",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T03: Count reviewed vs assigned ratio",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0903. Student (kopano/Cassy): Count reviewed vs assigned ratio. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0904",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T04: Define 10+ verified tasks threshold",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0904. Student (kopano/Cassy): Define 10+ verified tasks threshold. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0905",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T05: Zero hallucination: cite files only",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0905. Student (kopano/Cassy): Zero hallucination: cite files only. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0906",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T06: Chief Architect sign-off is external",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0906. Student (kopano/Cassy): Chief Architect sign-off is external. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0907",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T07: Protocol 13 compliance checklist",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0907. Student (kopano/Cassy): Protocol 13 compliance checklist. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0908",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T08: Shadowing: document watch-only session",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0908. Student (kopano/Cassy): Shadowing: document watch-only session. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0909",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T09: Supervised write: one reviewed PR scope",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0909. Student (kopano/Cassy): Supervised write: one reviewed PR scope. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0910",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T10: Graduate: draft criteria not claim met",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0910. Student (kopano/Cassy): Graduate: draft criteria not claim met. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0911",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T11: Cassy supervised audits Lessons 001-014",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0911. Student (kopano/Cassy): Cassy supervised audits Lessons 001-014. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0912",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T12: OG Mirror Wardens: vault parity note",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0912. Student (kopano/Cassy): OG Mirror Wardens: vault parity note. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0913",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T13: Recon scouts: research no-write example",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0913. Student (kopano/Cassy): Recon scouts: research no-write example. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0914",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T14: Stewardship split Cursor vs KC roles",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0914. Student (kopano/Cassy): Stewardship split Cursor vs KC roles. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-0915",
+      "phase": 9,
+      "phase_title": "Graduation and lifecycle",
+      "title": "KC \u2014 P9 T15: Append graduation intent to Main Brain Log",
+      "teacher_context": "Phase 9 (Graduation and lifecycle). Task KCA-0915. Student (kopano/Cassy): Append graduation intent to Main Brain Log. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1001",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T01: Read DEMO_DAY_RUNBOOK machine gates",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1001. Student (kopano/Cassy): Read DEMO_DAY_RUNBOOK machine gates. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1002",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T02: Run pytest suite documented in runbook",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1002. Student (kopano/Cassy): Run pytest suite documented in runbook. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1003",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T03: Cold-start api path sanity check",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1003. Student (kopano/Cassy): Cold-start api path sanity check. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1004",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T04: Studio npm run lint if node present",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1004. Student (kopano/Cassy): Studio npm run lint if node present. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1005",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T05: Binary path: note KopanoContext.exe optional",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1005. Student (kopano/Cassy): Binary path: note KopanoContext.exe optional. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1006",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T06: Azure deploy: cite bicep folder only",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1006. Student (kopano/Cassy): Azure deploy: cite bicep folder only. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1007",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T07: SafeSkill: no hardcoded secrets scan",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1007. Student (kopano/Cassy): SafeSkill: no hardcoded secrets scan. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1008",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T08: Reward system folder purpose one line",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1008. Student (kopano/Cassy): Reward system folder purpose one line. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1009",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T09: Legacy archive: what not to ship",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1009. Student (kopano/Cassy): Legacy archive: what not to ship. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1010",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T10: 10 phases 50 tasks map to 150 ledger",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1010. Student (kopano/Cassy): 10 phases 50 tasks map to 150 ledger. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1011",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T11: Activate script: dry-run count",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1011. Student (kopano/Cassy): Activate script: dry-run count. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1012",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T12: Activate script: seed store path",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1012. Student (kopano/Cassy): Activate script: seed store path. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1013",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T13: Training UI shows 150 assigned queue",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1013. Student (kopano/Cassy): Training UI shows 150 assigned queue. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1014",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T14: Stewardship: autonomous Cursor execution",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1014. Student (kopano/Cassy): Stewardship: autonomous Cursor execution. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    },
+    {
+      "code": "KCA-1015",
+      "phase": 10,
+      "phase_title": "Demo hardening and ops",
+      "title": "KC \u2014 P10 T15: Final: kc_guard all + manifest hash note",
+      "teacher_context": "Phase 10 (Demo hardening and ops). Task KCA-1015. Student (kopano/Cassy): Final: kc_guard all + manifest hash note. Deliverable: short student_response with file paths, command output, or URL. No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
+    }
+  ]
+}

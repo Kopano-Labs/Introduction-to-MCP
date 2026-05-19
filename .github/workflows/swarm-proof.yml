@@ -39,4 +39,4 @@ jobs:
         run: python scripts/kc_guard.py all
 
       - name: Pytest swarm tools
-        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py -q
+        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py -q

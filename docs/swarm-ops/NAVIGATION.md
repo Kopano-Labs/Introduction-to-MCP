@@ -19,6 +19,8 @@
 | KC Swarm Console (architecture prose) | [KC_SWARM_CONSOLE_ARCHITECTURE.md](./KC_SWARM_CONSOLE_ARCHITECTURE.md) | BFF model, flow, CI vs optional `proof_gate`, citations |
 | KC Swarm Console (GUI IA spec) | [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md) | Four-column layout, flows, branch protection notes |
 | Unified guard CLI | `scripts/kc_guard.py` | `status` / `validate` / `proof` / `all` / `watch`; delegates to `git_sync_monitor` + `kc_log_append` |
+| KC Apprenticeship 150 (stewardship) | [apprenticeship/STEWARDSHIP.md](./apprenticeship/STEWARDSHIP.md) | Manifest + activate; Studio Training API |
+| Apprenticeship task ledger | [apprenticeship/kc_apprenticeship_150.json](./apprenticeship/kc_apprenticeship_150.json) | 10×15 tasks; seed via `scripts/kc_apprenticeship_activate.py` |
 
 **CLI quick reference**
 
@@ -30,6 +32,7 @@ python scripts/kc_guard.py all --no-check-doc-hosts  # skip kopanolabs URL scan 
 python scripts/kc_guard.py all --require-swarm-ack   # stricter: swarm_ack or kimi_ack + evidence_urls (after Kimi)
 python scripts/kc_guard.py doctrine-doc-hosts  # host drift only
 python scripts/kc_guard.py doctrine-swarm-ack  # swarm/kimi ack only
+python scripts/kc_apprenticeship_activate.py   # manifest + seed kopano-core/.kc/context_store.json
 ```
 
 **Open PR:** https://github.com/Kopano-Labs/Introduction-to-MCP/compare/master...codex/kc-sovereign-gui-full-dev?expand=1

@@ -17,6 +17,7 @@ import logging
 from pathlib import Path
 from contextlib import asynccontextmanager
 from .kasilink_api import router as kasilink_router
+from .kc_training_api import router as kc_training_router
 from .labs_api import router as labs_router
 from .telemetry import configure_server_telemetry, log_demo_event
 
@@ -62,6 +63,7 @@ ADMIN_EMAIL = "rkholofelo@context.kopanolabs.com"
 PRODUCTION_URL = "https://context.kopanolabs.com"
 
 app.include_router(kasilink_router)
+app.include_router(kc_training_router)
 app.include_router(labs_router)
 
 # Shared memory for real-time updates (Broadcast Protocol)
