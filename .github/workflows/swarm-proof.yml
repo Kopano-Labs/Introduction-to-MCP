@@ -25,5 +25,8 @@ jobs:
           python scripts/kc_log_append.py validate
           python scripts/kc_log_append.py proof-check
 
-      - name: KC guard (sync + validate + proof)
-        run: python scripts/kc_guard.py all
+      - name: KC guard (sync + validate + proof + doc hosts)
+        run: python scripts/kc_guard.py all --check-doc-hosts
+
+      - name: Pytest swarm tools
+        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py -q

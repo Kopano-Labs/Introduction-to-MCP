@@ -26,7 +26,9 @@
 python scripts/kc_log_append.py validate
 python scripts/kc_log_append.py proof-check   # review last student/audit + main last non-bootstrap receipt
 python scripts/kc_guard.py all                 # git sync monitor + validate + proof-check (one entrypoint)
-python scripts/kc_guard.py all --require-swarm-ack   # stricter: at least one swarm_ack + evidence_urls in Main Brain log
+python scripts/kc_guard.py all --check-doc-hosts       # forbid dead/unlisted kopanolabs.com URLs in swarm-ops docs
+python scripts/kc_guard.py all --require-swarm-ack   # stricter: swarm_ack or kimi_ack + evidence_urls in Main Brain log
+python scripts/kc_guard.py all --check-doc-hosts --require-swarm-ack   # full doctrine bar (after real Kimi receipt)
 python scripts/kc_log_append.py review --strict-proof --role student --phase audit --summary "..." --commands ... --exit-code 0 --evidence-url https://...
 python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md --status acknowledged --notes "Swarm initiated" --evidence-url https://...
 ```

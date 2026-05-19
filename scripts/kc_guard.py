@@ -9,7 +9,7 @@ Exit codes (``all`` / single commands that run checks):
   0 — all invoked checks passed
   1 — a delegated tool returned non-zero (see stderr; maps to CI failure)
   2 — not a git repo (sync only) or invalid usage
-  3 — optional doctrine check failed (e.g. --require-swarm-ack)
+  3 — optional doctrine check failed (e.g. --require-swarm-ack, --check-doc-hosts)
 
 Examples:
   python scripts/kc_guard.py status
@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -37,9 +38,44 @@ EXIT_DOCTRINE = 3
 
 DEFAULT_REQUIRED_FILES = (
     "docs/swarm-ops/SWARM_OPERATIONS.md",
+    "docs/swarm-ops/VERIFIED_ENDPOINTS.md",
     "docs/swarm-ops/logs/KC Review Log.jsonl",
     "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
 )
+
+VERIFIED_ENDPOINTS_REL = Path("docs/swarm-ops/VERIFIED_ENDPOINTS.md")
+SWARM_DOC_GLOBS = ("docs/swarm-ops/*.md", "docs/swarm-ops/tools/*.html")
+
+# Hostnames allowed in swarm-ops prose (not counting VERIFIED_ENDPOINTS denylist table).
+KOPANO_HOST_ALLOW = frozenset(
+    {
+        "context.kopanolabs.com",
+        "kopanolabs.com",
+        "www.kopanolabs.com",
+    }
+)
+# Listed in VERIFIED_ENDPOINTS as dead; must not appear as https:// URLs outside that file.
+KOPANO_HOST_DENY = frozenset(
+    {
+        "kopanocontext.kopanolabs.com",
+        "www.kopanocontext.kopanolabs.com",
+        "www.context.kopanolabs.com",
+    }
+)
+EXTERNAL_HOST_ALLOW = frozenset(
+    {
+        "api.github.com",
+        "cursor.com",
+        "developers.google.com",
+        "example.com",
+        "fonts.googleapis.com",
+        "fonts.gstatic.com",
+        "github.com",
+        "kimi.example",
+        "www.github.com",
+    }
+)
+_URL_HOST_RE = re.compile(r"https?://([a-zA-Z0-9][a-zA-Z0-9.-]*)", re.IGNORECASE)
 
 
 def _scripts_dir() -> Path:
@@ -124,12 +160,19 @@ def _mainbrain_log(root: Path) -> Path:
     return root / "docs" / "swarm-ops" / "logs" / "KC Main Brain Log.jsonl"
 
 
+def _row_has_evidence_urls(obj: dict) -> bool:
+    urls = obj.get("evidence_urls")
+    if isinstance(urls, list) and any(isinstance(u, str) and u.strip() for u in urls):
+        return True
+    return isinstance(urls, str) and bool(urls.strip())
+
+
 def check_swarm_ack_evidence(root: Path) -> tuple[bool, str]:
-    """Return (ok, message). Requires at least one kc_main_brain row with kind swarm_ack and evidence_urls."""
+    """At least one Main Brain row with kind swarm_ack or kimi_ack and non-empty evidence_urls."""
     path = _mainbrain_log(root)
     if not path.is_file():
         return False, f"main brain log missing: {path.relative_to(root)}"
-    found = False
+    ack_kinds = frozenset({"swarm_ack", "kimi_ack"})
     for raw in path.read_text(encoding="utf-8").splitlines():
         raw = raw.strip()
         if not raw:
@@ -142,22 +185,58 @@ def check_swarm_ack_evidence(root: Path) -> tuple[bool, str]:
             continue
         if obj.get("schema") != "kc_main_brain_log_v1":
             continue
-        if obj.get("kind") != "swarm_ack":
+        if obj.get("kind") not in ack_kinds:
             continue
-        urls = obj.get("evidence_urls")
-        if isinstance(urls, list) and any(isinstance(u, str) and u.strip() for u in urls):
-            found = True
-            break
-        if isinstance(urls, str) and urls.strip():
-            found = True
-            break
-    if not found:
-        return False, "no swarm_ack row with non-empty evidence_urls (use --require-swarm-ack off for bootstrap repos)"
-    return True, "swarm_ack + evidence_urls present"
+        if _row_has_evidence_urls(obj):
+            return True, f"{obj.get('kind')} + evidence_urls present"
+    return (
+        False,
+        "no swarm_ack/kimi_ack row with non-empty evidence_urls "
+        "(use kimi-ack or mainbrain --kind swarm_ack; or --require-swarm-ack off for bootstrap)",
+    )
+
+
+def _hosts_in_text(text: str) -> set[str]:
+    return {m.group(1).lower() for m in _URL_HOST_RE.finditer(text)}
+
+
+def check_swarm_doc_hosts(root: Path) -> tuple[bool, str]:
+    """Fail if swarm-ops docs use dead Kopano hosts or unlisted *.kopanolabs.com URLs."""
+    verified = root / VERIFIED_ENDPOINTS_REL
+    if not verified.is_file():
+        return False, f"missing {VERIFIED_ENDPOINTS_REL.as_posix()}"
+
+    errors: list[str] = []
+    for pattern in SWARM_DOC_GLOBS:
+        for path in sorted(root.glob(pattern)):
+            if path.resolve() == verified.resolve():
+                continue
+            rel = path.relative_to(root).as_posix()
+            for host in _hosts_in_text(path.read_text(encoding="utf-8", errors="replace")):
+                if host in EXTERNAL_HOST_ALLOW:
+                    continue
+                if host in KOPANO_HOST_DENY:
+                    errors.append(f"{rel}: dead host https://{host}/ (see VERIFIED_ENDPOINTS.md)")
+                    continue
+                if host.endswith(".kopanolabs.com") or host == "kopanolabs.com":
+                    if host not in KOPANO_HOST_ALLOW:
+                        errors.append(
+                            f"{rel}: kopanolabs host https://{host}/ not in allowlist "
+                            f"({', '.join(sorted(KOPANO_HOST_ALLOW))})",
+                        )
+    if errors:
+        return False, "; ".join(errors[:8]) + (f" (+{len(errors) - 8} more)" if len(errors) > 8 else "")
+    return True, "swarm-ops doc hosts OK (no dead/unlisted kopanolabs.com URLs)"
 
 
 def cmd_doctrine_swarm_ack(root: Path) -> int:
     ok, msg = check_swarm_ack_evidence(root)
+    print(f"kc_guard doctrine: {msg}", flush=True)
+    return 0 if ok else EXIT_DOCTRINE
+
+
+def cmd_doctrine_doc_hosts(root: Path) -> int:
+    ok, msg = check_swarm_doc_hosts(root)
     print(f"kc_guard doctrine: {msg}", flush=True)
     return 0 if ok else EXIT_DOCTRINE
 
@@ -168,6 +247,7 @@ def cmd_all(
     strict_unpushed: bool,
     fetch: bool,
     require_swarm_ack: bool,
+    check_doc_hosts: bool,
 ) -> int:
     code = cmd_status(root, strict_unpushed=strict_unpushed, fetch=fetch)
     if code != 0:
@@ -178,6 +258,10 @@ def cmd_all(
     p = cmd_proof(root)
     if p != 0:
         return p
+    if check_doc_hosts:
+        d = cmd_doctrine_doc_hosts(root)
+        if d != 0:
+            return d
     if require_swarm_ack:
         return cmd_doctrine_swarm_ack(root)
     return 0
@@ -187,6 +271,7 @@ def cmd_watch(root: Path, interval: float, **kwargs: object) -> int:
     strict_unpushed = bool(kwargs.get("strict_unpushed"))
     fetch = bool(kwargs.get("fetch"))
     require_swarm_ack = bool(kwargs.get("require_swarm_ack"))
+    check_doc_hosts = bool(kwargs.get("check_doc_hosts"))
     try:
         while True:
             if os.name == "nt":
@@ -198,6 +283,7 @@ def cmd_watch(root: Path, interval: float, **kwargs: object) -> int:
                 strict_unpushed=strict_unpushed,
                 fetch=fetch,
                 require_swarm_ack=require_swarm_ack,
+                check_doc_hosts=check_doc_hosts,
             )
             print(f"\n[kc_guard watch] exit code {code} (next in {interval}s, Ctrl+C to stop)", flush=True)
             time.sleep(interval)
@@ -233,14 +319,26 @@ def _build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("validate", help="kc_log_append.py validate")
     sub.add_parser("proof", help="kc_log_append.py proof-check")
-    sub.add_parser("doctrine-swarm-ack", help="Only check swarm_ack + evidence_urls (no git sync)")
+    sub.add_parser(
+        "doctrine-swarm-ack",
+        help="Only check swarm_ack/kimi_ack + evidence_urls (no git sync)",
+    )
+    sub.add_parser(
+        "doctrine-doc-hosts",
+        help="Only check swarm-ops docs for dead/unlisted kopanolabs.com URLs",
+    )
 
     pa = sub.add_parser("all", help="status + validate + proof (+ optional doctrine)")
     add_sync_flags(pa)
     pa.add_argument(
         "--require-swarm-ack",
         action="store_true",
-        help="After proof-check, require swarm_ack + evidence_urls in Main Brain log.",
+        help="After proof-check, require swarm_ack or kimi_ack + evidence_urls in Main Brain log.",
+    )
+    pa.add_argument(
+        "--check-doc-hosts",
+        action="store_true",
+        help="After proof-check, forbid dead/unlisted kopanolabs.com URLs in swarm-ops docs.",
     )
 
     pw = sub.add_parser("watch", help="Loop: all (same flags as all)")
@@ -249,7 +347,12 @@ def _build_parser() -> argparse.ArgumentParser:
     pw.add_argument(
         "--require-swarm-ack",
         action="store_true",
-        help="After proof-check, require swarm_ack + evidence_urls in Main Brain log.",
+        help="After proof-check, require swarm_ack or kimi_ack + evidence_urls in Main Brain log.",
+    )
+    pw.add_argument(
+        "--check-doc-hosts",
+        action="store_true",
+        help="After proof-check, forbid dead/unlisted kopanolabs.com URLs in swarm-ops docs.",
     )
     return p
 
@@ -262,6 +365,7 @@ def main(argv: list[str] | None = None) -> int:
     fetch = bool(getattr(args, "fetch", False))
     strict = bool(getattr(args, "strict_unpushed", False))
     require_ack = bool(getattr(args, "require_swarm_ack", False))
+    check_hosts = bool(getattr(args, "check_doc_hosts", False))
 
     if args.cmd == "status":
         return cmd_status(root, strict_unpushed=strict, fetch=fetch)
@@ -271,12 +375,15 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_proof(root)
     if args.cmd == "doctrine-swarm-ack":
         return cmd_doctrine_swarm_ack(root)
+    if args.cmd == "doctrine-doc-hosts":
+        return cmd_doctrine_doc_hosts(root)
     if args.cmd == "all":
         return cmd_all(
             root,
             strict_unpushed=strict,
             fetch=fetch,
             require_swarm_ack=require_ack,
+            check_doc_hosts=check_hosts,
         )
     if args.cmd == "watch":
         return cmd_watch(
@@ -285,6 +392,7 @@ def main(argv: list[str] | None = None) -> int:
             strict_unpushed=strict,
             fetch=fetch,
             require_swarm_ack=require_ack,
+            check_doc_hosts=check_hosts,
         )
     return EXIT_USAGE
 

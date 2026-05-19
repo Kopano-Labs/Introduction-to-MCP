@@ -31,4 +31,6 @@ curl -sS -o /dev/null -w "%{http_code} %{url_effective}\n" --connect-timeout 10 
 
 ## Code references (may lag DNS)
 
-`kopano-core/kopano/api.py` and infra docs may still list `kopanocontext.kopanolabs.com`. Align deployment config with the **verified** host above when you touch those files.
+`kopano-core/kopano/api.py` CORS may still list legacy hostnames for transitional deploys. Align new config with **`context.kopanolabs.com`**.
+
+**CI:** `python scripts/kc_guard.py all --check-doc-hosts` fails if swarm-ops `*.md` / `tools/*.html` contain `https://` URLs to dead hosts (`kopanocontext.*`, `www.context.*`) or unlisted `*.kopanolabs.com` hosts. The denylist table in this file is exempt (it documents dead hosts on purpose).
