@@ -6,13 +6,23 @@ name: Swarm proof gate
 on:
   pull_request:
     branches: [master, main]
-    paths:
+    paths: &swarm_paths
       - "docs/swarm-ops/**"
       - "scripts/kc_log_append.py"
       - "scripts/kc_guard.py"
       - "scripts/git_sync_monitor.py"
+      - "scripts/swarm_remote_proof_urls.ps1"
+      - "scripts/swarm_remote_proof_urls.sh"
+      - "kopano-core/kopano/api.py"
+      - "kopano-core/studio/src/apiBase.ts"
+      - "kopano-core/studio/.env.example"
       - "tests/test_kc_log_append.py"
       - "tests/test_kc_guard.py"
+      - ".github/workflows/swarm-proof.yml"
+  push:
+    branches:
+      - codex/kc-sovereign-gui-full-dev
+    paths: *swarm_paths
 
 jobs:
   swarm-jsonl:

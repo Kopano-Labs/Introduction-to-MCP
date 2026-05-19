@@ -83,7 +83,7 @@ Client-facing demos are **audit-before-presentation** (**Protocol 13**). Narrati
 
 **Canonical SOP:** [Swarm Ops & Proof Doctrine](./docs/swarm-ops/SWARM_OPERATIONS.md) — proof bar (commands, exit/HTTP, logs/CI URLs, SHA, prod probes; chat-only proofs excluded), Kimi-external vs Cursor-local boundary, handoff envelope.
 
-**Machine-checkable demo stack (this repo):** Run every step in **Pre-Demo Checklist** above; capture and retain **stdout** (or equivalent), **CI job URLs**, and any **prod/staging probe** output referenced in the checklist. Claims of “demo ready” without those attachments fail the gate until receipts are filed.
+**Machine-checkable demo stack (this repo):** Run every step in **Pre-Demo Checklist** above; then from repo root: `python scripts/kc_guard.py all` (must exit 0) and `python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py -q`. Capture **stdout**, **CI job URLs** ([Actions](https://github.com/Kopano-Labs/Introduction-to-MCP/actions)), and prod probe output per [VERIFIED_ENDPOINTS.md](./docs/swarm-ops/VERIFIED_ENDPOINTS.md). Claims of “demo ready” without those attachments fail the gate until receipts are filed.
 
 **KC apprenticeship logs (mandatory for swarm doctrine demos):** After steps 1–4, append a **strict-proof** student audit (real `--evidence-url`). Until `validate` + `proof-check` pass and a new audit row is appended, treat demo readiness as **unverified**. Canonical navigation: [docs/swarm-ops/NAVIGATION.md](./docs/swarm-ops/NAVIGATION.md).
 
