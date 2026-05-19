@@ -16,7 +16,10 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from kopano.kc_training_store import KcTrainingStore  # noqa: E402
 
+from kc_apprenticeship_handlers_extra import extra_handlers  # noqa: E402
 from kc_apprenticeship_manifest import MANIFEST_PATH  # noqa: E402
+
+DEFAULT_STORE = REPO_ROOT / "kopano-core" / ".kc" / "context_store.json"
 
 COMPARE_URL = (
     "https://github.com/Kopano-Labs/Introduction-to-MCP/compare/"
@@ -64,8 +67,20 @@ def handlers(root: Path) -> dict[str, object]:
         teacher = "Save" if code == 0 else "Watch — command failed; fix and re-run."
         return student, teacher
 
-    swarm = root / "docs/swarm-ops/SWARM_OPERATIONS.md"
-    return {
+    def h_grep(path: str, needle: str, note: str) -> tuple[str, str]:
+        target = root / path
+        if not target.is_file():
+            return h_file(path, note)
+        hits = [
+            line
+            for line in target.read_text(encoding="utf-8", errors="replace").splitlines()
+            if needle in line
+        ][:10]
+        student = f"{note}\nneedle={needle}\npath={path}\nsha={sha}\n---\n" + "\n".join(hits or ["(no match)"])
+        teacher = "Save" if hits else "Watch — pattern not found."
+        return student, teacher
+
+    base: dict[str, object] = {
         "KCA-0101": lambda: h_file(
             "docs/swarm-ops/SWARM_OPERATIONS.md",
             "External proof = CI URLs, DNS/HTTP probes, GitHub compare. Local = kc_guard, pytest, JSONL validate.",
@@ -196,6 +211,10 @@ def handlers(root: Path) -> dict[str, object]:
             "Save",
         ),
     }
+    base.update(
+        extra_handlers(root, sha, COMPARE_URL, h_file, h_cmd, h_grep, DEFAULT_STORE)
+    )
+    return base
 
 
 def record_codes(store: KcTrainingStore, manifest_tasks: list[dict]) -> dict[str, str]:
@@ -293,7 +312,7 @@ def append_receipt(stats: dict[str, int], progress_path: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--store", type=Path, default=REPO_ROOT / "kopano-core" / ".kc" / "context_store.json")
+    parser.add_argument("--store", type=Path, default=DEFAULT_STORE)
     parser.add_argument("--max-phase", type=int, default=4)
     parser.add_argument("--promote", action="store_true", help="Promote records with Save review")
     parser.add_argument("--no-log", action="store_true")

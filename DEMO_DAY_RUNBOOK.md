@@ -23,7 +23,7 @@ python scripts/kc_guard.py all --no-check-doc-hosts
 
 # 4b. KC Student Apprenticeship 150 (manifest + local store + machine steward)
 python scripts/kc_apprenticeship_activate.py
-python scripts/kc_apprenticeship_steward.py --max-phase 4 --promote
+python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote
 
 # 5. Append KC student audit (strict proof — real CI/job URL required)
 python scripts/kc_log_append.py review --strict-proof --role student --phase audit \

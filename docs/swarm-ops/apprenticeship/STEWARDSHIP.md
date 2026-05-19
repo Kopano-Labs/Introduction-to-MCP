@@ -31,7 +31,7 @@ python scripts/kc_apprenticeship_activate.py --replace
 python scripts/kc_apprenticeship_activate.py --manifest-only
 
 # Machine steward (phases 1–4 handlers today; writes progress.json)
-python scripts/kc_apprenticeship_steward.py --max-phase 4 --promote
+python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote
 ```
 
 Track steward output in [progress.json](./progress.json) (git-tracked counts; local store remains gitignored).

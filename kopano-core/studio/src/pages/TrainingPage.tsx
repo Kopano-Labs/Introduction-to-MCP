@@ -194,7 +194,7 @@ export function TrainingPage() {
   );
 
   const runStewardHint = () => {
-    pushEvent('Steward: run python scripts/kc_apprenticeship_steward.py --max-phase 4 --promote');
+    pushEvent('Steward: run python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote');
   };
 
   return (
