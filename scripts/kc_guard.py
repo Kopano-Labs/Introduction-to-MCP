@@ -242,6 +242,14 @@ def cmd_doctrine_doc_hosts(root: Path) -> int:
     return 0 if ok else EXIT_DOCTRINE
 
 
+def cmd_doctrine_verified_production(root: Path, min_required: int) -> int:
+    from kc_verified_production import check_minimum
+
+    ok, msg = check_minimum(min_required)
+    print(f"kc_guard doctrine: {msg}", flush=True)
+    return 0 if ok else EXIT_DOCTRINE
+
+
 def cmd_all(
     root: Path,
     *,
@@ -249,6 +257,7 @@ def cmd_all(
     fetch: bool,
     require_swarm_ack: bool,
     check_doc_hosts: bool = True,
+    require_verified_production: int | None = None,
 ) -> int:
     code = cmd_status(root, strict_unpushed=strict_unpushed, fetch=fetch)
     if code != 0:
@@ -265,6 +274,8 @@ def cmd_all(
             return d
     if require_swarm_ack:
         return cmd_doctrine_swarm_ack(root)
+    if require_verified_production is not None:
+        return cmd_doctrine_verified_production(root, require_verified_production)
     return 0
 
 
@@ -285,6 +296,7 @@ def cmd_watch(root: Path, interval: float, **kwargs: object) -> int:
                 fetch=fetch,
                 require_swarm_ack=require_swarm_ack,
                 check_doc_hosts=check_doc_hosts,
+                require_verified_production=require_verified_production,
             )
             print(f"\n[kc_guard watch] exit code {code} (next in {interval}s, Ctrl+C to stop)", flush=True)
             time.sleep(interval)
@@ -328,6 +340,11 @@ def _build_parser() -> argparse.ArgumentParser:
         "doctrine-doc-hosts",
         help="Only check swarm-ops docs for dead/unlisted kopanolabs.com URLs",
     )
+    pvp = sub.add_parser(
+        "doctrine-verified-production",
+        help="Require N verified production rows in Review Log (not drill)",
+    )
+    pvp.add_argument("--min", type=int, default=10, metavar="N")
 
     pa = sub.add_parser("all", help="status + validate + proof (+ optional doctrine)")
     add_sync_flags(pa)
@@ -340,6 +357,13 @@ def _build_parser() -> argparse.ArgumentParser:
         "--no-check-doc-hosts",
         action="store_true",
         help="Skip dead/unlisted kopanolabs.com URL scan in swarm-ops docs (default: check runs).",
+    )
+    pa.add_argument(
+        "--require-verified-production",
+        type=int,
+        default=None,
+        metavar="N",
+        help="After proof-check, require N verified production rows in Review Log (not apprenticeship drill).",
     )
 
     pw = sub.add_parser("watch", help="Loop: all (same flags as all)")
@@ -355,6 +379,13 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Skip dead/unlisted kopanolabs.com URL scan in swarm-ops docs (default: check runs).",
     )
+    pw.add_argument(
+        "--require-verified-production",
+        type=int,
+        default=None,
+        metavar="N",
+        help="After proof-check, require N verified production rows in Review Log.",
+    )
     return p
 
 
@@ -367,6 +398,7 @@ def main(argv: list[str] | None = None) -> int:
     strict = bool(getattr(args, "strict_unpushed", False))
     require_ack = bool(getattr(args, "require_swarm_ack", False))
     check_hosts = not bool(getattr(args, "no_check_doc_hosts", False))
+    require_vp = getattr(args, "require_verified_production", None)
 
     if args.cmd == "status":
         return cmd_status(root, strict_unpushed=strict, fetch=fetch)
@@ -378,6 +410,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_doctrine_swarm_ack(root)
     if args.cmd == "doctrine-doc-hosts":
         return cmd_doctrine_doc_hosts(root)
+    if args.cmd == "doctrine-verified-production":
+        return cmd_doctrine_verified_production(root, args.min)
     if args.cmd == "all":
         return cmd_all(
             root,
@@ -385,6 +419,7 @@ def main(argv: list[str] | None = None) -> int:
             fetch=fetch,
             require_swarm_ack=require_ack,
             check_doc_hosts=check_hosts,
+            require_verified_production=require_vp,
         )
     if args.cmd == "watch":
         return cmd_watch(
@@ -394,6 +429,7 @@ def main(argv: list[str] | None = None) -> int:
             fetch=fetch,
             require_swarm_ack=require_ack,
             check_doc_hosts=check_hosts,
+            require_verified_production=require_vp,
         )
     return EXIT_USAGE
 

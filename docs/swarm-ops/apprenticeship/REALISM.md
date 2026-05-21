@@ -30,14 +30,14 @@ You said aesthetics sacrificed realism to preach bloatedness. **Accepted.** This
 - **Purpose:** Repeat discipline (proof, logs, guard, endpoints) — internal queue exercise.
 - **Not:** Proof that KC “finished school” or that swarm is complete.
 
-Prefer citing:
+**Do this (real bar):**
 
 ```bash
-python scripts/kc_apprenticeship_realism_report.py
-python scripts/kc_guard.py all
+python scripts/kc_production_verify_run.py
+python scripts/kc_guard.py all --require-verified-production 10
 ```
 
-over counting promoted rows as prestige.
+That writes 10 `phase=production` JSONL rows and enforces them — not 250 drill promotes.
 
 ## Cursor at fault (explicit)
 

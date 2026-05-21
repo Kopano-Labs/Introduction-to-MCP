@@ -433,8 +433,8 @@ def main() -> int:
     parser.add_argument(
         "--checkpoint-every",
         type=int,
-        default=CHECKPOINT_EVERY,
-        help="Emit KC status checkpoint every N tasks (0=off)",
+        default=0,
+        help="Emit KC status checkpoint every N tasks (0=off; drill does not need sermon files)",
     )
     parser.add_argument("--no-log", action="store_true")
     parser.add_argument("--no-checkpoint-log", action="store_true", help="Skip review log on checkpoints")
