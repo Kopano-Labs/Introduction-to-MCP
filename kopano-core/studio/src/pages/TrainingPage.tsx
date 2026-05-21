@@ -30,6 +30,10 @@ interface KcTrainingPayload {
 
 interface KcBrainOpinion {
   role: string;
+  verified_production: number;
+  production_bar_met: boolean;
+  drill_promoted: number;
+  public_graduation_bar: number;
   total_contexts: number;
   status_counts: Record<KcStatusName, number>;
   opinion_count: number;
@@ -183,10 +187,6 @@ export function TrainingPage() {
         + 'Training data lives in kopano-core/.kc/context_store.json (gitignored; seed with kc_apprenticeship_activate.py).',
       );
     });
-    const interval = window.setInterval(() => {
-      void refresh().catch(() => undefined);
-    }, 1800);
-    return () => window.clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -269,17 +269,18 @@ export function TrainingPage() {
             <strong>{activeQueue.length}</strong>
           </div>
           <div>
-            <span>Promoted</span>
-            <strong>{payload.status.status_counts.promoted ?? 0}</strong>
+            <span>Verified prod</span>
+            <strong>{brainOpinion?.verified_production ?? '—'}</strong>
+          </div>
+          <div>
+            <span>Drill promoted</span>
+            <strong>{brainOpinion?.drill_promoted ?? payload.status.status_counts.promoted ?? 0}</strong>
           </div>
         </div>
         {payload.status.total_contexts === 0 && !error && (
           <p className="training-setup-hint">
-            Local store is empty. From repo root:{' '}
-            <code>python scripts/kc_apprenticeship_activate.py --replace</code> (250-task machine drill — not graduation)
-            {' '}then{' '}
-            <code>python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote</code>
-            {' '}with API running: <code>python main.py serve api</code>
+            Empty store. Bar: <code>python scripts/kc_production_verify_run.py</code> then{' '}
+            <code>python scripts/kc_guard.py all --require-verified-production 10</code>
           </p>
         )}
       </motion.section>
@@ -419,7 +420,7 @@ export function TrainingPage() {
             <div className="dock-actions">
               <button type="button" className="quiet-button" onClick={() => void createAssignment()}>Create</button>
               <button type="button" className="quiet-button" onClick={() => void seedStarter()}>Seed</button>
-              <button type="button" className="quiet-button" onClick={() => void seedApprenticeship250()}>Seed drill (250)</button>
+              <button type="button" className="quiet-button" onClick={() => void seedApprenticeship250()}>Seed drill</button>
               <button type="button" className="quiet-button" onClick={runStewardHint}>Steward CLI</button>
               <button type="button" className="quiet-button danger" disabled={!selectedRecord} onClick={promote}>Promote</button>
             </div>

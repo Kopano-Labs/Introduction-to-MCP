@@ -50,3 +50,7 @@ def test_training_and_brain_opinion(client: TestClient) -> None:
     op = opinion.json()
     assert op["opinion_count"] == 3
     assert op["latest_opinion"]["teacher_review"].startswith("Save")
+    assert op["drill_promoted"] == 3
+    assert "verified_production" in op
+    assert "production_bar_met" in op
+    assert "graduation" not in op["closure"].lower() or "not" in op["closure"].lower()

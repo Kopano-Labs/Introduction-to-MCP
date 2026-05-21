@@ -15,6 +15,25 @@ router = APIRouter(prefix="/api/kc", tags=["kc-training"])
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _MANIFEST = _REPO_ROOT / "docs" / "swarm-ops" / "apprenticeship" / "kc_apprenticeship_250.json"
+_SCRIPTS = _REPO_ROOT / "scripts"
+
+
+def _verified_production_count() -> tuple[int, bool, int]:
+    import sys
+
+    scripts = str(_SCRIPTS)
+    if scripts not in sys.path:
+        sys.path.insert(0, scripts)
+    from kc_verified_production import DEFAULT_MIN, check_minimum, count_verified
+
+    n, _ = count_verified()
+    bar = int(DEFAULT_MIN)
+    if _MANIFEST.is_file():
+        import json
+
+        bar = int(json.loads(_MANIFEST.read_text(encoding="utf-8")).get("public_graduation_bar", bar))
+    ok, _ = check_minimum(bar)
+    return n, ok, bar
 
 
 class CreateRecordRequest(BaseModel):
@@ -47,33 +66,37 @@ def get_brain_opinion() -> dict:
     with_review = [r for r in records if r.teacher_review]
     latest = with_review[0] if with_review else None
     counts = store.status_payload()["status_counts"]
-    promoted = counts.get("promoted", 0)
+    drill_promoted = counts.get("promoted", 0)
+    verified_n, production_bar_met, graduation_bar = _verified_production_count()
     mode = "unknown"
-    graduation_bar = 10
     if _MANIFEST.is_file():
         import json
 
-        manifest = json.loads(_MANIFEST.read_text(encoding="utf-8"))
-        mode = manifest.get("mode", "unknown")
-        graduation_bar = int(manifest.get("public_graduation_bar", 10))
+        mode = json.loads(_MANIFEST.read_text(encoding="utf-8")).get("mode", "unknown")
 
-    if mode == "machine_drill" and promoted >= 200:
+    if production_bar_met:
         closure = (
-            f"Machine drill: {promoted} promoted rows in local store — steward batch reviews, not KC in chat. "
-            f"Not graduation. Real bar: {graduation_bar}+ verified production tasks + kc_guard/JSONL proof. "
-            "See docs/swarm-ops/apprenticeship/REALISM.md. No fake Kimi ack."
+            f"Production bar met: {verified_n} verified rows in Review Log (min {graduation_bar}). "
+            f"Drill promoted={drill_promoted} is local ledger only — not a diploma."
+        )
+    elif mode == "machine_drill":
+        closure = (
+            f"Drill promoted={drill_promoted} — batch steward, not graduation. "
+            f"Need {graduation_bar}+ verified production rows: python scripts/kc_production_verify_run.py"
         )
     else:
         closure = (
-            "KC ledger only. teacher_review is stored text from steward/teacher — not live KC speech. "
-            "Promote with bounded proof. No fake swarm, no Kimi ack in repo."
+            "teacher_review is stored text — not live KC chat. "
+            f"Bar: {graduation_bar}+ verified production in Review Log."
         )
 
     return {
         "role": "KC is the brain (vault + ledger), not the worker. Cassey/Cursor write teacher_review.",
         "manifest_mode": mode,
         "public_graduation_bar": graduation_bar,
-        "realism_doc": "docs/swarm-ops/apprenticeship/REALISM.md",
+        "verified_production": verified_n,
+        "production_bar_met": production_bar_met,
+        "drill_promoted": drill_promoted,
         "total_contexts": len(records),
         "status_counts": counts,
         "opinion_count": len(with_review),

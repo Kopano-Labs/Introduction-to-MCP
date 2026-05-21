@@ -45,4 +45,4 @@ That writes 10 `phase=production` JSONL rows and enforces them — not 250 drill
 - Checkpoints and markdown that read like progress sermons.
 - Studio copy that personifies KC without saying **steward-generated reviews**.
 
-**Watching noted.** Next changes: honest API/Studio closure, this file linked from stewardship, manifest `mode` field, no graduation claims from drill counts.
+**Enforced in repo:** `brain-opinion` reports verified production + `production_bar_met`; Studio shows verified prod vs drill promoted; guard/CI require 10 production rows.
