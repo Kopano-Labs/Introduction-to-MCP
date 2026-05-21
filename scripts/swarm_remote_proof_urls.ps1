@@ -74,13 +74,30 @@ if ($Probe) {
         "https://kopanolabs.com/",
         "https://kopanocontext.kopanolabs.com/"
     )
+    $primaryOk = $false
     foreach ($u in $kopanoHosts) {
-        $code = (& curl.exe -sS -o NUL -w "%{http_code}" --connect-timeout 10 $u) 2>$null
+        $code = "000"
+        try {
+            $prevEap = $ErrorActionPreference
+            $ErrorActionPreference = "Continue"
+            $code = (& curl.exe -sS -o NUL -w "%{http_code}" --connect-timeout 10 $u 2>$null)
+            $ErrorActionPreference = $prevEap
+        } catch {
+            $code = "000"
+        }
         if (-not $code) { $code = "000" }
         Write-Host "  GET $u -> HTTP $code"
+        if ($u -eq "https://context.kopanolabs.com/" -and $code -eq "200") {
+            $primaryOk = $true
+        }
     }
-    Write-Host "  See docs/swarm-ops/VERIFIED_ENDPOINTS.md for interpretation (000 often = DNS failure)."
+    Write-Host "  See docs/swarm-ops/VERIFIED_ENDPOINTS.md (NXDOMAIN on retired hosts is expected)."
     Write-Host ""
+    if (-not $primaryOk) {
+        Write-Host "  Probe failed: context.kopanolabs.com did not return HTTP 200." -ForegroundColor Yellow
+        exit 1
+    }
+    exit 0
 }
 
 Write-Host "Tip: if your public fork is RobynAwesome but origin is Kopano-Labs, run:"

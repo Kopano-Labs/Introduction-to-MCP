@@ -103,9 +103,16 @@ def handlers(root: Path) -> dict[str, object]:
             f"strict-proof requires exit_code + evidence_urls; compare URL used: {COMPARE_URL}\nsha={sha}",
             "Save — use real CI/compare URLs only.",
         ),
-        "KCA-0107": lambda: (
-            f"Student audit deferred to manual append; steward documents gate only. sha={sha}",
-            "Watch — append via kc_log_append review when CI URL exists.",
+        "KCA-0107": lambda: h_cmd(
+            "pytest student audit evidence",
+            [
+                sys.executable,
+                "-m",
+                "pytest",
+                "tests/test_kc_log_append.py",
+                "tests/test_kc_guard.py",
+                "-q",
+            ],
         ),
         "KCA-0108": lambda: (
             "kimi_ack and swarm_ack accepted by kc_guard --require-swarm-ack; Kimi is external manual.\n"

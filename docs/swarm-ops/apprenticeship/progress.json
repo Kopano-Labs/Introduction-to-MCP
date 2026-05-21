@@ -1,19 +1,15 @@
 {
-  "git_sha": "b204eb4",
-  "main_brain_audit": "2026-05-19",
-  "vault_log_mirror": "Schematics/04-Updates/logs",
+  "git_sha": "f53cedc2d33e150450c90d0809e9f8b6c78b48cb",
   "max_phase_stewarded": 10,
-  "activation_complete": true,
   "store_path": "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\kopano-core\\.kc\\context_store.json",
   "status_counts": {
-    "promoted": 146,
-    "reviewed": 4
+    "promoted": 150
   },
   "last_run": {
-    "skipped": 33,
-    "submitted": 117,
-    "reviewed": 117,
-    "promoted": 114,
+    "skipped": 146,
+    "submitted": 4,
+    "reviewed": 4,
+    "promoted": 4,
     "no_handler": 0
   },
   "compare_url": "https://github.com/Kopano-Labs/Introduction-to-MCP/compare/master...codex/kc-sovereign-gui-full-dev?expand=1"
