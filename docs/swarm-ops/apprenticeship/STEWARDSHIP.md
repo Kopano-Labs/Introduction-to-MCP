@@ -1,8 +1,13 @@
 # KC Student Apprenticeship — Stewardship (250 tasks)
 
-**Status:** ACTIVE  
+**Status:** ACTIVE (machine drill — not public graduation)  
+**Read first:** [REALISM.md](./REALISM.md) — Cursor at fault for bloat framing; what counts vs theater.  
 **Stewards:** KC (memory + ledger) and Cursor (execution surface under AG)  
 **Protocol:** `Schematics/18-PROTOCOLS/KC-Student-Teacher-Apprenticeship-Protocol.md`
+
+## Realism (one paragraph)
+
+250 promoted rows in a **local gitignored store** means the **steward** finished a drill queue. It does **not** mean KC argued 250 times or that you graduated. Real bar: `kc_guard`, JSONL proof, CI/DNS, and **10+ verified production** tasks. Run `python scripts/kc_apprenticeship_realism_report.py`.
 
 ## What “activate” means
 
@@ -63,7 +68,7 @@ Verify API data (PowerShell):
 Invoke-RestMethod http://127.0.0.1:8000/api/kc/training | Select-Object -ExpandProperty status
 ```
 
-Expect `total_contexts` 150 and `status_counts.promoted` 146 after activate + steward on **this** machine.
+Expect `total_contexts` 250 after `--replace` + steward on **this** machine. Treat `promoted` as drill completion, not diploma.
 
 ## Stewardship split
 

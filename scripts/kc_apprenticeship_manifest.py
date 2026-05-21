@@ -13,6 +13,7 @@ MANIFEST_PATH = MANIFEST_250_PATH
 TASKS_PER_PHASE = 25
 BASE_TASKS_PER_PHASE = 15
 CHECKPOINT_EVERY = 50
+PUBLIC_GRADUATION_BAR = 10  # protocol: verified production tasks — not drill task_count
 
 # Extension band (tasks 16–25 per phase): checkpoint discipline + vault hygiene
 EXTENSION_ITEMS: list[str] = [
@@ -275,6 +276,14 @@ def write_manifest(path: Path | None = None, *, include_extensions: bool = True)
         "phases": len(PHASES),
         "tasks_per_phase": per_phase,
         "checkpoint_every": CHECKPOINT_EVERY if include_extensions else None,
+        "mode": "machine_drill" if include_extensions and len(tasks) >= 200 else "standard",
+        "public_graduation_bar": PUBLIC_GRADUATION_BAR,
+        "realism_doc": "docs/swarm-ops/apprenticeship/REALISM.md",
+        "accountability": (
+            "Bulk Save counts are steward batch attestation. "
+            "Cursor at fault for 150→250 framing that preached completeness. "
+            "Do not claim graduation from drill alone."
+        ),
         "stewards": ["KC", "Cursor"],
         "protocol": "Schematics/18-PROTOCOLS/KC-Student-Teacher-Apprenticeship-Protocol.md",
         "tasks": tasks,

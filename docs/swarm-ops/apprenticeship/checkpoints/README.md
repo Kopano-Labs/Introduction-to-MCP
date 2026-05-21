@@ -1,6 +1,8 @@
 # KC status checkpoints (every 50 tasks)
 
-Steward writes machine-readable KC opinion snapshots here when run with `--checkpoint-every 50` (default for the 250-task manifest).
+**Audit snapshots only** — not graduation. See [REALISM.md](../REALISM.md).
+
+Steward writes machine-readable `teacher_review` counts here when run with `--checkpoint-every 50` (default for the 250-task **machine_drill** manifest).
 
 | Milestone | Files |
 |-----------|--------|

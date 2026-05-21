@@ -4,6 +4,10 @@
   "phases": 10,
   "tasks_per_phase": 25,
   "checkpoint_every": 50,
+  "mode": "machine_drill",
+  "public_graduation_bar": 10,
+  "realism_doc": "docs/swarm-ops/apprenticeship/REALISM.md",
+  "accountability": "Bulk Save counts are steward batch attestation. Cursor at fault for 150\u2192250 framing that preached completeness. Do not claim graduation from drill alone.",
   "stewards": [
     "KC",
     "Cursor"

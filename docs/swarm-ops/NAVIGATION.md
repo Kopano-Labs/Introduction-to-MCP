@@ -19,7 +19,8 @@
 | KC Swarm Console (architecture prose) | [KC_SWARM_CONSOLE_ARCHITECTURE.md](./KC_SWARM_CONSOLE_ARCHITECTURE.md) | BFF model, flow, CI vs optional `proof_gate`, citations |
 | KC Swarm Console (GUI IA spec) | [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md) | Four-column layout, flows, branch protection notes |
 | Unified guard CLI | `scripts/kc_guard.py` | `status` / `validate` / `proof` / `all` / `watch`; delegates to `git_sync_monitor` + `kc_log_append` |
-| KC Apprenticeship 250 (stewardship) | [apprenticeship/STEWARDSHIP.md](./apprenticeship/STEWARDSHIP.md) | Manifest + activate; KC status every 50 |
+| Realism vs drill theater | [apprenticeship/REALISM.md](./apprenticeship/REALISM.md) | What counts; Cursor accountability |
+| KC Apprenticeship 250 (stewardship) | [apprenticeship/STEWARDSHIP.md](./apprenticeship/STEWARDSHIP.md) | Machine drill — not public graduation |
 | Apprenticeship task ledger | [apprenticeship/kc_apprenticeship_250.json](./apprenticeship/kc_apprenticeship_250.json) | 10×25 tasks; checkpoints in [apprenticeship/checkpoints/](./apprenticeship/checkpoints/) |
 | KC status @ 50/100/150/200/250 | [apprenticeship/checkpoints/README.md](./apprenticeship/checkpoints/README.md) | `kc_status_at_*.json` + `KC_STATUS_AT_*.md` |
 | KC opinion (memory voice) | [apprenticeship/KC_OPINION.md](./apprenticeship/KC_OPINION.md) | Where teacher_review lives; Save/Watch/Kill |

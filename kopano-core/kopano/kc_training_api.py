@@ -47,8 +47,33 @@ def get_brain_opinion() -> dict:
     with_review = [r for r in records if r.teacher_review]
     latest = with_review[0] if with_review else None
     counts = store.status_payload()["status_counts"]
+    promoted = counts.get("promoted", 0)
+    mode = "unknown"
+    graduation_bar = 10
+    if _MANIFEST.is_file():
+        import json
+
+        manifest = json.loads(_MANIFEST.read_text(encoding="utf-8"))
+        mode = manifest.get("mode", "unknown")
+        graduation_bar = int(manifest.get("public_graduation_bar", 10))
+
+    if mode == "machine_drill" and promoted >= 200:
+        closure = (
+            f"Machine drill: {promoted} promoted rows in local store — steward batch reviews, not KC in chat. "
+            f"Not graduation. Real bar: {graduation_bar}+ verified production tasks + kc_guard/JSONL proof. "
+            "See docs/swarm-ops/apprenticeship/REALISM.md. No fake Kimi ack."
+        )
+    else:
+        closure = (
+            "KC ledger only. teacher_review is stored text from steward/teacher — not live KC speech. "
+            "Promote with bounded proof. No fake swarm, no Kimi ack in repo."
+        )
+
     return {
         "role": "KC is the brain (vault + ledger), not the worker. Cassey/Cursor write teacher_review.",
+        "manifest_mode": mode,
+        "public_graduation_bar": graduation_bar,
+        "realism_doc": "docs/swarm-ops/apprenticeship/REALISM.md",
         "total_contexts": len(records),
         "status_counts": counts,
         "opinion_count": len(with_review),
@@ -61,10 +86,7 @@ def get_brain_opinion() -> dict:
             "teacher_review": latest.teacher_review,
             "updated_at": latest.updated_at,
         },
-        "closure": (
-            "Apprenticeship 250: manifest on branch, steward evidence on records; KC status every 50 tasks. "
-            "Promote only with bounded proof. No fake swarm, no Kimi ack in repo."
-        ),
+        "closure": closure,
     }
 
 

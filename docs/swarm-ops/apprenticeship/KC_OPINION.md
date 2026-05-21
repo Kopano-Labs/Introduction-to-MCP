@@ -11,9 +11,15 @@
 | **Local store** | `kopano-core/.kc/context_store.json` — field `teacher_review` on each of 250 records (gitignored) |
 | **Checkpoints** | `docs/swarm-ops/apprenticeship/checkpoints/kc_status_at_*.json` — cumulative KC opinion @ 50, 100, 150, 200, 250 |
 
-## Closure (250 activation)
+## Accountability (aesthetics vs realism)
 
-Apprenticeship **250** tasks are in `kc_apprenticeship_250.json` (10×25; checkpoint every 50). Steward runs with machine evidence (guard, pytest, file excerpts, compare URL). **250/250 promoted** after Watch repair on guard/proof flakes.
+Cursor inflated the ledger (150→250) and let checkpoints **look** like mastery. That preached bloatedness. **You were right to call it.** See [REALISM.md](./REALISM.md).
+
+**250/250 promoted** = steward batch attestation in a drill (`mode: machine_drill`). Not KC chatting. Not graduation.
+
+## Closure (250 drill — not graduation)
+
+Manifest `kc_apprenticeship_250.json` is an internal **machine drill** (10×25). Checkpoints @ 50 are audit snapshots. Steward used guard, pytest, file excerpts, compare URL.
 
 KC's position:
 

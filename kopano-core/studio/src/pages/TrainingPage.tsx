@@ -251,7 +251,7 @@ export function TrainingPage() {
             <strong>{payload.status.owner_proof}</strong>
           </div>
           <div className="kc-opinion-lock">
-            <span>KC opinion (teacher lane)</span>
+            <span>Stored teacher_review (ledger — not live KC chat)</span>
             <strong>{selectedRecord?.teacher_review ?? brainOpinion?.latest_opinion?.teacher_review ?? 'Select a record below'}</strong>
             {brainOpinion?.closure && (
               <p className="kc-closure-line">{brainOpinion.closure}</p>
@@ -276,7 +276,7 @@ export function TrainingPage() {
         {payload.status.total_contexts === 0 && !error && (
           <p className="training-setup-hint">
             Local store is empty. From repo root:{' '}
-            <code>python scripts/kc_apprenticeship_activate.py --replace</code> (250 tasks; KC status every 50)
+            <code>python scripts/kc_apprenticeship_activate.py --replace</code> (250-task machine drill — not graduation)
             {' '}then{' '}
             <code>python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote</code>
             {' '}with API running: <code>python main.py serve api</code>
@@ -306,8 +306,8 @@ export function TrainingPage() {
               <p>{selectedRecord?.student_response ?? 'Awaiting student evidence.'}</p>
             </section>
             <section className={selectedRecord?.teacher_review ? 'filled' : ''}>
-              <span>KC / Cassey opinion (Save · Kill · Watch)</span>
-              <p>{selectedRecord?.teacher_review ?? 'Awaiting teacher review — steward writes this on each task.'}</p>
+              <span>teacher_review (Save · Kill · Watch)</span>
+              <p>{selectedRecord?.teacher_review ?? 'Steward or teacher writes this — KC stores it; she does not chat here.'}</p>
             </section>
           </div>
         </motion.article>
@@ -419,7 +419,7 @@ export function TrainingPage() {
             <div className="dock-actions">
               <button type="button" className="quiet-button" onClick={() => void createAssignment()}>Create</button>
               <button type="button" className="quiet-button" onClick={() => void seedStarter()}>Seed</button>
-              <button type="button" className="quiet-button" onClick={() => void seedApprenticeship250()}>Activate 250</button>
+              <button type="button" className="quiet-button" onClick={() => void seedApprenticeship250()}>Seed drill (250)</button>
               <button type="button" className="quiet-button" onClick={runStewardHint}>Steward CLI</button>
               <button type="button" className="quiet-button danger" disabled={!selectedRecord} onClick={promote}>Promote</button>
             </div>
