@@ -18,6 +18,6 @@ node_modules/
 # KC local apprenticeship store (manifest is tracked; seeded JSON is local)
 kopano-core/.kc/
 
-# Second Brain
+# Second Brain (Obsidian vault — local only; removed from git index so .obsidian/.smart-env do not dirty status)
 Schematics/
 
