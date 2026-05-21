@@ -16,19 +16,22 @@ from kc_apprenticeship_manifest import build_tasks, write_manifest  # noqa: E402
 from kopano.kc_training_store import KcTrainingStore  # noqa: E402
 
 
-def test_manifest_has_150_tasks(tmp_path: Path) -> None:
+def test_manifest_has_250_tasks(tmp_path: Path) -> None:
     path = write_manifest(tmp_path / "manifest.json")
     payload = json.loads(path.read_text(encoding="utf-8"))
-    assert payload["task_count"] == 150
-    assert len(payload["tasks"]) == 150
+    assert payload["task_count"] == 250
+    assert len(payload["tasks"]) == 250
+    assert payload["checkpoint_every"] == 50
     codes = [t["code"] for t in payload["tasks"]]
-    assert len(set(codes)) == 150
+    assert len(set(codes)) == 250
 
 
 def test_build_tasks_phase_coverage() -> None:
     tasks = build_tasks()
     phases = {t["phase"] for t in tasks}
     assert phases == set(range(1, 11))
+    assert len(tasks) == 250
+    assert sum(1 for t in tasks if t["code"].endswith("25")) == 10
 
 
 def test_store_bulk_create(tmp_path: Path) -> None:

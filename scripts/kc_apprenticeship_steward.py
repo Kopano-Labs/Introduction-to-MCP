@@ -16,8 +16,14 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from kopano.kc_training_store import KcTrainingStore  # noqa: E402
 
+from kc_apprenticeship_generic_handlers import fill_generic_handlers  # noqa: E402
 from kc_apprenticeship_handlers_extra import extra_handlers  # noqa: E402
-from kc_apprenticeship_manifest import MANIFEST_PATH  # noqa: E402
+from kc_apprenticeship_manifest import CHECKPOINT_EVERY, MANIFEST_PATH  # noqa: E402
+from kc_apprenticeship_status import (  # noqa: E402
+    print_checkpoint_report,
+    summarize_store,
+    write_checkpoint,
+)
 
 DEFAULT_STORE = REPO_ROOT / "kopano-core" / ".kc" / "context_store.json"
 
@@ -52,8 +58,11 @@ def _read_excerpt(path: Path, max_lines: int = 12) -> str:
     return "\n".join(lines[:max_lines])
 
 
-def handlers(root: Path) -> dict[str, object]:
+def handlers(root: Path, manifest_tasks: list[dict] | None = None) -> dict[str, object]:
     sha = _git_sha()
+
+    def h_note(note: str, teacher: str = "Save") -> tuple[str, str]:
+        return f"{note}\nsha={sha}", teacher
 
     def h_file(path: str, note: str) -> tuple[str, str]:
         excerpt = _read_excerpt(root / path)
@@ -214,13 +223,23 @@ def handlers(root: Path) -> dict[str, object]:
         ),
         "KCA-0402": lambda: h_file("kopano-core/studio/src/apiBase.ts", "VITE_KC_API_BASE_URL."),
         "KCA-0403": lambda: (
-            f"Manifest tasks=150 path=docs/swarm-ops/apprenticeship/kc_apprenticeship_150.json sha={sha}",
+            f"Manifest tasks=250 path=docs/swarm-ops/apprenticeship/kc_apprenticeship_250.json sha={sha}",
             "Save",
         ),
     }
     base.update(
         extra_handlers(root, sha, COMPARE_URL, h_file, h_cmd, h_grep, DEFAULT_STORE)
     )
+    if manifest_tasks:
+        fill_generic_handlers(
+            base,
+            manifest_tasks,
+            root=root,
+            sha=sha,
+            h_file=h_file,
+            h_cmd=h_cmd,
+            store_path=DEFAULT_STORE,
+        )
     return base
 
 
@@ -237,24 +256,84 @@ def record_codes(store: KcTrainingStore, manifest_tasks: list[dict]) -> dict[str
     return mapping
 
 
+def _rid_by_code(store: KcTrainingStore, manifest_tasks: list[dict]) -> dict[str, str]:
+    codes = record_codes(store, manifest_tasks)
+    return {code: rid for rid, code in codes.items()}
+
+
+def _emit_checkpoint(
+    milestone: int,
+    store: KcTrainingStore,
+    manifest_tasks: list[dict],
+    *,
+    git_sha: str,
+    log_review: bool,
+) -> Path:
+    payload = summarize_store(store, manifest_tasks, milestone=milestone)
+    path = write_checkpoint(milestone, store, manifest_tasks, git_sha=git_sha)
+    print_checkpoint_report(payload)
+    if log_review:
+        summary = payload["closure_line"]
+        subprocess.run(
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "kc_log_append.py"),
+                "review",
+                "--role",
+                "student",
+                "--phase",
+                "apprenticeship",
+                "--summary",
+                f"KC status checkpoint @{milestone}: {summary}",
+                "--commands",
+                "python scripts/kc_apprenticeship_steward.py",
+                "--exit-code",
+                "0",
+                "--evidence-url",
+                COMPARE_URL,
+            ],
+            cwd=REPO_ROOT,
+            check=False,
+        )
+    return path
+
+
 def steward_phase(
     store: KcTrainingStore,
     manifest_tasks: list[dict],
     max_phase: int,
     promote: bool,
+    checkpoint_every: int = 0,
+    *,
+    log_checkpoints: bool = True,
 ) -> dict[str, int]:
-    hmap = handlers(REPO_ROOT)
-    codes = record_codes(store, manifest_tasks)
-    phase_by_code = {t["code"]: t["phase"] for t in manifest_tasks}
+    hmap = handlers(REPO_ROOT, manifest_tasks)
+    code_to_rid = _rid_by_code(store, manifest_tasks)
     stats = {"skipped": 0, "submitted": 0, "reviewed": 0, "promoted": 0, "no_handler": 0}
+    sha = _git_sha()
+    completed_index = 0
 
-    for rid, code in codes.items():
-        phase = phase_by_code.get(code, 99)
+    for task in manifest_tasks:
+        code = task["code"]
+        phase = task["phase"]
         if phase > max_phase:
+            continue
+        rid = code_to_rid.get(code)
+        if not rid:
+            stats["no_handler"] += 1
             continue
         record = store.records[rid]
         if record.status in {"reviewed", "promoted"}:
             stats["skipped"] += 1
+            completed_index += 1
+            if checkpoint_every and completed_index % checkpoint_every == 0:
+                _emit_checkpoint(
+                    completed_index,
+                    store,
+                    manifest_tasks,
+                    git_sha=sha,
+                    log_review=log_checkpoints,
+                )
             continue
         handler = hmap.get(code)
         if not handler:
@@ -268,19 +347,47 @@ def steward_phase(
         if promote and teacher.startswith("Save"):
             store.promote(rid)
             stats["promoted"] += 1
+        completed_index += 1
+        if checkpoint_every and completed_index % checkpoint_every == 0:
+            _emit_checkpoint(
+                completed_index,
+                store,
+                manifest_tasks,
+                git_sha=sha,
+                log_review=log_checkpoints,
+            )
+
+    total = len(manifest_tasks)
+    if checkpoint_every and completed_index == total and total % checkpoint_every != 0:
+        _emit_checkpoint(
+            total,
+            store,
+            manifest_tasks,
+            git_sha=sha,
+            log_review=log_checkpoints,
+        )
 
     return stats
 
 
-def write_progress(store: KcTrainingStore, stats: dict[str, int], max_phase: int) -> Path:
+def write_progress(
+    store: KcTrainingStore,
+    stats: dict[str, int],
+    max_phase: int,
+    manifest_tasks: list[dict] | None = None,
+) -> Path:
     counts: dict[str, int] = {}
     for record in store.records.values():
         counts[record.status] = counts.get(record.status, 0) + 1
+    kc_status = summarize_store(store, manifest_tasks) if manifest_tasks else None
     payload = {
         "git_sha": _git_sha(),
+        "task_count": len(manifest_tasks) if manifest_tasks else None,
+        "checkpoint_every": CHECKPOINT_EVERY,
         "max_phase_stewarded": max_phase,
         "store_path": str(store.path),
         "status_counts": counts,
+        "kc_opinion_counts": (kc_status or {}).get("kc_opinion_counts"),
         "last_run": stats,
         "compare_url": COMPARE_URL,
     }
@@ -320,20 +427,40 @@ def append_receipt(stats: dict[str, int], progress_path: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--store", type=Path, default=DEFAULT_STORE)
-    parser.add_argument("--max-phase", type=int, default=4)
+    parser.add_argument("--manifest", type=Path, default=MANIFEST_PATH)
+    parser.add_argument("--max-phase", type=int, default=10)
     parser.add_argument("--promote", action="store_true", help="Promote records with Save review")
+    parser.add_argument(
+        "--checkpoint-every",
+        type=int,
+        default=CHECKPOINT_EVERY,
+        help="Emit KC status checkpoint every N tasks (0=off)",
+    )
     parser.add_argument("--no-log", action="store_true")
+    parser.add_argument("--no-checkpoint-log", action="store_true", help="Skip review log on checkpoints")
     args = parser.parse_args()
 
-    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     tasks = manifest["tasks"]
     store = KcTrainingStore(args.store)
     if not store.records:
         print("store empty; run kc_apprenticeship_activate.py first", file=sys.stderr)
         return 1
+    if len(store.records) != len(tasks):
+        print(
+            f"warn: store has {len(store.records)} records, manifest has {len(tasks)} tasks",
+            file=sys.stderr,
+        )
 
-    stats = steward_phase(store, tasks, args.max_phase, args.promote)
-    progress = write_progress(store, stats, args.max_phase)
+    stats = steward_phase(
+        store,
+        tasks,
+        args.max_phase,
+        args.promote,
+        args.checkpoint_every,
+        log_checkpoints=not args.no_checkpoint_log,
+    )
+    progress = write_progress(store, stats, args.max_phase, tasks)
     print(json.dumps({"stats": stats, "progress": str(progress)}, indent=2))
     if not args.no_log and stats["reviewed"]:
         append_receipt(stats, progress)

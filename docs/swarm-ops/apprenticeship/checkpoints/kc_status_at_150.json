@@ -1,0 +1,49 @@
+{
+  "schema": "kc_apprenticeship_status_v1",
+  "ts": "2026-05-21T12:25:03Z",
+  "milestone_tasks": 150,
+  "total_tasks": 150,
+  "processed_reviewed_or_promoted": 150,
+  "status_counts": {
+    "promoted": 150
+  },
+  "kc_opinion_counts": {
+    "Save": 150
+  },
+  "promoted": 150,
+  "closure_line": "KC opinion at 150/250: Save=150 Watch=0 Kill=0 pending=0; promoted=150. KC does not chat \u2014 read teacher_review per record.",
+  "sample_opinions": [
+    {
+      "id": "kc-1",
+      "code": "KCA-0101",
+      "status": "promoted",
+      "teacher_review": "Save \u2014 bounded file evidence; no external claim beyond repo."
+    },
+    {
+      "id": "kc-2",
+      "code": "KCA-0102",
+      "status": "promoted",
+      "teacher_review": "Save \u2014 bounded file evidence; no external claim beyond repo."
+    },
+    {
+      "id": "kc-3",
+      "code": "KCA-0103",
+      "status": "promoted",
+      "teacher_review": "Save \u2014 aligns with doctrine."
+    },
+    {
+      "id": "kc-4",
+      "code": "KCA-0104",
+      "status": "promoted",
+      "teacher_review": "Save"
+    },
+    {
+      "id": "kc-5",
+      "code": "KCA-0105",
+      "status": "promoted",
+      "teacher_review": "Save"
+    }
+  ],
+  "store_path": "kopano-core\\.kc\\context_store.json",
+  "git_sha": "a30da1ca733f0ac23aa2dca105fd3ec7782cb644"
+}

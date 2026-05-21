@@ -1,4 +1,4 @@
-"""Build the KC Student Apprenticeship 150-task manifest (10 phases × 15 tasks)."""
+"""Build the KC Student Apprenticeship manifest (10 phases × 25 tasks = 250)."""
 
 from __future__ import annotations
 
@@ -6,7 +6,27 @@ import json
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MANIFEST_PATH = REPO_ROOT / "docs" / "swarm-ops" / "apprenticeship" / "kc_apprenticeship_150.json"
+MANIFEST_150_PATH = REPO_ROOT / "docs" / "swarm-ops" / "apprenticeship" / "kc_apprenticeship_150.json"
+MANIFEST_250_PATH = REPO_ROOT / "docs" / "swarm-ops" / "apprenticeship" / "kc_apprenticeship_250.json"
+MANIFEST_PATH = MANIFEST_250_PATH
+
+TASKS_PER_PHASE = 25
+BASE_TASKS_PER_PHASE = 15
+CHECKPOINT_EVERY = 50
+
+# Extension band (tasks 16–25 per phase): checkpoint discipline + vault hygiene
+EXTENSION_ITEMS: list[str] = [
+    "Mirror canonical JSONL into Schematics vault via kc_sync_vault_logs.py",
+    "Read KC_OPINION.md — teacher_review is KC memory, not IDE chat",
+    "Write KC status checkpoint JSON every 50 tasks (Save/Watch/Kill counts)",
+    "Run kc_guard validate before closing phase extension band",
+    "Verify manifest task code order matches store record order",
+    "Append review row with real evidence_urls (no demo-bypass markers)",
+    "Re-read NAVIGATION.md apprenticeship and checkpoint links",
+    "Confirm zero Schematics paths tracked in git index",
+    "Update progress.json status_counts after this phase band",
+    "Phase extension closure: pytest + kc_guard excerpt in student_response",
+]
 
 PHASES: list[tuple[str, list[str]]] = [
     (
@@ -140,7 +160,7 @@ PHASES: list[tuple[str, list[str]]] = [
             "Identify KC as memory not executor",
             "Reject 300-node fiction in code claims",
             "Map 50 demo tasks to apprenticeship phases",
-            "Explain 150 = 10×15 stewardship expansion",
+            "Explain 250 = 10×25 stewardship expansion (checkpoint every 50)",
             "No kimi-ack without manual external step",
             "Honesty about local-only owner_proof",
             "Cross-link NAVIGATION.md",
@@ -201,10 +221,10 @@ PHASES: list[tuple[str, list[str]]] = [
             "SafeSkill: no hardcoded secrets scan",
             "Reward system folder purpose one line",
             "Legacy archive: what not to ship",
-            "10 phases 50 tasks map to 150 ledger",
-            "Activate script: dry-run count",
+            "10 phases 50 tasks map to 250 apprenticeship ledger",
+            "Activate script: dry-run count (expect 250)",
             "Activate script: seed store path",
-            "Training UI shows 150 assigned queue",
+            "Training UI shows 250 assigned queue",
             "Stewardship: autonomous Cursor execution",
             "Final: kc_guard all + manifest hash note",
         ],
@@ -212,10 +232,15 @@ PHASES: list[tuple[str, list[str]]] = [
 ]
 
 
-def build_tasks() -> list[dict[str, str]]:
+def build_tasks(include_extensions: bool = True) -> list[dict[str, str]]:
     tasks: list[dict[str, str]] = []
     for phase_index, (phase_title, items) in enumerate(PHASES, start=1):
-        for task_index, item in enumerate(items, start=1):
+        phase_items = list(items)
+        if include_extensions:
+            if len(phase_items) != BASE_TASKS_PER_PHASE:
+                raise RuntimeError(f"phase {phase_index}: expected {BASE_TASKS_PER_PHASE} base items")
+            phase_items = phase_items + EXTENSION_ITEMS
+        for task_index, item in enumerate(phase_items, start=1):
             code = f"KCA-{phase_index:02d}{task_index:02d}"
             title = f"KC — P{phase_index} T{task_index:02d}: {item}"
             teacher_context = (
@@ -233,22 +258,26 @@ def build_tasks() -> list[dict[str, str]]:
                     "teacher_context": teacher_context,
                 }
             )
-    if len(tasks) != 150:
-        raise RuntimeError(f"expected 150 tasks, got {len(tasks)}")
+    expected = len(PHASES) * (TASKS_PER_PHASE if include_extensions else BASE_TASKS_PER_PHASE)
+    if len(tasks) != expected:
+        raise RuntimeError(f"expected {expected} tasks, got {len(tasks)}")
     return tasks
 
 
-def write_manifest(path: Path | None = None) -> Path:
+def write_manifest(path: Path | None = None, *, include_extensions: bool = True) -> Path:
     target = path or MANIFEST_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
+    tasks = build_tasks(include_extensions=include_extensions)
+    per_phase = TASKS_PER_PHASE if include_extensions else BASE_TASKS_PER_PHASE
     payload = {
         "schema": "kc_apprenticeship_v1",
-        "task_count": 150,
-        "phases": 10,
-        "tasks_per_phase": 15,
+        "task_count": len(tasks),
+        "phases": len(PHASES),
+        "tasks_per_phase": per_phase,
+        "checkpoint_every": CHECKPOINT_EVERY if include_extensions else None,
         "stewards": ["KC", "Cursor"],
         "protocol": "Schematics/18-PROTOCOLS/KC-Student-Teacher-Apprenticeship-Protocol.md",
-        "tasks": build_tasks(),
+        "tasks": tasks,
     }
     target.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return target

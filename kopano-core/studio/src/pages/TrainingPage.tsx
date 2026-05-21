@@ -226,9 +226,9 @@ export function TrainingPage() {
 
   const seedStarter = () => runAction('Starter training task seeded', () => postJson(`${apiRoot}/api/kc/seed-training`, {}));
 
-  const seedApprenticeship150 = () => runAction(
-    'Apprenticeship 150 seeded',
-    () => postJson(`${apiRoot}/api/kc/seed-apprenticeship-150?replace=true`, {}),
+  const seedApprenticeship250 = () => runAction(
+    'Apprenticeship 250 seeded',
+    () => postJson(`${apiRoot}/api/kc/seed-apprenticeship-250?replace=true`, {}),
   );
 
   const runStewardHint = () => {
@@ -276,7 +276,7 @@ export function TrainingPage() {
         {payload.status.total_contexts === 0 && !error && (
           <p className="training-setup-hint">
             Local store is empty. From repo root:{' '}
-            <code>python scripts/kc_apprenticeship_activate.py --replace</code>
+            <code>python scripts/kc_apprenticeship_activate.py --replace</code> (250 tasks; KC status every 50)
             {' '}then{' '}
             <code>python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote</code>
             {' '}with API running: <code>python main.py serve api</code>
@@ -419,7 +419,7 @@ export function TrainingPage() {
             <div className="dock-actions">
               <button type="button" className="quiet-button" onClick={() => void createAssignment()}>Create</button>
               <button type="button" className="quiet-button" onClick={() => void seedStarter()}>Seed</button>
-              <button type="button" className="quiet-button" onClick={() => void seedApprenticeship150()}>Activate 150</button>
+              <button type="button" className="quiet-button" onClick={() => void seedApprenticeship250()}>Activate 250</button>
               <button type="button" className="quiet-button" onClick={runStewardHint}>Steward CLI</button>
               <button type="button" className="quiet-button danger" disabled={!selectedRecord} onClick={promote}>Promote</button>
             </div>

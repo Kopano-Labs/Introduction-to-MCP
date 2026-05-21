@@ -8,11 +8,12 @@
 |---------|----------------|
 | **Studio → Training** | **KC opinion (teacher lane)** at top; **KC / Cassey opinion** on the active record; preview on each historical line |
 | **API** | `GET /api/kc/brain-opinion` — latest `teacher_review` + closure line |
-| **Local store** | `kopano-core/.kc/context_store.json` — field `teacher_review` on each of 150 records (gitignored) |
+| **Local store** | `kopano-core/.kc/context_store.json` — field `teacher_review` on each of 250 records (gitignored) |
+| **Checkpoints** | `docs/swarm-ops/apprenticeship/checkpoints/kc_status_at_*.json` — cumulative KC opinion @ 50, 100, 150, 200, 250 |
 
-## Closure (this activation)
+## Closure (250 activation)
 
-Apprenticeship **150** tasks are in `kc_apprenticeship_150.json`. Steward ran with machine evidence (guard, pytest, file excerpts, compare URL). **146 promoted**, **4 reviewed** (Watch — not promoted until evidence is fixed).
+Apprenticeship **250** tasks are in `kc_apprenticeship_250.json` (10×25; checkpoint every 50). Steward runs with machine evidence (guard, pytest, file excerpts, compare URL). **250/250 promoted** after Watch repair on guard/proof flakes.
 
 KC's position:
 

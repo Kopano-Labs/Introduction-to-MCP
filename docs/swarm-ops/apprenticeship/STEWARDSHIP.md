@@ -1,4 +1,4 @@
-# KC Student Apprenticeship — Stewardship (150 tasks)
+# KC Student Apprenticeship — Stewardship (250 tasks)
 
 **Status:** ACTIVE  
 **Stewards:** KC (memory + ledger) and Cursor (execution surface under AG)  
@@ -8,17 +8,18 @@
 
 Activation is **machine-checkable**, not narrative:
 
-1. **Manifest** — `docs/swarm-ops/apprenticeship/kc_apprenticeship_150.json` (150 tasks, 10 phases × 15).
-2. **Local store** — `kopano-core/.kc/context_store.json` (gitignored); one KC record per task, status `assigned`.
-3. **API** — `GET /api/kc/training` when `python main.py serve api` (or equivalent) is running.
-4. **Studio** — Training page shows the queue; student submits evidence; teacher reviews Save/Kill/Watch.
+1. **Manifest** — `docs/swarm-ops/apprenticeship/kc_apprenticeship_250.json` (250 tasks, 10 phases × 25; legacy `kc_apprenticeship_150.json` frozen).
+2. **KC status every 50** — `docs/swarm-ops/apprenticeship/checkpoints/` (`kc_status_at_*.json` + `KC_STATUS_AT_*.md`).
+3. **Local store** — `kopano-core/.kc/context_store.json` (gitignored); one KC record per task, status `assigned`.
+4. **API** — `GET /api/kc/training` when `python main.py serve api` (or equivalent) is running.
+5. **Studio** — Training page shows the queue; student submits evidence; teacher reviews Save/Kill/Watch.
 
 Kimi and external swarm ack are **out of scope** for activation. Do not fabricate `kimi_ack` rows.
 
 ## Commands
 
 ```bash
-# Regenerate manifest (150 tasks)
+# Regenerate manifest (250 tasks)
 python scripts/kc_apprenticeship_manifest.py
 
 # Write manifest + seed store (first time)
@@ -31,7 +32,7 @@ python scripts/kc_apprenticeship_activate.py --replace
 python scripts/kc_apprenticeship_activate.py --manifest-only
 
 # Machine steward (phases 1–4 handlers today; writes progress.json)
-python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote
+python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote --checkpoint-every 50
 ```
 
 Track steward output in [progress.json](./progress.json) (git-tracked counts; local store remains gitignored).

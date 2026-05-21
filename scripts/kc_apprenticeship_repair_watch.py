@@ -13,6 +13,8 @@ sys.path.insert(0, str(REPO_ROOT / "kopano-core"))
 
 from kopano.kc_training_store import KcTrainingStore  # noqa: E402
 
+from kc_apprenticeship_manifest import MANIFEST_PATH  # noqa: E402
+
 
 def reset_watch_records(store: KcTrainingStore) -> list[str]:
     reset_ids: list[str] = []
@@ -36,7 +38,9 @@ def main() -> int:
         type=Path,
         default=REPO_ROOT / "kopano-core" / ".kc" / "context_store.json",
     )
+    parser.add_argument("--manifest", type=Path, default=MANIFEST_PATH)
     parser.add_argument("--max-phase", type=int, default=10)
+    parser.add_argument("--checkpoint-every", type=int, default=0)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -52,10 +56,15 @@ def main() -> int:
         str(REPO_ROOT / "scripts" / "kc_apprenticeship_steward.py"),
         "--store",
         str(args.store),
+        "--manifest",
+        str(args.manifest),
         "--max-phase",
         str(args.max_phase),
         "--promote",
+        "--no-checkpoint-log",
     ]
+    if args.checkpoint_every:
+        cmd.extend(["--checkpoint-every", str(args.checkpoint_every)])
     return subprocess.call(cmd, cwd=REPO_ROOT)
 
 

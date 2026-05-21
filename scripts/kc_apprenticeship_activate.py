@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Activate KC Student Apprenticeship: write 150-task manifest and seed local KC store."""
+"""Activate KC Student Apprenticeship: write 250-task manifest and seed local KC store."""
 
 from __future__ import annotations
 
@@ -20,8 +20,9 @@ from kc_apprenticeship_manifest import MANIFEST_PATH, write_manifest  # noqa: E4
 def load_manifest(path: Path) -> list[dict[str, str]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     tasks = payload.get("tasks", [])
-    if len(tasks) != 150:
-        raise SystemExit(f"manifest must contain 150 tasks, found {len(tasks)}")
+    expected = int(payload.get("task_count", len(tasks)))
+    if len(tasks) != expected:
+        raise SystemExit(f"manifest must contain {expected} tasks, found {len(tasks)}")
     return tasks
 
 
@@ -43,7 +44,7 @@ def append_activation_receipt(manifest_path: Path, store_path: Path, seeded: int
     import subprocess
 
     summary = (
-        f"KC Student Apprenticeship 150 activated: manifest={manifest_path.name} "
+        f"KC Student Apprenticeship 250 activated: manifest={manifest_path.name} "
         f"seeded={seeded} store={store_path.name}"
     )
     compare = (
@@ -66,6 +67,7 @@ def append_activation_receipt(manifest_path: Path, store_path: Path, seeded: int
             "0",
             "--evidence-url",
             compare,
+            "--evidence-url",
             "https://github.com/Kopano-Labs/Introduction-to-MCP/actions",
         ],
         check=False,
@@ -74,7 +76,7 @@ def append_activation_receipt(manifest_path: Path, store_path: Path, seeded: int
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Activate KC apprenticeship 150 tasks")
+    parser = argparse.ArgumentParser(description="Activate KC apprenticeship 250 tasks")
     parser.add_argument(
         "--store",
         type=Path,
