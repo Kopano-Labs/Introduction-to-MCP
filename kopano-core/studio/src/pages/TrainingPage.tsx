@@ -143,7 +143,11 @@ export function TrainingPage() {
 
   useEffect(() => {
     void refresh().catch((refreshError) => {
-      setError(refreshError instanceof Error ? refreshError.message : 'KC training API unavailable.');
+      const message = refreshError instanceof Error ? refreshError.message : 'KC training API unavailable.';
+      setError(
+        `${message} — Start the API: python main.py serve api (from repo root). `
+        + 'Training data lives in kopano-core/.kc/context_store.json (gitignored; seed with kc_apprenticeship_activate.py).',
+      );
     });
     const interval = window.setInterval(() => {
       void refresh().catch(() => undefined);
@@ -224,10 +228,19 @@ export function TrainingPage() {
             <strong>{activeQueue.length}</strong>
           </div>
           <div>
-            <span>Reviewed</span>
-            <strong>{payload.status.status_counts.reviewed ?? 0}</strong>
+            <span>Promoted</span>
+            <strong>{payload.status.status_counts.promoted ?? 0}</strong>
           </div>
         </div>
+        {payload.status.total_contexts === 0 && !error && (
+          <p className="training-setup-hint">
+            Local store is empty. From repo root:{' '}
+            <code>python scripts/kc_apprenticeship_activate.py --replace</code>
+            {' '}then{' '}
+            <code>python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote</code>
+            {' '}with API running: <code>python main.py serve api</code>
+          </p>
+        )}
       </motion.section>
 
       <section className="sovereign-workbench">

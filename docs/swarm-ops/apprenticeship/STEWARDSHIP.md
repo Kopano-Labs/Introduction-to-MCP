@@ -36,6 +36,26 @@ python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote
 
 Track steward output in [progress.json](./progress.json) (git-tracked counts; local store remains gitignored).
 
+## Why Studio does not show 146 promoted
+
+Studio is a **browser client**. It does not read `kopano-core/.kc/context_store.json` directly. It calls **`GET /api/kc/training`** on whatever host `getApiBase()` uses (default `http://127.0.0.1:8000`).
+
+| Symptom | Cause | Fix |
+|---------|--------|-----|
+| Error / connection refused | API not running | From repo root: `python main.py serve api` |
+| Records = 0, Promoted = 0 | Store never seeded on this machine | `python scripts/kc_apprenticeship_activate.py --replace` then steward |
+| JSON at `/` instead of Studio | `kopano-core/studio/dist` not built | `cd kopano-core/studio && npm run build`, then restart API |
+| Zeros while cloud works | Hitting production URL | Production has its own empty store; use local API for local ledger |
+| Top banner showed “Reviewed” only | UI metric slot (fixed in Training page) | Full breakdown is under **Record stack** → status row **Promoted** |
+
+Verify API data (PowerShell):
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/api/kc/training | Select-Object -ExpandProperty status
+```
+
+Expect `total_contexts` 150 and `status_counts.promoted` 146 after activate + steward on **this** machine.
+
 ## Stewardship split
 
 | Role | Responsibility |
