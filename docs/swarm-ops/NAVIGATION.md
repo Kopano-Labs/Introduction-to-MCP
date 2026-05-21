@@ -22,6 +22,8 @@
 | KC Apprenticeship 150 (stewardship) | [apprenticeship/STEWARDSHIP.md](./apprenticeship/STEWARDSHIP.md) | Manifest + activate; Studio Training API |
 | Apprenticeship task ledger | [apprenticeship/kc_apprenticeship_150.json](./apprenticeship/kc_apprenticeship_150.json) | 10×15 tasks; seed via `scripts/kc_apprenticeship_activate.py` |
 | KC opinion (memory voice) | [apprenticeship/KC_OPINION.md](./apprenticeship/KC_OPINION.md) | Where teacher_review lives; Save/Watch/Kill |
+| Main Brain / vault audit | [apprenticeship/MAIN_BRAIN_AUDIT.md](./apprenticeship/MAIN_BRAIN_AUDIT.md) | Canonical vs Schematics mirror |
+| Mirror logs to Schematics vault | `python scripts/kc_sync_vault_logs.py` | After JSONL append |
 
 **CLI quick reference**
 

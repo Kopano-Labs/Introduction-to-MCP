@@ -1,5 +1,7 @@
 {
-  "git_sha": "f3500b3",
+  "git_sha": "35949aa",
+  "main_brain_audit": "2026-05-19",
+  "vault_log_mirror": "Schematics/04-Updates/logs",
   "max_phase_stewarded": 10,
   "activation_complete": true,
   "store_path": "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\kopano-core\\.kc\\context_store.json",

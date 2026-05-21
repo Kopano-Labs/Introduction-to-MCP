@@ -36,6 +36,14 @@ python scripts/kc_apprenticeship_steward.py --max-phase 10 --promote
 
 Track steward output in [progress.json](./progress.json) (git-tracked counts; local store remains gitignored).
 
+After machine log appends, mirror canonical JSONL into the Obsidian vault:
+
+```bash
+python scripts/kc_sync_vault_logs.py
+```
+
+See [MAIN_BRAIN_AUDIT.md](./MAIN_BRAIN_AUDIT.md) for canonical vs `Schematics/04-Updates/logs/` discipline.
+
 ## Why Studio does not show 146 promoted
 
 Studio is a **browser client**. It does not read `kopano-core/.kc/context_store.json` directly. It calls **`GET /api/kc/training`** on whatever host `getApiBase()` uses (default `http://127.0.0.1:8000`).

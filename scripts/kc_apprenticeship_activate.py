@@ -38,23 +38,35 @@ def seed_store(store_path: Path, tasks: list[dict[str, str]], replace: bool) -> 
 
 def append_activation_receipt(manifest_path: Path, store_path: Path, seeded: int) -> None:
     log_script = REPO_ROOT / "scripts" / "kc_log_append.py"
-    if not log_script.exists():
+    if not log_script.exists() or seeded <= 0:
         return
     import subprocess
 
-    note = (
-        f"KC Student Apprenticeship 150 activated. manifest={manifest_path.name} "
-        f"seeded={seeded} store={store_path}"
+    summary = (
+        f"KC Student Apprenticeship 150 activated: manifest={manifest_path.name} "
+        f"seeded={seeded} store={store_path.name}"
+    )
+    compare = (
+        "https://github.com/Kopano-Labs/Introduction-to-MCP/"
+        "compare/master...codex/kc-sovereign-gui-full-dev?expand=1"
     )
     subprocess.run(
         [
             sys.executable,
             str(log_script),
             "mainbrain",
-            "--note",
-            note,
-            "--scope",
-            "apprenticeship-150",
+            "--kind",
+            "apprenticeship_activate",
+            "--summary",
+            summary,
+            "--commands",
+            "python",
+            "scripts/kc_apprenticeship_activate.py",
+            "--exit-code",
+            "0",
+            "--evidence-url",
+            compare,
+            "https://github.com/Kopano-Labs/Introduction-to-MCP/actions",
         ],
         check=False,
         cwd=REPO_ROOT,
