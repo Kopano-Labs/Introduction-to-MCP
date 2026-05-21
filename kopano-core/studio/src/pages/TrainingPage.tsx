@@ -28,6 +28,21 @@ interface KcTrainingPayload {
   records: KcRecord[];
 }
 
+interface KcBrainOpinion {
+  role: string;
+  total_contexts: number;
+  status_counts: Record<KcStatusName, number>;
+  opinion_count: number;
+  latest_opinion: {
+    record_id: string;
+    title: string;
+    status: KcStatusName;
+    teacher_review: string;
+    updated_at: number;
+  } | null;
+  closure: string;
+}
+
 const emptyCounts: Record<KcStatusName, number> = {
   assigned: 0,
   in_progress: 0,
@@ -94,6 +109,7 @@ export function TrainingPage() {
   const [teacherReview, setTeacherReview] = useState(defaultTeacherReview);
   const [eventLog, setEventLog] = useState<string[]>(['KC local CRUD ready.']);
   const [error, setError] = useState<string | null>(null);
+  const [brainOpinion, setBrainOpinion] = useState<KcBrainOpinion | null>(null);
 
   const selectedRecord = useMemo(() => {
     if (!payload.records.length) {
@@ -107,23 +123,41 @@ export function TrainingPage() {
   const activeQueue = payload.records.filter((record) => (
     record.status === 'assigned' || record.status === 'in_progress' || record.status === 'submitted'
   ));
-  const historicalRecords = payload.records.filter((record) => !activeQueue.some((activeRecord) => activeRecord.id === record.id));
+  const historicalRecords = useMemo(() => (
+    payload.records
+      .filter((record) => !activeQueue.some((activeRecord) => activeRecord.id === record.id))
+      .sort((a, b) => b.updated_at - a.updated_at)
+  ), [payload.records, activeQueue]);
+
+  const pickDefaultRecordId = (records: KcRecord[], current: string | null) => {
+    if (current && records.some((record) => record.id === current)) {
+      return current;
+    }
+    const activeRecord = records.find((record) => (
+      record.status === 'assigned' || record.status === 'in_progress' || record.status === 'submitted'
+    ));
+    if (activeRecord) {
+      return activeRecord.id;
+    }
+    const withOpinion = records.find((record) => record.teacher_review);
+    return withOpinion?.id ?? records[0]?.id ?? null;
+  };
 
   const refresh = async () => {
-    const response = await fetch(`${apiRoot}/api/kc/training`);
-    if (!response.ok) {
-      throw new Error(`KC training API returned ${response.status}`);
+    const [trainingRes, opinionRes] = await Promise.all([
+      fetch(`${apiRoot}/api/kc/training`),
+      fetch(`${apiRoot}/api/kc/brain-opinion`),
+    ]);
+    if (!trainingRes.ok) {
+      throw new Error(`KC training API returned ${trainingRes.status}`);
     }
 
-    const nextPayload = await response.json() as KcTrainingPayload;
+    const nextPayload = await trainingRes.json() as KcTrainingPayload;
     setPayload(nextPayload);
-    setSelectedId((current) => {
-      if (current && nextPayload.records.some((record) => record.id === current)) {
-        return current;
-      }
-      const activeRecord = nextPayload.records.find((record) => record.status !== 'reviewed' && record.status !== 'promoted');
-      return activeRecord?.id ?? nextPayload.records[0]?.id ?? null;
-    });
+    if (opinionRes.ok) {
+      setBrainOpinion(await opinionRes.json() as KcBrainOpinion);
+    }
+    setSelectedId((current) => pickDefaultRecordId(nextPayload.records, current));
   };
 
   const pushEvent = (message: string) => {
@@ -216,6 +250,13 @@ export function TrainingPage() {
             <span>Owner proof</span>
             <strong>{payload.status.owner_proof}</strong>
           </div>
+          <div className="kc-opinion-lock">
+            <span>KC opinion (teacher lane)</span>
+            <strong>{selectedRecord?.teacher_review ?? brainOpinion?.latest_opinion?.teacher_review ?? 'Select a record below'}</strong>
+            {brainOpinion?.closure && (
+              <p className="kc-closure-line">{brainOpinion.closure}</p>
+            )}
+          </div>
         </div>
 
         <div className="sovereign-metrics" aria-label="KC local status">
@@ -265,8 +306,8 @@ export function TrainingPage() {
               <p>{selectedRecord?.student_response ?? 'Awaiting student evidence.'}</p>
             </section>
             <section className={selectedRecord?.teacher_review ? 'filled' : ''}>
-              <span>Review</span>
-              <p>{selectedRecord?.teacher_review ?? 'Awaiting teacher review.'}</p>
+              <span>KC / Cassey opinion (Save · Kill · Watch)</span>
+              <p>{selectedRecord?.teacher_review ?? 'Awaiting teacher review — steward writes this on each task.'}</p>
             </section>
           </div>
         </motion.article>
@@ -318,6 +359,9 @@ export function TrainingPage() {
                 <span>{record.id}</span>
                 <strong>{record.title}</strong>
                 <small>{statusLabel[record.status]} | {formatMillis(record.updated_at)}</small>
+                {record.teacher_review && (
+                  <small className="record-opinion-preview">{record.teacher_review}</small>
+                )}
               </button>
             ))}
           </div>

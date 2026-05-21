@@ -39,6 +39,35 @@ def get_training() -> dict:
     return _store().training_payload()
 
 
+@router.get("/brain-opinion")
+def get_brain_opinion() -> dict:
+    """KC (memory) does not execute; teacher_review on each record is the stored teacher opinion."""
+    store = _store()
+    records = store.list_records()
+    with_review = [r for r in records if r.teacher_review]
+    latest = with_review[0] if with_review else None
+    counts = store.status_payload()["status_counts"]
+    return {
+        "role": "KC is the brain (vault + ledger), not the worker. Cassey/Cursor write teacher_review.",
+        "total_contexts": len(records),
+        "status_counts": counts,
+        "opinion_count": len(with_review),
+        "latest_opinion": None
+        if latest is None
+        else {
+            "record_id": latest.id,
+            "title": latest.title,
+            "status": latest.status,
+            "teacher_review": latest.teacher_review,
+            "updated_at": latest.updated_at,
+        },
+        "closure": (
+            "Apprenticeship 150: manifest on branch, steward evidence on records. "
+            "Promote only with bounded proof. No fake swarm, no Kimi ack in repo."
+        ),
+    }
+
+
 @router.post("/records")
 def create_record(body: CreateRecordRequest) -> dict:
     record = _store().create(body.title, body.teacher_context)

@@ -1,6 +1,7 @@
 {
-  "git_sha": "2943f8c240738f62fc37f8e6e9f537da351e1291",
+  "git_sha": "8136d29",
   "max_phase_stewarded": 10,
+  "activation_complete": true,
   "store_path": "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\kopano-core\\.kc\\context_store.json",
   "status_counts": {
     "promoted": 146,

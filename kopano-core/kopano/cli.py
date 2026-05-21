@@ -611,7 +611,11 @@ def launch(
 def start_api_cmd(
     port: int = typer.Option(8000, "--port", "-p", help="Port to run the API on."),
     host: str = typer.Option("127.0.0.1", "--host", "-h", help="Host to run the API on."),
-    open_browser: bool = typer.Option(True, "--open", help="Automatically open the GUI in the browser.")
+    open_browser: bool = typer.Option(
+        False,
+        "--open/--no-open",
+        help="Open the GUI in the browser (off by default for agents/CI).",
+    ),
 ):
     """
     Starts the Kopano Context AGI Control Plane API and serves Kopano Studio (GUI).

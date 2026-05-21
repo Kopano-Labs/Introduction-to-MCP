@@ -1294,7 +1294,8 @@ input[type='range'] {
 }
 
 .proof-lock,
-.store-proof {
+.store-proof,
+.kc-opinion-lock {
   display: grid;
   gap: 4px;
   min-width: 0;
@@ -1302,6 +1303,43 @@ input[type='range'] {
   border-radius: 8px;
   background: rgba(255, 212, 111, 0.08);
   border: 1px solid rgba(255, 212, 111, 0.16);
+}
+
+.kc-opinion-lock {
+  background: rgba(127, 213, 255, 0.08);
+  border-color: rgba(127, 213, 255, 0.22);
+}
+
+.kc-opinion-lock strong {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.kc-closure-line {
+  margin: 4px 0 0;
+  color: var(--muted-strong);
+  font-size: 0.85rem;
+}
+
+.record-opinion-preview {
+  display: block;
+  margin-top: 4px;
+  color: #9ed8ff;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.training-setup-hint {
+  margin: 8px 0 0;
+  color: var(--muted-strong);
+  font-size: 0.88rem;
+}
+
+.training-setup-hint code {
+  font-size: 0.82rem;
 }
 
 .proof-lock span,
