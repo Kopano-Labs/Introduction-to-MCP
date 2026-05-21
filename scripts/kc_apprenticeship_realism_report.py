@@ -14,6 +14,7 @@ sys.path.insert(0, str(REPO_ROOT / "kopano-core"))
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from kc_apprenticeship_manifest import MANIFEST_PATH, PUBLIC_GRADUATION_BAR  # noqa: E402
+from kc_verified_production import check_minimum, count_verified  # noqa: E402
 from kopano.kc_training_store import KcTrainingStore  # noqa: E402
 
 DEFAULT_STORE = REPO_ROOT / "kopano-core" / ".kc" / "context_store.json"
@@ -39,7 +40,11 @@ def main() -> int:
     print(f"manifest: {args.manifest.name}")
     print(f"mode: {mode}  (NOT a graduation diploma)")
     print(f"drill_tasks: {task_count}")
-    print(f"public_graduation_bar: {PUBLIC_GRADUATION_BAR} verified production tasks (protocol)\n")
+    print(f"public_graduation_bar: {PUBLIC_GRADUATION_BAR} verified production tasks (protocol)")
+
+    verified_n, _ = count_verified()
+    bar_ok, bar_msg = check_minimum(PUBLIC_GRADUATION_BAR)
+    print(f"review_log: {bar_msg} ({'BAR MET' if bar_ok else 'BAR NOT MET'})\n")
 
     if args.store.exists():
         store = KcTrainingStore(args.store)
@@ -64,7 +69,16 @@ def main() -> int:
     for label, cmd in [
         ("validate", [sys.executable, "scripts/kc_log_append.py", "validate"]),
         ("proof-check", [sys.executable, "scripts/kc_log_append.py", "proof-check"]),
-        ("kc_guard all", [sys.executable, "scripts/kc_guard.py", "all", "--no-check-doc-hosts"]),
+        (
+            "kc_guard all + verified production",
+            [
+                sys.executable,
+                "scripts/kc_guard.py",
+                "all",
+                "--require-verified-production",
+                str(PUBLIC_GRADUATION_BAR),
+            ],
+        ),
     ]:
         code, _ = _run(cmd)
         print(f"  {label}: exit {code} ({'OK' if code == 0 else 'FAIL'})")

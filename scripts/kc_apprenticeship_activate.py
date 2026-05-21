@@ -107,6 +107,17 @@ def main() -> int:
     if not args.no_log and seeded:
         append_activation_receipt(manifest_path, args.store, seeded)
 
+    try:
+        from kc_verified_production import check_minimum, count_verified
+
+        n, _ = count_verified()
+        ok, msg = check_minimum()
+        print(f"verified_production: {msg}")
+        if not ok:
+            print("real bar: python scripts/kc_production_verify_run.py", file=sys.stderr)
+    except ImportError:
+        pass
+
     return 0
 
 

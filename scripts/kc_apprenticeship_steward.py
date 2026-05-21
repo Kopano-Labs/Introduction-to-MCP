@@ -18,7 +18,7 @@ from kopano.kc_training_store import KcTrainingStore  # noqa: E402
 
 from kc_apprenticeship_generic_handlers import fill_generic_handlers  # noqa: E402
 from kc_apprenticeship_handlers_extra import extra_handlers  # noqa: E402
-from kc_apprenticeship_manifest import CHECKPOINT_EVERY, MANIFEST_PATH  # noqa: E402
+from kc_apprenticeship_manifest import MANIFEST_PATH  # noqa: E402
 from kc_apprenticeship_status import (  # noqa: E402
     print_checkpoint_report,
     summarize_store,
@@ -375,6 +375,8 @@ def write_progress(
     stats: dict[str, int],
     max_phase: int,
     manifest_tasks: list[dict] | None = None,
+    *,
+    checkpoint_every: int = 0,
 ) -> Path:
     counts: dict[str, int] = {}
     for record in store.records.values():
@@ -383,7 +385,8 @@ def write_progress(
     payload = {
         "git_sha": _git_sha(),
         "task_count": len(manifest_tasks) if manifest_tasks else None,
-        "checkpoint_every": CHECKPOINT_EVERY,
+        "checkpoint_every": checkpoint_every,
+        "mode": "machine_drill",
         "max_phase_stewarded": max_phase,
         "store_path": str(store.path),
         "status_counts": counts,
@@ -398,9 +401,11 @@ def write_progress(
 
 def append_receipt(stats: dict[str, int], progress_path: Path) -> None:
     summary = (
-        f"Apprenticeship steward: submitted={stats['submitted']} reviewed={stats['reviewed']} "
-        f"promoted={stats.get('promoted', 0)} progress={progress_path.name}"
+        f"Machine drill steward done (not graduation): submitted={stats['submitted']} "
+        f"reviewed={stats['reviewed']} promoted={stats.get('promoted', 0)} "
+        f"progress={progress_path.name}. Bar: verified production rows in Review Log."
     )
+    actions = "https://github.com/Kopano-Labs/Introduction-to-MCP/actions"
     subprocess.run(
         [
             sys.executable,
@@ -409,7 +414,7 @@ def append_receipt(stats: dict[str, int], progress_path: Path) -> None:
             "--role",
             "student",
             "--phase",
-            "apprenticeship",
+            "audit",
             "--summary",
             summary,
             "--commands",
@@ -418,6 +423,8 @@ def append_receipt(stats: dict[str, int], progress_path: Path) -> None:
             "0",
             "--evidence-url",
             COMPARE_URL,
+            "--evidence-url",
+            actions,
         ],
         cwd=REPO_ROOT,
         check=False,
@@ -460,7 +467,13 @@ def main() -> int:
         args.checkpoint_every,
         log_checkpoints=not args.no_checkpoint_log,
     )
-    progress = write_progress(store, stats, args.max_phase, tasks)
+    progress = write_progress(
+        store,
+        stats,
+        args.max_phase,
+        tasks,
+        checkpoint_every=args.checkpoint_every,
+    )
     print(json.dumps({"stats": stats, "progress": str(progress)}, indent=2))
     if not args.no_log and stats["reviewed"]:
         append_receipt(stats, progress)

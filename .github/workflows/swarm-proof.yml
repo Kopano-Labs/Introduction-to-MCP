@@ -10,6 +10,9 @@ on:
       - "docs/swarm-ops/**"
       - "scripts/kc_log_append.py"
       - "scripts/kc_guard.py"
+      - "scripts/kc_production_verify_run.py"
+      - "scripts/kc_verified_production.py"
+      - "scripts/kc_apprenticeship_realism_report.py"
       - "scripts/git_sync_monitor.py"
       - "scripts/swarm_remote_proof_urls.ps1"
       - "scripts/swarm_remote_proof_urls.sh"
@@ -39,4 +42,4 @@ jobs:
         run: python scripts/kc_guard.py all --require-verified-production 10
 
       - name: Pytest swarm tools
-        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py -q
+        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py tests/test_kc_verified_production.py -q
