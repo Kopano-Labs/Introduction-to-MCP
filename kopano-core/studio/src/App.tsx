@@ -40,7 +40,7 @@ const pageHeadlines: Record<PageId, string> = {
   council: 'Council',
   labs: 'Labs',
   forge: 'Forge',
-  console: 'Console',
+  console: 'Swarm Console',
   admin: 'Admin',
 };
 

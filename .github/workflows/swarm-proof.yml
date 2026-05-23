@@ -20,6 +20,8 @@ on:
       - "docs/swarm-ops/MAIN_BRAIN_ROADMAP.json"
       - "docs/swarm-ops/SERVITUDE_TRIAD.md"
       - "kopano-core/kopano/swarm_agents_api.py"
+      - "kopano-core/kopano/kc_swarm_console_api.py"
+      - "kopano-core/studio/src/pages/ConsolePage.tsx"
       - "scripts/git_sync_monitor.py"
       - "scripts/swarm_remote_proof_urls.ps1"
       - "scripts/swarm_remote_proof_urls.sh"
@@ -49,4 +51,4 @@ jobs:
         run: python scripts/kc_guard.py all --require-verified-production 10 --require-roadmap-gate
 
       - name: Pytest swarm tools
-        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py tests/test_kc_verified_production.py tests/test_kc_main_brain_roadmap.py tests/test_swarm_agents_api.py -q
+        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py tests/test_kc_verified_production.py tests/test_kc_main_brain_roadmap.py tests/test_swarm_agents_api.py tests/test_swarm_console_api.py -q

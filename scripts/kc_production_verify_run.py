@@ -78,6 +78,7 @@ def production_steps() -> list[tuple[str, str, list[str]]]:
             ],
         ),
         ("P12", "main brain roadmap gate", [PY, "scripts/kc_main_brain_roadmap.py", "gate"]),
+        ("P13", "swarm console status API", [PY, "-m", "pytest", "tests/test_swarm_console_api.py", "-q"]),
     ]
 
 

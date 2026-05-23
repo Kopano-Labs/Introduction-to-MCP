@@ -6,7 +6,7 @@ const pageLabels: Array<{ id: PageId; label: string; short: string }> = [
   { id: 'council', label: 'Council', short: 'Council' },
   { id: 'labs', label: 'Kopano Labs', short: 'Labs' },
   { id: 'forge', label: 'Forge', short: 'Forge' },
-  { id: 'console', label: 'Console', short: 'Console' },
+  { id: 'console', label: 'Swarm Console', short: 'Swarm' },
 ];
 
 interface AppTopNavProps {

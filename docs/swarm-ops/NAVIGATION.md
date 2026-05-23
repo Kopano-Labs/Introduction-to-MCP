@@ -18,6 +18,7 @@
 | KC Swarm Console (wireframe HTML) | [tools/kc-swarm-console-wireframe.html](./tools/kc-swarm-console-wireframe.html) | Studio or Next shell: KC→Cassey, BFF, proof strip; aligns CI with `swarm-proof.yml` |
 | KC Swarm Console (architecture prose) | [KC_SWARM_CONSOLE_ARCHITECTURE.md](./KC_SWARM_CONSOLE_ARCHITECTURE.md) | BFF model, flow, CI vs optional `proof_gate`, citations |
 | KC Swarm Console (GUI IA spec) | [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md) | Four-column layout, flows, branch protection notes |
+| KC Swarm Console (Studio + API) | `GET /api/kc/swarm-console/status` · `kopano-core/studio/src/pages/ConsolePage.tsx` | Context / Swarm / Proof / CI modes; BFF for git + JSONL gates |
 | Unified guard CLI | `scripts/kc_guard.py` | `status` / `validate` / `proof` / `all` / `watch`; delegates to `git_sync_monitor` + `kc_log_append` |
 | Servitude Triad (unified modes) | [SERVITUDE_TRIAD.md](./SERVITUDE_TRIAD.md) | Grit + Realism + Aesthetics — not split |
 | Main Brain roadmap (production gate) | [MAIN_BRAIN_ROADMAP.json](./MAIN_BRAIN_ROADMAP.json) | Seed before/after; Black Mass line |
