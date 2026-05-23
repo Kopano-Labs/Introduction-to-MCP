@@ -90,8 +90,15 @@ def get_brain_opinion() -> dict:
             f"Bar: {graduation_bar}+ verified production in Review Log."
         )
 
+    profile: dict = {}
+    profile_path = _REPO_ROOT / "kopano-core" / ".kc" / "swarm_profile.json"
+    if profile_path.is_file():
+        profile = json.loads(profile_path.read_text(encoding="utf-8"))
+
     return {
         "role": "KC is the brain (vault + ledger), not the worker. Cassey/Cursor write teacher_review.",
+        "lead_student": profile.get("lead_student", "cassy"),
+        "servitude_triad": "docs/swarm-ops/SERVITUDE_TRIAD.md",
         "manifest_mode": mode,
         "public_graduation_bar": graduation_bar,
         "verified_production": verified_n,

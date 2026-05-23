@@ -250,6 +250,14 @@ def cmd_doctrine_verified_production(root: Path, min_required: int) -> int:
     return 0 if ok else EXIT_DOCTRINE
 
 
+def cmd_doctrine_roadmap_gate(root: Path) -> int:
+    from kc_main_brain_roadmap import check_entry_gate
+
+    ok, msg = check_entry_gate()
+    print(f"kc_guard doctrine: {msg}", flush=True)
+    return 0 if ok else EXIT_DOCTRINE
+
+
 def cmd_all(
     root: Path,
     *,
@@ -258,6 +266,7 @@ def cmd_all(
     require_swarm_ack: bool,
     check_doc_hosts: bool = True,
     require_verified_production: int | None = None,
+    require_roadmap_gate: bool = False,
 ) -> int:
     code = cmd_status(root, strict_unpushed=strict_unpushed, fetch=fetch)
     if code != 0:
@@ -275,7 +284,11 @@ def cmd_all(
     if require_swarm_ack:
         return cmd_doctrine_swarm_ack(root)
     if require_verified_production is not None:
-        return cmd_doctrine_verified_production(root, require_verified_production)
+        vp = cmd_doctrine_verified_production(root, require_verified_production)
+        if vp != 0:
+            return vp
+    if require_roadmap_gate:
+        return cmd_doctrine_roadmap_gate(root)
     return 0
 
 
@@ -284,6 +297,8 @@ def cmd_watch(root: Path, interval: float, **kwargs: object) -> int:
     fetch = bool(kwargs.get("fetch"))
     require_swarm_ack = bool(kwargs.get("require_swarm_ack"))
     check_doc_hosts = bool(kwargs.get("check_doc_hosts"))
+    require_verified_production = kwargs.get("require_verified_production")
+    require_roadmap_gate = bool(kwargs.get("require_roadmap_gate"))
     try:
         while True:
             if os.name == "nt":
@@ -297,6 +312,7 @@ def cmd_watch(root: Path, interval: float, **kwargs: object) -> int:
                 require_swarm_ack=require_swarm_ack,
                 check_doc_hosts=check_doc_hosts,
                 require_verified_production=require_verified_production,
+                require_roadmap_gate=require_roadmap_gate,
             )
             print(f"\n[kc_guard watch] exit code {code} (next in {interval}s, Ctrl+C to stop)", flush=True)
             time.sleep(interval)
@@ -345,6 +361,10 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Require N verified production rows in Review Log (not drill)",
     )
     pvp.add_argument("--min", type=int, default=10, metavar="N")
+    sub.add_parser(
+        "doctrine-roadmap-gate",
+        help="Main Brain roadmap entry gate (seed_before + production_bar_met)",
+    )
 
     pa = sub.add_parser("all", help="status + validate + proof (+ optional doctrine)")
     add_sync_flags(pa)
@@ -364,6 +384,11 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="N",
         help="After proof-check, require N verified production rows in Review Log (not apprenticeship drill).",
+    )
+    pa.add_argument(
+        "--require-roadmap-gate",
+        action="store_true",
+        help="Require MAIN_BRAIN_ROADMAP entry gate (roadmap_seed_before + production_bar_met).",
     )
 
     pw = sub.add_parser("watch", help="Loop: all (same flags as all)")
@@ -386,6 +411,11 @@ def _build_parser() -> argparse.ArgumentParser:
         metavar="N",
         help="After proof-check, require N verified production rows in Review Log.",
     )
+    pw.add_argument(
+        "--require-roadmap-gate",
+        action="store_true",
+        help="Require MAIN_BRAIN_ROADMAP entry gate.",
+    )
     return p
 
 
@@ -399,6 +429,7 @@ def main(argv: list[str] | None = None) -> int:
     require_ack = bool(getattr(args, "require_swarm_ack", False))
     check_hosts = not bool(getattr(args, "no_check_doc_hosts", False))
     require_vp = getattr(args, "require_verified_production", None)
+    require_roadmap = bool(getattr(args, "require_roadmap_gate", False))
 
     if args.cmd == "status":
         return cmd_status(root, strict_unpushed=strict, fetch=fetch)
@@ -412,6 +443,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_doctrine_doc_hosts(root)
     if args.cmd == "doctrine-verified-production":
         return cmd_doctrine_verified_production(root, args.min)
+    if args.cmd == "doctrine-roadmap-gate":
+        return cmd_doctrine_roadmap_gate(root)
     if args.cmd == "all":
         return cmd_all(
             root,
@@ -420,6 +453,7 @@ def main(argv: list[str] | None = None) -> int:
             require_swarm_ack=require_ack,
             check_doc_hosts=check_hosts,
             require_verified_production=require_vp,
+            require_roadmap_gate=require_roadmap,
         )
     if args.cmd == "watch":
         return cmd_watch(
@@ -430,6 +464,7 @@ def main(argv: list[str] | None = None) -> int:
             require_swarm_ack=require_ack,
             check_doc_hosts=check_hosts,
             require_verified_production=require_vp,
+            require_roadmap_gate=require_roadmap,
         )
     return EXIT_USAGE
 

@@ -30,6 +30,8 @@ interface KcTrainingPayload {
 
 interface KcBrainOpinion {
   role: string;
+  lead_student?: string;
+  servitude_triad?: string;
   verified_production: number;
   production_bar_met: boolean;
   drill_promoted: number;
@@ -244,7 +246,9 @@ export function TrainingPage() {
         transition={{ duration: 0.52 }}
       >
         <div className="sovereign-command-copy">
-          <span className="sovereign-kicker">KC local CRUD</span>
+          <span className="sovereign-kicker">
+            Servitude Triad — lead student {brainOpinion?.lead_student ?? 'cassy'}
+          </span>
           <h2>{selectedRecord?.title ?? 'No KC record selected'}</h2>
           <div className="proof-lock">
             <span>Owner proof</span>

@@ -1,0 +1,104 @@
+{
+  "schema": "swarm_agents_v1",
+  "triad": ["grit", "realism", "aesthetics"],
+  "servitude": "Realism accommodates Aesthetics; Cassy is not held to corporate-only roles.",
+  "lead_student": "cassy",
+  "teacher": "cassey",
+  "brain": "kc",
+  "agents": [
+    {
+      "id": "cassy",
+      "display_name": "Cassy",
+      "role": "student_primary",
+      "apprenticeship": {
+        "active": true,
+        "manifest": "docs/swarm-ops/apprenticeship/kc_apprenticeship_250.json",
+        "wit_band": "docs/swarm-ops/agents/cassy_wit_25.json",
+        "mission": "Women in Tech — diaspora thrive; student-teacher with Cassey + KC ledger"
+      },
+      "studio_lane": "kopano"
+    },
+    {
+      "id": "cassey",
+      "display_name": "Cassey",
+      "role": "teacher",
+      "apprenticeship": { "active": true, "hold_back_student": false },
+      "studio_lane": "cassey"
+    },
+    {
+      "id": "kc",
+      "display_name": "KC",
+      "role": "brain",
+      "executes": false,
+      "apprenticeship": { "stores": "teacher_review", "api": "/api/kc/brain-opinion" }
+    },
+    {
+      "id": "kopano",
+      "display_name": "Kopano (KC student lane)",
+      "role": "student_studio_alias",
+      "binds_to": "cassy"
+    },
+    {
+      "id": "mirror_warden",
+      "display_name": "Mirror Warden",
+      "swarm_slot": "001",
+      "role": "orchestrator_parity",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc" }
+    },
+    {
+      "id": "kc_apprentice",
+      "display_name": "KC Apprentice (Student)",
+      "swarm_slot": "002",
+      "role": "student_audit",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc" }
+    },
+    {
+      "id": "operational_general",
+      "display_name": "Operational General (Teacher)",
+      "swarm_slot": "003",
+      "role": "teacher_swarm",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "validates": "BLACK_MASS_PROTOCOL.md" }
+    },
+    {
+      "id": "pipeline_drone",
+      "display_name": "3D Pipeline Drone",
+      "swarm_slot": "004",
+      "role": "mesh_worker",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc" }
+    },
+    {
+      "id": "claude",
+      "display_name": "Claude",
+      "role": "mesh",
+      "provider": "anthropic",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc" }
+    },
+    {
+      "id": "grok",
+      "display_name": "Grok",
+      "role": "mesh",
+      "provider": "xai",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc" }
+    },
+    {
+      "id": "gemini",
+      "display_name": "Gemini",
+      "role": "mesh",
+      "provider": "google",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc" }
+    },
+    {
+      "id": "copilot",
+      "display_name": "Copilot",
+      "role": "mesh",
+      "provider": "microsoft",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc" }
+    },
+    {
+      "id": "cf_cloud",
+      "display_name": "CF (cloud)",
+      "role": "lpm_operator",
+      "apprenticeship": { "student": "cassy", "teacher": "cassey", "brain": "kc", "flows": "autonomic" }
+    }
+  ]
+}

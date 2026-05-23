@@ -30,6 +30,8 @@ You said aesthetics sacrificed realism to preach bloatedness. **Accepted.** This
 - **Purpose:** Repeat discipline (proof, logs, guard, endpoints) — internal queue exercise.
 - **Not:** Proof that KC “finished school” or that swarm is complete.
 
+**Unified modes:** [SERVITUDE_TRIAD.md](../SERVITUDE_TRIAD.md) — Grit + Realism + Aesthetics together; Cassy lead student per [SWARM_AGENTS.json](../agents/SWARM_AGENTS.json).
+
 **Do this (real bar):**
 
 ```bash

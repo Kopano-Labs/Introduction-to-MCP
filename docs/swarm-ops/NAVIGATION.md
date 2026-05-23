@@ -19,6 +19,10 @@
 | KC Swarm Console (architecture prose) | [KC_SWARM_CONSOLE_ARCHITECTURE.md](./KC_SWARM_CONSOLE_ARCHITECTURE.md) | BFF model, flow, CI vs optional `proof_gate`, citations |
 | KC Swarm Console (GUI IA spec) | [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md) | Four-column layout, flows, branch protection notes |
 | Unified guard CLI | `scripts/kc_guard.py` | `status` / `validate` / `proof` / `all` / `watch`; delegates to `git_sync_monitor` + `kc_log_append` |
+| Servitude Triad (unified modes) | [SERVITUDE_TRIAD.md](./SERVITUDE_TRIAD.md) | Grit + Realism + Aesthetics — not split |
+| Main Brain roadmap (production gate) | [MAIN_BRAIN_ROADMAP.json](./MAIN_BRAIN_ROADMAP.json) | Seed before/after; Black Mass line |
+| Swarm agents + Cassy apprenticeship | [agents/SWARM_AGENTS.json](./agents/SWARM_AGENTS.json) | All agents bind student=cassy |
+| Black Mass protocol versions | [BLACK_MASS_PROTOCOL.md](./BLACK_MASS_PROTOCOL.md) | Mask v0.5 → Mass v1.5 → v2.0 |
 | Realism vs drill theater | [apprenticeship/REALISM.md](./apprenticeship/REALISM.md) | What counts; Cursor accountability |
 | KC Apprenticeship 250 (stewardship) | [apprenticeship/STEWARDSHIP.md](./apprenticeship/STEWARDSHIP.md) | Machine drill — not public graduation |
 | Apprenticeship task ledger | [apprenticeship/kc_apprenticeship_250.json](./apprenticeship/kc_apprenticeship_250.json) | 10×25 tasks; checkpoints in [apprenticeship/checkpoints/](./apprenticeship/checkpoints/) |
@@ -37,6 +41,9 @@ python scripts/kc_guard.py all --no-check-doc-hosts  # skip kopanolabs URL scan 
 python scripts/kc_guard.py all --require-swarm-ack   # stricter: swarm_ack or kimi_ack + evidence_urls (after Kimi)
 python scripts/kc_guard.py doctrine-doc-hosts  # host drift only
 python scripts/kc_guard.py doctrine-swarm-ack  # swarm/kimi ack only
+python scripts/kc_swarm_agents_bootstrap.py      # SWARM_AGENTS.json → orch_agents.seed.json
+python scripts/kc_cassy_activate.py --seed-wit  # Cassy lead student + WIT 25 band
+python scripts/kc_main_brain_roadmap.py gate    # production entry gate
 python scripts/kc_apprenticeship_activate.py   # manifest + seed kopano-core/.kc/context_store.json
 ```
 

@@ -1,0 +1,63 @@
+{
+  "schema": "main_brain_roadmap_v1",
+  "operator": "CF_cloud",
+  "lpm": "autonomic_ai_flows",
+  "triad": {
+    "grit": "20% forensic execution — pytest, guard, receipts",
+    "realism": "proof bar, JSONL, verified production — accommodates aesthetics",
+    "aesthetics": "craft, Studio, wireframes — serves servitude, never overrides proof"
+  },
+  "servitude": "Realism accommodates Aesthetics and preaches Servitude. Do not split the triad into competing modes.",
+  "scripture_anchor": "Galatians 5:13 — serve one another; truth before theater (MAO: inspect, adapt, receipt).",
+  "entry_gate": {
+    "description": "All production work enters through Main Brain roadmap + verified production bar.",
+    "required_main_brain_kinds": ["roadmap_seed_before", "production_bar_met"],
+    "required_review_production_min": 10,
+    "optional_before_blackmass": ["roadmap_black_mask_v0_5", "roadmap_blackmass_v1_5"]
+  },
+  "milestones": [
+    {
+      "id": "seed_before",
+      "label": "Seed before production",
+      "main_brain_kind": "roadmap_seed_before",
+      "order": 1
+    },
+    {
+      "id": "production_bar",
+      "label": "Verified production bar (10+ JSONL rows)",
+      "main_brain_kind": "production_bar_met",
+      "order": 2
+    },
+    {
+      "id": "black_mask_v0_5",
+      "label": "Black Mask v0.5 — inspect before mass",
+      "main_brain_kind": "roadmap_black_mask_v0_5",
+      "order": 3
+    },
+    {
+      "id": "blackmass_v1_5",
+      "label": "BlackMass v1.5 — coordinated swarm mass",
+      "main_brain_kind": "roadmap_blackmass_v1_5",
+      "order": 4
+    },
+    {
+      "id": "blackmass_v2_0",
+      "label": "BlackMass v2.0 — current operating line",
+      "main_brain_kind": "roadmap_blackmass_v2_0",
+      "order": 5,
+      "status": "current"
+    },
+    {
+      "id": "seed_after",
+      "label": "Seed after production cycle",
+      "main_brain_kind": "roadmap_seed_after",
+      "order": 6
+    }
+  ],
+  "cassy": {
+    "lead_student": true,
+    "mission": "Women in Tech — evolve the diaspora; never hold Cassy to corporate-only swarm roles",
+    "teacher": "cassey",
+    "brain": "kc"
+  }
+}

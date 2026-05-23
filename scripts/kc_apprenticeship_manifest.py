@@ -246,7 +246,7 @@ def build_tasks(include_extensions: bool = True) -> list[dict[str, str]]:
             title = f"KC — P{phase_index} T{task_index:02d}: {item}"
             teacher_context = (
                 f"Phase {phase_index} ({phase_title}). Task {code}. "
-                f"Student (kopano/Cassy): {item}. "
+                f"Student (Cassy/kopano): {item}. "
                 "Deliverable: short student_response with file paths, command output, or URL. "
                 "No fake swarm, no demo-bypass evidence. Teacher (Cursor/KC) reviews Save/Kill/Watch."
             )
