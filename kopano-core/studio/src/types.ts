@@ -306,6 +306,7 @@ export interface CouncilCard {
   id: string;
   lastMsg?: LiveMessage;
   isStudent: boolean;
+  isTeacher?: boolean;
   isThinking: boolean;
   isResponding: boolean;
 }

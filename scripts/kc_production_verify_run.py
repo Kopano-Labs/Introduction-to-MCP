@@ -64,11 +64,20 @@ def production_steps() -> list[tuple[str, str, list[str]]]:
         ("P07", "kc_guard all", [PY, "scripts/kc_guard.py", "all"]),
         ("P08", "git_sync_monitor", [PY, "scripts/git_sync_monitor.py"]),
         ("P09", "kc_sync_vault_logs", [PY, "scripts/kc_sync_vault_logs.py"]),
+        ("P10", "realism report", [PY, "scripts/kc_apprenticeship_realism_report.py"]),
         (
-            "P10",
-            "realism report + verified count",
-            [PY, "scripts/kc_apprenticeship_realism_report.py"],
+            "P11",
+            "roadmap + swarm agents pytest",
+            [
+                PY,
+                "-m",
+                "pytest",
+                "tests/test_kc_main_brain_roadmap.py",
+                "tests/test_swarm_agents_api.py",
+                "-q",
+            ],
         ),
+        ("P12", "main brain roadmap gate", [PY, "scripts/kc_main_brain_roadmap.py", "gate"]),
     ]
 
 

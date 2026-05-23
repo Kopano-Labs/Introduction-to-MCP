@@ -36,6 +36,7 @@ interface KcBrainOpinion {
   production_bar_met: boolean;
   drill_promoted: number;
   public_graduation_bar: number;
+  roadmap_gate_met?: boolean;
   total_contexts: number;
   status_counts: Record<KcStatusName, number>;
   opinion_count: number;

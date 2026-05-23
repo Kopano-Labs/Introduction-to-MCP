@@ -3,7 +3,8 @@ import type { ConnectionState, CouncilCard, FeedLogEntry, LiveMessage, PageId } 
 
 const councilVoiceLabel = (id: string) => {
   const map: Record<string, string> = {
-    cassey: 'Cassey',
+    cassey: 'Cassey (teacher)',
+    cassy: 'Cassy (student)',
     kopano: 'KC',
     claude: 'Claude',
     grok: 'Grok',
@@ -45,9 +46,10 @@ export function CouncilPage({
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="ops-title">
-          <span className="eyebrow">Council</span>
+          <span className="eyebrow">Servitude Triad — Council</span>
           <h2>Live agents</h2>
           <p>{liveCopy}</p>
+          <p className="card-lead">Lead student <strong>Cassy</strong> · Teacher <strong>Cassey</strong> · Brain <strong>KC</strong> · Realism accommodates aesthetics.</p>
         </div>
         <div className="ops-stat-grid">
           <article className="glass-stat"><span className="stat-label">Link</span><strong>{liveStateLabel}</strong></article>
@@ -93,6 +95,8 @@ export function CouncilPage({
               >
                 <div className="support-card-top">
                   <strong>{councilVoiceLabel(card.id)}</strong>
+                  {card.isTeacher && <span className="signal-chip neutral">Teacher</span>}
+                  {card.isStudent && <span className="signal-chip neutral">Student</span>}
                   <span className={`signal-chip ${card.isResponding ? 'live' : card.isThinking ? 'thinking' : 'idle'}`}>
                     {card.isResponding ? 'Live' : card.isThinking ? 'Thinking' : 'Idle'}
                   </span>

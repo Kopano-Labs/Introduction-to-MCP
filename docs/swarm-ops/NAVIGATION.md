@@ -43,6 +43,7 @@ python scripts/kc_guard.py doctrine-doc-hosts  # host drift only
 python scripts/kc_guard.py doctrine-swarm-ack  # swarm/kimi ack only
 python scripts/kc_swarm_agents_bootstrap.py      # SWARM_AGENTS.json → orch_agents.seed.json
 python scripts/kc_cassy_activate.py --seed-wit  # Cassy lead student + WIT 25 band
+python scripts/kc_cassy_wit_steward.py --promote # steward WIT phase 11
 python scripts/kc_main_brain_roadmap.py gate    # production entry gate
 python scripts/kc_apprenticeship_activate.py   # manifest + seed kopano-core/.kc/context_store.json
 ```

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import asdict
 
 from fastapi import APIRouter, HTTPException
@@ -29,8 +30,6 @@ def _verified_production_count() -> tuple[int, bool, int]:
     n, _ = count_verified()
     bar = int(DEFAULT_MIN)
     if _MANIFEST.is_file():
-        import json
-
         bar = int(json.loads(_MANIFEST.read_text(encoding="utf-8")).get("public_graduation_bar", bar))
     ok, _ = check_minimum(bar)
     return n, ok, bar
@@ -68,10 +67,19 @@ def get_brain_opinion() -> dict:
     counts = store.status_payload()["status_counts"]
     drill_promoted = counts.get("promoted", 0)
     verified_n, production_bar_met, graduation_bar = _verified_production_count()
+    roadmap_gate_met = False
+    try:
+        import sys as _sys
+
+        if str(_SCRIPTS) not in _sys.path:
+            _sys.path.insert(0, str(_SCRIPTS))
+        from kc_main_brain_roadmap import check_entry_gate
+
+        roadmap_gate_met, _ = check_entry_gate()
+    except ImportError:
+        pass
     mode = "unknown"
     if _MANIFEST.is_file():
-        import json
-
         mode = json.loads(_MANIFEST.read_text(encoding="utf-8")).get("mode", "unknown")
 
     if production_bar_met:
@@ -103,6 +111,7 @@ def get_brain_opinion() -> dict:
         "public_graduation_bar": graduation_bar,
         "verified_production": verified_n,
         "production_bar_met": production_bar_met,
+        "roadmap_gate_met": roadmap_gate_met,
         "drill_promoted": drill_promoted,
         "total_contexts": len(records),
         "status_counts": counts,

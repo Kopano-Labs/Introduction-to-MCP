@@ -30,8 +30,8 @@ const AdminPage = lazy(async () => ({ default: (await import('./pages/AdminPage'
 const TrainingPage = lazy(async () => ({ default: (await import('./pages/TrainingPage')).TrainingPage }));
 
 const apiBase = getApiBase();
-/** Cassey = teacher lane; kopano = KC student; remainder = multi-provider mesh. */
-const agentList = ['cassey', 'kopano', 'claude', 'grok', 'gemini', 'copilot'];
+/** Cassey = teacher; cassy/kopano = KC student lanes (Cassy lead). */
+const agentList = ['cassey', 'cassy', 'kopano', 'claude', 'grok', 'gemini', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
 const ownerOptions = ['Lead', 'DEV_1', 'DEV_2', 'DEV_3 (Background)', 'kopano'];
 
@@ -127,7 +127,8 @@ const App = () => {
     return {
       id,
       lastMsg,
-      isStudent: id === 'kopano',
+      isStudent: id === 'cassy' || id === 'kopano',
+      isTeacher: id === 'cassey',
       isThinking: thinkingAgent === id,
       isResponding: activeAgent === id,
     };
