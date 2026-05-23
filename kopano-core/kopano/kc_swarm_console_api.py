@@ -19,6 +19,9 @@ _COMPARE_BRANCH = (
     "https://github.com/Kopano-Labs/Introduction-to-MCP/"
     "compare/master...codex/kc-sovereign-gui-full-dev?expand=1"
 )
+_REGISTRY = _REPO_ROOT / "docs" / "swarm-ops" / "agents" / "SWARM_AGENTS.json"
+_WIT_MANIFEST = _REPO_ROOT / "docs" / "swarm-ops" / "agents" / "cassy_wit_25.json"
+_PROFILE = _REPO_ROOT / "kopano-core" / ".kc" / "swarm_profile.json"
 
 router = APIRouter(prefix="/api/kc", tags=["kc-swarm-console"])
 
@@ -131,6 +134,57 @@ def _doctrine() -> dict:
     }
 
 
+def _cassy_role() -> dict:
+    """Cassy = lead student on apprenticeship; not a corporate swarm-role ceiling."""
+    registry: dict = {}
+    if _REGISTRY.is_file():
+        registry = json.loads(_REGISTRY.read_text(encoding="utf-8"))
+    profile: dict = {}
+    if _PROFILE.is_file():
+        profile = json.loads(_PROFILE.read_text(encoding="utf-8"))
+
+    cassy_agent = next((a for a in registry.get("agents", []) if a.get("id") == "cassy"), {})
+    apprenticeship = cassy_agent.get("apprenticeship") or {}
+    wit_title = ""
+    if _WIT_MANIFEST.is_file():
+        wit_title = json.loads(_WIT_MANIFEST.read_text(encoding="utf-8")).get("title", "")
+
+    drill_promoted: int | None = None
+    try:
+        from kopano.kc_training_store import KcTrainingStore
+
+        counts = KcTrainingStore().status_payload().get("status_counts", {})
+        drill_promoted = int(counts.get("promoted", 0))
+    except OSError:
+        drill_promoted = None
+
+    return {
+        "id": "cassy",
+        "display_name": cassy_agent.get("display_name", "Cassy"),
+        "role": cassy_agent.get("role", "student_primary"),
+        "studio_lane": cassy_agent.get("studio_lane", "kopano"),
+        "lead_student": registry.get("lead_student") or profile.get("lead_student", "cassy"),
+        "teacher": registry.get("teacher") or profile.get("teacher", "cassey"),
+        "brain": registry.get("brain") or profile.get("brain", "kc"),
+        "mission": apprenticeship.get("mission") or registry.get("servitude", ""),
+        "wit_band": wit_title or apprenticeship.get("wit_band", ""),
+        "wit_manifest": "docs/swarm-ops/agents/cassy_wit_25.json",
+        "drill_manifest": apprenticeship.get("manifest", "docs/swarm-ops/apprenticeship/kc_apprenticeship_250.json"),
+        "drill_promoted_local": drill_promoted,
+        "drill_is_not_graduation": True,
+        "console_role": (
+            "Cassy is the lead student: she submits bounded student_response rows; "
+            "Cassey (teacher) writes teacher_review; KC stores memory — KC does not chat. "
+            "Mesh/swarm workers bind apprenticeship.student=cassy; corporate slot names are not her ceiling."
+        ),
+        "steward_commands": [
+            "python scripts/kc_cassy_activate.py --seed-wit",
+            "python scripts/kc_cassy_wit_steward.py --promote",
+            "python scripts/kc_apprenticeship_steward.py --promote",
+        ],
+    }
+
+
 def gather_status() -> dict:
     validate_code, validate_tail = _run_script("kc_log_append.py", ["validate"])
     proof_code, proof_tail = _run_script("kc_log_append.py", ["proof-check"])
@@ -158,7 +212,12 @@ def gather_status() -> dict:
         "schema": "kc_swarm_console_status_v1",
         "servitude_triad": "docs/swarm-ops/SERVITUDE_TRIAD.md",
         "wireframe_spec": "docs/swarm-ops/KC_SWARM_CONSOLE_WIREFRAME_SPEC.md",
-        "persona_route": "KC → Cassey",
+        "persona_route": "Cassy (student) → Cassey (teacher) · KC (brain ledger)",
+        "composer_hint": (
+            "Student Cassy: one bounded turn — read first, submit evidence, no owner-proof theater. "
+            "Teacher Cassey routes depth; KC stores teacher_review only."
+        ),
+        "cassy": _cassy_role(),
         "context_host": "https://context.kopanolabs.com",
         "git": _git_snapshot(),
         "checks": {

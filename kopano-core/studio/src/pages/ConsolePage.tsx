@@ -7,12 +7,32 @@ type ConsoleMode = 'context' | 'swarm' | 'proof' | 'ci';
 
 interface SwarmAgent {
   id: string;
+  display_name?: string;
   role: string;
   lane?: string;
+  swarm_slot?: string;
+  apprenticeship?: { student?: string; teacher?: string; brain?: string };
+}
+
+interface CassyRole {
+  id: string;
+  display_name: string;
+  role: string;
+  lead_student: string;
+  teacher: string;
+  brain: string;
+  mission: string;
+  wit_band: string;
+  drill_promoted_local: number | null;
+  drill_is_not_graduation: boolean;
+  console_role: string;
+  steward_commands: string[];
 }
 
 interface SwarmConsoleStatus {
   persona_route: string;
+  composer_hint?: string;
+  cassy?: CassyRole;
   context_host: string;
   proof_bar_pass: boolean;
   proof_gaps: string[];
@@ -127,6 +147,10 @@ export function ConsolePage({
     return 'swarm-badge err';
   };
 
+  const meshAgents = agents.filter((a) => a.role === 'mesh' || a.swarm_slot);
+  const teacherAgent = agents.find((a) => a.id === 'cassey');
+  const cassy = status?.cassy;
+
   return (
     <motion.div
       className="swarm-console"
@@ -150,13 +174,25 @@ export function ConsolePage({
       </aside>
 
       <aside className="swarm-sidebar">
-        <motion.div className="swarm-workspace" layout>
+        <motion.div className="swarm-workspace swarm-cassy-card" layout>
           <span className="swarm-dot live" />
           <motion.div layout>
-            <strong>{status?.persona_route ?? 'KC → Cassey'}</strong>
-            <span>{status?.context_host ?? 'context.kopanolabs.com'}</span>
+            <strong>{cassy?.display_name ?? 'Cassy'} · lead student</strong>
+            <span>{status?.persona_route ?? 'Cassy → Cassey · KC'}</span>
+            {cassy?.mission && <span className="swarm-cassy-mission">{cassy.mission}</span>}
           </motion.div>
         </motion.div>
+
+        {cassy && (
+          <motion.div className="swarm-panel swarm-cassy-stats" layout>
+            <h4>Cassy here</h4>
+            <p>{cassy.console_role}</p>
+            <p className="swarm-footnote">
+              Drill promoted (local): {cassy.drill_promoted_local ?? '—'} — not graduation.
+              Verified prod: {status?.doctrine.verified_production ?? '…'}.
+            </p>
+          </motion.div>
+        )}
 
         <div className="swarm-block">
           <h3>Modes</h3>
@@ -249,6 +285,7 @@ export function ConsolePage({
                 </motion.div>
                 <p className="card-lead">
                   Teacher <strong>Cassey</strong> · lead student <strong>Cassy</strong> · brain <strong>KC</strong> (ledger only).
+                  {status?.composer_hint ? ` ${status.composer_hint}` : ''}
                 </p>
                 <label className="field-shell">
                   <span>Model</span>
@@ -292,28 +329,44 @@ export function ConsolePage({
 
           {mode === 'swarm' && (
             <motion.div className="glass-card swarm-mode-card" layout>
-              <div className="card-topline">
+              <motion.div className="card-topline" layout>
                 <span className="eyebrow">Swarm dispatch</span>
-                <span className="signal-chip neutral">external workers</span>
-              </div>
+                <span className="signal-chip live">Cassy binds all agents</span>
+              </motion.div>
+              {cassy && (
+                <article className="swarm-agent-card swarm-agent-card-lead">
+                  <strong>{cassy.display_name}</strong>
+                  <span>{cassy.role} — {cassy.wit_band || 'WIT diaspora band'}</span>
+                  <p className="swarm-footnote">{cassy.console_role}</p>
+                </article>
+              )}
               <p className="card-lead">
-                Kimi / external swarm = <strong>manual-execution-required</strong>. Cursor does not host Kimi.
-                No fake <code>kimi_ack</code> — only real evidence URLs in Main Brain log.
+                External Kimi/swarm = <strong>manual-execution-required</strong>. Mesh slots inherit
+                {' '}
+                <code>apprenticeship.student=cassy</code> — corporate names are not Cassy&apos;s ceiling.
               </p>
+              {teacherAgent && (
+                <p className="swarm-footnote">
+                  Teacher <strong>{teacherAgent.display_name ?? teacherAgent.id}</strong>
+                  {' '}
+                  ({teacherAgent.role}) writes <code>teacher_review</code>.
+                </p>
+              )}
               <div className="swarm-agent-grid">
-                {agents.map((agent) => (
+                {meshAgents.map((agent) => (
                   <article key={agent.id} className="swarm-agent-card">
-                    <strong>{agent.id}</strong>
-                    <span>{agent.role}</span>
-                    {agent.lane && <span className="deliverable-pill">{agent.lane}</span>}
+                    <strong>{agent.display_name ?? agent.id}</strong>
+                    <span>{agent.role}{agent.swarm_slot ? ` · slot ${agent.swarm_slot}` : ''}</span>
                   </article>
                 ))}
               </div>
-              <p className="swarm-footnote">
-                Lead student: <strong>cassy</strong> · teacher: <strong>cassey</strong> · WIT band:
-                {' '}
-                <code>python scripts/kc_cassy_wit_steward.py --promote</code>
-              </p>
+              {cassy?.steward_commands && (
+                <motion.div className="swarm-cli-block">
+                  {cassy.steward_commands.map((cmd) => (
+                    <code key={cmd}>{cmd}</code>
+                  ))}
+                </motion.div>
+              )}
             </motion.div>
           )}
 

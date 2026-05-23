@@ -30,4 +30,7 @@ def test_swarm_console_status(client: TestClient) -> None:
     assert "doctrine" in body
     assert body["doctrine"]["verified_production"] >= 10
     assert body["doctrine"]["production_bar_met"] is True
+    assert body["cassy"]["lead_student"] == "cassy"
+    assert body["cassy"]["teacher"] == "cassey"
+    assert "student_primary" in body["cassy"]["role"]
     assert body["ci"]["actions_url"].startswith("https://github.com/")

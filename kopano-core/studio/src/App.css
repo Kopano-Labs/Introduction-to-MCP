@@ -2260,6 +2260,26 @@ input[type='range'] {
   font-size: 0.72rem;
 }
 
+.swarm-cassy-mission {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.68rem;
+  opacity: 0.8;
+  line-height: 1.35;
+}
+
+.swarm-cassy-stats p {
+  margin: 0 0 6px;
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.swarm-agent-card-lead {
+  border-color: rgba(90, 162, 170, 0.45);
+  background: rgba(90, 162, 170, 0.08);
+  margin-bottom: 10px;
+}
+
 .swarm-relay {
   margin-top: 0;
 }
