@@ -14,6 +14,9 @@ if (-not (Test-Path (Join-Path $studio "dist\index.html"))) {
     throw "Studio dist missing after npm run build"
 }
 
+Write-Host "==> Python deps (pywebview for native window)"
+python -m pip install pywebview 2>$null | Out-Null
+
 Write-Host "==> PyInstaller"
 python -m pip install --upgrade pyinstaller 2>$null | Out-Null
 # Avoid --clean on Windows if a prior build left locked files under build/
@@ -31,8 +34,9 @@ Write-Host @"
 
 Smoke test (optional):
   dist\KopanoContext.exe
-  # Opens http://127.0.0.1:8000 with bundled Studio
+  # Opens a native window with Studio (CRUD, Labs, Console) + Admin tab
 
-CLI mode inside the same binary:
+CLI / headless mode:
   dist\KopanoContext.exe serve api --no-open
+  dist\KopanoContext.exe serve api --no-window
 "@

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { getApiBase } from '../apiBase';
 import type { FeedLogEntry, LabsAnalytics, McpConsoleReply } from '../types';
+import { PhuLegacyCard } from '../operator/PhuLegacyCard';
 
 type ConsoleMode = 'context' | 'swarm' | 'proof' | 'ci';
 
@@ -193,6 +194,8 @@ export function ConsolePage({
             </p>
           </motion.div>
         )}
+
+        <PhuLegacyCard />
 
         <div className="swarm-block">
           <h3>Modes</h3>

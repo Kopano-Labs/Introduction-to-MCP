@@ -1,0 +1,103 @@
+{
+  "schema": "kopano_phu_ecosystem_v1",
+  "title": "Kopano-Phu Ecosystem",
+  "subtitle": "Kopano Labs × Ama-Phu Entertainment — Cassy legacy lane under KC",
+  "breaking_point_protocol": "Bracket Protocol",
+  "main_brain": {
+    "vault_root_env": "KOPANO_SCHEMATICS_ROOT",
+    "vault_relative": "Schematics",
+    "canonical_logs": [
+      "04-Updates/logs/KC Main Brain Log.jsonl",
+      "04-Updates/logs/KC Review Log.jsonl"
+    ],
+    "registry": "21-KOPANO LABS ECOSYSTEM/Operations General/SUB-BRAIN/RETURN-GATE-REGISTRY.md",
+    "roadmap_master": "21-KOPANO LABS ECOSYSTEM/Operations General/ROADMAP/Sub-Brain-Roadmap-CRUD-Master.md"
+  },
+  "parents": [
+    {
+      "id": "kopano_labs",
+      "display_name": "Kopano Labs",
+      "role": "platform_operator"
+    },
+    {
+      "id": "ama_phu",
+      "display_name": "Ama-Phu Entertainment",
+      "role": "entertainment_hub",
+      "sub_brain_folder": "AMA-PHU ENTERTAINMENT"
+    }
+  ],
+  "cassy_legacy": {
+    "lead_student": "cassy",
+    "teacher": "cassey",
+    "brain": "kc",
+    "legacy_doc": "docs/swarm-ops/LEGACY_ORCH.md",
+    "seed": "kopano-core/config/cassy_agents.seed.json"
+  },
+  "sub_brains": [
+    {
+      "id": "freddy_nw_alfalfa",
+      "display_name": "Freddy NW Alfalfa",
+      "vault_folder": "Freddy NW Alfalfa (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LD_REVIEW",
+      "flagship": true
+    },
+    {
+      "id": "starfall_salvage",
+      "display_name": "Starfall Salvage",
+      "vault_folder": "Starfall Salvage (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LOCKED"
+    },
+    {
+      "id": "ama_phu_entertainment",
+      "display_name": "AMA-PHU Entertainment",
+      "vault_folder": "AMA-PHU ENTERTAINMENT",
+      "parent": "ama_phu",
+      "return_gate_default": "LOCKED",
+      "mirror_warden_focus": true
+    },
+    {
+      "id": "kopano_labs_website",
+      "display_name": "Kopano Labs Website",
+      "vault_folder": "Kopano Labs Website (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LD_REVIEW"
+    },
+    {
+      "id": "kasilink",
+      "display_name": "KasiLink",
+      "vault_folder": "KasiLink (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LOCKED"
+    },
+    {
+      "id": "bookit_5s_arena",
+      "display_name": "Bookit 5s Arena",
+      "vault_folder": "Bookit 5s Arena (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LOCKED"
+    },
+    {
+      "id": "5s_arena_blog",
+      "display_name": "5s Arena Blog",
+      "vault_folder": "5s Arena Blog (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LOCKED"
+    },
+    {
+      "id": "cape_campass",
+      "display_name": "Cape Campass",
+      "vault_folder": "Cape Campass (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LOCKED"
+    },
+    {
+      "id": "portfolios_websites",
+      "display_name": "Portfolios Websites",
+      "vault_folder": "Portfolios Websites (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LOCKED"
+    }
+  ]
+}

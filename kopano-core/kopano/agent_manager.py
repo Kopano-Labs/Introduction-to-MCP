@@ -1,6 +1,7 @@
 from typing import Dict, List, Any, Optional
 from pydantic import BaseModel
 import json
+import os
 from pathlib import Path
 from rich.console import Console
 
@@ -8,6 +9,26 @@ console = Console()
 
 from .memory import memory_manager
 from .config import AGENTS_FILE
+
+_ENV_KEY_MAP = {
+    "anthropic": "ANTHROPIC_API_KEY",
+    "openai": "OPENAI_API_KEY",
+    "google": "GOOGLE_API_KEY",
+    "xai": "XAI_API_KEY",
+    "groq": "GROQ_API_KEY",
+    "mistral": "MISTRAL_API_KEY",
+    "microsoft": "OPENAI_API_KEY",
+}
+
+
+def _resolve_api_key(provider: str, api_key: str) -> str:
+    if api_key and api_key.strip().upper() != "ENV":
+        return api_key
+    env_var = _ENV_KEY_MAP.get(provider.lower())
+    if env_var:
+        return os.getenv(env_var, "")
+    return ""
+
 
 class Agent(BaseModel):
     id: str
@@ -88,7 +109,19 @@ def load_agents() -> Dict[str, Agent]:
     try:
         with open(AGENTS_FILE, "r") as f:
             agents_data = json.load(f)
-        return {id: Agent(**data) for id, data in agents_data.items()}
+        return {
+            aid: Agent(
+                id=aid,
+                **{
+                    **{k: v for k, v in data.items() if k != "id"},
+                    "api_key": _resolve_api_key(
+                        data.get("provider", "openai"),
+                        data.get("api_key", ""),
+                    ),
+                },
+            )
+            for aid, data in agents_data.items()
+        }
     except json.JSONDecodeError:
         console.print(f"[bold red]Error:[/bold red] Could not decode agents.json. File might be corrupt.")
         return {}

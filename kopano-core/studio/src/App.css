@@ -1017,6 +1017,171 @@ button {
   gap: 12px;
 }
 
+.nav-pill-admin {
+  border-color: rgba(255, 212, 111, 0.22);
+}
+
+.nav-lock-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--coral);
+  margin-left: 6px;
+  display: inline-block;
+}
+
+.desktop-boot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: rgba(2, 8, 12, 0.82);
+  backdrop-filter: blur(18px);
+}
+
+.desktop-boot-card {
+  width: min(520px, calc(100vw - 32px));
+  padding: 28px 30px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.desktop-boot-card h2 {
+  margin: 8px 0 10px;
+}
+
+.desktop-boot-card p {
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+
+.desktop-boot-spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 3px solid rgba(95, 241, 197, 0.18);
+  border-top-color: var(--teal);
+}
+
+.god-dock {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 900;
+  width: min(420px, calc(100vw - 32px));
+  max-height: min(78vh, 720px);
+  overflow: auto;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 212, 111, 0.28);
+  background: rgba(6, 12, 16, 0.94);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.god-dock-tab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 900;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 212, 111, 0.35);
+  background: rgba(6, 12, 16, 0.92);
+  color: var(--gold);
+  cursor: pointer;
+}
+
+.god-dock-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.god-dock-sub {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.god-dock-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.god-dock-stats article {
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.god-dock-stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.god-dock-panel {
+  margin-bottom: 12px;
+}
+
+.god-dock-panel h4 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+}
+
+.god-dock-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.god-dock-actions .action-button {
+  font-size: 0.78rem;
+  padding: 8px 10px;
+}
+
+.god-dock-output pre {
+  max-height: 140px;
+  overflow: auto;
+  margin: 8px 0 0;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 0.72rem;
+  white-space: pre-wrap;
+}
+
+.god-dock-output-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.god-dock-error {
+  color: var(--coral);
+  font-size: 0.85rem;
+  margin: 8px 0 0;
+}
+
+.swarm-phu-card .swarm-phu-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+
 .admin-error {
   padding: 12px 14px;
   border-radius: 16px;

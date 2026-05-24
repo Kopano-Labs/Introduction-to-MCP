@@ -173,7 +173,10 @@ def _model_backed_answer(message: str, topic: str, model_preference: str | None 
             "Respond in under 170 words. "
             "Structure the answer as a short operational summary followed by compact numbered next steps."
         )
-        return agent.model, call_ai_litellm(agent, prompt, temperature=0.2)
+        try:
+            return agent.model, call_ai_litellm(agent, prompt, temperature=0.2)
+        except Exception:
+            continue
     return None, ""
 
 

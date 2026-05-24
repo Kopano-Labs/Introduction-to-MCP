@@ -25,6 +25,7 @@
 | Main Brain roadmap (production gate) | [MAIN_BRAIN_ROADMAP.json](./MAIN_BRAIN_ROADMAP.json) | Seed before/after; Black Mass line |
 | Swarm agents + Cassy apprenticeship | [agents/SWARM_AGENTS.json](./agents/SWARM_AGENTS.json) | All agents bind student=cassy |
 | Cassy mesh seed (`cassy_agents.seed.json`) | `kopano-core/config/cassy_agents.seed.json` | Runnable agent install; legacy Orch map: [LEGACY_ORCH.md](./LEGACY_ORCH.md) |
+| Kopano-Phu ecosystem | [KOPANO_PHU_ECOSYSTEM.md](./KOPANO_PHU_ECOSYSTEM.md) · [BRACKET_PROTOCOL.md](./BRACKET_PROTOCOL.md) | Sub-brain reattach + Main Brain from `Schematics/` |
 | Black Mass protocol versions | [BLACK_MASS_PROTOCOL.md](./BLACK_MASS_PROTOCOL.md) | Mask v0.5 → Mass v1.5 → v2.0 |
 | Realism vs drill theater | [apprenticeship/REALISM.md](./apprenticeship/REALISM.md) | What counts; Cursor accountability |
 | KC Apprenticeship 250 (stewardship) | [apprenticeship/STEWARDSHIP.md](./apprenticeship/STEWARDSHIP.md) | Machine drill — not public graduation |

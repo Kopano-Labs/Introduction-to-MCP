@@ -20,6 +20,9 @@ a = Analysis(
     datas=added_files,
     hiddenimports=kopano_hidden
     + [
+        "webview",
+        "webview.platforms.winforms",
+        "webview.platforms.edgechromium",
         "uvicorn",
         "uvicorn.logging",
         "uvicorn.loops",
@@ -70,7 +73,7 @@ exe = EXE(
     upx=False,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=True,
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,

@@ -7,7 +7,19 @@ import subprocess
 import sys
 from pathlib import Path
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
+from pydantic import BaseModel, Field
+
+from .monorepo_control import (
+    GIT_ACTIONS,
+    SCRIPT_ACTIONS,
+    execute_git_action,
+    execute_script_action,
+    git_run as _git,
+    git_snapshot as _git_snapshot,
+    run_script as _run_script,
+)
+from .operator_auth import load_persisted_desktop_session, require_operator
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _SCRIPTS = _REPO_ROOT / "scripts"
@@ -24,71 +36,6 @@ _WIT_MANIFEST = _REPO_ROOT / "docs" / "swarm-ops" / "agents" / "cassy_wit_25.jso
 _PROFILE = _REPO_ROOT / "kopano-core" / ".kc" / "swarm_profile.json"
 
 router = APIRouter(prefix="/api/kc", tags=["kc-swarm-console"])
-
-
-def _git(cmd: list[str]) -> tuple[int, str]:
-    proc = subprocess.run(
-        ["git", *cmd],
-        cwd=_REPO_ROOT,
-        capture_output=True,
-        text=True,
-        timeout=60,
-    )
-    out = (proc.stdout or proc.stderr or "").strip()
-    return proc.returncode, out
-
-
-def _git_snapshot() -> dict:
-    snap: dict = {
-        "branch": "(unknown)",
-        "head_sha": "",
-        "upstream": None,
-        "ahead": 0,
-        "behind": 0,
-        "origin_fetch_url": "",
-        "warnings": [],
-    }
-    _, branch = _git(["branch", "--show-current"])
-    snap["branch"] = branch or "(detached)"
-    _, head = _git(["rev-parse", "HEAD"])
-    snap["head_sha"] = head[:12] if head else ""
-    _, upstream = _git(["rev-parse", "--abbrev-ref", f"{snap['branch']}@{{upstream}}"])
-    if upstream:
-        snap["upstream"] = upstream
-        code, cnt = _git(["rev-list", "--left-right", "--count", "HEAD...@{upstream}"])
-        if code == 0 and "\t" in cnt:
-            left, right = cnt.split("\t", 1)
-            snap["ahead"] = int(left)
-            snap["behind"] = int(right)
-            if snap["ahead"]:
-                snap["warnings"].append(f"{snap['ahead']} commit(s) ahead of {upstream} — push for remote receipts.")
-    else:
-        snap["warnings"].append("No upstream configured — git push -u origin <branch> once.")
-
-    _, remotes = _git(["remote", "-v"])
-    for line in (remotes or "").splitlines():
-        if line.startswith("origin\t") and "(fetch)" in line:
-            snap["origin_fetch_url"] = line.split()[1]
-            break
-    if "Kopano-Labs" in snap["origin_fetch_url"]:
-        snap["warnings"].append(
-            "origin is Kopano-Labs — add a personal fork remote if you need profile-visible receipts."
-        )
-    return snap
-
-
-def _run_script(script: str, args: list[str]) -> tuple[int, str]:
-    proc = subprocess.run(
-        [sys.executable, str(_SCRIPTS / script), *args],
-        cwd=_REPO_ROOT,
-        capture_output=True,
-        text=True,
-        timeout=300,
-    )
-    tail = (proc.stdout or proc.stderr or "").strip()
-    if len(tail) > 400:
-        tail = "…" + tail[-400:]
-    return proc.returncode if proc.returncode is not None else 1, tail
 
 
 def _last_log_line(path: Path) -> dict | None:
@@ -230,6 +177,24 @@ def _cassy_role() -> dict:
     }
 
 
+def _kopano_phu_summary() -> dict:
+    try:
+        from .phu_ecosystem import bracket_protocol_status, ecosystem_payload
+
+        eco = ecosystem_payload()
+        return {
+            "title": eco.get("title"),
+            "breaking_point": eco.get("bracket_protocol", {}).get("breaking_point"),
+            "attached": eco.get("bracket_protocol", {}).get("counts", {}).get("attached"),
+            "detached": eco.get("bracket_protocol", {}).get("counts", {}).get("detached"),
+            "main_brain_ratio": eco.get("main_brain", {}).get("population_ratio"),
+            "api": "/api/kc/phu/ecosystem",
+            "bracket": bracket_protocol_status().get("tagline"),
+        }
+    except OSError:
+        return {"title": "Kopano-Phu Ecosystem", "breaking_point": False, "api": "/api/kc/phu/ecosystem"}
+
+
 def gather_status() -> dict:
     validate_code, validate_tail = _run_script("kc_log_append.py", ["validate"])
     proof_code, proof_tail = _run_script("kc_log_append.py", ["proof-check"])
@@ -263,6 +228,7 @@ def gather_status() -> dict:
             "Teacher Cassey routes depth; KC stores teacher_review only."
         ),
         "cassy": _cassy_role(),
+        "kopano_phu": _kopano_phu_summary(),
         "agents": _agents_inventory(),
         "context_host": "https://context.kopanolabs.com",
         "git": _git_snapshot(),
@@ -310,3 +276,77 @@ def gather_status() -> dict:
 @router.get("/swarm-console/status")
 def get_swarm_console_status() -> dict:
     return gather_status()
+
+
+class OperatorLoginBody(BaseModel):
+    email: str
+    password: str
+
+
+class SwarmActionRequest(BaseModel):
+    action: str = Field(description="Allowlisted script action id")
+    confirm: bool = Field(default=False, description="Required for destructive git/steward actions")
+
+
+_SWARM_ACTIONS = SCRIPT_ACTIONS
+_GIT_GOD_ACTIONS = GIT_ACTIONS
+
+
+def _require_god(
+    authorization: str | None = Header(default=None, alias="Authorization"),
+) -> dict:
+    return require_operator(authorization, god_only=True)
+
+
+@router.get("/swarm-console/operator")
+def get_swarm_operator(operator: dict = Depends(_require_god)) -> dict:
+    return {
+        "user": operator,
+        "super_god_mode": True,
+        "actions": sorted(_SWARM_ACTIONS.keys()),
+        "git_actions": sorted(_GIT_GOD_ACTIONS.keys()),
+    }
+
+
+@router.get("/swarm-console/desktop-session")
+def get_desktop_operator_session(request: Request) -> dict:
+    client_host = request.client.host if request.client else ""
+    if client_host not in {"127.0.0.1", "::1"}:
+        raise HTTPException(status_code=403, detail="Desktop session is localhost-only.")
+    data = load_persisted_desktop_session()
+    if not data:
+        raise HTTPException(status_code=404, detail="No desktop operator session provisioned.")
+    return data
+
+
+@router.post("/swarm-console/actions/run")
+def run_swarm_action(
+    body: SwarmActionRequest,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    try:
+        result = execute_script_action(body.action, confirm=body.confirm)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {
+        **result,
+        "operator": operator["email"],
+        "status": gather_status(),
+    }
+
+
+@router.post("/swarm-console/git/run")
+def run_swarm_git_action(
+    body: SwarmActionRequest,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    try:
+        result = execute_git_action(body.action, confirm=body.confirm)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {**result, "operator": operator["email"]}
+
+
+@router.post("/swarm-console/status/refresh")
+def refresh_swarm_status(operator: dict = Depends(_require_god)) -> dict:
+    return {**gather_status(), "refreshed_by": operator["email"]}

@@ -12,9 +12,10 @@ for import_root in (ROOT / "kopano-core", ROOT):
     if import_root.exists() and path not in sys.path:
         sys.path.insert(0, path)
 
-from kopano.runtime import configure_frozen_runtime  # noqa: E402
+from kopano.runtime import configure_frozen_runtime, ensure_desktop_operator  # noqa: E402
 
 configure_frozen_runtime()
+ensure_desktop_operator()
 
 from kopano.desktop import main  # noqa: E402
 

@@ -276,6 +276,35 @@ def authenticate_user(email: str, password: str) -> Optional[dict]:
     }
 
 
+def upsert_operator_account(
+    email: str,
+    password: str,
+    *,
+    full_name: str | None = None,
+    god_mode: bool = True,
+) -> dict:
+    """Create or refresh a local operator with admin + optional god mode."""
+    normalized = email.strip().lower()
+    try:
+        user = register_user(normalized, password, full_name=full_name or "Kopano Operator")
+    except ValueError:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        salt = secrets.token_hex(16)
+        password_hash = _hash_password(password, salt)
+        cursor.execute(
+            """
+            UPDATE users
+            SET password_hash = ?, password_salt = ?, is_active = 1, updated_at = CURRENT_TIMESTAMP
+            WHERE email = ?
+            """,
+            (password_hash, salt, normalized),
+        )
+        conn.commit()
+        conn.close()
+    return grant_admin(normalized, god_mode=god_mode)
+
+
 def grant_admin(email: str, god_mode: bool = False) -> dict:
     conn = get_db_connection()
     cursor = conn.cursor()

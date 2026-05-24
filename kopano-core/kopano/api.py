@@ -20,6 +20,8 @@ from .kasilink_api import router as kasilink_router
 from .kc_training_api import router as kc_training_router
 from .swarm_agents_api import router as swarm_agents_router
 from .kc_swarm_console_api import router as swarm_console_router
+from .kc_god_api import router as god_router
+from .kc_phu_legacy_api import router as phu_legacy_router
 from .labs_api import router as labs_router
 from .telemetry import configure_server_telemetry, log_demo_event
 
@@ -33,6 +35,13 @@ async def lifespan(app: FastAPI):
     log_demo_event("cassy_api_startup", telemetry_configured=telemetry_state["configured"])
     # Startup: Initialize the Pristine Vault
     init_db()
+    from .runtime import ensure_desktop_admin, ensure_desktop_operator
+
+    ensure_desktop_admin()
+    ensure_desktop_operator()
+    from .operator_auth import load_persisted_desktop_session
+
+    load_persisted_desktop_session()
     print("Pristine Vault online")
     yield
     log_demo_event("cassy_api_shutdown")
@@ -68,6 +77,8 @@ app.include_router(kasilink_router)
 app.include_router(kc_training_router)
 app.include_router(swarm_agents_router)
 app.include_router(swarm_console_router)
+app.include_router(god_router)
+app.include_router(phu_legacy_router)
 app.include_router(labs_router)
 
 # Shared memory for real-time updates (Broadcast Protocol)
@@ -188,20 +199,25 @@ def login(request: LoginRequest):
     user = authenticate_user(request.email, request.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    log_demo_event("auth_login_success", role=user.get("role", "unknown"))
+    from .operator_auth import create_session
+
+    token = create_session(user)
+    log_demo_event("auth_login_success", role=user.get("role", "unknown"), god_mode=bool(user.get("god_mode")))
     return {
         "status": "ok",
+        "access_token": token,
         "user": {
             "id": user["id"],
             "email": user["email"],
             "full_name": user["full_name"],
             "role": user["role"],
+            "god_mode": bool(user.get("god_mode")),
             "reward_points": user.get("reward_points", 0),
             "referral_code": user.get("referral_code"),
             "referred_by": user.get("referred_by"),
             "is_active": bool(user["is_active"]),
-            "created_at": user["created_at"]
-        }
+            "created_at": user["created_at"],
+        },
     }
 
 @app.get("/rewards/status")

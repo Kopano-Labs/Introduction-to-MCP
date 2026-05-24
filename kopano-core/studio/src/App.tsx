@@ -6,6 +6,7 @@ import type { EditableArtifact, EditableTask } from './labsUi';
 import { clientTelemetryConfigured, trackClientEvent } from './telemetry';
 import { AnimatedBackdrop } from './components/AnimatedBackdrop';
 import { AppTopNav } from './components/AppTopNav';
+import { DesktopBootOverlay } from './components/DesktopBootOverlay';
 import type {
   ConnectionState,
   CoworkRoom,
@@ -21,6 +22,9 @@ import type {
   PageId,
 } from './types';
 import { getApiBase, getWsLiveUrl } from './apiBase';
+import { GodModeDock } from './operator/GodModeDock';
+import { useOperator } from './operator/OperatorProvider';
+import { storeOperator } from './operator/operatorApi';
 
 const CouncilPage = lazy(async () => ({ default: (await import('./pages/CouncilPage')).CouncilPage }));
 const LabsPage = lazy(async () => ({ default: (await import('./pages/LabsPage')).LabsPage }));
@@ -120,6 +124,7 @@ const App = () => {
     ? activeRoomCandidate
     : coworkRooms.find((room) => hasCoworkRoomDetail(room)) ?? null;
   const isAdminLoggedIn = adminUser?.role === 'admin';
+  const { isGodMode } = useOperator();
   const featuredAgentId = activeAgent ?? thinkingAgent ?? 'kopano';
   const latestTransmission = messages[messages.length - 1] ?? null;
   const councilCards = agentList.map((id) => {
@@ -547,6 +552,11 @@ const App = () => {
       }
       setAdminUser(data.user);
       window.localStorage.setItem('kopano-admin-user', JSON.stringify(data.user));
+      if (data.access_token) {
+        window.localStorage.setItem('kopano-operator-token', data.access_token);
+        window.localStorage.setItem('kopano-operator-user', JSON.stringify(data.user));
+        storeOperator(data.access_token, data.user);
+      }
       navigate('admin');
       logSystemEvent('admin-login', `Admin session opened for ${data.user.email}.`);
     } catch {
@@ -561,6 +571,8 @@ const App = () => {
     setSelectedSession(null);
     setAdminError(null);
     window.localStorage.removeItem('kopano-admin-user');
+    window.localStorage.removeItem('kopano-operator-token');
+    window.localStorage.removeItem('kopano-operator-user');
     navigate('labs');
     logSystemEvent('admin-logout', 'Admin session closed. Returned to public Labs.');
   };
@@ -582,11 +594,14 @@ const App = () => {
 
   return (
     <div className={`cassy-app page-${page}`}>
+      <DesktopBootOverlay />
       <AnimatedBackdrop page={page} connectionState={connectionState} />
       <div className="shell-frame">
         <AppTopNav
           page={page}
           connectionState={connectionState}
+          isAdminLoggedIn={isAdminLoggedIn}
+          isGodMode={isGodMode}
           onNavigate={navigate}
         />
 
@@ -725,6 +740,7 @@ const App = () => {
           </Suspense>
         </main>
       </div>
+      <GodModeDock />
     </div>
   );
 };

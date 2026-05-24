@@ -45,10 +45,10 @@ export function LabsPage({
             <span className="stat-label">Readiness</span>
             <strong>{requiredRatio}</strong>
           </article>
-          <article className="quick-launch-card static">
+          <button type="button" className="quick-launch-card" onClick={() => onNavigate('admin')}>
             <span className="stat-label">Audit</span>
-            <strong>{isAdminLoggedIn ? 'Unlocked' : 'Locked'}</strong>
-          </article>
+            <strong>{isAdminLoggedIn ? 'Unlocked' : 'Open admin'}</strong>
+          </button>
         </div>
       </motion.section>
 

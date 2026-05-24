@@ -102,9 +102,13 @@ From repo root (requires Node.js + Python with project deps installed):
 .\scripts\build_kopano_context.ps1
 ```
 
-Output: `dist\KopanoContext.exe` — starts **API + bundled Studio** on `http://127.0.0.1:8000` and opens your browser. SQLite lives under `%LOCALAPPDATA%\KopanoContext\` (not next to the exe).
+Output: `dist\KopanoContext.exe` — opens a **native window** with the full Studio UI (CRUD, Council, Labs, Forge, Swarm Console) plus the **Admin** tab in the top nav. API listens on `http://127.0.0.1:8000`. SQLite lives under `%LOCALAPPDATA%\KopanoContext\`.
 
-Optional flags: `KopanoContext.exe serve api --no-open --port 8000`
+First-run admin (auto-created if none exists): `admin@kopano.local` / `demo-admin` (override with `KOPANO_ADMIN_EMAIL` / `KOPANO_ADMIN_PASSWORD`).
+
+Optional flags:
+- `KopanoContext.exe serve api --no-window` — use system browser instead of embedded window
+- `KopanoContext.exe serve api --no-open` — headless API only
 
 ## Emergency Recovery
 

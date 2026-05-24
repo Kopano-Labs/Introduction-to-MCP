@@ -15,6 +15,12 @@ client = TestClient(app)
 
 
 @pytest.fixture
+def deterministic_mcp_console(monkeypatch):
+    """Keep MCP Console tests offline when ~/.cassy/agents.json has ENV placeholders."""
+    monkeypatch.setattr("kopano.mcp_console.load_agents", lambda: {})
+
+
+@pytest.fixture
 def isolated_labs_db(monkeypatch):
     temp_root = Path(".pytest_tmp")
     temp_root.mkdir(exist_ok=True)
@@ -258,7 +264,7 @@ def test_cassy_code_lesson_status_can_advance(isolated_labs_db):
     assert lesson["confidence"] == 91
 
 
-def test_mcp_console_chat_routes_cli_queries():
+def test_mcp_console_chat_routes_cli_queries(deterministic_mcp_console):
     response = client.post(
         "/api/labs/mcp-console/chat",
         json={"message": "How do I use the CLI and terminal flow for Cassy?"},
@@ -271,7 +277,7 @@ def test_mcp_console_chat_routes_cli_queries():
     assert "analytics" in payload
 
 
-def test_mcp_console_models_and_stream_endpoint_work():
+def test_mcp_console_models_and_stream_endpoint_work(deterministic_mcp_console):
     models_response = client.get("/api/labs/mcp-console/models")
     assert models_response.status_code == 200
     assert "models" in models_response.json()
@@ -313,7 +319,7 @@ def test_microsoft_readiness_endpoint_reports_shape():
     assert "az" in payload["tooling"]
 
 
-def test_labs_analytics_endpoint_reports_forge_and_console(isolated_labs_db):
+def test_labs_analytics_endpoint_reports_forge_and_console(isolated_labs_db, deterministic_mcp_console):
     client.post(
         "/api/labs/cowork/rooms",
         json={"name": "Analytics Room", "mission": "Track throughput", "lead": "Lead"},
