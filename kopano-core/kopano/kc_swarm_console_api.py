@@ -134,6 +134,49 @@ def _doctrine() -> dict:
     }
 
 
+def _agents_inventory() -> dict:
+    """Honest agent counts — registry vs orch-runnable vs doctrine-only."""
+    registry: dict = {}
+    if _REGISTRY.is_file():
+        registry = json.loads(_REGISTRY.read_text(encoding="utf-8"))
+    agents = registry.get("agents", [])
+    seed_path = _REPO_ROOT / "kopano-core" / "config" / "orch_agents.seed.json"
+    orch_ids: set[str] = set()
+    if seed_path.is_file():
+        orch_ids = set(json.loads(seed_path.read_text(encoding="utf-8")).keys())
+    orch_excluded = frozenset(
+        {"kc", "mirror_warden", "kc_apprentice", "operational_general", "pipeline_drone", "cf_cloud"}
+    )
+    wit_n = 0
+    if _WIT_MANIFEST.is_file():
+        wit_n = int(json.loads(_WIT_MANIFEST.read_text(encoding="utf-8")).get("task_count", 0))
+    return {
+        "registry_total": len(agents),
+        "orch_runnable": len(orch_ids),
+        "swarm_slots": sum(1 for a in agents if a.get("swarm_slot")),
+        "mesh": sum(1 for a in agents if a.get("role") == "mesh"),
+        "triad_ids": ["cassy", "cassey", "kc"],
+        "wit_tasks": wit_n,
+        "operator_cf": "cf_cloud",
+        "orch_seed_path": "kopano-core/config/orch_agents.seed.json",
+        "registry_path": "docs/swarm-ops/agents/SWARM_AGENTS.json",
+        "cf_comms_fragment": "docs/swarm-ops/comms-log-fragments/CF_AGENT_ACTIVATION.md",
+        "cf_activate_command": "python scripts/kc_cf_comms_activate.py --prepend-vault",
+        "external_kimi_300": "manual-execution-required",
+        "agents": [
+            {
+                "id": a.get("id"),
+                "display_name": a.get("display_name"),
+                "role": a.get("role"),
+                "swarm_slot": a.get("swarm_slot"),
+                "orch_runnable": a.get("id") in orch_ids,
+                "doctrine_only": a.get("id") in orch_excluded,
+            }
+            for a in agents
+        ],
+    }
+
+
 def _cassy_role() -> dict:
     """Cassy = lead student on apprenticeship; not a corporate swarm-role ceiling."""
     registry: dict = {}
@@ -218,6 +261,7 @@ def gather_status() -> dict:
             "Teacher Cassey routes depth; KC stores teacher_review only."
         ),
         "cassy": _cassy_role(),
+        "agents": _agents_inventory(),
         "context_host": "https://context.kopanolabs.com",
         "git": _git_snapshot(),
         "checks": {

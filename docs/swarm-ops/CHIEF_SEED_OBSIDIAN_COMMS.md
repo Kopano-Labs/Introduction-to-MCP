@@ -11,3 +11,15 @@ Prepend when you want the vault ledger to reference the **git-tracked** swarm do
 ```
 
 Adjust relative links if your Obsidian root is not the Kopano repo root.
+
+## CF LPM — activate created agents
+
+Generate the roster block and Main Brain receipt:
+
+```bash
+python scripts/kc_cf_comms_activate.py --prepend-vault
+```
+
+Canonical copy (always git-tracked): `docs/swarm-ops/comms-log-fragments/CF_AGENT_ACTIVATION.md`
+
+**Counts:** 13 registry · 7 orch-runnable · 4 swarm slots (001–004) · 4 mesh · CF receives comms to orchestrate doctrine slots + autonomic flows.

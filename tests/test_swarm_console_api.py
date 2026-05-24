@@ -34,3 +34,9 @@ def test_swarm_console_status(client: TestClient) -> None:
     assert body["cassy"]["teacher"] == "cassey"
     assert "student_primary" in body["cassy"]["role"]
     assert body["ci"]["actions_url"].startswith("https://github.com/")
+    agents = body["agents"]
+    assert agents["registry_total"] == 13
+    assert agents["orch_runnable"] == 7
+    assert agents["swarm_slots"] == 4
+    assert agents["mesh"] == 4
+    assert agents["operator_cf"] == "cf_cloud"
