@@ -53,7 +53,7 @@ def _require_bridge_auth(authorization: Optional[str]) -> None:
 def health() -> dict:
     return {
         "status": "ok",
-        "service": "kasilink-orch",
+        "service": "kasilink-cassy",
         "features": ["match", "sentiment", "forecast", "loadshedding", "moderate", "dashboard", "notify"],
     }
 

@@ -28,7 +28,7 @@
     { "code": "WIT-1119", "title": "Cassy — WIT: MAO movement — inspect/adapt/receipt loop", "teacher_context": "Student Cassy: 3-step loop applied to last failure." },
     { "code": "WIT-1120", "title": "Cassy — WIT: Anti-bloat — cut one theater artifact", "teacher_context": "Student Cassy: name file/row removed or disabled." },
     { "code": "WIT-1121", "title": "Cassy — WIT: README phase 7–10 tied to roadmap milestone", "teacher_context": "Student Cassy: map one README phase to MAIN_BRAIN_ROADMAP.json id." },
-    { "code": "WIT-1122", "title": "Cassy — WIT: orch agents bootstrap", "teacher_context": "Student Cassy: kc_swarm_agents_bootstrap.py --dry-run output." },
+    { "code": "WIT-1122", "title": "Cassy — WIT: cassy agents bootstrap", "teacher_context": "Student Cassy: kc_swarm_agents_bootstrap.py --dry-run output." },
     { "code": "WIT-1123", "title": "Cassy — WIT: Apprenticeship steward — machine drill labeled", "teacher_context": "Student Cassy: REALISM.md one-line closure." },
     { "code": "WIT-1124", "title": "Cassy — WIT: Cross-agent student-teacher parity check", "teacher_context": "Student Cassy: all agents have apprenticeship.student=cassy." },
     { "code": "WIT-1125", "title": "Cassy — WIT: Phase 11 closure — Save with compare + Actions URLs", "teacher_context": "Student Cassy: pytest kc + guard + roadmap gate." }

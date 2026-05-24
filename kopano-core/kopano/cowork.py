@@ -37,7 +37,7 @@ DEFAULT_ARTIFACTS = [
         "title": "Codex-Parity Prompt Pack",
         "summary": "System and orchestration prompts for IDE, OS, CLI, skill, and connector parity.",
         "status": "active",
-        "link": "Orch Labs / MCP Console",
+        "link": "Cassy Labs / MCP Console",
     },
     {
         "artifact_type": "api",
@@ -51,7 +51,7 @@ DEFAULT_ARTIFACTS = [
         "title": "Forge Control Surface",
         "summary": "Shared creator workspace for rooms, lanes, artifacts, and lessons.",
         "status": "building",
-        "link": "orch/gui/src/App.tsx",
+        "link": "kopano-core/studio/src/App.tsx",
     },
     {
         "artifact_type": "note",

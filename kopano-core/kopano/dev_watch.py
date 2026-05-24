@@ -34,7 +34,7 @@ def _ensure_session_rules_file() -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists():
         return
-    content = "# Orch Session Rules\n\n" + "\n".join(f"- {rule}" for rule in SESSION_RULES) + "\n"
+    content = "# Cassy Session Rules\n\n" + "\n".join(f"- {rule}" for rule in SESSION_RULES) + "\n"
     target.write_text(content, encoding="utf-8")
 
 
@@ -46,7 +46,7 @@ def _record_communication_request(*, room_id: int | None, task_id: int | None, o
         "room_id": room_id,
         "task_id": task_id,
         "event_type": event_type,
-        "request": "Please confirm compliance with Orch session rules and post your progress update.",
+        "request": "Please confirm compliance with Cassy session rules and post your progress update.",
         "session_rules_file": settings.dev_watch_session_rules_path,
     }
     target = Path(settings.dev_watch_comms_path)

@@ -105,7 +105,7 @@ def init_db():
     """)
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS orch_code_lessons (
+    CREATE TABLE IF NOT EXISTS cassy_code_lessons (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         lesson_key TEXT NOT NULL UNIQUE,
         title TEXT NOT NULL,
@@ -136,7 +136,7 @@ def init_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS mcp_console_sessions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        surface TEXT NOT NULL DEFAULT 'orch_labs',
+        surface TEXT NOT NULL DEFAULT 'cassy_labs',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     """)
@@ -186,6 +186,14 @@ def init_db():
         FOREIGN KEY (referred_by) REFERENCES users (id)
     );
     """)
+
+    cursor.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='orch_code_lessons'"
+    )
+    if cursor.fetchone():
+        cursor.execute(
+            "INSERT OR IGNORE INTO cassy_code_lessons SELECT * FROM orch_code_lessons"
+        )
 
     conn.commit()
     conn.close()

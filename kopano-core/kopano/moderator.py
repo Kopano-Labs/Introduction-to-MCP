@@ -32,11 +32,11 @@ class Moderator:
 
         Args:
             agent_id: The ID of the agent to be used as the moderator (e.g., 'claude-3-haiku-20240307' or 'gpt-4o').
-                      This agent must be configured via `orch agents config`.
+                      This agent must be configured via `cassy agents config`.
         """
         agents = agents or load_agents()
         if agent_id not in agents:
-            raise ValueError(f"Moderator agent '{agent_id}' not found. Please configure it using 'orch agents config'.")
+            raise ValueError(f"Moderator agent '{agent_id}' not found. Please configure it using 'cassy agents config'.")
         self.agent: Agent = agents[agent_id]
         console.log(f"Moderator initialized using agent: [bold cyan]{self.agent.id}[/] ({self.agent.model})")
 

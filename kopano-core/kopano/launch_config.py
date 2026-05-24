@@ -5,7 +5,7 @@ from typing import Any
 
 def get_launch_surface_config() -> dict[str, Any]:
     return {
-        "surface": "orch_labs_launch",
+        "surface": "cassy_labs_launch",
         "visual_mix": {
             "anthropic": 0.5,
             "codex": 0.5,
@@ -18,7 +18,7 @@ def get_launch_surface_config() -> dict[str, Any]:
         "cowork": {
             "enabled": True,
             "stitch_canvas": True,
-            "modes": ["orch-forge", "orch-code"],
+            "modes": ["cassy-forge", "cassy-code"],
         },
         "launch_sections": [
             "labs hero",
@@ -26,6 +26,6 @@ def get_launch_surface_config() -> dict[str, Any]:
             "sa language coverage",
             "accessibility modes",
             "cowork surfaces",
-            "orch code teaching tracks",
+            "Cassy code teaching tracks",
         ],
     }

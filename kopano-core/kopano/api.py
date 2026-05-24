@@ -29,16 +29,16 @@ logger = logging.getLogger("kopano.api")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     telemetry_state = configure_server_telemetry()
-    logger.info("Orch startup telemetry configured=%s reason=%s", telemetry_state["configured"], telemetry_state["reason"])
-    log_demo_event("orch_api_startup", telemetry_configured=telemetry_state["configured"])
+    logger.info("Cassy startup telemetry configured=%s reason=%s", telemetry_state["configured"], telemetry_state["reason"])
+    log_demo_event("cassy_api_startup", telemetry_configured=telemetry_state["configured"])
     # Startup: Initialize the Pristine Vault
     init_db()
     print("Pristine Vault online")
     yield
-    log_demo_event("orch_api_shutdown")
+    log_demo_event("cassy_api_shutdown")
     print("Vault sealed. No lingering neural threads.")
 
-app = FastAPI(title="orch AGI Control Plane", lifespan=lifespan)
+app = FastAPI(title="Cassy AGI Control Plane", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -161,7 +161,7 @@ async def get_updates():
 
 @app.post("/auth/register")
 def register(request: RegisterRequest):
-    """Register a local Orch user account."""
+    """Register a local Cassy user account."""
     try:
         user = register_user(request.email, request.password, request.full_name)
         return {
@@ -184,7 +184,7 @@ def register(request: RegisterRequest):
 
 @app.post("/auth/login")
 def login(request: LoginRequest):
-    """Authenticate a local Orch user account."""
+    """Authenticate a local Cassy user account."""
     user = authenticate_user(request.email, request.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
@@ -311,7 +311,7 @@ def get_session_detail(session_id: int):
             "value_score": log["value_score"],
             "override_score": log["override_score"],
             "improvement_hint": log["improvement_hint"],
-            "is_student": 1 if log["agent_id"] == "orch" else 0
+            "is_student": 1 if log["agent_id"] in {"orch", "cassy"} else 0
         })
     
     return {

@@ -276,7 +276,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    trackClientEvent('orch_page_view', { page });
+    trackClientEvent('cassy_page_view', { page });
   }, [page]);
 
   useEffect(() => {
@@ -464,7 +464,7 @@ const App = () => {
     if (data.readiness) {
       setMicrosoftReadiness(data.readiness as MicrosoftReadiness);
     }
-    trackClientEvent('orch_connector_action', { action_id: actionId });
+    trackClientEvent('cassy_connector_action', { action_id: actionId });
     logSystemEvent('connector', `${data.title} executed from Kopano Labs.`);
   };
 
@@ -581,7 +581,7 @@ const App = () => {
   };
 
   return (
-    <div className={`orch-app page-${page}`}>
+    <div className={`cassy-app page-${page}`}>
       <AnimatedBackdrop page={page} connectionState={connectionState} />
       <div className="shell-frame">
         <AppTopNav

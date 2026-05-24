@@ -11,7 +11,8 @@ from pydantic_settings import SettingsConfigDict
 from typing import Optional
 
 # Configuration paths
-AGENTS_FILE = Path.home() / ".orch" / "agents.json"
+AGENTS_FILE = Path.home() / ".cassy" / "agents.json"
+LEGACY_AGENTS_FILE = Path.home() / ".orch" / "agents.json"
 
 class Settings(BaseSettings):
     """Pydantic Settings for secure configuration management."""
@@ -40,7 +41,10 @@ class Settings(BaseSettings):
     clerk_jwks_url: Optional[str] = None
     eskom_api_token: Optional[str] = None
     loadshedding_provider_url: Optional[str] = None
-    orch_public_url: Optional[str] = None
+    cassy_public_url: Optional[str] = Field(
+        None,
+        validation_alias=AliasChoices("CASSY_PUBLIC_URL", "ORCH_PUBLIC_URL"),
+    )
 
     # Microsoft / Azure demo readiness
     azure_subscription_id: Optional[str] = None
@@ -78,8 +82,8 @@ class Settings(BaseSettings):
 
     # Team activity watcher
     dev_watch_owner: str = "DEV_3 (Background)"
-    dev_watch_path: str = ".orch_data/dev_watch/dev3_activity.jsonl"
-    dev_watch_comms_path: str = ".orch_data/dev_watch/dev3_communications.jsonl"
-    dev_watch_session_rules_path: str = ".orch_data/session_logs/session_rules.md"
+    dev_watch_path: str = ".cassy_data/dev_watch/dev3_activity.jsonl"
+    dev_watch_comms_path: str = ".cassy_data/dev_watch/dev3_communications.jsonl"
+    dev_watch_session_rules_path: str = ".cassy_data/session_logs/session_rules.md"
 
 settings = Settings()

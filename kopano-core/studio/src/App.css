@@ -46,7 +46,7 @@ button {
   color: inherit;
 }
 
-.orch-app {
+.cassy-app {
   position: relative;
   min-height: 100vh;
   background:
@@ -1118,7 +1118,7 @@ input[type='range'] {
 }
 
 /* KC sovereign training surface */
-.orch-app {
+.cassy-app {
   background:
     linear-gradient(180deg, rgba(13, 18, 22, 0.92), rgba(4, 7, 9, 0.98)),
     #05080a;

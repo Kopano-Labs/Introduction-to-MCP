@@ -10,8 +10,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = REPO_ROOT / "docs" / "swarm-ops" / "agents" / "SWARM_AGENTS.json"
-SEED_OUT = REPO_ROOT / "kopano-core" / "config" / "orch_agents.seed.json"
-DEFAULT_ORCH = Path.home() / ".orch" / "agents.json"
+SEED_OUT = REPO_ROOT / "kopano-core" / "config" / "cassy_agents.seed.json"
+LEGACY_SEED = REPO_ROOT / "kopano-core" / "config" / "orch_agents.seed.json"
+DEFAULT_CASSY = Path.home() / ".cassy" / "agents.json"
+LEGACY_HOME_AGENTS = Path.home() / ".orch" / "agents.json"
 
 
 def _persona(agent: dict) -> str:
@@ -38,7 +40,7 @@ def _persona(agent: dict) -> str:
     )
 
 
-def registry_to_orch_agents(registry: dict) -> dict:
+def registry_to_cassy_agents(registry: dict) -> dict:
     out: dict = {}
     for agent in registry.get("agents", []):
         aid = agent["id"]
@@ -63,30 +65,35 @@ def registry_to_orch_agents(registry: dict) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--install", action="store_true", help=f"Merge seed into {DEFAULT_ORCH}")
+    parser.add_argument("--install", action="store_true", help=f"Merge seed into {DEFAULT_CASSY}")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    seed = registry_to_orch_agents(registry)
+    seed = registry_to_cassy_agents(registry)
     SEED_OUT.parent.mkdir(parents=True, exist_ok=True)
     if args.dry_run:
         print(json.dumps({"seed_path": str(SEED_OUT), "agents": list(seed.keys())}, indent=2))
         return 0
     SEED_OUT.write_text(json.dumps(seed, indent=2), encoding="utf-8")
     print(f"wrote {SEED_OUT} ({len(seed)} agents)")
+    if LEGACY_SEED.is_file():
+        LEGACY_SEED.unlink()
 
     if args.install:
-        DEFAULT_ORCH.parent.mkdir(parents=True, exist_ok=True)
+        DEFAULT_CASSY.parent.mkdir(parents=True, exist_ok=True)
         existing: dict = {}
-        if DEFAULT_ORCH.exists():
-            existing = json.loads(DEFAULT_ORCH.read_text(encoding="utf-8"))
+        if DEFAULT_CASSY.exists():
+            existing = json.loads(DEFAULT_CASSY.read_text(encoding="utf-8"))
+        elif LEGACY_HOME_AGENTS.exists():
+            existing = json.loads(LEGACY_HOME_AGENTS.read_text(encoding="utf-8"))
+            print(f"migrated existing agents from legacy {LEGACY_HOME_AGENTS}")
         merged = {**existing, **seed}
-        backup = DEFAULT_ORCH.with_suffix(".json.bak")
-        if DEFAULT_ORCH.exists():
-            shutil.copy2(DEFAULT_ORCH, backup)
-        DEFAULT_ORCH.write_text(json.dumps(merged, indent=2), encoding="utf-8")
-        print(f"installed {DEFAULT_ORCH} (backup {backup.name})")
+        backup = DEFAULT_CASSY.with_suffix(".json.bak")
+        if DEFAULT_CASSY.exists():
+            shutil.copy2(DEFAULT_CASSY, backup)
+        DEFAULT_CASSY.write_text(json.dumps(merged, indent=2), encoding="utf-8")
+        print(f"installed {DEFAULT_CASSY} (backup {backup.name})")
     return 0
 
 

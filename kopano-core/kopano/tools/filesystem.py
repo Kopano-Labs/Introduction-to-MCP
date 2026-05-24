@@ -1,11 +1,11 @@
 """
-Filesystem MCP Tool for orch — Production Grade
+Filesystem MCP Tool for Cassy — Production Grade
 ================================================
 Capability #2  (Critical) — Formalise filesystem MCP tool
 Unlocks: #1, #5, #6, #8, #9, #12, #18, #19, #36, #39, #40, #41,
          #43, #50, #54, #65, #66, #67, #84, #87, #89 and more.
 
-Replaces: orch/orch/tools/filesystem.py
+Legacy path: orch/orch/tools/filesystem.py (see docs/swarm-ops/LEGACY_ORCH.md)
 
 Key hardening over the original:
   - SANDBOX: all paths are resolved and must stay inside ALLOWED_ROOT
@@ -24,7 +24,7 @@ Environment variables (.env):
   FS_READ_ONLY=false         # set true to block all writes/deletes
   FS_MAX_READ_MB=10          # max file size to read (MB)
   FS_MAX_WRITE_MB=5          # max file size to write (MB)
-  FS_AUDIT_LOG=.orch_data/fs_audit.log  # audit log path
+  FS_AUDIT_LOG=.cassy_data/fs_audit.log  # audit log path
 """
 
 from __future__ import annotations
@@ -66,7 +66,7 @@ def _max_write_bytes() -> int:
 
 
 def _audit_log_path() -> Path:
-    return Path(_env("FS_AUDIT_LOG", ".orch_data/fs_audit.log"))
+    return Path(_env("FS_AUDIT_LOG", ".cassy_data/fs_audit.log"))
 
 
 # ---------------------------------------------------------------------------
@@ -738,15 +738,15 @@ if __name__ == "__main__":
 
     # 2. Write test file
     print("=== Write test ===")
-    print(write_file("orch_test_output.txt", "Hello from kopano filesystem tool!\n"))
+    print(write_file("cassy_test_output.txt", "Hello from kopano filesystem tool!\n"))
 
     # 3. Read it back
     print("=== Read test ===")
-    print(read_file("orch_test_output.txt"))
+    print(read_file("cassy_test_output.txt"))
 
     # 4. File info
     print("=== File info ===")
-    print(file_info("orch_test_output.txt"))
+    print(file_info("cassy_test_output.txt"))
 
     # 5. Search
     print("=== Search *.py ===")
@@ -762,7 +762,7 @@ if __name__ == "__main__":
 
     # 8. Cleanup
     print("=== Cleanup ===")
-    print(delete_file("orch_test_output.txt"))
+    print(delete_file("cassy_test_output.txt"))
 
     # 9. Audit log
     print("=== Audit log (last 10) ===")

@@ -1,5 +1,5 @@
 """
-Read-only SQLite audit helpers for KC / orch datalake (Protocol 13 evidence lane).
+Read-only SQLite audit helpers for KC / Cassy datalake (Protocol 13 evidence lane).
 
 No writes. Fixed SQL only — no user-supplied query fragments.
 """

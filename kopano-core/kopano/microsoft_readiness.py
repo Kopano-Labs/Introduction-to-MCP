@@ -11,8 +11,8 @@ from .config import settings
 from .telemetry import configure_server_telemetry, get_server_telemetry_status
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-ORCH_ROOT = Path(__file__).resolve().parents[1]
-GUI_ROOT = ORCH_ROOT / "studio"
+KOPANO_PKG_ROOT = Path(__file__).resolve().parents[1]
+GUI_ROOT = KOPANO_PKG_ROOT / "studio"
 
 
 def _safe_value(value: str | None) -> bool:

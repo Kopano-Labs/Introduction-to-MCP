@@ -1,12 +1,11 @@
 """
-GitHub API MCP Tool for orch
-============================
+GitHub API MCP Tool for Cassy
+=============================
 Capabilities unlocked:
   #3  — Smart commit message generation from staged diff
   #4  — Auto PR review (summary, risks, suggestions)
 
-Place this file at:  orch/orch/tools/github_tool.py
-Create empty file:   orch/orch/tools/__init__.py
+Legacy path: orch/orch/tools/github_tool.py (see docs/swarm-ops/LEGACY_ORCH.md)
 
 No extra dependencies — uses only httpx (already in your venv).
 
@@ -291,7 +290,7 @@ def _format_review_comment(r: PRReviewResult) -> str:
     risks   = "\n".join(f"- {x}" for x in r.risks)
     suggest = "\n".join(f"- {x}" for x in r.suggestions)
     return textwrap.dedent(f"""
-        ## 🤖 orch Auto-Review — PR #{r.pr_number}
+        ## 🤖 Cassy Auto-Review — PR #{r.pr_number}
 
         **{emoji} Risk level:** `{r.risk_level}`
 
@@ -305,7 +304,7 @@ def _format_review_comment(r: PRReviewResult) -> str:
         {suggest}
 
         ---
-        *Posted automatically by [orch](https://github.com/RobynAwesome/Introduction-to-MCP)*
+        *Posted automatically by [Cassy](https://github.com/RobynAwesome/Introduction-to-MCP)*
     """).strip()
 
 
@@ -383,7 +382,7 @@ def _infer_scope(diff: str) -> str:
     paths    = re.findall(r"diff --git a/(.+?) b/", diff)
     top_dirs = {p.split("/")[0] for p in paths if "/" in p}
     scope_map = {
-        "orch": "orch", "tests": "tests", "cli": "cli",
+        "kopano-core": "kopano", "tests": "tests", "cli": "cli",
         "tools": "tools", "public": "public", ".github": "ci",
     }
     for d in top_dirs:

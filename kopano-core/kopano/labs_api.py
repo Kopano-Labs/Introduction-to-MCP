@@ -21,7 +21,7 @@ from .labs_registry import get_labs_overview
 from .language_runtime import build_multilingual_response, route_multilingual_prompt, translate_text
 from .launch_config import get_launch_surface_config
 from .mcp_console import answer_mcp_console, execute_connector_action, get_connector_actions, get_console_analytics, get_model_options, stream_mcp_console
-from .orch_code import get_orch_code_controls, get_orch_code_profile, teach_repo_patterns, update_lesson_status
+from .cassy_code import get_cassy_code_controls, get_cassy_code_profile, teach_repo_patterns, update_lesson_status
 from .sa_access import build_access_plan, execute_access_session
 from .dev_watch import read_recent_comms, read_recent_dev_activity
 from .config import settings
@@ -151,7 +151,7 @@ def labs_cowork() -> dict:
     overview = get_labs_overview()
     return {
         "cowork_surfaces": overview["cowork_surfaces"],
-        "orch_code_tracks": overview["orch_code_tracks"],
+        "cassy_code_tracks": overview["cassy_code_tracks"],
     }
 
 
@@ -310,23 +310,23 @@ def labs_mcp_console_models() -> dict:
     return {"models": get_model_options()}
 
 
-@router.post("/orch-code/teach")
-def orch_code_teach() -> dict:
+@router.post("/cassy-code/teach")
+def cassy_code_teach() -> dict:
     return teach_repo_patterns()
 
 
-@router.get("/orch-code/profile")
-def orch_code_profile() -> dict:
-    return get_orch_code_profile()
+@router.get("/cassy-code/profile")
+def cassy_code_profile() -> dict:
+    return get_cassy_code_profile()
 
 
-@router.get("/orch-code/controls")
-def orch_code_controls() -> dict:
-    return get_orch_code_controls()
+@router.get("/cassy-code/controls")
+def cassy_code_controls() -> dict:
+    return get_cassy_code_controls()
 
 
-@router.post("/orch-code/lessons/{lesson_key}/status")
-def orch_code_update_status(lesson_key: str, request: LessonStatusRequest) -> dict:
+@router.post("/cassy-code/lessons/{lesson_key}/status")
+def cassy_code_update_status(lesson_key: str, request: LessonStatusRequest) -> dict:
     return {"lesson": update_lesson_status(lesson_key, request.status, confidence=request.confidence)}
 
 

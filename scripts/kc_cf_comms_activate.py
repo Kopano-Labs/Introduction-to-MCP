@@ -12,7 +12,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = REPO_ROOT / "docs" / "swarm-ops" / "agents" / "SWARM_AGENTS.json"
-SEED = REPO_ROOT / "kopano-core" / "config" / "orch_agents.seed.json"
+SEED = REPO_ROOT / "kopano-core" / "config" / "cassy_agents.seed.json"
 WIT = REPO_ROOT / "docs" / "swarm-ops" / "agents" / "cassy_wit_25.json"
 FRAGMENTS = REPO_ROOT / "docs" / "swarm-ops" / "comms-log-fragments"
 VAULT_COMMS = REPO_ROOT / "Schematics" / "04-Updates" / "comms-log.md"
@@ -23,13 +23,13 @@ COMPARE = (
 ACTIONS = "https://github.com/Kopano-Labs/Introduction-to-MCP/actions"
 PY = sys.executable
 
-# Orch seed excludes doctrine-only roles (ledger, swarm slots, CF LPM).
-ORCH_EXCLUDED = frozenset(
+# Cassy seed excludes doctrine-only roles (ledger, swarm slots, CF LPM). See LEGACY_ORCH.md.
+CASSY_SEED_EXCLUDED = frozenset(
     {"kc", "mirror_warden", "kc_apprentice", "operational_general", "pipeline_drone", "cf_cloud"}
 )
 
 
-def _inventory(registry: dict, orch_ids: set[str]) -> dict:
+def _inventory(registry: dict, cassy_ids: set[str]) -> dict:
     agents = registry.get("agents", [])
     slots = [a for a in agents if a.get("swarm_slot")]
     mesh = [a for a in agents if a.get("role") == "mesh"]
@@ -43,8 +43,8 @@ def _inventory(registry: dict, orch_ids: set[str]) -> dict:
         "triad": len(triad),
         "swarm_slots": len(slots),
         "mesh": len(mesh),
-        "orch_runnable": len(orch_ids),
-        "orch_excluded_doctrine": len(ORCH_EXCLUDED),
+        "cassy_runnable": len(cassy_ids),
+        "cassy_excluded_doctrine": len(CASSY_SEED_EXCLUDED),
         "wit_tasks": wit_n,
         "lead_student": registry.get("lead_student", "cassy"),
         "operator_cf": "cf_cloud",
@@ -55,10 +55,10 @@ def _inventory(registry: dict, orch_ids: set[str]) -> dict:
                 "display_name": a.get("display_name", a["id"]),
                 "role": a.get("role"),
                 "swarm_slot": a.get("swarm_slot"),
-                "orch_runnable": a["id"] in orch_ids,
+                "cassy_runnable": a["id"] in cassy_ids,
                 "cf_activate_via": (
-                    "orch_agents.seed.json"
-                    if a["id"] in orch_ids
+                    "cassy_agents.seed.json"
+                    if a["id"] in cassy_ids
                     else ("comms_lpm" if a["id"] == "cf_cloud" else "doctrine_registry")
                 ),
             }
@@ -72,13 +72,13 @@ def _comms_markdown(inv: dict, *, git_sha: str) -> str:
     day = ts[:10]
     rows = "\n".join(
         f"| {a['n']} | `{a['id']}` | {a.get('swarm_slot') or '—'} | {a['role']} | "
-        f"{'yes' if a['orch_runnable'] else 'no'} | {a['cf_activate_via']} |"
+        f"{'yes' if a['cassy_runnable'] else 'no'} | {a['cf_activate_via']} |"
         for a in inv["agents"]
     )
     return f"""## {day} — CF LPM — swarm agent activation (BlackMass v2.0)
 
 **Operator:** `CF_cloud` (Main Brain roadmap) · **Lead student:** `{inv['lead_student']}`  
-**Status:** ACTIVATE — orch-runnable agents seeded; doctrine slots registered for CF orchestration.  
+**Status:** ACTIVATE — Cassy-runnable agents seeded; doctrine slots registered for CF orchestration.  
 **Git:** `{git_sha[:12]}` · **UTC:** `{ts}`
 
 ### Counts (honest)
@@ -89,16 +89,16 @@ def _comms_markdown(inv: dict, *, git_sha: str) -> str:
 | Triad (Cassy / Cassey / KC) | **{inv['triad']}** |
 | Swarm slots 001–004 | **{inv['swarm_slots']}** |
 | Mesh (claude, grok, gemini, copilot) | **{inv['mesh']}** |
-| Orch-runnable (`orch_agents.seed.json`) | **{inv['orch_runnable']}** |
-| Doctrine-only (KC ledger + slots + CF) | **{inv['orch_excluded_doctrine']}** |
+| Cassy-runnable (`cassy_agents.seed.json`) | **{inv['cassy_runnable']}** |
+| Doctrine-only (KC ledger + slots + CF) | **{inv['cassy_excluded_doctrine']}** |
 | Cassy WIT diaspora band | **{inv['wit_tasks']}** tasks |
 
 External Kimi 300 swarm remains **manual-execution-required** — no fake `kimi_ack`.
 
 ### Agent roster (send to CF)
 
-| # | id | slot | role | orch | CF path |
-|---|-----|------|------|------|---------|
+| # | id | slot | role | Cassy seed | CF path |
+|---|-----|------|------|------------|---------|
 {rows}
 
 ### CF activation commands (repo)
@@ -107,10 +107,11 @@ External Kimi 300 swarm remains **manual-execution-required** — no fake `kimi_
 python scripts/kc_swarm_agents_bootstrap.py
 python scripts/kc_cassy_activate.py --seed-wit
 python scripts/kc_cf_comms_activate.py --emit-only
-python scripts/kc_log_append.py mainbrain --kind cf_swarm_activation --summary "CF LPM: orch agents activated" ...
+python scripts/kc_log_append.py mainbrain --kind cf_swarm_activation --summary "CF LPM: Cassy agents activated" ...
 ```
 
-**Canonical paths:** `docs/swarm-ops/agents/SWARM_AGENTS.json`, `kopano-core/config/orch_agents.seed.json`, JSONL under `docs/swarm-ops/logs/`.
+**Canonical paths:** `docs/swarm-ops/agents/SWARM_AGENTS.json`, `kopano-core/config/cassy_agents.seed.json`, JSONL under `docs/swarm-ops/logs/`.  
+**Legacy name:** Orch → Cassy — see `docs/swarm-ops/LEGACY_ORCH.md`.
 
 ---
 """
@@ -141,11 +142,11 @@ def main() -> int:
     subprocess.run([PY, str(REPO_ROOT / "scripts" / "kc_swarm_agents_bootstrap.py")], cwd=REPO_ROOT, check=False)
 
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    orch_ids: set[str] = set()
+    cassy_ids: set[str] = set()
     if SEED.is_file():
-        orch_ids = set(json.loads(SEED.read_text(encoding="utf-8")).keys())
+        cassy_ids = set(json.loads(SEED.read_text(encoding="utf-8")).keys())
 
-    inv = _inventory(registry, orch_ids)
+    inv = _inventory(registry, cassy_ids)
     sha = _git_sha()
     md = _comms_markdown(inv, git_sha=sha)
 
@@ -154,7 +155,7 @@ def main() -> int:
     out.write_text(md, encoding="utf-8")
     print(f"wrote {out}")
     print(
-        f"counts: registry={inv['registry_total']} orch={inv['orch_runnable']} "
+        f"counts: registry={inv['registry_total']} cassy_runnable={inv['cassy_runnable']} "
         f"slots={inv['swarm_slots']} mesh={inv['mesh']} wit={inv['wit_tasks']}"
     )
 
@@ -167,7 +168,7 @@ def main() -> int:
     if not args.no_log:
         summary = (
             f"CF LPM activation comms: {inv['registry_total']} registry agents, "
-            f"{inv['orch_runnable']} orch-runnable, {inv['swarm_slots']} swarm slots, "
+            f"{inv['cassy_runnable']} Cassy-runnable, {inv['swarm_slots']} swarm slots, "
             f"{inv['mesh']} mesh; fragment={out.relative_to(REPO_ROOT).as_posix()}"
         )
         subprocess.run(

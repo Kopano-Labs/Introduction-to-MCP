@@ -14,9 +14,9 @@ MODIFY
 
 ## Objective
 
-Prepare Orch and the local demo stack to show a real Microsoft-backed story for Demo Day:
+Prepare Cassy (Kopano) and the local demo stack to show a real Microsoft-backed story for Demo Day:
 - working local Azure CLI and Azure Developer CLI
-- Azure environment readiness checks inside Orch Labs
+- Azure environment readiness checks inside Cassy Labs
 - Azure Monitor / Application Insights instrumentation hooks for the FastAPI backend and demo GUI
 - explicit environment examples for required Azure resources
 
@@ -41,9 +41,9 @@ AZCLI + app-level wiring
 ## Planned Steps
 
 1. Install Azure CLI and Azure Developer CLI in a non-admin, per-user way.
-2. Add Microsoft readiness inspection to Orch Labs.
+2. Add Microsoft readiness inspection to Cassy Labs.
 3. Add Azure Monitor / Application Insights telemetry hooks to the FastAPI backend.
-4. Add browser-side Application Insights support to the Orch GUI.
+4. Add browser-side Application Insights support to the Kopano Studio GUI.
 5. Add `.env.example` guidance for required Azure resources and keys.
 6. Replace the deterministic Azure connector playbook execution with a live readiness report.
 7. Verify builds, local API responses, and GUI rendering.

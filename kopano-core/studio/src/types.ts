@@ -111,7 +111,7 @@ export interface CoworkSurface {
   features: string[];
 }
 
-export interface OrchCodeTrack {
+export interface CassyCodeTrack {
   id: string;
   title: string;
   priority: string;
@@ -119,7 +119,7 @@ export interface OrchCodeTrack {
   topics: string[];
 }
 
-export interface OrchInterface {
+export interface CassyInterface {
   id: string;
   name: string;
   status: string;
@@ -229,8 +229,8 @@ export interface LabsOverview {
   languages: LabsLanguage[];
   access_modes: AccessMode[];
   cowork_surfaces: CoworkSurface[];
-  orch_code_tracks: OrchCodeTrack[];
-  kopano_interfaces: OrchInterface[];
+  cassy_code_tracks: CassyCodeTrack[];
+  kopano_interfaces: CassyInterface[];
   cloud_stacks: CloudStack[];
   connector_workflows: ConnectorWorkflow[];
   installer_actions: InstallerAction[];

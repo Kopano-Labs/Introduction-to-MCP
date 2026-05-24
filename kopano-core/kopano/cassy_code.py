@@ -13,7 +13,7 @@ PATTERN_CATALOG = [
         "lesson_key": "python-fastapi-api",
         "title": "FastAPI service patterns",
         "track": "python-core",
-        "source": "orch/orch/api.py",
+        "source": "kopano-core/kopano/api.py",
         "notes": "Router composition, lifespan setup, and JSON responses.",
     },
     {
@@ -27,7 +27,7 @@ PATTERN_CATALOG = [
         "lesson_key": "react-launch-surface",
         "title": "React launch surface patterns",
         "track": "frontend-core",
-        "source": "orch/gui/src/App.tsx",
+        "source": "kopano-core/studio/src/App.tsx",
         "notes": "Stateful sections, typed models, and launch-oriented UI composition.",
     },
     {
@@ -43,7 +43,7 @@ PATTERN_CATALOG = [
 def _upsert_lesson(cursor: Any, lesson: dict[str, str], status: str, confidence: int) -> None:
     cursor.execute(
         """
-        INSERT INTO orch_code_lessons (lesson_key, title, track, source, status, confidence, notes)
+        INSERT INTO cassy_code_lessons (lesson_key, title, track, source, status, confidence, notes)
         VALUES (?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(lesson_key) DO UPDATE SET
             title = excluded.title,
@@ -93,7 +93,7 @@ def recommend_next_lessons(limit: int = 5) -> list[dict[str, Any]]:
     cursor.execute(
         """
         SELECT lesson_key, title, track, source, status, confidence, notes
-        FROM orch_code_lessons
+        FROM cassy_code_lessons
         ORDER BY
             CASE status
                 WHEN 'queued' THEN 0
@@ -112,17 +112,17 @@ def recommend_next_lessons(limit: int = 5) -> list[dict[str, Any]]:
     return [dict(row) for row in rows]
 
 
-def get_orch_code_profile() -> dict[str, Any]:
+def get_cassy_code_profile() -> dict[str, Any]:
     init_db()
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(
-        "SELECT lesson_key, title, track, source, status, confidence, notes FROM orch_code_lessons ORDER BY id ASC"
+        "SELECT lesson_key, title, track, source, status, confidence, notes FROM cassy_code_lessons ORDER BY id ASC"
     )
     lessons = [dict(row) for row in cursor.fetchall()]
     conn.close()
     return {
-        "title": "Orch Code",
+        "title": "Cassy Code",
         "teaching_basis": "current repo patterns first",
         "tracks": sorted({lesson["track"] for lesson in lessons}) if lessons else [],
         "lessons": lessons,
@@ -134,8 +134,8 @@ def get_orch_code_profile() -> dict[str, Any]:
     }
 
 
-def get_orch_code_controls() -> dict[str, Any]:
-    profile = get_orch_code_profile()
+def get_cassy_code_controls() -> dict[str, Any]:
+    profile = get_cassy_code_profile()
     return {
         **profile,
         "control_states": ["queued", "learning", "learned", "shipping"],
@@ -150,7 +150,7 @@ def update_lesson_status(lesson_key: str, status: str, confidence: int | None = 
     if confidence is None:
         cursor.execute(
             """
-            UPDATE orch_code_lessons
+            UPDATE cassy_code_lessons
             SET status = ?, updated_at = CURRENT_TIMESTAMP
             WHERE lesson_key = ?
             """,
@@ -159,7 +159,7 @@ def update_lesson_status(lesson_key: str, status: str, confidence: int | None = 
     else:
         cursor.execute(
             """
-            UPDATE orch_code_lessons
+            UPDATE cassy_code_lessons
             SET status = ?, confidence = ?, updated_at = CURRENT_TIMESTAMP
             WHERE lesson_key = ?
             """,
@@ -167,7 +167,7 @@ def update_lesson_status(lesson_key: str, status: str, confidence: int | None = 
         )
     conn.commit()
     cursor.execute(
-        "SELECT lesson_key, title, track, source, status, confidence, notes FROM orch_code_lessons WHERE lesson_key = ?",
+        "SELECT lesson_key, title, track, source, status, confidence, notes FROM cassy_code_lessons WHERE lesson_key = ?",
         (lesson_key,),
     )
     row = cursor.fetchone()

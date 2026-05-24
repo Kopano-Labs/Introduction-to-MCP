@@ -1,12 +1,15 @@
+import sys
 from pathlib import Path
 from uuid import uuid4
 
 import pytest
 from fastapi.testclient import TestClient
 
-from orch.orch import database
-from orch.orch.api import app
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT / "kopano-core"))
 
+from kopano import database  # noqa: E402
+from kopano.api import app  # noqa: E402
 
 client = TestClient(app)
 
@@ -27,7 +30,7 @@ def test_labs_overview_endpoint():
     response = client.get("/api/labs/overview")
     assert response.status_code == 200
     payload = response.json()
-    assert payload["title"] == "Orch Labs"
+    assert payload["title"] == "Cassy Labs"
     assert payload["metrics"]["tools"] >= 1
 
 
@@ -49,13 +52,13 @@ def test_labs_languages_include_sasl_and_access_modes():
     assert "aac" in access_ids
 
 
-def test_labs_cowork_exposes_orch_code():
+def test_labs_cowork_exposes_cassy_code():
     response = client.get("/api/labs/cowork")
     assert response.status_code == 200
     payload = response.json()
     surface_ids = {surface["id"] for surface in payload["cowork_surfaces"]}
-    track_ids = {track["id"] for track in payload["orch_code_tracks"]}
-    assert "orch-code" in surface_ids
+    track_ids = {track["id"] for track in payload["cassy_code_tracks"]}
+    assert "cassy-code" in surface_ids
     assert "product-craft" in track_ids
 
 
@@ -63,7 +66,7 @@ def test_labs_overview_exposes_installer_actions():
     response = client.get("/api/labs/overview")
     payload = response.json()
     action_ids = {action["id"] for action in payload["installer_actions"]}
-    assert "install-orch-cli" in action_ids
+    assert "install-cassy-cli" in action_ids
     assert "azure-demo-playbook" in action_ids
 
 
@@ -215,7 +218,7 @@ def test_cowork_task_can_move_lanes_and_add_artifacts(isolated_labs_db):
             "title": "Azure Connector Contract",
             "summary": "Tracks Azure-first orchestration for demo day.",
             "status": "draft",
-            "link": "Orch Forge",
+            "link": "Cassy Forge",
         },
     )
     assert artifact_response.status_code == 200
@@ -227,26 +230,26 @@ def test_cowork_task_can_move_lanes_and_add_artifacts(isolated_labs_db):
     assert any(item["title"] == "Azure Connector Contract" for item in detail["artifacts"])
 
 
-def test_orch_code_teaching_loop_reads_repo_patterns(isolated_labs_db):
-    teach_response = client.post("/api/labs/orch-code/teach")
+def test_cassy_code_teaching_loop_reads_repo_patterns(isolated_labs_db):
+    teach_response = client.post("/api/labs/cassy-code/teach")
     assert teach_response.status_code == 200
     payload = teach_response.json()
     lesson_keys = {lesson["lesson_key"] for lesson in payload["taught_lessons"]}
     assert "python-fastapi-api" in lesson_keys
     assert "schematics-discipline" in lesson_keys
 
-    profile_response = client.get("/api/labs/orch-code/profile")
+    profile_response = client.get("/api/labs/cassy-code/profile")
     assert profile_response.status_code == 200
     profile = profile_response.json()
-    assert profile["title"] == "Orch Code"
+    assert profile["title"] == "Cassy Code"
     assert profile["summary"]["learned_lessons"] >= 1
     assert "python-core" in profile["tracks"]
 
 
-def test_orch_code_lesson_status_can_advance(isolated_labs_db):
-    client.post("/api/labs/orch-code/teach")
+def test_cassy_code_lesson_status_can_advance(isolated_labs_db):
+    client.post("/api/labs/cassy-code/teach")
     update_response = client.post(
-        "/api/labs/orch-code/lessons/python-fastapi-api/status",
+        "/api/labs/cassy-code/lessons/python-fastapi-api/status",
         json={"status": "learning", "confidence": 91},
     )
     assert update_response.status_code == 200
@@ -258,7 +261,7 @@ def test_orch_code_lesson_status_can_advance(isolated_labs_db):
 def test_mcp_console_chat_routes_cli_queries():
     response = client.post(
         "/api/labs/mcp-console/chat",
-        json={"message": "How do I use the CLI and terminal flow for Orch?"},
+        json={"message": "How do I use the CLI and terminal flow for Cassy?"},
     )
     assert response.status_code == 200
     payload = response.json()
@@ -275,7 +278,7 @@ def test_mcp_console_models_and_stream_endpoint_work():
 
     stream_response = client.post(
         "/api/labs/mcp-console/stream",
-        json={"message": "How do I install the Orch CLI?", "model_preference": "deterministic"},
+        json={"message": "How do I install the Cassy CLI?", "model_preference": "deterministic"},
     )
     assert stream_response.status_code == 200
     body = stream_response.text
@@ -317,7 +320,7 @@ def test_labs_analytics_endpoint_reports_forge_and_console(isolated_labs_db):
     )
     client.post(
         "/api/labs/mcp-console/chat",
-        json={"message": "How should Orch handle Azure demo day connectors?"},
+        json={"message": "How should Cassy handle Azure demo day connectors?"},
     )
     response = client.get("/api/labs/analytics")
     assert response.status_code == 200

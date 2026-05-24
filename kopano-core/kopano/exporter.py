@@ -85,7 +85,7 @@ def export_all_to_jsonl(output_dir: Path, format: str = "chatml") -> Path:
         session_ids = [row["id"] for row in cursor.fetchall()]
         
         output_dir.mkdir(parents=True, exist_ok=True)
-        dataset_file = output_dir / f"orch_full_master_{format}_dataset.jsonl"
+        dataset_file = output_dir / f"cassy_full_master_{format}_dataset.jsonl"
         
         with open(dataset_file, "w", encoding="utf-8") as f_out:
             for sid in session_ids:

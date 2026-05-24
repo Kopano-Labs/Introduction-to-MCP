@@ -60,11 +60,11 @@ ACCESS_MODES: list[dict[str, str]] = [
 
 COWORK_SURFACES: list[dict[str, Any]] = [
     {
-        "id": "orch-forge",
-        "name": "Orch Forge",
+        "id": "cassy-forge",
+        "name": "Cassy Forge",
         "status": "building",
         "inspiration": "Anthropic workspace + Codex command center + Stitch canvas",
-        "summary": "A shared forge where orch, Lead, and specialist agents plan, build, critique, and iterate in one creator surface.",
+        "summary": "A shared forge where Cassy, Lead, and specialist agents plan, build, critique, and iterate in one creator surface.",
         "features": [
             "parallel specialist lanes",
             "task inbox and assignment rail",
@@ -77,8 +77,8 @@ COWORK_SURFACES: list[dict[str, Any]] = [
         ],
     },
     {
-        "id": "orch-code",
-        "name": "Orch Code",
+        "id": "cassy-code",
+        "name": "Cassy Code",
         "status": "planned",
         "inspiration": "Codex + Claude Code style coding partner",
         "summary": "A coding mode that learns Robyn's stack, delivery standards, and architecture preferences before expanding outward.",
@@ -92,12 +92,12 @@ COWORK_SURFACES: list[dict[str, Any]] = [
 ]
 
 
-ORCH_INTERFACES: list[dict[str, Any]] = [
+CASSY_INTERFACES: list[dict[str, Any]] = [
     {
         "id": "ide-surface",
         "name": "IDE Workspace",
         "status": "building",
-        "summary": "Repo-aware coding surface for VS Code, Cursor, JetBrains, and web editors through Orch Labs orchestration.",
+        "summary": "Repo-aware coding surface for VS Code, Cursor, JetBrains, and web editors through Cassy Labs orchestration.",
         "mechanics": ["workspace context", "code actions", "review surfaces", "open file handoff"],
     },
     {
@@ -176,7 +176,7 @@ CONNECTOR_WORKFLOWS: list[dict[str, Any]] = [
         "id": "connector-orchestration",
         "name": "Connector Orchestration Workflow",
         "status": "planned",
-        "summary": "Route MCP, Azure, AWS, and external tool workflows through Orch Labs with analytics.",
+        "summary": "Route MCP, Azure, AWS, and external tool workflows through Cassy Labs with analytics.",
     },
 ]
 
@@ -188,17 +188,17 @@ INSTALLER_ACTIONS: list[dict[str, Any]] = [
         "title": "Install VS Code Workspace",
         "provider": "local",
         "status": "ready",
-        "summary": "Set up VS Code, workspace opening, recommended extensions, and Orch Labs handoff.",
+        "summary": "Set up VS Code, workspace opening, recommended extensions, and Cassy Labs handoff.",
         "commands": ["winget install Microsoft.VisualStudioCode", "code ."],
     },
     {
-        "id": "install-orch-cli",
+        "id": "install-cassy-cli",
         "surface": "cli",
         "provider": "local",
-        "title": "Install Orch CLI",
+        "title": "Install Cassy CLI",
         "status": "ready",
-        "summary": "Install Orch in editable mode and verify the command surface.",
-        "commands": ["pip install -e .", "orch --help"],
+        "summary": "Install Cassy in editable mode and verify the command surface.",
+        "commands": ["pip install -e .", "python -m kopano.cli --help"],
     },
     {
         "id": "azure-demo-playbook",
@@ -221,19 +221,19 @@ INSTALLER_ACTIONS: list[dict[str, Any]] = [
 ]
 
 
-ORCH_CODE_TRACKS: list[dict[str, Any]] = [
+CASSY_CODE_TRACKS: list[dict[str, Any]] = [
     {
         "id": "python-core",
         "title": "Python Core",
         "priority": "critical",
-        "summary": "Teach orch the Python patterns already used across CLI, API, tests, and tools.",
+        "summary": "Teach Cassy the Python patterns already used across CLI, API, tests, and tools.",
         "topics": ["Typer CLI", "FastAPI", "pytest", "Pydantic", "tool contracts"],
     },
     {
         "id": "frontend-core",
         "title": "Frontend Core",
         "priority": "high",
-        "summary": "Teach orch the React and Vite patterns used by Neural Link and Labs surfaces.",
+        "summary": "Teach Cassy the React and Vite patterns used by Neural Link and Labs surfaces.",
         "topics": ["React", "TypeScript", "state modeling", "design systems", "responsive UI"],
     },
     {
@@ -303,7 +303,7 @@ LABS_TOOLS: list[dict[str, Any]] = [
         "category": "language",
         "criticality": "critical",
         "status": "building",
-        "summary": "Makes orch understand and respond in all official South African languages.",
+        "summary": "Makes Cassy understand and respond in all official South African languages.",
         "impact": "National accessibility instead of English-only AI.",
         "phase": "Phase 7",
     },
@@ -319,7 +319,7 @@ LABS_TOOLS: list[dict[str, Any]] = [
     },
     {
         "id": "cowork-room",
-        "name": "Orch Forge",
+        "name": "Cassy Forge",
         "category": "creator",
         "criticality": "high",
         "status": "building",
@@ -328,8 +328,8 @@ LABS_TOOLS: list[dict[str, Any]] = [
         "phase": "Phase 8",
     },
     {
-        "id": "orch-code",
-        "name": "Orch Code",
+        "id": "cassy-code",
+        "name": "Cassy Code",
         "category": "creator",
         "criticality": "critical",
         "status": "planned",
@@ -343,10 +343,10 @@ LABS_TOOLS: list[dict[str, Any]] = [
 LABS_PHASES: list[dict[str, Any]] = [
     {
         "id": "phase-6",
-        "title": "Phase 6: Orch Labs",
+        "title": "Phase 6: Cassy Labs",
         "criticality": "critical",
         "status": "in_progress",
-        "summary": "Build a Google-Labs-style experiment layer on top of orch for South African tools.",
+        "summary": "Build a Google-Labs-style experiment layer on top of Cassy for South African tools.",
         "deliverables": [
             "Labs registry and API",
             "Labs gallery in GUI",
@@ -374,8 +374,8 @@ LABS_PHASES: list[dict[str, Any]] = [
         "status": "planned",
         "summary": "Run public-impact AI experiments with cowork surfaces, coding assistance, visibility, and metrics.",
         "deliverables": [
-            "Orch Forge creator surface",
-            "Orch Code teaching surface",
+            "Cassy Forge creator surface",
+            "Cassy Code teaching surface",
             "Impact dashboard",
         ],
     },
@@ -384,7 +384,7 @@ LABS_PHASES: list[dict[str, Any]] = [
         "title": "Phase 9: Research And Refinement Engine",
         "criticality": "critical",
         "status": "planned",
-        "summary": "Continuously research, benchmark, and refine orch so product decisions stay current and evidence-based.",
+        "summary": "Continuously research, benchmark, and refine Cassy so product decisions stay current and evidence-based.",
         "deliverables": [
             "Research backlog",
             "Top 50 product-readiness map",
@@ -397,16 +397,16 @@ LABS_PHASES: list[dict[str, Any]] = [
 
 def get_labs_overview() -> dict[str, Any]:
     return {
-        "title": "Orch Labs",
-        "positioning": "A Google-Labs-style experiment layer on top of orch for South African public-impact AI tools.",
+        "title": "Cassy Labs",
+        "positioning": "A Google-Labs-style experiment layer on top of Cassy for South African public-impact AI tools.",
         "categories": LABS_CATEGORIES,
         "tools": LABS_TOOLS,
         "phases": LABS_PHASES,
         "languages": SA_LANGUAGE_SUPPORT,
         "access_modes": ACCESS_MODES,
         "cowork_surfaces": COWORK_SURFACES,
-        "orch_code_tracks": ORCH_CODE_TRACKS,
-        "kopano_interfaces": ORCH_INTERFACES,
+        "cassy_code_tracks": CASSY_CODE_TRACKS,
+        "kopano_interfaces": CASSY_INTERFACES,
         "cloud_stacks": CLOUD_STACKS,
         "connector_workflows": CONNECTOR_WORKFLOWS,
         "installer_actions": INSTALLER_ACTIONS,
@@ -417,7 +417,7 @@ def get_labs_overview() -> dict[str, Any]:
             "live_tools": sum(1 for tool in LABS_TOOLS if tool["status"] == "live"),
             "languages": len(SA_LANGUAGE_SUPPORT),
             "access_modes": len(ACCESS_MODES),
-            "interfaces": len(ORCH_INTERFACES),
+            "interfaces": len(CASSY_INTERFACES),
             "cloud_stacks": len(CLOUD_STACKS),
             "installer_actions": len(INSTALLER_ACTIONS),
         },

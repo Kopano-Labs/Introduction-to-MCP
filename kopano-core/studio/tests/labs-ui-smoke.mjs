@@ -26,7 +26,7 @@ const editableTask = toEditableTask(task);
 assert.deepEqual(editableTask, task);
 assert.notEqual(editableTask, task);
 
-const artifact = { id: 3, artifact_type: 'api', title: 'Azure Playbook', summary: 'Demo day flow', status: 'draft', link: 'Orch Forge' };
+const artifact = { id: 3, artifact_type: 'api', title: 'Azure Playbook', summary: 'Demo day flow', status: 'draft', link: 'Cassy Forge' };
 const editableArtifact = toEditableArtifact(artifact);
 assert.deepEqual(editableArtifact, artifact);
 assert.notEqual(editableArtifact, artifact);
