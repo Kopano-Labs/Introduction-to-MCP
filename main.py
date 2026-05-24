@@ -17,13 +17,20 @@ for import_root in IMPORT_ROOTS:
         sys.path.insert(0, import_root_str)
 
 
-try:
-    from kopano.cli import app
-except ImportError:
-    from orch.orch.cli import app
-
-
 def main():
+    if getattr(sys, "frozen", False):
+        from kopano.runtime import configure_frozen_runtime
+        from kopano.desktop import main as desktop_main
+
+        configure_frozen_runtime()
+        desktop_main()
+        return
+
+    try:
+        from kopano.cli import app
+    except ImportError:
+        from orch.orch.cli import app  # legacy package layout
+
     app()
 
 if __name__ == "__main__":

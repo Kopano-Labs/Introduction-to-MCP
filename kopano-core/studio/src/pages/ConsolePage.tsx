@@ -218,7 +218,7 @@ export function ConsolePage({
               </button>
             ))}
           </nav>
-        </motion.div>
+        </div>
 
         <div className="swarm-block">
           <h3>Connectors</h3>
@@ -243,8 +243,8 @@ export function ConsolePage({
                 {status?.doctrine.swarm_ack_met ? 'ACK' : 'Manual'}
               </span>
             </motion.div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <motion.div className="swarm-panel" layout>
           <h4>Servitude Triad</h4>
@@ -264,7 +264,7 @@ export function ConsolePage({
               One composer · server-mediated tools · receipts before “complete”.
               {loadError && ` ${loadError}`}
             </p>
-          </motion.div>
+          </div>
           <div className="badge-cluster">
             <span className={`status-badge ${status?.proof_bar_pass ? 'live' : 'neutral'}`}>
               Proof bar: {status?.proof_bar_pass ? 'PASS' : 'OPEN'}
@@ -272,7 +272,7 @@ export function ConsolePage({
             <span className="status-badge neutral">
               Verified prod: {status?.doctrine.verified_production ?? '…'} / {status?.doctrine.public_graduation_bar ?? 10}
             </span>
-          </motion.div>
+          </div>
         </header>
 
         <section className="swarm-center">

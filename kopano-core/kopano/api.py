@@ -372,7 +372,7 @@ async def health_check():
 
     # Check Telemetry (Azure/OpenAI readiness)
     from .config import settings
-    if settings.azure_openai_key and settings.azure_openai_endpoint:
+    if settings.azure_openai_api_key and settings.azure_openai_endpoint:
         health["components"]["telemetry"] = "ready"
     else:
         health["components"]["telemetry"] = "unconfigured"

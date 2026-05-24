@@ -94,6 +94,18 @@ Client-facing demos are **audit-before-presentation** (**Protocol 13**). Narrati
 
 ---
 
+## Build KopanoContext.exe (Windows)
+
+From repo root (requires Node.js + Python with project deps installed):
+
+```powershell
+.\scripts\build_kopano_context.ps1
+```
+
+Output: `dist\KopanoContext.exe` — starts **API + bundled Studio** on `http://127.0.0.1:8000` and opens your browser. SQLite lives under `%LOCALAPPDATA%\KopanoContext\` (not next to the exe).
+
+Optional flags: `KopanoContext.exe serve api --no-open --port 8000`
+
 ## Emergency Recovery
 
 If the API crashes during demo:

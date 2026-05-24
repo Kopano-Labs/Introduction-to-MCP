@@ -21,7 +21,10 @@ class Settings(BaseSettings):
     google_api_key: Optional[str] = None
     xai_api_key: Optional[str] = None
     anthropic_api_key: Optional[str] = None
-    db_path: str = "db/datalake.db"
+    db_path: str = Field(
+        default="db/datalake.db",
+        validation_alias=AliasChoices("KOPANO_DB_PATH", "DB_PATH"),
+    )
 
     # WhatsApp Integration (Phase 3)
     whatsapp_api_key: Optional[str] = Field(None, validation_alias=AliasChoices("WHATSAPP_API_KEY", "WHATSAPP_TOKEN"))

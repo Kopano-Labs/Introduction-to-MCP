@@ -1,28 +1,59 @@
 # -*- mode: python ; coding: utf-8 -*-
+# Build: scripts/build_kopano_context.ps1  (or: pyinstaller KopanoContext.spec --noconfirm --clean)
+
+from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 block_cipher = None
 
-# Define the data files to include
+kopano_hidden = collect_submodules("kopano")
+litellm_datas = collect_data_files("litellm")
+
 added_files = [
-    ('kopano-core/studio/dist', 'studio/dist'),
-    ('kopano-core/kopano', 'kopano'),
-]
+    ("kopano-core/studio/dist", "studio/dist"),
+    ("db/datalake.db", "db"),
+] + litellm_datas
 
 a = Analysis(
-    ['main.py'],
-    pathex=['kopano-core'],
+    ["kopano_desktop.py"],
+    pathex=["kopano-core"],
     binaries=[],
     datas=added_files,
-    hiddenimports=['uvicorn.protocols.http.httptools_impl', 'uvicorn.protocols.http.h11_impl', 'uvicorn.protocols.websockets.websockets_impl', 'uvicorn.protocols.websockets.wsproto_impl', 'uvicorn.lifespan.on', 'uvicorn.lifespan.off', 'email.mime.multipart', 'email.mime.text'],
+    hiddenimports=kopano_hidden
+    + [
+        "uvicorn",
+        "uvicorn.logging",
+        "uvicorn.loops",
+        "uvicorn.loops.auto",
+        "uvicorn.loops.asyncio",
+        "uvicorn.protocols",
+        "uvicorn.protocols.http",
+        "uvicorn.protocols.http.auto",
+        "uvicorn.protocols.http.h11_impl",
+        "uvicorn.protocols.http.httptools_impl",
+        "uvicorn.protocols.websockets",
+        "uvicorn.protocols.websockets.auto",
+        "uvicorn.protocols.websockets.websockets_impl",
+        "uvicorn.lifespan",
+        "uvicorn.lifespan.on",
+        "uvicorn.lifespan.off",
+        "fastapi",
+        "starlette.routing",
+        "starlette.middleware.cors",
+        "pydantic_settings",
+        "email.mime.multipart",
+        "email.mime.text",
+        "anyio._backends._asyncio",
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=["pytest", "tkinter"],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
     cipher=block_cipher,
     noarchive=False,
 )
+
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
 exe = EXE(
@@ -32,14 +63,14 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='KopanoContext',
+    name="KopanoContext",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=True,
+    upx=False,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=True, # Set to False for no console window
+    console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
