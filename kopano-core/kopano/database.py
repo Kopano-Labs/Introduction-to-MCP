@@ -168,6 +168,31 @@ def init_db():
     );
     """)
 
+    # Oz Lattice Protocol — boundary audit tables
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS lattice_bleed_audits (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ts TEXT NOT NULL,
+        source_node TEXT NOT NULL,
+        target_node TEXT NOT NULL,
+        seal TEXT NOT NULL,
+        verdict TEXT NOT NULL CHECK(verdict IN ('SEALED','BLEED_DETECTED','STRUCTURAL_BLEED','SEMANTIC_BLEED')),
+        payload_preview TEXT,
+        structural_hits TEXT,
+        semantic_hits TEXT,
+        lattice_hash TEXT NOT NULL
+    );
+    """)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS lattice_node_states (
+        node_id TEXT PRIMARY KEY,
+        last_seal TEXT,
+        last_ts TEXT,
+        integrity_ok INTEGER NOT NULL DEFAULT 1,
+        bleed_count INTEGER NOT NULL DEFAULT 0
+    );
+    """)
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

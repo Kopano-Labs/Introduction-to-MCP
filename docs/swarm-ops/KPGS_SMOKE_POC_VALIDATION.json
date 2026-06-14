@@ -1,6 +1,6 @@
 {
   "schema": "kpgs_smoke_poc_v2",
-  "ts": "2026-06-14T15:07:26Z",
+  "ts": "2026-06-14T18:36:45Z",
   "verdict": "PASS",
   "activation_allowed": true,
   "summary": "[KPGS_SMOKE_POC] verdict=PASS | gate=ALLOW | gov=COMPILED | behavioral=PASS | steward=ACTIVE | sim=BOOTSTRAPPED | poc=PASS | delta=12 count",
@@ -9,7 +9,7 @@
       "step": "activation_gate",
       "result": {
         "schema": "kpgs_activation_gate_v1",
-        "ts": "2026-06-14T15:05:14Z",
+        "ts": "2026-06-14T18:32:59Z",
         "activation_allowed": true,
         "verdict": "ALLOW",
         "required_agents": 300,
@@ -94,7 +94,7 @@
       "step": "steward_lane_activate",
       "result": {
         "schema": "steward_lane_activate_v1",
-        "ts": "2026-06-14T15:05:29Z",
+        "ts": "2026-06-14T18:33:26Z",
         "verdict": "ACTIVE",
         "steps": [
           {
@@ -111,7 +111,7 @@
               ],
               "servitude": "Realism accommodates Aesthetics; Cassy is not held to corporate-only roles.",
               "hold_back_student": false,
-              "activated_at": "2026-06-14T15:05:21Z"
+              "activated_at": "2026-06-14T18:33:09Z"
             }
           },
           {
@@ -127,7 +127,7 @@
             "result": {
               "stored": true,
               "schema": "kc_main_brain_log_v1",
-              "ts": "2026-06-14T15:05:28Z",
+              "ts": "2026-06-14T18:33:25Z",
               "kind": "kpefs_steward_trust",
               "summary": "[KPEFS_GRADUATION_BAR] steward_trust | KC ledger Save|Watch | teacher: cassey | lead_student: cassy | verified_production: 19/10 | operating_mesh: True | drill_is_not_graduation: true | KPGS smoke PoC — activate KC Save|Watch + Cassy execute + Kopano Context GUI",
               "exit_code": 0,
@@ -151,17 +151,17 @@
                 },
                 "birth_rule": "LPH emerges when #! validates #? inside Guardian receipts — never #! without BlackMask + bracket discipline",
                 "dialectic_closed": true,
-                "summary": "[LPM_PROTOCOL] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph: pending | vector: pending | dialectic: CLOSED"
+                "summary": "[LPM_PROTOCOL] timestamp: 2026-06-14T18:33:25Z | ecosystem: Kopano-Phu | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph: pending | vector: pending | dialectic: CLOSED"
               },
               "lph": {
                 "personality_id": "diaspora",
                 "display": "Diaspora",
                 "kpefs_vector": "V4_DIASPORA",
                 "mao_intent": "orchestrate",
-                "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T15:05:28Z | personality: diaspora | vector: V4_DIASPORA | mao_intent: orchestrate | code_switch: active"
+                "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T18:33:25Z | personality: diaspora | vector: V4_DIASPORA | mao_intent: orchestrate | code_switch: active"
               },
-              "god_complex": "[GOD_COMPLEX] timestamp: 2026-06-14T15:05:28Z | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph_birth: diaspora",
-              "summary": "[IDENTI_AI_FLOW] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | verdict: PROPOSE | agent: identi_cursor | lph: diaspora | dept: kopano_labs_experimentation | [LPM_PROTOCOL] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph: pending | vector: pending | dialectic: CLOSED",
+              "god_complex": "[GOD_COMPLEX] timestamp: 2026-06-14T18:33:25Z | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph_birth: diaspora",
+              "summary": "[IDENTI_AI_FLOW] timestamp: 2026-06-14T18:33:25Z | ecosystem: Kopano-Phu | verdict: PROPOSE | agent: identi_cursor | lph: diaspora | dept: kopano_labs_experimentation | [LPM_PROTOCOL] timestamp: 2026-06-14T18:33:25Z | ecosystem: Kopano-Phu | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph: pending | vector: pending | dialectic: CLOSED",
               "defers_to": "guardian"
             }
           },
@@ -175,7 +175,7 @@
                   "step": "block_holder_brief",
                   "result": {
                     "schema": "kpgs_block_holder_brief_v1",
-                    "ts": "2026-06-14T15:05:28Z",
+                    "ts": "2026-06-14T18:33:25Z",
                     "bracket": "[KPGS_BLOCK_HOLDER]",
                     "agent_id": "mirror_warden",
                     "altar_layer": "guardian_ai",
@@ -359,7 +359,7 @@
                         "passed": true
                       }
                     ],
-                    "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
+                    "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T18:33:25Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
                     "drill_complete": true
                   }
                 },
@@ -369,13 +369,13 @@
                     "status": "submitted",
                     "department": "kopano_labs_experimentation",
                     "student": "cassy",
-                    "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-14T15:05:29Z | ecosystem: Kopano-Phu | lane: mcp | role: student | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: SUBMITTED | action: [KPGS_SMOKE_POC] steward + sovereign sim activation | evidence: docs/swarm-ops/KPGS_ACTIVATION_GATE.json",
+                    "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-14T18:33:25Z | ecosystem: Kopano-Phu | lane: mcp | role: student | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: SUBMITTED | action: [KPGS_SMOKE_POC] steward + sovereign sim activation | evidence: docs/swarm-ops/KPGS_ACTIVATION_GATE.json",
                     "telemetry_routing": {
                       "schema": "kpgs_submission_telemetry_v1",
-                      "ts": "2026-06-14T15:05:29Z",
+                      "ts": "2026-06-14T18:33:25Z",
                       "classification": {
                         "schema": "kpgs_telemetry_classify_v1",
-                        "ts": "2026-06-14T15:05:29Z",
+                        "ts": "2026-06-14T18:33:25Z",
                         "raw_signal": "[KPGS_SMOKE_POC] steward + sovereign sim activation | docs/swarm-ops/KPGS_ACTIVATION_GATE.json",
                         "verdict": "ACCEPT",
                         "classified": true,
@@ -410,11 +410,11 @@
                     "department": "kopano_labs_experimentation",
                     "teacher": "cassey",
                     "verdict": "APPROVE",
-                    "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-14T15:05:29Z | ecosystem: Kopano-Phu | lane: mcp | role: teacher | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: APPROVE | note: Cassey teacher_review — steward lane lead-dev trust",
+                    "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-14T18:33:25Z | ecosystem: Kopano-Phu | lane: mcp | role: teacher | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: APPROVE | note: Cassey teacher_review — steward lane lead-dev trust",
                     "main_brain_exit_code": 0,
                     "kc_teacher_review": {
                       "stored": true,
-                      "ts": "2026-06-14T15:05:29Z",
+                      "ts": "2026-06-14T18:33:25Z",
                       "schema": "kc_teacher_review_v1",
                       "opinion": "Save — Cassey teacher_review — steward lane lead-dev trust",
                       "verdict_token": "Save",
@@ -430,12 +430,12 @@
                 "display": "Diaspora",
                 "kpefs_vector": "V4_DIASPORA",
                 "mao_intent": "orchestrate",
-                "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T15:05:29Z | personality: diaspora | vector: V4_DIASPORA | mao_intent: orchestrate | code_switch: active"
+                "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T18:33:26Z | personality: diaspora | vector: V4_DIASPORA | mao_intent: orchestrate | code_switch: active"
               },
-              "summary": "[GUARDIAN_AI_FLOW] timestamp: 2026-06-14T15:05:29Z | ecosystem: Kopano-Phu | verdict: SHIP | department: kopano_labs_experimentation | student: cassy | lph: diaspora",
+              "summary": "[GUARDIAN_AI_FLOW] timestamp: 2026-06-14T18:33:26Z | ecosystem: Kopano-Phu | verdict: SHIP | department: kopano_labs_experimentation | student: cassy | lph: diaspora",
               "block_holder": {
                 "schema": "kpgs_block_holder_brief_v1",
-                "ts": "2026-06-14T15:05:28Z",
+                "ts": "2026-06-14T18:33:25Z",
                 "bracket": "[KPGS_BLOCK_HOLDER]",
                 "agent_id": "mirror_warden",
                 "altar_layer": "guardian_ai",
@@ -519,12 +519,12 @@
           "profile_present": true,
           "boot_active": true,
           "last_guardian": {
-            "last_at": "2026-06-14T15:05:29Z",
+            "last_at": "2026-06-14T18:33:26Z",
             "verdict": "SHIP",
             "department": "kopano_labs_experimentation"
           },
           "last_identi": {
-            "last_at": "2026-06-14T15:05:28Z",
+            "last_at": "2026-06-14T18:33:25Z",
             "verdict": "PROPOSE",
             "personality": "diaspora"
           },
@@ -537,7 +537,7 @@
           "operating_mesh_ready": null,
           "kpgs_governance": {
             "schema": "kpgs_governance_status_v1",
-            "ts": "2026-06-14T15:05:50Z",
+            "ts": "2026-06-14T18:34:19Z",
             "authority": "Schematics MAIN BRAIN",
             "registry_present": true,
             "registry_path": "Schematics\\21-KOPANO-PHU GOVERNACE SYSTEMS\\MAIN-BRAIN\\KPGS_GOVERNANCE_CORE.json",
@@ -580,7 +580,7 @@
             "summary": "[KPGS_MAIN_BRAIN] authority: Schematics | verdict: COMPILED | thesis: COMPILED | beast: COMPILED | mesh: PASS (19/19 SHIP) | spawn: COMPILED (300/300 SHIP)",
             "spawn_swarm": {
               "schema": "kpgs_spawn_swarm_status_v2",
-              "ts": "2026-06-14T15:05:50Z",
+              "ts": "2026-06-14T18:34:19Z",
               "junior_agent_count": 300,
               "sharding": {
                 "telemetry": {
@@ -626,22 +626,22 @@
               ],
               "swfus_bracket": "[SWFUS_KPGS]",
               "hood_objective": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood.",
-              "altar_head_hash": "b70686ae9f690903d58a16c8820e3d51eeac4c4e0cd5046af3be843dc8bcdb41",
+              "altar_head_hash": "3ceeca016ee19464da99a9e22f9b851f4f86c148b55957f8965141e4441a19e6",
               "latest_checkpoint": {
-                "checkpoint_id": 558,
-                "ts": "2026-06-14T15:05:50Z",
+                "checkpoint_id": 1193,
+                "ts": "2026-06-14T18:34:19Z",
                 "agents_total": 300,
                 "ship_count": 23,
-                "head_hash": "b70686ae9f690903d58a16c8820e3d51eeac4c4e0cd5046af3be843dc8bcdb41",
+                "head_hash": "3ceeca016ee19464da99a9e22f9b851f4f86c148b55957f8965141e4441a19e6",
                 "snapshot": {
-                  "ts": "2026-06-14T15:05:50Z",
+                  "ts": "2026-06-14T18:34:19Z",
                   "catalog_counts": {
                     "telemetry_cohort": 100,
                     "identic_cohort": 100,
                     "guardian_cohort": 100,
                     "total": 300
                   },
-                  "head_hash": "b70686ae9f690903d58a16c8820e3d51eeac4c4e0cd5046af3be843dc8bcdb41",
+                  "head_hash": "3ceeca016ee19464da99a9e22f9b851f4f86c148b55957f8965141e4441a19e6",
                   "cohorts": {
                     "telemetry": {
                       "slots": "001-100",
@@ -682,7 +682,7 @@
       "step": "behavioral_poc",
       "result": {
         "schema": "kpgs_behavioral_poc_v1",
-        "ts": "2026-06-14T15:07:08Z",
+        "ts": "2026-06-14T18:36:22Z",
         "verdict": "PASS",
         "activation_allowed": true,
         "proofs_passed": 6,
@@ -696,7 +696,7 @@
             "instrument": "infinite_hood_cloud.hood_dispatch_for_plot",
             "observed": {
               "schema": "infinite_hood_dispatch_v1",
-              "ts": "2026-06-14T15:06:29Z",
+              "ts": "2026-06-14T18:35:28Z",
               "plot_id": "plot_kopano_context",
               "domain": "context.kopanolabs.com",
               "agent_id": "mirror_warden",
@@ -707,7 +707,7 @@
                 "proceed": true,
                 "swfus": {
                   "schema": "kpgs_swfus_envelope_v2",
-                  "ts": "2026-06-14T15:06:29Z",
+                  "ts": "2026-06-14T18:35:28Z",
                   "bracket": "[SWFUS_KPGS]",
                   "agent_id": "mirror_warden",
                   "cohort": "guardian",
@@ -722,7 +722,7 @@
                   "altar_layer": "guardian_ai",
                   "hood_entry": {
                     "schema": "kpgs_hood_entry_assertion_v1",
-                    "ts": "2026-06-14T15:06:29Z",
+                    "ts": "2026-06-14T18:35:28Z",
                     "bracket": "[KPGS_HOOD_ENTRY]",
                     "renter_id": "spawn:mirror_warden",
                     "renter_class": "spawn_agent",
@@ -814,7 +814,7 @@
                   },
                   "block_holder": {
                     "schema": "kpgs_block_holder_brief_v1",
-                    "ts": "2026-06-14T15:06:29Z",
+                    "ts": "2026-06-14T18:35:28Z",
                     "bracket": "[KPGS_BLOCK_HOLDER]",
                     "agent_id": "mirror_warden",
                     "altar_layer": "guardian_ai",
@@ -886,7 +886,7 @@
                   "forensic_sociology": null,
                   "jethro_triage": {
                     "schema": "kpgs_jethro_triage_v2",
-                    "ts": "2026-06-14T15:06:29Z",
+                    "ts": "2026-06-14T18:35:28Z",
                     "bracket": "[JETHRO_TRIAGE]",
                     "agent_id": "mirror_warden",
                     "cohort": "guardian",
@@ -899,7 +899,7 @@
                   },
                   "wwjd_firewall": {
                     "schema": "kpgs_wwjd_firewall_v1",
-                    "ts": "2026-06-14T15:06:29Z",
+                    "ts": "2026-06-14T18:35:28Z",
                     "bracket": "[WWJD_FIREWALL]",
                     "verdict": "REVIEW",
                     "reject_hits": [],
@@ -912,7 +912,7 @@
                 },
                 "jethro": {
                   "schema": "kpgs_jethro_triage_v2",
-                  "ts": "2026-06-14T15:06:29Z",
+                  "ts": "2026-06-14T18:35:28Z",
                   "bracket": "[JETHRO_TRIAGE]",
                   "agent_id": "mirror_warden",
                   "cohort": "guardian",
@@ -925,7 +925,7 @@
                 },
                 "wwjd": {
                   "schema": "kpgs_wwjd_firewall_v1",
-                  "ts": "2026-06-14T15:06:29Z",
+                  "ts": "2026-06-14T18:35:28Z",
                   "bracket": "[WWJD_FIREWALL]",
                   "verdict": "REVIEW",
                   "reject_hits": [],
@@ -955,7 +955,7 @@
             "observed": {
               "misnamed": {
                 "schema": "kpgs_telemetry_classify_v1",
-                "ts": "2026-06-14T15:06:29Z",
+                "ts": "2026-06-14T18:35:28Z",
                 "raw_signal": "pressure is high on the team",
                 "verdict": "RECLASSIFY",
                 "classified": false,
@@ -977,7 +977,7 @@
               },
               "routed": {
                 "schema": "kpgs_telemetry_classify_v1",
-                "ts": "2026-06-14T15:06:29Z",
+                "ts": "2026-06-14T18:35:28Z",
                 "raw_signal": "grief after load shedding killed the shift",
                 "verdict": "ROUTED",
                 "classified": true,
@@ -1036,9 +1036,9 @@
             },
             "tick": {
               "schema": "sovereign_sim_tick_v1",
-              "ts": "2026-06-14T15:07:08Z",
+              "ts": "2026-06-14T18:36:22Z",
               "verdict": "TICK_OK",
-              "tick_id": "20260614T150708",
+              "tick_id": "20260614T183622",
               "sample_size": 12,
               "proceed_count": 12,
               "sever_count": 0,
@@ -1132,7 +1132,7 @@
     {
       "step": "eco_poc_validate",
       "result": {
-        "poc_id": "poc_cassy_20260614T150726",
+        "poc_id": "poc_cassy_20260614T183645",
         "agent_id": "cassy",
         "verdict": "PASS",
         "oracles": [
@@ -1207,10 +1207,10 @@
         ],
         "oracles_pass": 11,
         "oracles_total": 11,
-        "summary": "[ECO_POC_VALIDATE] timestamp: 2026-06-14T15:07:26Z | ecosystem: Kopano-Phu | doctrine: UNEMPLOYMENT_32_8 | poc_id: poc_cassy_20260614T150726 | agent: cassy | oracles_pass: 11/11 | delta: 12.0 count | verdict: PASS | oracle: internal_not_world",
+        "summary": "[ECO_POC_VALIDATE] timestamp: 2026-06-14T18:36:45Z | ecosystem: Kopano-Phu | doctrine: UNEMPLOYMENT_32_8 | poc_id: poc_cassy_20260614T183645 | agent: cassy | oracles_pass: 11/11 | delta: 12.0 count | verdict: PASS | oracle: internal_not_world",
         "catalog_functionality": null,
         "doctrine": "[UNEMPLOYMENT_32_8_DOCTRINE]",
-        "validated_at": "2026-06-14T15:07:26Z"
+        "validated_at": "2026-06-14T18:36:45Z"
       }
     }
   ],
@@ -1223,7 +1223,7 @@
   },
   "ui_snapshot": {
     "schema": "sovereign_sim_ui_v1",
-    "ts": "2026-06-14T15:08:04Z",
+    "ts": "2026-06-14T18:37:13Z",
     "activation_allowed": true,
     "gate_verdict": "ALLOW",
     "behavioral_poc_verdict": "PASS",
@@ -1295,17 +1295,17 @@
       "latest_comms": [
         {
           "id": "mb-kpgs_altar_hash_commit-0",
-          "ts": "2026-06-14 15:08",
+          "ts": "2026-06-14 18:37",
           "tranche": "kpgs altar hash commit",
           "operator": "LD-LPM",
-          "dispatch": "[KPGS_ALTAR] commit agent=mirror_warden hash=9670a365dd2dcffb…",
+          "dispatch": "[KPGS_ALTAR] commit agent=mirror_warden hash=96772c529981fec7…",
           "verdict": "SAVE",
           "bracket": "[KPEFS_STEWARD_LANE]",
-          "body": "[KPGS_ALTAR] commit agent=mirror_warden hash=9670a365dd2dcffb…"
+          "body": "[KPGS_ALTAR] commit agent=mirror_warden hash=96772c529981fec7…"
         },
         {
           "id": "mb-kpgs_spawn_swarm_validation-1",
-          "ts": "2026-06-14 15:08",
+          "ts": "2026-06-14 18:37",
           "tranche": "kpgs spawn swarm validation",
           "operator": "LD-LPM",
           "dispatch": "[KPGS_SPAWN] sharded_validation | verdict=PASS | total=300 SHIP=300",
@@ -1315,23 +1315,23 @@
         },
         {
           "id": "mb-black_mask_drill-2",
-          "ts": "2026-06-14 15:07",
+          "ts": "2026-06-14 18:37",
           "tranche": "black mask drill",
           "operator": "LD-LPM",
-          "dispatch": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
+          "dispatch": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T18:37:06Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
           "verdict": "SHIP",
           "bracket": "[BLACK_MASK_DRILL]",
-          "body": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "body": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T18:37:06Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         },
         {
           "id": "mb-black_mask_drill-3",
-          "ts": "2026-06-14 15:07",
+          "ts": "2026-06-14 18:37",
           "tranche": "black mask drill",
           "operator": "LD-LPM",
-          "dispatch": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
+          "dispatch": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T18:37:06Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
           "verdict": "SHIP",
           "bracket": "[BLACK_MASK_DRILL]",
-          "body": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "body": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T18:37:06Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "kpefs_vector": "V4_DIASPORA",
@@ -1346,12 +1346,12 @@
         "profile_present": true,
         "boot_active": true,
         "last_guardian": {
-          "last_at": "2026-06-14T15:05:29Z",
+          "last_at": "2026-06-14T18:33:26Z",
           "verdict": "SHIP",
           "department": "kopano_labs_experimentation"
         },
         "last_identi": {
-          "last_at": "2026-06-14T15:05:28Z",
+          "last_at": "2026-06-14T18:33:25Z",
           "verdict": "PROPOSE",
           "personality": "diaspora"
         },
@@ -1364,7 +1364,7 @@
         "operating_mesh_ready": null,
         "kpgs_governance": {
           "schema": "kpgs_governance_status_v1",
-          "ts": "2026-06-14T15:08:03Z",
+          "ts": "2026-06-14T18:37:13Z",
           "authority": "Schematics MAIN BRAIN",
           "registry_present": true,
           "registry_path": "Schematics\\21-KOPANO-PHU GOVERNACE SYSTEMS\\MAIN-BRAIN\\KPGS_GOVERNANCE_CORE.json",
@@ -1407,7 +1407,7 @@
           "summary": "[KPGS_MAIN_BRAIN] authority: Schematics | verdict: COMPILED | thesis: COMPILED | beast: COMPILED | mesh: PASS (19/19 SHIP) | spawn: COMPILED (300/300 SHIP)",
           "spawn_swarm": {
             "schema": "kpgs_spawn_swarm_status_v2",
-            "ts": "2026-06-14T15:08:03Z",
+            "ts": "2026-06-14T18:37:13Z",
             "junior_agent_count": 300,
             "sharding": {
               "telemetry": {
@@ -1453,22 +1453,22 @@
             ],
             "swfus_bracket": "[SWFUS_KPGS]",
             "hood_objective": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood.",
-            "altar_head_hash": "9670a365dd2dcffbcd6efc1f6943a62ec23bf208a1df4a6c8c43e5fe8f0cc9bb",
+            "altar_head_hash": "96772c529981fec74f8b25602c56c897ce7ff7b8640476b2fecdec4a5ddbc889",
             "latest_checkpoint": {
-              "checkpoint_id": 605,
-              "ts": "2026-06-14T15:08:03Z",
+              "checkpoint_id": 1235,
+              "ts": "2026-06-14T18:37:13Z",
               "agents_total": 300,
               "ship_count": 23,
-              "head_hash": "9670a365dd2dcffbcd6efc1f6943a62ec23bf208a1df4a6c8c43e5fe8f0cc9bb",
+              "head_hash": "96772c529981fec74f8b25602c56c897ce7ff7b8640476b2fecdec4a5ddbc889",
               "snapshot": {
-                "ts": "2026-06-14T15:08:03Z",
+                "ts": "2026-06-14T18:37:13Z",
                 "catalog_counts": {
                   "telemetry_cohort": 100,
                   "identic_cohort": 100,
                   "guardian_cohort": 100,
                   "total": 300
                 },
-                "head_hash": "9670a365dd2dcffbcd6efc1f6943a62ec23bf208a1df4a6c8c43e5fe8f0cc9bb",
+                "head_hash": "96772c529981fec74f8b25602c56c897ce7ff7b8640476b2fecdec4a5ddbc889",
                 "cohorts": {
                   "telemetry": {
                     "slots": "001-100",
@@ -1506,7 +1506,7 @@
     },
     "world": {
       "schema": "sovereign_sim_world_v1",
-      "ts": "2026-06-14T15:07:26Z",
+      "ts": "2026-06-14T18:36:45Z",
       "bootstrapped": true,
       "verdict": "WORLD_READY",
       "thesis_frame": "KPGS_THESIS_2026_X8020 sector_matrix + infinite_hood plots",

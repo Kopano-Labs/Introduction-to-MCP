@@ -1,6 +1,6 @@
 {
   "schema": "kpgs_activation_gate_v1",
-  "ts": "2026-06-14T16:00:29Z",
+  "ts": "2026-06-14T18:36:45Z",
   "activation_allowed": true,
   "verdict": "ALLOW",
   "required_agents": 300,

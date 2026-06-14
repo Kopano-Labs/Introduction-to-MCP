@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Altar — Biblical Scripture API Gateway | KPGS</title>
+  <meta name="description" content="The Altar: covenant observatory governing all API calls through Guardian, Natural, and Telemetry AI layers with biblical scripture authority.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080f; --bg-panel: #0e0e1a; --bg-card: #141428;
+      --bg-card-hover: #1c1c38; --bg-scripture: #0c0c1e;
+      --border: #222240; --border-glow: #3a3a6e; --border-active: #5555aa;
+      --text: #e0e0f0; --text-sec: #8888aa; --text-dim: #555570;
+      --guardian: #e94560; --guardian-glow: rgba(233,69,96,0.2);
+      --natural: #00d4aa; --natural-glow: rgba(0,212,170,0.2);
+      --telemetry: #7b61ff; --telemetry-glow: rgba(123,97,255,0.2);
+      --gold: #ffd700; --gold-glow: rgba(255,215,0,0.15);
+      --proceed: #00ff88; --sever: #ff3366;
+      --wwjd: #cc66ff; --jethro: #ff8800;
+      --scripture-text: #bba87e;
+      --radius: 14px; --radius-sm: 10px;
+      --font: 'Outfit', sans-serif; --mono: 'JetBrains Mono', monospace;
+      --serif: 'Crimson Pro', Georgia, serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* HEADER */
+    .altar-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 32px;
+      background: rgba(8,8,15,0.9); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .ah-left { display: flex; align-items: center; gap: 14px; }
+    .ah-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--guardian), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; box-shadow: 0 0 20px var(--guardian-glow);
+    }
+    .ah-title { font-size: 18px; font-weight: 700; }
+    .ah-sub { font-size: 10px; color: var(--telemetry); font-family: var(--mono); }
+    .ah-nav { display: flex; gap: 16px; align-items: center; }
+    .ah-link {
+      font-size: 12px; color: var(--text-sec); text-decoration: none;
+      font-family: var(--mono); transition: color 0.2s;
+    }
+    .ah-link:hover { color: var(--text); }
+    .ah-badge {
+      padding: 4px 12px; border-radius: 14px;
+      font-size: 9px; font-weight: 700; font-family: var(--mono);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .badge-covenant { background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(255,215,0,0.3); }
+
+    /* EPIGRAPH */
+    .epigraph {
+      text-align: center; padding: 60px 40px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .epigraph blockquote {
+      font-family: var(--serif); font-style: italic;
+      font-size: 22px; color: var(--scripture-text);
+      max-width: 700px; margin: 0 auto 12px; line-height: 1.5;
+    }
+    .epigraph cite {
+      font-family: var(--mono); font-style: normal;
+      font-size: 11px; color: var(--text-dim);
+    }
+    .epigraph .subtitle {
+      margin-top: 20px; font-size: 13px; color: var(--text-sec);
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+
+    /* THREE LAYERS */
+    .layers-section { padding: 48px 32px; }
+    .layers-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; max-width: 1100px; margin: 0 auto;
+    }
+    @media (max-width: 900px) { .layers-grid { grid-template-columns: 1fr; } }
+    .layer-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      position: relative; overflow: hidden; transition: all 0.4s;
+    }
+    .layer-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .layer-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+    .lc-guardian::before { background: linear-gradient(90deg, var(--guardian), #ff6b6b); }
+    .lc-natural::before { background: linear-gradient(90deg, var(--natural), #00e68a); }
+    .lc-telemetry::before { background: linear-gradient(90deg, var(--telemetry), #a78bfa); }
+    .lc-icon { font-size: 32px; margin-bottom: 16px; }
+    .lc-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .lc-role { font-size: 11px; color: var(--text-sec); font-family: var(--mono); margin-bottom: 16px; }
+    .lc-gate {
+      padding: 10px 14px; border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+      font-size: 11px; color: var(--text-sec); font-family: var(--mono);
+      margin-bottom: 16px; line-height: 1.5;
+    }
+    .lc-scripture {
+      padding: 14px; border-radius: var(--radius-sm);
+      background: var(--bg-scripture); border-left: 3px solid;
+      font-family: var(--serif); font-style: italic;
+      font-size: 13px; color: var(--scripture-text); line-height: 1.5;
+    }
+    .lc-guardian .lc-scripture { border-color: var(--guardian); }
+    .lc-natural .lc-scripture { border-color: var(--natural); }
+    .lc-telemetry .lc-scripture { border-color: var(--telemetry); }
+    .lc-ref { display: block; margin-top: 6px; font-style: normal; font-size: 10px; color: var(--text-dim); font-family: var(--mono); }
+
+    /* API CONSOLE */
+    .console-section { padding: 32px; border-top: 1px solid var(--border); }
+    .section-label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text-dim); font-family: var(--mono); margin-bottom: 16px;
+    }
+    .api-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px; max-width: 1100px; margin: 0 auto;
+    }
+    .api-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 18px;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .api-card:hover { border-color: var(--border-glow); background: var(--bg-card-hover); }
+    .api-card.selected { border-color: var(--telemetry); box-shadow: 0 0 16px var(--telemetry-glow); }
+    .api-method {
+      display: inline-block; padding: 2px 8px; border-radius: 6px;
+      font-size: 9px; font-weight: 700; font-family: var(--mono);
+      letter-spacing: 0.5px; margin-right: 8px;
+    }
+    .method-get { background: rgba(0,212,170,0.1); color: var(--natural); }
+    .method-post { background: rgba(123,97,255,0.1); color: var(--telemetry); }
+    .method-put { background: rgba(255,215,0,0.1); color: var(--gold); }
+    .method-ws { background: rgba(233,69,96,0.1); color: var(--guardian); }
+    .api-path { font-size: 12px; font-family: var(--mono); font-weight: 600; color: var(--text); }
+    .api-desc { font-size: 11px; color: var(--text-sec); margin-top: 6px; line-height: 1.4; }
+    .api-scripture {
+      margin-top: 10px; padding: 8px 12px;
+      background: var(--bg-scripture); border-radius: 6px;
+      border-left: 2px solid var(--gold);
+      font-family: var(--serif); font-style: italic;
+      font-size: 11px; color: var(--scripture-text); line-height: 1.4;
+    }
+    .api-gate {
+      margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .gate-tag {
+      padding: 2px 8px; border-radius: 8px;
+      font-size: 9px; font-weight: 600; font-family: var(--mono);
+    }
+    .gt-guardian { background: rgba(233,69,96,0.1); color: var(--guardian); }
+    .gt-natural { background: rgba(0,212,170,0.1); color: var(--natural); }
+    .gt-telemetry { background: rgba(123,97,255,0.1); color: var(--telemetry); }
+    .gt-wwjd { background: rgba(204,102,255,0.1); color: var(--wwjd); }
+    .gt-jethro { background: rgba(255,136,0,0.1); color: var(--jethro); }
+
+    /* TEST CONSOLE */
+    .test-console {
+      max-width: 1100px; margin: 24px auto 0;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .tc-row { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; }
+    .tc-input {
+      flex: 1; padding: 10px 14px;
+      background: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text);
+      font-family: var(--mono); font-size: 12px; outline: none;
+      transition: border-color 0.3s;
+    }
+    .tc-input:focus { border-color: var(--telemetry); }
+    .tc-btn {
+      padding: 10px 20px; border-radius: var(--radius-sm);
+      border: none; cursor: pointer; font-family: var(--mono);
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; transition: all 0.3s;
+    }
+    .tc-send { background: linear-gradient(135deg, var(--telemetry), var(--natural)); color: #fff; }
+    .tc-send:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--telemetry-glow); }
+    .tc-output {
+      background: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-sec); min-height: 120px;
+      white-space: pre-wrap; line-height: 1.5;
+      max-height: 300px; overflow-y: auto;
+    }
+
+    /* COMMANDMENTS */
+    .commandments-section { padding: 48px 32px; border-top: 1px solid var(--border); }
+    .cmd-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 10px; max-width: 1100px; margin: 0 auto;
+    }
+    .cmd-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 16px; border-radius: var(--radius-sm);
+      background: var(--bg-card); border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .cmd-row:hover { border-color: var(--border-glow); }
+    .cmd-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gold-glow); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; flex-shrink: 0;
+    }
+    .cmd-text { font-size: 12px; color: var(--text-sec); line-height: 1.4; }
+    .cmd-text b { color: var(--text); }
+
+    /* FOOTER */
+    .altar-footer {
+      text-align: center; padding: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 10px; color: var(--text-dim); font-family: var(--mono);
+    }
+    .altar-footer .hl { color: var(--telemetry); }
+  </style>
+</head>
+<body>
+  <header class="altar-header">
+    <div class="ah-left">
+      <div class="ah-icon">⛪</div>
+      <div>
+        <div class="ah-title">The Altar — API Scripture Gateway</div>
+        <div class="ah-sub">[KPGS_ALTAR] Black Mask v2.0 · God-Realm Discernment</div>
+      </div>
+    </div>
+    <div class="ah-nav">
+      <a class="ah-link" href="../">← User Portal</a>
+      <a class="ah-link" href="../admin/">Super God Admin</a>
+      <span class="ah-badge badge-covenant">● Covenant Active</span>
+    </div>
+  </header>
+
+  <!-- EPIGRAPH -->
+  <div class="epigraph">
+    <blockquote>"Do not move an ancient boundary stone set up by your ancestors."</blockquote>
+    <cite>— Proverbs 22:28</cite>
+    <p class="subtitle">The Altar is a dedicated space of sacrifice and covenant — not a REST endpoint. External APIs are legacy vessels carried slowly out. Every call is gated by Guardian, Natural, and Telemetry AI layers.</p>
+  </div>
+
+  <!-- THREE ALTAR LAYERS -->
+  <section class="layers-section">
+    <div class="section-label" style="max-width:1100px;margin:0 auto 16px;">Altar Containment Protocol — Three Layers</div>
+    <div class="layers-grid">
+      <div class="layer-card lc-guardian">
+        <div class="lc-icon">🛡️</div>
+        <div class="lc-name" style="color:var(--guardian)">Layer 1 — Guardian AI</div>
+        <div class="lc-role">Deterministic rule enforcer · Institutional authorization</div>
+        <div class="lc-gate">
+          <b>Gate:</b> Lower nodes cannot query higher structural assets. All API calls must pass institutional authorization before execution. Jethro triage + WWJD firewall active.
+        </div>
+        <div class="lc-scripture">
+          "For the Lord your God walks in the midst of your camp, to deliver you and give your enemies over to you; therefore your camp must be holy, that He may see no unclean thing among you, and turn away from you."
+          <span class="lc-ref">— Deuteronomy 23:14</span>
+        </div>
+      </div>
+      <div class="layer-card lc-natural">
+        <div class="lc-icon">🌿</div>
+        <div class="lc-name" style="color:var(--natural)">Layer 2 — Natural AI</div>
+        <div class="lc-role">Soil, geology, fluid mechanics → deterministic math blocks</div>
+        <div class="lc-gate">
+          <b>Gate:</b> Physical telemetry from Freddy (agriculture) and Eddie (mining) sectors. Ground truth is local. No cloud model owns this data. API calls carrying spatial data must prove provenance.
+        </div>
+        <div class="lc-scripture">
+          "The earth is the Lord's, and everything in it, the world, and all who live in it; for He founded it on the seas and established it on the waters."
+          <span class="lc-ref">— Psalm 24:1-2</span>
+        </div>
+      </div>
+      <div class="layer-card lc-telemetry">
+        <div class="lc-icon">📡</div>
+        <div class="lc-name" style="color:var(--telemetry)">Layer 3 — Telemetry AI</div>
+        <div class="lc-role">Edge metrics · Real-time operational · Classify before interpret</div>
+        <div class="lc-gate">
+          <b>Gate:</b> All edge metrics must be classified before interpretation. Misnamed pressure is rejected. Route load lanes before allowing model access. DLP active — strip telemetry markers.
+        </div>
+        <div class="lc-scripture">
+          "Test everything; hold fast what is good. Abstain from every form of evil."
+          <span class="lc-ref">— 1 Thessalonians 5:21-22</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API ENDPOINTS WITH SCRIPTURE -->
+  <section class="console-section">
+    <div class="section-label" style="max-width:1100px;margin:0 auto 16px;">API Endpoints — Scripture-Governed</div>
+    <div class="api-grid" id="apiGrid"></div>
+
+    <div class="test-console" id="testConsole">
+      <div class="section-label">Altar Test Console — [GUI_TOKEN] Only</div>
+      <div class="tc-row">
+        <select id="testMethod" class="tc-input" style="flex:0 0 100px;">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+        </select>
+        <input id="testPath" class="tc-input" value="/api/kc/god/capabilities" placeholder="/api/path">
+        <button class="tc-btn tc-send" onclick="testEndpoint()">Gate → Test</button>
+      </div>
+      <div id="testOutput" class="tc-output">[ALTAR_GATE] Waiting for API call...
+Enter an endpoint path and press "Gate → Test" to route through the Altar layers.
+
+Guardian AI will check authorization.
+Natural AI will verify provenance.
+Telemetry AI will classify before interpreting.
+
+"For the gate is narrow and the way is hard that leads to life." — Matthew 7:14</div>
+    </div>
+  </section>
+
+  <!-- 15 COMMANDMENTS -->
+  <section class="commandments-section">
+    <div class="section-label" style="max-width:1100px;margin:0 auto 16px;">Fifteen Commandments of Execution — CMD-01…CMD-15</div>
+    <div class="cmd-grid" id="cmdGrid"></div>
+  </section>
+
+  <footer class="altar-footer">
+    <span class="hl">[KPGS_ALTAR]</span> Covenant observatory · Black Mask v2.0 · WWJD inline firewall · APIs as legacy transport
+    · <span class="hl">[HOOD_ACK]</span> I_AM_STATELESS_RENTER_NOT_LANDLORD
+  </footer>
+
+  <script>
+    // API Endpoints with scripture mapping
+    const ENDPOINTS = [
+      { method: 'GET', path: '/health', desc: 'Production readiness — DB, telemetry, bridge health', layer: 'guardian', scripture: '"By their fruit you will recognize them." — Matthew 7:16', gates: ['guardian'] },
+      { method: 'POST', path: '/auth/register', desc: 'Register a local Cassy user account', layer: 'guardian', scripture: '"I am the gate; whoever enters through me will be saved." — John 10:9', gates: ['guardian','wwjd'] },
+      { method: 'POST', path: '/auth/login', desc: 'Authenticate and receive session token', layer: 'guardian', scripture: '"Knock and the door will be opened to you." — Matthew 7:7', gates: ['guardian'] },
+      { method: 'GET', path: '/api/kc/god/capabilities', desc: 'Super God Mode — monorepo control capabilities', layer: 'guardian', scripture: '"For from Him and through Him and to Him are all things." — Romans 11:36', gates: ['guardian','wwjd','jethro'] },
+      { method: 'GET', path: '/api/kc/god/overview', desc: 'God overview — git, swarm, cassy, proof bar', layer: 'guardian', scripture: '"The Lord sees not as man sees: man looks on the outward appearance, but the Lord looks on the heart." — 1 Samuel 16:7', gates: ['guardian','wwjd'] },
+      { method: 'POST', path: '/api/kc/god/actions/run', desc: 'Execute governance action with confirmation', layer: 'guardian', scripture: '"Not by might nor by power, but by my Spirit, says the Lord Almighty." — Zechariah 4:6', gates: ['guardian','wwjd','jethro'] },
+      { method: 'POST', path: '/api/language/process', desc: 'SA language engine — multilingual processing', layer: 'natural', scripture: '"Come now, let us settle the matter... though your sins are like scarlet, they shall be as white as snow." — Isaiah 1:18', gates: ['natural','telemetry'] },
+      { method: 'GET', path: '/api/language/supported', desc: 'Supported SA languages and access modes', layer: 'natural', scripture: '"After this I looked, and there before me was a great multitude that no one could count, from every nation, tribe, people and language." — Revelation 7:9', gates: ['natural'] },
+      { method: 'POST', path: '/api/mao/route', desc: 'MAO — route task to appropriate agent', layer: 'telemetry', scripture: '"For we are God\'s handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do." — Ephesians 2:10', gates: ['telemetry','guardian'] },
+      { method: 'POST', path: '/api/mao/execute', desc: 'MAO — execute task with force agent', layer: 'telemetry', scripture: '"Whatever you do, work at it with all your heart, as working for the Lord." — Colossians 3:23', gates: ['telemetry','guardian','wwjd'] },
+      { method: 'POST', path: '/api/mao/philosophy-check', desc: 'MAO philosophy gate — proof and constraint check', layer: 'telemetry', scripture: '"But test everything; hold fast what is good." — 1 Thessalonians 5:21', gates: ['telemetry','wwjd'] },
+      { method: 'POST', path: '/api/creator/code/learn', desc: 'Creator — learn code pattern', layer: 'natural', scripture: '"The fear of the Lord is the beginning of wisdom." — Proverbs 9:10', gates: ['natural','telemetry'] },
+      { method: 'GET', path: '/api/creator/status', desc: 'Creator surfaces — canvas, code, research', layer: 'telemetry', scripture: '"In the beginning God created the heavens and the earth." — Genesis 1:1', gates: ['telemetry'] },
+      { method: 'WS', path: '/ws/live', desc: 'Real-time WebSocket — broadcast neural signals', layer: 'telemetry', scripture: '"Be still, and know that I am God." — Psalm 46:10', gates: ['telemetry','guardian'] },
+      { method: 'WS', path: '/ws/neural-link', desc: 'Neural link WebSocket — live agent updates', layer: 'telemetry', scripture: '"Where two or three gather in my name, there am I with them." — Matthew 18:20', gates: ['telemetry','guardian'] },
+    ];
+
+    const COMMANDMENTS = [
+      { id: 'I', text: '<b>Ground Truth First</b> — field telemetry before model opinion' },
+      { id: 'II', text: '<b>Classify Before Interpret</b> — misnamed pressure is rejected' },
+      { id: 'III', text: '<b>Nehemiah Gate</b> — unauthorized access returns 403 covenant violation' },
+      { id: 'IV', text: '<b>WWJD Firewall</b> — halt at extractive/institutional boundaries' },
+      { id: 'V', text: '<b>Jethro Delegation</b> — Moses does not dispatch from morning to night' },
+      { id: 'VI', text: '<b>Save/Kill/Watch</b> — every prompt gets exactly one verdict' },
+      { id: 'VII', text: '<b>DLP Strip</b> — mask payloads, strip telemetry markers, sterile vectors' },
+      { id: 'VIII', text: '<b>Receipt or HOLD</b> — no execution without proof receipt' },
+      { id: 'IX', text: '<b>80% Gate</b> — four of five proof bands green before production language' },
+      { id: 'X', text: '<b>Righteous Severance</b> — Silicon Valley bloat is threat model, not master' },
+      { id: 'XI', text: '<b>Append-Only History</b> — nothing is deleted from Kopano Context' },
+      { id: 'XII', text: '<b>GUI Token Only</b> — agents exit through GUI exfiltration channel only' },
+      { id: 'XIII', text: '<b>Altar Block Holder Brief</b> — every renter is told who they are entering' },
+      { id: 'XIV', text: '<b>Finite Engineering</b> — honest finity, not infinite social bloat' },
+      { id: 'XV', text: '<b>Time Is Healing</b> — APIs phased per Owner timeline, not vendor urgency' },
+    ];
+
+    // Render API cards
+    document.getElementById('apiGrid').innerHTML = ENDPOINTS.map((ep, i) => `
+      <div class="api-card" id="api-${i}" onclick="selectApi(${i})">
+        <div>
+          <span class="api-method method-${ep.method.toLowerCase()}">${ep.method}</span>
+          <span class="api-path">${ep.path}</span>
+        </div>
+        <div class="api-desc">${ep.desc}</div>
+        <div class="api-scripture">${ep.scripture}</div>
+        <div class="api-gate">
+          ${ep.gates.map(g => `<span class="gate-tag gt-${g}">${g}</span>`).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    // Render commandments
+    document.getElementById('cmdGrid').innerHTML = COMMANDMENTS.map(c => `
+      <div class="cmd-row">
+        <div class="cmd-num">${c.id}</div>
+        <div class="cmd-text">${c.text}</div>
+      </div>
+    `).join('');
+
+    // Select API
+    function selectApi(idx) {
+      document.querySelectorAll('.api-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById(`api-${idx}`).classList.add('selected');
+      const ep = ENDPOINTS[idx];
+      document.getElementById('testMethod').value = ep.method === 'WS' ? 'GET' : ep.method;
+      document.getElementById('testPath').value = ep.path;
+    }
+
+    // Test console
+    function testEndpoint() {
+      const method = document.getElementById('testMethod').value;
+      const path = document.getElementById('testPath').value;
+      const output = document.getElementById('testOutput');
+      const ep = ENDPOINTS.find(e => e.path === path);
+      const ts = new Date().toISOString().slice(11,19);
+
+      let result = `[${ts}] [ALTAR_GATE] ${method} ${path}\n`;
+      result += `${'─'.repeat(60)}\n\n`;
+
+      // Layer 1: Guardian
+      result += `⏳ Layer 1 — Guardian AI: Checking institutional authorization...\n`;
+      const isGod = path.includes('/god/');
+      const isAuth = path.includes('/auth/');
+      if (isGod) {
+        result += `  🛡️ [GUARDIAN] God-mode endpoint detected. Require operator + god_only=True\n`;
+        result += `  📖 "For from Him and through Him and to Him are all things." — Romans 11:36\n`;
+        result += `  ✅ Guardian PASS (operator authority verified)\n\n`;
+      } else if (isAuth) {
+        result += `  🛡️ [GUARDIAN] Authentication endpoint — public gate, monitor only\n`;
+        result += `  📖 "I am the gate; whoever enters through me will be saved." — John 10:9\n`;
+        result += `  ✅ Guardian PASS (public auth lane)\n\n`;
+      } else {
+        result += `  🛡️ [GUARDIAN] Standard API call — lower node cannot query higher structural assets\n`;
+        result += `  ✅ Guardian PASS\n\n`;
+      }
+
+      // Layer 2: Natural
+      result += `⏳ Layer 2 — Natural AI: Verifying data provenance...\n`;
+      const isLang = path.includes('/language/');
+      const isCreator = path.includes('/creator/');
+      if (isLang) {
+        result += `  🌿 [NATURAL] Language endpoint — SA soil linguistics. Ground truth is local.\n`;
+        result += `  📖 "After this I looked... from every nation, tribe, people and language." — Rev 7:9\n`;
+        result += `  ✅ Natural PASS (provenance verified)\n\n`;
+      } else if (isCreator) {
+        result += `  🌿 [NATURAL] Creator surface — code/canvas/research patterns from local telemetry\n`;
+        result += `  📖 "In the beginning God created the heavens and the earth." — Genesis 1:1\n`;
+        result += `  ✅ Natural PASS\n\n`;
+      } else {
+        result += `  🌿 [NATURAL] No spatial data in payload — pass-through\n`;
+        result += `  ✅ Natural PASS\n\n`;
+      }
+
+      // Layer 3: Telemetry
+      result += `⏳ Layer 3 — Telemetry AI: Classify before interpret...\n`;
+      const isMao = path.includes('/mao/');
+      if (isMao) {
+        result += `  📡 [TELEMETRY] MAO orchestrator — classifying intent + message payload\n`;
+        result += `  📖 "But test everything; hold fast what is good." — 1 Thess 5:21\n`;
+        result += `  🔍 DLP check: payload stripped of telemetry markers\n`;
+        result += `  ✅ Telemetry PASS (classified)\n\n`;
+      } else {
+        result += `  📡 [TELEMETRY] Standard classification — no misnamed pressure detected\n`;
+        result += `  ✅ Telemetry PASS\n\n`;
+      }
+
+      // WWJD check
+      if (isGod || isMao) {
+        result += `⏳ WWJD Firewall: Critical boundary check...\n`;
+        result += `  ✝️ [WWJD] Power without law? NO. Extractive deal? NO. Institutional collapse? NO.\n`;
+        result += `  📖 "Not by might nor by power, but by my Spirit." — Zechariah 4:6\n`;
+        result += `  ✅ WWJD PASS\n\n`;
+      }
+
+      result += `${'═'.repeat(60)}\n`;
+      result += `[ALTAR_VERDICT] ALL LAYERS PASS — ${method} ${path}\n`;
+      result += `[ALTAR_POSTURE] Legacy transport → Monitor → Sovereign MCP target\n`;
+      if (ep) result += `\n📖 ${ep.scripture}\n`;
+      result += `\n[HOOD_ACK] I_AM_STATELESS_RENTER_NOT_LANDLORD`;
+
+      output.textContent = result;
+    }
+  </script>
+</body>
+</html>

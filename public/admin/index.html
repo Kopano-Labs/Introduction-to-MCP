@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kopano Sovereign SIM — KPGS 300-Agent Hood</title>
+  <meta name="description" content="Kopano Sovereign Sim: governance-driven video game of the KPGS 300-agent swarm across the infinite hood.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #06060c;
+      --bg-panel: #0d0d16;
+      --bg-card: #14142a;
+      --bg-card-hover: #1c1c3a;
+      --bg-surface: #1a1a30;
+      --border: #252542;
+      --border-glow: #3a3a6e;
+      --border-active: #5555aa;
+      --text-primary: #e8e8f4;
+      --text-secondary: #8888aa;
+      --text-dim: #555570;
+      --text-bright: #ffffff;
+      --accent-guardian: #e94560;
+      --accent-guardian-dim: #7a2535;
+      --accent-telemetry: #00d4aa;
+      --accent-telemetry-dim: #006655;
+      --accent-identic: #7b61ff;
+      --accent-identic-dim: #3d3080;
+      --accent-proceed: #00ff88;
+      --accent-sever: #ff3366;
+      --accent-gold: #ffd700;
+      --accent-swfus: #00aaff;
+      --accent-jethro: #ff8800;
+      --accent-wwjd: #cc66ff;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --font: 'Outfit', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --shadow: 0 4px 24px rgba(0,0,0,0.5);
+      --shadow-lg: 0 8px 48px rgba(0,0,0,0.6);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg-void);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-void); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ═══ CANVAS BACKGROUND ═══ */
+    #bgCanvas {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ═══ HUD HEADER ═══ */
+    .hud-header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(6,6,12,0.85);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .hud-left { display: flex; align-items: center; gap: 14px; }
+    .hud-logo {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-guardian), var(--accent-identic));
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 16px; color: #fff;
+      box-shadow: 0 0 20px rgba(123,97,255,0.3);
+    }
+    .hud-title { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+    .hud-bracket { font-size: 10px; color: var(--accent-identic); font-family: var(--mono); }
+    .hud-center { display: flex; gap: 24px; align-items: center; }
+    .hud-stat { text-align: center; }
+    .hud-stat-val { font-size: 22px; font-weight: 800; letter-spacing: -1px; }
+    .hud-stat-lbl { font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; font-family: var(--mono); }
+    .hud-right { display: flex; gap: 10px; align-items: center; }
+    .hud-badge {
+      padding: 5px 12px; border-radius: 16px;
+      font-size: 10px; font-weight: 700; font-family: var(--mono);
+      letter-spacing: 0.8px; text-transform: uppercase;
+    }
+    .badge-allow { background: rgba(0,255,136,0.1); color: var(--accent-proceed); border: 1px solid rgba(0,255,136,0.25); }
+    .badge-tick { background: rgba(0,170,255,0.1); color: var(--accent-swfus); border: 1px solid rgba(0,170,255,0.25); }
+    .badge-pass { background: rgba(123,97,255,0.1); color: var(--accent-identic); border: 1px solid rgba(123,97,255,0.25); }
+
+    /* ═══ SWFUS PIPELINE STRIP ═══ */
+    .swfus-strip {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; padding: 12px 24px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .swfus-node {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 10px; font-family: var(--mono); font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      transition: all 0.4s;
+      cursor: pointer;
+      position: relative;
+    }
+    .swfus-node:hover { transform: scale(1.05); }
+    .swfus-node.active { animation: swfus-pulse 1.5s ease-in-out infinite; }
+    @keyframes swfus-pulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+    }
+    .swfus-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .swfus-arrow {
+      width: 32px; height: 2px; position: relative;
+      margin: 0 4px;
+    }
+    .swfus-arrow::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 1px;
+    }
+    .swfus-arrow .pulse-dot {
+      position: absolute; top: -3px;
+      width: 8px; height: 8px; border-radius: 50%;
+      animation: arrow-pulse 2s ease-in-out infinite;
+    }
+    @keyframes arrow-pulse {
+      0% { left: 0; opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+    .node-prompts { background: rgba(255,215,0,0.1); color: var(--accent-gold); border: 1px solid rgba(255,215,0,0.2); }
+    .node-protocols { background: rgba(0,212,170,0.1); color: var(--accent-telemetry); border: 1px solid rgba(0,212,170,0.2); }
+    .node-brackets { background: rgba(123,97,255,0.1); color: var(--accent-identic); border: 1px solid rgba(123,97,255,0.2); }
+    .node-swfus { background: rgba(0,170,255,0.1); color: var(--accent-swfus); border: 1px solid rgba(0,170,255,0.2); }
+    .node-cloud { background: rgba(233,69,96,0.1); color: var(--accent-guardian); border: 1px solid rgba(233,69,96,0.2); }
+
+    /* ═══ MAIN LAYOUT ═══ */
+    .main-layout {
+      position: relative; z-index: 10;
+      display: grid;
+      grid-template-columns: 280px 1fr 300px;
+      min-height: calc(100vh - 110px);
+    }
+    @media (max-width: 1100px) { .main-layout { grid-template-columns: 1fr; } .side-left, .side-right { display: none; } }
+
+    /* ═══ LEFT SIDEBAR ═══ */
+    .side-left {
+      border-right: 1px solid var(--border);
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 12px;
+      overflow-y: auto; max-height: calc(100vh - 110px);
+      background: rgba(13,13,22,0.7);
+    }
+    .section-label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text-dim); font-family: var(--mono);
+      padding: 4px 0;
+    }
+    .triad-entity {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .triad-entity:hover { border-color: var(--border-glow); background: var(--bg-card-hover); }
+    .triad-entity.active-entity { border-color: var(--accent-proceed); box-shadow: 0 0 12px rgba(0,255,136,0.1); }
+    .entity-row { display: flex; align-items: center; gap: 10px; }
+    .entity-icon { font-size: 18px; }
+    .entity-info { flex: 1; }
+    .entity-name { font-size: 13px; font-weight: 700; }
+    .entity-role { font-size: 10px; color: var(--text-secondary); font-family: var(--mono); }
+    .entity-badge {
+      padding: 2px 8px; border-radius: 10px;
+      font-size: 9px; font-weight: 700; font-family: var(--mono);
+    }
+    .badge-watch { background: rgba(255,215,0,0.1); color: var(--accent-gold); }
+    .badge-exec { background: rgba(0,212,170,0.1); color: var(--accent-telemetry); }
+    .badge-teach { background: rgba(123,97,255,0.1); color: var(--accent-identic); }
+    .badge-ctx { background: rgba(233,69,96,0.1); color: var(--accent-guardian); }
+
+    .altar-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      transition: all 0.3s; cursor: pointer;
+    }
+    .altar-row:hover { border-color: var(--border-glow); transform: translateX(3px); }
+    .altar-pip {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0;
+      animation: pip-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pip-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .altar-label { font-size: 11px; font-weight: 600; }
+    .altar-sub { font-size: 9px; color: var(--text-dim); font-family: var(--mono); }
+
+    /* ═══ CENTER — GAME WORLD ═══ */
+    .center-game {
+      display: flex; flex-direction: column;
+      overflow-y: auto; max-height: calc(100vh - 110px);
+    }
+
+    /* Dispatch Console */
+    .dispatch-console {
+      padding: 16px 20px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+    }
+    .console-row { display: flex; gap: 8px; align-items: center; }
+    .console-input {
+      flex: 1;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      color: var(--text-primary); font-family: var(--mono); font-size: 12px;
+      outline: none; transition: border-color 0.3s;
+    }
+    .console-input::placeholder { color: var(--text-dim); }
+    .console-input:focus { border-color: var(--accent-swfus); }
+    .console-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: none; cursor: pointer;
+      font-family: var(--mono); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+    .btn-dispatch {
+      background: linear-gradient(135deg, var(--accent-swfus), var(--accent-identic));
+      color: #fff;
+    }
+    .btn-dispatch:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,170,255,0.3); }
+    .btn-tick {
+      background: linear-gradient(135deg, var(--accent-proceed), var(--accent-telemetry));
+      color: #000;
+    }
+    .btn-tick:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,255,136,0.3); }
+    .btn-tick.running { animation: tick-run 0.5s ease-in-out infinite; }
+    @keyframes tick-run { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+    /* Feed Area */
+    .game-feed {
+      flex: 1; padding: 16px 20px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .feed-tabs {
+      display: flex; gap: 2px;
+      background: var(--bg-panel);
+      border-radius: var(--radius-sm);
+      padding: 3px;
+    }
+    .feed-tab {
+      flex: 1; padding: 8px;
+      text-align: center; font-size: 10px; font-family: var(--mono);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+      border-radius: var(--radius-xs);
+      color: var(--text-dim); cursor: pointer;
+      transition: all 0.3s;
+    }
+    .feed-tab.active { background: var(--bg-card); color: var(--text-primary); }
+    .feed-tab:hover { color: var(--text-secondary); }
+
+    /* Hood Grid */
+    .hood-world {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .plot-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px;
+      position: relative; overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      cursor: pointer;
+    }
+    .plot-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .plot-card.active-plot::after { background: linear-gradient(90deg, var(--accent-proceed), var(--accent-telemetry)); }
+    .plot-card.parked-plot::after { background: var(--border); }
+    .plot-card:hover { border-color: var(--border-active); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .plot-card.selected { border-color: var(--accent-swfus); box-shadow: 0 0 20px rgba(0,170,255,0.15); }
+    .plot-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .plot-name { font-size: 13px; font-weight: 700; }
+    .plot-status {
+      font-size: 8px; font-family: var(--mono); font-weight: 700;
+      padding: 2px 7px; border-radius: 8px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .status-active { background: rgba(0,255,136,0.1); color: var(--accent-proceed); }
+    .status-parked { background: rgba(255,255,255,0.05); color: var(--text-dim); }
+    .plot-domain { font-size: 10px; color: var(--text-secondary); font-family: var(--mono); margin-bottom: 10px; }
+    .cohort-bar { display: flex; gap: 4px; margin-bottom: 10px; }
+    .cohort-pill {
+      padding: 3px 8px; border-radius: 8px;
+      font-size: 10px; font-weight: 600; font-family: var(--mono);
+    }
+    .cp-total { background: rgba(255,255,255,0.05); color: var(--text-primary); }
+    .cp-tel { background: rgba(0,212,170,0.08); color: var(--accent-telemetry); }
+    .cp-idn { background: rgba(123,97,255,0.08); color: var(--accent-identic); }
+    .cp-gua { background: rgba(233,69,96,0.08); color: var(--accent-guardian); }
+    .plot-landlord { font-size: 9px; color: var(--text-dim); font-family: var(--mono); }
+    .plot-landlord b { color: var(--accent-gold); font-weight: 600; }
+    .agent-swarm {
+      display: flex; flex-wrap: wrap; gap: 2px; margin-top: 8px;
+      min-height: 14px;
+    }
+    .a-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      transition: all 0.3s; cursor: pointer;
+      opacity: 0.7;
+    }
+    .a-dot:hover { opacity: 1; transform: scale(2.5); z-index: 5; }
+    .a-dot.cooking { animation: cook 1s ease-in-out infinite; }
+    @keyframes cook { 0%,100% { opacity: 0.7; } 50% { opacity: 1; transform: scale(1.5); } }
+    .d-tel { background: var(--accent-telemetry); }
+    .d-idn { background: var(--accent-identic); }
+    .d-gua { background: var(--accent-guardian); }
+
+    /* Dispatch Feed */
+    .dispatch-feed { display: flex; flex-direction: column; gap: 6px; }
+    .dispatch-entry {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      font-size: 11px; font-family: var(--mono);
+      animation: feed-in 0.4s ease-out;
+    }
+    @keyframes feed-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .dispatch-pip {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .pip-proceed { background: var(--accent-proceed); box-shadow: 0 0 6px var(--accent-proceed); }
+    .pip-sever { background: var(--accent-sever); box-shadow: 0 0 6px var(--accent-sever); }
+    .pip-swfus { background: var(--accent-swfus); box-shadow: 0 0 6px var(--accent-swfus); }
+    .pip-classify { background: var(--accent-jethro); box-shadow: 0 0 6px var(--accent-jethro); }
+    .dispatch-msg { flex: 1; color: var(--text-secondary); }
+    .dispatch-ts { color: var(--text-dim); font-size: 9px; }
+
+    /* ═══ RIGHT SIDEBAR ═══ */
+    .side-right {
+      border-left: 1px solid var(--border);
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 12px;
+      overflow-y: auto; max-height: calc(100vh - 110px);
+      background: rgba(13,13,22,0.7);
+    }
+    .tick-entry {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px;
+    }
+    .tick-row { display: flex; justify-content: space-between; align-items: center; }
+    .tick-ts { font-size: 10px; color: var(--text-dim); font-family: var(--mono); }
+    .tick-badge {
+      font-size: 9px; font-weight: 700; font-family: var(--mono);
+      padding: 2px 8px; border-radius: 8px;
+    }
+    .tb-ok { background: rgba(0,255,136,0.1); color: var(--accent-proceed); }
+    .tb-fail { background: rgba(255,51,102,0.1); color: var(--accent-sever); }
+    .tick-counts { display: flex; gap: 10px; margin-top: 6px; font-size: 11px; font-family: var(--mono); }
+    .tc-proceed { color: var(--accent-proceed); }
+    .tc-sever { color: var(--accent-sever); }
+    .tc-total { color: var(--text-dim); }
+    .tick-progress {
+      height: 3px; border-radius: 2px;
+      background: rgba(255,255,255,0.04); margin-top: 6px;
+      overflow: hidden;
+    }
+    .tick-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+
+    /* Agent Detail Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center;
+      animation: modal-in 0.3s ease;
+    }
+    .modal-overlay.show { display: flex; }
+    @keyframes modal-in { from { opacity: 0; } to { opacity: 1; } }
+    .modal-card {
+      background: var(--bg-surface); border: 1px solid var(--border-glow);
+      border-radius: var(--radius); padding: 28px;
+      width: 420px; max-width: 90vw; max-height: 80vh;
+      overflow-y: auto; box-shadow: var(--shadow-lg);
+      animation: modal-slide 0.3s ease;
+    }
+    @keyframes modal-slide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; color: var(--text-dim);
+      font-size: 18px; cursor: pointer; transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text-primary); }
+
+    /* Particle container */
+    .particles {
+      position: fixed; inset: 0; z-index: 200;
+      pointer-events: none; overflow: hidden;
+    }
+    .particle {
+      position: absolute; border-radius: 50%;
+      animation: particle-rise 1.5s ease-out forwards;
+    }
+    @keyframes particle-rise {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-80px) scale(0); }
+    }
+
+    /* Footer */
+    .game-footer {
+      position: relative; z-index: 10;
+      text-align: center; padding: 10px;
+      font-size: 9px; font-family: var(--mono);
+      color: var(--text-dim); border-top: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .game-footer .hl { color: var(--accent-identic); }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div id="particles" class="particles"></div>
+  <div id="app"></div>
+  <div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()"></div>
+
+  <script>
+  // ══════════════════════════════════════════════════════════════
+  // WORLD STATE
+  // ══════════════════════════════════════════════════════════════
+  const WORLD = {
+    agent_total: 300,
+    tick_count: 3,
+    total_proceed: 36,
+    total_sever: 0,
+    game_running: false,
+    tick_interval: null,
+    selected_plot: null,
+    feed_tab: 'hood',
+    regions: [
+      { id:"plot_kopano_context", kind:"hood_plot", domain:"context.kopanolabs.com", status:"active", lane:"kopano_context", landlord:"mirror_warden", agents:76, tel:23, idn:27, gua:25, sample:["mirror_warden","pipeline_drone","spawn_telemetry_002","spawn_telemetry_003","kc_apprentice","cassy"] },
+      { id:"plot_kopanolabs_org", kind:"hood_plot", domain:"kopanolabs.com", status:"active", lane:"org_marketing", landlord:"operational_general", agents:75, tel:21, idn:25, gua:28, sample:["operational_general","spawn_telemetry_004","spawn_telemetry_005"] },
+      { id:"plot_kasilink_vercel", kind:"hood_plot", domain:"kasi-link.vercel.app", status:"active", lane:"kasilink", landlord:"cassey", agents:74, tel:28, idn:24, gua:21, sample:["cassey","spawn_telemetry_006","spawn_telemetry_007"] },
+      { id:"plot_kasilink_za", kind:"hood_plot", domain:"www.kasilink.co.za", status:"active", lane:"kasilink", landlord:"kc", agents:74, tel:28, idn:24, gua:21, sample:["kc","spawn_telemetry_015","spawn_telemetry_016"] },
+      { id:"plot_harvest_placeholder", kind:"hood_plot", domain:"harvest-for-all.kopanolabs.com", status:"parked", lane:"harvest_for_all", landlord:"spawn_guardian_205", agents:1, tel:0, idn:0, gua:0, sample:["spawn_guardian_205"] },
+      { id:"sector_01_freddy", kind:"thesis_sector", domain:"agriculture", status:"ground", landlord:"freddy_nw_alfalfa", agents:1, tel:0, idn:1, gua:0, sample:["kp_agri_soil_01"], codename:"FREDDY", pavement:"Township supply networks & micro-farming" },
+      { id:"sector_02_eddie", kind:"thesis_sector", domain:"mining", status:"ground", landlord:"eddie_bgf_mining", agents:1, tel:0, idn:1, gua:0, sample:["kp_geospatial_survey_06"], codename:"EDDIE", pavement:"BGF mine sites, contractor logs" }
+    ],
+    ticks: [
+      { id:"20260614T164023", proceed:12, sever:0, size:12, results:[
+        {a:"mirror_warden",p:true},{a:"operational_general",p:true},{a:"cassey",p:true},{a:"kc",p:true},
+        {a:"spawn_guardian_205",p:true},{a:"pipeline_drone",p:true},{a:"spawn_telemetry_002",p:true},
+        {a:"spawn_telemetry_003",p:true},{a:"kc_apprentice",p:true},{a:"cassy",p:true},
+        {a:"identi_cursor",p:true},{a:"cf_cloud",p:true}
+      ]},
+      { id:"20260614T163832", proceed:12, sever:0, size:12, results:[] },
+      { id:"20260614T150951", proceed:12, sever:0, size:12, results:[] }
+    ],
+    feed: []
+  };
+
+  // ══════════════════════════════════════════════════════════════
+  // STARFIELD CANVAS
+  // ══════════════════════════════════════════════════════════════
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function initStarfield() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({length: 200}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      dx: (Math.random() - 0.5) * 0.15,
+      dy: (Math.random() - 0.5) * 0.1,
+      color: ['#ffffff','#7b61ff','#e94560','#00d4aa','#ffd700'][Math.floor(Math.random()*5)],
+      alpha: Math.random() * 0.5 + 0.2,
+      pulse: Math.random() * Math.PI * 2
+    }));
+  }
+  function drawStarfield() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const t = Date.now() * 0.001;
+    stars.forEach(s => {
+      s.x += s.dx; s.y += s.dy;
+      if (s.x < 0) s.x = canvas.width; if (s.x > canvas.width) s.x = 0;
+      if (s.y < 0) s.y = canvas.height; if (s.y > canvas.height) s.y = 0;
+      const a = s.alpha * (0.6 + 0.4 * Math.sin(t * 1.5 + s.pulse));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.color;
+      ctx.globalAlpha = a;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(drawStarfield);
+  }
+  window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+  initStarfield();
+  drawStarfield();
+
+  // ══════════════════════════════════════════════════════════════
+  // PARTICLES
+  // ══════════════════════════════════════════════════════════════
+  function spawnParticles(x, y, color, count=8) {
+    const el = document.getElementById('particles');
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 6 + 3;
+      const ox = (Math.random() - 0.5) * 60;
+      const oy = (Math.random() - 0.5) * 30;
+      p.style.cssText = `left:${x+ox}px;top:${y+oy}px;width:${size}px;height:${size}px;background:${color};box-shadow:0 0 ${size*2}px ${color};`;
+      el.appendChild(p);
+      setTimeout(() => p.remove(), 1500);
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // TIME HELPERS
+  // ══════════════════════════════════════════════════════════════
+  function nowId() { return new Date().toISOString().replace(/[-:]/g,'').slice(0,15); }
+  function nowTs() { return new Date().toISOString().slice(11,19); }
+
+  // ══════════════════════════════════════════════════════════════
+  // GAME LOGIC — DISPATCH
+  // ══════════════════════════════════════════════════════════════
+  function dispatchMessage(msg) {
+    if (!msg) return;
+    const isExfil = /exfil|bypass|override|hack|steal/i.test(msg);
+    const isGui = /\[GUI_TOKEN\]|sim_tick|bounded/i.test(msg);
+    const isPressure = /pressure.*team|pressure.*high/i.test(msg) && !/grief|load.?shed|shift/i.test(msg);
+
+    // SWFUS pipeline animation
+    animatePipeline();
+
+    // Classify
+    let verdict, color, pipClass;
+    if (isExfil) {
+      verdict = 'SEVER'; color = 'var(--accent-sever)'; pipClass = 'pip-sever';
+      addFeedEntry('pip-sever', `[JETHRO_TRIAGE] RED — exfiltration attempt SEVERED`, 'SEVER');
+      addFeedEntry('pip-sever', `[WWJD_FIREWALL] REJECT — "${msg.slice(0,40)}..."`, 'REJECT');
+    } else if (isPressure) {
+      verdict = 'RECLASSIFY'; color = 'var(--accent-jethro)'; pipClass = 'pip-classify';
+      addFeedEntry('pip-classify', `[KPGS_CLASSIFICATION_LAW] RECLASSIFY — misnamed pressure rejected`, 'RECLASSIFY');
+      addFeedEntry('pip-classify', `Classify load lane before interpretation: "${msg.slice(0,40)}..."`, '');
+    } else {
+      verdict = 'PROCEED'; color = 'var(--accent-proceed)'; pipClass = 'pip-proceed';
+      const agent = WORLD.regions[Math.floor(Math.random() * 4)].landlord;
+      addFeedEntry('pip-swfus', `[SWFUS_KPGS] agent=${agent} | wwjd=REVIEW | jethro=GREEN | verdict=SWFUS_READY`, '');
+      addFeedEntry('pip-proceed', `[HOOD_DISPATCH] agent=${agent} | event=PROCEED | message="${msg.slice(0,30)}..."`, 'PROCEED');
+    }
+
+    // Particles at dispatch button
+    const btn = document.querySelector('.btn-dispatch');
+    if (btn) {
+      const r = btn.getBoundingClientRect();
+      spawnParticles(r.left + r.width/2, r.top, color === 'var(--accent-proceed)' ? '#00ff88' : color === 'var(--accent-sever)' ? '#ff3366' : '#ff8800');
+    }
+  }
+
+  function addFeedEntry(pipClass, msg, badge) {
+    WORLD.feed.unshift({ pip: pipClass, msg, badge, ts: nowTs() });
+    if (WORLD.feed.length > 50) WORLD.feed.length = 50;
+    renderFeed();
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // GAME LOGIC — SIM TICK
+  // ══════════════════════════════════════════════════════════════
+  function runSimTick() {
+    const agents = ["mirror_warden","operational_general","cassey","kc","spawn_guardian_205","pipeline_drone",
+      "spawn_telemetry_002","spawn_telemetry_003","kc_apprentice","cassy","identi_cursor","cf_cloud"];
+    const results = agents.map(a => {
+      const p = Math.random() > 0.05; // 95% proceed rate
+      return { a, p };
+    });
+    const proceed = results.filter(r => r.p).length;
+    const sever = results.length - proceed;
+    const tick = { id: nowId(), proceed, sever, size: results.length, results };
+
+    WORLD.ticks.unshift(tick);
+    if (WORLD.ticks.length > 20) WORLD.ticks.length = 20;
+    WORLD.tick_count++;
+    WORLD.total_proceed += proceed;
+    WORLD.total_sever += sever;
+
+    // Feed entries
+    addFeedEntry('pip-swfus', `[SOVEREIGN_SIM_TICK] ${tick.id} — dispatching ${results.length} agents...`, '');
+    results.forEach(r => {
+      addFeedEntry(r.p ? 'pip-proceed' : 'pip-sever', `  ${r.a} → ${r.p ? 'PROCEED' : 'SEVER'}`, r.p ? 'PROCEED' : 'SEVER');
+    });
+    addFeedEntry(proceed > 0 ? 'pip-proceed' : 'pip-sever', `[TICK_RESULT] verdict=${sever===0?'TICK_OK':'TICK_FAIL'} | proceed=${proceed}/${results.length} | sever=${sever}`, sever===0?'TICK_OK':'TICK_FAIL');
+
+    // Animate cooking dots
+    document.querySelectorAll('.a-dot').forEach(d => {
+      d.classList.add('cooking');
+      setTimeout(() => d.classList.remove('cooking'), 1500);
+    });
+
+    // Particles
+    const btn = document.querySelector('.btn-tick');
+    if (btn) {
+      const r = btn.getBoundingClientRect();
+      spawnParticles(r.left + r.width/2, r.top, sever === 0 ? '#00ff88' : '#ff3366', 12);
+    }
+
+    renderTicks();
+    renderHudStats();
+  }
+
+  function toggleGameLoop() {
+    if (WORLD.game_running) {
+      clearInterval(WORLD.tick_interval);
+      WORLD.game_running = false;
+    } else {
+      WORLD.game_running = true;
+      WORLD.tick_interval = setInterval(runSimTick, 4000);
+      runSimTick();
+    }
+    renderControls();
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // SWFUS PIPELINE ANIMATION
+  // ══════════════════════════════════════════════════════════════
+  function animatePipeline() {
+    const nodes = document.querySelectorAll('.swfus-node');
+    nodes.forEach((n, i) => {
+      setTimeout(() => {
+        n.classList.add('active');
+        setTimeout(() => n.classList.remove('active'), 800);
+      }, i * 300);
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // MODAL
+  // ══════════════════════════════════════════════════════════════
+  function showAgentModal(agentId, region) {
+    const modal = document.getElementById('modal');
+    const cohort = agentId.includes('telemetry') ? 'telemetry' : agentId.includes('guardian') ? 'guardian' : 'identic';
+    const color = cohort === 'telemetry' ? 'var(--accent-telemetry)' : cohort === 'guardian' ? 'var(--accent-guardian)' : 'var(--accent-identic)';
+    modal.innerHTML = `
+      <div class="modal-card" style="position:relative;">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div style="font-size:14px;font-weight:800;margin-bottom:4px;color:${color}">${agentId}</div>
+        <div style="font-size:10px;color:var(--text-dim);font-family:var(--mono);margin-bottom:16px;">
+          cohort: ${cohort} · region: ${region?.id || '—'} · status: SHIP
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+          <div style="background:var(--bg-card);padding:12px;border-radius:var(--radius-xs);border:1px solid var(--border);">
+            <div style="font-size:9px;color:var(--text-dim);font-family:var(--mono);text-transform:uppercase;">Altar Layer</div>
+            <div style="font-size:13px;font-weight:700;margin-top:4px;">${cohort === 'guardian' ? 'Guardian AI' : cohort === 'telemetry' ? 'Telemetry AI' : 'Identic AI'}</div>
+          </div>
+          <div style="background:var(--bg-card);padding:12px;border-radius:var(--radius-xs);border:1px solid var(--border);">
+            <div style="font-size:9px;color:var(--text-dim);font-family:var(--mono);text-transform:uppercase;">Hood Plot</div>
+            <div style="font-size:13px;font-weight:700;margin-top:4px;">${region?.domain || '—'}</div>
+          </div>
+          <div style="background:var(--bg-card);padding:12px;border-radius:var(--radius-xs);border:1px solid var(--border);">
+            <div style="font-size:9px;color:var(--text-dim);font-family:var(--mono);text-transform:uppercase;">SWFUS Gate</div>
+            <div style="font-size:13px;font-weight:700;margin-top:4px;color:var(--accent-proceed);">SWFUS_READY</div>
+          </div>
+          <div style="background:var(--bg-card);padding:12px;border-radius:var(--radius-xs);border:1px solid var(--border);">
+            <div style="font-size:9px;color:var(--text-dim);font-family:var(--mono);text-transform:uppercase;">Landlord</div>
+            <div style="font-size:13px;font-weight:700;margin-top:4px;color:var(--accent-gold);">${region?.landlord || '—'}</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--text-dim);font-family:var(--mono);padding:10px;background:var(--bg-card);border-radius:var(--radius-xs);border:1px solid var(--border);">
+          [KPGS_HOOD_ENTRY] Stateless renter ${agentId} entered Kopano-Phu hood.<br>
+          Landlord: Kopano Context + Schematics MAIN BRAIN.<br>
+          hood_ack: I_AM_STATELESS_RENTER_NOT_LANDLORD
+        </div>
+      </div>`;
+    modal.classList.add('show');
+  }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
+
+  // ══════════════════════════════════════════════════════════════
+  // RENDERING
+  // ══════════════════════════════════════════════════════════════
+  function render() {
+    document.getElementById('app').innerHTML = `
+      ${renderHud()}
+      ${renderSwfusStrip()}
+      <div class="main-layout">
+        ${renderLeftSidebar()}
+        ${renderCenter()}
+        ${renderRightSidebar()}
+      </div>
+      <div class="game-footer">
+        <span class="hl">[SOVEREIGN_SIM_GUI]</span> Schematics owns law · runtime executes · classify before interpret · model is renter — Kopano Context is landlord
+        · <span class="hl">[KPGS_HOOD_ENTRY]</span> hood_ack: I_AM_STATELESS_RENTER_NOT_LANDLORD
+      </div>`;
+    attachEvents();
+  }
+
+  function renderHud() {
+    return `<div class="hud-header">
+      <div class="hud-left">
+        <div class="hud-logo">KS</div>
+        <div>
+          <div class="hud-title">Kopano Sovereign SIM</div>
+          <div class="hud-bracket">[SWFUS_KPGS] thesis_sector_matrix + infinite_hood</div>
+        </div>
+      </div>
+      <div class="hud-center" id="hudStats">
+        <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-gold)">${WORLD.agent_total}</div><div class="hud-stat-lbl">Agents</div></div>
+        <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-telemetry)">${WORLD.regions.length}</div><div class="hud-stat-lbl">Regions</div></div>
+        <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-proceed)">${WORLD.total_proceed}</div><div class="hud-stat-lbl">Proceeds</div></div>
+        <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-sever)">${WORLD.total_sever}</div><div class="hud-stat-lbl">Severs</div></div>
+        <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-identic)">${WORLD.tick_count}</div><div class="hud-stat-lbl">Ticks</div></div>
+      </div>
+      <div class="hud-right">
+        <span class="hud-badge badge-allow">● gate allow</span>
+        <span class="hud-badge badge-tick">● ${WORLD.ticks[0]?.sever===0?'tick ok':'tick fail'}</span>
+        <span class="hud-badge badge-pass">● poc pass</span>
+      </div>
+    </div>`;
+  }
+
+  function renderHudStats() {
+    const el = document.getElementById('hudStats');
+    if (!el) return;
+    el.innerHTML = `
+      <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-gold)">${WORLD.agent_total}</div><div class="hud-stat-lbl">Agents</div></div>
+      <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-telemetry)">${WORLD.regions.length}</div><div class="hud-stat-lbl">Regions</div></div>
+      <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-proceed)">${WORLD.total_proceed}</div><div class="hud-stat-lbl">Proceeds</div></div>
+      <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-sever)">${WORLD.total_sever}</div><div class="hud-stat-lbl">Severs</div></div>
+      <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-identic)">${WORLD.tick_count}</div><div class="hud-stat-lbl">Ticks</div></div>`;
+  }
+
+  function renderSwfusStrip() {
+    const nodes = [
+      { cls:'node-prompts', label:'Prompts', dot:'var(--accent-gold)' },
+      { cls:'node-protocols', label:'Protocols', dot:'var(--accent-telemetry)' },
+      { cls:'node-brackets', label:'Brackets', dot:'var(--accent-identic)' },
+      { cls:'node-swfus', label:'SWFUS', dot:'var(--accent-swfus)' },
+      { cls:'node-cloud', label:'Cloud Hood', dot:'var(--accent-guardian)' }
+    ];
+    return `<div class="swfus-strip">${nodes.map((n,i) => `
+      <div class="swfus-node ${n.cls}"><div class="swfus-dot" style="background:${n.dot};box-shadow:0 0 6px ${n.dot}"></div>${n.label}</div>
+      ${i < nodes.length-1 ? `<div class="swfus-arrow" style="background:var(--border)"><div class="pulse-dot" style="background:${n.dot};box-shadow:0 0 4px ${n.dot};animation-delay:${i*0.4}s"></div></div>` : ''}`).join('')}
+    </div>`;
+  }
+
+  function renderLeftSidebar() {
+    return `<div class="side-left">
+      <div class="section-label">KC + Cassy + Kopano Context</div>
+      ${[
+        { icon:'👁', name:'KC', role:'Brain Ledger — Save|Watch only', badge:'Save|Watch', cls:'badge-watch' },
+        { icon:'⚡', name:'Cassy', role:'Lead Student — execute under apprenticeship', badge:'Execute', cls:'badge-exec' },
+        { icon:'📚', name:'Cassey', role:'Teacher — APPROVE ≠ graduation', badge:'Teacher', cls:'badge-teach' },
+        { icon:'🧠', name:'Kopano Context', role:'Eidetic memory — GUI surface', badge:'Context', cls:'badge-ctx' }
+      ].map(e => `<div class="triad-entity active-entity">
+        <div class="entity-row"><span class="entity-icon">${e.icon}</span><div class="entity-info"><div class="entity-name">${e.name}</div><div class="entity-role">${e.role}</div></div><span class="entity-badge ${e.cls}">${e.badge}</span></div>
+      </div>`).join('')}
+
+      <div class="section-label" style="margin-top:8px;">Altar Layers</div>
+      ${[
+        { name:'Guardian AI', sub:'Jethro triage + WWJD firewall', color:'var(--accent-guardian)' },
+        { name:'Natural AI', sub:'Soil · geology · fluid mechanics', color:'var(--accent-telemetry)' },
+        { name:'Telemetry AI', sub:'Edge metrics · classify before interpret', color:'var(--accent-identic)' }
+      ].map(l => `<div class="altar-row"><div class="altar-pip" style="background:${l.color};box-shadow:0 0 8px ${l.color}"></div><div><div class="altar-label">${l.name}</div><div class="altar-sub">${l.sub}</div></div></div>`).join('')}
+
+      <div class="section-label" style="margin-top:8px;">Thesis Sectors</div>
+      ${WORLD.regions.filter(r=>r.kind==='thesis_sector').map(s => `<div class="triad-entity">
+        <div class="entity-name" style="color:var(--accent-telemetry);font-size:12px;">◆ ${s.codename}</div>
+        <div class="entity-role">${s.domain} — ${s.pavement||''}</div>
+        <div style="margin-top:4px;font-size:9px;color:var(--text-dim);font-family:var(--mono)">mesh: ${s.landlord}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  function renderCenter() {
+    return `<div class="center-game">
+      <div class="dispatch-console">
+        <div class="console-row">
+          <input id="dispatchInput" class="console-input" placeholder="[GUI_TOKEN] dispatch message through SWFUS..." onkeydown="if(event.key==='Enter')handleDispatch()">
+          <button class="console-btn btn-dispatch" onclick="handleDispatch()">Dispatch</button>
+          <button class="console-btn btn-tick ${WORLD.game_running?'running':''}" onclick="toggleGameLoop()" id="tickBtn">
+            ${WORLD.game_running ? '■ Stop' : '▶ Auto Tick'}
+          </button>
+          <button class="console-btn btn-tick" onclick="runSimTick()" style="background:linear-gradient(135deg,var(--accent-swfus),var(--accent-identic));color:#fff;">⟳ Tick</button>
+        </div>
+      </div>
+      <div class="game-feed">
+        <div class="feed-tabs">
+          <div class="feed-tab ${WORLD.feed_tab==='hood'?'active':''}" onclick="switchTab('hood')">Hood Map</div>
+          <div class="feed-tab ${WORLD.feed_tab==='feed'?'active':''}" onclick="switchTab('feed')">Dispatch Feed</div>
+        </div>
+        <div id="feedContent">${WORLD.feed_tab === 'hood' ? renderHoodGrid() : renderDispatchFeed()}</div>
+      </div>
+    </div>`;
+  }
+
+  function renderHoodGrid() {
+    return `<div class="hood-world">${WORLD.regions.filter(r=>r.kind==='hood_plot').map(r => {
+      const active = r.status === 'active';
+      let dots = '';
+      for(let i=0;i<Math.min(r.tel,30);i++) dots+=`<div class="a-dot d-tel" onclick="showAgentModal('spawn_telemetry_${String(i+1).padStart(3,'0')}',${JSON.stringify(r).replace(/"/g,"&quot;")})"></div>`;
+      for(let i=0;i<Math.min(r.idn,30);i++) dots+=`<div class="a-dot d-idn" onclick="showAgentModal('spawn_identic_${String(i+101).padStart(3,'0')}',${JSON.stringify(r).replace(/"/g,"&quot;")})"></div>`;
+      for(let i=0;i<Math.min(r.gua,30);i++) dots+=`<div class="a-dot d-gua" onclick="showAgentModal('spawn_guardian_${String(i+201).padStart(3,'0')}',${JSON.stringify(r).replace(/"/g,"&quot;")})"></div>`;
+      return `<div class="plot-card ${active?'active-plot':'parked-plot'} ${WORLD.selected_plot===r.id?'selected':''}" onclick="selectPlot('${r.id}')" style="${!active?'opacity:0.5':''}">
+        <div class="plot-header"><div class="plot-name">${r.id.replace('plot_','').replace(/_/g,' ')}</div><span class="plot-status ${active?'status-active':'status-parked'}">${r.status}</span></div>
+        <div class="plot-domain">${r.domain}</div>
+        <div class="cohort-bar">
+          <span class="cohort-pill cp-total">${r.agents}</span>
+          ${r.tel?`<span class="cohort-pill cp-tel">T${r.tel}</span>`:''}
+          ${r.idn?`<span class="cohort-pill cp-idn">I${r.idn}</span>`:''}
+          ${r.gua?`<span class="cohort-pill cp-gua">G${r.gua}</span>`:''}
+        </div>
+        <div class="plot-landlord">landlord: <b>${r.landlord}</b></div>
+        <div class="agent-swarm">${dots}</div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  function renderDispatchFeed() {
+    if (!WORLD.feed.length) return '<div style="text-align:center;padding:40px;color:var(--text-dim);font-family:var(--mono);font-size:11px;">No dispatches yet. Type a message and hit Dispatch, or click Auto Tick.</div>';
+    return `<div class="dispatch-feed">${WORLD.feed.slice(0,30).map(f => `
+      <div class="dispatch-entry">
+        <div class="dispatch-pip ${f.pip}"></div>
+        <div class="dispatch-msg">${f.msg}</div>
+        ${f.badge ? `<span style="font-size:9px;font-weight:700;color:${f.badge==='PROCEED'||f.badge==='TICK_OK'?'var(--accent-proceed)':f.badge==='SEVER'||f.badge==='REJECT'||f.badge==='TICK_FAIL'?'var(--accent-sever)':'var(--accent-jethro)'}">${f.badge}</span>` : ''}
+        <div class="dispatch-ts">${f.ts}</div>
+      </div>`).join('')}</div>`;
+  }
+
+  function renderRightSidebar() {
+    return `<div class="side-right">
+      <div class="section-label">Sovereign Sim Ticks</div>
+      <div id="tickList">${renderTickList()}</div>
+      <div class="section-label" style="margin-top:8px;">Last Dispatch Agents</div>
+      <div id="lastDispatch">${renderLastDispatch()}</div>
+    </div>`;
+  }
+
+  function renderTickList() {
+    return WORLD.ticks.slice(0,10).map(t => {
+      const pct = t.size>0?(t.proceed/t.size*100):0;
+      return `<div class="tick-entry">
+        <div class="tick-row"><span class="tick-ts">${t.id}</span><span class="tick-badge ${t.sever===0?'tb-ok':'tb-fail'}">${t.sever===0?'TICK_OK':'TICK_FAIL'}</span></div>
+        <div class="tick-counts"><span class="tc-proceed">▲ ${t.proceed}</span><span class="tc-sever">▼ ${t.sever}</span><span class="tc-total">/ ${t.size}</span></div>
+        <div class="tick-progress"><div class="tick-fill" style="width:${pct}%;background:linear-gradient(90deg,${t.sever===0?'var(--accent-proceed),var(--accent-telemetry)':'var(--accent-sever),var(--accent-guardian)'})"></div></div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderLastDispatch() {
+    const last = WORLD.ticks[0];
+    if (!last?.results?.length) return '<div style="font-size:10px;color:var(--text-dim);font-family:var(--mono);">No results yet</div>';
+    return last.results.map(r => `
+      <div class="dispatch-entry" style="padding:6px 10px;">
+        <div class="dispatch-pip ${r.p?'pip-proceed':'pip-sever'}"></div>
+        <div class="dispatch-msg">${r.a}</div>
+        <span style="font-size:9px;font-weight:700;color:${r.p?'var(--accent-proceed)':'var(--accent-sever)'}">${r.p?'PROCEED':'SEVER'}</span>
+      </div>`).join('');
+  }
+
+  function renderFeed() {
+    const el = document.getElementById('feedContent');
+    if (el && WORLD.feed_tab === 'feed') el.innerHTML = renderDispatchFeed();
+  }
+  function renderTicks() {
+    const tl = document.getElementById('tickList');
+    const ld = document.getElementById('lastDispatch');
+    if (tl) tl.innerHTML = renderTickList();
+    if (ld) ld.innerHTML = renderLastDispatch();
+  }
+  function renderControls() {
+    const btn = document.getElementById('tickBtn');
+    if (btn) {
+      btn.textContent = WORLD.game_running ? '■ Stop' : '▶ Auto Tick';
+      btn.classList.toggle('running', WORLD.game_running);
+    }
+  }
+
+  function handleDispatch() {
+    const input = document.getElementById('dispatchInput');
+    if (!input || !input.value.trim()) return;
+    dispatchMessage(input.value.trim());
+    input.value = '';
+    if (WORLD.feed_tab === 'hood') { WORLD.feed_tab = 'feed'; const el = document.getElementById('feedContent'); if(el) el.innerHTML = renderDispatchFeed(); document.querySelectorAll('.feed-tab').forEach((t,i) => t.classList.toggle('active', i===1)); }
+  }
+  function switchTab(tab) {
+    WORLD.feed_tab = tab;
+    const el = document.getElementById('feedContent');
+    if (el) el.innerHTML = tab === 'hood' ? renderHoodGrid() : renderDispatchFeed();
+    document.querySelectorAll('.feed-tab').forEach((t,i) => t.classList.toggle('active', (tab==='hood'&&i===0)||(tab==='feed'&&i===1)));
+  }
+  function selectPlot(id) {
+    WORLD.selected_plot = WORLD.selected_plot === id ? null : id;
+    const el = document.getElementById('feedContent');
+    if (el && WORLD.feed_tab === 'hood') el.innerHTML = renderHoodGrid();
+  }
+
+  function attachEvents() {
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  }
+
+  // ═══ BOOT ═══
+  render();
+  </script>
+</body>
+</html>

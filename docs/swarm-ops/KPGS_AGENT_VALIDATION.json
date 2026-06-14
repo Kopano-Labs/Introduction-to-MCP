@@ -1,13 +1,13 @@
 {
   "schema": "kpgs_mesh_poc_v1",
-  "ts": "2026-06-14T13:19:25Z",
+  "ts": "2026-06-14T16:37:21Z",
   "title": "KPGS Agent Swarm PoC — Altar Integration",
   "operator": "LD-LPM",
   "deploy_context": "VERCEL_PREVIEW | kasilink_steward_wire SHIP",
   "thesis_document_id": "KPGS-THESIS-2026-X8020",
   "thesis_compile": {
     "schema": "kpgs_thesis_compile_v1",
-    "ts": "2026-06-14T13:19:25Z",
+    "ts": "2026-06-14T16:37:21Z",
     "document_id": "KPGS-THESIS-2026-X8020",
     "verdict": "COMPILED",
     "errors": [],
@@ -29,7 +29,7 @@
   },
   "black_beast_compile": {
     "schema": "black_beast_thesis_compile_v1",
-    "ts": "2026-06-14T13:19:25Z",
+    "ts": "2026-06-14T16:37:21Z",
     "document_id": "BLACK_BEAST_THESIS_PAYLOAD_V1",
     "verdict": "COMPILED",
     "errors": [],
@@ -46,12 +46,12 @@
   "agents": [
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "freddy_nw_alfalfa",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:20Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:freddy_nw_alfalfa",
         "renter_class": "mesh_agent",
@@ -178,7 +178,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: freddy_nw_alfalfa | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: "
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:20Z | ecosystem: Kopano-Phu | agent: freddy_nw_alfalfa | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: "
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: freddy_nw_alfalfa | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -296,12 +296,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "eddie_bgf_mining",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:eddie_bgf_mining",
         "renter_class": "mesh_agent",
@@ -428,7 +428,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: eddie_bgf_mining | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: S"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: eddie_bgf_mining | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: S"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: eddie_bgf_mining | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -546,12 +546,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "starfall_salvage",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:starfall_salvage",
         "renter_class": "mesh_agent",
@@ -678,7 +678,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: starfall_salvage | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: S"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: starfall_salvage | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: S"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: starfall_salvage | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -796,12 +796,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "kopano_labs_website",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:kopano_labs_website",
         "renter_class": "mesh_agent",
@@ -928,7 +928,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: kopano_labs_website | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: kopano_labs_website | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: kopano_labs_website | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -1046,12 +1046,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "kasilink",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:kasilink",
         "renter_class": "mesh_agent",
@@ -1178,7 +1178,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: kasilink | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: kasilink | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: kasilink | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -1296,12 +1296,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "bookit_5s_arena",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:bookit_5s_arena",
         "renter_class": "mesh_agent",
@@ -1428,7 +1428,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: bookit_5s_arena | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SH"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: bookit_5s_arena | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SH"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: bookit_5s_arena | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -1546,12 +1546,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "5s_arena_blog",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:5s_arena_blog",
         "renter_class": "mesh_agent",
@@ -1678,7 +1678,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: 5s_arena_blog | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: 5s_arena_blog | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: 5s_arena_blog | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -1796,12 +1796,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "cape_campass",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:cape_campass",
         "renter_class": "mesh_agent",
@@ -1928,7 +1928,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: cape_campass | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: cape_campass | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: cape_campass | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -2046,12 +2046,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "portfolios_websites",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:portfolios_websites",
         "renter_class": "mesh_agent",
@@ -2178,7 +2178,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: portfolios_websites | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: portfolios_websites | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: portfolios_websites | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -2296,12 +2296,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "ama_phu_entertainment",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:ama_phu_entertainment",
         "renter_class": "mesh_agent",
@@ -2428,7 +2428,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: ama_phu_entertainment | commandments_pass: 15/15 | pillars_pass: 5/5 | verdi"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: ama_phu_entertainment | commandments_pass: 15/15 | pillars_pass: 5/5 | verdi"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: ama_phu_entertainment | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -2546,12 +2546,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "pipeline_drone",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:pipeline_drone",
         "renter_class": "mesh_agent",
@@ -2678,7 +2678,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: pipeline_drone | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHI"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: pipeline_drone | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHI"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: pipeline_drone | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -2796,12 +2796,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "claude",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:claude",
         "renter_class": "mesh_agent",
@@ -2928,7 +2928,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: claude | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: claude | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: claude | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -3046,12 +3046,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "grok",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:grok",
         "renter_class": "mesh_agent",
@@ -3178,7 +3178,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: grok | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: grok | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: grok | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -3296,12 +3296,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "gemini",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:gemini",
         "renter_class": "mesh_agent",
@@ -3428,7 +3428,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: gemini | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: gemini | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: gemini | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -3546,12 +3546,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "copilot",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:copilot",
         "renter_class": "mesh_agent",
@@ -3678,7 +3678,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: copilot | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: copilot | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: copilot | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -3796,12 +3796,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "cf_cloud",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:cf_cloud",
         "renter_class": "mesh_agent",
@@ -3928,7 +3928,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: cf_cloud | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: cf_cloud | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: cf_cloud | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -3979,7 +3979,7 @@
           "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
           "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:cf_cloud entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-          "altar_layer": null,
+          "altar_layer": "identic_ai",
           "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
         },
         "hood_entry": {
@@ -4046,12 +4046,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "mirror_warden",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:mirror_warden",
         "renter_class": "mesh_agent",
@@ -4178,7 +4178,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: mirror_warden | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: mirror_warden | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: mirror_warden | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -4296,12 +4296,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "cassey",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:cassey",
         "renter_class": "mesh_agent",
@@ -4428,7 +4428,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: cassey | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
@@ -4546,12 +4546,12 @@
     },
     {
       "schema": "kpgs_agent_validation_v1",
-      "ts": "2026-06-14T13:19:25Z",
+      "ts": "2026-06-14T16:37:21Z",
       "agent_id": "operational_general",
       "verdict": "SHIP",
       "hood_entry": {
         "schema": "kpgs_hood_entry_assertion_v1",
-        "ts": "2026-06-14T13:19:25Z",
+        "ts": "2026-06-14T16:37:21Z",
         "bracket": "[KPGS_HOOD_ENTRY]",
         "renter_id": "agent:operational_general",
         "renter_class": "mesh_agent",
@@ -4678,7 +4678,7 @@
         {
           "check": "black_mask_drill",
           "verdict": "PASS",
-          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T13:19:25Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict"
+          "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T16:37:21Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict"
         }
       ],
       "summary": "[KPGS_AGENT_INIT] agent: operational_general | verdict: SHIP | pillars: PASS | routing: PASS | commandments: PASS | altar_sync: authorized",
