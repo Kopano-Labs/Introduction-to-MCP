@@ -1,0 +1,52 @@
+{
+  "schema": "kopano_phu_founding_doctrine_v1",
+  "title": "32.8% Unemployment Doctrine",
+  "subtitle": "Founding constraint for Kopano-Phu Eco-Friendly System — not world acceptance",
+  "rate_percent": 32.8,
+  "bracket_tag": "[UNEMPLOYMENT_32_8_DOCTRINE]",
+  "statement": "We design and validate for an economy where roughly one in three people seeking work cannot find it. PoC passes when livelihood-relevant measurands improve under sovereign constraints — not when global markets applaud.",
+  "what_we_do_not_worship": [
+    "viral reach",
+    "VC term sheets",
+    "industry buzzwords without units",
+    "fake swarm ACK",
+    "graduation theater without placement or income pathway"
+  ],
+  "what_we_validate_with": [
+    "rosen_mr",
+    "measurable_delta",
+    "receipt_stack",
+    "servitude_triad",
+    "environment_fit",
+    "livelihood_signal"
+  ],
+  "livelihood_signals": [
+    {
+      "id": "LIV-01",
+      "name": "skill_transfer",
+      "text": "Teacher–student apprenticeship produces a repeatable skill artifact (lab sheet, build, cert prep)."
+    },
+    {
+      "id": "LIV-02",
+      "name": "low_capital_path",
+      "text": "Entry cost fits load-shedding, offline, and low-data reality — no cloud-only gate."
+    },
+    {
+      "id": "LIV-03",
+      "name": "measurable_output",
+      "text": "STEM measurand with units — something an employer or client can verify without believing a slide deck."
+    },
+    {
+      "id": "LIV-04",
+      "name": "time_to_useful",
+      "text": "Hours-to-first-useful-output is bounded and logged — unemployment cannot afford infinite courses."
+    },
+    {
+      "id": "LIV-05",
+      "name": "local_eco_fit",
+      "text": "Reduces waste (water, watts, trust, rehearsal time) in the actual environment, not a datacenter fantasy."
+    }
+  ],
+  "poc_guide": "docs/swarm-ops/ECO_FRIENDLY_POC_GUIDE.md",
+  "rosen_delta_tip": "docs/swarm-ops/ROSEN_DELTA_TIP.json"
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "infinite_hood_domain_grid_v1",
+  "title": "Infinite Hood — Domain Plot Inventory",
+  "ts_note": "Extend operator_extend.domains — paste your parked portfolio; re-run generate_infinite_hood_grid.py",
+  "cloud_backbone": {
+    "microsoft_partner_blade_id": "6962519",
+    "azure_region_primary": "southafricanorth"
+  },
+  "plots": [
+    {
+      "plot_id": "plot_kopano_context",
+      "domain": "context.kopanolabs.com",
+      "url": "https://context.kopanolabs.com/",
+      "status": "active",
+      "probe_ref": "VERIFIED_ENDPOINTS.md#context.kopanolabs.com",
+      "product_lane": "kopano_context",
+      "pwa": true,
+      "outer_api_mount": "/api/kc/phu",
+      "client_ingress": ["pwa", "google_workspace", "microsoft_copilot"]
+    },
+    {
+      "plot_id": "plot_kopanolabs_org",
+      "domain": "kopanolabs.com",
+      "url": "https://kopanolabs.com/",
+      "status": "active",
+      "probe_ref": "VERIFIED_ENDPOINTS.md#kopanolabs.com",
+      "product_lane": "org_marketing",
+      "pwa": false,
+      "outer_api_mount": "/api/kc/phu",
+      "client_ingress": ["web", "microsoft_partner"]
+    },
+    {
+      "plot_id": "plot_kasilink_vercel",
+      "domain": "kasi-link.vercel.app",
+      "url": "https://kasi-link.vercel.app/",
+      "status": "active",
+      "product_lane": "kasilink",
+      "pwa": true,
+      "outer_api_mount": "/api/kasilink",
+      "client_ingress": ["pwa", "google_app_store"]
+    },
+    {
+      "plot_id": "plot_kasilink_za",
+      "domain": "www.kasilink.co.za",
+      "url": "https://www.kasilink.co.za/",
+      "status": "active",
+      "product_lane": "kasilink",
+      "pwa": true,
+      "outer_api_mount": "/api/kasilink",
+      "client_ingress": ["pwa", "za_mobile"]
+    },
+    {
+      "plot_id": "plot_harvest_placeholder",
+      "domain": "harvest-for-all.kopanolabs.com",
+      "url": null,
+      "status": "parked",
+      "product_lane": "harvest_for_all",
+      "pwa": true,
+      "outer_api_mount": "/api/kc/phu",
+      "client_ingress": ["pwa"],
+      "activate_note": "Bind DNS when Harvest for All domain is live"
+    },
+    {
+      "plot_id": "plot_kopanocontext_legacy",
+      "domain": "kopanocontext.kopanolabs.com",
+      "url": null,
+      "status": "dormant_dns",
+      "probe_ref": "VERIFIED_ENDPOINTS.md#NXDOMAIN",
+      "product_lane": "parked_plot",
+      "pwa": false,
+      "reactivate_note": "Do not wire until DNS resolves — prefer context.kopanolabs.com"
+    }
+  ],
+  "operator_extend": {
+    "instruction": "Add one object per parked domain you own. Re-run: python scripts/generate_infinite_hood_grid.py",
+    "template": {
+      "plot_id": "plot_your_domain",
+      "domain": "example.com",
+      "url": "https://example.com/",
+      "status": "parked",
+      "product_lane": "parked_plot",
+      "pwa": false,
+      "outer_api_mount": "/api/kc/phu",
+      "client_ingress": []
+    },
+    "domains": []
+  }
+}

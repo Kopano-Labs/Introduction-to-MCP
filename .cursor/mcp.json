@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "mao": {
+      "command": "python",
+      "args": [
+        "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\CLI\\mao_server.py"
+      ],
+      "transport": "stdio",
+      "description": "MAO — Multi Agent Orchestrator + TSAP MAO teacher/student lanes. BlackMask drill."
+    },
+    "tsap": {
+      "command": "python",
+      "args": [
+        "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\CLI\\tsap_mcp_server.py"
+      ],
+      "transport": "stdio",
+      "description": "TSAP — Teacher Student Apprenticeship Protocol (MCP Cassey/Cassy). 15 Commandments + 5 Pillars."
+    }
+  }
+}

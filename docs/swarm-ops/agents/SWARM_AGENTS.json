@@ -1,7 +1,17 @@
 {
-  "schema": "swarm_agents_v1",
-  "triad": ["grit", "realism", "aesthetics"],
-  "servitude": "Realism accommodates Aesthetics; Cassy is not held to corporate-only roles.",
+ "schema": "swarm_agents_v1",
+ "triad": ["grit", "realism", "aesthetics"],
+ "servitude": "Realism accommodates Aesthetics; Cassy is not held to corporate-only roles.",
+ "philosophy": {
+   "principle": "Aesthetics stems ideas (STEM). Realism accommodates aesthetics — does not kill it. Dependence on aesthetics alone produces bloat because aesthetics preaches creativeness, not logic. STEM validates what creativity stems.",
+   "agent_gate": [
+     "Does this accommodate realism, or only preach aesthetics?",
+     "Is there proof (exit code, JSONL, production row), or only narrative?",
+     "Does the creative idea survive constraints (offline, load-shedding, data residency)?"
+   ],
+   "hierarchy": "Realism > Aesthetics (accommodates, not versus)",
+   "tagline": "Realism accommodates aesthetics; sovereignty accommodates both."
+ },
   "lead_student": "cassy",
   "teacher": "cassey",
   "brain": "kc",
@@ -10,8 +20,10 @@
       "id": "cassy",
       "display_name": "Cassy",
       "role": "student_primary",
+      "governance_boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
       "apprenticeship": {
         "active": true,
+        "mode": "student_teacher_apprenticeship",
         "manifest": "docs/swarm-ops/apprenticeship/kc_apprenticeship_250.json",
         "wit_band": "docs/swarm-ops/agents/cassy_wit_25.json",
         "mission": "Women in Tech — diaspora thrive; student-teacher with Cassey + KC ledger"
@@ -30,7 +42,12 @@
       "display_name": "KC",
       "role": "brain",
       "executes": false,
-      "apprenticeship": { "stores": "teacher_review", "api": "/api/kc/brain-opinion" }
+      "governance_boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
+      "apprenticeship": {
+        "stores": "teacher_review",
+        "verdicts": ["Save", "Watch"],
+        "api": "/api/kc/brain-opinion"
+      }
     },
     {
       "id": "kopano",

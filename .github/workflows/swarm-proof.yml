@@ -30,7 +30,31 @@ on:
       - "kopano-core/studio/.env.example"
       - "tests/test_kc_log_append.py"
       - "tests/test_kc_guard.py"
+      - "tests/test_agent_build_poc_validate.py"
+      - "scripts/kc_agent_build_poc_validate.py"
+      - "scripts/kc_bracket_lint.py"
+      - "scripts/kc_ai_flow_operate.py"
+      - "scripts/kc_phu_boot_v1.py"
+      - "kopano-core/kopano/agent_build_poc_validate.py"
+      - "kopano-core/kopano/lpm_lph_engine.py"
+      - "kopano-core/kopano/kpefs_router.py"
+      - "kopano-core/kopano/operating_mesh.py"
+      - "kopano-core/kopano/graduation_bar.py"
+      - "scripts/kc_phu_operating_mesh.py"
+      - "scripts/kc_phu_graduation_bar.py"
+      - "scripts/kc_kpefs_full_gate.py"
+      - "kopano-core/kopano/external_swarm_lane.py"
+      - "scripts/kc_external_swarm_lane.py"
+      - "tests/test_external_swarm_lane.py"
+      - "kopano-core/studio/src/operator/KpefsConsolePanel.tsx"
+      - "tests/test_operating_mesh.py"
+      - "tests/test_graduation_bar.py"
+      - "docs/swarm-ops/AGENT_BUILD_POC_VALIDATION.json"
+      - "docs/swarm-ops/LPM_LPH_GOD_COMPLEX_DOCTRINE.json"
+      - "docs/swarm-ops/AI_FLOW_PROTOCOL.md"
+      - "Structure/07-Agents/AI_FLOW_BINDINGS.json"
       - ".github/workflows/swarm-proof.yml"
+      - ".github/workflows/ci.yml"
   push:
     branches:
       - codex/kc-sovereign-gui-full-dev
@@ -50,5 +74,17 @@ jobs:
       - name: KC guard (sync + validate + proof + doc hosts + verified production)
         run: python scripts/kc_guard.py all --require-verified-production 10 --require-roadmap-gate
 
+      - name: Install Kopano-Phu validator deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ./kopano-core
+          pip install -e ./CLI
+
+      - name: Agent build PoC validate
+        run: python scripts/kc_agent_build_poc_validate.py
+
+      - name: KPEFS full gate
+        run: python scripts/kc_kpefs_full_gate.py
+
       - name: Pytest swarm tools
-        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py tests/test_kc_verified_production.py tests/test_kc_main_brain_roadmap.py tests/test_swarm_agents_api.py tests/test_swarm_console_api.py -q
+        run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py tests/test_kc_verified_production.py tests/test_kc_main_brain_roadmap.py tests/test_swarm_agents_api.py tests/test_swarm_console_api.py tests/test_agent_build_poc_validate.py tests/test_operating_mesh.py tests/test_graduation_bar.py tests/test_external_swarm_lane.py -q

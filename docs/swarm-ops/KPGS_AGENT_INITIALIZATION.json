@@ -1,0 +1,102 @@
+{
+  "schema": "kpgs_agent_initialization_v1",
+  "title": "KPGS Agent Initialization — Altar Integration",
+  "subtitle": "Kopano Protocol Governance System — 5 Pillars + 15 Commandments before GUI or Main Brain comms",
+  "thesis": "docs/swarm-ops/KPGS_THESIS_2026_X8020.json",
+  "thesis_markdown": "docs/swarm-ops/KPGS_THESIS_2026_X8020.md",
+  "black_beast_thesis": "docs/swarm-ops/BLACK_BEAST_THESIS_PAYLOAD_V1.json",
+  "black_beast_markdown": "docs/swarm-ops/BLACK_BEAST_THESIS_PAYLOAD_V1.md",
+  "document_id": "KPGS-THESIS-2026-X8020",
+  "altar_bracket": "[KPGS_AGENT_INIT]",
+  "black_mask_doctrine": "docs/swarm-ops/BLACK_MASK_COMMANDMENTS.json",
+  "data_pipeline_stages": [
+    "raw_chaos_vector",
+    "bounded_bracket_bodmas",
+    "half_range_fourier_cosine",
+    "kopano_context_core"
+  ],
+  "altar_layers": ["guardian_ai", "natural_ai", "telemetry_ai", "identic_ai"],
+  "altar_block_holders": "docs/swarm-ops/KPGS_ALTAR_BLOCK_HOLDERS.json",
+  "renter_entryway": "docs/swarm-ops/STATELESS_RENTER_ENTRYWAY.json",
+  "block_holder_bracket": "[KPGS_BLOCK_HOLDER]",
+  "sector_lanes": {
+    "freddy": "freddy_nw_alfalfa",
+    "eddie": "eddie_bgf_mining",
+    "eddie_catalog": "kp_geospatial_survey_06"
+  },
+  "pipeline": [
+    "hood_entry_assertion",
+    "block_holder_brief",
+    "spawn_swfus_envelope",
+    "jethro_triage",
+    "wwjd_firewall",
+    "forensic_sociology_lens",
+    "agent_manifest",
+    "kpgs_five_pillars",
+    "telemetry_classify_route",
+    "fifteen_commandments",
+    "bracket_lint",
+    "black_mask_drill",
+    "guardian_supervisor",
+    "altar_sync"
+  ],
+  "telemetry_routing_law": {
+    "source": "docs/swarm-ops/BLACK_BEAST_THESIS_PAYLOAD_V1.json",
+    "rule": "Telemetry must be classified and routed before interpretation.",
+    "misnamed": ["pressure"],
+    "required_manifest_fields": ["classified", "pre_interpretation", "misnamed_pressure_rejected", "primary_lane"]
+  },
+  "kpgs_pillars": [
+    {
+      "id": "ground_awareness",
+      "altar_name": "Ground-Awareness (Soil & Rock)",
+      "black_mask_pillar": "PIL-02",
+      "black_mask_name": "Realism",
+      "kpefs_vector": "V1_PLANT",
+      "required_fields": ["ground_context", "telemetry_class"]
+    },
+    {
+      "id": "eidetic_persistence",
+      "altar_name": "Eidetic Persistence",
+      "black_mask_pillar": "PIL-01",
+      "black_mask_name": "Grit",
+      "required_fields": ["log_target", "immutable_history"]
+    },
+    {
+      "id": "zero_trust_isolation",
+      "altar_name": "Zero-Trust Isolation",
+      "black_mask_pillar": "PIL-04",
+      "black_mask_name": "Sovereignty",
+      "required_fields": ["containment_firewall", "public_exposed"]
+    },
+    {
+      "id": "asymmetric_leverage",
+      "altar_name": "Asymmetric Leverage",
+      "black_mask_pillar": "PIL-04",
+      "black_mask_name": "Sovereignty",
+      "required_fields": ["local_ip_protected", "no_public_cloud_cache"]
+    },
+    {
+      "id": "hierarchical_triage",
+      "altar_name": "Hierarchical Triage",
+      "black_mask_pillar": "PIL-05",
+      "black_mask_name": "Apprenticeship",
+      "required_fields": ["supervisor_node", "runtime_closure_gate"]
+    }
+  ],
+  "commandment_guards": {
+    "CMD-02": "evidence.proof_artifact_path required",
+    "CMD-03": "no fake external kimi_ack",
+    "CMD-05": "kc executes false",
+    "CMD-06": "bracket_receipt lint clean",
+    "CMD-07": "black_mask_v0_5 before blackmass",
+    "CMD-11": "jsonl_validate exit 0 when claimed"
+  },
+  "verdicts": {
+    "SHIP": "Authorized for Altar synchronization and steward/GUI lane",
+    "REJECT": "Failed KPGS gate — hold spawn",
+    "HOLD": "BlackMask drill incomplete"
+  },
+  "default_supervisor": "cassey",
+  "default_proof_artifact": "docs/swarm-ops/KPEFS_CLOSURE_STATUS.json"
+}

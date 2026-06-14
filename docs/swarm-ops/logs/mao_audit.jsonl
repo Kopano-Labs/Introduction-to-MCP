@@ -1,0 +1,53 @@
+{"ts": "2026-05-25T17:13:39.989485+00:00", "kind": "mao_route", "payload": {"intent": "coding", "routed_to": "cassy", "confidence": 1.1}}
+{"ts": "2026-05-25T17:13:49.496251+00:00", "kind": "mao_route", "payload": {"intent": "coding", "routed_to": "cassy", "confidence": 1.1}}
+{"ts": "2026-05-25T17:14:07.879147+00:00", "kind": "language_route", "payload": {"detected": "en-za", "domain": "general"}}
+{"ts": "2026-05-25T17:14:43.422412+00:00", "kind": "mao_route", "payload": {"intent": "coding", "routed_to": "cassy", "confidence": 1.1}}
+{"ts": "2026-05-25T17:14:43.437315+00:00", "kind": "mao_route", "payload": {"intent": "research", "routed_to": "claude", "confidence": 1.0}}
+{"ts": "2026-05-25T17:15:20.464576+00:00", "kind": "mao_route", "payload": {"intent": "coding", "routed_to": "cassy", "confidence": 1.1}}
+{"ts": "2026-05-25T17:15:20.474519+00:00", "kind": "mao_route", "payload": {"intent": "research", "routed_to": "claude", "confidence": 1.0}}
+{"ts": "2026-05-25T17:15:20.481528+00:00", "kind": "language_route", "payload": {"detected": "en-za", "domain": "general"}}
+{"ts": "2026-05-25T17:15:20.493878+00:00", "kind": "context_store", "payload": {"agent_id": "cassy", "key": "last_task"}}
+{"ts": "2026-05-25T17:15:20.497562+00:00", "kind": "proof", "payload": {"agent_id": "cassy", "action": "mao_validation_autonomous", "evidence": "All 7 tools validated, 13 agents routed, philosophy gate enforced", "ts": "2026-05-25T17:15:20.497252+00:00"}}
+{"ts": "2026-05-25T17:25:56.854099+00:00", "kind": "mao_route", "payload": {"intent": "coding", "routed_to": "cassy", "confidence": 0.539}}
+{"ts": "2026-05-25T19:38:08.793674+00:00", "kind": "mao_route", "payload": {"intent": "research", "routed_to": "grok", "confidence": 0.829}}
+{"ts": "2026-05-25T19:38:08.810880+00:00", "kind": "mao_route", "payload": {"intent": "teach", "routed_to": "cassey", "confidence": 0.714}}
+{"ts": "2026-05-25T19:38:08.832504+00:00", "kind": "mao_route", "payload": {"intent": "language", "routed_to": "cassy", "confidence": 0.65}}
+{"ts": "2026-05-25T19:39:32.247789+00:00", "kind": "mao_route", "payload": {"intent": "language", "routed_to": "cassy", "confidence": 0.7}}
+{"ts": "2026-05-25T19:39:32.303358+00:00", "kind": "mao_route", "payload": {"intent": "orchestrate", "routed_to": "cf_cloud", "confidence": 0.486}}
+{"ts": "2026-05-25T19:39:32.316903+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.75}}
+{"ts": "2026-05-31T18:46:54.665669+00:00", "kind": "mao_route", "payload": {"intent": "research", "routed_to": "grok", "confidence": 0.771}}
+{"ts": "2026-05-31T18:46:54.769164+00:00", "kind": "mao_route", "payload": {"intent": "research", "routed_to": "grok", "confidence": 0.771}}
+{"ts": "2026-05-31T18:47:07.631835+00:00", "kind": "mao_route", "payload": {"intent": "teach", "routed_to": "cassey", "confidence": 0.65}}
+{"ts": "2026-05-31T18:47:07.664349+00:00", "kind": "proof", "payload": {"agent_id": "cassey", "action": "mao_execute:teach", "evidence": "mode=deterministic;latency_ms=6158.04", "ts": "2026-05-31T18:47:07.663672+00:00"}}
+{"ts": "2026-05-31T18:48:19.666202+00:00", "kind": "proof", "payload": {"agent_id": "grok", "action": "mao_execute:research", "evidence": "mode=deterministic;latency_ms=84994.64", "ts": "2026-05-31T18:48:19.664613+00:00"}}
+{"ts": "2026-06-04T23:27:48.056619+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:28:55.838616+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:31:16.228893+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:32:50.123323+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:32:55.139850+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:40:37.567879+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:47:49.078966+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:47:50.285553+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-04T23:47:54.620946+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T00:12:10.446438+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T00:12:15.447945+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T00:12:16.436499+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T08:56:21.191629+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T08:56:28.999312+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T08:56:30.401128+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:01:38.464886+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:01:49.952101+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:01:51.484045+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:04:33.074694+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:04:56.001187+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:05:16.719424+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:05:27.155787+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:05:28.651647+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:06:55.621425+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:08:12.949089+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:09:15.073826+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:21:21.851459+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:22:46.360094+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:22:53.271105+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-05T09:22:54.598808+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-14T12:28:37.144123+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}

@@ -333,21 +333,53 @@ def populate_main_brain(*, sync_vault_logs: bool = True) -> dict:
 def ecosystem_payload() -> dict:
     cfg = load_ecosystem_config()
     rows = merge_sub_brain_rows()
+    tsap_status: dict | None = None
+    poc_guide: dict | None = None
+    try:
+        from .phu_apprenticeship import apprenticeship_status
+        tsap_status = apprenticeship_status()
+    except ImportError:
+        tsap_status = None
+    try:
+        from .eco_poc_validate import poc_doctrine_payload
+        poc_guide = poc_doctrine_payload()
+    except ImportError:
+        poc_guide = None
+    boot_status_payload: dict | None = None
+    try:
+        from .phu_boot_governance import boot_status as _boot_status
+        boot_status_payload = _boot_status()
+    except ImportError:
+        boot_status_payload = None
     return {
         "schema": "kopano_phu_ecosystem_status_v1",
         "title": cfg.get("title"),
         "subtitle": cfg.get("subtitle"),
         "breaking_point_protocol": cfg.get("breaking_point_protocol"),
+        "apprenticeship_protocol": cfg.get("apprenticeship_protocol"),
+        "eco_friendly_system": cfg.get("eco_friendly_system", {}),
+        "teaching_surfaces": cfg.get("teaching_surfaces", {}),
+        "departments": cfg.get("departments", []),
         "schematics_root": str(schematics_root()),
         "parents": cfg.get("parents", []),
         "cassy_legacy": cfg.get("cassy_legacy", {}),
         "sub_brains": rows,
         "main_brain": main_brain_index(),
         "bracket_protocol": bracket_protocol_status(),
+        "apprenticeship": tsap_status,
+        "eco_poc": poc_guide,
+        "agent_governance_boot": boot_status_payload,
+        "founding_doctrine": cfg.get("founding_doctrine", {}),
         "runtime_state_path": str(STATE_PATH.relative_to(REPO_ROOT)),
         "docs": {
             "ecosystem": "docs/swarm-ops/KOPANO_PHU_ECOSYSTEM.md",
+            "eco_friendly": "docs/swarm-ops/KOPANO_PHU_ECO_FRIENDLY_SYSTEM.md",
+            "poc_guide": "docs/swarm-ops/ECO_FRIENDLY_POC_GUIDE.md",
+            "rosen_delta_tip": "docs/swarm-ops/ROSEN_DELTA_TIP.json",
+            "unemployment_doctrine": "docs/swarm-ops/UNEMPLOYMENT_32_8_DOCTRINE.json",
             "bracket": "docs/swarm-ops/BRACKET_PROTOCOL.md",
+            "tsap": "docs/swarm-ops/apprenticeship/TEACHER_STUDENT_APPRENTICESHIP_PROTOCOL.md",
+            "commandments": "docs/swarm-ops/BLACK_MASK_COMMANDMENTS.json",
             "legacy_orch": "docs/swarm-ops/LEGACY_ORCH.md",
         },
     }

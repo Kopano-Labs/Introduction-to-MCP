@@ -3,8 +3,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { getApiBase } from '../apiBase';
 import type { FeedLogEntry, LabsAnalytics, McpConsoleReply } from '../types';
 import { PhuLegacyCard } from '../operator/PhuLegacyCard';
+import { SovereignSimCard } from '../operator/SovereignSimCard';
+import { KpefsConsolePanel } from '../operator/KpefsConsolePanel';
 
-type ConsoleMode = 'context' | 'swarm' | 'proof' | 'ci';
+type ConsoleMode = 'context' | 'swarm' | 'mao' | 'kpefs' | 'proof' | 'ci' | 'sim';
 
 interface SwarmAgent {
   id: string;
@@ -67,6 +69,19 @@ interface SwarmConsoleStatus {
   cli: string[];
 }
 
+interface MaoExecuteResult {
+  routed_agent?: {
+    agent_id?: string;
+    display_name?: string;
+    role?: string;
+    confidence?: number;
+  };
+  response?: string;
+  model_used?: string;
+  execution_mode?: string;
+  latency_ms?: number;
+}
+
 interface ConsolePageProps {
   consoleMessage: string;
   consoleReply: McpConsoleReply | null;
@@ -85,15 +100,21 @@ const apiRoot = getApiBase();
 const modeLabels: Record<ConsoleMode, string> = {
   context: 'Context',
   swarm: 'Swarm',
+  mao: 'MAO',
+  kpefs: 'KPEFS',
   proof: 'Proof',
   ci: 'CI',
+  sim: 'Sovereign SIM',
 };
 
 const modeIcons: Record<ConsoleMode, string> = {
   context: '⌘',
   swarm: '◎',
+  mao: '⬡',
+  kpefs: '◈',
   proof: '✓',
   ci: '∿',
+  sim: '▣',
 };
 
 export function ConsolePage({
@@ -112,12 +133,24 @@ export function ConsolePage({
   const [status, setStatus] = useState<SwarmConsoleStatus | null>(null);
   const [agents, setAgents] = useState<SwarmAgent[]>([]);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [maoStatus, setMaoStatus] = useState<{
+    total_agents?: number;
+    philosophy?: { principle?: string; hierarchy?: string; agent_gate?: string[] };
+    agents?: { id: string; display_name: string; role: string; status: string; total_routes: number }[];
+  } | null>(null);
+  const [maoIntent, setMaoIntent] = useState('build');
+  const [maoForceAgent, setMaoForceAgent] = useState('');
+  const [maoMessage, setMaoMessage] = useState('Build a proof-bounded KC interface turn with receipts.');
+  const [maoExecuting, setMaoExecuting] = useState(false);
+  const [maoExecuteResult, setMaoExecuteResult] = useState<MaoExecuteResult | null>(null);
+  const [maoRouteResult, setMaoRouteResult] = useState<string | null>(null);
 
   const refreshStatus = useCallback(async () => {
     try {
-      const [statusRes, agentsRes] = await Promise.all([
+      const [statusRes, agentsRes, maoRes] = await Promise.all([
         fetch(`${apiRoot}/api/kc/swarm-console/status`),
         fetch(`${apiRoot}/api/kc/swarm-agents`),
+        fetch(`${apiRoot}/api/mao/status`),
       ]);
       if (statusRes.ok) {
         setStatus(await statusRes.json());
@@ -127,6 +160,9 @@ export function ConsolePage({
       if (agentsRes.ok) {
         const body = await agentsRes.json();
         setAgents(body.agents ?? []);
+      }
+      if (maoRes.ok) {
+        setMaoStatus(await maoRes.json());
       }
       setLoadError(null);
     } catch {
@@ -197,6 +233,8 @@ export function ConsolePage({
 
         <PhuLegacyCard />
 
+        <SovereignSimCard />
+
         <div className="swarm-block">
           <h3>Modes</h3>
           <nav className="swarm-nav">
@@ -208,6 +246,11 @@ export function ConsolePage({
                 onClick={() => setMode(key)}
               >
                 <span>{modeIcons[key]} {modeLabels[key]}</span>
+                {key === 'mao' && (
+                  <span className={badgeClass(Boolean(maoStatus?.total_agents))}>
+                    {maoStatus?.total_agents ? 'Live' : '…'}
+                  </span>
+                )}
                 {key === 'proof' && status && (
                   <span className={badgeClass(status.proof_bar_pass)}>
                     {status.proof_bar_pass ? 'PASS' : `${status.proof_gaps.length} gaps`}
@@ -217,6 +260,9 @@ export function ConsolePage({
                   <span className={badgeClass(status.checks.guard_all_ok)}>
                     {status.checks.guard_all_ok ? 'Ready' : 'Check'}
                   </span>
+                )}
+                {key === 'kpefs' && (
+                  <span className="swarm-badge ok">4V</span>
                 )}
               </button>
             ))}
@@ -373,6 +419,158 @@ export function ConsolePage({
             </motion.div>
           )}
 
+          {mode === 'mao' && (
+            <motion.div className="glass-card swarm-mode-card" layout>
+              <motion.div className="card-topline" layout>
+                <span className="eyebrow">Multi Agent Orchestrator</span>
+                <span className={`signal-chip ${maoStatus?.total_agents ? 'live' : 'neutral'}`}>
+                  {maoStatus?.total_agents ? `${maoStatus.total_agents} agents` : 'Loading'}
+                </span>
+              </motion.div>
+              {maoStatus?.philosophy && (
+                <div className="swarm-panel" style={{ marginBottom: '1rem' }}>
+                  <h4>Philosophy Gate</h4>
+                  <p style={{ fontSize: '0.85rem', opacity: 0.85 }}>{maoStatus.philosophy.principle}</p>
+                  <p className="swarm-footnote">{maoStatus.philosophy.hierarchy}</p>
+                  {maoStatus.philosophy.agent_gate && (
+                    <ul className="swarm-checklist">
+                      {maoStatus.philosophy.agent_gate.map((q) => (
+                        <li key={q} className="ok">{q}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+              <div className="swarm-context-grid" style={{ marginBottom: '1rem' }}>
+                <motion.article className="glass-card console-composer" layout>
+                  <motion.div className="card-topline" layout>
+                    <span className="eyebrow">MAO dispatch</span>
+                    <span className="signal-chip live">LPM</span>
+                  </motion.div>
+                  <label className="field-shell">
+                    <span>Intent</span>
+                    <select value={maoIntent} onChange={(e) => setMaoIntent(e.target.value)}>
+                      {['build', 'review', 'research', 'teach', 'execute', 'orchestrate', 'audit', 'coding', 'language', 'creative', 'memory'].map((opt) => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="field-shell">
+                    <span>Force agent (optional)</span>
+                    <select value={maoForceAgent} onChange={(e) => setMaoForceAgent(e.target.value)}>
+                      <option value="">Auto-route</option>
+                      {(maoStatus?.agents ?? []).map((agent) => (
+                        <option key={agent.id} value={agent.id}>{agent.display_name}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="field-shell">
+                    <span>Task</span>
+                    <textarea rows={4} value={maoMessage} onChange={(e) => setMaoMessage(e.target.value)} />
+                  </label>
+                  <div className="button-row">
+                    <button
+                      type="button"
+                      className="action-button primary"
+                      disabled={maoExecuting}
+                      onClick={() => {
+                        setMaoExecuting(true);
+                        fetch(`${apiRoot}/api/mao/execute`, {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            intent: maoIntent,
+                            message: maoMessage,
+                            force_agent_id: maoForceAgent || '',
+                          }),
+                        })
+                          .then((r) => r.json())
+                          .then((data) => {
+                            setMaoExecuteResult(data);
+                            const agent = data.routed_agent;
+                            if (agent) {
+                              setMaoRouteResult(
+                                `${agent.display_name} (${agent.agent_id ?? agent.display_name}) — conf ${agent.confidence ?? '—'}`,
+                              );
+                            }
+                            void refreshStatus();
+                          })
+                          .finally(() => setMaoExecuting(false));
+                      }}
+                    >
+                      {maoExecuting ? 'Dispatching…' : 'Dispatch agent'}
+                    </button>
+                    <button
+                      type="button"
+                      className="action-button ghost"
+                      onClick={() => {
+                        fetch(`${apiRoot}/api/mao/route`, {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ intent: maoIntent, message: maoMessage }),
+                        })
+                          .then((r) => r.json())
+                          .then((data) => {
+                            const agent = data.routed_agent;
+                            setMaoRouteResult(
+                              agent
+                                ? `Route only → ${agent.display_name} (${agent.role}) — ${agent.confidence}`
+                                : JSON.stringify(data),
+                            );
+                          });
+                      }}
+                    >
+                      Route only
+                    </button>
+                  </div>
+                </motion.article>
+                <motion.article className="glass-card console-output" layout>
+                  <div className="card-topline">
+                    <span className="eyebrow">Agent response</span>
+                    <span className="signal-chip neutral">
+                      {maoExecuteResult?.execution_mode ?? 'idle'}
+                    </span>
+                  </div>
+                  <h3>{maoExecuteResult?.routed_agent?.display_name ?? maoRouteResult ?? 'No dispatch yet'}</h3>
+                  <p className="swarm-footnote">
+                    {maoExecuteResult?.model_used
+                      ? `Model: ${maoExecuteResult.model_used} · ${maoExecuteResult.latency_ms ?? 0}ms`
+                      : 'Dispatch an agent to run a bounded LPM turn.'}
+                  </p>
+                  <div className="console-output-panel tall">
+                    <p>{maoExecuteResult?.response ?? 'Select intent, write task, then Dispatch agent.'}</p>
+                  </div>
+                </motion.article>
+              </div>
+              <h4>Agent Registry (LPM Roster)</h4>
+              <div className="swarm-agent-grid">
+                {(maoStatus?.agents ?? []).map((agent) => (
+                  <article
+                    key={agent.id}
+                    className="swarm-agent-card"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setMaoForceAgent(agent.id)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') setMaoForceAgent(agent.id); }}
+                  >
+                    <strong>{agent.display_name}</strong>
+                    <span>{agent.role}</span>
+                    <span className={`swarm-badge ${agent.total_routes > 0 ? 'ok' : 'neutral'}`}>
+                      {agent.total_routes > 0 ? `${agent.total_routes} routes` : agent.status}
+                    </span>
+                  </article>
+                ))}
+              </div>
+              <div className="button-row" style={{ marginTop: '1rem' }}>
+                <button type="button" className="action-button ghost" onClick={() => { void refreshStatus(); }}>
+                  Refresh roster
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {mode === 'kpefs' && <KpefsConsolePanel />}
+
           {mode === 'proof' && status && (
             <motion.div className="glass-card swarm-mode-card" layout>
               <motion.div className="card-topline" layout>
@@ -441,6 +639,16 @@ export function ConsolePage({
                 Requests: {labsAnalytics?.mcp_console.requests ?? 0} ·
                 Sessions: {labsAnalytics?.mcp_console.sessions ?? 0}
               </p>
+            </motion.div>
+          )}
+
+          {mode === 'sim' && (
+            <motion.div className="glass-card swarm-mode-card" layout>
+              <motion.div className="card-topline" layout>
+                <span className="eyebrow">Sovereign SIM</span>
+                <span className="signal-chip live">KPGS thesis frame</span>
+              </motion.div>
+              <SovereignSimCard />
             </motion.div>
           )}
         </section>

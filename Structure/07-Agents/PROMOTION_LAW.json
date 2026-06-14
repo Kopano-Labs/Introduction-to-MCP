@@ -1,0 +1,49 @@
+{
+  "schema": "promotion_law_v1",
+  "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
+  "bracket_tag": "[PROMOTION_LAW]",
+  "law": "No promotion without proof. Drill is not graduation.",
+  "forbidden_claims": [
+    "promoted without blackmask SHIP",
+    "graduated from drill counts alone",
+    "KC said promote in chat",
+    "mao route success equals production graduation",
+    "catalog status catalog treated as operating"
+  ],
+  "kc_teacher_review": {
+    "allowed": ["Save", "Watch"],
+    "save_means": "Bounded evidence stored in KC ledger — not production graduation",
+    "watch_means": "Hold — not promoted; requires new evidence",
+    "kill": "Chief Architect only — never auto-written by steward or MAO"
+  },
+  "promotion_requires_all": [
+    {
+      "id": "PROOF-01",
+      "name": "blackmask_ship",
+      "check": "black_mask.verdict == SHIP"
+    },
+    {
+      "id": "PROOF-02",
+      "name": "teacher_approve",
+      "check": "tsap teacher_review verdict == APPROVE"
+    },
+    {
+      "id": "PROOF-03",
+      "name": "receipt",
+      "check": "exit_code 0 OR jsonl row OR verified evidence path"
+    },
+    {
+      "id": "PROOF-04",
+      "name": "kpgs_altar_ship",
+      "check": "kpgs_agent_validate.verdict == SHIP AND telemetry_routing declared",
+      "authority": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_GOVERNANCE_CORE.json"
+    }
+  ],
+  "promotion_states": {
+    "catalog": "defined only — no ops",
+    "drill": "blackmask passed — still not graduated",
+    "operating": "department student active after PROOF-01..03",
+    "graduated": "requires verified production bar — separate from boot"
+  },
+  "rosen_delta_tip": "docs/swarm-ops/ROSEN_DELTA_TIP.json"
+}

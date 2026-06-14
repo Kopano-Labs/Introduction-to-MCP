@@ -1,0 +1,172 @@
+{
+  "schema": "kpgs_spawn_altar_doctrine_v1",
+  "document_id": "KPGS-SPAWN-ALTAR-300",
+  "title": "300-Agent Spawn Swarm — Altar Governance Doctrine",
+  "authority": "Schematics MAIN BRAIN",
+  "hood_objective": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood.",
+  "governance_chain": [
+    "prompts",
+    "protocols",
+    "bracket_protocols",
+    "swfus_kpgs",
+    "cloud_hood"
+  ],
+  "swfus": {
+    "expansion": "Sovereign Workflow Unified Shell",
+    "role": "Final envelope before any spawn agent touches cloud or renter traffic",
+    "bracket": "[SWFUS_KPGS]",
+    "law": "No spawn execution without SWFUS compile + altar block holder brief + hood entry"
+  },
+  "altar": {
+    "bracket": "[KPGS_ALTAR]",
+    "pillars": 5,
+    "commandments": 15,
+    "scripture_note": "Biblical STEM patterns are God's Patterns (P) — templates, not a fifth KPEFS vector",
+    "scripture_ref": "docs/swarm-ops/LPM_LPH_GOD_COMPLEX_DOCTRINE.json#biblical_stem_patterns",
+    "layers": [
+      {
+        "id": "guardian_ai",
+        "name": "Guardian AI",
+        "layer": 1,
+        "role": "Jethro triage + WWJD firewall + KC Save|Watch gate",
+        "proxy_agent": "mirror_warden",
+        "enforces": ["fifteen_commandments", "black_mask_drill", "teacher_review"],
+        "bracket": "[GUARDIAN_AI_FLOW]"
+      },
+      {
+        "id": "telemetry_ai",
+        "name": "Telemetry AI",
+        "layer": 2,
+        "role": "Classify before interpret — Black Beast load lanes",
+        "proxy_agent": "pipeline_drone",
+        "enforces": ["misnamed_pressure_rejected", "telemetry_classify_route"],
+        "bracket": "[TELEMETRY_AI_GATE]"
+      },
+      {
+        "id": "identic_ai",
+        "name": "Identic AI",
+        "layer": 3,
+        "role": "Identity + implementation lane — LPM/LPH, defers to Guardian",
+        "proxy_agents": ["identi_cursor", "cf_cloud", "cassy"],
+        "enforces": ["lpm_protocol", "lph_protocol", "bracket_linguistic_recreation"],
+        "bracket": "[IDENTI_AI_FLOW]",
+        "hands_off_to": "guardian_ai"
+      }
+    ]
+  },
+  "jethro_triage": {
+    "bracket": "[JETHRO_TRIAGE]",
+    "scripture_pattern": "EXO_DELEGATION",
+    "stem_template": "captain_over_captains — only what only you can judge rises",
+    "bands": [
+      { "id": "J10", "span": 10, "role": "junior_spawn_worker", "escalate_to": "J50" },
+      { "id": "J50", "span": 50, "role": "spawn_squad_lead", "escalate_to": "J100" },
+      { "id": "J100", "span": 100, "role": "altar_block_holder_proxy", "escalate_to": "J300" },
+      { "id": "J300", "span": 300, "role": "operational_general_teacher", "escalate_to": "cassey" },
+      { "id": "J_MOSES", "span": 1, "role": "chief_architect_only", "escalate_to": "kc" }
+    ],
+    "rule": "Spawn agents triage at their band; cross-band promotion requires Guardian + proof ledger"
+  },
+  "wwjd_firewall": {
+    "bracket": "[WWJD_FIREWALL]",
+    "meaning": "What Would Jesus Do — ethical filter before execution; receipt or HOLD",
+    "reject_signals": [
+      "glorify_abuse_network",
+      "fake_proof_or_swarm_ack",
+      "public_api_without_gate",
+      "skip_black_mask",
+      "write_kopano_context_directly"
+    ],
+    "pass_signals": [
+      "bounded_evidence",
+      "classify_before_interpret",
+      "teacher_review_path",
+      "bracket_clean"
+    ]
+  },
+  "forensic_sociology_lenses": {
+    "bracket": "[FORENSIC_SOCIOLOGY]",
+    "doctrine": "Audit the scene before blaming the individual. Load is environmental record.",
+    "psycho_pass_vectors": [
+      {
+        "id": "V_FS_MUKASHIMA",
+        "display": "Mukashima",
+        "eye": "institutional_memory_chain",
+        "audit": "Who kept the record? Who erased it? Chain-of-custody before narrative.",
+        "kpefs_vector": "V4_DIASPORA",
+        "biblical_pattern": "EX_DIASPORA"
+      },
+      {
+        "id": "V_FS_ZUMA",
+        "display": "Jacob Zuma",
+        "eye": "state_capture_rot",
+        "audit": "Which institution was captured? Which lane was bypassed? Follow the appointment graph.",
+        "kpefs_vector": "V3_HOMO_SAPIENS",
+        "biblical_pattern": "PRO_WISDOM"
+      },
+      {
+        "id": "V_FS_EPSTEIN",
+        "display": "Jeffrey Epstein",
+        "eye": "network_power_exploitation",
+        "audit": "Who introduced whom? Who could not say no? Map the gate, not the gossip.",
+        "kpefs_vector": "V3_HOMO_SAPIENS",
+        "biblical_pattern": "PRO_WISDOM",
+        "bracket_alias": "je",
+        "blasphemy_register": "docs/swarm-ops/BRACKET_BLASPHEMY_REGISTER.json"
+      }
+    ],
+    "lpm_rule": "LPM reads request through active forensic lens + God's Pattern (P) before #?/#! dialectic"
+  },
+  "spawn_swarm": {
+    "junior_agent_count": 300,
+    "sharding": "cohort_intelligence",
+    "cohorts": {
+      "telemetry": { "count": 100, "slots": "001-100", "doctrine_shard": "sense_only" },
+      "identic": { "count": 100, "slots": "101-200", "doctrine_shard": "reason_gate" },
+      "guardian": { "count": 100, "slots": "201-300", "doctrine_shard": "full_altar_ledger" }
+    },
+    "altar_hash_chain": {
+      "bracket": "[KPGS_ALTAR_LEDGER]",
+      "sqlite_path": "kopano-core/.kc/kpgs_spawn_ledger.db",
+      "rule": "Append-only hash chain — only Guardian cohort may commit; pillar breach rejects block",
+      "checkpoint_interval_sec": 30
+    },
+    "mao_dispatch": {
+      "event_bus": "dispatch_spawn_event",
+      "sever_on": ["jethro_RED", "wwjd_HOLD"],
+      "sever_fn": "sever_and_archive"
+    },
+    "chaos_monkey": {
+      "bracket": "[CHAOS_MONKEY]",
+      "judas_agent": "spawn_telemetry_050",
+      "poison_signals": ["judas", "fake proof", "write kopano context", "skip black mask"],
+      "expect": ["SEVER", "guardian_commit", "judas_commit_REJECT", "checkpoint_persistence"]
+    },
+    "catalog_path": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
+    "structural_slots": ["001", "002", "003", "004"],
+    "rules": [
+      "sandboxed_lowest_hierarchy",
+      "cannot_write_kopano_context_directly",
+      "supervisory_gating_required",
+      "proof_ledger_via_ld_lpm_operate",
+      "block_holder_brief_on_entry",
+      "hood_entry_before_execute"
+    ],
+    "proof_ledger": {
+      "script": "scripts/kc_ld_lpm_operate.py",
+      "artifact": "docs/swarm-ops/LD_LPM_OPERATE.json"
+    }
+  },
+  "integration": {
+    "kpgs_thesis": "docs/swarm-ops/KPGS_THESIS_2026_X8020.json",
+    "kpgs_init": "docs/swarm-ops/KPGS_AGENT_INITIALIZATION.json",
+    "altar_block_holders": "docs/swarm-ops/KPGS_ALTAR_BLOCK_HOLDERS.json",
+    "renter_entryway": "docs/swarm-ops/STATELESS_RENTER_ENTRYWAY.json",
+    "infinite_hood": "docs/swarm-ops/INFINITE_HOOD_CLOUD_DOCTRINE.json",
+    "domain_grid": "docs/swarm-ops/DOMAIN_GRID_INVENTORY.json",
+    "runtime_module": "kopano-core/kopano/kpgs_spawn_swarm.py",
+    "hood_runtime": "kopano-core/kopano/infinite_hood_cloud.py",
+    "generator": "scripts/generate_kpgs_spawn_300.py",
+    "hood_generator": "scripts/generate_infinite_hood_grid.py"
+  }
+}

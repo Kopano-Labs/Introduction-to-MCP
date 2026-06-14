@@ -70,7 +70,7 @@ app.add_middleware(
 
 # --- SYSTEM METADATA ---
 SYSTEM_NAME = "Kopano Context"
-ADMIN_EMAIL = "rkholofelo@context.kopanolabs.com"
+ADMIN_EMAIL = os.environ.get("KOPANO_ADMIN_EMAIL", "admin@kopano.local").strip().lower()
 PRODUCTION_URL = "https://context.kopanolabs.com"
 
 app.include_router(kasilink_router)
@@ -104,6 +104,12 @@ class RegisterRequest(BaseModel):
 class LoginRequest(BaseModel):
     email: str
     password: str
+
+
+class MaoTaskRequest(BaseModel):
+    intent: str
+    message: str
+    force_agent_id: str = ""
 
 # --- API ENDPOINTS ---
 
@@ -395,6 +401,131 @@ async def health_check():
         health["status"] = "degraded"
 
     return health
+
+# --- PHASE 7: SA LANGUAGE ENGINE (Production) ---
+
+@app.post("/api/language/process")
+def language_process_turn(
+    message: str = "",
+    preferred_language: str | None = None,
+    speech_impairment: bool = False,
+    domain: str = "general",
+):
+    from .speech_pipeline import process_multilingual_turn
+    return process_multilingual_turn(
+        message=message,
+        preferred_language=preferred_language,
+        speech_impairment=speech_impairment,
+        domain=domain,
+    )
+
+
+@app.get("/api/language/analytics")
+def language_analytics():
+    from .speech_pipeline import get_language_analytics
+    return get_language_analytics()
+
+
+@app.get("/api/language/supported")
+def language_supported():
+    from .labs_registry import SA_LANGUAGE_SUPPORT, ACCESS_MODES
+    from .speech_pipeline import resolve_speech_mode
+    return {
+        "languages": SA_LANGUAGE_SUPPORT,
+        "access_modes": ACCESS_MODES,
+        "speech_mode": resolve_speech_mode(),
+        "offline_capable": True,
+        "phase": "7",
+    }
+
+
+# --- PHASE 8: CREATOR SURFACES ---
+
+@app.get("/api/creator/status")
+def creator_status():
+    from .creator_surfaces import get_creator_surfaces_status
+    return get_creator_surfaces_status()
+
+
+@app.post("/api/creator/code/learn")
+def creator_code_learn(pattern_type: str, pattern_key: str, pattern_value: str, confidence: float = 0.7):
+    from .creator_surfaces import learn_pattern
+    return learn_pattern(pattern_type, pattern_key, pattern_value, confidence)
+
+
+@app.get("/api/creator/code/patterns")
+def creator_code_patterns(pattern_type: str | None = None):
+    from .creator_surfaces import recall_patterns
+    return recall_patterns(pattern_type)
+
+
+@app.post("/api/creator/canvas/wireframe")
+def creator_canvas_wireframe(prompt: str):
+    from .creator_surfaces import generate_wireframe
+    return generate_wireframe(prompt)
+
+
+@app.post("/api/creator/research")
+def creator_research(query: str, grounded_in: str = "local"):
+    from .creator_surfaces import research_query
+    return research_query(query, grounded_in)
+
+
+# --- MAO: Multi Agent Orchestrator ---
+
+@app.get("/api/mao/status")
+def mao_status():
+    try:
+        import importlib.util
+        mao_path = Path(__file__).resolve().parents[2] / "CLI" / "mao_server.py"
+        spec = importlib.util.spec_from_file_location("mao_server", mao_path)
+        mao_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mao_mod)
+        return mao_mod.mao_swarm_status()
+    except Exception as e:
+        return {"error": str(e), "mao_available": False}
+
+
+@app.post("/api/mao/route")
+def mao_route_task(request: MaoTaskRequest):
+    try:
+        from .mao_dispatch import route_task
+
+        return route_task(intent=request.intent, message=request.message)
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/mao/execute")
+def mao_execute_task(request: MaoTaskRequest):
+    try:
+        from .mao_dispatch import execute_task
+
+        return execute_task(
+            intent=request.intent,
+            message=request.message,
+            force_agent_id=request.force_agent_id,
+        )
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/mao/philosophy-check")
+def mao_philosophy(action_description: str, has_proof: bool, survives_constraints: bool):
+    try:
+        import importlib.util
+        mao_path = Path(__file__).resolve().parents[2] / "CLI" / "mao_server.py"
+        spec = importlib.util.spec_from_file_location("mao_server", mao_path)
+        mao_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mao_mod)
+        return mao_mod.mao_philosophy_check(
+            action_description=action_description,
+            has_proof=has_proof,
+            survives_constraints=survives_constraints,
+        )
+    except Exception as e:
+        return {"error": str(e)}
+
 
 # --- STATIC FILE SERVING (GUI) ---
 # Mount the React build directory if it exists

@@ -1,0 +1,37 @@
+{
+  "schema": "kopano_phu_student_teacher_mao_boot_v1",
+  "bracket_tag": "[KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1]",
+  "title": "Kopano-Phu Student–Teacher + MAO Boot",
+  "ecosystem": "Kopano-Phu Eco-Friendly System",
+  "protocols": {
+    "tsap": "docs/swarm-ops/apprenticeship/TEACHER_STUDENT_APPRENTICESHIP_PROTOCOL.md",
+    "black_mask": "docs/swarm-ops/BLACK_MASK_COMMANDMENTS.json",
+    "promotion_law": "Structure/07-Agents/PROMOTION_LAW.json",
+    "role_bindings": "Structure/07-Agents/ROLE_BINDINGS.json",
+    "agent_mesh": "Structure/07-Agents/AGENT_MESH.json",
+    "ai_flows": "Structure/07-Agents/AI_FLOW_BINDINGS.json",
+    "lpm_lph": "docs/swarm-ops/LPM_LPH_GOD_COMPLEX_DOCTRINE.json",
+    "kpgs_main_brain": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_GOVERNANCE_CORE.json",
+    "kpgs_thesis": "docs/swarm-ops/KPGS_THESIS_2026_X8020.json",
+    "black_beast": "docs/swarm-ops/BLACK_BEAST_THESIS_PAYLOAD_V1.json",
+    "kpgs_init": "docs/swarm-ops/KPGS_AGENT_INITIALIZATION.json",
+    "renter_entryway": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json"
+  },
+  "surfaces": {
+    "mcp_tsap": { "server": "tsap", "teacher": "cassey", "student": "cassy" },
+    "mao": {
+      "server": "mao",
+      "routes_only": true,
+      "stores_kc_teacher_review": false,
+      "kp_teacher": "operational_general",
+      "ape_teacher": "cassey",
+      "student": "cassy"
+    }
+  },
+  "state_files": {
+    "boot_runtime": "kopano-core/.kc/phu_boot_v1.json",
+    "apprenticeship": "kopano-core/.kc/phu_apprenticeship.json"
+  },
+  "runtime_module": "kopano-core/kopano/phu_boot_governance.py",
+  "cli": "scripts/kc_phu_boot_v1.py"
+}

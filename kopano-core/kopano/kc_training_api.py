@@ -147,10 +147,24 @@ def submit_record(record_id: str, body: SubmitRequest) -> dict:
 @router.post("/records/{record_id}/review")
 def review_record(record_id: str, body: ReviewRequest) -> dict:
     try:
+        from .phu_boot_governance import validate_kc_teacher_review
+
+        check = validate_kc_teacher_review(body.teacher_review)
+        if not check["valid"]:
+            raise HTTPException(
+                status_code=400,
+                detail=f"KC teacher_review must start with Save or Watch; allowed={check['allowed']}",
+            )
+    except ImportError:
+        check = None
+    try:
         record = _store().review(record_id, body.teacher_review)
     except KeyError as error:
         raise HTTPException(status_code=404, detail=str(error)) from error
-    return {"record": asdict(record)}
+    out = {"record": asdict(record)}
+    if check:
+        out["kc_verdict_normalized"] = check.get("normalized")
+    return out
 
 
 @router.post("/records/{record_id}/promote")

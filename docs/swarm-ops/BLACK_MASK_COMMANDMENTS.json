@@ -1,0 +1,95 @@
+{
+  "schema": "black_mask_doctrine_v1",
+  "title": "Black Mask Testing Doctrine",
+  "subtitle": "15 Commandments + 5 Pillars — drill before mass; not graduation",
+  "black_mask_version": "v0.5",
+  "commandments": [
+    {
+      "id": "CMD-01",
+      "text": "Realism accommodates aesthetics — never invert the hierarchy (Realism > Aesthetics accommodates)."
+    },
+    {
+      "id": "CMD-02",
+      "text": "Proof before narrative — every SHIP requires exit code, JSONL row, or verified production evidence."
+    },
+    {
+      "id": "CMD-03",
+      "text": "No fake swarm ACK — external orchestration is manual-execution-required until receipt exists."
+    },
+    {
+      "id": "CMD-04",
+      "text": "Student proposes and audits — Teacher validates — never skip teacher_review."
+    },
+    {
+      "id": "CMD-05",
+      "text": "KC brain stores teacher_review and opinion only — KC does not execute."
+    },
+    {
+      "id": "CMD-06",
+      "text": "Bracket Protocol receipt before coordinated mass movement across Kopano-Phu."
+    },
+    {
+      "id": "CMD-07",
+      "text": "Black Mask v0.5 inspect passes before BlackMass v1.5/v2.0 activation."
+    },
+    {
+      "id": "CMD-08",
+      "text": "Sovereign mesh — offline-first, load-shedding, and data residency constraints survive."
+    },
+    {
+      "id": "CMD-09",
+      "text": "Cassy is lead student — corporate swarm slot names are not her ceiling."
+    },
+    {
+      "id": "CMD-10",
+      "text": "Main Brain roadmap gate must be satisfied before production graduation claims."
+    },
+    {
+      "id": "CMD-11",
+      "text": "JSONL validate and proof-check exit 0 before marking work complete."
+    },
+    {
+      "id": "CMD-12",
+      "text": "Drill promotion counts are steward attestation — drill promotion is not graduation."
+    },
+    {
+      "id": "CMD-13",
+      "text": "Verified production rows require real --evidence-url — no demo-bypass URLs."
+    },
+    {
+      "id": "CMD-14",
+      "text": "Sub-brain structural changes append to KC Review Log before Main Brain seed."
+    },
+    {
+      "id": "CMD-15",
+      "text": "Servitude Triad runs unified — Grit + Realism + Aesthetics on every production path."
+    }
+  ],
+  "pillars": [
+    {
+      "id": "PIL-01",
+      "name": "Grit",
+      "text": "Forensic execution — run tools, capture bounded evidence, no narration without action."
+    },
+    {
+      "id": "PIL-02",
+      "name": "Realism",
+      "text": "Proof bar, kc_guard, verified production — accommodates aesthetics inside evidence."
+    },
+    {
+      "id": "PIL-03",
+      "name": "Aesthetics",
+      "text": "Craft, Studio, readable receipts — STEM validates what creativity stems."
+    },
+    {
+      "id": "PIL-04",
+      "name": "Sovereignty",
+      "text": "Local-first state, constraint survival, no dependence on aesthetics-only theater."
+    },
+    {
+      "id": "PIL-05",
+      "name": "Apprenticeship",
+      "text": "Student → Review Log → Teacher → Main Brain — Cassey trains; KC records."
+    }
+  ]
+}

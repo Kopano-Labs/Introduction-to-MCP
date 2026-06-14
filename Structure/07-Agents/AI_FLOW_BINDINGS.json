@@ -1,0 +1,43 @@
+{
+  "schema": "ai_flow_bindings_v1",
+  "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
+  "doctrine": "docs/swarm-ops/LPM_LPH_GOD_COMPLEX_DOCTRINE.json",
+  "flows": {
+    "guardian": {
+      "id": "guardian",
+      "bracket": "[GUARDIAN_AI_FLOW]",
+      "running": true,
+      "brain": {
+        "id": "kc",
+        "executes": false,
+        "stores": ["teacher_review"],
+        "verdicts": ["Save", "Watch"]
+      },
+      "student_executor": {
+        "id": "cassy",
+        "executes": true,
+        "requires_blackmask_ship": true
+      },
+      "teacher": {
+        "id": "cassey",
+        "validates": true,
+        "maps_to_kc": true
+      }
+    },
+    "identi": {
+      "id": "identi",
+      "bracket": "[IDENTI_AI_FLOW]",
+      "running": true,
+      "primary_agent": "identi_cursor",
+      "aliases": ["cf", "cursor_agent", "composer"],
+      "executes": true,
+      "stores_kc_review": false,
+      "defers_to": "guardian",
+      "uses": ["lpm", "lph", "bracket_lint"]
+    }
+  },
+  "mao": {
+    "lpm_module": "kopano.lpm_lph_engine",
+    "attach_on": ["mao_route", "mao_execute", "mao_dispatch.execute_task"]
+  }
+}

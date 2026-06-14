@@ -62,7 +62,7 @@ COWORK_SURFACES: list[dict[str, Any]] = [
     {
         "id": "cassy-forge",
         "name": "Cassy Forge",
-        "status": "building",
+        "status": "production",
         "inspiration": "Anthropic workspace + Codex command center + Stitch canvas",
         "summary": "A shared forge where Cassy, Lead, and specialist agents plan, build, critique, and iterate in one creator surface.",
         "features": [
@@ -79,7 +79,7 @@ COWORK_SURFACES: list[dict[str, Any]] = [
     {
         "id": "cassy-code",
         "name": "Cassy Code",
-        "status": "planned",
+        "status": "building",
         "inspiration": "Codex + Claude Code style coding partner",
         "summary": "A coding mode that learns Robyn's stack, delivery standards, and architecture preferences before expanding outward.",
         "features": [
@@ -87,6 +87,35 @@ COWORK_SURFACES: list[dict[str, Any]] = [
             "pattern capture from user edits",
             "tests-first verification loops",
             "craft memory for preferred implementation style",
+        ],
+    },
+    {
+        "id": "cassy-canvas",
+        "name": "Cassy Canvas",
+        "status": "building",
+        "inspiration": "Figma + Excalidraw + v0 — prompt-to-UI with sovereign design tokens",
+        "summary": "A design canvas where agents sketch UI concepts, wireframes, and system diagrams from natural language prompts.",
+        "features": [
+            "prompt-to-wireframe generation",
+            "component library from existing codebase",
+            "collaborative annotation",
+            "export to React/Tailwind components",
+            "offline SVG rendering",
+            "design token inheritance from project theme",
+        ],
+    },
+    {
+        "id": "cassy-research",
+        "name": "Cassy Research",
+        "status": "building",
+        "inspiration": "Perplexity + Elicit + deep research agents",
+        "summary": "A research surface that grounds agent decisions in verified sources, local docs, and thesis evidence.",
+        "features": [
+            "source-grounded responses with citation",
+            "local document search (Schematics vault)",
+            "thesis evidence linking",
+            "research → implementation pipeline",
+            "offline knowledge base queries",
         ],
     },
 ]

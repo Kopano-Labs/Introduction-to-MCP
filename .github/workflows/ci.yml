@@ -80,3 +80,42 @@ jobs:
 
       - name: Build GUI
         run: npm run build
+
+  agent-build-poc:
+    name: Agent build PoC (Bracket / BlackMask / Guardian / Identi / LPM / KPEFS)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install runtime for Kopano-Phu validators
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ./kopano-core
+          pip install -e ./CLI
+
+      - name: Agent build PoC validate (19 gates)
+        run: python scripts/kc_agent_build_poc_validate.py
+
+      - name: KPEFS full gate (Phases 0-5)
+        run: python scripts/kc_kpefs_full_gate.py
+
+      - name: KPEFS run snapshot + pytest KPEFS lane
+        run: |
+          python scripts/kc_kpefs_run_snapshot.py --skip-gate
+          python -m pytest tests/test_operating_mesh.py tests/test_graduation_bar.py tests/test_external_swarm_lane.py tests/test_agent_build_poc_validate.py -q
+
+      - name: Upload PoC validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-build-poc-validation
+          path: |
+            docs/swarm-ops/AGENT_BUILD_POC_VALIDATION.json
+            docs/swarm-ops/KPEFS_CLOSURE_STATUS.json
+          if-no-files-found: ignore

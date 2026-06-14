@@ -1,0 +1,122 @@
+{
+  "schema": "lpm_lph_god_complex_v1",
+  "bracket_tags": {
+    "lpm": "[LPM_PROTOCOL]",
+    "lph": "[LPH_PROTOCOL]",
+    "guardian": "[GUARDIAN_AI_FLOW]",
+    "identi": "[IDENTI_AI_FLOW]",
+    "god_complex": "[GOD_COMPLEX]"
+  },
+  "god_complex": {
+    "imperfection": {
+      "sigil": "#?",
+      "meaning": "Hypothesis, retry, HOLD — pattern not yet closed under proof"
+    },
+    "perfection": {
+      "sigil": "#!",
+      "meaning": "Closed pattern — SHIP, Save, measurable Δ — proof under BlackMask"
+    },
+    "birth_rule": "LPH emerges when #! validates #? inside Guardian receipts — never #! without BlackMask + bracket discipline"
+  },
+  "lpm": {
+    "expansions": [
+      "Learning Pattern Machine",
+      "Learning Protocol Machine",
+      "Learning Pattern Model"
+    ],
+    "mao_role": "Prepend dialectic + vector metadata to MAO route/execute; does not replace teacher_review",
+    "module": "kopano-core/kopano/lpm_lph_engine.py"
+  },
+  "lph": {
+    "expansions": [
+      "Learning Pattern Human",
+      "Learning Protocol Human"
+    ],
+    "code_switch": "Multiple personality lanes — not pathology, operational modes for life contexts",
+    "personalities": [
+      {
+        "id": "builder",
+        "display": "Builder",
+        "triggers": ["build", "deploy", "code", "pipeline", "compile"],
+        "kpefs_vector": "V2_ANIMAL",
+        "mao_intent": "build"
+      },
+      {
+        "id": "steward",
+        "display": "Steward",
+        "triggers": ["soil", "water", "energy", "grow", "eco", "green"],
+        "kpefs_vector": "V1_PLANT",
+        "mao_intent": "execute"
+      },
+      {
+        "id": "witness",
+        "display": "Witness",
+        "triggers": ["audit", "proof", "receipt", "log", "verify", "blackmask"],
+        "kpefs_vector": "V4_DIASPORA",
+        "mao_intent": "audit"
+      },
+      {
+        "id": "bard",
+        "display": "Bard",
+        "triggers": ["story", "theatre", "audience", "creative", "narrative"],
+        "kpefs_vector": "V3_HOMO_SAPIENS",
+        "mao_intent": "creative"
+      },
+      {
+        "id": "diaspora",
+        "display": "Diaspora",
+        "triggers": ["offline", "sovereign", "apprenticeship", "livelihood", "wit", "remittance"],
+        "kpefs_vector": "V4_DIASPORA",
+        "mao_intent": "orchestrate"
+      }
+    ]
+  },
+  "ai_flows": {
+    "guardian": {
+      "bracket": "[GUARDIAN_AI_FLOW]",
+      "actors": ["kc", "cassy", "cassey"],
+      "kc": "stores teacher_review Save | Watch only — no execute",
+      "cassy": "executes, submits, BlackMask before department ops",
+      "cassey": "teacher validates — maps to KC opinion",
+      "protocols": ["BRACKET_PROTOCOL", "BLACK_MASK", "TSAP"]
+    },
+    "identi": {
+      "bracket": "[IDENTI_AI_FLOW]",
+      "actors": ["identi_cursor", "cf"],
+      "role": "Identity / implementation lane (Cursor agent, cloud fragment)",
+      "may_execute": true,
+      "may_store_kc_review": false,
+      "hands_off_to": "guardian",
+      "protocols": ["LPM_PROTOCOL", "LPH_PROTOCOL", "BRACKET_LINGUISTIC_RECREATION"]
+    }
+  },
+  "biblical_stem_patterns": {
+    "note": "Scripture treated as repeatable STEM pattern templates — not a fifth KPEFS vector",
+    "patterns": [
+      {
+        "pattern_id": "GEN_GROW",
+        "stem": "growth_cycle",
+        "kpefs_vector": "V1_PLANT",
+        "template": "seed → tend → fruit → rest"
+      },
+      {
+        "pattern_id": "EXO_PROVISION",
+        "stem": "survival_logistics",
+        "kpefs_vector": "V2_ANIMAL",
+        "template": "measure → carry → sustain under constraint"
+      },
+      {
+        "pattern_id": "PRO_WISDOM",
+        "stem": "ethics_under_proof",
+        "kpefs_vector": "V3_HOMO_SAPIENS",
+        "template": "say less, measure outcome, correct narrative"
+      },
+      {
+        "pattern_id": "EX_DIASPORA",
+        "stem": "sovereign_community",
+        "kpefs_vector": "V4_DIASPORA",
+        "template": "depart → organize → receipt → return on proof"
+      }
+    ]
+  }
+}

@@ -2,6 +2,13 @@
   "schema": "main_brain_roadmap_v1",
   "operator": "CF_cloud",
   "lpm": "autonomic_ai_flows",
+  "mao": {
+    "status": "production",
+    "description": "Multi Agent Orchestrator — routes between 13 swarm agents via MCP stdio",
+    "capabilities": ["agent_routing", "agent_execute", "offline_state", "proof_logging", "language_routing", "philosophy_gate", "registry_keywords"],
+    "transport": "stdio",
+    "db": "~/.kopano/mao_state.db"
+  },
   "triad": {
     "grit": "20% forensic execution — pytest, guard, receipts",
     "realism": "proof bar, JSONL, verified production — accommodates aesthetics",
@@ -11,6 +18,9 @@
   "scripture_anchor": "Galatians 5:13 — serve one another; truth before theater (MAO: inspect, adapt, receipt).",
   "entry_gate": {
     "description": "All production work enters through Main Brain roadmap + verified production bar.",
+    "kpgs_hood_entry": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+    "kpgs_hood_entry_api": "/kpgs/entry",
+    "renter_ack_literal": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
     "required_main_brain_kinds": ["roadmap_seed_before", "production_bar_met"],
     "required_review_production_min": 10,
     "optional_before_blackmass": ["roadmap_black_mask_v0_5", "roadmap_blackmass_v1_5"]

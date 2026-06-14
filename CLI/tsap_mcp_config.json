@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "tsap": {
+      "command": "python",
+      "args": [
+        "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\CLI\\tsap_mcp_server.py"
+      ],
+      "transport": "stdio",
+      "description": "TSAP — Teacher Student Apprenticeship Protocol (MCP Teacher Cassey / Student Cassy). BlackMask 15+5."
+    }
+  }
+}

@@ -1,0 +1,4572 @@
+{
+  "schema": "kpgs_blueprint_inventory_v1",
+  "ts": "2026-06-14T15:15:12Z",
+  "title": "KPGS 300 Blueprint Inventory \u2014 billing / decentralization proof",
+  "catalog_ref": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
+  "totals": {
+    "catalog_agents": 300,
+    "manifest_synthesized": 300,
+    "validation_ship": 300,
+    "validation_hold": 0,
+    "structural_full_mesh": 7,
+    "structural_catalog_only": 2,
+    "kp_ape_linked": 96,
+    "generated_spawn_slot": 195,
+    "other": 0,
+    "deployed_to_giant_provider": 0,
+    "paid_api_instances": 0
+  },
+  "honesty": {
+    "what_is_built": "300 spawn manifests synthesized and governance-validated SHIP; 300 infinite-hood plot assignments; altar ledger checkpoints.",
+    "what_is_not_built": "No per-agent Microsoft/Google/Meta paid API deployments; no provider execution receipts; sovereign sim is simulated dispatch only.",
+    "full_mesh_blueprint_ids": [
+      "cassey",
+      "cassy",
+      "kc",
+      "kc_apprentice",
+      "mirror_warden",
+      "operational_general",
+      "pipeline_drone"
+    ],
+    "structural_catalog_only_ids": [
+      "cf_cloud",
+      "identi_cursor"
+    ]
+  },
+  "by_class": {
+    "generated_spawn_slot": 195,
+    "kp_ape_linked": 96,
+    "structural_catalog_only": 2,
+    "structural_full_mesh": 7
+  },
+  "by_cohort": {
+    "telemetry": 100,
+    "identic": 100,
+    "guardian": 100
+  },
+  "giant_routing_intent_by_cohort": {
+    "telemetry": [
+      "microsoft_copilot",
+      "azure_openai"
+    ],
+    "identic": [
+      "google_gemini",
+      "google_workspace"
+    ],
+    "guardian": [
+      "meta_ai",
+      "openai_chatgpt"
+    ]
+  },
+  "ledger": {
+    "exists": true,
+    "tables": {
+      "altar_blocks": 281,
+      "sqlite_sequence": 3,
+      "swarm_checkpoints": 741,
+      "severed_agents": 291
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "pipeline_drone",
+      "blueprint_class": "structural_full_mesh",
+      "cohort": "telemetry",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": true,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_002",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_003",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_004",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_005",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_006",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_007",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_008",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_009",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_010",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_011",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_012",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_013",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_014",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_015",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_016",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_017",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_018",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_019",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_020",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_021",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_022",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_023",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_024",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_025",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_026",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_027",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_028",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_029",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_030",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_031",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_032",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_033",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_034",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_035",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_036",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_037",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_038",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_039",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_040",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_041",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_042",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_043",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_044",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_045",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_046",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_047",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_048",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_049",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_050",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_051",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_052",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_053",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_054",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_055",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_056",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_057",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_058",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_059",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_060",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_061",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_062",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_063",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_064",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_065",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_066",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_067",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_068",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_069",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_070",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_071",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_072",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_073",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_074",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_075",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_076",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_077",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_078",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_079",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_080",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_081",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_082",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_083",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_084",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_085",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_086",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_087",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_088",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_089",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_090",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_091",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_092",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_093",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_094",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_095",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_096",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_097",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_098",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_099",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_telemetry_100",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "microsoft_copilot",
+        "azure_openai"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kc_apprentice",
+      "blueprint_class": "structural_full_mesh",
+      "cohort": "identic",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": true,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "cassy",
+      "blueprint_class": "structural_full_mesh",
+      "cohort": "identic",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": true,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "identi_cursor",
+      "blueprint_class": "structural_catalog_only",
+      "cohort": "identic",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "cf_cloud",
+      "blueprint_class": "structural_catalog_only",
+      "cohort": "identic",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_agri_soil_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_water_hydro_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_energy_renew_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_materials_mfg_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_biomed_health_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_robotics_mech_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_env_monitor_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_geospatial_survey_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_07",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_08",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_09",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_ict_instrument_10",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_edu_lab_ops_01",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_edu_lab_ops_02",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_edu_lab_ops_03",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_edu_lab_ops_04",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_edu_lab_ops_05",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kp_edu_lab_ops_06",
+      "blueprint_class": "kp_ape_linked",
+      "cohort": "identic",
+      "structural": false,
+      "catalog_ref": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "google_gemini",
+        "google_workspace"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "mirror_warden",
+      "blueprint_class": "structural_full_mesh",
+      "cohort": "guardian",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": true,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "operational_general",
+      "blueprint_class": "structural_full_mesh",
+      "cohort": "guardian",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": true,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "cassey",
+      "blueprint_class": "structural_full_mesh",
+      "cohort": "guardian",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": true,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "kc",
+      "blueprint_class": "structural_full_mesh",
+      "cohort": "guardian",
+      "structural": true,
+      "catalog_ref": null,
+      "full_mesh_manifest": true,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_205",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_206",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_207",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_208",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_209",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_210",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_211",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_212",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_213",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_214",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_215",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_216",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_217",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_218",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_219",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_220",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_221",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_222",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_223",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_224",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_225",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_226",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_227",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_228",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_229",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_230",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_231",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_232",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_233",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_234",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_235",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_236",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_237",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_238",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_239",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_240",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_241",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_242",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_243",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_244",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_245",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_246",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_247",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_248",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_249",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_250",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_251",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_252",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_253",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_254",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_255",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_256",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_257",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_258",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_259",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_260",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_261",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_262",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_263",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_264",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_265",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_266",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_267",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_268",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_269",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_270",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_271",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_272",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_273",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_274",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_275",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_276",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_277",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_278",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_279",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_280",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_281",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_282",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_283",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_284",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_285",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_286",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_287",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_288",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_289",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_290",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_291",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_292",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_293",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_294",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_295",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_296",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_297",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_298",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_299",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    },
+    {
+      "agent_id": "spawn_guardian_300",
+      "blueprint_class": "generated_spawn_slot",
+      "cohort": "guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "full_mesh_manifest": false,
+      "validation_verdict": "SHIP",
+      "giant_routing_intent": [
+        "meta_ai",
+        "openai_chatgpt"
+      ],
+      "provider_deployed": false,
+      "provider_receipt": null
+    }
+  ]
+}

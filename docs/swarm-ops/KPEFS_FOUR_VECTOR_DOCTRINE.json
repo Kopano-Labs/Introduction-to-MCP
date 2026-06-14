@@ -1,0 +1,82 @@
+{
+  "schema": "kpefs_four_vector_v1",
+  "system": "KPEFS",
+  "full_name": "Kopano-Phu Eco-Friendly System",
+  "bracket_tag": "[KPEFS_FOUR_VECTOR]",
+  "priority_order": ["V1_PLANT", "V2_ANIMAL", "V3_HOMO_SAPIENS", "V4_DIASPORA"],
+  "vectors": [
+    {
+      "id": "V1_PLANT",
+      "rank": 1,
+      "metaphor": "Like plants — only interested in growing",
+      "drive": "growth",
+      "kp_bias": "experimentation",
+      "stem_letters": ["S", "E"],
+      "agent_domains": [
+        "Agriculture & Soil Science",
+        "Water & Hydrology",
+        "Energy & Renewables",
+        "Environmental Monitoring",
+        "Education & Lab Operations"
+      ],
+      "routing_keywords": ["grow", "soil", "crop", "irrigation", "photosynthesis", "germination", "NDVI"]
+    },
+    {
+      "id": "V2_ANIMAL",
+      "rank": 2,
+      "metaphor": "Like animals — growth and survival",
+      "drive": "growth_and_survival",
+      "kp_bias": "experimentation",
+      "stem_letters": ["S", "T", "E"],
+      "agent_domains": [
+        "Biomedical & Health Technology",
+        "Robotics & Mechatronics",
+        "Materials & Manufacturing",
+        "Geospatial & Surveying"
+      ],
+      "routing_keywords": ["survival", "herd", "health", "predator", "telemetry", "forage", "cold-chain", "mining", "rock", "pit", "dmr", "uptime", "bgf"]
+    },
+    {
+      "id": "V3_HOMO_SAPIENS",
+      "rank": 3,
+      "metaphor": "Homo sapiens — story, ethics, culture (handle with realism)",
+      "drive": "meaning_under_constraints",
+      "ape_bias": "creativity",
+      "stem_letters": ["S", "M"],
+      "agent_domains": [
+        "Science Communication & Documentary",
+        "STEM Theatre & Performance",
+        "Bio-Ethics & Science in Society",
+        "Youth STEM Media"
+      ],
+      "routing_keywords": ["audience", "ethics", "classroom", "theatre", "consent", "narrative"],
+      "caution": "Never let aesthetics outrun proof — CMD-01 Servitude Triad"
+    },
+    {
+      "id": "V4_DIASPORA",
+      "rank": 4,
+      "metaphor": "Diaspora — sovereignty, networks, Women in Tech, cross-border livelihood",
+      "drive": "diaspora_thrive",
+      "unifies": ["kopano_labs", "ama_phu"],
+      "lead_student": "cassy",
+      "stem_letters": ["STEM"],
+      "agent_domains": ["all_KP_APE_when_livelihood_LIV"],
+      "routing_keywords": ["diaspora", "wit", "remittance", "load-shedding", "offline", "sovereign", "apprenticeship"],
+      "doctrine_links": [
+        "docs/swarm-ops/UNEMPLOYMENT_32_8_DOCTRINE.json",
+        "Structure/07-Agents/KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1.json"
+      ],
+      "note": "Fourth vector is not blasphemy — it counters one-world flattening without naming it with honorific caps."
+    }
+  ],
+  "blasphemy_register": {
+    "rule": "Bracket tags for listed concepts use derogatory casing — never Title Case or ALL_CAPS",
+    "doc": "docs/swarm-ops/BRACKET_LINGUISTIC_RECREATION.md",
+    "examples": [
+      "oNE_wORLD_oRDER",
+      "elon_mask",
+      "je",
+      "silcon_valley"
+    ]
+  }
+}

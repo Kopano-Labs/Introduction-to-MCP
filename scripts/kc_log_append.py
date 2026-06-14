@@ -53,6 +53,24 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+def _bracket_lint_summary(summary: str, label: str) -> int:
+    """Return 1 if bracket lint fails."""
+    try:
+        scripts = Path(__file__).resolve().parent
+        if str(scripts) not in sys.path:
+            sys.path.insert(0, str(scripts))
+        from kc_bracket_lint import lint_brackets
+
+        errs = lint_brackets(summary)
+        if errs:
+            for e in errs:
+                print(f"{label}bracket-lint: {e}", file=sys.stderr)
+            return 1
+    except Exception as exc:
+        print(f"{label}bracket-lint: skipped ({exc})", file=sys.stderr)
+    return 0
+
+
 def _utc_now_iso() -> str:
     return datetime.now(tz=UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -250,6 +268,9 @@ def cmd_review(args: argparse.Namespace, root: Path) -> int:
                 print(e, file=sys.stderr)
             return 1
         _strict_proof_warn_sha(record, "review: ")
+    if getattr(args, "bracket_lint", False):
+        if _bracket_lint_summary(args.summary, "review: "):
+            return 1
     _append_jsonl(root / REVIEW_REL, record)
     return 0
 
@@ -281,6 +302,9 @@ def cmd_mainbrain(args: argparse.Namespace, root: Path) -> int:
                 print(e, file=sys.stderr)
             return 1
         _strict_proof_warn_sha(record, "mainbrain: ")
+    if getattr(args, "bracket_lint", False):
+        if _bracket_lint_summary(args.summary, "mainbrain: "):
+            return 1
     _append_jsonl(root / MAIN_REL, record)
     return 0
 
@@ -457,6 +481,11 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Require exit_code and at least one evidence URL; warn if git_sha missing",
     )
+    pr.add_argument(
+        "--bracket-lint",
+        action="store_true",
+        help="Reject summary if bracket blasphemy register violated",
+    )
 
     pm = sub.add_parser("mainbrain", help="Append KC Main Brain Log (orchestrator / chief)")
     pm.set_defaults(func=cmd_mainbrain)
@@ -471,6 +500,11 @@ def _build_parser() -> argparse.ArgumentParser:
         "--strict-proof",
         action="store_true",
         help="Require exit_code and at least one evidence URL; warn if git_sha missing",
+    )
+    pm.add_argument(
+        "--bracket-lint",
+        action="store_true",
+        help="Reject summary if bracket blasphemy register violated",
     )
 
     pk = sub.add_parser("kimi-ack", help="Append standardized Kimi acknowledgement (main brain log)")

@@ -3,6 +3,89 @@
   "title": "Kopano-Phu Ecosystem",
   "subtitle": "Kopano Labs × Ama-Phu Entertainment — Cassy legacy lane under KC",
   "breaking_point_protocol": "Bracket Protocol",
+  "apprenticeship_protocol": "TEACHER_STUDENT_APPRENTICESHIP_PROTOCOL",
+  "agent_governance_boot": "Structure/07-Agents/KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1.json",
+  "kpefs": {
+    "four_vectors": "docs/swarm-ops/KPEFS_FOUR_VECTOR_DOCTRINE.json",
+    "implementation_plan": "docs/swarm-ops/KPEFS_IMPLEMENTATION_PLAN.md",
+    "bracket_linguistics": "docs/swarm-ops/BRACKET_LINGUISTIC_RECREATION.md",
+    "bracket_lint": "scripts/kc_bracket_lint.py"
+  },
+  "eco_friendly_system": {
+    "kopano_labs": "Experimentation",
+    "ama_phu": "Creativity",
+    "unified_as": "Kopano-Phu Eco-Friendly System",
+    "agent_catalog": {
+      "path": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+      "index": "docs/swarm-ops/agents/KP_APE_200_AGENTS_INDEX.md",
+      "guide": "docs/swarm-ops/KOPANO_PHU_ECO_FRIENDLY_SYSTEM.md",
+      "counts": { "KP": 100, "APE": 100, "total": 200 }
+    }
+  },
+  "teaching_surfaces": {
+    "mcp": {
+      "server": "tsap",
+      "teacher": { "id": "mcp_teacher", "binds_to": "cassey", "role": "teacher" },
+      "student": { "id": "mcp_student", "binds_to": "cassy", "role": "student_primary" }
+    },
+    "mao": {
+      "server": "mao",
+      "teacher": { "id": "mao_teacher", "binds_to": "operational_general", "fallback": "cassey" },
+      "student": { "id": "mao_student", "binds_to": "cassy", "role": "student_primary" }
+    }
+  },
+  "founding_doctrine": {
+    "unemployment_32_8": {
+      "rate_percent": 32.8,
+      "path": "docs/swarm-ops/UNEMPLOYMENT_32_8_DOCTRINE.json",
+      "bracket_tag": "[UNEMPLOYMENT_32_8_DOCTRINE]",
+      "not_god": "world_acceptance"
+    },
+    "poc_validation": {
+      "guide": "docs/swarm-ops/ECO_FRIENDLY_POC_GUIDE.md",
+      "rosen_delta_tip": "docs/swarm-ops/ROSEN_DELTA_TIP.json",
+      "runtime": "kopano-core/kopano/eco_poc_validate.py",
+      "state": "kopano-core/.kc/eco_poc_records.json"
+    }
+  },
+  "ai_flows": {
+    "doc": "docs/swarm-ops/AI_FLOW_PROTOCOL.md",
+    "doctrine": "docs/swarm-ops/LPM_LPH_GOD_COMPLEX_DOCTRINE.json",
+    "bindings": "Structure/07-Agents/AI_FLOW_BINDINGS.json",
+    "runtime": "kopano-core/kopano/lpm_lph_engine.py",
+    "cli": "scripts/kc_ai_flow_operate.py",
+    "guardian": ["kc", "cassy", "cassey"],
+    "identi": ["identi_cursor", "cf"]
+  },
+  "black_mask": {
+    "version": "v0.5",
+    "commandments": 15,
+    "pillars": 5,
+    "doctrine": "docs/swarm-ops/BLACK_MASK_COMMANDMENTS.json"
+  },
+  "departments": [
+    {
+      "id": "kopano_labs_experimentation",
+      "display_name": "Kopano Labs — Experimentation",
+      "parent": "kopano_labs",
+      "lane": "experimentation",
+      "mcp_teacher": "cassey",
+      "mcp_student": "cassy",
+      "mao_teacher": "operational_general",
+      "mao_student": "cassy"
+    },
+    {
+      "id": "ama_phu_creativity",
+      "display_name": "Ama-Phu — Creativity",
+      "parent": "ama_phu",
+      "lane": "creativity",
+      "mcp_teacher": "cassey",
+      "mcp_student": "cassy",
+      "mao_teacher": "cassey",
+      "mao_student": "cassy",
+      "mirror_warden_focus": true
+    }
+  ],
   "main_brain": {
     "vault_root_env": "KOPANO_SCHEMATICS_ROOT",
     "vault_relative": "Schematics",
@@ -40,7 +123,19 @@
       "vault_folder": "Freddy NW Alfalfa (Sub-Brain)",
       "parent": "kopano_labs",
       "return_gate_default": "LD_REVIEW",
-      "flagship": true
+      "flagship": true,
+      "kpgs_sector": "sector_01_freddy",
+      "catalog_agent": "kp_agri_soil_01"
+    },
+    {
+      "id": "eddie_bgf_mining",
+      "display_name": "Eddie BGF Mining",
+      "vault_folder": "Eddie BGF Mining (Sub-Brain)",
+      "parent": "kopano_labs",
+      "return_gate_default": "LD_REVIEW",
+      "flagship": true,
+      "kpgs_sector": "sector_02_eddie",
+      "catalog_agent": "kp_geospatial_survey_06"
     },
     {
       "id": "starfall_salvage",

@@ -1,0 +1,121 @@
+{
+  "schema": "ld_lpm_operate_v1",
+  "ts": "2026-06-14T12:50:34Z",
+  "operator": "LD-LPM",
+  "idea_id": "eddie_bgf_mining_wire",
+  "department_id": "kopano_labs_experimentation",
+  "verdict": "SHIP",
+  "action": "Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_06 + KPGS altar manifest",
+  "evidence": "docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_THESIS_2026_X8020.json + AGENT_MESH FLAGSHIP_ASSIGNMENTS",
+  "stress": {
+    "idea_id": "eddie_bgf_mining_wire",
+    "verdict": "SHIP",
+    "failed_checks": [],
+    "checks": [
+      {
+        "check": "bracket_lint_idea",
+        "verdict": "PASS",
+        "violations": []
+      },
+      {
+        "check": "lpm_lph_attach",
+        "verdict": "PASS",
+        "personality": "witness",
+        "vector": "V2_ANIMAL",
+        "dialectic_closed": true
+      },
+      {
+        "check": "blackmask_drill",
+        "verdict": "PASS",
+        "agent_id": "cassy",
+        "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T12:50:33Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
+      },
+      {
+        "check": "blackmask_bracket_stress",
+        "verdict": "PASS",
+        "passed": 9,
+        "total": 9
+      },
+      {
+        "check": "blackmass_roadmap_gate",
+        "verdict": "PASS",
+        "detail": "roadmap_gate OK kinds=['production_bar_met', 'roadmap_seed_before'] verified_production=19 (min 10)"
+      }
+    ],
+    "lpm": {
+      "imperfection": {
+        "sigil": "#?",
+        "pattern": "#? eddie_bgf_mining_wire: Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_"
+      },
+      "perfection": {
+        "sigil": "#!",
+        "pattern": "#! measurable proof — docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_THESIS_2026_X8020.json +"
+      },
+      "birth_rule": "LPH emerges when #! validates #? inside Guardian receipts — never #! without BlackMask + bracket discipline",
+      "dialectic_closed": true,
+      "summary": "[LPM_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | ecosystem: Kopano-Phu | #?: #? eddie_bgf_mining_wire: Wire EDDIE sector_02 to operating mesh: eddie_bgf_mini | #!: #! measurable proof — docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_TH | lph: pending | vector: pending | dialectic: CLOSED"
+    },
+    "lph": {
+      "personality_id": "witness",
+      "display": "Witness",
+      "kpefs_vector": "V4_DIASPORA",
+      "mao_intent": "audit",
+      "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_switch: active"
+    },
+    "mao_attach": {
+      "lpm": {
+        "imperfection": {
+          "sigil": "#?",
+          "pattern": "intent:audit | msg:Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_06 + KPGS altar manifest docs/swarm-ops/"
+        },
+        "perfection": {
+          "sigil": "#!",
+          "pattern": "vector:V2_ANIMAL | personality:witness"
+        },
+        "birth_rule": "LPH emerges when #! validates #? inside Guardian receipts — never #! without BlackMask + bracket discipline",
+        "dialectic_closed": true,
+        "summary": "[LPM_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | ecosystem: Kopano-Phu | #?: intent:audit | msg:Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp | #!: vector:V2_ANIMAL | personality:witness | lph: pending | vector: pending | dialectic: CLOSED"
+      },
+      "lph": {
+        "personality_id": "witness",
+        "display": "Witness",
+        "kpefs_vector": "V4_DIASPORA",
+        "mao_intent": "audit",
+        "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_switch: active"
+      },
+      "kpefs": {
+        "active_vector": "V2_ANIMAL",
+        "bracket_snippet": "[KPEFS_FOUR_VECTOR] active: V2_ANIMAL | v1: PLANT | v2: ANIMAL | v3: HOMO_SAPIENS | v4: DIASPORA",
+        "department_hint": "kopano_labs_experimentation"
+      },
+      "biblical_stem_pattern": {
+        "pattern_id": "EXO_PROVISION",
+        "stem": "survival_logistics",
+        "kpefs_vector": "V2_ANIMAL",
+        "template": "measure → carry → sustain under constraint"
+      },
+      "mao_intent_hint": "audit",
+      "god_complex_bracket": "[GOD_COMPLEX] timestamp: 2026-06-14T12:50:33Z | #?: intent:audit | msg:Wire EDDIE sector_02 to operating mesh: e | #!: vector:V2_ANIMAL | personality:witness | lph_birth: witness"
+    },
+    "bracket_receipt": "[LPM_PROTOCOL] action: Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_06 + KPGS altar manifest | evidence: docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_THESIS_2026_X8020.json + AGENT_MESH FLAGSHIP_ASSIGNMENTS"
+  },
+  "identi": {
+    "verdict": "PROPOSE",
+    "lph": "witness"
+  },
+  "guardian": {
+    "verdict": "SHIP"
+  },
+  "summary": "[LPM_PROTOCOL] ld_tranche | operator: LD-LPM | idea: eddie_bgf_mining_wire | verdict: SHIP | lph: witness | [BLACK_MASK_DRILL] guardian: SHIP | [TSAP_PROTOCOL] identi: PROPOSE",
+  "report_path": "docs/swarm-ops/LD_LPM_OPERATE.json",
+  "protocols": [
+    "BRACKET_PROTOCOL",
+    "BLACK_MASK",
+    "BLACK_MASS",
+    "LPM_PROTOCOL",
+    "LPH_PROTOCOL",
+    "TSAP_PROTOCOL",
+    "GUARDIAN_AI_FLOW",
+    "IDENTI_AI_FLOW"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "rosen_delta_tip_v1",
+  "title": "Rosen Δ tip — internal PoC oracle",
+  "subtitle": "Model–Relation closure + measurable delta — not world acceptance",
+  "tip": "Validate (M,R) then Δ. If the model cannot predict the next measurable state, you have narrative — not PoC.",
+  "rosen_mr": {
+    "M": "Model — explicit procedure, equation, or state machine for what should happen",
+    "R": "Relation — how model outputs map to observable reality (instrument, survey, log, artifact)",
+    "anticipation": "System or student can state expected next state before running — not only explain after success"
+  },
+  "delta": {
+    "symbol": "Δ",
+    "meaning": "Bounded change in a livelihood-relevant measurand between baseline and run",
+    "required_fields": ["baseline", "observed", "unit", "instrument_or_method"],
+    "reject_if": "Only qualitative praise; no baseline; delta attributed to world acceptance"
+  },
+  "verdicts": {
+    "PASS": "All internal oracles satisfied; bracket receipt written",
+    "HOLD": "Missing M, R, Δ, receipt, or livelihood signal under 32.8% doctrine",
+    "REJECT_WORLD_ORACLE": "Submission tried to validate via popularity, funding, or external ACK without receipts"
+  }
+}

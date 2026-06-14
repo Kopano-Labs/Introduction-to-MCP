@@ -1,0 +1,48 @@
+{
+  "schema": "agent_mesh_v1",
+  "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
+  "governance_core": ["kc", "cassey", "cassy"],
+  "orchestrator": {
+    "mao": {
+      "type": "surface",
+      "tools_lane": ["mao_tsap_student_turn", "mao_tsap_teacher_turn", "mao_blackmask_drill"]
+    },
+    "mirror_warden": { "role": "orchestrator_parity", "executes": false }
+  },
+  "teachers": {
+    "cassey": { "departments": ["ama_phu_creativity"], "mcp": true },
+    "operational_general": { "departments": ["kopano_labs_experimentation"], "mao": true }
+  },
+  "department_students": {
+    "kopano_labs_experimentation": {
+      "parent": "kopano_labs",
+      "student_lane": "cassy",
+      "agents": [
+        "freddy_nw_alfalfa",
+        "eddie_bgf_mining",
+        "starfall_salvage",
+        "kopano_labs_website",
+        "kasilink",
+        "bookit_5s_arena",
+        "5s_arena_blog",
+        "cape_campass",
+        "portfolios_websites"
+      ]
+    },
+    "ama_phu_creativity": {
+      "parent": "ama_phu",
+      "student_lane": "cassy",
+      "agents": ["ama_phu_entertainment"]
+    }
+  },
+  "mesh_workers": ["pipeline_drone"],
+  "mesh_llm": ["claude", "grok", "gemini", "copilot"],
+  "mesh_operator": ["cf_cloud"],
+  "blackmask_required": true,
+  "catalog_200": {
+    "path": "docs/swarm-ops/agents/KP_APE_200_AGENTS.json",
+    "status_default": "catalog",
+    "auto_operating": false,
+    "note": "Catalog agents need explicit assignment + proof — not in boot mesh until assigned."
+  }
+}

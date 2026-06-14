@@ -230,7 +230,7 @@ def gather_status() -> dict:
         "cassy": _cassy_role(),
         "kopano_phu": _kopano_phu_summary(),
         "agents": _agents_inventory(),
-        "context_host": "https://context.kopanolabs.com",
+        "context_host": "https://kopanocontext.kopanolabs.com",
         "git": _git_snapshot(),
         "checks": {
             "jsonl_validate_ok": validate_code == 0,

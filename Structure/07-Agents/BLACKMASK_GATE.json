@@ -1,0 +1,17 @@
+{
+  "schema": "blackmask_gate_v1",
+  "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
+  "version": "v0.5",
+  "doctrine": "docs/swarm-ops/BLACK_MASK_COMMANDMENTS.json",
+  "commandments": 15,
+  "pillars": 5,
+  "verdicts": {
+    "SHIP": "All commandments and pillars acknowledged — may enter drill/operating path",
+    "HOLD": "Missing ack — not operating"
+  },
+  "dry_run_bracket": "[BLACK_MASK_DRILL_DRY]",
+  "live_bracket": "[BLACK_MASK_DRILL]",
+  "applies_to": "all agents listed in AGENT_MESH.json department_students, mesh_workers, mesh_llm, mesh_operator",
+  "exempt": ["kc"],
+  "exempt_reason": "KC brain does not execute — stores teacher_review only"
+}

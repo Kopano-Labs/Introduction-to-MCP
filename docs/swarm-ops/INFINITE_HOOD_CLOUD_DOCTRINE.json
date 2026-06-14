@@ -1,0 +1,89 @@
+{
+  "schema": "infinite_hood_cloud_doctrine_v1",
+  "document_id": "INFINITE-HOOD-CLOUD",
+  "title": "Infinite Hood — Cloud-Native Sovereign Territory",
+  "authority": "Schematics MAIN BRAIN",
+  "hood_objective": "The cloud is infinite territory — we own plots (domains), populate them with cooking agents, and retain SA insight sovereignty via offline-first mesh.",
+  "kernel_vs_territory": {
+    "kernel": "Black Beast — development, logic, KPGS altar compile, local ledger",
+    "territory": "Cloud plots — deployment, client ingress, scaled agent execution"
+  },
+  "governance_chain": [
+    "prompts",
+    "protocols",
+    "bracket_protocols",
+    "swfus_kpgs",
+    "domain_grid",
+    "outer_api",
+    "cloud_hood"
+  ],
+  "sharded_sovereignty": {
+    "bracket": "[INFINITE_HOOD]",
+    "rule": "Never monolith 300 agents into one bucket — shard across domain portfolio as mesh nodes",
+    "cohort_roles_on_plot": {
+      "landlord_guardian": "One altar block holder per plot — discernment filter + hash-chain commit for that hood",
+      "telemetry_utility": "Sense ground-aware traffic entering the plot",
+      "identic_utility": "Jethro + forensic sociology + WWJD for client queries"
+    }
+  },
+  "cloud_backbone": {
+    "microsoft_partner_blade_id": "6962519",
+    "azure_note": "Geo-distributed clusters via partner fabric — LLM heavy lifting off Black Beast",
+    "primary_region_hint": "southafricanorth",
+    "data_residency": {
+      "rule": "Cloud reasons at scale; insights and ledger receipts anchor local/offline-first mesh",
+      "border": "ZA_data_residency_for_insights"
+    }
+  },
+  "client_ingress": {
+    "bracket": "[OUTER_API]",
+    "outer_layer": "FastAPI /api/kc/phu + /api/kasilink — PWAs and partner shells land here",
+    "microsoft": {
+      "channels": ["copilot", "azure_openai", "partner_center", "microsoft_graph"],
+      "note": "Use giant machinery to build Kopano house — BFF targets context.kopanolabs.com"
+    },
+    "google": {
+      "channels": ["google_workspace", "google_app_store", "pwa_webapk"],
+      "note": "Workspace clients ingress to PWA ecosystem pre-loaded with Kopano Context API"
+    }
+  },
+  "product_lanes": {
+    "kopano_context": {
+      "display": "Kopano Context",
+      "primary_host": "context.kopanolabs.com",
+      "agent_mix": { "telemetry": 0.2, "identic": 0.45, "guardian": 0.35 }
+    },
+    "kasilink": {
+      "display": "Kasi Link",
+      "hosts": ["kasi-link.vercel.app", "www.kasilink.co.za"],
+      "agent_mix": { "telemetry": 0.55, "identic": 0.3, "guardian": 0.15 }
+    },
+    "harvest_for_all": {
+      "display": "Harvest for All",
+      "status": "activate_on_domain_bind",
+      "agent_mix": { "telemetry": 0.4, "identic": 0.35, "guardian": 0.25 }
+    },
+    "org_marketing": {
+      "display": "Kopano Labs org",
+      "primary_host": "kopanolabs.com",
+      "agent_mix": { "telemetry": 0.15, "identic": 0.35, "guardian": 0.5 }
+    },
+    "parked_plot": {
+      "display": "Parked domain — landlord only until activated",
+      "agent_mix": { "telemetry": 0.0, "identic": 0.0, "guardian": 1.0 }
+    }
+  },
+  "no_dormant_agents": {
+    "bracket": "[NO_DORMANT]",
+    "rule": "If an agent is not cooking, it is a resource leak — SWFUS + Jethro sever or reassign to active plot",
+    "dormancy_signals": ["no_dispatch_24h", "alignment_drift", "parked_plot_without_landlord"]
+  },
+  "artifacts": {
+    "domain_inventory": "docs/swarm-ops/DOMAIN_GRID_INVENTORY.json",
+    "deployment_manifest": "docs/swarm-ops/INFINITE_HOOD_DEPLOYMENT.json",
+    "verified_endpoints": "docs/swarm-ops/VERIFIED_ENDPOINTS.md",
+    "spawn_catalog": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
+    "runtime_module": "kopano-core/kopano/infinite_hood_cloud.py",
+    "generator": "scripts/generate_infinite_hood_grid.py"
+  }
+}

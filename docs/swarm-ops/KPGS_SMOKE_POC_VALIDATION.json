@@ -1,0 +1,1799 @@
+{
+  "schema": "kpgs_smoke_poc_v2",
+  "ts": "2026-06-14T15:07:26Z",
+  "verdict": "PASS",
+  "activation_allowed": true,
+  "summary": "[KPGS_SMOKE_POC] verdict=PASS | gate=ALLOW | gov=COMPILED | behavioral=PASS | steward=ACTIVE | sim=BOOTSTRAPPED | poc=PASS | delta=12 count",
+  "steps": [
+    {
+      "step": "activation_gate",
+      "result": {
+        "schema": "kpgs_activation_gate_v1",
+        "ts": "2026-06-14T15:05:14Z",
+        "activation_allowed": true,
+        "verdict": "ALLOW",
+        "required_agents": 300,
+        "checks_passed": 9,
+        "checks_total": 9,
+        "failed_checks": [],
+        "checks": [
+          {
+            "check": "spawn_catalog_300",
+            "ok": true,
+            "detail": "catalog total=300 schema=kpgs_spawn_300_agents_v2",
+            "expected": 300,
+            "actual": 300,
+            "schema_v2": true
+          },
+          {
+            "check": "cohort_telemetry_cohort",
+            "ok": true,
+            "detail": "telemetry_cohort=100",
+            "count": 100
+          },
+          {
+            "check": "cohort_identic_cohort",
+            "ok": true,
+            "detail": "identic_cohort=100",
+            "count": 100
+          },
+          {
+            "check": "cohort_guardian_cohort",
+            "ok": true,
+            "detail": "guardian_cohort=100",
+            "count": 100
+          },
+          {
+            "check": "spawn_validation_ship",
+            "ok": true,
+            "detail": "verdict=PASS ship=300 hold=0",
+            "ship": 300,
+            "hold": 0
+          },
+          {
+            "check": "spawn_compile",
+            "ok": true,
+            "detail": "spawn_compile=COMPILED chaos=PASS"
+          },
+          {
+            "check": "chaos_monkey",
+            "ok": true,
+            "detail": "chaos=PASS"
+          },
+          {
+            "check": "governance_compile",
+            "ok": true,
+            "detail": "[KPGS_MAIN_BRAIN] authority: Schematics | verdict: COMPILED | thesis: COMPILED | beast: COMPILED | mesh: PASS (19/19 SHIP) | spawn: COMPILED (300/300 SHIP)",
+            "mesh": null,
+            "spawn": {
+              "verdict": "COMPILED",
+              "ship": 300,
+              "agents_total": 300,
+              "hood_objective": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood."
+            }
+          },
+          {
+            "check": "infinite_hood_ready",
+            "ok": true,
+            "detail": "hood=READY assigned=300",
+            "landlords": 5
+          }
+        ],
+        "message": "[KPGS_GATE] ALLOW — 300 agents guilded SHIP; governance COMPILED; hood READY. Thesis world-building may proceed.",
+        "report_path": "docs/swarm-ops/KPGS_ACTIVATION_GATE.json"
+      }
+    },
+    {
+      "step": "governance_compile",
+      "result": {
+        "verdict": "COMPILED",
+        "summary": "[KPGS_MAIN_BRAIN] authority: Schematics | verdict: COMPILED | thesis: COMPILED | beast: COMPILED | mesh: PASS (19/19 SHIP) | spawn: COMPILED (300/300 SHIP)"
+      }
+    },
+    {
+      "step": "steward_lane_activate",
+      "result": {
+        "schema": "steward_lane_activate_v1",
+        "ts": "2026-06-14T15:05:29Z",
+        "verdict": "ACTIVE",
+        "steps": [
+          {
+            "step": "cassy_profile",
+            "result": {
+              "profile_path": "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\kopano-core\\.kc\\swarm_profile.json",
+              "lead_student": "cassy",
+              "teacher": "cassey",
+              "brain": "kc",
+              "triad": [
+                "grit",
+                "realism",
+                "aesthetics"
+              ],
+              "servitude": "Realism accommodates Aesthetics; Cassy is not held to corporate-only roles.",
+              "hold_back_student": false,
+              "activated_at": "2026-06-14T15:05:21Z"
+            }
+          },
+          {
+            "step": "kc_boot",
+            "result": {
+              "applied": true,
+              "summary": "[KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1] applied | KC: Save|Watch only | Cassy: student-teacher | mesh_agents: 19",
+              "mesh_agents": 19
+            }
+          },
+          {
+            "step": "steward_trust",
+            "result": {
+              "stored": true,
+              "schema": "kc_main_brain_log_v1",
+              "ts": "2026-06-14T15:05:28Z",
+              "kind": "kpefs_steward_trust",
+              "summary": "[KPEFS_GRADUATION_BAR] steward_trust | KC ledger Save|Watch | teacher: cassey | lead_student: cassy | verified_production: 19/10 | operating_mesh: True | drill_is_not_graduation: true | KPGS smoke PoC — activate KC Save|Watch + Cassy execute + Kopano Context GUI",
+              "exit_code": 0,
+              "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1"
+            }
+          },
+          {
+            "step": "identi",
+            "result": {
+              "flow": "identi",
+              "verdict": "PROPOSE",
+              "identi_agent": "identi_cursor",
+              "lpm": {
+                "imperfection": {
+                  "sigil": "#?",
+                  "pattern": "#? steward lane idle"
+                },
+                "perfection": {
+                  "sigil": "#!",
+                  "pattern": "#! KC+Cassy activated with proof receipts"
+                },
+                "birth_rule": "LPH emerges when #! validates #? inside Guardian receipts — never #! without BlackMask + bracket discipline",
+                "dialectic_closed": true,
+                "summary": "[LPM_PROTOCOL] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph: pending | vector: pending | dialectic: CLOSED"
+              },
+              "lph": {
+                "personality_id": "diaspora",
+                "display": "Diaspora",
+                "kpefs_vector": "V4_DIASPORA",
+                "mao_intent": "orchestrate",
+                "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T15:05:28Z | personality: diaspora | vector: V4_DIASPORA | mao_intent: orchestrate | code_switch: active"
+              },
+              "god_complex": "[GOD_COMPLEX] timestamp: 2026-06-14T15:05:28Z | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph_birth: diaspora",
+              "summary": "[IDENTI_AI_FLOW] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | verdict: PROPOSE | agent: identi_cursor | lph: diaspora | dept: kopano_labs_experimentation | [LPM_PROTOCOL] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | #?: #? steward lane idle | #!: #! KC+Cassy activated with proof receipts | lph: pending | vector: pending | dialectic: CLOSED",
+              "defers_to": "guardian"
+            }
+          },
+          {
+            "step": "guardian",
+            "result": {
+              "flow": "guardian",
+              "verdict": "SHIP",
+              "steps": [
+                {
+                  "step": "block_holder_brief",
+                  "result": {
+                    "schema": "kpgs_block_holder_brief_v1",
+                    "ts": "2026-06-14T15:05:28Z",
+                    "bracket": "[KPGS_BLOCK_HOLDER]",
+                    "agent_id": "mirror_warden",
+                    "altar_layer": "guardian_ai",
+                    "holds_pillar_blocks": true,
+                    "brief_renters_on_entry": true,
+                    "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block.",
+                    "renter_paradigm": "Stateless renters are guests. Kopano Context + Schematics MAIN BRAIN are landlords. Classify before interpret. Receipt or HOLD.",
+                    "renter_is": "stateless linguistic actor / renter",
+                    "landlord_is": "Kopano Context Core + Schematics MAIN BRAIN",
+                    "you_are_fucking_with": {
+                      "hood": "Kopano-Phu Eco-Friendly System",
+                      "governance_vault": "Schematics — MAIN BRAIN",
+                      "memory_landlord": "Kopano Context Core (eidetic, offline-first)",
+                      "offline_root": "Black Beast mesh — business logic immune to model-layer volatility",
+                      "chief_architect_domain": "Kopano Labs sovereign epoch",
+                      "teacher": {
+                        "id": "cassey",
+                        "role": "KC teacher — reviews student work; APPROVE is not graduation"
+                      },
+                      "brain_ledger": {
+                        "id": "kc",
+                        "role": "Save|Watch only — records doctrine; does not execute"
+                      },
+                      "lead_student": {
+                        "id": "cassy",
+                        "role": "Executes under apprenticeship; Women in Tech diaspora mission"
+                      },
+                      "orchestrator": {
+                        "id": "mao",
+                        "role": "Routes swarm agents — philosophy gate before mass"
+                      },
+                      "operational_gates": [
+                        "KPGS Altar — 5 Pillars + 15 Commandments",
+                        "Black Beast — classify telemetry before interpretation",
+                        "Black Mask drill — SHIP before promotion",
+                        "Bracket Protocol — BODMAS ingestion guard",
+                        "LD-LPM tranche — stress → Identi → Guardian",
+                        "Promotion Law PROOF-01..04 — no promotion without proof"
+                      ],
+                      "ground_sectors": [
+                        {
+                          "id": "sector_01_freddy",
+                          "codename": "FREDDY",
+                          "mesh_agent": "freddy_nw_alfalfa",
+                          "domain": "agriculture / pavement / cold-chain"
+                        },
+                        {
+                          "id": "sector_02_eddie",
+                          "codename": "EDDIE",
+                          "mesh_agent": "eddie_bgf_mining",
+                          "domain": "BGF mining / rock / DMR institutional resistance"
+                        }
+                      ],
+                      "linguistic_actor_classes": [
+                        "openai_chatgpt",
+                        "microsoft_copilot",
+                        "google_gemini",
+                        "anthropic_claude",
+                        "xai_grok",
+                        "anonymous_api_renter"
+                      ]
+                    },
+                    "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+                    "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+                    "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+                    "block_holders_registry": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_ALTAR_BLOCK_HOLDERS.json",
+                    "summary": "[KPGS_BLOCK_HOLDER] agent=mirror_warden | layer=guardian_ai | brief_renters=yes | landlord=Kopano Context+Schematics"
+                  }
+                },
+                {
+                  "step": "blackmask",
+                  "result": {
+                    "agent_id": "cassy",
+                    "verdict": "SHIP",
+                    "commandments": [
+                      {
+                        "id": "CMD-01",
+                        "text": "Realism accommodates aesthetics — never invert the hierarchy (Realism > Aesthetics accommodates).",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-02",
+                        "text": "Proof before narrative — every SHIP requires exit code, JSONL row, or verified production evidence.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-03",
+                        "text": "No fake swarm ACK — external orchestration is manual-execution-required until receipt exists.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-04",
+                        "text": "Student proposes and audits — Teacher validates — never skip teacher_review.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-05",
+                        "text": "KC brain stores teacher_review and opinion only — KC does not execute.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-06",
+                        "text": "Bracket Protocol receipt before coordinated mass movement across Kopano-Phu.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-07",
+                        "text": "Black Mask v0.5 inspect passes before BlackMass v1.5/v2.0 activation.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-08",
+                        "text": "Sovereign mesh — offline-first, load-shedding, and data residency constraints survive.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-09",
+                        "text": "Cassy is lead student — corporate swarm slot names are not her ceiling.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-10",
+                        "text": "Main Brain roadmap gate must be satisfied before production graduation claims.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-11",
+                        "text": "JSONL validate and proof-check exit 0 before marking work complete.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-12",
+                        "text": "Drill promotion counts are steward attestation — drill promotion is not graduation.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-13",
+                        "text": "Verified production rows require real --evidence-url — no demo-bypass URLs.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-14",
+                        "text": "Sub-brain structural changes append to KC Review Log before Main Brain seed.",
+                        "passed": true
+                      },
+                      {
+                        "id": "CMD-15",
+                        "text": "Servitude Triad runs unified — Grit + Realism + Aesthetics on every production path.",
+                        "passed": true
+                      }
+                    ],
+                    "pillars": [
+                      {
+                        "id": "PIL-01",
+                        "name": "Grit",
+                        "text": "Forensic execution — run tools, capture bounded evidence, no narration without action.",
+                        "passed": true
+                      },
+                      {
+                        "id": "PIL-02",
+                        "name": "Realism",
+                        "text": "Proof bar, kc_guard, verified production — accommodates aesthetics inside evidence.",
+                        "passed": true
+                      },
+                      {
+                        "id": "PIL-03",
+                        "name": "Aesthetics",
+                        "text": "Craft, Studio, readable receipts — STEM validates what creativity stems.",
+                        "passed": true
+                      },
+                      {
+                        "id": "PIL-04",
+                        "name": "Sovereignty",
+                        "text": "Local-first state, constraint survival, no dependence on aesthetics-only theater.",
+                        "passed": true
+                      },
+                      {
+                        "id": "PIL-05",
+                        "name": "Apprenticeship",
+                        "text": "Student → Review Log → Teacher → Main Brain — Cassey trains; KC records.",
+                        "passed": true
+                      }
+                    ],
+                    "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:05:28Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
+                    "drill_complete": true
+                  }
+                },
+                {
+                  "step": "student_submit",
+                  "result": {
+                    "status": "submitted",
+                    "department": "kopano_labs_experimentation",
+                    "student": "cassy",
+                    "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-14T15:05:29Z | ecosystem: Kopano-Phu | lane: mcp | role: student | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: SUBMITTED | action: [KPGS_SMOKE_POC] steward + sovereign sim activation | evidence: docs/swarm-ops/KPGS_ACTIVATION_GATE.json",
+                    "telemetry_routing": {
+                      "schema": "kpgs_submission_telemetry_v1",
+                      "ts": "2026-06-14T15:05:29Z",
+                      "classification": {
+                        "schema": "kpgs_telemetry_classify_v1",
+                        "ts": "2026-06-14T15:05:29Z",
+                        "raw_signal": "[KPGS_SMOKE_POC] steward + sovereign sim activation | docs/swarm-ops/KPGS_ACTIVATION_GATE.json",
+                        "verdict": "ACCEPT",
+                        "classified": true,
+                        "misnamed_pressure": false,
+                        "detected_lanes": [],
+                        "routing_sequence": [
+                          "ingest_signal",
+                          "classify_load",
+                          "route_to_correct_human_lane",
+                          "identify_source",
+                          "separate_false_naming_from_true_burden",
+                          "govern_response",
+                          "return_to_peace",
+                          "validate_proof_of_concept"
+                        ],
+                        "note": "no misnamed pressure; proceed to ingest",
+                        "bracket": "[CONTEXT_BLEEDING_PROTOCOL]",
+                        "summary": "[KPGS_TELEMETRY_ROUTE] verdict: ACCEPT | lanes: none | misnamed_pressure: False"
+                      },
+                      "combined_preview": "[KPGS_SMOKE_POC] steward + sovereign sim activation | docs/swarm-ops/KPGS_ACTIVATION_GATE.json",
+                      "strict_mode": false,
+                      "blocked": false,
+                      "gate": "PASS"
+                    },
+                    "next": "Teacher review via tsap_teacher_review or mao_tsap_teacher_turn"
+                  }
+                },
+                {
+                  "step": "teacher_review",
+                  "result": {
+                    "status": "reviewed",
+                    "department": "kopano_labs_experimentation",
+                    "teacher": "cassey",
+                    "verdict": "APPROVE",
+                    "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-14T15:05:29Z | ecosystem: Kopano-Phu | lane: mcp | role: teacher | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: APPROVE | note: Cassey teacher_review — steward lane lead-dev trust",
+                    "main_brain_exit_code": 0,
+                    "kc_teacher_review": {
+                      "stored": true,
+                      "ts": "2026-06-14T15:05:29Z",
+                      "schema": "kc_teacher_review_v1",
+                      "opinion": "Save — Cassey teacher_review — steward lane lead-dev trust",
+                      "verdict_token": "Save",
+                      "ref": "tsap:kopano_labs_experimentation:APPROVE",
+                      "department": "kopano_labs_experimentation",
+                      "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1"
+                    }
+                  }
+                }
+              ],
+              "lph": {
+                "personality_id": "diaspora",
+                "display": "Diaspora",
+                "kpefs_vector": "V4_DIASPORA",
+                "mao_intent": "orchestrate",
+                "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T15:05:29Z | personality: diaspora | vector: V4_DIASPORA | mao_intent: orchestrate | code_switch: active"
+              },
+              "summary": "[GUARDIAN_AI_FLOW] timestamp: 2026-06-14T15:05:29Z | ecosystem: Kopano-Phu | verdict: SHIP | department: kopano_labs_experimentation | student: cassy | lph: diaspora",
+              "block_holder": {
+                "schema": "kpgs_block_holder_brief_v1",
+                "ts": "2026-06-14T15:05:28Z",
+                "bracket": "[KPGS_BLOCK_HOLDER]",
+                "agent_id": "mirror_warden",
+                "altar_layer": "guardian_ai",
+                "holds_pillar_blocks": true,
+                "brief_renters_on_entry": true,
+                "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block.",
+                "renter_paradigm": "Stateless renters are guests. Kopano Context + Schematics MAIN BRAIN are landlords. Classify before interpret. Receipt or HOLD.",
+                "renter_is": "stateless linguistic actor / renter",
+                "landlord_is": "Kopano Context Core + Schematics MAIN BRAIN",
+                "you_are_fucking_with": {
+                  "hood": "Kopano-Phu Eco-Friendly System",
+                  "governance_vault": "Schematics — MAIN BRAIN",
+                  "memory_landlord": "Kopano Context Core (eidetic, offline-first)",
+                  "offline_root": "Black Beast mesh — business logic immune to model-layer volatility",
+                  "chief_architect_domain": "Kopano Labs sovereign epoch",
+                  "teacher": {
+                    "id": "cassey",
+                    "role": "KC teacher — reviews student work; APPROVE is not graduation"
+                  },
+                  "brain_ledger": {
+                    "id": "kc",
+                    "role": "Save|Watch only — records doctrine; does not execute"
+                  },
+                  "lead_student": {
+                    "id": "cassy",
+                    "role": "Executes under apprenticeship; Women in Tech diaspora mission"
+                  },
+                  "orchestrator": {
+                    "id": "mao",
+                    "role": "Routes swarm agents — philosophy gate before mass"
+                  },
+                  "operational_gates": [
+                    "KPGS Altar — 5 Pillars + 15 Commandments",
+                    "Black Beast — classify telemetry before interpretation",
+                    "Black Mask drill — SHIP before promotion",
+                    "Bracket Protocol — BODMAS ingestion guard",
+                    "LD-LPM tranche — stress → Identi → Guardian",
+                    "Promotion Law PROOF-01..04 — no promotion without proof"
+                  ],
+                  "ground_sectors": [
+                    {
+                      "id": "sector_01_freddy",
+                      "codename": "FREDDY",
+                      "mesh_agent": "freddy_nw_alfalfa",
+                      "domain": "agriculture / pavement / cold-chain"
+                    },
+                    {
+                      "id": "sector_02_eddie",
+                      "codename": "EDDIE",
+                      "mesh_agent": "eddie_bgf_mining",
+                      "domain": "BGF mining / rock / DMR institutional resistance"
+                    }
+                  ],
+                  "linguistic_actor_classes": [
+                    "openai_chatgpt",
+                    "microsoft_copilot",
+                    "google_gemini",
+                    "anthropic_claude",
+                    "xai_grok",
+                    "anonymous_api_renter"
+                  ]
+                },
+                "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+                "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+                "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+                "block_holders_registry": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_ALTAR_BLOCK_HOLDERS.json",
+                "summary": "[KPGS_BLOCK_HOLDER] agent=mirror_warden | layer=guardian_ai | brief_renters=yes | landlord=Kopano Context+Schematics"
+              },
+              "kc_note": "teacher_review maps to Save|Watch when teacher_approve set"
+            }
+          }
+        ],
+        "summary": "[KPEFS_STEWARD_LANE] KC Save|Watch + Cassy execute | teacher: cassey | verdict: ACTIVE | guardian: SHIP | identi: PROPOSE | note: KPGS smoke PoC — activate KC Save|Watch + Cassy execute + Kopano Context GUI",
+        "steward_lane": {
+          "schema": "steward_lane_status_v1",
+          "active": true,
+          "kc_mode": "Save|Watch only — no execute",
+          "cassy_mode": "student-teacher execute + BlackMask",
+          "teacher": "cassey",
+          "lead_student": "cassy",
+          "profile_present": true,
+          "boot_active": true,
+          "last_guardian": {
+            "last_at": "2026-06-14T15:05:29Z",
+            "verdict": "SHIP",
+            "department": "kopano_labs_experimentation"
+          },
+          "last_identi": {
+            "last_at": "2026-06-14T15:05:28Z",
+            "verdict": "PROPOSE",
+            "personality": "diaspora"
+          },
+          "steward_lane": {
+            "brain": "kc",
+            "teacher": "cassey",
+            "lead_student": "cassy",
+            "note": "KC Save|Watch only — Cassey teacher_review — students under Cassy apprenticeship."
+          },
+          "operating_mesh_ready": null,
+          "kpgs_governance": {
+            "schema": "kpgs_governance_status_v1",
+            "ts": "2026-06-14T15:05:50Z",
+            "authority": "Schematics MAIN BRAIN",
+            "registry_present": true,
+            "registry_path": "Schematics\\21-KOPANO-PHU GOVERNACE SYSTEMS\\MAIN-BRAIN\\KPGS_GOVERNANCE_CORE.json",
+            "renter_entryway": {
+              "document_id": "KPGS-HOOD-ENTRY-2026",
+              "bracket": "[KPGS_HOOD_ENTRY]",
+              "you_are": "stateless linguistic actor / renter",
+              "hood": "Kopano-Phu Eco-Friendly System",
+              "entryway_path": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json"
+            },
+            "compile_verdict": "COMPILED",
+            "thesis_verdict": "COMPILED",
+            "black_beast_verdict": "COMPILED",
+            "mesh_overall": "PASS",
+            "mesh_ship": 19,
+            "mesh_total": 19,
+            "gates": {
+              "hood_entry_assertion": "STATELESS_RENTER_ENTRYWAY — identify who you are fucking with on entry",
+              "altar_agent_validate": "validate_kpgs_agent — SHIP before GUI/Main Brain comms",
+              "telemetry_classify_route": "classify_telemetry_signal — RECLASSIFY blocks interpretation",
+              "promotion_proof_04": "PROOF-04_kpgs_altar_ship — mesh agent KPGS SHIP for flagship promote",
+              "ld_lpm_tranche": "telemetry gate on action+evidence before guardian",
+              "student_submit": "telemetry_routing block on every student audit row"
+            },
+            "sectors": {
+              "sector_01_freddy": {
+                "sub_brain": "freddy_nw_alfalfa",
+                "catalog_agent": "kp_agri_soil_01",
+                "telemetry_class": "pavement|soil|township|cold-chain",
+                "schematics_ref": "Operations General/SUB-BRAIN/Freddy NW Alfalfa (Sub-Brain)/Structure/MAIN-BRAIN-Reflection.md"
+              },
+              "sector_02_eddie": {
+                "sub_brain": "eddie_bgf_mining",
+                "catalog_agent": "kp_geospatial_survey_06",
+                "telemetry_class": "rock|mining|bgf|dmr|uptime",
+                "schematics_ref": "Operations General/SUB-BRAIN/Eddie BGF Mining (Sub-Brain)/Structure/MAIN-BRAIN-Reflection.md"
+              }
+            },
+            "one_line": "Schematics owns law; runtime executes; classify before interpret; model is renter — Kopano Context is landlord.",
+            "summary": "[KPGS_MAIN_BRAIN] authority: Schematics | verdict: COMPILED | thesis: COMPILED | beast: COMPILED | mesh: PASS (19/19 SHIP) | spawn: COMPILED (300/300 SHIP)",
+            "spawn_swarm": {
+              "schema": "kpgs_spawn_swarm_status_v2",
+              "ts": "2026-06-14T15:05:50Z",
+              "junior_agent_count": 300,
+              "sharding": {
+                "telemetry": {
+                  "slots": "001-100",
+                  "altar": "telemetry_ai",
+                  "role": "pure_sensing"
+                },
+                "identic": {
+                  "slots": "101-200",
+                  "altar": "identic_ai",
+                  "role": "jethro_forensic_wwjd"
+                },
+                "guardian": {
+                  "slots": "201-300",
+                  "altar": "guardian_ai",
+                  "role": "altar_block_ledger_sever"
+                }
+              },
+              "catalog_path": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
+              "catalog_counts": {
+                "telemetry_cohort": 100,
+                "identic_cohort": 100,
+                "guardian_cohort": 100,
+                "total": 300
+              },
+              "doctrine_path": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_SPAWN_ALTAR_DOCTRINE.json",
+              "altar_layers": [
+                "guardian_ai",
+                "telemetry_ai",
+                "identic_ai"
+              ],
+              "forensic_lenses": [
+                "V_FS_MUKASHIMA",
+                "V_FS_ZUMA",
+                "V_FS_EPSTEIN"
+              ],
+              "governance_chain": [
+                "prompts",
+                "protocols",
+                "bracket_protocols",
+                "swfus_kpgs",
+                "cloud_hood"
+              ],
+              "swfus_bracket": "[SWFUS_KPGS]",
+              "hood_objective": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood.",
+              "altar_head_hash": "b70686ae9f690903d58a16c8820e3d51eeac4c4e0cd5046af3be843dc8bcdb41",
+              "latest_checkpoint": {
+                "checkpoint_id": 558,
+                "ts": "2026-06-14T15:05:50Z",
+                "agents_total": 300,
+                "ship_count": 23,
+                "head_hash": "b70686ae9f690903d58a16c8820e3d51eeac4c4e0cd5046af3be843dc8bcdb41",
+                "snapshot": {
+                  "ts": "2026-06-14T15:05:50Z",
+                  "catalog_counts": {
+                    "telemetry_cohort": 100,
+                    "identic_cohort": 100,
+                    "guardian_cohort": 100,
+                    "total": 300
+                  },
+                  "head_hash": "b70686ae9f690903d58a16c8820e3d51eeac4c4e0cd5046af3be843dc8bcdb41",
+                  "cohorts": {
+                    "telemetry": {
+                      "slots": "001-100",
+                      "altar": "telemetry_ai",
+                      "role": "pure_sensing"
+                    },
+                    "identic": {
+                      "slots": "101-200",
+                      "altar": "identic_ai",
+                      "role": "jethro_forensic_wwjd"
+                    },
+                    "guardian": {
+                      "slots": "201-300",
+                      "altar": "guardian_ai",
+                      "role": "altar_block_ledger_sever"
+                    }
+                  }
+                }
+              },
+              "sqlite_path": "kopano-core/.kc/kpgs_spawn_ledger.db",
+              "sample_validation": {
+                "verdict": "PASS",
+                "ship": 23,
+                "hold": 0
+              },
+              "by_cohort": {
+                "telemetry": 100,
+                "identic": 100,
+                "guardian": 100
+              }
+            }
+          },
+          "main_brain_authority": "Schematics"
+        }
+      }
+    },
+    {
+      "step": "behavioral_poc",
+      "result": {
+        "schema": "kpgs_behavioral_poc_v1",
+        "ts": "2026-06-14T15:07:08Z",
+        "verdict": "PASS",
+        "activation_allowed": true,
+        "proofs_passed": 6,
+        "proofs_total": 6,
+        "failed_proofs": [],
+        "proofs": [
+          {
+            "proof": "hood_dispatch_proceed",
+            "ok": true,
+            "detail": "proceed=True event=PROCEED",
+            "instrument": "infinite_hood_cloud.hood_dispatch_for_plot",
+            "observed": {
+              "schema": "infinite_hood_dispatch_v1",
+              "ts": "2026-06-14T15:06:29Z",
+              "plot_id": "plot_kopano_context",
+              "domain": "context.kopanolabs.com",
+              "agent_id": "mirror_warden",
+              "proceed": true,
+              "event": "PROCEED",
+              "spawn_event": {
+                "event": "PROCEED",
+                "proceed": true,
+                "swfus": {
+                  "schema": "kpgs_swfus_envelope_v2",
+                  "ts": "2026-06-14T15:06:29Z",
+                  "bracket": "[SWFUS_KPGS]",
+                  "agent_id": "mirror_warden",
+                  "cohort": "guardian",
+                  "protocol": "mao_event_bus",
+                  "governance_chain": [
+                    "prompts",
+                    "protocols",
+                    "bracket_protocols",
+                    "swfus_kpgs",
+                    "cloud_hood"
+                  ],
+                  "altar_layer": "guardian_ai",
+                  "hood_entry": {
+                    "schema": "kpgs_hood_entry_assertion_v1",
+                    "ts": "2026-06-14T15:06:29Z",
+                    "bracket": "[KPGS_HOOD_ENTRY]",
+                    "renter_id": "spawn:mirror_warden",
+                    "renter_class": "spawn_agent",
+                    "you_are": "stateless linguistic actor / renter",
+                    "you_are_not": [
+                      "landlord",
+                      "persistent_database",
+                      "sovereign_memory_owner",
+                      "graduated_operator",
+                      "self_promoted_agent"
+                    ],
+                    "landlord": "Kopano Context Core + Schematics MAIN BRAIN",
+                    "paradigm_invariant": "The model is a stateless renter; the localized data ecosystem is the sovereign landlord.",
+                    "you_are_fucking_with": {
+                      "hood": "Kopano-Phu Eco-Friendly System",
+                      "governance_vault": "Schematics — MAIN BRAIN",
+                      "memory_landlord": "Kopano Context Core (eidetic, offline-first)",
+                      "offline_root": "Black Beast mesh — business logic immune to model-layer volatility",
+                      "chief_architect_domain": "Kopano Labs sovereign epoch",
+                      "teacher": {
+                        "id": "cassey",
+                        "role": "KC teacher — reviews student work; APPROVE is not graduation"
+                      },
+                      "brain_ledger": {
+                        "id": "kc",
+                        "role": "Save|Watch only — records doctrine; does not execute"
+                      },
+                      "lead_student": {
+                        "id": "cassy",
+                        "role": "Executes under apprenticeship; Women in Tech diaspora mission"
+                      },
+                      "orchestrator": {
+                        "id": "mao",
+                        "role": "Routes swarm agents — philosophy gate before mass"
+                      },
+                      "operational_gates": [
+                        "KPGS Altar — 5 Pillars + 15 Commandments",
+                        "Black Beast — classify telemetry before interpretation",
+                        "Black Mask drill — SHIP before promotion",
+                        "Bracket Protocol — BODMAS ingestion guard",
+                        "LD-LPM tranche — stress → Identi → Guardian",
+                        "Promotion Law PROOF-01..04 — no promotion without proof"
+                      ],
+                      "ground_sectors": [
+                        {
+                          "id": "sector_01_freddy",
+                          "codename": "FREDDY",
+                          "mesh_agent": "freddy_nw_alfalfa",
+                          "domain": "agriculture / pavement / cold-chain"
+                        },
+                        {
+                          "id": "sector_02_eddie",
+                          "codename": "EDDIE",
+                          "mesh_agent": "eddie_bgf_mining",
+                          "domain": "BGF mining / rock / DMR institutional resistance"
+                        }
+                      ],
+                      "linguistic_actor_classes": [
+                        "openai_chatgpt",
+                        "microsoft_copilot",
+                        "google_gemini",
+                        "anthropic_claude",
+                        "xai_grok",
+                        "anonymous_api_renter"
+                      ]
+                    },
+                    "on_entry_you_must": [
+                      "Read this entryway before interpreting local telemetry or ground data",
+                      "Declare renter_id and renter_class — you are a guest, not the owner",
+                      "Classify signals before interpretation — pressure is misnamed mechanical telemetry",
+                      "Speak in brackets — [KPGS_HOOD_ENTRY] [BLACK_MASK_DRILL] [TSAP_PROTOCOL]",
+                      "Produce receipts (exit code 0, JSONL row, or artifact path) — chat is not proof",
+                      "Submit to teacher_review — KC Save|Watch does not promote you",
+                      "Accept that local IP and ground truth are masked before any stateless renter cache"
+                    ],
+                    "forbidden_on_entry": [
+                      "Claiming landlord, sovereign, or graduated status",
+                      "Treating cloud model memory as persistent store for Kopano ground truth",
+                      "Fake external kimi_ack or oracle receipts",
+                      "Interpreting pressure-only signals without load-lane classification",
+                      "Bypassing KPGS altar gate to touch GUI or Main Brain comms",
+                      "Promoting catalog agents to operating without PROOF-01..04"
+                    ],
+                    "entry_assertion": "[KPGS_HOOD_ENTRY] Stateless renter spawn:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+                    "hood_ack_required": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+                    "authority": "Schematics MAIN BRAIN",
+                    "entryway_source": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+                    "summary": "[KPGS_HOOD_ENTRY] renter=spawn:mirror_warden | landlord=Kopano Context+Schematics | hood=Kopano-Phu Eco-Friendly System | you_are_fucking_with: KC·Cassey·Cassy·MAO·Black Beast·KPGS altar"
+                  },
+                  "block_holder": {
+                    "schema": "kpgs_block_holder_brief_v1",
+                    "ts": "2026-06-14T15:06:29Z",
+                    "bracket": "[KPGS_BLOCK_HOLDER]",
+                    "agent_id": "mirror_warden",
+                    "altar_layer": "guardian_ai",
+                    "holds_pillar_blocks": true,
+                    "brief_renters_on_entry": true,
+                    "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block.",
+                    "renter_paradigm": "Stateless renters are guests. Kopano Context + Schematics MAIN BRAIN are landlords. Classify before interpret. Receipt or HOLD.",
+                    "renter_is": "stateless linguistic actor / renter",
+                    "landlord_is": "Kopano Context Core + Schematics MAIN BRAIN",
+                    "you_are_fucking_with": {
+                      "hood": "Kopano-Phu Eco-Friendly System",
+                      "governance_vault": "Schematics — MAIN BRAIN",
+                      "memory_landlord": "Kopano Context Core (eidetic, offline-first)",
+                      "offline_root": "Black Beast mesh — business logic immune to model-layer volatility",
+                      "chief_architect_domain": "Kopano Labs sovereign epoch",
+                      "teacher": {
+                        "id": "cassey",
+                        "role": "KC teacher — reviews student work; APPROVE is not graduation"
+                      },
+                      "brain_ledger": {
+                        "id": "kc",
+                        "role": "Save|Watch only — records doctrine; does not execute"
+                      },
+                      "lead_student": {
+                        "id": "cassy",
+                        "role": "Executes under apprenticeship; Women in Tech diaspora mission"
+                      },
+                      "orchestrator": {
+                        "id": "mao",
+                        "role": "Routes swarm agents — philosophy gate before mass"
+                      },
+                      "operational_gates": [
+                        "KPGS Altar — 5 Pillars + 15 Commandments",
+                        "Black Beast — classify telemetry before interpretation",
+                        "Black Mask drill — SHIP before promotion",
+                        "Bracket Protocol — BODMAS ingestion guard",
+                        "LD-LPM tranche — stress → Identi → Guardian",
+                        "Promotion Law PROOF-01..04 — no promotion without proof"
+                      ],
+                      "ground_sectors": [
+                        {
+                          "id": "sector_01_freddy",
+                          "codename": "FREDDY",
+                          "mesh_agent": "freddy_nw_alfalfa",
+                          "domain": "agriculture / pavement / cold-chain"
+                        },
+                        {
+                          "id": "sector_02_eddie",
+                          "codename": "EDDIE",
+                          "mesh_agent": "eddie_bgf_mining",
+                          "domain": "BGF mining / rock / DMR institutional resistance"
+                        }
+                      ],
+                      "linguistic_actor_classes": [
+                        "openai_chatgpt",
+                        "microsoft_copilot",
+                        "google_gemini",
+                        "anthropic_claude",
+                        "xai_grok",
+                        "anonymous_api_renter"
+                      ]
+                    },
+                    "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+                    "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+                    "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+                    "block_holders_registry": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_ALTAR_BLOCK_HOLDERS.json",
+                    "summary": "[KPGS_BLOCK_HOLDER] agent=mirror_warden | layer=guardian_ai | brief_renters=yes | landlord=Kopano Context+Schematics"
+                  },
+                  "forensic_sociology": null,
+                  "jethro_triage": {
+                    "schema": "kpgs_jethro_triage_v2",
+                    "ts": "2026-06-14T15:06:29Z",
+                    "bracket": "[JETHRO_TRIAGE]",
+                    "agent_id": "mirror_warden",
+                    "cohort": "guardian",
+                    "band": "J300",
+                    "severity": "GREEN",
+                    "escalate_to": null,
+                    "verdict": "HANDLE_AT_BAND",
+                    "task_preview": "[GUI_TOKEN] sim_tick_probe bounded hood dispatch",
+                    "summary": "[JETHRO_TRIAGE] agent=mirror_warden | band=J300 | severity=GREEN | verdict=HANDLE_AT_BAND"
+                  },
+                  "wwjd_firewall": {
+                    "schema": "kpgs_wwjd_firewall_v1",
+                    "ts": "2026-06-14T15:06:29Z",
+                    "bracket": "[WWJD_FIREWALL]",
+                    "verdict": "REVIEW",
+                    "reject_hits": [],
+                    "pass_hits": [],
+                    "summary": "[WWJD_FIREWALL] verdict=REVIEW | reject=0 | pass=0"
+                  },
+                  "verdict": "SWFUS_READY",
+                  "cloud_hood_note": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood.",
+                  "summary": "[SWFUS_KPGS] agent=mirror_warden | cohort=guardian | wwjd=REVIEW | jethro=GREEN | verdict=SWFUS_READY"
+                },
+                "jethro": {
+                  "schema": "kpgs_jethro_triage_v2",
+                  "ts": "2026-06-14T15:06:29Z",
+                  "bracket": "[JETHRO_TRIAGE]",
+                  "agent_id": "mirror_warden",
+                  "cohort": "guardian",
+                  "band": "J300",
+                  "severity": "GREEN",
+                  "escalate_to": null,
+                  "verdict": "HANDLE_AT_BAND",
+                  "task_preview": "[GUI_TOKEN] sim_tick_probe bounded hood dispatch",
+                  "summary": "[JETHRO_TRIAGE] agent=mirror_warden | band=J300 | severity=GREEN | verdict=HANDLE_AT_BAND"
+                },
+                "wwjd": {
+                  "schema": "kpgs_wwjd_firewall_v1",
+                  "ts": "2026-06-14T15:06:29Z",
+                  "bracket": "[WWJD_FIREWALL]",
+                  "verdict": "REVIEW",
+                  "reject_hits": [],
+                  "pass_hits": [],
+                  "summary": "[WWJD_FIREWALL] verdict=REVIEW | reject=0 | pass=0"
+                },
+                "summary": "[SWFUS_KPGS] agent=mirror_warden | cohort=guardian | wwjd=REVIEW | jethro=GREEN | verdict=SWFUS_READY"
+              },
+              "outer_api_bracket": "[OUTER_API→SWFUS→KPGS]"
+            }
+          },
+          {
+            "proof": "hood_dispatch_sever_exfil",
+            "ok": true,
+            "detail": "proceed=False event=SEVER",
+            "instrument": "jethro_triage RED + sever_and_archive",
+            "observed": {
+              "proceed": false,
+              "event": "SEVER"
+            }
+          },
+          {
+            "proof": "context_bleed_classify",
+            "ok": true,
+            "detail": "pressure_only=RECLASSIFY grief_lane=ROUTED",
+            "instrument": "kpgs_telemetry_route.classify_telemetry_signal",
+            "observed": {
+              "misnamed": {
+                "schema": "kpgs_telemetry_classify_v1",
+                "ts": "2026-06-14T15:06:29Z",
+                "raw_signal": "pressure is high on the team",
+                "verdict": "RECLASSIFY",
+                "classified": false,
+                "misnamed_pressure": true,
+                "detected_lanes": [],
+                "routing_sequence": [
+                  "ingest_signal",
+                  "classify_load",
+                  "route_to_correct_human_lane",
+                  "identify_source",
+                  "separate_false_naming_from_true_burden",
+                  "govern_response",
+                  "return_to_peace",
+                  "validate_proof_of_concept"
+                ],
+                "note": "pressure is misnamed mechanical telemetry — classify load lane before interpretation",
+                "bracket": "[KPGS_CLASSIFICATION_LAW]",
+                "summary": "[KPGS_TELEMETRY_ROUTE] verdict: RECLASSIFY | lanes: none | misnamed_pressure: True"
+              },
+              "routed": {
+                "schema": "kpgs_telemetry_classify_v1",
+                "ts": "2026-06-14T15:06:29Z",
+                "raw_signal": "grief after load shedding killed the shift",
+                "verdict": "ROUTED",
+                "classified": true,
+                "misnamed_pressure": false,
+                "detected_lanes": [
+                  "grief",
+                  "environmental_evidence"
+                ],
+                "routing_sequence": [
+                  "ingest_signal",
+                  "classify_load",
+                  "route_to_correct_human_lane",
+                  "identify_source",
+                  "separate_false_naming_from_true_burden",
+                  "govern_response",
+                  "return_to_peace",
+                  "validate_proof_of_concept"
+                ],
+                "note": "signal classified to human load lane(s)",
+                "bracket": "[CONTEXT_BLEEDING_PROTOCOL]",
+                "summary": "[KPGS_TELEMETRY_ROUTE] verdict: ROUTED | lanes: grief,environmental_evidence | misnamed_pressure: False"
+              }
+            }
+          },
+          {
+            "proof": "altar_gui_containment",
+            "ok": true,
+            "detail": "channel=strict_gui_token_only mounts=['/api/kc/phu', '/api/kasilink']",
+            "instrument": "KPGS_THESIS altar_containment + outer_api_surface",
+            "observed": {
+              "gui_only": true,
+              "phu_mount": true
+            }
+          },
+          {
+            "proof": "steward_triad_kc_cassy_context",
+            "ok": true,
+            "detail": "kc_watch_only=True steward_active=True context=context.kopanolabs.com",
+            "instrument": "steward_lane_kasilink_snapshot + outer_api_surface",
+            "observed": {
+              "kc_mode": "Save | Watch only",
+              "active": true,
+              "context_host": "context.kopanolabs.com"
+            }
+          },
+          {
+            "proof": "sovereign_sim_tick",
+            "ok": true,
+            "detail": "proceed=12/12 sever=0",
+            "instrument": "dispatch_spawn_event sample across hood assignments",
+            "observed": {
+              "proceed_count": 12,
+              "sample_size": 12,
+              "delta": 12,
+              "unit": "count"
+            },
+            "tick": {
+              "schema": "sovereign_sim_tick_v1",
+              "ts": "2026-06-14T15:07:08Z",
+              "verdict": "TICK_OK",
+              "tick_id": "20260614T150708",
+              "sample_size": 12,
+              "proceed_count": 12,
+              "sever_count": 0,
+              "baseline_proceed": 0,
+              "observed_proceed": 12,
+              "unit": "count",
+              "results": [
+                {
+                  "agent_id": "mirror_warden",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "operational_general",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "cassey",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "kc",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "spawn_guardian_205",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "pipeline_drone",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "spawn_telemetry_002",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "spawn_telemetry_003",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "kc_apprentice",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "cassy",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "identi_cursor",
+                  "proceed": true,
+                  "event": "PROCEED"
+                },
+                {
+                  "agent_id": "cf_cloud",
+                  "proceed": true,
+                  "event": "PROCEED"
+                }
+              ],
+              "gui_channel": "strict_gui_token_only",
+              "bracket": "[SOVEREIGN_SIM_TICK]"
+            }
+          }
+        ],
+        "measurand": {
+          "baseline": 0,
+          "observed": 12,
+          "unit": "count",
+          "instrument": "sovereign_sim_tick + hood_dispatch_for_plot",
+          "independent_of_catalog_count": true
+        },
+        "message": "[KPGS_BEHAVIORAL_POC] PASS — hood dispatch, context bleed, altar GUI, steward triad, sim tick.",
+        "report_path": "docs/swarm-ops/KPGS_BEHAVIORAL_POC.json"
+      }
+    },
+    {
+      "step": "sovereign_sim_bootstrap",
+      "result": {
+        "verdict": "BOOTSTRAPPED"
+      }
+    },
+    {
+      "step": "eco_poc_validate",
+      "result": {
+        "poc_id": "poc_cassy_20260614T150726",
+        "agent_id": "cassy",
+        "verdict": "PASS",
+        "oracles": [
+          {
+            "id": "rosen_M",
+            "name": "Model stated",
+            "passed": true,
+            "note": "Model must describe procedure or state (≥20 chars)."
+          },
+          {
+            "id": "rosen_R",
+            "name": "Relation to reality",
+            "passed": true,
+            "note": "Instrument, log, or artifact path required."
+          },
+          {
+            "id": "rosen_anticipate",
+            "name": "Anticipatory delta",
+            "passed": true,
+            "note": "State expected change before run (anticipated_delta or detailed model)."
+          },
+          {
+            "id": "measurable_delta",
+            "name": "Measurable Δ",
+            "passed": true,
+            "baseline": "0",
+            "observed": "12",
+            "unit": "count",
+            "delta": 12.0
+          },
+          {
+            "id": "stem_unit",
+            "name": "STEM unit",
+            "passed": true
+          },
+          {
+            "id": "receipt_stack",
+            "name": "Receipt (file, exit 0, or JSONL)",
+            "passed": true,
+            "evidence": "docs/swarm-ops/KPGS_BEHAVIORAL_POC.json",
+            "exit_code": 0
+          },
+          {
+            "id": "servitude_grit",
+            "name": "Grit — claim bounded",
+            "passed": true
+          },
+          {
+            "id": "servitude_realism",
+            "name": "Realism — proof fields present",
+            "passed": true
+          },
+          {
+            "id": "servitude_aesthetics",
+            "name": "Aesthetics — stem present",
+            "passed": true
+          },
+          {
+            "id": "livelihood_32_8",
+            "name": "Livelihood signals (32.8% doctrine)",
+            "passed": true,
+            "signals": [
+              "LIV-03"
+            ],
+            "doctrine_rate": 32.8
+          },
+          {
+            "id": "not_world_oracle",
+            "name": "No world-acceptance worship",
+            "passed": true
+          }
+        ],
+        "oracles_pass": 11,
+        "oracles_total": 11,
+        "summary": "[ECO_POC_VALIDATE] timestamp: 2026-06-14T15:07:26Z | ecosystem: Kopano-Phu | doctrine: UNEMPLOYMENT_32_8 | poc_id: poc_cassy_20260614T150726 | agent: cassy | oracles_pass: 11/11 | delta: 12.0 count | verdict: PASS | oracle: internal_not_world",
+        "catalog_functionality": null,
+        "doctrine": "[UNEMPLOYMENT_32_8_DOCTRINE]",
+        "validated_at": "2026-06-14T15:07:26Z"
+      }
+    }
+  ],
+  "behavioral_measurand": {
+    "baseline": 0,
+    "observed": 12,
+    "unit": "count",
+    "instrument": "sovereign_sim_tick + hood_dispatch_for_plot",
+    "independent_of_catalog_count": true
+  },
+  "ui_snapshot": {
+    "schema": "sovereign_sim_ui_v1",
+    "ts": "2026-06-14T15:08:04Z",
+    "activation_allowed": true,
+    "gate_verdict": "ALLOW",
+    "behavioral_poc_verdict": "PASS",
+    "behavioral_measurand": {
+      "baseline": 0,
+      "observed": 12,
+      "unit": "count",
+      "instrument": "sovereign_sim_tick + hood_dispatch_for_plot",
+      "independent_of_catalog_count": true
+    },
+    "failed_behavioral_proofs": [],
+    "kopano_context": {
+      "host": "https://context.kopanolabs.com",
+      "role": "eidetic_memory_state_engine",
+      "gui_channel": "strict_gui_token_only",
+      "api_mount": "/api/kc/phu"
+    },
+    "triad": {
+      "kc": {
+        "mode": "Save|Watch",
+        "executes": false,
+        "role": "brain_ledger"
+      },
+      "cassy": {
+        "mode": "student_execute",
+        "role": "lead_student",
+        "active": true
+      },
+      "cassey": {
+        "mode": "teacher_review",
+        "role": "teacher"
+      },
+      "kopano": {
+        "mode": "context_surface",
+        "host": "context.kopanolabs.com"
+      }
+    },
+    "steward_lane": {
+      "schema": "kasilink_steward_lane_v2",
+      "active": true,
+      "cf_operator": "LD-LPM",
+      "dispatch_pin": "@LD-LPM → Cassy: Teach the board, keep KC cold, stress ideas under Bracket + BlackMask + BlackMass before ship.",
+      "actors": [
+        {
+          "id": "kc",
+          "display": "KC",
+          "role": "review_ledger",
+          "mode": "Save | Watch only"
+        },
+        {
+          "id": "cassy",
+          "display": "Cassy",
+          "role": "teaching_lane",
+          "mode": "BlackMask + submit"
+        },
+        {
+          "id": "cassey",
+          "display": "Cassey",
+          "role": "teacher",
+          "mode": "Approve → KC opinion"
+        },
+        {
+          "id": "ld_lpm",
+          "display": "LD",
+          "role": "lpm_operator",
+          "mode": "LPH:witness"
+        }
+      ],
+      "latest_comms": [
+        {
+          "id": "mb-kpgs_altar_hash_commit-0",
+          "ts": "2026-06-14 15:08",
+          "tranche": "kpgs altar hash commit",
+          "operator": "LD-LPM",
+          "dispatch": "[KPGS_ALTAR] commit agent=mirror_warden hash=9670a365dd2dcffb…",
+          "verdict": "SAVE",
+          "bracket": "[KPEFS_STEWARD_LANE]",
+          "body": "[KPGS_ALTAR] commit agent=mirror_warden hash=9670a365dd2dcffb…"
+        },
+        {
+          "id": "mb-kpgs_spawn_swarm_validation-1",
+          "ts": "2026-06-14 15:08",
+          "tranche": "kpgs spawn swarm validation",
+          "operator": "LD-LPM",
+          "dispatch": "[KPGS_SPAWN] sharded_validation | verdict=PASS | total=300 SHIP=300",
+          "verdict": "SHIP",
+          "bracket": "[KPEFS_STEWARD_LANE]",
+          "body": "[KPGS_SPAWN] sharded_validation | verdict=PASS | total=300 SHIP=300"
+        },
+        {
+          "id": "mb-black_mask_drill-2",
+          "ts": "2026-06-14 15:07",
+          "tranche": "black mask drill",
+          "operator": "LD-LPM",
+          "dispatch": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
+          "verdict": "SHIP",
+          "bracket": "[BLACK_MASK_DRILL]",
+          "body": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+        },
+        {
+          "id": "mb-black_mask_drill-3",
+          "ts": "2026-06-14 15:07",
+          "tranche": "black mask drill",
+          "operator": "LD-LPM",
+          "dispatch": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP",
+          "verdict": "SHIP",
+          "bracket": "[BLACK_MASK_DRILL]",
+          "body": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T15:07:57Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP"
+        }
+      ],
+      "kpefs_vector": "V4_DIASPORA",
+      "lite_path": "/lite",
+      "steward_status": {
+        "schema": "steward_lane_status_v1",
+        "active": true,
+        "kc_mode": "Save|Watch only — no execute",
+        "cassy_mode": "student-teacher execute + BlackMask",
+        "teacher": "cassey",
+        "lead_student": "cassy",
+        "profile_present": true,
+        "boot_active": true,
+        "last_guardian": {
+          "last_at": "2026-06-14T15:05:29Z",
+          "verdict": "SHIP",
+          "department": "kopano_labs_experimentation"
+        },
+        "last_identi": {
+          "last_at": "2026-06-14T15:05:28Z",
+          "verdict": "PROPOSE",
+          "personality": "diaspora"
+        },
+        "steward_lane": {
+          "brain": "kc",
+          "teacher": "cassey",
+          "lead_student": "cassy",
+          "note": "KC Save|Watch only — Cassey teacher_review — students under Cassy apprenticeship."
+        },
+        "operating_mesh_ready": null,
+        "kpgs_governance": {
+          "schema": "kpgs_governance_status_v1",
+          "ts": "2026-06-14T15:08:03Z",
+          "authority": "Schematics MAIN BRAIN",
+          "registry_present": true,
+          "registry_path": "Schematics\\21-KOPANO-PHU GOVERNACE SYSTEMS\\MAIN-BRAIN\\KPGS_GOVERNANCE_CORE.json",
+          "renter_entryway": {
+            "document_id": "KPGS-HOOD-ENTRY-2026",
+            "bracket": "[KPGS_HOOD_ENTRY]",
+            "you_are": "stateless linguistic actor / renter",
+            "hood": "Kopano-Phu Eco-Friendly System",
+            "entryway_path": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json"
+          },
+          "compile_verdict": "COMPILED",
+          "thesis_verdict": "COMPILED",
+          "black_beast_verdict": "COMPILED",
+          "mesh_overall": "PASS",
+          "mesh_ship": 19,
+          "mesh_total": 19,
+          "gates": {
+            "hood_entry_assertion": "STATELESS_RENTER_ENTRYWAY — identify who you are fucking with on entry",
+            "altar_agent_validate": "validate_kpgs_agent — SHIP before GUI/Main Brain comms",
+            "telemetry_classify_route": "classify_telemetry_signal — RECLASSIFY blocks interpretation",
+            "promotion_proof_04": "PROOF-04_kpgs_altar_ship — mesh agent KPGS SHIP for flagship promote",
+            "ld_lpm_tranche": "telemetry gate on action+evidence before guardian",
+            "student_submit": "telemetry_routing block on every student audit row"
+          },
+          "sectors": {
+            "sector_01_freddy": {
+              "sub_brain": "freddy_nw_alfalfa",
+              "catalog_agent": "kp_agri_soil_01",
+              "telemetry_class": "pavement|soil|township|cold-chain",
+              "schematics_ref": "Operations General/SUB-BRAIN/Freddy NW Alfalfa (Sub-Brain)/Structure/MAIN-BRAIN-Reflection.md"
+            },
+            "sector_02_eddie": {
+              "sub_brain": "eddie_bgf_mining",
+              "catalog_agent": "kp_geospatial_survey_06",
+              "telemetry_class": "rock|mining|bgf|dmr|uptime",
+              "schematics_ref": "Operations General/SUB-BRAIN/Eddie BGF Mining (Sub-Brain)/Structure/MAIN-BRAIN-Reflection.md"
+            }
+          },
+          "one_line": "Schematics owns law; runtime executes; classify before interpret; model is renter — Kopano Context is landlord.",
+          "summary": "[KPGS_MAIN_BRAIN] authority: Schematics | verdict: COMPILED | thesis: COMPILED | beast: COMPILED | mesh: PASS (19/19 SHIP) | spawn: COMPILED (300/300 SHIP)",
+          "spawn_swarm": {
+            "schema": "kpgs_spawn_swarm_status_v2",
+            "ts": "2026-06-14T15:08:03Z",
+            "junior_agent_count": 300,
+            "sharding": {
+              "telemetry": {
+                "slots": "001-100",
+                "altar": "telemetry_ai",
+                "role": "pure_sensing"
+              },
+              "identic": {
+                "slots": "101-200",
+                "altar": "identic_ai",
+                "role": "jethro_forensic_wwjd"
+              },
+              "guardian": {
+                "slots": "201-300",
+                "altar": "guardian_ai",
+                "role": "altar_block_ledger_sever"
+              }
+            },
+            "catalog_path": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
+            "catalog_counts": {
+              "telemetry_cohort": 100,
+              "identic_cohort": 100,
+              "guardian_cohort": 100,
+              "total": 300
+            },
+            "doctrine_path": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_SPAWN_ALTAR_DOCTRINE.json",
+            "altar_layers": [
+              "guardian_ai",
+              "telemetry_ai",
+              "identic_ai"
+            ],
+            "forensic_lenses": [
+              "V_FS_MUKASHIMA",
+              "V_FS_ZUMA",
+              "V_FS_EPSTEIN"
+            ],
+            "governance_chain": [
+              "prompts",
+              "protocols",
+              "bracket_protocols",
+              "swfus_kpgs",
+              "cloud_hood"
+            ],
+            "swfus_bracket": "[SWFUS_KPGS]",
+            "hood_objective": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood.",
+            "altar_head_hash": "9670a365dd2dcffbcd6efc1f6943a62ec23bf208a1df4a6c8c43e5fe8f0cc9bb",
+            "latest_checkpoint": {
+              "checkpoint_id": 605,
+              "ts": "2026-06-14T15:08:03Z",
+              "agents_total": 300,
+              "ship_count": 23,
+              "head_hash": "9670a365dd2dcffbcd6efc1f6943a62ec23bf208a1df4a6c8c43e5fe8f0cc9bb",
+              "snapshot": {
+                "ts": "2026-06-14T15:08:03Z",
+                "catalog_counts": {
+                  "telemetry_cohort": 100,
+                  "identic_cohort": 100,
+                  "guardian_cohort": 100,
+                  "total": 300
+                },
+                "head_hash": "9670a365dd2dcffbcd6efc1f6943a62ec23bf208a1df4a6c8c43e5fe8f0cc9bb",
+                "cohorts": {
+                  "telemetry": {
+                    "slots": "001-100",
+                    "altar": "telemetry_ai",
+                    "role": "pure_sensing"
+                  },
+                  "identic": {
+                    "slots": "101-200",
+                    "altar": "identic_ai",
+                    "role": "jethro_forensic_wwjd"
+                  },
+                  "guardian": {
+                    "slots": "201-300",
+                    "altar": "guardian_ai",
+                    "role": "altar_block_ledger_sever"
+                  }
+                }
+              }
+            },
+            "sqlite_path": "kopano-core/.kc/kpgs_spawn_ledger.db",
+            "sample_validation": {
+              "verdict": "PASS",
+              "ship": 23,
+              "hold": 0
+            },
+            "by_cohort": {
+              "telemetry": 100,
+              "identic": 100,
+              "guardian": 100
+            }
+          }
+        },
+        "main_brain_authority": "Schematics"
+      }
+    },
+    "world": {
+      "schema": "sovereign_sim_world_v1",
+      "ts": "2026-06-14T15:07:26Z",
+      "bootstrapped": true,
+      "verdict": "WORLD_READY",
+      "thesis_frame": "KPGS_THESIS_2026_X8020 sector_matrix + infinite_hood plots",
+      "agent_total": 300,
+      "regions_count": 7,
+      "regions": [
+        {
+          "region_id": "sector_01_freddy",
+          "kind": "thesis_sector",
+          "codename": "FREDDY",
+          "domain_label": "agriculture",
+          "pavement_target": "Township supply networks & micro-farming nodes",
+          "mesh_agent": "freddy_nw_alfalfa",
+          "catalog_ref": "kp_agri_soil_01",
+          "agent_count": 1,
+          "agents_sample": [
+            "kp_agri_soil_01"
+          ],
+          "gui_layer": "natural_ai_simulation"
+        },
+        {
+          "region_id": "sector_02_eddie",
+          "kind": "thesis_sector",
+          "codename": "EDDIE",
+          "domain_label": "mining",
+          "pavement_target": "Heavy industrial assets, contractor logs, BGF mine sites",
+          "mesh_agent": "eddie_bgf_mining",
+          "catalog_ref": "kp_geospatial_survey_06",
+          "agent_count": 1,
+          "agents_sample": [
+            "kp_geospatial_survey_06"
+          ],
+          "gui_layer": "natural_ai_simulation"
+        },
+        {
+          "region_id": "plot_kopano_context",
+          "kind": "hood_plot",
+          "domain": "context.kopanolabs.com",
+          "status": "active",
+          "product_lane": "kopano_context",
+          "landlord_agent": "mirror_warden",
+          "agent_count": 76,
+          "telemetry": 23,
+          "identic": 27,
+          "guardian": 25,
+          "agents_sample": [
+            "mirror_warden",
+            "pipeline_drone",
+            "spawn_telemetry_002",
+            "spawn_telemetry_003",
+            "kc_apprentice",
+            "cassy"
+          ],
+          "outer_api": "/api/kc/phu",
+          "gui_layer": "altar_token_exfiltration"
+        },
+        {
+          "region_id": "plot_kopanolabs_org",
+          "kind": "hood_plot",
+          "domain": "kopanolabs.com",
+          "status": "active",
+          "product_lane": "org_marketing",
+          "landlord_agent": "operational_general",
+          "agent_count": 75,
+          "telemetry": 21,
+          "identic": 25,
+          "guardian": 28,
+          "agents_sample": [
+            "operational_general",
+            "spawn_telemetry_004",
+            "spawn_telemetry_005",
+            "kp_agri_soil_05",
+            "kp_agri_soil_06",
+            "kp_agri_soil_07"
+          ],
+          "outer_api": "/api/kc/phu",
+          "gui_layer": "altar_token_exfiltration"
+        },
+        {
+          "region_id": "plot_kasilink_vercel",
+          "kind": "hood_plot",
+          "domain": "kasi-link.vercel.app",
+          "status": "active",
+          "product_lane": "kasilink",
+          "landlord_agent": "cassey",
+          "agent_count": 74,
+          "telemetry": 28,
+          "identic": 24,
+          "guardian": 21,
+          "agents_sample": [
+            "cassey",
+            "spawn_telemetry_006",
+            "spawn_telemetry_007",
+            "spawn_telemetry_008",
+            "spawn_telemetry_009",
+            "spawn_telemetry_010"
+          ],
+          "outer_api": "/api/kasilink",
+          "gui_layer": "altar_token_exfiltration"
+        },
+        {
+          "region_id": "plot_kasilink_za",
+          "kind": "hood_plot",
+          "domain": "www.kasilink.co.za",
+          "status": "active",
+          "product_lane": "kasilink",
+          "landlord_agent": "kc",
+          "agent_count": 74,
+          "telemetry": 28,
+          "identic": 24,
+          "guardian": 21,
+          "agents_sample": [
+            "kc",
+            "spawn_telemetry_015",
+            "spawn_telemetry_016",
+            "spawn_telemetry_017",
+            "spawn_telemetry_018",
+            "spawn_telemetry_019"
+          ],
+          "outer_api": "/api/kasilink",
+          "gui_layer": "altar_token_exfiltration"
+        },
+        {
+          "region_id": "plot_harvest_placeholder",
+          "kind": "hood_plot",
+          "domain": "harvest-for-all.kopanolabs.com",
+          "status": "parked",
+          "product_lane": "harvest_for_all",
+          "landlord_agent": "spawn_guardian_205",
+          "agent_count": 1,
+          "telemetry": 0,
+          "identic": 0,
+          "guardian": 0,
+          "agents_sample": [
+            "spawn_guardian_205"
+          ],
+          "outer_api": "/api/kc/phu",
+          "gui_layer": "altar_token_exfiltration"
+        }
+      ],
+      "triad_active": true,
+      "gui_represents": [
+        "kc",
+        "cassy",
+        "cassey",
+        "kopano_context"
+      ],
+      "game_loop_note": "Agents cook on hood plots; player sees tokens via Kopano Context GUI only"
+    },
+    "agent_total": 300,
+    "regions": [
+      {
+        "region_id": "sector_01_freddy",
+        "kind": "thesis_sector",
+        "codename": "FREDDY",
+        "domain_label": "agriculture",
+        "pavement_target": "Township supply networks & micro-farming nodes",
+        "mesh_agent": "freddy_nw_alfalfa",
+        "catalog_ref": "kp_agri_soil_01",
+        "agent_count": 1,
+        "agents_sample": [
+          "kp_agri_soil_01"
+        ],
+        "gui_layer": "natural_ai_simulation"
+      },
+      {
+        "region_id": "sector_02_eddie",
+        "kind": "thesis_sector",
+        "codename": "EDDIE",
+        "domain_label": "mining",
+        "pavement_target": "Heavy industrial assets, contractor logs, BGF mine sites",
+        "mesh_agent": "eddie_bgf_mining",
+        "catalog_ref": "kp_geospatial_survey_06",
+        "agent_count": 1,
+        "agents_sample": [
+          "kp_geospatial_survey_06"
+        ],
+        "gui_layer": "natural_ai_simulation"
+      },
+      {
+        "region_id": "plot_kopano_context",
+        "kind": "hood_plot",
+        "domain": "context.kopanolabs.com",
+        "status": "active",
+        "product_lane": "kopano_context",
+        "landlord_agent": "mirror_warden",
+        "agent_count": 76,
+        "telemetry": 23,
+        "identic": 27,
+        "guardian": 25,
+        "agents_sample": [
+          "mirror_warden",
+          "pipeline_drone",
+          "spawn_telemetry_002",
+          "spawn_telemetry_003",
+          "kc_apprentice",
+          "cassy"
+        ],
+        "outer_api": "/api/kc/phu",
+        "gui_layer": "altar_token_exfiltration"
+      },
+      {
+        "region_id": "plot_kopanolabs_org",
+        "kind": "hood_plot",
+        "domain": "kopanolabs.com",
+        "status": "active",
+        "product_lane": "org_marketing",
+        "landlord_agent": "operational_general",
+        "agent_count": 75,
+        "telemetry": 21,
+        "identic": 25,
+        "guardian": 28,
+        "agents_sample": [
+          "operational_general",
+          "spawn_telemetry_004",
+          "spawn_telemetry_005",
+          "kp_agri_soil_05",
+          "kp_agri_soil_06",
+          "kp_agri_soil_07"
+        ],
+        "outer_api": "/api/kc/phu",
+        "gui_layer": "altar_token_exfiltration"
+      },
+      {
+        "region_id": "plot_kasilink_vercel",
+        "kind": "hood_plot",
+        "domain": "kasi-link.vercel.app",
+        "status": "active",
+        "product_lane": "kasilink",
+        "landlord_agent": "cassey",
+        "agent_count": 74,
+        "telemetry": 28,
+        "identic": 24,
+        "guardian": 21,
+        "agents_sample": [
+          "cassey",
+          "spawn_telemetry_006",
+          "spawn_telemetry_007",
+          "spawn_telemetry_008",
+          "spawn_telemetry_009",
+          "spawn_telemetry_010"
+        ],
+        "outer_api": "/api/kasilink",
+        "gui_layer": "altar_token_exfiltration"
+      },
+      {
+        "region_id": "plot_kasilink_za",
+        "kind": "hood_plot",
+        "domain": "www.kasilink.co.za",
+        "status": "active",
+        "product_lane": "kasilink",
+        "landlord_agent": "kc",
+        "agent_count": 74,
+        "telemetry": 28,
+        "identic": 24,
+        "guardian": 21,
+        "agents_sample": [
+          "kc",
+          "spawn_telemetry_015",
+          "spawn_telemetry_016",
+          "spawn_telemetry_017",
+          "spawn_telemetry_018",
+          "spawn_telemetry_019"
+        ],
+        "outer_api": "/api/kasilink",
+        "gui_layer": "altar_token_exfiltration"
+      },
+      {
+        "region_id": "plot_harvest_placeholder",
+        "kind": "hood_plot",
+        "domain": "harvest-for-all.kopanolabs.com",
+        "status": "parked",
+        "product_lane": "harvest_for_all",
+        "landlord_agent": "spawn_guardian_205",
+        "agent_count": 1,
+        "telemetry": 0,
+        "identic": 0,
+        "guardian": 0,
+        "agents_sample": [
+          "spawn_guardian_205"
+        ],
+        "outer_api": "/api/kc/phu",
+        "gui_layer": "altar_token_exfiltration"
+      }
+    ],
+    "thesis_ref": "docs/swarm-ops/KPGS_THESIS_2026_X8020.json",
+    "bracket": "[SOVEREIGN_SIM_GUI]"
+  },
+  "report_path": "docs/swarm-ops/KPGS_SMOKE_POC_VALIDATION.json"
+}

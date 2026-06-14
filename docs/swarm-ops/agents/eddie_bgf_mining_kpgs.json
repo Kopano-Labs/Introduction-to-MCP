@@ -1,0 +1,67 @@
+{
+  "schema": "kpgs_agent_manifest_v1",
+  "agent_id": "eddie_bgf_mining",
+  "kpgs_sector": "sector_02_eddie",
+  "thesis_document_id": "KPGS-THESIS-2026-X8020",
+  "catalog_agent": "kp_geospatial_survey_06",
+  "kc_executes": false,
+  "pillars": {
+    "ground_awareness": {
+      "ground_context": true,
+      "telemetry_class": "rock|mining|bgf|dmr|uptime"
+    },
+    "eidetic_persistence": {
+      "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
+      "immutable_history": true
+    },
+    "zero_trust_isolation": {
+      "containment_firewall": true,
+      "public_exposed": false
+    },
+    "asymmetric_leverage": {
+      "local_ip_protected": true,
+      "no_public_cloud_cache": true
+    },
+    "hierarchical_triage": {
+      "supervisor_node": "cassey",
+      "runtime_closure_gate": "guardian_ai_flow"
+    }
+  },
+  "execution": {
+    "uses_public_api": false,
+    "mesh_member": true,
+    "altar_layer": "telemetry_ai"
+  },
+  "evidence": {
+    "proof_artifact_path": "docs/swarm-ops/KPEFS_CLOSURE_STATUS.json"
+  },
+  "telemetry_routing": {
+    "classified": true,
+    "pre_interpretation": true,
+    "misnamed_pressure_rejected": true,
+    "primary_lane": "institutional_resistance",
+    "context_bleed_mode": "CONTROLLED_BLEED_ACTIVE",
+    "routing_law": "docs/swarm-ops/BLACK_BEAST_THESIS_PAYLOAD_V1.json"
+  },
+  "block_holder": {
+    "holds_pillar_blocks": true,
+    "brief_renters_on_entry": true,
+    "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+    "tell_renters": "Natural block: ground truth is local — Freddy soil / Eddie rock. Renter does not own this telemetry. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:eddie_bgf_mining entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+    "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+    "altar_layer": "natural_ai",
+    "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
+  },
+  "hood_entry": {
+    "bracket": "[KPGS_BLOCK_HOLDER]",
+    "tell_renters": "Natural block: ground truth is local — Freddy soil / Eddie rock. Renter does not own this telemetry. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:eddie_bgf_mining entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+    "landlord_is": "Kopano Context Core + Schematics MAIN BRAIN",
+    "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+  },
+  "financial_target": {
+    "baseline_zar_month_per_node": 50000,
+    "target_mines": "5/11",
+    "target_recurring_zar_month": 250000
+  },
+  "bracket_receipt": "[KPGS_BLOCK_HOLDER] agent: eddie_bgf_mining | brief_renters: yes | [KPGS_AGENT_INIT] agent: eddie_bgf_mining | altar: five_pillars | sector: sector_02_eddie | vector: V2_ANIMAL"
+}

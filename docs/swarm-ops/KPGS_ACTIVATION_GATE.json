@@ -1,0 +1,74 @@
+{
+  "schema": "kpgs_activation_gate_v1",
+  "ts": "2026-06-14T16:00:29Z",
+  "activation_allowed": true,
+  "verdict": "ALLOW",
+  "required_agents": 300,
+  "checks_passed": 9,
+  "checks_total": 9,
+  "failed_checks": [],
+  "checks": [
+    {
+      "check": "spawn_catalog_300",
+      "ok": true,
+      "detail": "catalog total=300 schema=kpgs_spawn_300_agents_v2",
+      "expected": 300,
+      "actual": 300,
+      "schema_v2": true
+    },
+    {
+      "check": "cohort_telemetry_cohort",
+      "ok": true,
+      "detail": "telemetry_cohort=100",
+      "count": 100
+    },
+    {
+      "check": "cohort_identic_cohort",
+      "ok": true,
+      "detail": "identic_cohort=100",
+      "count": 100
+    },
+    {
+      "check": "cohort_guardian_cohort",
+      "ok": true,
+      "detail": "guardian_cohort=100",
+      "count": 100
+    },
+    {
+      "check": "spawn_validation_ship",
+      "ok": true,
+      "detail": "verdict=PASS ship=300 hold=0",
+      "ship": 300,
+      "hold": 0
+    },
+    {
+      "check": "spawn_compile",
+      "ok": true,
+      "detail": "spawn_compile=COMPILED chaos=PASS"
+    },
+    {
+      "check": "chaos_monkey",
+      "ok": true,
+      "detail": "chaos=PASS"
+    },
+    {
+      "check": "governance_compile",
+      "ok": true,
+      "detail": "[KPGS_MAIN_BRAIN] authority: Schematics | verdict: COMPILED | thesis: COMPILED | beast: COMPILED | mesh: PASS (19/19 SHIP) | spawn: COMPILED (300/300 SHIP)",
+      "mesh": null,
+      "spawn": {
+        "verdict": "COMPILED",
+        "ship": 300,
+        "agents_total": 300,
+        "hood_objective": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood."
+      }
+    },
+    {
+      "check": "infinite_hood_ready",
+      "ok": true,
+      "detail": "hood=READY assigned=300",
+      "landlords": 5
+    }
+  ],
+  "message": "[KPGS_GATE] ALLOW — 300 agents guilded SHIP; governance COMPILED; hood READY. Thesis world-building may proceed."
+}

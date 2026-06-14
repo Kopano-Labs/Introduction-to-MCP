@@ -1,0 +1,53 @@
+{
+  "schema": "kpefs_closure_status_v1",
+  "internal_kpefs_complete": true,
+  "external_swarm_receipt": false,
+  "full_closure": false,
+  "steward_lane": {
+    "brain": "kc",
+    "teacher": "cassey",
+    "lead_student": "cassy",
+    "note": "KC Save|Watch only — Cassey teacher_review — students under Cassy apprenticeship."
+  },
+  "operating_mesh": {
+    "operating": 9,
+    "total": 9,
+    "phase3_exit_met": true
+  },
+  "graduation_bar": {
+    "verified_production": 19,
+    "bar": 10,
+    "production_bar_met": true
+  },
+  "agent_build_poc_pass": true,
+  "external_swarm": {
+    "schema": "external_swarm_lane_v1",
+    "commandment": "CMD-03",
+    "manual_execution_required": true,
+    "receipt": {
+      "cmd03": "No fake swarm ACK — external orchestration is manual-execution-required until receipt exists.",
+      "receipt_present": false,
+      "receipt_count": 0,
+      "latest": null,
+      "how_to_log": "python scripts/kc_log_append.py kimi-ack (see docs/swarm-ops/KIMI_ACK_FORMAT.md)"
+    },
+    "guide": {
+      "cmd03": "No fake swarm ACK — external orchestration is manual-execution-required until receipt exists.",
+      "payload_ref": "docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md",
+      "kimi_ack_doc": "docs/swarm-ops/KIMI_ACK_FORMAT.md",
+      "steps": [
+        "Paste payload into Kimi (or external orchestrator) manually.",
+        "Capture durable external artifact URL (share link, job URL, export).",
+        "python scripts/kc_external_swarm_lane.py validate-url --url <URL>",
+        "python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md --status acknowledged --evidence-url <URL> --strict-proof",
+        "python scripts/kc_guard.py doctrine-swarm-ack",
+        "python scripts/kc_kpefs_full_gate.py"
+      ],
+      "cli_template": "python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md --status acknowledged --evidence-url \"https://<durable-external-artifact>\" --strict-proof",
+      "guard_unlock": "python scripts/kc_guard.py all --require-swarm-ack"
+    }
+  },
+  "next_human_step": "Log real kimi_ack with external evidence URL (see external_swarm.guide)",
+  "ts": "2026-06-14T12:28:37Z",
+  "when_back_command": "python scripts/kc_kpefs_run_snapshot.py"
+}

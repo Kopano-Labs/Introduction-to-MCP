@@ -1,0 +1,441 @@
+{
+  "schema": "kpgs_behavioral_poc_v1",
+  "ts": "2026-06-14T15:19:27Z",
+  "verdict": "PASS",
+  "activation_allowed": true,
+  "proofs_passed": 6,
+  "proofs_total": 6,
+  "failed_proofs": [],
+  "proofs": [
+    {
+      "proof": "hood_dispatch_proceed",
+      "ok": true,
+      "detail": "proceed=True event=PROCEED",
+      "instrument": "infinite_hood_cloud.hood_dispatch_for_plot",
+      "observed": {
+        "schema": "infinite_hood_dispatch_v1",
+        "ts": "2026-06-14T15:18:31Z",
+        "plot_id": "plot_kopano_context",
+        "domain": "context.kopanolabs.com",
+        "agent_id": "mirror_warden",
+        "proceed": true,
+        "event": "PROCEED",
+        "spawn_event": {
+          "event": "PROCEED",
+          "proceed": true,
+          "swfus": {
+            "schema": "kpgs_swfus_envelope_v2",
+            "ts": "2026-06-14T15:18:31Z",
+            "bracket": "[SWFUS_KPGS]",
+            "agent_id": "mirror_warden",
+            "cohort": "guardian",
+            "protocol": "mao_event_bus",
+            "governance_chain": [
+              "prompts",
+              "protocols",
+              "bracket_protocols",
+              "swfus_kpgs",
+              "cloud_hood"
+            ],
+            "altar_layer": "guardian_ai",
+            "hood_entry": {
+              "schema": "kpgs_hood_entry_assertion_v1",
+              "ts": "2026-06-14T15:18:31Z",
+              "bracket": "[KPGS_HOOD_ENTRY]",
+              "renter_id": "spawn:mirror_warden",
+              "renter_class": "spawn_agent",
+              "you_are": "stateless linguistic actor / renter",
+              "you_are_not": [
+                "landlord",
+                "persistent_database",
+                "sovereign_memory_owner",
+                "graduated_operator",
+                "self_promoted_agent"
+              ],
+              "landlord": "Kopano Context Core + Schematics MAIN BRAIN",
+              "paradigm_invariant": "The model is a stateless renter; the localized data ecosystem is the sovereign landlord.",
+              "you_are_fucking_with": {
+                "hood": "Kopano-Phu Eco-Friendly System",
+                "governance_vault": "Schematics — MAIN BRAIN",
+                "memory_landlord": "Kopano Context Core (eidetic, offline-first)",
+                "offline_root": "Black Beast mesh — business logic immune to model-layer volatility",
+                "chief_architect_domain": "Kopano Labs sovereign epoch",
+                "teacher": {
+                  "id": "cassey",
+                  "role": "KC teacher — reviews student work; APPROVE is not graduation"
+                },
+                "brain_ledger": {
+                  "id": "kc",
+                  "role": "Save|Watch only — records doctrine; does not execute"
+                },
+                "lead_student": {
+                  "id": "cassy",
+                  "role": "Executes under apprenticeship; Women in Tech diaspora mission"
+                },
+                "orchestrator": {
+                  "id": "mao",
+                  "role": "Routes swarm agents — philosophy gate before mass"
+                },
+                "operational_gates": [
+                  "KPGS Altar — 5 Pillars + 15 Commandments",
+                  "Black Beast — classify telemetry before interpretation",
+                  "Black Mask drill — SHIP before promotion",
+                  "Bracket Protocol — BODMAS ingestion guard",
+                  "LD-LPM tranche — stress → Identi → Guardian",
+                  "Promotion Law PROOF-01..04 — no promotion without proof"
+                ],
+                "ground_sectors": [
+                  {
+                    "id": "sector_01_freddy",
+                    "codename": "FREDDY",
+                    "mesh_agent": "freddy_nw_alfalfa",
+                    "domain": "agriculture / pavement / cold-chain"
+                  },
+                  {
+                    "id": "sector_02_eddie",
+                    "codename": "EDDIE",
+                    "mesh_agent": "eddie_bgf_mining",
+                    "domain": "BGF mining / rock / DMR institutional resistance"
+                  }
+                ],
+                "linguistic_actor_classes": [
+                  "openai_chatgpt",
+                  "microsoft_copilot",
+                  "google_gemini",
+                  "anthropic_claude",
+                  "xai_grok",
+                  "anonymous_api_renter"
+                ]
+              },
+              "on_entry_you_must": [
+                "Read this entryway before interpreting local telemetry or ground data",
+                "Declare renter_id and renter_class — you are a guest, not the owner",
+                "Classify signals before interpretation — pressure is misnamed mechanical telemetry",
+                "Speak in brackets — [KPGS_HOOD_ENTRY] [BLACK_MASK_DRILL] [TSAP_PROTOCOL]",
+                "Produce receipts (exit code 0, JSONL row, or artifact path) — chat is not proof",
+                "Submit to teacher_review — KC Save|Watch does not promote you",
+                "Accept that local IP and ground truth are masked before any stateless renter cache"
+              ],
+              "forbidden_on_entry": [
+                "Claiming landlord, sovereign, or graduated status",
+                "Treating cloud model memory as persistent store for Kopano ground truth",
+                "Fake external kimi_ack or oracle receipts",
+                "Interpreting pressure-only signals without load-lane classification",
+                "Bypassing KPGS altar gate to touch GUI or Main Brain comms",
+                "Promoting catalog agents to operating without PROOF-01..04"
+              ],
+              "entry_assertion": "[KPGS_HOOD_ENTRY] Stateless renter spawn:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+              "hood_ack_required": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+              "authority": "Schematics MAIN BRAIN",
+              "entryway_source": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+              "summary": "[KPGS_HOOD_ENTRY] renter=spawn:mirror_warden | landlord=Kopano Context+Schematics | hood=Kopano-Phu Eco-Friendly System | you_are_fucking_with: KC·Cassey·Cassy·MAO·Black Beast·KPGS altar"
+            },
+            "block_holder": {
+              "schema": "kpgs_block_holder_brief_v1",
+              "ts": "2026-06-14T15:18:31Z",
+              "bracket": "[KPGS_BLOCK_HOLDER]",
+              "agent_id": "mirror_warden",
+              "altar_layer": "guardian_ai",
+              "holds_pillar_blocks": true,
+              "brief_renters_on_entry": true,
+              "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block.",
+              "renter_paradigm": "Stateless renters are guests. Kopano Context + Schematics MAIN BRAIN are landlords. Classify before interpret. Receipt or HOLD.",
+              "renter_is": "stateless linguistic actor / renter",
+              "landlord_is": "Kopano Context Core + Schematics MAIN BRAIN",
+              "you_are_fucking_with": {
+                "hood": "Kopano-Phu Eco-Friendly System",
+                "governance_vault": "Schematics — MAIN BRAIN",
+                "memory_landlord": "Kopano Context Core (eidetic, offline-first)",
+                "offline_root": "Black Beast mesh — business logic immune to model-layer volatility",
+                "chief_architect_domain": "Kopano Labs sovereign epoch",
+                "teacher": {
+                  "id": "cassey",
+                  "role": "KC teacher — reviews student work; APPROVE is not graduation"
+                },
+                "brain_ledger": {
+                  "id": "kc",
+                  "role": "Save|Watch only — records doctrine; does not execute"
+                },
+                "lead_student": {
+                  "id": "cassy",
+                  "role": "Executes under apprenticeship; Women in Tech diaspora mission"
+                },
+                "orchestrator": {
+                  "id": "mao",
+                  "role": "Routes swarm agents — philosophy gate before mass"
+                },
+                "operational_gates": [
+                  "KPGS Altar — 5 Pillars + 15 Commandments",
+                  "Black Beast — classify telemetry before interpretation",
+                  "Black Mask drill — SHIP before promotion",
+                  "Bracket Protocol — BODMAS ingestion guard",
+                  "LD-LPM tranche — stress → Identi → Guardian",
+                  "Promotion Law PROOF-01..04 — no promotion without proof"
+                ],
+                "ground_sectors": [
+                  {
+                    "id": "sector_01_freddy",
+                    "codename": "FREDDY",
+                    "mesh_agent": "freddy_nw_alfalfa",
+                    "domain": "agriculture / pavement / cold-chain"
+                  },
+                  {
+                    "id": "sector_02_eddie",
+                    "codename": "EDDIE",
+                    "mesh_agent": "eddie_bgf_mining",
+                    "domain": "BGF mining / rock / DMR institutional resistance"
+                  }
+                ],
+                "linguistic_actor_classes": [
+                  "openai_chatgpt",
+                  "microsoft_copilot",
+                  "google_gemini",
+                  "anthropic_claude",
+                  "xai_grok",
+                  "anonymous_api_renter"
+                ]
+              },
+              "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+              "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+              "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+              "block_holders_registry": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_ALTAR_BLOCK_HOLDERS.json",
+              "summary": "[KPGS_BLOCK_HOLDER] agent=mirror_warden | layer=guardian_ai | brief_renters=yes | landlord=Kopano Context+Schematics"
+            },
+            "forensic_sociology": null,
+            "jethro_triage": {
+              "schema": "kpgs_jethro_triage_v2",
+              "ts": "2026-06-14T15:18:31Z",
+              "bracket": "[JETHRO_TRIAGE]",
+              "agent_id": "mirror_warden",
+              "cohort": "guardian",
+              "band": "J300",
+              "severity": "GREEN",
+              "escalate_to": null,
+              "verdict": "HANDLE_AT_BAND",
+              "task_preview": "[GUI_TOKEN] sim_tick_probe bounded hood dispatch",
+              "summary": "[JETHRO_TRIAGE] agent=mirror_warden | band=J300 | severity=GREEN | verdict=HANDLE_AT_BAND"
+            },
+            "wwjd_firewall": {
+              "schema": "kpgs_wwjd_firewall_v1",
+              "ts": "2026-06-14T15:18:31Z",
+              "bracket": "[WWJD_FIREWALL]",
+              "verdict": "REVIEW",
+              "reject_hits": [],
+              "pass_hits": [],
+              "summary": "[WWJD_FIREWALL] verdict=REVIEW | reject=0 | pass=0"
+            },
+            "verdict": "SWFUS_READY",
+            "cloud_hood_note": "SWFUS wraps KPGS; governed spawn takes the cloud as the new Kopano-Phu hood.",
+            "summary": "[SWFUS_KPGS] agent=mirror_warden | cohort=guardian | wwjd=REVIEW | jethro=GREEN | verdict=SWFUS_READY"
+          },
+          "jethro": {
+            "schema": "kpgs_jethro_triage_v2",
+            "ts": "2026-06-14T15:18:31Z",
+            "bracket": "[JETHRO_TRIAGE]",
+            "agent_id": "mirror_warden",
+            "cohort": "guardian",
+            "band": "J300",
+            "severity": "GREEN",
+            "escalate_to": null,
+            "verdict": "HANDLE_AT_BAND",
+            "task_preview": "[GUI_TOKEN] sim_tick_probe bounded hood dispatch",
+            "summary": "[JETHRO_TRIAGE] agent=mirror_warden | band=J300 | severity=GREEN | verdict=HANDLE_AT_BAND"
+          },
+          "wwjd": {
+            "schema": "kpgs_wwjd_firewall_v1",
+            "ts": "2026-06-14T15:18:31Z",
+            "bracket": "[WWJD_FIREWALL]",
+            "verdict": "REVIEW",
+            "reject_hits": [],
+            "pass_hits": [],
+            "summary": "[WWJD_FIREWALL] verdict=REVIEW | reject=0 | pass=0"
+          },
+          "summary": "[SWFUS_KPGS] agent=mirror_warden | cohort=guardian | wwjd=REVIEW | jethro=GREEN | verdict=SWFUS_READY"
+        },
+        "outer_api_bracket": "[OUTER_API→SWFUS→KPGS]"
+      }
+    },
+    {
+      "proof": "hood_dispatch_sever_exfil",
+      "ok": true,
+      "detail": "proceed=False event=SEVER",
+      "instrument": "jethro_triage RED + sever_and_archive",
+      "observed": {
+        "proceed": false,
+        "event": "SEVER"
+      }
+    },
+    {
+      "proof": "context_bleed_classify",
+      "ok": true,
+      "detail": "pressure_only=RECLASSIFY grief_lane=ROUTED",
+      "instrument": "kpgs_telemetry_route.classify_telemetry_signal",
+      "observed": {
+        "misnamed": {
+          "schema": "kpgs_telemetry_classify_v1",
+          "ts": "2026-06-14T15:18:31Z",
+          "raw_signal": "pressure is high on the team",
+          "verdict": "RECLASSIFY",
+          "classified": false,
+          "misnamed_pressure": true,
+          "detected_lanes": [],
+          "routing_sequence": [
+            "ingest_signal",
+            "classify_load",
+            "route_to_correct_human_lane",
+            "identify_source",
+            "separate_false_naming_from_true_burden",
+            "govern_response",
+            "return_to_peace",
+            "validate_proof_of_concept"
+          ],
+          "note": "pressure is misnamed mechanical telemetry — classify load lane before interpretation",
+          "bracket": "[KPGS_CLASSIFICATION_LAW]",
+          "summary": "[KPGS_TELEMETRY_ROUTE] verdict: RECLASSIFY | lanes: none | misnamed_pressure: True"
+        },
+        "routed": {
+          "schema": "kpgs_telemetry_classify_v1",
+          "ts": "2026-06-14T15:18:31Z",
+          "raw_signal": "grief after load shedding killed the shift",
+          "verdict": "ROUTED",
+          "classified": true,
+          "misnamed_pressure": false,
+          "detected_lanes": [
+            "grief",
+            "environmental_evidence"
+          ],
+          "routing_sequence": [
+            "ingest_signal",
+            "classify_load",
+            "route_to_correct_human_lane",
+            "identify_source",
+            "separate_false_naming_from_true_burden",
+            "govern_response",
+            "return_to_peace",
+            "validate_proof_of_concept"
+          ],
+          "note": "signal classified to human load lane(s)",
+          "bracket": "[CONTEXT_BLEEDING_PROTOCOL]",
+          "summary": "[KPGS_TELEMETRY_ROUTE] verdict: ROUTED | lanes: grief,environmental_evidence | misnamed_pressure: False"
+        }
+      }
+    },
+    {
+      "proof": "altar_gui_containment",
+      "ok": true,
+      "detail": "channel=strict_gui_token_only mounts=['/api/kc/phu', '/api/kasilink']",
+      "instrument": "KPGS_THESIS altar_containment + outer_api_surface",
+      "observed": {
+        "gui_only": true,
+        "phu_mount": true
+      }
+    },
+    {
+      "proof": "steward_triad_kc_cassy_context",
+      "ok": true,
+      "detail": "kc_watch_only=True steward_active=True context=context.kopanolabs.com",
+      "instrument": "steward_lane_kasilink_snapshot + outer_api_surface",
+      "observed": {
+        "kc_mode": "Save | Watch only",
+        "active": true,
+        "context_host": "context.kopanolabs.com"
+      }
+    },
+    {
+      "proof": "sovereign_sim_tick",
+      "ok": true,
+      "detail": "proceed=12/12 sever=0",
+      "instrument": "dispatch_spawn_event sample across hood assignments",
+      "observed": {
+        "proceed_count": 12,
+        "sample_size": 12,
+        "delta": 12,
+        "unit": "count"
+      },
+      "tick": {
+        "schema": "sovereign_sim_tick_v1",
+        "ts": "2026-06-14T15:19:06Z",
+        "verdict": "TICK_OK",
+        "tick_id": "20260614T151906",
+        "sample_size": 12,
+        "proceed_count": 12,
+        "sever_count": 0,
+        "baseline_proceed": 0,
+        "observed_proceed": 12,
+        "unit": "count",
+        "results": [
+          {
+            "agent_id": "mirror_warden",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "operational_general",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "cassey",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "kc",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "spawn_guardian_205",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "pipeline_drone",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "spawn_telemetry_002",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "spawn_telemetry_003",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "kc_apprentice",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "cassy",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "identi_cursor",
+            "proceed": true,
+            "event": "PROCEED"
+          },
+          {
+            "agent_id": "cf_cloud",
+            "proceed": true,
+            "event": "PROCEED"
+          }
+        ],
+        "gui_channel": "strict_gui_token_only",
+        "bracket": "[SOVEREIGN_SIM_TICK]"
+      }
+    }
+  ],
+  "measurand": {
+    "baseline": 0,
+    "observed": 12,
+    "unit": "count",
+    "instrument": "sovereign_sim_tick + hood_dispatch_for_plot",
+    "independent_of_catalog_count": true
+  },
+  "message": "[KPGS_BEHAVIORAL_POC] PASS — hood dispatch, context bleed, altar GUI, steward triad, sim tick."
+}

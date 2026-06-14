@@ -1,0 +1,117 @@
+{
+  "schema": "blackmask_bracket_stress_v1",
+  "ts": "2026-06-14T12:50:34Z",
+  "operator": "LD-LPM",
+  "tranche": "Main Brain audit → KC → Cassy → BlackMask heavy stress",
+  "bracket": "[BLACK_MASK_DRILL] [TSAP_PROTOCOL] [KPEFS_STEWARD_LANE]",
+  "verdict": "PASS",
+  "passed": 9,
+  "total": 9,
+  "failed_checks": [],
+  "mesh_agents_drilled": 19,
+  "bracket_matrix_size": 16,
+  "checks": [
+    {
+      "check": "bracket_heavy_matrix",
+      "verdict": "PASS",
+      "total": 16,
+      "failed": []
+    },
+    {
+      "check": "bracket_log_summaries_80",
+      "verdict": "PASS",
+      "errors": [],
+      "error_count": 0
+    },
+    {
+      "check": "blackmask_live_mesh",
+      "verdict": "PASS",
+      "agents_total": 19,
+      "ship": 19,
+      "hold": 0,
+      "hold_agents": []
+    },
+    {
+      "check": "blackmask_failure_injection",
+      "verdict": "PASS",
+      "partial_verdict": "HOLD",
+      "zero_ack_verdict": "HOLD"
+    },
+    {
+      "check": "blackmask_dry_run_mesh",
+      "verdict": "PASS",
+      "ship": 19,
+      "hold": 0,
+      "agents_total": 19
+    },
+    {
+      "check": "blackmask_core_cassy",
+      "verdict": "PASS",
+      "agent_id": "cassy",
+      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T12:50:34Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
+    },
+    {
+      "check": "blackmask_core_cassey",
+      "verdict": "PASS",
+      "agent_id": "cassey",
+      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T12:50:34Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | "
+    },
+    {
+      "check": "promotion_allowed_flagships",
+      "verdict": "PASS",
+      "flagships_total": 10,
+      "promotion_allowed": 9,
+      "note": "Informational — operating mesh may already satisfy checks",
+      "sample": [
+        {
+          "agent_id": "freddy_nw_alfalfa",
+          "promotion_allowed": true,
+          "law": "No promotion without proof. Drill is not graduation.",
+          "checks": {
+            "blackmask_ship": true,
+            "teacher_approve": true,
+            "receipt": true,
+            "operating_flag": true
+          },
+          "operating_mesh": "operating",
+          "note": "Drill is not graduation — verified production is a separate bar."
+        },
+        {
+          "agent_id": "eddie_bgf_mining",
+          "promotion_allowed": false,
+          "law": "No promotion without proof. Drill is not graduation.",
+          "checks": {
+            "blackmask_ship": true,
+            "teacher_approve": false,
+            "receipt": false,
+            "operating_flag": false
+          },
+          "operating_mesh": null,
+          "note": "Drill is not graduation — verified production is a separate bar."
+        },
+        {
+          "agent_id": "starfall_salvage",
+          "promotion_allowed": true,
+          "law": "No promotion without proof. Drill is not graduation.",
+          "checks": {
+            "blackmask_ship": true,
+            "teacher_approve": true,
+            "receipt": true,
+            "operating_flag": true
+          },
+          "operating_mesh": "operating",
+          "note": "Drill is not graduation — verified production is a separate bar."
+        }
+      ]
+    },
+    {
+      "check": "bracket_rejects_sacred_submit",
+      "verdict": "PASS",
+      "violations": [
+        "Sacred caps blasphemy: [ONE_WORLD_ORDER] — use [oNE_wORLD_oRDER]"
+      ]
+    }
+  ],
+  "report_path": "docs/swarm-ops/BLACKMASK_BRACKET_STRESS.json",
+  "cf_dispatch": "@LD-LPM → LD: Heavy BlackMask + bracket stress — abilities probe complete."
+}

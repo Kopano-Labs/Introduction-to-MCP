@@ -1,0 +1,51 @@
+{
+  "schema": "role_bindings_v1",
+  "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
+  "bindings": {
+    "kc": {
+      "id": "kc",
+      "role": "brain",
+      "executes": false,
+      "chats": false,
+      "stores": "teacher_review",
+      "teacher_review_verdicts": ["Save", "Watch"],
+      "teacher_review_forbidden": ["Kill", "PROMOTE", "GRADUATE", "SHIP"],
+      "api": "/api/kc/brain-opinion",
+      "note": "KC records Cassey/Cursor teacher_review only — Save or Watch."
+    },
+    "cassy": {
+      "id": "cassy",
+      "role": "student_teacher_apprenticeship",
+      "executes": true,
+      "proposes": true,
+      "audits": true,
+      "validates": false,
+      "teacher": "cassey",
+      "brain": "kc",
+      "studio_lane": "kopano",
+      "aliases": ["kopano", "kc_apprentice"],
+      "note": "Single lead student — aliases bind here; no second student role."
+    },
+    "cassey": {
+      "id": "cassey",
+      "role": "teacher",
+      "executes": false,
+      "validates": true,
+      "writes_teacher_review_for": "kc",
+      "student": "cassy",
+      "studio_lane": "cassey"
+    },
+    "mao": {
+      "id": "mao",
+      "role": "orchestrator_surface",
+      "executes_via": "mao_dispatch",
+      "not_a_teacher_of_record": true,
+      "defers_teacher_review_to": "cassey",
+      "defers_kc_storage_to": "kc"
+    }
+  },
+  "deprecated_overlap": {
+    "kc_apprentice": "binds_to cassy — do not treat as separate student",
+    "kopano": "binds_to cassy — studio alias only"
+  }
+}

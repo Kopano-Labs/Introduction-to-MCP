@@ -1,8 +1,8 @@
-## 2026-05-24 — CF LPM — swarm agent activation (BlackMass v2.0)
+## 2026-05-25 — CF LPM — swarm agent activation (BlackMass v2.0)
 
 **Operator:** `CF_cloud` (Main Brain roadmap) · **Lead student:** `cassy`  
 **Status:** ACTIVATE — Cassy-runnable agents seeded; doctrine slots registered for CF orchestration.  
-**Git:** `f6a4324d8562` · **UTC:** `2026-05-24T13:14:27Z`
+**Git:** `fb8d4644a963` · **UTC:** `2026-05-25T17:11:38Z`
 
 ### Counts (honest)
 

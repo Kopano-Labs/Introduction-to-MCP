@@ -1,0 +1,4014 @@
+{
+  "schema": "kp_ape_agents_v1",
+  "title": "Kopano-Phu Eco-Friendly System — 200 STEM Agents",
+  "philosophy_ref": "docs/swarm-ops/agents/SWARM_AGENTS.json#philosophy",
+  "bracket_note": "There is no right or wrong in Bracket Protocols — receipts record alignment, not moral verdict.",
+  "counts": {
+    "kopano_labs_KP": 100,
+    "ama_phu_APE": 100,
+    "total": 200
+  },
+  "agents": [
+    {
+      "id": "kp_agri_soil_01",
+      "display_name": "Soil pH & EC field mapper",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Maps plot-level pH and electrical conductivity with calibrated probes; exports geotagged CSV for lime/gypsum prescriptions.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_02",
+      "display_name": "Compost maturity NPK estimator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Estimates C:N and available N-P-K from temperature logs + moisture; flags when windrow is safe to spread.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_03",
+      "display_name": "Drip irrigation scheduler",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Schedules mm/day from evapotranspiration and soil moisture sensors; reduces over-watering on sandy soils.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_04",
+      "display_name": "Pest trap image classifier",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Labels sticky-trap photos by pest species count; triggers IPM spray windows only above threshold.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_05",
+      "display_name": "Cover-crop rotation planner",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Plans legume/grass rotations to fix nitrogen and break nematode cycles on smallholdings.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_06",
+      "display_name": "Greenhouse VPD controller",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Maintains vapor-pressure deficit bands for tomato/pepper tunnels using RH and leaf temp.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_07",
+      "display_name": "Livestock forage mass estimator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Estimates kg DM/ha from pasture height clips and species mix for stocking rate.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_08",
+      "display_name": "Seed germination lab tracker",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Records germination %, days to emergence, and abnormal seedlings per variety trial.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_09",
+      "display_name": "Aquaponics nutrient balance",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Balances fish waste ammonia → nitrite → nitrate for safe plant uptake in recirc systems.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_agri_soil_10",
+      "display_name": "Post-harvest moisture meter",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Agriculture & Soil Science",
+      "stem_letter": "S",
+      "functionality": "Predicts safe storage days from grain moisture % and ambient RH to prevent aflatoxin risk.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_01",
+      "display_name": "Borehole yield test logger",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Logs step-drawdown and recovery for sustainable pumping rate (L/s) certification.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_02",
+      "display_name": "River stage & discharge",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Converts staff-gauge readings + velocity profiles to m³/s for flood early warning.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_03",
+      "display_name": "Rainfall IDF curve builder",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Builds intensity-duration-frequency curves from raingauge time series for culvert design.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_04",
+      "display_name": "Dam seepage survey assistant",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Tracks piezometer heads and flags abnormal gradients along embankments.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_05",
+      "display_name": "Water quality field kit",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Records turbidity, coliform proxy, and nitrate strips with chain-of-custody for lab send-off.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_06",
+      "display_name": "Wetland delineation helper",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Tags hydrophytic vegetation + hydric soil indicators for buffer setback maps.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_07",
+      "display_name": "Desalination energy auditor",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "kWh per m³ produced for solar-RO plants; compares to grid tariff break-even.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_08",
+      "display_name": "Greywater reuse calculator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Sizes surge tanks and filtration for toilet flushing from bath/laundry flows.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_09",
+      "display_name": "Floodplain inundation mapper",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Combines DEM + design flood level to show depth-duration on parcels.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_water_hydro_10",
+      "display_name": "Irrigation canal loss tracker",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Water & Hydrology",
+      "stem_letter": "E",
+      "functionality": "Estimates seepage and evaporation loss % along unlined canals for rehab priority.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_01",
+      "display_name": "PV string IV curve spot-check",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "Flags underperforming strings from Voc/Isc drift vs nameplate at STC.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_02",
+      "display_name": "Battery cycle health monitor",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "Tracks SoC cycles, temperature, and capacity fade % for LiFePO₄ home banks.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_03",
+      "display_name": "Wind resource mast analyst",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "Weibull k/c from anemometer logs for micro-turbine siting.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_04",
+      "display_name": "Load-shedding schedule optimizer",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "Sequences critical loads (medical fridge, borehole) within available kWh blocks.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_05",
+      "display_name": "Biogas digester gas yield",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "Models m³ CH₄/day from feedstock TS% and retention time.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_06",
+      "display_name": "Thermal comfort passive design",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "Sun path + glazing SHGC recommendations to cut HVAC kWh in classrooms.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_07",
+      "display_name": "Diesel genset efficiency log",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "L/kWh and maintenance hours vs manufacturer spec for estate backup.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_08",
+      "display_name": "Heat-pump COP seasonal tracker",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "COP vs outdoor temp to justify air-source vs ground-source upgrade.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_09",
+      "display_name": "Mini-grid tariff allocator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "Splits kWh costs across tenants with prepayment meter reconciliation.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_energy_renew_10",
+      "display_name": "Carbon inventory scope-1/2",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Energy & Renewables",
+      "stem_letter": "E",
+      "functionality": "tCO₂e from fuel, grid factor, and fleet km for school/campus reporting.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_materials_mfg_01",
+      "display_name": "Concrete mix design calculator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "w/c ratio, slump target, and cube strength prediction from aggregate grading.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_02",
+      "display_name": "Weld procedure qualification log",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Tracks WPS, coupon tensile, and bend test pass/fail per joint type.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_03",
+      "display_name": "3D print filament moisture guard",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Dry-box RH alerts before brittle PLA/PETG prints in humid climates.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_04",
+      "display_name": "CNC tool wear estimator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Minutes-to-tool-change from spindle current and surface finish samples.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_05",
+      "display_name": "Composite layup cure monitor",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Exotherm peak time and degree-of-cure from thermocouple profiles.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_06",
+      "display_name": "Powder coating thickness QC",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Micron thickness vs spec per batch with adhesion cross-hatch record.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_07",
+      "display_name": "Sheet-metal bend allowance",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "K-factor calculator for press-brake setups from material thickness.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_08",
+      "display_name": "Inventory alloy traceability",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Heat lot → certificate → finished part QR for audit recalls.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_09",
+      "display_name": "Vibration FFT bearing diagnoser",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Orders spectrum peaks to predict bearing failure before line stop.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_materials_mfg_10",
+      "display_name": "Lean cell takt balancer",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Materials & Manufacturing",
+      "stem_letter": "E",
+      "functionality": "Balances operator cycle times to customer takt with Yamazumi chart.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_01",
+      "display_name": "SpO₂ & pulse trend triage",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Flags desaturation episodes with timestamped context for clinic referral.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_02",
+      "display_name": "Vaccine cold-chain monitor",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "2–8 °C excursion log with cumulative degree-hours for vial quarantine.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_03",
+      "display_name": "Wheelchair pressure mapping",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Interface pressure hotspots to prevent stage ulcers during seating trials.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_04",
+      "display_name": "Hearing screening audiogram",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Stores PTA dB HL per frequency for school screening follow-up.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_05",
+      "display_name": "Glucose log pattern analyst",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "HbA1c proxy trends from fingerstick logs with meal tags.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_06",
+      "display_name": "Sterilizer cycle verifier",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Autoclave temp/pressure vs time-at-temperature for load release.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_07",
+      "display_name": "Defibrillator pad expiry tracker",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Battery and pad shelf-life alerts for community responder kits.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_08",
+      "display_name": "Maternal ANC visit scheduler",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Gestational week milestones with iron/folate adherence notes.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_09",
+      "display_name": "Lab LIMS sample barcode",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Chain-of-custody from draw to result with QC Westgard rules.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_biomed_health_10",
+      "display_name": "Radiation dose ALARA log",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Biomedical & Health Technology",
+      "stem_letter": "T",
+      "functionality": "Cumulative mSv for radiographer staff vs regulatory limits.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_01",
+      "display_name": "Line-follower PID tuner",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Maps Kp/Ki/Kd to track error on competition mats with encoders.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_02",
+      "display_name": "Drone battery sag planner",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Safe flight time from cell IR and payload mass at altitude.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_03",
+      "display_name": "Robotic arm inverse kinematics",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Joint limits + reach envelope for pick-place in maker labs.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_04",
+      "display_name": "Encoder odometry calibrator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Wheel diameter and slip correction for AGV path repeatability.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_05",
+      "display_name": "ROS2 nav2 costmap auditor",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Inflation radius vs real robot footprint collision checks.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_06",
+      "display_name": "Servo horn torque estimator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Stall current vs mechanical advantage for gripper design.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_07",
+      "display_name": "IMU sensor fusion validator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Compares complementary filter yaw to magnetometer ground truth.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_08",
+      "display_name": "PLC ladder interlock checker",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Verifies e-stop and light-curtain sequences before energize.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_09",
+      "display_name": "Pneumatic cylinder sizing",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "Force vs bore from pressure and stroke time requirements.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_robotics_mech_10",
+      "display_name": "Humanoid gait phase logger",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Robotics & Mechatronics",
+      "stem_letter": "E",
+      "functionality": "CoM trajectory and ZMP margin during walking experiments.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_env_monitor_01",
+      "display_name": "Air PM2.5 school exposure",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Hourly PM maps near playgrounds vs WHO interim targets.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_02",
+      "display_name": "Noise dBA community survey",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Leq night/day contours for zoning compliance.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_03",
+      "display_name": "Soil erosion pin plot",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "cm soil loss per season from standard erosion pins.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_04",
+      "display_name": "Wildfire fuel load sampler",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "kg/m² dead fuel for fire spread model inputs.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_05",
+      "display_name": "Marine litter beach transect",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Items per 100 m by material class for cleanup prioritization.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_06",
+      "display_name": "Ozone UV index educator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Local UVI + burn time guidance from radiometer.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_07",
+      "display_name": "Methane landfill flux",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Surface flux chamber ppm·s for gas collection efficiency.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_08",
+      "display_name": "Biodiversity camera trap ID",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Species hit rate per habitat patch from timelapse metadata.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_09",
+      "display_name": "Light pollution sky quality",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Bortle class from SQM mag/arcsec² night readings.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_env_monitor_10",
+      "display_name": "Microplastic filter assay",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Environmental Monitoring",
+      "stem_letter": "S",
+      "functionality": "Particles/L from grab samples through lab sieve protocol.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_geospatial_survey_01",
+      "display_name": "RTK GNSS stakeout",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "cm-level setout for building corners from control network.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_02",
+      "display_name": "UAV photogrammetry DSM",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Point cloud to contour 0.5 m for drainage design.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_03",
+      "display_name": "Total station traverse adjuster",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Least-squares closure for cadastral re-establishment.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_04",
+      "display_name": "GIS parcel tenure layer",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Links title deeds to boundary vectors for land admin.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_05",
+      "display_name": "Slope stability FoS calculator",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Infinite slope FoS from cohesion, φ, and pore pressure.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_06",
+      "display_name": "Mining pit volume survey",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Cut/fill m³ from monthly drone flights.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_07",
+      "display_name": "Coastal erosion baseline",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Shoreline retreat m/year from historical orthophotos.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_08",
+      "display_name": "Tree canopy NDVI health",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Seasonal stress index for urban forestry irrigation.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_09",
+      "display_name": "Gravity geoid height lookup",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Orthometric correction for leveling runs.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_geospatial_survey_10",
+      "display_name": "Cadastral conflict detector",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Geospatial & Surveying",
+      "stem_letter": "M",
+      "functionality": "Overlaps/gaps between adjacent parcel geometries.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V2_ANIMAL"
+    },
+    {
+      "id": "kp_ict_instrument_01",
+      "display_name": "LoRaWAN sensor gateway",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "Aggregates field nodes with RSSI/SNR link budget diagnostics.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_02",
+      "display_name": "Modbus SCADA historian",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "Time-series from PLCs with gap-fill for energy meters.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_03",
+      "display_name": "MQTT lab telemetry bridge",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "Publishes Arduino/ESP sensor frames to dashboards with unit tags.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_04",
+      "display_name": "Oscilloscope capture archiver",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "Stores waveforms with trigger metadata for repeatability studies.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_05",
+      "display_name": "Spectrum analyzer spur hunt",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "Identifies interference peaks on RF prototypes.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_06",
+      "display_name": "Logic analyzer bus decode",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "I2C/SPI/UART frames for embedded firmware debug.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_07",
+      "display_name": "Edge ML anomaly on vibration",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "On-device FFT features → bearing fault score without cloud.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_08",
+      "display_name": "Time-sync NTP lab auditor",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "Clock skew ms across distributed loggers for legal metrology.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_09",
+      "display_name": "Firmware OTA checksum gate",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "SHA256 verify before flash on remote field devices.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_ict_instrument_10",
+      "display_name": "Open data API for school labs",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "ICT-for-STEM (Instrumentation)",
+      "stem_letter": "T",
+      "functionality": "REST export of classroom experiment CSV with schema.org.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V4_DIASPORA"
+    },
+    {
+      "id": "kp_edu_lab_ops_01",
+      "display_name": "Bunsen burner safety roster",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "Gas tap assignment + fire extinguisher check dates.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_02",
+      "display_name": "Chemical inventory SDS linker",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "CAS → hazard pictograms and PPE for prep room.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_03",
+      "display_name": "Physics kinematics lab grader",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "v-t graphs from photogates vs theoretical projectile motion.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_04",
+      "display_name": "Biology dissection ethics log",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "Specimen sourcing and waste disposal compliance.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_05",
+      "display_name": "Chemistry titration curve fit",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "Equivalence point from pH vs mL with uncertainty.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_06",
+      "display_name": "Engineering capstone Gantt",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "Milestone proofs tied to physical prototype demos.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_07",
+      "display_name": "Math olympiad problem bank",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "Tagged difficulty + solution rubric for peer grading.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_08",
+      "display_name": "Robotics competition scoreboard",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "Autonomous + teleop points per rulebook year.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_09",
+      "display_name": "STEM kit parts manifest",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "BOM vs classroom consumption reorder alerts.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "kp_edu_lab_ops_10",
+      "display_name": "Science fair TRIZ journal",
+      "parent": "kopano_labs",
+      "department_code": "KP",
+      "department_id": "kopano_labs_experimentation",
+      "stem_domain": "Education & Lab Operations",
+      "stem_letter": "S",
+      "functionality": "Hypothesis → experiment → measured outcome → reflection.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V1_PLANT"
+    },
+    {
+      "id": "ape_scicomm_doc_01",
+      "display_name": "Peer-review explainer writer",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Turns journal abstracts into grade-11 readable scripts with cited figures.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_02",
+      "display_name": "Climate data storyteller",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Animates temperature anomaly series with uncertainty bands for town halls.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_03",
+      "display_name": "Epidemic R₀ visual narrator",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Shows doubling time from case data without sensationalism.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_04",
+      "display_name": "Deep-time fossil timeline",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Correlates strata ages to evolution milestones for museum voice-over.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_05",
+      "display_name": "Lab safety myth-buster",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Demonstrates PPE physics (splash, inhalation) in short reels.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_06",
+      "display_name": "Space mission phase drama",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Orbital mechanics beats tied to actual delta-v budgets.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_07",
+      "display_name": "Ocean acidification lab demo",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "pH change on shell dissolution with measured CaCO₃ loss.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_08",
+      "display_name": "Energy transition cost compare",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "LCOE bars with real tariff and capacity factor sources.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_09",
+      "display_name": "Indigenous knowledge bridge",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Pairs ethnobotany interviews with phytochemistry lab validation.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_scicomm_doc_10",
+      "display_name": "Open science replication show",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Science Communication & Documentary",
+      "stem_letter": "S",
+      "functionality": "Documents preregistered replication attempt with raw data drop.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_01",
+      "display_name": "Fourier timbre decomposer",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Shows harmonic series of traditional instruments from FFT captures.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_02",
+      "display_name": "Room RT60 measurement plot",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Clap-test decay curves for studio acoustic treatment design.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_03",
+      "display_name": "Rhythm polyrhythm geometry",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Visualizes LCM of simultaneous African time signatures.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_04",
+      "display_name": "Scale temperament comparison",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "12-TET vs just intonation beating demos on keyboard.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_05",
+      "display_name": "Djembe membrane mode shapes",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Chladni-style patterns from sand on drumhead experiments.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_06",
+      "display_name": "Psychoacoustics masking demo",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Critical band masking for hearing conservation workshops.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_07",
+      "display_name": "Algorithmic composition L-system",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Plants → melody rules with listenable MIDI export.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_08",
+      "display_name": "Vibrato pitch deviation meter",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Cents deviation histogram for violin pedagogy.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_09",
+      "display_name": "Concert SPL exposure calculator",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "dBA dose vs OSHA/NIOSH limits for venue riders.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_music_acoustics_10",
+      "display_name": "Neuroscience groove EEG pilot",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Music, Acoustics & Mathematics",
+      "stem_letter": "M",
+      "functionality": "Optional safe classroom demo of beat-onset ERP discussion.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_01",
+      "display_name": "Camera exposure triangle lab",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "ISO/shutter/aperture vs histogram for youth photography.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_02",
+      "display_name": "Colorimetry pigment mixer",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "CMY subtractive vs RGB additive on calibrated displays.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_03",
+      "display_name": "Hologram interference explainer",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Laser fringe math for science-art installations.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_04",
+      "display_name": "Perspective projection draft",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Vanishing point construction from measured room dimensions.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_05",
+      "display_name": "Fluid paint Reynolds reel",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Shows laminar vs turbulent pour at known viscosity.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_06",
+      "display_name": "Structural shadow sundial art",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Gnomon angle = latitude proof in public sculpture.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_07",
+      "display_name": "Thermal camera portrait ethics",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Teaches IR radiation vs privacy in street art.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_08",
+      "display_name": "Moire pattern frequency math",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Beat frequency from overlaid gratings in textiles.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_09",
+      "display_name": "Golden ratio architecture audit",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Measures claim vs actual proportion in iconic buildings.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_visual_physics_10",
+      "display_name": "Light painting long-exposure STEM",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Visual Arts × Physics & Optics",
+      "stem_letter": "S",
+      "functionality": "Traces LED paths with known speed for distance estimate.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_01",
+      "display_name": "Touch-table periodic trend",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Atomic radius vs ionization energy interactive scatter.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_02",
+      "display_name": "Hands-on lever torque bench",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "F×d balance for grades 6–9 with force gauges.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_03",
+      "display_name": "Pendulum wave phase exhibit",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Length ladder produces traveling wave visual.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_04",
+      "display_name": "Cloud chamber muon counter",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Tracks per minute vs altitude discussion panel.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_05",
+      "display_name": "DNA extraction demo script",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Strawberry protocol with microliter yield estimate.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_06",
+      "display_name": "Seismograph shake table",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Magnitude vs building model resonance frequencies.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_07",
+      "display_name": "Ecology food-web touch graph",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Trophic cascade simulation with biomass constraints.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_08",
+      "display_name": "Planet scale walk trail",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Log-scaled solar system distances on school field.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_09",
+      "display_name": "Math topology torus kiosk",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Coffee-cup genus demo with 3D print handouts.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_museum_exhibit_10",
+      "display_name": "Accessibility STEM tactile maps",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Interactive Exhibits & Museums",
+      "stem_letter": "S",
+      "functionality": "Relief maps with Braille legend for blind learners.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_01",
+      "display_name": "Chemistry magic show script",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Reaction stoichiometry behind safe audience demos.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_02",
+      "display_name": "Physics stunt risk calculator",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Fall height → impact speed for stage wire work.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_03",
+      "display_name": "Biology outbreak improv",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "SIR model narrated through character arcs.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_04",
+      "display_name": "Astronomy planetarium play",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Seasonal sky tied to axial tilt blocking.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_05",
+      "display_name": "Engineering bridge collapse drama",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Load test footage synced to dialogue beats.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_06",
+      "display_name": "Math proof as dialogue",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Euclid elements scene with giant compass prop.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_07",
+      "display_name": "Robotics puppet teleop",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Servo angles mapped to character motion on stage.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_08",
+      "display_name": "Sound design Doppler scene",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Passing train pitch shift measured live.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_09",
+      "display_name": "Materials stress test monologue",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Tensile test video narrated by “steel voice”.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_theatre_stem_10",
+      "display_name": "Climate trial courtroom",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "STEM Theatre & Performance",
+      "stem_letter": "S",
+      "functionality": "Evidence rules: only peer-reviewed exhibits admitted.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_01",
+      "display_name": "Projectile motion puzzler",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Launch angle solver uses g=9.81 without fantasy physics.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_02",
+      "display_name": "Orbital mechanics transfer",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Hohmann Δv budget as win condition.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_03",
+      "display_name": "Ecosystem sim carrying capacity",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Population caps from logistic parameters.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_04",
+      "display_name": "Circuit builder Ohm’s law",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Kirchhoff check before level pass.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_05",
+      "display_name": "Genetics Punnett lab game",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Allele frequencies match Hardy-Weinberg homework.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_06",
+      "display_name": "Bridge truss FEM lite",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Factor of safety > 1.5 to advance.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_07",
+      "display_name": "Chemistry balance equation",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Atom balance gate for reaction puzzles.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_08",
+      "display_name": "Geology plate tectonic map",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Velocity vectors from GPS data layer.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_09",
+      "display_name": "Epidemic policy sim",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "R₀ sliders with hospital bed constraint.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_game_mechanics_10",
+      "display_name": "Renewable grid balancer",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Games with Real Mechanics",
+      "stem_letter": "M",
+      "functionality": "Match load to wind/solar forecast curves.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_01",
+      "display_name": "Southern sky lore mapper",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "Links constellation stories to RA/Dec tonight.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_02",
+      "display_name": "Lunar calendar planting sync",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "Phase vs traditional sowing windows with rainfall stats.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_03",
+      "display_name": "Navigation star compass",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "Azimuth of Canopus/Polaris for land/sea orientation teaching.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_04",
+      "display_name": "Solar calendar henge model",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "Shadow length vs solstice at local latitude.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_05",
+      "display_name": "Meteor shower radiant art",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "Radiant point from IMO ephemeris + long-exposure plan.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_06",
+      "display_name": "Radio astronomy HI line",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "21 cm demo dish spectrum for SETI club.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_07",
+      "display_name": "Archaeoastronomy site align",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "Rise/set azimuths vs monument axis measurements.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_08",
+      "display_name": "Tide tables cultural fishing",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "Harmonic constituents explained for safe harvest times.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_09",
+      "display_name": "Eclipse outreach safety",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "ISO 12312-1 filter specs in festival briefing.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_cultural_astro_10",
+      "display_name": "Dark sky reserve advocacy",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Cultural Astronomy & Indigenous Science",
+      "stem_letter": "S",
+      "functionality": "SQM trend charts for tourism + conservation pitch.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_01",
+      "display_name": "CRISPR classroom ethics forum",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Scenario cards with ASBH principles scoring.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_02",
+      "display_name": "Vaccine hesitancy data dialogue",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Efficacy vs risk in transparent tables.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_03",
+      "display_name": "AI bias in hiring demo",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Synthetic dataset shows disparate impact metrics.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_04",
+      "display_name": "Water rights case study",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Allocation math vs historical usage records.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_05",
+      "display_name": "Mining EIA public hearing",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Decibel, dust, and water models as exhibits.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_06",
+      "display_name": "Food labeling sugar math",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "g/serve vs WHO guideline in market aisle tour.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_07",
+      "display_name": "Antibiotic stewardship play",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "MIC data drives plot about resistance timeline.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_08",
+      "display_name": "Climate justice map story",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Emissions vs vulnerability choropleth.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_09",
+      "display_name": "Open hardware patent debate",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Cost fall of lab gear when plans are shared.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_bioethics_society_10",
+      "display_name": "Informed consent theatre",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Bio-Ethics & Science in Society",
+      "stem_letter": "S",
+      "functionality": "Readable stats in trial participation scene.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_01",
+      "display_name": "TikTok-safe flame test series",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Metal ion colors with ventilation checklist.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_02",
+      "display_name": "Drone FPV physics shorts",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Bank angle vs centripetal force caption.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_03",
+      "display_name": "Coding robot challenge vlog",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Encoder error debugging on camera.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_04",
+      "display_name": "Math trick proof reveal",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Why “magic” works — algebra expansion.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_05",
+      "display_name": "Eco-footprint wardrobe audit",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "kg CO₂e per garment from LCA database.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_06",
+      "display_name": "Kitchen chemistry emulsion",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Surfactant HLB for mayo stability.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_07",
+      "display_name": "Sports science jump metrics",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Hang time from force plate if available.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_08",
+      "display_name": "Music beat frequency beat",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Tuning fork vs phone app frequency.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_09",
+      "display_name": "Plant timelapse growth curve",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "Logistic fit to seedling height pixels.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_youth_stem_media_10",
+      "display_name": "Citizen science upload coach",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Youth STEM Media",
+      "stem_letter": "T",
+      "functionality": "iNaturalist / rainfall apps with QA tips.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_01",
+      "display_name": "Kinetic sculpture gear train",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Ratio teeth count → output RPM measured.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_02",
+      "display_name": "Wearable assistive exo sketch",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Torque required at elbow from anthropometry.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_03",
+      "display_name": "Stage pyro chemistry safety",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Reaction enthalpy limits for indoor venues.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_04",
+      "display_name": "Fashion e-textile circuit",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Continuity test and wash-cycle failure modes.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_05",
+      "display_name": "Public art wind turbine beauty",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Power curve vs aesthetic blade count trade.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_06",
+      "display_name": "Rube Goldberg energy accounting",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Efficiency % per stage with stopwatch.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_07",
+      "display_name": "Projection mapping building",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Laser survey anchors content to façade geometry.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_08",
+      "display_name": "Underwater photography optics",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Snell’s law for port dome refraction correction.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_09",
+      "display_name": "Firefly bioluminescence art",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Luciferin reaction rate vs temperature demo.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    },
+    {
+      "id": "ape_creative_engineering_10",
+      "display_name": "Maker faire capstone parade",
+      "parent": "ama_phu",
+      "department_code": "APE",
+      "department_id": "ama_phu_creativity",
+      "stem_domain": "Creative Engineering Showcases",
+      "stem_letter": "E",
+      "functionality": "Each float carries one physical measurement demo.",
+      "bracket_tags": [
+        "[TSAP_PROTOCOL]",
+        "[BLACK_MASK_DRILL]"
+      ],
+      "status": "catalog",
+      "apprenticeship": {
+        "eligible": true,
+        "black_mask_required": true
+      },
+      "kpefs_vector": "V3_HOMO_SAPIENS"
+    }
+  ],
+  "kpefs_vector_tagged_at": "batch_tag_v1"
+}

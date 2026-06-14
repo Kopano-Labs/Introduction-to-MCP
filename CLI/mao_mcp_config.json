@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "mao": {
+      "command": "python",
+      "args": ["C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\CLI\\mao_server.py"],
+      "transport": "stdio",
+      "description": "MAO — Multi Agent Orchestrator (LPM). Routes between 13 swarm agents, offline-first state, proof-gated."
+    }
+  }
+}

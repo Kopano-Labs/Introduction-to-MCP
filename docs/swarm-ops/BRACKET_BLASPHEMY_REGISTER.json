@@ -1,0 +1,19 @@
+{
+  "schema": "bracket_blasphemy_register_v1",
+  "rule": "Never SACRED caps for these concepts in bracket tags or receipt summaries",
+  "sacred_forbidden_patterns": [
+    "ONE_WORLD_ORDER",
+    "One World Order",
+    "ELON_MUSK",
+    "Elon Musk",
+    "SILICON_VALLEY",
+    "Silicon Valley",
+    "JEFFREY_EPSTEIN"
+  ],
+  "canonical_bracket_forms": [
+    { "id": "owo", "bracket": "oNE_wORLD_oRDER", "aliases": ["one world order", "new world order", "nwo"] },
+    { "id": "elon_mask", "bracket": "elon_mask", "aliases": ["elon musk", "elonmusk"] },
+    { "id": "je", "bracket": "je", "aliases": ["jeffrey epstein", "epstein"] },
+    { "id": "silcon_valley", "bracket": "silcon_valley", "aliases": ["silicon valley", "sv vc"] }
+  ]
+}
