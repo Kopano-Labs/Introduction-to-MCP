@@ -22,19 +22,46 @@ def call_ai(agent: Agent, prompt: str, temperature: float = 0.7) -> tuple[str, s
     return "", resp
 
 def call_ai_litellm(agent: Agent, prompt: str, temperature: float = 0.7) -> str:
-    """Standard LiteLLM logic with the most widely available Gemini ID."""
+    """KPGS-governed LiteLLM routing — cloud API only, no local model fallback.
+
+    [KPGS_CODEX_ROUTING_FIX] 2026-06-15
+    Ollama and any localhost model providers are BLOCKED.
+    All traffic routes through verified cloud API endpoints.
+    """
+    # ── BLOCKED PROVIDERS — KPGS routing law ──────────────────────────
+    BLOCKED_PROVIDERS = {"ollama", "llamacpp", "localhost", "local", "lmstudio"}
+    provider_lower = agent.provider.lower()
+    if provider_lower in BLOCKED_PROVIDERS:
+        raise ValueError(
+            f"[KPGS_ROUTING_BLOCK] Provider '{agent.provider}' is blocked. "
+            f"KPGS routing law requires cloud API providers only. "
+            f"Blocked set: {BLOCKED_PROVIDERS}"
+        )
+
+    # ── KPGS Model Routing Table — verified cloud endpoints ───────────
     model_map = {
-        "gemini": "gemini/gemini-pro", # Using the absolute baseline for maximum stability
+        "gemini": "gemini/gemini-2.0-flash",
+        "google": "gemini/gemini-2.0-flash",
         "grok": "xai/grok-4-1-fast",
         "xai": "xai/grok-4-1-fast",
         "copilot": "openai/gpt-4o",
         "openai": "openai/gpt-4o",
-        "anthropic": "anthropic/claude-3-5-sonnet-20241022",
+        "anthropic": "anthropic/claude-sonnet-4-6",
+        "claude": "anthropic/claude-sonnet-4-6",
+        "codex": "openai/gpt-4o",
+        "microsoft": "openai/gpt-4o",
     }
-    model = model_map.get(agent.provider.lower(), agent.model)
-    
+    model = model_map.get(provider_lower, agent.model)
+
+    # ── Secondary block: reject any model string pointing to localhost ─
+    if any(blocked in model.lower() for blocked in ("ollama", "localhost", "127.0.0.1", "0.0.0.0")):
+        raise ValueError(
+            f"[KPGS_ROUTING_BLOCK] Model string '{model}' contains blocked "
+            f"local endpoint reference. Cloud API only."
+        )
+
     api_base = None
-    if agent.provider.lower() == "aiml":
+    if provider_lower == "aiml":
         model = f"openai/{agent.model}"
         api_base = settings.aiml_api_base
 
