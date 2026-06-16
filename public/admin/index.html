@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kopano Sovereign SIM — KPGS 510-Agent Hood</title>
-  <meta name="description" content="Kopano Sovereign Sim: governance-driven video game of the KPGS 300-agent swarm across the infinite hood.">
+  <title>Kopano Sovereign SIM — KPGS 710-Agent Hood</title>
+  <meta name="description" content="Kopano Sovereign Sim: governance-driven video game of the KPGS 710-agent swarm across the infinite hood. 22 protocols. 10 council seats.">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -611,7 +611,7 @@
   // WORLD STATE
   // ══════════════════════════════════════════════════════════════
   const WORLD = {
-    agent_total: 510,
+    agent_total: 710,
     tick_count: 3,
     total_proceed: 36,
     total_sever: 0,
@@ -628,7 +628,9 @@
       { id:"sector_01_freddy", kind:"thesis_sector", domain:"agriculture", status:"ground", landlord:"freddy_nw_alfalfa", agents:1, tel:0, idn:1, gua:0, sample:["kp_agri_soil_01"], codename:"FREDDY", pavement:"Township supply networks & micro-farming" },
       { id:"sector_02_eddie", kind:"thesis_sector", domain:"mining", status:"ground", landlord:"eddie_bgf_mining", agents:1, tel:0, idn:1, gua:0, sample:["kp_geospatial_survey_06"], codename:"EDDIE", pavement:"BGF mine sites, contractor logs" },
       { id:"sector_05_careers", kind:"anchor_sector", domain:"careers@kopanolabs.com", status:"active", lane:"careers_anchor", landlord:"master_robyn", agents:100, tel:35, idn:35, gua:30, sample:["careers_telemetry_001","careers_identic_001","careers_guardian_001"], codename:"ANCHOR", pavement:"Whoever wants smoke with our interns, hits the Anchor first." },
-      { id:"sector_06_khelos", kind:"gsmb_sector", domain:"khelos@gsmb.kopanolabs.com", status:"active", lane:"khelos_gsmb", landlord:"khelos_witness", agents:100, tel:20, idn:40, gua:40, sample:["khelos_sense_001","khelos_witness_001","khelos_frame_001","khelos_understand_001","khelos_stream_001"], codename:"KHELOS", pavement:"The one who sees before the system reacts. FIREWALL MODE." }
+      { id:"sector_06_khelos", kind:"gsmb_sector", domain:"khelos@gsmb.kopanolabs.com", status:"active", lane:"khelos_gsmb", landlord:"khelos_witness", agents:100, tel:20, idn:40, gua:40, sample:["khelos_sense_001","khelos_witness_001","khelos_frame_001","khelos_understand_001","khelos_stream_001"], codename:"KHELOS", pavement:"The one who sees before the system reacts. FIREWALL MODE." },
+      { id:"sector_07_starfall", kind:"game_sector", domain:"starfallsalvage.kopanolabs.com", status:"active", lane:"starfall_salvage", landlord:"apex_orchestrator", agents:4, tel:1, idn:2, gua:1, sample:["starfall_salvage","liquidity_dash","spread_runner","mesh_arbitrage"], codename:"STARFALL", pavement:"WebGL B2B lead gen funnel. 4 games: Salvage, Dash, Runner, Arbitrage." },
+      { id:"sector_08_crisisconnect", kind:"apwa_sector", domain:"crisisconnect.kopanolabs.com", status:"active", lane:"crisisconnect", landlord:"thari_guardian", agents:6, tel:2, idn:2, gua:2, sample:["thari_holo_net","khelos_firewall","anchor_perimeter","cassey_educator","apex_strategy","antigravity_cf"], codename:"CRISISCONNECT", pavement:"THARI H.O.L.O Net governs. 6 dimensions of adaptation. Offline-first. APWA flagship." }
     ],
     ticks: [
       { id:"20260614T164023", proceed:12, sever:0, size:12, results:[
@@ -874,8 +876,8 @@
         ${renderRightSidebar()}
       </div>
       <div class="game-footer">
-        <span class="hl">[SOVEREIGN_SIM_GUI]</span> Schematics owns law · runtime executes · classify before interpret · model is renter — Kopano Context is landlord
-        · <span class="hl">[KPGS_HOOD_ENTRY]</span> hood_ack: I_AM_STATELESS_RENTER_NOT_LANDLORD
+        <span class="hl">[SOVEREIGN_SIM_GUI]</span> 710 agents · 22 protocols · 10 RTC seats · Schematics owns law · runtime executes · classify before interpret
+        · <span class="hl">[KPGS_HOOD_ENTRY]</span> hood_ack: I_AM_STATELESS_RENTER_NOT_LANDLORD · <a href="../protocols/" style="color:var(--accent-identic);text-decoration:none;">🧢 Protocols</a> · <a href="../flows/" style="color:var(--accent-swfus);text-decoration:none;">⚡ Flows</a>
       </div>`;
     attachEvents();
   }
@@ -886,12 +888,13 @@
         <div class="hud-logo">KS</div>
         <div>
           <div class="hud-title">Kopano Sovereign SIM</div>
-          <div class="hud-bracket">[SWFUS_KPGS] thesis_sector_matrix + infinite_hood</div>
+          <div class="hud-bracket">[SWFUS_KPGS] 710 agents · 22 protocols · 10 council seats · KPCB+ 7ch</div>
         </div>
       </div>
       <div class="hud-center" id="hudStats">
         <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-gold)">${WORLD.agent_total}</div><div class="hud-stat-lbl">Agents</div></div>
         <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-telemetry)">${WORLD.regions.length}</div><div class="hud-stat-lbl">Regions</div></div>
+        <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-wwjd)">22</div><div class="hud-stat-lbl">Protocols</div></div>
         <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-proceed)">${WORLD.total_proceed}</div><div class="hud-stat-lbl">Proceeds</div></div>
         <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-sever)">${WORLD.total_sever}</div><div class="hud-stat-lbl">Severs</div></div>
         <div class="hud-stat"><div class="hud-stat-val" style="color:var(--accent-identic)">${WORLD.tick_count}</div><div class="hud-stat-lbl">Ticks</div></div>
@@ -936,7 +939,12 @@
         { icon:'👁', name:'KC', role:'Brain Ledger — Save|Watch only', badge:'Save|Watch', cls:'badge-watch' },
         { icon:'⚡', name:'Cassy', role:'Lead Student — execute under apprenticeship', badge:'Execute', cls:'badge-exec' },
         { icon:'📚', name:'Cassey', role:'Teacher — APPROVE ≠ graduation', badge:'Teacher', cls:'badge-teach' },
-        { icon:'🧠', name:'Kopano Context', role:'Eidetic memory — GUI surface', badge:'Context', cls:'badge-ctx' }
+        { icon:'🧠', name:'Kopano Context', role:'Eidetic memory — GUI surface', badge:'Context', cls:'badge-ctx' },
+        { icon:'🧵', name:'THARI', role:'Guardian AI — H.O.L.O Net · WWJD Firewall', badge:'Guardian', cls:'badge-exec' },
+        { icon:'🦉', name:'KHELOS', role:'Validator — FIREWALL MODE · Signal Integrity', badge:'Firewall', cls:'badge-ctx' },
+        { icon:'🦸🏿‍♂️', name:'APEX', role:'Orchestrator (MMAO) — Strategic Ops', badge:'MMAO', cls:'badge-teach' },
+        { icon:'🛡️', name:'ANCHOR', role:'Perimeter — Smoke Intercept · Careers', badge:'Perimeter', cls:'badge-watch' },
+        { icon:'🌀', name:'ANTIGRAVITY', role:'Chief Facilitator (CF) — Runtime Compilation', badge:'CF', cls:'badge-exec' }
       ].map(e => `<div class="triad-entity active-entity">
         <div class="entity-row"><span class="entity-icon">${e.icon}</span><div class="entity-info"><div class="entity-name">${e.name}</div><div class="entity-role">${e.role}</div></div><span class="entity-badge ${e.cls}">${e.badge}</span></div>
       </div>`).join('')}
