@@ -1,0 +1,241 @@
+{
+  "schema": "kpgs_iscp_v1",
+  "document_id": "ISCP-SPEC-2026",
+  "title": "Inter-Swarm Communication Protocol (ISCP)",
+  "purpose": "Controls how Careers swarm, KHELOS swarm, and Anchor layer communicate without chaos — avoiding agent noise, circular loops, and fake escalation.",
+  "generated": "2026-06-16T17:14:00Z",
+  "authority": "Schematics MAIN BRAIN",
+
+  "system_stack": {
+    "note": "The KPGS system stack is now 4 tiers deep. Each tier has a strict role boundary.",
+    "tiers": [
+      {
+        "position": 1,
+        "emoji": "🦸🏿‍♂️",
+        "name": "Apex",
+        "role": "Orchestrator (MMAO)",
+        "function": "High-level decisions, swarm coordination, strategic direction",
+        "sees": ["validated_poc_signals", "iscp_escalations", "department_status"],
+        "does_not_see": ["raw_noise", "foc_signals", "internal_routing"]
+      },
+      {
+        "position": 2,
+        "emoji": "🦉",
+        "name": "KHELOS",
+        "role": "Validator (Orchard Witness) — FIREWALL MODE",
+        "function": "Signal integrity, POC validation, auto-blocks FOC before Apex sees it",
+        "mode": "FIREWALL",
+        "sees": ["all_signals", "foc_noise", "poc_candidates", "swarm_requests"],
+        "does_not_see": ["apex_orchestration_internals"]
+      },
+      {
+        "position": 3,
+        "emoji": "🛡️",
+        "name": "Anchor",
+        "role": "Perimeter (Environment Shield)",
+        "function": "Smoke intercept, personnel protection, 4Ws gating, external noise filter",
+        "sees": ["external_inbound", "corporate_noise", "hiring_events"],
+        "does_not_see": ["internal_swfus_loops", "khelos_frame_data"]
+      },
+      {
+        "position": 4,
+        "emoji": "👥",
+        "name": "Swarms",
+        "role": "Execution Bodies",
+        "function": "Internal SWFUS lifecycle execution within department boundaries",
+        "sees": ["department_signals", "iscp_routed_requests"],
+        "does_not_see": ["other_department_internals", "apex_decisions"]
+      }
+    ]
+  },
+
+  "signal_control_law": {
+    "note": "No agent is allowed to violate these 5 laws. KHELOS enforces via FIREWALL MODE.",
+    "laws": [
+      {"id": "SCL-01", "rule": "Sense cannot output", "reason": "Sensing is intake only — no side effects"},
+      {"id": "SCL-02", "rule": "Witness cannot classify", "reason": "Witnessing is observation only — no judgment"},
+      {"id": "SCL-03", "rule": "Frame cannot decide truth", "reason": "Framing is structure only — no interpretation"},
+      {"id": "SCL-04", "rule": "Understand cannot inject new data", "reason": "Understanding processes existing data — no fabrication"},
+      {"id": "SCL-05", "rule": "Stream cannot mutate signal", "reason": "Streaming is output only — no transformation"}
+    ],
+    "enforcement": "KHELOS FIREWALL MODE auto-blocks any agent violating SCL-01 through SCL-05",
+    "result": "Total separation of responsibilities = no contamination = pure POC pipeline"
+  },
+
+  "routing_matrix": {
+    "note": "Three routing cases govern every signal through KHELOS.",
+    "cases": [
+      {
+        "id": "CASE_A",
+        "name": "CLEAN_SIGNAL",
+        "condition": "Signal passes all SWFUS phases without FOC detection",
+        "path": "Sense → Witness → Frame → Understand ✅ POC → Stream → Apex/MMAO",
+        "action": "ROUTE_TO_MMAO",
+        "verdict": "POC_VALIDATED"
+      },
+      {
+        "id": "CASE_B",
+        "name": "FOC_DETECTED",
+        "condition": "Witness or Understand detects FOC noise pattern",
+        "path": "Sense → Witness → Frame → Understand ❌ FOC → LOOPBACK → Frame",
+        "action": "LOOPBACK_FRAME",
+        "verdict": "DECLINE",
+        "loopback_limit": 3,
+        "after_limit": "IIDP_PERMANENT_DECLINE"
+      },
+      {
+        "id": "CASE_C",
+        "name": "UNKNOWN_INCOMPLETE",
+        "condition": "Signal is ambiguous — neither clear POC nor clear FOC",
+        "path": "Sense → Witness → Frame → Understand ⚠️ IIDP HOLD → TBFP monitor",
+        "action": "IIDP_HOLD",
+        "verdict": "HOLD",
+        "monitor_duration_seconds": 300,
+        "escalation": "After 300s, escalate to Apex for human review"
+      }
+    ]
+  },
+
+  "iscp_protocol": {
+    "note": "The 3-level request-validate-route protocol for inter-swarm communication.",
+
+    "level_1_request": {
+      "name": "REQUEST",
+      "description": "Agent submits communication request with SWFUS state, intent, and target",
+      "schema": {
+        "swfus_state": "Current SWFUS phase of requesting agent (sense/witness/frame/understand/stream)",
+        "intent": "What the agent wants to communicate (data_share/escalation/status_query/resource_request)",
+        "target": "Target department or agent (careers_anchor/khelos_gsmb/apex/specific_agent_id)",
+        "payload": "The actual data being communicated",
+        "source_department": "Originating department (careers@kopanolabs.com / khelos@gsmb.kopanolabs.com)",
+        "timestamp": "ISO 8601 UTC timestamp"
+      },
+      "example": {
+        "swfus_state": "S_stream",
+        "intent": "data_share",
+        "target": "khelos_gsmb",
+        "payload": {"candidate_id": "KAT-001", "validation_status": "SANDBOX_90DAY"},
+        "source_department": "careers@kopanolabs.com",
+        "timestamp": "2026-06-16T17:14:00Z"
+      }
+    },
+
+    "level_2_validation": {
+      "name": "VALIDATION",
+      "description": "KHELOS checks the request for POC validity and permission",
+      "checks": [
+        {"check": "is_poc", "description": "Is this request POC-valid? Does it serve the orchard?"},
+        {"check": "is_allowed", "description": "Is the requesting agent authorized to communicate with the target?"},
+        {"check": "is_bounded", "description": "Does the payload stay within department boundaries?"},
+        {"check": "is_clean", "description": "Does the payload contain any FOC noise patterns?"},
+        {"check": "is_within_rate", "description": "Is the requesting agent within its communication rate limit?"}
+      ],
+      "verdicts": ["APPROVED", "DECLINED", "HOLD", "REROUTE"],
+      "firewall_mode": "If any check fails, request is auto-blocked BEFORE Apex sees it"
+    },
+
+    "level_3_routing": {
+      "name": "ROUTING",
+      "description": "After validation, the request is routed to the appropriate tier",
+      "routes": [
+        {"verdict": "APPROVED", "target_type": "swarm", "action": "Route to target swarm for internal execution"},
+        {"verdict": "APPROVED", "target_type": "apex", "action": "Escalate to Apex for high-level decision"},
+        {"verdict": "DECLINED", "action": "Block and log to IIDP decline register"},
+        {"verdict": "HOLD", "action": "Buffer in TBFP monitor queue for 300s"},
+        {"verdict": "REROUTE", "action": "Redirect to correct department based on SWFUS classification"}
+      ]
+    }
+  },
+
+  "apex_khelos_contract": {
+    "note": "The communication contract between Apex (Orchestrator) and KHELOS (Validator).",
+    "apex_to_khelos": {
+      "allowed": [
+        "department_status_query",
+        "signal_audit_request",
+        "mode_change (FIREWALL/OBSERVER)",
+        "rate_limit_adjustment",
+        "foc_pattern_update"
+      ],
+      "forbidden": [
+        "direct_agent_manipulation",
+        "bypass_swfus_loop",
+        "override_iidp_decline",
+        "inject_data_into_stream"
+      ]
+    },
+    "khelos_to_apex": {
+      "allowed": [
+        "validated_poc_signal",
+        "foc_alert_notification",
+        "iidp_hold_escalation",
+        "department_status_report",
+        "system_health_metric"
+      ],
+      "forbidden": [
+        "raw_unvalidated_data",
+        "internal_routing_details",
+        "agent_level_telemetry",
+        "frame_phase_intermediates"
+      ]
+    },
+    "axiom": "KHELOS does not compete with Apex — KHELOS protects Apex. KHELOS does not build the orchard — KHELOS ensures the orchard stays true."
+  },
+
+  "anchor_khelos_contract": {
+    "note": "Anchor handles external perimeter. KHELOS handles internal signal integrity. No overlap.",
+    "anchor_to_khelos": {
+      "allowed": [
+        "cleared_external_signal",
+        "personnel_shield_status",
+        "smoke_intercept_alert"
+      ],
+      "forbidden": [
+        "unfiltered_external_noise",
+        "raw_corporate_data",
+        "unsevered_smoke_signals"
+      ]
+    },
+    "khelos_to_anchor": {
+      "allowed": [
+        "internal_foc_alert_for_perimeter_update",
+        "new_foc_pattern_detection",
+        "swarm_health_metric"
+      ],
+      "forbidden": [
+        "direct_personnel_commands",
+        "perimeter_override",
+        "external_communication"
+      ]
+    }
+  },
+
+  "swarm_swarm_contract": {
+    "note": "How execution swarms (Careers, future departments) communicate through ISCP.",
+    "rules": [
+      "All inter-swarm communication MUST route through KHELOS validation",
+      "No direct swarm-to-swarm data transfer without ISCP Level 2 approval",
+      "Each department operates within its own SWFUS lifecycle — no cross-contamination",
+      "Shared telemetry is read-only — no department can mutate another department's state",
+      "Rate limit: 100 ISCP requests per department per tick cycle"
+    ]
+  },
+
+  "deployment": {
+    "runtime_modules": [
+      "kopano-core/kopano/khelos_witness_engine.py",
+      "kopano-core/kopano/anchor_vanguard.py"
+    ],
+    "catalogs": [
+      "docs/swarm-ops/agents/KPGS_KHELOS_100_AGENTS.json",
+      "docs/swarm-ops/agents/KPGS_CAREERS_100_AGENTS.json"
+    ],
+    "governance": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_GOVERNANCE_CORE.json",
+    "total_agents": 510,
+    "swarm_breakdown": {
+      "base_swarm": 310,
+      "careers_anchor": 100,
+      "khelos_gsmb": 100
+    }
+  }
+}

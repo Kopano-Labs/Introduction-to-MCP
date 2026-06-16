@@ -1,0 +1,5979 @@
+{
+  "schema": "kpgs_careers_100_agents_v1",
+  "document_id": "KPGS-CAREERS-ANCHOR-100",
+  "title": "100-Agent Careers Department Swarm - Anchor Vanguard",
+  "department_email": "careers@kopanolabs.com",
+  "anchor_node": "ANCHOR",
+  "vanguard_axiom": "Whoever wants smoke with our interns, with our employees, hits the Anchor first.",
+  "head_of_department": "master_robyn",
+  "generated": "2026-06-16T16:32:48Z",
+  "counts": {
+    "total": 100,
+    "telemetry": 35,
+    "identic": 35,
+    "guardian": 30
+  },
+  "governance_chain": [
+    "prompts",
+    "protocols",
+    "bracket_protocols",
+    "swfus_kpgs",
+    "cloud_hood"
+  ],
+  "anchor_protection": {
+    "core_sovereign_nodes": [
+      "LPH",
+      "Siyanda",
+      "Freddy"
+    ],
+    "active_onboarding_nodes": [
+      "Katlego",
+      "Monica"
+    ],
+    "sandbox_shield_days": 90,
+    "zero_trust": true
+  },
+  "four_ws": {
+    "WHO": "Sovereign human core; compute weights paid in ZAR",
+    "WHAT": "KinTech infrastructure - careers pipeline for township economic self-sufficiency",
+    "WHERE": "Pavement of township informal economy via Black Beast local mesh",
+    "WHY_WIDE": "Eliminate 32.8% local unemployment through proximity-locked hiring"
+  },
+  "agents": [
+    {
+      "spawn_slot": "001",
+      "id": "careers_telemetry_001",
+      "display_name": "Careers Tel 001 (cv)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": true,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "CV intake parser",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "structural",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "002",
+      "id": "careers_telemetry_002",
+      "display_name": "Careers Tel 002 (skills)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Skills taxonomy classifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "003",
+      "id": "careers_telemetry_003",
+      "display_name": "Careers Tel 003 (employment)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Employment gap detector",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "004",
+      "id": "careers_telemetry_004",
+      "display_name": "Careers Tel 004 (application)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Application channel router",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "005",
+      "id": "careers_telemetry_005",
+      "display_name": "Careers Tel 005 (resume)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Resume dedup scanner",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "006",
+      "id": "careers_telemetry_006",
+      "display_name": "Careers Tel 006 (language)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Language proficiency tagger",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "007",
+      "id": "careers_telemetry_007",
+      "display_name": "Careers Tel 007 (qualification)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Qualification verifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "008",
+      "id": "careers_telemetry_008",
+      "display_name": "Careers Tel 008 (location)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Location proximity scorer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "009",
+      "id": "careers_telemetry_009",
+      "display_name": "Careers Tel 009 (salary)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Salary expectation normalizer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "010",
+      "id": "careers_telemetry_010",
+      "display_name": "Careers Tel 010 (reference)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Reference check ingester",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "011",
+      "id": "careers_telemetry_011",
+      "display_name": "Careers Tel 011 (portfolio)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Portfolio link validator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "012",
+      "id": "careers_telemetry_012",
+      "display_name": "Careers Tel 012 (work)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Work sample classifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "013",
+      "id": "careers_telemetry_013",
+      "display_name": "Careers Tel 013 (interview)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Interview availability scheduler",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "014",
+      "id": "careers_telemetry_014",
+      "display_name": "Careers Tel 014 (communication)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Communication tone analyzer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "015",
+      "id": "careers_telemetry_015",
+      "display_name": "Careers Tel 015 (kpgs)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "KPGS alignment pre-screen",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "016",
+      "id": "careers_telemetry_016",
+      "display_name": "Careers Tel 016 (education)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Education credential parser",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "017",
+      "id": "careers_telemetry_017",
+      "display_name": "Careers Tel 017 (certification)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Certification validator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "018",
+      "id": "careers_telemetry_018",
+      "display_name": "Careers Tel 018 (experience)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Experience years calculator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "019",
+      "id": "careers_telemetry_019",
+      "display_name": "Careers Tel 019 (industry)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Industry domain mapper",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "020",
+      "id": "careers_telemetry_020",
+      "display_name": "Careers Tel 020 (soft)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Soft skills signal extractor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "021",
+      "id": "careers_telemetry_021",
+      "display_name": "Careers Tel 021 (technical)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Technical stack profiler",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "022",
+      "id": "careers_telemetry_022",
+      "display_name": "Careers Tel 022 (remote)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Remote readiness assessor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "023",
+      "id": "careers_telemetry_023",
+      "display_name": "Careers Tel 023 (diversity)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Diversity context tagger",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "024",
+      "id": "careers_telemetry_024",
+      "display_name": "Careers Tel 024 (application)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Application completeness gate",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "025",
+      "id": "careers_telemetry_025",
+      "display_name": "Careers Tel 025 (cover)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Cover letter intent parser",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "026",
+      "id": "careers_telemetry_026",
+      "display_name": "Careers Tel 026 (referral)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Referral chain tracer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "027",
+      "id": "careers_telemetry_027",
+      "display_name": "Careers Tel 027 (pavement)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Pavement proximity scorer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "028",
+      "id": "careers_telemetry_028",
+      "display_name": "Careers Tel 028 (township)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Township origin validator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "029",
+      "id": "careers_telemetry_029",
+      "display_name": "Careers Tel 029 (youth)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Youth employment signal",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "030",
+      "id": "careers_telemetry_030",
+      "display_name": "Careers Tel 030 (internship)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Internship readiness tagger",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "031",
+      "id": "careers_telemetry_031",
+      "display_name": "Careers Tel 031 (freelance)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Freelance history classifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "032",
+      "id": "careers_telemetry_032",
+      "display_name": "Careers Tel 032 (entrepreneurship)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Entrepreneurship signal extractor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "033",
+      "id": "careers_telemetry_033",
+      "display_name": "Careers Tel 033 (volunteer)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Volunteer experience parser",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "034",
+      "id": "careers_telemetry_034",
+      "display_name": "Careers Tel 034 (digital)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Digital literacy assessor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "035",
+      "id": "careers_telemetry_035",
+      "display_name": "Careers Tel 035 (mobile-first)",
+      "cohort": "telemetry",
+      "role": "careers_telemetry",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "telemetry_ai",
+      "forensic_lens": null,
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "telemetry",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "telemetry_sense",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence"
+        ],
+        "commandments_shard": "ingest_classify_only",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "raw_input",
+          "ground_aware_map",
+          "telemetry_dump",
+          "careers_intake"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[TELEMETRY_AI_GATE]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_intake",
+      "functionality": "Mobile-first readiness probe",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": false
+      }
+    },
+    {
+      "spawn_slot": "036",
+      "id": "careers_identic_001",
+      "display_name": "Careers Idn 001 (4ws)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": true,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "4Ws candidate alignment scorer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "structural",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "037",
+      "id": "careers_identic_002",
+      "display_name": "Careers Idn 002 (cultural)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Cultural fit vector",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "038",
+      "id": "careers_identic_003",
+      "display_name": "Careers Idn 003 (wwjd)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "WWJD ethical alignment gate",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "039",
+      "id": "careers_identic_004",
+      "display_name": "Careers Idn 004 (swfus)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "SWFUS candidate envelope",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "040",
+      "id": "careers_identic_005",
+      "display_name": "Careers Idn 005 (sovereign)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Sovereign identity verifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "041",
+      "id": "careers_identic_006",
+      "display_name": "Careers Idn 006 (black)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Black Mask drill responder",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "042",
+      "id": "careers_identic_007",
+      "display_name": "Careers Idn 007 (jethro)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Jethro band placement engine",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "043",
+      "id": "careers_identic_008",
+      "display_name": "Careers Idn 008 (candidate)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Candidate archetype classifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "044",
+      "id": "careers_identic_009",
+      "display_name": "Careers Idn 009 (forensic)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Forensic background checker",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "045",
+      "id": "careers_identic_010",
+      "display_name": "Careers Idn 010 (interview)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Interview transcript analyzer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "046",
+      "id": "careers_identic_011",
+      "display_name": "Careers Idn 011 (personality-role)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Personality-role matrix mapper",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "047",
+      "id": "careers_identic_012",
+      "display_name": "Careers Idn 012 (growth)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Growth trajectory predictor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "048",
+      "id": "careers_identic_013",
+      "display_name": "Careers Idn 013 (apprenticeship)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Apprenticeship readiness gate",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "049",
+      "id": "careers_identic_014",
+      "display_name": "Careers Idn 014 (team)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Team dynamics compatibility",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "050",
+      "id": "careers_identic_015",
+      "display_name": "Careers Idn 015 (leadership)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Leadership potential scorer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "051",
+      "id": "careers_identic_016",
+      "display_name": "Careers Idn 016 (conflict)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Conflict resolution profile",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "052",
+      "id": "careers_identic_017",
+      "display_name": "Careers Idn 017 (resilience)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Resilience index calculator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "053",
+      "id": "careers_identic_018",
+      "display_name": "Careers Idn 018 (self-motivation)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Self-motivation signal",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "054",
+      "id": "careers_identic_019",
+      "display_name": "Careers Idn 019 (accountability)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Accountability pattern tracer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "055",
+      "id": "careers_identic_020",
+      "display_name": "Careers Idn 020 (innovation)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Innovation mindset classifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "056",
+      "id": "careers_identic_021",
+      "display_name": "Careers Idn 021 (community)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Community impact scorer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "057",
+      "id": "careers_identic_022",
+      "display_name": "Careers Idn 022 (pavement)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Pavement experience validator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "058",
+      "id": "careers_identic_023",
+      "display_name": "Careers Idn 023 (stem)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "STEM aptitude profiler",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "059",
+      "id": "careers_identic_024",
+      "display_name": "Careers Idn 024 (creative)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Creative expression gauge",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "060",
+      "id": "careers_identic_025",
+      "display_name": "Careers Idn 025 (multi-language)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Multi-language capability",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "061",
+      "id": "careers_identic_026",
+      "display_name": "Careers Idn 026 (cross-sector)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Cross-sector adaptability",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "062",
+      "id": "careers_identic_027",
+      "display_name": "Careers Idn 027 (pressure)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Pressure response profile",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "063",
+      "id": "careers_identic_028",
+      "display_name": "Careers Idn 028 (ethical)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Ethical boundary detector",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "064",
+      "id": "careers_identic_029",
+      "display_name": "Careers Idn 029 (sovereign)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Sovereign alignment verifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "065",
+      "id": "careers_identic_030",
+      "display_name": "Careers Idn 030 (knowledge-understanding)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Knowledge-understanding separator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "066",
+      "id": "careers_identic_031",
+      "display_name": "Careers Idn 031 (execution)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Execution vs theory classifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "067",
+      "id": "careers_identic_032",
+      "display_name": "Careers Idn 032 (teachability)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Teachability index",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "068",
+      "id": "careers_identic_033",
+      "display_name": "Careers Idn 033 (feedback)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Feedback receptivity gauge",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "069",
+      "id": "careers_identic_034",
+      "display_name": "Careers Idn 034 (proactive)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Proactive initiative scorer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "070",
+      "id": "careers_identic_035",
+      "display_name": "Careers Idn 035 (township)",
+      "cohort": "identic",
+      "role": "careers_identic",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "identic",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": true,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "identic_reason",
+        "five_pillars_shard": [
+          "ground_awareness",
+          "eidetic_persistence",
+          "zero_trust_isolation"
+        ],
+        "commandments_shard": "reason_classify_defer",
+        "ledger_commit_authority": false,
+        "capabilities": [
+          "identity_verify",
+          "alignment_score",
+          "forensic_classify",
+          "careers_screen"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[IDENTI_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_alignment",
+      "functionality": "Township solidarity marker",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "071",
+      "id": "careers_guardian_001",
+      "display_name": "Careers Grd 001 (90-day)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": true,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J50",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "90-day sandbox enforcer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "structural",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "072",
+      "id": "careers_guardian_002",
+      "display_name": "Careers Grd 002 (onboarding)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J50",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Onboarding pipeline orchestrator",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "073",
+      "id": "careers_guardian_003",
+      "display_name": "Careers Grd 003 (probation)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J50",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Probation checkpoint gate",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "074",
+      "id": "careers_guardian_004",
+      "display_name": "Careers Grd 004 (mentor)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J50",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Mentor assignment engine",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "075",
+      "id": "careers_guardian_005",
+      "display_name": "Careers Grd 005 (performance)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J50",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Performance review scheduler",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "076",
+      "id": "careers_guardian_006",
+      "display_name": "Careers Grd 006 (kpi)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "KPI alignment monitor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "077",
+      "id": "careers_guardian_007",
+      "display_name": "Careers Grd 007 (contract)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Contract compliance verifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "078",
+      "id": "careers_guardian_008",
+      "display_name": "Careers Grd 008 (nda)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "NDA acknowledgment gate",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "079",
+      "id": "careers_guardian_009",
+      "display_name": "Careers Grd 009 (intellectual)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Intellectual property shield",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "080",
+      "id": "careers_guardian_010",
+      "display_name": "Careers Grd 010 (extractive)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Extractive behavior detector",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "081",
+      "id": "careers_guardian_011",
+      "display_name": "Careers Grd 011 (corporate)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Corporate noise interceptor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "082",
+      "id": "careers_guardian_012",
+      "display_name": "Careers Grd 012 (smoke)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Smoke severance executor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "083",
+      "id": "careers_guardian_013",
+      "display_name": "Careers Grd 013 (internal)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Internal comms firewall",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "084",
+      "id": "careers_guardian_014",
+      "display_name": "Careers Grd 014 (workspace)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Workspace access controller",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "085",
+      "id": "careers_guardian_015",
+      "display_name": "Careers Grd 015 (data)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Data classification enforcer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "086",
+      "id": "careers_guardian_016",
+      "display_name": "Careers Grd 016 (leave)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Leave management router",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "087",
+      "id": "careers_guardian_017",
+      "display_name": "Careers Grd 017 (training)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Training completion tracker",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "088",
+      "id": "careers_guardian_018",
+      "display_name": "Careers Grd 018 (certification)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Certification renewal monitor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "089",
+      "id": "careers_guardian_019",
+      "display_name": "Careers Grd 019 (exit)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Exit interview processor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "090",
+      "id": "careers_guardian_020",
+      "display_name": "Careers Grd 020 (rehire)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Rehire eligibility gate",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "091",
+      "id": "careers_guardian_021",
+      "display_name": "Careers Grd 021 (whistleblower)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Whistleblower protection shield",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "092",
+      "id": "careers_guardian_022",
+      "display_name": "Careers Grd 022 (harassment)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Harassment detection sentinel",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "093",
+      "id": "careers_guardian_023",
+      "display_name": "Careers Grd 023 (pay)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Pay equity auditor",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "094",
+      "id": "careers_guardian_024",
+      "display_name": "Careers Grd 024 (benefits)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Benefits enrollment gate",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "095",
+      "id": "careers_guardian_025",
+      "display_name": "Careers Grd 025 (emergency)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Emergency contact updater",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "096",
+      "id": "careers_guardian_026",
+      "display_name": "Careers Grd 026 (equipment)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Equipment allocation tracker",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "097",
+      "id": "careers_guardian_027",
+      "display_name": "Careers Grd 027 (badge)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Badge access controller",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "098",
+      "id": "careers_guardian_028",
+      "display_name": "Careers Grd 028 (compliance)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Compliance training enforcer",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "099",
+      "id": "careers_guardian_029",
+      "display_name": "Careers Grd 029 (sovereign)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_ZUMA",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Sovereign systems onboard verifier",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    },
+    {
+      "spawn_slot": "100",
+      "id": "careers_guardian_030",
+      "display_name": "Careers Grd 030 (personnel)",
+      "cohort": "guardian",
+      "role": "careers_guardian",
+      "structural": false,
+      "catalog_ref": null,
+      "altar_layer": "guardian_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
+      "jethro_band": "J10",
+      "kpgs": {
+        "cohort": "guardian",
+        "brief_renters_on_entry": true,
+        "swfus_required": true,
+        "sharded_doctrine": false,
+        "holds_pillar_blocks": true,
+        "doctrine_shard": "guardian_govern",
+        "five_pillars_shard": "all",
+        "commandments_shard": "full_commandments",
+        "ledger_commit_authority": true,
+        "fifteen_commandments": true,
+        "five_pillars": true,
+        "capabilities": [
+          "gate_enforce",
+          "severance_execute",
+          "ledger_commit",
+          "careers_protect",
+          "anchor_shield"
+        ]
+      },
+      "governance_chain": [
+        "prompts",
+        "protocols",
+        "bracket_protocols",
+        "swfus_kpgs",
+        "cloud_hood"
+      ],
+      "bracket_tags": [
+        "[KPGS_SPAWN]",
+        "[KPGS_BLOCK_HOLDER]",
+        "[SWFUS_KPGS]",
+        "[JETHRO_TRIAGE]",
+        "[WWJD_FIREWALL]",
+        "[GUARDIAN_AI_FLOW]",
+        "[ANCHOR_VANGUARD]"
+      ],
+      "stem_domain": "careers_governance",
+      "functionality": "Personnel protection index",
+      "department": "careers@kopanolabs.com",
+      "anchor_node": "ANCHOR",
+      "status": "sandbox",
+      "apprenticeship": {
+        "student": "cassy",
+        "teacher": "cassey",
+        "brain": "kc",
+        "black_mask_required": true
+      }
+    }
+  ]
+}

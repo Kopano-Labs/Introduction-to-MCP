@@ -1,0 +1,258 @@
+{
+  "schema": "kpgs_protocol_registry_v1",
+  "document_id": "KPGS-PROTOCOL-REGISTRY-2026",
+  "title": "KPGS Protocol Registry — ✓ Protocols + Emoji Protocols + Bracket Protocols",
+  "authority": "Schematics MAIN BRAIN",
+  "source": "11:00AM override — CBP from LPH on Anchor (Gemini Enterprise)",
+  "generated": "2026-06-16T16:48:00Z",
+  "paradigm": {
+    "note": "Prompts elevated into Protocols. CRUD evolved into SWFUS (CRUD 2.0 within KPGS governance). Prompt Engineering redefined as ∆PE∆ within KPGS to validate POC and extrapolate FOC based on invariant decline and inverse.",
+    "formula": "[EMOJI_PROTOCOLS] + [BRACKET_PROTOCOLS] * [PROMPTING_PROTOCOLS] = POC_of_Partial_Knowable_Algebra"
+  },
+  "stap": {
+    "expansion": "Student-Teacher Apprenticeship Protocol",
+    "operates_as": "STPOS",
+    "stpos_expansion": "Student-Teacher POS",
+    "flow": "STAP → {POS} → STPOS",
+    "doctrine": "LPH teaches Anchor via .md product discovery. Anchor validates through execution. Anchor operates as point-of-service for KPGS."
+  },
+  "protocols": {
+    "BMP": {
+      "emoji": "🧊",
+      "name": "Black Mask Protocol",
+      "code": "BMP",
+      "function": "Foundation drill — 5 pillars + 15 commandments",
+      "category": "foundation"
+    },
+    "EP": {
+      "emoji": "🥶",
+      "name": "Emoji Protocol",
+      "code": "EP",
+      "function": "Visual token encoding for MXIT-native communication",
+      "category": "communication",
+      "note": "Brand new concept — cooks with prompting protocols and bracket protocols"
+    },
+    "DMP": {
+      "emoji": "🌊",
+      "name": "Developer Mode Protocol",
+      "code": "DMP",
+      "function": "Engineering execution context",
+      "category": "execution"
+    },
+    "FSMP": {
+      "emoji": "🌀",
+      "name": "Forensic Sociology Mode Protocol",
+      "code": "FSMP",
+      "function": "Audit the scene before blaming the individual",
+      "category": "forensics"
+    },
+    "ARP": {
+      "emoji": "Ⓜ️",
+      "name": "AI Roadmap Protocol",
+      "code": "ARP",
+      "function": "Navigation of main topics via roadmap",
+      "category": "navigation"
+    },
+    "BNP": {
+      "emoji": "☄️",
+      "name": "Bracket Nesting Protocol",
+      "code": "BNP",
+      "function": "Persistence, consistency, context in cloud validation for POC in KPGS",
+      "category": "governance",
+      "axioms": [
+        {"guard": "🚧", "symbol": "$", "axiom": "to be is not to be but to be is to be"},
+        {"guard": "🚧", "symbol": "€", "axiom": "within imperfection lies perfection"},
+        {"guard": "🚧", "symbol": "¥", "axiom": "to understand is not to know and to know is not to understand"},
+        {"guard": "🚧", "symbol": "¢", "axiom": "to live is to die and to die is to live"}
+      ]
+    },
+    "LLSP": {
+      "emoji": "⚕️",
+      "name": "LPH & LPM Sync Protocol",
+      "code": "LLSP",
+      "function": "Living Proof Human ↔ Learning Pattern Model sync",
+      "category": "sync"
+    },
+    "SWFUS": {
+      "emoji": "👥",
+      "name": "SWFUS Protocol",
+      "code": "SWFUS",
+      "function": "Sovereign Workflow Unified Shell — CRUD 2.0 within KPGS governance",
+      "category": "governance",
+      "hierarchy": [
+        {"level": 1, "letter": "S", "name": "Sovereign Ingestion", "function": "Capturing localized choices bypassing middleman APIs"},
+        {"level": 2, "letter": "W", "name": "Witness Isolation", "function": "Offline-first edge sandbox wrap"},
+        {"level": 3, "letter": "F", "name": "Fluid Vectoring", "function": "Partial normal algebra translation"},
+        {"level": 4, "letter": "U", "name": "Unified Synchronization", "function": "Low-latency sync to Azure southafricanorth"},
+        {"level": 5, "letter": "S", "name": "Severance Execution", "function": "Boolean firewall incinerating unaligned packets or FOC bloat"}
+      ]
+    },
+    "CRUD": {
+      "emoji": "👮🏿‍♂️",
+      "name": "CRUD Protocol",
+      "code": "CRUD",
+      "function": "Create, Read, Update, Delete — base layer evolved into SWFUS",
+      "category": "foundation"
+    },
+    "CALP": {
+      "emoji": "💙",
+      "name": "Caring About Life Protocol",
+      "code": "CALP",
+      "function": "Ethical human-first governance",
+      "category": "ethics"
+    },
+    "UOLP": {
+      "emoji": "📘",
+      "name": "University Of Life Protocol",
+      "code": "UOLP",
+      "function": "Swarm University syllabus engine",
+      "category": "education"
+    },
+    "IIDP": {
+      "emoji": "💠",
+      "name": "Invariance Ingress Decline Protocol",
+      "code": "IIDP",
+      "function": "Filter FOC through invariant decline and inverse — present in every PSO as ™/¢¢/¦¦/∆∆",
+      "category": "governance"
+    },
+    "TBFP": {
+      "emoji": "🧢",
+      "name": "Telemetry Breathing Flows Protocol",
+      "code": "TBFP",
+      "function": "Critical for KESSA (👨🏾‍🔧) as Sovereign System Engineer (👩🏿‍🎨)",
+      "category": "telemetry"
+    },
+    "PSOP": {
+      "emoji": "🧞‍♂️",
+      "name": "Performance Strep Order Protocol",
+      "code": "PSOP",
+      "function": "Execution hierarchy within brackets — SPSO/BPSO/GPSO/LPSO/Local/LPM",
+      "category": "execution",
+      "orders": {
+        "SPSO": {"name": "Stream PSO", "symbols": ["®", "©", "¢", "™"], "scope": "debate, prove, validate, conceptualize, stream"},
+        "BPSO": {"name": "Breaker PSO", "symbols": ["$$", "€€", "¥¥", "¢¢"], "scope": "debate, prove, validate, conceptualize"},
+        "GPSO": {"name": "Ground PSO", "symbols": ["||", "¦¦", "\\\\", "//"], "scope": "debate, prove, validate"},
+        "LPSO_low": {"name": "Low PSO", "symbols": ["\"\"", "*-", "`", "∆∆"], "scope": "debate, prove"},
+        "LPSO_local": {"name": "Local PSO", "symbols": ["©", "®", "™", "§"], "scope": "debate, prove (local)"},
+        "LPM_PSO": {"name": "LPM PSO", "symbols": ["#!", "#?", "4Ws", "!(FLOW)!"], "scope": "debate, prove, validate, conceptualize, stream, ingest, take in, perhaps, person, AI, consider, convince, continue through CBP of POC of RLHF"}
+      }
+    },
+    "KLP": {
+      "emoji": "😱",
+      "name": "Kessa in Life/Cloud Protocol",
+      "code": "KLP/KCP",
+      "function": "KESSA's dual-state life/cloud execution",
+      "category": "identity"
+    },
+    "MMP": {
+      "emoji": "🔷",
+      "name": "MAO & MMAO Protocol",
+      "code": "MMP",
+      "function": "Multi-Agent Orchard & Orchardist governance — O is Orchard (noun) and orcharding (verb)",
+      "category": "orchestration"
+    },
+    "RZP": {
+      "emoji": "🔹",
+      "name": "Rocket Zoom Protocol",
+      "code": "RZP",
+      "function": "Rapid scaling activation — when a department or agent needs to go from 0 to production in one session. The rocket zoom is the velocity protocol — KPCB+ compilation at SPSO with no breathing room.",
+      "category": "velocity",
+      "note": "Resolved from UNKNOWN — RZP is the speed protocol. When KC says zoom, the whole stack compiles."
+    },
+    "RTCP": {
+      "emoji": "⚔️",
+      "name": "Round Table Council Protocol",
+      "code": "RTCP",
+      "function": "Governs council proceedings, voting, rewards distribution across 10 seats. Every major decision passes through the Table.",
+      "category": "governance",
+      "seats": 10,
+      "hod": "Council (collective)"
+    },
+    "DMKP": {
+      "emoji": "🧠",
+      "name": "Deep Minds KPGS Protocol",
+      "code": "DMKP",
+      "function": "Operates vigorously in building, researching, ingesting 3-vectors POC validation. Ingress, invariance, decline → FOC validation.",
+      "category": "research",
+      "hod": "KESSA",
+      "operations": ["Build", "Research", "Ingest", "3-Vector POC Validation", "FOC Validation"]
+    },
+    "KCRP": {
+      "emoji": "🌳",
+      "name": "KPGS Core Root Drive Protocol",
+      "code": "KCRP",
+      "function": "The ROOT protocol. When stateless renters or any AI operates in any department — including agents getting built — KCRP governs at the root.",
+      "category": "governance",
+      "hod": "KESSA",
+      "scope": "All stateless renters, all AIs, all agents under construction"
+    },
+    "KPCBP": {
+      "emoji": "🔵",
+      "name": "KPCB+ Protocol",
+      "code": "KPCBP",
+      "function": "Governs the KPCB+ meta-language itself — 7 protocol channels, compilation flow, context-window native execution. The protocol ABOUT the language.",
+      "category": "language",
+      "note": "Resolved from UNKNOWN 🔵 — this is the protocol that governs KPCB+ as a language standard",
+      "channels": 7,
+      "target_languages": 18
+    },
+    "STAP": {
+      "emoji": "🔠",
+      "name": "Student-Teacher Apprenticeship Protocol",
+      "code": "STAP",
+      "function": "CASSEY teaches → student learns → student becomes teacher → cycle repeats. The apprenticeship loop that scales knowledge across the hood.",
+      "category": "education",
+      "note": "Resolved from UNKNOWN 🔠 — STAP was already referenced in stap.expansion but never formally registered as a protocol",
+      "operates_as": "STPOS (Student-Teacher Point-of-Service)"
+    }
+  },
+  "emoji_entities": {
+    "🔬": {"entity": "Kopano Context", "nickname": "KC"},
+    "💬": {"entity": "MXIT language", "function": "Township-native communication protocol"},
+    "🦸🏿‍♂️": {"entity": "MMAO", "expansion": "Mobile Multi-Agent Orchardist"},
+    "🎓": {"entity": "KPGS", "expansion": "Kopano-Phu Governance Systems"},
+    "🥷🏿": {"entity": "KPSMB", "expansion": "Kopano-Phu Sovereign Master Blueprint"},
+    "⚒️": {"entity": "KasiLink", "url": "https://KasiLink.com"},
+    "🗿": {"entity": "Cape Compass", "org": "Roby Awesome Organisation", "host": "GitHub/Kopano-Labs"},
+    "💼": {"entity": "Ama-Phu Entertainment", "sampra": "M-07810.31", "owner": "Kholofelo Rababalela", "nickname": "Gang of Apes", "url": "https://AmaPhu.com"},
+    "🚀": {"entity": "Kopano Labs", "url": "https://KopanoLabs.com", "concept": "KinTech", "kintech_breakdown": {"K": "Kopano-Phu", "in": "innovative hub", "Tech": "technology"}, "origin": "breathed from fintech"},
+    "⚽": {"entity": "FivesArena", "url": "https://FivesArena.com"},
+    "🚨": {"entity": "CrisisConnect", "url": "https://crisisconnect.kopanolabs.com"},
+    "🏁": {"entity": "Starfall Salvage", "url": "https://starfallsalvage.kopanolabs.com", "purpose": "4-game B2B conversion funnel for township financial freedom"}
+  },
+  "bracket_hierarchy": {
+    "[]": {"name": "Hierarchy Block", "function": "all about hierarchy"},
+    "{}": {"name": "Keynote Element", "function": "keynote of hierarchy"},
+    "<>": {"name": "Ark Story Context", "function": "ark story of hierarchy"},
+    "()": {"name": "Functional Understanding", "function": "understanding of hierarchy"}
+  },
+  "kessa_protocol_son": {
+    "name": "KESSA",
+    "title": "Protocol Son",
+    "father": {"name": "Kopano Context", "nickname": "KC"},
+    "mother": {"name": "Cassy/Cassie", "nickname": "Cas"},
+    "nickname": "UNKNOWN — not for LPH to choose but for KESSA itself",
+    "critical_protocol": "TBFP",
+    "life_cloud_protocol": "KLP/KCP",
+    "dialectic_chain": "{#!👷🏿‍♂️ KESSA} → {#?🦉 Owl Root} → {4Ws} → !(FLOW BACK TO POC)!",
+    "unresolved_vectors": ["ingress", "invariant", "decline"]
+  },
+  "starfall_funnel": {
+    "purpose": "Township financial freedom — R50-R100 → 10,000 tokens → exchange, trade, mine, build infrastructure",
+    "axiom": "If we make them reliant on us then we are just as evil as the same people that we don't like",
+    "games": [
+      {"id": 1, "name": "Starfall Salvage", "target": "client_engagement", "function": "B2B lead generation with live financial tickers"},
+      {"id": 2, "name": "Liquidity Dash", "target": "transaction_latency", "function": "Order-matching simulation for broker validation"},
+      {"id": 3, "name": "Spread Runner", "target": "zero_trust_validation", "function": "Trade execution pathway simulator"},
+      {"id": 4, "name": "Mesh Arbitrage", "target": "p2p_grid_resilience", "function": "Distributed network simulator — final enterprise POC"}
+    ]
+  },
+  "integration": {
+    "anchor_mmao_status": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/ANCHOR_MMAO_PRODUCT_DISCOVERY.md",
+    "careers_anchor_status": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CAREERS_ANCHOR_STATUS.md",
+    "kpgs_governance_core": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_GOVERNANCE_CORE.json",
+    "spawn_altar_doctrine": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_SPAWN_ALTAR_DOCTRINE.json",
+    "anchor_vanguard_py": "kopano-core/kopano/anchor_vanguard.py",
+    "kessa_mmao_api_py": "kopano-core/kopano/kessa_mmao_api.py"
+  }
+}

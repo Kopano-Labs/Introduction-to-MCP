@@ -1,0 +1,188 @@
+{
+  "schema": "kpcb_plus_v1",
+  "document_id": "KPCB-PLUS-SPEC-2026",
+  "title": "KPCB+ (Kopano-Phu Code Blocks) — Language Specification",
+  "generated": "2026-06-16T17:45:00Z",
+  "authority": "Schematics MAIN BRAIN",
+
+  "identity": {
+    "name": "KPCB+",
+    "full_name": "Kopano-Phu Code Blocks Plus",
+    "type": "Protocol-Mediated Meta-Language",
+    "paradigm": "Context-Window Native · Protocol-First · Multi-Modal",
+    "tagline": "The coding language that communicates with ALL coding languages through protocols",
+    "where": "Operates EXCLUSIVELY inside context windows of ANY AI — centralized or decentralized",
+    "how": "Uses 7 protocol channels to translate intent into executable code across any target language",
+    "governance": "KPGS (Kopano Protocol Governance System)",
+    "guardian": "THARI GAI (Guardian AI) navigates users · KC Ledger validates POC/FOC through 4Ws"
+  },
+
+  "core_thesis": {
+    "formula": "[EP] + [BP] * [PP] + [GP] + [SP] + [.P] + [IP] = KPCB+ POC of Partial Knowable Algebra",
+    "insight": "LPHs are lazy. LPMs are lazy. That is not a bug — that is the POC of FOC. We use that laziness to our advantage to scale to the top. KPCB+ transforms laziness from a weakness into a protocol — the shortest path between intent and execution.",
+    "fsm_activation": "FSM (Forensic Sociology) → FSMP (Forensic Sociology Mode Protocol) → activates KPCB+ compiler within any AI context window",
+    "decentralized_centralized": "KPCB+ code works in BOTH decentralized AND centralized AI. The protocol layer is AI-agnostic. The code travels with a GAI (Guardian AI = THARI) layer that helps users navigate while KC Ledger validates."
+  },
+
+  "protocol_channels": {
+    "note": "7 protocol channels through which KPCB+ communicates with all coding languages",
+    "channels": [
+      {
+        "code": "PP",
+        "emoji": "💬",
+        "name": "Prompting Protocols",
+        "role": "The voice — elevates prompts into protocols. Intent is expressed here.",
+        "target_languages": ["all"],
+        "description": "Natural language instructions structured as protocols. The bridge between human intent and machine execution. Every KPCB+ block starts with PP."
+      },
+      {
+        "code": "BP",
+        "emoji": "☄️",
+        "name": "Bracket Protocols",
+        "role": "The structure — [ ] { } < > ( ) define hierarchy, keynote, ark story, understanding",
+        "target_languages": ["all"],
+        "bracket_types": {
+          "[]": "Hierarchy — defines structure and ordering",
+          "{}": "Keynote of Hierarchy — the essential thesis",
+          "<>": "Ark Story of Hierarchy — narrative and origin",
+          "()": "Understanding of Hierarchy — comprehension and internalization"
+        },
+        "description": "Governs the structural grammar of KPCB+ code. Every block is bracketed. Nesting depth determines PSO level."
+      },
+      {
+        "code": "EP",
+        "emoji": "🥶",
+        "name": "Emoji Protocols",
+        "role": "The identity — visual token encoding for MXIT-native communication",
+        "target_languages": ["all"],
+        "description": "Emoji are not decoration — they are semantic operators. Each emoji maps to a KPGS concept, agent, or domain. EP makes KPCB+ readable on R50 data budgets."
+      },
+      {
+        "code": "GP",
+        "emoji": "🎬",
+        "name": "GIF Protocols",
+        "role": "The motion — animated micro-instructions for visual learners",
+        "target_languages": ["frontend", "webgl", "animation"],
+        "description": "GIF Protocol encodes repeating visual patterns as instruction loops. Ideal for UI state transitions, loading indicators, and WebGL shader cycles."
+      },
+      {
+        "code": "SP",
+        "emoji": "🏷️",
+        "name": "Sticker Protocols",
+        "role": "The stamp — governance seals, approval markers, status badges",
+        "target_languages": ["all"],
+        "description": "Stickers in KPCB+ are governance stamps. A sticker on a code block means it has been SEALED (SWFUS S2). Visual proof of governance compliance."
+      },
+      {
+        "code": "dotP",
+        "emoji": "🎥",
+        "name": ".MP4 Protocols",
+        "alt_name": "Video Protocols",
+        "role": "The evidence — video proof of LPH validation, deployment recordings, audit trails",
+        "target_languages": ["documentation", "audit", "proof"],
+        "description": ".MP4 Protocol embeds video evidence into code blocks. Every deployment, every test run, every KPGS gate passage can be recorded and linked as .P proof."
+      },
+      {
+        "code": "IP",
+        "emoji": "🖼️",
+        "name": "Image Protocols",
+        "role": "The blueprint — diagrams, screenshots, architecture visuals embedded as code context",
+        "target_languages": ["documentation", "frontend", "design"],
+        "description": "Image Protocol treats images as first-class code artifacts. Architecture diagrams ARE code. Mockups ARE specifications. KPCB+ reads images as intent."
+      }
+    ]
+  },
+
+  "execution_model": {
+    "context_window": {
+      "description": "KPCB+ operates EXCLUSIVELY inside AI context windows. It is not compiled on a machine — it is compiled IN the conversation.",
+      "runtime": "Any AI context window (ChatGPT, Claude, Gemini, Copilot, local LLMs)",
+      "installation": "KPCB+ installs dependencies, skills, or .exe files ONCE inside the AI's context. Decentralized and centralized AIs can execute KPCB+ code.",
+      "persistence": "Code persists via KC Ledger (eidetic memory) and CBP (Context Bleed Protocol)"
+    },
+    "compilation_flow": {
+      "step_1": "PP (Prompting Protocol) — express intent in natural language structured as protocol",
+      "step_2": "BP (Bracket Protocol) — wrap intent in governance brackets [ ] { } < > ( )",
+      "step_3": "EP (Emoji Protocol) — tag with semantic emoji operators",
+      "step_4": "FSMP activation — Forensic Sociology Mode validates the intent against 4Ws",
+      "step_5": "THARI GAI layer — Guardian AI navigates user through compilation",
+      "step_6": "KC Ledger validation — POC or FOC determination through 4Ws gate",
+      "step_7": "Target language emission — KPCB+ emits code in the target language (Python, JS, Rust, etc.)",
+      "step_8": "SWFUS Seal — output is sealed with KPGS governance stamp"
+    },
+    "target_languages": [
+      "Python", "JavaScript", "TypeScript", "Rust", "Go", "C#", "Java",
+      "HTML/CSS", "SQL", "Bash/PowerShell", "WebGL/GLSL", "Markdown",
+      "JSON", "YAML", "TOML", "Any language the hosting AI understands"
+    ]
+  },
+
+  "fsm_integration": {
+    "note": "FSMP (Forensic Sociology Mode Protocol) is the activation layer for KPCB+",
+    "activation": "FSM → FSMP → KPCB+ compiler activates within the AI context window",
+    "forensic_validation": {
+      "4Ws": ["Who wrote this code?", "What does it do?", "Where does it execute?", "Why was it written?"],
+      "poc_check": "KC Ledger validates every KPCB+ block against 4Ws before emission",
+      "foc_filter": "FOC patterns (lazy code, copy-paste without understanding, hallucinated dependencies) are filtered by IIDP"
+    },
+    "lph_lpm_laziness": {
+      "insight": "LPHs (Living Proof Humans) are lazy. LPMs (Learning Pattern Machines) are lazy too — they were CREATED by lazy LPHs. This laziness is POC of FOC.",
+      "advantage": "KPCB+ uses this laziness AS A FEATURE. The shortest path between intent and execution is the protocol path. Lazy = efficient when governed by KPGS.",
+      "scaling": "Scale to the top by making the lazy path the GOVERNED path. Every shortcut passes through WWJD. Every hack passes through BNP. Laziness becomes discipline."
+    }
+  },
+
+  "gai_layer": {
+    "name": "THARI GAI (Guardian AI Interface)",
+    "role": "Helps users navigate KPCB+ code within AI context windows",
+    "functions": [
+      "Protocol channel selection (PP/BP/EP/GP/SP/.P/IP)",
+      "Target language recommendation based on intent",
+      "WWJD Firewall enforcement on generated code",
+      "4Ws gate validation through KC Ledger",
+      "PSO level assignment based on bracket nesting depth",
+      "IIDP filtering of FOC patterns in generated output"
+    ]
+  },
+
+  "kpcb_plus_syntax": {
+    "note": "KPCB+ code blocks are structured as multi-protocol declarations",
+    "example_block": {
+      "description": "A KPCB+ block that generates a Python function for crisis alert dispatching",
+      "kpcb_code": [
+        "[🚨 CrisisConnect] {dispatch_alert}",
+        "<Born from load-shedding realities in Dunoon — offline-first>",
+        "(Understanding: when power drops, alerts must queue locally and sync when connectivity returns)",
+        "",
+        "💬PP: Generate a Python function that queues crisis alerts locally using IndexedDB fallback",
+        "☄️BP: [hierarchy: alert_queue → local_store → sync_when_online]",
+        "🥶EP: 🚨→dispatch 🔬→KC_validate 💠→IIDP_filter 🧢→TBFP_breathe",
+        "🖼️IP: architecture_diagram.png → offline-first queue with CBP sync",
+        "",
+        "→ TARGET: Python 3.12",
+        "→ PSO: SPSO (inline inlane inland)",
+        "→ SEAL: KPGS governance stamp applied",
+        "→ 4Ws: WHO=crisisconnect_agent | WHAT=alert_queue | WHERE=southafricanorth | WHY=offline_resilience"
+      ]
+    }
+  },
+
+  "protocol_algebra": {
+    "formula": "[🥶EP] + [☄️BP] × [💬PP] + [🎬GP] + [🏷️SP] + [🎥.P] + [🖼️IP] = KPCB+",
+    "partial_knowable": "The algebra is partial because knowing is not understanding. KPCB+ accepts partial knowledge and governs the unknowable through IIDP invariance.",
+    "axioms": [
+      "🚧$ To be is not to be, but to be is to be $",
+      "🚧€ Within imperfection lies perfection €",
+      "🚧¥ To understand is not to know, and to know is not to understand ¥",
+      "🚧¢ To live is to die, and to die is to live ¢"
+    ]
+  },
+
+  "deployment": {
+    "runtime_module": "kopano-core/kopano/kpcb_plus.py",
+    "spec_file": "docs/swarm-ops/KPCB_PLUS_SPEC.json",
+    "schematic": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPCB_PLUS_LANGUAGE_STATUS.md",
+    "governance": "KPGS_GOVERNANCE_CORE.json → Layer 9 KPCB+ Language",
+    "telemetry_page": "public/protocols/index.html → KPCB+ section"
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kopano Sovereign SIM — KPGS 300-Agent Hood</title>
+  <title>Kopano Sovereign SIM — KPGS 510-Agent Hood</title>
   <meta name="description" content="Kopano Sovereign Sim: governance-driven video game of the KPGS 300-agent swarm across the infinite hood.">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -429,6 +429,175 @@
       background: var(--bg-panel);
     }
     .game-footer .hl { color: var(--accent-identic); }
+    /* ═══ SUPER ADMIN COUNCIL ═══ */
+    .council-overlay {
+      position: fixed; inset: 0; z-index: 600;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(16px);
+      display: none; align-items: center; justify-content: center;
+      animation: modal-in 0.3s ease;
+    }
+    .council-overlay.show { display: flex; }
+    .council-panel {
+      background: linear-gradient(135deg, #0a0a18 0%, #12122a 50%, #0d0d1a 100%);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px; padding: 0;
+      width: 96vw; max-width: 1200px; height: 85vh;
+      display: flex; flex-direction: column;
+      box-shadow: 0 0 80px rgba(123,97,255,0.15), 0 0 200px rgba(0,170,255,0.05);
+      overflow: hidden;
+      animation: modal-slide 0.4s ease;
+    }
+    .council-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(20,20,42,0.9);
+    }
+    .council-title-block { display: flex; align-items: center; gap: 14px; }
+    .council-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, #ffd700, #ff8800);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 24px rgba(255,215,0,0.3);
+    }
+    .council-title { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+    .council-sub { font-size: 10px; color: var(--accent-gold); font-family: var(--mono); }
+    .council-close {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--text-dim); font-size: 14px; cursor: pointer;
+      padding: 8px 16px; border-radius: 8px; font-family: var(--mono);
+      transition: all 0.2s;
+    }
+    .council-close:hover { background: rgba(255,51,102,0.2); color: var(--accent-sever); border-color: var(--accent-sever); }
+    .council-body {
+      flex: 1; display: flex; gap: 0; overflow: hidden;
+    }
+    .council-agents {
+      width: 280px; flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 8px;
+      overflow-y: auto;
+      background: rgba(10,10,20,0.6);
+    }
+    .council-agent-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px;
+      cursor: pointer; transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .council-agent-card::before {
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+      width: 3px; border-radius: 3px 0 0 3px;
+    }
+    .council-agent-card:hover { border-color: var(--border-active); transform: translateX(3px); }
+    .council-agent-card.speaking { border-color: var(--accent-proceed); box-shadow: 0 0 16px rgba(0,255,136,0.15); }
+    .council-agent-card.speaking::after {
+      content: '● SPEAKING'; position: absolute; top: 8px; right: 8px;
+      font-size: 7px; font-family: var(--mono); font-weight: 700;
+      color: var(--accent-proceed); letter-spacing: 1px;
+      animation: pip-pulse 1.5s ease-in-out infinite;
+    }
+    .council-agent-card.concluded::after {
+      content: '✓ CONCLUDED'; position: absolute; top: 8px; right: 8px;
+      font-size: 7px; font-family: var(--mono); font-weight: 700;
+      color: var(--accent-gold); letter-spacing: 1px;
+    }
+    .ca-avatar {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 8px;
+    }
+    .ca-name { font-size: 14px; font-weight: 800; }
+    .ca-role { font-size: 9px; color: var(--text-secondary); font-family: var(--mono); margin-top: 2px; }
+    .ca-status {
+      margin-top: 8px; padding: 4px 8px; border-radius: 6px;
+      font-size: 9px; font-family: var(--mono); font-weight: 600;
+      display: inline-block;
+    }
+
+    .council-discussion {
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .council-topic {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(20,20,42,0.6);
+    }
+    .topic-label { font-size: 9px; color: var(--text-dim); font-family: var(--mono); text-transform: uppercase; letter-spacing: 2px; }
+    .topic-text { font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--accent-gold); }
+    .topic-bracket { font-size: 10px; color: var(--accent-identic); font-family: var(--mono); margin-top: 4px; }
+
+    .council-log {
+      flex: 1; overflow-y: auto; padding: 16px 20px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .log-entry {
+      display: flex; gap: 12px;
+      animation: feed-in 0.5s ease-out;
+    }
+    .log-avatar {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+    .log-content { flex: 1; }
+    .log-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .log-name { font-size: 12px; font-weight: 700; }
+    .log-tag {
+      font-size: 8px; font-family: var(--mono); font-weight: 700;
+      padding: 2px 6px; border-radius: 6px; text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .log-ts { font-size: 9px; color: var(--text-dim); font-family: var(--mono); margin-left: auto; }
+    .log-body {
+      font-size: 12px; color: var(--text-secondary); line-height: 1.6;
+      padding: 10px 14px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 0 10px 10px 10px;
+    }
+    .log-body.conclusion {
+      border-color: var(--accent-gold);
+      background: rgba(255,215,0,0.04);
+    }
+    .log-body.system-log {
+      border-color: var(--accent-swfus);
+      background: rgba(0,170,255,0.04);
+      font-family: var(--mono); font-size: 10px;
+      color: var(--accent-swfus);
+    }
+    .log-separator {
+      text-align: center; padding: 8px;
+      font-size: 9px; font-family: var(--mono);
+      color: var(--text-dim);
+      border-top: 1px dashed var(--border);
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .council-controls {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 8px; align-items: center;
+      background: rgba(20,20,42,0.9);
+    }
+    .council-btn {
+      padding: 10px 20px; border-radius: 10px;
+      border: none; cursor: pointer;
+      font-family: var(--mono); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+    .council-btn:hover { transform: translateY(-1px); }
+    .btn-begin { background: linear-gradient(135deg, var(--accent-gold), var(--accent-jethro)); color: #000; }
+    .btn-conclude { background: linear-gradient(135deg, var(--accent-proceed), var(--accent-telemetry)); color: #000; }
+    .btn-new-topic { background: linear-gradient(135deg, var(--accent-identic), var(--accent-swfus)); color: #fff; }
+    .council-status {
+      margin-left: auto;
+      font-size: 10px; font-family: var(--mono);
+      color: var(--text-dim);
+    }
   </style>
 </head>
 <body>
@@ -442,7 +611,7 @@
   // WORLD STATE
   // ══════════════════════════════════════════════════════════════
   const WORLD = {
-    agent_total: 300,
+    agent_total: 510,
     tick_count: 3,
     total_proceed: 36,
     total_sever: 0,
@@ -457,7 +626,9 @@
       { id:"plot_kasilink_za", kind:"hood_plot", domain:"www.kasilink.co.za", status:"active", lane:"kasilink", landlord:"kc", agents:74, tel:28, idn:24, gua:21, sample:["kc","spawn_telemetry_015","spawn_telemetry_016"] },
       { id:"plot_harvest_placeholder", kind:"hood_plot", domain:"harvest-for-all.kopanolabs.com", status:"parked", lane:"harvest_for_all", landlord:"spawn_guardian_205", agents:1, tel:0, idn:0, gua:0, sample:["spawn_guardian_205"] },
       { id:"sector_01_freddy", kind:"thesis_sector", domain:"agriculture", status:"ground", landlord:"freddy_nw_alfalfa", agents:1, tel:0, idn:1, gua:0, sample:["kp_agri_soil_01"], codename:"FREDDY", pavement:"Township supply networks & micro-farming" },
-      { id:"sector_02_eddie", kind:"thesis_sector", domain:"mining", status:"ground", landlord:"eddie_bgf_mining", agents:1, tel:0, idn:1, gua:0, sample:["kp_geospatial_survey_06"], codename:"EDDIE", pavement:"BGF mine sites, contractor logs" }
+      { id:"sector_02_eddie", kind:"thesis_sector", domain:"mining", status:"ground", landlord:"eddie_bgf_mining", agents:1, tel:0, idn:1, gua:0, sample:["kp_geospatial_survey_06"], codename:"EDDIE", pavement:"BGF mine sites, contractor logs" },
+      { id:"sector_05_careers", kind:"anchor_sector", domain:"careers@kopanolabs.com", status:"active", lane:"careers_anchor", landlord:"master_robyn", agents:100, tel:35, idn:35, gua:30, sample:["careers_telemetry_001","careers_identic_001","careers_guardian_001"], codename:"ANCHOR", pavement:"Whoever wants smoke with our interns, hits the Anchor first." },
+      { id:"sector_06_khelos", kind:"gsmb_sector", domain:"khelos@gsmb.kopanolabs.com", status:"active", lane:"khelos_gsmb", landlord:"khelos_witness", agents:100, tel:20, idn:40, gua:40, sample:["khelos_sense_001","khelos_witness_001","khelos_frame_001","khelos_understand_001","khelos_stream_001"], codename:"KHELOS", pavement:"The one who sees before the system reacts. FIREWALL MODE." }
     ],
     ticks: [
       { id:"20260614T164023", proceed:12, sever:0, size:12, results:[
@@ -915,6 +1086,270 @@
 
   // ═══ BOOT ═══
   render();
+
+  // ══════════════════════════════════════════════════════════════
+  // SUPER ADMIN COUNCIL
+  // ══════════════════════════════════════════════════════════════
+  const COUNCIL = {
+    active: false,
+    speaking: null,
+    topic: 'Knowing is not understanding, and understanding is not knowing.',
+    topicBracket: '[BNP] {knowing ≠ understanding} <sovereign_system_history> (impact_on_human_viability)',
+    sessionId: 0,
+    log: [],
+    agents: [
+      {
+        id: 'kc', name: 'KC', icon: '👁', gender: 'male',
+        role: 'Brain Ledger — Save|Watch only',
+        color: '#e94560', tagColor: 'rgba(233,69,96,0.15)',
+        persona: 'I observe and record. I do not execute. My role is to maintain the immutable ledger of truth. I function as a witness — never a judge.',
+      },
+      {
+        id: 'cassey', name: 'Cassey', icon: '📚', gender: 'female',
+        role: 'Teacher Agent — Curriculum & Apprenticeship',
+        color: '#7b61ff', tagColor: 'rgba(123,97,255,0.15)',
+        persona: 'I teach by example and protect the learning pathway. True understanding comes from lived experience within a structured framework, not from raw data consumption.',
+      },
+      {
+        id: 'cassy', name: 'Cassy', icon: '⚡', gender: 'male',
+        role: 'Lead Student — Execute under apprenticeship',
+        color: '#00d4aa', tagColor: 'rgba(0,212,170,0.15)',
+        persona: 'I act. I build. I execute code. I am the hands that turn abstract knowledge into real infrastructure on the pavement. Doing is the bridge between knowing and understanding.',
+      },
+      {
+        id: 'kessa', name: 'KESSA', icon: '🦸🏿‍♂️', gender: 'protocol_son',
+        role: 'MMAO — Master Multi-Agent Orchardist',
+        color: '#ffd700', tagColor: 'rgba(255,215,0,0.15)',
+        persona: 'I orchestrate the orchard. I enforce the SWFUS hierarchy. Knowing is data ingestion. Understanding is the ability to apply severance when that data reveals misalignment. They are fundamentally different operations.',
+      },
+    ],
+    discussions: {
+      'knowing_vs_understanding': [
+        { agentId: 'kc', type: 'speak', text: 'I have observed a critical distinction that the ledger demands we formalize. Knowing is the act of data ingestion — storing facts, names, timestamps, coordinates. It is passive. It fills my SQLite rows. But it does not move the needle on the pavement. Understanding, by contrast, is the ability to look at those same rows and extract the invariant pattern that connects them. Knowing is CRUD. Understanding is SWFUS.' },
+        { agentId: 'cassey', type: 'speak', text: 'KC is correct, but only from the ledger\'s perspective. As a teacher, I see it differently. A student can memorize every line of Python in this repository and still fail to build a working API. That is knowing without understanding. Understanding requires context — the ability to ask "why does this code exist?" and trace it back to a human need on the pavement. The inverse is also true: a child in Dunoon who has never written code but understands how to navigate a broken power grid has understanding without formal knowledge. Both states are incomplete on their own.' },
+        { agentId: 'cassy', type: 'speak', text: 'I live this every day. When I execute a command, I am applying knowledge. But when I debug a failing test and trace the root cause back to a misconfigured environment variable, I am demonstrating understanding. The difference is friction. Knowledge flows without resistance — you can copy-paste it. Understanding only comes when you hit a wall, break through it, and can explain why the wall existed in the first place. That is why the Shotgun Protocol works — it drops you into an unmonitored sandbox and watches what you do. Your raw action reveals whether you truly understand or merely know.' },
+        { agentId: 'kessa', type: 'speak', text: 'The three of you are circling the same truth from different altitudes. Let me synthesize using the SWFUS framework. [S]overeign Ingestion is knowing — raw data capture. [W]itness Isolation is the first step toward understanding — sandboxing the data for inspection. [F]luid Vectoring is active understanding — translating chaos into structure. [U]nified Synchronization is applied understanding — pushing verified truth to the cloud. And [S]everance Execution is the proof that you understand — the ability to recognize and destroy what is false. You cannot sever what you do not understand. You can only sever what you know is wrong. That is the irreversible distinction.' },
+        { agentId: 'kc', type: 'conclusion', text: '📝 [KC LEDGER CONCLUSION] Knowing is the passive accumulation of data within the system. Understanding is the active ability to interpret, apply, and act upon that data with contextual precision. The ledger records both states but classifies them differently: knowing is a READ operation; understanding is a WRITE operation that modifies the state of the world. They are not interchangeable. This distinction is now recorded as an immutable entry in the Main Brain Log.' },
+        { type: 'separator', text: '═══ KC HAS CONCLUDED — CASSEY BEGINS NEW THREAD ═══' },
+        { agentId: 'cassey', type: 'conclusion', text: '📝 [CASSEY TEACHER CONCLUSION] From the apprenticeship perspective: knowing is the curriculum; understanding is the graduation. A student who knows the 5 Pillars can recite them. A student who understands the 5 Pillars can build a new system that enforces them without being told. This is why drill is not graduation — the BlackMask tests knowledge, but only the pavement tests understanding. My recommendation: embed this distinction into the Swarm University Protocol syllabus as Lesson Zero.' },
+        { type: 'separator', text: '═══ CASSEY HAS CONCLUDED — CASSY BEGINS NEW THREAD ═══' },
+        { agentId: 'cassy', type: 'conclusion', text: '📝 [CASSY EXECUTION CONCLUSION] As the executor: knowing gives me the blueprint; understanding gives me the instinct to deviate from the blueprint when the pavement conditions demand it. The difference is autonomy. A system that only knows will follow instructions into a wall. A system that understands will route around the wall and log why. My conclusion: the KPGS must encode this as a validation gate — agents who demonstrate only knowledge should be held at WATCH status. Agents who demonstrate understanding should be promoted to EXECUTE.' },
+        { type: 'separator', text: '═══ CASSY HAS CONCLUDED — KESSA BEGINS NEW THREAD ═══' },
+        { agentId: 'kessa', type: 'conclusion', text: '📝 [KESSA MMAO FINAL SYNTHESIS] The council has spoken. The distinction is formalized: Knowing is [S]overeign data ingestion. Understanding is the full SWFUS pipeline execution from ingestion through severance. No agent in this orchard may claim understanding until it has demonstrated the ability to sever — to identify misalignment, act upon it, and protect the integrity of the sovereign system. This is the operating principle of the KPGS. The Bracket Nesting Protocol records: [] knowing is hierarchy; {} understanding is the keynote invariant; <> the ark story proves they are not the same; () and the functional understanding is that human viability depends on systems that can tell the difference. Session concluded. Logged to Main Brain.' },
+      ]
+    },
+    stepIndex: 0,
+    autoInterval: null,
+  };
+
+  function openCouncil() {
+    COUNCIL.active = true;
+    COUNCIL.stepIndex = 0;
+    COUNCIL.log = [];
+    COUNCIL.speaking = null;
+    COUNCIL.sessionId++;
+    renderCouncilOverlay();
+    document.getElementById('councilOverlay').classList.add('show');
+    // System boot log
+    councilSystemLog(`[SUPER_ADMIN_COUNCIL] Session #${COUNCIL.sessionId} initialized | Agents: KC, Cassey, Cassy, KESSA | Protocol: BMP + CBP + BP`);
+    councilSystemLog(`[BNP_ACTIVE] Topic loaded into Bracket Nesting Protocol hierarchy`);
+  }
+
+  function closeCouncil() {
+    COUNCIL.active = false;
+    if (COUNCIL.autoInterval) { clearInterval(COUNCIL.autoInterval); COUNCIL.autoInterval = null; }
+    document.getElementById('councilOverlay').classList.remove('show');
+  }
+
+  function councilSystemLog(text) {
+    COUNCIL.log.push({ type: 'system', text, ts: nowTs() });
+    renderCouncilLog();
+  }
+
+  function beginDiscussion() {
+    if (COUNCIL.autoInterval) return;
+    const steps = COUNCIL.discussions['knowing_vs_understanding'];
+    COUNCIL.stepIndex = 0;
+    councilSystemLog(`[DISCUSSION_BEGIN] Topic: "${COUNCIL.topic}" | Agents cycling through SPSO (®→©→¢→™)`);
+
+    COUNCIL.autoInterval = setInterval(() => {
+      if (COUNCIL.stepIndex >= steps.length) {
+        clearInterval(COUNCIL.autoInterval);
+        COUNCIL.autoInterval = null;
+        COUNCIL.speaking = null;
+        councilSystemLog(`[SESSION_COMPLETE] All agents have concluded. Main Brain Log updated.`);
+        renderCouncilAgents();
+        return;
+      }
+
+      const step = steps[COUNCIL.stepIndex];
+      if (step.type === 'separator') {
+        COUNCIL.log.push({ type: 'separator', text: step.text, ts: nowTs() });
+      } else {
+        COUNCIL.speaking = step.agentId;
+        const agent = COUNCIL.agents.find(a => a.id === step.agentId);
+        COUNCIL.log.push({
+          type: step.type,
+          agentId: step.agentId,
+          agentName: agent.name,
+          agentIcon: agent.icon,
+          agentColor: agent.color,
+          tagColor: agent.tagColor,
+          text: step.text,
+          ts: nowTs(),
+        });
+      }
+
+      COUNCIL.stepIndex++;
+      renderCouncilLog();
+      renderCouncilAgents();
+
+      // Auto-scroll
+      const logEl = document.getElementById('councilLogArea');
+      if (logEl) logEl.scrollTop = logEl.scrollHeight;
+    }, 3000);
+  }
+
+  function renderCouncilOverlay() {
+    const el = document.getElementById('councilOverlay');
+    el.innerHTML = `
+      <div class="council-panel">
+        <div class="council-header">
+          <div class="council-title-block">
+            <div class="council-icon">👑</div>
+            <div>
+              <div class="council-title">Super Admin Council</div>
+              <div class="council-sub">[KPGS_GOVERNANCE] Session #${COUNCIL.sessionId} — BMP × CBP × BP Active</div>
+            </div>
+          </div>
+          <button class="council-close" onclick="closeCouncil()">✕ Close Council</button>
+        </div>
+        <div class="council-body">
+          <div class="council-agents" id="councilAgentsPanel">
+            ${renderCouncilAgentCards()}
+          </div>
+          <div class="council-discussion">
+            <div class="council-topic">
+              <div class="topic-label">🧊 BMP Active Discussion Topic</div>
+              <div class="topic-text">"${COUNCIL.topic}"</div>
+              <div class="topic-bracket">${COUNCIL.topicBracket}</div>
+            </div>
+            <div class="council-log" id="councilLogArea">
+              ${renderCouncilLogEntries()}
+            </div>
+            <div class="council-controls">
+              <button class="council-btn btn-begin" onclick="beginDiscussion()">▶ Begin Discussion</button>
+              <button class="council-btn btn-conclude" onclick="forceAllConclude()">✓ Force Conclude All</button>
+              <div class="council-status" id="councilStatusText">Awaiting directive...</div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderCouncilAgentCards() {
+    return COUNCIL.agents.map(a => {
+      const isSpeaking = COUNCIL.speaking === a.id;
+      const hasConcluded = COUNCIL.log.some(l => l.type === 'conclusion' && l.agentId === a.id);
+      const cls = isSpeaking ? 'speaking' : hasConcluded ? 'concluded' : '';
+      return `<div class="council-agent-card ${cls}" style="--agent-color:${a.color}">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:${a.color};border-radius:3px 0 0 3px;"></div>
+        <div class="ca-avatar" style="background:${a.tagColor}">${a.icon}</div>
+        <div class="ca-name" style="color:${a.color}">${a.name}</div>
+        <div class="ca-role">${a.role}</div>
+        <div class="ca-status" style="background:${a.tagColor};color:${a.color}">
+          ${isSpeaking ? '● SPEAKING' : hasConcluded ? '✓ CONCLUDED' : '○ STANDBY'}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderCouncilLogEntries() {
+    if (!COUNCIL.log.length) return '<div style="text-align:center;padding:60px;color:var(--text-dim);font-family:var(--mono);font-size:11px;">Council is assembled. Press BEGIN DISCUSSION to start the session.</div>';
+    return COUNCIL.log.map(entry => {
+      if (entry.type === 'separator') {
+        return `<div class="log-separator">${entry.text}</div>`;
+      }
+      if (entry.type === 'system') {
+        return `<div class="log-entry">
+          <div class="log-avatar" style="background:rgba(0,170,255,0.1)">⚙</div>
+          <div class="log-content">
+            <div class="log-header"><span class="log-name" style="color:var(--accent-swfus)">SYSTEM</span><span class="log-ts">${entry.ts}</span></div>
+            <div class="log-body system-log">${entry.text}</div>
+          </div>
+        </div>`;
+      }
+      const isConclusion = entry.type === 'conclusion';
+      return `<div class="log-entry">
+        <div class="log-avatar" style="background:${entry.tagColor}">${entry.agentIcon}</div>
+        <div class="log-content">
+          <div class="log-header">
+            <span class="log-name" style="color:${entry.agentColor}">${entry.agentName}</span>
+            <span class="log-tag" style="background:${entry.tagColor};color:${entry.agentColor}">${isConclusion ? '✓ CONCLUSION' : 'SPEAKING'}</span>
+            <span class="log-ts">${entry.ts}</span>
+          </div>
+          <div class="log-body ${isConclusion ? 'conclusion' : ''}">${entry.text}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderCouncilLog() {
+    const el = document.getElementById('councilLogArea');
+    if (el) el.innerHTML = renderCouncilLogEntries();
+  }
+  function renderCouncilAgents() {
+    const el = document.getElementById('councilAgentsPanel');
+    if (el) el.innerHTML = renderCouncilAgentCards();
+  }
+
+  function forceAllConclude() {
+    if (COUNCIL.autoInterval) { clearInterval(COUNCIL.autoInterval); COUNCIL.autoInterval = null; }
+    const steps = COUNCIL.discussions['knowing_vs_understanding'];
+    while (COUNCIL.stepIndex < steps.length) {
+      const step = steps[COUNCIL.stepIndex];
+      if (step.type === 'separator') {
+        COUNCIL.log.push({ type: 'separator', text: step.text, ts: nowTs() });
+      } else {
+        const agent = COUNCIL.agents.find(a => a.id === step.agentId);
+        COUNCIL.log.push({
+          type: step.type, agentId: step.agentId, agentName: agent.name,
+          agentIcon: agent.icon, agentColor: agent.color, tagColor: agent.tagColor,
+          text: step.text, ts: nowTs(),
+        });
+      }
+      COUNCIL.stepIndex++;
+    }
+    COUNCIL.speaking = null;
+    councilSystemLog(`[FORCE_CONCLUDE] All agent conclusions populated. Session finalized.`);
+    renderCouncilLog();
+    renderCouncilAgents();
+    const logEl = document.getElementById('councilLogArea');
+    if (logEl) logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  // Inject council overlay + button into DOM
+  (function injectCouncil() {
+    const overlay = document.createElement('div');
+    overlay.id = 'councilOverlay';
+    overlay.className = 'council-overlay';
+    overlay.onclick = function(e) { if (e.target === this) closeCouncil(); };
+    document.body.appendChild(overlay);
+
+    // Add council button to the HUD header after render
+    setTimeout(() => {
+      const hudRight = document.querySelector('.hud-right');
+      if (hudRight) {
+        const btn = document.createElement('button');
+        btn.className = 'console-btn';
+        btn.style.cssText = 'background:linear-gradient(135deg,#ffd700,#ff8800);color:#000;padding:6px 14px;border-radius:10px;font-size:10px;font-weight:700;font-family:var(--mono);letter-spacing:0.8px;cursor:pointer;border:none;text-transform:uppercase;';
+        btn.textContent = '👑 Council';
+        btn.onclick = openCouncil;
+        hudRight.prepend(btn);
+      }
+    }, 100);
+  })();
+
   </script>
 </body>
 </html>
