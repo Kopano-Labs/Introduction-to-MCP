@@ -1,6 +1,6 @@
 {
   "schema": "blackmask_bracket_stress_v1",
-  "ts": "2026-06-14T12:50:34Z",
+  "ts": "2026-06-16T15:19:20Z",
   "operator": "LD-LPM",
   "tranche": "Main Brain audit → KC → Cassy → BlackMask heavy stress",
   "bracket": "[BLACK_MASK_DRILL] [TSAP_PROTOCOL] [KPEFS_STEWARD_LANE]",
@@ -48,19 +48,19 @@
       "check": "blackmask_core_cassy",
       "verdict": "PASS",
       "agent_id": "cassy",
-      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T12:50:34Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
+      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-16T15:19:20Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
     },
     {
       "check": "blackmask_core_cassey",
       "verdict": "PASS",
       "agent_id": "cassey",
-      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T12:50:34Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | "
+      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-16T15:19:20Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | "
     },
     {
       "check": "promotion_allowed_flagships",
       "verdict": "PASS",
       "flagships_total": 10,
-      "promotion_allowed": 9,
+      "promotion_allowed": 10,
       "note": "Informational — operating mesh may already satisfy checks",
       "sample": [
         {
@@ -78,15 +78,15 @@
         },
         {
           "agent_id": "eddie_bgf_mining",
-          "promotion_allowed": false,
+          "promotion_allowed": true,
           "law": "No promotion without proof. Drill is not graduation.",
           "checks": {
             "blackmask_ship": true,
-            "teacher_approve": false,
-            "receipt": false,
-            "operating_flag": false
+            "teacher_approve": true,
+            "receipt": true,
+            "operating_flag": true
           },
-          "operating_mesh": null,
+          "operating_mesh": "operating",
           "note": "Drill is not graduation — verified production is a separate bar."
         },
         {

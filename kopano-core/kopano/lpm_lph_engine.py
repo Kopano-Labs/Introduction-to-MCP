@@ -31,16 +31,29 @@ def _append_jsonl(path: Path, row: dict[str, Any]) -> None:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
-def load_doctrine() -> dict[str, Any]:
+from functools import lru_cache
+import copy
+
+@lru_cache(maxsize=1)
+def _load_doctrine_cached() -> dict[str, Any]:
     if not DOCTRINE_PATH.is_file():
         return {}
     return json.loads(DOCTRINE_PATH.read_text(encoding="utf-8"))
 
 
-def load_flow_bindings() -> dict[str, Any]:
+def load_doctrine() -> dict[str, Any]:
+    return copy.deepcopy(_load_doctrine_cached())
+
+
+@lru_cache(maxsize=1)
+def _load_flow_bindings_cached() -> dict[str, Any]:
     if not FLOW_BINDINGS_PATH.is_file():
         return {}
     return json.loads(FLOW_BINDINGS_PATH.read_text(encoding="utf-8"))
+
+
+def load_flow_bindings() -> dict[str, Any]:
+    return copy.deepcopy(_load_flow_bindings_cached())
 
 
 def _load_state() -> dict[str, Any]:

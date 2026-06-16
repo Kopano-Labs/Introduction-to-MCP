@@ -41,7 +41,23 @@ from kopano.oz_lattice_protocol import (
 )
 
 
-class TestLatticeSeal(unittest.TestCase):
+def reset_lattice_db() -> None:
+    init_lattice_tables()
+    conn = _db_conn()
+    try:
+        conn.execute("DELETE FROM lattice_bleed_audits")
+        conn.execute("UPDATE lattice_node_states SET integrity_ok = 1, bleed_count = 0, last_seal = NULL, last_ts = NULL")
+        conn.commit()
+    finally:
+        conn.close()
+
+
+class BaseLatticeTest(unittest.TestCase):
+    def setUp(self) -> None:
+        reset_lattice_db()
+
+
+class TestLatticeSeal(BaseLatticeTest):
     """Test 1: SEALED verdict on allowed edge with clean payload."""
 
     def test_sealed_on_allowed_edge(self) -> None:
@@ -66,7 +82,7 @@ class TestLatticeSeal(unittest.TestCase):
         self.assertIn("summary", result)
 
 
-class TestForbiddenEdge(unittest.TestCase):
+class TestForbiddenEdge(BaseLatticeTest):
     """Test 2: BLEED_DETECTED on forbidden edge."""
 
     def test_forbidden_edge_triggers_bleed(self) -> None:
@@ -90,7 +106,7 @@ class TestForbiddenEdge(unittest.TestCase):
         self.assertIn("source_node_unknown", result.get("reason", ""))
 
 
-class TestStructuralBleed(unittest.TestCase):
+class TestStructuralBleed(BaseLatticeTest):
     """Test 3: STRUCTURAL_BLEED on SQL pattern in payload."""
 
     def test_sql_in_payload_detected(self) -> None:
@@ -141,7 +157,7 @@ class TestStructuralBleed(unittest.TestCase):
         self.assertEqual(result["verdict"], "STRUCTURAL_BLEED")
 
 
-class TestSemanticBleed(unittest.TestCase):
+class TestSemanticBleed(BaseLatticeTest):
     """Test 4: SEMANTIC_BLEED on misnamed pressure signal."""
 
     def test_misnamed_pressure_reclassify(self) -> None:
@@ -166,7 +182,7 @@ class TestSemanticBleed(unittest.TestCase):
         self.assertEqual(result["verdict"], "SEALED")
 
 
-class TestSealVerification(unittest.TestCase):
+class TestSealVerification(BaseLatticeTest):
     """Test 5: Seal verification — recompute hash and match."""
 
     def test_verify_correct_seal(self) -> None:
@@ -190,7 +206,7 @@ class TestSealVerification(unittest.TestCase):
         self.assertFalse(verify_lattice_seal(wrong_hash, "swfus", "blackmask", payload))
 
 
-class TestNodeIntegrity(unittest.TestCase):
+class TestNodeIntegrity(BaseLatticeTest):
     """Test 6: Node integrity — bleed increments count, sets integrity_ok=0."""
 
     def test_bleed_increments_count(self) -> None:
@@ -222,7 +238,7 @@ class TestNodeIntegrity(unittest.TestCase):
         self.assertTrue(status["integrity_ok"])
 
 
-class TestSQLitePersistence(unittest.TestCase):
+class TestSQLitePersistence(BaseLatticeTest):
     """Test 7: SQLite persistence — audit rows exist in database after seal."""
 
     def test_audit_row_inserted(self) -> None:
@@ -255,7 +271,7 @@ class TestSQLitePersistence(unittest.TestCase):
             conn.close()
 
 
-class TestLatticeIntegrityReport(unittest.TestCase):
+class TestLatticeIntegrityReport(BaseLatticeTest):
     """Test 8: Lattice integrity report — all nodes present, integrity state consistent."""
 
     def test_all_nodes_present(self) -> None:
@@ -278,7 +294,7 @@ class TestLatticeIntegrityReport(unittest.TestCase):
         self.assertEqual(report1["lattice_hash"], report2["lattice_hash"])
 
 
-class TestEnforceBoundary(unittest.TestCase):
+class TestEnforceBoundary(BaseLatticeTest):
     """Test high-level boundary enforcer."""
 
     def test_enforce_strict_blocks_forbidden(self) -> None:
@@ -313,7 +329,7 @@ class TestEnforceBoundary(unittest.TestCase):
         self.assertIn("warning", result)
 
 
-class TestStructuralScanDirect(unittest.TestCase):
+class TestStructuralScanDirect(BaseLatticeTest):
     """Direct structural scan tests."""
 
     def test_clean_payload_no_hits(self) -> None:

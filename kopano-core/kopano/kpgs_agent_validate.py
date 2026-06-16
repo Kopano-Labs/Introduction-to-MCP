@@ -39,16 +39,29 @@ def _append_jsonl(path: Path, row: dict[str, Any]) -> None:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
-def load_kpgs_doctrine() -> dict[str, Any]:
+from functools import lru_cache
+import copy
+
+@lru_cache(maxsize=1)
+def _load_kpgs_doctrine_cached() -> dict[str, Any]:
     if not KPGS_PATH.is_file():
         return {}
     return json.loads(KPGS_PATH.read_text(encoding="utf-8"))
 
 
-def load_kpgs_thesis() -> dict[str, Any]:
+def load_kpgs_doctrine() -> dict[str, Any]:
+    return copy.deepcopy(_load_kpgs_doctrine_cached())
+
+
+@lru_cache(maxsize=1)
+def _load_kpgs_thesis_cached() -> dict[str, Any]:
     if not THESIS_PATH.is_file():
         return {}
     return json.loads(THESIS_PATH.read_text(encoding="utf-8"))
+
+
+def load_kpgs_thesis() -> dict[str, Any]:
+    return copy.deepcopy(_load_kpgs_thesis_cached())
 
 
 def compile_kpgs_thesis(*, write_log: bool = True) -> dict[str, Any]:
@@ -164,6 +177,8 @@ def synthesize_agent_manifest(agent_id: str, *, proof_path: str | None = None) -
         altar_layer = "guardian_ai"
     elif agent_id in ("cassy", "cf_cloud", "identi_cursor"):
         altar_layer = "identic_ai"
+    elif agent_id == "kessa":
+        altar_layer = "mmao_ai"
 
     routing = synthesize_telemetry_routing(agent_id, telemetry_class=telemetry)
     holder = synthesize_block_holder_manifest(agent_id, altar_layer=altar_layer)

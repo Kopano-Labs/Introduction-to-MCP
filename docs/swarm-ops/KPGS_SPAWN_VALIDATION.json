@@ -1,6 +1,6 @@
 {
   "schema": "kpgs_spawn_swarm_report_v2",
-  "ts": "2026-06-14T18:37:13Z",
+  "ts": "2026-06-16T15:23:32Z",
   "title": "KPGS 300-Agent Spawn Swarm — Sharded Cohort Validation",
   "doctrine": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_SPAWN_ALTAR_DOCTRINE.json",
   "catalog": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
@@ -21,9 +21,9 @@
   },
   "checkpoint": {
     "verdict": "CHECKPOINTED",
-    "checkpoint_id": 1233,
-    "head_hash": "609d8ad8bb9a64b70bc1bbe9849ebc52f53d917e5aae85778fab1ecd53ddf637",
-    "ts": "2026-06-14T18:37:13Z",
+    "checkpoint_id": 3473,
+    "head_hash": "cdde9cf54f4c233773a76e1eb966a75ea87bb3a1aff69a22b90371ab69e882ef",
+    "ts": "2026-06-16T15:23:32Z",
     "catalog_counts": {
       "telemetry_cohort": 100,
       "identic_cohort": 100,
@@ -48,12 +48,12 @@
       }
     }
   },
-  "altar_head_hash": "609d8ad8bb9a64b70bc1bbe9849ebc52f53d917e5aae85778fab1ecd53ddf637",
+  "altar_head_hash": "cdde9cf54f4c233773a76e1eb966a75ea87bb3a1aff69a22b90371ab69e882ef",
   "sample_only": false,
   "agents": [
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "pipeline_drone",
       "spawn_slot": "001",
       "cohort": "telemetry",
@@ -139,7 +139,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_002",
       "spawn_slot": "002",
       "cohort": "telemetry",
@@ -213,7 +213,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_003",
       "spawn_slot": "003",
       "cohort": "telemetry",
@@ -287,7 +287,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_004",
       "spawn_slot": "004",
       "cohort": "telemetry",
@@ -361,7 +361,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_005",
       "spawn_slot": "005",
       "cohort": "telemetry",
@@ -435,7 +435,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_006",
       "spawn_slot": "006",
       "cohort": "telemetry",
@@ -509,7 +509,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_007",
       "spawn_slot": "007",
       "cohort": "telemetry",
@@ -583,7 +583,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_008",
       "spawn_slot": "008",
       "cohort": "telemetry",
@@ -657,7 +657,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_009",
       "spawn_slot": "009",
       "cohort": "telemetry",
@@ -731,7 +731,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_010",
       "spawn_slot": "010",
       "cohort": "telemetry",
@@ -805,7 +805,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_011",
       "spawn_slot": "011",
       "cohort": "telemetry",
@@ -879,7 +879,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_012",
       "spawn_slot": "012",
       "cohort": "telemetry",
@@ -953,7 +953,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_013",
       "spawn_slot": "013",
       "cohort": "telemetry",
@@ -1027,7 +1027,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_014",
       "spawn_slot": "014",
       "cohort": "telemetry",
@@ -1101,7 +1101,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_015",
       "spawn_slot": "015",
       "cohort": "telemetry",
@@ -1175,7 +1175,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_016",
       "spawn_slot": "016",
       "cohort": "telemetry",
@@ -1249,7 +1249,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_017",
       "spawn_slot": "017",
       "cohort": "telemetry",
@@ -1323,7 +1323,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_018",
       "spawn_slot": "018",
       "cohort": "telemetry",
@@ -1397,7 +1397,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:07Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_019",
       "spawn_slot": "019",
       "cohort": "telemetry",
@@ -1471,7 +1471,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-14T18:37:06Z",
+      "ts": "2026-06-16T15:23:30Z",
       "agent_id": "spawn_telemetry_020",
       "spawn_slot": "020",
       "cohort": "telemetry",

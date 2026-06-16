@@ -1,14 +1,20 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import pytest
 import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
-from orch.orch.simulator import run_simulation, _handle_tool_calls
+from kopano.simulator import run_simulation, _handle_tool_calls
 
 @pytest.mark.asyncio
 async def test_handle_tool_calls():
     # Mocking execute_tool_code to avoid side effects
-    with patch("orch.orch.simulator.execute_tool_code") as mock_execute, \
-         patch("orch.orch.simulator._broadcast") as mock_broadcast, \
-         patch("orch.orch.simulator.log_interaction") as mock_log:
+    with patch("kopano.simulator.execute_tool_code") as mock_execute, \
+         patch("kopano.simulator._broadcast") as mock_broadcast, \
+         patch("kopano.simulator.log_interaction") as mock_log:
         
         mock_execute.return_value = "File content"
         reply = "I will read the file. <tool_code>read_file(\"test.txt\")</tool_code>"
@@ -32,11 +38,11 @@ async def test_run_simulation_basic():
     moderator.agent = MagicMock(id="mod1", model="gpt-4")
     moderator.amoderate = AsyncMock(return_value="Continue")
     
-    with patch("orch.orch.simulator._broadcast") as mock_broadcast, \
-         patch("orch.orch.simulator.log_interaction") as mock_log_interaction, \
-         patch("orch.orch.simulator.log_message") as mock_log_message, \
-         patch("orch.orch.simulator.get_db_connection") as mock_db, \
-         patch("orch.orch.simulator.bridge") as mock_bridge:
+    with patch("kopano.simulator._broadcast") as mock_broadcast, \
+         patch("kopano.simulator.log_interaction") as mock_log_interaction, \
+         patch("kopano.simulator.log_message") as mock_log_message, \
+         patch("kopano.simulator.get_db_connection") as mock_db, \
+         patch("kopano.simulator.bridge") as mock_bridge:
         
         # Mock DB cursor
         mock_cursor = MagicMock()

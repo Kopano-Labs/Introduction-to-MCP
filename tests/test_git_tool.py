@@ -1,9 +1,15 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import os
 import shutil
 import tempfile
 import unittest
 from pathlib import Path
-from orch.orch.tools.git import git_init, git_add, git_commit, git_status, git_log
+from kopano.tools.git import git_init, git_add, git_commit, git_status, git_log
 
 class TestGitTool(unittest.TestCase):
     def setUp(self):

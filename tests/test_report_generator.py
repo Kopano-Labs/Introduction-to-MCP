@@ -1,9 +1,15 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import unittest
 import os
 import shutil
 import tempfile
 from pathlib import Path
-from orch.orch.tools.report_generator import generate_report
+from kopano.tools.report_generator import generate_report
 
 class TestReportGenerator(unittest.TestCase):
     def setUp(self):

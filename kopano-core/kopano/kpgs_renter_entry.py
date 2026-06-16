@@ -46,8 +46,11 @@ def _append_jsonl(path: Path, row: dict[str, Any]) -> None:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
-def load_renter_entryway() -> dict[str, Any]:
-    """Load entryway — Schematics authority first, runtime mirror fallback."""
+from functools import lru_cache
+import copy
+
+@lru_cache(maxsize=1)
+def _load_renter_entryway_cached() -> dict[str, Any]:
     for path in (SCHEMATICS_ENTRYWAY, RUNTIME_ENTRYWAY):
         if path.is_file():
             data = json.loads(path.read_text(encoding="utf-8"))
@@ -58,6 +61,10 @@ def load_renter_entryway() -> dict[str, Any]:
         "error": "entryway_missing",
         "expected": str(SCHEMATICS_ENTRYWAY.relative_to(REPO_ROOT)),
     }
+
+
+def load_renter_entryway() -> dict[str, Any]:
+    return copy.deepcopy(_load_renter_entryway_cached())
 
 
 def hood_entry_assertion(
@@ -163,14 +170,18 @@ def assert_and_log_entry(
     return assertion
 
 
-def load_altar_block_holders() -> dict[str, Any]:
-    """Load altar block holder registry — Schematics authority first."""
+@lru_cache(maxsize=1)
+def _load_altar_block_holders_cached() -> dict[str, Any]:
     for path in (ALTAR_BLOCK_HOLDERS_JSON, ALTAR_BLOCK_HOLDERS_RUNTIME):
         if path.is_file():
             data = json.loads(path.read_text(encoding="utf-8"))
             data["_source"] = str(path.relative_to(REPO_ROOT)).replace("\\", "/")
             return data
     return {"schema": "kpgs_altar_block_holders_v1", "error": "altar_block_holders_missing"}
+
+
+def load_altar_block_holders() -> dict[str, Any]:
+    return copy.deepcopy(_load_altar_block_holders_cached())
 
 
 def _altar_layer_for_agent(agent_id: str, registry: dict[str, Any]) -> str | None:

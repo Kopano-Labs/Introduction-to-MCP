@@ -1,9 +1,15 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import unittest
 from unittest.mock import patch, MagicMock
-from orch.orch.tools.social_monitor import monitor_brand
+from kopano.tools.social_monitor import monitor_brand
 
 class TestSocialMonitor(unittest.TestCase):
-    @patch("orch.orch.tools.social_monitor.perform_search")
+    @patch("kopano.tools.social_monitor.perform_search")
     def test_monitor_brand_reddit(self, mock_perform_search):
         # Setup mock behavior
         mock_perform_search.return_value = "Reddit mention of MyBrand"
@@ -14,7 +20,7 @@ class TestSocialMonitor(unittest.TestCase):
         mock_perform_search.assert_called_with('site:reddit.com "MyBrand"')
         self.assertIn("Reddit mention of MyBrand", result)
 
-    @patch("orch.orch.tools.social_monitor.perform_search")
+    @patch("kopano.tools.social_monitor.perform_search")
     def test_monitor_brand_x(self, mock_perform_search):
         mock_perform_search.return_value = "X (Twitter) mention of MyBrand"
         
@@ -23,7 +29,7 @@ class TestSocialMonitor(unittest.TestCase):
         mock_perform_search.assert_called_with('site:x.com OR site:twitter.com "MyBrand"')
         self.assertIn("X (Twitter) mention of MyBrand", result)
 
-    @patch("orch.orch.tools.social_monitor.perform_search")
+    @patch("kopano.tools.social_monitor.perform_search")
     def test_monitor_brand_all(self, mock_perform_search):
         mock_perform_search.return_value = "General results"
         

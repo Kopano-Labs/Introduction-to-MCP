@@ -1,9 +1,15 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import unittest
 from unittest.mock import patch, MagicMock
-from orch.orch.tools.web_scraper import scrape_page
+from kopano.tools.web_scraper import scrape_page
 
 class TestWebScraper(unittest.TestCase):
-    @patch("orch.orch.tools.web_scraper.httpx.get")
+    @patch("kopano.tools.web_scraper.httpx.get")
     def test_scrape_page_success(self, mock_get):
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -14,7 +20,7 @@ class TestWebScraper(unittest.TestCase):
         self.assertIn("Title: Test Title", result)
         self.assertIn("Content Preview:\nTest content.", result)
 
-    @patch("orch.orch.tools.web_scraper.httpx.get")
+    @patch("kopano.tools.web_scraper.httpx.get")
     def test_scrape_page_404(self, mock_get):
         mock_response = MagicMock()
         mock_response.status_code = 404

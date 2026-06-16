@@ -1,4 +1,10 @@
-from orch.orch.tool_runtime import execute_tool_code
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
+from kopano.tool_runtime import execute_tool_code
 
 
 def test_execute_tool_code_rejects_unknown_tool():

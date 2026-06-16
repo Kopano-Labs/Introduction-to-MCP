@@ -1,11 +1,17 @@
 """
-Pytest tests for the tool functions in orch/tools.
+Pytest tests for the tool functions in kopano/tools.
 """
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import pytest
 from pathlib import Path
 
-from orch.tools.filesystem import read_file
-from orch.tools.write_file import write_file
+from kopano.tools.filesystem import read_file
+from kopano.tools.write_file import write_file
 
 
 def test_write_and_read_file(tmp_path: Path):

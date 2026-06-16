@@ -1,3 +1,9 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import gc
 import os
 import unittest
@@ -5,7 +11,7 @@ import sqlite3
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import time
-from orch.orch.tools.database_tool import sql_query
+from kopano.tools.database_tool import sql_query
 
 class TestDatabaseTool(unittest.TestCase):
     def setUp(self):
@@ -36,7 +42,7 @@ class TestDatabaseTool(unittest.TestCase):
                 os.remove(self.test_db_path)
 
     def test_sql_query_success(self):
-        from orch.orch.tools import database_tool
+        from kopano.tools import database_tool
         original_path = database_tool.DB_PATH
         database_tool.DB_PATH = self.test_db_path
         try:
@@ -46,7 +52,7 @@ class TestDatabaseTool(unittest.TestCase):
             database_tool.DB_PATH = original_path
 
     def test_sql_query_invalid_sql(self):
-        from orch.orch.tools import database_tool
+        from kopano.tools import database_tool
         original_path = database_tool.DB_PATH
         database_tool.DB_PATH = self.test_db_path
         try:
@@ -56,7 +62,7 @@ class TestDatabaseTool(unittest.TestCase):
             database_tool.DB_PATH = original_path
 
     def test_sql_query_empty_result(self):
-        from orch.orch.tools import database_tool
+        from kopano.tools import database_tool
         original_path = database_tool.DB_PATH
         database_tool.DB_PATH = self.test_db_path
         try:

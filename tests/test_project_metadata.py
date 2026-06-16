@@ -1,3 +1,9 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 from pathlib import Path
 import tomllib
 
@@ -9,8 +15,8 @@ def test_pyproject_files_are_valid_toml():
     ]
     if Path("kopano-core/pyproject.toml").exists():
         candidates.append(Path("kopano-core/pyproject.toml"))
-    if Path("orch/pyproject.toml").exists():
-        candidates.append(Path("orch/pyproject.toml"))
+    if Path("kopano/pyproject.toml").exists():
+        candidates.append(Path("kopano/pyproject.toml"))
 
     for path in candidates:
         data = tomllib.loads(path.read_text(encoding="utf-8"))

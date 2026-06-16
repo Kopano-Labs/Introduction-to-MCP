@@ -1,6 +1,6 @@
 {
   "schema": "agent_build_poc_validation_v1",
-  "ts": "2026-06-14T12:28:37Z",
+  "ts": "2026-06-16T15:05:56Z",
   "verdict": "PASS",
   "passed": 20,
   "total": 20,
@@ -62,19 +62,19 @@
     {
       "check": "lpm_dialectic",
       "verdict": "PASS",
-      "detail": "[LPM_PROTOCOL] timestamp: 2026-06-14T12:28:19Z | ecosystem: Kopano-Phu | #?: #? agent_build open | #!: #! agent_build pr",
+      "detail": "[LPM_PROTOCOL] timestamp: 2026-06-16T15:05:40Z | ecosystem: Kopano-Phu | #?: #? agent_build open | #!: #! agent_build pr",
       "evidence": null
     },
     {
       "check": "lph_witness_switch",
       "verdict": "PASS",
-      "detail": "[LPH_PROTOCOL] timestamp: 2026-06-14T12:28:19Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_s",
+      "detail": "[LPH_PROTOCOL] timestamp: 2026-06-16T15:05:40Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_s",
       "evidence": null
     },
     {
       "check": "mao_lpm_attach",
       "verdict": "PASS",
-      "detail": "[GOD_COMPLEX] timestamp: 2026-06-14T12:28:19Z | #?: intent:build | msg:build guardian identi flows | #!: vector:V4_DIASP",
+      "detail": "[GOD_COMPLEX] timestamp: 2026-06-16T15:05:40Z | #?: intent:build | msg:build guardian identi flows | #!: vector:V4_DIASP",
       "evidence": {
         "vector": "V4_DIASPORA"
       }
@@ -94,7 +94,7 @@
     {
       "check": "blackmask_cassy_ship",
       "verdict": "PASS",
-      "detail": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T12:28:19Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p",
+      "detail": "[BLACK_MASK_DRILL] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p",
       "evidence": null
     },
     {
@@ -108,11 +108,11 @@
           "department": "kopano_labs_experimentation",
           "teacher": "cassey",
           "verdict": "APPROVE",
-          "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-14T12:28:19Z | ecosystem: Kopano-Phu | lane: mcp | role: teacher | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: APPROVE | note: Save — PoC validation run",
+          "summary": "[TSAP_PROTOCOL] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | lane: mcp | role: teacher | department: kopano_labs_experimentation | student: cassy | teacher: cassey | verdict: APPROVE | note: Save — PoC validation run",
           "main_brain_exit_code": 0,
           "kc_teacher_review": {
             "stored": true,
-            "ts": "2026-06-14T12:28:19Z",
+            "ts": "2026-06-16T15:05:44Z",
             "schema": "kc_teacher_review_v1",
             "opinion": "Save — Save — PoC validation run",
             "verdict_token": "Save",
@@ -126,13 +126,13 @@
     {
       "check": "boot_blackmask_dry_run",
       "verdict": "PASS",
-      "detail": "SHIP=18 HOLD=0",
+      "detail": "SHIP=19 HOLD=0",
       "evidence": {
         "schema": "blackmask_dry_run_v1",
         "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
         "dry_run": true,
-        "agents_total": 18,
-        "ship": 18,
+        "agents_total": 19,
+        "ship": 19,
         "hold": 0,
         "all_ship": true,
         "results": [
@@ -141,126 +141,133 @@
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: freddy_nw_alfalfa | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: freddy_nw_alfalfa | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+          },
+          {
+            "agent_id": "eddie_bgf_mining",
+            "verdict": "SHIP",
+            "commandments_pass": 15,
+            "pillars_pass": 5,
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: eddie_bgf_mining | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "starfall_salvage",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: starfall_salvage | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: starfall_salvage | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "kopano_labs_website",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: kopano_labs_website | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: kopano_labs_website | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "kasilink",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: kasilink | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: kasilink | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "bookit_5s_arena",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: bookit_5s_arena | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: bookit_5s_arena | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "5s_arena_blog",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: 5s_arena_blog | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: 5s_arena_blog | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "cape_campass",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: cape_campass | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: cape_campass | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "portfolios_websites",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: portfolios_websites | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: portfolios_websites | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "ama_phu_entertainment",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: ama_phu_entertainment | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: ama_phu_entertainment | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "pipeline_drone",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: pipeline_drone | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: pipeline_drone | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "claude",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: claude | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: claude | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "grok",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: grok | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: grok | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "gemini",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: gemini | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: gemini | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "copilot",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: copilot | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: copilot | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "cf_cloud",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: cf_cloud | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: cf_cloud | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "mirror_warden",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: mirror_warden | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: mirror_warden | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "cassey",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           },
           {
             "agent_id": "operational_general",
             "verdict": "SHIP",
             "commandments_pass": 15,
             "pillars_pass": 5,
-            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-14T12:28:20Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
+            "summary": "[BLACK_MASK_DRILL_DRY] timestamp: 2026-06-16T15:05:44Z | ecosystem: Kopano-Phu | agent: operational_general | commandments_pass: 15/15 | pillars_pass: 5/5 | verdict: SHIP | dry_run: true"
           }
         ]
       }
@@ -281,7 +288,7 @@
       "check": "eco_poc_rosen_delta",
       "verdict": "PASS",
       "detail": "PASS",
-      "evidence": "poc_kp_edu_lab_ops_10_20260614T122837"
+      "evidence": "poc_kp_edu_lab_ops_10_20260616T150548"
     },
     {
       "check": "doctrine_files",
@@ -292,7 +299,7 @@
     {
       "check": "operating_mesh_phase3",
       "verdict": "PASS",
-      "detail": "operating=9/9",
+      "detail": "operating=10/10",
       "evidence": null
     },
     {
@@ -309,5 +316,5 @@
     }
   ],
   "report_path": "docs/swarm-ops/AGENT_BUILD_POC_VALIDATION.json",
-  "eco_poc_id": "poc_kp_edu_lab_ops_10_20260614T122837"
+  "eco_poc_id": "poc_kp_edu_lab_ops_10_20260616T150548"
 }

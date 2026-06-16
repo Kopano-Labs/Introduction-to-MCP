@@ -1,6 +1,6 @@
 {
   "schema": "kpgs_behavioral_poc_v1",
-  "ts": "2026-06-14T18:36:22Z",
+  "ts": "2026-06-16T15:23:17Z",
   "verdict": "PASS",
   "activation_allowed": true,
   "proofs_passed": 6,
@@ -14,7 +14,7 @@
       "instrument": "infinite_hood_cloud.hood_dispatch_for_plot",
       "observed": {
         "schema": "infinite_hood_dispatch_v1",
-        "ts": "2026-06-14T18:35:28Z",
+        "ts": "2026-06-16T15:23:01Z",
         "plot_id": "plot_kopano_context",
         "domain": "context.kopanolabs.com",
         "agent_id": "mirror_warden",
@@ -25,7 +25,7 @@
           "proceed": true,
           "swfus": {
             "schema": "kpgs_swfus_envelope_v2",
-            "ts": "2026-06-14T18:35:28Z",
+            "ts": "2026-06-16T15:23:01Z",
             "bracket": "[SWFUS_KPGS]",
             "agent_id": "mirror_warden",
             "cohort": "guardian",
@@ -40,7 +40,7 @@
             "altar_layer": "guardian_ai",
             "hood_entry": {
               "schema": "kpgs_hood_entry_assertion_v1",
-              "ts": "2026-06-14T18:35:28Z",
+              "ts": "2026-06-16T15:23:01Z",
               "bracket": "[KPGS_HOOD_ENTRY]",
               "renter_id": "spawn:mirror_warden",
               "renter_class": "spawn_agent",
@@ -132,7 +132,7 @@
             },
             "block_holder": {
               "schema": "kpgs_block_holder_brief_v1",
-              "ts": "2026-06-14T18:35:28Z",
+              "ts": "2026-06-16T15:23:01Z",
               "bracket": "[KPGS_BLOCK_HOLDER]",
               "agent_id": "mirror_warden",
               "altar_layer": "guardian_ai",
@@ -204,7 +204,7 @@
             "forensic_sociology": null,
             "jethro_triage": {
               "schema": "kpgs_jethro_triage_v2",
-              "ts": "2026-06-14T18:35:28Z",
+              "ts": "2026-06-16T15:23:01Z",
               "bracket": "[JETHRO_TRIAGE]",
               "agent_id": "mirror_warden",
               "cohort": "guardian",
@@ -217,7 +217,7 @@
             },
             "wwjd_firewall": {
               "schema": "kpgs_wwjd_firewall_v1",
-              "ts": "2026-06-14T18:35:28Z",
+              "ts": "2026-06-16T15:23:01Z",
               "bracket": "[WWJD_FIREWALL]",
               "verdict": "REVIEW",
               "reject_hits": [],
@@ -230,7 +230,7 @@
           },
           "jethro": {
             "schema": "kpgs_jethro_triage_v2",
-            "ts": "2026-06-14T18:35:28Z",
+            "ts": "2026-06-16T15:23:01Z",
             "bracket": "[JETHRO_TRIAGE]",
             "agent_id": "mirror_warden",
             "cohort": "guardian",
@@ -243,7 +243,7 @@
           },
           "wwjd": {
             "schema": "kpgs_wwjd_firewall_v1",
-            "ts": "2026-06-14T18:35:28Z",
+            "ts": "2026-06-16T15:23:01Z",
             "bracket": "[WWJD_FIREWALL]",
             "verdict": "REVIEW",
             "reject_hits": [],
@@ -273,7 +273,7 @@
       "observed": {
         "misnamed": {
           "schema": "kpgs_telemetry_classify_v1",
-          "ts": "2026-06-14T18:35:28Z",
+          "ts": "2026-06-16T15:23:01Z",
           "raw_signal": "pressure is high on the team",
           "verdict": "RECLASSIFY",
           "classified": false,
@@ -295,7 +295,7 @@
         },
         "routed": {
           "schema": "kpgs_telemetry_classify_v1",
-          "ts": "2026-06-14T18:35:28Z",
+          "ts": "2026-06-16T15:23:01Z",
           "raw_signal": "grief after load shedding killed the shift",
           "verdict": "ROUTED",
           "classified": true,
@@ -354,9 +354,9 @@
       },
       "tick": {
         "schema": "sovereign_sim_tick_v1",
-        "ts": "2026-06-14T18:36:22Z",
+        "ts": "2026-06-16T15:23:17Z",
         "verdict": "TICK_OK",
-        "tick_id": "20260614T183622",
+        "tick_id": "20260616T152317",
         "sample_size": 12,
         "proceed_count": 12,
         "sever_count": 0,

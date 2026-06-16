@@ -1,6 +1,12 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 from typer.testing import CliRunner
 
-from orch.__main__ import app
+from kopano.__main__ import app
 
 
 runner = CliRunner()

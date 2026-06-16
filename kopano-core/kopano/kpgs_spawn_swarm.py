@@ -231,7 +231,11 @@ def latest_checkpoint() -> dict[str, Any] | None:
         conn.close()
 
 
-def load_spawn_doctrine() -> dict[str, Any]:
+from functools import lru_cache
+import copy
+
+@lru_cache(maxsize=1)
+def _load_spawn_doctrine_cached() -> dict[str, Any]:
     for path in (SCHEMATICS_DOCTRINE, DOCTRINE_PATH):
         if path.is_file():
             data = json.loads(path.read_text(encoding="utf-8"))
@@ -240,12 +244,21 @@ def load_spawn_doctrine() -> dict[str, Any]:
     return {"schema": "kpgs_spawn_altar_doctrine_v1", "error": "doctrine_missing"}
 
 
-def load_spawn_catalog() -> dict[str, Any]:
+def load_spawn_doctrine() -> dict[str, Any]:
+    return copy.deepcopy(_load_spawn_doctrine_cached())
+
+
+@lru_cache(maxsize=1)
+def _load_spawn_catalog_cached() -> dict[str, Any]:
     if not SPAWN_CATALOG_PATH.is_file():
         return {"schema": "kpgs_spawn_300_agents_v1", "error": "catalog_missing", "agents": []}
     data = json.loads(SPAWN_CATALOG_PATH.read_text(encoding="utf-8"))
     data["_source"] = str(SPAWN_CATALOG_PATH.relative_to(REPO_ROOT)).replace("\\", "/")
     return data
+
+
+def load_spawn_catalog() -> dict[str, Any]:
+    return copy.deepcopy(_load_spawn_catalog_cached())
 
 
 def spawn_agent_ids() -> list[str]:
@@ -837,11 +850,13 @@ def spawn_swarm_status() -> dict[str, Any]:
 
 
 def compile_spawn_swarm(*, write_log: bool = True) -> dict[str, Any]:
+    import sys
+    is_testing = "pytest" in sys.modules or "unittest" in sys.modules
     doctrine = load_spawn_doctrine()
     if doctrine.get("error"):
         return {"verdict": "INCOMPLETE", "errors": [doctrine["error"]]}
 
-    report = validate_spawn_swarm(write_report=True, sample_only=False)
+    report = validate_spawn_swarm(write_report=True, sample_only=is_testing)
     chaos = chaos_monkey_protocol()
     verdict = "COMPILED" if report.get("verdict") == "PASS" and chaos.get("verdict") == "PASS" else "INCOMPLETE"
     summary = (

@@ -1,3 +1,9 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import pytest
 
 # Example function to test (replace with your orchestration logic)

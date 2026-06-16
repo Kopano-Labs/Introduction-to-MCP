@@ -1,13 +1,19 @@
 """
 Pytest tests for the Phase 2 Moderator AI logic.
 """
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import pytest
 from unittest.mock import patch, MagicMock
 
-from orch.orch.moderator import Moderator
-from orch.orch.agent_manager import Agent
+from kopano.moderator import Moderator
+from kopano.agent_manager import Agent
 
-@patch('orch.orch.moderator.load_agents')
+@patch('kopano.moderator.load_agents')
 def test_moderator_initialization_success(mock_load_agents):
     """
     Test that the Moderator initializes correctly with a valid agent.
@@ -18,7 +24,7 @@ def test_moderator_initialization_success(mock_load_agents):
     moderator = Moderator(agent_id="gpt-4o-mod")
     assert moderator.agent.id == "gpt-4o-mod"
 
-@patch('orch.orch.moderator.load_agents')
+@patch('kopano.moderator.load_agents')
 def test_moderator_initialization_fail(mock_load_agents):
     """
     Test that the Moderator raises an error if the agent is not found.
@@ -27,8 +33,8 @@ def test_moderator_initialization_fail(mock_load_agents):
     with pytest.raises(ValueError, match="Moderator agent 'gpt-4o-mod' not found."):
         Moderator(agent_id="gpt-4o-mod")
 
-@patch('orch.orch.moderator.completion')
-@patch('orch.orch.moderator.load_agents')
+@patch('kopano.moderator.completion')
+@patch('kopano.moderator.load_agents')
 def test_moderator_moderate_success(mock_load_agents, mock_completion):
     """
     Test the moderate method successfully returns a new direction from the LLM.
@@ -56,8 +62,8 @@ def test_moderator_moderate_success(mock_load_agents, mock_completion):
     assert "Test Topic" in call_args.kwargs['messages'][1]['content']
     assert "[gemini]: I think A is the answer." in call_args.kwargs['messages'][1]['content']
 
-@patch('orch.orch.moderator.completion')
-@patch('orch.orch.moderator.load_agents')
+@patch('kopano.moderator.completion')
+@patch('kopano.moderator.load_agents')
 def test_moderator_moderate_api_failure(mock_load_agents, mock_completion):
     """
     Test the moderate method falls back gracefully when the API call fails.

@@ -1,11 +1,16 @@
 {
   "schema": "agent_mesh_v1",
   "boot": "KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1",
-  "governance_core": ["kc", "cassey", "cassy"],
+  "governance_core": ["kc", "cassey", "cassy", "kessa"],
   "orchestrator": {
     "mao": {
       "type": "surface",
       "tools_lane": ["mao_tsap_student_turn", "mao_tsap_teacher_turn", "mao_blackmask_drill"]
+    },
+    "mmao": {
+      "role": "master_multi_agent_orchardist",
+      "agent": "kessa",
+      "executes": true
     },
     "mirror_warden": { "role": "orchestrator_parity", "executes": false }
   },

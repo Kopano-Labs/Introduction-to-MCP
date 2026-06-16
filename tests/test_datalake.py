@@ -3,9 +3,15 @@ Test Suite for Data Lake SQLite Operations
 Architect: www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7
 GitHub: https://github.com/RobynAwesome/
 """
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import pytest
 import sqlite3
-from orch.datalake import get_connection, start_discussion, log_interaction
+from kopano.datalake import get_connection, start_discussion, log_interaction
 
 @pytest.fixture
 def in_memory_db(monkeypatch):
@@ -23,7 +29,7 @@ def in_memory_db(monkeypatch):
         conn.row_factory = sqlite3.Row
         return conn
 
-    monkeypatch.setattr("orch.datalake.get_connection", _connect)
+    monkeypatch.setattr("kopano.datalake.get_connection", _connect)
     yield anchor
     anchor.close()
 

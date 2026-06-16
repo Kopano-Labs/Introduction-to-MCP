@@ -1,6 +1,12 @@
 """CMD-03 external swarm lane — no fabricated kimi_ack."""
-
 from __future__ import annotations
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
+
 
 import pytest
 

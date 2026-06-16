@@ -1,8 +1,14 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 from fastapi.testclient import TestClient
 
-from orch.orch.api import app
-from orch.orch.tools.gig_matcher import match_gig
-from orch.orch.tools.loadshedding import get_loadshedding_status, is_gig_safe
+from kopano.api import app
+from kopano.tools.gig_matcher import match_gig
+from kopano.tools.loadshedding import get_loadshedding_status, is_gig_safe
 
 
 client = TestClient(app)

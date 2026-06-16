@@ -1,9 +1,15 @@
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import unittest
 from unittest.mock import patch, MagicMock
-from orch.orch.tools.arxiv import search_arxiv
+from kopano.tools.arxiv import search_arxiv
 
 class TestArxivTool(unittest.TestCase):
-    @patch("orch.orch.tools.arxiv.httpx.get")
+    @patch("kopano.tools.arxiv.httpx.get")
     def test_search_arxiv_success(self, mock_get):
         # Mocking the arXiv API response (XML format)
         mock_response = MagicMock()
@@ -25,7 +31,7 @@ class TestArxivTool(unittest.TestCase):
         self.assertIn("Abstract content here...", result)
         self.assertIn("Authors: John Doe", result)
 
-    @patch("orch.orch.tools.arxiv.httpx.get")
+    @patch("kopano.tools.arxiv.httpx.get")
     def test_search_arxiv_no_results(self, mock_get):
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -37,7 +43,7 @@ class TestArxivTool(unittest.TestCase):
         result = search_arxiv("NonExistentTopic12345")
         self.assertIn("No arXiv papers found", result)
 
-    @patch("orch.orch.tools.arxiv.httpx.get")
+    @patch("kopano.tools.arxiv.httpx.get")
     def test_search_arxiv_error(self, mock_get):
         mock_get.side_effect = Exception("Network error")
         result = search_arxiv("Topic")

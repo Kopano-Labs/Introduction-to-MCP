@@ -1,13 +1,19 @@
 """
-Pytest tests for the orch CLI application.
+Pytest tests for the kopano CLI application.
 """
+
+import sys
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
+
 import pytest
 import sqlite3
 from typer.testing import CliRunner
 from unittest.mock import patch, MagicMock, AsyncMock
 
-from orch.orch.cli import app
-from orch.orch.agent_manager import Agent
+from kopano.cli import app
+from kopano.agent_manager import Agent
 
 runner = CliRunner()
 
@@ -66,9 +72,9 @@ def in_memory_db():
         conn.row_factory = sqlite3.Row
         return conn
 
-    with patch('orch.orch.cli.get_db_connection', side_effect=_connect), \
-         patch('orch.orch.database.get_db_connection', side_effect=_connect), \
-         patch('orch.orch.simulator.get_db_connection', side_effect=_connect):
+    with patch('kopano.cli.get_db_connection', side_effect=_connect), \
+         patch('kopano.database.get_db_connection', side_effect=_connect), \
+         patch('kopano.simulator.get_db_connection', side_effect=_connect):
         yield anchor
 
     anchor.close()
@@ -76,7 +82,7 @@ def in_memory_db():
 
 def test_agents_list_command_runs_successfully():
     """
-    Ensures the `orch agents list` command can be invoked without errors.
+    Ensures the `kopano agents list` command can be invoked without errors.
     """
     result = runner.invoke(app, ["agents", "list"])
     assert result.exit_code == 0
@@ -84,9 +90,9 @@ def test_agents_list_command_runs_successfully():
 
 def test_agents_list_no_agents():
     """
-    Test `orch agents list` when no agents are configured.
+    Test `kopano agents list` when no agents are configured.
     """
-    with patch('orch.orch.cli.load_agents', return_value={}):
+    with patch('kopano.cli.load_agents', return_value={}):
         result = runner.invoke(app, ["agents", "list"])
         assert result.exit_code == 0
         assert "No agents configured yet." in result.stdout
@@ -94,10 +100,10 @@ def test_agents_list_no_agents():
 
 def test_agents_list_with_agents():
     """
-    Test `orch agents list` with a configured agent.
+    Test `kopano agents list` with a configured agent.
     """
     mock_agent = Agent(id="gemini-test", provider="google", model="gemini-pro", api_key="[REDACTED_MOCK_KEY]", persona="")
-    with patch('orch.orch.cli.load_agents', return_value={"gemini-test": mock_agent}):
+    with patch('kopano.cli.load_agents', return_value={"gemini-test": mock_agent}):
         result = runner.invoke(app, ["agents", "list"])
         assert result.exit_code == 0
         assert "Configured Agents" in result.stdout
@@ -107,10 +113,10 @@ def test_agents_list_with_agents():
 
 def test_agents_config_new_agent():
     """
-    Test `orch agents config` correctly saves a new agent.
+    Test `kopano agents config` correctly saves a new agent.
     """
-    with patch('orch.orch.cli.load_agents', return_value={}), \
-         patch('orch.orch.cli.save_agents') as mock_save:
+    with patch('kopano.cli.load_agents', return_value={}), \
+         patch('kopano.cli.save_agents') as mock_save:
 
         agent_id = "test-gpt"
         provider = "openai"
@@ -143,7 +149,7 @@ def test_agents_config_new_agent():
 
 def test_serve_launch_with_logging(in_memory_db):
     """
-    Test that `orch serve launch` correctly logs the discussion to the database.
+    Test that `kopano serve launch` correctly logs the discussion to the database.
     This verifies capability #98: Explain its own reasoning via audit trails.
     """
     # Mock agents
@@ -154,9 +160,9 @@ def test_serve_launch_with_logging(in_memory_db):
     mock_message = MagicMock()
     mock_message.content = "This is a test response."
 
-    with patch('orch.orch.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
-         patch('orch.orch.agent_manager.Agent.agenerate_response', new=AsyncMock(return_value=mock_message)), \
-         patch('orch.orch.moderator.Moderator.moderate', return_value="This is a moderator direction."):
+    with patch('kopano.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
+         patch('kopano.agent_manager.Agent.agenerate_response', new=AsyncMock(return_value=mock_message)), \
+         patch('kopano.moderator.Moderator.moderate', return_value="This is a moderator direction."):
 
         # Run the command for 2 rounds to ensure the moderator is triggered
         result = runner.invoke(app, [
@@ -199,7 +205,7 @@ def test_serve_launch_with_logging(in_memory_db):
 
 def test_serve_launch_context_handling(in_memory_db):
     """
-    Test that `orch serve launch` correctly manages and passes `full_conversation_history`
+    Test that `kopano serve launch` correctly manages and passes `full_conversation_history`
     to agents and the moderator.
     """
     # Mock agents
@@ -215,9 +221,9 @@ def test_serve_launch_context_handling(in_memory_db):
 
     mock_agent_generate_response = AsyncMock(side_effect=[mock_agent_response_r1, mock_agent_response_r2])
 
-    with patch('orch.orch.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
-         patch('orch.orch.agent_manager.Agent.agenerate_response', new=mock_agent_generate_response), \
-         patch('orch.orch.moderator.Moderator.moderate', return_value=mock_moderator_direction_r2) as mock_moderator_moderate:
+    with patch('kopano.cli.load_agents', return_value={"test-agent": mock_agent, "mod-agent": mock_mod_agent}), \
+         patch('kopano.agent_manager.Agent.agenerate_response', new=mock_agent_generate_response), \
+         patch('kopano.moderator.Moderator.moderate', return_value=mock_moderator_direction_r2) as mock_moderator_moderate:
 
         topic = "Test Context Handling"
         result = runner.invoke(app, [
@@ -261,11 +267,11 @@ def test_serve_launch_context_handling(in_memory_db):
 
 def test_agents_remove():
     """
-    Test `orch agents remove` successfully removes an agent.
+    Test `kopano agents remove` successfully removes an agent.
     """
     mock_agent = Agent(id="test-remove", provider="test", model="test", api_key="[REDACTED_MOCK_KEY]", persona="")
-    with patch('orch.orch.cli.load_agents', return_value={"test-remove": mock_agent}), \
-         patch('orch.orch.cli.save_agents') as mock_save:
+    with patch('kopano.cli.load_agents', return_value={"test-remove": mock_agent}), \
+         patch('kopano.cli.save_agents') as mock_save:
 
         result = runner.invoke(app, ["agents", "remove", "test-remove"])
 
@@ -276,10 +282,10 @@ def test_agents_remove():
 
 def test_agents_remove_not_found():
     """
-    Test `orch agents remove` fails when the agent is not found.
+    Test `kopano agents remove` fails when the agent is not found.
     """
-    with patch('orch.orch.cli.load_agents', return_value={}), \
-         patch('orch.orch.cli.save_agents') as mock_save:
+    with patch('kopano.cli.load_agents', return_value={}), \
+         patch('kopano.cli.save_agents') as mock_save:
 
         result = runner.invoke(app, ["agents", "remove", "non-existent-agent"])
 
