@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starfall Salvage — B2B Lead Gen Funnel · KPGS</title>
+  <meta name="description" content="Starfall Salvage: WebGL salvage runner turning gameplay into B2B lead generation. 4 games: Starfall Salvage, Liquidity Dash, Spread Runner, Mesh Arbitrage.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #04040c; --glass: rgba(255,255,255,0.03); --glass-b: rgba(255,255,255,0.06);
+      --text: #e8e8f4; --dim: rgba(255,255,255,0.3); --sub: rgba(255,255,255,0.55);
+      --cyan: #00e5ff; --purple: #7b61ff; --gold: #ffd700; --rose: #e94560;
+      --emerald: #00d4aa; --coral: #ff7b54;
+      --f: 'Outfit', sans-serif; --m: 'JetBrains Mono', monospace;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:var(--f); color:var(--text); background:var(--bg); overflow-x:hidden; }
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-thumb { background:rgba(0,229,255,0.2); border-radius:3px; }
+
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 40px; background:rgba(4,4,12,0.85); backdrop-filter:blur(24px);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+    .nav-mark {
+      width:32px; height:32px; background:linear-gradient(135deg,var(--coral),var(--gold));
+      border-radius:6px; display:flex; align-items:center; justify-content:center;
+      font-weight:900; font-size:11px; color:#fff;
+    }
+    .nav-name { font-size:14px; font-weight:700; }
+    .nav-links { display:flex; gap:24px; }
+    .nav-links a { font-size:12px; font-weight:500; color:var(--sub); text-decoration:none; transition:color 0.3s; }
+    .nav-links a:hover { color:var(--cyan); }
+    @media(max-width:768px) { .nav-links{display:none;} nav{padding:12px 16px;} }
+
+    .hero {
+      min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:120px 40px 60px; text-align:center; position:relative;
+      background:radial-gradient(ellipse at 50% 30%,rgba(255,123,84,0.06),transparent 55%),
+                 radial-gradient(ellipse at 30% 70%,rgba(123,97,255,0.04),transparent 50%);
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 16px; border-radius:20px; font-size:10px; font-family:var(--m);
+      background:rgba(255,123,84,0.1); color:var(--coral); border:1px solid rgba(255,123,84,0.2);
+      letter-spacing:1.5px; text-transform:uppercase; margin-bottom:24px;
+    }
+    .hero h1 {
+      font-size:clamp(36px,6vw,60px); font-weight:900; letter-spacing:-3px; line-height:1.05;
+      background:linear-gradient(135deg,#fff 10%,var(--coral) 40%,var(--gold) 70%,var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:16px;
+    }
+    .hero-sub { font-size:16px; color:var(--sub); max-width:600px; line-height:1.7; margin-bottom:32px; }
+    .hero-cta {
+      padding:14px 36px; border-radius:12px; border:none; cursor:pointer;
+      background:linear-gradient(135deg,var(--coral),var(--gold));
+      color:#000; font-family:var(--f); font-size:15px; font-weight:700;
+      transition:all 0.3s; box-shadow:0 4px 24px rgba(255,123,84,0.3);
+    }
+    .hero-cta:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(255,123,84,0.4); }
+
+    /* GAME CANVAS */
+    .game-section { padding:40px; text-align:center; }
+    .game-wrapper {
+      max-width:800px; margin:0 auto; background:var(--glass); border:1px solid var(--glass-b);
+      border-radius:20px; overflow:hidden; position:relative;
+    }
+    .game-header {
+      display:flex; align-items:center; justify-content:space-between; padding:16px 24px;
+      border-bottom:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02);
+    }
+    .game-title { font-size:14px; font-weight:700; }
+    .game-score { font-family:var(--m); font-size:13px; color:var(--gold); }
+    #gameCanvas { width:100%; display:block; background:#08080f; cursor:crosshair; }
+    .game-controls {
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      padding:16px 24px; border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .game-btn {
+      padding:10px 24px; border-radius:10px; border:none; cursor:pointer;
+      font-family:var(--m); font-size:11px; font-weight:700; text-transform:uppercase;
+      letter-spacing:1px; transition:all 0.3s;
+    }
+    .btn-play { background:linear-gradient(135deg,var(--emerald),var(--cyan)); color:#000; }
+    .btn-play:hover { transform:translateY(-1px); }
+    .game-info { font-size:10px; color:var(--dim); font-family:var(--m); }
+
+    /* GAMES GRID */
+    .games-section { padding:80px 40px; }
+    .section-tag {
+      font-size:10px; font-family:var(--m); color:var(--coral);
+      letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;
+    }
+    .games-section h2 { font-size:clamp(28px,4vw,36px); font-weight:800; letter-spacing:-1px; margin-bottom:14px; }
+    .games-section .desc { font-size:14px; color:var(--sub); max-width:600px; line-height:1.7; margin-bottom:40px; }
+    .games-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+      gap:16px; max-width:1100px;
+    }
+    .game-card {
+      background:var(--glass); border:1px solid var(--glass-b); border-radius:16px;
+      padding:28px 24px; transition:all 0.4s; cursor:default; position:relative; overflow:hidden;
+    }
+    .game-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:var(--card-c,var(--coral)); transform:scaleX(0); transition:transform 0.4s; transform-origin:left;
+    }
+    .game-card:hover::before { transform:scaleX(1); }
+    .game-card:hover { transform:translateY(-3px); border-color:rgba(255,255,255,0.1); box-shadow:0 16px 48px rgba(0,0,0,0.4); }
+    .gc-icon { font-size:32px; margin-bottom:14px; }
+    .gc-name { font-size:16px; font-weight:700; margin-bottom:4px; }
+    .gc-tag {
+      display:inline-block; padding:2px 8px; border-radius:4px; font-size:9px;
+      font-family:var(--m); font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .gc-desc { font-size:12px; color:var(--sub); line-height:1.6; }
+
+    /* B2B FUNNEL */
+    .funnel-section {
+      padding:80px 40px;
+      background:radial-gradient(ellipse at 50% 50%,rgba(123,97,255,0.04),transparent 50%);
+    }
+    .funnel-steps {
+      max-width:800px; margin:40px auto 0; display:flex; flex-direction:column; gap:0;
+    }
+    .funnel-step {
+      display:grid; grid-template-columns:60px 1fr; gap:0;
+      background:var(--glass); border:1px solid var(--glass-b); border-bottom:none;
+      transition:all 0.3s;
+    }
+    .funnel-step:first-child { border-radius:16px 16px 0 0; }
+    .funnel-step:last-child { border-bottom:1px solid var(--glass-b); border-radius:0 0 16px 16px; }
+    .funnel-step:hover { background:rgba(255,255,255,0.04); }
+    .fs-num {
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:900; color:var(--dim); border-right:1px solid var(--glass-b);
+    }
+    .fs-info { padding:20px 24px; }
+    .fs-label { font-size:14px; font-weight:700; margin-bottom:4px; }
+    .fs-desc { font-size:12px; color:var(--sub); line-height:1.5; }
+
+    /* FOOTER */
+    footer {
+      padding:48px 40px; text-align:center; border-top:1px solid var(--glass-b);
+      font-size:11px; color:var(--dim);
+    }
+    .footer-links { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+    .footer-links a { color:var(--sub); font-size:11px; text-decoration:none; transition:color 0.3s; }
+    .footer-links a:hover { color:var(--cyan); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../" class="nav-logo">
+      <div class="nav-mark">SS</div>
+      <span class="nav-name">Starfall Salvage</span>
+    </a>
+    <div class="nav-links">
+      <a href="../">Home</a>
+      <a href="../protocols/">Protocols</a>
+      <a href="../flows/">Flows</a>
+      <a href="../admin/">Dashboard</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">B2B Lead Generation Funnel · KPGS Governed</div>
+    <h1>Starfall Salvage</h1>
+    <p class="hero-sub">WebGL salvage runner that turns gameplay into qualified B2B leads. Play the game. Discover financial literacy. Enter the funnel. <strong style="color:var(--coral);">Entertainment IS the pipeline.</strong></p>
+    <button class="hero-cta" onclick="document.getElementById('play').scrollIntoView({behavior:'smooth'})">Play Now</button>
+  </section>
+
+  <!-- PLAYABLE GAME -->
+  <section class="game-section" id="play">
+    <div class="game-wrapper">
+      <div class="game-header">
+        <div class="game-title">Starfall Salvage — Debris Runner</div>
+        <div class="game-score">Score: <span id="score">0</span> | Salvaged: <span id="salvaged">0</span></div>
+      </div>
+      <canvas id="gameCanvas" width="800" height="400"></canvas>
+      <div class="game-controls">
+        <button class="game-btn btn-play" id="playBtn" onclick="startGame()">PLAY</button>
+        <div class="game-info">Arrow keys or WASD to move · Collect salvage · Avoid debris</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 GAMES -->
+  <section class="games-section" id="games">
+    <div class="section-tag">THE FUNNEL · 4 GAMES</div>
+    <h2>Four Games. One Pipeline.</h2>
+    <p class="desc">Each game teaches a financial concept. Each concept generates a qualified lead. The player doesn't know they're in a funnel — they think they're playing a game. <strong style="color:var(--gold);">That's the thesis.</strong></p>
+    <div class="games-grid">
+      <div class="game-card" style="--card-c:var(--coral);">
+        <div class="gc-icon">🌠</div>
+        <div class="gc-name">Starfall Salvage</div>
+        <div class="gc-tag" style="background:rgba(255,123,84,0.1);color:var(--coral);">Asset Recovery</div>
+        <div class="gc-desc">Collect falling debris in space. Each piece has value. Learn to assess asset worth under time pressure. The salvage = portfolio diversification in disguise.</div>
+      </div>
+      <div class="game-card" style="--card-c:var(--cyan);">
+        <div class="gc-icon">💧</div>
+        <div class="gc-name">Liquidity Dash</div>
+        <div class="gc-tag" style="background:rgba(0,229,255,0.1);color:var(--cyan);">Cash Flow</div>
+        <div class="gc-desc">Race through liquidity pools. Avoid illiquid zones. The faster you move, the more liquid your position. Cash flow management as a runner mechanic.</div>
+      </div>
+      <div class="game-card" style="--card-c:var(--emerald);">
+        <div class="gc-icon">📊</div>
+        <div class="gc-name">Spread Runner</div>
+        <div class="gc-tag" style="background:rgba(0,212,170,0.1);color:var(--emerald);">Market Spread</div>
+        <div class="gc-desc">Navigate the bid-ask spread. Buy low on the left lane, sell high on the right. The spread narrows as you level up — tighter margins, more skill.</div>
+      </div>
+      <div class="game-card" style="--card-c:var(--purple);">
+        <div class="gc-icon">🕸️</div>
+        <div class="gc-name">Mesh Arbitrage</div>
+        <div class="gc-tag" style="background:rgba(123,97,255,0.1);color:var(--purple);">Arbitrage</div>
+        <div class="gc-desc">Connect mesh nodes to find price discrepancies. Buy on one node, sell on another. The mesh = decentralized exchange routing. Arbitrage as puzzle gameplay.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B2B FUNNEL -->
+  <section class="funnel-section" id="funnel">
+    <div class="section-tag">THE PIPELINE</div>
+    <h2>How Gameplay Becomes Pipeline</h2>
+    <p class="desc" style="max-width:600px;">The player enters through entertainment. They exit as a qualified lead who understands financial concepts. No cold calls. No spam. <strong style="color:var(--emerald);">The game IS the qualifying conversation.</strong></p>
+    <div class="funnel-steps">
+      <div class="funnel-step">
+        <div class="fs-num" style="color:var(--coral);">1</div>
+        <div class="fs-info">
+          <div class="fs-label" style="color:var(--coral);">Play</div>
+          <div class="fs-desc">User discovers the game through social sharing, community links, or CrisisConnect integration. Zero friction entry — just play.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="fs-num" style="color:var(--gold);">2</div>
+        <div class="fs-info">
+          <div class="fs-label" style="color:var(--gold);">Learn</div>
+          <div class="fs-desc">Each game mechanic maps to a financial concept. The player learns asset recovery, cash flow, spread trading, and arbitrage — without knowing they're learning.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="fs-num" style="color:var(--emerald);">3</div>
+        <div class="fs-info">
+          <div class="fs-label" style="color:var(--emerald);">Score</div>
+          <div class="fs-desc">High scores unlock financial literacy content. Leaderboards create community. The score IS the lead qualification metric — higher score = better understanding.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="fs-num" style="color:var(--cyan);">4</div>
+        <div class="fs-info">
+          <div class="fs-label" style="color:var(--cyan);">Convert</div>
+          <div class="fs-desc">Qualified leads flow into KopanoLabs B2B pipeline. They've already demonstrated financial understanding through gameplay. The conversation starts warm.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="fs-num" style="color:var(--purple);">5</div>
+        <div class="fs-info">
+          <div class="fs-label" style="color:var(--purple);">Govern</div>
+          <div class="fs-desc">KPGS governance ensures no dark patterns. WWJD Firewall active. No addiction loops. No engagement farming. The game serves the player — not the other way around.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../">Home</a>
+      <a href="../protocols/">Protocols</a>
+      <a href="../flows/">Flows</a>
+      <a href="../admin/">Dashboard</a>
+      <a href="https://kopanolabs.com" target="_blank">KopanoLabs</a>
+    </div>
+    <p>&copy; 2026 Kopano Labs (Pty) Ltd · Starfall Salvage · B2B Lead Gen Funnel</p>
+    <p style="font-family:var(--m);font-size:9px;color:rgba(255,255,255,0.12);margin-top:8px;">
+      [STARFALL_SALVAGE] KPGS governed · WWJD firewall · Entertainment IS the pipeline · Overlord is THE GOAT
+    </p>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════
+    // STARFALL SALVAGE — PLAYABLE GAME
+    // ═══════════════════════════════════════
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = 800, H = 400;
+    canvas.width = W; canvas.height = H;
+
+    let gameRunning = false, score = 0, salvageCount = 0, frameId = null;
+    let ship = { x: W/2, y: H - 60, w: 32, h: 32, speed: 5 };
+    let debris = [], salvage = [], stars = [], particles = [];
+    let keys = {};
+
+    // Stars
+    for (let i = 0; i < 120; i++) {
+      stars.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.2 + 0.2, speed: Math.random() * 0.5 + 0.2,
+        alpha: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    // Input
+    document.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; });
+    document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+    function spawnDebris() {
+      if (Math.random() < 0.03) {
+        debris.push({
+          x: Math.random() * (W - 20), y: -20,
+          w: 12 + Math.random() * 16, h: 12 + Math.random() * 16,
+          speed: 1.5 + Math.random() * 2, rot: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function spawnSalvage() {
+      if (Math.random() < 0.015) {
+        const types = [
+          { color: '#ffd700', value: 10, label: 'Au' },
+          { color: '#00e5ff', value: 5, label: 'Li' },
+          { color: '#00d4aa', value: 15, label: 'Pt' },
+          { color: '#ff7b54', value: 20, label: 'Di' },
+        ];
+        const t = types[Math.floor(Math.random() * types.length)];
+        salvage.push({
+          x: Math.random() * (W - 16), y: -16,
+          w: 14, h: 14, speed: 1 + Math.random() * 1.5,
+          ...t, pulse: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function spawnParticle(x, y, color) {
+      for (let i = 0; i < 6; i++) {
+        particles.push({
+          x, y, vx: (Math.random()-0.5)*4, vy: (Math.random()-0.5)*4,
+          r: Math.random()*3+1, life: 1, color
+        });
+      }
+    }
+
+    function update() {
+      // Ship movement
+      if (keys['arrowleft'] || keys['a']) ship.x -= ship.speed;
+      if (keys['arrowright'] || keys['d']) ship.x += ship.speed;
+      if (keys['arrowup'] || keys['w']) ship.y -= ship.speed;
+      if (keys['arrowdown'] || keys['s']) ship.y += ship.speed;
+      ship.x = Math.max(0, Math.min(W - ship.w, ship.x));
+      ship.y = Math.max(0, Math.min(H - ship.h, ship.y));
+
+      // Stars
+      stars.forEach(s => { s.y += s.speed; if (s.y > H) { s.y = 0; s.x = Math.random() * W; } });
+
+      // Debris
+      spawnDebris();
+      debris.forEach(d => { d.y += d.speed; d.rot += 0.02; });
+      debris = debris.filter(d => d.y < H + 30);
+
+      // Salvage
+      spawnSalvage();
+      salvage.forEach(s => { s.y += s.speed; s.pulse += 0.05; });
+      salvage = salvage.filter(s => s.y < H + 20);
+
+      // Collision — debris
+      for (const d of debris) {
+        if (ship.x < d.x + d.w && ship.x + ship.w > d.x &&
+            ship.y < d.y + d.h && ship.y + ship.h > d.y) {
+          spawnParticle(ship.x + ship.w/2, ship.y + ship.h/2, '#e94560');
+          score = Math.max(0, score - 5);
+          d.y = H + 50;
+        }
+      }
+
+      // Collision — salvage
+      for (let i = salvage.length - 1; i >= 0; i--) {
+        const s = salvage[i];
+        if (ship.x < s.x + s.w && ship.x + ship.w > s.x &&
+            ship.y < s.y + s.h && ship.y + ship.h > s.y) {
+          spawnParticle(s.x + s.w/2, s.y + s.h/2, s.color);
+          score += s.value;
+          salvageCount++;
+          salvage.splice(i, 1);
+        }
+      }
+
+      // Particles
+      particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.life -= 0.03; });
+      particles = particles.filter(p => p.life > 0);
+
+      document.getElementById('score').textContent = score;
+      document.getElementById('salvaged').textContent = salvageCount;
+    }
+
+    function draw() {
+      ctx.fillStyle = '#08080f';
+      ctx.fillRect(0, 0, W, H);
+
+      // Stars
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
+      });
+
+      // Debris
+      debris.forEach(d => {
+        ctx.save();
+        ctx.translate(d.x + d.w/2, d.y + d.h/2);
+        ctx.rotate(d.rot);
+        ctx.fillStyle = 'rgba(233,69,96,0.6)';
+        ctx.fillRect(-d.w/2, -d.h/2, d.w, d.h);
+        ctx.strokeStyle = 'rgba(233,69,96,0.8)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(-d.w/2, -d.h/2, d.w, d.h);
+        ctx.restore();
+      });
+
+      // Salvage
+      salvage.forEach(s => {
+        const glow = 0.5 + Math.sin(s.pulse) * 0.3;
+        ctx.shadowColor = s.color;
+        ctx.shadowBlur = 8;
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(s.x + s.w/2, s.y + s.h/2, s.w/2 + 1, 0, Math.PI * 2);
+        ctx.globalAlpha = glow;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#fff';
+        ctx.font = '8px "JetBrains Mono"';
+        ctx.textAlign = 'center';
+        ctx.fillText(s.label, s.x + s.w/2, s.y + s.h/2 + 3);
+      });
+
+      // Ship
+      ctx.shadowColor = '#00e5ff';
+      ctx.shadowBlur = 12;
+      ctx.fillStyle = '#00e5ff';
+      ctx.beginPath();
+      ctx.moveTo(ship.x + ship.w/2, ship.y);
+      ctx.lineTo(ship.x, ship.y + ship.h);
+      ctx.lineTo(ship.x + ship.w, ship.y + ship.h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Engine glow
+      ctx.fillStyle = `rgba(0,229,255,${0.3 + Math.random()*0.3})`;
+      ctx.beginPath();
+      ctx.arc(ship.x + ship.w/2, ship.y + ship.h + 4, 4 + Math.random()*3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Particles
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.life;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      // HUD
+      ctx.fillStyle = 'rgba(255,215,0,0.8)';
+      ctx.font = '12px "JetBrains Mono"';
+      ctx.textAlign = 'left';
+      ctx.fillText(`SCORE: ${score}`, 12, 24);
+      ctx.fillStyle = 'rgba(0,229,255,0.6)';
+      ctx.fillText(`SALVAGED: ${salvageCount}`, 12, 40);
+    }
+
+    function gameLoop() {
+      if (!gameRunning) return;
+      update();
+      draw();
+      frameId = requestAnimationFrame(gameLoop);
+    }
+
+    function startGame() {
+      if (gameRunning) return;
+      gameRunning = true;
+      score = 0; salvageCount = 0;
+      debris = []; salvage = []; particles = [];
+      ship.x = W/2; ship.y = H - 60;
+      document.getElementById('playBtn').textContent = 'PLAYING...';
+      document.getElementById('playBtn').style.opacity = '0.5';
+      gameLoop();
+    }
+
+    // Draw idle screen
+    function drawIdle() {
+      ctx.fillStyle = '#08080f';
+      ctx.fillRect(0, 0, W, H);
+      stars.forEach(s => {
+        s.y += s.speed * 0.3;
+        if (s.y > H) { s.y = 0; s.x = Math.random() * W; }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha * 0.5})`;
+        ctx.fill();
+      });
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.font = '24px Outfit';
+      ctx.textAlign = 'center';
+      ctx.fillText('Press PLAY to begin salvage run', W/2, H/2);
+      ctx.font = '11px "JetBrains Mono"';
+      ctx.fillStyle = 'rgba(255,123,84,0.4)';
+      ctx.fillText('Arrow keys / WASD to move · Collect salvage · Avoid debris', W/2, H/2 + 30);
+      requestAnimationFrame(drawIdle);
+    }
+    drawIdle();
+
+    console.log('%c[STARFALL_SALVAGE] B2B Lead Gen Funnel — ACTIVE', 'color:#ff7b54;font-weight:bold;');
+    console.log('%c[STARFALL_SALVAGE] 4 games: Salvage, Dash, Runner, Arbitrage', 'color:#ffd700;');
+    console.log('%c[STARFALL_SALVAGE] KPGS governed · WWJD firewall · No dark patterns', 'color:#00e5ff;');
+  </script>
+</body>
+</html>
