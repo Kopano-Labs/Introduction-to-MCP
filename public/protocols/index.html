@@ -4,20 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KPGS Protocol Telemetry — THARI H.O.L.O Net</title>
-  <meta name="description" content="KPGS Protocol Telemetry: the canonical reference for the Kopano Protocol Governance System architecture. 17 protocols, SWFUS, BNP, PSO — governed by THARI H.O.L.O Net.">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="KPGS Protocol Telemetry: the canonical reference for the Kopano Protocol Governance System architecture. 27 protocols, SWFUS, BNP, PSO — governed by THARI H.O.L.O Net.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #08080f; --bg-card: rgba(255,255,255,0.03); --bg-card-hover: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.08); --border-hover: rgba(255,255,255,0.18);
-      --text: #e8e8f0; --text-secondary: rgba(255,255,255,0.55); --text-dim: rgba(255,255,255,0.3);
-      --accent: #7b61ff; --accent-light: #a78bfa; --accent-glow: rgba(123,97,255,0.25);
-      --accent2: #00d4aa; --accent2-glow: rgba(0,212,170,0.2);
-      --accent3: #e94560; --accent3-glow: rgba(233,69,96,0.2);
-      --gold: #ffd700; --gold-glow: rgba(255,215,0,0.15);
-      --thari: #00e5ff; --thari-glow: rgba(0,229,255,0.2);
-      --radius: 16px; --radius-sm: 10px; --radius-xs: 6px;
-      --font: 'Outfit', sans-serif; --mono: 'JetBrains Mono', monospace;
+      --bg: #070909; --bg-card: rgba(234,223,207,0.03); --bg-card-hover: rgba(234,223,207,0.06);
+      --border: rgba(234,223,207,0.10); --border-hover: rgba(234,223,207,0.20);
+      --text: #eadfcf; --text-secondary: #9d8e7b; --text-dim: rgba(234,223,207,0.3);
+      --accent: #b96f43; --accent-light: #d0854d; --accent-glow: rgba(185,111,67,0.25);
+      --accent2: #7a9866; --accent2-glow: rgba(122,152,102,0.2);
+      --accent3: #b96f43; --accent3-glow: rgba(185,111,67,0.2);
+      --gold: #d5c4af; --gold-glow: rgba(213,196,175,0.15);
+      --thari: #7a9866; --thari-glow: rgba(122,152,102,0.2);
+      --radius: 14px; --radius-sm: 10px; --radius-xs: 6px;
+      --font: 'Manrope', system-ui, sans-serif; --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Fraunces', Georgia, serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -82,9 +84,8 @@
       margin-bottom: 20px;
     }
     .hero h1 {
-      font-size: 48px; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 16px;
-      background: linear-gradient(135deg, #fff 20%, var(--thari) 60%, var(--accent-light));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-family: var(--serif); font-size: 48px; font-weight: 600; letter-spacing: -2px; line-height: 1.1; margin-bottom: 16px;
+      color: var(--text);
     }
     .hero-sub { font-size: 16px; color: var(--text-secondary); max-width: 700px; margin: 0 auto 12px; line-height: 1.6; }
     .hero-contrast {
@@ -103,7 +104,7 @@
       color: var(--thari); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
     }
     .section h2 {
-      font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px;
+      font-family: var(--serif); font-size: 32px; font-weight: 600; letter-spacing: -1px; margin-bottom: 12px;
     }
     .section-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; max-width: 700px; margin-bottom: 40px; }
     @media (max-width: 768px) { .section { padding: 50px 16px; } .section h2 { font-size: 24px; } }
@@ -268,9 +269,8 @@
     .thari-header { text-align: center; margin-bottom: 32px; }
     .thari-header .thread-icon { font-size: 48px; margin-bottom: 12px; }
     .thari-header h2 {
-      font-size: 28px; font-weight: 900;
-      background: linear-gradient(135deg, var(--thari), #fff);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-family: var(--serif); font-size: 28px; font-weight: 600;
+      color: var(--text);
     }
     .thari-header .seriti { font-size: 12px; font-family: var(--mono); color: var(--text-dim); margin-top: 6px; }
     .thari-vector-label {

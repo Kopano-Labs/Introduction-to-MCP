@@ -5,21 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adaptive AI Flows — THARI H.O.L.O Net · KPGS</title>
   <meta name="description" content="Adaptive AI Flows: living protocol intelligence, THARI weave visualization, and real-time governance telemetry for the KPGS ecosystem.">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #06060e; --bg2: #0a0a16;
-      --glass: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.07);
-      --glass-hover: rgba(255,255,255,0.06); --glass-border-hover: rgba(255,255,255,0.14);
-      --text: #eaeaf4; --text-s: rgba(255,255,255,0.55); --text-d: rgba(255,255,255,0.25);
-      --thari: #00e5ff; --thari-g: rgba(0,229,255,0.18);
-      --accent: #7b61ff; --accent-g: rgba(123,97,255,0.18);
-      --gold: #ffd700; --gold-g: rgba(255,215,0,0.12);
-      --emerald: #00d4aa; --emerald-g: rgba(0,212,170,0.15);
-      --rose: #e94560; --rose-g: rgba(233,69,96,0.15);
-      --coral: #ff7b54; --coral-g: rgba(255,123,84,0.15);
-      --r: 16px; --rs: 10px; --rx: 6px;
-      --f: 'Outfit', sans-serif; --m: 'JetBrains Mono', monospace;
+      --bg: #070909; --bg2: #0a0c0c;
+      --glass: rgba(234,223,207,0.03); --glass-border: rgba(234,223,207,0.08);
+      --glass-hover: rgba(234,223,207,0.06); --glass-border-hover: rgba(234,223,207,0.16);
+      --text: #eadfcf; --text-s: #9d8e7b; --text-d: rgba(234,223,207,0.25);
+      --thari: #7a9866; --thari-g: rgba(122,152,102,0.18);
+      --accent: #b96f43; --accent-g: rgba(185,111,67,0.18);
+      --gold: #d5c4af; --gold-g: rgba(213,196,175,0.12);
+      --emerald: #7a9866; --emerald-g: rgba(122,152,102,0.15);
+      --rose: #b96f43; --rose-g: rgba(185,111,67,0.15);
+      --coral: #d0854d; --coral-g: rgba(208,133,77,0.15);
+      --r: 14px; --rs: 10px; --rx: 6px;
+      --f: 'Manrope', system-ui, sans-serif; --m: 'IBM Plex Mono', monospace;
+      --serif: 'Fraunces', Georgia, serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -81,11 +83,9 @@
     }
     @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
     .hero h1 {
-      font-size: clamp(36px, 6vw, 64px); font-weight: 900; letter-spacing: -3px; line-height: 1.05;
+      font-family: var(--serif); font-size: clamp(36px, 6vw, 64px); font-weight: 600; letter-spacing: -3px; line-height: 1.05;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 10%, var(--thari) 45%, var(--accent) 80%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: heroShimmer 6s ease-in-out infinite;
+      color: var(--text);
     }
     @keyframes heroShimmer {
       0%,100% { filter: brightness(1); }
@@ -142,7 +142,7 @@
     }
     .section-tag .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--thari); }
     .section h2 {
-      font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 14px;
+      font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 600; letter-spacing: -1.5px; margin-bottom: 14px;
     }
     .section-desc { font-size: 14px; color: var(--text-s); line-height: 1.7; max-width: 650px; margin-bottom: 48px; }
     @media (max-width: 768px) { .section { padding: 60px 16px; } }
@@ -204,9 +204,8 @@
     @keyframes weaveGlow { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
     .weave-header { text-align: center; margin-bottom: 40px; }
     .weave-header h3 {
-      font-size: 24px; font-weight: 800; letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--thari), #fff);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-family: var(--serif); font-size: 24px; font-weight: 600; letter-spacing: -0.5px;
+      color: var(--text);
     }
     .weave-header p { font-size: 12px; color: var(--text-d); font-family: var(--m); margin-top: 6px; }
 
@@ -348,9 +347,8 @@
     @keyframes identityGlow { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
     .id-thread { text-align: center; font-size: 56px; margin-bottom: 16px; }
     .id-title {
-      text-align: center; font-size: 32px; font-weight: 900; letter-spacing: -1px;
-      background: linear-gradient(135deg, var(--thari), #fff);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-align: center; font-family: var(--serif); font-size: 32px; font-weight: 600; letter-spacing: -1px;
+      color: var(--text);
       margin-bottom: 8px;
     }
     .id-subtitle { text-align: center; font-size: 11px; font-family: var(--m); color: var(--text-d); margin-bottom: 36px; }
