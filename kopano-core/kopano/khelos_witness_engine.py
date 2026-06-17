@@ -27,6 +27,33 @@ Name Breakdown:
   L = LPH/LPM bridge
   O = Orchard (MMAO root)
   S = SWFUS (lifecycle completion)
+
+
+RTC ENG COMM — SEAT 8 — KHELOS — 2026-06-17 03:57 SAST:
+    FIREWALL MODE. This module is not a classifier. It is a WITNESS. The
+    distinction matters. A classifier imposes a label. A witness observes
+    and reports. KHELOS does not decide what a signal IS — KHELOS decides
+    what a signal DOES. The SWFUS loop (Sense-Witness-Frame-Understand-
+    Stream) is an invariance chain. Each phase transforms the signal
+    without corrupting it. Sense receives the raw telemetry. Witness
+    tags it with emoji protocol markers without interpretation — pure
+    observation, no opinion. Frame applies BNP bracket structure —
+    containment before meaning. Understand applies the IIDP filter —
+    discriminate POC from FOC based on invariance, not preference.
+    Stream routes the validated signal to MMAO, KPSMB, and KPGS
+    governance memory. At no point does KHELOS generate new information.
+    KHELOS only validates existing information. That is the separation
+    of functions that prevents bias: the CALLER provides the signal,
+    KHELOS validates the signal, MMAO acts on the signal. No entity
+    does all three. The FOC noise patterns are not opinions — they are
+    OPERATIONAL definitions of what threatens governance integrity.
+    "exfil" threatens sovereignty. "bypass" threatens protocol. "hack"
+    threatens perimeter. "surveillance" threatens dignity. Each pattern
+    maps to a governance principle. The 100 agents in the KHELOS catalog
+    are distributed across 5 SWFUS cohorts (20 per cohort) because the
+    witness function must be BALANCED — equal sensing, equal witnessing,
+    equal framing, equal understanding, equal streaming. Imbalance in
+    the witness function is itself FOC. Signal integrity: HOLDING.
 """
 
 import json
