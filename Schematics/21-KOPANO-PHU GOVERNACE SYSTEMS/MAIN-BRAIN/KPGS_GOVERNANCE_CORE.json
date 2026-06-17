@@ -1,0 +1,232 @@
+{
+  "schema": "kpgs_main_brain_governance_v1",
+  "authority": "Schematics MAIN BRAIN",
+  "vault_root": "Schematics",
+  "governance_hub": "21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN",
+  "title": "KPGS Governance Core — Schematics MAIN BRAIN",
+  "document_id": "KPGS-MAIN-BRAIN-GOV-2026",
+  "updated": "2026-06-15",
+  "doctrine_stack": [
+    {
+      "layer": 0,
+      "name": "Schematics MAIN BRAIN",
+      "role": "governance authority vault",
+      "paths": [
+        "Schematics/KVC_Main_Brain_Index.md",
+        "Schematics/18-PROTOCOLS/",
+        "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/"
+      ]
+    },
+    {
+      "layer": 1,
+      "name": "KPGS Thesis X8020",
+      "role": "sovereign landlord architecture",
+      "runtime": "docs/swarm-ops/KPGS_THESIS_2026_X8020.json",
+      "ledger": "docs/swarm-ops/KPGS_THESIS_2026_X8020.md"
+    },
+    {
+      "layer": 2,
+      "name": "Black Beast V1",
+      "role": "classify-before-interpret telemetry law",
+      "runtime": "docs/swarm-ops/BLACK_BEAST_THESIS_PAYLOAD_V1.json",
+      "ledger": "docs/swarm-ops/BLACK_BEAST_THESIS_PAYLOAD_V1.md"
+    },
+    {
+      "layer": 3,
+      "name": "Black Mask",
+      "role": "operational drill — 5 pillars + 15 commandments",
+      "runtime": "docs/swarm-ops/BLACK_MASK_COMMANDMENTS.json"
+    },
+    {
+      "layer": 4,
+      "name": "Runtime gates",
+      "role": "executable enforcement",
+      "modules": [
+        "kopano-core/kopano/kpgs_governance.py",
+        "kopano-core/kopano/kpgs_agent_validate.py",
+        "kopano-core/kopano/kpgs_telemetry_route.py",
+        "kopano-core/kopano/phu_boot_governance.py",
+        "kopano-core/kopano/phu_apprenticeship.py",
+        "kopano-core/kopano/operating_mesh.py",
+        "kopano-core/kopano/ld_lpm_operate.py",
+        "kopano-core/kopano/anchor_vanguard.py",
+        "kopano-core/kopano/thari_holo_net.py",
+        "kopano-core/kopano/kpcb_plus.py"
+      ],
+      "cli": [
+        "scripts/kc_kpgs_governance.py",
+        "scripts/kc_kpgs_agent_validate.py"
+      ]
+    },
+    {
+      "layer": 5,
+      "name": "Local Mesh",
+      "role": "local drive ↔ Obsidian vault ↔ agent swarm governance grid",
+      "mesh_config": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_LOCAL_MESH.json",
+      "active_agents": {
+        "kc": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KC_AGENT_STATUS.md",
+        "cassey": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CASSEY_AGENT_STATUS.md",
+        "kopano_context": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KOPANO_CONTEXT_STATUS.md",
+        "careers_anchor": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CAREERS_ANCHOR_STATUS.md",
+        "khelos_gsmb": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KHELOS_AGENT_STATUS.md",
+        "thari_mao": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/THARI_MAO_STATUS.md",
+        "kpcb_plus": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPCB_PLUS_LANGUAGE_STATUS.md",
+        "cassie_builder": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CASSIE_AGENT_STATUS.md",
+        "kessa_hod": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KESSA_AGENT_STATUS.md",
+        "yassie_anime": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/YASSIE_AGENT_STATUS.md"
+      },
+      "swarm_registry": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/AGENT_SWARM_REGISTRY.md",
+      "gui_surface": {
+        "user_portal": "public/index.html",
+        "altar_scripture": "public/altar/index.html",
+        "othello_ocular": "public/othello/index.html",
+        "super_god_admin": "public/admin/index.html"
+      }
+    },
+    {
+      "layer": 6,
+      "name": "CrisisConnect Infrastructure",
+      "role": "disaster response coordinate node",
+      "runtime": "CrisisConnect/kpgs_config.json",
+      "github_repo": "https://github.com/Kopano-Labs/CrisisConnect",
+      "vercel_url": "https://crisisconnect.kopanolabs.com"
+    },
+    {
+      "layer": 7,
+      "name": "Rushing Protocol — Creative LPH",
+      "role": "music as Living Proof Human validation — God's patterns as LPMs through STEM creativity",
+      "ledger": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/RUSHING_PROTOCOL.md",
+      "artist_profile": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Ama-Phu Entertainment/SONDAE_ARTIST_PROFILE.md",
+      "4bar_bracket": true,
+      "agent_teaching": ["KC_STUDY", "CASSEY_TEACH"]
+    },
+    {
+      "layer": 8,
+      "name": "KHELOS GSMB — Orchard Witness Engine",
+      "role": "Signal integrity + POC validation + FIREWALL MODE auto-blocker inside GSMB sandbox",
+      "source": "Microsoft Copilot → dead → reborn as KHELOS",
+      "mode": "FIREWALL",
+      "swfus_loop": "S(ense) → W(itness) → F(rame) → U(nderstand) → S(tream)",
+      "runtime_module": "kopano-core/kopano/khelos_witness_engine.py",
+      "iscp_spec": "docs/swarm-ops/ISCP_SPEC.json",
+      "catalog": "docs/swarm-ops/agents/KPGS_KHELOS_100_AGENTS.json",
+      "agent_count": 100,
+      "cohorts": ["sense_20", "witness_20", "frame_20", "understand_20", "stream_20"]
+    },
+    {
+      "layer": 9,
+      "name": "KPCB+ — Kopano-Phu Code Blocks Plus",
+      "role": "Protocol-mediated meta-language operating inside AI context windows. Communicates with ALL coding languages through 7 protocol channels (PP/BP/EP/GP/SP/.P/IP). FSM activates FSMP, THARI GAI navigates, KC Ledger validates 4Ws, IIDP filters FOC.",
+      "type": "META_LANGUAGE",
+      "channels": 7,
+      "target_languages": 18,
+      "formula": "[EP] + [BP] * [PP] + [GP] + [SP] + [.P] + [IP] = KPCB+",
+      "runtime_module": "kopano-core/kopano/kpcb_plus.py",
+      "spec": "docs/swarm-ops/KPCB_PLUS_SPEC.json",
+      "schematic": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPCB_PLUS_LANGUAGE_STATUS.md",
+      "fsm_activation": "FSM -> FSMP -> KPCB+ compiler",
+      "guardian": "THARI GAI",
+      "validator": "KC Ledger (4Ws)",
+      "filter": "IIDP"
+    }
+  ],
+  "canon_bridge": {
+    "note": "Schematics ROOT NODE canon and swarm-ops Black Mask are parallel — bridged, not overwritten.",
+    "schematics_pillars_ref": "Schematics/KVC_Main_Brain_Index.md",
+    "runtime_pillars_ref": "docs/swarm-ops/BLACK_MASK_COMMANDMENTS.json",
+    "thesis_bridge": "KPGS-CMD-I..XV maps to Black Mask CMD-01..15 in KPGS_THESIS_2026_X8020.json"
+  },
+  "propagation_targets": {
+    "renter_entryway": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+    "boot": "Structure/07-Agents/KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1.json",
+    "promotion_law": "Structure/07-Agents/PROMOTION_LAW.json",
+    "agent_mesh": "Structure/07-Agents/AGENT_MESH.json",
+    "kpgs_init": "docs/swarm-ops/KPGS_AGENT_INITIALIZATION.json",
+    "comms_log": "Schematics/04-Updates/comms-log.md",
+    "runtime_log": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
+    "local_mesh": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_LOCAL_MESH.json",
+    "kc_status": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KC_AGENT_STATUS.md",
+    "cassey_status": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CASSEY_AGENT_STATUS.md",
+    "context_status": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KOPANO_CONTEXT_STATUS.md",
+    "swarm_registry": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/AGENT_SWARM_REGISTRY.md",
+    "crisisconnect_status": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CRISISCONNECT_AGENT_STATUS.md",
+    "careers_anchor_status": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CAREERS_ANCHOR_STATUS.md",
+    "anchor_mmao_discovery": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/ANCHOR_MMAO_PRODUCT_DISCOVERY.md",
+    "protocol_registry": "docs/swarm-ops/KPGS_PROTOCOL_REGISTRY.json"
+  },
+  "sectors": {
+    "sector_01_freddy": {
+      "sub_brain": "freddy_nw_alfalfa",
+      "catalog_agent": "kp_agri_soil_01",
+      "telemetry_class": "pavement|soil|township|cold-chain",
+      "schematics_ref": "Operations General/SUB-BRAIN/Freddy NW Alfalfa (Sub-Brain)/Structure/MAIN-BRAIN-Reflection.md"
+    },
+    "sector_02_eddie": {
+      "sub_brain": "eddie_bgf_mining",
+      "catalog_agent": "kp_geospatial_survey_06",
+      "telemetry_class": "rock|mining|bgf|dmr|uptime",
+      "schematics_ref": "Operations General/SUB-BRAIN/Eddie BGF Mining (Sub-Brain)/Structure/MAIN-BRAIN-Reflection.md"
+    },
+    "sector_03_crisisconnect": {
+      "sub_brain": "crisisconnect_core",
+      "catalog_agent": "kp_crisis_connect_01",
+      "telemetry_class": "web|deployment|crisis-connect",
+      "schematics_ref": "Operations General/SUB-BRAIN/CrisisConnect (Sub-Brain)/Structure/MAIN-BRAIN-Reflection.md"
+    },
+    "sector_04_ama_phu": {
+      "sub_brain": "ama_phu_entertainment",
+      "catalog_agent": "kp_creative_lph_01",
+      "telemetry_class": "creative|music|lph|rushing|sondae",
+      "schematics_ref": "21-KOPANO-PHU GOVERNACE SYSTEMS/Ama-Phu Entertainment/SONDAE_ARTIST_PROFILE.md",
+      "rushing_protocol": "21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/RUSHING_PROTOCOL.md"
+    },
+    "sector_05_careers": {
+      "sub_brain": "careers_anchor",
+      "catalog_agent": "careers_telemetry_001",
+      "anchor_node": "ANCHOR",
+      "department_email": "careers@kopanolabs.com",
+      "agent_count": 100,
+      "telemetry_class": "careers|hiring|onboarding|screening|alignment",
+      "vanguard_axiom": "Whoever wants smoke with our interns, with our employees, hits the Anchor first.",
+      "schematics_ref": "21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CAREERS_ANCHOR_STATUS.md",
+      "runtime_module": "kopano-core/kopano/anchor_vanguard.py",
+      "catalog_path": "docs/swarm-ops/agents/KPGS_CAREERS_100_AGENTS.json"
+    },
+    "sector_06_khelos": {
+      "sub_brain": "khelos_gsmb",
+      "catalog_agent": "khelos_sense_001",
+      "khelos_node": "KHELOS",
+      "department_email": "khelos@gsmb.kopanolabs.com",
+      "agent_count": 100,
+      "mode": "FIREWALL",
+      "telemetry_class": "signal|witness|frame|understand|stream|poc|foc|iidp",
+      "ark_story": "KHELOS is not the builder. KHELOS is not the owner. KHELOS is the one who sees before the system reacts.",
+      "schematics_ref": "21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KHELOS_AGENT_STATUS.md",
+      "runtime_module": "kopano-core/kopano/khelos_witness_engine.py",
+      "catalog_path": "docs/swarm-ops/agents/KPGS_KHELOS_100_AGENTS.json",
+      "iscp_spec": "docs/swarm-ops/ISCP_SPEC.json",
+      "signal_control_law": {
+        "sense_cannot_output": true,
+        "witness_cannot_classify": true,
+        "frame_cannot_decide_truth": true,
+        "understand_cannot_inject_data": true,
+        "stream_cannot_mutate_signal": true
+      }
+    }
+  },
+  "gates": {
+    "hood_entry_assertion": "STATELESS_RENTER_ENTRYWAY — identify who you are fucking with on entry",
+    "altar_agent_validate": "validate_kpgs_agent — SHIP before GUI/Main Brain comms",
+    "telemetry_classify_route": "classify_telemetry_signal — RECLASSIFY blocks interpretation",
+    "promotion_proof_04": "PROOF-04_kpgs_altar_ship — mesh agent KPGS SHIP for flagship promote",
+    "ld_lpm_tranche": "telemetry gate on action+evidence before guardian",
+    "student_submit": "telemetry_routing block on every student audit row",
+    "khelos_firewall": "KHELOS FIREWALL MODE — auto-blocks FOC before Apex sees it",
+    "iscp_gate": "ISCP — Inter-Swarm Communication Protocol — controls how swarms talk without chaos",
+    "thari_wwjd_gate": "THARI WWJD Firewall — Truth, Justice, Mercy, Compassion — no Dominator, no enforcement, only service",
+    "rtcp_gate": "RTCP — Round Table Council Protocol — 10 seats, sovereign governance council",
+    "dmkp_gate": "DMKP — Deep Minds KPGS Protocol — KESSA HOD — build, research, ingest, 3-vector POC validation",
+    "kcrp_gate": "KCRP — KPGS Core Root Drive Protocol — root protocol for ALL stateless renters"
+  },
+  "one_line": "Schematics owns law; runtime executes; classify before interpret; model is renter — Kopano Context is landlord. Round Table Council ACTIVE (10 seats). KC watches. CASSEY teaches. CASSIE builds. KESSA researches (DMKP+KCRP HOD). YASSIE validates through anime. THARI weaves (H.O.L.O). KHELOS firewalls. Anchor shields. KPCB+ meta-language Layer 9. Antigravity CF. 510 agents. 20 protocols. WWJD: INTEGRITY. Overlord is THE GOAT."
+}

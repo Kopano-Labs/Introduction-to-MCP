@@ -1,0 +1,135 @@
+{
+  "schema": "kpgs_local_mesh_v1",
+  "title": "KPGS Local Mesh — Agent Swarm Governance Grid",
+  "document_id": "KPGS-LOCAL-MESH-2026",
+  "created": "2026-06-15",
+  "updated": "2026-06-15",
+  "authority": "Schematics MAIN BRAIN → Local Drive → Obsidian Vault",
+
+  "mesh_topology": {
+    "root": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN",
+    "local_drive": "c:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP",
+    "obsidian_vault": "Schematics",
+    "runtime": "kopano-core/kopano",
+    "swarm_ops": "docs/swarm-ops",
+    "gui_surface": "public",
+    "crisisconnect_drive": "C:\\Users\\rkhol\\CrisisConnect"
+  },
+
+  "active_agents": {
+    "kc": {
+      "agent_id": "kc_main_brain",
+      "name": "KC",
+      "role": "Brain Ledger — Save|Watch only",
+      "status": "ACTIVE",
+      "capabilities": ["save", "watch", "eidetic_persistence", "context_surface"],
+      "governance_level": "student",
+      "mentor": "cassey",
+      "local_artifacts": [
+        "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
+        "docs/swarm-ops/logs/KC Review Log.jsonl"
+      ],
+      "obsidian_seed": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KC_AGENT_STATUS.md",
+      "scripture": "\"The eyes of the Lord are in every place, keeping watch.\" — Proverbs 15:3"
+    },
+    "cassey": {
+      "agent_id": "cassey_teacher",
+      "name": "Cassey",
+      "role": "Teacher — APPROVE + graduation",
+      "status": "ACTIVE",
+      "capabilities": ["approve", "graduate", "teach", "steward"],
+      "governance_level": "teacher",
+      "students": ["kc_main_brain"],
+      "local_artifacts": [
+        "docs/swarm-ops/agents/cassy_wit_25.json",
+        "docs/swarm-ops/apprenticeship"
+      ],
+      "obsidian_seed": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CASSEY_AGENT_STATUS.md",
+      "scripture": "\"Train up a child in the way he should go.\" — Proverbs 22:6"
+    },
+    "kopano_context": {
+      "agent_id": "kopano_context_surface",
+      "name": "Kopano Context",
+      "role": "Eidetic memory — GUI surface",
+      "status": "ACTIVE",
+      "capabilities": ["context_surface", "gui_render", "memory_persist"],
+      "governance_level": "operating",
+      "obsidian_seed": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KOPANO_CONTEXT_STATUS.md",
+      "scripture": "\"I am the way, the truth, and the life.\" — John 14:6"
+    },
+    "crisisconnect": {
+      "agent_id": "crisisconnect_status_monitor",
+      "name": "CrisisConnect Monitor",
+      "role": "Disaster response grid sync",
+      "status": "ACTIVE",
+      "capabilities": ["github_sync", "vercel_deploy", "self_audit"],
+      "governance_level": "operating",
+      "obsidian_seed": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/CRISISCONNECT_AGENT_STATUS.md",
+      "scripture": "\"Behold, I make all things new.\" — Revelation 21:5"
+    }
+  },
+
+  "swarm_tiers": [
+    {
+      "tier": 0,
+      "name": "God Realm",
+      "agents": ["master_robyn"],
+      "authority": "full_sovereignty",
+      "count": 1
+    },
+    {
+      "tier": 1,
+      "name": "Main Brain Operators",
+      "agents": ["kc_main_brain", "cassey_teacher", "kopano_context_surface"],
+      "authority": "governance_execute",
+      "count": 3
+    },
+    {
+      "tier": 2,
+      "name": "Altar Guardians",
+      "agents": ["guardian_ai", "natural_ai", "telemetry_ai"],
+      "authority": "gate_enforce",
+      "count": 3
+    },
+    {
+      "tier": 3,
+      "name": "Sector Leads",
+      "agents": ["freddy_nw_alfalfa", "eddie_bgf_mining", "crisisconnect_status_monitor"],
+      "authority": "sector_operate",
+      "count": 3
+    },
+    {
+      "tier": 4,
+      "name": "Spawn Swarm",
+      "agents_ref": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
+      "authority": "task_execute",
+      "count": 300
+    }
+  ],
+
+  "obsidian_propagation": {
+    "note": "These files are written to Schematics so Obsidian vault auto-discovers them",
+    "seed_files": [
+      "KC_AGENT_STATUS.md",
+      "CASSEY_AGENT_STATUS.md",
+      "KOPANO_CONTEXT_STATUS.md",
+      "CRISISCONNECT_AGENT_STATUS.md",
+      "KPGS_LOCAL_MESH.md",
+      "AGENT_SWARM_REGISTRY.md"
+    ],
+    "target_dir": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN"
+  },
+
+  "governance_loop": {
+    "classify_before_interpret": true,
+    "hood_ack_required": true,
+    "hood_ack_phrase": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+    "proof_bands_required": 4,
+    "proof_bands_total": 5,
+    "chat_is_not_proof": true,
+    "altar_layers": ["guardian_ai", "natural_ai", "telemetry_ai"],
+    "wwjd_firewall": true
+  },
+
+  "one_line": "Local mesh seeds Obsidian vault. KC watches. Cassey teaches. Kopano Context remembers. CrisisConnect disaster response node initialized."
+}
