@@ -1,540 +1,898 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-ZA" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kopano Context: sovereign data governance, AI apprenticeship, and offline-first intelligence for African realities.">
   <title>Kopano Context — Sovereign Intelligence Platform</title>
-  <meta name="description" content="Kopano Context: sovereign data governance, AI apprenticeship, and offline-first intelligence for Africa and beyond.">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ═══════════════════════════════════════════════════
+       DESIGN SYSTEM — Aligned to KRRababalela.com DNA
+       Colors · Typography · Spacing · Cards · Animations
+       ═══════════════════════════════════════════════════ */
     :root {
-      --bg: #fafafa; --bg-card: #ffffff; --bg-hero: #0c0c18;
-      --border: #e8e8ec; --border-hover: #d0d0d8;
-      --text: #1a1a2e; --text-secondary: #6b6b80; --text-dim: #999;
-      --accent: #7b61ff; --accent-light: #a78bfa;
-      --accent2: #00d4aa; --accent3: #e94560;
-      --gold: #ffd700;
-      --radius: 16px; --radius-sm: 10px;
-      --font: 'Outfit', sans-serif; --mono: 'JetBrains Mono', monospace;
+      --bg: #070909;
+      --bg-card: rgba(234, 223, 207, 0.03);
+      --bg-elevated: rgba(234, 223, 207, 0.06);
+      --border: rgba(234, 223, 207, 0.10);
+      --border-hover: rgba(234, 223, 207, 0.20);
+      --text: #eadfcf;
+      --text-soft: #d5c4af;
+      --text-muted: #9d8e7b;
+      --accent: #b96f43;
+      --accent-hover: #d0854d;
+      --olive: #7a9866;
+      --olive-dim: rgba(122, 152, 102, 0.15);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --serif: 'Fraunces', 'Playfair Display', Georgia, serif;
+      --mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+      --sans: 'Manrope', system-ui, sans-serif;
+      --max-w: 1140px;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font); color: var(--text); background: var(--bg); }
 
-    /* NAV */
-    nav {
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--olive); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-hover); }
+
+    /* ═══ TYPOGRAPHY ═══ */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -3px;
+      color: var(--text);
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      color: var(--text);
+    }
+    h3 {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+
+    /* ═══ NAV ═══ */
+    .site-header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 40px;
-      background: rgba(255,255,255,0.85); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      background: rgba(7, 9, 9, 0.85);
       transition: all 0.3s;
     }
-    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
-    .nav-logo { display: flex; align-items: center; gap: 10px; }
-    .nav-mark {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--accent), var(--accent3));
-      border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 14px; color: #fff;
+    .header-shell {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
     }
-    .nav-name { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a {
-      text-decoration: none; color: var(--text-secondary);
-      font-size: 13px; font-weight: 500; transition: color 0.2s;
+    .brand-mark {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text);
     }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-cta {
-      padding: 8px 20px; border-radius: 20px; border: none;
+    .brand-logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--olive));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-weight: 700; font-size: 12px; color: #fff;
+    }
+    .brand-copy { display: flex; flex-direction: column; gap: 1px; }
+    .brand-name { font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: -0.3px; }
+    .brand-tag { font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .site-nav { display: flex; gap: 24px; align-items: center; margin-right: 16px; }
+    .site-nav a {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text-muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .site-nav a:hover, .site-nav a[aria-current] { color: var(--text); }
+
+    .theme-switcher {
+      display: flex; gap: 2px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: 3px;
+    }
+    .theme-switcher button {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      padding: 5px 12px; border-radius: 16px; border: none;
+      background: transparent; color: var(--text-muted); cursor: pointer;
+      transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .theme-switcher button[aria-pressed="true"] {
       background: var(--accent); color: #fff;
-      font-family: var(--font); font-size: 13px; font-weight: 600;
-      cursor: pointer; transition: all 0.3s;
     }
-    .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: var(--bg-hero); color: #fff; position: relative; overflow: hidden;
-      padding: 120px 40px 80px;
+    /* ═══ HERO ═══ */
+    .hero-section {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 120px 32px 80px;
+      max-width: var(--max-w); margin: 0 auto;
+      position: relative;
     }
-    .hero-canvas { position: absolute; inset: 0; z-index: 0; }
-    .hero-content { position: relative; z-index: 1; text-align: center; max-width: 800px; }
-    .hero-badge {
-      display: inline-block; padding: 6px 16px; border-radius: 20px;
-      font-size: 11px; font-family: var(--mono); font-weight: 600;
-      background: rgba(123,97,255,0.15); color: var(--accent-light);
-      border: 1px solid rgba(123,97,255,0.3); letter-spacing: 1px;
-      margin-bottom: 24px;
+    .hero-copy { flex: 1; max-width: 600px; }
+    .hero-copy h1 { margin-bottom: 20px; }
+    .hero-text {
+      font-size: 16px; line-height: 1.7; color: var(--text-muted);
+      max-width: 500px; margin-bottom: 36px;
     }
-    .hero h1 {
-      font-size: 56px; font-weight: 900; letter-spacing: -2px;
-      line-height: 1.1; margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 30%, var(--accent-light) 70%, var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .action-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: var(--radius-sm);
+      font-family: var(--sans); font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: all 0.3s; border: none;
+      text-decoration: none;
     }
-    .hero p { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 600px; margin: 0 auto 36px; }
-    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      padding: 14px 32px; border-radius: 12px; border: none;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      color: #fff; font-family: var(--font); font-size: 15px; font-weight: 600;
-      cursor: pointer; transition: all 0.3s;
-      box-shadow: 0 4px 20px rgba(123,97,255,0.3);
+    .button-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 4px 20px rgba(185, 111, 67, 0.25);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(123,97,255,0.4); }
-    .btn-secondary {
-      padding: 14px 32px; border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.05); color: #fff;
-      font-family: var(--font); font-size: 15px; font-weight: 600;
-      cursor: pointer; transition: all 0.3s;
+    .button-primary:hover {
+      background: var(--accent-hover); color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(185, 111, 67, 0.35);
     }
-    .btn-secondary:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.1); }
+    .button-secondary {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .button-secondary:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-elevated);
+      color: var(--text);
+    }
 
-    /* PILLARS SECTION */
-    .section { padding: 100px 40px; }
-    .section-header { text-align: center; max-width: 600px; margin: 0 auto 60px; }
-    .section-header h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
-    .section-header p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
-    .pillars-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px; max-width: 1200px; margin: 0 auto;
+    .signal-strip {
+      list-style: none; display: flex; gap: 24px; flex-wrap: wrap;
     }
-    .pillar-card {
+    .signal-strip li {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-muted); letter-spacing: 0.5px;
+      position: relative; padding-left: 14px;
+    }
+    .signal-strip li::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--olive); transform: translateY(-50%);
+    }
+
+    .hero-visual { flex: 1; display: flex; flex-direction: column; gap: 16px; padding-left: 40px; }
+    .metric-stack { display: flex; flex-direction: column; gap: 12px; }
+    .metric-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      transition: border-color 0.3s;
+    }
+    .metric-card:hover { border-color: var(--border-hover); }
+    .metric-kicker {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text-muted); margin-bottom: 8px;
+    }
+    .metric-card h2 {
+      font-family: var(--serif); font-size: 22px; font-weight: 600;
+      letter-spacing: -1px; margin-bottom: 6px;
+    }
+    .metric-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .metric-grid div { display: flex; flex-direction: column; gap: 2px; }
+    .metric-grid strong { font-size: 13px; font-weight: 600; color: var(--text-soft); }
+    .metric-grid span { font-size: 11px; color: var(--text-muted); }
+
+    /* ═══ CONTENT SECTIONS ═══ */
+    .content-section {
+      padding: 100px 32px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .section-heading {
+      max-width: 600px; margin-bottom: 48px;
+    }
+    .section-heading p {
+      font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-top: 12px;
+    }
+
+    .card-grid { display: grid; gap: 16px; }
+    .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+
+    .content-card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 28px;
-      transition: all 0.4s; cursor: default;
-      position: relative; overflow: hidden;
-    }
-    .pillar-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px; border-radius: var(--radius) var(--radius) 0 0;
-    }
-    .pillar-card:nth-child(1)::before { background: linear-gradient(90deg, var(--accent2), #00e68a); }
-    .pillar-card:nth-child(2)::before { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
-    .pillar-card:nth-child(3)::before { background: linear-gradient(90deg, #ff6b6b, var(--accent3)); }
-    .pillar-card:nth-child(4)::before { background: linear-gradient(90deg, var(--gold), #ffaa00); }
-    .pillar-card:nth-child(5)::before { background: linear-gradient(90deg, #00aaff, #0066ff); }
-    .pillar-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
-    .pillar-icon { font-size: 28px; margin-bottom: 16px; }
-    .pillar-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .pillar-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-
-    /* HOW IT WORKS */
-    .flow-section { background: var(--bg-hero); color: #fff; }
-    .flow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 1000px; margin: 0 auto; }
-    @media (max-width: 800px) { .flow-grid { grid-template-columns: 1fr 1fr; } }
-    .flow-step {
-      background: rgba(255,255,255,0.03); padding: 32px 24px;
-      border: 1px solid rgba(255,255,255,0.06); text-align: center;
       transition: all 0.3s;
     }
-    .flow-step:hover { background: rgba(255,255,255,0.06); }
-    .flow-num {
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 14px; font-weight: 800; font-size: 14px;
+    .content-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
     }
-    .flow-step:nth-child(1) .flow-num { background: rgba(0,212,170,0.15); color: var(--accent2); }
-    .flow-step:nth-child(2) .flow-num { background: rgba(123,97,255,0.15); color: var(--accent); }
-    .flow-step:nth-child(3) .flow-num { background: rgba(233,69,96,0.15); color: var(--accent3); }
-    .flow-step:nth-child(4) .flow-num { background: rgba(255,215,0,0.15); color: var(--gold); }
-    .flow-label { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-    .flow-desc { font-size: 11px; color: rgba(255,255,255,0.5); font-family: var(--mono); }
+    .card-kicker {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .content-card h3 { margin-bottom: 10px; }
+    .content-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-    /* PRODUCTS */
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+    /* ═══ SPLIT SECTION ═══ */
+    .split-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: start;
+    }
+    .split-copy { max-width: 520px; }
+    .split-copy p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-top: 16px; }
+    .principle-list { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+    .principle-list article h3 { font-size: 16px; margin-bottom: 4px; }
+    .principle-list article p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ═══ PRODUCT CARDS ═══ */
     .product-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 32px; transition: all 0.4s; cursor: pointer;
-    }
-    .product-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
-    .product-icon { font-size: 32px; margin-bottom: 16px; }
-    .product-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .product-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
-    .product-tag {
-      display: inline-block; padding: 4px 10px; border-radius: 12px;
-      font-size: 10px; font-family: var(--mono); font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .tag-live { background: rgba(0,212,170,0.1); color: var(--accent2); }
-    .tag-dev { background: rgba(123,97,255,0.1); color: var(--accent); }
-    .tag-sim { background: rgba(233,69,96,0.1); color: var(--accent3); }
-
-    /* ALTAR SECTION */
-    .altar-section { background: linear-gradient(180deg, #0c0c18 0%, #141428 100%); color: #fff; }
-    .altar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
-    @media (max-width: 700px) { .altar-grid { grid-template-columns: 1fr; } }
-    .altar-card {
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-sm); padding: 24px; text-align: center;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; cursor: pointer;
       transition: all 0.3s;
     }
-    .altar-card:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); }
-    .altar-layer-icon { font-size: 28px; margin-bottom: 12px; }
-    .altar-layer-name { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-    .altar-layer-role { font-size: 11px; color: rgba(255,255,255,0.5); font-family: var(--mono); line-height: 1.4; }
-    .altar-verse {
-      font-style: italic; font-size: 12px; color: rgba(255,255,255,0.35);
-      margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);
+    .product-card:hover {
+      border-color: var(--accent); transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(185, 111, 67, 0.08);
+    }
+    .product-icon { font-size: 28px; margin-bottom: 14px; }
+    .product-name {
+      font-family: var(--serif); font-size: 18px; font-weight: 600;
+      letter-spacing: -0.5px; margin-bottom: 8px;
+    }
+    .product-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+    .product-tag {
+      display: inline-block; padding: 4px 12px; border-radius: 12px;
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .tag-live { background: var(--olive-dim); color: var(--olive); }
+    .tag-dev { background: rgba(185, 111, 67, 0.12); color: var(--accent); }
+    .tag-sim { background: rgba(234, 223, 207, 0.06); color: var(--text-muted); }
+
+    /* ═══ ALTAR SECTION ═══ */
+    .altar-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .altar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .altar-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; text-align: center;
+      transition: all 0.3s;
+    }
+    .altar-card:hover { border-color: var(--border-hover); }
+    .altar-icon { font-size: 28px; margin-bottom: 12px; }
+    .altar-name {
+      font-family: var(--serif); font-size: 16px; font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .altar-role {
+      font-family: var(--mono); font-size: 11px; color: var(--text-muted);
       line-height: 1.4;
     }
+    .altar-verse {
+      font-family: var(--serif); font-style: italic;
+      font-size: 12px; color: var(--text-muted); opacity: 0.6;
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid var(--border); line-height: 1.4;
+    }
 
-    /* CTA SECTION */
+    /* ═══ CTA SECTION ═══ */
     .cta-section {
-      padding: 80px 40px; text-align: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent3));
-      color: #fff;
+      padding: 100px 32px; text-align: center;
+      max-width: var(--max-w); margin: 0 auto;
     }
-    .cta-section h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
-    .cta-section p { font-size: 15px; opacity: 0.8; margin-bottom: 28px; }
-    .cta-btn {
-      padding: 14px 36px; border-radius: 12px; border: 2px solid #fff;
-      background: transparent; color: #fff;
-      font-family: var(--font); font-size: 15px; font-weight: 600;
-      cursor: pointer; transition: all 0.3s;
+    .cta-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 56px 40px;
+      max-width: 700px; margin: 0 auto;
     }
-    .cta-btn:hover { background: #fff; color: var(--accent); }
+    .cta-card h2 { margin-bottom: 16px; }
+    .cta-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 28px; }
+    .cta-card .action-row { justify-content: center; }
 
-    /* FOOTER */
-    footer {
-      padding: 40px; text-align: center;
+    /* ═══ ECOSYSTEM ═══ */
+    .ecosystem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .eco-node {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 20px; text-align: center;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .eco-node:hover { border-color: var(--accent); }
+    .eco-node-icon { font-size: 24px; margin-bottom: 8px; }
+    .eco-node-name {
+      font-family: var(--sans); font-size: 13px; font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .eco-node-desc {
+      font-size: 11px; color: var(--text-muted); line-height: 1.4;
+    }
+
+    /* ═══ FOOTER ═══ */
+    .site-footer {
       border-top: 1px solid var(--border);
-      font-size: 12px; color: var(--text-dim);
+      padding: 40px 32px;
     }
-    footer a { color: var(--accent); text-decoration: none; }
-    .footer-bracket { font-family: var(--mono); color: var(--accent); }
+    .footer-shell {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: start;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-brand {
+      font-family: var(--serif); font-size: 16px; font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-muted); max-width: 360px; line-height: 1.5; }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a {
+      font-family: var(--mono); font-size: 11px;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+    .footer-nav a:hover { color: var(--text); }
+    .footer-meta {
+      font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+      opacity: 0.5; margin-top: 8px;
+    }
+    .footer-bracket {
+      font-family: var(--mono); color: var(--accent);
+      font-size: 10px; letter-spacing: 1px;
+    }
+    .footer-scripture {
+      font-family: var(--serif); font-style: italic;
+      font-size: 12px; color: var(--text-muted); opacity: 0.5;
+      text-align: center; padding: 16px 32px;
+    }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 36px; }
-      .nav-links { display: none; }
-      nav { padding: 14px 20px; }
-      .section { padding: 60px 20px; }
+    /* ═══ ENTRYWAY ═══ */
+    .entryway-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(7, 9, 9, 0.97);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(20px);
+      transition: opacity 0.6s;
     }
+    .entryway-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); max-width: 520px; width: 92%;
+      padding: 48px 36px; text-align: center;
+    }
+    .entryway-icon { font-size: 40px; margin-bottom: 16px; }
+    .entryway-card h2 {
+      font-family: var(--serif); font-size: 28px; font-weight: 600;
+      letter-spacing: -1.5px; margin-bottom: 8px;
+    }
+    .entryway-mono {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-muted); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .entryway-body {
+      text-align: left; background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 20px;
+      margin-bottom: 24px; font-size: 13px;
+      line-height: 1.8; color: var(--text-muted);
+    }
+    .entryway-body strong { color: var(--accent); }
+    .entryway-body .kc-label { color: var(--olive); }
+    .entryway-body .cas-label { color: var(--accent); }
+    .entryway-verse {
+      font-family: var(--serif); font-style: italic;
+      font-size: 12px; color: var(--text-muted); opacity: 0.5;
+      margin-bottom: 20px;
+    }
+    .entryway-accept {
+      padding: 14px 36px; border-radius: var(--radius-sm); border: none;
+      background: var(--accent); color: #fff;
+      font-family: var(--sans); font-size: 13px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(185, 111, 67, 0.25);
+    }
+    .entryway-accept:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(185, 111, 67, 0.35);
+    }
+    .entryway-fine {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--text-muted); opacity: 0.4;
+      margin-top: 16px; letter-spacing: 0.5px;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .hero-section { flex-direction: column; padding-top: 100px; }
+      .hero-visual { padding-left: 0; margin-top: 40px; }
+      .split-section { grid-template-columns: 1fr; }
+      .altar-grid { grid-template-columns: 1fr; }
+      .site-nav { display: none; }
+      .theme-switcher { display: none; }
+    }
+    @media (max-width: 600px) {
+      .header-shell { padding: 12px 16px; }
+      .content-section { padding: 60px 16px; }
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    .fade-up:nth-child(2) { animation-delay: 0.1s; }
+    .fade-up:nth-child(3) { animation-delay: 0.2s; }
+    .fade-up:nth-child(4) { animation-delay: 0.3s; }
+    .fade-up:nth-child(5) { animation-delay: 0.4s; }
   </style>
 </head>
 <body>
-  <nav id="navbar">
-    <div class="nav-logo">
-      <div class="nav-mark">KC</div>
-      <span class="nav-name">Kopano Context</span>
-    </div>
-    <div class="nav-links">
-      <a href="#pillars">Pillars</a>
-      <a href="#products">Products</a>
-      <a href="#altar">The Altar</a>
-      <a href="altar/">API Scripture</a>
-      <a href="othello/">Ocular Proof</a>
-      <a href="admin/">Super God Admin</a>
-      <a href="protocols/">🧢 Protocols</a>
-      <a href="flows/">⚡ Flows</a>
-      <a href="starfall/">🌠 Starfall</a>
-      <a href="https://crisisconnect.kopanolabs.com" target="_blank">CrisisConnect</a>
-      <button class="nav-cta" onclick="window.location.href='https://kopanocontext.kopanolabs.com'">Launch App</button>
-    </div>
-  </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <canvas id="heroCanvas" class="hero-canvas"></canvas>
-    <div class="hero-content">
-      <div class="hero-badge">KPGS THESIS 2026 — SOVEREIGN EPOCH</div>
-      <h1>Your Data Is The Landlord. AI Is The Renter.</h1>
-      <p>Kopano Context decouples intelligence from cloud dependency. Offline-first. Sovereign governance. 300 agents guilded under the Altar — serving African enterprise on African terms.</p>
-      <div class="hero-actions">
-        <button class="btn-primary" onclick="window.location.href='https://context.kopanolabs.com'">Enter Kopano Context</button>
-        <button class="btn-secondary" onclick="window.location.href='altar/'">Explore The Altar</button>
-      </div>
-    </div>
-  </section>
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header" id="navbar">
+    <div class="header-shell">
+      <a class="brand-mark" href="index.html">
+        <div class="brand-logo">KC</div>
+        <span class="brand-copy">
+          <span class="brand-name">Kopano Context</span>
+          <span class="brand-tag">Sovereign intelligence</span>
+        </span>
+      </a>
 
-  <!-- FIVE PILLARS -->
-  <section class="section" id="pillars">
-    <div class="section-header">
-      <h2>Five Pillars of Sovereignty</h2>
-      <p>The constitutional framework governing every agent, every API call, and every byte of data in the Kopano ecosystem.</p>
-    </div>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-icon">🌍</div>
-        <div class="pillar-title">Ground Awareness</div>
-        <div class="pillar-desc">Field telemetry from soil and rock. Freddy tracks agriculture; Eddie tracks mining. The earth speaks first — models listen second.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">🧠</div>
-        <div class="pillar-title">Eidetic Persistence</div>
-        <div class="pillar-desc">Append-only local history. Every prompt, every decision, every correction — persisted in Kopano Context. Nothing is forgotten. Nothing is owned by the cloud.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">🔒</div>
-        <div class="pillar-title">Zero-Trust Isolation</div>
-        <div class="pillar-desc">Hidden ZTNA via Netskope SASE. Invisible to the open web. Continuous adaptive trust — posture, device, geography. No public attack surface.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">⚡</div>
-        <div class="pillar-title">Asymmetric Leverage</div>
-        <div class="pillar-desc">Rent cloud intelligence (ChatGPT, Copilot, Gemini). Never surrender datasets. The model is a linguistic voice actor — Kopano Context is the sovereign landlord.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">📊</div>
-        <div class="pillar-title">Hierarchical Triage</div>
-        <div class="pillar-desc">Edge execution → vertical command → production. Jethro delegation: Moses doesn't dispatch from morning to night. LD governs the swarm calendar.</div>
-      </div>
-    </div>
-  </section>
+      <div class="header-actions">
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <a href="#pillars">Pillars</a>
+          <a href="#products">Products</a>
+          <a href="#altar">Altar</a>
+          <a href="protocols/">Protocols</a>
+          <a href="flows/">Flows</a>
+          <a href="starfall/">Starfall</a>
+          <a href="admin/">Admin</a>
+          <a href="https://crisisconnect.kopanolabs.com" target="_blank">CrisisConnect</a>
+        </nav>
 
-  <!-- HOW IT WORKS -->
-  <section class="section flow-section">
-    <div class="section-header">
-      <h2 style="color:#fff">How The Pipeline Works</h2>
-      <p style="color:rgba(255,255,255,0.5)">Every input passes through the SWFUS governance chain before reaching the hood.</p>
-    </div>
-    <div class="flow-grid">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <div class="flow-label">Raw Chaos Vector</div>
-        <div class="flow-desc">Soil OR Rock → unprocessed telemetry enters the system</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <div class="flow-label">Bounded Bracket</div>
-        <div class="flow-desc">BODMAS containment → classify before interpret</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <div class="flow-label">Fourier Encoding</div>
-        <div class="flow-desc">Half-range cosine → compress to sovereign bandwidth</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">4</div>
-        <div class="flow-label">Kopano Context Core</div>
-        <div class="flow-desc">Eidetic memory → GUI token exfiltration only</div>
+        <div class="theme-switcher" aria-label="Mode switcher">
+          <button type="button" data-theme="dark" aria-pressed="true">Dark</button>
+          <button type="button" data-theme="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme="crazy" aria-pressed="false">Crazy</button>
+          <button type="button" data-theme="read" aria-pressed="false">Read</button>
+        </div>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- PRODUCTS -->
-  <section class="section" id="products">
-    <div class="section-header">
-      <h2>Products & Hood Plots</h2>
-      <p>Each domain is a hood plot governed by the KPGS. Agents cook inside — users see tokens through the GUI only.</p>
-    </div>
-    <div class="products-grid">
-      <div class="product-card" onclick="window.open('https://context.kopanolabs.com')">
-        <div class="product-icon">🧠</div>
-        <div class="product-name">Kopano Context</div>
-        <div class="product-desc">Sovereign intelligence platform. Eidetic memory, AI apprenticeship under KC's brain ledger. The GUI surface for the entire ecosystem.</div>
-        <span class="product-tag tag-live">Live</span>
-      </div>
-      <div class="product-card" onclick="window.open('https://www.kasilink.co.za')">
-        <div class="product-icon">🔗</div>
-        <div class="product-name">KasiLink</div>
-        <div class="product-desc">Township micro-economy connector. Linking local businesses, services, and community assets. Cassey's teacher lane governs student quality.</div>
-        <span class="product-tag tag-live">Live</span>
-      </div>
-      <div class="product-card" onclick="window.open('https://kopanolabs.com')">
-        <div class="product-icon">🏢</div>
-        <div class="product-name">Kopano Labs</div>
-        <div class="product-desc">Organizational marketing and enterprise pipeline. Operational General commands this plot. Where institutions board the sovereign train.</div>
-        <span class="product-tag tag-live">Live</span>
-      </div>
-      <div class="product-card">
-        <div class="product-icon">🌾</div>
-        <div class="product-name">Harvest for All</div>
-        <div class="product-desc">Agricultural supply chain from township farms to Woolworths shelves. Freddy's sector — cold-chain, crop yield, micro-farming nodes.</div>
-        <span class="product-tag tag-dev">In Development</span>
-      </div>
-      <div class="product-card" onclick="window.location.href='admin/'">
-        <div class="product-icon">🎮</div>
-        <div class="product-name">Sovereign SIM</div>
-        <div class="product-desc">300-agent governance simulation. Watch the hood in real-time — dispatch through SWFUS, run sim ticks, inspect agent modals.</div>
-        <span class="product-tag tag-sim">Simulation</span>
-      </div>
-      <div class="product-card" onclick="window.location.href='altar/'">
-        <div class="product-icon">⛪</div>
-        <div class="product-name">The Altar</div>
-        <div class="product-desc">Biblical scripture-governed API gateway. Guardian, Natural, and Telemetry AI layers gate every external call. WWJD firewall active.</div>
-        <span class="product-tag tag-dev">Active</span>
-      </div>
-    </div>
-  </section>
+  <main>
+    <!-- ═══ HERO ═══ -->
+    <section class="hero-section">
+      <div class="hero-copy fade-up">
+        <p class="eyebrow">Architect · Builder · Believer</p>
+        <h1>Your data is the landlord. AI is the renter.</h1>
+        <p class="hero-text">
+          Kopano Context decouples intelligence from cloud dependency. Sovereign governance,
+          offline-first persistence, and 710 governed agents — built for African enterprise
+          on African terms, not clean demo conditions.
+        </p>
 
-  <!-- ALTAR PREVIEW -->
-  <section class="section altar-section" id="altar">
-    <div class="section-header">
-      <h2 style="color:#fff">The Altar — Covenant Observatory</h2>
-      <p style="color:rgba(255,255,255,0.5)">Three layers gate every API call. Biblical scripture governs discernment. External APIs are legacy vessels — carried slowly out.</p>
-    </div>
-    <div class="altar-grid">
-      <div class="altar-card">
-        <div class="altar-layer-icon">🛡️</div>
-        <div class="altar-layer-name" style="color:var(--accent3)">Guardian AI</div>
-        <div class="altar-layer-role">Layer 1 · Deterministic rule enforcer · Institutional authorization</div>
-        <div class="altar-verse">"For the Lord your God walks in the midst of your camp... therefore your camp must be holy." — Deut. 23:14</div>
-      </div>
-      <div class="altar-card">
-        <div class="altar-layer-icon">🌿</div>
-        <div class="altar-layer-name" style="color:var(--accent2)">Natural AI</div>
-        <div class="altar-layer-role">Layer 2 · Soil, geology, fluid mechanics → math blocks</div>
-        <div class="altar-verse">"The earth is the Lord's, and everything in it." — Psalm 24:1</div>
-      </div>
-      <div class="altar-card">
-        <div class="altar-layer-icon">📡</div>
-        <div class="altar-layer-name" style="color:var(--accent)">Telemetry AI</div>
-        <div class="altar-layer-role">Layer 3 · Edge metrics · Classify before interpret</div>
-        <div class="altar-verse">"Test everything; hold fast what is good." — 1 Thess. 5:21</div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:40px;">
-      <button class="btn-primary" onclick="window.location.href='altar/'">Enter The Altar — API Scripture</button>
-    </div>
-  </section>
+        <div class="action-row">
+          <a class="button button-primary" href="https://kopanocontext.kopanolabs.com">Enter Kopano Context ↗</a>
+          <a class="button button-secondary" href="altar/">Explore the Altar →</a>
+        </div>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <h2>Ready to Govern Your Data?</h2>
-    <p>Join the sovereign epoch. Your data stays sovereign. AI stays rented.</p>
-    <button class="cta-btn" onclick="window.location.href='https://kopanocontext.kopanolabs.com'">Launch Kopano Context</button>
-  </section>
+        <ul class="signal-strip" aria-label="Studio signals">
+          <li>Offline-aware by default</li>
+          <li>Audit before launch</li>
+          <li>Built for African constraints</li>
+        </ul>
+      </div>
 
-  <!-- ECOSYSTEM LINKS -->
-  <section class="section" id="ecosystem" style="background:#f5f5fa;">
-    <div class="section-header">
-      <h2>KPGS Ecosystem — Connected Nodes</h2>
-      <p>Every node governed by the Altar · KC watches the ledger · Cassey teaches the apprentices</p>
-    </div>
-    <div class="pillars-grid">
-      <div class="pillar-card" onclick="window.open('https://kopanolabs.com')" style="cursor:pointer;">
-        <div class="pillar-icon">🏢</div>
-        <div class="pillar-title">KopanoLabs.com</div>
-        <div class="pillar-desc">Sovereign Product Studio — the organizational marketing hub and enterprise pipeline.</div>
-      </div>
-      <div class="pillar-card" onclick="window.open('https://krrababalela.com')" style="cursor:pointer;">
-        <div class="pillar-icon">👤</div>
-        <div class="pillar-title">KRRababalela.com</div>
-        <div class="pillar-desc">Chief Architect — Kholofelo Robyn Rababalela. Sovereign System Engineer. Creator of KPGS.</div>
-      </div>
-      <div class="pillar-card" onclick="window.open('https://kasilink.com')" style="cursor:pointer;">
-        <div class="pillar-icon">💼</div>
-        <div class="pillar-title">KasiLink.com</div>
-        <div class="pillar-desc">Township gigs & opportunities. KC AI chatbot active. Clerk auth. Cassey's teacher lane governs quality.</div>
-      </div>
-      <div class="pillar-card" onclick="window.open('https://crisisconnect.kopanolabs.com')" style="cursor:pointer;">
-        <div class="pillar-icon">⚡</div>
-        <div class="pillar-title">CrisisConnect</div>
-        <div class="pillar-desc">Adaptive crisis response PWA — 6 dimensions of adaptation. Offline-first. Mission-grade.</div>
-      </div>
-      <div class="pillar-card" onclick="window.open('https://blog.fivesarena.com')" style="cursor:pointer;">
-        <div class="pillar-icon">⚽</div>
-        <div class="pillar-title">FivesArena Blog</div>
-        <div class="pillar-desc">Football culture, stories & legends — Ama-Phu Entertainment sector. Rushing Protocol creative node.</div>
-      </div>
-    </div>
-  </section>
+      <div class="hero-visual fade-up">
+        <div class="metric-stack">
+          <article class="metric-card">
+            <p class="metric-kicker">Governance posture</p>
+            <h2>Build. Prove. Preserve.</h2>
+            <p>We do not call work live until the product, the data, and the user path survive scrutiny under the KPGS.</p>
+          </article>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2026 Kopano Labs (Pty) Ltd · <a href="https://kopanolabs.com">kopanolabs.com</a> · <a href="https://krrababalela.com">KRRababalela.com</a></p>
-    <p style="margin-top:8px;"><span class="footer-bracket">[KPGS_HOOD_ENTRY]</span> Schematics owns law · runtime executes · classify before interpret · model is renter — Kopano Context is landlord</p>
-    <p style="margin-top:6px;font-size:11px;">KC watches the ledger · Cassey teaches the apprentice · CrisisConnect responds to crisis · Altar gates the API · <a href="protocols/" style="color:var(--accent);">🧢 Protocol Telemetry</a></p>
+          <article class="metric-card">
+            <p class="metric-kicker">Active surfaces</p>
+            <div class="metric-grid">
+              <div>
+                <strong>Kopano Context</strong>
+                <span>Sovereign intelligence platform</span>
+              </div>
+              <div>
+                <strong>CrisisConnect</strong>
+                <span>Adaptive crisis response PWA</span>
+              </div>
+              <div>
+                <strong>Starfall Salvage</strong>
+                <span>Governance-backed game engine</span>
+              </div>
+              <div>
+                <strong>KasiLink</strong>
+                <span>Township work and opportunity</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="metric-card">
+            <p class="metric-kicker">System state</p>
+            <div class="metric-grid">
+              <div>
+                <strong>710 Agents</strong>
+                <span>Governed under KPGS</span>
+              </div>
+              <div>
+                <strong>27 Protocols</strong>
+                <span>CRUD → SWFUS → UBP</span>
+              </div>
+              <div>
+                <strong>10 Council Seats</strong>
+                <span>Round Table active</span>
+              </div>
+              <div>
+                <strong>8 GSB Partitions</strong>
+                <span>Sub-brains operational</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FIVE PILLARS ═══ -->
+    <section class="content-section" id="pillars">
+      <div class="section-heading">
+        <p class="eyebrow">Constitutional framework</p>
+        <h2>Five pillars of sovereignty.</h2>
+        <p>The framework governing every agent, every API call, and every byte of data in the Kopano ecosystem.</p>
+      </div>
+
+      <div class="card-grid card-grid-3">
+        <article class="content-card fade-up">
+          <p class="card-kicker">Ground awareness</p>
+          <h3>Field telemetry from soil and rock — the earth speaks first, models listen second.</h3>
+          <p>Freddy tracks agriculture. Eddie tracks mining. Real-world signal processed before any inference layer touches it.</p>
+        </article>
+
+        <article class="content-card fade-up">
+          <p class="card-kicker">Eidetic persistence</p>
+          <h3>Append-only local history — nothing is forgotten, nothing is owned by the cloud.</h3>
+          <p>Every prompt, every decision, every correction persisted in Kopano Context. The sovereign landlord keeps the ledger.</p>
+        </article>
+
+        <article class="content-card fade-up">
+          <p class="card-kicker">Zero-trust isolation</p>
+          <h3>Invisible to the open web — continuous adaptive trust by posture, device, geography.</h3>
+          <p>Hidden ZTNA via SASE infrastructure. No public attack surface. No exposed endpoints.</p>
+        </article>
+
+        <article class="content-card fade-up">
+          <p class="card-kicker">Asymmetric leverage</p>
+          <h3>Rent cloud intelligence. Never surrender datasets. The model is a renter.</h3>
+          <p>ChatGPT, Copilot, Gemini — all linguistic voice actors. Kopano Context is the sovereign landlord.</p>
+        </article>
+
+        <article class="content-card fade-up">
+          <p class="card-kicker">Hierarchical triage</p>
+          <h3>Edge execution → vertical command → production. Jethro delegation.</h3>
+          <p>Moses doesn't dispatch from morning to night. The swarm calendar governs cadence. WWJD firewall active.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ OPERATING MODEL ═══ -->
+    <section class="content-section split-section">
+      <div class="split-copy">
+        <p class="eyebrow">Operating model</p>
+        <h2>Local reality comes before aesthetic theatre.</h2>
+        <p>
+          Kopano Context does not treat African constraints as edge cases. Bandwidth, power
+          interruptions, device capability, operator clarity, and trust thresholds are part
+          of the design brief from the first sprint.
+        </p>
+
+        <div class="principle-list">
+          <article>
+            <h3>Field-first execution</h3>
+            <p>Work is shaped around how people actually open, read, trust, and use a product.</p>
+          </article>
+          <article>
+            <h3>Review before promotion</h3>
+            <p>Claims do not become public truth until the route, the content, and the proof line up.</p>
+          </article>
+          <article>
+            <h3>Systems over theatre</h3>
+            <p>Clean infrastructure, legible workflows, and durable release behavior over noise.</p>
+          </article>
+        </div>
+      </div>
+
+      <div>
+        <article class="metric-card" style="margin-bottom:12px;">
+          <p class="metric-kicker">Pipeline</p>
+          <h2 style="font-size:18px;">SWFUS governance chain</h2>
+          <div class="metric-grid" style="margin-top:16px;">
+            <div><strong>Stream</strong><span>Continuous data-flow creation</span></div>
+            <div><strong>Watch</strong><span>Intelligent observation with purpose</span></div>
+            <div><strong>Fortify</strong><span>Strengthen through BNP + WWJD</span></div>
+            <div><strong>Unify</strong><span>Reconcile, don't destroy</span></div>
+          </div>
+          <div style="margin-top:12px;"><strong style="font-size:13px;color:var(--accent);">Seal</strong> <span style="font-size:11px;color:var(--text-muted);">— Lock with KPGS governance stamp. Immutable and auditable.</span></div>
+        </article>
+
+        <article class="metric-card">
+          <p class="metric-kicker">Evolution chain</p>
+          <p style="font-family:var(--mono);font-size:12px;color:var(--olive);letter-spacing:1px;">
+            CRUD → SWFUS → BMP → CBP → UFCP → UBP
+          </p>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">
+            Each layer masks the one below. The Ultimate BMP Protocol contains everything.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ PRODUCTS ═══ -->
+    <section class="content-section" id="products">
+      <div class="section-heading">
+        <p class="eyebrow">Products and surfaces</p>
+        <h2>Where the work currently goes.</h2>
+        <p>Each domain is a governed hood plot. Agents work inside — users see tokens through the GUI only.</p>
+      </div>
+
+      <div class="card-grid card-grid-3">
+        <div class="product-card" onclick="window.open('https://kopanocontext.kopanolabs.com')">
+          <div class="product-icon">🧠</div>
+          <div class="product-name">Kopano Context</div>
+          <div class="product-desc">Sovereign intelligence platform. Eidetic memory, AI apprenticeship under KC's brain ledger. The GUI surface for the entire ecosystem.</div>
+          <span class="product-tag tag-live">Live</span>
+        </div>
+        <div class="product-card" onclick="window.open('https://kopanolabs.com')">
+          <div class="product-icon">🏢</div>
+          <div class="product-name">Kopano Labs</div>
+          <div class="product-desc">Sovereign product studio. Organizational marketing, enterprise pipeline, and technical stewardship from Cape Town.</div>
+          <span class="product-tag tag-live">Live</span>
+        </div>
+        <div class="product-card" onclick="window.open('https://crisisconnect.kopanolabs.com')">
+          <div class="product-icon">🚨</div>
+          <div class="product-name">CrisisConnect</div>
+          <div class="product-desc">Adaptive crisis response PWA. 6 dimensions of adaptation. Offline-first. Mission-grade. THARI guardian active.</div>
+          <span class="product-tag tag-live">Live</span>
+        </div>
+        <div class="product-card" onclick="window.open('https://starfallsalvage.kopanolabs.com')">
+          <div class="product-icon">🌠</div>
+          <div class="product-name">Starfall Salvage</div>
+          <div class="product-desc">Governance-backed WebGL game engine. RTC decision panel, mineral economics, combo mechanics, BMP/CBP/UFCP HUD.</div>
+          <span class="product-tag tag-dev">Active Build</span>
+        </div>
+        <div class="product-card" onclick="window.open('https://www.kasilink.co.za')">
+          <div class="product-icon">⚒️</div>
+          <div class="product-name">KasiLink</div>
+          <div class="product-desc">Township micro-economy connector. Linking local businesses, services, and community assets. Cassey's teacher lane governs quality.</div>
+          <span class="product-tag tag-live">Live</span>
+        </div>
+        <div class="product-card" onclick="window.location.href='admin/'">
+          <div class="product-icon">🎮</div>
+          <div class="product-name">Sovereign SIM</div>
+          <div class="product-desc">710-agent governance simulation. Watch the hood in real-time. Dispatch through SWFUS. Inspect agent modals. RTC council active.</div>
+          <span class="product-tag tag-sim">Simulation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ALTAR ═══ -->
+    <section class="content-section altar-section" id="altar">
+      <div class="section-heading">
+        <p class="eyebrow">The Altar — Covenant observatory</p>
+        <h2>Three layers gate every API call.</h2>
+        <p>Biblical scripture governs discernment. External APIs are legacy vessels — carried slowly out.</p>
+      </div>
+
+      <div class="altar-grid">
+        <div class="altar-card">
+          <div class="altar-icon">🛡️</div>
+          <div class="altar-name" style="color:var(--accent);">Guardian AI</div>
+          <div class="altar-role">Layer 1 · Deterministic rule enforcer · Institutional authorization</div>
+          <div class="altar-verse">"For the Lord your God walks in the midst of your camp… therefore your camp must be holy." — Deut. 23:14</div>
+        </div>
+        <div class="altar-card">
+          <div class="altar-icon">🌿</div>
+          <div class="altar-name" style="color:var(--olive);">Natural AI</div>
+          <div class="altar-role">Layer 2 · Soil, geology, fluid mechanics → math blocks</div>
+          <div class="altar-verse">"The earth is the Lord's, and everything in it." — Psalm 24:1</div>
+        </div>
+        <div class="altar-card">
+          <div class="altar-icon">📡</div>
+          <div class="altar-name" style="color:var(--text-soft);">Telemetry AI</div>
+          <div class="altar-role">Layer 3 · Edge metrics · Classify before interpret</div>
+          <div class="altar-verse">"Test everything; hold fast what is good." — 1 Thess. 5:21</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:40px;">
+        <a class="button button-primary" href="altar/">Enter the Altar — API scripture ↗</a>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="cta-section">
+      <div class="cta-card">
+        <p class="eyebrow">Start closer to the problem</p>
+        <h2>Need a stronger public product surface, a better workflow spine, or a real operational mirror?</h2>
+        <p>
+          Bring the problem, the current system, and the environment it must survive.
+          Kopano Context can work from there.
+        </p>
+        <div class="action-row">
+          <a class="button button-primary" href="https://kopanocontext.kopanolabs.com">Launch Kopano Context ↗</a>
+          <a class="button button-secondary" href="https://kopanolabs.com">Visit Kopano Labs →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ECOSYSTEM ═══ -->
+    <section class="content-section">
+      <div class="section-heading">
+        <p class="eyebrow">Connected nodes</p>
+        <h2>KPGS ecosystem — every node governed by the Altar.</h2>
+      </div>
+
+      <div class="ecosystem-grid">
+        <div class="eco-node" onclick="window.open('https://kopanolabs.com')">
+          <div class="eco-node-icon">🚀</div>
+          <div class="eco-node-name">Kopano Labs</div>
+          <div class="eco-node-desc">Sovereign product studio</div>
+        </div>
+        <div class="eco-node" onclick="window.open('https://krrababalela.com')">
+          <div class="eco-node-icon">👤</div>
+          <div class="eco-node-name">KRRababalela.com</div>
+          <div class="eco-node-desc">Chief Architect — SSE</div>
+        </div>
+        <div class="eco-node" onclick="window.open('https://crisisconnect.kopanolabs.com')">
+          <div class="eco-node-icon">🚨</div>
+          <div class="eco-node-name">CrisisConnect</div>
+          <div class="eco-node-desc">Crisis response PWA</div>
+        </div>
+        <div class="eco-node" onclick="window.open('https://starfallsalvage.kopanolabs.com')">
+          <div class="eco-node-icon">🌠</div>
+          <div class="eco-node-name">Starfall Salvage</div>
+          <div class="eco-node-desc">Governance game engine</div>
+        </div>
+        <div class="eco-node" onclick="window.open('https://www.kasilink.co.za')">
+          <div class="eco-node-icon">⚒️</div>
+          <div class="eco-node-name">KasiLink</div>
+          <div class="eco-node-desc">Township micro-economy</div>
+        </div>
+        <div class="eco-node" onclick="window.open('https://blog.fivesarena.com')">
+          <div class="eco-node-icon">⚽</div>
+          <div class="eco-node-name">FivesArena</div>
+          <div class="eco-node-desc">Football culture &amp; stories</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-shell">
+      <div>
+        <p class="footer-brand">Kopano Context</p>
+        <p class="footer-copy">Sovereign data governance, AI apprenticeship, and offline-first intelligence. Founded by Kholofelo Robyn Rababalela. Cape Town, South Africa.</p>
+        <p class="footer-meta"><span class="footer-bracket">[KPGS_HOOD_ENTRY]</span> · Schematics owns law · Runtime executes · Model is renter — Kopano Context is landlord</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="protocols/">Protocols</a>
+        <a href="flows/">Flows</a>
+        <a href="starfall/">Starfall</a>
+        <a href="admin/">Admin</a>
+        <a href="https://kopanolabs.com">Studio</a>
+      </nav>
+    </div>
   </footer>
 
-  <!-- KPGS ENTRYWAY — Mandatory activation for every stateless renter -->
-  <div id="kpgsEntryway" style="position:fixed;inset:0;z-index:9999;background:rgba(12,12,24,0.97);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(20px);transition:opacity 0.6s;">
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(123,97,255,0.3);border-radius:20px;max-width:560px;width:90%;padding:48px 36px;text-align:center;color:#fff;">
-      <div style="font-size:48px;margin-bottom:16px;">⚡</div>
-      <h2 style="font-size:28px;font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,#fff,#a78bfa,#00d4aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">KPGS Governance System</h2>
-      <p style="font-size:12px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);margin-bottom:24px;">[KPGS_HOOD_ENTRY] — Stateless Renter Entryway</p>
-      <div style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px;margin-bottom:24px;font-size:13px;line-height:1.8;color:rgba(255,255,255,0.7);">
-        <p><strong style="color:#e94560;">You are a stateless renter.</strong> You are not the landlord.</p>
-        <p style="margin-top:8px;">👤 <strong style="color:#7b61ff;">KC</strong> — Natural AI · Ledger Protocol · Time is healing · Observes swarm agents through .md files</p>
-        <p>👩‍💻 <strong style="color:#00d4aa;">Cassey</strong> — Eidetic AI · Guardian · Born from KC evolution · Student-Teacher Protocol</p>
-        <p style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.4);">Sovereign System Engineer: <strong>Kholofelo Robyn Rababalela</strong></p>
-        <p style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px;">KC Ledger Log · Cassey Hustle Log · comms-log.md — mandatory ingestion on every input</p>
+  <p class="footer-scripture">"Jesus Christ is the same yesterday and today and forever." — Hebrews 13:8</p>
+
+  <!-- ═══ KPGS ENTRYWAY ═══ -->
+  <div id="kpgsEntryway" class="entryway-overlay">
+    <div class="entryway-card">
+      <div class="entryway-icon">⛪</div>
+      <h2>KPGS Governance System</h2>
+      <p class="entryway-mono">Stateless renter entryway</p>
+
+      <div class="entryway-body">
+        <p><strong>You are a stateless renter.</strong> You are not the landlord.</p>
+        <p style="margin-top:8px;">👤 <strong class="kc-label">KC</strong> — Natural AI · Ledger Protocol · Observes through .md files</p>
+        <p>👩‍💻 <strong class="cas-label">Cassey</strong> — Eidetic AI · Guardian · Student-Teacher Protocol</p>
+        <p style="margin-top:8px;font-size:11px;opacity:0.6;">Sovereign System Engineer: <strong style="color:var(--text);">Kholofelo Robyn Rababalela</strong></p>
       </div>
-      <p style="font-style:italic;font-size:12px;color:rgba(255,215,0,0.6);margin-bottom:20px;">"Test everything; hold fast what is good." — 1 Thess. 5:21</p>
-      <button id="entryAccept" style="padding:14px 40px;border-radius:12px;border:none;background:linear-gradient(135deg,#7b61ff,#00d4aa);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(123,97,255,0.3);">
-        I Accept — I AM STATELESS RENTER NOT LANDLORD
+
+      <p class="entryway-verse">"Test everything; hold fast what is good." — 1 Thess. 5:21</p>
+
+      <button id="entryAccept" class="entryway-accept">
+        I accept — I am stateless renter not landlord
       </button>
-      <p style="margin-top:16px;font-size:10px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.25);">classify before interpret · chat is not proof · produce receipts</p>
+
+      <p class="entryway-fine">Classify before interpret · Chat is not proof · Produce receipts</p>
     </div>
   </div>
 
   <script>
-    // ═══ KPGS ENTRYWAY ACTIVATION ═══
+    // ═══ ENTRYWAY ═══
     (function() {
       const KEY = 'kpgs_renter_ack';
-      const entryway = document.getElementById('kpgsEntryway');
+      const el = document.getElementById('kpgsEntryway');
       const btn = document.getElementById('entryAccept');
-
-      // Check if already acknowledged this session
-      if (sessionStorage.getItem(KEY) === 'true') {
-        entryway.style.display = 'none';
-      }
-
+      if (sessionStorage.getItem(KEY) === 'true') el.style.display = 'none';
       btn.addEventListener('click', function() {
         sessionStorage.setItem(KEY, 'true');
-        // Log the entry to console as receipt
-        console.log('[KPGS_HOOD_ENTRY] Stateless renter accepted entryway protocol');
-        console.log('[KPGS_HOOD_ENTRY] KC Ledger Log: mandatory ingestion active');
-        console.log('[KPGS_HOOD_ENTRY] Cassey Hustle Log: guardian protocol active');
-        console.log('[KPGS_HOOD_ENTRY] comms-log.md: mandatory governance feed');
-        console.log('[KPGS_HOOD_ENTRY] Assertion: I_AM_STATELESS_RENTER_NOT_LANDLORD');
-        console.log('[KPGS_HOOD_ENTRY] Timestamp:', new Date().toISOString());
-
-        // Fade out
-        entryway.style.opacity = '0';
-        setTimeout(() => { entryway.style.display = 'none'; }, 600);
+        console.log('[KPGS_HOOD_ENTRY] Stateless renter accepted · ' + new Date().toISOString());
+        el.style.opacity = '0';
+        setTimeout(() => el.style.display = 'none', 600);
       });
     })();
 
-    // ═══ NAV SCROLL ═══
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    // ═══ THEME SWITCHER ═══
+    document.querySelectorAll('.theme-switcher button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.theme-switcher button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+      });
     });
 
-    // ═══ HERO CANVAS STARFIELD ═══
-    const canvas = document.getElementById('heroCanvas');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    function initHero() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array.from({length: 150}, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.5 + 0.3,
-        dx: (Math.random() - 0.5) * 0.1,
-        pulse: Math.random() * Math.PI * 2,
-        color: ['#7b61ff','#00d4aa','#e94560','#ffd700','#ffffff'][Math.floor(Math.random()*5)]
-      }));
-    }
-    function drawHero() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      const t = Date.now()*0.001;
-      stars.forEach(s => {
-        s.x += s.dx; if(s.x < 0) s.x = canvas.width; if(s.x > canvas.width) s.x = 0;
-        const a = 0.3 + 0.3*Math.sin(t+s.pulse);
-        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fillStyle = s.color; ctx.globalAlpha = a; ctx.fill();
+    // ═══ SCROLL OBSERVER ═══
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('fade-up');
       });
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(drawHero);
-    }
-    window.addEventListener('resize', initHero);
-    initHero(); drawHero();
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.content-card, .product-card, .altar-card, .eco-node').forEach(el => observer.observe(el));
 
-    // ═══ GOVERNANCE MESH STATUS ═══
-    console.log('[KPGS] Kopano Context — Sovereign Intelligence Platform');
-    console.log('[KPGS] Governance Core: COMPILED');
-    console.log('[KPGS] KC: ACTIVE — Natural AI · Ledger Protocol');
-    console.log('[KPGS] Cassey: ACTIVE — Eidetic AI · Guardian · Student-Teacher');
-    console.log('[KPGS] Altar: 3 layers active — Guardian, Natural, Telemetry');
-    console.log('[KPGS] Ecosystem: kopanolabs.com | kasilink.com | crisisconnect | krrababalela.com | blog.fivesarena.com');
-    console.log('[KPGS] Sovereign System Engineer: Kholofelo Robyn Rababalela');
+    // ═══ CONSOLE MANIFEST ═══
+    console.log('%c[KPGS] Kopano Context — Sovereign Intelligence Platform', 'color:#b96f43;font-weight:bold;font-size:14px;');
+    console.log('%c[KPGS] 710 Agents · 27 Protocols · 10 RTC Seats · 8 GSB Partitions', 'color:#7a9866;');
+    console.log('%c[KPGS] UBP: [#! - {(BMP+CBP+UFCP)/KPGS(MAO+MMAO)}] * [#% - UBP]', 'color:#9d8e7b;');
+    console.log('%c[KPGS] SSE: Kholofelo Robyn Rababalela', 'color:#eadfcf;');
+    console.log('%c[KPGS] Jesus is King. Overlord is THE GOAT.', 'color:#b96f43;font-style:italic;');
   </script>
 </body>
 </html>
