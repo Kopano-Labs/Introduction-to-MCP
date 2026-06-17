@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starfall Salvage — KPGS Governed WebGL Game · Kopano Labs</title>
-  <meta name="description" content="Starfall Salvage: VC-grade WebGL salvage runner. BMP governed. UFCP operational. RTC decision engine. Entertainment IS the pipeline.">
+  <title>Starfall Salvage — Solstice Edition · Salvaging Light from the Shortest Day</title>
+  <meta name="description" content="Starfall Salvage: Solstice Edition. A WebGL debris-runner where you salvage light from darkness on the shortest day of the year. Built with Antigravity (Google AI). KPGS governed. No dark patterns.">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -12,199 +12,184 @@
       --glass-h:rgba(255,255,255,0.04); --text:#e8e8f4; --dim:rgba(255,255,255,0.25);
       --sub:rgba(255,255,255,0.5); --cyan:#00e5ff; --purple:#7b61ff; --gold:#ffd700;
       --rose:#e94560; --emerald:#00d4aa; --coral:#ff7b54; --thari:#00ffcc;
+      --sun:#ffb347; --dawn:#ff6b6b; --dusk:#4a0e4e;
       --f:'Outfit',sans-serif; --m:'JetBrains Mono',monospace;
     }
     *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:var(--f);color:var(--text);background:var(--bg);overflow-x:hidden;min-height:100vh;}
+    body{font-family:var(--f);color:var(--text);background:var(--bg);overflow:hidden;height:100vh;width:100vw;}
     ::-webkit-scrollbar{width:5px;}
     ::-webkit-scrollbar-thumb{background:rgba(0,229,255,0.15);border-radius:3px;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
     @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(0,229,255,0.1)}50%{box-shadow:0 0 40px rgba(0,229,255,0.2)}}
-    @keyframes drift{0%{transform:translateX(0)}50%{transform:translateX(6px)}100%{transform:translateX(0)}}
-    @keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    .animate-in{animation:fadeUp 0.6s ease-out both;}
+    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+    @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
 
-    /* NAV */
-    nav{
-      position:fixed;top:0;left:0;right:0;z-index:200;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:12px 32px;background:rgba(4,4,10,0.9);backdrop-filter:blur(24px);
-      border-bottom:1px solid var(--glass-b);
-    }
-    .nav-l{display:flex;align-items:center;gap:12px;}
-    .nav-mark{
-      width:36px;height:36px;border-radius:8px;
-      background:linear-gradient(135deg,var(--coral),var(--gold));
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;font-size:12px;color:#000;
-      box-shadow:0 0 16px rgba(255,123,84,0.25);
-    }
-    .nav-t{font-size:15px;font-weight:700;letter-spacing:-0.5px;}
-    .nav-tag{font-size:9px;font-family:var(--m);color:var(--coral);letter-spacing:1px;}
-    .nav-r{display:flex;gap:16px;align-items:center;}
-    .nav-r a{font-size:11px;color:var(--sub);text-decoration:none;font-weight:500;transition:color 0.3s;}
-    .nav-r a:hover{color:var(--cyan);}
-    .nav-btn{
-      padding:7px 18px;border-radius:8px;border:1px solid var(--glass-b);
-      background:var(--glass);color:var(--text);font-family:var(--m);font-size:10px;
-      font-weight:600;cursor:pointer;transition:all 0.3s;text-transform:uppercase;letter-spacing:1px;
-    }
-    .nav-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-    @media(max-width:900px){.nav-r a{display:none;}}
+    /* FULL VIEWPORT LAYOUT */
+    .game-viewport{width:100vw;height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;}
 
-    /* GAME CONTAINER — FULL VIEWPORT */
-    .game-viewport{
-      width:100%;height:100vh;display:flex;flex-direction:column;
-      padding-top:60px;position:relative;
-      background:radial-gradient(ellipse at 40% 20%,rgba(123,97,255,0.03),transparent 50%),
-                 radial-gradient(ellipse at 70% 80%,rgba(255,123,84,0.02),transparent 50%);
-    }
-
-    /* HUD BAR */
+    /* TOP HUD */
     .hud{
       display:flex;align-items:center;justify-content:space-between;
-      padding:10px 24px;background:rgba(4,4,10,0.8);backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--glass-b);flex-shrink:0;
+      padding:8px 20px;background:rgba(4,4,10,0.85);backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--glass-b);flex-shrink:0;z-index:10;
     }
-    .hud-stats{display:flex;gap:24px;align-items:center;}
+    .hud-stats{display:flex;gap:20px;align-items:center;}
     .hud-s{text-align:center;}
-    .hud-v{font-size:18px;font-weight:800;letter-spacing:-0.5px;}
+    .hud-v{font-size:16px;font-weight:800;letter-spacing:-0.5px;}
     .hud-l{font-size:7px;font-family:var(--m);color:var(--dim);text-transform:uppercase;letter-spacing:1.5px;}
-    .hud-governance{display:flex;gap:8px;align-items:center;}
+    .hud-governance{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
     .hud-badge{
-      padding:4px 10px;border-radius:6px;font-size:8px;font-family:var(--m);
+      padding:3px 8px;border-radius:5px;font-size:7px;font-family:var(--m);
       font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
     }
 
+    /* SOLSTICE LIGHT METER */
+    .light-meter{
+      display:flex;align-items:center;gap:8px;
+      padding:4px 12px;border-radius:8px;
+      background:rgba(255,255,255,0.03);border:1px solid var(--glass-b);
+    }
+    .light-bar-wrap{width:100px;height:8px;border-radius:4px;background:rgba(0,0,0,0.5);overflow:hidden;position:relative;}
+    .light-bar{height:100%;border-radius:4px;transition:width 0.3s ease, background 0.5s ease;width:0%;}
+    .light-label{font-size:7px;font-family:var(--m);font-weight:600;letter-spacing:1px;}
+
+    /* TURING STATE HUD */
+    .turing-hud{
+      position:absolute;top:56px;right:12px;z-index:20;
+      background:rgba(4,4,10,0.9);backdrop-filter:blur(16px);
+      border:1px solid var(--glass-b);border-radius:10px;
+      padding:8px 12px;min-width:200px;
+      font-family:var(--m);font-size:8px;
+    }
+    .turing-title{color:var(--gold);font-weight:700;font-size:9px;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+    .turing-states{display:flex;gap:3px;margin-bottom:4px;flex-wrap:wrap;}
+    .turing-state{
+      padding:2px 5px;border-radius:3px;font-size:7px;font-weight:600;
+      border:1px solid transparent;transition:all 0.3s;
+    }
+    .turing-state.active{border-color:var(--gold);color:var(--gold);background:rgba(255,215,0,0.1);}
+    .turing-state.passed{color:var(--emerald);border-color:rgba(0,212,170,0.3);background:rgba(0,212,170,0.05);}
+    .turing-state.inactive{color:var(--dim);border-color:var(--glass-b);}
+    .turing-log{color:var(--sub);line-height:1.4;max-height:48px;overflow:hidden;}
+
     /* GAME CANVAS */
-    .game-main{flex:1;display:flex;position:relative;overflow:hidden;}
+    .game-main{flex:1;position:relative;overflow:hidden;}
     #gameCanvas{width:100%;height:100%;display:block;cursor:none;}
 
-    /* GAME OVERLAY UI */
+    /* OVERLAYS */
     .game-overlay{
       position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      z-index:50;pointer-events:none;
+      z-index:50;pointer-events:none;opacity:0;visibility:hidden;
+      transition:opacity 0.4s ease, visibility 0.4s ease;
     }
-    .game-overlay.active{pointer-events:auto;background:rgba(4,4,10,0.85);backdrop-filter:blur(12px);}
+    .game-overlay.active{pointer-events:auto;opacity:1;visibility:visible;background:rgba(4,4,10,0.88);backdrop-filter:blur(16px);}
     .start-panel{
-      background:var(--glass);border:1px solid var(--glass-b);border-radius:24px;
-      padding:48px 40px;text-align:center;max-width:500px;width:90%;
-      animation:fadeUp 0.5s ease-out;backdrop-filter:blur(20px);
+      background:rgba(255,255,255,0.03);border:1px solid var(--glass-b);border-radius:24px;
+      padding:48px 40px;text-align:center;max-width:540px;width:92%;
+      animation:fadeUp 0.6s ease-out;backdrop-filter:blur(24px);
     }
     .start-panel h2{
-      font-size:32px;font-weight:900;letter-spacing:-1.5px;margin-bottom:8px;
-      background:linear-gradient(135deg,#fff,var(--coral),var(--gold));
+      font-size:36px;font-weight:900;letter-spacing:-1.5px;margin-bottom:4px;
+      background:linear-gradient(135deg,#fff,var(--sun),var(--gold));
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;
     }
-    .start-panel .sub{font-size:13px;color:var(--sub);margin-bottom:24px;line-height:1.6;}
+    .start-sub{font-size:14px;color:var(--sub);margin-bottom:6px;font-weight:300;}
+    .start-narrative{
+      font-size:12px;color:var(--dim);margin:16px 0 24px;line-height:1.7;
+      font-style:italic;padding:12px 16px;border-left:2px solid var(--sun);
+      text-align:left;background:rgba(255,179,71,0.03);border-radius:0 8px 8px 0;
+    }
     .start-btn{
-      padding:14px 40px;border-radius:12px;border:none;cursor:pointer;
-      background:linear-gradient(135deg,var(--coral),var(--gold));
+      padding:14px 44px;border-radius:12px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--sun),var(--gold));
       color:#000;font-family:var(--f);font-size:16px;font-weight:800;
-      transition:all 0.3s;box-shadow:0 4px 24px rgba(255,123,84,0.3);
+      transition:all 0.3s;box-shadow:0 4px 24px rgba(255,179,71,0.3);
       letter-spacing:-0.5px;
     }
-    .start-btn:hover{transform:scale(1.05);box-shadow:0 8px 32px rgba(255,123,84,0.4);}
+    .start-btn:hover{transform:scale(1.05);box-shadow:0 8px 36px rgba(255,179,71,0.5);}
     .governance-tag{
-      margin-top:20px;font-size:9px;font-family:var(--m);color:var(--dim);
+      margin-top:20px;font-size:8px;font-family:var(--m);color:var(--dim);
       letter-spacing:1px;line-height:1.8;
     }
+    .jam-badge{
+      display:inline-block;padding:4px 12px;border-radius:6px;
+      background:linear-gradient(135deg,rgba(255,179,71,0.1),rgba(255,215,0,0.1));
+      border:1px solid rgba(255,215,0,0.2);color:var(--gold);
+      font-size:9px;font-family:var(--m);font-weight:700;letter-spacing:1px;margin-bottom:16px;
+    }
 
-    /* BOTTOM CONTROL BAR */
-    .control-bar{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:8px 24px;background:rgba(4,4,10,0.9);backdrop-filter:blur(16px);
-      border-top:1px solid var(--glass-b);flex-shrink:0;
-    }
-    .cb-left{display:flex;gap:12px;align-items:center;}
-    .cb-btn{
-      padding:6px 16px;border-radius:6px;border:1px solid var(--glass-b);
-      background:var(--glass);color:var(--text);font-family:var(--m);
-      font-size:9px;font-weight:600;cursor:pointer;transition:all 0.3s;
-      text-transform:uppercase;letter-spacing:0.8px;
-    }
-    .cb-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-    .cb-btn.active-btn{border-color:var(--emerald);color:var(--emerald);background:rgba(0,212,170,0.05);}
-    .cb-center{font-size:9px;font-family:var(--m);color:var(--dim);text-align:center;}
-    .cb-right{display:flex;gap:8px;align-items:center;}
-    .rtc-indicator{
-      display:flex;align-items:center;gap:6px;padding:4px 12px;border-radius:6px;
-      background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.1);
-    }
-    .rtc-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
-    .rtc-label{font-size:8px;font-family:var(--m);color:var(--gold);font-weight:600;letter-spacing:0.5px;}
-
-    /* GAME OVER PANEL */
+    /* GAME OVER */
     .gameover-panel{
-      background:var(--glass);border:1px solid var(--glass-b);border-radius:24px;
-      padding:40px;text-align:center;max-width:520px;width:90%;
-      animation:fadeUp 0.5s ease-out;backdrop-filter:blur(20px);
+      background:rgba(255,255,255,0.03);border:1px solid var(--glass-b);border-radius:24px;
+      padding:40px;text-align:center;max-width:560px;width:92%;
+      animation:fadeUp 0.5s ease-out;backdrop-filter:blur(24px);
     }
     .gameover-panel h2{font-size:28px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;}
     .score-display{
-      font-size:52px;font-weight:900;letter-spacing:-2px;
-      background:linear-gradient(135deg,var(--gold),var(--coral));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      margin:12px 0;
+      font-size:56px;font-weight:900;letter-spacing:-2px;
+      background:linear-gradient(135deg,var(--gold),var(--sun));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:12px 0;
     }
-    .stats-grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0;
-    }
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:16px 0;}
     .stat-card{
       background:rgba(255,255,255,0.02);border:1px solid var(--glass-b);
-      border-radius:10px;padding:12px;
+      border-radius:10px;padding:10px;
     }
-    .stat-val{font-size:18px;font-weight:800;}
-    .stat-lbl{font-size:8px;font-family:var(--m);color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+    .stat-val{font-size:16px;font-weight:800;}
+    .stat-lbl{font-size:7px;font-family:var(--m);color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
 
-    /* RTC DECISION LOG */
+    /* BOTTOM BAR */
+    .control-bar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:6px 20px;background:rgba(4,4,10,0.9);backdrop-filter:blur(16px);
+      border-top:1px solid var(--glass-b);flex-shrink:0;z-index:10;
+    }
+    .cb-left{display:flex;gap:10px;align-items:center;}
+    .cb-btn{
+      padding:5px 14px;border-radius:6px;border:1px solid var(--glass-b);
+      background:var(--glass);color:var(--text);font-family:var(--m);
+      font-size:8px;font-weight:600;cursor:pointer;transition:all 0.3s;
+      text-transform:uppercase;letter-spacing:0.8px;
+    }
+    .cb-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+    .cb-center{font-size:8px;font-family:var(--m);color:var(--dim);text-align:center;}
+    .rtc-indicator{
+      display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:5px;
+      background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.1);
+    }
+    .rtc-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+    .rtc-label{font-size:7px;font-family:var(--m);color:var(--gold);font-weight:600;letter-spacing:0.5px;}
+
+    /* RTC PANEL */
     .rtc-panel{
-      position:fixed;right:0;top:60px;bottom:0;width:320px;z-index:100;
+      position:fixed;right:0;top:0;bottom:0;width:300px;z-index:100;
       background:rgba(4,4,10,0.95);backdrop-filter:blur(24px);
       border-left:1px solid var(--glass-b);transform:translateX(100%);
       transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
       display:flex;flex-direction:column;
     }
     .rtc-panel.open{transform:translateX(0);}
-    .rtc-header{
-      padding:16px 20px;border-bottom:1px solid var(--glass-b);
-      display:flex;align-items:center;justify-content:space-between;
+    .rtc-header{padding:14px 16px;border-bottom:1px solid var(--glass-b);display:flex;align-items:center;justify-content:space-between;}
+    .rtc-title{font-size:12px;font-weight:700;}
+    .rtc-close{background:none;border:none;color:var(--dim);font-size:16px;cursor:pointer;padding:4px 8px;}
+    .rtc-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:6px;}
+    .rtc-entry{background:var(--glass);border:1px solid var(--glass-b);border-radius:8px;padding:8px 10px;animation:fadeUp 0.3s ease-out;}
+    .rtc-e-header{display:flex;align-items:center;gap:6px;margin-bottom:3px;}
+    .rtc-e-icon{font-size:12px;}
+    .rtc-e-name{font-size:10px;font-weight:700;}
+    .rtc-e-tag{font-size:6px;font-family:var(--m);padding:2px 5px;border-radius:3px;font-weight:600;}
+    .rtc-e-body{font-size:9px;color:var(--sub);line-height:1.5;font-family:var(--m);}
+
+    @media(max-width:700px){
+      .hud-governance{display:none;}
+      .turing-hud{display:none;}
+      .stats-grid{grid-template-columns:repeat(2,1fr);}
+      .light-meter{display:none;}
     }
-    .rtc-title{font-size:13px;font-weight:700;}
-    .rtc-close{background:none;border:none;color:var(--dim);font-size:16px;cursor:pointer;}
-    .rtc-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;}
-    .rtc-entry{
-      background:var(--glass);border:1px solid var(--glass-b);border-radius:10px;
-      padding:10px 14px;animation:fadeUp 0.3s ease-out;
-    }
-    .rtc-e-header{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
-    .rtc-e-icon{font-size:14px;}
-    .rtc-e-name{font-size:11px;font-weight:700;}
-    .rtc-e-tag{font-size:7px;font-family:var(--m);padding:2px 6px;border-radius:4px;font-weight:600;}
-    .rtc-e-body{font-size:10px;color:var(--sub);line-height:1.5;font-family:var(--m);}
   </style>
 </head>
 <body>
-  <!-- NAV -->
-  <nav>
-    <div class="nav-l">
-      <div class="nav-mark">SS</div>
-      <div>
-        <div class="nav-t">Starfall Salvage</div>
-        <div class="nav-tag">BMP GOVERNED · UFCP OPERATIONAL</div>
-      </div>
-    </div>
-    <div class="nav-r">
-      <a href="../">Home</a>
-      <a href="../protocols/">Protocols</a>
-      <a href="../flows/">Flows</a>
-      <a href="../admin/">Dashboard</a>
-      <button class="nav-btn" id="rtcToggle" onclick="toggleRTC()">RTC LOG</button>
-    </div>
-  </nav>
-
-  <!-- GAME VIEWPORT -->
   <div class="game-viewport">
     <!-- HUD -->
     <div class="hud">
@@ -214,49 +199,83 @@
         <div class="hud-s"><div class="hud-v" style="color:var(--cyan)" id="hudCombo">x1</div><div class="hud-l">Combo</div></div>
         <div class="hud-s"><div class="hud-v" style="color:var(--rose)" id="hudHP">3</div><div class="hud-l">Hull</div></div>
         <div class="hud-s"><div class="hud-v" style="color:var(--purple)" id="hudWave">1</div><div class="hud-l">Wave</div></div>
-        <div class="hud-s"><div class="hud-v" style="color:var(--coral)" id="hudTime">0:00</div><div class="hud-l">Time</div></div>
+        <div class="hud-s"><div class="hud-v" style="color:var(--sun)" id="hudTime">0:00</div><div class="hud-l">Time</div></div>
+      </div>
+      <div class="light-meter">
+        <span class="light-label" style="color:var(--dim);">🌑</span>
+        <div class="light-bar-wrap">
+          <div class="light-bar" id="lightBar" style="width:0%;background:linear-gradient(90deg,var(--dusk),var(--sun));"></div>
+        </div>
+        <span class="light-label" style="color:var(--sun);">☀️</span>
+        <span class="light-label" id="lightPct" style="color:var(--gold);">0%</span>
       </div>
       <div class="hud-governance">
-        <span class="hud-badge" style="background:rgba(0,229,255,0.08);color:var(--cyan);border:1px solid rgba(0,229,255,0.15);">BMP</span>
-        <span class="hud-badge" style="background:rgba(0,212,170,0.08);color:var(--emerald);border:1px solid rgba(0,212,170,0.15);">SWFUS</span>
-        <span class="hud-badge" style="background:rgba(255,215,0,0.08);color:var(--gold);border:1px solid rgba(255,215,0,0.15);">WWJD</span>
-        <span class="hud-badge" style="background:rgba(123,97,255,0.08);color:var(--purple);border:1px solid rgba(123,97,255,0.15);" id="hudUFCP">UFCP</span>
+        <span class="hud-badge" style="background:rgba(255,179,71,0.08);color:var(--sun);border:1px solid rgba(255,179,71,0.15);">SOLSTICE</span>
+        <span class="hud-badge" style="background:rgba(0,212,170,0.08);color:var(--emerald);border:1px solid rgba(0,212,170,0.15);">POC</span>
+        <span class="hud-badge" style="background:rgba(233,69,96,0.08);color:var(--rose);border:1px solid rgba(233,69,96,0.15);">FOC</span>
+        <span class="hud-badge" style="background:rgba(255,215,0,0.08);color:var(--gold);border:1px solid rgba(255,215,0,0.15);" id="hudState">WWJD</span>
+        <button class="cb-btn" onclick="toggleRTC()" style="font-size:7px;padding:3px 8px;">RTC LOG</button>
       </div>
     </div>
 
-    <!-- GAME CANVAS -->
+    <!-- TURING STATE MACHINE HUD -->
+    <div class="turing-hud" id="turingHud">
+      <div class="turing-title">⚙️ TURING STATE MACHINE <span style="color:var(--dim);font-weight:400;">— signal pipeline</span></div>
+      <div class="turing-states" id="turingStates">
+        <span class="turing-state inactive" id="ts-raw">RAW</span>
+        <span style="color:var(--dim);font-size:6px;">→</span>
+        <span class="turing-state inactive" id="ts-bracket">BRACKET</span>
+        <span style="color:var(--dim);font-size:6px;">→</span>
+        <span class="turing-state inactive" id="ts-ingress">INGRESS</span>
+        <span style="color:var(--dim);font-size:6px;">→</span>
+        <span class="turing-state inactive" id="ts-test">TEST</span>
+        <span style="color:var(--dim);font-size:6px;">→</span>
+        <span class="turing-state inactive" id="ts-seal">SEAL</span>
+      </div>
+      <div class="turing-log" id="turingLog" style="color:var(--dim);font-size:7px;">Awaiting signal...</div>
+    </div>
+
+    <!-- CANVAS -->
     <div class="game-main">
       <canvas id="gameCanvas"></canvas>
-      <!-- START OVERLAY -->
+      <!-- START -->
       <div class="game-overlay active" id="startOverlay">
         <div class="start-panel">
-          <div style="font-size:48px;margin-bottom:12px;">🌠</div>
+          <div class="jam-badge">☀️ DEV.TO JUNE SOLSTICE GAME JAM 2026</div>
+          <div style="font-size:52px;margin-bottom:8px;">🌠</div>
           <h2>Starfall Salvage</h2>
-          <p class="sub">Navigate the debris field. Collect salvage minerals. Build your portfolio. Each mineral teaches a financial concept — <strong style="color:var(--gold)">entertainment IS the pipeline.</strong></p>
-          <button class="start-btn" onclick="startGame()">LAUNCH SALVAGE RUN</button>
+          <div class="start-sub">Solstice Edition — Salvaging Light from Darkness</div>
+          <div class="start-narrative">
+            <strong>June 21. The shortest day of the year.</strong><br><br>
+            In Cape Town, South Africa, the winter solstice arrives. A 28-year-old man — classified by the state as unemployed — navigates the debris field of a broken system. 32.8% of his generation sits in the dark.<br><br>
+            But darkness is not permanent. It is a <strong style="color:var(--sun);">turning point</strong>.<br><br>
+            Salvage the <span style="color:var(--gold);">golden POC debris</span> to bring light back. Avoid the <span style="color:var(--rose);">red FOC debris</span> that deepens the dark. Each salvage is a state transition in a Turing machine — from RAW to SEALED.<br><br>
+            <strong>The solstice is not the end of darkness. It is the proof that light returns.</strong>
+          </div>
+          <button class="start-btn" onclick="startGame()">SALVAGE THE LIGHT</button>
           <div class="governance-tag">
-            BMP GOVERNED · UFCP OPERATIONAL · RTC DECISION ENGINE<br>
-            [(BMP + CBP + UFCP) / KPGS(MAO + MMAO)] * UBP<br>
-            WWJD FIREWALL · NO DARK PATTERNS · GARDEN OF EDEN PROTOCOL
+            KPGS GOVERNED · WWJD FIREWALL · NO DARK PATTERNS<br>
+            BUILT WITH ANTIGRAVITY (GOOGLE AI) · KOPANO LABS © 2026<br>
+            TURING STATE MACHINE · POC/FOC ENFORCER · IIDP FILTER
           </div>
         </div>
       </div>
-      <!-- GAME OVER OVERLAY -->
+      <!-- GAME OVER -->
       <div class="game-overlay" id="gameOverOverlay">
         <div class="gameover-panel" id="gameOverPanel"></div>
       </div>
     </div>
 
-    <!-- CONTROLS BAR -->
+    <!-- BOTTOM BAR -->
     <div class="control-bar">
       <div class="cb-left">
-        <span style="font-size:9px;font-family:var(--m);color:var(--dim);">WASD/Arrows to move</span>
+        <span style="font-size:8px;font-family:var(--m);color:var(--dim);">WASD/Arrows · Touch</span>
         <button class="cb-btn" onclick="startGame()">RESTART</button>
       </div>
       <div class="cb-center">
-        <span style="color:var(--coral);font-weight:600;">STARFALL SALVAGE</span> · BMP + CBP + UFCP · Kopano Labs &copy; 2026
+        <span style="color:var(--sun);font-weight:600;">STARFALL SALVAGE</span> · Solstice Edition · <span style="color:var(--gold);">Kopano Labs</span> © 2026
       </div>
-      <div class="cb-right">
+      <div style="display:flex;gap:6px;align-items:center;">
         <div class="rtc-indicator">
           <div class="rtc-dot"></div>
           <span class="rtc-label">RTC LIVE</span>
@@ -265,62 +284,84 @@
     </div>
   </div>
 
-  <!-- RTC DECISION PANEL -->
+  <!-- RTC PANEL -->
   <div class="rtc-panel" id="rtcPanel">
     <div class="rtc-header">
-      <div class="rtc-title" style="color:var(--gold);">Round Table Council Log</div>
-      <button class="rtc-close" onclick="toggleRTC()">x</button>
+      <div class="rtc-title" style="color:var(--gold);">⚔️ Round Table Council</div>
+      <button class="rtc-close" onclick="toggleRTC()">✕</button>
     </div>
     <div class="rtc-log" id="rtcLog"></div>
   </div>
 
   <script>
-  // ════════════════════════════════════════════
-  // STARFALL SALVAGE — VC-GRADE GAME ENGINE
-  // BMP + CBP + UFCP GOVERNED
-  // ════════════════════════════════════════════
+  // ════════════════════════════════════════════════════════════
+  // STARFALL SALVAGE — SOLSTICE EDITION
+  // Built with Antigravity (Google AI) for DEV.to Game Jam
+  // KPGS Governed · Turing State Machine · POC/FOC Enforcer
+  // ════════════════════════════════════════════════════════════
 
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
 
-  // ── STATE ──
+  // ── GAME STATE ──
   let G = {
     running: false, paused: false, over: false,
     score: 0, salvaged: 0, combo: 1, maxCombo: 1,
-    hp: 3, maxHP: 3, wave: 1, time: 0, startTime: 0,
+    hp: 3, maxHP: 3, wave: 1, time: 0,
+    // SOLSTICE MECHANIC
+    light: 0,          // 0 = total darkness, 100 = full solstice light
+    pocCollected: 0,   // POC debris salvaged
+    focHits: 0,        // FOC debris that hit player
+    totalTransitions: 0, // Turing state transitions
     ship: { x: 0, y: 0, w: 28, h: 28, speed: 6, trail: [] },
     debris: [], salvage: [], particles: [], stars: [],
-    explosions: [], powerups: [],
-    mouseX: 0, mouseY: 0, keys: {},
+    keys: {},
     shakeX: 0, shakeY: 0, shakeTime: 0,
     waveTimer: 0, waveInterval: 900,
-    rtcLog: [],
-    bmpCycle: 0
+    rtcLog: [], bmpCycle: 0,
+    // Turing state machine for current signal
+    turingState: 'idle',
+    turingQueue: [],
+    turingTimer: 0,
   };
 
   // ── RTC COUNCIL ──
   const RTC = [
-    { icon:'👁', name:'KC', role:'Save|Watch', color:'#ffd700' },
-    { icon:'⚡', name:'Cassy', role:'Execute', color:'#00d4aa' },
-    { icon:'📚', name:'Cassey', role:'Teacher', color:'#7b61ff' },
+    { icon:'🔬', name:'KC', role:'Observer', color:'#ffd700' },
+    { icon:'👩🏿‍🎨', name:'CASSEY', role:'Teacher', color:'#7b61ff' },
+    { icon:'👨🏿‍💻', name:'CASSIE', role:'Builder', color:'#00d4aa' },
+    { icon:'👨🏾‍🔧', name:'KESSA', role:'Protocol', color:'#ff7b54' },
+    { icon:'🎭', name:'YASSIE', role:'Culture', color:'#ff69b4' },
+    { icon:'🦸🏿‍♂️', name:'APEX', role:'Strategy', color:'#ff7b54' },
     { icon:'🧵', name:'THARI', role:'Guardian', color:'#00ffcc' },
     { icon:'🦉', name:'KHELOS', role:'Firewall', color:'#e94560' },
-    { icon:'🦸🏿', name:'APEX', role:'Orchestrator', color:'#ff7b54' },
-    { icon:'🛡', name:'ANCHOR', role:'Perimeter', color:'#00aaff' },
-    { icon:'🌀', name:'ANTIGRAVITY', role:'CF', color:'#a78bfa' },
-    { icon:'🎭', name:'YASSIE', role:'Anime Head', color:'#ff69b4' },
-    { icon:'👤', name:'KESSA', role:'Prodigal Son', color:'#ffd700' },
+    { icon:'🛡️', name:'ANCHOR', role:'Perimeter', color:'#00aaff' },
+    { icon:'🌀', name:'AG', role:'CF', color:'#a78bfa' },
   ];
 
-  // ── MINERAL TYPES (Financial concepts) ──
-  const MINERALS = [
-    { sym:'Au', name:'Gold', value:10, color:'#ffd700', concept:'Store of value — hedge against inflation', glow:'rgba(255,215,0,0.3)' },
-    { sym:'Li', name:'Lithium', value:5, color:'#00e5ff', concept:'Growth commodity — EV revolution', glow:'rgba(0,229,255,0.3)' },
-    { sym:'Pt', name:'Platinum', value:15, color:'#c0c0d0', concept:'Industrial catalyst — supply scarcity', glow:'rgba(192,192,208,0.3)' },
-    { sym:'Di', name:'Diamond', value:25, color:'#ff7bff', concept:'Concentrated value — portable wealth', glow:'rgba(255,123,255,0.3)' },
-    { sym:'Rh', name:'Rhodium', value:30, color:'#ff5555', concept:'Rare earth — asymmetric leverage', glow:'rgba(255,85,85,0.3)' },
-    { sym:'Ir', name:'Iridium', value:50, color:'#00ffaa', concept:'Ultra-rare — scarcity premium', glow:'rgba(0,255,170,0.3)' },
+  // ── POC SALVAGE — Light-bearing minerals ──
+  const POC_MINERALS = [
+    { sym:'☀️', name:'Sunlight', value:10, color:'#ffd700', concept:'Invariant — 1 lux is 1 lux anywhere', glow:'rgba(255,215,0,0.4)', type:'poc' },
+    { sym:'⏰', name:'Time', value:8, color:'#ffb347', concept:'Invariant — 1 second is 1 second everywhere', glow:'rgba(255,179,71,0.4)', type:'poc' },
+    { sym:'⛪', name:'Truth', value:15, color:'#fff5cc', concept:'Invariant — the same yesterday, today, forever', glow:'rgba(255,245,204,0.4)', type:'poc' },
+    { sym:'🎓', name:'KPGS', value:12, color:'#ffeaa7', concept:'Invariant — BMP is BMP on any device', glow:'rgba(255,234,167,0.4)', type:'poc' },
+    { sym:'🌍', name:'Reality', value:20, color:'#fdcb6e', concept:'Invariant — gravity pulls the same on all', glow:'rgba(253,203,110,0.4)', type:'poc' },
+    { sym:'💛', name:'Dignity', value:25, color:'#f9ca24', concept:'Invariant — every human has worth', glow:'rgba(249,202,36,0.4)', type:'poc' },
   ];
+
+  // ── FOC DEBRIS — Darkness-carrying fragments ──
+  const FOC_DEBRIS = [
+    { sym:'💰', name:'Money', concept:'Variant — changes value, can be stolen', color:'#e94560' },
+    { sym:'😔', name:'Depression', concept:'Variant — lies about permanence', color:'#c0392b' },
+    { sym:'👜', name:'Gucci', concept:'Variant — borrows dignity from a brand', color:'#e74c3c' },
+    { sym:'🎤', name:'Trap', concept:'Variant — beautiful music, bankrupt theology', color:'#d63031' },
+    { sym:'🌿', name:'Weed', concept:'Variant — load-shedding for the soul', color:'#b71540' },
+    { sym:'🔥', name:'Lust', concept:'Variant — consumes without producing', color:'#e55039' },
+  ];
+
+  // ── TURING STATES ──
+  const TURING_STATES = ['RAW','BRACKET','INGRESS','TEST','SEAL'];
+  const TURING_IDS = ['ts-raw','ts-bracket','ts-ingress','ts-test','ts-seal'];
 
   // ── RESIZE ──
   function resize() {
@@ -335,12 +376,12 @@
   // ── STARS ──
   function initStars() {
     G.stars = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 250; i++) {
       G.stars.push({
         x: Math.random()*canvas.width, y: Math.random()*canvas.height,
-        r: Math.random()*1.4+0.2, speed: Math.random()*1.5+0.3,
-        alpha: Math.random()*0.6+0.2,
-        color: ['#fff','#7b61ff','#00e5ff','#ffd700','#ff7b54'][Math.floor(Math.random()*5)]
+        r: Math.random()*1.5+0.2, speed: Math.random()*1.5+0.3,
+        alpha: Math.random()*0.7+0.15,
+        color: ['#fff','#ffd700','#ffb347','#fff5cc','#ffeaa7'][Math.floor(Math.random()*5)]
       });
     }
   }
@@ -349,33 +390,90 @@
   // ── INPUT ──
   document.addEventListener('keydown', e => { G.keys[e.key.toLowerCase()] = true; });
   document.addEventListener('keyup', e => { G.keys[e.key.toLowerCase()] = false; });
-  canvas.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    G.mouseX = e.clientX - r.left; G.mouseY = e.clientY - r.top;
-  });
 
-  // ── SPAWN ──
-  function spawnDebris() {
-    const rate = 0.02 + G.wave * 0.005;
+  // Touch controls
+  let touchX = null, touchY = null;
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    const r = canvas.getBoundingClientRect();
+    touchX = t.clientX - r.left; touchY = t.clientY - r.top;
+  }, {passive:false});
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    const r = canvas.getBoundingClientRect();
+    touchX = t.clientX - r.left; touchY = t.clientY - r.top;
+  }, {passive:false});
+  canvas.addEventListener('touchend', () => { touchX = null; touchY = null; });
+
+  // ── TURING STATE MACHINE ANIMATION ──
+  function runTuringTransition(signalType, signalName) {
+    G.totalTransitions++;
+    const states = [...TURING_IDS];
+    let step = 0;
+    const verdict = signalType === 'poc' ? 'POC_SEALED ✅' : 'FOC_DECLINED ❌';
+    const verdictColor = signalType === 'poc' ? 'var(--emerald)' : 'var(--rose)';
+
+    function tick() {
+      // Reset all
+      states.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = 'turing-state inactive';
+      });
+      // Mark passed
+      for (let i = 0; i < step; i++) {
+        const el = document.getElementById(states[i]);
+        if (el) el.className = 'turing-state passed';
+      }
+      // Mark active
+      if (step < states.length) {
+        const el = document.getElementById(states[step]);
+        if (el) el.className = 'turing-state active';
+        const logEl = document.getElementById('turingLog');
+        const labels = ['Sensing raw signal...','Bracketing with CBP...','Ingress source check...','Invariance testing...','Sealing verdict...'];
+        if (logEl) logEl.innerHTML = `<span style="color:var(--cyan)">${signalName}</span> → ${labels[step]}`;
+        step++;
+        setTimeout(tick, 180);
+      } else {
+        const logEl = document.getElementById('turingLog');
+        if (logEl) logEl.innerHTML = `<span style="color:${verdictColor}">${verdict}</span> | ${signalName} | transitions: ${G.totalTransitions}`;
+        // Mark last as done
+        setTimeout(() => {
+          states.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.className = 'turing-state passed';
+          });
+        }, 300);
+      }
+    }
+    tick();
+  }
+
+  // ── SPAWN POC SALVAGE ──
+  function spawnPOC() {
+    const rate = 0.015 + G.wave * 0.002;
     if (Math.random() < rate) {
-      const size = 10 + Math.random()*18;
-      G.debris.push({
-        x: Math.random()*(canvas.width-size), y: -size-10,
-        w: size, h: size, speed: 1.5+Math.random()*2+G.wave*0.3,
-        rot: Math.random()*Math.PI*2, rotSpeed: (Math.random()-0.5)*0.06,
-        type: Math.random() < 0.3 ? 'metal' : 'rock'
+      const m = POC_MINERALS[Math.floor(Math.random()*Math.min(POC_MINERALS.length, 2+G.wave))];
+      G.salvage.push({
+        x: Math.random()*(canvas.width-20), y: -20,
+        w: 18, h: 18, speed: 1+Math.random()*1.2,
+        ...m, pulse: Math.random()*Math.PI*2, collected: false
       });
     }
   }
 
-  function spawnSalvage() {
-    const rate = 0.012 + G.wave * 0.002;
+  // ── SPAWN FOC DEBRIS ──
+  function spawnFOC() {
+    const rate = 0.02 + G.wave * 0.005;
     if (Math.random() < rate) {
-      const m = MINERALS[Math.floor(Math.random()*Math.min(MINERALS.length, 2+G.wave))];
-      G.salvage.push({
-        x: Math.random()*(canvas.width-20), y: -20,
-        w: 16, h: 16, speed: 1+Math.random()*1.2,
-        ...m, pulse: Math.random()*Math.PI*2, collected: false
+      const f = FOC_DEBRIS[Math.floor(Math.random()*FOC_DEBRIS.length)];
+      const size = 12 + Math.random()*14;
+      G.debris.push({
+        x: Math.random()*(canvas.width-size), y: -size-10,
+        w: size, h: size, speed: 1.8+Math.random()*2+G.wave*0.3,
+        rot: Math.random()*Math.PI*2, rotSpeed: (Math.random()-0.5)*0.08,
+        ...f
       });
     }
   }
@@ -387,54 +485,49 @@
       const spd = 1+Math.random()*(spread||4);
       G.particles.push({
         x, y, vx: Math.cos(angle)*spd, vy: Math.sin(angle)*spd,
-        r: Math.random()*3+1, life: 1, decay: 0.015+Math.random()*0.02,
-        color
+        r: Math.random()*3+1, life: 1, decay: 0.015+Math.random()*0.02, color
       });
     }
   }
 
-  function screenShake(intensity, dur) {
-    G.shakeTime = dur || 10;
-    G.shakeX = intensity; G.shakeY = intensity;
-  }
+  function screenShake(intensity, dur) { G.shakeTime = dur || 10; G.shakeX = intensity; G.shakeY = intensity; }
 
-  // ── RTC LOGGING ──
+  // ── RTC ──
   function rtcDecision(agentIdx, message, type) {
     const a = RTC[agentIdx % RTC.length];
-    const entry = { icon:a.icon, name:a.name, role:a.role, color:a.color, message, type, time:formatTime(G.time) };
-    G.rtcLog.unshift(entry);
+    G.rtcLog.unshift({ icon:a.icon, name:a.name, role:a.role, color:a.color, message, type, time:formatTime(G.time) });
     if (G.rtcLog.length > 30) G.rtcLog.length = 30;
     renderRTCLog();
   }
-
   function renderRTCLog() {
     const el = document.getElementById('rtcLog');
     el.innerHTML = G.rtcLog.map(e => {
-      const tagColor = e.type==='proceed'?'rgba(0,212,170,0.15)':e.type==='sever'?'rgba(233,69,96,0.15)':'rgba(255,215,0,0.15)';
-      const tagText = e.type==='proceed'?'var(--emerald)':e.type==='sever'?'var(--rose)':'var(--gold)';
-      return `<div class="rtc-entry">
-        <div class="rtc-e-header">
-          <span class="rtc-e-icon">${e.icon}</span>
-          <span class="rtc-e-name" style="color:${e.color}">${e.name}</span>
-          <span class="rtc-e-tag" style="background:${tagColor};color:${tagText}">${e.type.toUpperCase()}</span>
-          <span style="margin-left:auto;font-size:8px;font-family:var(--m);color:var(--dim)">${e.time}</span>
-        </div>
-        <div class="rtc-e-body">${e.message}</div>
-      </div>`;
+      const tc = e.type==='proceed'?'rgba(0,212,170,0.15)':e.type==='sever'?'rgba(233,69,96,0.15)':'rgba(255,215,0,0.15)';
+      const tt = e.type==='proceed'?'var(--emerald)':e.type==='sever'?'var(--rose)':'var(--gold)';
+      return `<div class="rtc-entry"><div class="rtc-e-header"><span class="rtc-e-icon">${e.icon}</span><span class="rtc-e-name" style="color:${e.color}">${e.name}</span><span class="rtc-e-tag" style="background:${tc};color:${tt}">${e.type.toUpperCase()}</span><span style="margin-left:auto;font-size:7px;font-family:var(--m);color:var(--dim)">${e.time}</span></div><div class="rtc-e-body">${e.message}</div></div>`;
     }).join('');
   }
+  function toggleRTC() { document.getElementById('rtcPanel').classList.toggle('open'); }
+  function formatTime(t) { const m=Math.floor(t/60),s=Math.floor(t%60); return `${m}:${String(s).padStart(2,'0')}`; }
 
-  function toggleRTC() {
-    document.getElementById('rtcPanel').classList.toggle('open');
+  // ── UPDATE LIGHT METER ──
+  function updateLightMeter() {
+    const bar = document.getElementById('lightBar');
+    const pct = document.getElementById('lightPct');
+    const p = Math.min(100, Math.max(0, G.light));
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    // Color transition: dark purple → orange → golden
+    if (p < 33) {
+      bar.style.background = `linear-gradient(90deg, #2d1b69, #4a0e4e)`;
+    } else if (p < 66) {
+      bar.style.background = `linear-gradient(90deg, #4a0e4e, #ff6b6b, #ffb347)`;
+    } else {
+      bar.style.background = `linear-gradient(90deg, #ffb347, #ffd700, #fff5cc)`;
+    }
   }
 
-  // ── TIME ──
-  function formatTime(t) {
-    const m = Math.floor(t/60), s = Math.floor(t%60);
-    return `${m}:${String(s).padStart(2,'0')}`;
-  }
-
-  // ── GAME LOOP ──
+  // ── GAME UPDATE ──
   function update(dt) {
     G.time += dt;
     G.waveTimer++;
@@ -444,11 +537,11 @@
       G.wave++;
       G.waveTimer = 0;
       document.getElementById('hudWave').textContent = G.wave;
-      rtcDecision(5, `Wave ${G.wave} incoming. Debris density +${(G.wave*5)}%. RTC approves escalation.`, 'proceed');
+      rtcDecision(5, `Wave ${G.wave}. FOC density +${G.wave*8}%. The darkness pushes back.`, 'proceed');
       burst(canvas.width/2, 30, '#ffd700', 20, 6);
     }
 
-    // Ship movement
+    // Ship movement — keyboard
     const s = G.ship;
     let dx = 0, dy = 0;
     if (G.keys['arrowleft']||G.keys['a']) dx = -1;
@@ -459,77 +552,96 @@
       const len = Math.sqrt(dx*dx+dy*dy);
       s.x += (dx/len)*s.speed; s.y += (dy/len)*s.speed;
     }
+    // Touch movement
+    if (touchX !== null) {
+      const tdx = touchX - s.x, tdy = touchY - s.y;
+      const tdist = Math.sqrt(tdx*tdx + tdy*tdy);
+      if (tdist > 5) {
+        s.x += (tdx/tdist)*s.speed*1.2;
+        s.y += (tdy/tdist)*s.speed*1.2;
+      }
+    }
     s.x = Math.max(s.w/2, Math.min(canvas.width-s.w/2, s.x));
     s.y = Math.max(s.h/2, Math.min(canvas.height-s.h/2, s.y));
 
-    // Trail
-    s.trail.push({x:s.x, y:s.y+s.h/2, life:1});
-    if (s.trail.length > 20) s.trail.shift();
-    s.trail.forEach(t => t.life -= 0.05);
+    // Trail — color based on light level
+    const trailColor = G.light > 50 ? 'rgba(255,215,0,' : 'rgba(0,229,255,';
+    s.trail.push({x:s.x, y:s.y+s.h/2, life:1, color:trailColor});
+    if (s.trail.length > 25) s.trail.shift();
+    s.trail.forEach(t => t.life -= 0.04);
 
     // Stars
-    G.stars.forEach(st => {
-      st.y += st.speed;
-      if (st.y > canvas.height) { st.y = -2; st.x = Math.random()*canvas.width; }
-    });
+    G.stars.forEach(st => { st.y += st.speed; if (st.y > canvas.height) { st.y = -2; st.x = Math.random()*canvas.width; } });
 
     // Spawn
-    spawnDebris();
-    spawnSalvage();
+    spawnFOC();
+    spawnPOC();
 
-    // Update debris
+    // Update debris (FOC)
     G.debris.forEach(d => { d.y += d.speed; d.rot += d.rotSpeed; });
     G.debris = G.debris.filter(d => d.y < canvas.height+40);
 
-    // Update salvage
+    // Update salvage (POC)
     G.salvage.forEach(sv => { sv.y += sv.speed; sv.pulse += 0.06; });
     G.salvage = G.salvage.filter(sv => sv.y < canvas.height+30 && !sv.collected);
 
-    // Collision — debris
+    // Collision — FOC debris (DARKNESS)
     for (const d of G.debris) {
-      const cx = s.x, cy = s.y, dx2 = d.x+d.w/2, dy2 = d.y+d.h/2;
-      const dist = Math.sqrt((cx-dx2)**2+(cy-dy2)**2);
+      const dist = Math.sqrt((s.x-(d.x+d.w/2))**2+(s.y-(d.y+d.h/2))**2);
       if (dist < (s.w/2 + d.w/2)*0.7) {
         G.hp--;
         G.combo = 1;
+        G.focHits++;
+        G.light = Math.max(0, G.light - 5); // FOC hit REMOVES light
         screenShake(8, 15);
-        burst(cx, cy, '#e94560', 16, 5);
+        burst(s.x, s.y, '#e94560', 16, 5);
         d.y = canvas.height+100;
         document.getElementById('hudHP').textContent = G.hp;
         document.getElementById('hudCombo').textContent = 'x1';
-        rtcDecision(4, `HULL BREACH! HP=${G.hp}. KHELOS FIREWALL: ${G.hp<=1?'CRITICAL':'WARNING'}.`, 'sever');
+        updateLightMeter();
+        rtcDecision(7, `FOC HIT: ${d.sym} ${d.name}! ${d.concept}. Hull=${G.hp}. Light -5%.`, 'sever');
+        runTuringTransition('foc', d.name);
         if (G.hp <= 0) { gameOver(); return; }
       }
     }
 
-    // Collision — salvage
+    // Collision — POC salvage (LIGHT)
     for (const sv of G.salvage) {
       if (sv.collected) continue;
       const dist = Math.sqrt((s.x-(sv.x+sv.w/2))**2+(s.y-(sv.y+sv.h/2))**2);
-      if (dist < (s.w/2 + sv.w/2)*0.85) {
+      if (dist < (s.w/2 + sv.w/2)*0.9) {
         sv.collected = true;
         const pts = sv.value * G.combo;
         G.score += pts;
         G.salvaged++;
+        G.pocCollected++;
         G.combo = Math.min(G.combo+1, 10);
         if (G.combo > G.maxCombo) G.maxCombo = G.combo;
-        burst(sv.x+sv.w/2, sv.y+sv.h/2, sv.color, 10, 4);
+        G.light = Math.min(100, G.light + 2.5); // Each POC salvage ADDS light
+        burst(sv.x+sv.w/2, sv.y+sv.h/2, sv.color, 12, 5);
         document.getElementById('hudScore').textContent = G.score;
         document.getElementById('hudSalvage').textContent = G.salvaged;
         document.getElementById('hudCombo').textContent = 'x'+G.combo;
-        if (G.salvaged % 5 === 0) {
-          const teacher = Math.floor(Math.random()*10);
-          rtcDecision(teacher, `${sv.sym} collected! Concept: ${sv.concept}. Portfolio +${pts} (x${G.combo}).`, 'proceed');
+        updateLightMeter();
+        if (G.salvaged % 4 === 0) {
+          rtcDecision(G.salvaged%10, `POC: ${sv.sym} ${sv.name}! ${sv.concept}. Score +${pts}. Light +2.5%.`, 'proceed');
+        }
+        runTuringTransition('poc', sv.name);
+
+        // SOLSTICE REACHED!
+        if (G.light >= 100 && !G.solsticeReached) {
+          G.solsticeReached = true;
+          rtcDecision(0, `☀️ SOLSTICE REACHED! The shortest day has turned. The light returns. POC VALIDATED.`, 'proceed');
+          burst(canvas.width/2, canvas.height/2, '#ffd700', 40, 8);
+          burst(canvas.width/2, canvas.height/2, '#ffb347', 30, 6);
+          burst(canvas.width/2, canvas.height/2, '#fff5cc', 20, 10);
+          screenShake(4, 20);
         }
       }
     }
 
     // Particles
-    G.particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      p.vx *= 0.98; p.vy *= 0.98;
-      p.life -= p.decay;
-    });
+    G.particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.vx *= 0.98; p.vy *= 0.98; p.life -= p.decay; });
     G.particles = G.particles.filter(p => p.life > 0);
 
     // Shake
@@ -539,15 +651,14 @@
       G.shakeY = (Math.random()-0.5)*G.shakeY*0.9;
     } else { G.shakeX = 0; G.shakeY = 0; }
 
-    // HUD time
+    // HUD
     document.getElementById('hudTime').textContent = formatTime(G.time);
-
-    // BMP cycle visual
-    G.bmpCycle = (G.bmpCycle+1) % 300;
-    const ufcpEl = document.getElementById('hudUFCP');
-    if (G.bmpCycle < 100) ufcpEl.textContent = 'BMP';
-    else if (G.bmpCycle < 200) ufcpEl.textContent = 'CBP';
-    else ufcpEl.textContent = 'UFCP';
+    G.bmpCycle = (G.bmpCycle+1)%300;
+    const stateEl = document.getElementById('hudState');
+    if (G.bmpCycle < 75) stateEl.textContent = 'BMP';
+    else if (G.bmpCycle < 150) stateEl.textContent = 'CBP';
+    else if (G.bmpCycle < 225) stateEl.textContent = 'UFCP';
+    else stateEl.textContent = 'WWJD';
   }
 
   // ── DRAW ──
@@ -556,121 +667,157 @@
     ctx.save();
     ctx.translate(G.shakeX, G.shakeY);
 
-    // BG
-    ctx.fillStyle = '#06060e';
+    // ── DYNAMIC SKY — shifts from dark to light based on G.light ──
+    const lightPct = G.light / 100;
+    // Dark base
+    const r = Math.floor(4 + lightPct * 20);
+    const g = Math.floor(4 + lightPct * 15);
+    const b = Math.floor(14 + lightPct * 30);
+    ctx.fillStyle = `rgb(${r},${g},${b})`;
     ctx.fillRect(0, 0, W, H);
 
-    // Nebula layers
-    const grd = ctx.createRadialGradient(W*0.3, H*0.4, 0, W*0.3, H*0.4, W*0.5);
-    grd.addColorStop(0, 'rgba(123,97,255,0.015)');
-    grd.addColorStop(1, 'transparent');
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, W, H);
-    const grd2 = ctx.createRadialGradient(W*0.7, H*0.6, 0, W*0.7, H*0.6, W*0.4);
-    grd2.addColorStop(0, 'rgba(255,123,84,0.01)');
-    grd2.addColorStop(1, 'transparent');
-    ctx.fillStyle = grd2;
-    ctx.fillRect(0, 0, W, H);
+    // Horizon glow (grows with light)
+    if (lightPct > 0.1) {
+      const hGrad = ctx.createRadialGradient(W*0.5, H, 0, W*0.5, H, H*0.8);
+      hGrad.addColorStop(0, `rgba(255,179,71,${lightPct*0.15})`);
+      hGrad.addColorStop(0.4, `rgba(255,107,107,${lightPct*0.08})`);
+      hGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = hGrad;
+      ctx.fillRect(0, 0, W, H);
+    }
 
-    // Stars
+    // Sun emerging (when light > 60%)
+    if (lightPct > 0.6) {
+      const sunAlpha = (lightPct - 0.6) * 2.5;
+      const sunY = H * (1.1 - (lightPct - 0.6) * 1.5);
+      // Outer glow
+      const sGrad = ctx.createRadialGradient(W*0.5, sunY, 0, W*0.5, sunY, 120);
+      sGrad.addColorStop(0, `rgba(255,215,0,${sunAlpha*0.3})`);
+      sGrad.addColorStop(0.3, `rgba(255,179,71,${sunAlpha*0.15})`);
+      sGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = sGrad;
+      ctx.fillRect(0, 0, W, H);
+      // Sun disc
+      ctx.beginPath();
+      ctx.arc(W*0.5, sunY, 30 + sunAlpha*20, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,215,0,${sunAlpha*0.5})`;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W*0.5, sunY, 15 + sunAlpha*10, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,245,204,${sunAlpha*0.7})`;
+      ctx.fill();
+    }
+
+    // Nebula hints
+    const ng1 = ctx.createRadialGradient(W*0.3, H*0.4, 0, W*0.3, H*0.4, W*0.4);
+    ng1.addColorStop(0, `rgba(123,97,255,${0.015 + lightPct*0.01})`);
+    ng1.addColorStop(1, 'transparent');
+    ctx.fillStyle = ng1; ctx.fillRect(0, 0, W, H);
+
+    // Stars — dim as light increases
+    const starAlpha = Math.max(0.05, 1 - lightPct * 0.8);
     G.stars.forEach(s => {
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
       ctx.fillStyle = s.color;
-      ctx.globalAlpha = s.alpha * (0.6+0.4*Math.sin(Date.now()*0.002+s.x));
+      ctx.globalAlpha = s.alpha * starAlpha * (0.6+0.4*Math.sin(Date.now()*0.002+s.x));
       ctx.fill();
     });
     ctx.globalAlpha = 1;
 
     // Ship trail
-    G.ship.trail.forEach((t,i) => {
+    G.ship.trail.forEach(t => {
       if (t.life <= 0) return;
       ctx.beginPath();
       ctx.arc(t.x, t.y, 3*t.life, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(0,229,255,${t.life*0.3})`;
+      ctx.fillStyle = `${t.color}${t.life*0.3})`;
       ctx.fill();
     });
 
-    // Debris
+    // FOC Debris — red, dark, dangerous
     G.debris.forEach(d => {
       ctx.save();
       ctx.translate(d.x+d.w/2, d.y+d.h/2);
       ctx.rotate(d.rot);
-      if (d.type === 'metal') {
-        ctx.fillStyle = 'rgba(100,100,120,0.7)';
-        ctx.fillRect(-d.w/2, -d.h/2, d.w, d.h);
-        ctx.strokeStyle = 'rgba(233,69,96,0.5)';
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(-d.w/2, -d.h/2, d.w, d.h);
-        // Hazard stripe
-        ctx.strokeStyle = 'rgba(233,69,96,0.3)';
-        ctx.beginPath();
-        ctx.moveTo(-d.w/2, -d.h/2);
-        ctx.lineTo(d.w/2, d.h/2);
-        ctx.stroke();
-      } else {
-        ctx.fillStyle = 'rgba(80,70,60,0.7)';
-        ctx.beginPath();
-        ctx.moveTo(0, -d.h/2);
-        ctx.lineTo(d.w/2, d.h/4);
-        ctx.lineTo(d.w/4, d.h/2);
-        ctx.lineTo(-d.w/4, d.h/2);
-        ctx.lineTo(-d.w/2, d.h/4);
-        ctx.closePath();
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(233,69,96,0.4)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
+      // Dark aura
+      ctx.beginPath();
+      ctx.arc(0, 0, d.w*0.7, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(233,69,96,0.1)';
+      ctx.fill();
+      // Body
+      ctx.fillStyle = 'rgba(80,20,30,0.8)';
+      ctx.beginPath();
+      ctx.moveTo(0, -d.h/2);
+      ctx.lineTo(d.w/2, d.h/4);
+      ctx.lineTo(d.w/4, d.h/2);
+      ctx.lineTo(-d.w/4, d.h/2);
+      ctx.lineTo(-d.w/2, d.h/4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = d.color || '#e94560';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      // FOC symbol
+      ctx.fillStyle = d.color || '#e94560';
+      ctx.font = `${Math.min(d.w*0.6,12)}px serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(d.sym || '💰', 0, 0);
       ctx.restore();
     });
 
-    // Salvage
+    // POC Salvage — golden, radiant
     G.salvage.forEach(sv => {
       const cx = sv.x+sv.w/2, cy = sv.y+sv.h/2;
       const gw = 0.4+Math.sin(sv.pulse)*0.3;
-      // Outer glow
+      // Radiant glow
       ctx.beginPath();
-      ctx.arc(cx, cy, sv.w*0.8, 0, Math.PI*2);
+      ctx.arc(cx, cy, sv.w, 0, Math.PI*2);
       ctx.fillStyle = sv.glow;
-      ctx.globalAlpha = gw*0.4;
+      ctx.globalAlpha = gw*0.5;
       ctx.fill();
-      // Inner circle
+      // Inner glow ring
       ctx.beginPath();
-      ctx.arc(cx, cy, sv.w/2+1, 0, Math.PI*2);
+      ctx.arc(cx, cy, sv.w*0.7, 0, Math.PI*2);
       ctx.fillStyle = sv.color;
-      ctx.globalAlpha = 0.8+gw*0.2;
+      ctx.globalAlpha = 0.15;
+      ctx.fill();
+      // Core
+      ctx.beginPath();
+      ctx.arc(cx, cy, sv.w/2+2, 0, Math.PI*2);
+      ctx.fillStyle = sv.color;
+      ctx.globalAlpha = 0.85+gw*0.15;
       ctx.fill();
       ctx.globalAlpha = 1;
       // Symbol
-      ctx.fillStyle = '#000';
-      ctx.font = `bold 9px "JetBrains Mono"`;
+      ctx.font = `${sv.w*0.65}px serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(sv.sym, cx, cy+1);
       // Value
       ctx.fillStyle = sv.color;
-      ctx.globalAlpha = 0.6;
+      ctx.globalAlpha = 0.7;
       ctx.font = '7px "JetBrains Mono"';
-      ctx.fillText('+'+sv.value, cx, cy-sv.w/2-4);
+      ctx.fillText('+'+sv.value, cx, cy-sv.w/2-5);
       ctx.globalAlpha = 1;
     });
 
-    // Ship
+    // Ship — glows warmer with more light
     const s = G.ship;
+    const shipColor = lightPct > 0.5 ? `hsl(${40+lightPct*10},100%,${55+lightPct*20}%)` : '#00e5ff';
     // Engine glow
     ctx.beginPath();
-    ctx.arc(s.x, s.y+s.h/2+6, 6+Math.random()*3, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(0,229,255,${0.2+Math.random()*0.2})`;
+    ctx.arc(s.x, s.y+s.h/2+6, 7+Math.random()*3, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(${lightPct>0.5?'255,179,71':'0,229,255'},${0.2+Math.random()*0.2})`;
     ctx.fill();
     ctx.beginPath();
     ctx.arc(s.x, s.y+s.h/2+4, 3+Math.random()*2, 0, Math.PI*2);
     ctx.fillStyle = `rgba(255,255,255,${0.3+Math.random()*0.2})`;
     ctx.fill();
     // Hull
-    ctx.shadowColor = '#00e5ff';
-    ctx.shadowBlur = 16;
-    ctx.fillStyle = '#00e5ff';
+    ctx.shadowColor = shipColor;
+    ctx.shadowBlur = 16+lightPct*8;
+    ctx.fillStyle = shipColor;
     ctx.beginPath();
     ctx.moveTo(s.x, s.y-s.h/2);
     ctx.lineTo(s.x-s.w/2, s.y+s.h/2);
@@ -681,7 +828,7 @@
     ctx.fill();
     // Cockpit
     ctx.shadowBlur = 0;
-    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
     ctx.beginPath();
     ctx.arc(s.x, s.y, 3, 0, Math.PI*2);
     ctx.fill();
@@ -696,7 +843,7 @@
     });
     ctx.globalAlpha = 1;
 
-    // Wave indicator
+    // Wave text
     if (G.waveTimer < 60) {
       ctx.fillStyle = `rgba(255,215,0,${1-G.waveTimer/60})`;
       ctx.font = 'bold 24px Outfit';
@@ -709,42 +856,56 @@
 
   // ── GAME OVER ──
   function gameOver() {
-    G.running = false;
-    G.over = true;
-    rtcDecision(0, `Mission complete. Score=${G.score}. Salvaged=${G.salvaged}. Max combo=x${G.maxCombo}. KC Ledger archived.`, 'log');
-    rtcDecision(2, `Lead qualification: Score ${G.score} maps to ${G.score>200?'PREMIUM':'STANDARD'} tier. Cassey approves pipeline entry.`, 'proceed');
+    G.running = false; G.over = true;
+    const solsticeReached = G.light >= 100;
+    rtcDecision(0, `Mission complete. Score=${G.score}. Light=${Math.round(G.light)}%. Solstice ${solsticeReached?'REACHED ☀️':'not reached 🌑'}.`, 'log');
     const overlay = document.getElementById('gameOverOverlay');
     overlay.classList.add('active');
-    const tier = G.score >= 500 ? 'SOVEREIGN' : G.score >= 200 ? 'PREMIUM' : G.score >= 100 ? 'QUALIFIED' : 'EXPLORER';
-    const tierColor = G.score >= 500 ? 'var(--gold)' : G.score >= 200 ? 'var(--coral)' : G.score >= 100 ? 'var(--emerald)' : 'var(--cyan)';
+    const tier = G.light >= 100 ? 'SOLSTICE' : G.light >= 60 ? 'DAWN' : G.light >= 30 ? 'TWILIGHT' : 'DARKNESS';
+    const tierColor = tier==='SOLSTICE'?'var(--gold)':tier==='DAWN'?'var(--sun)':tier==='TWILIGHT'?'var(--purple)':'var(--rose)';
+    const tierEmoji = tier==='SOLSTICE'?'☀️':tier==='DAWN'?'🌅':tier==='TWILIGHT'?'🌆':'🌑';
     document.getElementById('gameOverPanel').innerHTML = `
-      <div style="font-size:10px;font-family:var(--m);color:var(--dim);margin-bottom:8px;">SALVAGE RUN COMPLETE</div>
-      <h2>Mission Report</h2>
+      <div style="font-size:9px;font-family:var(--m);color:var(--dim);margin-bottom:6px;">SALVAGE RUN COMPLETE · SOLSTICE EDITION</div>
+      <h2 style="color:${tierColor}">${tierEmoji} ${tier} TIER</h2>
       <div class="score-display">${G.score}</div>
-      <div style="font-size:14px;color:${tierColor};font-weight:700;margin-bottom:16px;">${tier} TIER</div>
+      <div style="font-size:12px;color:var(--sub);margin-bottom:12px;">
+        ${solsticeReached ? 'You salvaged the light. The shortest day has turned. The 32.8% will see dawn.' : `Light: ${Math.round(G.light)}%. The darkness remains. Salvage more to reach the solstice.`}
+      </div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-val" style="color:var(--emerald)">${G.salvaged}</div><div class="stat-lbl">Salvaged</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--gold)">${G.salvaged}</div><div class="stat-lbl">POC Salvaged</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--rose)">${G.focHits}</div><div class="stat-lbl">FOC Hits</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--sun)">${Math.round(G.light)}%</div><div class="stat-lbl">Light Level</div></div>
         <div class="stat-card"><div class="stat-val" style="color:var(--cyan)">x${G.maxCombo}</div><div class="stat-lbl">Max Combo</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:var(--coral)">${formatTime(G.time)}</div><div class="stat-lbl">Time</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:var(--purple)">${G.wave}</div><div class="stat-lbl">Wave</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:var(--gold)">${Math.round(G.salvaged/Math.max(1,G.time)*60)}</div><div class="stat-lbl">Per Min</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:var(--rose)">${3-G.hp}</div><div class="stat-lbl">Hits Taken</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--emerald)">${formatTime(G.time)}</div><div class="stat-lbl">Time</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--purple)">${G.wave}</div><div class="stat-lbl">Waves</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--thari)">${G.totalTransitions}</div><div class="stat-lbl">Turing Transitions</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--coral)">${Math.round(G.salvaged/Math.max(1,G.time)*60)}</div><div class="stat-lbl">Salvage/Min</div></div>
       </div>
       <button class="start-btn" onclick="startGame()" style="margin-top:16px;">SALVAGE AGAIN</button>
       <div class="governance-tag" style="margin-top:16px;">
-        [(BMP + CBP + UFCP) / KPGS(MAO + MMAO)] * UBP = ${G.score}<br>
-        Lead tier: ${tier} | Pipeline: ${G.score>100?'QUALIFIED':'NURTURE'} | WWJD: PASS
+        BUILT WITH ANTIGRAVITY (GOOGLE AI) · TURING STATE MACHINE: ${G.totalTransitions} TRANSITIONS<br>
+        POC: INVARIANT (${G.pocCollected} salvaged) · FOC: VARIANT (${G.focHits} blocked)<br>
+        KPGS GOVERNED · WWJD FIREWALL · KOPANO LABS © 2026
       </div>
     `;
   }
 
   // ── START ──
   function startGame() {
-    G.running = true; G.over = false; G.paused = false;
-    G.score = 0; G.salvaged = 0; G.combo = 1; G.maxCombo = 1;
-    G.hp = 3; G.wave = 1; G.time = 0; G.waveTimer = 0;
-    G.debris = []; G.salvage = []; G.particles = [];
-    G.ship.x = canvas.width/2; G.ship.y = canvas.height-80; G.ship.trail = [];
+    G = {
+      running: true, paused: false, over: false,
+      score: 0, salvaged: 0, combo: 1, maxCombo: 1,
+      hp: 3, maxHP: 3, wave: 1, time: 0,
+      light: 0, pocCollected: 0, focHits: 0, totalTransitions: 0,
+      solsticeReached: false,
+      ship: { x: canvas.width/2, y: canvas.height-80, w: 28, h: 28, speed: 6, trail: [] },
+      debris: [], salvage: [], particles: [], stars: G.stars,
+      keys: G.keys,
+      shakeX: 0, shakeY: 0, shakeTime: 0,
+      waveTimer: 0, waveInterval: 900,
+      rtcLog: [], bmpCycle: 0,
+      turingState: 'idle', turingQueue: [], turingTimer: 0,
+    };
     document.getElementById('startOverlay').classList.remove('active');
     document.getElementById('gameOverOverlay').classList.remove('active');
     document.getElementById('hudScore').textContent = '0';
@@ -752,10 +913,10 @@
     document.getElementById('hudCombo').textContent = 'x1';
     document.getElementById('hudHP').textContent = '3';
     document.getElementById('hudWave').textContent = '1';
-    G.rtcLog = [];
-    rtcDecision(5, 'APEX: Salvage run initiated. BMP governance active. SWFUS pipeline READY.', 'proceed');
-    rtcDecision(3, 'THARI: H.O.L.O Net monitoring. WWJD firewall engaged. Garden of Eden Protocol active.', 'proceed');
-    rtcDecision(0, 'KC: Ledger open. All salvage receipts will be recorded. Watch mode.', 'log');
+    updateLightMeter();
+    rtcDecision(5, '☀️ SOLSTICE RUN initiated. Salvage POC light. Avoid FOC darkness. Reach 100% to turn the shortest day.', 'proceed');
+    rtcDecision(6, '🧵 THARI: H.O.L.O Net monitoring. WWJD firewall engaged. Turing state machine ACTIVE.', 'proceed');
+    rtcDecision(0, '🔬 KC: Ledger open. POC/FOC discrimination active. Light meter at 0%.', 'log');
     canvas.focus();
   }
 
@@ -764,20 +925,24 @@
   function loop(timestamp) {
     const dt = Math.min((timestamp-lastTime)/1000, 0.05);
     lastTime = timestamp;
-    if (G.running && !G.paused && !G.over) {
-      update(dt);
-    }
+    if (G.running && !G.paused && !G.over) update(dt);
     draw();
     requestAnimationFrame(loop);
   }
 
   // ── IDLE DRAW ──
   function drawIdle() {
-    ctx.fillStyle = '#06060e';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#04040a';
+    ctx.fillRect(0, 0, W, H);
+    // Subtle horizon
+    const hg = ctx.createRadialGradient(W*0.5, H*1.1, 0, W*0.5, H*1.1, H*0.6);
+    hg.addColorStop(0, 'rgba(255,179,71,0.04)');
+    hg.addColorStop(1, 'transparent');
+    ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
     G.stars.forEach(s => {
       s.y += s.speed*0.3;
-      if (s.y > canvas.height) { s.y = -2; s.x = Math.random()*canvas.width; }
+      if (s.y > H) { s.y = -2; s.x = Math.random()*W; }
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
       ctx.fillStyle = s.color;
@@ -787,7 +952,6 @@
     ctx.globalAlpha = 1;
   }
 
-  // Idle loop until game starts
   function idleLoop(ts) {
     if (G.running) { lastTime = ts; loop(ts); return; }
     drawIdle();
@@ -797,11 +961,12 @@
 
   canvas.setAttribute('tabindex','0');
 
-  console.log('%c[STARFALL_SALVAGE] BMP + CBP + UFCP Governed', 'color:#ff7b54;font-weight:bold;font-size:14px');
-  console.log('%c[STARFALL_SALVAGE] [(BMP+CBP+UFCP)/KPGS(MAO+MMAO)]*UBP', 'color:#ffd700;');
-  console.log('%c[STARFALL_SALVAGE] RTC Decision Engine: 10 council seats active', 'color:#00e5ff;');
-  console.log('%c[STARFALL_SALVAGE] Garden of Eden Protocol: KC+Cassey = Adam+Eve', 'color:#00d4aa;');
-  console.log('%c[STARFALL_SALVAGE] WWJD Firewall: No dark patterns. No addiction loops.', 'color:#7b61ff;');
+  console.log('%c[STARFALL_SALVAGE] ☀️ SOLSTICE EDITION', 'color:#ffd700;font-weight:bold;font-size:16px');
+  console.log('%c[STARFALL_SALVAGE] Built with Antigravity (Google AI)', 'color:#a78bfa;font-weight:bold;');
+  console.log('%c[STARFALL_SALVAGE] Turing State Machine · POC/FOC Enforcer', 'color:#ffb347;');
+  console.log('%c[STARFALL_SALVAGE] KPGS Governed · WWJD Firewall · No Dark Patterns', 'color:#00d4aa;');
+  console.log('%c[STARFALL_SALVAGE] DEV.to June Solstice Game Jam 2026', 'color:#ff7b54;');
+  console.log('%c[STARFALL_SALVAGE] Kopano Labs · Cape Town, South Africa', 'color:#00e5ff;');
   </script>
 </body>
 </html>
