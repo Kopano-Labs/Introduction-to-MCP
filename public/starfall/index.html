@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starfall Salvage — Solstice Edition · Salvaging Light from the Shortest Day</title>
-  <meta name="description" content="Starfall Salvage: Solstice Edition. A WebGL debris-runner where you salvage light from darkness on the shortest day of the year. Built with Antigravity (Google AI). KPGS governed. No dark patterns.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Starfall Salvage — AW3GL · Salvaging Light from the Shortest Day</title>
+  <meta name="description" content="Starfall Salvage: The 1st AW3GL (Adaptive Web 3-Vector Graphics Layer). Salvage light from darkness on the shortest day. Installable. Offline-first. KPGS governed. Built with Antigravity (Google AI). No dark patterns. No loot boxes. No app store.">
+  <!-- AW3GL: Adaptive Web 3-Vector Graphics Layer — PWA Meta -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#ffd700">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Starfall">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Starfall Salvage">
+  <meta name="msapplication-TileColor" content="#04040a">
+  <meta name="msapplication-TileImage" content="./icon-192.png">
+  <!-- Open Graph for DEV.to / social sharing -->
+  <meta property="og:title" content="Starfall Salvage — AW3GL · Salvaging Light from the Shortest Day">
+  <meta property="og:description" content="The 1st Adaptive Web 3-Vector Graphics Layer game. Salvage light from darkness. Installable. Offline-first. KPGS governed. Built with Antigravity (Google AI).">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://starfallsalvage.kopanolabs.com">
+  <meta property="og:image" content="./icon-512.png">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -243,20 +260,29 @@
         <div class="start-panel">
           <div class="jam-badge">☀️ DEV.TO JUNE SOLSTICE GAME JAM 2026</div>
           <div style="font-size:52px;margin-bottom:8px;">🌠</div>
-          <h2>Starfall Salvage</h2>
-          <div class="start-sub">Solstice Edition — Salvaging Light from Darkness</div>
+          <h1 style="font-size:36px;font-weight:900;letter-spacing:-1.5px;margin-bottom:4px;background:linear-gradient(135deg,#fff,var(--sun),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Starfall Salvage</h1>
+          <div class="start-sub">AW3GL · Adaptive Web 3-Vector Graphics Layer</div>
+          <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0;">
+            <span class="jam-badge" style="margin:0;font-size:7px;padding:3px 8px;">INSTALLABLE</span>
+            <span class="jam-badge" style="margin:0;font-size:7px;padding:3px 8px;">OFFLINE-FIRST</span>
+            <span class="jam-badge" style="margin:0;font-size:7px;padding:3px 8px;">NO APP STORE</span>
+            <span class="jam-badge" style="margin:0;font-size:7px;padding:3px 8px;">PAU v3</span>
+          </div>
           <div class="start-narrative">
             <strong>June 21. The shortest day of the year.</strong><br><br>
             In Cape Town, South Africa, the winter solstice arrives. A 28-year-old man — classified by the state as unemployed — navigates the debris field of a broken system. 32.8% of his generation sits in the dark.<br><br>
             But darkness is not permanent. It is a <strong style="color:var(--sun);">turning point</strong>.<br><br>
+            This is the <strong style="color:var(--gold);">1st AW3GL</strong> — an Adaptive Web 3-Vector Graphics Layer. It installs on your phone. It plays offline. It doesn't need an app store, a Google Play fee, or an Apple review. <strong>Because access to light should be invariant.</strong><br><br>
             Salvage the <span style="color:var(--gold);">golden POC debris</span> to bring light back. Avoid the <span style="color:var(--rose);">red FOC debris</span> that deepens the dark. Each salvage is a state transition in a Turing machine — from RAW to SEALED.<br><br>
             <strong>The solstice is not the end of darkness. It is the proof that light returns.</strong>
           </div>
           <button class="start-btn" onclick="startGame()">SALVAGE THE LIGHT</button>
+          <button id="installBtn" class="start-btn" style="display:none;margin-top:8px;background:linear-gradient(135deg,var(--emerald),var(--thari));font-size:13px;padding:10px 32px;" onclick="installPWA()">📲 INSTALL — PLAY OFFLINE</button>
           <div class="governance-tag">
+            AW3GL · ADAPTIVE WEB 3-VECTOR GRAPHICS LAYER<br>
             KPGS GOVERNED · WWJD FIREWALL · NO DARK PATTERNS<br>
             BUILT WITH ANTIGRAVITY (GOOGLE AI) · KOPANO LABS © 2026<br>
-            TURING STATE MACHINE · POC/FOC ENFORCER · IIDP FILTER
+            PAU: PROGRESSIVE APP UPDATE · NOT A REBUILD
           </div>
         </div>
       </div>
@@ -273,7 +299,7 @@
         <button class="cb-btn" onclick="startGame()">RESTART</button>
       </div>
       <div class="cb-center">
-        <span style="color:var(--sun);font-weight:600;">STARFALL SALVAGE</span> · Solstice Edition · <span style="color:var(--gold);">Kopano Labs</span> © 2026
+        <span style="color:var(--sun);font-weight:600;">STARFALL SALVAGE</span> · AW3GL · <span style="color:var(--gold);">Kopano Labs</span> © 2026 · <span style="color:var(--emerald);" id="pwaStatus">—</span>
       </div>
       <div style="display:flex;gap:6px;align-items:center;">
         <div class="rtc-indicator">
@@ -961,12 +987,68 @@
 
   canvas.setAttribute('tabindex','0');
 
-  console.log('%c[STARFALL_SALVAGE] ☀️ SOLSTICE EDITION', 'color:#ffd700;font-weight:bold;font-size:16px');
-  console.log('%c[STARFALL_SALVAGE] Built with Antigravity (Google AI)', 'color:#a78bfa;font-weight:bold;');
-  console.log('%c[STARFALL_SALVAGE] Turing State Machine · POC/FOC Enforcer', 'color:#ffb347;');
-  console.log('%c[STARFALL_SALVAGE] KPGS Governed · WWJD Firewall · No Dark Patterns', 'color:#00d4aa;');
-  console.log('%c[STARFALL_SALVAGE] DEV.to June Solstice Game Jam 2026', 'color:#ff7b54;');
-  console.log('%c[STARFALL_SALVAGE] Kopano Labs · Cape Town, South Africa', 'color:#00e5ff;');
+  // ════════════════════════════════════════════════════════════
+  // AW3GL: ADAPTIVE WEB 3-VECTOR GRAPHICS LAYER
+  // PAU v3: Service Worker + Install Prompt + Offline Cache
+  //
+  // POC of PAU:
+  //   v1: Static HTML game (CRUD)
+  //   v2: Solstice Edition — day/night, POC/FOC, Turing FSM (SWFUS)
+  //   v3: AW3GL — PWA, offline, installable, adaptive (BMP)
+  //   Each version ADDS. Nothing is removed. Nothing is rewritten.
+  //   That's PAU. That's how 32.8% gets access.
+  //   You don't rebuild their lives. You progressively update them.
+  // ════════════════════════════════════════════════════════════
+
+  // Service Worker Registration
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      console.log('%c[AW3GL] Service worker registered. Offline play ENABLED.', 'color:#00d4aa;font-weight:bold;');
+      const statusEl = document.getElementById('pwaStatus');
+      if (statusEl) statusEl.textContent = 'OFFLINE READY';
+    }).catch(err => {
+      console.log('%c[AW3GL] Service worker failed:', 'color:#e94560;', err);
+      const statusEl = document.getElementById('pwaStatus');
+      if (statusEl) statusEl.textContent = 'ONLINE ONLY';
+    });
+  }
+
+  // PWA Install Prompt
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById('installBtn');
+    if (btn) btn.style.display = 'inline-block';
+    console.log('%c[AW3GL] Install prompt ready. Game can be installed to home screen.', 'color:#ffd700;font-weight:bold;');
+  });
+
+  function installPWA() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        console.log('%c[AW3GL] INSTALLED. 32.8% just got access without an app store.', 'color:#ffd700;font-weight:bold;font-size:14px;');
+        rtcDecision(9, '📲 AW3GL INSTALLED. No app store. No platform fee. No gatekeeping. POC of PAU.', 'proceed');
+      }
+      deferredPrompt = null;
+      const btn = document.getElementById('installBtn');
+      if (btn) btn.style.display = 'none';
+    });
+  }
+
+  window.addEventListener('appinstalled', () => {
+    console.log('%c[AW3GL] App installed to device. Offline-first. Access is invariant.', 'color:#00d4aa;font-weight:bold;font-size:14px;');
+    const statusEl = document.getElementById('pwaStatus');
+    if (statusEl) { statusEl.textContent = 'INSTALLED'; statusEl.style.color = 'var(--gold)'; }
+  });
+
+  console.log('%c[AW3GL] ☀️ STARFALL SALVAGE — 1st ADAPTIVE WEB 3-VECTOR GRAPHICS LAYER', 'color:#ffd700;font-weight:bold;font-size:16px');
+  console.log('%c[AW3GL] PAU v3: Static → Solstice → AW3GL. Each layer ADDS. Nothing removed.', 'color:#ffb347;font-weight:bold;');
+  console.log('%c[AW3GL] Built with Antigravity (Google AI) · Kopano Labs · Cape Town', 'color:#a78bfa;font-weight:bold;');
+  console.log('%c[AW3GL] KPGS Governed · WWJD Firewall · No Dark Patterns · No App Store', 'color:#00d4aa;');
+  console.log('%c[AW3GL] POC: Installable. Offline-first. 32.8%% can play without data.', 'color:#00e5ff;');
+  console.log('%c[AW3GL] DEV.to June Solstice Game Jam 2026', 'color:#ff7b54;');
   </script>
 </body>
 </html>
