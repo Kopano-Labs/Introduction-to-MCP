@@ -272,7 +272,12 @@ class ThreeSixtyDP:
         nested_trace = fsm.nested_trace()
         bmnp_nest    = f"[360DP[{domain}[{dso}→{effective_dso}[{fsmp.fsmp_verdict}]]]]"
 
-        # ── PERSIST to log ────────────────────────────────────────────
+        # ── PERSIST to log (BEFORE building result so it is captured) ──
+        _cycle_hash = hashlib.sha256(
+            f"{ts}:{domain}:{dso}:{fsmp.fsmp_verdict}".encode()
+        ).hexdigest()[:16]
+        fsm.transition("PERSIST", {"hash": _cycle_hash})
+
         result = {
             "schema":         "three_sixty_dp_v1",
             "cycle_ts":       ts,
@@ -284,15 +289,11 @@ class ThreeSixtyDP:
             "pkap":           pkap,
             "bmnp_nest":      bmnp_nest,
             "fsm_trace":      nested_trace,
-            "fsm_states":     [h["to"] for h in fsm.history],
+            "fsm_states":     [h["to"] for h in fsm.history],  # PERSIST is now in history
+            "fsm_complete":   (fsm.state == "PERSIST"),
             "constraint":     "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-            "cycle_hash":     hashlib.sha256(
-                f"{ts}:{domain}:{dso}:{fsmp.fsmp_verdict}".encode()
-            ).hexdigest()[:16],
+            "cycle_hash":     _cycle_hash,
         }
-
-        fsm.transition("PERSIST", {"hash": result["cycle_hash"]})
-        result["fsm_complete"] = (fsm.state == "PERSIST")
 
         with TDP_LOG.open("a", encoding="utf-8") as f:
             f.write(json.dumps(result, ensure_ascii=False) + "\n")

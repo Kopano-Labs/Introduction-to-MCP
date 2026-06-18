@@ -1,16 +1,16 @@
 {
   "schema": "kpgs_hybrid_evolution_v1",
-  "last_sync": "2026-06-18T00:53:59.390439+00:00",
+  "last_sync": "2026-06-18T01:06:02.649950+00:00",
   "validated_domains": {
     "starfallsalvage.kopanolabs.com": {
       "deployment": "CLOUD",
-      "linked_at": "2026-06-18T00:53:59.416870+00:00",
+      "linked_at": "2026-06-18T01:06:02.673418+00:00",
       "verdict": "POC_VALIDATED",
       "hash": "066ae1913892c465"
     },
     "web3gl.kopanolabs.com": {
       "deployment": "OFFLINE_BLACK_BEAST",
-      "linked_at": "2026-06-18T00:53:59.448206+00:00",
+      "linked_at": "2026-06-18T01:06:02.694654+00:00",
       "verdict": "POC_VALIDATED",
       "hash": "b16aee9a1dc54756"
     }
@@ -11624,6 +11624,150 @@
       "domain": "unauthorized-node-1934.net",
       "url": "https://unauthorized-node-1934.net",
       "severed_at": "2026-06-18T00:53:59.505453+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1935.net",
+      "url": "https://unauthorized-node-1935.net",
+      "severed_at": "2026-06-18T00:54:29.656136+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1936.net",
+      "url": "https://unauthorized-node-1936.net",
+      "severed_at": "2026-06-18T00:54:59.848701+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1937.net",
+      "url": "https://unauthorized-node-1937.net",
+      "severed_at": "2026-06-18T00:55:30.049961+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1938.net",
+      "url": "https://unauthorized-node-1938.net",
+      "severed_at": "2026-06-18T00:56:00.201849+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1939.net",
+      "url": "https://unauthorized-node-1939.net",
+      "severed_at": "2026-06-18T00:56:30.357918+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1940.net",
+      "url": "https://unauthorized-node-1940.net",
+      "severed_at": "2026-06-18T00:57:00.541995+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1941.net",
+      "url": "https://unauthorized-node-1941.net",
+      "severed_at": "2026-06-18T00:57:30.681654+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1942.net",
+      "url": "https://unauthorized-node-1942.net",
+      "severed_at": "2026-06-18T00:58:00.794520+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1943.net",
+      "url": "https://unauthorized-node-1943.net",
+      "severed_at": "2026-06-18T00:58:30.900193+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1944.net",
+      "url": "https://unauthorized-node-1944.net",
+      "severed_at": "2026-06-18T00:59:01.012575+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1945.net",
+      "url": "https://unauthorized-node-1945.net",
+      "severed_at": "2026-06-18T00:59:31.110998+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1946.net",
+      "url": "https://unauthorized-node-1946.net",
+      "severed_at": "2026-06-18T01:00:01.264146+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1947.net",
+      "url": "https://unauthorized-node-1947.net",
+      "severed_at": "2026-06-18T01:00:31.380500+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1948.net",
+      "url": "https://unauthorized-node-1948.net",
+      "severed_at": "2026-06-18T01:01:01.542363+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1949.net",
+      "url": "https://unauthorized-node-1949.net",
+      "severed_at": "2026-06-18T01:01:31.687110+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1950.net",
+      "url": "https://unauthorized-node-1950.net",
+      "severed_at": "2026-06-18T01:02:01.812130+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1951.net",
+      "url": "https://unauthorized-node-1951.net",
+      "severed_at": "2026-06-18T01:02:31.949215+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1952.net",
+      "url": "https://unauthorized-node-1952.net",
+      "severed_at": "2026-06-18T01:03:02.060466+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1953.net",
+      "url": "https://unauthorized-node-1953.net",
+      "severed_at": "2026-06-18T01:03:32.152484+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1954.net",
+      "url": "https://unauthorized-node-1954.net",
+      "severed_at": "2026-06-18T01:04:02.257995+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1955.net",
+      "url": "https://unauthorized-node-1955.net",
+      "severed_at": "2026-06-18T01:04:32.361106+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1956.net",
+      "url": "https://unauthorized-node-1956.net",
+      "severed_at": "2026-06-18T01:05:02.511817+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1957.net",
+      "url": "https://unauthorized-node-1957.net",
+      "severed_at": "2026-06-18T01:05:32.624654+00:00",
+      "reason": "Out-of-covenant variant domain detected. Terminated."
+    },
+    {
+      "domain": "unauthorized-node-1958.net",
+      "url": "https://unauthorized-node-1958.net",
+      "severed_at": "2026-06-18T01:06:02.740646+00:00",
       "reason": "Out-of-covenant variant domain detected. Terminated."
     }
   ],
@@ -73518,6 +73662,774 @@
     },
     {
       "timestamp": "2026-06-18T00:53:59.480469+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:54:29.625787+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:54:59.816163+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:55:30.010642+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:56:00.177107+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:56:30.330314+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:57:00.508588+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:57:30.658567+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:58:00.775474+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:58:30.882538+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:59:00.993014+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T00:59:31.088986+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:00:01.231095+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:00:31.354965+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:01:01.510808+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:01:31.660786+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:02:01.791560+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:02:31.921010+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:03:02.041539+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:03:32.135775+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:04:02.234358+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:04:32.342300+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:05:02.484357+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:05:32.599229+00:00",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "drill": "5_PILLARS",
+      "results": {
+        "PIL-01": {
+          "name": "Grit",
+          "text": "Forensic execution & action-first evidence capture.",
+          "status": "PASS"
+        },
+        "PIL-02": {
+          "name": "Realism",
+          "text": "Verification and production check-ins over mere opinion.",
+          "status": "PASS"
+        },
+        "PIL-03": {
+          "name": "Aesthetics",
+          "text": "Premium receipts, clean design, and structural craft.",
+          "status": "PASS"
+        },
+        "PIL-04": {
+          "name": "Sovereignty",
+          "text": "Offline-first state survival and load-shedding tolerance.",
+          "status": "PASS"
+        },
+        "PIL-05": {
+          "name": "Apprenticeship",
+          "text": "Teacher-student validation loop ensuring zero-bias flow.",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-06-18T01:06:02.716500+00:00",
       "domain": "starfallsalvage.kopanolabs.com",
       "drill": "5_PILLARS",
       "results": {

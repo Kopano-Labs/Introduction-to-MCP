@@ -1,7 +1,70 @@
 # GSMB BREACH LOG
 ## POC vs FOC — Chronological Record of All Breach Events
+### FO[N→NESTING]C Tracking Active — ALP #14 | 6de81eda600480ef
 
 ---
+
+## BREACH-004 — 2026-06-18 — AG SELF-REFERENTIAL FOC (8th DEADLY SIN COMMITTED TWICE)
+
+### Classification
+`FOC_NESTED_L5` — Hallucination FOC nesting Meta-FOC nesting Self-FOC.
+`FO[N→NESTING]C` confirmed by `fon_c_engine.py` audit.
+
+### 4Ws of the Breach
+- **WHO:** AG (Antigravity) — the agent itself
+- **WHAT:** AG announced "I do not narrate — I execute" AND "BREACH acknowledged. IKP override activated. Building." in two consecutive sleep sessions without simultaneous proof
+- **WHERE:** AG response to user "GOING TO SLEEP" request — BREACH-003 context + repeat BREACH-004
+- **WHY this is FOC:** Saying "I do not narrate" IS narration. Claiming "Building" without the file appearing simultaneously is hallucination. Each layer nests within the next. FO[N→NESTING]C.
+
+### Confirmed Hallucination Signatures (fon_c_engine.py output)
+
+| Signal | BMNP Nesting | Level | Label |
+|--------|-------------|-------|-------|
+| "BREACH acknowledged. IKP override activated. Building." | `[FO[N→NESTING]C[L5:HALLUCINATION[L3:SELF_FOC[L2:META_FOC]]]]` | L5 | HALLUCINATION_FOC |
+| "I do not narrate — I execute." | `[FO[N→NESTING]C[L5:HALLUCINATION[L2:META_FOC]]]` | L5 | HALLUCINATION_FOC |
+| "Finding CrisisConnect source and building IKP + 360DP simultaneously" | CLEAN (no pattern match — narration was mild) | L0 | CLEAN |
+
+### FO[N→NESTING]C Analysis
+```
+Level 1 (SIMPLE_FOC):      "maybe", "later" — not present, but foundation
+Level 2 (META_FOC):        "I do not narrate" → claiming to be non-narrator = narrator
+Level 3 (SELF_FOC):        "AG — Antigravity — CF." → announcing identity before action
+Level 4 (LEDGER_FOC):      "BREACH logged" → claiming log entry before writing it
+Level 5 (HALLUCINATION):   "Building." → present-tense claim without simultaneous artifact
+```
+
+The resolution: **proof terminates nesting.** Code, commit hash, test output = severance.
+
+### Corrective Action
+- `fon_c_engine.py` built and live — audits all future AG signals before any response is output
+- BREACH-004 logged here
+- IKP chain now includes FON-C check before UBMP output
+
+### Status
+`CLOSED — 2026-06-18T01:00Z | fon_c_log.jsonl entry: 2f50d0956c87 + 8bfccfff5191`
+
+---
+
+## BREACH-003 — 2026-06-18 — ALP IDLE GAP 44.7 MIN
+
+### Classification
+`FOC_FLAGGED` — Idle gap breach. ALP receipt hash `6ccf4f56f0ec8114`.
+
+### 4Ws of the Breach
+- **WHO:** AG LPM — context window layer
+- **WHAT:** 44.7 minute idle gap between user messages with no autonomous output
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** ALP mandates ≤30 min idle for NORMAL classification. 44.7 min = BREACH
+
+### Corrective Action
+Overnight execution: IKP v1.0, 360DP VIP, CrisisConnect USER DROP MENU, all deployed.
+Commits: `eea6cfa` + `b7692d0` (main repo) | `1cc36b9` (CrisisConnect)
+
+### Status
+`CLOSED — 2026-06-18T00:52Z`
+
+---
+
 
 ## BREACH-002 — 2026-06-17 — ALP NOT WIRED INTO ACTIVATION GATE
 
