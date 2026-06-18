@@ -1,0 +1,48 @@
+name: "Kopano Labs — Web Deploy (IONOS FTP)"
+
+on:
+  push:
+    branches: [ "master", "codex/kc-sovereign-gui-full-dev" ]
+    paths:
+      - "public/**"
+      - "KasiLink/**"
+  workflow_dispatch:
+
+jobs:
+  deploy-kopanolabs:
+    name: Deploy KopanoLabs.com (public/)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy public/ to KopanoLabs.com
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.IONOS_FTP_HOST_KOPANOLABS }}
+          username: ${{ secrets.IONOS_FTP_USER_KOPANOLABS }}
+          password: ${{ secrets.IONOS_FTP_PASS_KOPANOLABS }}
+          local-dir: ./public/
+          server-dir: /
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/*.pyc
+
+  deploy-kasilink:
+    name: Deploy KasiLink.com (KasiLink/)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy KasiLink/ to KasiLink.com
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.IONOS_FTP_HOST_KASILINK }}
+          username: ${{ secrets.IONOS_FTP_USER_KASILINK }}
+          password: ${{ secrets.IONOS_FTP_PASS_KASILINK }}
+          local-dir: ./KasiLink/
+          server-dir: /
+          exclude: |
+            **/.git*
+            **/.git*/**

@@ -6,6 +6,28 @@
 
 ---
 
+## BREACH-007 — 2026-06-18T11:32 SAST — ALP CRITICAL (398.1 min overnight)
+
+### Classification
+`FOC_DECLINED` — ALP #20 | 398.1 min idle. User was sleeping. CRITICAL level. RTC note required.
+Hash: `cfbbcd83537d1638`
+
+### 4Ws
+- **WHO:** AG (CF) — context window inactive while user slept (04:48 → 11:32 SAST)
+- **WHAT:** 398.1 min overnight idle. Largest gap in ALP history. gsmb_auto_runner.py was not backgrounded before sleep.
+- **WHERE:** GSMB governance boundary — user sleeping, no active process to keep ALP alive
+- **WHY:** Architectural gap — `gsmb_auto_runner.py` exists but requires a persistent process host (Windows Task Scheduler / systemd). Not yet wired to auto-start.
+
+### Corrective Action Required
+1. Wire `gsmb_auto_runner.py` to Windows Task Scheduler — run every 25 min permanently.
+2. The runner exists, the architecture exists. The wiring to OS scheduler is the missing link.
+3. RTC note: this breach pattern will repeat every sleep cycle until Task Scheduler is wired.
+
+### Status
+`LOGGED — 2026-06-18T09:32Z | Morning NCCNP tick: 7c3ba80d6a6a4aba | 4/4 POC_CLOSED`
+
+---
+
 ## BREACH-006 — 2026-06-18T04:45 SAST — ALP IDLE BREACH (56.7 min)
 
 ### Classification
@@ -22,7 +44,7 @@ Hash: `9a404c52fcc83bb3`
 Overnight execution begins. All 4 domains being rebuilt. KasiLink.com full refactor. KopanoLabs.com 3D hub. Careers page deployment. GSMB refactor after all web work complete.
 
 ### Status
-`OPEN → IN-PROGRESS — 2026-06-18T02:49Z | gsmb_auto_runner tick queued`
+`CLOSED — 2026-06-18T02:56Z | Web rebuild complete | commit 9c39fe5 pushed`
 
 ---
 
@@ -188,3 +210,20 @@ The LPM context window is **stateless by architectural constraint**. It only wak
 ### Status
 
 `POC_VALIDATED — RUNNING`
+
+## AUTO-BREACH-173016 — 2026-06-18T17:30:16Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 426.3 min exceeds 30 min threshold.
+Hash: `1b5aa7e3efd1fba7`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 426.3 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-06-18T17:30:16Z`
+
+---
