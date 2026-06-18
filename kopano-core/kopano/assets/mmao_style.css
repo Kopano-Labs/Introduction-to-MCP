@@ -1,0 +1,415 @@
+/*
+ * mmao_style.css — MMAO Live Financial Telemetry Dashboard
+ * ==========================================================
+ * KPCB+: 2026.06.16 | ALP: a137edd7265c807b | DSO: HDSO ###!!!
+ *
+ * ¢ [CONCEPTUALIZE & STREAM]
+ * Visually maps live financial telemetry flows as 100 independent agent
+ * dots rendering across the local dashboard. Each dot = one MMAO agent
+ * running in the Kopano Sovereign orchard — DSO HDSO (growth+survival+purpose).
+ *
+ * PSO Bracket Hierarchy used in this file:
+ *   [] Spatial Boundary Tier  — .perimeter, .firewall-wall, .agent-grid
+ *   {} Keynote Element Tier   — :root variables (the formula constants)
+ *   <> Ark Story Tier         — @keyframes sovereign identities
+ *   () Functional Tier        — .agent-dot functional states
+ *
+ * ¥¥ FORENSIC SHIELD: no external CDN, no Google Fonts API call.
+ *    All assets load from local path — offline-first, load-shedding-tolerant.
+ * ¢¢ IIDP PURGE: no third-party analytics injected here.
+ */
+
+/* ─── {} KEYNOTE: CSS VARIABLES (FORMULA CONSTANTS) ────────────────────────── */
+:root {
+  /* KPCB+ protocol colors — based on DSO taxonomy */
+  --color-pdso:    #f97316;   /* ###!  PDSO — Orange: growth only */
+  --color-adso:    #eab308;   /* ###!! ADSO — Yellow: growth+survival */
+  --color-hdso:    #22c55e;   /* ###!!! HDSO — Green: growth+survival+purpose */
+  --color-ag-rtc:  #a855f7;   /* ###??? AG/RTC — Purple: emerging 4th vector */
+  --color-foc:     #ef4444;   /* 😂 FOC — Red: fake of concept */
+  --color-poc:     #3b82f6;   /* 💯 POC — Blue: proof of concept */
+  --color-iidp:    #06b6d4;   /* 💠 IIDP — Cyan: invariance ingress decline */
+  --color-bg:      #0a0a0f;   /* Cape Town midnight — Black Beast dark */
+  --color-surface: #111118;
+  --color-border:  #1e1e2e;
+  --color-text:    #e2e8f0;
+  --color-muted:   #64748b;
+
+  /* Telemetry constants */
+  --overdrive-factor:      2.5;
+  --baseline-rate:         10;
+  --active-rate-hz:        25; /* baseline × overdrive = 25 Hz */
+  --agent-count:           100;
+  --iidp-inline:           0.90;
+  --iidp-inlane:           0.85;
+  --iidp-inland:           0.78;
+  --unemployment-invariant:0.328; /* 32.8% — the WHY vector */
+
+  /* Typography — local stack, no CDN */
+  --font-mono:   "Cascadia Code", "Fira Code", "JetBrains Mono", monospace;
+  --font-ui:     "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Animation timing */
+  --pulse-speed:   calc(1s / var(--active-rate-hz)); /* ~40ms — 25Hz */
+  --dot-drift-min: 4s;
+  --dot-drift-max: 12s;
+}
+
+/* ─── [] SPATIAL BOUNDARY: BASE RESET ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  height: 100%;
+  overflow: hidden; /* Dashboard is fullscreen — no scroll */
+}
+
+/* ─── [] SPATIAL BOUNDARY: DASHBOARD PERIMETER ──────────────────────────────── */
+.mmao-dashboard {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 3.5rem 1fr 5rem;
+  grid-template-columns: 16rem 1fr 20rem;
+  gap: 1px;
+  background: var(--color-border);
+}
+
+/* ─── [] HEADER BAR ─────────────────────────────────────────────────────────── */
+.mmao-header {
+  grid-column: 1 / -1;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mmao-header .title {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-hdso);
+  text-transform: uppercase;
+}
+
+.mmao-header .alp-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  margin-left: auto;
+}
+
+.mmao-header .rate-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--color-hdso);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  animation: rate-pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes rate-pulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1.0; }
+}
+
+/* ─── [] SIDEBAR: DSO VECTOR PANEL ──────────────────────────────────────────── */
+.mmao-sidebar {
+  background: var(--color-surface);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-y: auto;
+}
+
+.dso-card {
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.dso-card:hover { border-color: var(--color-iidp); }
+
+.dso-card.pdso  { background: rgba(249, 115, 22, 0.08);  border-color: rgba(249,115,22,0.2); }
+.dso-card.adso  { background: rgba(234, 179, 8, 0.08);   border-color: rgba(234,179,8,0.2); }
+.dso-card.hdso  { background: rgba(34, 197, 94, 0.08);   border-color: rgba(34,197,94,0.3); }
+.dso-card.agtc  { background: rgba(168, 85, 247, 0.08);  border-color: rgba(168,85,247,0.2);}
+
+.dso-card .label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.dso-card.pdso .label { color: var(--color-pdso); }
+.dso-card.adso .label { color: var(--color-adso); }
+.dso-card.hdso .label { color: var(--color-hdso); }
+.dso-card.agtc .label { color: var(--color-ag-rtc); }
+
+.dso-card .meaning {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+/* ─── () FUNCTIONAL: AGENT GRID — 100 INDEPENDENT DOTS ─────────────────────── */
+.agent-grid {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* Grid scanline overlay — visual signal of live emission */
+.agent-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(6, 182, 212, 0.02) 2px,
+    rgba(6, 182, 212, 0.02) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Individual agent dot */
+.agent-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.agent-dot:hover {
+  transform: translate(-50%, -50%) scale(2.5);
+  z-index: 10;
+}
+
+/* DSO-color-coded dots */
+.agent-dot.pdso  {
+  background: var(--color-pdso);
+  box-shadow: 0 0 6px var(--color-pdso);
+  animation: drift-orbit var(--dot-drift-min) ease-in-out infinite alternate,
+             poc-pulse 2s ease-in-out infinite;
+}
+.agent-dot.adso  {
+  background: var(--color-adso);
+  box-shadow: 0 0 6px var(--color-adso);
+  animation: drift-orbit calc(var(--dot-drift-min) * 1.3) ease-in-out infinite alternate-reverse,
+             poc-pulse 2.5s ease-in-out infinite;
+}
+.agent-dot.hdso  {
+  background: var(--color-hdso);
+  box-shadow: 0 0 8px var(--color-hdso), 0 0 16px rgba(34,197,94,0.3);
+  animation: drift-orbit calc(var(--dot-drift-min) * 1.7) ease-in-out infinite alternate,
+             poc-pulse 3s ease-in-out infinite;
+}
+.agent-dot.agtc  {
+  background: var(--color-ag-rtc);
+  box-shadow: 0 0 10px var(--color-ag-rtc), 0 0 20px rgba(168,85,247,0.4);
+  animation: drift-orbit var(--dot-drift-max) ease-in-out infinite alternate-reverse,
+             poc-pulse 1.5s ease-in-out infinite;
+}
+
+/* FOC dot — appears when breach detected */
+.agent-dot.foc {
+  background: var(--color-foc);
+  box-shadow: 0 0 12px var(--color-foc);
+  animation: foc-breach 0.3s ease-in-out infinite alternate;
+}
+
+/* <> ARK STORY: @keyframes — the sovereign identity motions */
+@keyframes drift-orbit {
+  0%   { transform: translate(-50%, -50%) translate(0px, 0px); }
+  25%  { transform: translate(-50%, -50%) translate(8px, -5px); }
+  50%  { transform: translate(-50%, -50%) translate(-4px, 10px); }
+  75%  { transform: translate(-50%, -50%) translate(6px, 4px); }
+  100% { transform: translate(-50%, -50%) translate(-8px, -8px); }
+}
+
+@keyframes poc-pulse {
+  0%, 100% { opacity: 0.8; }
+  50%       { opacity: 1.0; }
+}
+
+@keyframes foc-breach {
+  from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  to   { transform: translate(-50%, -50%) scale(1.8); opacity: 0.5; }
+}
+
+/* ─── {} KEYNOTE: TELEMETRY TICKER OVERLAY ───────────────────────────────────── */
+.telemetry-ticker {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(6, 182, 212, 0.6);
+  white-space: nowrap;
+  z-index: 5;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ─── [] SIDEBAR RIGHT: PROTOCOL STATUS ─────────────────────────────────────── */
+.mmao-protocols {
+  background: var(--color-surface);
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.protocol-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  border: 1px solid var(--color-border);
+  transition: background 0.15s;
+}
+
+.protocol-item.phase-1 { border-left: 3px solid var(--color-poc); }
+.protocol-item.phase-2 { border-left: 3px solid var(--color-iidp); }
+.protocol-item.phase-3 { border-left: 3px solid var(--color-ag-rtc); }
+
+.protocol-item .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-hdso);
+  flex-shrink: 0;
+  animation: poc-pulse 2s ease-in-out infinite;
+}
+
+.protocol-item .name  { color: var(--color-text); flex: 1; }
+.protocol-item .phase { color: var(--color-muted); font-size: 0.6rem; }
+
+/* ─── [] FOOTER: ALP RECEIPT BAR ────────────────────────────────────────────── */
+.mmao-footer {
+  grid-column: 1 / -1;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.25rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-muted);
+}
+
+.mmao-footer .metric {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.mmao-footer .metric-label { color: var(--color-muted); }
+.mmao-footer .metric-value {
+  color: var(--color-text);
+  font-weight: 600;
+}
+.mmao-footer .metric-value.hdso { color: var(--color-hdso); }
+.mmao-footer .metric-value.poc  { color: var(--color-poc); }
+
+.mmao-footer .constraint {
+  margin-left: auto;
+  color: rgba(100, 116, 139, 0.5);
+  font-size: 0.6rem;
+}
+
+/* ─── () FUNCTIONAL: IIDP VECTOR BARS ───────────────────────────────────────── */
+.iidp-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem;
+}
+
+.iidp-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+}
+
+.iidp-bar-row .token { color: var(--color-iidp); width: 1.2rem; }
+.iidp-bar-row .label { color: var(--color-muted); width: 5rem; }
+
+.iidp-bar-track {
+  flex: 1;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.iidp-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-iidp), var(--color-hdso));
+  transition: width 0.5s ease;
+}
+
+.iidp-bar-row .value {
+  color: var(--color-text);
+  width: 3rem;
+  text-align: right;
+}
+
+/* ─── () FUNCTIONAL: RESPONSIVE — survives mobile in Mitchells Plain ───────── */
+@media (max-width: 768px) {
+  .mmao-dashboard {
+    grid-template-rows: 3rem 1fr 4rem;
+    grid-template-columns: 1fr;
+  }
+  .mmao-sidebar, .mmao-protocols { display: none; }
+  .agent-dot { width: 6px; height: 6px; }
+}
+
+/* ─── SPSO TOKEN COMMENT TRAIL (in-lane documentation) ──────────────────────── */
+/*
+ * ® INLINE:    .agent-grid drives the execution flow across the physical grid map.
+ * © PROVE:     .dso-card.hdso — 100% POC — HDSO target is the validated goal.
+ * ¢ STREAM:    100 .agent-dot elements render financial telemetry flows live.
+ * ™ IIDP:      .agent-dot.foc — FOC detected → red breach animation triggered.
+ *
+ * $$ HARD CEILING: overdrive rate never renders below 25 Hz in the UI ticker.
+ * €€ SANDBOX:  no external assets loaded — fully offline-first.
+ * ¥¥ FORENSIC: no external @font-face or CDN calls present in this file.
+ * ¢¢ IIDP PURGE: no analytics script tags are referenced from this stylesheet.
+ *
+ * CONSTRAINT: I_AM_STATELESS_RENTER_NOT_LANDLORD
+ */

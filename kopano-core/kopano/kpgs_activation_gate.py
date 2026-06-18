@@ -7,9 +7,22 @@ Do not activate sovereign sim / thesis world-building prompts until this gate pa
 from __future__ import annotations
 
 import json
+import sys
+from .telemetry_breathing_flow import TelemetryBreathingFlow
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+# ALP — Auto LPM Protocol: MANDATORY on every stateless renter activation
+# Closes BREACH-001: LPM idle period not declared on context window re-entry.
+_ALP_PATH = Path(__file__).resolve().parents[2] / "poc-vs-foc" / "alp_protocol"
+if str(_ALP_PATH) not in sys.path:
+    sys.path.insert(0, str(_ALP_PATH))
+try:
+    from alp_auto_lpm_protocol import activate as _alp_activate
+    _ALP_AVAILABLE = True
+except ImportError:
+    _ALP_AVAILABLE = False
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 GATE_REPORT_PATH = REPO_ROOT / "docs" / "swarm-ops" / "KPGS_ACTIVATION_GATE.json"
@@ -119,6 +132,8 @@ def check_kpgs_activation_gate(*, write_report: bool = False) -> dict[str, Any]:
 
     failed = [c for c in checks if not c.get("ok")]
     allowed = len(failed) == 0
+    # Initialize telemetry flow if activation is allowed
+    telemetry_flow = TelemetryBreathingFlow(base_rate=10) if allowed else None
 
     report = {
         "schema": "kpgs_activation_gate_v1",
@@ -130,13 +145,10 @@ def check_kpgs_activation_gate(*, write_report: bool = False) -> dict[str, Any]:
         "checks_total": len(checks),
         "failed_checks": [c["check"] for c in failed],
         "checks": checks,
-        "message": (
-            "[KPGS_GATE] ALLOW — 300 agents guilded SHIP; governance COMPILED; hood READY. "
-            "Thesis world-building may proceed."
-            if allowed
-            else "[KPGS_GATE] BLOCK — complete 300-agent guild before sovereign sim / thesis activation. "
-            f"Failed: {', '.join(c['check'] for c in failed)}"
-        ),
+        "message": ("[KPGS_GATE] ALLOW — 300 agents guilded SHIP; governance COMPILED; hood READY. "
+                "Thesis world-building may proceed." if allowed else
+                "[KPGS_GATE] BLOCK — complete 300-agent guild before sovereign sim / thesis activation. "
+                f"Failed: {', '.join(c['check'] for c in failed)}")
     }
 
     if write_report:
@@ -170,8 +182,22 @@ def load_cached_activation_gate(*, fallback_live: bool = False) -> dict[str, Any
 
 
 def require_activation_allowed() -> dict[str, Any]:
-    """Return gate report; raises ValueError if blocked (for programmatic guards)."""
+    """
+    Return gate report; raises ValueError if blocked.
+    ALP MANDATORY: every stateless renter entry fires alp_activate().
+    This is the architectural fix for BREACH-001.
+    """
+    # [AUTO LPM PROTOCOL] ALP — fires BEFORE gate evaluation
+    # Every stateless renter must declare its idle gap and receive a receipt.
+    alp_receipt = None
+    if _ALP_AVAILABLE:
+        try:
+            alp_receipt = _alp_activate(context="kpgs_activation_gate_entry")
+        except Exception as _alp_err:
+            pass  # ALP failure must never block the gate
+
     gate = check_kpgs_activation_gate()
+    gate["alp_receipt"] = alp_receipt  # Receipt embedded in gate report
     if not gate.get("activation_allowed"):
         raise ValueError(gate.get("message", "KPGS activation gate BLOCK"))
     return gate

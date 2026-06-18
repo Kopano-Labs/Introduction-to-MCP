@@ -42,3 +42,17 @@ def log_execution(agent: str, action: str, result: str) -> None:
         "result": result
     }
     _write_line("execution.jsonl", entry)
+
+# Compatibility shim: expose standard library logging API
+import logging as _std_logging
+
+getLogger = _std_logging.getLogger
+basicConfig = _std_logging.basicConfig
+DEBUG = _std_logging.DEBUG
+INFO = _std_logging.INFO
+WARNING = _std_logging.WARNING
+ERROR = _std_logging.ERROR
+CRITICAL = _std_logging.CRITICAL
+_std_logger = _std_logging.getLogger(__name__)
+
+__all__ = ["log_reasoning", "log_execution", "getLogger", "basicConfig", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]

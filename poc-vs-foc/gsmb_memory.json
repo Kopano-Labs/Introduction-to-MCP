@@ -1,0 +1,159 @@
+{
+  "schema": "gsmb_memory_v1",
+  "sessions": [],
+  "vc_intakes": [
+    {
+      "session_id": "9D7D7F1E",
+      "applicant": "Vinchénzo April",
+      "dso": "HDSO",
+      "role": "Operations Node",
+      "status": "FAST_TRACK",
+      "proof": "github.com/vap/kopano-sandbox"
+    },
+    {
+      "session_id": "9D7D7F1E",
+      "applicant": "Monica Demo",
+      "dso": "ADSO",
+      "role": "Frontend Engineer",
+      "status": "CONDITIONAL",
+      "proof": ""
+    },
+    {
+      "session_id": "9D7D7F1E",
+      "applicant": "New Applicant",
+      "dso": "HDSO",
+      "role": "MMAO Engineering",
+      "status": "FAST_TRACK",
+      "proof": "github.com/na/agent-poc"
+    }
+  ],
+  "sse_events": [
+    {
+      "seq": 1,
+      "type": "PRODUCT_DISCOVERY",
+      "ts": "2026-06-17T23:45:13.753908+00:00",
+      "hash": "ab0e5f828aec19a4"
+    },
+    {
+      "seq": 2,
+      "type": "PRODUCT_DISCOVERY",
+      "ts": "2026-06-17T23:45:13.755571+00:00",
+      "hash": "fd593c89ae7e58c6"
+    },
+    {
+      "seq": 3,
+      "type": "PRODUCT_DISCOVERY",
+      "ts": "2026-06-17T23:45:13.756604+00:00",
+      "hash": "952801bdd63bd2c9"
+    },
+    {
+      "seq": 4,
+      "type": "SSE_SESSION_OPEN",
+      "ts": "2026-06-17T23:45:13.757404+00:00",
+      "hash": "7708e4b2a8ead6cf"
+    },
+    {
+      "seq": 5,
+      "type": "VC_DSO_CLASSIFICATION",
+      "ts": "2026-06-17T23:45:13.858568+00:00",
+      "hash": "cce3b7b2935b7b40"
+    },
+    {
+      "seq": 6,
+      "type": "VC_PROOF_SUBMITTED",
+      "ts": "2026-06-17T23:45:13.960000+00:00",
+      "hash": "d80cc755956f5452"
+    },
+    {
+      "seq": 7,
+      "type": "GSMB_MEMORY_UPDATED",
+      "ts": "2026-06-17T23:45:14.062390+00:00",
+      "hash": "a27968799075fdf4"
+    },
+    {
+      "seq": 8,
+      "type": "VC_ROUTING",
+      "ts": "2026-06-17T23:45:14.163994+00:00",
+      "hash": "4fcd0d131cac3db2"
+    },
+    {
+      "seq": 9,
+      "type": "SSE_SESSION_CLOSE",
+      "ts": "2026-06-17T23:45:14.265683+00:00",
+      "hash": "d10b01a694795f7a"
+    },
+    {
+      "seq": 10,
+      "type": "SSE_SESSION_OPEN",
+      "ts": "2026-06-17T23:45:14.266957+00:00",
+      "hash": "ca1c1776500f4985"
+    },
+    {
+      "seq": 11,
+      "type": "VC_DSO_CLASSIFICATION",
+      "ts": "2026-06-17T23:45:14.368218+00:00",
+      "hash": "9d95a3f7e8c1437b"
+    },
+    {
+      "seq": 12,
+      "type": "GSMB_MEMORY_UPDATED",
+      "ts": "2026-06-17T23:45:14.470845+00:00",
+      "hash": "c65c900d25e256dc"
+    },
+    {
+      "seq": 13,
+      "type": "VC_ROUTING",
+      "ts": "2026-06-17T23:45:14.572090+00:00",
+      "hash": "0de4969ff11b3fd6"
+    },
+    {
+      "seq": 14,
+      "type": "SSE_SESSION_CLOSE",
+      "ts": "2026-06-17T23:45:14.681728+00:00",
+      "hash": "ba8f5c179431d43e"
+    },
+    {
+      "seq": 15,
+      "type": "SSE_SESSION_OPEN",
+      "ts": "2026-06-17T23:45:14.683836+00:00",
+      "hash": "798e5706d6617634"
+    },
+    {
+      "seq": 16,
+      "type": "VC_DSO_CLASSIFICATION",
+      "ts": "2026-06-17T23:45:14.784866+00:00",
+      "hash": "2ecb7205f51d3e81"
+    },
+    {
+      "seq": 17,
+      "type": "VC_PROOF_SUBMITTED",
+      "ts": "2026-06-17T23:45:14.886552+00:00",
+      "hash": "6214eb0c6bd893e2"
+    },
+    {
+      "seq": 18,
+      "type": "GSMB_MEMORY_UPDATED",
+      "ts": "2026-06-17T23:45:14.989099+00:00",
+      "hash": "adf9bfcb6fc42740"
+    },
+    {
+      "seq": 19,
+      "type": "VC_ROUTING",
+      "ts": "2026-06-17T23:45:15.090382+00:00",
+      "hash": "5fdbac2b17c4660c"
+    },
+    {
+      "seq": 20,
+      "type": "SSE_SESSION_CLOSE",
+      "ts": "2026-06-17T23:45:15.192201+00:00",
+      "hash": "aa558e988185566c"
+    },
+    {
+      "seq": 21,
+      "type": "RTC_SESSION_COMPLETE",
+      "ts": "2026-06-17T23:45:15.193733+00:00",
+      "hash": "752298cfe02187d2"
+    }
+  ],
+  "kc_entries": 21
+}
