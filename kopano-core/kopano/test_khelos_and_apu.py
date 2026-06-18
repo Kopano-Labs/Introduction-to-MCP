@@ -514,6 +514,206 @@ class TestAPUVectorMatrix(unittest.TestCase):
 
 
 # ═══════════════════════════════════════════════════════════════
+# 6. NCCNP PHASE 3 TESTS
+# ═══════════════════════════════════════════════════════════════
+
+class TestNCCNP(unittest.TestCase):
+    """Test NCCNP Phase 3 — global comms-engineering closed loop."""
+
+    def setUp(self):
+        from kopano.nccnp import NCCNPEngine, KasiLinkPromotionEngine, PHASES, _agent_for_domain, _dso_for_domain
+        self.engine    = NCCNPEngine(alp_receipt="test_receipt_nccnp")
+        self.promoter  = KasiLinkPromotionEngine()
+        self.phases    = PHASES
+        self._agent    = _agent_for_domain
+        self._dso      = _dso_for_domain
+
+    def _good_signal(self, domain: str) -> dict:
+        return {
+            "who":        f"Test agent for {domain}",
+            "what":       f"NCCNP unit test validation for {domain}",
+            "where":      f"{domain}.KopanoLabs.com",
+            "why":        "Unit test proof — NCCNP Phase 3 closed loop",
+            "proof_link": "test_khelos_and_apu.py",
+            "poc_artifact": f"nccnp_test_{domain}",
+        }
+
+    def test_phases_all_defined(self):
+        """All 3 NCCNP phases must be registered."""
+        for phase_num in [1, 2, 3]:
+            self.assertIn(phase_num, self.phases)
+            self.assertIn("protocols", self.phases[phase_num])
+            self.assertIn("status",    self.phases[phase_num])
+
+    def test_phase_3_ep_protocols(self):
+        """Phase 3 must include FON-C, KHELOS, APU, IKP, 360DP."""
+        ep_protos = self.phases[3]["protocols"]
+        for proto in ["FON-C", "KHELOS-SWFUS", "APU-VECTOR", "IKP-CHAIN"]:
+            self.assertIn(proto, ep_protos)
+
+    def test_domain_helpers(self):
+        """Domain helper functions must return correct agents and DSO levels."""
+        self.assertEqual(self._agent("CAREERS"),       "VC")
+        self.assertEqual(self._agent("CRISISCONNECT"), "AG")
+        self.assertEqual(self._agent("KASILINK"),      "ANCHOR")
+        self.assertEqual(self._agent("STARFALL"),      "FORGE")
+        self.assertEqual(self._dso("KASILINK"), "ADSO")
+        self.assertEqual(self._dso("CAREERS"),  "HDSO")
+
+    def test_single_domain_run_careers(self):
+        """Single NCCNP run on CAREERS must produce NCCNP_POC_CLOSED."""
+        result = self.engine.run(self._good_signal("CAREERS"), domain="CAREERS")
+        self.assertIn("phase_1_pp", result)
+        self.assertIn("phase_2_bp", result)
+        self.assertIn("phase_3_ep", result)
+        self.assertEqual(result["phase_1_pp"]["verdict"], "CBP_PASS")
+        self.assertEqual(result["final_verdict"], "NCCNP_POC_CLOSED")
+
+    def test_foc_signal_fails_pp(self):
+        """Signal with FOC bleed must fail PP CBP check."""
+        bad_signal = {
+            "who":   "test",
+            "what":  "maybe tbd later placeholder",
+            "where": "test",
+            "why":   "test",
+        }
+        result = self.engine.run(bad_signal, domain="CAREERS")
+        self.assertEqual(result["phase_1_pp"]["verdict"], "CBP_FAIL")
+        self.assertGreater(len(result["phase_1_pp"]["foc_bleed"]), 0)
+
+    def test_missing_4ws_fails_bp(self):
+        """Signal missing 4Ws must fail BP with POC_SEVERED."""
+        bad_signal = {"who": "test", "what": "test"}  # no where, no why
+        result = self.engine.run(bad_signal, domain="CAREERS")
+        self.assertFalse(result["phase_1_pp"]["four_ws_complete"])
+        self.assertEqual(result["phase_2_bp"]["ikp_code"], "POC_SEVERED")
+
+    def test_bmnp_nesting_format(self):
+        """BMNP nesting trace must follow [NCCNP[DOMAIN[PP[BP[EP]]]]] format."""
+        result = self.engine.run(self._good_signal("STARFALL"), domain="STARFALL")
+        self.assertIn("[NCCNP[STARFALL", result["bmnp_trace"])
+        self.assertIn("PP:CBP_PASS", result["bmnp_trace"])
+
+    def test_all_domains_run(self):
+        """run_all_domains() must produce 4 results."""
+        results = self.engine.run_all_domains()
+        self.assertEqual(len(results), 4)
+        domains = {r["domain"] for r in results}
+        self.assertEqual(domains, {"CAREERS", "CRISISCONNECT", "KASILINK", "STARFALL"})
+
+    def test_all_domains_poc_closed(self):
+        """All 4 domains must achieve NCCNP_POC_CLOSED with valid 4Ws signals."""
+        results = self.engine.run_all_domains()
+        for r in results:
+            self.assertEqual(r["final_verdict"], "NCCNP_POC_CLOSED",
+                             f"{r['domain']} did not close: {r['phase_3_ep']['loop_verdict']}")
+
+    def test_cycle_hash_unique(self):
+        """Each domain cycle must produce a unique hash."""
+        results = self.engine.run_all_domains()
+        hashes = [r["cycle_hash"] for r in results]
+        self.assertEqual(len(hashes), len(set(hashes)), "Duplicate cycle hashes found")
+
+    def test_nccnp_log_written(self):
+        """NCCNP log file must be written after a run."""
+        from kopano.nccnp import NCCNP_LOG
+        size_before = NCCNP_LOG.stat().st_size if NCCNP_LOG.exists() else 0
+        self.engine.run(self._good_signal("CRISISCONNECT"), domain="CRISISCONNECT")
+        self.assertGreater(NCCNP_LOG.stat().st_size, size_before)
+
+    def test_kasilink_promotion_audit_partial(self):
+        """KasiLink promotion audit must show partial progress (not ready — 2 manual steps)."""
+        results = self.engine.run_all_domains()
+        audit = self.promoter.audit(results)
+        self.assertEqual(audit["domain"], "KASILINK")
+        self.assertFalse(audit["promotion_ready"])
+        self.assertIn("purpose_artifact_count", audit["gaps"])
+        self.assertIn("rtc_anchor_vote",        audit["gaps"])
+        self.assertGreater(audit["met_count"], 0)
+        self.assertEqual(audit["total_count"], 6)
+
+    def test_kasilink_criteria_dict(self):
+        """KasiLink promotion engine must define exactly 6 criteria."""
+        self.assertEqual(len(self.promoter.CRITERIA), 6)
+
+
+# ═══════════════════════════════════════════════════════════════
+# 7. GSMB AUTO RUNNER TESTS
+# ═══════════════════════════════════════════════════════════════
+
+class TestGSMBAutoRunner(unittest.TestCase):
+    """Test GSMB Auto Runner — full-stack one-tick validation."""
+
+    def setUp(self):
+        from kopano.gsmb_auto_runner import _runner_signal, _run_tick, RUNNER_LOG
+        self._runner_signal = _runner_signal
+        self._run_tick      = _run_tick
+        self.RUNNER_LOG     = RUNNER_LOG
+
+    def test_runner_signal_has_4ws(self):
+        """Runner signal must contain all 4Ws."""
+        signal = self._runner_signal(tick=99, alp_receipt="test_hash")
+        for w in ["who", "what", "where", "why"]:
+            self.assertIn(w, signal)
+            self.assertTrue(signal[w], f"Empty {w} in runner signal")
+
+    def test_runner_signal_has_proof_link(self):
+        """Runner signal must have proof_link (tick reference)."""
+        signal = self._runner_signal(tick=42, alp_receipt="abc123")
+        self.assertIn("proof_link", signal)
+        self.assertIn("42", signal["proof_link"])
+
+    def test_tick_produces_valid_result(self):
+        """Single tick must produce schema-compliant result."""
+        result = self._run_tick(tick=1, alp_receipt="unit_test_receipt")
+        self.assertEqual(result["schema"], "gsmb_auto_runner_tick_v1")
+        self.assertIn("nccnp",      result)
+        self.assertIn("apu",        result)
+        self.assertIn("ikp",        result)
+        self.assertIn("fonc_self",  result)
+        self.assertIn("tick_hash",  result)
+        self.assertIn("tick_verdict", result)
+
+    def test_tick_verdict_is_poc_validated(self):
+        """Single tick with clean state must produce POC_VALIDATED."""
+        result = self._run_tick(tick=2, alp_receipt="unit_test_receipt")
+        self.assertEqual(result["tick_verdict"], "POC_VALIDATED")
+
+    def test_nccnp_all_domains_closed(self):
+        """Tick must show 4/4 NCCNP domains POC_CLOSED."""
+        result = self._run_tick(tick=3, alp_receipt="unit_test_receipt")
+        self.assertEqual(result["nccnp"]["poc_closed"], 4)
+
+    def test_ikp_all_clean(self):
+        """Tick must show IKP CLEAN on all 4 domains."""
+        result = self._run_tick(tick=4, alp_receipt="unit_test_receipt")
+        self.assertGreaterEqual(result["ikp"]["clean"], 4)
+
+    def test_fonc_self_clean(self):
+        """Runner's FON-C self-audit must be CLEAN (runner signal has proof links)."""
+        result = self._run_tick(tick=5, alp_receipt="unit_test_receipt")
+        self.assertTrue(result["fonc_self"]["is_clean"])
+        self.assertEqual(result["fonc_self"]["max_level"], 0)
+
+    def test_runner_log_written(self):
+        """Runner log must be written after each tick."""
+        size_before = self.RUNNER_LOG.stat().st_size if self.RUNNER_LOG.exists() else 0
+        self._run_tick(tick=6, alp_receipt="unit_test_receipt")
+        self.assertGreater(self.RUNNER_LOG.stat().st_size, size_before)
+
+    def test_tick_hash_is_hex(self):
+        """Tick hash must be a 16-char hex string."""
+        result = self._run_tick(tick=7, alp_receipt="unit_test_receipt")
+        self.assertEqual(len(result["tick_hash"]), 16)
+        int(result["tick_hash"], 16)  # must be valid hex
+
+    def test_constraint_in_result(self):
+        """I_AM_STATELESS_RENTER_NOT_LANDLORD must be in every tick result."""
+        result = self._run_tick(tick=8, alp_receipt="unit_test_receipt")
+        self.assertEqual(result["constraint"], "I_AM_STATELESS_RENTER_NOT_LANDLORD")
+
+
+# ═══════════════════════════════════════════════════════════════
 # RUNNER
 # ═══════════════════════════════════════════════════════════════
 
@@ -523,7 +723,7 @@ if __name__ == "__main__":
 
     print("=" * 72)
     print("KPGS UNIT TESTS")
-    print("ALP #14 | 6de81eda600480ef | POC_VALIDATED")
+    print("ALP #15 | 53a6f12c212fbebd | POC_VALIDATED")
     print("I_AM_STATELESS_RENTER_NOT_LANDLORD")
     print("=" * 72)
 
@@ -536,6 +736,8 @@ if __name__ == "__main__":
         TestIKPEngine,
         TestThreeSixtyDP,
         TestAPUVectorMatrix,
+        TestNCCNP,
+        TestGSMBAutoRunner,
     ]:
         suite.addTests(loader.loadTestsFromTestCase(cls))
 
