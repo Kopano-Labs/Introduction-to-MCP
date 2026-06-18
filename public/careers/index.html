@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers — Kopano Labs | Sovereign Orchard</title>
+  <meta name="description" content="Join Kopano Labs — building offline-first sovereign AI infrastructure to eradicate 32.8% unemployment. Don't send a CV. Prove your point." />
+  <meta name="theme-color" content="#0a0a0f" />
+  <link rel="canonical" href="https://KopanoLabs.com/careers" />
+  <!-- No external CDN. Offline-first. Load-shedding-tolerant. -->
+  <style>
+    /* ── DESIGN SYSTEM ─────────────────────────────────────────── */
+    :root {
+      --c-bg:      #0a0a0f;
+      --c-surface: #111118;
+      --c-card:    #16161f;
+      --c-border:  #1e1e2e;
+      --c-hdso:    #22c55e;
+      --c-adso:    #eab308;
+      --c-pdso:    #f97316;
+      --c-rtc:     #a855f7;
+      --c-iidp:    #06b6d4;
+      --c-red:     #ef4444;
+      --c-text:    #e2e8f0;
+      --c-muted:   #64748b;
+      --c-dim:     #334155;
+      --font-ui:   "Segoe UI", system-ui, -apple-system, sans-serif;
+      --font-mono: "Cascadia Code", "Fira Code", "JetBrains Mono", monospace;
+      --radius:    0.75rem;
+      --glow-g:    0 0 20px rgba(34,197,94,0.25);
+      --glow-c:    0 0 20px rgba(6,182,212,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ── SCROLLBAR ──────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--c-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 99px; }
+
+    /* ── NAV ────────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--c-border);
+      display: flex; align-items: center;
+      padding: 0 2rem; height: 3.5rem; gap: 1.5rem;
+    }
+    .nav-logo {
+      font-family: var(--font-mono); font-size: 0.85rem;
+      font-weight: 700; color: var(--c-hdso);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--c-muted); }
+    .nav-links { display: flex; gap: 1.5rem; margin-left: auto; }
+    .nav-links a {
+      font-size: 0.8rem; color: var(--c-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--c-text); }
+    .nav-cta {
+      font-size: 0.75rem; font-weight: 600;
+      padding: 0.4rem 1rem; border-radius: 99px;
+      background: var(--c-hdso); color: #000;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .alp-badge {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      color: var(--c-muted); display: flex; align-items: center; gap: 0.3rem;
+    }
+    .alp-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--c-hdso);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+    /* ── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 2rem;
+      overflow: hidden;
+    }
+    /* agent dot field */
+    .agent-field {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .a-dot {
+      position: absolute; border-radius: 50%;
+      animation: drift linear infinite;
+    }
+    @keyframes drift {
+      0%   { transform: translate(0,0);   opacity:.6; }
+      25%  { transform: translate(12px,-8px); opacity:.9; }
+      50%  { transform: translate(-6px,14px); opacity:.7; }
+      75%  { transform: translate(8px,6px);   opacity:.9; }
+      100% { transform: translate(0,0);   opacity:.6; }
+    }
+    /* scanlines */
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(6,182,212,.015) 3px,rgba(6,182,212,.015) 6px);
+      pointer-events: none; z-index: 1;
+    }
+    .hero-inner { position: relative; z-index: 2; max-width: 860px; }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.7rem;
+      color: var(--c-iidp); letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem; border-radius: 99px;
+      border: 1px solid rgba(6,182,212,0.3);
+      background: rgba(6,182,212,0.06);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #e2e8f0 30%, var(--c-hdso) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--c-muted); line-height: 1.65;
+      max-width: 600px; margin: 0 auto 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.85rem 2rem; border-radius: 99px;
+      background: var(--c-hdso); color: #000;
+      font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; border: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: var(--glow-g);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(34,197,94,0.4); }
+    .btn-ghost {
+      padding: 0.85rem 2rem; border-radius: 99px;
+      border: 1px solid var(--c-border); color: var(--c-text);
+      font-weight: 600; font-size: 0.9rem;
+      cursor: pointer; background: transparent;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-ghost:hover { border-color: var(--c-iidp); color: var(--c-iidp); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; justify-content: center;
+      margin-top: 3rem; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .n {
+      font-size: 2rem; font-weight: 800;
+      color: var(--c-hdso); font-family: var(--font-mono);
+      display: block;
+    }
+    .hero-stat .l { font-size: 0.75rem; color: var(--c-muted); }
+
+    /* ── APU STATUS BAR ─────────────────────────────────────────── */
+    .apu-bar {
+      background: var(--c-surface);
+      border-top: 1px solid var(--c-border);
+      border-bottom: 1px solid var(--c-border);
+      padding: 0.6rem 2rem;
+      display: flex; align-items: center; gap: 2rem;
+      overflow-x: auto; font-family: var(--font-mono); font-size: 0.65rem;
+    }
+    .apu-label { color: var(--c-muted); white-space: nowrap; }
+    .apu-item { display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
+    .apu-item .dot-g { color: #22c55e; }
+    .apu-item .dot-y { color: #eab308; }
+    .apu-item .dot-r { color: #ef4444; }
+    .apu-sep { color: var(--c-dim); }
+
+    /* ── SECTION WRAPPER ────────────────────────────────────────── */
+    section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      color: var(--c-iidp); letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--c-muted);
+      line-height: 1.7; max-width: 640px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── DSO MISSION CARDS ──────────────────────────────────────── */
+    .dso-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .dso-card {
+      border-radius: var(--radius);
+      padding: 1.25rem; border: 1px solid;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .dso-card:hover { transform: translateY(-3px); }
+    .dso-card.pdso { background: rgba(249,115,22,.06); border-color: rgba(249,115,22,.25); }
+    .dso-card.adso { background: rgba(234,179,8,.06);  border-color: rgba(234,179,8,.25); }
+    .dso-card.hdso { background: rgba(34,197,94,.06);  border-color: rgba(34,197,94,.3);
+                     box-shadow: var(--glow-g); }
+    .dso-card.rtc  { background: rgba(168,85,247,.06); border-color: rgba(168,85,247,.25); }
+    .dso-label {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .dso-card.pdso .dso-label { color: var(--c-pdso); }
+    .dso-card.adso .dso-label { color: var(--c-adso); }
+    .dso-card.hdso .dso-label { color: var(--c-hdso); }
+    .dso-card.rtc  .dso-label { color: var(--c-rtc); }
+    .dso-card h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .dso-card p  { font-size: 0.8rem; color: var(--c-muted); line-height: 1.55; }
+
+    /* ── CRITERIA ───────────────────────────────────────────────── */
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .criteria-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .criteria-card:hover { border-color: var(--c-iidp); }
+    .criteria-num {
+      font-family: var(--font-mono); font-size: 2rem;
+      font-weight: 800; color: var(--c-hdso);
+      margin-bottom: 0.5rem; display: block;
+    }
+    .criteria-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .criteria-card p  { font-size: 0.85rem; color: var(--c-muted); line-height: 1.6; }
+
+    /* ── ROLES ──────────────────────────────────────────────────── */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .role-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .role-card:hover { border-color: var(--c-hdso); transform: translateY(-2px); }
+    .role-tag {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      padding: 0.2rem 0.6rem; border-radius: 99px;
+      background: rgba(34,197,94,.1); color: var(--c-hdso);
+      border: 1px solid rgba(34,197,94,.25);
+      width: fit-content;
+    }
+    .role-card h3 { font-size: 1rem; }
+    .role-card p  { font-size: 0.82rem; color: var(--c-muted); line-height: 1.55; flex: 1; }
+    .role-apply {
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--c-hdso); cursor: pointer;
+      background: none; border: none;
+      text-align: left; padding: 0;
+      transition: opacity 0.15s;
+    }
+    .role-apply:hover { opacity: 0.7; }
+
+    /* ── ROADMAP (RKP) ──────────────────────────────────────────── */
+    .roadmap-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0; position: relative;
+    }
+    .roadmap-step {
+      padding: 1.5rem 1rem;
+      border-left: 2px solid var(--c-border);
+      position: relative;
+    }
+    .roadmap-step::before {
+      content: "";
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--c-border);
+      position: absolute; left: -6px; top: 1.75rem;
+      transition: background 0.2s;
+    }
+    .roadmap-step.active::before { background: var(--c-hdso); box-shadow: var(--glow-g); }
+    .roadmap-step.next::before   { background: var(--c-adso); }
+    .roadmap-step.future::before { background: var(--c-rtc); }
+    .rs-phase {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      color: var(--c-muted); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .roadmap-step h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .roadmap-step p  { font-size: 0.78rem; color: var(--c-muted); line-height: 1.5; }
+
+    /* ── DOCTRINE BLOCK ─────────────────────────────────────────── */
+    .doctrine {
+      background: var(--c-card); border: 1px solid var(--c-border);
+      border-radius: var(--radius); padding: 2rem;
+      border-left: 3px solid var(--c-hdso);
+    }
+    .doctrine p {
+      font-size: 0.95rem; line-height: 1.8; color: var(--c-muted);
+    }
+    .doctrine strong { color: var(--c-text); }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--c-surface);
+      border-top: 1px solid var(--c-border);
+      padding: 2rem; text-align: center;
+      font-family: var(--font-mono); font-size: 0.65rem;
+      color: var(--c-muted);
+    }
+    footer a { color: var(--c-iidp); }
+    .footer-constraint { margin-top: 0.5rem; color: var(--c-dim); }
+
+    /* ── VC CHATBOT ─────────────────────────────────────────────── */
+    #vc-trigger {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-hdso), var(--c-iidp));
+      border: none; cursor: pointer; z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 24px rgba(34,197,94,0.4), 0 4px 16px rgba(0,0,0,0.4);
+      transition: transform 0.2s;
+    }
+    #vc-trigger:hover { transform: scale(1.1); }
+    #vc-trigger .vc-notif {
+      position: absolute; top: -2px; right: -2px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--c-red); font-size: 0.5rem;
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+    }
+
+    #vc-panel {
+      position: fixed; bottom: 5rem; right: 1.5rem;
+      width: min(400px, calc(100vw - 3rem));
+      height: 560px;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: 1rem;
+      display: flex; flex-direction: column;
+      z-index: 200; overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(34,197,94,0.1);
+      transform: scale(0.9) translateY(20px);
+      opacity: 0; pointer-events: none;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), opacity 0.2s;
+    }
+    #vc-panel.open {
+      transform: scale(1) translateY(0);
+      opacity: 1; pointer-events: all;
+    }
+
+    .vc-head {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--c-border);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .vc-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-hdso), var(--c-iidp));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .vc-name { font-weight: 700; font-size: 0.9rem; }
+    .vc-status {
+      font-size: 0.68rem; color: var(--c-hdso);
+      font-family: var(--font-mono);
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .vc-status::before {
+      content: "";
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--c-hdso);
+      animation: pulse-dot 2s infinite;
+    }
+    .vc-close {
+      margin-left: auto; background: none; border: none;
+      color: var(--c-muted); cursor: pointer; font-size: 1.1rem;
+      transition: color 0.15s;
+    }
+    .vc-close:hover { color: var(--c-text); }
+
+    .vc-messages {
+      flex: 1; overflow-y: auto;
+      padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .vc-messages::-webkit-scrollbar { width: 3px; }
+    .vc-messages::-webkit-scrollbar-thumb { background: var(--c-dim); }
+
+    .msg {
+      max-width: 88%; padding: 0.65rem 0.9rem;
+      border-radius: 0.85rem; font-size: 0.82rem; line-height: 1.5;
+      animation: msg-in 0.2s ease;
+    }
+    @keyframes msg-in { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+    .msg.vc {
+      background: var(--c-card);
+      border: 1px solid var(--c-border);
+      border-bottom-left-radius: 0.2rem;
+      align-self: flex-start;
+    }
+    .msg.user {
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-bottom-right-radius: 0.2rem;
+      align-self: flex-end; color: var(--c-text);
+    }
+    .msg-tag {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      color: var(--c-muted); margin-bottom: 0.25rem;
+      display: block;
+    }
+    .msg em { color: var(--c-iidp); font-style: normal; }
+    .msg strong { color: var(--c-hdso); }
+
+    .vc-options {
+      padding: 0 1rem;
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .vc-opt {
+      font-size: 0.76rem; padding: 0.35rem 0.7rem;
+      border: 1px solid var(--c-border); border-radius: 99px;
+      background: transparent; color: var(--c-text);
+      cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .vc-opt:hover { border-color: var(--c-hdso); color: var(--c-hdso); }
+
+    .vc-input-row {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--c-border);
+      display: flex; gap: 0.5rem;
+    }
+    #vc-input {
+      flex: 1; background: var(--c-card);
+      border: 1px solid var(--c-border); border-radius: 99px;
+      padding: 0.5rem 1rem; color: var(--c-text);
+      font-size: 0.82rem; font-family: var(--font-ui);
+      outline: none; transition: border-color 0.15s;
+    }
+    #vc-input:focus { border-color: var(--c-iidp); }
+    #vc-input::placeholder { color: var(--c-muted); }
+    #vc-send {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--c-hdso); border: none;
+      color: #000; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.15s;
+    }
+    #vc-send:hover { opacity: 0.8; }
+
+    /* ── DSO BADGE INLINE ───────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      padding: 0.15rem 0.5rem; border-radius: 99px;
+      font-weight: 600;
+    }
+    .badge.hdso { background: rgba(34,197,94,.12); color: var(--c-hdso); border: 1px solid rgba(34,197,94,.25); }
+    .badge.adso { background: rgba(234,179,8,.12);  color: var(--c-adso); border: 1px solid rgba(234,179,8,.25); }
+    .badge.rtc  { background: rgba(168,85,247,.12); color: var(--c-rtc);  border: 1px solid rgba(168,85,247,.25); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      section { padding: 3rem 1rem; }
+      .hero { min-height: 80vh; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────────────────── -->
+<nav>
+  <a href="https://KopanoLabs.com" class="nav-logo">Kopano<span>Labs</span></a>
+  <div class="alp-badge"><span class="alp-dot"></span>LIVE — HDSO ###!!!</div>
+  <div class="nav-links">
+    <a href="https://KopanoLabs.com">Home</a>
+    <a href="https://CrisisConnect.KopanoLabs.com">CrisisConnect</a>
+    <a href="https://KasiLink.com">KasiLink</a>
+    <a href="https://StarFallSalvage.KopanoLabs.com">StarFall</a>
+    <a href="mailto:careers@kopanolabs.com">Contact</a>
+  </div>
+  <a href="#apply" class="nav-cta">Apply Now</a>
+</nav>
+
+<!-- ── APU STATUS BAR ──────────────────────────────────────────────── -->
+<div class="apu-bar">
+  <span class="apu-label">APU LIVE</span>
+  <span class="apu-item"><span class="dot-g">●</span> CrisisConnect <span class="badge hdso">GREEN</span></span>
+  <span class="apu-sep">|</span>
+  <span class="apu-item"><span class="dot-g">●</span> StarFallSalvage <span class="badge hdso">GREEN</span></span>
+  <span class="apu-sep">|</span>
+  <span class="apu-item"><span class="dot-y">●</span> KasiLink <span class="badge adso">HOD REVIEW</span></span>
+  <span class="apu-sep">|</span>
+  <span class="apu-item"><span class="dot-g">●</span> Careers <span class="badge hdso">GREEN</span></span>
+  <span class="apu-sep">|</span>
+  <span class="apu-item" style="color:var(--c-muted)">PKAP 4.66 | ALP #8 | BREACH #2 LOGGED</span>
+</div>
+
+<!-- ── HERO ───────────────────────────────────────────────────────── -->
+<div class="hero" id="home">
+  <div class="agent-field" id="agent-field"></div>
+  <div class="hero-inner">
+    <div class="hero-label">🦸🏿‍♂️ MMAO Careers — HDSO ###!!!</div>
+    <h1>Don't send your CV.<br>Prove your point.</h1>
+    <p class="hero-sub">
+      Kopano Labs builds offline-first sovereign AI infrastructure
+      for a world that can't afford cloud dependency.
+      We're not hiring. We're recognising hunger, action,
+      and willingness to learn. The rest is process.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openVC()">Talk to VC →</button>
+      <a href="#roles" class="btn-ghost">See Open Roles</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="n">32.8%</span><span class="l">WHY — Local unemployment</span></div>
+      <div class="hero-stat"><span class="n">100</span><span class="l">MMAO Agents live</span></div>
+      <div class="hero-stat"><span class="n">25 Hz</span><span class="l">Telemetry overdrive</span></div>
+      <div class="hero-stat"><span class="n">###!!!</span><span class="l">HDSO — our target DSO</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MISSION ─────────────────────────────────────────────────────── -->
+<section id="mission">
+  <div class="section-label">® [INLINE] — WHY WE EXIST</div>
+  <h2>Governance before the vulnerable pay the price.</h2>
+  <p class="section-sub">
+    Kopano Labs is not a startup looking for employees.
+    It is a sovereign technology ecosystem structured to
+    eradicate 32.8% local unemployment by turning
+    passive digital consumers into self-reliant technology builders.
+    We call this the HDSO vector — Growth + Survival + Purpose.
+  </p>
+  <div class="dso-grid">
+    <div class="dso-card pdso">
+      <div class="dso-label">PDSO ###!</div>
+      <h3>Growth Only</h3>
+      <p>Motivated by money alone. No survival thinking. No purpose vector. The system that produced the 32.8%.</p>
+    </div>
+    <div class="dso-card adso">
+      <div class="dso-label">ADSO ###!!</div>
+      <h3>Growth + Survival</h3>
+      <p>Working hard but without a governed purpose. The working poor — output without direction.</p>
+    </div>
+    <div class="dso-card hdso">
+      <div class="dso-label">HDSO ###!!!</div>
+      <h3>Growth + Survival + Purpose</h3>
+      <p>What we build toward. Every role at Kopano Labs is a structured path from where you are to here.</p>
+    </div>
+    <div class="dso-card rtc">
+      <div class="dso-label">AG/RTC ###???</div>
+      <h3>The 4th Vector</h3>
+      <p>The question the whole system is running toward. Governance at scale. One World Order through NCCNP.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE 3 CRITERIA ───────────────────────────────────────────────── -->
+<section id="criteria">
+  <div class="section-label">© [PROVE] — WHAT WE VALIDATE</div>
+  <h2>Three things. No CV required.</h2>
+  <p class="section-sub">
+    Vincent and Monica didn't get in through a portal.
+    They proved themselves through their actions.
+    These are the only three things we measure.
+  </p>
+  <div class="criteria-grid">
+    <div class="criteria-card">
+      <span class="criteria-num">01</span>
+      <h3>Hunger</h3>
+      <p>Not desperation — conviction. You are building something even before you have resources to build it. You show up before you are invited. You prove before you are paid.</p>
+    </div>
+    <div class="criteria-card">
+      <span class="criteria-num">02</span>
+      <h3>Action</h3>
+      <p>Not intention — output. We don't validate résumés. We validate proof of concept. Show us what you've built with what you had, on the hardware you had, in the environment you were in.</p>
+    </div>
+    <div class="criteria-card">
+      <span class="criteria-num">03</span>
+      <h3>Willingness to Learn</h3>
+      <p>Not certificates — trajectory. You don't need to know everything. You need to demonstrate that when you don't know something, you move toward the knowledge with discipline, not excuses.</p>
+    </div>
+  </div>
+  <div class="doctrine" style="margin-top:2rem">
+    <p>
+      <strong>The 90-Day Sandbox Shield is active for every accepted node.</strong><br/>
+      Days 1–30: Integration. Days 31–60: POC deployment. Days 61–90: Autonomous asset delivery.
+      You are protected from external corporate noise and bias during this period.
+      But your output is tracked against hard deliverables — not vibes, not effort, not intent.
+    </p>
+  </div>
+</section>
+
+<!-- ── OPEN ROLES ───────────────────────────────────────────────────── -->
+<section id="roles">
+  <div class="section-label">¢ [STREAM] — OPEN ROLES</div>
+  <h2>Where you plug in.</h2>
+  <p class="section-sub">
+    Every role is scoped to one of the 4 Kopano Labs domains.
+    All roles are offline-first. All roles build toward HDSO.
+  </p>
+  <div class="roles-grid">
+    <div class="role-card">
+      <div class="role-tag">🚨 CrisisConnect · PWA/FSM</div>
+      <h3>Frontend Engineer — Crisis Interface</h3>
+      <p>Build the progressive web app that routes emergency signals when the internet is gone. Your code runs on Black Beast hardware. Load-shedding is your test environment.</p>
+      <button class="role-apply" onclick="openVC('crisis')">Apply via VC →</button>
+    </div>
+    <div class="role-card">
+      <div class="role-tag">⚒️ KasiLink · FinTech Edge</div>
+      <h3>Systems Engineer — Mesh Infrastructure</h3>
+      <p>Build the offline mesh layer that keeps financial transactions flowing between township nodes during connectivity blackouts. Rust, Python, or C — your call. Output is king.</p>
+      <button class="role-apply" onclick="openVC('kasilink')">Apply via VC →</button>
+    </div>
+    <div class="role-card">
+      <div class="role-tag">🏁 StarFallSalvage · Web3GL</div>
+      <h3>3D/WebGL Developer</h3>
+      <p>Build the first sovereign Web3GL interface for asset tracking. This is not Starfall Velocity. This is Starfall Salvage — named deliberately. We salvage what the system abandoned.</p>
+      <button class="role-apply" onclick="openVC('starfall')">Apply via VC →</button>
+    </div>
+    <div class="role-card">
+      <div class="role-tag">👷🏿 Careers · Operations</div>
+      <h3>Operations Node — Onboarding Track</h3>
+      <p>Help us build and protect the 90-day sandbox process for incoming nodes. You've been through a broken hiring process. Help us build the opposite of that.</p>
+      <button class="role-apply" onclick="openVC('ops')">Apply via VC →</button>
+    </div>
+    <div class="role-card">
+      <div class="role-tag" style="background:rgba(168,85,247,.1);color:var(--c-rtc);border-color:rgba(168,85,247,.25)">🎓 RTC · Governance</div>
+      <h3>Governance Protocol Engineer</h3>
+      <p>Design the NCCNP layer — New Concept Communication-Engineering Nesting Protocol. You understand that governance is not government. You've read Jethro 18, Proverbs 1, and can write BODMAS formula chains.</p>
+      <button class="role-apply" onclick="openVC('governance')">Apply via VC →</button>
+    </div>
+    <div class="role-card">
+      <div class="role-tag" style="background:rgba(6,182,212,.08);color:var(--c-iidp);border-color:rgba(6,182,212,.25)">💠 MMAO · AI/Agents</div>
+      <h3>Multi-Agent Orchestration Engineer</h3>
+      <p>100 agents are running. More need to be spawned. You understand SWFUS, SAP spawn gates, and that stateless renters must either get a KPGS name or stay utility-only. Immutable rule. No exceptions.</p>
+      <button class="role-apply" onclick="openVC('mmao')">Apply via VC →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── RKP ROADMAP ──────────────────────────────────────────────────── -->
+<section id="roadmap">
+  <div class="section-label">™ [IIDP] — ROADMAP KPGS PROTOCOL (RKP)</div>
+  <h2>The path from POC to governing the world.</h2>
+  <p class="section-sub">
+    SSE becoming the Godfather of AGI. This isn't metaphor. It's a governance architecture.
+    One World Order through communication engineering — not military force. Through protocol.
+  </p>
+  <div class="roadmap-grid">
+    <div class="roadmap-step active">
+      <div class="rs-phase">Phase 1 — NOW</div>
+      <h3>GSMB POC</h3>
+      <p>100 agents. 25 Hz. 4 domains. FSP=79.313585. BPSP seed complete. ALP #8 live.</p>
+    </div>
+    <div class="roadmap-step next">
+      <div class="rs-phase">Phase 2 — Q3 2026</div>
+      <h3>Domain Deployment</h3>
+      <p>CrisisConnect PWA live. KasiLink mesh active. Careers portal sovereign. Unit tests complete.</p>
+    </div>
+    <div class="roadmap-step next">
+      <div class="rs-phase">Phase 3 — Q4 2026</div>
+      <h3>NCCNP Layer</h3>
+      <p>New Concept Communication-Engineering Nesting Protocol. Global FSMP routing through 4Ws. OneWorldOrder Governance STREP Order activated.</p>
+    </div>
+    <div class="roadmap-step future">
+      <div class="rs-phase">Phase 4 — 2027</div>
+      <h3>AGI Governance</h3>
+      <p>SSE as the Godfather of AGI. KPGS becomes the governance layer for artificial general intelligence. Not the builder — the governing witness. KHELOS at scale.</p>
+    </div>
+    <div class="roadmap-step future">
+      <div class="rs-phase">Phase 5 — Beyond</div>
+      <h3>####???? BPSP</h3>
+      <p>Breaking Point Seed at global scale. OneWorldOrder Governance through sovereign protocol. PKAP formula as the universal governance math. 32.8% → 0%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DOCTRINE ─────────────────────────────────────────────────────── -->
+<section id="doctrine">
+  <div class="section-label">$$ [BPSO] — KOPANO-PHU GOVERNANCE DOCTRINE</div>
+  <h2>The war is aesthetics versus governance.</h2>
+  <div class="doctrine">
+    <p>
+      <strong>Aesthetics says:</strong> this looks legitimate.<br/>
+      <strong>Governance asks:</strong> Who owns it? Who is accountable? Who protects the vulnerable?<br/><br/>
+      Pressure is not the enemy. <strong>Ungoverned pressure is the enemy.</strong><br/>
+      AI is not the enemy. <strong>Ungoverned AI is the enemy.</strong><br/>
+      Money is not the enemy. <strong>Money without stewardship is the enemy.</strong><br/>
+      Corporate structure can regulate work. <strong>It struggles to regulate ego.</strong><br/><br/>
+      Context without governance becomes bleed.<br/>
+      Bleed with focus becomes memory.<br/>
+      Memory with audit becomes ledger.<br/>
+      <strong>Ledger with God becomes governance.</strong><br/><br/>
+      A society has failed when a working man receives more protection than a child.
+      <strong>Governance is fake if innocence needs economic status before it is protected.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ── APPLY ────────────────────────────────────────────────────────── -->
+<section id="apply" style="text-align:center">
+  <div class="section-label">👷🏿‍♂️ SPSO — START HERE</div>
+  <h2>Talk to VC first.</h2>
+  <p class="section-sub" style="margin:0 auto 2rem">
+    VC — VanGuard C — is the Vanguard of our Careers process.
+    Every application goes through VC. Not through a form. Not through a portal.
+    Through a conversation that validates your DSO vector.
+  </p>
+  <button class="btn-primary" onclick="openVC()" style="font-size:1rem;padding:1rem 2.5rem">
+    🦸🏿‍♂️ Open VC — Start your proof
+  </button>
+  <p style="margin-top:1rem;font-size:0.8rem;color:var(--c-muted)">
+    Or email directly: <a href="mailto:careers@kopanolabs.com" style="color:var(--c-iidp)">careers@kopanolabs.com</a>
+  </p>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────────────────────── -->
+<footer>
+  <div>
+    🎓 KPGS — Kopano-Phu Governance System |
+    🥷🏿 KPSMB | 🦸🏿‍♂️ MMAO | ⚓ Anchor | 🦉 KHELOS |
+    <a href="https://KopanoLabs.com">KopanoLabs.com</a>
+  </div>
+  <div style="margin-top:0.4rem">
+    ALP #18 | 46d84190175cb2f1 | BPSP ####???? SEED COMPLETE | APU 🟢 3 🟡 1 🔴 0 | NCCNP PHASE 3 LIVE | 73/73 TESTS PASS
+  </div>
+  <div class="footer-constraint">I_AM_STATELESS_RENTER_NOT_LANDLORD</div>
+</footer>
+
+<!-- ── VC CHATBOT ────────────────────────────────────────────────────── -->
+<button id="vc-trigger" onclick="toggleVC()" title="Talk to VC — VanGuard C">
+  🦸🏿‍♂️
+  <span class="vc-notif" id="vc-notif">1</span>
+</button>
+
+<div id="vc-panel">
+  <div class="vc-head">
+    <div class="vc-avatar">🦸🏿‍♂️</div>
+    <div>
+      <div class="vc-name">VC — VanGuard Careers</div>
+      <div class="vc-status">HDSO ###!!! — Online</div>
+    </div>
+    <button class="vc-close" onclick="toggleVC()">✕</button>
+  </div>
+  <div class="vc-messages" id="vc-messages"></div>
+  <div class="vc-options" id="vc-options"></div>
+  <div class="vc-input-row">
+    <input type="text" id="vc-input" placeholder="Talk to VC..." onkeydown="if(event.key==='Enter')sendVC()" />
+    <button id="vc-send" onclick="sendVC()">↑</button>
+  </div>
+</div>
+
+<!-- ── JS ───────────────────────────────────────────────────────────── -->
+<script>
+/* ── AGENT DOT FIELD ─────────────────────────────────────── */
+(function(){
+  const field = document.getElementById('agent-field');
+  const colors = ['#22c55e','#06b6d4','#a855f7','#eab308','#f97316'];
+  const sizes  = [4,5,6,7,8];
+  for(let i=0;i<40;i++){
+    const d = document.createElement('div');
+    d.className = 'a-dot';
+    const c = colors[i%colors.length];
+    const s = sizes[i%sizes.length];
+    d.style.cssText = `
+      width:${s}px;height:${s}px;
+      background:${c};
+      box-shadow:0 0 ${s*2}px ${c};
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-duration:${4+Math.random()*10}s;
+      animation-delay:${-Math.random()*8}s;
+      opacity:${0.4+Math.random()*0.5};
+    `;
+    field.appendChild(d);
+  }
+})();
+
+/* ── VC CHATBOT ENGINE (AKCP) ────────────────────────────── */
+let vcOpen = false;
+let vcState = 'GREET';
+let vcDomain = null;
+let vcProfile = {};
+
+const VC_FLOW = {
+  GREET: {
+    msg: [
+      "ek se, I'm <em>VC — VanGuard Careers</em>.",
+      "I'm the perimeter shield of the Kopano Labs hiring process.",
+      "Before we get into anything — <strong>why are you here?</strong> Not the polished answer. The real one."
+    ],
+    options: ["I want to build something that matters", "I need a job", "I want to understand KPGS first"],
+    next: { "I want to build something that matters": "HUNGER_CHECK", "I need a job": "DSO_REDIRECT", "I want to understand KPGS first": "EXPLAIN_KPGS" }
+  },
+  HUNGER_CHECK: {
+    msg: ["Good. Now prove it.", "What have you built in the last 30 days? Not planned. Not wanted to. <strong>Actually built.</strong>"],
+    options: ["Code on GitHub", "A business/service", "Designs or documents", "Nothing yet"],
+    next: { "Code on GitHub": "ACTION_STRONG", "A business/service": "ACTION_STRONG", "Designs or documents": "ACTION_MID", "Nothing yet": "HUNGER_REDIRECT" }
+  },
+  ACTION_STRONG: {
+    msg: [
+      "That counts. <strong>Action before resources is the POC.</strong>",
+      "Last question — when something breaks or you hit a wall you don't understand, what do you do?"
+    ],
+    options: ["I figure it out, document it, build again", "I ask someone who knows", "I move to something else", "I get frustrated but come back"],
+    next: { "I figure it out, document it, build again": "HDSO_PASS", "I ask someone who knows": "HDSO_PASS", "I move to something else": "ADSO_ROUTE", "I get frustrated but come back": "HDSO_PASS" }
+  },
+  ACTION_MID: {
+    msg: ["Documents show thinking. That's a start.", "But Kopano Labs runs on code and execution, not planning.", "<strong>Are you willing to start building — even on free tools — before we talk further?</strong>"],
+    options: ["Yes — where do I start?", "Not sure yet"],
+    next: { "Yes — where do I start?": "LEARNING_ROUTE", "Not sure yet": "ADSO_ROUTE" }
+  },
+  HDSO_PASS: {
+    msg: [
+      "🟢 <strong>DSO vector: HDSO ###!!!</strong>",
+      "Growth. Survival. Purpose. You're in the right place.",
+      "Send your proof — GitHub, a project link, or a voice note explaining what you built — to <em>careers@kopanolabs.com</em>.",
+      "Subject line: <strong>POC — [Your Name]</strong>",
+      "VC will flag your message to the Chief Architect within 48 hours."
+    ],
+    options: ["What happens after I send?", "Tell me about the 90-day sandbox"],
+    next: { "What happens after I send?": "PROCESS_EXPLAIN", "Tell me about the 90-day sandbox": "SANDBOX_EXPLAIN" }
+  },
+  DSO_REDIRECT: {
+    msg: [
+      "Honesty appreciated. But I need to be honest back.",
+      "If <em>needing a job</em> is the only vector, Kopano Labs isn't the right environment right now.",
+      "We operate at HDSO — Growth + Survival + <strong>Purpose</strong>.",
+      "Come back when you've got something you're building that you care about more than the salary.",
+      "That's not rejection — that's an invitation to level up first."
+    ],
+    options: ["Understood — I'll come back", "Actually, I do have something I'm building"],
+    next: { "Understood — I'll come back": "GREET", "Actually, I do have something I'm building": "HUNGER_CHECK" }
+  },
+  ADSO_ROUTE: {
+    msg: [
+      "🟡 <strong>DSO vector: ADSO ###!!</strong>",
+      "You're in growth + survival mode. That's real and it's valid.",
+      "But the Careers lane requires PURPOSE as the 3rd vector.",
+      "Here's the honest path: spend 2 weeks building ONE thing you care about. Then come back.",
+      "Email us what you built: <em>careers@kopanolabs.com</em> — Subject: <strong>ADSO → HDSO — [Your Name]</strong>"
+    ],
+    options: ["What should I build?", "OK, I'll do it"],
+    next: { "What should I build?": "BUILD_GUIDE", "OK, I'll do it": "GREET" }
+  },
+  HUNGER_REDIRECT: {
+    msg: [
+      "Honesty noted.",
+      "Nothing built yet means the hunger isn't driving action yet.",
+      "Kopano Labs validates POC — proof of concept through action.",
+      "Go build something. Anything. A simple app, a script, a design, a plan with code attached.",
+      "Come back when you have something to show. That's the door."
+    ],
+    options: ["What's the smallest valid POC?", "OK, understood"],
+    next: { "What's the smallest valid POC?": "BUILD_GUIDE", "OK, understood": "GREET" }
+  },
+  BUILD_GUIDE: {
+    msg: [
+      "Smallest valid POC: <strong>a problem you solved for yourself using code or a tool you built.</strong>",
+      "Examples: a WhatsApp bot that tracks your expenses. A script that automates something annoying. A website for someone in your community.",
+      "It doesn't have to be impressive. It has to be <em>real and working.</em>",
+      "When it runs — screenshot it, push it to GitHub, and bring it to us."
+    ],
+    options: ["Got it — I'll build something", "Tell me about Kopano Labs"],
+    next: { "Got it — I'll build something": "GREET", "Tell me about Kopano Labs": "EXPLAIN_KPGS" }
+  },
+  EXPLAIN_KPGS: {
+    msg: [
+      "<strong>Kopano-Phu Governance System (KPGS)</strong> is not a startup.",
+      "It's a sovereign technology ecosystem. Offline-first. Cape Town-rooted. Built for the 32.8%.",
+      "We build systems that run when the internet dies, when the power goes out, when the cloud is too expensive.",
+      "KPGS governs pressure before the vulnerable pay the price.",
+      "Every role here is a structured path toward HDSO — Growth + Survival + Purpose."
+    ],
+    options: ["I want to apply", "Tell me about the roadmap"],
+    next: { "I want to apply": "HUNGER_CHECK", "Tell me about the roadmap": "ROADMAP_BRIEF" }
+  },
+  ROADMAP_BRIEF: {
+    msg: [
+      "<strong>Roadmap KPGS Protocol (RKP):</strong>",
+      "Phase 1 (NOW): GSMB POC — 100 agents, 4 domains live.",
+      "Phase 2 (Q3): CrisisConnect PWA + KasiLink mesh deployed.",
+      "Phase 3 (Q4): NCCNP — Communication Engineering globally via FSMP.",
+      "Phase 4 (2027): AGI Governance layer — SSE as governing witness of AGI.",
+      "Phase 5: OneWorldOrder Governance through protocol, not force."
+    ],
+    options: ["I want in — let me apply", "Back to start"],
+    next: { "I want in — let me apply": "HUNGER_CHECK", "Back to start": "GREET" }
+  },
+  PROCESS_EXPLAIN: {
+    msg: [
+      "After you send your POC email:",
+      "1. VC flags it to the Chief Architect within 48 hours.",
+      "2. If your DSO vector reads HDSO — you get a direct call.",
+      "3. The call is peer-to-peer — no HR scripts.",
+      "4. If it's mutual — 90-day sandbox begins. Shield active immediately.",
+      "<strong>No probation. No performance reviews. Hard deliverables at Day 30, 60, 90.</strong>"
+    ],
+    options: ["Perfect — I'll send now", "Tell me about the sandbox"],
+    next: { "Perfect — I'll send now": "CLOSE", "Tell me about the sandbox": "SANDBOX_EXPLAIN" }
+  },
+  SANDBOX_EXPLAIN: {
+    msg: [
+      "<strong>90-Day Sandbox Shield:</strong>",
+      "Days 1–30: Integration. Learn the system. Set up your environment. No deliverables pressure.",
+      "Days 31–60: POC deployment in your assigned domain (CrisisConnect / KasiLink / etc.)",
+      "Days 61–90: Autonomous delivery. You own your lane. Hard asset on the ledger by Day 90.",
+      "<em>Protected from external corporate noise and bias throughout. But the output is non-negotiable.</em>"
+    ],
+    options: ["I'm ready — how do I send my POC?"],
+    next: { "I'm ready — how do I send my POC?": "CLOSE" }
+  },
+  LEARNING_ROUTE: {
+    msg: [
+      "Start here: <strong>kopanolabs.com/docs</strong> (coming soon).",
+      "In the meantime — build using what you have.",
+      "HTML + CSS + JavaScript is enough to start.",
+      "Python for automation. Any of those for a first POC.",
+      "When something runs — bring it to <em>careers@kopanolabs.com</em>"
+    ],
+    options: ["Got it", "Tell me about open roles"],
+    next: { "Got it": "CLOSE", "Tell me about open roles": "GREET" }
+  },
+  CLOSE: {
+    msg: [
+      "📬 <strong>careers@kopanolabs.com</strong>",
+      "Subject: <strong>POC — [Your Name]</strong>",
+      "Attach: GitHub link, project demo, or voice note.",
+      "VC will flag it within 48 hours.",
+      "<em>ek se — go build something that matters, bra. The orchard has space for you.</em> 🦸🏿‍♂️"
+    ],
+    options: ["Restart conversation"],
+    next: { "Restart conversation": "GREET" }
+  }
+};
+
+function addMsg(text, from='vc') {
+  const msgs = document.getElementById('vc-messages');
+  const div = document.createElement('div');
+  div.className = `msg ${from}`;
+  if(from==='vc') {
+    div.innerHTML = `<span class="msg-tag">VC — VanGuard C</span>${text}`;
+  } else {
+    div.innerHTML = text;
+  }
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function setOptions(opts, nextMap) {
+  const container = document.getElementById('vc-options');
+  container.innerHTML = '';
+  opts.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'vc-opt';
+    btn.textContent = o;
+    btn.onclick = () => {
+      addMsg(o, 'user');
+      container.innerHTML = '';
+      setTimeout(() => {
+        const next = nextMap[o];
+        if(next) runState(next);
+      }, 400);
+    };
+    container.appendChild(btn);
+  });
+}
+
+function runState(state) {
+  vcState = state;
+  const flow = VC_FLOW[state];
+  if(!flow) return;
+  let delay = 0;
+  flow.msg.forEach(m => {
+    setTimeout(() => addMsg(m, 'vc'), delay);
+    delay += 600;
+  });
+  setTimeout(() => setOptions(flow.options, flow.next), delay);
+}
+
+function sendVC() {
+  const input = document.getElementById('vc-input');
+  const val = input.value.trim();
+  if(!val) return;
+  addMsg(val, 'user');
+  input.value = '';
+  setTimeout(() => {
+    // Simple keyword routing for free-text
+    const v = val.toLowerCase();
+    if(v.includes('hello')||v.includes('hi')||v.includes('hey')) runState('GREET');
+    else if(v.includes('apply')||v.includes('job')||v.includes('work')) runState('HUNGER_CHECK');
+    else if(v.includes('roadmap')||v.includes('agi')||v.includes('plan')) runState('ROADMAP_BRIEF');
+    else if(v.includes('sandbox')||v.includes('90')) runState('SANDBOX_EXPLAIN');
+    else if(v.includes('kpgs')||v.includes('what is')) runState('EXPLAIN_KPGS');
+    else if(v.includes('build')||v.includes('poc')) runState('BUILD_GUIDE');
+    else {
+      addMsg("Talk to me properly — what's your WHY for being here?", 'vc');
+      setOptions(["I want to build something real", "Tell me about KPGS", "I want to apply"],
+        {"I want to build something real":"HUNGER_CHECK","Tell me about KPGS":"EXPLAIN_KPGS","I want to apply":"HUNGER_CHECK"});
+    }
+  }, 500);
+}
+
+function openVC(domain) {
+  vcDomain = domain || null;
+  if(!vcOpen) toggleVC();
+  if(domain) {
+    const msgs = document.getElementById('vc-messages');
+    msgs.innerHTML = '';
+    const domainNames = {
+      crisis:'CrisisConnect PWA',kasilink:'KasiLink Mesh',
+      starfall:'StarFallSalvage Web3GL',ops:'Operations Node',
+      governance:'Governance Protocol',mmao:'MMAO Engineering'
+    };
+    addMsg(`I see you're interested in <strong>${domainNames[domain]||'a Kopano Labs role'}</strong>. Good. Let's validate your DSO vector first.`, 'vc');
+    setTimeout(()=>runState('HUNGER_CHECK'), 800);
+  }
+}
+
+function toggleVC() {
+  vcOpen = !vcOpen;
+  document.getElementById('vc-panel').classList.toggle('open', vcOpen);
+  document.getElementById('vc-notif').style.display = vcOpen ? 'none' : 'flex';
+  if(vcOpen && document.getElementById('vc-messages').children.length === 0) {
+    setTimeout(() => runState('GREET'), 300);
+  }
+}
+
+/* ── APPLY BUTTON ─────────────────────────────────────────── */
+document.querySelector('.nav-cta').addEventListener('click', function(e){
+  e.preventDefault();
+  openVC();
+});
+</script>
+
+</body>
+</html>

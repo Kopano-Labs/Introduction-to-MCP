@@ -1,898 +1,858 @@
 <!DOCTYPE html>
-<html lang="en-ZA" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kopano Context: sovereign data governance, AI apprenticeship, and offline-first intelligence for African realities.">
-  <title>Kopano Context — Sovereign Intelligence Platform</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kopano Labs — Sovereign Product Studio</title>
+  <meta name="description" content="Kopano Labs builds offline-first sovereign technology ecosystems. CrisisConnect, KasiLink, StarFall Salvage — built from the township, for the world." />
+  <meta name="theme-color" content="#050508" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* ═══════════════════════════════════════════════════
-       DESIGN SYSTEM — Aligned to KRRababalela.com DNA
-       Colors · Typography · Spacing · Cards · Animations
-       ═══════════════════════════════════════════════════ */
     :root {
-      --bg: #070909;
-      --bg-card: rgba(234, 223, 207, 0.03);
-      --bg-elevated: rgba(234, 223, 207, 0.06);
-      --border: rgba(234, 223, 207, 0.10);
-      --border-hover: rgba(234, 223, 207, 0.20);
-      --text: #eadfcf;
-      --text-soft: #d5c4af;
-      --text-muted: #9d8e7b;
-      --accent: #b96f43;
-      --accent-hover: #d0854d;
-      --olive: #7a9866;
-      --olive-dim: rgba(122, 152, 102, 0.15);
-      --radius: 14px;
-      --radius-sm: 10px;
-      --serif: 'Fraunces', 'Playfair Display', Georgia, serif;
-      --mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
-      --sans: 'Manrope', system-ui, sans-serif;
-      --max-w: 1140px;
+      --bg:      #050508;
+      --bg2:     #0a0a12;
+      --surface: #0f0f1a;
+      --border:  #1a1a2e;
+      --border2: #252540;
+      --green:   #00ff88;
+      --cyan:    #00d4ff;
+      --purple:  #9d4edd;
+      --gold:    #f4c542;
+      --red:     #ff4d6d;
+      --text:    #f0f0f8;
+      --muted:   #6b7280;
+      --dim:     #374151;
+      --font:    'Inter', system-ui, sans-serif;
+      --mono:    'JetBrains Mono', monospace;
+      --r:       1rem;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: var(--sans);
-      color: var(--text);
       background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    a { color: var(--olive); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--accent-hover); }
-
-    /* ═══ TYPOGRAPHY ═══ */
-    .eyebrow {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-family: var(--serif);
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -3px;
       color: var(--text);
+      font-family: var(--font);
+      overflow-x: hidden;
+      cursor: none;
     }
-    h2 {
-      font-family: var(--serif);
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -2px;
-      color: var(--text);
-    }
-    h3 {
-      font-family: var(--serif);
-      font-size: clamp(18px, 2.5vw, 22px);
-      font-weight: 500;
-      line-height: 1.3;
-      letter-spacing: -0.5px;
-      color: var(--text);
-    }
+    a { color: inherit; text-decoration: none; }
 
-    /* ═══ NAV ═══ */
-    .site-header {
+    /* ── CUSTOM CURSOR ─────────────────────────────────────── */
+    #cursor {
+      position: fixed; top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--green);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s, width 0.2s, height 0.2s;
+      transform: translate(-50%, -50%);
+    }
+    #cursor-ring {
+      position: fixed; top: 0; left: 0;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(0,255,136,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: transform 0.35s ease, width 0.3s, height 0.3s, border-color 0.2s;
+    }
+    body.hovering #cursor { transform: translate(-50%,-50%) scale(2.5); }
+    body.hovering #cursor-ring { width: 60px; height: 60px; border-color: rgba(0,255,136,0.6); }
+
+    /* ── SCROLLBAR ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 0 3rem; height: 64px;
+      background: rgba(5,5,8,0.7);
+      backdrop-filter: blur(24px) saturate(180%);
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(20px);
-      background: rgba(7, 9, 9, 0.85);
-      transition: all 0.3s;
     }
-    .header-shell {
-      max-width: var(--max-w); margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 32px;
+    .nav-logo {
+      font-family: var(--mono); font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .brand-mark {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; color: var(--text);
+    .nav-center {
+      display: flex; gap: 2rem; margin: 0 auto;
     }
-    .brand-logo {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), var(--olive));
+    .nav-center a {
+      font-size: 0.82rem; color: var(--muted); font-weight: 500;
+      transition: color 0.2s; letter-spacing: 0.02em;
+    }
+    .nav-center a:hover { color: var(--text); }
+    .nav-cta {
+      font-size: 0.8rem; font-weight: 700; padding: 0.5rem 1.25rem;
+      border-radius: 99px;
+      border: 1px solid rgba(0,255,136,0.4);
+      color: var(--green);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { background: rgba(0,255,136,0.1); border-color: var(--green); }
+
+    /* ── CANVAS HERO ───────────────────────────────────────── */
+    #hero-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--green); letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 99px;
+      border: 1px solid rgba(0,255,136,0.2);
+      background: rgba(0,255,136,0.04);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s 0.2s both;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse-g 2s infinite;
+    }
+    @keyframes pulse-g { 0%,100%{opacity:0.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.3)} }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900; line-height: 1.0;
+      letter-spacing: -0.04em;
+      animation: fadeUp 0.8s 0.3s both;
+    }
+    .h1-line1 { color: var(--text); }
+    .h1-line2 {
+      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 50%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      margin: 1.5rem auto 0;
+      max-width: 560px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted); line-height: 1.7; font-weight: 400;
+      animation: fadeUp 0.8s 0.5s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .hero-scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.6rem; color: var(--muted);
+      letter-spacing: 0.1em; animation: fadeUp 1s 1.2s both;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--green), transparent);
+      animation: scroll-pulse 2s infinite;
+    }
+    @keyframes scroll-pulse { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(0.6)} }
+
+    /* ── STATS STRIP ───────────────────────────────────────── */
+    .stats-strip {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: center;
+      background: rgba(10,10,18,0.8);
+      backdrop-filter: blur(12px);
+    }
+    .stats-inner {
+      display: flex; align-items: stretch;
+      max-width: 1200px; width: 100%;
+    }
+    .stat-item {
+      flex: 1; padding: 2rem 1.5rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-n {
+      font-size: 2.4rem; font-weight: 900;
+      font-family: var(--mono); display: block;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-l { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* ── SECTION ───────────────────────────────────────────── */
+    .section {
+      position: relative; z-index: 1;
+      padding: 8rem 2rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-tag {
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--green); letter-spacing: 0.2em;
+      text-transform: uppercase; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-tag::before {
+      content: ""; width: 24px; height: 1px;
+      background: var(--green);
+    }
+    .section h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 560px; line-height: 1.7; margin-bottom: 4rem;
+    }
+
+    /* ── MVP CARDS ─────────────────────────────────────────── */
+    .mvp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      overflow: hidden;
+    }
+    .mvp-card {
+      background: var(--bg2);
+      padding: 2.5rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+      cursor: none;
+    }
+    .mvp-card:hover { background: var(--surface); }
+    .mvp-card::before {
+      content: "";
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .mvp-card:hover::before { opacity: 1; }
+    .mvp-card.crisis::before  { background: radial-gradient(ellipse at top left, rgba(0,255,136,0.05) 0%, transparent 70%); }
+    .mvp-card.kasilink::before { background: radial-gradient(ellipse at top left, rgba(0,212,255,0.05) 0%, transparent 70%); }
+    .mvp-card.starfall::before { background: radial-gradient(ellipse at top left, rgba(157,78,221,0.05) 0%, transparent 70%); }
+    .mvp-card.careers::before  { background: radial-gradient(ellipse at top left, rgba(244,197,66,0.05) 0%, transparent 70%); }
+
+    .mvp-icon {
+      font-size: 2.5rem;
+      filter: drop-shadow(0 0 12px currentColor);
+      width: 64px; height: 64px;
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--mono); font-weight: 700; font-size: 12px; color: #fff;
+      border-radius: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border2);
     }
-    .brand-copy { display: flex; flex-direction: column; gap: 1px; }
-    .brand-name { font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: -0.3px; }
-    .brand-tag { font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+    .mvp-tag {
+      font-family: var(--mono); font-size: 0.6rem;
+      font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 99px;
+      width: fit-content;
+    }
+    .tag-green { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+    .tag-cyan  { background: rgba(0,212,255,0.1);  color: var(--cyan);  border: 1px solid rgba(0,212,255,0.2); }
+    .tag-purple{ background: rgba(157,78,221,0.1); color: var(--purple);border: 1px solid rgba(157,78,221,0.2); }
+    .tag-gold  { background: rgba(244,197,66,0.1); color: var(--gold);  border: 1px solid rgba(244,197,66,0.2); }
+    .tag-red   { background: rgba(255,77,109,0.1); color: var(--red);   border: 1px solid rgba(255,77,109,0.2); }
 
-    .header-actions { display: flex; align-items: center; gap: 8px; }
-    .site-nav { display: flex; gap: 24px; align-items: center; margin-right: 16px; }
-    .site-nav a {
-      font-size: 12px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-muted);
-      text-decoration: none; transition: color 0.2s;
+    .mvp-card h3 {
+      font-size: 1.4rem; font-weight: 800;
+      letter-spacing: -0.02em;
     }
-    .site-nav a:hover, .site-nav a[aria-current] { color: var(--text); }
+    .mvp-card p {
+      font-size: 0.88rem; color: var(--muted);
+      line-height: 1.65; flex: 1;
+    }
+    .mvp-status {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-family: var(--mono); font-size: 0.62rem;
+      color: var(--muted);
+    }
+    .mvp-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+    }
+    .dot-live   { background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse-g 2s infinite; }
+    .dot-yellow { background: var(--gold);  box-shadow: 0 0 8px var(--gold); }
+    .dot-build  { background: var(--purple); }
+    .mvp-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 700;
+      padding: 0.6rem 1.2rem; border-radius: 99px;
+      border: 1px solid var(--border2);
+      color: var(--text); transition: all 0.2s;
+      width: fit-content;
+    }
+    .mvp-link:hover {
+      border-color: var(--green); color: var(--green);
+      background: rgba(0,255,136,0.05);
+      transform: translateX(4px);
+    }
+    .mvp-link.cyan:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.05); }
+    .mvp-link.purple:hover { border-color: var(--purple); color: var(--purple); background: rgba(157,78,221,0.05); }
+    .mvp-link.gold:hover { border-color: var(--gold); color: var(--gold); background: rgba(244,197,66,0.05); }
 
-    .theme-switcher {
-      display: flex; gap: 2px; background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: 20px;
-      padding: 3px;
+    /* ── FEATURED CARD (LARGE) ─────────────────────────────── */
+    .mvp-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: row; align-items: center; gap: 3rem;
     }
-    .theme-switcher button {
-      font-family: var(--mono); font-size: 10px; font-weight: 500;
-      padding: 5px 12px; border-radius: 16px; border: none;
-      background: transparent; color: var(--text-muted); cursor: pointer;
-      transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .theme-switcher button[aria-pressed="true"] {
-      background: var(--accent); color: #fff;
-    }
-
-    /* ═══ HERO ═══ */
-    .hero-section {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 120px 32px 80px;
-      max-width: var(--max-w); margin: 0 auto;
+    .mvp-card.featured .mvp-content { flex: 1; }
+    .mvp-card.featured .mvp-preview {
+      flex-shrink: 0; width: 280px; height: 180px;
+      border-radius: 0.75rem; overflow: hidden;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
       position: relative;
     }
-    .hero-copy { flex: 1; max-width: 600px; }
-    .hero-copy h1 { margin-bottom: 20px; }
-    .hero-text {
-      font-size: 16px; line-height: 1.7; color: var(--text-muted);
-      max-width: 500px; margin-bottom: 36px;
+    .preview-grid {
+      display: grid; grid-template-columns: repeat(5,1fr);
+      grid-template-rows: repeat(5,1fr);
+      gap: 4px; padding: 12px; width: 100%; height: 100%;
     }
-    .action-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
-    .button {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: var(--radius-sm);
-      font-family: var(--sans); font-size: 13px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 1px;
-      cursor: pointer; transition: all 0.3s; border: none;
-      text-decoration: none;
+    .pg-dot {
+      border-radius: 50%; opacity: 0.6;
+      animation: blink var(--d, 2s) var(--del, 0s) infinite;
     }
-    .button-primary {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 4px 20px rgba(185, 111, 67, 0.25);
+    @keyframes blink { 0%,100%{opacity:0.2} 50%{opacity:0.9} }
+
+    /* ── MANIFESTO ─────────────────────────────────────────── */
+    .manifesto-block {
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--green);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 2.5rem;
+      background: var(--surface);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
     }
-    .button-primary:hover {
-      background: var(--accent-hover); color: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(185, 111, 67, 0.35);
+    .manifesto-line {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--muted);
     }
-    .button-secondary {
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border);
+    .manifesto-line strong { color: var(--text); }
+    .manifesto-quote {
+      font-size: 1.5rem; font-weight: 800;
+      line-height: 1.4; letter-spacing: -0.02em;
+      display: flex; align-items: flex-start;
     }
-    .button-secondary:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-elevated);
-      color: var(--text);
+    .manifesto-quote span {
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .signal-strip {
-      list-style: none; display: flex; gap: 24px; flex-wrap: wrap;
-    }
-    .signal-strip li {
-      font-family: var(--mono); font-size: 11px;
-      color: var(--text-muted); letter-spacing: 0.5px;
-      position: relative; padding-left: 14px;
-    }
-    .signal-strip li::before {
-      content: ''; position: absolute; left: 0; top: 50%;
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--olive); transform: translateY(-50%);
-    }
-
-    .hero-visual { flex: 1; display: flex; flex-direction: column; gap: 16px; padding-left: 40px; }
-    .metric-stack { display: flex; flex-direction: column; gap: 12px; }
-    .metric-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px;
-      transition: border-color 0.3s;
-    }
-    .metric-card:hover { border-color: var(--border-hover); }
-    .metric-kicker {
-      font-family: var(--mono); font-size: 10px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 2px;
-      color: var(--text-muted); margin-bottom: 8px;
-    }
-    .metric-card h2 {
-      font-family: var(--serif); font-size: 22px; font-weight: 600;
-      letter-spacing: -1px; margin-bottom: 6px;
-    }
-    .metric-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
-    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .metric-grid div { display: flex; flex-direction: column; gap: 2px; }
-    .metric-grid strong { font-size: 13px; font-weight: 600; color: var(--text-soft); }
-    .metric-grid span { font-size: 11px; color: var(--text-muted); }
-
-    /* ═══ CONTENT SECTIONS ═══ */
-    .content-section {
-      padding: 100px 32px;
-      max-width: var(--max-w); margin: 0 auto;
-    }
-    .section-heading {
-      max-width: 600px; margin-bottom: 48px;
-    }
-    .section-heading p {
-      font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-top: 12px;
-    }
-
-    .card-grid { display: grid; gap: 16px; }
-    .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
-
-    .content-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 28px;
-      transition: all 0.3s;
-    }
-    .content-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-    .card-kicker {
-      font-family: var(--mono); font-size: 10px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 2px;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .content-card h3 { margin-bottom: 10px; }
-    .content-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-
-    /* ═══ SPLIT SECTION ═══ */
-    .split-section {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 48px; align-items: start;
-    }
-    .split-copy { max-width: 520px; }
-    .split-copy p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-top: 16px; }
-    .principle-list { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
-    .principle-list article h3 { font-size: 16px; margin-bottom: 4px; }
-    .principle-list article p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
-
-    /* ═══ PRODUCT CARDS ═══ */
-    .product-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 28px; cursor: pointer;
-      transition: all 0.3s;
-    }
-    .product-card:hover {
-      border-color: var(--accent); transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(185, 111, 67, 0.08);
-    }
-    .product-icon { font-size: 28px; margin-bottom: 14px; }
-    .product-name {
-      font-family: var(--serif); font-size: 18px; font-weight: 600;
-      letter-spacing: -0.5px; margin-bottom: 8px;
-    }
-    .product-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
-    .product-tag {
-      display: inline-block; padding: 4px 12px; border-radius: 12px;
-      font-family: var(--mono); font-size: 10px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 1px;
-    }
-    .tag-live { background: var(--olive-dim); color: var(--olive); }
-    .tag-dev { background: rgba(185, 111, 67, 0.12); color: var(--accent); }
-    .tag-sim { background: rgba(234, 223, 207, 0.06); color: var(--text-muted); }
-
-    /* ═══ ALTAR SECTION ═══ */
-    .altar-section {
+    /* ── APU LIVE BAR ──────────────────────────────────────── */
+    .apu-live {
+      position: relative; z-index: 1;
+      background: var(--surface);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      padding: 0.75rem 3rem;
+      display: flex; align-items: center; gap: 2rem;
+      overflow-x: auto;
+      font-family: var(--mono); font-size: 0.62rem;
     }
-    .altar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .altar-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px; text-align: center;
-      transition: all 0.3s;
-    }
-    .altar-card:hover { border-color: var(--border-hover); }
-    .altar-icon { font-size: 28px; margin-bottom: 12px; }
-    .altar-name {
-      font-family: var(--serif); font-size: 16px; font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .altar-role {
-      font-family: var(--mono); font-size: 11px; color: var(--text-muted);
-      line-height: 1.4;
-    }
-    .altar-verse {
-      font-family: var(--serif); font-style: italic;
-      font-size: 12px; color: var(--text-muted); opacity: 0.6;
-      margin-top: 12px; padding-top: 12px;
-      border-top: 1px solid var(--border); line-height: 1.4;
-    }
+    .apu-label { color: var(--green); font-weight: 700; white-space: nowrap; }
+    .apu-pair { display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; color: var(--muted); }
+    .apu-sep { color: var(--dim); }
 
-    /* ═══ CTA SECTION ═══ */
-    .cta-section {
-      padding: 100px 32px; text-align: center;
-      max-width: var(--max-w); margin: 0 auto;
+    /* ── TECH STACK ────────────────────────────────────────── */
+    .tech-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
     }
-    .cta-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 56px 40px;
-      max-width: 700px; margin: 0 auto;
-    }
-    .cta-card h2 { margin-bottom: 16px; }
-    .cta-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 28px; }
-    .cta-card .action-row { justify-content: center; }
-
-    /* ═══ ECOSYSTEM ═══ */
-    .ecosystem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .eco-node {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 20px; text-align: center;
-      transition: all 0.3s; cursor: pointer;
-    }
-    .eco-node:hover { border-color: var(--accent); }
-    .eco-node-icon { font-size: 24px; margin-bottom: 8px; }
-    .eco-node-name {
-      font-family: var(--sans); font-size: 13px; font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .eco-node-desc {
-      font-size: 11px; color: var(--text-muted); line-height: 1.4;
-    }
-
-    /* ═══ FOOTER ═══ */
-    .site-footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 32px;
-    }
-    .footer-shell {
-      max-width: var(--max-w); margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: start;
-      flex-wrap: wrap; gap: 24px;
-    }
-    .footer-brand {
-      font-family: var(--serif); font-size: 16px; font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .footer-copy { font-size: 12px; color: var(--text-muted); max-width: 360px; line-height: 1.5; }
-    .footer-nav { display: flex; gap: 20px; }
-    .footer-nav a {
-      font-family: var(--mono); font-size: 11px;
-      text-transform: uppercase; letter-spacing: 1px;
-      color: var(--text-muted);
-    }
-    .footer-nav a:hover { color: var(--text); }
-    .footer-meta {
-      font-family: var(--mono); font-size: 10px; color: var(--text-muted);
-      opacity: 0.5; margin-top: 8px;
-    }
-    .footer-bracket {
-      font-family: var(--mono); color: var(--accent);
-      font-size: 10px; letter-spacing: 1px;
-    }
-    .footer-scripture {
-      font-family: var(--serif); font-style: italic;
-      font-size: 12px; color: var(--text-muted); opacity: 0.5;
-      text-align: center; padding: 16px 32px;
-    }
-
-    /* ═══ ENTRYWAY ═══ */
-    .entryway-overlay {
-      position: fixed; inset: 0; z-index: 9999;
-      background: rgba(7, 9, 9, 0.97);
-      display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(20px);
-      transition: opacity 0.6s;
-    }
-    .entryway-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); max-width: 520px; width: 92%;
-      padding: 48px 36px; text-align: center;
-    }
-    .entryway-icon { font-size: 40px; margin-bottom: 16px; }
-    .entryway-card h2 {
-      font-family: var(--serif); font-size: 28px; font-weight: 600;
-      letter-spacing: -1.5px; margin-bottom: 8px;
-    }
-    .entryway-mono {
-      font-family: var(--mono); font-size: 11px;
-      color: var(--text-muted); letter-spacing: 2px;
-      text-transform: uppercase; margin-bottom: 24px;
-    }
-    .entryway-body {
-      text-align: left; background: var(--bg-elevated);
+    .tech-card {
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 20px;
-      margin-bottom: 24px; font-size: 13px;
-      line-height: 1.8; color: var(--text-muted);
+      border-radius: var(--r);
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    .entryway-body strong { color: var(--accent); }
-    .entryway-body .kc-label { color: var(--olive); }
-    .entryway-body .cas-label { color: var(--accent); }
-    .entryway-verse {
-      font-family: var(--serif); font-style: italic;
-      font-size: 12px; color: var(--text-muted); opacity: 0.5;
-      margin-bottom: 20px;
+    .tech-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .tech-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+    .tech-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .tech-desc { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── CTA SECTION ───────────────────────────────────────── */
+    .cta-section {
+      position: relative; z-index: 1;
+      padding: 8rem 2rem;
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(0,255,136,0.04) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
     }
-    .entryway-accept {
-      padding: 14px 36px; border-radius: var(--radius-sm); border: none;
-      background: var(--accent); color: #fff;
-      font-family: var(--sans); font-size: 13px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      cursor: pointer; transition: all 0.3s;
-      box-shadow: 0 4px 20px rgba(185, 111, 67, 0.25);
+    .cta-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900; letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
     }
-    .entryway-accept:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(185, 111, 67, 0.35);
+    .cta-sub { font-size: 1.1rem; color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-glow {
+      padding: 1rem 2.5rem; border-radius: 99px;
+      background: var(--green); color: #000;
+      font-weight: 800; font-size: 0.95rem;
+      border: none; cursor: none;
+      box-shadow: 0 0 32px rgba(0,255,136,0.3), 0 0 0 1px rgba(0,255,136,0.2);
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .entryway-fine {
-      font-family: var(--mono); font-size: 10px;
-      color: var(--text-muted); opacity: 0.4;
-      margin-top: 16px; letter-spacing: 0.5px;
+    .btn-glow:hover { box-shadow: 0 0 48px rgba(0,255,136,0.5); transform: translateY(-2px); }
+    .btn-outline {
+      padding: 1rem 2.5rem; border-radius: 99px;
+      border: 1px solid var(--border2); color: var(--text);
+      font-weight: 700; font-size: 0.95rem;
+      background: transparent; cursor: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      position: relative; z-index: 1;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 3rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 2rem;
+    }
+    .footer-brand .logo {
+      font-family: var(--mono); font-size: 0.9rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 0.75rem; display: block;
+    }
+    .footer-brand p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-col h4 { font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); letter-spacing: 0.05em; }
+    .footer-col a {
+      display: block; font-size: 0.78rem; color: var(--muted);
+      margin-bottom: 0.5rem; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--green); }
+    .footer-bottom {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem; margin-top: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono); font-size: 0.6rem; color: var(--dim);
     }
 
-    /* ═══ RESPONSIVE ═══ */
-    @media (max-width: 900px) {
-      .hero-section { flex-direction: column; padding-top: 100px; }
-      .hero-visual { padding-left: 0; margin-top: 40px; }
-      .split-section { grid-template-columns: 1fr; }
-      .altar-grid { grid-template-columns: 1fr; }
-      .site-nav { display: none; }
-      .theme-switcher { display: none; }
+    /* ── FLOATING 3D ORBS ──────────────────────────────────── */
+    .orb {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(120px); opacity: 0.12;
+      animation: orb-drift var(--d, 20s) ease-in-out infinite alternate;
     }
-    @media (max-width: 600px) {
-      .header-shell { padding: 12px 16px; }
-      .content-section { padding: 60px 16px; }
-      .metric-grid { grid-template-columns: 1fr; }
+    @keyframes orb-drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(var(--tx, 40px), var(--ty, -30px)) scale(var(--ts, 1.1)); }
     }
+    .orb-1 { width: 600px; height: 600px; background: var(--green); top: -100px; left: -100px; --d: 22s; --tx: 60px; --ty: 40px; }
+    .orb-2 { width: 500px; height: 500px; background: var(--cyan);  top: 30vh;  right: -120px; --d: 18s; --tx: -50px; --ty: 60px; }
+    .orb-3 { width: 400px; height: 400px; background: var(--purple); bottom: 0; left: 30%; --d: 25s; --tx: 30px; --ty: -40px; }
 
-    /* ═══ ANIMATIONS ═══ */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* ── SCROLL ANIMATIONS ─────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .fade-up {
-      animation: fadeUp 0.6s ease forwards;
-      opacity: 0;
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-center { display: none; }
+      .mvp-card.featured { flex-direction: column; }
+      .mvp-card.featured .mvp-preview { width: 100%; }
+      .manifesto-block { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
-    .fade-up:nth-child(2) { animation-delay: 0.1s; }
-    .fade-up:nth-child(3) { animation-delay: 0.2s; }
-    .fade-up:nth-child(4) { animation-delay: 0.3s; }
-    .fade-up:nth-child(5) { animation-delay: 0.4s; }
   </style>
 </head>
 <body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
-  <!-- ═══ HEADER ═══ -->
-  <header class="site-header" id="navbar">
-    <div class="header-shell">
-      <a class="brand-mark" href="index.html">
-        <div class="brand-logo">KC</div>
-        <span class="brand-copy">
-          <span class="brand-name">Kopano Context</span>
-          <span class="brand-tag">Sovereign intelligence</span>
-        </span>
-      </a>
+<canvas id="hero-canvas"></canvas>
 
-      <div class="header-actions">
-        <nav class="site-nav" id="site-nav" aria-label="Primary">
-          <a href="#pillars">Pillars</a>
-          <a href="#products">Products</a>
-          <a href="#altar">Altar</a>
-          <a href="protocols/">Protocols</a>
-          <a href="flows/">Flows</a>
-          <a href="starfall/">Starfall</a>
-          <a href="admin/">Admin</a>
-          <a href="https://crisisconnect.kopanolabs.com" target="_blank">CrisisConnect</a>
-        </nav>
+<!-- ── NAV ──────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">KOPANO LABS</div>
+  <div class="nav-center">
+    <a href="#products">Products</a>
+    <a href="#manifesto">Manifesto</a>
+    <a href="#stack">Stack</a>
+    <a href="https://careers.kopanolabs.com">Careers</a>
+  </div>
+  <a href="https://careers.kopanolabs.com" class="nav-cta">Join Us →</a>
+</nav>
 
-        <div class="theme-switcher" aria-label="Mode switcher">
-          <button type="button" data-theme="dark" aria-pressed="true">Dark</button>
-          <button type="button" data-theme="light" aria-pressed="false">Light</button>
-          <button type="button" data-theme="crazy" aria-pressed="false">Crazy</button>
-          <button type="button" data-theme="read" aria-pressed="false">Read</button>
-        </div>
-      </div>
+<!-- ── APU LIVE BAR ─────────────────────────────────────────── -->
+<div class="apu-live" style="margin-top:64px">
+  <span class="apu-label">▶ APU LIVE</span>
+  <span class="apu-pair"><span class="mvp-dot dot-live"></span> CrisisConnect — GREEN</span>
+  <span class="apu-sep">|</span>
+  <span class="apu-pair"><span class="mvp-dot dot-live"></span> StarFall Salvage — GREEN</span>
+  <span class="apu-sep">|</span>
+  <span class="apu-pair"><span class="mvp-dot dot-yellow"></span> KasiLink — HOD REVIEW</span>
+  <span class="apu-sep">|</span>
+  <span class="apu-pair"><span class="mvp-dot dot-live"></span> Careers — GREEN</span>
+  <span class="apu-sep">|</span>
+  <span class="apu-pair" style="color:var(--dim)">PKAP 4.66 | ALP #17 | NCCNP PHASE 3 LIVE | 73/73 TESTS PASS</span>
+</div>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Sovereign Product Studio · South Africa · HDSO ###!!!
+  </div>
+  <h1>
+    <div class="h1-line1">Build.</div>
+    <div class="h1-line1">Prove.</div>
+    <div class="h1-line2">Preserve.</div>
+  </h1>
+  <p class="hero-sub">
+    Offline-first. Load-shedding-tolerant. Township-built.<br/>
+    Every product is proof that governance comes before aesthetics.
+  </p>
+  <div class="scroll-line" style="margin-top:3rem"></div>
+</div>
+
+<!-- ── STATS STRIP ───────────────────────────────────────────── -->
+<div class="stats-strip reveal">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-n">4</span>
+      <div class="stat-l">Live MVPs</div>
     </div>
-  </header>
-
-  <main>
-    <!-- ═══ HERO ═══ -->
-    <section class="hero-section">
-      <div class="hero-copy fade-up">
-        <p class="eyebrow">Architect · Builder · Believer</p>
-        <h1>Your data is the landlord. AI is the renter.</h1>
-        <p class="hero-text">
-          Kopano Context decouples intelligence from cloud dependency. Sovereign governance,
-          offline-first persistence, and 710 governed agents — built for African enterprise
-          on African terms, not clean demo conditions.
-        </p>
-
-        <div class="action-row">
-          <a class="button button-primary" href="https://kopanocontext.kopanolabs.com">Enter Kopano Context ↗</a>
-          <a class="button button-secondary" href="altar/">Explore the Altar →</a>
-        </div>
-
-        <ul class="signal-strip" aria-label="Studio signals">
-          <li>Offline-aware by default</li>
-          <li>Audit before launch</li>
-          <li>Built for African constraints</li>
-        </ul>
-      </div>
-
-      <div class="hero-visual fade-up">
-        <div class="metric-stack">
-          <article class="metric-card">
-            <p class="metric-kicker">Governance posture</p>
-            <h2>Build. Prove. Preserve.</h2>
-            <p>We do not call work live until the product, the data, and the user path survive scrutiny under the KPGS.</p>
-          </article>
-
-          <article class="metric-card">
-            <p class="metric-kicker">Active surfaces</p>
-            <div class="metric-grid">
-              <div>
-                <strong>Kopano Context</strong>
-                <span>Sovereign intelligence platform</span>
-              </div>
-              <div>
-                <strong>CrisisConnect</strong>
-                <span>Adaptive crisis response PWA</span>
-              </div>
-              <div>
-                <strong>Starfall Salvage</strong>
-                <span>Governance-backed game engine</span>
-              </div>
-              <div>
-                <strong>KasiLink</strong>
-                <span>Township work and opportunity</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="metric-card">
-            <p class="metric-kicker">System state</p>
-            <div class="metric-grid">
-              <div>
-                <strong>710 Agents</strong>
-                <span>Governed under KPGS</span>
-              </div>
-              <div>
-                <strong>27 Protocols</strong>
-                <span>CRUD → SWFUS → UBP</span>
-              </div>
-              <div>
-                <strong>10 Council Seats</strong>
-                <span>Round Table active</span>
-              </div>
-              <div>
-                <strong>8 GSB Partitions</strong>
-                <span>Sub-brains operational</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ FIVE PILLARS ═══ -->
-    <section class="content-section" id="pillars">
-      <div class="section-heading">
-        <p class="eyebrow">Constitutional framework</p>
-        <h2>Five pillars of sovereignty.</h2>
-        <p>The framework governing every agent, every API call, and every byte of data in the Kopano ecosystem.</p>
-      </div>
-
-      <div class="card-grid card-grid-3">
-        <article class="content-card fade-up">
-          <p class="card-kicker">Ground awareness</p>
-          <h3>Field telemetry from soil and rock — the earth speaks first, models listen second.</h3>
-          <p>Freddy tracks agriculture. Eddie tracks mining. Real-world signal processed before any inference layer touches it.</p>
-        </article>
-
-        <article class="content-card fade-up">
-          <p class="card-kicker">Eidetic persistence</p>
-          <h3>Append-only local history — nothing is forgotten, nothing is owned by the cloud.</h3>
-          <p>Every prompt, every decision, every correction persisted in Kopano Context. The sovereign landlord keeps the ledger.</p>
-        </article>
-
-        <article class="content-card fade-up">
-          <p class="card-kicker">Zero-trust isolation</p>
-          <h3>Invisible to the open web — continuous adaptive trust by posture, device, geography.</h3>
-          <p>Hidden ZTNA via SASE infrastructure. No public attack surface. No exposed endpoints.</p>
-        </article>
-
-        <article class="content-card fade-up">
-          <p class="card-kicker">Asymmetric leverage</p>
-          <h3>Rent cloud intelligence. Never surrender datasets. The model is a renter.</h3>
-          <p>ChatGPT, Copilot, Gemini — all linguistic voice actors. Kopano Context is the sovereign landlord.</p>
-        </article>
-
-        <article class="content-card fade-up">
-          <p class="card-kicker">Hierarchical triage</p>
-          <h3>Edge execution → vertical command → production. Jethro delegation.</h3>
-          <p>Moses doesn't dispatch from morning to night. The swarm calendar governs cadence. WWJD firewall active.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ═══ OPERATING MODEL ═══ -->
-    <section class="content-section split-section">
-      <div class="split-copy">
-        <p class="eyebrow">Operating model</p>
-        <h2>Local reality comes before aesthetic theatre.</h2>
-        <p>
-          Kopano Context does not treat African constraints as edge cases. Bandwidth, power
-          interruptions, device capability, operator clarity, and trust thresholds are part
-          of the design brief from the first sprint.
-        </p>
-
-        <div class="principle-list">
-          <article>
-            <h3>Field-first execution</h3>
-            <p>Work is shaped around how people actually open, read, trust, and use a product.</p>
-          </article>
-          <article>
-            <h3>Review before promotion</h3>
-            <p>Claims do not become public truth until the route, the content, and the proof line up.</p>
-          </article>
-          <article>
-            <h3>Systems over theatre</h3>
-            <p>Clean infrastructure, legible workflows, and durable release behavior over noise.</p>
-          </article>
-        </div>
-      </div>
-
-      <div>
-        <article class="metric-card" style="margin-bottom:12px;">
-          <p class="metric-kicker">Pipeline</p>
-          <h2 style="font-size:18px;">SWFUS governance chain</h2>
-          <div class="metric-grid" style="margin-top:16px;">
-            <div><strong>Stream</strong><span>Continuous data-flow creation</span></div>
-            <div><strong>Watch</strong><span>Intelligent observation with purpose</span></div>
-            <div><strong>Fortify</strong><span>Strengthen through BNP + WWJD</span></div>
-            <div><strong>Unify</strong><span>Reconcile, don't destroy</span></div>
-          </div>
-          <div style="margin-top:12px;"><strong style="font-size:13px;color:var(--accent);">Seal</strong> <span style="font-size:11px;color:var(--text-muted);">— Lock with KPGS governance stamp. Immutable and auditable.</span></div>
-        </article>
-
-        <article class="metric-card">
-          <p class="metric-kicker">Evolution chain</p>
-          <p style="font-family:var(--mono);font-size:12px;color:var(--olive);letter-spacing:1px;">
-            CRUD → SWFUS → BMP → CBP → UFCP → UBP
-          </p>
-          <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">
-            Each layer masks the one below. The Ultimate BMP Protocol contains everything.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ═══ PRODUCTS ═══ -->
-    <section class="content-section" id="products">
-      <div class="section-heading">
-        <p class="eyebrow">Products and surfaces</p>
-        <h2>Where the work currently goes.</h2>
-        <p>Each domain is a governed hood plot. Agents work inside — users see tokens through the GUI only.</p>
-      </div>
-
-      <div class="card-grid card-grid-3">
-        <div class="product-card" onclick="window.open('https://kopanocontext.kopanolabs.com')">
-          <div class="product-icon">🧠</div>
-          <div class="product-name">Kopano Context</div>
-          <div class="product-desc">Sovereign intelligence platform. Eidetic memory, AI apprenticeship under KC's brain ledger. The GUI surface for the entire ecosystem.</div>
-          <span class="product-tag tag-live">Live</span>
-        </div>
-        <div class="product-card" onclick="window.open('https://kopanolabs.com')">
-          <div class="product-icon">🏢</div>
-          <div class="product-name">Kopano Labs</div>
-          <div class="product-desc">Sovereign product studio. Organizational marketing, enterprise pipeline, and technical stewardship from Cape Town.</div>
-          <span class="product-tag tag-live">Live</span>
-        </div>
-        <div class="product-card" onclick="window.open('https://crisisconnect.kopanolabs.com')">
-          <div class="product-icon">🚨</div>
-          <div class="product-name">CrisisConnect</div>
-          <div class="product-desc">Adaptive crisis response PWA. 6 dimensions of adaptation. Offline-first. Mission-grade. THARI guardian active.</div>
-          <span class="product-tag tag-live">Live</span>
-        </div>
-        <div class="product-card" onclick="window.open('https://starfallsalvage.kopanolabs.com')">
-          <div class="product-icon">🌠</div>
-          <div class="product-name">Starfall Salvage</div>
-          <div class="product-desc">Governance-backed WebGL game engine. RTC decision panel, mineral economics, combo mechanics, BMP/CBP/UFCP HUD.</div>
-          <span class="product-tag tag-dev">Active Build</span>
-        </div>
-        <div class="product-card" onclick="window.open('https://www.kasilink.co.za')">
-          <div class="product-icon">⚒️</div>
-          <div class="product-name">KasiLink</div>
-          <div class="product-desc">Township micro-economy connector. Linking local businesses, services, and community assets. Cassey's teacher lane governs quality.</div>
-          <span class="product-tag tag-live">Live</span>
-        </div>
-        <div class="product-card" onclick="window.location.href='admin/'">
-          <div class="product-icon">🎮</div>
-          <div class="product-name">Sovereign SIM</div>
-          <div class="product-desc">710-agent governance simulation. Watch the hood in real-time. Dispatch through SWFUS. Inspect agent modals. RTC council active.</div>
-          <span class="product-tag tag-sim">Simulation</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ ALTAR ═══ -->
-    <section class="content-section altar-section" id="altar">
-      <div class="section-heading">
-        <p class="eyebrow">The Altar — Covenant observatory</p>
-        <h2>Three layers gate every API call.</h2>
-        <p>Biblical scripture governs discernment. External APIs are legacy vessels — carried slowly out.</p>
-      </div>
-
-      <div class="altar-grid">
-        <div class="altar-card">
-          <div class="altar-icon">🛡️</div>
-          <div class="altar-name" style="color:var(--accent);">Guardian AI</div>
-          <div class="altar-role">Layer 1 · Deterministic rule enforcer · Institutional authorization</div>
-          <div class="altar-verse">"For the Lord your God walks in the midst of your camp… therefore your camp must be holy." — Deut. 23:14</div>
-        </div>
-        <div class="altar-card">
-          <div class="altar-icon">🌿</div>
-          <div class="altar-name" style="color:var(--olive);">Natural AI</div>
-          <div class="altar-role">Layer 2 · Soil, geology, fluid mechanics → math blocks</div>
-          <div class="altar-verse">"The earth is the Lord's, and everything in it." — Psalm 24:1</div>
-        </div>
-        <div class="altar-card">
-          <div class="altar-icon">📡</div>
-          <div class="altar-name" style="color:var(--text-soft);">Telemetry AI</div>
-          <div class="altar-role">Layer 3 · Edge metrics · Classify before interpret</div>
-          <div class="altar-verse">"Test everything; hold fast what is good." — 1 Thess. 5:21</div>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:40px;">
-        <a class="button button-primary" href="altar/">Enter the Altar — API scripture ↗</a>
-      </div>
-    </section>
-
-    <!-- ═══ CTA ═══ -->
-    <section class="cta-section">
-      <div class="cta-card">
-        <p class="eyebrow">Start closer to the problem</p>
-        <h2>Need a stronger public product surface, a better workflow spine, or a real operational mirror?</h2>
-        <p>
-          Bring the problem, the current system, and the environment it must survive.
-          Kopano Context can work from there.
-        </p>
-        <div class="action-row">
-          <a class="button button-primary" href="https://kopanocontext.kopanolabs.com">Launch Kopano Context ↗</a>
-          <a class="button button-secondary" href="https://kopanolabs.com">Visit Kopano Labs →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ ECOSYSTEM ═══ -->
-    <section class="content-section">
-      <div class="section-heading">
-        <p class="eyebrow">Connected nodes</p>
-        <h2>KPGS ecosystem — every node governed by the Altar.</h2>
-      </div>
-
-      <div class="ecosystem-grid">
-        <div class="eco-node" onclick="window.open('https://kopanolabs.com')">
-          <div class="eco-node-icon">🚀</div>
-          <div class="eco-node-name">Kopano Labs</div>
-          <div class="eco-node-desc">Sovereign product studio</div>
-        </div>
-        <div class="eco-node" onclick="window.open('https://krrababalela.com')">
-          <div class="eco-node-icon">👤</div>
-          <div class="eco-node-name">KRRababalela.com</div>
-          <div class="eco-node-desc">Chief Architect — SSE</div>
-        </div>
-        <div class="eco-node" onclick="window.open('https://crisisconnect.kopanolabs.com')">
-          <div class="eco-node-icon">🚨</div>
-          <div class="eco-node-name">CrisisConnect</div>
-          <div class="eco-node-desc">Crisis response PWA</div>
-        </div>
-        <div class="eco-node" onclick="window.open('https://starfallsalvage.kopanolabs.com')">
-          <div class="eco-node-icon">🌠</div>
-          <div class="eco-node-name">Starfall Salvage</div>
-          <div class="eco-node-desc">Governance game engine</div>
-        </div>
-        <div class="eco-node" onclick="window.open('https://www.kasilink.co.za')">
-          <div class="eco-node-icon">⚒️</div>
-          <div class="eco-node-name">KasiLink</div>
-          <div class="eco-node-desc">Township micro-economy</div>
-        </div>
-        <div class="eco-node" onclick="window.open('https://blog.fivesarena.com')">
-          <div class="eco-node-icon">⚽</div>
-          <div class="eco-node-name">FivesArena</div>
-          <div class="eco-node-desc">Football culture &amp; stories</div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="site-footer">
-    <div class="footer-shell">
-      <div>
-        <p class="footer-brand">Kopano Context</p>
-        <p class="footer-copy">Sovereign data governance, AI apprenticeship, and offline-first intelligence. Founded by Kholofelo Robyn Rababalela. Cape Town, South Africa.</p>
-        <p class="footer-meta"><span class="footer-bracket">[KPGS_HOOD_ENTRY]</span> · Schematics owns law · Runtime executes · Model is renter — Kopano Context is landlord</p>
-      </div>
-
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="index.html">Home</a>
-        <a href="protocols/">Protocols</a>
-        <a href="flows/">Flows</a>
-        <a href="starfall/">Starfall</a>
-        <a href="admin/">Admin</a>
-        <a href="https://kopanolabs.com">Studio</a>
-      </nav>
+    <div class="stat-item">
+      <span class="stat-n">32.8%</span>
+      <div class="stat-l">Unemployment we're fighting</div>
     </div>
-  </footer>
-
-  <p class="footer-scripture">"Jesus Christ is the same yesterday and today and forever." — Hebrews 13:8</p>
-
-  <!-- ═══ KPGS ENTRYWAY ═══ -->
-  <div id="kpgsEntryway" class="entryway-overlay">
-    <div class="entryway-card">
-      <div class="entryway-icon">⛪</div>
-      <h2>KPGS Governance System</h2>
-      <p class="entryway-mono">Stateless renter entryway</p>
-
-      <div class="entryway-body">
-        <p><strong>You are a stateless renter.</strong> You are not the landlord.</p>
-        <p style="margin-top:8px;">👤 <strong class="kc-label">KC</strong> — Natural AI · Ledger Protocol · Observes through .md files</p>
-        <p>👩‍💻 <strong class="cas-label">Cassey</strong> — Eidetic AI · Guardian · Student-Teacher Protocol</p>
-        <p style="margin-top:8px;font-size:11px;opacity:0.6;">Sovereign System Engineer: <strong style="color:var(--text);">Kholofelo Robyn Rababalela</strong></p>
-      </div>
-
-      <p class="entryway-verse">"Test everything; hold fast what is good." — 1 Thess. 5:21</p>
-
-      <button id="entryAccept" class="entryway-accept">
-        I accept — I am stateless renter not landlord
-      </button>
-
-      <p class="entryway-fine">Classify before interpret · Chat is not proof · Produce receipts</p>
+    <div class="stat-item">
+      <span class="stat-n">300</span>
+      <div class="stat-l">Agents guilded</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">25Hz</span>
+      <div class="stat-l">Telemetry overdrive</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">73/73</span>
+      <div class="stat-l">Unit tests passing</div>
     </div>
   </div>
+</div>
 
-  <script>
-    // ═══ ENTRYWAY ═══
-    (function() {
-      const KEY = 'kpgs_renter_ack';
-      const el = document.getElementById('kpgsEntryway');
-      const btn = document.getElementById('entryAccept');
-      if (sessionStorage.getItem(KEY) === 'true') el.style.display = 'none';
-      btn.addEventListener('click', function() {
-        sessionStorage.setItem(KEY, 'true');
-        console.log('[KPGS_HOOD_ENTRY] Stateless renter accepted · ' + new Date().toISOString());
-        el.style.opacity = '0';
-        setTimeout(() => el.style.display = 'none', 600);
-      });
-    })();
+<!-- ── PRODUCTS ──────────────────────────────────────────────── -->
+<div class="section" id="products">
+  <div class="section-tag">Our MVPs</div>
+  <h2 class="reveal">Every product<br/>proves a point.</h2>
+  <p class="section-sub reveal">Access every Kopano Labs project from here. All domains. All live.</p>
 
-    // ═══ THEME SWITCHER ═══
-    document.querySelectorAll('.theme-switcher button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.theme-switcher button').forEach(b => b.setAttribute('aria-pressed', 'false'));
-        btn.setAttribute('aria-pressed', 'true');
-        document.documentElement.setAttribute('data-theme', btn.dataset.theme);
-      });
-    });
+  <div class="mvp-grid reveal">
 
-    // ═══ SCROLL OBSERVER ═══
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('fade-up');
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.content-card, .product-card, .altar-card, .eco-node').forEach(el => observer.observe(el));
+    <!-- CRISISCONNECT -->
+    <div class="mvp-card crisis featured">
+      <div class="mvp-content">
+        <div class="mvp-icon">🚨</div>
+        <div class="mvp-tag tag-green">PWA · LIVE</div>
+        <h3>CrisisConnect</h3>
+        <p>AI-powered crisis response platform. 32.8% unemployment drives crisis. This platform routes emergency signals when the internet fails. Offline-first, load-shedding-tolerant, POPIA-compliant. GPT-5 triage, live maps, KCC financial literacy.</p>
+        <div class="mvp-status">
+          <span class="mvp-dot dot-live"></span>
+          APU GREEN · HDSO ###!!! · IKP CLEAN
+        </div>
+        <a href="https://CrisisConnect.KopanoLabs.com" class="mvp-link">Open CrisisConnect →</a>
+      </div>
+      <div class="mvp-preview" style="flex-shrink:0;width:280px;height:180px">
+        <div class="preview-grid" id="crisis-preview"></div>
+      </div>
+    </div>
 
-    // ═══ CONSOLE MANIFEST ═══
-    console.log('%c[KPGS] Kopano Context — Sovereign Intelligence Platform', 'color:#b96f43;font-weight:bold;font-size:14px;');
-    console.log('%c[KPGS] 710 Agents · 27 Protocols · 10 RTC Seats · 8 GSB Partitions', 'color:#7a9866;');
-    console.log('%c[KPGS] UBP: [#! - {(BMP+CBP+UFCP)/KPGS(MAO+MMAO)}] * [#% - UBP]', 'color:#9d8e7b;');
-    console.log('%c[KPGS] SSE: Kholofelo Robyn Rababalela', 'color:#eadfcf;');
-    console.log('%c[KPGS] Jesus is King. Overlord is THE GOAT.', 'color:#b96f43;font-style:italic;');
-  </script>
+    <!-- KASILINK -->
+    <div class="mvp-card kasilink">
+      <div class="mvp-icon">⚒️</div>
+      <div class="mvp-tag tag-cyan">FinTech · ADSO</div>
+      <h3>KasiLink</h3>
+      <p>Township gigs and financial mesh. Local income, near you, right now. Peer-to-peer micro-transactions that don't need Stripe or bank accounts. Offline mesh payments for communities that can't afford cloud dependency.</p>
+      <div class="mvp-status">
+        <span class="mvp-dot dot-yellow"></span>
+        APU HOD REVIEW · ADSO→HDSO 67% · RTC pending
+      </div>
+      <a href="https://KasiLink.com" class="mvp-link cyan">Open KasiLink →</a>
+    </div>
+
+    <!-- STARFALL SALVAGE -->
+    <div class="mvp-card starfall">
+      <div class="mvp-icon">🌌</div>
+      <div class="mvp-tag tag-purple">WebGL · LIVE</div>
+      <h3>StarFall Salvage</h3>
+      <p>Township-built WebGL runner. Named deliberately — we salvage what the system abandoned. Phase-dash debris, score cores, share your run. The community graph and enterprise proof layer is next.</p>
+      <div class="mvp-status">
+        <span class="mvp-dot dot-live"></span>
+        APU GREEN · HDSO ###!!!
+      </div>
+      <a href="https://StarFallSalvage.KopanoLabs.com" class="mvp-link purple">Play StarFall →</a>
+    </div>
+
+    <!-- CAREERS -->
+    <div class="mvp-card careers">
+      <div class="mvp-icon">🎓</div>
+      <div class="mvp-tag tag-gold">Portal · LIVE</div>
+      <h3>Careers</h3>
+      <p>Don't send a CV. Prove your point. The 90-Day Sandbox Shield is active for every accepted node. VC — VanGuard Careers — validates your DSO vector. 6 open roles across all 4 domains.</p>
+      <div class="mvp-status">
+        <span class="mvp-dot dot-live"></span>
+        APU GREEN · HDSO ###!!! · VC CHATBOT LIVE
+      </div>
+      <a href="https://careers.kopanolabs.com" class="mvp-link gold">View Careers →</a>
+    </div>
+
+    <!-- KOPANO LABS MAIN -->
+    <div class="mvp-card" style="grid-column:1/-1; background: radial-gradient(ellipse at 20% 50%, rgba(0,255,136,0.03) 0%, transparent 60%)">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
+        <div>
+          <div class="mvp-tag tag-green" style="margin-bottom:0.75rem">KPGS · 300 AGENTS</div>
+          <h3 style="font-size:1.2rem;margin-bottom:0.5rem">MMAO — Mobile Multi-Agent Orchard</h3>
+          <p style="font-size:0.82rem;color:var(--muted);max-width:500px">The governance backbone. 300 agents guilded. NCCNP Phase 3 live. IKP, 360DP, FON-C, KHELOS all running. 73/73 tests pass. ALP #17.</p>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+          <span class="mvp-tag tag-green">IKP CLEAN</span>
+          <span class="mvp-tag tag-cyan">NCCNP LIVE</span>
+          <span class="mvp-tag tag-purple">360DP VIP ####!!!!</span>
+          <span class="mvp-tag tag-gold">73/73 PASS</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── MANIFESTO ──────────────────────────────────────────────── -->
+<div class="section" id="manifesto" style="max-width:1200px">
+  <div class="section-tag">Doctrine</div>
+  <h2 class="reveal">The war is aesthetics<br/>versus governance.</h2>
+  <div class="manifesto-block reveal">
+    <div>
+      <div class="manifesto-quote">
+        <span>"Governance before the vulnerable<br/>pay the price."</span>
+      </div>
+    </div>
+    <div class="manifesto-line">
+      <strong>Aesthetics says:</strong> this looks legitimate.<br/>
+      <strong>Governance asks:</strong> Who owns it? Who is accountable? Who protects the vulnerable?<br/><br/>
+      Pressure is not the enemy. <strong>Ungoverned pressure is the enemy.</strong><br/>
+      AI is not the enemy. <strong>Ungoverned AI is the enemy.</strong><br/>
+      Money is not the enemy. <strong>Money without stewardship is the enemy.</strong><br/><br/>
+      Corporate structure can regulate work.<br/>
+      <strong>It struggles to regulate ego.</strong><br/><br/>
+      Context without governance becomes bleed.<br/>
+      Bleed with focus becomes memory.<br/>
+      Memory with audit becomes ledger.<br/>
+      <strong>Ledger with God becomes governance.</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ── STACK ─────────────────────────────────────────────────── -->
+<div class="section" id="stack">
+  <div class="section-tag">Tech Stack</div>
+  <h2 class="reveal">Offline-first.<br/>No cloud dependency.</h2>
+  <p class="section-sub reveal">Everything runs on Black Beast. Load-shedding is a feature, not a bug.</p>
+  <div class="tech-grid reveal">
+    <div class="tech-card"><span class="tech-icon">🐍</span><div class="tech-name">Python / KPGS</div><div class="tech-desc">300-agent governance stack, IKP, FON-C, 360DP, NCCNP</div></div>
+    <div class="tech-card"><span class="tech-icon">📡</span><div class="tech-name">PWA / Service Worker</div><div class="tech-desc">Offline-first. Works during load-shedding.</div></div>
+    <div class="tech-card"><span class="tech-icon">🎮</span><div class="tech-name">Raw WebGL</div><div class="tech-desc">StarFall Salvage — no frameworks, pure performance.</div></div>
+    <div class="tech-card"><span class="tech-icon">🔐</span><div class="tech-name">POPIA Compliant</div><div class="tech-desc">South African data sovereignty by design.</div></div>
+    <div class="tech-card"><span class="tech-icon">🤖</span><div class="tech-name">Multi-Agent FSM</div><div class="tech-desc">MMAO — 300 named agents, SWFUS governance.</div></div>
+    <div class="tech-card"><span class="tech-icon">⚡</span><div class="tech-name">Black Beast Edge</div><div class="tech-desc">Local compute first. Cloud is the last resort.</div></div>
+    <div class="tech-card"><span class="tech-icon">🧮</span><div class="tech-name">PKAP Formula</div><div class="tech-desc">BODMAS-grade governance math. POC vs FOC quantified.</div></div>
+    <div class="tech-card"><span class="tech-icon">🔭</span><div class="tech-name">KHELOS Witness</div><div class="tech-desc">AI governance witness engine. FOC detection live.</div></div>
+  </div>
+</div>
+
+<!-- ── CTA ───────────────────────────────────────────────────── -->
+<div class="cta-section">
+  <h2 class="cta-title reveal">
+    Don't send your CV.<br/>
+    <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Prove your point.</span>
+  </h2>
+  <p class="cta-sub reveal">6 roles open across 4 domains. All offline-first. All building toward HDSO ###!!!. Your environment is your credential.</p>
+  <div class="cta-actions reveal">
+    <a href="https://careers.kopanolabs.com" class="btn-glow">See Open Roles →</a>
+    <a href="https://CrisisConnect.KopanoLabs.com" class="btn-outline">Try CrisisConnect</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">KOPANO LABS</span>
+    <p>Sovereign product studio. Offline-first. Township-built. Fighting 32.8% unemployment through governance, not aesthetics.</p>
+    <div style="margin-top:1rem;font-family:var(--mono);font-size:0.6rem;color:var(--dim)">I_AM_STATELESS_RENTER_NOT_LANDLORD</div>
+  </div>
+  <div class="footer-col">
+    <h4>Products</h4>
+    <a href="https://CrisisConnect.KopanoLabs.com">CrisisConnect</a>
+    <a href="https://KasiLink.com">KasiLink</a>
+    <a href="https://StarFallSalvage.KopanoLabs.com">StarFall Salvage</a>
+    <a href="https://careers.kopanolabs.com">Careers Portal</a>
+  </div>
+  <div class="footer-col">
+    <h4>Governance</h4>
+    <a href="#">KPGS Protocol</a>
+    <a href="#">MMAO — 300 Agents</a>
+    <a href="#">NCCNP Phase 3</a>
+    <a href="#">IKP Chain</a>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <a href="mailto:hello@kopanolabs.com">hello@kopanolabs.com</a>
+    <a href="mailto:careers@kopanolabs.com">careers@kopanolabs.com</a>
+    <a href="https://github.com/Kopano-Labs">GitHub</a>
+  </div>
+  <div class="footer-bottom">
+    <span>KOPANO LABS © 2026 · HDSO ###!!! · ALP #17 | 9a404c52fcc83bb3</span>
+    <span>Build. Prove. Preserve.</span>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ─────────────────────────────────── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function animCursor() {
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('a,button,.mvp-card,.tech-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+});
+
+/* ── HERO CANVAS (3D PARTICLE FIELD) ──────── */
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const COLORS = ['#00ff88','#00d4ff','#9d4edd','rgba(0,255,136,0.3)','rgba(0,212,255,0.2)'];
+for (let i = 0; i < 120; i++) {
+  particles.push({
+    x: Math.random() * 1600 - 200, y: Math.random() * 900,
+    z: Math.random() * 800 + 100,
+    vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
+    vz: (Math.random()-0.5)*0.5,
+    color: COLORS[Math.floor(Math.random()*COLORS.length)],
+    size: Math.random() * 2 + 0.5,
+  });
+}
+
+function project(x, y, z) {
+  const fov = 400;
+  const scale = fov / (fov + z);
+  return { px: x * scale + W/2, py: y * scale + H/2, scale };
+}
+
+let angle = 0;
+function drawCanvas() {
+  ctx.clearRect(0, 0, W, H);
+  angle += 0.001;
+
+  // Draw connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i+1; j < particles.length; j++) {
+      const a = particles[i], b = particles[j];
+      const dist = Math.sqrt((a.x-b.x)**2 + (a.y-b.y)**2 + (a.z-b.z)**2);
+      if (dist < 200) {
+        const pa = project(a.x, a.y, a.z);
+        const pb = project(b.x, b.y, b.z);
+        ctx.beginPath();
+        ctx.moveTo(pa.px, pa.py);
+        ctx.lineTo(pb.px, pb.py);
+        ctx.strokeStyle = `rgba(0,255,136,${(1-dist/200)*0.06})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Draw particles
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.z += p.vz;
+    if (p.x < -400) p.x = 400; if (p.x > 400) p.x = -400;
+    if (p.y < -300) p.y = 300; if (p.y > 300) p.y = -300;
+    if (p.z < 50) p.vz = Math.abs(p.vz); if (p.z > 800) p.vz = -Math.abs(p.vz);
+    const {px,py,scale} = project(p.x, p.y, p.z);
+    ctx.beginPath();
+    ctx.arc(px, py, p.size * scale, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+
+/* ── CRISIS PREVIEW DOTS ──────────────────── */
+const cPrev = document.getElementById('crisis-preview');
+if (cPrev) {
+  const dotColors = ['#00ff88','#00d4ff','#9d4edd','#f4c542','transparent'];
+  for (let i = 0; i < 25; i++) {
+    const d = document.createElement('div');
+    d.className = 'pg-dot';
+    const c = dotColors[Math.floor(Math.random()*dotColors.length)];
+    d.style.cssText = `background:${c};--d:${1+Math.random()*3}s;--del:${Math.random()*2}s;border-radius:50%`;
+    cPrev.appendChild(d);
+  }
+}
+
+/* ── SCROLL REVEAL ────────────────────────── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
