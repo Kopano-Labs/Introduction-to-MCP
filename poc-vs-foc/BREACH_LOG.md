@@ -227,3 +227,71 @@ Hash: `1b5aa7e3efd1fba7`
 `AUTO-LOGGED — 2026-06-18T17:30:16Z`
 
 ---
+
+## AUTO-BREACH-225704 — 2026-06-18T22:57:04Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 52.7 min exceeds 30 min threshold.
+Hash: `cff53479c2e29959`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 52.7 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-06-18T22:57:04Z`
+
+---
+
+## AUTO-BREACH-014856 — 2026-06-19T01:48:56Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 171.9 min exceeds 30 min threshold.
+Hash: `f18be164167f771f`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 171.9 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-06-19T01:48:56Z`
+
+---
+
+## AUTO-BREACH-051945 — 2026-06-19T05:19:45Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 35.8 min exceeds 30 min threshold.
+Hash: `02aa5c1e01acf7bf`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 35.8 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-06-19T05:19:45Z`
+
+---
+
+## AUTO-BREACH-155856 — 2026-06-19T15:58:56Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 600.0 min exceeds 30 min threshold.
+Hash: `dc9fddf6b8c79287`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 600.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-06-19T15:58:56Z`
+
+---
