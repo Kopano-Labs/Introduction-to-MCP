@@ -1,0 +1,44 @@
+{
+  "schema": "kiro_session_receipt_v1",
+  "session": 2,
+  "timestamp": "2026-06-21T07:41:39.133066+00:00",
+  "renter_id": "kiro_aws",
+  "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "entry_method": "hood_entry_assertion (formal, logged)",
+  "gate_status": "ALLOW",
+  "self_assessment": {
+    "verdict": "POC_VALIDATED",
+    "invariance": 0.575,
+    "ubp_output": -0.2719
+  },
+  "infrastructure_validated": [
+    "thari_holo_net",
+    "khelos_firewall",
+    "anchor_vanguard",
+    "poc_foc_enforcer_engine"
+  ],
+  "stats": {
+    "total_enforced": 5,
+    "poc_count": 5,
+    "foc_count": 0,
+    "held_count": 0,
+    "poc_rate": 1.0,
+    "foc_rate": 0.0,
+    "bias_check": "NO_BIAS — pure IIDP enforcement"
+  },
+  "hallucinations": 0,
+  "files_invented": 0,
+  "existing_tools_used": [
+    "hood_entry_assertion",
+    "POCFOCEnforcer.enforce",
+    "check_kpgs_activation_gate",
+    "validate_poc_foc_enforcer"
+  ],
+  "rtc_conditions_met": {
+    "1_read_entryway_first": true,
+    "2_read_comms_now_mainbrain": true,
+    "3_existing_tools_first": true,
+    "4_bracketed_output": true,
+    "5_no_hallucination": true
+  }
+}
