@@ -23,3 +23,9 @@ Schematics/
 
 
 docs/swarm-ops/logs/KPGS_SEVER_FORENSIC.jsonl
+
+# SQLite database files — ignore binaries, track schema/migrations only
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
