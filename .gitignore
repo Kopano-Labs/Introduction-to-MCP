@@ -21,3 +21,5 @@ kopano-core/.kc/
 # Second Brain (Obsidian vault — local only; removed from git index so .obsidian/.smart-env do not dirty status)
 Schematics/
 
+
+docs/swarm-ops/logs/KPGS_SEVER_FORENSIC.jsonl
