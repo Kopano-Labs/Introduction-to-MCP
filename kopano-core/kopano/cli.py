@@ -636,3 +636,5 @@ def start_api_cmd(
         webbrowser.open(url)
         
     uvicorn.run(app, host=host, port=port)
+
+# merge: dev 2026-06-22
