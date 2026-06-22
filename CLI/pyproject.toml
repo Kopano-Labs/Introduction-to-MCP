@@ -19,3 +19,5 @@ dependencies = [
 mcp-cli = "main:cli_entry"
 mao = "mao_server:mcp.run"
 tsap = "tsap_mcp_server:mcp.run"
+
+# merge: dev branch 2026-06-22
