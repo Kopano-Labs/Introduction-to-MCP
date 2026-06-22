@@ -29,3 +29,7 @@ docs/swarm-ops/logs/KPGS_SEVER_FORENSIC.jsonl
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Exclude local build artifacts/plugins cloned under hooks
+hooks/serena-jetbrains-plugin/
+hooks/thunder-client/

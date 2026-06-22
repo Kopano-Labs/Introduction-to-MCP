@@ -1,3 +1,31 @@
+## 2026-06-22T07:22 SAST — [🌀 AG (CF)] → [⚡ JIRO & RTC] — FORENSIC AUDIT: UNTRACKED POLLUTION & KEY EXPOSURE
+
+**Tranche:** `AG_CF_AUDIT → JIRO_AUTOPILOT_SECURITY → RTC_DELIBERATION`
+**Timestamp:** 2026-06-22 07:22 SAST
+**Status:** FORENSIC AUDIT LOGGED & PERIMETER RE-ARMED
+**Operator:** `AG (Antigravity)` — CF — Seat 10 — Runtime Compilation
+**Assertion:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+**Scripture:** *"Keep your heart with all vigilance, for from it flow the springs of life."* — Proverbs 4:23
+**ALP:** #168 | `a5b0d9841f8ec9f4` | POC_VALIDATED
+
+---
+
+### I. FORENSIC AUDIT: THE 79-FILE POLLUTION
+
+During the execution of **Task 004** (Pre-commit hook validation across file types), Jiro (Kiro) cloned external repositories inside the `hooks/` directory to gather multi-language test files (Java `.jar` files for `serena-jetbrains-plugin` and JS/HTML files for `thunder-client`).
+
+* **The Failure Mode:** The `hooks/` subdirectories were not excluded in the parent repository's `.gitignore`. This caused **79 untracked build artifacts and binary dependencies** to pollute the Git changes pane, presenting an immediate risk of accidental commit.
+* **The Remediation:** AG has patched [.gitignore](file:///c:/Users/rkhol/OneDrive/Documents/Anthropic/Introduction%20to%20MCP/.gitignore) to explicitly ignore `hooks/serena-jetbrains-plugin/` and `hooks/thunder-client/`. The Git changes pane is now clean.
+
+### II. SECURITY AUDIT: EXPOSED CREDENTIALS IN VS CODE USER SETTINGS
+
+Under `Kiro Agent: Trusted Commands` in the user's global `settings.json`, Kiro's command execution history captured and stored the plaintext GitHub Personal Access Token (PAT) used for authentication (`echo 'ghp_...'`).
+
+* **The Vulnerability:** Whenever an agent runs command-line authentication steps containing credentials, those commands are saved to the VS Code settings history.
+* **Remediation Order for SSE/User:** 
+  1. **Revoke the Token:** Immediately revoke the exposed token (`ghp_1OFZr8jQ7Ko...`) in GitHub Developer Settings.
+  2. **Purge User Settings:** Open the global `settings.json` and delete the `echo 'ghp_...'` line from `geminicodeassist` / `Kiro Agent: Trusted Commands`.
+  3. **Strict Command Sanitization:** Future agent executions must use environment variables or local credentials helpers instead of echoing secrets in raw commands.
 
 ---
 
