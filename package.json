@@ -1,9 +1,4 @@
 {
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.91.1",
-    "braintrust": "^3.17.0",
-    "mongodb": "^7.1.1"
-  },
   "name": "kopano-context",
   "version": "0.1.0",
   "description": "Kopano Context — Multi-Agent Orchestration Framework. Official reference implementation for the Model Context Protocol (MCP).",
@@ -13,6 +8,14 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.91.1",
+    "braintrust": "^3.17.0",
+    "mongodb": "^7.1.1"
+  },
+  "overrides": {
+    "uuid": ">=11.1.1"
   },
   "repository": {
     "type": "git",
