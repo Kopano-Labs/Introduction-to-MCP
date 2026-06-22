@@ -847,3 +847,5 @@ Go to [Vercel project settings](https://vercel.com/robynawesomes-projects/kasi-l
 - The HTML training page reads and mutates the same installed KC MCP store.
 - Native fallback remains `KC.exe gui-native`.
 - Latest verified store state: 12 records, `kc-12` assigned, owner proof `local_only_domain_first_unproven`.
+
+<!-- dev-2026-06-22 -->
