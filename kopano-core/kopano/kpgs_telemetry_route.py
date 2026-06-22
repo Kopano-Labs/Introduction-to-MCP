@@ -101,20 +101,56 @@ def compile_black_beast_thesis(*, write_log: bool = True) -> dict[str, Any]:
 def classify_telemetry_signal(text: str) -> dict[str, Any]:
     """
     Classify raw signal before interpretation.
-    Rejects pressure-only labels; routes to human load lanes when possible.
+    Enforces the NeuralFailureFirewall, translates slang via SwiftKeyNLP, and routes civic telemetry.
     """
+    from .adaptiveness import NeuralFailureFirewall, SwiftKeyNLP, CivicUtilityRouter
+
     thesis = load_black_beast_thesis()
     law = thesis.get("kpgs_classification_law") or {}
     valid_lanes = set(law.get("load_lanes") or [])
-    misnamed = set(law.get("misnamed_telemetry") or ["pressure"])
 
     raw = (text or "").strip()
+
+    # 1. Neural Failure Firewall Check
+    firewall = NeuralFailureFirewall()
+    is_clean, pattern = firewall.check_text(raw)
+    if not is_clean:
+        return {
+            "schema": "kpgs_telemetry_classify_v1",
+            "ts": _utc_now(),
+            "raw_signal": raw[:500],
+            "verdict": "FOC_DECLINED",
+            "classified": False,
+            "misnamed_pressure": False,
+            "detected_lanes": [],
+            "routing_sequence": law.get("routing_sequence", []),
+            "note": f"FOC_DECLINED: Caught therapeutic or self-referential neural smoothing boilerplate violation: '{pattern}'",
+            "bracket": "[NEURAL_FAILURE_FIREWALL]",
+            "summary": f"[KPGS_TELEMETRY_ROUTE] verdict: FOC_DECLINED | violation: {pattern}",
+            "adaptiveness": {
+                "firewall_pass": False,
+                "violation": pattern,
+                "translated": False,
+                "civic_routed": False,
+            }
+        }
+
+    # 2. Local Vernacular Translation via SwiftKey NLP
+    nlp = SwiftKeyNLP()
+    savings = nlp.calculate_savings(raw)
+    translated = savings["translated_text"]
+
+    # 3. Civic Utility Routing
+    civic = CivicUtilityRouter()
+    civic_report = civic.route_civic_signal(translated)
+
+    # 4. Standard Classification Logic running on Translated Text
     detected_lanes: list[str] = []
-    for lane, pattern in _LANE_HINTS.items():
-        if pattern.search(raw) and lane in valid_lanes:
+    for lane, hint_pattern in _LANE_HINTS.items():
+        if hint_pattern.search(translated) and lane in valid_lanes:
             detected_lanes.append(lane)
 
-    has_pressure = bool(_PRESSURE_RE.search(raw))
+    has_pressure = bool(_PRESSURE_RE.search(translated))
     classified = bool(detected_lanes) or not has_pressure
 
     if has_pressure and not detected_lanes:
@@ -143,6 +179,16 @@ def classify_telemetry_signal(text: str) -> dict[str, Any]:
             f"lanes: {','.join(detected_lanes) or 'none'} | "
             f"misnamed_pressure: {has_pressure and not detected_lanes}"
         ),
+        "adaptiveness": {
+            "firewall_pass": True,
+            "violation": None,
+            "translated": translated != raw,
+            "translated_preview": translated[:250],
+            "tokens_saved": savings["tokens_saved"],
+            "cost_savings": savings["cost_savings_factor"],
+            "civic_routed": civic_report.get("routed", False),
+            "civic_payload": civic_report if civic_report.get("routed") else None,
+        }
     }
 
 

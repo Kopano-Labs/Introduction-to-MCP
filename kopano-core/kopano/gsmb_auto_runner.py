@@ -223,12 +223,35 @@ def _run_tick(tick: int, alp_receipt: str) -> dict:
     except Exception as e:
         tick_result["khelos"] = {"error": str(e)}
 
+    # ── Adaptiveness telemetry validation ─────────────────────
+    try:
+        from kopano.adaptiveness import NeuralFailureFirewall, SwiftKeyNLP
+        firewall = NeuralFailureFirewall()
+        nlp = SwiftKeyNLP()
+        
+        # Validate that the runner's own signal passes the firewall
+        sig_str = f"gsmb runner tick {tick} kopano kpgs mmao poc"
+        is_clean, pattern = firewall.check_text(sig_str)
+        
+        # Monitor dictionary vocabulary size
+        vocab_size = len(nlp.local_dictionary)
+        
+        tick_result["adaptiveness"] = {
+            "firewall_pass": is_clean,
+            "vocab_size": vocab_size,
+        }
+        logger.info("[RUNNER] Adaptiveness: firewall_pass=%s | vocab_size=%d", is_clean, vocab_size)
+    except Exception as e:
+        tick_result["adaptiveness"] = {"error": str(e)}
+        logger.error("[RUNNER] Adaptiveness error: %s", e)
+
     # ── Overall tick verdict ──────────────────────────────────
     nccnp_ok = tick_result.get("nccnp", {}).get("poc_closed", 0) == 4
     apu_ok   = tick_result.get("apu", {}).get("red", 1) == 0
     ikp_ok   = tick_result.get("ikp", {}).get("clean", 0) >= 3
     fonc_ok  = tick_result.get("fonc_self", {}).get("is_clean", False)
-    all_ok   = nccnp_ok and apu_ok and ikp_ok and fonc_ok
+    adaptiveness_ok = tick_result.get("adaptiveness", {}).get("firewall_pass", False)
+    all_ok   = nccnp_ok and apu_ok and ikp_ok and fonc_ok and adaptiveness_ok
 
     tick_result["tick_verdict"]  = "POC_VALIDATED" if all_ok else "PARTIAL_POC"
     tick_result["tick_hash"]     = hashlib.sha256(f"{ts}:{tick}:{alp_receipt}".encode()).hexdigest()[:16]

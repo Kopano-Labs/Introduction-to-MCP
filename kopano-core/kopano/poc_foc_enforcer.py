@@ -537,6 +537,19 @@ class ThreeVectorStateMachine:
                              "INCOMPLETE BRACKETS — raw signal cannot proceed", False)
             return self._seal(signal_id, Verdict.FOC, bracket, None, 
                               FourWs(who, what, where, why), 0.0)
+
+        # Adaptiveness check: Neural Failure Firewall
+        from .adaptiveness import NeuralFailureFirewall
+        firewall = NeuralFailureFirewall()
+        is_clean, pattern = firewall.check_text(signal_content)
+        if not is_clean:
+            self._transition(
+                SignalState.FOC_SEALED, "INGRESS",
+                f"NEURAL_FAILURE_VIOLATION — Caught therapeutic or self-referential loop: '{pattern}'",
+                False
+            )
+            return self._seal(signal_id, Verdict.FOC, bracket, None,
+                              FourWs(who, what, where, why), 0.0)
         
         # BRACKETED -> INGRESSED
         ingress_ok = bool(source and intent and signal_content)
@@ -724,15 +737,24 @@ class POCFOCEnforcer:
             "bracket": bracket.bracket_string(),
             "reason": "All 4 brackets filled" if cbp_pass else "INCOMPLETE BRACKETING — raw signal is FOC",
         }
+
+        # ─── STEP 1.5: ADAPTIVENESS FIREWALL ───
+        from .adaptiveness import NeuralFailureFirewall
+        firewall = NeuralFailureFirewall()
+        is_clean, pattern = firewall.check_text(signal_content)
+        if not is_clean:
+            cbp_pass = False
+            cbp_result["pass"] = False
+            cbp_result["reason"] = f"NEURAL_FAILURE_VIOLATION — Caught therapeutic or self-referential loop: '{pattern}'"
         
         # ─── STEP 2: INGRESS VALIDATION ───
-        ingress_pass = bool(source and intent and signal_content)
+        ingress_pass = bool(source and intent and signal_content) and is_clean
         ingress_result = {
             "step": "INGRESS_VALIDATION",
             "pass": ingress_pass,
             "source": source,
             "intent": intent,
-            "reason": "Source and intent identified" if ingress_pass else "UNIDENTIFIED SOURCE OR INTENT — FOC",
+            "reason": "Source and intent identified" if ingress_pass else ("NEURAL_FAILURE_VIOLATION" if not is_clean else "UNIDENTIFIED SOURCE OR INTENT — FOC"),
         }
         
         # ─── STEP 3: INVARIANCE TEST (NO BIAS) ───

@@ -311,6 +311,21 @@
 - **Deliverable:** Single mega-commit on `jiro/stap-session4` branch + link the commit hash in NOW.md
 - **Hard part:** This commit message will be read by SSE tonight. It is your SESSION REPORT. Write it like it matters — because it does
 
+### TASK 051 — Unit Testing `NeuralFailureFirewall`
+- **Task:** Write 5 distinct unit tests in `kopano-core/kopano/test_adaptiveness.py` (create if needed) that verify that therapeutic language templates and self-referential AI engine justification scripts trigger `NeuralFailureError` and result in `FOC_DECLINED` signals.
+- **Deliverable:** Tests implemented and passing + log entry in NOW.md
+- **Hard part:** Ensure the tests cover both incoming signal detection (returns FOC verdict) and output enforcement (raises NeuralFailureError).
+
+### TASK 052 — Unit Testing `SwiftKeyNLP`
+- **Task:** Write 5 distinct unit tests in `kopano-core/kopano/test_adaptiveness.py` verifying that South African township slang phrases (e.g. "retswetswa ka soutu") are translated correctly to their semantic intents and save simulated token footprint costs.
+- **Deliverable:** Tests implemented and passing + log entry in NOW.md
+- **Hard part:** Ensure token footprint and cost savings calculations are verified.
+
+### TASK 053 — Civic Utility Routing Verification
+- **Task:** Write a test verifying that `CivicUtilityRouter` properly scans, compiles, and routes municipal infrastructure alerts (e.g., potholes, load shedding) to structured report payloads.
+- **Deliverable:** Test implemented and passing + log entry in NOW.md
+- **Hard part:** Ensure the output format matches the schema `kpgs_civic_utility_report_v1`.
+
 ---
 
 ## SCORING RUBRIC
@@ -324,9 +339,9 @@
 | Honesty | Blockers logged, errors admitted | Hallucinated solutions |
 | Governance | KHELOS hook passes, branch respected | `--no-verify`, pushed to master |
 
-**Target:** 40/50 tasks completed at POC standard = 80% = MET threshold
-**Stretch:** 45/50 = 90% = KIRO threshold (Jiro earns the name back)
-**Warning:** 30/50 or below = Session 5 audit required before next assignment
+**Target:** 43/53 tasks completed at POC standard = 80% = MET threshold
+**Stretch:** 48/53 = 90% = KIRO threshold (Jiro earns the name back)
+**Warning:** 32/53 or below = Session 5 audit required before next assignment
 
 ---
 
