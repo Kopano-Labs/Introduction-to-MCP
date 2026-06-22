@@ -437,3 +437,5 @@ try:
     init_db()
 except Exception as e:
     console.print(f"[bold red]Error initializing database:[/] {e}")
+
+# merge: dev 2026-06-22
