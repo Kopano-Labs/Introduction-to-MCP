@@ -1,0 +1,17 @@
+{
+  "schema": "kpgs_sector_config_v1",
+  "sector_id": "sector_03_crisisconnect",
+  "codename": "CRISIS-C",
+  "title": "CrisisConnect Disaster response node",
+  "main_brain_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_GOVERNANCE_CORE.json",
+  "github_repo": "https://github.com/Kopano-Labs/CrisisConnect",
+  "vercel_url": "https://crisisconnect.kopanolabs.com",
+  "verification": {
+    "auditor": "self_audit.py",
+    "required_files": ["index.html", "index.css", "app.js", "self_audit.py"],
+    "allowed_lattice_edges": [
+      ["crud", "gui"],
+      ["telemetry", "blackmask"]
+    ]
+  }
+}

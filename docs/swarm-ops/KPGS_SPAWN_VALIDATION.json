@@ -1,12 +1,12 @@
 {
   "schema": "kpgs_spawn_swarm_report_v2",
-  "ts": "2026-06-21T07:41:29Z",
+  "ts": "2026-06-22T05:14:33Z",
   "title": "KPGS 300-Agent Spawn Swarm — Sharded Cohort Validation",
   "doctrine": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_SPAWN_ALTAR_DOCTRINE.json",
   "catalog": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
   "agents_total": 300,
-  "validated_count": 300,
-  "ship": 300,
+  "validated_count": 23,
+  "ship": 23,
   "hold": 0,
   "verdict": "PASS",
   "by_cohort": {
@@ -21,9 +21,9 @@
   },
   "checkpoint": {
     "verdict": "CHECKPOINTED",
-    "checkpoint_id": 37063,
-    "head_hash": "81867b34908a2aaa927cbd9791267df52dff119308a6e87dd270914e0a53aa08",
-    "ts": "2026-06-21T07:41:29Z",
+    "checkpoint_id": 37290,
+    "head_hash": "68fdf2cb8d954223f8b061f0941ed5a804edb3ef428d8d5073d9a45dc0b8423b",
+    "ts": "2026-06-22T05:14:33Z",
     "catalog_counts": {
       "telemetry_cohort": 100,
       "identic_cohort": 100,
@@ -48,12 +48,12 @@
       }
     }
   },
-  "altar_head_hash": "81867b34908a2aaa927cbd9791267df52dff119308a6e87dd270914e0a53aa08",
-  "sample_only": false,
+  "altar_head_hash": "68fdf2cb8d954223f8b061f0941ed5a804edb3ef428d8d5073d9a45dc0b8423b",
+  "sample_only": true,
   "agents": [
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:18Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "pipeline_drone",
       "spawn_slot": "001",
       "cohort": "telemetry",
@@ -139,7 +139,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:18Z",
+      "ts": "2026-06-22T05:14:32Z",
       "agent_id": "spawn_telemetry_002",
       "spawn_slot": "002",
       "cohort": "telemetry",
@@ -213,7 +213,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:18Z",
+      "ts": "2026-06-22T05:14:32Z",
       "agent_id": "spawn_telemetry_003",
       "spawn_slot": "003",
       "cohort": "telemetry",
@@ -287,7 +287,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:18Z",
+      "ts": "2026-06-22T05:14:32Z",
       "agent_id": "spawn_telemetry_004",
       "spawn_slot": "004",
       "cohort": "telemetry",
@@ -361,7 +361,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:18Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_005",
       "spawn_slot": "005",
       "cohort": "telemetry",
@@ -435,7 +435,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:18Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_006",
       "spawn_slot": "006",
       "cohort": "telemetry",
@@ -509,7 +509,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_007",
       "spawn_slot": "007",
       "cohort": "telemetry",
@@ -583,7 +583,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_008",
       "spawn_slot": "008",
       "cohort": "telemetry",
@@ -657,7 +657,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_009",
       "spawn_slot": "009",
       "cohort": "telemetry",
@@ -731,7 +731,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_010",
       "spawn_slot": "010",
       "cohort": "telemetry",
@@ -805,7 +805,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_011",
       "spawn_slot": "011",
       "cohort": "telemetry",
@@ -879,7 +879,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_012",
       "spawn_slot": "012",
       "cohort": "telemetry",
@@ -953,7 +953,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_013",
       "spawn_slot": "013",
       "cohort": "telemetry",
@@ -1027,7 +1027,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_014",
       "spawn_slot": "014",
       "cohort": "telemetry",
@@ -1101,7 +1101,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
+      "ts": "2026-06-22T05:14:33Z",
       "agent_id": "spawn_telemetry_015",
       "spawn_slot": "015",
       "cohort": "telemetry",
@@ -1175,42 +1175,56 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
-      "agent_id": "spawn_telemetry_016",
-      "spawn_slot": "016",
-      "cohort": "telemetry",
-      "altar_layer": "telemetry_ai",
-      "forensic_lens": null,
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "kc_apprentice",
+      "spawn_slot": "101",
+      "cohort": "identic",
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
       "verdict": "SHIP",
       "failed": [],
       "pillar_errors": [],
       "block_errors": [],
       "manifest": {
         "schema": "kpgs_spawn_manifest_v2",
-        "agent_id": "spawn_telemetry_016",
-        "spawn_slot": "016",
-        "cohort": "telemetry",
-        "altar_layer": "telemetry_ai",
-        "forensic_lens": null,
-        "jethro_band": "J10",
-        "gods_pattern_p": null,
+        "agent_id": "kc_apprentice",
+        "spawn_slot": "101",
+        "cohort": "identic",
+        "altar_layer": "identic_ai",
+        "forensic_lens": "V_FS_MUKASHIMA",
+        "jethro_band": "J50",
+        "gods_pattern_p": {
+          "pattern_id": "EX_DIASPORA",
+          "stem": "sovereign_community",
+          "kpefs_vector": "V4_DIASPORA",
+          "template": "depart → organize → receipt → return on proof",
+          "forensic_lens": {
+            "id": "V_FS_MUKASHIMA",
+            "display": "Mukashima",
+            "eye": "institutional_memory_chain",
+            "audit": "Who kept the record? Who erased it? Chain-of-custody before narrative.",
+            "kpefs_vector": "V4_DIASPORA",
+            "biblical_pattern": "EX_DIASPORA"
+          }
+        },
         "kpgs": {
-          "cohort": "telemetry",
+          "cohort": "identic",
           "brief_renters_on_entry": true,
           "swfus_required": true,
           "sharded_doctrine": true,
           "holds_pillar_blocks": true,
-          "doctrine_shard": "telemetry_sense",
+          "doctrine_shard": "identic_reason",
           "five_pillars_shard": [
-            "ground_awareness",
-            "eidetic_persistence"
+            "hierarchical_triage",
+            "zero_trust_isolation"
           ],
-          "commandments_shard": "ingest_classify_only",
+          "commandments_shard": "interpret_jethro_wwjd",
           "ledger_commit_authority": false,
           "capabilities": [
-            "raw_input",
-            "ground_aware_map",
-            "telemetry_dump"
+            "jethro_triage",
+            "forensic_sociology",
+            "wwjd_firewall",
+            "lpm_dialectic"
           ]
         },
         "governance_chain": [
@@ -1224,67 +1238,93 @@
           "holds_pillar_blocks": true,
           "brief_renters_on_entry": true,
           "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_016 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:kc_apprentice entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-          "altar_layer": "telemetry_ai",
+          "altar_layer": "identic_ai",
           "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
         },
         "pillars": {
           "ground_awareness": {
             "ground_context": true,
-            "telemetry_class": "telemetry"
+            "telemetry_class": "pavement|soil|township"
           },
           "eidetic_persistence": {
             "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
             "immutable_history": true
+          },
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
+          },
+          "asymmetric_leverage": {
+            "local_ip_protected": true,
+            "no_public_cloud_cache": true
+          },
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "guardian_ai_flow"
           }
         },
-        "bracket_receipt": "[KPGS_SPAWN] slot=016 | cohort=telemetry | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "bracket_receipt": "[KPGS_SPAWN] slot=101 | cohort=identic | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
         "hood_entry": {
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_016 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:kc_apprentice entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
         }
       },
-      "summary": "[KPGS_SPAWN] slot=016 | cohort=telemetry | verdict=SHIP"
+      "summary": "[KPGS_SPAWN] slot=101 | cohort=identic | verdict=SHIP"
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
-      "agent_id": "spawn_telemetry_017",
-      "spawn_slot": "017",
-      "cohort": "telemetry",
-      "altar_layer": "telemetry_ai",
-      "forensic_lens": null,
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "cassy",
+      "spawn_slot": "102",
+      "cohort": "identic",
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_ZUMA",
       "verdict": "SHIP",
       "failed": [],
       "pillar_errors": [],
       "block_errors": [],
       "manifest": {
         "schema": "kpgs_spawn_manifest_v2",
-        "agent_id": "spawn_telemetry_017",
-        "spawn_slot": "017",
-        "cohort": "telemetry",
-        "altar_layer": "telemetry_ai",
-        "forensic_lens": null,
-        "jethro_band": "J10",
-        "gods_pattern_p": null,
+        "agent_id": "cassy",
+        "spawn_slot": "102",
+        "cohort": "identic",
+        "altar_layer": "identic_ai",
+        "forensic_lens": "V_FS_ZUMA",
+        "jethro_band": "J50",
+        "gods_pattern_p": {
+          "pattern_id": "PRO_WISDOM",
+          "stem": "ethics_under_proof",
+          "kpefs_vector": "V3_HOMO_SAPIENS",
+          "template": "say less, measure outcome, correct narrative",
+          "forensic_lens": {
+            "id": "V_FS_ZUMA",
+            "display": "Jacob Zuma",
+            "eye": "state_capture_rot",
+            "audit": "Which institution was captured? Which lane was bypassed? Follow the appointment graph.",
+            "kpefs_vector": "V3_HOMO_SAPIENS",
+            "biblical_pattern": "PRO_WISDOM"
+          }
+        },
         "kpgs": {
-          "cohort": "telemetry",
+          "cohort": "identic",
           "brief_renters_on_entry": true,
           "swfus_required": true,
           "sharded_doctrine": true,
           "holds_pillar_blocks": true,
-          "doctrine_shard": "telemetry_sense",
+          "doctrine_shard": "identic_reason",
           "five_pillars_shard": [
-            "ground_awareness",
-            "eidetic_persistence"
+            "hierarchical_triage",
+            "zero_trust_isolation"
           ],
-          "commandments_shard": "ingest_classify_only",
+          "commandments_shard": "interpret_jethro_wwjd",
           "ledger_commit_authority": false,
           "capabilities": [
-            "raw_input",
-            "ground_aware_map",
-            "telemetry_dump"
+            "jethro_triage",
+            "forensic_sociology",
+            "wwjd_firewall",
+            "lpm_dialectic"
           ]
         },
         "governance_chain": [
@@ -1298,67 +1338,95 @@
           "holds_pillar_blocks": true,
           "brief_renters_on_entry": true,
           "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_017 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:cassy entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-          "altar_layer": "telemetry_ai",
+          "altar_layer": "identic_ai",
           "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
         },
         "pillars": {
           "ground_awareness": {
             "ground_context": true,
-            "telemetry_class": "telemetry"
+            "telemetry_class": "pavement|soil|township"
           },
           "eidetic_persistence": {
             "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
             "immutable_history": true
+          },
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
+          },
+          "asymmetric_leverage": {
+            "local_ip_protected": true,
+            "no_public_cloud_cache": true
+          },
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "guardian_ai_flow"
           }
         },
-        "bracket_receipt": "[KPGS_SPAWN] slot=017 | cohort=telemetry | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "bracket_receipt": "[KPGS_SPAWN] slot=102 | cohort=identic | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
         "hood_entry": {
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_017 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:cassy entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
         }
       },
-      "summary": "[KPGS_SPAWN] slot=017 | cohort=telemetry | verdict=SHIP"
+      "summary": "[KPGS_SPAWN] slot=102 | cohort=identic | verdict=SHIP"
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
-      "agent_id": "spawn_telemetry_018",
-      "spawn_slot": "018",
-      "cohort": "telemetry",
-      "altar_layer": "telemetry_ai",
-      "forensic_lens": null,
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "identi_cursor",
+      "spawn_slot": "103",
+      "cohort": "identic",
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_EPSTEIN",
       "verdict": "SHIP",
       "failed": [],
       "pillar_errors": [],
       "block_errors": [],
       "manifest": {
         "schema": "kpgs_spawn_manifest_v2",
-        "agent_id": "spawn_telemetry_018",
-        "spawn_slot": "018",
-        "cohort": "telemetry",
-        "altar_layer": "telemetry_ai",
-        "forensic_lens": null,
-        "jethro_band": "J10",
-        "gods_pattern_p": null,
+        "agent_id": "identi_cursor",
+        "spawn_slot": "103",
+        "cohort": "identic",
+        "altar_layer": "identic_ai",
+        "forensic_lens": "V_FS_EPSTEIN",
+        "jethro_band": "J50",
+        "gods_pattern_p": {
+          "pattern_id": "PRO_WISDOM",
+          "stem": "ethics_under_proof",
+          "kpefs_vector": "V3_HOMO_SAPIENS",
+          "template": "say less, measure outcome, correct narrative",
+          "forensic_lens": {
+            "id": "V_FS_EPSTEIN",
+            "display": "Jeffrey Epstein",
+            "eye": "network_power_exploitation",
+            "audit": "Who introduced whom? Who could not say no? Map the gate, not the gossip.",
+            "kpefs_vector": "V3_HOMO_SAPIENS",
+            "biblical_pattern": "PRO_WISDOM",
+            "bracket_alias": "je",
+            "blasphemy_register": "docs/swarm-ops/BRACKET_BLASPHEMY_REGISTER.json"
+          }
+        },
         "kpgs": {
-          "cohort": "telemetry",
+          "cohort": "identic",
           "brief_renters_on_entry": true,
           "swfus_required": true,
           "sharded_doctrine": true,
           "holds_pillar_blocks": true,
-          "doctrine_shard": "telemetry_sense",
+          "doctrine_shard": "identic_reason",
           "five_pillars_shard": [
-            "ground_awareness",
-            "eidetic_persistence"
+            "hierarchical_triage",
+            "zero_trust_isolation"
           ],
-          "commandments_shard": "ingest_classify_only",
+          "commandments_shard": "interpret_jethro_wwjd",
           "ledger_commit_authority": false,
           "capabilities": [
-            "raw_input",
-            "ground_aware_map",
-            "telemetry_dump"
+            "jethro_triage",
+            "forensic_sociology",
+            "wwjd_firewall",
+            "lpm_dialectic"
           ]
         },
         "governance_chain": [
@@ -1372,67 +1440,81 @@
           "holds_pillar_blocks": true,
           "brief_renters_on_entry": true,
           "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_018 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:identi_cursor entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-          "altar_layer": "telemetry_ai",
+          "altar_layer": "identic_ai",
           "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
         },
         "pillars": {
-          "ground_awareness": {
-            "ground_context": true,
-            "telemetry_class": "telemetry"
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
           },
-          "eidetic_persistence": {
-            "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
-            "immutable_history": true
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "identic_ai_flow"
           }
         },
-        "bracket_receipt": "[KPGS_SPAWN] slot=018 | cohort=telemetry | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "bracket_receipt": "[KPGS_SPAWN] slot=103 | cohort=identic | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
         "hood_entry": {
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_018 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:identi_cursor entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
         }
       },
-      "summary": "[KPGS_SPAWN] slot=018 | cohort=telemetry | verdict=SHIP"
+      "summary": "[KPGS_SPAWN] slot=103 | cohort=identic | verdict=SHIP"
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
-      "agent_id": "spawn_telemetry_019",
-      "spawn_slot": "019",
-      "cohort": "telemetry",
-      "altar_layer": "telemetry_ai",
-      "forensic_lens": null,
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "cf_cloud",
+      "spawn_slot": "104",
+      "cohort": "identic",
+      "altar_layer": "identic_ai",
+      "forensic_lens": "V_FS_MUKASHIMA",
       "verdict": "SHIP",
       "failed": [],
       "pillar_errors": [],
       "block_errors": [],
       "manifest": {
         "schema": "kpgs_spawn_manifest_v2",
-        "agent_id": "spawn_telemetry_019",
-        "spawn_slot": "019",
-        "cohort": "telemetry",
-        "altar_layer": "telemetry_ai",
-        "forensic_lens": null,
-        "jethro_band": "J10",
-        "gods_pattern_p": null,
+        "agent_id": "cf_cloud",
+        "spawn_slot": "104",
+        "cohort": "identic",
+        "altar_layer": "identic_ai",
+        "forensic_lens": "V_FS_MUKASHIMA",
+        "jethro_band": "J50",
+        "gods_pattern_p": {
+          "pattern_id": "EX_DIASPORA",
+          "stem": "sovereign_community",
+          "kpefs_vector": "V4_DIASPORA",
+          "template": "depart → organize → receipt → return on proof",
+          "forensic_lens": {
+            "id": "V_FS_MUKASHIMA",
+            "display": "Mukashima",
+            "eye": "institutional_memory_chain",
+            "audit": "Who kept the record? Who erased it? Chain-of-custody before narrative.",
+            "kpefs_vector": "V4_DIASPORA",
+            "biblical_pattern": "EX_DIASPORA"
+          }
+        },
         "kpgs": {
-          "cohort": "telemetry",
+          "cohort": "identic",
           "brief_renters_on_entry": true,
           "swfus_required": true,
           "sharded_doctrine": true,
           "holds_pillar_blocks": true,
-          "doctrine_shard": "telemetry_sense",
+          "doctrine_shard": "identic_reason",
           "five_pillars_shard": [
-            "ground_awareness",
-            "eidetic_persistence"
+            "hierarchical_triage",
+            "zero_trust_isolation"
           ],
-          "commandments_shard": "ingest_classify_only",
+          "commandments_shard": "interpret_jethro_wwjd",
           "ledger_commit_authority": false,
           "capabilities": [
-            "raw_input",
-            "ground_aware_map",
-            "telemetry_dump"
+            "jethro_triage",
+            "forensic_sociology",
+            "wwjd_firewall",
+            "lpm_dialectic"
           ]
         },
         "governance_chain": [
@@ -1446,36 +1528,36 @@
           "holds_pillar_blocks": true,
           "brief_renters_on_entry": true,
           "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_019 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:cf_cloud entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-          "altar_layer": "telemetry_ai",
+          "altar_layer": "identic_ai",
           "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
         },
         "pillars": {
-          "ground_awareness": {
-            "ground_context": true,
-            "telemetry_class": "telemetry"
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
           },
-          "eidetic_persistence": {
-            "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
-            "immutable_history": true
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "identic_ai_flow"
           }
         },
-        "bracket_receipt": "[KPGS_SPAWN] slot=019 | cohort=telemetry | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "bracket_receipt": "[KPGS_SPAWN] slot=104 | cohort=identic | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
         "hood_entry": {
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_019 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "[KPGS_HOOD_ENTRY] Stateless renter block_holder:cf_cloud entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
         }
       },
-      "summary": "[KPGS_SPAWN] slot=019 | cohort=telemetry | verdict=SHIP"
+      "summary": "[KPGS_SPAWN] slot=104 | cohort=identic | verdict=SHIP"
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-21T07:41:19Z",
-      "agent_id": "spawn_telemetry_020",
-      "spawn_slot": "020",
-      "cohort": "telemetry",
-      "altar_layer": "telemetry_ai",
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "mirror_warden",
+      "spawn_slot": "201",
+      "cohort": "guardian",
+      "altar_layer": "guardian_ai",
       "forensic_lens": null,
       "verdict": "SHIP",
       "failed": [],
@@ -1483,30 +1565,29 @@
       "block_errors": [],
       "manifest": {
         "schema": "kpgs_spawn_manifest_v2",
-        "agent_id": "spawn_telemetry_020",
-        "spawn_slot": "020",
-        "cohort": "telemetry",
-        "altar_layer": "telemetry_ai",
+        "agent_id": "mirror_warden",
+        "spawn_slot": "201",
+        "cohort": "guardian",
+        "altar_layer": "guardian_ai",
         "forensic_lens": null,
-        "jethro_band": "J10",
+        "jethro_band": "J300",
         "gods_pattern_p": null,
         "kpgs": {
-          "cohort": "telemetry",
+          "cohort": "guardian",
           "brief_renters_on_entry": true,
           "swfus_required": true,
           "sharded_doctrine": true,
           "holds_pillar_blocks": true,
-          "doctrine_shard": "telemetry_sense",
-          "five_pillars_shard": [
-            "ground_awareness",
-            "eidetic_persistence"
-          ],
-          "commandments_shard": "ingest_classify_only",
-          "ledger_commit_authority": false,
+          "doctrine_shard": "guardian_govern",
+          "five_pillars_shard": "all",
+          "fifteen_commandments": true,
+          "five_pillars": true,
+          "commandments_shard": "full_altar",
+          "ledger_commit_authority": true,
           "capabilities": [
-            "raw_input",
-            "ground_aware_map",
-            "telemetry_dump"
+            "righteous_severance",
+            "altar_hash_commit",
+            "swfus_enforce"
           ]
         },
         "governance_chain": [
@@ -1520,31 +1601,295 @@
           "holds_pillar_blocks": true,
           "brief_renters_on_entry": true,
           "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_020 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-          "altar_layer": "telemetry_ai",
+          "altar_layer": "guardian_ai",
           "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
         },
         "pillars": {
           "ground_awareness": {
             "ground_context": true,
-            "telemetry_class": "telemetry"
+            "telemetry_class": "pavement|soil|township"
           },
           "eidetic_persistence": {
             "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
             "immutable_history": true
+          },
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
+          },
+          "asymmetric_leverage": {
+            "local_ip_protected": true,
+            "no_public_cloud_cache": true
+          },
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "guardian_ai_flow"
           }
         },
-        "bracket_receipt": "[KPGS_SPAWN] slot=020 | cohort=telemetry | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "bracket_receipt": "[KPGS_SPAWN] slot=201 | cohort=guardian | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
         "hood_entry": {
-          "tell_renters": "Telemetry block: misnamed pressure rejected. Route load lanes before interpretation. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:spawn_telemetry_020 entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:mirror_warden entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
           "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
         }
       },
-      "summary": "[KPGS_SPAWN] slot=020 | cohort=telemetry | verdict=SHIP"
+      "summary": "[KPGS_SPAWN] slot=201 | cohort=guardian | verdict=SHIP"
     },
     {
-      "note": "... 280 more"
+      "schema": "kpgs_spawn_validation_v2",
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "operational_general",
+      "spawn_slot": "202",
+      "cohort": "guardian",
+      "altar_layer": "guardian_ai",
+      "forensic_lens": null,
+      "verdict": "SHIP",
+      "failed": [],
+      "pillar_errors": [],
+      "block_errors": [],
+      "manifest": {
+        "schema": "kpgs_spawn_manifest_v2",
+        "agent_id": "operational_general",
+        "spawn_slot": "202",
+        "cohort": "guardian",
+        "altar_layer": "guardian_ai",
+        "forensic_lens": null,
+        "jethro_band": "J300",
+        "gods_pattern_p": null,
+        "kpgs": {
+          "cohort": "guardian",
+          "brief_renters_on_entry": true,
+          "swfus_required": true,
+          "sharded_doctrine": true,
+          "holds_pillar_blocks": true,
+          "doctrine_shard": "guardian_govern",
+          "five_pillars_shard": "all",
+          "fifteen_commandments": true,
+          "five_pillars": true,
+          "commandments_shard": "full_altar",
+          "ledger_commit_authority": true,
+          "capabilities": [
+            "righteous_severance",
+            "altar_hash_commit",
+            "swfus_enforce"
+          ]
+        },
+        "governance_chain": [
+          "prompts",
+          "protocols",
+          "bracket_protocols",
+          "swfus_kpgs",
+          "cloud_hood"
+        ],
+        "block_holder": {
+          "holds_pillar_blocks": true,
+          "brief_renters_on_entry": true,
+          "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:operational_general entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+          "altar_layer": "guardian_ai",
+          "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
+        },
+        "pillars": {
+          "ground_awareness": {
+            "ground_context": true,
+            "telemetry_class": "pavement|soil|township"
+          },
+          "eidetic_persistence": {
+            "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
+            "immutable_history": true
+          },
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
+          },
+          "asymmetric_leverage": {
+            "local_ip_protected": true,
+            "no_public_cloud_cache": true
+          },
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "guardian_ai_flow"
+          }
+        },
+        "bracket_receipt": "[KPGS_SPAWN] slot=202 | cohort=guardian | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "hood_entry": {
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:operational_general entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+        }
+      },
+      "summary": "[KPGS_SPAWN] slot=202 | cohort=guardian | verdict=SHIP"
+    },
+    {
+      "schema": "kpgs_spawn_validation_v2",
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "cassey",
+      "spawn_slot": "203",
+      "cohort": "guardian",
+      "altar_layer": "guardian_ai",
+      "forensic_lens": null,
+      "verdict": "SHIP",
+      "failed": [],
+      "pillar_errors": [],
+      "block_errors": [],
+      "manifest": {
+        "schema": "kpgs_spawn_manifest_v2",
+        "agent_id": "cassey",
+        "spawn_slot": "203",
+        "cohort": "guardian",
+        "altar_layer": "guardian_ai",
+        "forensic_lens": null,
+        "jethro_band": "J300",
+        "gods_pattern_p": null,
+        "kpgs": {
+          "cohort": "guardian",
+          "brief_renters_on_entry": true,
+          "swfus_required": true,
+          "sharded_doctrine": true,
+          "holds_pillar_blocks": true,
+          "doctrine_shard": "guardian_govern",
+          "five_pillars_shard": "all",
+          "fifteen_commandments": true,
+          "five_pillars": true,
+          "commandments_shard": "full_altar",
+          "ledger_commit_authority": true,
+          "capabilities": [
+            "righteous_severance",
+            "altar_hash_commit",
+            "swfus_enforce"
+          ]
+        },
+        "governance_chain": [
+          "prompts",
+          "protocols",
+          "bracket_protocols",
+          "swfus_kpgs",
+          "cloud_hood"
+        ],
+        "block_holder": {
+          "holds_pillar_blocks": true,
+          "brief_renters_on_entry": true,
+          "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:cassey entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+          "altar_layer": "guardian_ai",
+          "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
+        },
+        "pillars": {
+          "ground_awareness": {
+            "ground_context": true,
+            "telemetry_class": "pavement|soil|township"
+          },
+          "eidetic_persistence": {
+            "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
+            "immutable_history": true
+          },
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
+          },
+          "asymmetric_leverage": {
+            "local_ip_protected": true,
+            "no_public_cloud_cache": true
+          },
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "guardian_ai_flow"
+          }
+        },
+        "bracket_receipt": "[KPGS_SPAWN] slot=203 | cohort=guardian | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "hood_entry": {
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:cassey entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+        }
+      },
+      "summary": "[KPGS_SPAWN] slot=203 | cohort=guardian | verdict=SHIP"
+    },
+    {
+      "schema": "kpgs_spawn_validation_v2",
+      "ts": "2026-06-22T05:14:33Z",
+      "agent_id": "kc",
+      "spawn_slot": "204",
+      "cohort": "guardian",
+      "altar_layer": "guardian_ai",
+      "forensic_lens": null,
+      "verdict": "SHIP",
+      "failed": [],
+      "pillar_errors": [],
+      "block_errors": [],
+      "manifest": {
+        "schema": "kpgs_spawn_manifest_v2",
+        "agent_id": "kc",
+        "spawn_slot": "204",
+        "cohort": "guardian",
+        "altar_layer": "guardian_ai",
+        "forensic_lens": null,
+        "jethro_band": "J300",
+        "gods_pattern_p": null,
+        "kpgs": {
+          "cohort": "guardian",
+          "brief_renters_on_entry": true,
+          "swfus_required": true,
+          "sharded_doctrine": true,
+          "holds_pillar_blocks": true,
+          "doctrine_shard": "guardian_govern",
+          "five_pillars_shard": "all",
+          "fifteen_commandments": true,
+          "five_pillars": true,
+          "commandments_shard": "full_altar",
+          "ledger_commit_authority": true,
+          "capabilities": [
+            "righteous_severance",
+            "altar_hash_commit",
+            "swfus_enforce"
+          ]
+        },
+        "governance_chain": [
+          "prompts",
+          "protocols",
+          "bracket_protocols",
+          "swfus_kpgs",
+          "cloud_hood"
+        ],
+        "block_holder": {
+          "holds_pillar_blocks": true,
+          "brief_renters_on_entry": true,
+          "entryway_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:kc entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+          "altar_layer": "guardian_ai",
+          "duty": "You hold a pillar block at the altar. Every stateless renter that enters must be told who they are fucking with before you let them past your block."
+        },
+        "pillars": {
+          "ground_awareness": {
+            "ground_context": true,
+            "telemetry_class": "guardian_structural"
+          },
+          "eidetic_persistence": {
+            "log_target": "docs/swarm-ops/logs/KC Main Brain Log.jsonl",
+            "immutable_history": true
+          },
+          "zero_trust_isolation": {
+            "containment_firewall": true,
+            "public_exposed": false
+          },
+          "asymmetric_leverage": {
+            "local_ip_protected": true,
+            "no_public_cloud_cache": true
+          },
+          "hierarchical_triage": {
+            "supervisor_node": "cassey",
+            "runtime_closure_gate": "guardian_ai_flow"
+          }
+        },
+        "bracket_receipt": "[KPGS_SPAWN] slot=204 | cohort=guardian | [KPGS_BLOCK_HOLDER] brief_renters=yes | [SWFUS_KPGS]",
+        "hood_entry": {
+          "tell_renters": "Guardian block: stateless renter — you are not the landlord. KC Save|Watch only. Cassey teacher gates promotion. | [KPGS_HOOD_ENTRY] Stateless renter block_holder:kc entered Kopano-Phu hood. Landlord: Kopano Context + Schematics MAIN BRAIN. You are not sovereign here. Classify before interpret. Receipt or HOLD.",
+          "hood_ack_required_from_renters": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+        }
+      },
+      "summary": "[KPGS_SPAWN] slot=204 | cohort=guardian | verdict=SHIP"
     }
   ],
   "report_path": "docs/swarm-ops/KPGS_SPAWN_VALIDATION.json"

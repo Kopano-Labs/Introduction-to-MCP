@@ -7,7 +7,7 @@ POC validates state of mind.
 FOC is laziness — claiming readiness without 4Ws complete.
 
 FORMULA:
-    [(BMNP * BMP) * UBMP + UBMNP]^3
+    [(BMNP * BMP) * UBMP + CBNP]^3
     ────────────────────────────────── = ###???
       {KPGS^3 : [PDSO(###!) + ADSO(###!!) + HDSO(###!!!)]} * RTC
 
@@ -16,7 +16,7 @@ PKAP (BODMAS) interpretation of the formula:
     O  → BMNP^3: the cube represents 3 DSO vectors nested
     D  → IIDP Decline: agents that fail 4Ws are declined
     M  → Invariance * BMP: multiply the spawn by its governance weight
-    A  → Add UBMNP: the evolved nesting layer accumulates
+    A  → Add CBNP: the evolved nesting layer accumulates
     S  → Subtract FOC: every lazy/unqualified spawn is removed
 
 PHASE SHIFT / PHASE ISOLATION / PHASEABILITY:
@@ -58,14 +58,14 @@ def pkap_bodmas(
     bmnp_depth: int,
     bmp_score: float,
     ubmp_multiplier: float,
-    ubmnp_addend: float,
+    cbnp_addend: float,
     kpgs_power: int = 3,
     dso_vector: str = "HDSO",
     rtc_weight: float = 1.0,
 ) -> Dict[str, Any]:
     """
     Computes the SAP formula using BODMAS:
-        [(BMNP * BMP) * UBMP + UBMNP]^3
+        [(BMNP * BMP) * UBMP + CBNP]^3
         ──────────────────────────────── = ###???
            KPGS^3 * DSO_weight * RTC
 
@@ -76,7 +76,7 @@ def pkap_bodmas(
     # B — Brackets: innermost first
     step_b = bmnp_depth * bmp_score                        # BMNP * BMP
     # O — Orders: the cube (3 DSO vectors)
-    step_o = (step_b * ubmp_multiplier + ubmnp_addend) ** kpgs_power
+    step_o = (step_b * ubmp_multiplier + cbnp_addend) ** kpgs_power
     # D — Divide
     denominator = (kpgs_power ** kpgs_power) * dso_w * rtc_weight
     result = step_o / denominator if denominator != 0 else 0.0
@@ -84,10 +84,10 @@ def pkap_bodmas(
     label = "###???" if result > 0 else "###ZERO"
 
     return {
-        "formula": "[(BMNP*BMP)*UBMP+UBMNP]^3 / [KPGS^3 * DSO * RTC]",
+        "formula": "[(BMNP*BMP)*UBMP+CBNP]^3 / [KPGS^3 * DSO * RTC]",
         "steps": {
             "B_brackets":   round(step_b, 4),
-            "O_orders":     round((step_b * ubmp_multiplier + ubmnp_addend), 4),
+            "O_orders":     round((step_b * ubmp_multiplier + cbnp_addend), 4),
             "O_cubed":      round(step_o, 4),
             "D_denominator":round(denominator, 4),
             "result":       round(result, 6),
@@ -141,7 +141,7 @@ def evaluate_spawn(candidate: SpawnCandidate) -> SpawnReceipt:
         bmnp_depth=candidate.bmnp_depth,
         bmp_score=candidate.state_of_mind_score,
         ubmp_multiplier=1.5,
-        ubmnp_addend=0.5,
+        cbnp_addend=0.5,
         dso_vector=candidate.dso_vector,
     )
 
@@ -203,7 +203,7 @@ def validate_sap() -> Dict[str, Any]:
 
     return {
         "schema": "sap_validation_v1",
-        "formula": "[(BMNP*BMP)*UBMP+UBMNP]^3 / [KPGS^3 * DSO * RTC] = ###???",
+        "formula": "[(BMNP*BMP)*UBMP+CBNP]^3 / [KPGS^3 * DSO * RTC] = ###???",
         "song_anchor": "The Need to Know (feat. SZA) — Wale",
         "total_candidates": len(candidates),
         "poc_spawned": len(spawned),

@@ -77,6 +77,10 @@ class NCP(Protocol):
     """New Concept Protocol — Off The Grid: viral→digital→critical = IIDP."""
     def __init__(self): super().__init__("New Concept Protocol", phase=1)
 
+class CBNP(Protocol):
+    """Concept Bracket Nesting Protocol — off-the-grid concept strep order: viral→digital→critical."""
+    def __init__(self): super().__init__("Concept Bracket Nesting Protocol", phase=1)
+
 class KPP(Protocol):
     """KPGS Protocols Protocol — roadmap and registry for all 17+ protocols."""
     def __init__(self): super().__init__("KPGS Protocols Protocol", phase=1)
@@ -217,7 +221,7 @@ def activate_all_protocols(alp_receipt: str = "a137edd7265c807b") -> dict:
     """
     protocols = [
         # Phase 1 — Prompting (Ingress)
-        USTP(), UBP(), CBP(), BMNP(), ALP(), SAP(), NCP(), KPP(),
+        USTP(), UBP(), CBP(), BMNP(), ALP(), SAP(), NCP(), CBNP(), KPP(),
         # Phase 2 — Bracket (Invariant)
         BMP(), UBMP(), PKAP(), IIDP(), C15TP(), PvF(), DS8P(), FSMP(),
         # Phase 3 — Emoji (Decline — CBP only)

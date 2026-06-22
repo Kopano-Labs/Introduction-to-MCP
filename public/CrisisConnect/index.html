@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en-ZA" data-role="citizen" data-urgency="normal">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="theme-color" content="#0a0e1a">
+  <meta name="description" content="CrisisConnect — Adaptive mission-grade disaster response PWA. Report incidents, coordinate responders, manage crises offline-first. Built for African conditions by Kopano Labs.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="CrisisConnect">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://crisisconnect.kopanolabs.com/">
+  <meta property="og:title" content="CrisisConnect — Adaptive Crisis Response PWA">
+  <meta property="og:description" content="Mission-grade adaptive web app for disaster response. 6 dimensions of adaptation: connectivity, role, urgency, device, trust, local context.">
+  <meta property="og:site_name" content="CrisisConnect">
+  <meta property="og:locale" content="en_ZA">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CrisisConnect — Adaptive Crisis Response PWA">
+  <meta name="twitter:description" content="Mission-grade adaptive web app for disaster response by Kopano Labs.">
+
+  <title>CrisisConnect — Adaptive Crisis Response</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- Offline Banner -->
+  <div class="offline-banner" id="offlineBanner" role="alert">
+    ⚡ You are offline — CrisisConnect is running in field mode. Queued actions will sync when connectivity returns.
+  </div>
+
+  <div class="app-shell" id="appShell">
+    <!-- ═══ HEADER ═══ -->
+    <header class="app-header" id="appHeader">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar">☰</button>
+        <div class="app-logo">
+          <div class="logo-icon">⚡</div>
+          <div class="logo-text">Crisis<span>Connect</span></div>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <!-- Urgency Mode Selector -->
+        <div class="urgency-selector" id="urgencySelector" role="radiogroup" aria-label="Urgency mode">
+          <button class="urgency-btn active" data-urgency="normal" role="radio" aria-checked="true">Normal</button>
+          <button class="urgency-btn" data-urgency="active" role="radio" aria-checked="false">Active</button>
+          <button class="urgency-btn" data-urgency="mass" role="radio" aria-checked="false">Mass</button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!-- Connection Status -->
+        <div class="connection-badge" id="connectionBadge" data-status="online">
+          <span class="status-dot"></span>
+          <span id="connectionLabel">Online</span>
+        </div>
+
+        <!-- Sync Info -->
+        <div class="sync-info" id="syncInfo">
+          <span>Last sync:</span>
+          <span id="lastSync">just now</span>
+        </div>
+
+        <!-- Role Selector -->
+        <div class="role-selector" id="roleSelector">
+          <button class="role-current" id="roleCurrent" aria-haspopup="true" aria-expanded="false">
+            <span id="roleIcon">👤</span>
+            <span id="roleLabel">Citizen</span>
+            <span>▾</span>
+          </button>
+          <div class="role-dropdown" id="roleDropdown">
+            <button class="role-option active" data-role="citizen" data-icon="👤">👤 Citizen</button>
+            <button class="role-option" data-role="operator" data-icon="📋">📋 Operator / Dispatcher</button>
+            <button class="role-option" data-role="responder" data-icon="🚑">🚑 Field Responder</button>
+            <button class="role-option" data-role="command" data-icon="🎯">🎯 Command Layer</button>
+          </div>
+        </div>
+
+        <!-- USER DROP MENU — Pilot Profile -->
+        <div class="user-menu-wrap" id="userMenuWrap">
+          <button
+            class="user-menu-trigger"
+            id="userMenuTrigger"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="userMenuPanel"
+            aria-label="Pilot profile menu"
+          >
+            <div class="user-avatar" id="userAvatar" aria-hidden="true">?</div>
+            <span class="user-callsign" id="userCallsign">Guest</span>
+            <span class="user-menu-caret" aria-hidden="true">▾</span>
+          </button>
+
+          <div class="user-menu-panel is-hidden" id="userMenuPanel" role="menu" aria-label="Pilot profile">
+            <!-- Panel Header -->
+            <div class="ump-header">
+              <div class="ump-avatar-lg" id="umpAvatarLg">?</div>
+              <div class="ump-identity">
+                <p class="ump-name" id="umpName">Guest Pilot</p>
+                <p class="ump-role" id="umpRole">Citizen · Offline-first</p>
+                <div class="ump-status-row">
+                  <span class="ump-kpgs-badge" id="umpKpgsBadge">KPGS: POC</span>
+                  <span class="ump-alp-label" id="umpAlpLabel">ALP #13</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ump-divider"></div>
+
+            <!-- Stats Row -->
+            <div class="ump-stats" id="umpStats">
+              <div class="ump-stat">
+                <span class="ump-stat-value" id="umpReports">0</span>
+                <span class="ump-stat-label">Reports</span>
+              </div>
+              <div class="ump-stat">
+                <span class="ump-stat-value" id="umpSynced">0</span>
+                <span class="ump-stat-label">Synced</span>
+              </div>
+              <div class="ump-stat">
+                <span class="ump-stat-value" id="umpSession">0m</span>
+                <span class="ump-stat-label">Session</span>
+              </div>
+            </div>
+
+            <div class="ump-divider"></div>
+
+            <!-- Menu Items -->
+            <nav class="ump-nav" aria-label="User menu">
+              <button class="ump-item" id="umpEditProfile" role="menuitem">
+                <span class="ump-item-icon">✏️</span>
+                <span>Edit callsign</span>
+              </button>
+              <button class="ump-item" id="umpViewQueue" role="menuitem">
+                <span class="ump-item-icon">📤</span>
+                <span>Offline queue</span>
+                <span class="ump-item-badge is-hidden" id="umpQueueBadge">0</span>
+              </button>
+              <button class="ump-item" id="umpToggleUrgency" role="menuitem">
+                <span class="ump-item-icon">⚡</span>
+                <span id="umpUrgencyLabel">Switch urgency mode</span>
+              </button>
+              <button class="ump-item" id="umpEcosystem" role="menuitem">
+                <span class="ump-item-icon">🌐</span>
+                <span>Kopano Ecosystem</span>
+              </button>
+            </nav>
+
+            <div class="ump-divider"></div>
+
+            <!-- KPGS Governance Footer -->
+            <div class="ump-governance">
+              <p class="ump-gov-label">Governance</p>
+              <div class="ump-gov-row">
+                <span class="ump-gov-tag" id="umpIkpStatus">IKP: CLEAN</span>
+                <span class="ump-gov-tag" id="ump360dp">360DP: VIP</span>
+                <span class="ump-gov-tag" id="umpDso">DSO: HDSO ###!!!</span>
+              </div>
+              <p class="ump-constraint">I_AM_STATELESS_RENTER_NOT_LANDLORD</p>
+            </div>
+
+            <div class="ump-divider"></div>
+
+            <!-- Sign Out -->
+            <button class="ump-item ump-item--danger" id="umpSignOut" role="menuitem">
+              <span class="ump-item-icon">🚪</span>
+              <span>Reset pilot data</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Edit Callsign Modal -->
+    <div class="ump-callsign-modal is-hidden" id="umpCallsignModal" role="dialog" aria-modal="true" aria-labelledby="umpCallsignTitle">
+      <div class="ump-callsign-card">
+        <p class="eyebrow">Pilot Identity</p>
+        <h2 id="umpCallsignTitle">Set Your Callsign</h2>
+        <p class="ump-callsign-hint">Your callsign is stored locally on this device. No account required.</p>
+        <div class="form-group">
+          <label class="form-label" for="umpCallsignInput">Callsign</label>
+          <input class="form-input" id="umpCallsignInput" type="text" maxlength="24" placeholder="e.g. Eagle-7, Sandile, Dr Nkosi" autocomplete="nickname">
+        </div>
+        <div class="ump-callsign-actions">
+          <button class="btn btn-primary" id="umpCallsignSave">Save Callsign</button>
+          <button class="btn btn-outline" id="umpCallsignCancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="app-sidebar" id="appSidebar">
+      <!-- Quick Stats -->
+      <div class="sidebar-stats" id="sidebarStats">
+        <div class="stat-card critical">
+          <div class="stat-value" id="statActive">3</div>
+          <div class="stat-label">Active</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-value" id="statPending">7</div>
+          <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card safe">
+          <div class="stat-value" id="statResolved">24</div>
+          <div class="stat-label">Resolved</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-value" id="statQueued">0</div>
+          <div class="stat-label">Queued</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Operations</div>
+        <button class="nav-item active" data-view="dashboard" id="navDashboard">📊 Dashboard</button>
+        <button class="nav-item" data-view="incidents" id="navIncidents">🔴 Incidents <span class="nav-badge" id="incidentBadge">3</span></button>
+        <button class="nav-item" data-view="report" id="navReport">📝 Report</button>
+        <button class="nav-item" data-view="map" id="navMap">🗺️ Map</button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">System</div>
+        <button class="nav-item" data-view="adaptation" id="navAdaptation">⚙️ Adaptation Status</button>
+        <button class="nav-item" data-view="queue" id="navQueue">📤 Offline Queue <span class="nav-badge hidden" id="queueBadge">0</span></button>
+        <button class="nav-item" data-view="ecosystem" id="navEcosystem">🌐 Ecosystem</button>
+      </div>
+
+      <!-- Device Info -->
+      <div class="device-info" id="deviceInfo">
+        <p><span class="device-label">Device:</span> <span id="deviceClass">detecting...</span></p>
+        <p><span class="device-label">Network:</span> <span id="networkType">detecting...</span></p>
+        <p><span class="device-label">Battery:</span> <span id="batteryLevel">--</span></p>
+        <p><span class="device-label">Cache:</span> <span id="cacheSize">calculating...</span></p>
+      </div>
+    </aside>
+
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="app-main" id="appMain">
+      <!-- Install Banner -->
+      <div class="install-banner" id="installBanner">
+        <p>📲 <strong>Install CrisisConnect</strong> for offline access and push notifications</p>
+        <button class="btn btn-primary" id="installBtn">Install</button>
+      </div>
+
+      <!-- Offline Queue Banner -->
+      <div class="offline-queue-banner" id="offlineQueueBanner">
+        <span>📤 <span id="queueCount">0</span> items queued for sync</span>
+        <button class="btn btn-outline" id="forceSync">Force Sync</button>
+      </div>
+
+      <!-- ═══ VIEW: Dashboard ═══ -->
+      <div class="view-container active" id="viewDashboard">
+        <div class="page-header">
+          <h1 class="page-title">Operations Dashboard</h1>
+          <p class="page-subtitle">Real-time overview · <span id="dashboardTimestamp" class="font-mono"></span></p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="metric-card">
+            <div class="metric-icon">🔴</div>
+            <div class="metric-value text-critical" id="metricCritical">3</div>
+            <div class="metric-label">Critical Incidents</div>
+            <div class="metric-delta up">↑ 2 in last hour</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">🚑</div>
+            <div class="metric-value" id="metricResponders">12</div>
+            <div class="metric-label">Active Responders</div>
+            <div class="metric-delta neutral">— stable</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">⏱️</div>
+            <div class="metric-value" id="metricAvgResponse">4:32</div>
+            <div class="metric-label">Avg Response Time</div>
+            <div class="metric-delta down">↓ 1:15 improvement</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">📡</div>
+            <div class="metric-value text-safe" id="metricUptime">99.2%</div>
+            <div class="metric-label">System Uptime</div>
+            <div class="metric-delta neutral">— 30 day avg</div>
+          </div>
+        </div>
+
+        <!-- Recent Incidents -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Recent Incidents</h2>
+            <span class="card-meta">Last updated: <span id="incidentListTime"></span></span>
+          </div>
+          <div class="incident-list" id="incidentList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ VIEW: Incidents ═══ -->
+      <div class="view-container" id="viewIncidents">
+        <div class="page-header">
+          <h1 class="page-title">Incident Feed</h1>
+          <p class="page-subtitle">All active and recent incidents with trust indicators</p>
+        </div>
+        <div class="incident-list" id="fullIncidentList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- ═══ VIEW: Report ═══ -->
+      <div class="view-container" id="viewReport">
+        <div class="page-header">
+          <h1 class="page-title">Report Incident</h1>
+          <p class="page-subtitle">Submit a new incident report · works offline</p>
+        </div>
+        <div class="card">
+          <form id="reportForm">
+            <div class="form-group">
+              <label class="form-label" for="incidentType">Incident Type</label>
+              <select class="form-select" id="incidentType" required>
+                <option value="">Select type...</option>
+                <option value="flood">🌊 Flood</option>
+                <option value="fire">🔥 Fire</option>
+                <option value="medical">🏥 Medical Emergency</option>
+                <option value="gbv">🛡️ Gender-Based Violence</option>
+                <option value="infrastructure">🏗️ Infrastructure Failure</option>
+                <option value="civil_unrest">⚠️ Civil Unrest</option>
+                <option value="power">⚡ Power / Load Shedding</option>
+                <option value="water">💧 Water Outage</option>
+                <option value="other">📋 Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="incidentSeverity">Severity</label>
+              <select class="form-select" id="incidentSeverity" required>
+                <option value="low">Low — Informational</option>
+                <option value="medium" selected>Medium — Action needed</option>
+                <option value="high">High — Urgent</option>
+                <option value="critical">Critical — Life threatening</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="incidentLocation">Location</label>
+              <input class="form-input" id="incidentLocation" type="text" placeholder="e.g. Khayelitsha, Cape Town" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="incidentDescription">Description</label>
+              <textarea class="form-textarea" id="incidentDescription" placeholder="Describe the incident..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reporterContact">Contact (optional)</label>
+              <input class="form-input" id="reporterContact" type="text" placeholder="Phone or name">
+            </div>
+            <button type="submit" class="btn btn-danger btn-lg btn-block" id="submitReport">
+              🚨 Submit Report
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- ═══ VIEW: Map ═══ -->
+      <div class="view-container" id="viewMap">
+        <div class="page-header">
+          <h1 class="page-title">Incident Map</h1>
+          <p class="page-subtitle">Geographic incident distribution</p>
+        </div>
+        <div class="map-container">
+          <div class="map-overlay">
+            <div class="map-icon">🗺️</div>
+            <p>Map integration ready</p>
+            <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.75rem;">Leaflet/Mapbox integration point — cached tiles available offline</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ VIEW: Adaptation Status ═══ -->
+      <div class="view-container" id="viewAdaptation">
+        <div class="page-header">
+          <h1 class="page-title">Adaptive System Status</h1>
+          <p class="page-subtitle">All 6 dimensions of CrisisConnect adaptation</p>
+        </div>
+        <div class="adaptation-grid" id="adaptationGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- ═══ VIEW: Offline Queue ═══ -->
+      <div class="view-container" id="viewQueue">
+        <div class="page-header">
+          <h1 class="page-title">Offline Queue</h1>
+          <p class="page-subtitle">Pending items waiting for connectivity</p>
+        </div>
+        <div class="card" id="queueCard">
+          <div class="card-header">
+            <h2 class="card-title">Queued Items</h2>
+            <button class="btn btn-primary" id="syncAll">Sync All</button>
+          </div>
+          <div id="queueList">
+            <p class="text-muted" style="padding: 2rem; text-align: center;">No items in queue — all synced ✅</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ VIEW: Ecosystem ═══ -->
+      <div class="view-container" id="viewEcosystem">
+        <div class="page-header">
+          <h1 class="page-title">KPGS Ecosystem</h1>
+          <p class="page-subtitle">Connected nodes in the Kopano Labs governance system</p>
+        </div>
+        <div class="dashboard-grid" id="ecosystemGrid">
+          <a href="https://kopanolabs.com" target="_blank" rel="noopener" class="metric-card" style="text-decoration:none; cursor:pointer;">
+            <div class="metric-icon">🏢</div>
+            <div class="metric-value" style="font-size:1.25rem;">KopanoLabs.com</div>
+            <div class="metric-label">Sovereign Product Studio</div>
+            <div class="metric-delta neutral">Static HTML · Vercel</div>
+          </a>
+          <a href="https://krrababalela.com" target="_blank" rel="noopener" class="metric-card" style="text-decoration:none; cursor:pointer;">
+            <div class="metric-icon">👤</div>
+            <div class="metric-value" style="font-size:1.25rem;">KRRababalela.com</div>
+            <div class="metric-label">Chief Architect Portfolio</div>
+            <div class="metric-delta neutral">Vite+React · Vercel</div>
+          </a>
+          <a href="https://kasilink.com" target="_blank" rel="noopener" class="metric-card" style="text-decoration:none; cursor:pointer;">
+            <div class="metric-icon">💼</div>
+            <div class="metric-value" style="font-size:1.25rem;">KasiLink.com</div>
+            <div class="metric-label">Township Gigs & Opportunities</div>
+            <div class="metric-delta neutral">Next.js+Clerk · Vercel</div>
+          </a>
+          <a href="https://blog.fivesarena.com" target="_blank" rel="noopener" class="metric-card" style="text-decoration:none; cursor:pointer;">
+            <div class="metric-icon">⚽</div>
+            <div class="metric-value" style="font-size:1.25rem;">blog.fivesarena.com</div>
+            <div class="metric-label">Football Culture Blog</div>
+            <div class="metric-delta neutral">Vite+React · Vercel</div>
+          </a>
+          <div class="metric-card" style="border-color: rgba(239,68,68,0.3);">
+            <div class="metric-icon">🔴</div>
+            <div class="metric-value text-critical" style="font-size:1.1rem;">kopanocontext</div>
+            <div class="metric-label">DNS Not Resolving</div>
+            <div class="metric-delta up">CNAME needed → Vercel</div>
+          </div>
+          <div class="metric-card" style="border-color: rgba(16,185,129,0.3);">
+            <div class="metric-icon">⚡</div>
+            <div class="metric-value text-safe" style="font-size:1.1rem;">CrisisConnect</div>
+            <div class="metric-label">This Adaptive PWA</div>
+            <div class="metric-delta down">You are here</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

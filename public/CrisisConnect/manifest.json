@@ -1,0 +1,21 @@
+{
+  "name": "CrisisConnect",
+  "short_name": "CrisisConnect",
+  "description": "Adaptive mission-grade disaster response PWA by Kopano Labs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0a0e1a",
+  "orientation": "any",
+  "categories": ["emergency", "government", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='80' fill='%230a0e1a'/><text x='256' y='340' font-size='280' text-anchor='middle' fill='%23ff3d57'>⚡</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

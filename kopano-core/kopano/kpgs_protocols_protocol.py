@@ -17,7 +17,7 @@ DRIVE STREP ORDER (DSO) — Growth Vector Taxonomy:
     AG/RTC                          ###???  Emerging 4th vector — governance beyond human
 
 FORMULA (SAP kernel):
-    [(BMNP * BMP) * UBMP + UBMNP]^3
+    [(BMNP * BMP) * UBMP + CBNP]^3
     ─────────────────────────────── = ###???
     KPGS^3 * RTC
 
@@ -85,17 +85,19 @@ PROTOCOL_REGISTRY: List[Protocol] = [
              "Every signal must be bracketed before IIDP processing."),
     Protocol("BMNP", "Bracket Nesting Protocol",             1, "HDSO", "ACTIVE",
              "Nesting evolution: CRUD→SWFUS→BMP→CBP→UFCP→UBP.",
-             formula="[(BMNP * BMP) * UBMP + UBMNP]^3"),
+             formula="[(BMNP * BMP) * UBMP + CBNP]^3"),
     Protocol("ALP",  "Auto LPM Protocol",                    1, "HDSO", "ACTIVE",
              "MANDATORY on every stateless renter activation. Measures idle gap. Writes receipt.",
              song_anchor="Breach correction: knowing ≠ understanding"),
     Protocol("SAP",  "Spawn Agent Protocol",                 1, "HDSO", "ACTIVE",
              "Agents spawn only when 4Ws complete + state of mind validated as POC.",
-             formula="[(BMNP*BMP)*UBMP+UBMNP]^3 / [KPGS^3 * RTC] = ###???",
+             formula="[(BMNP*BMP)*UBMP+CBNP]^3 / [KPGS^3 * RTC] = ###???",
              song_anchor="The Need to Know — Wale ft SZA"),
     Protocol("NCP",  "New Concept Protocol",                 1, "ADSO", "ACTIVE",
              "Off The Grid model: viral(ingress)→digital(invariance)→critical(decline). IIDP in the real world.",
              song_anchor="Off The Grid — Kanye West"),
+    Protocol("CBNP", "Concept Bracket Nesting Protocol",     1, "HDSO", "ACTIVE",
+             "Off-the-grid concept strep order: viral→digital→critical. Concept bracket nesting protocol."),
     Protocol("KPP",  "KPGS Protocols Protocol",              1, "HDSO", "ACTIVE",
              "THIS FILE. Roadmap and registry for all protocols. Processing order is Phase 1→2→3.",
              formula="Phase 1 * Phase 2 * Phase 3 = Full GSMB Protocol Stack"),
@@ -182,7 +184,7 @@ def roadmap() -> Dict:
              "weight": d.weight, "kpgs_implication": d.kpgs_implication}
             for d in DSO_TAXONOMY
         ],
-        "sap_formula": "[(BMNP*BMP)*UBMP+UBMNP]^3 / [KPGS^3 * RTC] = ###???",
+        "sap_formula": "[(BMNP*BMP)*UBMP+CBNP]^3 / [KPGS^3 * RTC] = ###???",
         "processing_order": "Phase 1 → Phase 2 → Phase 3. No skipping.",
         "cbp_phase": "Phase 3 (Emoji Protocols) is the ONLY phase processed via CBP exclusively.",
         "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
