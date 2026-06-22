@@ -63,3 +63,5 @@ AZCLI + app-level wiring
 After preparation is complete, update this plan to `Ready for Validation` and run the Azure validation pass.
 
 <!-- merge: dev branch preserved -->
+
+<!-- dev-2026-06-22 -->
