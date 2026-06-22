@@ -80,3 +80,5 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
 )
+
+# merge: 2026-06-22 dev branch
