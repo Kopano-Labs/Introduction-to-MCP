@@ -1,0 +1,21 @@
+{
+  "schema": "rtc_decision_v1",
+  "timestamp": "2026-06-22T00:13:16.444927+00:00",
+  "signal": "KPGS_SEVER_FORENSIC.jsonl blocking push (109.7MB > 100MB limit)",
+  "decision": "OPTION A \u2014 git filter-repo + .gitignore + force push",
+  "vote": "10/10 UNANIMOUS",
+  "enforcer_verdicts": {
+    "option_a_filter_repo": {
+      "verdict": "POC_VALIDATED",
+      "invariance": 0.7583
+    },
+    "option_b_git_lfs": {
+      "verdict": "POC_VALIDATED",
+      "invariance": 0.5167
+    },
+    "option_c_do_nothing": {
+      "verdict": "FOC_DECLINED",
+      "invariance": 0.1667
+    }
+  }
+}
