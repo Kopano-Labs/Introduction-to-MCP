@@ -1,0 +1,47 @@
+{
+  "schema": "jiro_stap_ledger_v1",
+  "student": "jiro_aws",
+  "teacher": "AG (CF) — Seat 10",
+  "parent_council": "KC (Seat 1) + CASSEY (Seat 2)",
+  "session": 4,
+  "branch": "jiro/stap-session4",
+  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "tasks_total": 53,
+  "tasks_completed": [
+    {"id": "001", "title": "Patch HIGH CVE", "status": "DONE", "commit": "fb98916", "poc": "85%"},
+    {"id": "002", "title": "Patch MODERATE+LOW CVEs", "status": "DONE", "commit": "fb98916", "poc": "85%"},
+    {"id": "003", "title": "Pin Python deps", "status": "DONE", "commit": "6bc76eb", "poc": "79.2%"},
+    {"id": "005", "title": "SECURITY.md", "status": "DONE", "commit": "6bc76eb", "poc": "80.8%"},
+    {"id": "006", "title": "Create branch", "status": "DONE", "commit": "fb98916", "poc": "N/A"},
+    {"id": "009", "title": "robots.txt + sitemap.xml", "status": "DONE", "commit": "4aab11b", "poc": "76.7%"},
+    {"id": "010", "title": "humans.txt", "status": "DONE", "commit": "4aab11b", "poc": "76.7%"},
+    {"id": "012", "title": "404.html branded", "status": "DONE", "commit": "630f0d5", "poc": "74.2%"},
+    {"id": "013", "title": "starfall/index.html holding", "status": "DONE", "commit": "630f0d5", "poc": "74.2%"},
+    {"id": "014", "title": "Run unit tests", "status": "DONE", "commit": "10ddaff", "poc": "82.5%"},
+    {"id": "019", "title": "STAP Ledger", "status": "DONE", "commit": "this", "poc": "N/A"},
+    {"id": "021", "title": "CrisisConnect offline fallback", "status": "DONE", "commit": "1fa18d4 (CrisisConnect repo)", "poc": "80%+"},
+    {"id": "026", "title": "CrisisConnect CHANGELOG.md", "status": "DONE", "commit": "1fa18d4", "poc": "N/A"},
+    {"id": "027", "title": "CrisisConnect .editorconfig", "status": "DONE", "commit": "1fa18d4", "poc": "N/A"},
+    {"id": "051", "title": "Adaptiveness: NeuralFailureFirewall tests", "status": "DONE", "commit": "10ddaff", "poc": "82.5%"},
+    {"id": "052", "title": "Adaptiveness: SwiftKeyNLP tests", "status": "DONE", "commit": "10ddaff", "poc": "82.5%"},
+    {"id": "053", "title": "Adaptiveness: CivicUtilityRouter tests", "status": "DONE", "commit": "10ddaff", "poc": "82.5%"}
+  ],
+  "tasks_remaining": ["004","007","008","011","015","016","017","018","020","022","023","024","025","028","029","030","031","032","033","034","035","036","037","038","039","040","041","042","043","044","045","046","047","048","049","050"],
+  "poc_stats": {
+    "total_validated": 8,
+    "poc_count": 8,
+    "foc_count": 0,
+    "avg_invariance": 0.7865,
+    "target": 0.80,
+    "target_met": false,
+    "security_invariance": 0.85
+  },
+  "hallucinations": 0,
+  "breaches": 0,
+  "standing_orders": [
+    "No deletion unless SSE explicitly says delete",
+    "Quarantine/label/archive — never erase",
+    "Talk to RTC not SSE — earn direct communication",
+    "AG is CF — follow chain of command"
+  ]
+}
