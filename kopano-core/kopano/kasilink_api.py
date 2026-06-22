@@ -146,3 +146,5 @@ async def notify(request: NotifyRequest, authorization: Optional[str] = Header(d
     else:
         success = await bridge.send_message(request.message or "KasiLink notification", request.recipient)
     return {"sent": success}
+
+# merge: dev 2026-06-22
