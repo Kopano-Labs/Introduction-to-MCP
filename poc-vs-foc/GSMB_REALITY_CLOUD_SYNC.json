@@ -1,0 +1,364 @@
+{
+  "schema": "gsmb_reality_cloud_sync_v2",
+  "timestamp": "2026-06-22T01:59:32.695599+00:00",
+  "operator": "kiro_aws",
+  "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "poc_verdict": "POC_VALIDATED",
+  "poc_invariance": 0.8333,
+  "target_met": true,
+  "kopano_labs": [
+    {
+      "name": "starfall-salvage",
+      "url": "https://github.com/Kopano-Labs/starfall-salvage",
+      "private": false,
+      "swfus": "Underground",
+      "role": "WebGL B2B lead gen",
+      "tier": "PRODUCT",
+      "updated": "2026-06-22T00:49:40Z"
+    },
+    {
+      "name": "Bookit-5s-Arena",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena",
+      "private": false,
+      "swfus": "Underground",
+      "role": "Venue booking platform",
+      "tier": "PRODUCT",
+      "updated": "2026-06-22T00:47:55Z"
+    },
+    {
+      "name": "slack-agent-template",
+      "url": "https://github.com/Kopano-Labs/slack-agent-template",
+      "private": true,
+      "swfus": "Sky",
+      "role": "Agent template",
+      "tier": "TOOLING",
+      "updated": "2026-06-22T00:37:36Z"
+    },
+    {
+      "name": "CrisisConnect",
+      "url": "https://github.com/Kopano-Labs/CrisisConnect",
+      "private": false,
+      "swfus": "Fire",
+      "role": "APWA crisis response PWA",
+      "tier": "PRODUCT",
+      "updated": "2026-06-22T00:31:49Z"
+    },
+    {
+      "name": "5s-Arena-Blog",
+      "url": "https://github.com/Kopano-Labs/5s-Arena-Blog",
+      "private": true,
+      "swfus": "Underground",
+      "role": "Blog CMS",
+      "tier": "PRODUCT",
+      "updated": "2026-06-22T00:02:52Z"
+    },
+    {
+      "name": "Harvest-4-All",
+      "url": "https://github.com/Kopano-Labs/Harvest-4-All",
+      "private": true,
+      "swfus": "Soil",
+      "role": "Community sustainability",
+      "tier": "PRODUCT",
+      "updated": "2026-06-21T07:49:51Z"
+    },
+    {
+      "name": "next-video-starter",
+      "url": "https://github.com/Kopano-Labs/next-video-starter",
+      "private": true,
+      "swfus": "Sky",
+      "role": "Video starter",
+      "tier": "TOOLING",
+      "updated": "2026-06-21T07:42:50Z"
+    },
+    {
+      "name": "Introduction-to-MCP",
+      "url": "https://github.com/Kopano-Labs/Introduction-to-MCP",
+      "private": false,
+      "swfus": "Sky",
+      "role": "GSMB Main Brain + Runtime",
+      "tier": "CORE",
+      "updated": "2026-06-21T06:34:03Z"
+    },
+    {
+      "name": "kopano-context",
+      "url": "https://github.com/Kopano-Labs/kopano-context",
+      "private": false,
+      "swfus": "Sky",
+      "role": "Sovereign Intelligence GUI",
+      "tier": "CORE",
+      "updated": "2026-06-20T07:45:52Z"
+    },
+    {
+      "name": "Kiro",
+      "url": "https://github.com/Kopano-Labs/Kiro",
+      "private": false,
+      "swfus": "Sky",
+      "role": "Agentic IDE",
+      "tier": "TOOLING",
+      "updated": "2026-06-19T04:06:21Z"
+    },
+    {
+      "name": "KasiLink",
+      "url": "https://github.com/Kopano-Labs/KasiLink",
+      "private": true,
+      "swfus": "Water",
+      "role": "Township gig marketplace",
+      "tier": "PRODUCT",
+      "updated": "2026-06-18T07:46:37Z"
+    },
+    {
+      "name": "classroom50",
+      "url": "https://github.com/Kopano-Labs/classroom50",
+      "private": true,
+      "swfus": "Soil",
+      "role": "STAP education",
+      "tier": "EDUCATION",
+      "updated": "2026-06-18T01:12:28Z"
+    },
+    {
+      "name": "teacher-toolbox",
+      "url": "https://github.com/Kopano-Labs/teacher-toolbox",
+      "private": false,
+      "swfus": "Soil",
+      "role": "Educator hub",
+      "tier": "EDUCATION",
+      "updated": "2026-06-18T00:54:55Z"
+    },
+    {
+      "name": "Portfolio",
+      "url": "https://github.com/Kopano-Labs/Portfolio",
+      "private": true,
+      "swfus": "Sky",
+      "role": "SSE portfolio",
+      "tier": "IDENTITY",
+      "updated": "2026-06-15T09:19:50Z"
+    },
+    {
+      "name": "clear-code-see-throughs",
+      "url": "https://github.com/Kopano-Labs/clear-code-see-throughs",
+      "private": false,
+      "swfus": "Sky",
+      "role": "Log viewer",
+      "tier": "TOOLING",
+      "updated": "2026-05-28T06:52:29Z"
+    },
+    {
+      "name": "unity-platforms",
+      "url": "https://github.com/Kopano-Labs/unity-platforms",
+      "private": true,
+      "swfus": "Underground",
+      "role": "Unity game",
+      "tier": "EXPERIMENTAL",
+      "updated": "2026-05-16T05:19:49Z"
+    },
+    {
+      "name": "Portfolio-MBR",
+      "url": "https://github.com/Kopano-Labs/Portfolio-MBR",
+      "private": true,
+      "swfus": "Sky",
+      "role": "Mashoto portfolio",
+      "tier": "IDENTITY",
+      "updated": "2026-05-03T14:02:34Z"
+    },
+    {
+      "name": "cape-campass",
+      "url": "https://github.com/Kopano-Labs/cape-campass",
+      "private": true,
+      "swfus": "Water",
+      "role": "Heritage PWA",
+      "tier": "PRODUCT",
+      "updated": "2026-05-03T14:00:23Z"
+    },
+    {
+      "name": "orch-code-implementation",
+      "url": "https://github.com/Kopano-Labs/orch-code-implementation",
+      "private": false,
+      "swfus": "Sky",
+      "role": "Legacy Rust port",
+      "tier": "LEGACY",
+      "updated": "2026-04-24T00:10:37Z"
+    },
+    {
+      "name": ".github",
+      "url": "https://github.com/Kopano-Labs/.github",
+      "private": false,
+      "swfus": "Soil",
+      "role": "Org profile",
+      "tier": "IDENTITY",
+      "updated": "2026-04-19T16:35:43Z"
+    },
+    {
+      "name": "codex-plugin-cc-",
+      "url": "https://github.com/Kopano-Labs/codex-plugin-cc-",
+      "private": false,
+      "swfus": "Sky",
+      "role": "Codex-Claude bridge",
+      "tier": "TOOLING",
+      "updated": "2026-04-18T22:38:37Z"
+    },
+    {
+      "name": "demo-repository",
+      "url": "https://github.com/Kopano-Labs/demo-repository",
+      "private": true,
+      "swfus": "Soil",
+      "role": "GitHub demo",
+      "tier": "EDUCATION",
+      "updated": "2026-04-17T06:17:31Z"
+    }
+  ],
+  "forks": [
+    {
+      "name": "Awesome-AI-Code-Editor",
+      "url": "https://github.com/RobynAwesome/Awesome-AI-Code-Editor",
+      "role": "AI editor landscape",
+      "value": "HIGH",
+      "updated": "2026-06-21T23:23:59Z"
+    },
+    {
+      "name": "hackerrank-orchestrate-june26",
+      "url": "https://github.com/RobynAwesome/hackerrank-orchestrate-june26",
+      "role": "HackerRank comp",
+      "value": "HIGH",
+      "updated": "2026-06-19T16:07:14Z"
+    },
+    {
+      "name": "Top-AI-repos",
+      "url": "https://github.com/RobynAwesome/Top-AI-repos",
+      "role": "AI landscape intel",
+      "value": "HIGH",
+      "updated": "2026-06-21T06:08:49Z"
+    },
+    {
+      "name": "wp-docs-health-monitor",
+      "url": "https://github.com/RobynAwesome/wp-docs-health-monitor",
+      "role": "WP health",
+      "value": "LOW",
+      "updated": "2026-06-07T15:08:42Z"
+    },
+    {
+      "name": "forem",
+      "url": "https://github.com/RobynAwesome/forem",
+      "role": "Community platform ref",
+      "value": "MEDIUM",
+      "updated": "2026-06-07T15:08:43Z"
+    },
+    {
+      "name": "simplenote-mcp",
+      "url": "https://github.com/RobynAwesome/simplenote-mcp",
+      "role": "MCP server ref",
+      "value": "MEDIUM",
+      "updated": "2026-06-07T15:08:45Z"
+    },
+    {
+      "name": "chessmates",
+      "url": "https://github.com/RobynAwesome/chessmates",
+      "role": "Social gaming ref",
+      "value": "LOW",
+      "updated": "2026-06-07T15:08:47Z"
+    },
+    {
+      "name": "azure-skills",
+      "url": "https://github.com/RobynAwesome/azure-skills",
+      "role": "Azure agent skills",
+      "value": "HIGH",
+      "updated": "2026-06-07T15:08:51Z"
+    },
+    {
+      "name": "scc",
+      "url": "https://github.com/RobynAwesome/scc",
+      "role": "CHPC HPC competition",
+      "value": "HIGH",
+      "updated": "2026-06-07T15:08:52Z"
+    },
+    {
+      "name": "model-mondays",
+      "url": "https://github.com/RobynAwesome/model-mondays",
+      "role": "Model knowledge",
+      "value": "MEDIUM",
+      "updated": "2026-06-07T15:08:52Z"
+    },
+    {
+      "name": "GitHub-Copilot-Dev-Workshop-18-04-2026",
+      "url": "https://github.com/RobynAwesome/GitHub-Copilot-Dev-Workshop-18-04-2026",
+      "role": "Copilot workshop",
+      "value": "MEDIUM",
+      "updated": "2026-06-07T15:08:55Z"
+    },
+    {
+      "name": "scc26",
+      "url": "https://github.com/RobynAwesome/scc26",
+      "role": "CPUT internal selection",
+      "value": "HIGH",
+      "updated": "2026-06-07T15:08:55Z"
+    },
+    {
+      "name": "open-antigravity",
+      "url": "https://github.com/RobynAwesome/open-antigravity",
+      "role": "Google AG reference",
+      "value": "MEDIUM",
+      "updated": "2026-06-07T15:08:56Z"
+    },
+    {
+      "name": "Project-Ideas-And-Resources",
+      "url": "https://github.com/RobynAwesome/Project-Ideas-And-Resources",
+      "role": "Ideation bank",
+      "value": "MEDIUM",
+      "updated": "2026-06-07T15:08:58Z"
+    },
+    {
+      "name": "create-block-theme",
+      "url": "https://github.com/RobynAwesome/create-block-theme",
+      "role": "WP theming",
+      "value": "LOW",
+      "updated": "2026-06-07T15:08:59Z"
+    }
+  ],
+  "owned_personal": [
+    {
+      "name": "RobynAwesome",
+      "url": "https://github.com/RobynAwesome/RobynAwesome"
+    },
+    {
+      "name": "cars4mars-landingpage",
+      "url": "https://github.com/RobynAwesome/cars4mars-landingpage"
+    },
+    {
+      "name": "skills-introduction-to-github-lession",
+      "url": "https://github.com/RobynAwesome/skills-introduction-to-github-lession"
+    },
+    {
+      "name": "skills-introduction-to-github",
+      "url": "https://github.com/RobynAwesome/skills-introduction-to-github"
+    },
+    {
+      "name": "Portfolio-MBR",
+      "url": "https://github.com/RobynAwesome/Portfolio-MBR"
+    }
+  ],
+  "totals": {
+    "org": 22,
+    "forks": 15,
+    "owned": 5
+  },
+  "tiers": {
+    "PRODUCT": 7,
+    "TOOLING": 5,
+    "CORE": 2,
+    "EDUCATION": 3,
+    "IDENTITY": 3,
+    "EXPERIMENTAL": 1,
+    "LEGACY": 1
+  },
+  "swfus": {
+    "Underground": 4,
+    "Sky": 10,
+    "Fire": 1,
+    "Soil": 5,
+    "Water": 2
+  },
+  "fork_values": {
+    "HIGH": 6,
+    "LOW": 3,
+    "MEDIUM": 6
+  }
+}
