@@ -90,3 +90,5 @@ class Settings(BaseSettings):
     dev_watch_session_rules_path: str = ".cassy_data/session_logs/session_rules.md"
 
 settings = Settings()
+
+# merge: dev 2026-06-22
