@@ -6225,3 +6225,5 @@ Five lessons stay in `submitted` state, not `reviewed`, until Master physically:
 **Corpus audit:** full 21-folder document corpus extracted and read path prepared at `C:\Users\rkhol\AppData\Local\Temp\kpefs-21-governance-audit-20260608`; `217` docs, `0` extraction errors.
 **KC/Cassey discipline:** new lesson `KC Lesson LEGAL-001 - Registered Entity And Internal Proof Handling - 2026-06-08.md` bound the rule that legal registration changes current-state language discipline, but tax identifiers remain internal.
 **Save/Kill/Watch:** SAVE the legal-ground-truth promotion. WATCH stale historical notes that still describe Kopano Labs as only a pending company or public-only brand.
+
+<!-- dev-2026-06-22 -->
