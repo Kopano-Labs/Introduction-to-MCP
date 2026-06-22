@@ -1,4 +1,4 @@
-name: Kopano CI Pipeline
+name: Kopano CI Pipeline  # Kopano CI — dev branch v2
 
 on:
   push:
