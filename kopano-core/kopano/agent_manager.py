@@ -133,3 +133,5 @@ def save_agents(agents: Dict[str, Agent]):
     AGENTS_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(AGENTS_FILE, "w") as f:
         json.dump({id: agent.dict() for id, agent in agents.items()}, f, indent=4)
+
+# merge: dev 2026-06-22
