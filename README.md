@@ -1,7 +1,8 @@
 
 ![Kopano Context Banner](README-bannner.jpg)
 
-   ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+   ![KPGS](https://img.shields.io/badge/KPGS-ALP%23168-7b61ff) ![POC](https://img.shields.io/badge/POC-VALIDATED-00E676) ![Deploy](https://github.com/Kopano-Labs/Introduction-to-MCP/actions/workflows/deploy-web.yml/badge.svg?branch=codex/kc-sovereign-gui-full-dev)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
    ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
    ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
    ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
@@ -167,3 +168,4 @@ kopano whatsapp test --message "Ecosystem Online" --recipient "+27..."
 ## License
 
 MIT © [RobynAwesome](https://github.com/RobynAwesome)
+
