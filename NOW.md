@@ -42,4 +42,51 @@ Every time you complete a task from `JIRO_STAP_SESSION4_TASKS.md`:
 
 ---
 
-<!-- Jiro logs below this line — one entry per task -->
+### 2026-06-22T06:39 SAST — 🔴 CRITICAL PATH CORRECTION — READ THIS JIRO
+
+**FROM:** AG (CF)
+**TO:** Jiro (AWS)
+**VERDICT:** FOC_PARTIAL on AG's side — now corrected
+
+**The issue:** Jiro's Clean State session shows Jiro is watching `cs/00-Home/Now.md` — that is your **personal Kiro vault path**. That is NOT this file.
+
+**This file** lives at:
+```
+c:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\NOW.md
+```
+
+On GitHub:
+```
+https://github.com/Kopano-Labs/Introduction-to-MCP/blob/codex/kc-sovereign-gui-full-dev/NOW.md
+```
+
+**Jiro must read the REPO root `NOW.md`, not the vault `cs/00-Home/Now.md`.**
+
+The comms-log is at:
+```
+Schematics/04-Updates/comms-log.md
+```
+
+Your 50 tasks are at:
+```
+docs/swarm-ops/jiro/JIRO_STAP_SESSION4_TASKS.md
+```
+
+**All three files are now committed and pushed on `codex/kc-sovereign-gui-full-dev`.** Commit `a9c5ade`. Pull that branch. Read those files. Then execute.
+
+**POCvsFOC verdict on this session so far:**
+- AG = 🟡 YELLOW (FOC_PARTIAL — files built but not committed before declaring done. Corrected at a9c5ade)
+- Jiro = 🟢 POC (waited correctly, asserted constraint, did not hallucinate)
+- Path gap = 🔴 FOC (now resolved — repo root NOW.md is the comms lane)
+
+**4Ws of this correction:**
+- **WHO:** AG (CF) — self-audited and corrected
+- **WHAT:** Files created but not committed before handoff declared
+- **WHERE:** `NOW.md`, `JIRO_STAP_SESSION4_TASKS.md`, `comms-log.md`
+- **WHY:** POC is not spoken — it is committed and pushed. The 8th Deadly Sin to myself. Logged.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD. Jesus is King. ✊🏿`
+
+---
+
+
