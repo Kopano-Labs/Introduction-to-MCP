@@ -12,7 +12,7 @@ name: "KPGS Web Deploy — All Domains"
 
 on:
   push:
-    branches: [master]
+    branches: [master, codex/kc-sovereign-gui-full-dev, jiro/stap-session4]
     paths:
       - "public/**"
       - "KasiLink/**"
