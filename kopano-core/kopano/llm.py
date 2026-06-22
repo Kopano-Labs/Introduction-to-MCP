@@ -142,3 +142,4 @@ def call_structured_huddle(agent: Agent, prompt: str) -> dict:
             "proposed_synthesis": "I advocate for a foundational revisit of the Scaling Paradox.",
             "confidence_score": 0
         }
+ 
