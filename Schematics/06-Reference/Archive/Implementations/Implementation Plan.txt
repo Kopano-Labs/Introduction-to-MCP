@@ -1,0 +1,29 @@
+IMPORTANT
+
+Tech Stack Finalized: We are using Python with Typer (CLI), Rich (Terminal UI), LiteLLM (Unified AI Access), and Pydantic-Settings (Configuration). Phase 1 Strategy: We've adopted a high-quality boilerplate that implements Simulated CLI Chat with real LLM integration from day one.
+
+Build Phases (Source: Master Spec)
+
+Phase 1: The Foundation (Simulated CLI Chat) [CURRENT]
+Entry Point: Implement orch.py with the subcommand structure: serve, chat, agents, learn.
+Agent Manager: Implement orch agents config to securely store API keys in a local .env or YAML.
+Simulation Engine: Build the logic for orch serve launch --group-simulated true, enabling models to talk in a round-robin format in the terminal.
+
+Phase 2: Data Lake & Strategy Engine
+Structured Logging: Design the SQLite schema for capturing (Model, Message, Topic, Prompt, Timestamp).
+Moderator Logic: Implement a "Moderator AI" (Claude/GPT-4o) to manage flow and summarize rounds.
+Context Handling: Standardize history injection so all models share the same "state."
+
+Phase 3: The WhatsApp Gateway
+Gateway Bot: Implement a single bot bridge (via Twilio or WhatsApp Business API) that posts on behalf of the AIs.
+Formatting: Use the [Agent Name]: Message format for group clarity.
+
+Phase 4: Data Analysis & Learning
+Reasoning Chains: Extract and store logical structures from successful debates.
+Fine-Tuning Prep: Build orch learn generate-tuning-data to export the captured reasoning into Alpaca/JSONL formats.
+
+Verification Plan
+Manual Verification
+orch agents config gemini --api-key "..." -> Verify key is saved.
+orch serve launch --topic "AGI Ethics" --agents "gemini,gpt4" -> Verify local debate begins in terminal.
+orch chat log -> Verify the discussion was correctly recorded in the local Data Lake.

@@ -1,0 +1,70 @@
+INFO:     Started server process [19784]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52705 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58689 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52331 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:52118 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:54967 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:63296 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:56686 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:59134 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:64259 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58366 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:60838 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:55424 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:54524 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:58534 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:61334 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:62285 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:59225 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:50388 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:62871 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:63449 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:64015 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:65507 - "WebSocket /ws/live" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed

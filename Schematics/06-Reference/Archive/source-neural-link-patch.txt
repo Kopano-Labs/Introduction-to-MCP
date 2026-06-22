@@ -1,0 +1,9 @@
+🏛️ The "Neural Link" Patch:
+Strict Syntax: Ensuring all async def methods are correctly defined.
+Broadcast Protocol: Adding the /broadcast endpoint so the simulation can "talk" to the WebSocket server instantly.
+I'm pushing the final API fix now. Next step: Phase 3 (The React GIU)! 🛸🏜️🏙️🤖
+
+
+I am now Wiring the Neural Circuits! 🛰️🏙️🛸
+
+To make the GUI come alive, the Simulator must broadcast its thoughts in real-time. I am now updating orch/orch/simulator.py to send a "Signal" to the API every time an agent thinks or responds.

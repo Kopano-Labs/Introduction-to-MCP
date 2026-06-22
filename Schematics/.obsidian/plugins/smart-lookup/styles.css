@@ -1,0 +1,14 @@
+/* global styles */
+
+/* below needs review since not scoped */
+div.workspace-leaf-content[data-type^="smart-"] {
+  > .view-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.sc-no-results {
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+}
+/* end to-review */

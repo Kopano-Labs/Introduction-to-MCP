@@ -1,0 +1,9 @@
+Error: @clerk/nextjs: Missing publishableKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.
+    at Object.throwMissingPublishableKeyError (C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\KasiLink\.next\server\chunks\[root-of-the-server]__0dw_xrd._.js:26:1499)
+    at l (C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\KasiLink\.next\server\chunks\[root-of-the-server]__0dw_xrd._.js:76:731)
+    at <unknown> (C:\U^Crs\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\KasiLink\.next\server\chunks\[root-of-the-server]__0dw_xrd._.js:76:768)
+Error: @clerk/nextjs: Missing publishableKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.
+    at Object.throwMissingPublishableKeyError (C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\KasiLink\.next\server\chunks\[root-of-the-server]__0dw_xrd._.js:26:1499)
+    at l (C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\KasiLink\.next\server\chunks\[root-of-the-server]__0dw_xrd._.js:76:731)
+    at <unknown> (C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\KasiLink\.next\server\chunks\[root-of-the-server]__0dw_xrd._.js:76:768)
+^C

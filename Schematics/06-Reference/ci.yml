@@ -1,0 +1,26 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  python-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile Python source
+        working-directory: Schematics/06-Reference/orch-code-implemtation
+        run: python -m compileall src
+      - name: Run porting workspace tests
+        working-directory: Schematics/06-Reference/orch-code-implemtation
+        run: python -m unittest -q tests/test_porting_workspace.py
+
+  rust-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust check
+        working-directory: Schematics/06-Reference/orch-code-implemtation/rust
+        run: cargo check --workspace --all-targets

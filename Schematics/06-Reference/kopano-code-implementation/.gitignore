@@ -1,0 +1,11 @@
+__pycache__/
+archive/
+.omx/
+.clawd-agents/
+build/
+dist/
+KC.spec
+.venv-kc-build/
+# Claude Code local artifacts
+.claude/settings.local.json
+.claude/sessions/

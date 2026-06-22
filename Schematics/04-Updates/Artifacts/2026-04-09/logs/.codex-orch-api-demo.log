@@ -1,0 +1,26 @@
+[23:38:44] Database schema initialized successfully.            database.py:192
+┌─────────────────────────────────────┐
+│ Starting orch AGI Control Plane     │
+│ 🌐 API & GUI: http://127.0.0.1:8000 │
+└─────────────────────────────────────┘
+🚀 Opening http://127.0.0.1:8000 in your browser...
+[23:38:48] Database schema initialized successfully.            database.py:192
+Pristine Vault online
+INFO:     127.0.0.1:57508 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57508 - "GET /assets/index-AtMqgxMP.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57508 - "GET /assets/index-Dcu7qvaz.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57508 - "GET /sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56964 - "GET /api/labs/overview HTTP/1.1" 200 OK
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192
+           Database schema initialized successfully.            database.py:192INFO:     127.0.0.1:53581 - "GET /api/labs/cowork/rooms HTTP/1.1" 200 OK
+
+           Database schema initialized successfully.            database.py:192
+INFO:     127.0.0.1:65042 - "GET /api/labs/analytics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51541 - "GET /api/labs/orch-code/controls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50183 - "GET /favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50183 - "GET /api/labs/cowork/rooms/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64404 - "GET /api/kasilink/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49888 - "GET /sessions/32 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49888 - "GET /sessions/31 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49888 - "GET /sessions/26 HTTP/1.1" 200 OK
