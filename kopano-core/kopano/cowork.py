@@ -430,3 +430,5 @@ def get_cowork_room(room_id: int) -> dict[str, Any]:
         "artifact_types": sorted({artifact["artifact_type"] for artifact in snapshot["artifacts"]}),
     }
     return snapshot
+
+# merge: dev 2026-06-22
