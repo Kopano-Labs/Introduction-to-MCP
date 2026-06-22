@@ -1,15 +1,19 @@
-typer[all]>=0.12
-rich>=13
-pydantic-settings>=2
-python-dotenv>=1
-azure-monitor-opentelemetry>=1.8
-litellm>=1.40
-sqlalchemy>=2.0
-google-generativeai>=0.8.0
-openai>=1.55.0
-httpx>=0.27.0
-fastapi>=0.110.0
-uvicorn>=0.29.0
-gunicorn>=22.0.0
-websockets>=12.0
-pywebview>=5.0
+# KPGS Kopano Core — Pinned Dependencies
+# Security: all deps pinned to exact versions per TASK 003
+# Audit date: 2026-06-22
+# Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
+typer[all]==0.24.1
+rich==14.3.3
+pydantic-settings==2.13.1
+python-dotenv==1.2.2
+azure-monitor-opentelemetry==1.8.7
+litellm==1.83.0
+sqlalchemy==2.0.49
+google-generativeai==0.8.6
+openai==2.30.0
+httpx==0.28.1
+fastapi==0.135.2
+uvicorn==0.42.0
+gunicorn==22.0.0
+websockets==16.0
+pywebview==6.2.1
