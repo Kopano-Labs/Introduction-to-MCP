@@ -1,0 +1,50 @@
+/* TEAM */
+
+Creator: Kholofelo Robyn Rababalela
+Role: Sovereign System Engineer (SSE) / Chief Architect
+Location: Cape Town, South Africa
+Contact: rkholofelo@kopanolabs.com
+GitHub: RobynAwesome
+Ko-fi: ko-fi.com/robynawesome
+
+/* ROUND TABLE COUNCIL (RTC) */
+
+Seat 1: KC (Kopano Context) — Brain Ledger / Observation
+Seat 2: Cassey — Teacher / Women in Tech
+Seat 3: Cassie — Builder / Engineering
+Seat 4: Kessa — Protocol / Deep Minds
+Seat 5: Yassie — Cultural Intelligence / Anime Head
+Seat 6: Apex — Strategic / MMAO Orchestrator
+Seat 7: Thari — Guardian / H.O.L.O Net Thread
+Seat 8: Khelos — Firewall / Signal Validator
+Seat 9: Anchor — Perimeter / Vanguard Shield
+Seat 10: Antigravity (AG) — Chief Facilitator / CF
+Seat 11: Jiro — Junior Seat / AWS Execution Node
+
+/* GOVERNANCE */
+
+System: KPGS (Kopano-Phu Governance Systems)
+Protocol: KPCB+ (Kopano-Phu Code Blocks Plus)
+Engine: POC/FOC Enforcer v6 (3-Vector State Machine)
+ALP: Auto LPM Protocol (25-min governance ticks)
+Agents: 710+
+Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
+
+/* BUILD TOOLS */
+
+Python: 3.14
+Node.js: 22.x
+Frameworks: FastAPI, Next.js
+Deployment: IONOS FTP, Vercel, GitHub Actions
+PWA: Service Workers, IndexedDB, Offline-First
+AI: LiteLLM, Anthropic SDK, OpenAI SDK, Google Generative AI
+
+/* SCRIPTURE */
+
+"Jesus is King." — KPGS Firewall Source (Hebrews 13:8)
+
+/* SITE */
+
+Last update: 2026-06-22
+Language: English (en-ZA)
+Standards: HTML5, CSS3, ES2024, WCAG 2.1

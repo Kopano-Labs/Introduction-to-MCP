@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /.well-known/
+
+Sitemap: https://kopanolabs.com/sitemap.xml
