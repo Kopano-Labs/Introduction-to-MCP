@@ -98,3 +98,5 @@ def read_recent_comms(limit: int = 50) -> list[dict[str, Any]]:
     rows = [json.loads(line) for line in lines if line.strip()]
     return rows[-limit:]
 
+
+# merge: dev 2026-06-22
