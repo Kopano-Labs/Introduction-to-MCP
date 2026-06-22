@@ -451,3 +451,4 @@ def get_labs_overview() -> dict[str, Any]:
             "installer_actions": len(INSTALLER_ACTIONS),
         },
     }
+ 
