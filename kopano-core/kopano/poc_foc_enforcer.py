@@ -1,4 +1,13 @@
 """
+MODULE_NAME: poc_foc_enforcer.py
+SPECIFICATION: KPCB+ LAYER 9 COMPLIANT
+====================================================================
+This module implements VOC (Validation of Concept) — the absolute
+parent umbrella classification system governing the macro baseline.
+All incoming telemetry paths split into POC or FOC branches
+directly beneath this structural gate checkpoint.
+====================================================================
+
 KPGS POC/FOC Enforcement Engine -- CBP x UBP x IIDP
 =====================================================
 EVOLUTION: 3-VECTOR STATE THESIS MODE
