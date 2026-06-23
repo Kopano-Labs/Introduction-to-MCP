@@ -35,8 +35,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 # ── output encoding fix ────────────────────────────────────────
-if hasattr(sys.stdout, "buffer"):
+# Only replace stdout when running as main script, not when imported
+# (importing this replaces pytest's capture stdout and causes
+#  "ValueError: I/O operation on closed file" during teardown)
+if __name__ == "__main__" and hasattr(sys.stdout, "buffer"):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+
 
 logging.basicConfig(
     level=logging.INFO,
