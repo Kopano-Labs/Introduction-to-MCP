@@ -58,3 +58,6 @@
 "event_logs:plugin:new_version_available": {"key":"plugin:new_version_available","ct":1,"first_at":1778292288380,"last_at":1778292288380,"class_name":"EventLog","event_sources":{"check_for_update":1}},
 "event_logs:connections:opened": {"key":"connections:opened","ct":179,"first_at":1775470023692,"last_at":1778292290470,"class_name":"EventLog"},
 "event_logs:sources:opened": {"key":"sources:opened","ct":142,"first_at":1775470189215,"last_at":1778292289970,"class_name":"EventLog","event_sources":{"open_source":22,"active-leaf-change":116,"file-open":4}},
+"event_logs:source:initial_scan_started": {"key":"source:initial_scan_started","ct":1,"first_at":1782251251737,"last_at":1782251251737,"class_name":"EventLog","event_sources":{"init_items":1}},
+"event_logs:connections:opened": {"key":"connections:opened","ct":1,"first_at":1782251773219,"last_at":1782251773219,"class_name":"EventLog"},
+"event_logs:milestones:first_achieved": {"key":"milestones:first_achieved","ct":1,"first_at":1782251773223,"last_at":1782251773223,"class_name":"EventLog","event_sources":{"onboarding_events":1}},

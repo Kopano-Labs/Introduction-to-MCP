@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md",
+                "file": "00-Home/All Projects Registry.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "09-KOPANO PROGRESSION - Index"
+              "title": "All Projects Registry"
             }
           }
         ]
@@ -88,8 +88,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 233.5,
-    "collapsed": true
+    "width": 233.5
   },
   "right": {
     "id": "891cb4bfa988de8c",
@@ -268,6 +267,8 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "00-Home/00-Home - Index.md",
+    "09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md",
     "00-Home/Dashboard.md",
     "18-PROTOCOLS/Token_Governance_Overrides.md",
     "18-PROTOCOLS/Data_Science_Lifecycle.md",
@@ -290,7 +291,6 @@
     "17-KC-JOURNAL/Non-KC Scaffolding/2026-05-01 - KC Memory Renter Reflection Prompt.md",
     "18-PROTOCOLS/KC Memory-Renter Doctrine.md",
     "00-Home/All Projects Registry.md",
-    "00-Home/00-Home - Index.md",
     "16-PORTFOLIO AND KOPANO LABS/Handbook/00-Handbook Index.md",
     "19-TOKEN USUAGE/Weekly Reviews/Weekly Token Review - 2026-04-24.md",
     "19-TOKEN USUAGE/Probation Records/Kimi - First Task Output.md",
@@ -303,7 +303,6 @@
     "11-AI HALLUCINATION - CRITICAL/Codex/GPT-5 Codex/2026-04-17 - Portfolio Redesign Drift and Rollback Failure.md",
     "19-TOKEN USUAGE/Templates/Templates - Index.md",
     "19-TOKEN USUAGE/Model Capability Cards/Model Capability Cards - Index.md",
-    "19-TOKEN USUAGE/Weekly Reviews/Weekly Reviews - Index.md",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",

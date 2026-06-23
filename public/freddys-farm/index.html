@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPGS: Rock-Solid Farm Governance Console</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050814;
+            color: #f8fafc;
+            font-size: 16px;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* ACCESSIBILITY: High-vis overrides for near-sighted users */
+        .big-num { font-size: 2.5rem !important; line-height: 1.1; }
+        .med-num { font-size: 1.5rem !important; line-height: 1.2; }
+        .big-label { font-size: 13px !important; letter-spacing: 0.08em; }
+        .big-badge { font-size: 12px !important; padding: 4px 12px !important; }
+        .thick-bar { height: 8px !important; border-radius: 8px !important; }
+        .thick-bar-container { height: 8px !important; border-radius: 8px !important; }
+        /* Custom Glowing Card Borders */
+        .glowing-card-cyan {
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.05);
+            border: 1px solid rgba(6, 182, 212, 0.1);
+        }
+        .glowing-card-cyan:hover {
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+        .glowing-card-emerald {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        .glowing-card-emerald:hover {
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        /* Active Synergy Flow Lines */
+        .active-flow {
+            stroke-dasharray: 8;
+            animation: flow 1s linear infinite;
+        }
+        @keyframes flow {
+            to {
+                stroke-dashoffset: -16;
+            }
+        }
+        /* Giant POC vs FOC cards */
+        .pf-card { min-height: 140px; }
+        .pf-card .pf-score { font-size: 2.2rem; font-weight: 900; }
+        .pf-card .pf-label { font-size: 11px; font-weight: 800; }
+        /* Scrollbar Override */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d1f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-x-hidden">
+
+    <!-- Header Grid Info -->
+    <header class="bg-[#090d1f] border-b border-slate-800 px-6 py-4 sticky top-0 z-50 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center space-x-4">
+            <div class="h-12 w-12 bg-gradient-to-br from-cyan-500 via-teal-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                <i class="fa-solid fa-mountain-city text-white text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-black tracking-wider flex items-center gap-2">
+                    KPGS: SOVEREIGN FARM GOVERNANCE
+                    <span class="text-xs bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-widest">Live Demo</span>
+                </h1>
+                <p class="text-sm text-slate-400 tracking-wide font-medium">Freddy's 10-Acre Northwest Lucerne Farm • KOPANO Architecture</p>
+            </div>
+        </div>
+
+        <!-- Real-Time Metrics -->
+        <div class="flex flex-wrap items-center gap-3">
+            <div class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 flex items-center gap-2">
+                <span class="text-xs text-slate-500 font-bold uppercase">Contract:</span>
+                <span class="text-sm text-slate-200 font-bold mono">Freddy (12-Month)</span>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 flex items-center gap-2">
+                <span class="text-xs text-slate-500 font-bold uppercase">Location:</span>
+                <span class="text-sm text-slate-200 font-bold mono">A7 Highlands Village</span>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 flex items-center gap-2">
+                <i class="fa-solid fa-clock text-cyan-400 text-lg"></i>
+                <span class="text-lg text-slate-300 font-bold mono" id="timer">20:38:00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <main class="flex-1 max-w-[1600px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 xl:grid-cols-12 gap-6 pb-24">
+        
+        <!-- LEFT PANEL: The Solid Rock Parable Interactive Core (7 Columns) -->
+        <section class="xl:col-span-7 flex flex-col space-y-6">
+            
+            <!-- PARABLE CONTROL: Rock vs. Sand -->
+            <div class="bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 h-40 w-40 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-800 pb-4">
+                    <div>
+                        <h2 class="text-base font-black text-slate-300 uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-circle-nodes text-cyan-400 text-xl"></i> The Parable of the Wise Builder
+                        </h2>
+                        <p class="text-sm text-slate-400 mt-1">"Build on solid rock, not shifting sand." — Proving Departmental Synergy.</p>
+                    </div>
+                    <!-- Toggle Switch -->
+                    <div class="flex items-center bg-slate-950 border border-slate-800 rounded-xl p-1 w-fit self-start">
+                        <button onclick="toggleFoundation('sand')" id="btn-sand" class="px-5 py-2.5 rounded-lg text-sm font-black uppercase tracking-wider transition-all cursor-pointer text-slate-500">
+                            ⚠️ Shifting Sand
+                        </button>
+                        <button onclick="toggleFoundation('rock')" id="btn-rock" class="px-5 py-2.5 rounded-lg text-sm font-black uppercase tracking-wider transition-all cursor-pointer bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+                            ✅ Solid Rock
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Foundation Blueprint Canvas -->
+                <div class="relative bg-[#040612] rounded-xl border border-slate-800 p-4 min-h-[300px] flex flex-col justify-between overflow-hidden" id="foundationCanvas">
+                    
+                    <!-- Dynamic Matrix Line Diagram (SVG) -->
+                    <div class="absolute inset-0 z-0 opacity-70">
+                        <svg class="w-full h-full" id="synergySvg" viewBox="0 0 700 300" preserveAspectRatio="none">
+                            <!-- Foundation Lines -->
+                            <line x1="100" y1="240" x2="600" y2="240" stroke="#1e293b" stroke-width="3" id="groundLine" />
+                            
+                            <!-- Pillars (Connections) -->
+                            <!-- Water to IT -->
+                            <line x1="160" y1="200" x2="350" y2="200" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4" id="flow-water-it" />
+                            <!-- IT to HR -->
+                            <line x1="350" y1="200" x2="540" y2="200" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4" id="flow-it-hr" />
+                            <!-- HR to Finance -->
+                            <line x1="540" y1="200" x2="250" y2="100" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4" id="flow-hr-finance" />
+                            <!-- Finance to Logistics -->
+                            <line x1="250" y1="100" x2="450" y2="100" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4" id="flow-finance-log" />
+
+                            <!-- Active Synergy Laser Beam overlay -->
+                            <path d="M 160 200 L 350 200 L 540 200 L 250 100 L 450 100 Z" fill="none" stroke="rgba(6, 182, 212, 0.15)" stroke-width="2" class="active-flow hidden" id="synergyLaser" />
+                        </svg>
+                    </div>
+
+                    <!-- Sandbox Alert Banner -->
+                    <div class="z-10 flex items-center justify-between bg-cyan-950/30 border border-cyan-500/20 rounded-xl p-3" id="stateBanner">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-400">Sovereign Bedrock Integration Active</span>
+                        </div>
+                        <span class="mono text-[10px] text-slate-400">SYNERGY SCALE: 150%</span>
+                    </div>
+
+                    <!-- Interactive Pillar Display Grid -->
+                    <div class="z-10 grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                        
+                        <!-- Ground Level Departments (Water & IT) -->
+                        <div class="bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-blue-500/30" id="card-water">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-black uppercase text-blue-400 tracking-wider">💧 Water & Resource</span>
+                                <i class="fa-solid fa-droplet text-blue-500 text-lg"></i>
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-200" id="waterText">Northwest Solenoid Grid</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed" id="waterDesc">Soil moisture monitoring across all 10 acres.</p>
+                        </div>
+
+                        <div class="bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-cyan-500/30" id="card-it">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-black uppercase text-cyan-400 tracking-wider">📡 IT & Telemetry</span>
+                                <i class="fa-solid fa-tower-broadcast text-cyan-500 text-lg"></i>
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-200" id="itText">Mountain Repeater Array</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed" id="itDesc">Wireless signal routing across canyons.</p>
+                        </div>
+
+                        <!-- Mid Level Departments (HR & Finance) -->
+                        <div class="bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-purple-500/30" id="card-hr">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-black uppercase text-purple-400 tracking-wider">👷 HR & Talent</span>
+                                <i class="fa-solid fa-users-gear text-purple-500 text-lg"></i>
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-200" id="hrText">The Out-of-Farm Squad</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed" id="hrDesc">5 workers, 3 cloud-trained mechanics.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Upper Tier Departments (Finance & Logistics) -->
+                    <div class="z-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-amber-500/30" id="card-finance">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-black uppercase text-amber-400 tracking-wider">Finance & Capital</span>
+                                <i class="fa-solid fa-sack-dollar text-amber-500 text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-200" id="financeText">R4,000 Contract Ledger</h4>
+                            <p class="text-[9px] text-slate-500 leading-relaxed" id="financeDesc">Bypassing commercial loan traps with autonomous cash reserves.</p>
+                        </div>
+
+                        <div class="bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-emerald-500/30" id="card-logistics">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-black uppercase text-emerald-400 tracking-wider">Logistics & Market</span>
+                                <i class="fa-solid fa-truck-ramp-box text-emerald-500 text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-200" id="logisticsText">Sovereign Market Gate</h4>
+                            <p class="text-[9px] text-slate-500 leading-relaxed" id="logisticsDesc">Routing A-grade Lucerne directly to Takealot & Durban Docks.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SIMULATOR CONTROL CONSOLE -->
+            <div class="bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <i class="fa-solid fa-vials text-cyan-400 text-lg"></i>
+                    <div>
+                        <h3 class="text-sm font-black text-slate-300 uppercase tracking-widest">Synergy Test Bench</h3>
+                        <p class="text-[11px] text-slate-500">Trigger simulated anomalies to test the instant departmental communication loops</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button onclick="triggerSynergyFailure('pipe_burst')" class="bg-red-500/10 hover:bg-red-500/20 border-2 border-red-500/40 hover:border-red-500/60 text-red-400 py-4 px-4 rounded-xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-bold uppercase tracking-wider text-sm">
+                        <i class="fa-solid fa-circle-nodes text-2xl"></i>
+                        💥 Pipe Burst
+                    </button>
+                    
+                    <button onclick="triggerSynergyFailure('load_shedding')" class="bg-amber-500/10 hover:bg-amber-500/20 border-2 border-amber-500/40 hover:border-amber-500/60 text-amber-400 py-4 px-4 rounded-xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-bold uppercase tracking-wider text-sm">
+                        <i class="fa-solid fa-plug-circle-exclamation text-2xl"></i>
+                        ⚡ Load Shedding
+                    </button>
+
+                    <button onclick="triggerSynergySuccess('harvest_cycle')" class="bg-emerald-500/10 hover:bg-emerald-500/20 border-2 border-emerald-500/40 hover:border-emerald-500/60 text-emerald-400 py-4 px-4 rounded-xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-bold uppercase tracking-wider text-sm">
+                        <i class="fa-solid fa-tractor text-2xl"></i>
+                        🌾 Harvest Cycle
+                    </button>
+
+                    <button onclick="resetSynergyState()" class="bg-slate-500/10 hover:bg-slate-500/20 border-2 border-slate-500/40 hover:border-slate-500/60 text-slate-400 py-4 px-4 rounded-xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-bold uppercase tracking-wider text-sm">
+                        <i class="fa-solid fa-arrows-rotate text-2xl"></i>
+                        🔄 Reset
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- RIGHT PANEL: Live Monitoring & Deep Dive Tabs (5 Columns) -->
+        <section class="xl:col-span-5 flex flex-col space-y-6">
+            
+            <!-- Department Selection Tab Bar -->
+            <div class="flex border-b border-slate-800 bg-[#090d1f] p-1 rounded-xl gap-1 overflow-x-auto">
+                <button onclick="switchTab('water')" id="tab-water" class="flex-1 text-center py-2 px-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 cursor-pointer min-w-[70px]">
+                    Water
+                </button>
+                <button onclick="switchTab('it')" id="tab-it" class="flex-1 text-center py-2 px-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-slate-400 hover:text-slate-200 cursor-pointer min-w-[70px]">
+                    IT
+                </button>
+                <button onclick="switchTab('hr')" id="tab-hr" class="flex-1 text-center py-2 px-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-slate-400 hover:text-slate-200 cursor-pointer min-w-[70px]">
+                    HR
+                </button>
+                <button onclick="switchTab('finance')" id="tab-finance" class="flex-1 text-center py-2 px-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-slate-400 hover:text-slate-200 cursor-pointer min-w-[70px]">
+                    Fin
+                </button>
+                <button onclick="switchTab('logistics')" id="tab-logistics" class="flex-1 text-center py-2 px-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-slate-400 hover:text-slate-200 cursor-pointer min-w-[70px]">
+                    Log
+                </button>
+            </div>
+
+            <!-- WATER & RESOURCE SECURITY SUB-PANEL -->
+            <div id="panel-water" class="dept-panel bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-droplet text-blue-400 text-lg"></i>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-200 uppercase tracking-widest">Water & Resource Security</h3>
+                            <p class="text-[9px] text-slate-500">Autonomous Irrigation Monitoring</p>
+                        </div>
+                    </div>
+                    <span id="waterBadge" class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400">Optimal</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Soil VWC Avg</span>
+                        <span class="text-3xl font-black text-slate-100 mono mt-1" id="vwcDisplay">64.5%</span>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Borehole Flow</span>
+                        <span class="text-3xl font-black text-slate-100 mono mt-1" id="flowDisplay">14.2 m³</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Pipe Pressure Indicator -->
+                <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex flex-col space-y-2">
+                    <div class="flex items-center justify-between text-[10px] font-bold text-slate-400">
+                        <span>Pumping Pressure</span>
+                        <span class="mono text-blue-400" id="pressureVal">4.2 bar</span>
+                    </div>
+                    <div class="w-full bg-slate-900 rounded-full h-3 overflow-hidden thick-bar-container">
+                        <div class="bg-blue-500 h-3 rounded-full transition-all duration-500 thick-bar" style="width: 70%" id="pressureBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IT & TELEMETRY SUB-PANEL -->
+            <div id="panel-it" class="dept-panel hidden bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-tower-broadcast text-cyan-400 text-lg"></i>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-200 uppercase tracking-widest">IT & Technology Department</h3>
+                            <p class="text-[9px] text-slate-500">Wireless Repeater & Telemetry Routing</p>
+                        </div>
+                    </div>
+                    <span id="itBadge" class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400">Online</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase">REP-01 Signal</span>
+                        <span class="text-md font-black text-slate-100 mono mt-1" id="rep1Display">98% (Excellent)</span>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase">REP-02 Signal</span>
+                        <span class="text-md font-black text-slate-100 mono mt-1" id="rep2Display">94% (Good)</span>
+                    </div>
+                </div>
+
+                <!-- Solana Node Integration Status -->
+                <div class="bg-[#040612] border border-slate-800 p-3 rounded-xl flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold uppercase text-cyan-400 flex items-center gap-1.5">
+                            <i class="fa-brands fa-solana"></i> Solana RPC Node Status
+                        </p>
+                        <p class="text-[9px] text-slate-500 mt-0.5">Syncing with Mainnet-Beta Core</p>
+                    </div>
+                    <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase">SYNCED</span>
+                </div>
+            </div>
+
+            <!-- HUMAN RESOURCES (THE HUMAN PROBLEM) SUB-PANEL -->
+            <div id="panel-hr" class="dept-panel hidden bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-users-viewfinder text-purple-400 text-lg"></i>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-200 uppercase tracking-widest">Human Resources (The Human Problem)</h3>
+                            <p class="text-[9px] text-slate-500">Managing the Out-of-Farm Squad & Community Security</p>
+                        </div>
+                    </div>
+                    <span id="hrBadge" class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400">Allocated</span>
+                </div>
+
+                <!-- Out-of-Farm Squad list -->
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col space-y-2">
+                    <span class="text-[9px] text-slate-500 font-bold uppercase">Worker Deployment Roster</span>
+                    
+                    <div class="flex items-center justify-between text-xs py-1.5 border-b border-slate-900">
+                        <div class="flex items-center gap-2">
+                            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                            <span class="text-slate-300 font-semibold">Tshepo (Welder)</span>
+                        </div>
+                        <span class="text-[9px] text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20 uppercase font-bold">Deployable</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs py-1.5 border-b border-slate-900">
+                        <div class="flex items-center gap-2">
+                            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                            <span class="text-slate-300 font-semibold">Vusi (Mechanic)</span>
+                        </div>
+                        <span class="text-[9px] text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20 uppercase font-bold">Deployable</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs py-1.5">
+                        <div class="flex items-center gap-2">
+                            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                            <span class="text-slate-300 font-semibold">Lebo (Logistics)</span>
+                        </div>
+                        <span class="text-[9px] text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20 uppercase font-bold">Deployable</span>
+                    </div>
+                </div>
+
+                <!-- Resolve the Human Problem dispatch -->
+                <button onclick="dispatchWorker()" id="workerDispatchBtn" class="w-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 hover:border-purple-500/50 text-purple-400 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer">
+                    Dispatch Maintenance Worker
+                </button>
+            </div>
+
+            <!-- FINANCE & CAPITAL SUB-PANEL -->
+            <div id="panel-finance" class="dept-panel hidden bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-sack-dollar text-amber-400 text-lg"></i>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-200 uppercase tracking-widest">Finance & Capital Department</h3>
+                            <p class="text-[9px] text-slate-500">R4,000 Contract Ledger & ROI Tracking</p>
+                        </div>
+                    </div>
+                    <span id="financeBadge" class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400">Stable</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase">Contract Base</span>
+                        <span class="text-3xl font-black text-slate-100 mono mt-1">R4,000</span>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase">Projected Net ROI</span>
+                        <span class="text-3xl font-black text-emerald-400 mono mt-1">+R280K/yr</span>
+                    </div>
+                </div>
+
+                <!-- CapEx Limit Bar -->
+                <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex flex-col space-y-2">
+                    <div class="flex items-center justify-between text-[10px] font-bold text-slate-400">
+                        <span>CapEx Budget Used</span>
+                        <span class="mono text-slate-200" id="capexDisplay">R80,000 / R480,000</span>
+                    </div>
+                    <div class="w-full bg-slate-900 rounded-full h-3 overflow-hidden thick-bar-container">
+                        <div class="bg-amber-500 h-3 rounded-full transition-all duration-500 thick-bar" style="width: 16.6%" id="capexBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGISTICS & MARKET COMPLIANCE SUB-PANEL -->
+            <div id="panel-logistics" class="dept-panel hidden bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-truck-fast text-emerald-400 text-lg"></i>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-200 uppercase tracking-widest">Logistics & Market Compliance</h3>
+                            <p class="text-[9px] text-slate-500">A-Grade Lucerne Processing & Transport</p>
+                        </div>
+                    </div>
+                    <span id="logisticsBadge" class="px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">Ready</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Bales Packaged</span>
+                        <span class="text-3xl font-black text-slate-100 mono mt-1" id="balesDisplay">128</span>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col justify-between">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Moisture Level</span>
+                        <span class="text-3xl font-black text-slate-100 mono mt-1">11.8%</span>
+                    </div>
+                </div>
+
+                <!-- Solana Cryptographic Ledger Status -->
+                <button onclick="dispatchBales()" class="w-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-400 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer">
+                    Dispatch Shipment to Takealot
+                </button>
+            </div>
+
+            <!-- THE UN-WIPEABLE LEDGER LOG (Nothing is Lost) -->
+            <div class="bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800/60 pb-3">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-receipt text-cyan-400"></i> REAL-TIME SOLANA LEDGER
+                    </span>
+                    <span class="text-[10px] text-slate-500 tracking-wider">"Nothing is Lost"</span>
+                </div>
+                <div class="h-[120px] overflow-y-auto space-y-2 pr-1" id="ledgerQueue">
+                    <div class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl text-[10px] flex justify-between items-center transition-all duration-300">
+                        <div>
+                            <span class="mono font-bold text-slate-400">[SOL-SYNC] TX_8901F4</span>
+                            <p class="text-slate-500 text-[9px] mt-0.5">Freddy 4,000 ZAR contract initialized</p>
+                        </div>
+                        <span class="mono text-cyan-400 font-bold bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-md uppercase">OK</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ADAPTIVENESS: POC vs FOC LIVE VALIDATION (Full Width) -->
+        <section class="xl:col-span-12 flex flex-col space-y-4">
+            <div class="bg-[#090d1f] border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 h-32 w-32 bg-gradient-to-br from-emerald-500/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-slate-800 pb-4">
+                    <div>
+                        <h2 class="text-sm font-black text-slate-300 uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-emerald-400"></i> Adaptiveness — POC vs FOC Validation
+                        </h2>
+                        <p class="text-[11px] text-slate-500 mt-1">Real-time proof: what works (POC) vs what fails (FOC) across every department</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mono" id="rtcRelay">RTC RELAY: LIVE</span>
+                    </div>
+                </div>
+
+                <!-- POC vs FOC Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3" id="pocFocGrid">
+                    
+                    <!-- Water -->
+                    <div class="bg-[#040612] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3" id="pf-water">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-droplet text-blue-400"></i>
+                            <span class="text-[10px] font-black uppercase text-blue-400 tracking-wider">Water</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-emerald-500 tracking-wider">POC</span>
+                                <span class="text-lg font-black text-emerald-400 mono" id="pf-water-poc">90%</span>
+                            </div>
+                            <div class="h-8 w-px bg-slate-700"></div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-red-500 tracking-wider">FOC</span>
+                                <span class="text-lg font-black text-red-400 mono" id="pf-water-foc">10%</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-emerald-500 h-1.5 rounded-full transition-all duration-700" style="width: 90%" id="pf-water-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- IT -->
+                    <div class="bg-[#040612] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3" id="pf-it">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-tower-broadcast text-cyan-400"></i>
+                            <span class="text-[10px] font-black uppercase text-cyan-400 tracking-wider">IT</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-emerald-500 tracking-wider">POC</span>
+                                <span class="text-lg font-black text-emerald-400 mono" id="pf-it-poc">88%</span>
+                            </div>
+                            <div class="h-8 w-px bg-slate-700"></div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-red-500 tracking-wider">FOC</span>
+                                <span class="text-lg font-black text-red-400 mono" id="pf-it-foc">12%</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-emerald-500 h-1.5 rounded-full transition-all duration-700" style="width: 88%" id="pf-it-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- HR -->
+                    <div class="bg-[#040612] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3" id="pf-hr">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-users-gear text-purple-400"></i>
+                            <span class="text-[10px] font-black uppercase text-purple-400 tracking-wider">HR</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-emerald-500 tracking-wider">POC</span>
+                                <span class="text-lg font-black text-emerald-400 mono" id="pf-hr-poc">72%</span>
+                            </div>
+                            <div class="h-8 w-px bg-slate-700"></div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-red-500 tracking-wider">FOC</span>
+                                <span class="text-lg font-black text-red-400 mono" id="pf-hr-foc">28%</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-amber-500 h-1.5 rounded-full transition-all duration-700" style="width: 72%" id="pf-hr-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Finance -->
+                    <div class="bg-[#040612] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3" id="pf-finance">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-sack-dollar text-amber-400"></i>
+                            <span class="text-[10px] font-black uppercase text-amber-400 tracking-wider">Finance</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-emerald-500 tracking-wider">POC</span>
+                                <span class="text-lg font-black text-emerald-400 mono" id="pf-finance-poc">85%</span>
+                            </div>
+                            <div class="h-8 w-px bg-slate-700"></div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-red-500 tracking-wider">FOC</span>
+                                <span class="text-lg font-black text-red-400 mono" id="pf-finance-foc">15%</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-emerald-500 h-1.5 rounded-full transition-all duration-700" style="width: 85%" id="pf-finance-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Logistics -->
+                    <div class="bg-[#040612] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3" id="pf-logistics">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-truck-ramp-box text-emerald-400"></i>
+                            <span class="text-[10px] font-black uppercase text-emerald-400 tracking-wider">Logistics</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-emerald-500 tracking-wider">POC</span>
+                                <span class="text-lg font-black text-emerald-400 mono" id="pf-logistics-poc">82%</span>
+                            </div>
+                            <div class="h-8 w-px bg-slate-700"></div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-[8px] font-bold uppercase text-red-500 tracking-wider">FOC</span>
+                                <span class="text-lg font-black text-red-400 mono" id="pf-logistics-foc">18%</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-emerald-500 h-1.5 rounded-full transition-all duration-700" style="width: 82%" id="pf-logistics-bar"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Overall POC Score -->
+                <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#040612] border border-slate-800 rounded-xl p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-check-double text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Overall Sovereign POC Score</span>
+                            <p class="text-xs text-slate-400">Departments communicating = POC rises. Silos = FOC rises.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-black mono text-emerald-400" id="overallPoc">83.4%</span>
+                        <span class="text-[10px] font-bold uppercase px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400" id="overallVerdict">POC_VALIDATED</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Notification Toast Stack -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3 pointer-events-none max-w-sm w-full"></div>
+
+    <script>
+        // System State
+        const state = {
+            avgVwc: 64.5,
+            flowDisplay: 14.2,
+            boreholeActive: false,
+            bales: 128,
+            rep1: 98,
+            rep2: 94,
+            capexUsed: 80000,
+            foundation: 'rock', // 'rock' or 'sand'
+            activeTask: null
+        };
+
+        // Real-Time Clock Simulator
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            document.getElementById('timer').textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+
+        // Core Toast Notification Engine
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-xl border flex items-center justify-between text-xs font-bold pointer-events-auto shadow-2xl transition-all duration-300 transform translate-y-2 opacity-0 bg-[#090d1f] border-slate-800 text-slate-200`;
+            
+            let icon = '<i class="fa-solid fa-info text-cyan-400 text-base"></i>';
+            if (type === 'success') {
+                icon = '<i class="fa-solid fa-circle-check text-green-400 text-base animate-bounce"></i>';
+            } else if (type === 'warning') {
+                toast.classList.add('border-amber-500/20');
+                icon = '<i class="fa-solid fa-triangle-exclamation text-amber-400 text-base"></i>';
+            } else if (type === 'error') {
+                toast.classList.add('border-red-500/20');
+                icon = '<i class="fa-solid fa-circle-exclamation text-red-400 text-base animate-ping"></i>';
+            }
+
+            toast.innerHTML = `
+                <div class="flex items-center gap-3">
+                    ${icon}
+                    <span>${message}</span>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-slate-500 hover:text-slate-300 text-sm font-black pl-3 cursor-pointer">×</button>
+            `;
+
+            const container = document.getElementById('toastContainer');
+            container.appendChild(toast);
+
+            // Trigger Transition reflow
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            // Self-destruction routine
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-[-10px]');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4500);
+        }
+
+        // Add to Solana Ledger Interface
+        function appendLedgerRecord(txHash, description, status = 'OK') {
+            const ledgerQueue = document.getElementById('ledgerQueue');
+            const div = document.createElement('div');
+            div.className = `bg-slate-950 border border-slate-800 p-2.5 rounded-xl text-[10px] flex justify-between items-center transition-all duration-300 transform scale-95 opacity-0`;
+            
+            const colorClass = status === 'OK' ? 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20' : 'text-red-400 bg-red-500/10 border-red-500/20';
+
+            div.innerHTML = `
+                <div>
+                    <span class="mono font-bold text-slate-400">[SOL-SYNC] ${txHash}</span>
+                    <p class="text-slate-500 text-[9px] mt-0.5">${description}</p>
+                </div>
+                <span class="mono ${colorClass} font-bold border px-2 py-0.5 rounded-md uppercase">${status}</span>
+            `;
+
+            ledgerQueue.prepend(div);
+            setTimeout(() => {
+                div.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            const depts = ['water', 'it', 'hr', 'finance', 'logistics'];
+            depts.forEach(d => {
+                document.getElementById(`panel-${d}`).classList.add('hidden');
+                document.getElementById(`tab-${d}`).className = "flex-1 text-center py-2 px-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-slate-400 hover:text-slate-200 cursor-pointer min-w-[70px]";
+            });
+
+            // Set Active
+            document.getElementById(`panel-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).className = "flex-1 text-center py-2 px-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 cursor-pointer min-w-[70px]";
+        }
+
+        // Toggle Parable state (Rock-Solid vs Shifting Sand)
+        function toggleFoundation(mode) {
+            state.foundation = mode;
+            const btnSand = document.getElementById('btn-sand');
+            const btnRock = document.getElementById('btn-rock');
+            const ground = document.getElementById('groundLine');
+            const synergyLaser = document.getElementById('synergyLaser');
+            const stateBanner = document.getElementById('stateBanner');
+
+            // Select line connectors to show/hide flow animation
+            const flows = ['flow-water-it', 'flow-it-hr', 'flow-hr-finance', 'flow-finance-log'];
+
+            if (mode === 'sand') {
+                btnSand.className = "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer bg-red-500/10 border border-red-500/20 text-red-400";
+                btnRock.className = "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer text-slate-500";
+                ground.setAttribute('stroke', '#ef4444');
+                synergyLaser.classList.add('hidden');
+                
+                stateBanner.className = "z-10 flex items-center justify-between bg-red-950/30 border border-red-500/20 rounded-xl p-3";
+                stateBanner.innerHTML = `
+                    <div class="flex items-center space-x-2.5">
+                        <span class="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-red-500">Shifting Sand Matrix - High-Risk Mode</span>
+                    </div>
+                    <span class="mono text-[10px] text-slate-400">SYNERGY SCALE: 0%</span>
+                `;
+
+                // Unlink flow connectors
+                flows.forEach(id => {
+                    const el = document.getElementById(id);
+                    el.setAttribute('stroke', '#ef4444');
+                    el.classList.remove('active-flow');
+                });
+
+                // Degrade local indicators
+                document.getElementById('card-water').className = "bg-[#090d1f]/90 border border-red-500/10 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all";
+                document.getElementById('card-it').className = "bg-[#090d1f]/90 border border-red-500/10 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all";
+                document.getElementById('card-hr').className = "bg-[#090d1f]/90 border border-red-500/10 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all";
+
+                showToast("System Warning: Synergized departments unlinked. Infrastructure running in blind silos.", "warning");
+            } else {
+                btnRock.className = "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer bg-cyan-500/10 border border-cyan-500/20 text-cyan-400";
+                btnSand.className = "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer text-slate-500";
+                ground.setAttribute('stroke', '#1e293b');
+                synergyLaser.classList.remove('hidden');
+
+                stateBanner.className = "z-10 flex items-center justify-between bg-cyan-950/30 border border-cyan-500/20 rounded-xl p-3";
+                stateBanner.innerHTML = `
+                    <div class="flex items-center space-x-2.5">
+                        <span class="h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-400">Sovereign Bedrock Integration Active</span>
+                    </div>
+                    <span class="mono text-[10px] text-slate-400">SYNERGY SCALE: 150%</span>
+                `;
+
+                // Restore flow connectors
+                flows.forEach(id => {
+                    const el = document.getElementById(id);
+                    el.setAttribute('stroke', '#334155');
+                    el.classList.add('active-flow');
+                });
+
+                // Restore local indicators
+                document.getElementById('card-water').className = "bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-blue-500/30";
+                document.getElementById('card-it').className = "bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-cyan-500/30";
+                document.getElementById('card-hr').className = "bg-[#090d1f]/90 border border-slate-800 p-3.5 rounded-xl flex flex-col space-y-2 cursor-pointer transition-all hover:border-purple-500/30";
+
+                showToast("System Verified: Synergized departments locked. Sovereign rock foundation active.", "success");
+            }
+        }
+
+        // TRIGGER SYNERGY: Failure Mode - Pipe Burst
+        function triggerSynergyFailure(type) {
+            if (state.foundation === 'sand') {
+                // Shifting Sand: Isolated failure, no communication
+                if (type === 'pipe_burst') {
+                    state.avgVwc = 24.1;
+                    state.flowDisplay = 0.0;
+                    
+                    document.getElementById('vwcDisplay').textContent = "24.1%";
+                    document.getElementById('vwcDisplay').classList.add('text-red-500');
+                    document.getElementById('flowDisplay').textContent = "0.0 m³";
+                    document.getElementById('waterBadge').textContent = "Critical";
+                    document.getElementById('waterBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-red-500/30 bg-red-500/10 text-red-400";
+                    
+                    showToast("CRITICAL: Pipe burst in Sector 4. Moisture collapsing. Traditional farm is failing to notify HR or IT.", "error");
+                    appendLedgerRecord("TX_ERR_" + Math.floor(Math.random()*1000000), "Drought state ignored - Sand Farm data loss", "ERR");
+                } else if (type === 'load_shedding') {
+                    document.getElementById('rep1Display').textContent = "0% (Dead)";
+                    document.getElementById('rep2Display').textContent = "0% (Dead)";
+                    document.getElementById('itBadge').textContent = "Offline";
+                    document.getElementById('itBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-red-500/30 bg-red-500/10 text-red-400";
+
+                    showToast("CRITICAL: Load shedding dropped the grid. IT Repeaters died instantly. No backup logic.", "error");
+                }
+            } else {
+                // Solid Rock: Synergized communication
+                if (type === 'pipe_burst') {
+                    // 1. Water senses failure
+                    state.avgVwc = 38.0;
+                    document.getElementById('vwcDisplay').textContent = "38.0%";
+                    document.getElementById('waterBadge').textContent = "Anomaly";
+                    document.getElementById('waterBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400";
+                    
+                    // 2. IT triggers Alert instantly
+                    document.getElementById('itBadge').textContent = "Alert Triggered";
+                    document.getElementById('itBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-red-500/30 bg-red-500/10 text-red-400 animate-pulse";
+                    
+                    // 3. HR auto-dispatches out-of-farm squad
+                    document.getElementById('hrBadge').textContent = "SQUAD DEPLOYED";
+                    document.getElementById('hrBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 animate-pulse";
+                    document.getElementById('workerDispatchBtn').textContent = "Vusi dispatched to Sector 4";
+                    document.getElementById('workerDispatchBtn').className = "w-full bg-red-500/10 border border-red-500/30 text-red-400 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider animate-pulse";
+                    
+                    state.activeTask = 'repair';
+
+                    showToast("SYNERGY TRIGGERED: Water pressure drop intercepted by IT Repeaters. HR automatically deployed Out-of-Farm squad to Sector 4.", "warning");
+                    appendLedgerRecord("TX_" + Math.floor(Math.random()*1000000), "Solenoid Anomaly detected - Auto-dispatch logged");
+                } else if (type === 'load_shedding') {
+                    // IT repeaters fall back to Solar / Battery
+                    document.getElementById('rep1Display').textContent = "84% (Solar Backup)";
+                    document.getElementById('rep2Display').textContent = "81% (Solar Backup)";
+                    document.getElementById('itBadge').textContent = "Backup Active";
+                    document.getElementById('itBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400";
+
+                    showToast("SYNERGY ACTIVE: Load shedding detected. IT repeaters switched instantly to solar battery backup.", "success");
+                    appendLedgerRecord("TX_" + Math.floor(Math.random()*1000000), "Grid failure - IT Solar backup initialized");
+                }
+            }
+        }
+
+        // TRIGGER SYNERGY: Success Harvest Cycle
+        function triggerSynergySuccess() {
+            if (state.avgVwc < 50) {
+                showToast("Cannot harvest. Lucerne crop water levels are insufficient for premium grading.", "error");
+                return;
+            }
+
+            // 1. Harvest & process Lucerne
+            state.bales += 32;
+            document.getElementById('balesDisplay').textContent = state.bales;
+            
+            // 2. Finance credits yield capacity projection
+            state.capexUsed += 15000;
+            document.getElementById('capexDisplay').textContent = `R${state.capexUsed.toLocaleString()} / R480,000`;
+            const pct = (state.capexUsed / 480000) * 100;
+            document.getElementById('capexBar').style.width = `${pct}%`;
+
+            showToast("HARVEST LOOP COMPILED: Bales produced, budget credited, and shipping queues synced.", "success");
+            appendLedgerRecord("TX_" + Math.floor(Math.random()*1000000), "32 Lucerne Bales harvested - Financial Ledger updated");
+        }
+
+        // Dispatch HR worker manual trigger
+        function dispatchWorker() {
+            if (state.activeTask === 'repair') {
+                // Reset synergy state after fixing burst
+                resetSynergyState();
+                showToast("SUCCESS: Out-of-Farm squad completed borehole repair. Moisture levels returning to optimal.", "success");
+                appendLedgerRecord("TX_" + Math.floor(Math.random()*1000000), "Borehole repair finalized - System Restored");
+            } else {
+                showToast("Out-of-Farm squad deployed to standard perimeter check.", "info");
+            }
+        }
+
+        // Logistics Dispatch
+        function dispatchBales() {
+            if (state.bales < 40) {
+                showToast("Insufficient packaged bales to fill standard Takealot transit batch.", "error");
+                return;
+            }
+            state.bales -= 40;
+            document.getElementById('balesDisplay').textContent = state.bales;
+
+            // Finance records transaction
+            showToast("SHIPMENT DISPATCHED: 40 A-grade Lucerne Bales routed directly to Durban Docks.", "success");
+            appendLedgerRecord("TX_" + Math.floor(Math.random()*1000000), "40 Bales dispatched to Takealot hubs - Solana confirmed");
+        }
+
+        // Reset Synergy Test State
+        function resetSynergyState() {
+            state.avgVwc = 64.5;
+            state.flowDisplay = 14.2;
+            state.rep1 = 98;
+            state.rep2 = 94;
+            state.activeTask = null;
+
+            document.getElementById('vwcDisplay').textContent = "64.5%";
+            document.getElementById('vwcDisplay').classList.remove('text-red-500');
+            document.getElementById('flowDisplay').textContent = "14.2 m³";
+            document.getElementById('waterBadge').textContent = "Optimal";
+            document.getElementById('waterBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400";
+            
+            document.getElementById('itBadge').textContent = "Online";
+            document.getElementById('itBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400";
+            document.getElementById('rep1Display').textContent = "98% (Excellent)";
+            document.getElementById('rep2Display').textContent = "94% (Good)";
+
+            document.getElementById('hrBadge').textContent = "Allocated";
+            document.getElementById('hrBadge').className = "px-2 py-0.5 text-[9px] font-bold uppercase rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400";
+            document.getElementById('workerDispatchBtn').textContent = "Dispatch Maintenance Worker";
+            document.getElementById('workerDispatchBtn').className = "w-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 hover:border-purple-500/50 text-purple-400 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer";
+
+                showToast("System State Reset completed. Departmental metrics returned to baseline.", "success");
+            updatePocFoc();
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        // ADAPTIVENESS: POC vs FOC — Real-Time Validation Engine
+        // POC = Proof of Concept (what works)
+        // FOC = Fabrication of Concern (what fails / what's faked)
+        // RTC Relay validates every 3 seconds
+        // ═══════════════════════════════════════════════════════════
+        const pocFocBaseline = {
+            water:     { poc: 90, foc: 10 },
+            it:        { poc: 88, foc: 12 },
+            hr:        { poc: 72, foc: 28 },
+            finance:   { poc: 85, foc: 15 },
+            logistics: { poc: 82, foc: 18 },
+        };
+
+        function updatePocFoc() {
+            const depts = ['water', 'it', 'hr', 'finance', 'logistics'];
+            let totalPoc = 0;
+
+            depts.forEach(d => {
+                let poc = pocFocBaseline[d].poc;
+                let foc = pocFocBaseline[d].foc;
+
+                // Adaptiveness: foundation mode shifts POC/FOC
+                if (state.foundation === 'sand') {
+                    // Sand = departments isolated = POC drops, FOC rises
+                    poc = Math.max(15, poc - 45);
+                    foc = 100 - poc;
+                } else {
+                    // Rock = synergy = small natural variance
+                    const drift = (Math.random() - 0.5) * 4;
+                    poc = Math.min(98, Math.max(60, poc + drift));
+                    foc = 100 - poc;
+                }
+
+                // Crisis adjustments
+                if (d === 'water' && state.avgVwc < 40) {
+                    poc = Math.max(20, poc - 30);
+                    foc = 100 - poc;
+                }
+                if (d === 'it' && state.rep1 < 50) {
+                    poc = Math.max(15, poc - 40);
+                    foc = 100 - poc;
+                }
+                if (d === 'hr' && state.activeTask === 'repair') {
+                    poc = Math.min(95, poc + 5); // HR active = POC boost
+                    foc = 100 - poc;
+                }
+
+                poc = Math.round(poc);
+                foc = Math.round(foc);
+
+                document.getElementById(`pf-${d}-poc`).textContent = poc + '%';
+                document.getElementById(`pf-${d}-foc`).textContent = foc + '%';
+                document.getElementById(`pf-${d}-bar`).style.width = poc + '%';
+
+                // Color the bar based on POC level
+                const bar = document.getElementById(`pf-${d}-bar`);
+                if (poc >= 75) {
+                    bar.className = 'bg-emerald-500 h-1.5 rounded-full transition-all duration-700';
+                } else if (poc >= 50) {
+                    bar.className = 'bg-amber-500 h-1.5 rounded-full transition-all duration-700';
+                } else {
+                    bar.className = 'bg-red-500 h-1.5 rounded-full transition-all duration-700';
+                }
+
+                totalPoc += poc;
+            });
+
+            const avg = (totalPoc / depts.length).toFixed(1);
+            document.getElementById('overallPoc').textContent = avg + '%';
+
+            const verdict = document.getElementById('overallVerdict');
+            if (parseFloat(avg) >= 75) {
+                verdict.textContent = 'POC_VALIDATED';
+                verdict.className = 'text-[10px] font-bold uppercase px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400';
+            } else if (parseFloat(avg) >= 50) {
+                verdict.textContent = 'PARTIAL_POC';
+                verdict.className = 'text-[10px] font-bold uppercase px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400';
+            } else {
+                verdict.textContent = 'FOC_DOMINANT';
+                verdict.className = 'text-[10px] font-bold uppercase px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400';
+            }
+
+            // RTC Relay pulse
+            const rtc = document.getElementById('rtcRelay');
+            const ts = new Date().toLocaleTimeString();
+            rtc.textContent = `RTC RELAY: ${ts}`;
+        }
+
+        // RTC Relay — auto-validate every 3 seconds
+        setInterval(updatePocFoc, 3000);
+        updatePocFoc(); // Initial fire
+    </script>
+</body>
+</html>

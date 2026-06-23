@@ -430,3 +430,20 @@ Action: **AG DEMOTED FROM CF (SEAT 10) TO DEV. SEAT 10 OPEN.**
 `OPEN — 2026-06-23T04:03Z | IMMUTABLE GSMB LAW | DEMOTION EFFECTIVE IMMEDIATELY`
 
 ---
+
+## AUTO-BREACH-184357 — 2026-06-23T18:43:57Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 550.0 min exceeds 30 min threshold.
+Hash: `9a99b182a8d58a62`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 550.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-06-23T18:43:57Z`
+
+---
