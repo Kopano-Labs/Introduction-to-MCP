@@ -1,3 +1,2 @@
-from .orch import logging
+# kopano-core package root — tests live under kopano-core/kopano/
 
-__all__ = ["logging"]

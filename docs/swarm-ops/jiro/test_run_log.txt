@@ -1,0 +1,128 @@
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_verdict_is_poc_validated
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_verdict_is_poc_validated
+1 failed, 63 passed, 19 errors in 0.77s
+...............................................................FEEEEEEEE [ 93%]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\pytest\__main__.py", line 9, in <module>
+    raise SystemExit(pytest.console_main())
+                     ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\config\__init__.py", line 223, in console_main
+    code = main()
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\config\__init__.py", line 199, in main
+    ret: ExitCode | int = config.hook.pytest_cmdline_main(config=config)
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\main.py", line 365, in pytest_cmdline_main
+    return wrap_session(config, _main)
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\main.py", line 360, in wrap_session
+    config._ensure_unconfigure()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\config\__init__.py", line 1171, in _ensure_unconfigure
+    self._cleanup_stack.close()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\contextlib.py", line 627, in close
+    self.__exit__(None, None, None)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\contextlib.py", line 619, in __exit__
+    raise exc
+  File "C:\Python314\Lib\contextlib.py", line 604, in __exit__
+    if cb(*exc_details):
+       ~~^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\contextlib.py", line 482, in _exit_wrapper
+    callback(*args, **kwds)
+    ~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\capture.py", line 778, in stop_global_capturing
+    self._global_capturing.pop_outerr_to_orig()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\capture.py", line 659, in pop_outerr_to_orig
+    out, err = self.readouterr()
+               ~~~~~~~~~~~~~~~^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\capture.py", line 706, in readouterr
+    out = self.out.snap() if self.out else ""
+          ~~~~~~~~~~~~~^^
+  File "C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\capture.py", line 591, in snap
+    self.tmpfile.seek(0)
+    ~~~~~~~~~~~~~~~~~^^^
+ValueError: I/O operation on closed file.
+EEEEEEEEEEE                                                              [100%]
+=================================== ERRORS ====================================
+______ ERROR at teardown of TestGSMBAutoRunner.test_constraint_in_result ______
+E   ValueError: I/O operation on closed file
+------------------------------ Captured log call ------------------------------
+WARNING  kopano.apu_vector_matrix:apu_vector_matrix.py:270 [APU \U0001f7e1 YELLOW] domain=KasiLink | poc=0.70 foc=0.30 | HOD review triggered
+__________ ERROR at setup of TestGSMBAutoRunner.test_fonc_self_clean __________
+E   ValueError: I/O operation on closed file
+________ ERROR at teardown of TestGSMBAutoRunner.test_fonc_self_clean _________
+E   ValueError: I/O operation on closed file
+___________ ERROR at setup of TestGSMBAutoRunner.test_ikp_all_clean ___________
+E   ValueError: I/O operation on closed file
+_________ ERROR at teardown of TestGSMBAutoRunner.test_ikp_all_clean __________
+E   ValueError: I/O operation on closed file
+_____ ERROR at setup of TestGSMBAutoRunner.test_nccnp_all_domains_closed ______
+E   ValueError: I/O operation on closed file
+____ ERROR at teardown of TestGSMBAutoRunner.test_nccnp_all_domains_closed ____
+E   ValueError: I/O operation on closed file
+________ ERROR at setup of TestGSMBAutoRunner.test_runner_log_written _________
+E   ValueError: I/O operation on closed file
+_______ ERROR at teardown of TestGSMBAutoRunner.test_runner_log_written _______
+E   ValueError: I/O operation on closed file
+_______ ERROR at setup of TestGSMBAutoRunner.test_runner_signal_has_4ws _______
+E   ValueError: I/O operation on closed file
+_____ ERROR at teardown of TestGSMBAutoRunner.test_runner_signal_has_4ws ______
+E   ValueError: I/O operation on closed file
+___ ERROR at setup of TestGSMBAutoRunner.test_runner_signal_has_proof_link ____
+E   ValueError: I/O operation on closed file
+__ ERROR at teardown of TestGSMBAutoRunner.test_runner_signal_has_proof_link __
+E   ValueError: I/O operation on closed file
+_________ ERROR at setup of TestGSMBAutoRunner.test_tick_hash_is_hex __________
+E   ValueError: I/O operation on closed file
+________ ERROR at teardown of TestGSMBAutoRunner.test_tick_hash_is_hex ________
+E   ValueError: I/O operation on closed file
+____ ERROR at setup of TestGSMBAutoRunner.test_tick_produces_valid_result _____
+E   ValueError: I/O operation on closed file
+___ ERROR at teardown of TestGSMBAutoRunner.test_tick_produces_valid_result ___
+E   ValueError: I/O operation on closed file
+___ ERROR at setup of TestGSMBAutoRunner.test_tick_verdict_is_poc_validated ___
+E   ValueError: I/O operation on closed file
+_ ERROR at teardown of TestGSMBAutoRunner.test_tick_verdict_is_poc_validated __
+E   ValueError: I/O operation on closed file
+================================== FAILURES ===================================
+E   ValueError: I/O operation on closed file.
+------------------------------ Captured log call ------------------------------
+WARNING  kopano.apu_vector_matrix:apu_vector_matrix.py:270 [APU \U0001f7e1 YELLOW] domain=KasiLink | poc=0.70 foc=0.30 | HOD review triggered
+C:\Users\rkhol\AppData\Roaming\Python\Python314\site-packages\_pytest\capture.py:591: ValueError: I/O operation on closed file.
+=========================== short test summary info ===========================
+FAILED kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_constraint_in_result
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_constraint_in_result
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_fonc_self_clean
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_fonc_self_clean
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_ikp_all_clean
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_ikp_all_clean
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_nccnp_all_domains_closed
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_nccnp_all_domains_closed
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_runner_log_written
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_runner_log_written
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_runner_signal_has_4ws
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_runner_signal_has_4ws
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_runner_signal_has_proof_link
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_runner_signal_has_proof_link
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_hash_is_hex
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_hash_is_hex
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_produces_valid_result
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_produces_valid_result
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_verdict_is_poc_validated
+ERROR kopano-core/kopano/test_khelos_and_apu.py::TestGSMBAutoRunner::test_tick_verdict_is_poc_validated
+1 failed, 63 passed, 19 errors in 0.86s
+...............................                                          [100%]
+31 passed in 0.32s
