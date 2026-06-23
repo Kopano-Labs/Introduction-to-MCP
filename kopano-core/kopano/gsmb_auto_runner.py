@@ -268,6 +268,47 @@ def _run_tick(tick: int, alp_receipt: str) -> dict:
         tick_result["adaptiveness"] = {"error": str(e)}
         logger.error("[RUNNER] Adaptiveness error: %s", e)
 
+    # ── GSMB Immutability Mandates validation ───────────────
+    try:
+        from kopano.gsmb_immutability_mandates import validate_immutability_mandates
+        mandates_report = validate_immutability_mandates()
+        tick_result["mandates"] = {
+            "tests_run": mandates_report["tests_run"],
+            "tests_passed": mandates_report["tests_passed"],
+            "all_pass": mandates_report["all_pass"],
+            "verdict": mandates_report["verdict"],
+        }
+        logger.info(
+            "[RUNNER] Mandates: %d/%d | %s",
+            mandates_report["tests_passed"],
+            mandates_report["tests_run"],
+            mandates_report["verdict"],
+        )
+    except Exception as e:
+        tick_result["mandates"] = {"error": str(e)}
+        logger.error("[RUNNER] Mandates error: %s", e)
+
+    # ── Cassey curriculum validation ──────────────────────
+    try:
+        from kopano.cassey_adaptiveness_curriculum import run_full_curriculum_validation
+        curriculum_report = run_full_curriculum_validation()
+        tick_result["cassey_curriculum"] = {
+            "modules": curriculum_report["curriculum_modules"],
+            "lessons": curriculum_report["curriculum_lessons"],
+            "tests_passed": curriculum_report["tests_passed"],
+            "all_pass": curriculum_report["all_pass"],
+            "verdict": curriculum_report["verdict"],
+        }
+        logger.info(
+            "[RUNNER] Cassey: %d/%d lessons | %s",
+            curriculum_report["tests_passed"],
+            curriculum_report["curriculum_lessons"],
+            curriculum_report["verdict"],
+        )
+    except Exception as e:
+        tick_result["cassey_curriculum"] = {"error": str(e)}
+        logger.error("[RUNNER] Cassey curriculum error: %s", e)
+
     # ── Overall tick verdict ──────────────────────────────────
     nccnp_ok = tick_result.get("nccnp", {}).get("poc_closed", 0) == 4
     apu_ok   = tick_result.get("apu", {}).get("red", 1) == 0
@@ -278,7 +319,9 @@ def _run_tick(tick: int, alp_receipt: str) -> dict:
         and tick_result.get("adaptiveness", {}).get("aso_verdict", "").startswith("ASO_")
         and tick_result.get("adaptiveness", {}).get("aso_verdict", "").endswith("_VALIDATED")
     )
-    all_ok   = nccnp_ok and apu_ok and ikp_ok and fonc_ok and adaptiveness_ok
+    mandates_ok = tick_result.get("mandates", {}).get("all_pass", False)
+    curriculum_ok = tick_result.get("cassey_curriculum", {}).get("all_pass", False)
+    all_ok   = nccnp_ok and apu_ok and ikp_ok and fonc_ok and adaptiveness_ok and mandates_ok and curriculum_ok
 
     tick_result["tick_verdict"]  = "POC_VALIDATED" if all_ok else "PARTIAL_POC"
     tick_result["tick_hash"]     = hashlib.sha256(f"{ts}:{tick}:{alp_receipt}".encode()).hexdigest()[:16]

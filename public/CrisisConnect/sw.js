@@ -24,15 +24,24 @@ self.addEventListener('install', (event) => {
   );
 });
 
-/* ── Activate: clean old caches ────────────────────────── */
+/* ── Activate: clean old caches + GSMB Mandate 001 Vault Lock ─ */
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.filter(k => k !== SHELL_CACHE && k !== DATA_CACHE)
-            .map(k => caches.delete(k))
-      )
-    ).then(() => self.clients.claim())
+    Promise.all([
+      // Clean old caches
+      caches.keys().then(keys =>
+        Promise.all(
+          keys.filter(k => k !== SHELL_CACHE && k !== DATA_CACHE)
+              .map(k => caches.delete(k))
+        )
+      ),
+      // GSMB MANDATE 001: Request persistent storage — crisis data survives OS pressure
+      navigator.storage && navigator.storage.persist
+        ? navigator.storage.persist().then(granted => {
+            console.log('[CC-SW] GSMB Mandate 001 — Vault Lock:', granted ? 'GRANTED' : 'DENIED');
+          })
+        : Promise.resolve(),
+    ]).then(() => self.clients.claim())
   );
 });
 

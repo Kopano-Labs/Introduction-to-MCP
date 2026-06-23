@@ -60,15 +60,23 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// DECLINE — Clean up old caches on activate
+// DECLINE — Clean up old caches on activate + GSMB Mandate 001 Vault Lock
 self.addEventListener('activate', event => {
   console.log('%c[AW3GL] DECLINE: Clearing old caches. PAU chain preserved.', 'color:#e94560;font-weight:bold;');
   event.waitUntil(
-    caches.keys().then(names => {
-      return Promise.all(
-        names.filter(n => n !== CACHE_NAME).map(n => caches.delete(n))
-      );
-    })
+    Promise.all([
+      caches.keys().then(names => {
+        return Promise.all(
+          names.filter(n => n !== CACHE_NAME).map(n => caches.delete(n))
+        );
+      }),
+      // GSMB MANDATE 001: Request persistent storage — game telemetry survives OS pressure
+      navigator.storage && navigator.storage.persist
+        ? navigator.storage.persist().then(granted => {
+            console.log('%c[AW3GL] GSMB Mandate 001 — Vault Lock: ' + (granted ? 'GRANTED' : 'DENIED'), 'color:#ffd700;font-weight:bold;');
+          })
+        : Promise.resolve(),
+    ])
   );
   self.clients.claim();
 });

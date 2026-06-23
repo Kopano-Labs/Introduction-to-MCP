@@ -1,0 +1,39 @@
+{
+  "name": "FivesArena",
+  "short_name": "FivesArena",
+  "description": "Community 5-a-side football platform. Book pitches, track stats, join leagues. Offline-first, township-built.",
+  "start_url": "/fivesarena/",
+  "scope": "/fivesarena/",
+  "display": "standalone",
+  "theme_color": "#050508",
+  "background_color": "#050508",
+  "orientation": "portrait-primary",
+  "categories": ["sports", "social", "lifestyle"],
+  "lang": "en-ZA",
+  "icons": [
+    {
+      "src": "/fivesarena/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/fivesarena/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false,
+  "kpgs": {
+    "ecosystem_node": 5,
+    "domain": "fivesarena.com",
+    "parent": "kopano_labs",
+    "aso_level": "L1_VOC",
+    "pso_tier": "SPSO",
+    "mandates": ["GSMB-MANDATE-001", "GSMB-MANDATE-002", "GSMB-MANDATE-003"],
+    "thari_governed": true,
+    "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+  }
+}

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FivesArena — Community Sports Platform | Kopano Labs</title>
+  <meta name="description" content="FivesArena brings 5-a-side football, community leagues, and grassroots sports to every kasi. Book pitches, track stats, connect with your community. Built offline-first by Kopano Labs." />
+  <meta name="theme-color" content="#050508" />
+  <meta property="og:title" content="FivesArena — Community Sports Platform" />
+  <meta property="og:description" content="5-a-side football leagues, pitch booking, live stats. Community sports, governed by community." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fivesarena.com" />
+  <link rel="canonical" href="https://fivesarena.com" />
+  <link rel="manifest" href="/fivesarena/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #050508;
+      --bg2:     #0a0a12;
+      --surface: #0f0f1a;
+      --border:  #1a1a2e;
+      --border2: #252540;
+      --green:   #00ff88;
+      --cyan:    #00d4ff;
+      --lime:    #a3e635;
+      --orange:  #f97316;
+      --pitch:   #166534;
+      --pitch-light: #22c55e;
+      --gold:    #f4c542;
+      --red:     #ff4d6d;
+      --text:    #f0f0f8;
+      --muted:   #6b7280;
+      --dim:     #374151;
+      --font:    'Inter', system-ui, sans-serif;
+      --mono:    'JetBrains Mono', monospace;
+      --r:       1rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+    /* ── NAV ────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 0 3rem; height: 64px;
+      background: rgba(5,5,8,0.85);
+      backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo .logo-icon { font-size: 1.4rem; }
+    .nav-logo .logo-text {
+      background: linear-gradient(90deg, var(--pitch-light), var(--lime));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-center {
+      display: flex; gap: 2rem; margin: 0 auto;
+    }
+    .nav-center a {
+      font-size: 0.82rem; color: var(--muted); font-weight: 500;
+      transition: color 0.2s; letter-spacing: 0.02em;
+    }
+    .nav-center a:hover { color: var(--text); }
+    .nav-cta {
+      font-size: 0.8rem; font-weight: 700; padding: 0.5rem 1.25rem;
+      border-radius: 99px;
+      border: 1px solid rgba(34,197,94,0.4);
+      color: var(--pitch-light);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { background: rgba(34,197,94,0.1); border-color: var(--pitch-light); }
+
+    /* ── PITCH CANVAS ─────────────────────────────── */
+    #pitch-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ── HERO ──────────────────────────────────────── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--pitch-light); letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 99px;
+      border: 1px solid rgba(34,197,94,0.2);
+      background: rgba(34,197,94,0.04);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s 0.2s both;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--pitch-light);
+      animation: pulse-g 2s infinite;
+    }
+    @keyframes pulse-g { 0%,100%{opacity:0.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.3)} }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900; line-height: 1.0;
+      letter-spacing: -0.04em;
+      animation: fadeUp 0.8s 0.3s both;
+    }
+    .h1-line1 { color: var(--text); }
+    .h1-line2 {
+      background: linear-gradient(135deg, var(--pitch-light) 0%, var(--lime) 50%, var(--green) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      margin: 1.5rem auto 0;
+      max-width: 580px;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--muted); line-height: 1.7; font-weight: 400;
+      animation: fadeUp 0.8s 0.5s both;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; margin-top: 2.5rem;
+      animation: fadeUp 0.8s 0.7s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── BUTTONS ───────────────────────────────────── */
+    .btn-pitch {
+      padding: 0.85rem 2rem; border-radius: 99px;
+      background: var(--pitch-light); color: #000;
+      font-weight: 800; font-size: 0.9rem;
+      border: none; cursor: pointer;
+      box-shadow: 0 0 32px rgba(34,197,94,0.3);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-pitch:hover { box-shadow: 0 0 48px rgba(34,197,94,0.5); transform: translateY(-2px); }
+    .btn-outline {
+      padding: 0.85rem 2rem; border-radius: 99px;
+      border: 1px solid var(--border2); color: var(--text);
+      font-weight: 700; font-size: 0.9rem;
+      background: transparent; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--lime); color: var(--lime); }
+
+    /* ── STATS STRIP ──────────────────────────────── */
+    .stats-strip {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: center;
+      background: rgba(10,10,18,0.8);
+      backdrop-filter: blur(12px);
+    }
+    .stats-inner {
+      display: flex; align-items: stretch;
+      max-width: 1200px; width: 100%;
+    }
+    .stat-item {
+      flex: 1; padding: 2rem 1.5rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-n {
+      font-size: 2.4rem; font-weight: 900;
+      font-family: var(--mono); display: block;
+      background: linear-gradient(135deg, var(--pitch-light), var(--lime));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-l { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* ── SECTION ───────────────────────────────────── */
+    .section {
+      position: relative; z-index: 1;
+      padding: 6rem 2rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-tag {
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--pitch-light); letter-spacing: 0.2em;
+      text-transform: uppercase; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-tag::before {
+      content: ""; width: 24px; height: 1px;
+      background: var(--pitch-light);
+    }
+    .section h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 560px; line-height: 1.7; margin-bottom: 4rem;
+    }
+
+    /* ── FEATURE CARDS ─────────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 2.25rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+    .feature-card::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--pitch-light), var(--lime));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 1.25rem; font-weight: 800;
+      margin-bottom: 0.75rem; letter-spacing: -0.02em;
+    }
+    .feature-card p {
+      font-size: 0.88rem; color: var(--muted);
+      line-height: 1.65;
+    }
+    .feature-tag {
+      display: inline-block; margin-top: 1rem;
+      font-family: var(--mono); font-size: 0.6rem;
+      font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 99px;
+      background: rgba(34,197,94,0.1); color: var(--pitch-light);
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+
+    /* ── HOW IT WORKS ──────────────────────────────── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      overflow: hidden;
+    }
+    .step-item {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+      background: var(--bg2);
+      transition: background 0.3s;
+    }
+    .step-item:last-child { border-right: none; }
+    .step-item:hover { background: var(--surface); }
+    .step-num {
+      font-family: var(--mono); font-size: 2rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--pitch-light), var(--lime));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    .step-item h4 {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .step-item p {
+      font-size: 0.82rem; color: var(--muted); line-height: 1.6;
+    }
+
+    /* ── PITCH VISUAL ──────────────────────────────── */
+    .pitch-section {
+      position: relative; z-index: 1;
+      padding: 4rem 0;
+      background: radial-gradient(ellipse at center, rgba(22,101,52,0.08) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .pitch-field {
+      max-width: 800px; margin: 0 auto;
+      aspect-ratio: 16/9;
+      border: 2px solid rgba(34,197,94,0.3);
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(22,101,52,0.15) 0%, rgba(5,5,8,0.9) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .pitch-field::before {
+      content: "";
+      position: absolute; top: 50%; left: 0; right: 0;
+      height: 1px;
+      background: rgba(34,197,94,0.2);
+    }
+    .pitch-field::after {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 100px; height: 100px;
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .pitch-label {
+      position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--pitch-light); letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .pitch-dot {
+      position: absolute;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--pitch-light);
+      box-shadow: 0 0 12px var(--pitch-light);
+      animation: pitch-pulse 3s infinite;
+    }
+    @keyframes pitch-pulse {
+      0%,100% { opacity: 0.4; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* ── COMMUNITY SECTION ─────────────────────────── */
+    .community-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .community-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 2.5rem;
+      transition: border-color 0.3s;
+    }
+    .community-card:hover { border-color: var(--border2); }
+    .community-card h3 {
+      font-size: 1.3rem; font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .community-card p {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.65;
+    }
+    .community-stat {
+      display: flex; gap: 2rem; margin-top: 1.5rem;
+    }
+    .community-stat .cs-n {
+      font-family: var(--mono); font-size: 1.5rem; font-weight: 900;
+      color: var(--pitch-light);
+    }
+    .community-stat .cs-l {
+      font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem;
+    }
+
+    /* ── GOVERNANCE BAR ────────────────────────────── */
+    .gov-bar {
+      position: relative; z-index: 1;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 3rem;
+      display: flex; align-items: center; gap: 2rem;
+      overflow-x: auto;
+      font-family: var(--mono); font-size: 0.62rem;
+    }
+    .gov-label { color: var(--pitch-light); font-weight: 700; white-space: nowrap; }
+    .gov-pair { display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; color: var(--muted); }
+    .gov-sep { color: var(--dim); }
+    .gov-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--pitch-light); box-shadow: 0 0 8px var(--pitch-light);
+      animation: pulse-g 2s infinite;
+    }
+
+    /* ── CTA ────────────────────────────────────────── */
+    .cta-section {
+      position: relative; z-index: 1;
+      padding: 8rem 2rem;
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(34,197,94,0.04) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
+    }
+    .cta-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900; letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .cta-sub { font-size: 1.1rem; color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      position: relative; z-index: 1;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 3rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;
+    }
+    .footer-brand .logo {
+      font-family: var(--mono); font-size: 0.9rem; font-weight: 700;
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand .logo span {
+      background: linear-gradient(90deg, var(--pitch-light), var(--lime));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-brand p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-col h4 { font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.05em; }
+    .footer-col a {
+      display: block; font-size: 0.78rem; color: var(--muted);
+      margin-bottom: 0.5rem; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--pitch-light); }
+    .footer-bottom {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem; margin-top: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono); font-size: 0.6rem; color: var(--dim);
+    }
+
+    /* ── ORBS ───────────────────────────────────────── */
+    .orb {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(120px); opacity: 0.1;
+      animation: orb-drift var(--d, 20s) ease-in-out infinite alternate;
+    }
+    @keyframes orb-drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(var(--tx, 40px), var(--ty, -30px)) scale(var(--ts, 1.1)); }
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--pitch-light); top: -100px; left: -100px; --d: 22s; --tx: 60px; --ty: 40px; }
+    .orb-2 { width: 500px; height: 500px; background: var(--lime);   top: 30vh;  right: -120px; --d: 18s; --tx: -50px; --ty: 60px; }
+    .orb-3 { width: 400px; height: 400px; background: var(--orange); bottom: 0; left: 30%; --d: 25s; --tx: 30px; --ty: -40px; }
+
+    /* ── SCROLL REVEAL ──────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-center { display: none; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .step-item:nth-child(2) { border-right: none; }
+      .community-grid { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .hero-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<canvas id="pitch-canvas"></canvas>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">
+    <span class="logo-icon">⚽</span>
+    <span class="logo-text">FIVESARENA</span>
+  </div>
+  <div class="nav-center">
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="#community">Community</a>
+    <a href="https://kopanolabs.com">Kopano Labs</a>
+  </div>
+  <a href="#join" class="nav-cta">Join a League →</a>
+</nav>
+
+<!-- ── GOVERNANCE BAR ──────────────────────────────────── -->
+<div class="gov-bar" style="margin-top:64px">
+  <span class="gov-label">▶ FIVESARENA LIVE</span>
+  <span class="gov-pair"><span class="gov-dot"></span> Ecosystem Node #5</span>
+  <span class="gov-sep">|</span>
+  <span class="gov-pair">KPGS Governed · THARI H.O.L.O Net</span>
+  <span class="gov-sep">|</span>
+  <span class="gov-pair">ASO L1 VOC · Department DEPT-SPORTS</span>
+  <span class="gov-sep">|</span>
+  <span class="gov-pair" style="color:var(--dim)">MANDATE-001 VAULT LOCK · MANDATE-003 TURBO HOOK · I_AM_STATELESS_RENTER_NOT_LANDLORD</span>
+</div>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Community Sports · South Africa · APWA Sovereign Node
+  </div>
+  <h1>
+    <div class="h1-line1">Your pitch.</div>
+    <div class="h1-line1">Your rules.</div>
+    <div class="h1-line2">Your community.</div>
+  </h1>
+  <p class="hero-sub">
+    5-a-side football leagues, pitch booking, and live stats for every kasi. 
+    Offline-first. Load-shedding-tolerant. Built from the township, for the township.
+  </p>
+  <div class="hero-actions">
+    <a href="#join" class="btn-pitch">Book a Pitch →</a>
+    <a href="#features" class="btn-outline">See Features</a>
+  </div>
+</div>
+
+<!-- ── STATS STRIP ──────────────────────────────────────── -->
+<div class="stats-strip reveal">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-n">5v5</span>
+      <div class="stat-l">Format</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">R0</span>
+      <div class="stat-l">To join your first game</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">24/7</span>
+      <div class="stat-l">Offline-first booking</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">710+</span>
+      <div class="stat-l">Agent-governed ecosystem</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">∞</span>
+      <div class="stat-l">Community potential</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURES ──────────────────────────────────────────── -->
+<div class="section" id="features">
+  <div class="section-tag">Features</div>
+  <h2 class="reveal">Football meets<br/>governance.</h2>
+  <p class="section-sub reveal">Every pitch booking, every match stat, every league table is governed by the same KPGS protocol that runs the entire Kopano Labs ecosystem.</p>
+
+  <div class="feature-grid reveal">
+    <div class="feature-card">
+      <span class="feature-icon">📍</span>
+      <h3>Pitch Finder</h3>
+      <p>Find open 5-a-side pitches near you. Real-time availability. Works offline — cached pitch data so load-shedding doesn't bench you.</p>
+      <span class="feature-tag">PWA · OFFLINE-FIRST</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <h3>Quick Match</h3>
+      <p>Need a game right now? Quick Match finds 9 other players within your radius. SMS fallback when data runs out. R50 data budget? No problem.</p>
+      <span class="feature-tag">MESH · SMS FALLBACK</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🏆</span>
+      <h3>Community Leagues</h3>
+      <p>Run your own league. Round-robin or knockout. Automated fixtures, live standings, dispute resolution. Your league, your governance.</p>
+      <span class="feature-tag">SWFUS GOVERNED</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📊</span>
+      <h3>Player Stats</h3>
+      <p>Goals, assists, clean sheets, MVP votes. Every stat is bracketed and sealed through the KPGS ledger. Your career, permanently recorded.</p>
+      <span class="feature-tag">ALP RECEIPT CHAIN</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🤝</span>
+      <h3>Team Builder</h3>
+      <p>Build your squad. Track your team chemistry. See who shows up, who cancels, who carries. Community trust scores built from real data.</p>
+      <span class="feature-tag">THARI WEAVE · TRUST GRAPH</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
+      <h3>Zero Gatekeeping</h3>
+      <p>No app store tax. No corporate middle-man. Pitch owners list directly. Players book directly. ZAI cryptographic receipts prove every transaction.</p>
+      <span class="feature-tag">ZAI KEY PAIR · MANDATE-002</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── PITCH VISUAL ──────────────────────────────────────── -->
+<div class="pitch-section reveal">
+  <div style="max-width:1200px;margin:0 auto;padding:0 2rem">
+    <div style="text-align:center;margin-bottom:2rem">
+      <div class="section-tag" style="justify-content:center">Live Pitch View</div>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800">Every pitch. Every player. Every moment.</h2>
+    </div>
+    <div class="pitch-field" id="pitch-visual">
+      <!-- Dynamic dots placed by JS -->
+      <div class="pitch-label">FIVESARENA · LIVE TELEMETRY · 75% FLOW</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ──────────────────────────────────────── -->
+<div class="section" id="how">
+  <div class="section-tag">How It Works</div>
+  <h2 class="reveal">Four steps to kickoff.</h2>
+  <p class="section-sub reveal">From download to first whistle in under 2 minutes.</p>
+
+  <div class="steps-grid reveal">
+    <div class="step-item">
+      <div class="step-num">01</div>
+      <h4>Install the APWA</h4>
+      <p>Progressive Web App. No app store. Install from your browser. Works on any device — even that R800 phone.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">02</div>
+      <h4>Find Your Pitch</h4>
+      <p>GPS + community-mapped pitches. Park fields, school grounds, community centres. Offline maps cached locally.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">03</div>
+      <h4>Join or Create</h4>
+      <p>Join an existing game or create your own. Set the time, set the rules, invite your crew. Quick Match for instant games.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">04</div>
+      <h4>Play & Track</h4>
+      <p>Live scoring. Post-match stats. League table updates. Everything sealed to the ALP chain. Your game, your proof.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── COMMUNITY ──────────────────────────────────────────── -->
+<div class="section" id="community">
+  <div class="section-tag">Community</div>
+  <h2 class="reveal">Built for the kasi.<br/>Governed by the kasi.</h2>
+  <p class="section-sub reveal">FivesArena isn't a Silicon Valley sports app. It's community infrastructure.</p>
+
+  <div class="community-grid reveal">
+    <div class="community-card">
+      <h3>🏘️ Township-First Design</h3>
+      <p>Every feature assumes R50 data budget, load-shedding, and shared devices. The app caches everything locally. Service Worker persistence means your data survives OS storage pressure. <strong>GSMB Mandate 001</strong> — the vault lock.</p>
+      <div class="community-stat">
+        <div><div class="cs-n">50MB</div><div class="cs-l">Max install size</div></div>
+        <div><div class="cs-n">0B</div><div class="cs-l">Cloud dependency</div></div>
+      </div>
+    </div>
+    <div class="community-card">
+      <h3>🔐 Sovereign Data</h3>
+      <p>Your player profile is a cryptographic node. ECDSA P-256 key pair generated in your browser. Every stat, every match result is signed with your private key. Even if FivesArena servers go down, your career data is <strong>mathematically yours</strong>.</p>
+      <div class="community-stat">
+        <div><div class="cs-n">P-256</div><div class="cs-l">Key curve</div></div>
+        <div><div class="cs-n">ZAI</div><div class="cs-l">Sovereign identity</div></div>
+      </div>
+    </div>
+    <div class="community-card">
+      <h3>⚖️ THARI Governance</h3>
+      <p>THARI — the H.O.L.O Net Guardian — weaves through every FivesArena decision. Disputes go through the WWJD Firewall: Truth, Justice, Mercy, Compassion. Not an algorithm — a structural boundary.</p>
+      <div class="community-stat">
+        <div><div class="cs-n">17</div><div class="cs-l">Protocol threads</div></div>
+        <div><div class="cs-n">WWJD</div><div class="cs-l">Firewall active</div></div>
+      </div>
+    </div>
+    <div class="community-card">
+      <h3>🌍 Adaptive STREP Order</h3>
+      <p>FivesArena runs on the ASO engine — the same adaptive governance that powers the entire Kopano ecosystem. Bracket hierarchy validates every action. NSO nesting isolates every data stream. <strong>31/31 tests pass.</strong></p>
+      <div class="community-stat">
+        <div><div class="cs-n">L1</div><div class="cs-l">Bracket level</div></div>
+        <div><div class="cs-n">SPSO</div><div class="cs-l">PSO tier</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ──────────────────────────────────────────────── -->
+<div class="cta-section" id="join">
+  <h2 class="cta-title reveal">
+    Lace up.<br/>
+    <span style="background:linear-gradient(135deg,var(--pitch-light),var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Find your pitch.</span>
+  </h2>
+  <p class="cta-sub reveal">FivesArena is part of the Kopano Labs sovereign ecosystem. Every game you play strengthens the community mesh.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap" class="reveal">
+    <a href="#" class="btn-pitch">Join the Waitlist →</a>
+    <a href="https://kopanolabs.com" class="btn-outline">Kopano Labs ↗</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ──────────────────────────────────────────── -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo"><span>⚽ FIVESARENA</span></div>
+    <p>Community sports platform. Offline-first. Township-built. Part of the Kopano Labs sovereign ecosystem. Governed by THARI H.O.L.O Net.</p>
+    <div style="margin-top:1rem;font-family:var(--mono);font-size:0.6rem;color:var(--dim)">I_AM_STATELESS_RENTER_NOT_LANDLORD</div>
+  </div>
+  <div class="footer-col">
+    <h4>Ecosystem</h4>
+    <a href="https://kopanolabs.com">Kopano Labs</a>
+    <a href="https://crisisconnect.kopanolabs.com">CrisisConnect</a>
+    <a href="https://kasilink.com">KasiLink</a>
+    <a href="https://starfallsalvage.kopanolabs.com">StarFall Salvage</a>
+    <a href="https://amaphu.com">Ama-Phu Entertainment</a>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <a href="mailto:hello@fivesarena.com">hello@fivesarena.com</a>
+    <a href="mailto:hello@kopanolabs.com">hello@kopanolabs.com</a>
+    <a href="https://github.com/Kopano-Labs">GitHub</a>
+  </div>
+  <div class="footer-bottom">
+    <span>FIVESARENA © 2026 · A Kopano Labs Sovereign Node · KPGS Governed · ASO 31/31 · GSMB Mandates Active</span>
+    <span>Your pitch. Your rules. Your community.</span>
+  </div>
+</footer>
+
+<script>
+/* ── PITCH CANVAS (Particle Field) ─────────── */
+const canvas = document.getElementById('pitch-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const COLORS = ['#22c55e','#a3e635','rgba(34,197,94,0.3)','rgba(163,230,53,0.2)','#166534'];
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * 1600 - 200, y: Math.random() * 900,
+    z: Math.random() * 800 + 100,
+    vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
+    vz: (Math.random()-0.5)*0.5,
+    color: COLORS[Math.floor(Math.random()*COLORS.length)],
+    size: Math.random() * 2 + 0.5,
+  });
+}
+
+function project(x, y, z) {
+  const fov = 400;
+  const scale = fov / (fov + z);
+  return { px: x * scale + W/2, py: y * scale + H/2, scale };
+}
+
+let angle = 0;
+function drawCanvas() {
+  ctx.clearRect(0, 0, W, H);
+  angle += 0.002;
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.z += p.vz;
+    if (p.z < 50) p.z = 800;
+    if (p.z > 900) p.z = 100;
+    const rx = p.x * Math.cos(angle) - p.z * Math.sin(angle);
+    const rz = p.x * Math.sin(angle) + p.z * Math.cos(angle);
+    const proj = project(rx, p.y, rz);
+    if (proj.px < -50 || proj.px > W+50 || proj.py < -50 || proj.py > H+50) return;
+    ctx.beginPath();
+    ctx.arc(proj.px, proj.py, p.size * proj.scale, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+
+/* ── PITCH VISUAL DOTS ──────────────────────── */
+const pitchEl = document.getElementById('pitch-visual');
+if (pitchEl) {
+  const positions = [
+    [20, 50], [35, 30], [35, 70], [50, 50],
+    [65, 25], [65, 50], [65, 75], [80, 35], [80, 65], [50, 15]
+  ];
+  positions.forEach(([x, y], i) => {
+    const dot = document.createElement('div');
+    dot.className = 'pitch-dot';
+    dot.style.left = x + '%';
+    dot.style.top = y + '%';
+    dot.style.animationDelay = (i * 0.3) + 's';
+    if (i >= 5) dot.style.background = 'var(--lime)';
+    if (i >= 5) dot.style.boxShadow = '0 0 12px var(--lime)';
+    pitchEl.appendChild(dot);
+  });
+}
+
+/* ── SCROLL REVEAL ──────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── SERVICE WORKER REGISTRATION ──────────── */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/fivesarena/sw.js', { scope: '/fivesarena/' })
+    .then(reg => console.log('[FA] SW registered:', reg.scope))
+    .catch(err => console.warn('[FA] SW failed:', err));
+}
+
+/* ── GSMB MANDATE 001: VAULT LOCK BOOT ────── */
+async function kpgsVaultLock() {
+  if (navigator.storage && navigator.storage.persist) {
+    const persisted = await navigator.storage.persist();
+    if (!persisted) {
+      console.error('[KPGS-VAULT] Storage persistence DENIED by OS');
+      document.dispatchEvent(new CustomEvent('kpgs-vault-denied', {
+        detail: { mandate: 'GSMB-MANDATE-001', reason: 'OS denied persist' }
+      }));
+    } else {
+      console.log('[KPGS-VAULT] Storage persistence GRANTED — vault locked');
+    }
+  }
+  if (navigator.storage && navigator.storage.estimate) {
+    const est = await navigator.storage.estimate();
+    console.log(`[KPGS-VAULT] Usage: ${(est.usage/1024/1024).toFixed(2)} MB / ${(est.quota/1024/1024).toFixed(2)} MB`);
+  }
+}
+kpgsVaultLock();
+
+/* ── GSMB MANDATE 002: ZAI KEY PAIR ──────── */
+async function kpgsZAIInit() {
+  if (!window.crypto || !window.crypto.subtle) {
+    console.warn('[ZAI-KEY] Web Crypto API not available');
+    return;
+  }
+  // Check if key already exists in IndexedDB
+  const dbReq = indexedDB.open('kpgs-vault', 1);
+  dbReq.onupgradeneeded = (e) => {
+    const db = e.target.result;
+    ['masters','telemetry','wallet','governance'].forEach(s => {
+      if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, { keyPath: 'id', autoIncrement: true });
+    });
+  };
+  dbReq.onsuccess = async (e) => {
+    const db = e.target.result;
+    const tx = db.transaction('wallet', 'readonly');
+    const store = tx.objectStore('wallet');
+    const all = store.getAll();
+    all.onsuccess = async () => {
+      const keys = all.result.filter(r => r.type === 'zai_keypair');
+      if (keys.length === 0) {
+        // Generate new key pair
+        const kp = await crypto.subtle.generateKey(
+          { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign', 'verify']
+        );
+        const pubJWK = await crypto.subtle.exportKey('jwk', kp.publicKey);
+        const wtx = db.transaction('wallet', 'readwrite');
+        wtx.objectStore('wallet').put({
+          id: 'ZAI-KEY-' + Date.now(), type: 'zai_keypair',
+          publicKey: kp.publicKey, privateKey: kp.privateKey,
+          publicKeyJWK: pubJWK, created: new Date().toISOString(),
+          algorithm: 'ECDSA', curve: 'P-256',
+        });
+        console.log('[ZAI-KEY] Key pair generated and stored in vault');
+      } else {
+        console.log('[ZAI-KEY] Existing key pair found — identity sovereign');
+      }
+    };
+  };
+}
+kpgsZAIInit();
+</script>
+</body>
+</html>
