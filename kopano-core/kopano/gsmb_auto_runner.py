@@ -223,24 +223,47 @@ def _run_tick(tick: int, alp_receipt: str) -> dict:
     except Exception as e:
         tick_result["khelos"] = {"error": str(e)}
 
-    # ── Adaptiveness telemetry validation ─────────────────────
+    # ── Adaptiveness telemetry + ASO validation ─────────────
     try:
-        from kopano.adaptiveness import NeuralFailureFirewall, SwiftKeyNLP
+        from kopano.adaptiveness import (
+            NeuralFailureFirewall, SwiftKeyNLP, AdaptiveSTREPEngine
+        )
         firewall = NeuralFailureFirewall()
         nlp = SwiftKeyNLP()
-        
+        aso = AdaptiveSTREPEngine()
+
         # Validate that the runner's own signal passes the firewall
         sig_str = f"gsmb runner tick {tick} kopano kpgs mmao poc"
         is_clean, pattern = firewall.check_text(sig_str)
-        
+
         # Monitor dictionary vocabulary size
         vocab_size = len(nlp.local_dictionary)
-        
+
+        # ASO: Process the runner signal through Adaptive STREP Order
+        aso_result = aso.process(
+            f"[VOC] gsmb_auto_runner tick {tick} — full governance sweep",
+            protocol_context="GSMB autonomous governance loop",
+            poc_context=f"ALP:{alp_receipt} | NCCNP+IKP+APU sweep",
+        )
+
         tick_result["adaptiveness"] = {
             "firewall_pass": is_clean,
             "vocab_size": vocab_size,
+            "aso_bracket_level": aso_result["bracket"]["level"],
+            "aso_pso_tier": aso_result["adaptive_pso_tier"],
+            "aso_pkanp_ratio": aso_result["pkanp"]["pkanp_ratio"],
+            "aso_knowable_dominant": aso_result["pkanp"]["knowable_dominant"],
+            "aso_nesting_depth": aso_result["nso"]["depth"],
+            "aso_verdict": aso_result["verdict"],
         }
-        logger.info("[RUNNER] Adaptiveness: firewall_pass=%s | vocab_size=%d", is_clean, vocab_size)
+        logger.info(
+            "[RUNNER] Adaptiveness: firewall=%s | vocab=%d | ASO=L%d/%s | PKANP=%.2f | %s",
+            is_clean, vocab_size,
+            aso_result["bracket"]["level"],
+            aso_result["adaptive_pso_tier"],
+            aso_result["pkanp"]["pkanp_ratio"],
+            aso_result["verdict"],
+        )
     except Exception as e:
         tick_result["adaptiveness"] = {"error": str(e)}
         logger.error("[RUNNER] Adaptiveness error: %s", e)
@@ -250,7 +273,11 @@ def _run_tick(tick: int, alp_receipt: str) -> dict:
     apu_ok   = tick_result.get("apu", {}).get("red", 1) == 0
     ikp_ok   = tick_result.get("ikp", {}).get("clean", 0) >= 3
     fonc_ok  = tick_result.get("fonc_self", {}).get("is_clean", False)
-    adaptiveness_ok = tick_result.get("adaptiveness", {}).get("firewall_pass", False)
+    adaptiveness_ok = (
+        tick_result.get("adaptiveness", {}).get("firewall_pass", False)
+        and tick_result.get("adaptiveness", {}).get("aso_verdict", "").startswith("ASO_")
+        and tick_result.get("adaptiveness", {}).get("aso_verdict", "").endswith("_VALIDATED")
+    )
     all_ok   = nccnp_ok and apu_ok and ikp_ok and fonc_ok and adaptiveness_ok
 
     tick_result["tick_verdict"]  = "POC_VALIDATED" if all_ok else "PARTIAL_POC"
