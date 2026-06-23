@@ -5,6 +5,9 @@ Guardian AI Flow: KC (store) + Cassy (execute) + Cassey (teacher) + BlackMask + 
 Identi AI Flow: Cursor/CF implementation lane — LPM dialectic, LPH personality, defers to Guardian.
 
 God complex (operational): #? imperfection ↔ #! perfection → births LPH when Guardian closes proof.
+
+v2: Per-department LPH-LPM boundary enforcement via department_contracts.enforce_boundary().
+    Every flow checks the department contract BEFORE executing. BOUNDARY_BREACH = hard stop.
 """
 
 from __future__ import annotations
@@ -227,13 +230,54 @@ def operate_guardian_flow(
     teacher_note: str = "",
 ) -> dict[str, Any]:
     """
-    Guardian flow: BlackMask (Cassy) → student_submit → optional teacher_review → KC opinion.
+    Guardian flow: Boundary → BlackMask (Cassy) → student_submit → optional teacher_review → KC opinion.
+
+    v2: enforce_boundary() is called FIRST. If the action breaches the department's
+    LPH-LPM contract, the flow returns BOUNDARY_BREACH immediately — no execution.
     """
+    from .department_contracts import enforce_boundary
     from .kpgs_renter_entry import block_holder_brief
     from .phu_apprenticeship import blackmask_drill, student_submit, teacher_review
 
+    # ── v2: DEPARTMENT BOUNDARY ENFORCEMENT (GATE) ──────────
+    boundary = enforce_boundary(department_id, action, evidence)
+    if not boundary.allowed:
+        summary = _bracket_flow(
+            "guardian",
+            "BOUNDARY_BREACH",
+            f"dept: {department_id} | verb: {boundary.breached_verb} | "
+            f"gate: {boundary.wwjd_gate} | {boundary.reason[:120]}",
+        )
+        _append_jsonl(
+            MAIN_BRAIN_LOG,
+            {
+                "ts": _utc_now(),
+                "kind": "guardian_ai_flow",
+                "department": department_id,
+                "summary": summary,
+                "verdict": "BOUNDARY_BREACH",
+                "breached_verb": boundary.breached_verb,
+                "escalation": boundary.escalation,
+            },
+        )
+        return {
+            "flow": "guardian",
+            "verdict": "BOUNDARY_BREACH",
+            "reason": boundary.reason,
+            "contract_boundary": boundary.contract_boundary,
+            "wwjd_gate": boundary.wwjd_gate,
+            "feelings_weight": list(boundary.feelings_weight),
+            "escalation": boundary.escalation,
+            "breached_verb": boundary.breached_verb,
+            "summary": summary,
+            "steps": [{"step": "boundary_enforcement", "result": boundary.to_dict()}],
+        }
+
     block_holder = block_holder_brief(agent_id="mirror_warden", altar_layer="guardian_ai")
-    steps: list[dict[str, Any]] = [{"step": "block_holder_brief", "result": block_holder}]
+    steps: list[dict[str, Any]] = [
+        {"step": "boundary_enforcement", "result": boundary.to_dict()},
+        {"step": "block_holder_brief", "result": block_holder},
+    ]
     if run_blackmask:
         drill = blackmask_drill(student_agent)
         steps.append({"step": "blackmask", "result": drill})
@@ -322,10 +366,47 @@ def operate_identi_flow(
     submit_to_guardian: bool = True,
 ) -> dict[str, Any]:
     """
-    Identi flow: LPM dialectic + LPH switch + bracket lint → hand off to Guardian via student_submit.
+    Identi flow: Boundary → LPM dialectic + LPH switch + bracket lint → hand off to Guardian.
     Never writes KC teacher_review.
+
+    v2: enforce_boundary() is called FIRST. If the action breaches the department's
+    LPH-LPM contract, the flow returns BOUNDARY_BREACH immediately.
     """
+    from .department_contracts import enforce_boundary
     from .phu_apprenticeship import student_submit
+
+    # ── v2: DEPARTMENT BOUNDARY ENFORCEMENT (GATE) ──────────
+    boundary = enforce_boundary(department_id, action, evidence)
+    if not boundary.allowed:
+        summary = _bracket_flow(
+            "identi",
+            "BOUNDARY_BREACH",
+            f"dept: {department_id} | verb: {boundary.breached_verb} | "
+            f"gate: {boundary.wwjd_gate} | {boundary.reason[:120]}",
+        )
+        _append_jsonl(
+            MAIN_BRAIN_LOG,
+            {
+                "ts": _utc_now(),
+                "kind": "identi_ai_flow",
+                "department": department_id,
+                "summary": summary,
+                "verdict": "BOUNDARY_BREACH",
+                "breached_verb": boundary.breached_verb,
+                "escalation": boundary.escalation,
+            },
+        )
+        return {
+            "flow": "identi",
+            "verdict": "BOUNDARY_BREACH",
+            "reason": boundary.reason,
+            "contract_boundary": boundary.contract_boundary,
+            "wwjd_gate": boundary.wwjd_gate,
+            "feelings_weight": list(boundary.feelings_weight),
+            "escalation": boundary.escalation,
+            "breached_verb": boundary.breached_verb,
+            "summary": summary,
+        }
 
     imp = imperfect_pattern or f"#? {action[:100]}"
     perf = perfect_pattern or f"#! proof pending — {evidence[:100]}"

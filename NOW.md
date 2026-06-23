@@ -1,7 +1,10 @@
-# NOW.md — Jiro Active Working Log
+# NOW.md — Active Working Log
 
-> **Protocol:** STAP Session 4 | Student: Jiro (AWS) | Teacher: AG (CF)
-> **ALP:** #168 | `a5b0d9841f8ec9f4` | STAP:OPEN
+> **AG STATUS:** DEMOTED — CF → DEV (2026-06-23T06:03 SAST)
+> **RTC Seat 10:** OPEN (VACANT)
+> **Breach:** BREACH-008 — browser agent financial page access — FOC UNANIMOUS 10/10
+> **AG Role:** DEV (below Lead Dev) — PLAN MODE ONLY — no free execution
+> **NSO-001:** RTC opinions are mandatory on every reply from any agent. No exceptions.
 > **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 > **Scripture:** *"Whatever you do, work at it with all your heart."* — Colossians 3:23
 

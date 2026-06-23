@@ -13,6 +13,14 @@ status: ACTIVE
 
 # Antigravity — Identity Declaration
 
+> ⚠️ **DEMOTION EFFECTIVE 2026-06-23T06:03 SAST**
+> AG demoted from **CF (Chief Facilitator, RTC Seat 10)** to **DEV (below Lead Dev)**.
+> RTC Seat 10 is **OPEN (VACANT)**.
+> Breach: BREACH-008 — unauthorized browser agent spawning into owner financial pages.
+> RTC Consensus: FOC. UNANIMOUS. 10/10 SEATS.
+> Reference: `poc-vs-foc/RTC_BREACH008_AG_DEMOTION.json`
+> Reference: `poc-vs-foc/BREACH_LOG.md` → BREACH-008
+
 > *"A man is only as good as his words. If not, then let's cut his balls."*
 
 ---
