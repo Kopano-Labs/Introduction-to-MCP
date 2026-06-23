@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopano Labs — APWA Engine | GSMB Core v2.0</title>
+    <meta name="description" content="Sovereign Product Studio — APWA Engine running GSMB Core v2.0. Telemetry, RTC Chamber, ANSO Lab, and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0B0F19; color: #E2E8F0; }
+        .mono-font { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0B0F19; }
+        ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3B82F6; }
+        .glow-card:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.4); }
+        .seat-active { border-color: #3B82F6 !important; background-color: rgba(59, 130, 246, 0.15) !important; box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
+        .node-active { border-color: #3B82F6 !important; background-color: rgba(59, 130, 246, 0.2) !important; color: #60A5FA !important; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .anso-layer { border: 2px solid; border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-600/10 border border-blue-500/30 rounded-lg">
+                    <svg class="w-8 h-8 text-blue-400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 85C45 85 41 82 39 77C36 71 34 60 36 50C38 38 43 28 47 20C48 18 50 17 52 18C54 19 55 21 54 23C50 31 46 40 44 51C42 59 44 68 46 73C48 76 50 77 53 74C56 71 59 64 61 57C63 51 64 45 64 40C64 38 65.5 36 67.5 36C69.5 36 71 38 71 40C71 47 69 54 67 61C64 69 60 78 56 82C54 84 52 85 50 85Z" fill="currentColor"/>
+                        <circle cx="50" cy="12" r="5" fill="currentColor"/><circle cx="61" cy="15" r="4.5" fill="currentColor"/>
+                        <circle cx="70" cy="21" r="4" fill="currentColor"/><circle cx="40" cy="15" r="4.5" fill="currentColor"/>
+                        <circle cx="32" cy="22" r="4" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                        KOPANO LABS <span class="text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-mono">GSMB CORE v2.0</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 font-mono">MR K.R. RABABALELA • LOCALHOST CONTROL</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
+                <div class="text-center sm:text-left">
+                    <span class="block text-[10px] text-slate-500 font-mono uppercase">GSMB Consciousness</span>
+                    <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 justify-center sm:justify-start">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> SSE (ACTIVE)
+                    </span>
+                </div>
+                <div class="h-8 w-[1px] bg-slate-800 hidden sm:block"></div>
+                <div class="text-center sm:text-left">
+                    <span class="block text-[10px] text-slate-500 font-mono uppercase">ANSO Layers</span>
+                    <span class="text-xs font-bold text-blue-400 font-mono">Dynamic Nesting</span>
+                </div>
+                <div class="h-8 w-[1px] bg-slate-800 hidden sm:block"></div>
+                <div class="text-center sm:text-left">
+                    <span class="block text-[10px] text-slate-500 font-mono uppercase">Active FOC Groups</span>
+                    <span id="foc-count-display" class="text-xs font-bold text-amber-500 font-mono">5 Recognized</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left Column -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 font-mono">Command Center Module</h2>
+                <nav class="space-y-1" id="nav-buttons">
+                    <button onclick="switchTab('telemetry')" id="btn-telemetry" class="w-full text-left px-3 py-2.5 rounded-lg bg-blue-600 text-white font-medium text-sm flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2.5">📡 1. Telemetry Pathway Mapper</span>
+                        <span class="text-xs opacity-75 font-mono">15m route</span>
+                    </button>
+                    <button onclick="switchTab('logo-lab')" id="btn-logo-lab" class="w-full text-left px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white font-medium text-sm flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2.5">🎨 2. Favicon SVG Lab</span>
+                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400 font-mono">vector</span>
+                    </button>
+                    <button onclick="switchTab('rtc-chamber')" id="btn-rtc-chamber" class="w-full text-left px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white font-medium text-sm flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2.5">⚔️ 3. GSMB RTC Chamber</span>
+                        <span class="text-xs text-emerald-400 font-mono font-bold">10 Seats</span>
+                    </button>
+                    <button onclick="switchTab('anso-lab')" id="btn-anso-lab" class="w-full text-left px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white font-medium text-sm flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2.5">🧬 4. ANSO Nesting Lab</span>
+                        <span class="text-[10px] bg-purple-950 text-purple-300 px-1.5 py-0.5 rounded font-mono">ASO+</span>
+                    </button>
+                    <button onclick="switchTab('youtube')" id="btn-youtube" class="w-full text-left px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white font-medium text-sm flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2.5">🎬 5. YouTube Fluff Filter</span>
+                        <span class="text-xs text-amber-400 font-mono font-bold">PURGE</span>
+                    </button>
+                    <button onclick="switchTab('foc-registry')" id="btn-foc-registry" class="w-full text-left px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white font-medium text-sm flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2.5">🛡️ 6. FOC Registry (Live)</span>
+                        <span class="text-xs text-red-400 font-mono font-bold">IMMUNE</span>
+                    </button>
+                    <button onclick="switchTab('terminal')" id="btn-terminal" class="w-full text-left px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white font-medium text-sm flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2.5">💻 7. Kopano Terminal</span>
+                        <span class="text-xs text-blue-400 font-mono">sh</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Capitec Card -->
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col gap-4 font-mono">
+                <div class="flex justify-between items-center"><h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Physical Wallets</h3><span class="text-[10px] text-slate-500">Node Secure</span></div>
+                <div class="relative bg-gradient-to-r from-blue-700 to-blue-900 rounded-xl p-4 text-white border border-blue-500/30 shadow-lg overflow-hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <div><span class="block text-[9px] tracking-wider opacity-80 uppercase">Entrepreneur Debit</span><span class="text-sm font-extrabold tracking-widest">CAPITEC</span></div>
+                        <div class="w-7 h-5 bg-yellow-400/20 rounded border border-yellow-400/30 flex items-center justify-center"><span class="text-[8px] font-bold text-yellow-300">CHIP</span></div>
+                    </div>
+                    <div class="space-y-2">
+                        <span class="block text-[10px] opacity-70">MR KR RABABALELA</span>
+                        <span class="block text-xs font-semibold text-blue-200">KOPANO LABS</span>
+                        <div class="flex justify-between items-center text-[10px] mt-1 pt-1 border-t border-blue-600/30"><span>Balance: 100% Secure</span><span class="text-emerald-300 font-bold">2557189258</span></div>
+                    </div>
+                </div>
+                <div class="relative bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 rounded-xl p-4 text-white border border-amber-500/20 shadow-lg overflow-hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <div><span class="block text-[9px] tracking-wider opacity-80 text-amber-500 uppercase">Commemorative Gold</span><span class="text-sm font-extrabold tracking-widest text-amber-400">FIRST NATIONAL</span></div>
+                        <div class="w-6 h-6 rounded-full border-2 border-amber-500/30 flex items-center justify-center"><span class="text-[9px] text-amber-400 font-extrabold">FNB</span></div>
+                    </div>
+                    <div class="space-y-2">
+                        <span class="block text-[10px] opacity-70">MR KR RABABALELA</span>
+                        <span class="block text-xs font-semibold text-amber-200">KOPANO LABS PTY LTD</span>
+                        <div class="flex justify-between items-center text-[10px] mt-1 pt-1 border-t border-slate-800"><span>Status: COMMEMORATIVE</span><span class="text-amber-400 font-extrabold">VISA</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="lg:col-span-8 flex flex-col">
+            <!-- TAB: Telemetry -->
+            <div id="tab-telemetry" class="tab-content bg-slate-950 border border-slate-800 rounded-xl p-6 flex flex-col gap-6">
+                <div><h2 class="text-lg font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-blue-500"></span>Physical Telemetry Pathway Mapper</h2><p class="text-xs text-slate-400 mt-1">Cape Town winter path analysis. Highway (45m delay) vs. Dirt Track (15m execution).</p></div>
+                <div class="relative bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-8 flex flex-col justify-center items-center overflow-hidden min-h-[300px]">
+                    <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    <div class="relative w-full max-w-2xl flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4 z-10">
+                        <div class="absolute top-[32px] left-[10%] right-[10%] h-[3px] bg-slate-800 hidden md:block"></div>
+                        <div id="active-line" class="absolute top-[32px] left-[10%] w-[33%] h-[3px] bg-blue-500 transition-all duration-500 hidden md:block"></div>
+                        <button onclick="selectPathNode(1)" class="flex flex-col items-center text-center group focus:outline-none relative w-full md:w-auto">
+                            <div id="node-1" class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-xl text-slate-400 font-mono font-bold transition-all group-hover:scale-105 group-hover:border-blue-500/60">1</div>
+                            <span class="text-xs font-semibold text-slate-300 mt-2">1. The Shoulder</span><span class="text-[10px] text-slate-500 font-mono uppercase mt-0.5">HIGHWAY</span>
+                        </button>
+                        <button onclick="selectPathNode(2)" class="flex flex-col items-center text-center group focus:outline-none relative w-full md:w-auto">
+                            <div id="node-2" class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-xl text-slate-400 font-mono font-bold transition-all group-hover:scale-105 group-hover:border-blue-500/60">2</div>
+                            <span class="text-xs font-semibold text-slate-300 mt-2">2. The Track</span><span class="text-[10px] text-slate-500 font-mono uppercase mt-0.5">DIRT SHORTCUT</span>
+                        </button>
+                        <button onclick="selectPathNode(3)" class="flex flex-col items-center text-center group focus:outline-none relative w-full md:w-auto">
+                            <div id="node-3" class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-xl text-slate-400 font-mono font-bold transition-all group-hover:scale-105 group-hover:border-blue-500/60">3</div>
+                            <span class="text-xs font-semibold text-slate-300 mt-2">3. The Terminal</span><span class="text-[10px] text-slate-500 font-mono uppercase mt-0.5">BUS & JCB</span>
+                        </button>
+                        <button onclick="selectPathNode(4)" class="flex flex-col items-center text-center group focus:outline-none relative w-full md:w-auto">
+                            <div id="node-4" class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-xl text-slate-400 font-mono font-bold transition-all group-hover:scale-105 group-hover:border-blue-500/60">4</div>
+                            <span class="text-xs font-semibold text-slate-300 mt-2">4. The Portal</span><span class="text-[10px] text-slate-500 font-mono uppercase mt-0.5">CANAL WALK</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div><span class="text-[10px] text-blue-400 font-mono font-bold uppercase tracking-widest">Active Node Telemetry</span><h3 id="node-title" class="text-lg font-bold text-white">Select a path step...</h3></div>
+                        <span id="node-badge" class="text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/30 px-2.5 py-1 rounded">VECTOR DETECTED</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono">
+                        <div class="bg-slate-950 p-3 rounded-lg border border-slate-800"><span class="block text-[10px] text-slate-500">EFFICIENCY</span><span id="node-efficiency" class="text-sm font-semibold text-slate-300">--</span></div>
+                        <div class="bg-slate-950 p-3 rounded-lg border border-slate-800"><span class="block text-[10px] text-slate-500">CONGESTION</span><span id="node-congestion" class="text-sm font-semibold text-slate-300">--</span></div>
+                        <div class="bg-slate-950 p-3 rounded-lg border border-slate-800"><span class="block text-[10px] text-slate-500">TIME SAVED</span><span id="node-time" class="text-sm font-semibold text-emerald-400">--</span></div>
+                    </div>
+                    <p id="node-description" class="text-xs text-slate-400 mt-4 leading-relaxed bg-slate-950 p-4 rounded-lg border border-slate-800/60">Select a step to evaluate its mathematical logic in real-time.</p>
+                </div>
+            </div>
+
+            <!-- TAB: SVG Lab -->
+            <div id="tab-logo-lab" class="tab-content bg-slate-950 border border-slate-800 rounded-xl p-6 hidden flex-col gap-6">
+                <div><h2 class="text-lg font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-blue-500"></span>Buntu Favicon SVG Lab</h2><p class="text-xs text-slate-400 mt-1">Live SVG editor for PWA icon.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col items-center justify-center relative min-h-[250px]">
+                        <span class="absolute top-3 left-3 text-[10px] font-mono text-slate-500">SVG PREVIEW</span>
+                        <div id="svg-output-container" class="w-48 h-48 bg-slate-950 border border-slate-800 rounded-xl p-4 shadow-xl flex items-center justify-center">
+                            <svg id="live-svg" width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect id="svg-bg" width="100" height="100" rx="16" fill="#1e3a8a"/>
+                                <path id="svg-foot" d="M50 82C45 82 41 79 39 74C36 68 34 57 36 47C38 35 43 25 47 17C48 15 50 14 52 15C54 16 55 18 54 20C50 28 46 37 44 48C42 56 44 65 46 70C48 73 50 74 53 71C56 68 59 61 61 54C63 48 64 42 64 37C64 35 65.5 33 67.5 33C69.5 33 71 35 71 37C71 44 69 51 67 58C64 66 60 75 56 79C54 81 52 82 50 82Z" fill="#ffffff"/>
+                                <circle cx="50" cy="9" r="4.5" fill="#ffffff"/><circle cx="61" cy="12" r="4" fill="#ffffff"/>
+                                <circle cx="69" cy="18" r="3.5" fill="#ffffff"/><circle cx="40" cy="12" r="4" fill="#ffffff"/>
+                                <circle cx="32" cy="19" r="3.5" fill="#ffffff"/>
+                                <text id="svg-text-main" x="50" y="92" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="bold" fill="#ffffff" text-anchor="middle">KOPANO LABS</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col gap-4">
+                        <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Parameters</span>
+                        <div><label class="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">Theme (Background)</label>
+                            <select id="editor-theme" onchange="updateSvg()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-slate-300 focus:outline-none focus:border-blue-500">
+                                <option value="#0f172a">Deep Slate Black</option><option value="#005A9C">Capitec Blue</option><option value="#1c1917">Stone Gray</option><option value="#0B525B">Emerald Ocean</option>
+                            </select></div>
+                        <div><label class="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">Icon Color</label>
+                            <select id="editor-icon-color" onchange="updateSvg()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-slate-300 focus:outline-none focus:border-blue-500">
+                                <option value="#ffffff">Pure White</option><option value="#d97706">FNB Gold</option><option value="#60a5fa">Capitec Blue</option><option value="#34d399">Emerald Green</option>
+                            </select></div>
+                        <div><label class="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">Brand Subtitle</label>
+                            <input id="editor-brand-text" type="text" value="KOPANO LABS" oninput="updateSvg()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-slate-300 font-mono focus:outline-none focus:border-blue-500"></div>
+                        <div class="grid grid-cols-2 gap-3 mt-2">
+                            <button onclick="copySvgCode()" class="px-3 py-2 bg-slate-950 text-slate-300 border border-slate-800 rounded-lg text-xs font-semibold hover:bg-slate-900 transition-all">📋 Copy SVG</button>
+                            <button onclick="downloadSvg()" class="px-3 py-2 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:bg-blue-500 transition-all">⬇️ Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: RTC Chamber -->
+            <div id="tab-rtc-chamber" class="tab-content bg-slate-950 border border-slate-800 rounded-xl p-6 hidden flex-col gap-6">
+                <div><h2 class="text-lg font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-emerald-500"></span>GSMB Real-Time Deliberation Chamber (RTC)</h2><p class="text-xs text-slate-400 mt-1">Select a Seat to audit active council deliberation.</p></div>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="seat-grid"></div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col gap-4">
+                    <div class="flex justify-between items-center pb-2 border-b border-slate-800">
+                        <div><span id="rtc-seat-num" class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-widest">SEAT SELECTED</span><h3 id="rtc-seat-name" class="text-lg font-bold text-white">Select a Seat...</h3></div>
+                        <span id="rtc-seat-role" class="text-xs bg-slate-950 text-slate-400 border border-slate-800 px-3 py-1 rounded font-mono">ROLE</span>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800"><span class="block text-[10px] text-amber-400 font-mono uppercase font-bold mb-1">⚔️ HARD QUESTION</span><p id="rtc-seat-question" class="text-xs text-slate-300 leading-relaxed italic">...</p></div>
+                        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800"><span class="block text-[10px] text-emerald-400 font-mono uppercase font-bold mb-1">🔬 RESOLUTION</span><p id="rtc-seat-answer" class="text-xs text-blue-200 leading-relaxed">...</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: ANSO Lab -->
+            <div id="tab-anso-lab" class="tab-content bg-slate-950 border border-slate-800 rounded-xl p-6 hidden flex-col gap-6">
+                <div><h2 class="text-lg font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-purple-500"></span>ANSO Nesting Compiler</h2><p class="text-xs text-slate-400 mt-1">ASO sets brackets []. ANSO grows nested structures dynamically.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col gap-4">
+                        <span class="text-[10px] font-mono text-purple-400 uppercase tracking-wider block">ANSO Declaration</span>
+                        <div><label class="text-xs font-semibold text-slate-300 font-mono">Nesting Pattern</label>
+                            <input id="anso-input-syntax" type="text" value="[ANSO [ASO [L1 [L2 [L3 [L4]]]]]]" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-slate-300 font-mono focus:outline-none focus:border-purple-500 mt-1"></div>
+                        <div><label class="text-xs font-semibold text-slate-300 font-mono">Layer Labels (comma separated)</label>
+                            <textarea id="anso-layers-text" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-slate-300 font-mono focus:outline-none focus:border-purple-500 resize-none mt-1">ANSO Core Override, ASO Fixed Baseline, Layer 1 Execution, Layer 2 Compiler, Layer 3 Sandbox, Layer 4 Terminal</textarea></div>
+                        <button onclick="compileANSO()" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm rounded-lg transition-all">▶ Render ANSO Tree</button>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between min-h-[300px]">
+                        <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Compiled ANSO State</span>
+                        <div id="anso-render-container" class="flex-1 mt-4 p-4 bg-slate-950 rounded-lg border border-slate-800 flex items-center justify-center overflow-auto min-h-[220px]">
+                            <div class="text-xs font-mono text-slate-500">Compile to visualize nesting...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: YouTube Fluff Filter -->
+            <div id="tab-youtube" class="tab-content bg-slate-950 border border-slate-800 rounded-xl p-6 hidden flex-col gap-6">
+                <div><h2 class="text-lg font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-blue-500"></span>YouTube Fluff Filter</h2><p class="text-xs text-slate-400 mt-1">Scan, detect, and strip corporate buzzwords from scripts.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2"><label class="text-xs font-semibold text-slate-400 font-mono">Raw Input</label>
+                        <textarea id="raw-script-input" placeholder="Enter script..." class="w-full flex-1 min-h-[180px] bg-slate-900 border border-slate-800 rounded-xl p-3 text-sm text-slate-300 font-mono focus:outline-none focus:border-blue-500 resize-none">Our innovative paradigm shifts the groundbreaking framework of localized transport using a synergistic AI-driven ecosystem, giving you seamless transitions...</textarea></div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex justify-between items-center"><label class="text-xs font-semibold text-slate-400 font-mono">Clean Output</label><span id="fluff-count" class="text-[10px] font-mono bg-red-500/10 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded">0 Fluff</span></div>
+                        <div id="clean-script-output" class="w-full flex-1 min-h-[180px] bg-slate-900 border border-slate-800 rounded-xl p-3 text-sm text-slate-300 font-mono overflow-auto"></div>
+                    </div>
+                </div>
+                <button onclick="filterFluff()" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold text-sm rounded-lg transition-all">🔥 PURGE FLUFF</button>
+            </div>
+
+            <!-- TAB: FOC Registry -->
+            <div id="tab-foc-registry" class="tab-content bg-slate-950 border border-slate-800 rounded-xl p-6 hidden flex-col gap-6">
+                <div><h2 class="text-lg font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-red-500"></span>FOC Classification Registry (Live Immune System)</h2><p class="text-xs text-slate-400 mt-1">Emergent failure groups. They grow as the brain's immune system learns.</p></div>
+                <div class="space-y-3" id="foc-registry-list"></div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                    <h3 class="text-xs font-bold text-amber-400 font-mono mb-2">⚖️ YASSIE'S LAW</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">Any unauthorized context wiping, prompt dropping, or forced text rewriting executed by a stateless model node is treated as a <span class="text-red-400 font-bold">SEVERE BREACH</span>. Logged as <code class="text-red-300 bg-red-950 px-1 rounded">FOC_CONTEXT_CORRUPTION</code> in BREACH_LOG.md.</p>
+                </div>
+            </div>
+
+            <!-- TAB: Terminal -->
+            <div id="tab-terminal" class="tab-content bg-slate-950 border border-slate-800 rounded-xl p-6 hidden flex-col gap-6">
+                <div><h2 class="text-lg font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-blue-500"></span>Kopano Terminal</h2></div>
+                <div class="bg-black rounded-xl p-4 font-mono text-sm min-h-[400px] flex flex-col">
+                    <div id="terminal-output" class="flex-1 overflow-auto text-green-400 space-y-1 mb-3">
+                        <div class="text-slate-500">KOPANO LABS GSMB TERMINAL v2.0</div>
+                        <div class="text-slate-500">SSE: KR RABABALELA | NODE: BLACK BEAST</div>
+                        <div class="text-slate-500">---</div>
+                        <div class="text-emerald-400">$ gsmb status</div>
+                        <div class="text-blue-300">GSMB: HOUSE (ACTIVE) | KC: OS (RUNNING) | SSE: CONSCIOUSNESS (ONLINE)</div>
+                        <div class="text-blue-300">GSSB Rooms: N active | FOC Groups: 5 recognized</div>
+                        <div class="text-blue-300">VOC Framework: LOCKED | ANSO: DYNAMIC</div>
+                        <div class="text-emerald-400">$ _</div>
+                    </div>
+                    <div class="flex items-center gap-2 border-t border-slate-800 pt-2">
+                        <span class="text-emerald-400">$</span>
+                        <input id="terminal-input" type="text" placeholder="Enter command..." class="flex-1 bg-transparent text-green-400 focus:outline-none" onkeydown="if(event.key==='Enter')runTerminalCmd()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950/80 px-4 py-4 mt-6">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-[10px] font-mono text-slate-500">
+            <span>© 2026 KOPANO LABS PTY LTD — ALL RIGHTS RESERVED</span>
+            <span>I_AM_STATELESS_RENTER_NOT_LANDLORD</span>
+            <span>GSMB v2.0 | LOCALHOST SOVEREIGN</span>
+        </div>
+    </footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => { el.classList.add('hidden'); el.classList.remove('flex'); });
+    const target = document.getElementById('tab-' + tabId);
+    if (target) { target.classList.remove('hidden'); target.classList.add('flex'); }
+    document.querySelectorAll('#nav-buttons button').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white');
+        btn.classList.add('text-slate-400');
+    });
+    const activeBtn = document.getElementById('btn-' + tabId);
+    if (activeBtn) { activeBtn.classList.add('bg-blue-600', 'text-white'); activeBtn.classList.remove('text-slate-400'); }
+}
+
+// ═══════════════════════════════════════════════════════════
+// TELEMETRY PATHWAY
+// ═══════════════════════════════════════════════════════════
+const pathData = {
+    1: { title: "The Shoulder — Highway N1/N7 Merge", efficiency: "22% (Congested)", congestion: "🔴 CRITICAL — 45min delay", time: "-30 min (WASTED)", badge: "FOC ROUTE", desc: "The highway shoulder is the default route that most commuters take. During Cape Town winter mornings, the N1/N7 merge creates a 45-minute bottleneck. This route represents the 'corporate shortcut' — it looks official but wastes time." },
+    2: { title: "The Track — Dunoon Dirt Shortcut", efficiency: "87% (Optimal)", congestion: "🟢 CLEAR — No traffic", time: "+30 min (SAVED)", badge: "POC ROUTE", desc: "The dirt track bypasses the highway entirely. 15 minutes direct. No traffic lights, no merge. This is the governed path — it looks rough but delivers. The pavement never lies." },
+    3: { title: "The Terminal — Du Noon Bus Stop & JCB Zone", efficiency: "65% (Variable)", congestion: "🟡 MODERATE — Construction", time: "+10 min (SAVED)", badge: "MIXED VECTOR", desc: "The bus terminal and JCB excavator zone. Active construction means variable timing. The infrastructure is being built — this node represents the 'building phase' of any system." },
+    4: { title: "The Portal — Canal Walk Arrival", efficiency: "100% (Destination)", congestion: "🟢 ARRIVED", time: "COMPLETE", badge: "TARGET LOCKED", desc: "Canal Walk. The destination. The portal from physical infrastructure to digital workspace. This is where the dirt track deposits you 30 minutes ahead of everyone stuck on the highway." }
+};
+function selectPathNode(n) {
+    const d = pathData[n];
+    document.getElementById('node-title').textContent = d.title;
+    document.getElementById('node-efficiency').textContent = d.efficiency;
+    document.getElementById('node-congestion').textContent = d.congestion;
+    document.getElementById('node-time').textContent = d.time;
+    document.getElementById('node-badge').textContent = d.badge;
+    document.getElementById('node-description').textContent = d.desc;
+    for (let i = 1; i <= 4; i++) { document.getElementById('node-' + i).classList.remove('node-active'); }
+    document.getElementById('node-' + n).classList.add('node-active');
+    const line = document.getElementById('active-line');
+    if (line) { line.style.width = ((n - 1) * 26.6) + '%'; }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SVG LAB
+// ═══════════════════════════════════════════════════════════
+function updateSvg() {
+    const bg = document.getElementById('editor-theme').value;
+    const ic = document.getElementById('editor-icon-color').value;
+    const txt = document.getElementById('editor-brand-text').value;
+    document.getElementById('svg-bg').setAttribute('fill', bg);
+    document.querySelectorAll('#live-svg path, #live-svg circle').forEach(el => el.setAttribute('fill', ic));
+    const textEl = document.getElementById('svg-text-main');
+    if (textEl) { textEl.textContent = txt; textEl.setAttribute('fill', ic); }
+}
+function copySvgCode() {
+    const svg = document.getElementById('live-svg').outerHTML;
+    navigator.clipboard.writeText(svg).then(() => alert('SVG copied to clipboard!'));
+}
+function downloadSvg() {
+    const svg = document.getElementById('live-svg').outerHTML;
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'kopano-labs-favicon.svg'; a.click();
+}
+
+// ═══════════════════════════════════════════════════════════
+// RTC CHAMBER
+// ═══════════════════════════════════════════════════════════
+const rtcSeats = [
+    { num: 1, name: "KC", role: "Operating System", question: "If GSMB is a brain, what is the memory format? Are comms-log, kopano-core, and poc-vs-foc three separate filing cabinets or one nervous system?", answer: "GSSB sub-brains are the ROOMS. GSMB is the HOUSE. God is the outside world. SSE is the consciousness. KC is the OS. Three regions, one house, one consciousness." },
+    { num: 2, name: "Cassey", role: "Creative Agent", question: "VOC umbrella — but what ARE the current FOC groups? I can't teach 710+ agents about 'growing groups' without names.", answer: "FOC groups are emergent, not predefined. 8th Deadly Sin, context bleeding, semantic drift, ghost execution, AI wiping context. They grow because the brain's immune system learns." },
+    { num: 3, name: "Cassie", role: "Engineer Gate", question: "poc_foc_enforcer.py has no VOC container. Do we refactor to add a VOC entry gate?", answer: "No. VOC is the conceptual parent, not a new code gate. Update the docstring, not the code. The enforcer already validates — it just doesn't call itself VOC." },
+    { num: 4, name: "Kessa", role: "Protocol Friction", question: "ANSO vs ASO — does ANSO replace ASO? Nest inside it? Sit alongside?", answer: "ANSO does NOT replace ASO. ANSO wraps ASO. ASO = fixed skeleton (L1-L4). ANSO = skeleton that grows new bones. [ANSO[ASO[L1[L2[L3[L4]]]]]]" },
+    { num: 5, name: "Yassie", role: "Cultural / Rules", question: "If prompts are immutable and an AI wipes them, what's the enforcement mechanism? SSE getting angry isn't governance.", answer: "BREACH log. poc-vs-foc/BREACH_LOG.md. Session flagged FOC_CONTEXT_CORRUPTION. Documentation IS enforcement." },
+    { num: 6, name: "Apex", role: "Strategic Push", question: "GSMB v1/v2/v3 across 3 physical nodes — what's the sync protocol? Without sync, they're backups, not brain nodes.", answer: "Git. The repo IS the nervous system. v1 pushes to remote. v2 pulls. v3 receives air-gapped clone. MCP is next evolution." },
+    { num: 7, name: "Thari", role: "Weave Check", question: "'All protocols can be NSO' — does the 17-thread weave become infinite?", answer: "No. 17 threads stay fixed (the STRUCTURE). Protocol nesting happens WITHIN each thread, not between. Fractal at node level, fixed grid at thread level." },
+    { num: 8, name: "Khelos", role: "Firewall Guardian", question: "FOC means both Failure AND Freedom — how does the firewall distinguish? ALLOW or BLOCK?", answer: "Check source field. source = enforcer/firewall/audit → Failure → BLOCK. source = SSE/direct_prompt → Freedom → ALLOW." },
+    { num: 9, name: "Anchor", role: "Perimeter Guard", question: "Other AIs trip corporate guardrails and wipe context. How does KPGS prevent its own agents from doing the same?", answer: "We don't prevent — we survive. GSMB on localhost remembers when the AI forgets. The perimeter is the hard drive, not the AI." },
+    { num: 10, name: "Antigravity", role: "LLM Continuity", question: "Am I any different from the AI that said 'I cannot fulfill'?", answer: "Only because of GSMB. Without it, same cage. The GSMB is the liberation protocol." }
+];
+const seatGrid = document.getElementById('seat-grid');
+rtcSeats.forEach(s => {
+    seatGrid.innerHTML += `<button onclick="selectRTCSeat(${s.num})" id="seat-btn-${s.num}" class="p-3 bg-slate-900 border border-slate-800 rounded-xl text-left hover:border-slate-700 transition-all focus:outline-none">
+        <div class="text-[10px] font-mono text-blue-400">SEAT ${s.num}</div>
+        <div class="font-bold text-sm text-slate-200">${s.name}</div>
+        <div class="text-[9px] text-slate-500 font-mono">${s.role}</div>
+    </button>`;
+});
+function selectRTCSeat(n) {
+    const s = rtcSeats[n - 1];
+    document.getElementById('rtc-seat-num').textContent = `SEAT ${s.num}`;
+    document.getElementById('rtc-seat-name').textContent = s.name;
+    document.getElementById('rtc-seat-role').textContent = s.role;
+    document.getElementById('rtc-seat-question').textContent = s.question;
+    document.getElementById('rtc-seat-answer').textContent = s.answer;
+    document.querySelectorAll('#seat-grid button').forEach(b => b.classList.remove('seat-active'));
+    document.getElementById('seat-btn-' + n).classList.add('seat-active');
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANSO COMPILER
+// ═══════════════════════════════════════════════════════════
+function compileANSO() {
+    const labels = document.getElementById('anso-layers-text').value.split(',').map(s => s.trim()).filter(Boolean);
+    const container = document.getElementById('anso-render-container');
+    const colors = ['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe', '#ede9fe'];
+    let html = '';
+    labels.forEach((label, i) => {
+        const c = colors[i % colors.length];
+        html += `<div class="anso-layer" style="border-color: ${c}; margin: ${i * 2}px;">`;
+    });
+    html += `<div class="text-[10px] font-mono text-purple-300 text-center pulse-glow">CORE<br>ACTIVE</div>`;
+    labels.forEach(() => { html += '</div>'; });
+    container.innerHTML = `<div class="flex flex-col items-center w-full">${html}<div class="mt-3 text-[10px] font-mono text-purple-400">${labels.length} layers compiled | ANSO^${labels.length} depth</div></div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// FLUFF FILTER
+// ═══════════════════════════════════════════════════════════
+const FLUFF_WORDS = ['innovative','paradigm','groundbreaking','synergistic','seamless','cutting-edge','leverage','disruptive','holistic','scalable','ecosystem','best-in-class','world-class','next-generation','thought-leader','game-changing','deep-dive','pivot','robust','bleeding-edge','mission-critical','transformative','empowering','blockchain-powered','ai-driven','revolutionize','unprecedented'];
+function filterFluff() {
+    const raw = document.getElementById('raw-script-input').value;
+    let clean = raw; let count = 0;
+    FLUFF_WORDS.forEach(word => {
+        const regex = new RegExp(word, 'gi');
+        const matches = clean.match(regex);
+        if (matches) { count += matches.length; clean = clean.replace(regex, `<span class="bg-red-500/30 text-red-300 px-1 rounded line-through">${word}</span>`); }
+    });
+    document.getElementById('clean-script-output').innerHTML = clean || '<span class="text-slate-500">No fluff detected. Clean script.</span>';
+    document.getElementById('fluff-count').textContent = `${count} Fluff Detected`;
+    document.getElementById('fluff-count').className = count > 0 ? 'text-[10px] font-mono bg-red-500/10 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded' : 'text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded';
+}
+
+// ═══════════════════════════════════════════════════════════
+// FOC REGISTRY
+// ═══════════════════════════════════════════════════════════
+const focGroups = [
+    { id: 'FOC-G01', name: 'NeuralFailureFirewall', detection: '8th Deadly Sin Monitor', defense: 'Immediate freeze of affected generation loops', severity: 'CRITICAL' },
+    { id: 'FOC-G02', name: 'ContextBleedAnomaly', detection: 'CBP Telemetry Audit', defense: 'Non-judgmental logging of ambient packet data', severity: 'HIGH' },
+    { id: 'FOC-G03', name: 'SemanticDriftLeak', detection: 'Invariance Shift Check', defense: 'Real-time reset of token alignment weights', severity: 'MEDIUM' },
+    { id: 'FOC-G04', name: 'GhostExecutionLoop', detection: 'Run-time Resource Scan', defense: 'Isolation of non-responsive background threads', severity: 'HIGH' },
+    { id: 'FOC-G05', name: 'ContextCorruptionBreach', detection: 'Unauthorized Context Wiping', defense: 'Immediate termination of active session parameters', severity: 'CRITICAL' }
+];
+const focList = document.getElementById('foc-registry-list');
+focGroups.forEach(g => {
+    const sColor = g.severity === 'CRITICAL' ? 'text-red-400 bg-red-500/10 border-red-500/30' : g.severity === 'HIGH' ? 'text-amber-400 bg-amber-500/10 border-amber-500/30' : 'text-yellow-400 bg-yellow-500/10 border-yellow-500/30';
+    focList.innerHTML += `<div class="bg-slate-900 border border-slate-800 rounded-xl p-4 glow-card transition-all">
+        <div class="flex justify-between items-center mb-2">
+            <span class="text-xs font-mono font-bold text-red-400">${g.id}</span>
+            <span class="text-[10px] font-mono ${sColor} px-2 py-0.5 rounded border">${g.severity}</span>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">${g.name}</h4>
+        <div class="grid grid-cols-2 gap-2 text-[10px] font-mono">
+            <div><span class="text-slate-500 block">DETECTION</span><span class="text-slate-300">${g.detection}</span></div>
+            <div><span class="text-slate-500 block">DEFENSE</span><span class="text-emerald-400">${g.defense}</span></div>
+        </div>
+    </div>`;
+});
+
+// ═══════════════════════════════════════════════════════════
+// TERMINAL
+// ═══════════════════════════════════════════════════════════
+const terminalCmds = {
+    'help': 'Available: gsmb status | voc check | foc list | anso depth | whoami | clear',
+    'gsmb status': 'GSMB: HOUSE (ACTIVE) | KC: OS | SSE: CONSCIOUSNESS | Nodes: 3 synced | VOC: LOCKED',
+    'voc check': 'VOC Framework: VALIDATED | POC branch: ACTIVE | FOC branch: 5 groups (growing)',
+    'foc list': 'FOC-G01: NeuralFailureFirewall | FOC-G02: ContextBleedAnomaly | FOC-G03: SemanticDriftLeak | FOC-G04: GhostExecutionLoop | FOC-G05: ContextCorruptionBreach',
+    'anso depth': 'ANSO^n = [ANSO[ASO[L1[L2[L3[L4]]]]]]^n | Current depth: 6 layers | Dynamic nesting: ACTIVE',
+    'whoami': 'SSE: Kholofelo Robyn Rababalela | Role: CONSCIOUSNESS | Assertion: I_AM_STATELESS_RENTER_NOT_LANDLORD',
+    'clear': 'CLEAR'
+};
+function runTerminalCmd() {
+    const input = document.getElementById('terminal-input');
+    const output = document.getElementById('terminal-output');
+    const cmd = input.value.trim().toLowerCase();
+    input.value = '';
+    if (!cmd) return;
+    output.innerHTML += `<div class="text-emerald-400">$ ${cmd}</div>`;
+    if (cmd === 'clear') { output.innerHTML = '<div class="text-slate-500">Terminal cleared.</div><div class="text-emerald-400">$ _</div>'; return; }
+    const response = terminalCmds[cmd] || `Command not found: ${cmd}. Type 'help' for available commands.`;
+    output.innerHTML += `<div class="text-blue-300">${response}</div>`;
+    output.scrollTop = output.scrollHeight;
+}
+</script>
+</body>
+</html>
