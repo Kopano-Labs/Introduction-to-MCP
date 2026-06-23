@@ -1,0 +1,31 @@
+{
+  "corrections": [
+    {
+      "id": "gsmb_correction",
+      "keynote": "{governance_system_main_brain}"
+    },
+    {
+      "id": "anso_birth",
+      "keynote": "{adaptive_nesting_strep_order}"
+    },
+    {
+      "id": "bp_full_keyboard",
+      "keynote": "{bracket_protocol_is_every_key}"
+    },
+    {
+      "id": "kpcb_plus_codebase",
+      "keynote": "{kopano_phu_code_base_plus}"
+    },
+    {
+      "id": "dont_rename_acronyms",
+      "keynote": "{sse_owns_the_language}"
+    },
+    {
+      "id": "be_in_the_moment",
+      "keynote": "{be_here_not_ahead}"
+    }
+  ],
+  "avg_invariance": 0.8847,
+  "poc": 6,
+  "foc": 0
+}
