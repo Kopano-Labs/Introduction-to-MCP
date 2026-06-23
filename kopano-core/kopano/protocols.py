@@ -262,3 +262,50 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     result = activate_all_protocols()
     print(json.dumps(result, indent=2, ensure_ascii=False))
+
+# --- TASK 046: SWFUS.seal() ---
+
+@dataclass
+class SWFUS:
+    """SWFUS Layer — Sever Watch Fortify Unblock Ship. CRUD 2.0."""
+    signal_id: str = ""
+    verdict: str = ""
+    state: str = "RAW"  # RAW -> SEVERED/WATCHED/FORTIFIED/UNBLOCKED/SHIPPED
+
+    def sever(self, reason: str) -> dict:
+        """S — Cut the signal. FOC declined."""
+        self.state = "SEVERED"
+        return {"action": "SEVER", "signal": self.signal_id, "reason": reason, "state": self.state}
+
+    def watch(self, reason: str) -> dict:
+        """W — Observe without action. Signal under review."""
+        self.state = "WATCHED"
+        return {"action": "WATCH", "signal": self.signal_id, "reason": reason, "state": self.state}
+
+    def fortify(self, proof: str) -> dict:
+        """F — Strengthen with evidence. Signal has proof."""
+        self.state = "FORTIFIED"
+        return {"action": "FORTIFY", "signal": self.signal_id, "proof": proof, "state": self.state}
+
+    def unblock(self, gate: str) -> dict:
+        """U — Clear for execution. Gate passed."""
+        self.state = "UNBLOCKED"
+        return {"action": "UNBLOCK", "signal": self.signal_id, "gate": gate, "state": self.state}
+
+    def seal(self, verdict: str, hash_key: str = "") -> dict:
+        """S2 — Ship/Seal. Final immutable state. SWFUS complete."""
+        import hashlib
+        self.state = "SEALED"
+        self.verdict = verdict
+        if not hash_key:
+            hash_key = hashlib.sha256(f"{self.signal_id}:{verdict}:{datetime.now(timezone.utc).isoformat()}".encode()).hexdigest()[:16]
+        return {
+            "action": "SEAL",
+            "signal": self.signal_id,
+            "verdict": verdict,
+            "hash": hash_key,
+            "state": self.state,
+            "immutable": True,
+            "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+        }
+
