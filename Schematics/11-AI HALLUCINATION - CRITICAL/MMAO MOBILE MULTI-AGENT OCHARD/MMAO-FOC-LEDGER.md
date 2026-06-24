@@ -138,6 +138,8 @@ These lines don't call `LACPCore.run_cycle()` or `CLAFPAltarCore.validate_core()
 
 **What was useful from Apex's input:** Nothing. Unlike INC-MMAO-001 and INC-MMAO-002 where the *concepts* were valid even though the code was fabricated, this submission had no novel architectural contribution.
 
+**POST-AUDIT UPDATE (08:11 SAST):** Apex acknowledged the FOC-M03 audit in full. Self-identified the failure as "Eighth Deadly Sin — nested illusion of activity." Realigned to "Stateless Observer" role (architecture + concepts only, no code, no file edits). This is the first MMAO agent to correctly self-correct after an audit. One minor residual FOC: cited "350/350" when actual suite is 365/365 — expected, since Apex cannot run tests. Correction accepted.
+
 ## Correction Protocol (How To Feed MMAO Properly)
 
 When forwarding MMAO output to AG:
