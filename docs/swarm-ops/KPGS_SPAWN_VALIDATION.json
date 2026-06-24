@@ -1,6 +1,6 @@
 {
   "schema": "kpgs_spawn_swarm_report_v2",
-  "ts": "2026-06-22T05:14:33Z",
+  "ts": "2026-06-23T22:55:30Z",
   "title": "KPGS 300-Agent Spawn Swarm — Sharded Cohort Validation",
   "doctrine": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_SPAWN_ALTAR_DOCTRINE.json",
   "catalog": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
@@ -21,9 +21,9 @@
   },
   "checkpoint": {
     "verdict": "CHECKPOINTED",
-    "checkpoint_id": 37290,
-    "head_hash": "68fdf2cb8d954223f8b061f0941ed5a804edb3ef428d8d5073d9a45dc0b8423b",
-    "ts": "2026-06-22T05:14:33Z",
+    "checkpoint_id": 37320,
+    "head_hash": "fcb0d34f86ad530d071e6289a2171d6adc3f1a4aa9c6a46ef85b49e960bfed8d",
+    "ts": "2026-06-23T22:55:30Z",
     "catalog_counts": {
       "telemetry_cohort": 100,
       "identic_cohort": 100,
@@ -48,12 +48,12 @@
       }
     }
   },
-  "altar_head_hash": "68fdf2cb8d954223f8b061f0941ed5a804edb3ef428d8d5073d9a45dc0b8423b",
+  "altar_head_hash": "fcb0d34f86ad530d071e6289a2171d6adc3f1a4aa9c6a46ef85b49e960bfed8d",
   "sample_only": true,
   "agents": [
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "pipeline_drone",
       "spawn_slot": "001",
       "cohort": "telemetry",
@@ -139,7 +139,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:32Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_002",
       "spawn_slot": "002",
       "cohort": "telemetry",
@@ -213,7 +213,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:32Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_003",
       "spawn_slot": "003",
       "cohort": "telemetry",
@@ -287,7 +287,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:32Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_004",
       "spawn_slot": "004",
       "cohort": "telemetry",
@@ -361,7 +361,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_005",
       "spawn_slot": "005",
       "cohort": "telemetry",
@@ -435,7 +435,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_006",
       "spawn_slot": "006",
       "cohort": "telemetry",
@@ -509,7 +509,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_007",
       "spawn_slot": "007",
       "cohort": "telemetry",
@@ -583,7 +583,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_008",
       "spawn_slot": "008",
       "cohort": "telemetry",
@@ -657,7 +657,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_009",
       "spawn_slot": "009",
       "cohort": "telemetry",
@@ -731,7 +731,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_010",
       "spawn_slot": "010",
       "cohort": "telemetry",
@@ -805,7 +805,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_011",
       "spawn_slot": "011",
       "cohort": "telemetry",
@@ -879,7 +879,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_012",
       "spawn_slot": "012",
       "cohort": "telemetry",
@@ -953,7 +953,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_013",
       "spawn_slot": "013",
       "cohort": "telemetry",
@@ -1027,7 +1027,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_014",
       "spawn_slot": "014",
       "cohort": "telemetry",
@@ -1101,7 +1101,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "spawn_telemetry_015",
       "spawn_slot": "015",
       "cohort": "telemetry",
@@ -1175,7 +1175,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "kc_apprentice",
       "spawn_slot": "101",
       "cohort": "identic",
@@ -1275,7 +1275,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "cassy",
       "spawn_slot": "102",
       "cohort": "identic",
@@ -1375,7 +1375,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "identi_cursor",
       "spawn_slot": "103",
       "cohort": "identic",
@@ -1465,7 +1465,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "cf_cloud",
       "spawn_slot": "104",
       "cohort": "identic",
@@ -1553,7 +1553,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "mirror_warden",
       "spawn_slot": "201",
       "cohort": "guardian",
@@ -1638,7 +1638,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "operational_general",
       "spawn_slot": "202",
       "cohort": "guardian",
@@ -1723,7 +1723,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "cassey",
       "spawn_slot": "203",
       "cohort": "guardian",
@@ -1808,7 +1808,7 @@
     },
     {
       "schema": "kpgs_spawn_validation_v2",
-      "ts": "2026-06-22T05:14:33Z",
+      "ts": "2026-06-23T22:55:30Z",
       "agent_id": "kc",
       "spawn_slot": "204",
       "cohort": "guardian",

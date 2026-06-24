@@ -72,3 +72,5 @@
 {"ts": "2026-06-16T15:18:24.680974+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
 {"ts": "2026-06-22T05:09:01.533546+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
 {"ts": "2026-06-22T05:09:15.906937+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-23T22:55:07.136037+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
+{"ts": "2026-06-23T22:55:24.406543+00:00", "kind": "mao_route", "payload": {"intent": "audit", "routed_to": "kc", "confidence": 0.65}}
