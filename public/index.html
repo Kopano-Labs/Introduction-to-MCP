@@ -6,6 +6,10 @@
   <title>Kopano Labs — Sovereign Product Studio</title>
   <meta name="description" content="Kopano Labs builds offline-first sovereign technology ecosystems. CrisisConnect, KasiLink, StarFall Salvage — built from the township, for the world." />
   <meta name="theme-color" content="#050508" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Kopano Labs" />
+  <link rel="manifest" href="manifest-main.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -902,6 +906,15 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<!-- APWA Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw-main.js')
+    .then(reg => console.log('[KL] Service Worker registered:', reg.scope))
+    .catch(err => console.warn('[KL] SW registration failed:', err));
+}
 </script>
 </body>
 </html>
