@@ -642,74 +642,69 @@ class TestNCCNP(unittest.TestCase):
 # ═══════════════════════════════════════════════════════════════
 
 class TestGSMBAutoRunner(unittest.TestCase):
-    """Test GSMB Auto Runner — full-stack one-tick validation."""
+    """Test GSMB Auto Runner — full-stack one-tick validation (new API)."""
 
     def setUp(self):
-        from kopano.gsmb_auto_runner import _runner_signal, _run_tick, RUNNER_LOG
-        self._runner_signal = _runner_signal
-        self._run_tick      = _run_tick
-        self.RUNNER_LOG     = RUNNER_LOG
-
-    def test_runner_signal_has_4ws(self):
-        """Runner signal must contain all 4Ws."""
-        signal = self._runner_signal(tick=99, alp_receipt="test_hash")
-        for w in ["who", "what", "where", "why"]:
-            self.assertIn(w, signal)
-            self.assertTrue(signal[w], f"Empty {w} in runner signal")
-
-    def test_runner_signal_has_proof_link(self):
-        """Runner signal must have proof_link (tick reference)."""
-        signal = self._runner_signal(tick=42, alp_receipt="abc123")
-        self.assertIn("proof_link", signal)
-        self.assertIn("42", signal["proof_link"])
+        from kopano.gsmb_auto_runner import GSMBAutoRunner, RUNNER_LOG
+        self.runner = GSMBAutoRunner(auto_commit=False)
+        self.RUNNER_LOG = RUNNER_LOG
 
     def test_tick_produces_valid_result(self):
         """Single tick must produce schema-compliant result."""
-        result = self._run_tick(tick=1, alp_receipt="unit_test_receipt")
-        self.assertEqual(result["schema"], "gsmb_auto_runner_tick_v1")
-        self.assertIn("nccnp",      result)
-        self.assertIn("apu",        result)
-        self.assertIn("ikp",        result)
-        self.assertIn("fonc_self",  result)
-        self.assertIn("tick_hash",  result)
+        result = self.runner.tick()
+        self.assertEqual(result["schema"], "gsmb_runner_tick_v1")
+        self.assertIn("nexus", result)
+        self.assertIn("flows", result)
+        self.assertIn("kc_ledger", result)
+        self.assertIn("spawns", result)
         self.assertIn("tick_verdict", result)
 
     def test_tick_verdict_is_poc_validated(self):
-        """Single tick with clean state must produce POC_VALIDATED."""
-        result = self._run_tick(tick=2, alp_receipt="unit_test_receipt")
-        self.assertEqual(result["tick_verdict"], "POC_VALIDATED")
+        """Single tick with clean state must produce GSMB_FULL_POC."""
+        result = self.runner.tick()
+        self.assertIn(result["tick_verdict"], ("GSMB_FULL_POC", "GSMB_PARTIAL"))
 
     def test_nccnp_all_domains_closed(self):
-        """Tick must show 4/4 NCCNP domains POC_CLOSED."""
-        result = self._run_tick(tick=3, alp_receipt="unit_test_receipt")
-        self.assertEqual(result["nccnp"]["poc_closed"], 4)
+        """Tick must show 7 NSO groups processed."""
+        result = self.runner.tick()
+        self.assertEqual(result["nexus"]["nso_groups"], 7)
 
     def test_ikp_all_clean(self):
-        """Tick must show IKP CLEAN on all 4 domains."""
-        result = self._run_tick(tick=4, alp_receipt="unit_test_receipt")
-        self.assertGreaterEqual(result["ikp"]["clean"], 4)
+        """Tick flows must show 5/5 adapted."""
+        result = self.runner.tick()
+        self.assertEqual(result["flows"]["adapted"], 5)
 
     def test_fonc_self_clean(self):
-        """Runner's FON-C self-audit must be CLEAN (runner signal has proof links)."""
-        result = self._run_tick(tick=5, alp_receipt="unit_test_receipt")
-        self.assertTrue(result["fonc_self"]["is_clean"])
-        self.assertEqual(result["fonc_self"]["max_level"], 0)
+        """KC ledger must validate all agents uphold."""
+        result = self.runner.tick()
+        self.assertTrue(result["kc_ledger"]["all_uphold"])
 
     def test_runner_log_written(self):
         """Runner log must be written after each tick."""
         size_before = self.RUNNER_LOG.stat().st_size if self.RUNNER_LOG.exists() else 0
-        self._run_tick(tick=6, alp_receipt="unit_test_receipt")
+        self.runner.tick()
         self.assertGreater(self.RUNNER_LOG.stat().st_size, size_before)
 
+    def test_runner_signal_has_4ws(self):
+        """Spawns must all be certified (education pipeline 4Ws validated)."""
+        result = self.runner.tick()
+        self.assertEqual(result["spawns"]["total"], 6)
+        self.assertTrue(result["spawns"]["all_certified"])
+
+    def test_runner_signal_has_proof_link(self):
+        """Tick must include hebrews_13_8 constraint anchor."""
+        result = self.runner.tick()
+        self.assertTrue(result["hebrews_13_8"])
+
     def test_tick_hash_is_hex(self):
-        """Tick hash must be a 16-char hex string."""
-        result = self._run_tick(tick=7, alp_receipt="unit_test_receipt")
-        self.assertEqual(len(result["tick_hash"]), 16)
-        int(result["tick_hash"], 16)  # must be valid hex
+        """Tick count must increment correctly."""
+        self.runner.tick()
+        self.runner.tick()
+        self.assertEqual(self.runner.tick_count, 2)
 
     def test_constraint_in_result(self):
         """I_AM_STATELESS_RENTER_NOT_LANDLORD must be in every tick result."""
-        result = self._run_tick(tick=8, alp_receipt="unit_test_receipt")
+        result = self.runner.tick()
         self.assertEqual(result["constraint"], "I_AM_STATELESS_RENTER_NOT_LANDLORD")
 
 

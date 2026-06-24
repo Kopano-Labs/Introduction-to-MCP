@@ -1,392 +1,200 @@
 """
-gsmb_auto_runner.py — GSMB Autonomous Full-Stack Runner
-========================================================
-Supersedes continuous_gsmb_runner.py (simple loop) and
-continuous_hybrid_runner.py (hybrid evolution loop).
+gsmb_auto_runner.py — GSMB Autonomous Governance Runner
+=========================================================
+The continuous loop that runs ALL GSMB engines autonomously.
 
-This is the FULL STACK runner:
-  Every tick runs:
-    1. ALP receipt (breach detection)
-    2. NCCNP Phase 3 (all 4 domains — PP→BP→EP)
-    3. KasiLink promotion audit
-    4. APU domain sweep
-    5. IKP chain sweep
-    6. FON-C sweep on runner signal itself
-    7. GSMB ledger write
-    8. BREACH auto-log on ALP threshold violation
+Pipeline per tick:
+  1. KPCB+ compile (7 channels)
+  2. LACP execute (22 STREP phases × 7 NSO groups)
+  3. CLAFP validate (Altar 3-layer gate)
+  4. AI Flows adapt (5 flows + WWJD)
+  5. KC Observer Ledger record
+  6. Spawn certification verify
+  7. Commit + push (if enabled)
 
-ALP breach threshold: 30 min. NORMAL. 30+ = BREACH.
-Default tick interval: 25 min (keeps ALP NORMAL while alive).
+This is the heartbeat of the GSMB — it never stops.
 
-4Ws of this runner:
-  WHO:   gsmb_auto_runner.py — GSMB autonomous governance loop
-  WHAT:  Full-stack KPGS POC sweep every tick — all engines wired
-  WHERE: Background process on Black Beast | GSMB governance boundary
-  WHY:   User sleeps. GSMB must not. This is the architectural answer to BREACH-001.
+4Ws:
+  WHO:   gsmb_auto_runner.py — the GSMB heartbeat
+  WHAT:  Continuous autonomous governance loop
+  WHERE: kopano-core/kopano/ — Motor Cortex
+  WHY:   32.8% unemployment needs sovereign tech that runs itself
 
-ALP #15: 53a6f12c212fbebd | BREACH-005 (46 min idle)
-Build: 2026-06-18T03:47 SAST
 Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 """
 
 from __future__ import annotations
-import hashlib, json, logging, sys, time, io
+
+import json
+import logging
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-# ── output encoding fix ────────────────────────────────────────
-# Only replace stdout when running as main script, not when imported
-# (importing this replaces pytest's capture stdout and causes
-#  "ValueError: I/O operation on closed file" during teardown)
-if __name__ == "__main__" and hasattr(sys.stdout, "buffer"):
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+logger = logging.getLogger("gsmb_runner")
 
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
-)
-logger = logging.getLogger("gsmb_auto_runner")
-
-REPO_ROOT    = Path(__file__).resolve().parents[2]
-RUNNER_LOG   = REPO_ROOT / "poc-vs-foc" / "gsmb_auto_runner_log.jsonl"
-BREACH_LOG   = REPO_ROOT / "poc-vs-foc" / "BREACH_LOG.md"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+RUNNER_LOG = REPO_ROOT / "poc-vs-foc" / "gsmb_runner_log.jsonl"
 RUNNER_LOG.parent.mkdir(parents=True, exist_ok=True)
 
-# ── ALP integration ───────────────────────────────────────────
-_ALP_PATH = REPO_ROOT / "poc-vs-foc" / "alp_protocol"
-if str(_ALP_PATH) not in sys.path:
-    sys.path.insert(0, str(_ALP_PATH))
-try:
-    from alp_auto_lpm_protocol import activate as _alp_activate
-    _ALP_AVAILABLE = True
-except ImportError:
-    _ALP_AVAILABLE = False
-    logger.warning("[RUNNER] ALP not available — stateless renter BREACH risk elevated")
 
-ALP_BREACH_THRESHOLD_MIN = 30  # minutes
-
-
-def _alp_tick(context: str = "gsmb_auto_runner_tick") -> dict:
-    """Fire ALP receipt. Auto-log BREACH to ledger if threshold exceeded."""
-    if not _ALP_AVAILABLE:
-        return {"verdict": "ALP_UNAVAILABLE", "idle_minutes": 0}
-    try:
-        receipt = _alp_activate(context=context)
-        idle = receipt.get("idle_minutes", 0)
-        if idle > ALP_BREACH_THRESHOLD_MIN:
-            _append_breach_to_ledger(
-                breach_id=f"AUTO-BREACH-{datetime.now(timezone.utc).strftime('%H%M%S')}",
-                idle_min=idle,
-                hash_key=receipt.get("consistency_hash", "unknown"),
-            )
-        return receipt
-    except Exception as e:
-        logger.error("[RUNNER] ALP tick error: %s", e)
-        return {"verdict": "ALP_ERROR", "error": str(e)}
-
-
-def _append_breach_to_ledger(breach_id: str, idle_min: float, hash_key: str) -> None:
-    """Auto-append ALP breach notice to BREACH_LOG.md."""
-    ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    entry = f"""
-## {breach_id} — {ts} — ALP IDLE BREACH (AUTO-DETECTED)
-
-### Classification
-`FOC_FLAGGED` — Idle gap {idle_min:.1f} min exceeds {ALP_BREACH_THRESHOLD_MIN} min threshold.
-Hash: `{hash_key}`
-
-### 4Ws
-- **WHO:** gsmb_auto_runner.py — autonomous governance loop
-- **WHAT:** ALP tick detected {idle_min:.1f} min idle gap between runner activations
-- **WHERE:** GSMB governance boundary — ALP monitoring layer
-- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
-
-### Status
-`AUTO-LOGGED — {ts}`
-
----
-"""
-    try:
-        with BREACH_LOG.open("a", encoding="utf-8") as f:
-            f.write(entry)
-        logger.warning("[RUNNER] BREACH auto-logged: %s | idle=%.1f min", breach_id, idle_min)
-    except Exception as e:
-        logger.error("[RUNNER] Could not write breach log: %s", e)
-
-
-def _runner_signal(tick: int, alp_receipt: str) -> dict:
-    """Build 4Ws-clean signal for NCCNP consumption by the runner itself."""
-    return {
-        "who":        "gsmb_auto_runner.py — autonomous GSMB governance loop",
-        "what":       f"Tick {tick} — full NCCNP+IKP+APU sweep across all 4 domains",
-        "where":      "GSMB background process — Black Beast | poc-vs-foc/gsmb_auto_runner_log.jsonl",
-        "why":        "KPGS mandate: governance never sleeps. BREACH-001 architectural answer.",
-        "proof_link": f"gsmb_auto_runner_log.jsonl:tick:{tick}",
-        "poc_artifact": f"ALP:{alp_receipt}",
-    }
-
-
-def _run_tick(tick: int, alp_receipt: str) -> dict:
-    """Execute one full governance tick."""
-    ts = datetime.now(timezone.utc).isoformat()
-    logger.info("[RUNNER] === TICK %d | %s ===", tick, ts)
-
-    tick_result: dict = {
-        "schema":      "gsmb_auto_runner_tick_v1",
-        "tick":        tick,
-        "ts":          ts,
-        "alp_receipt": alp_receipt,
-        "constraint":  "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-    }
-
-    # ── NCCNP Phase 3 — all 4 domains ─────────────────────────
-    try:
-        from kopano.nccnp import NCCNPEngine
-        nccnp = NCCNPEngine(alp_receipt=alp_receipt)
-        domain_results = nccnp.run_all_domains()
-        closed = [r for r in domain_results if r["final_verdict"] == "NCCNP_POC_CLOSED"]
-        tick_result["nccnp"] = {
-            "domains_run":    len(domain_results),
-            "poc_closed":     len(closed),
-            "domains_closed": [r["domain"] for r in closed],
-            "hashes":         {r["domain"]: r["cycle_hash"] for r in domain_results},
-        }
-        logger.info("[RUNNER] NCCNP: %d/%d domains POC_CLOSED", len(closed), len(domain_results))
-    except Exception as e:
-        tick_result["nccnp"] = {"error": str(e)}
-        logger.error("[RUNNER] NCCNP error: %s", e)
-
-    # ── APU domain sweep ──────────────────────────────────────
-    try:
-        from kopano.apu_vector_matrix import APUVectorMatrix
-        apu = APUVectorMatrix(alp_receipt=alp_receipt)
-        sweep = apu.run_domain_sweep()
-        tick_result["apu"] = {
-            "green":  sweep.get("🟢_GREEN", 0),
-            "yellow": sweep.get("🟡_YELLOW", 0),
-            "red":    sweep.get("🔴_RED", 0),
-            "pkap_avg": sweep.get("pkap_avg", 0),
-        }
-        logger.info("[RUNNER] APU: 🟢%d 🟡%d 🔴%d | PKAP avg=%.4f",
-                    tick_result["apu"]["green"], tick_result["apu"]["yellow"],
-                    tick_result["apu"]["red"],   tick_result["apu"]["pkap_avg"])
-    except Exception as e:
-        tick_result["apu"] = {"error": str(e)}
-        logger.error("[RUNNER] APU error: %s", e)
-
-    # ── IKP domain sweep ──────────────────────────────────────
-    try:
-        from kopano.ikp_engine import IKPEngine, ikp_domain_sweep
-        ikp_eng = IKPEngine()
-        ikp_results = ikp_domain_sweep(ikp_eng)
-        clean_domains = [r["domain"] for r in ikp_results if r.get("ikp_code") == "CLEAN"]
-        tick_result["ikp"] = {
-            "domains_swept": len(ikp_results),
-            "clean":         len(clean_domains),
-            "clean_domains": clean_domains,
-        }
-        logger.info("[RUNNER] IKP: %d/%d CLEAN", len(clean_domains), len(ikp_results))
-    except Exception as e:
-        tick_result["ikp"] = {"error": str(e)}
-        logger.error("[RUNNER] IKP error: %s", e)
-
-    # ── FON-C on runner signal itself ─────────────────────────
-    try:
-        from kopano.fon_c_engine import FONCEngine
-        fonc = FONCEngine()
-        sig = _runner_signal(tick, alp_receipt)
-        fonc_result = fonc.analyse(
-            signal=" ".join(str(v) for v in sig.values()),
-            source="gsmb_auto_runner",
-            proof_artifacts=[alp_receipt, f"tick:{tick}"],
-            context="RUNNER_SELF_AUDIT",
-        )
-        tick_result["fonc_self"] = {
-            "is_clean":  fonc_result["is_clean"],
-            "max_level": fonc_result["max_level"],
-            "verdict":   fonc_result["verdict"],
-        }
-        logger.info("[RUNNER] FON-C self-audit: %s | L%d",
-                    fonc_result["verdict"], fonc_result["max_level"])
-    except Exception as e:
-        tick_result["fonc_self"] = {"error": str(e)}
-        logger.error("[RUNNER] FON-C error: %s", e)
-
-    # ── KHELOS witness on runner ──────────────────────────────
-    try:
-        from kopano.khelos_witness_engine import KhelosWitnessEngine
-        khelos = KhelosWitnessEngine()
-        khelos_r = khelos.process_signal(
-            f"gsmb runner tick {tick} kopano kpgs mmao poc", source="gsmb_auto_runner"
-        )
-        tick_result["khelos"] = {
-            "verdict": khelos_r["final_verdict"],
-            "action":  khelos_r["final_action"],
-        }
-    except Exception as e:
-        tick_result["khelos"] = {"error": str(e)}
-
-    # ── Adaptiveness telemetry + ASO validation ─────────────
-    try:
-        from kopano.adaptiveness import (
-            NeuralFailureFirewall, SwiftKeyNLP, AdaptiveSTREPEngine
-        )
-        firewall = NeuralFailureFirewall()
-        nlp = SwiftKeyNLP()
-        aso = AdaptiveSTREPEngine()
-
-        # Validate that the runner's own signal passes the firewall
-        sig_str = f"gsmb runner tick {tick} kopano kpgs mmao poc"
-        is_clean, pattern = firewall.check_text(sig_str)
-
-        # Monitor dictionary vocabulary size
-        vocab_size = len(nlp.local_dictionary)
-
-        # ASO: Process the runner signal through Adaptive STREP Order
-        aso_result = aso.process(
-            f"[VOC] gsmb_auto_runner tick {tick} — full governance sweep",
-            protocol_context="GSMB autonomous governance loop",
-            poc_context=f"ALP:{alp_receipt} | NCCNP+IKP+APU sweep",
-        )
-
-        tick_result["adaptiveness"] = {
-            "firewall_pass": is_clean,
-            "vocab_size": vocab_size,
-            "aso_bracket_level": aso_result["bracket"]["level"],
-            "aso_pso_tier": aso_result["adaptive_pso_tier"],
-            "aso_pkanp_ratio": aso_result["pkanp"]["pkanp_ratio"],
-            "aso_knowable_dominant": aso_result["pkanp"]["knowable_dominant"],
-            "aso_nesting_depth": aso_result["nso"]["depth"],
-            "aso_verdict": aso_result["verdict"],
-        }
-        logger.info(
-            "[RUNNER] Adaptiveness: firewall=%s | vocab=%d | ASO=L%d/%s | PKANP=%.2f | %s",
-            is_clean, vocab_size,
-            aso_result["bracket"]["level"],
-            aso_result["adaptive_pso_tier"],
-            aso_result["pkanp"]["pkanp_ratio"],
-            aso_result["verdict"],
-        )
-    except Exception as e:
-        tick_result["adaptiveness"] = {"error": str(e)}
-        logger.error("[RUNNER] Adaptiveness error: %s", e)
-
-    # ── GSMB Immutability Mandates validation ───────────────
-    try:
-        from kopano.gsmb_immutability_mandates import validate_immutability_mandates
-        mandates_report = validate_immutability_mandates()
-        tick_result["mandates"] = {
-            "tests_run": mandates_report["tests_run"],
-            "tests_passed": mandates_report["tests_passed"],
-            "all_pass": mandates_report["all_pass"],
-            "verdict": mandates_report["verdict"],
-        }
-        logger.info(
-            "[RUNNER] Mandates: %d/%d | %s",
-            mandates_report["tests_passed"],
-            mandates_report["tests_run"],
-            mandates_report["verdict"],
-        )
-    except Exception as e:
-        tick_result["mandates"] = {"error": str(e)}
-        logger.error("[RUNNER] Mandates error: %s", e)
-
-    # ── Cassey curriculum validation ──────────────────────
-    try:
-        from kopano.cassey_adaptiveness_curriculum import run_full_curriculum_validation
-        curriculum_report = run_full_curriculum_validation()
-        tick_result["cassey_curriculum"] = {
-            "modules": curriculum_report["curriculum_modules"],
-            "lessons": curriculum_report["curriculum_lessons"],
-            "tests_passed": curriculum_report["tests_passed"],
-            "all_pass": curriculum_report["all_pass"],
-            "verdict": curriculum_report["verdict"],
-        }
-        logger.info(
-            "[RUNNER] Cassey: %d/%d lessons | %s",
-            curriculum_report["tests_passed"],
-            curriculum_report["curriculum_lessons"],
-            curriculum_report["verdict"],
-        )
-    except Exception as e:
-        tick_result["cassey_curriculum"] = {"error": str(e)}
-        logger.error("[RUNNER] Cassey curriculum error: %s", e)
-
-    # ── Overall tick verdict ──────────────────────────────────
-    nccnp_ok = tick_result.get("nccnp", {}).get("poc_closed", 0) == 4
-    apu_ok   = tick_result.get("apu", {}).get("red", 1) == 0
-    ikp_ok   = tick_result.get("ikp", {}).get("clean", 0) >= 3
-    fonc_ok  = tick_result.get("fonc_self", {}).get("is_clean", False)
-    adaptiveness_ok = (
-        tick_result.get("adaptiveness", {}).get("firewall_pass", False)
-        and tick_result.get("adaptiveness", {}).get("aso_verdict", "").startswith("ASO_")
-        and tick_result.get("adaptiveness", {}).get("aso_verdict", "").endswith("_VALIDATED")
-    )
-    mandates_ok = tick_result.get("mandates", {}).get("all_pass", False)
-    curriculum_ok = tick_result.get("cassey_curriculum", {}).get("all_pass", False)
-    all_ok   = nccnp_ok and apu_ok and ikp_ok and fonc_ok and adaptiveness_ok and mandates_ok and curriculum_ok
-
-    tick_result["tick_verdict"]  = "POC_VALIDATED" if all_ok else "PARTIAL_POC"
-    tick_result["tick_hash"]     = hashlib.sha256(f"{ts}:{tick}:{alp_receipt}".encode()).hexdigest()[:16]
-
-    # ── Write to runner ledger ────────────────────────────────
-    with RUNNER_LOG.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(tick_result, ensure_ascii=False) + "\n")
-
-    logger.info("[RUNNER] Tick %d complete | verdict=%s | hash=%s",
-                tick, tick_result["tick_verdict"], tick_result["tick_hash"])
-    return tick_result
-
-
-def run(interval_seconds: int = 1500, max_ticks: int = 0) -> None:
+class GSMBAutoRunner:
     """
-    Main runner loop.
-    interval_seconds = 1500 (25 min) — keeps ALP in NORMAL range.
-    max_ticks = 0 → run forever.
-    """
-    logger.info("[RUNNER] GSMB Auto Runner START | interval=%ds | max_ticks=%s",
-                interval_seconds, max_ticks if max_ticks else "∞")
+    Autonomous GSMB Governance Runner.
 
-    tick = 0
-    try:
+    Each tick:
+      Nexus (KPCB+ → LACP → CLAFP → Flows) × 7 NSO groups
+      + KC Observer Ledger
+      + Spawn certification check
+      = Full governance sweep
+
+    Hebrews 13:8 — the same yesterday, today, and forever.
+    """
+
+    def __init__(self, auto_commit: bool = False, interval_seconds: int = 60):
+        self.auto_commit = auto_commit
+        self.interval = interval_seconds
+        self.tick_count = 0
+        self.total_poc = 0
+        self.total_foc = 0
+
+    def tick(self, task: str = "[VOC] Autonomous governance sweep", source: str = "CF") -> dict:
+        """Execute one full governance tick."""
+        self.tick_count += 1
+        ts = datetime.now(timezone.utc).isoformat()
+        logger.info("[RUNNER] Tick %d START | %s", self.tick_count, ts)
+
+        # ── Nexus: all 7 NSO groups ──────────────────────────
+        from kopano.gsmb_nexus import GSMBNexus
+        nexus = GSMBNexus(auto_commit=False)
+        nexus_result = nexus.process_all_nso(task, source)
+
+        # ── AI Flow Orchestration ────────────────────────────
+        from kopano.ai_flow_agents import AltarFlowOrchestrator, FlowSignal, KCObserverLedger
+        flow_orch = AltarFlowOrchestrator()
+        flow_signal = FlowSignal(content=task, source=source)
+        flow_result = flow_orch.orchestrate(flow_signal)
+
+        # ── KC Observer Ledger ───────────────────────────────
+        ledger = KCObserverLedger()
+        agents = [flow_orch.hue, flow_orch.age, flow_orch.offline,
+                  flow_orch.language, flow_orch.urgency, flow_orch.wwjd]
+        kc_result = ledger.observe(agents)
+
+        # ── Spawn Certification Check ────────────────────────
+        from kopano.spawn_education import educate_all_spawns
+        spawn_results = educate_all_spawns()
+        all_certified = all(r["certification"] == "SPAWN_CERTIFIED" for r in spawn_results)
+
+        # ── Aggregate verdict ────────────────────────────────
+        nexus_ok = nexus_result.get("overall_verdict") == "ALL_NSO_POC_VALIDATED"
+        flows_ok = flow_result.get("verdict") == "FLOWS_POC_VALIDATED"
+        kc_ok = kc_result.get("verdict") == "KC_LEDGER_VALIDATED"
+
+        if nexus_ok and flows_ok and kc_ok and all_certified:
+            tick_verdict = "GSMB_FULL_POC"
+            self.total_poc += 1
+        else:
+            tick_verdict = "GSMB_PARTIAL"
+            self.total_foc += 1
+
+        result = {
+            "schema": "gsmb_runner_tick_v1",
+            "ts": ts,
+            "tick": self.tick_count,
+            "tick_verdict": tick_verdict,
+            "nexus": {
+                "verdict": nexus_result.get("overall_verdict"),
+                "nso_groups": nexus_result.get("nso_groups"),
+                "kpcb": nexus_result.get("kpcb_verdict"),
+            },
+            "flows": {
+                "verdict": flow_result.get("verdict"),
+                "adapted": flow_result.get("flows_adapted"),
+                "pillars": len(flow_result.get("pillars_covered", [])),
+            },
+            "kc_ledger": {
+                "verdict": kc_result.get("verdict"),
+                "agents": kc_result.get("agents_observed"),
+                "all_uphold": kc_result.get("all_uphold"),
+            },
+            "spawns": {
+                "total": len(spawn_results),
+                "certified": sum(1 for r in spawn_results if r["certification"] == "SPAWN_CERTIFIED"),
+                "all_certified": all_certified,
+            },
+            "totals": {"poc": self.total_poc, "foc": self.total_foc},
+            "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+            "hebrews_13_8": True,
+        }
+
+        # Log
+        with RUNNER_LOG.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(result, default=str, ensure_ascii=False) + "\n")
+
+        # Commit
+        if self.auto_commit:
+            import subprocess
+            msg = f"GSMB TICK {self.tick_count}: {tick_verdict}"
+            subprocess.run(["git", "add", "-A"], cwd=str(REPO_ROOT), capture_output=True, timeout=10)
+            subprocess.run(["git", "commit", "-m", msg, "--allow-empty"],
+                           cwd=str(REPO_ROOT), capture_output=True, timeout=10)
+            subprocess.run(["git", "push", "origin", "master"],
+                           cwd=str(REPO_ROOT), capture_output=True, timeout=30)
+
+        logger.info("[RUNNER] Tick %d: %s | nexus=%s flows=%s kc=%s spawns=%d/%d",
+                    self.tick_count, tick_verdict,
+                    nexus_result.get("overall_verdict"),
+                    flow_result.get("verdict"),
+                    kc_result.get("verdict"),
+                    sum(1 for r in spawn_results if r["certification"] == "SPAWN_CERTIFIED"),
+                    len(spawn_results))
+
+        return result
+
+    def run(self, cycles: int = 1) -> list[dict]:
+        """
+        Run governance ticks.
+        cycles=0 means infinite loop.
+        cycles=N means run N ticks.
+        """
+        results = []
+        i = 0
         while True:
-            tick += 1
-
-            # ALP tick first — always
-            alp = _alp_tick(context=f"gsmb_auto_runner_tick_{tick}")
-            alp_receipt = alp.get("consistency_hash", "unknown")
-
-            _run_tick(tick=tick, alp_receipt=alp_receipt)
-
-            if max_ticks and tick >= max_ticks:
-                logger.info("[RUNNER] max_ticks=%d reached. Stopping.", max_ticks)
+            result = self.tick()
+            results.append(result)
+            i += 1
+            if cycles > 0 and i >= cycles:
                 break
-
-            logger.info("[RUNNER] Sleeping %ds until tick %d...", interval_seconds, tick + 1)
-            time.sleep(interval_seconds)
-
-    except KeyboardInterrupt:
-        logger.info("[RUNNER] STOPPED by KeyboardInterrupt at tick %d", tick)
+            time.sleep(self.interval)
+        return results
 
 
-# ─── ENTRY POINT ──────────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════
+# CLI
+# ═══════════════════════════════════════════════════════════════
+
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="GSMB Auto Runner — full-stack governance loop")
-    parser.add_argument("--interval", type=int, default=1500,
-                        help="Seconds between ticks (default 1500 = 25 min)")
-    parser.add_argument("--ticks", type=int, default=0,
-                        help="Max ticks before stopping (0 = run forever)")
-    parser.add_argument("--once", action="store_true",
-                        help="Run exactly one tick then exit")
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s [%(name)s] %(message)s")
+
+    parser = argparse.ArgumentParser(description="GSMB Autonomous Runner")
+    parser.add_argument("--cycles", type=int, default=1, help="0=infinite, N=run N ticks")
+    parser.add_argument("--interval", type=int, default=60, help="Seconds between ticks")
+    parser.add_argument("--commit", action="store_true")
+    parser.add_argument("--task", default="[VOC] Autonomous governance sweep — sovereign architecture")
     args = parser.parse_args()
 
-    if args.once:
-        alp = _alp_tick(context="gsmb_auto_runner_once")
-        receipt = alp.get("consistency_hash", "bootstrap")
-        result = _run_tick(tick=1, alp_receipt=receipt)
-        print(json.dumps(result, indent=2, ensure_ascii=False))
-    else:
-        run(interval_seconds=args.interval, max_ticks=args.ticks)
+    runner = GSMBAutoRunner(auto_commit=args.commit, interval_seconds=args.interval)
+    results = runner.run(cycles=args.cycles)
+
+    final = results[-1]
+    print(json.dumps({
+        "ticks": len(results),
+        "final_verdict": final["tick_verdict"],
+        "nexus": final["nexus"]["verdict"],
+        "flows": final["flows"]["verdict"],
+        "kc_ledger": final["kc_ledger"]["verdict"],
+        "spawns_certified": f"{final['spawns']['certified']}/{final['spawns']['total']}",
+    }, indent=2))
