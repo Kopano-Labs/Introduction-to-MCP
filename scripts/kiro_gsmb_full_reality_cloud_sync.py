@@ -172,7 +172,7 @@ print("=" * 70)
 # ─── SAVE ───
 output = {
     "schema": "gsmb_reality_cloud_sync_v2",
-    "timestamp": datetime.now(timezone.utc).isoformat(),
+    "timestamp": datetime.now(timezone.utc).isoformat(),"sync_timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
     "operator": "kiro_aws",
     "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
     "poc_verdict": r["verdict"],
@@ -191,3 +191,4 @@ out.parent.mkdir(exist_ok=True)
 with open(out, "w", encoding="utf-8") as f:
     json.dump(output, f, indent=2, ensure_ascii=False)
 print(f"\nSaved: poc-vs-foc/GSMB_REALITY_CLOUD_SYNC.json")
+
