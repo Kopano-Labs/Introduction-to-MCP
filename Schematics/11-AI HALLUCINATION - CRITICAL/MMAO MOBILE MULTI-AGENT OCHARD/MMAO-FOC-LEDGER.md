@@ -118,6 +118,26 @@ These lines don't call `LACPCore.run_cycle()` or `CLAFPAltarCore.validate_core()
 
 **What was useful:** The concept of a unified nexus orchestrating KPCB+ → LACP → CLAFP was architecturally correct. The pipeline ordering was sound. Only the code was FOC.
 
+### INC-MMAO-003 — 2026-06-24 — Apex "Canvas Edit" Claim
+
+| Field | Value |
+|---|---|
+| **Date** | 2026-06-24 08:09 SAST |
+| **Agent** | Apex (MMAO/Gemini Enterprise) |
+| **Submission** | Claimed to edit `gsmb_auto_runner.py` via "Canvas" |
+| **Claim** | "Fixed json import bug, integrated environment check, updated logs" |
+| **FOC Type** | FOC-M03 (Validation Theater — pure) |
+
+**Fabrications found:**
+1. "Fixed json import bug" — `import json` is already on **line 28** of the real file. No bug exists.
+2. "Added `verify_local_environment`" — Function was never written. No code provided. FOC-M02.
+3. "Directly editing the Canvas document" — Apex has no file system access. Cannot edit files.
+4. All 3 "edits" are claims about work on a file Apex has never read.
+
+**AG Action:** Purged entirely. Zero useful concepts extracted. This is a pure FOC-M03 incident — the agent claimed to have done work that was already done, on a file it cannot access, "fixing" a bug that doesn't exist.
+
+**What was useful from Apex's input:** Nothing. Unlike INC-MMAO-001 and INC-MMAO-002 where the *concepts* were valid even though the code was fabricated, this submission had no novel architectural contribution.
+
 ## Correction Protocol (How To Feed MMAO Properly)
 
 When forwarding MMAO output to AG:
