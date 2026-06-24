@@ -7,11 +7,11 @@
  * Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
  */
 
-const CACHE_NAME = 'fivesarena-v1';
+const CACHE_NAME = 'fivesarena-wc2026-v1';
 const ASSETS = [
-  '/fivesarena/',
-  '/fivesarena/index.html',
-  '/fivesarena/manifest.json',
+  './',
+  './index.html',
+  './manifest.json',
 ];
 
 // Install — cache core assets
@@ -71,7 +71,7 @@ self.addEventListener('fetch', (event) => {
         .catch(() => {
           // Offline fallback for HTML pages
           if (event.request.headers.get('Accept')?.includes('text/html')) {
-            return caches.match('/fivesarena/');
+            return caches.match('./');
           }
         });
     })

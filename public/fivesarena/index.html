@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FivesArena — Community Sports Platform | Kopano Labs</title>
+  <title>FivesArena — World Cup 2026 Community Sports | Kopano Labs</title>
   <meta name="description" content="FivesArena brings 5-a-side football, community leagues, and grassroots sports to every kasi. Book pitches, track stats, connect with your community. Built offline-first by Kopano Labs." />
-  <meta name="theme-color" content="#050508" />
+  <meta name="theme-color" content="#0a0a12" />
   <meta property="og:title" content="FivesArena — Community Sports Platform" />
   <meta property="og:description" content="5-a-side football leagues, pitch booking, live stats. Community sports, governed by community." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fivesarena.com" />
   <link rel="canonical" href="https://fivesarena.com" />
-  <link rel="manifest" href="/fivesarena/manifest.json" />
+  <link rel="manifest" href="./manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -24,12 +24,16 @@
       --border2: #252540;
       --green:   #00ff88;
       --cyan:    #00d4ff;
-      --lime:    #a3e635;
-      --orange:  #f97316;
-      --pitch:   #166534;
-      --pitch-light: #22c55e;
-      --gold:    #f4c542;
-      --red:     #ff4d6d;
+      --wc-gold:    #D4AF37;
+      --wc-crimson: #C41E3A;
+      --wc-navy:    #1B2A4A;
+      --wc-white:   #F5F5F5;
+      --pitch:   #006400;
+      --pitch-light: #D4AF37;
+      --lime:    #D4AF37;
+      --orange:  #C41E3A;
+      --gold:    #D4AF37;
+      --red:     #C41E3A;
       --text:    #f0f0f8;
       --muted:   #6b7280;
       --dim:     #374151;
@@ -66,7 +70,7 @@
     }
     .nav-logo .logo-icon { font-size: 1.4rem; }
     .nav-logo .logo-text {
-      background: linear-gradient(90deg, var(--pitch-light), var(--lime));
+      background: linear-gradient(90deg, var(--wc-gold), var(--wc-crimson));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -129,7 +133,7 @@
     }
     .h1-line1 { color: var(--text); }
     .h1-line2 {
-      background: linear-gradient(135deg, var(--pitch-light) 0%, var(--lime) 50%, var(--green) 100%);
+      background: linear-gradient(135deg, var(--wc-gold) 0%, var(--wc-crimson) 50%, var(--wc-gold) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -525,16 +529,16 @@
 <div class="hero">
   <div class="hero-badge">
     <span class="badge-dot"></span>
-    Community Sports · South Africa · APWA Sovereign Node
+    World Cup 2026 · Community Sports · Cape Town · APWA Sovereign Node
   </div>
   <h1>
-    <div class="h1-line1">Your pitch.</div>
-    <div class="h1-line1">Your rules.</div>
-    <div class="h1-line2">Your community.</div>
+    <div class="h1-line1">The beautiful game.</div>
+    <div class="h1-line1">Your community.</div>
+    <div class="h1-line2">World Cup ready.</div>
   </h1>
   <p class="hero-sub">
-    5-a-side football leagues, pitch booking, and live stats for every kasi. 
-    Offline-first. Load-shedding-tolerant. Built from the township, for the township.
+    5-a-side football leagues, pitch booking, and live stats for every kasi.
+    World Cup 2026 is here — bring the energy home. Offline-first. Load-shedding-tolerant.
   </p>
   <div class="hero-actions">
     <a href="#join" class="btn-pitch">Book a Pitch →</a>

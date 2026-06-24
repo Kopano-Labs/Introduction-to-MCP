@@ -1,39 +1,22 @@
 {
-  "name": "FivesArena",
+  "name": "FivesArena — World Cup 2026",
   "short_name": "FivesArena",
-  "description": "Community 5-a-side football platform. Book pitches, track stats, join leagues. Offline-first, township-built.",
-  "start_url": "/fivesarena/",
-  "scope": "/fivesarena/",
+  "description": "Community 5-a-side football. World Cup 2026 energy. Offline-first. Township-built.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "theme_color": "#050508",
-  "background_color": "#050508",
-  "orientation": "portrait-primary",
-  "categories": ["sports", "social", "lifestyle"],
-  "lang": "en-ZA",
+  "background_color": "#0a0a12",
+  "theme_color": "#D4AF37",
+  "orientation": "any",
+  "categories": ["sports", "entertainment", "social"],
   "icons": [
     {
-      "src": "/fivesarena/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/fivesarena/icon-512.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%230a0a12'/%3E%3Cdefs%3E%3ClinearGradient id='wc' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23D4AF37'/%3E%3Cstop offset='100%25' stop-color='%23C41E3A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='url(%23wc)'%3E⚽%3C/text%3E%3C/svg%3E",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ],
   "screenshots": [],
-  "prefer_related_applications": false,
-  "kpgs": {
-    "ecosystem_node": 5,
-    "domain": "fivesarena.com",
-    "parent": "kopano_labs",
-    "aso_level": "L1_VOC",
-    "pso_tier": "SPSO",
-    "mandates": ["GSMB-MANDATE-001", "GSMB-MANDATE-002", "GSMB-MANDATE-003"],
-    "thari_governed": true,
-    "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
-  }
+  "prefer_related_applications": false
 }
