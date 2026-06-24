@@ -837,3 +837,12 @@
   </script>
 </body>
 </html>
+@media print {
+  .no-print, nav, footer, .particle, .glow, canvas, video, iframe { display: none !important; }
+  body { background: white !important; color: black !important; font-size: 12pt; }
+  a { color: black; text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; font-size: 9pt; }
+  h1, h2, h3 { page-break-after: avoid; color: black !important; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #333; padding: 4px 8px; }
+}
