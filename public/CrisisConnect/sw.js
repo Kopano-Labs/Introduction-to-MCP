@@ -3,16 +3,17 @@
    Cache-first for shell, network-first for API, offline queue
    ═══════════════════════════════════════════════════════════ */
 
-const CACHE_VERSION = 'cc-adaptive-v1';
+const CACHE_VERSION = 'cc-adaptive-v2';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const DATA_CACHE = `${CACHE_VERSION}-data`;
 
 const SHELL_ASSETS = [
-  '/',
-  '/index.html',
-  '/index.css',
-  '/app.js',
-  '/manifest.json'
+  './',
+  './index.html',
+  './index.css',
+  './app.js',
+  './db.js',
+  './manifest.json'
 ];
 
 /* ── Install: cache app shell ──────────────────────────── */
@@ -79,7 +80,7 @@ self.addEventListener('fetch', (event) => {
       .catch(() => {
         // Offline fallback for navigation
         if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
+          return caches.match('./index.html');
         }
       })
   );
