@@ -113,12 +113,18 @@ class GSMBNexus:
             verdict = "PIPELINE_FOC"
             self.total_foc += 1
 
+        # ── Step 4: AI Flow Agents adaptation ────────────────
+        from kopano.ai_flow_agents import AltarFlowOrchestrator, FlowSignal
+        flow_orch = AltarFlowOrchestrator()
+        flow_signal = FlowSignal(content=task, source=source)
+        flow_result = flow_orch.orchestrate(flow_signal)
+
         # ── Optional commit ──────────────────────────────────
         commit_hash = None
         if self.auto_commit:
             commit_hash = self._commit_push(verdict, nso_group)
 
-        return self._build_result(ts, verdict, kpcb_result, lacp_result, clafp_result, commit_hash)
+        return self._build_result(ts, verdict, kpcb_result, lacp_result, clafp_result, commit_hash, flow_result)
 
     def process_all_nso(self, task: str, source: str = "CF") -> dict:
         """
@@ -171,7 +177,7 @@ class GSMBNexus:
 
         return result
 
-    def _build_result(self, ts, verdict, kpcb, lacp, clafp, commit_hash=None):
+    def _build_result(self, ts, verdict, kpcb, lacp, clafp, commit_hash=None, flows=None):
         result = {
             "schema": "gsmb_nexus_v1",
             "ts": ts,
@@ -193,6 +199,11 @@ class GSMBNexus:
                 "layers_pass": clafp.get("layers_pass", False),
                 "hash": clafp.get("altar_hash", "none"),
             } if clafp else None,
+            "flows": {
+                "verdict": flows.get("verdict", "N/A"),
+                "adapted": flows.get("flows_adapted", 0),
+                "pillars": len(flows.get("pillars_covered", [])),
+            } if flows else None,
             "commit": commit_hash,
             "totals": {"poc": self.total_poc, "foc": self.total_foc},
             "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
