@@ -1,0 +1,13 @@
+{
+  "schema": "autonomous_strep_order_v1",
+  "iteration": 1,
+  "timestamp": "2026-06-24T05:14:58.658778+00:00",
+  "bmnp_depth": 6,
+  "pkap_score": 6.0,
+  "avg_invariance": 0.8233,
+  "poc": 5,
+  "foc": 0,
+  "swfus_seal": "a2bb13bb26dcbc41",
+  "triangle": "HOLDS",
+  "verdict": "POC_VALIDATED \u2014 AUTONOMOUS LOOP COMPLETE"
+}
