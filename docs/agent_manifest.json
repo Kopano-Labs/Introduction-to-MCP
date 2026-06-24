@@ -1,0 +1,148 @@
+{
+  "schema": "gsmb_distribution_trinity_v1",
+  "generated": "2026-06-24T07:42:01.966382+00:00",
+  "trinity": {
+    "core_scripture": "For from him and through him and for him are all things. — Romans 11:36",
+    "altar_scripture": "I am the way, the truth, and the life. — John 14:6",
+    "engine_scripture": "They saw tongues of fire that came to rest on each of them. — Acts 2:3"
+  },
+  "1_corinthians_12": "Different gifts, same Spirit. Different service, same Lord. Different working, same God.",
+  "totals": {
+    "gssbs_targeted": 14,
+    "gssbs_distributed": 14,
+    "gssbs_skipped": 0,
+    "total_agent_deployments": 740,
+    "named_agents": 10,
+    "utility_agents": 700
+  },
+  "altar_verdict": "ALL_SANCTIFIED",
+  "distribution": [
+    {
+      "slug": "master-nexus",
+      "name": "Introduction-to-MCP",
+      "domain": "kopanolabs.com",
+      "named": 6,
+      "utility": 50,
+      "total": 56,
+      "sanctified": true
+    },
+    {
+      "slug": "crisisconnect",
+      "name": "CrisisConnect",
+      "domain": "crisisconnect.kopanolabs.com",
+      "named": 3,
+      "utility": 50,
+      "total": 53,
+      "sanctified": true
+    },
+    {
+      "slug": "kasilink",
+      "name": "KasiLink",
+      "domain": "kasilink.com",
+      "named": 3,
+      "utility": 50,
+      "total": 53,
+      "sanctified": true
+    },
+    {
+      "slug": "fivesarena",
+      "name": "Bookit-5s-Arena",
+      "domain": "fivesarena.com",
+      "named": 3,
+      "utility": 50,
+      "total": 53,
+      "sanctified": true
+    },
+    {
+      "slug": "freddys-farm",
+      "name": "Freddy's Farm",
+      "domain": "freddysfarm.com",
+      "named": 3,
+      "utility": 50,
+      "total": 53,
+      "sanctified": true
+    },
+    {
+      "slug": "starfall",
+      "name": "StarFall Salvage",
+      "domain": "starfallsalvage.kopanolabs.com",
+      "named": 2,
+      "utility": 50,
+      "total": 52,
+      "sanctified": true
+    },
+    {
+      "slug": "cape-campass",
+      "name": "Cape Campass",
+      "domain": "capecampass.com",
+      "named": 3,
+      "utility": 50,
+      "total": 53,
+      "sanctified": true
+    },
+    {
+      "slug": "harvest-4-all",
+      "name": "Harvest-4-All",
+      "domain": "harvest4all.com",
+      "named": 3,
+      "utility": 50,
+      "total": 53,
+      "sanctified": true
+    },
+    {
+      "slug": "kopano-context",
+      "name": "KopanoContext",
+      "domain": "context.kopanolabs.com",
+      "named": 4,
+      "utility": 50,
+      "total": 54,
+      "sanctified": true
+    },
+    {
+      "slug": "fivesarena-blog",
+      "name": "5s-Arena-Blog",
+      "domain": "blog.fivesarena.com",
+      "named": 2,
+      "utility": 50,
+      "total": 52,
+      "sanctified": true
+    },
+    {
+      "slug": "portfolio",
+      "name": "Portfolio",
+      "domain": "portfolio.kopanolabs.com",
+      "named": 2,
+      "utility": 50,
+      "total": 52,
+      "sanctified": true
+    },
+    {
+      "slug": "portfolio-mbr",
+      "name": "Portfolio-MBR",
+      "domain": "mbr.kopanolabs.com",
+      "named": 1,
+      "utility": 50,
+      "total": 51,
+      "sanctified": true
+    },
+    {
+      "slug": "kasilink-clean",
+      "name": "KasiLink-Clean",
+      "domain": "kasilink.com",
+      "named": 3,
+      "utility": 50,
+      "total": 53,
+      "sanctified": true
+    },
+    {
+      "slug": "bookit",
+      "name": "Bookit-Arena",
+      "domain": "bookit.fivesarena.com",
+      "named": 2,
+      "utility": 50,
+      "total": 52,
+      "sanctified": true
+    }
+  ],
+  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+}

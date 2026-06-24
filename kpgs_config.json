@@ -1,0 +1,36 @@
+{
+  "schema": "kpgs_gssb_config_v1",
+  "trinity": {
+    "core": "Father — Source of all agents",
+    "altar": "Son — Validation gate",
+    "engine": "Holy Spirit — Distribution power"
+  },
+  "gssb": "Introduction-to-MCP",
+  "slug": "master-nexus",
+  "domain": "kopanolabs.com",
+  "nso_group": "ALL",
+  "governance": {
+    "named_agents": [
+      "KC",
+      "APEX",
+      "ANTIGRAVITY",
+      "THARI",
+      "KHELOS",
+      "ANCHOR"
+    ],
+    "named_count": 6,
+    "utility_agents": 50,
+    "total_agents": 56,
+    "pillars": [
+      "SPIRIT",
+      "BODY",
+      "MIND",
+      "COMMUNITY",
+      "SOVEREIGNTY"
+    ]
+  },
+  "apwa_status": "APWA",
+  "scripture": "1 Corinthians 12:4-6",
+  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "distributed_at": "2026-06-24T07:42:01.921217+00:00"
+}
