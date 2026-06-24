@@ -757,7 +757,7 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-const COLORS = ['#22c55e','#a3e635','rgba(34,197,94,0.3)','rgba(163,230,53,0.2)','#166534'];
+const COLORS = ['#D4AF37','#C41E3A','rgba(212,175,55,0.3)','rgba(196,30,58,0.2)','#1B2A4A'];
 for (let i = 0; i < 80; i++) {
   particles.push({
     x: Math.random() * 1600 - 200, y: Math.random() * 900,
@@ -809,8 +809,8 @@ if (pitchEl) {
     dot.style.left = x + '%';
     dot.style.top = y + '%';
     dot.style.animationDelay = (i * 0.3) + 's';
-    if (i >= 5) dot.style.background = 'var(--lime)';
-    if (i >= 5) dot.style.boxShadow = '0 0 12px var(--lime)';
+    if (i >= 5) dot.style.background = 'var(--wc-crimson)';
+    if (i >= 5) dot.style.boxShadow = '0 0 12px var(--wc-crimson)';
     pitchEl.appendChild(dot);
   });
 }
@@ -823,7 +823,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 /* ── SERVICE WORKER REGISTRATION ──────────── */
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/fivesarena/sw.js', { scope: '/fivesarena/' })
+  navigator.serviceWorker.register('./sw.js')
     .then(reg => console.log('[FA] SW registered:', reg.scope))
     .catch(err => console.warn('[FA] SW failed:', err));
 }
