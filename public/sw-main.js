@@ -60,6 +60,7 @@ self.addEventListener('fetch', event => {
   // Sub-app pages — let them handle their own SW
   if (url.pathname.startsWith('/CrisisConnect/') ||
       url.pathname.startsWith('/fivesarena/') ||
+      url.pathname.startsWith('/kasilink/') ||
       url.pathname.startsWith('/starfall/') ||
       url.pathname.startsWith('/othello/') ||
       url.pathname.startsWith('/freddys-farm/') ||
