@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-12  
 **State:** IMPLEMENTATION READY  
-**Target:** `Kopano-Labs/Introduction-to-MCP`
+**Target:** `RobynAwesome/Introduction-to-MCP`
 
 ## Objective
 
@@ -34,7 +34,7 @@ Turn the OyaAIProd public corpus into a provenance-preserving AI engineering int
 
 ## First reviewed seed projects
 
-- `Kopano-Labs/Introduction-to-MCP` ↔ detached `OyaAIProd/Introduction-to-MCP`
+- `RobynAwesome/Introduction-to-MCP` (repository ID `1188724145`; historically `Kopano-Labs/Introduction-to-MCP`) ↔ detached `OyaAIProd/Introduction-to-MCP`
 - `cl0nazepamm/3dsmax-mcp`
 - `shinpr/mcp-local-rag`
 - `exa-labs/exa-mcp-server`

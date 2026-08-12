@@ -30,6 +30,7 @@ OyaAIProd corpus
 4. **Do not equate `fork:false` with original authorship.** Detached forks require commit/PR/history evidence.
 5. **Do not rank by stars alone.** Frontier value measures engineering signal, not popularity.
 6. **Collector facts and analyst inferences remain separate fields.**
+7. **Repository ID outranks owner/name for identity.** Owner transfers and renames must preserve historical names while the stable GitHub repository ID anchors lineage.
 
 ## Reuse membrane
 
