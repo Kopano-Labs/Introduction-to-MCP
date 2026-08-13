@@ -1,0 +1,58 @@
+name: PKA Skills Validation
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "skills/pka/**"
+  pull_request:
+    branches: [master]
+    paths:
+      - "skills/pka/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate PKA skill packages
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          required = {"name", "description", "author"}
+          files = sorted(Path("skills/pka").rglob("SKILL.md"))
+          if not files:
+              raise SystemExit("No PKA SKILL.md files found")
+
+          for path in files:
+              text = path.read_text(encoding="utf-8")
+              lines = text.splitlines()
+              if not lines or lines[0].strip() != "---":
+                  raise SystemExit(f"{path}: missing opening YAML frontmatter delimiter")
+              try:
+                  end = next(i for i, line in enumerate(lines[1:], start=1) if line.strip() == "---")
+              except StopIteration:
+                  raise SystemExit(f"{path}: missing closing YAML frontmatter delimiter")
+
+              keys = {
+                  line.split(":", 1)[0].strip()
+                  for line in lines[1:end]
+                  if ":" in line and not line.lstrip().startswith("-")
+              }
+              missing = required - keys
+              if missing:
+                  raise SystemExit(f"{path}: missing required frontmatter keys: {sorted(missing)}")
+
+              if "/s/ Kholofelo Robyn Rababalela" not in text:
+                  raise SystemExit(f"{path}: missing canonical author signature")
+
+              print(f"validated {path}")
+          PY
