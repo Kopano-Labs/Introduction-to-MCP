@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krrababalela.com/schemas/wyc-01-receipt.schema.json",
+  "title": "WYC-01 Watch What You Call Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "trigger",
+    "failure",
+    "change_causality",
+    "invocation_causality",
+    "provenance",
+    "ownership",
+    "remediation"
+  ],
+  "properties": {
+    "protocol": {
+      "const": "WYC-01"
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "changed_scope"],
+      "properties": {
+        "ref": { "type": "string", "minLength": 1 },
+        "changed_scope": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subsystem", "job"],
+      "properties": {
+        "subsystem": { "type": "string", "minLength": 1 },
+        "job": { "type": "string", "minLength": 1 }
+      }
+    },
+    "change_causality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "dependency_evidence"],
+      "properties": {
+        "verdict": { "enum": ["yes", "no", "maybe"] },
+        "dependency_evidence": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "invocation_causality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authorized", "invocation_evidence"],
+      "properties": {
+        "authorized": { "enum": ["yes", "no", "maybe"] },
+        "invocation_evidence": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "evidence"],
+      "properties": {
+        "verdict": {
+          "enum": ["preexisting", "introduced-by-change", "independent", "maybe"]
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "classification": {
+      "enum": [
+        "LEGITIMATE_REGRESSION",
+        "REGRESSION_PLUS_ORCHESTRATION_DEFECT",
+        "PREEXISTING_DEFECT_LEGITIMATELY_DISCOVERED",
+        "UNRELATED_DEFECT_EXPOSED_BY_ORCHESTRATION_MISTAKE",
+        "CAUSALITY_UNRESOLVED"
+      ]
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invocation_owner", "defect_owner"],
+      "properties": {
+        "invocation_owner": { "type": "string", "minLength": 1 },
+        "defect_owner": { "type": "string", "minLength": 1 }
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["orchestration", "defect"],
+      "properties": {
+        "orchestration": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "defect": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

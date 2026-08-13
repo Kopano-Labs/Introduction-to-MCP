@@ -1,0 +1,26 @@
+{
+  "name": "Watch What You Call",
+  "slug": "kpgs-watch-what-you-call",
+  "version": "1.0.0",
+  "author": "Kholofelo Robyn Rababalela",
+  "license": "MIT",
+  "source_repository": "RobynAwesome/Introduction-to-MCP",
+  "source_branch": "master",
+  "skill_path": "skills/pka/watch-what-you-call/SKILL.md",
+  "public_skill_url": "https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/pka/watch-what-you-call",
+  "category": "agent-governance",
+  "tags": [
+    "pka",
+    "kpgs",
+    "orchestration",
+    "ci-cd",
+    "causality",
+    "provenance",
+    "github-actions",
+    "incident-response"
+  ],
+  "summary": "Separates defect causality from invocation causality so a change is not blamed for a failure merely because its call surfaced that failure.",
+  "canonical_quote": "My PKA files did not create those underlying defects. My call caused completely unrelated systems to execute and expose them. And that is still my orchestration mistake.",
+  "registry_intent": "AwesomeSkills.dev publication",
+  "signature": "/s/ Kholofelo Robyn Rababalela"
+}
