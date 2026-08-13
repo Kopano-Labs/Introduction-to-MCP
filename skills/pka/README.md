@@ -11,6 +11,7 @@ PKA skills must preserve three boundaries:
 ## Skills
 
 - [`bapedi-cultural-game-hub`](./bapedi-cultural-game-hub/SKILL.md) — apply PKA to a governed Cultural Game Hub using Telemetry AI evidence, parser reduction, contract-ledger state transitions, minimal Identic AI state passes, APWA adaptation, and Memory Receipts.
+- [`watch-what-you-call`](./watch-what-you-call/SKILL.md) — WYC-01 causal-governance protocol separating change causality, invocation causality, and defect provenance. It preserves `MAYBE` when causality is unproven and prevents workflow triggers from being mistaken for defect ownership.
 
 ## Source authority
 
