@@ -1,0 +1,47 @@
+{
+  "protocol": "WYC-01",
+  "trigger": {
+    "ref": "96c3451ab9159435e17dfab4fbc8ed3d66af8c4d",
+    "changed_scope": [
+      "skills/pka/bapedi-cultural-game-hub/SKILL.md"
+    ]
+  },
+  "failure": {
+    "subsystem": "Kopano estate automation",
+    "job": "unrelated CI, CodeQL, and Azure deployment jobs were invoked"
+  },
+  "change_causality": {
+    "verdict": "no",
+    "dependency_evidence": [
+      "the triggering commit changed only skills/pka/bapedi-cultural-game-hub/SKILL.md",
+      "the PKA skill file did not modify Azure credentials, GUI code, Python lint targets, C/C++ code, or the agent-build validator"
+    ]
+  },
+  "invocation_causality": {
+    "authorized": "no",
+    "invocation_evidence": [
+      "the previous workflows triggered on every push to master without a skill-path boundary",
+      "a skills-only change caused full estate validation and production deployment workflows to execute"
+    ]
+  },
+  "provenance": {
+    "verdict": "preexisting",
+    "evidence": [
+      "the surfaced failures belonged to independent subsystems whose causal conditions were not introduced by the skills-only commit"
+    ]
+  },
+  "classification": "UNRELATED_DEFECT_EXPOSED_BY_ORCHESTRATION_MISTAKE",
+  "ownership": {
+    "invocation_owner": "GitHub Actions orchestration / workflow scope",
+    "defect_owner": "each independently failing subsystem"
+  },
+  "remediation": {
+    "orchestration": [
+      "route skills/pka/** changes to PKA Skills Validation",
+      "exclude skills/** from unrelated full-estate CI, CodeQL, and production deployment workflows unless an explicit dependency requires them"
+    ],
+    "defect": [
+      "track and repair each independent subsystem failure separately from the skills publication event"
+    ]
+  }
+}
