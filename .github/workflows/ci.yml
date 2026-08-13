@@ -3,8 +3,12 @@ name: Kopano CI Pipeline  # Kopano CI — dev branch v2
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - "skills/**"
   pull_request:
     branches: [master]
+    paths-ignore:
+      - "skills/**"
 
 jobs:
   lint-and-test:
