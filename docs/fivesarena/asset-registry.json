@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "freeze-pending-owner-identification",
+  "status": "freeze-pending-owner-confirmation",
   "invariants": {
     "logoMutationAllowed": false,
     "unverifiedAssetRuntimeUseAllowed": false
@@ -8,21 +8,35 @@
   "assets": [
     {
       "id": "fivesarena.logo.primary",
-      "repository": null,
-      "path": null,
-      "sha256": null,
+      "repository": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "public/images/logo.svg",
+      "gitBlobSha": "99d64bed92caf3164fd366486d6b44f4ef8dc009",
+      "sha256": "a113c8ac0bc1c5584c0957011e9db0177b49b591bbc8d67612af5bc823a9118d",
+      "byteLength": 603,
+      "observedConsumer": "components/Header.jsx",
       "ownerConfirmed": false,
       "license": null,
-      "runtimeUse": "blocked"
+      "runtimeUse": "existing-preserve-exactly"
+    },
+    {
+      "id": "fivesarena.icon.app.192",
+      "repository": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "public/icons/icon-192x192.png",
+      "gitBlobSha": "4853bde8feb424ea67e1eadf8d3141fea0a5f23d",
+      "sha256": "f019db473ff5fe9b98142d9aa3f0ff6072a38bb0e2ed374b0bac94c2c7902d59",
+      "byteLength": 16107,
+      "ownerConfirmed": false,
+      "license": null,
+      "runtimeUse": "existing-pending-owner-confirmation"
     },
     {
       "id": "fivesarena.icon.maskable",
-      "repository": null,
-      "path": null,
+      "repository": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "public/icons/icon-maskable-512x512.png",
       "sha256": null,
       "ownerConfirmed": false,
       "license": null,
-      "runtimeUse": "blocked"
+      "runtimeUse": "blocked-pending-hash"
     },
     {
       "id": "fivesarena.scene.football",
@@ -31,7 +45,7 @@
       "sha256": null,
       "ownerConfirmed": false,
       "license": null,
-      "runtimeUse": "planned"
+      "runtimeUse": "planned-feature-flagged"
     }
   ]
 }
