@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "status": "freeze-pending-owner-identification",
+  "invariants": {
+    "logoMutationAllowed": false,
+    "unverifiedAssetRuntimeUseAllowed": false
+  },
+  "assets": [
+    {
+      "id": "fivesarena.logo.primary",
+      "repository": null,
+      "path": null,
+      "sha256": null,
+      "ownerConfirmed": false,
+      "license": null,
+      "runtimeUse": "blocked"
+    },
+    {
+      "id": "fivesarena.icon.maskable",
+      "repository": null,
+      "path": null,
+      "sha256": null,
+      "ownerConfirmed": false,
+      "license": null,
+      "runtimeUse": "blocked"
+    },
+    {
+      "id": "fivesarena.scene.football",
+      "repository": null,
+      "path": null,
+      "sha256": null,
+      "ownerConfirmed": false,
+      "license": null,
+      "runtimeUse": "planned"
+    }
+  ]
+}
