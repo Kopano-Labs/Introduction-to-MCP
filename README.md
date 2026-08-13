@@ -1,7 +1,7 @@
 
 ![Kopano Context Banner](README-bannner.jpg)
 
-   ![KPGS](https://img.shields.io/badge/KPGS-ALP%23168-7b61ff) ![POC](https://img.shields.io/badge/POC-VALIDATED-00E676) ![Deploy](https://github.com/Kopano-Labs/Introduction-to-MCP/actions/workflows/deploy-web.yml/badge.svg?branch=codex/kc-sovereign-gui-full-dev)
+   ![KPGS](https://img.shields.io/badge/KPGS-ALP%23168-7b61ff) ![POC](https://img.shields.io/badge/POC-VALIDATED-00E676) ![Deploy](https://github.com/RobynAwesome/Introduction-to-MCP/actions/workflows/deploy-web.yml/badge.svg?branch=codex/kc-sovereign-gui-full-dev)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
    ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
    ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
@@ -17,6 +17,9 @@
    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # 🌍 Kopano Context
+
+**Current KPGS semantic-governance repository:** `RobynAwesome/Introduction-to-MCP`  
+**Stateless-renter invariant:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 
 **Full-Stack Multi-Agent Orchestration & South African Impact Ecosystem**
 **Official Reference Implementation for the Model Context Protocol (MCP)**
