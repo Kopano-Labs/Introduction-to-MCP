@@ -25,6 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: false
 
       - name: Set up Python
@@ -36,18 +37,37 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e .
-          pip install pytest ruff
+          pip install -e . -e ./kopano-core -e ./CLI
+          pip install pytest pytest-asyncio ruff==0.16.3
           pip check
 
       - name: Compile before tests
         run: python -m compileall -q kopano-core tests scripts
 
-      - name: Lint with ruff
-        run: ruff check .
+      - name: Lint changed Python with ruff
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+            BASE_SHA="$(git rev-parse "${HEAD_SHA}^")"
+          fi
+          mapfile -d '' PY_FILES < <(
+            git diff --name-only --diff-filter=ACMR -z "$BASE_SHA...$HEAD_SHA" -- '*.py'
+          )
+          if (( ${#PY_FILES[@]} == 0 )); then
+            echo "No changed Python files to lint."
+          else
+            printf 'Linting %s\n' "${PY_FILES[@]}"
+            # Enforce correctness-critical rules while legacy style debt is
+            # migrated independently from feature PRs.
+            ruff check --select E9,F63,F7,F82 -- "${PY_FILES[@]}"
+          fi
 
       - name: Test with pytest
-        run: python -m pytest -q
+        # Stateful proof gates run in agent-build-poc after their ephemeral
+        # mesh is built; this matrix owns deterministic unit/API coverage.
+        run: python -m pytest -q -m "not integration"
 
   cli-package-check:
     runs-on: ubuntu-latest
@@ -133,6 +153,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ./kopano-core
           pip install -e ./CLI
+          pip install pytest
           pip check
 
       - name: Runtime import preflight

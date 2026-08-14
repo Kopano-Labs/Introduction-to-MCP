@@ -482,8 +482,9 @@ class DistributionEngine:
                 })
                 continue
 
-            # Check path exists
-            if not gssb_path.exists():
+            # A dry run validates the planned distribution without requiring
+            # Windows-only deployment paths to exist on a Linux CI runner.
+            if not dry_run and not gssb_path.exists():
                 results["skipped"].append({
                     "slug": gssb.slug,
                     "reason": f"Path not found: {gssb.path}"
