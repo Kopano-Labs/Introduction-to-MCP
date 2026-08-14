@@ -7,7 +7,11 @@ name = "mcp-cli"
 version = "0.1.0"
 dependencies = [
     "python-dotenv",
-    "mcp",
+    # The CLI servers still use the v1 FastMCP import surface. MCP 2.x removes
+    # mcp.server.fastmcp, so an unbounded dependency turns provider drift into
+    # a false application regression. Keep the v1 line explicit until the
+    # three server modules are migrated together and validated against v2.
+    "mcp>=1.28,<2",
     "pydantic",
     "pyinstaller",
     "anthropic",

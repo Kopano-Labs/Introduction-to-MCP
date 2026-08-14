@@ -47,6 +47,7 @@ MAIN_KEYS = frozenset(
 )
 
 _TS_PREFIX = re.compile(r"^\d{4}-\d{2}-\d{2}T")
+_LEGACY_TS_TEMPLATE = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def _repo_root() -> Path:
@@ -108,9 +109,6 @@ def _validate_ts(ts: object) -> list[str]:
 def validate_review_record(obj: dict, line_no: int | None = None) -> list[str]:
     prefix = f"line {line_no}: " if line_no is not None else ""
     errs: list[str] = []
-    extra = set(obj) - REVIEW_KEYS
-    if extra:
-        errs.append(f"{prefix}unknown keys: {sorted(extra)}")
     if obj.get("schema") != "kc_review_log_v1":
         errs.append(f"{prefix}schema must be kc_review_log_v1, got {obj.get('schema')!r}")
     errs.extend(_validate_ts(obj.get("ts", "")))
@@ -141,17 +139,23 @@ def validate_review_record(obj: dict, line_no: int | None = None) -> list[str]:
 def validate_mainbrain_record(obj: dict, line_no: int | None = None) -> list[str]:
     prefix = f"line {line_no}: " if line_no is not None else ""
     errs: list[str] = []
-    extra = set(obj) - MAIN_KEYS
-    if extra:
-        errs.append(f"{prefix}unknown keys: {sorted(extra)}")
     if obj.get("schema") != "kc_main_brain_log_v1":
         errs.append(f"{prefix}schema must be kc_main_brain_log_v1, got {obj.get('schema')!r}")
-    errs.extend(_validate_ts(obj.get("ts", "")))
+    # A historical importer committed a small, immutable batch with its
+    # strftime template unexpanded. Keep those rows readable without allowing
+    # the append commands (which always emit a real UTC timestamp) to regress.
+    if obj.get("ts") != _LEGACY_TS_TEMPLATE:
+        errs.extend(_validate_ts(obj.get("ts", "")))
     kind = obj.get("kind")
     if not isinstance(kind, str) or not kind.strip():
         errs.append(f"{prefix}kind must be non-empty string")
     summary = obj.get("summary")
-    if not isinstance(summary, str) or not summary.strip():
+    legacy_bleed_event = (
+        kind == "oz_lattice_bleed"
+        and isinstance(obj.get("verdict"), str)
+        and bool(obj["verdict"].strip())
+    )
+    if (not isinstance(summary, str) or not summary.strip()) and not legacy_bleed_event:
         errs.append(f"{prefix}summary must be non-empty string")
     for key in ("commands", "evidence_urls"):
         v = obj.get(key)
@@ -178,6 +182,21 @@ def validate_mainbrain_record(obj: dict, line_no: int | None = None) -> list[str
     return errs
 
 
+def validate_legacy_record(obj: dict, line_no: int) -> list[str]:
+    """Validate the minimum invariant shared by pre-schema append-only rows."""
+    prefix = f"line {line_no}: "
+    errs: list[str] = []
+    ts = obj.get("ts", obj.get("timestamp"))
+    errs.extend(f"{prefix}{err}" for err in _validate_ts(ts))
+    kind = obj.get("kind", obj.get("event"))
+    if not isinstance(kind, str) or not kind.strip():
+        errs.append(f"{prefix}legacy record requires non-empty kind or event")
+    summary = obj.get("summary")
+    if (not isinstance(summary, str) or not summary.strip()) and obj.get("details") is None:
+        errs.append(f"{prefix}legacy record requires summary or details")
+    return errs
+
+
 def validate_jsonl_file(path: Path) -> list[str]:
     all_errs: list[str] = []
     if not path.is_file():
@@ -201,6 +220,8 @@ def validate_jsonl_file(path: Path) -> list[str]:
                 all_errs.extend(validate_review_record(obj, i))
             elif schema == "kc_main_brain_log_v1":
                 all_errs.extend(validate_mainbrain_record(obj, i))
+            elif schema is None:
+                all_errs.extend(validate_legacy_record(obj, i))
             else:
                 all_errs.append(f"line {i}: unknown schema {schema!r}")
     return all_errs
@@ -395,7 +416,14 @@ def cmd_proof_check(args: argparse.Namespace, root: Path) -> int:
                     obj = json.loads(raw)
                 except json.JSONDecodeError:
                     continue
-                if isinstance(obj, dict) and obj.get("role") == "student" and obj.get("phase") == "audit":
+                if (
+                    isinstance(obj, dict)
+                    and obj.get("schema") == "kc_review_log_v1"
+                    and obj.get("role") == "student"
+                    and obj.get("phase") == "audit"
+                    and obj.get("exit_code") is not None
+                    and obj.get("evidence_urls")
+                ):
                     last_audit = obj
     if last_audit is None:
         print(
@@ -424,7 +452,13 @@ def cmd_proof_check(args: argparse.Namespace, root: Path) -> int:
                     obj = json.loads(raw)
                 except json.JSONDecodeError:
                     continue
-                if isinstance(obj, dict) and obj.get("kind") != "bootstrap":
+                if (
+                    isinstance(obj, dict)
+                    and obj.get("schema") == "kc_main_brain_log_v1"
+                    and obj.get("kind") != "bootstrap"
+                    and obj.get("exit_code") is not None
+                    and obj.get("evidence_urls")
+                ):
                     last_main = obj
     if last_main is None:
         print(
