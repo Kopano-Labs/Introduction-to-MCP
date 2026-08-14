@@ -1,0 +1,28 @@
+name: NPC AI Pilot Gate
+
+on:
+  pull_request:
+    paths:
+      - "governance/ai-frontier-map/NPC_AI_PILOT_STACK.md"
+      - "data/ai-frontier-map/npc-pilot-candidates.json"
+      - "tools/ai_frontier_map/validate_npc_pilot.py"
+      - ".github/workflows/npc-ai-pilot-gate.yml"
+  push:
+    paths:
+      - "governance/ai-frontier-map/NPC_AI_PILOT_STACK.md"
+      - "data/ai-frontier-map/npc-pilot-candidates.json"
+      - "tools/ai_frontier_map/validate_npc_pilot.py"
+
+permissions:
+  contents: read
+
+jobs:
+  npc-pilot-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate NPC pilot execution membrane
+        run: python tools/ai_frontier_map/validate_npc_pilot.py
