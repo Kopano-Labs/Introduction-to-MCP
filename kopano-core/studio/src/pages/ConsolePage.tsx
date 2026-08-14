@@ -171,7 +171,15 @@ export function ConsolePage({
   }, []);
 
   useEffect(() => {
-    void refreshStatus();
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (!cancelled) {
+        void refreshStatus();
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [refreshStatus]);
 
   const modelOptions = consoleReply?.model_options ?? [

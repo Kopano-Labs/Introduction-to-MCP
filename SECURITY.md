@@ -40,6 +40,7 @@ Please include:
 
 ## Dependency Policy
 
+- Do not commit `node_modules/` or other generated vendor directories
 - All Python dependencies pinned to exact versions (`==`) in `kopano-core/requirements.txt`
 - All npm dependencies managed via `package-lock.json` with `npm audit` enforcement
 - Dependabot alerts reviewed within 24 hours of notification
@@ -69,6 +70,7 @@ The KPGS pre-commit hook (`hooks/pre-commit-kpgs-gate.py`) prevents:
 - Zero secrets in source code (enforced by `.gitignore`)
 - All API keys via environment variables only
 - No hardcoded tokens, passwords, or connection strings
+- If a secret is exposed, revoke or rotate it immediately before remediation
 - SafeSkill audit: 100/100 passes (verified 2026-04-11)
 
 ## Constraint
