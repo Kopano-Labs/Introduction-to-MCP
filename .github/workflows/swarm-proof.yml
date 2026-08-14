@@ -80,6 +80,9 @@ jobs:
           pip install -e ./kopano-core
           pip install -e ./CLI
 
+      - name: Build ephemeral operating-mesh proof state
+        run: python scripts/kc_ci_bootstrap_operating_mesh.py
+
       - name: Agent build PoC validate
         run: python scripts/kc_agent_build_poc_validate.py
 
