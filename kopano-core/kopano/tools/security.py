@@ -59,7 +59,7 @@ def scan_dependencies(requirements_file: str = "requirements.txt") -> str:
             output = result.stdout.strip()
             if not output and result.stderr:
                 output = result.stderr.strip()
-            return f"Dependency vulnerabilities found in '{requirements_file}':\n{output}"
+            return f"Dependency scan issue for '{requirements_file}':\n{output}"
     except Exception as e:
         if "No module named safety" in str(e) or "No such file or directory" in str(e):
             return "Error: Safety is not installed. Please install it with 'pip install safety'."
