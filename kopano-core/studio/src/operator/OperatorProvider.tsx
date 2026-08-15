@@ -173,6 +173,9 @@ export function OperatorProvider({ children }: { children: ReactNode }) {
   return <OperatorContext.Provider value={value}>{children}</OperatorContext.Provider>;
 }
 
+// The provider and its hook intentionally share one module API. This is the only
+// non-component export in the file and does not affect Fast Refresh state.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useOperator() {
   const ctx = useContext(OperatorContext);
   if (!ctx) {

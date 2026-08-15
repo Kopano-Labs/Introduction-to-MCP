@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { getApiBase } from '../apiBase';
 
 type KcStatusName = 'assigned' | 'in_progress' | 'submitted' | 'reviewed' | 'promoted';
@@ -110,6 +110,7 @@ const defaultTeacherReview = [
 export function TrainingPage() {
   const [payload, setPayload] = useState<KcTrainingPayload>({ status: fallbackStatus, records: [] });
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectedIdRef = useRef<string | null>(null);
   const [title, setTitle] = useState('KC - ');
   const [teacherContext, setTeacherContext] = useState('One task. Read first. CRUD only.');
   const [studentResponse, setStudentResponse] = useState(defaultStudentResponse);
@@ -150,6 +151,14 @@ export function TrainingPage() {
     return withOpinion?.id ?? records[0]?.id ?? null;
   };
 
+  const selectRecord = (record: KcRecord | null) => {
+    const nextId = record?.id ?? null;
+    selectedIdRef.current = nextId;
+    setSelectedId(nextId);
+    setStudentResponse(record?.student_response ?? defaultStudentResponse);
+    setTeacherReview(record?.teacher_review ?? defaultTeacherReview);
+  };
+
   const refresh = async () => {
     const [trainingRes, opinionRes] = await Promise.all([
       fetch(`${apiRoot}/api/kc/training`),
@@ -164,8 +173,12 @@ export function TrainingPage() {
     if (opinionRes.ok) {
       setBrainOpinion(await opinionRes.json() as KcBrainOpinion);
     }
-    setSelectedId((current) => pickDefaultRecordId(nextPayload.records, current));
+    const nextId = pickDefaultRecordId(nextPayload.records, selectedIdRef.current);
+    const nextRecord = nextPayload.records.find((record) => record.id === nextId) ?? null;
+    selectRecord(nextRecord);
   };
+
+  const initialRefreshRef = useRef(refresh);
 
   const pushEvent = (message: string) => {
     setEventLog((prev) => [`${new Date().toLocaleTimeString()} | ${message}`, ...prev].slice(0, 5));
@@ -183,23 +196,27 @@ export function TrainingPage() {
   };
 
   useEffect(() => {
-    void refresh().catch((refreshError) => {
-      const message = refreshError instanceof Error ? refreshError.message : 'KC training API unavailable.';
-      setError(
-        `${message} — Start the API: python main.py serve api (from repo root). `
-        + 'Training data lives in kopano-core/.kc/context_store.json (gitignored; seed with kc_apprenticeship_activate.py).',
-      );
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (cancelled) {
+        return;
+      }
+      void initialRefreshRef.current().catch((refreshError) => {
+        const message = refreshError instanceof Error ? refreshError.message : 'KC training API unavailable.';
+        setError(
+          `${message} — Start the API: python main.py serve api (from repo root). `
+          + 'Training data lives in kopano-core/.kc/context_store.json (gitignored; seed with kc_apprenticeship_activate.py).',
+        );
+      });
     });
+    return () => {
+      cancelled = true;
+    };
   }, []);
-
-  useEffect(() => {
-    setStudentResponse(selectedRecord?.student_response ?? defaultStudentResponse);
-    setTeacherReview(selectedRecord?.teacher_review ?? defaultTeacherReview);
-  }, [selectedRecord?.id, selectedRecord?.student_response, selectedRecord?.teacher_review]);
 
   const createAssignment = () => runAction('Teacher assignment created', async () => {
     const data = await postJson(`${apiRoot}/api/kc/records`, { title, teacher_context: teacherContext }) as { record: KcRecord };
-    setSelectedId(data.record.id);
+    selectRecord(data.record);
   });
 
   const submitResponse = () => {
@@ -343,7 +360,7 @@ export function TrainingPage() {
                 key={record.id}
                 type="button"
                 className={`record-line priority-record ${selectedRecord?.id === record.id ? 'active' : ''}`}
-                onClick={() => setSelectedId(record.id)}
+                onClick={() => selectRecord(record)}
               >
                 <span>{record.id}</span>
                 <strong>{record.title}</strong>
@@ -360,7 +377,7 @@ export function TrainingPage() {
                 key={record.id}
                 type="button"
                 className={`record-line ${selectedRecord?.id === record.id ? 'active' : ''}`}
-                onClick={() => setSelectedId(record.id)}
+                onClick={() => selectRecord(record)}
               >
                 <span>{record.id}</span>
                 <strong>{record.title}</strong>

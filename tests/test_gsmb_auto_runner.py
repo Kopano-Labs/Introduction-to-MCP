@@ -1,57 +1,39 @@
-"""
-[KPGS] STAP Task 015 — 5 New Unit Tests for gsmb_auto_runner.py
-================================================================
-Covers: tick verdict, graceful NCCNP error, ALP receipt, IKP log, FON-C audit
-Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
-"""
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'kopano-core'))
+"""Compatibility checks for the current GSMB runner class API."""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
 
 import pytest
-from unittest.mock import patch, MagicMock
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT / "kopano-core"))
+
+from kopano.gsmb_auto_runner import GSMBAutoRunner  # noqa: E402
 
 
-class TestGSMBAutoRunnerNew:
-    """5 new tests per STAP Task 015."""
-
-    def test_tick_produces_verdict(self):
-        """Tick must return a dict with tick_verdict key."""
-        from kopano.gsmb_auto_runner import _run_tick
-        result = _run_tick(tick=1, alp_receipt="test_receipt_001")
-        assert "tick_verdict" in result
-        assert result["tick_verdict"] in ("POC_VALIDATED", "PARTIAL_POC")
-
-    def test_tick_graceful_on_nccnp_error(self):
-        """If NCCNP raises, tick should not crash — should log error in result."""
-        from kopano.gsmb_auto_runner import _run_tick
-        with patch("kopano.nccnp.NCCNPEngine") as mock:
-            mock.side_effect = ImportError("test: nccnp unavailable")
-            result = _run_tick(tick=99, alp_receipt="error_test")
-            # Should still return a dict even if NCCNP fails
-            assert isinstance(result, dict)
-            assert "tick" in result
-
-    def test_alp_receipt_generated(self):
-        """ALP tick must return a receipt with consistency_hash."""
-        from kopano.gsmb_auto_runner import _alp_tick
-        receipt = _alp_tick(context="test_alp")
-        assert isinstance(receipt, dict)
-        assert "consistency_hash" in receipt or "hash" in str(receipt)
-
-    def test_tick_contains_constraint(self):
-        """Every tick result must carry the stateless renter constraint."""
-        from kopano.gsmb_auto_runner import _run_tick
-        result = _run_tick(tick=1, alp_receipt="constraint_test")
-        assert result.get("constraint") == "I_AM_STATELESS_RENTER_NOT_LANDLORD"
-
-    def test_tick_hash_is_hex(self):
-        """Tick hash must be a valid hex string."""
-        from kopano.gsmb_auto_runner import _run_tick
-        result = _run_tick(tick=1, alp_receipt="hash_test")
-        tick_hash = result.get("tick_hash", "")
-        assert all(c in "0123456789abcdef" for c in tick_hash)
-        assert len(tick_hash) == 16
+@pytest.fixture(scope="module")
+def tick_result() -> dict:
+    """Share one real governance tick across the compatibility assertions."""
+    return GSMBAutoRunner().tick()
 
 
-if __name__ == "__main__":
-    pytest.main([__file__, "-v", "--tb=short"])
+def test_tick_produces_current_verdict(tick_result: dict) -> None:
+    assert tick_result["tick_verdict"] in ("GSMB_FULL_POC", "GSMB_PARTIAL")
+
+
+def test_tick_contains_current_sections(tick_result: dict) -> None:
+    assert {"nexus", "flows", "kc_ledger", "spawns"} <= set(tick_result)
+
+
+def test_tick_contains_constraint(tick_result: dict) -> None:
+    assert tick_result["constraint"] == "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+
+
+def test_tick_uses_current_schema(tick_result: dict) -> None:
+    assert tick_result["schema"] == "gsmb_runner_tick_v1"
+
+
+def test_runner_counts_tick(tick_result: dict) -> None:
+    assert tick_result["tick"] == 1
