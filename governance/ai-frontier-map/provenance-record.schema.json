@@ -1,0 +1,400 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/ai-frontier-map/provenance-record.schema.json",
+  "title": "AI Frontier Map Provenance Record",
+  "type": "object",
+  "required": [
+    "provenance",
+    "discovery",
+    "safeskill",
+    "technical_intelligence",
+    "capability_surface",
+    "reuse_governance",
+    "frontier_score",
+    "convergence",
+    "evidence"
+  ],
+  "properties": {
+    "provenance": {
+      "type": "object",
+      "required": [
+        "oya_repo",
+        "oya_repo_id",
+        "oya_created_at",
+        "classification"
+      ],
+      "properties": {
+        "oya_repo": {
+          "type": "string"
+        },
+        "oya_repo_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "oya_created_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "safeskill_fork",
+            "other_fork",
+            "detached_fork",
+            "oya_authored",
+            "oya_agent_generated",
+            "unresolved"
+          ]
+        },
+        "upstream_repo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "upstream_owner": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "upstream_owner_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "upstream_repo_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "original_repo_created_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "upstream_commit_sha": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "discovery": {
+      "type": "object",
+      "required": [
+        "signal"
+      ],
+      "properties": {
+        "signal": {
+          "enum": [
+            "mcp-server",
+            "model-context-protocol",
+            "agent-skills",
+            "claude-skill",
+            "claude-code",
+            "openclaw",
+            "curated-list",
+            "npm",
+            "smithery",
+            "unknown"
+          ]
+        },
+        "candidate_signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "discovered_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "safeskill": {
+      "type": "object",
+      "properties": {
+        "scan_branch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scan_score": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "scan_grade": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "findings": {
+          "type": "object"
+        },
+        "pr_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pr_number": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "pr_created_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "maintainer_response": {
+          "enum": [
+            "merged",
+            "accepted_with_changes",
+            "commented",
+            "closed",
+            "rejected",
+            "ignored",
+            "pending",
+            "unknown"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "technical_intelligence": {
+      "type": "object"
+    },
+    "capability_surface": {
+      "type": "object"
+    },
+    "reuse_governance": {
+      "type": "object",
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "code_reuse",
+            "architectural_reuse",
+            "research_only"
+          ]
+        },
+        "license": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "spdx": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reusable_code": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "attribution_required": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "architecture_only": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "restrictions": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provenance_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_commit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "frontier_score": {
+      "type": "object",
+      "properties": {
+        "novelty": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "technical_depth": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "composability": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "ecosystem_relevance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "kpgs_relevance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "current_activity": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "total": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "confidence_score": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": true
+    },
+    "convergence": {
+      "type": "object",
+      "required": [
+        "decision"
+      ],
+      "properties": {
+        "target_systems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reusable_primitive": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "integration_pattern": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gaps": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decision": {
+          "enum": [
+            "ADOPT",
+            "ADAPT",
+            "STUDY",
+            "MONITOR",
+            "REJECT"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "url"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
