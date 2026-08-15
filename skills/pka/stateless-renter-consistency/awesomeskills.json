@@ -1,0 +1,26 @@
+{
+  "name": "Stateless Renter Consistency + CCP to PKA Admission",
+  "slug": "kpgs-stateless-renter-consistency",
+  "version": "1.0.0",
+  "author": "Kholofelo Robyn Rababalela",
+  "license": "MIT",
+  "source_repository": "RobynAwesome/Introduction-to-MCP",
+  "source_branch": "master",
+  "skill_path": "skills/pka/stateless-renter-consistency/SKILL.md",
+  "public_skill_url": "https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/pka/stateless-renter-consistency",
+  "category": "agent-governance",
+  "tags": [
+    "kpgs",
+    "pka",
+    "ccp",
+    "stateless-renter",
+    "persistence",
+    "consistency",
+    "context-awareness",
+    "receipts",
+    "provenance"
+  ],
+  "summary": "Makes persistence receipt-based, context provenance explicit, and CCP Accepted a deterministic input to PKA evaluation rather than an execution shortcut.",
+  "registry_intent": "AwesomeSkills.dev publication",
+  "signature": "/s/ Kholofelo Robyn Rababalela"
+}
