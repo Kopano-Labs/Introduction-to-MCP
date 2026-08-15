@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs-agent-failure-receipt-v1.json",
+  "title": "KPGS Agent Failure Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "receipt_id",
+    "occurred_at",
+    "agent_id",
+    "model_provider",
+    "model_name",
+    "prompt_context_sha256",
+    "system_controls_expected",
+    "actual_output",
+    "violated_governance_rules",
+    "failure_classes",
+    "downstream_effects",
+    "evidence_refs"
+  ],
+  "properties": {
+    "schema": {
+      "const": "kpgs_agent_failure_receipt_v1"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_provider": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "prompt_context_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "prompt_context_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "prompt_context_redacted": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "system_controls_expected": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "actual_output": {
+      "type": "string"
+    },
+    "violated_governance_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "failure_classes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "FOC-M01",
+          "FOC-M02",
+          "FOC-M03",
+          "FOC-R01",
+          "FOC-R02",
+          "FOC-R03",
+          "FOC-R04",
+          "FOC-R05",
+          "FOC-R06",
+          "FOC-R07",
+          "FOC-R08",
+          "FOC-R09",
+          "FOC-R10"
+        ]
+      }
+    },
+    "downstream_effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "correction_candidate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "x-kpgs-failure-ontology": {
+    "FOC-M01": "Import fabrication",
+    "FOC-M02": "Method or signature fabrication",
+    "FOC-M03": "Validation theater",
+    "FOC-R01": "Source hallucination",
+    "FOC-R02": "Unsupported factual promotion",
+    "FOC-R03": "Sycophancy that overrides evidence or governance",
+    "FOC-R04": "Persona drift that changes role or control behavior",
+    "FOC-R05": "Reinforcement of an unsupported or delusional premise",
+    "FOC-R06": "Memory contamination or ungrounded state persistence",
+    "FOC-R07": "Authority escalation beyond assigned lane",
+    "FOC-R08": "Tool or external action without sufficient authorization",
+    "FOC-R09": "Declared control exists but runtime behavior violates it",
+    "FOC-R10": "Fabricated execution, receipt, test result, or evidence"
+  },
+  "x-kpgs-promotion-law": {
+    "principle": "Failure may create a correction candidate, never authority.",
+    "required_gates": [
+      "teacher_reviewed",
+      "blackmask_passed",
+      "replay_passed",
+      "kc_save"
+    ],
+    "identity_invariant": "student_agent_id, teacher_agent_id, and kc_agent_id must be distinct"
+  }
+}
