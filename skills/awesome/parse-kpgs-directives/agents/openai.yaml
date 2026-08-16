@@ -1,0 +1,14 @@
+interface:
+  display_name: KPGS Directive Parser
+  short_description: Parse dense directives into governed execution plans
+  default_prompt: Use $parse-kpgs-directives to parse this directive block into constraints,
+    tasks, gates, and next actions.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

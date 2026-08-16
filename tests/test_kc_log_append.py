@@ -1,17 +1,13 @@
 """Tests for scripts/kc_log_append.py."""
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-REPO = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO / "kopano-core"))
-
-
-
 import json
 import subprocess
 import sys
 from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "kopano-core"))
 
 SCRIPT = Path(__file__).resolve().parent.parent / "scripts" / "kc_log_append.py"
 
@@ -154,33 +150,61 @@ def test_validate_and_proof_check(tmp_path: Path) -> None:
     assert pc.returncode == 0, pc.stderr
 
 
-def test_validate_tolerates_legacy_main_brain_records(tmp_path: Path) -> None:
-    """Legacy Main Brain records (pre-`schema`, or evolved per-kind fields)
-    must not fail the validate gate -- the validator tracks the code, not a
-    frozen historical shape."""
+def test_legacy_telemetry_is_valid_but_not_selected_as_proof(tmp_path: Path) -> None:
     (tmp_path / "docs/swarm-ops/logs").mkdir(parents=True)
-    (tmp_path / "docs/swarm-ops/logs/KC Review Log.jsonl").write_text("", encoding="utf-8")
+    review = tmp_path / "docs/swarm-ops/logs/KC Review Log.jsonl"
     mainb = tmp_path / "docs/swarm-ops/logs/KC Main Brain Log.jsonl"
+    review.write_text(
+        '{"schema":"kc_review_log_v1","ts":"2026-05-16T12:01:00Z","role":"student",'
+        '"phase":"audit","agent_id":"t","summary":"audit","commands":["pytest"],'
+        '"exit_code":0,"git_sha":"abc","branch":null,'
+        '"evidence_urls":["https://example.com/review"],"ref_review_id":null,'
+        '"teacher_verdict":null}\n'
+        '{"ts":"2026-06-04T23:23:34Z","kind":"student_audit",'
+        '"summary":"legacy telemetry","status":"pending_teacher"}\n',
+        encoding="utf-8",
+    )
     mainb.write_text(
-        # 1. original bootstrap ledger format: event/timestamp/details (dict)
-        '{"timestamp":"2026-05-25T19:40:00Z","event":"mao_studio_integration",'
-        '"phase":"p","details":{"completed":["x"]},"proof":"tsc 0"}\n'
-        # 2. legacy kind-only record (no schema) with per-agent fields
-        '{"ts":"2026-06-23T22:55:26Z","kind":"black_mask_drill",'
-        '"agent_id":"kasilink","summary":"SHIP","verdict":"SHIP"}\n'
-        # 3. schema'd record with evolved per-kind field (verdict, no summary)
-        '{"schema":"kc_main_brain_log_v1","ts":"2026-06-22T05:12:36Z",'
-        '"kind":"oz_lattice_bleed","source":"gui","target":"crud",'
-        '"verdict":"BLEED_DETECTED","seal":"s","exit_code":1}\n'
-        # 4. schema'd internal adapter receipt (no evidence_urls)
-        '{"schema":"kc_main_brain_log_v1","ts":"2026-08-16T05:06:33Z",'
-        '"kind":"agent_build_poc_ci_adapter","summary":"governance=POC_VALIDATED",'
-        '"exit_code":0}\n',
+        '{"schema":"kc_main_brain_log_v1","ts":"2026-06-14T12:27:39Z",'
+        '"kind":"receipt","summary":"proof","commands":null,"exit_code":0,'
+        '"git_sha":"abc","evidence_urls":["https://example.com/main"],'
+        '"payload_ref":null,"kimi_ack":null}\n'
+        '{"ts":"2026-06-22T05:09:12Z","kind":"identi_ai_flow",'
+        '"summary":"legacy operational telemetry","verdict":"HANDOFF_SUBMITTED"}\n',
         encoding="utf-8",
     )
 
-    v = _run(tmp_path, "validate")
-    assert v.returncode == 0, v.stderr
+    validated = _run(tmp_path, "validate")
+    assert validated.returncode == 0, validated.stderr
+
+    proof = _run(tmp_path, "proof-check")
+    assert proof.returncode == 0, proof.stderr
+
+
+def test_validate_rejects_unknown_explicit_schema(tmp_path: Path) -> None:
+    path = tmp_path / "unknown.jsonl"
+    path.write_text(
+        '{"schema":"future_without_contract","ts":"2026-06-22T05:09:12Z",'
+        '"kind":"event","summary":"not governed"}\n',
+        encoding="utf-8",
+    )
+    result = _run(tmp_path, "validate", path)
+    assert result.returncode == 1
+    assert "unknown schema" in result.stderr
+
+
+def test_validate_accepts_historical_mainbrain_extensions(tmp_path: Path) -> None:
+    path = tmp_path / "historical.jsonl"
+    path.write_text(
+        '{"schema":"kc_main_brain_log_v1","ts":"2026-06-14T18:26:08Z",'
+        '"kind":"oz_lattice_bleed","source":"gui","target":"crud",'
+        '"verdict":"BLEED_DETECTED","exit_code":1}\n'
+        '{"schema":"kc_main_brain_log_v1","ts":"%Y-%m-%dT%H:%M:%SZ",'
+        '"kind":"council_kc_conclusion","summary":"historical import"}\n',
+        encoding="utf-8",
+    )
+    result = _run(tmp_path, "validate", path)
+    assert result.returncode == 0, result.stderr
 
 
 def test_proof_check_fails_without_student_audit(tmp_path: Path) -> None:

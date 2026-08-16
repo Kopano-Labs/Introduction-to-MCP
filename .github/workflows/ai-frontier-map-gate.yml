@@ -1,0 +1,34 @@
+name: AI Frontier Map Gate
+
+on:
+  pull_request:
+    paths:
+      - "governance/ai-frontier-map/**"
+      - "data/ai-frontier-map/**"
+      - "tools/ai_frontier_map/**"
+      - ".github/workflows/ai-frontier-map-gate.yml"
+  push:
+    paths:
+      - "governance/ai-frontier-map/**"
+      - "data/ai-frontier-map/**"
+      - "tools/ai_frontier_map/**"
+
+permissions:
+  contents: read
+
+jobs:
+  provenance-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate seed provenance records
+        run: python tools/ai_frontier_map/validate_corpus.py data/ai-frontier-map/seed.records.jsonl
+      - name: Validate collected corpus when present
+        shell: bash
+        run: |
+          if [[ -f data/ai-frontier-map/oya-corpus.jsonl ]]; then
+            python tools/ai_frontier_map/validate_corpus.py data/ai-frontier-map/oya-corpus.jsonl
+          fi
