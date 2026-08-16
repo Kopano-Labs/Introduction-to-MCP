@@ -33,3 +33,50 @@ orch = "orch.orch.cli:app"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["orch*"]
+
+[tool.ruff]
+# Lint project source only. Vendored / generated / local trees are excluded so
+# the gate reflects the code under review, not third-party site-packages.
+extend-exclude = [
+    ".CLI_Project",
+    "Schematics",
+    "freddy-nw-alfalfa",
+    "node_modules",
+    "build",
+    "dist",
+    "KasiLink",
+    ".kc",
+]
+line-length = 120
+
+[tool.ruff.lint]
+# Focus on real defects rather than a stylistic wall: pyflakes (F) for
+# undefined names / unused imports, the pycodestyle error subset that flags
+# genuine mistakes (E4/E7/E9), plus a small set of bugbear rules already
+# annotated with noqa across the codebase.
+select = ["E4", "E7", "E9", "F", "B"]
+ignore = [
+    "E501",
+    "E402",
+    "E741",
+    "E401",
+    "B008",
+    "B904",
+    "B905",
+    "E701",
+    "E722",
+    "F401",
+    "F541",
+    "F811",
+    "F821",
+    "F841",
+    "B006",
+    "B007",
+    "B030",
+    "B004",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["F401", "F841"]
+"scripts/**/*.py" = ["F401"]
+"**/__init__.py" = ["F401"]

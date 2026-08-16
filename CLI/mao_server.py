@@ -393,7 +393,7 @@ def mao_language_route(
     _pref = preferred_language if isinstance(preferred_language, str) else ""
     _domain = domain if isinstance(domain, str) else "general"
     try:
-        from kopano.language_runtime import detect_language, build_multilingual_response
+        from kopano.language_runtime import build_multilingual_response
         from kopano.sa_access import build_access_plan
 
         lang_response = build_multilingual_response(
@@ -469,7 +469,7 @@ def mao_tsap_student_turn(
     message: str = Field(description="Student task message"),
     intent: str = Field(default="execute", description="MAO routing intent"),
 ) -> dict[str, Any]:
-    from kopano.phu_apprenticeship import departments_from_config, student_submit
+    from kopano.phu_apprenticeship import student_submit
     from kopano.mao_dispatch import execute_task
 
     dept_id = _tsap_str(department_id)

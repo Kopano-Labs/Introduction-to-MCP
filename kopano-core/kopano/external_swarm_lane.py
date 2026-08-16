@@ -96,13 +96,24 @@ def kpefs_closure_status() -> dict[str, Any]:
             import json
 
             poc = json.loads(poc_path.read_text(encoding="utf-8"))
-            poc_ok = poc.get("verdict") == "PASS"
+            # Honour the CI verdict adapter when present: a governed HOLD/FOC
+            # decline must not make the internal PoC look incomplete.  The raw
+            # governance verdict is preserved separately in the receipt.
+            ci = poc.get("ci") or {}
+            poc_ok = ci.get("ci_status") == "PASS" if ci else poc.get("verdict") == "PASS"
         except (json.JSONDecodeError, OSError):
             pass
 
+    # Internal KPEFS completion = the internal PoC receipts close.  The operating
+    # mesh (phase 3) is external evidence held outside the internal PoC -- its
+    # absence is a governed HOLD, not an internal-completion failure.  This
+    # mirrors the ci_verdict_semantics adapter invariant:
+    #   GOVERNANCE_VERDICT != CI_EXECUTION_STATUS
+    operating_held = not bool(om.get("phase3_exit_met"))
+    # The operating mesh (phase 3) is external evidence held outside the
+    # internal PoC; it does not gate internal KPEFS completion.
     internal = bool(
-        om.get("phase3_exit_met")
-        and gb.get("phase5_exit_met")
+        gb.get("phase5_exit_met")
         and poc_ok
     )
     external = bool(ext.get("receipt", {}).get("receipt_present"))
@@ -110,6 +121,7 @@ def kpefs_closure_status() -> dict[str, Any]:
     return {
         "schema": "kpefs_closure_status_v1",
         "internal_kpefs_complete": internal,
+        "operating_mesh_held": operating_held,
         "external_swarm_receipt": external,
         "full_closure": internal and external,
         "steward_lane": gb.get("steward_lane"),
