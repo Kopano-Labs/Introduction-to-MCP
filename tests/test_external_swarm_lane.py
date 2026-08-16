@@ -41,3 +41,14 @@ def test_closure_internal_complete():
     c = kpefs_closure_status()
     assert c["internal_kpefs_complete"] is True
     assert "external_swarm" in c
+
+@pytest.mark.integration
+def test_closure_reports_operating_mesh_hold():
+    """The operating mesh is external evidence; when unseeded it must surface
+    as a HOLD, not block internal KPEFS completion."""
+    c = kpefs_closure_status()
+    assert "operating_mesh_held" in c
+    assert isinstance(c["operating_mesh_held"], bool)
+    assert c["operating_mesh"]["phase3_exit_met"] is False
+    # internal completion honours the CI verdict adapter, not the raw verdict
+    assert c["internal_kpefs_complete"] is True

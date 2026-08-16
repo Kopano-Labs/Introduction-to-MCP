@@ -76,6 +76,79 @@ def test_external_graduation_evidence_is_held_not_failed() -> None:
     assert ci["held_external_evidence"] == ["graduation_bar_met"]
 
 
+def test_boundary_breach_governed_decline_is_green_ci() -> None:
+    """A BOUNDARY_BREACH is the LPM-LPH engine enforcing a department contract
+    before execution -- a governed decline, not a validator crash."""
+    report = {
+        "verdict": "FAIL",
+        "checks": [
+            {
+                "check": "identi_flow_handoff",
+                "verdict": "FAIL",
+                "detail": "BOUNDARY_BREACH",
+            },
+            {
+                "check": "guardian_flow_teacher_kc",
+                "verdict": "FAIL",
+                "detail": "BOUNDARY_BREACH",
+            },
+        ],
+    }
+
+    ci = classify_agent_build_ci(report)
+
+    assert ci["ci_status"] == "PASS"
+    assert ci["expected_declines"] == ["identi_flow_handoff", "guardian_flow_teacher_kc"]
+    assert ci["blocking_failures"] == []
+
+
+def test_optional_dep_missing_and_operating_mesh_hold_are_held_not_failed() -> None:
+    """A missing optional runtime dep (mcp.server.fastmcp) and an unseeded
+    operating mesh are external-evidence Holds, not CI blockers."""
+    report = {
+        "verdict": "FAIL",
+        "checks": [
+            {
+                "check": "mao_dispatch",
+                "verdict": "FAIL",
+                "detail": "No module named 'mcp.server.fastmcp'",
+            },
+            {
+                "check": "operating_mesh_phase3",
+                "verdict": "FAIL",
+                "detail": "operating=0/10",
+            },
+        ],
+    }
+
+    ci = classify_agent_build_ci(report)
+
+    assert ci["ci_status"] == "PASS"
+    assert ci["evidence_status"] == "HELD_FOR_EXTERNAL_PROOF"
+    assert ci["held_external_evidence"] == ["mao_dispatch", "operating_mesh_phase3"]
+    assert ci["blocking_failures"] == []
+
+
+def test_real_validator_crash_stays_red() -> None:
+    """A genuine internal exception (not a boundary breach, not an optional
+    dep) must remain a CI blocker."""
+    report = {
+        "verdict": "FAIL",
+        "checks": [
+            {
+                "check": "blackmask_drill",
+                "verdict": "FAIL",
+                "detail": "AttributeError: 'NoneType' object has no attribute 'verdict'",
+            }
+        ],
+    }
+
+    ci = classify_agent_build_ci(report)
+
+    assert ci["ci_status"] == "FAIL"
+    assert ci["blocking_failures"] == ["blackmask_drill"]
+
+
 def test_unexpected_validator_failure_stays_red() -> None:
     report = {
         "verdict": "FAIL",

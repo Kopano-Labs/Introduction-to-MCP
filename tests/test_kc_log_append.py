@@ -154,6 +154,35 @@ def test_validate_and_proof_check(tmp_path: Path) -> None:
     assert pc.returncode == 0, pc.stderr
 
 
+def test_validate_tolerates_legacy_main_brain_records(tmp_path: Path) -> None:
+    """Legacy Main Brain records (pre-`schema`, or evolved per-kind fields)
+    must not fail the validate gate -- the validator tracks the code, not a
+    frozen historical shape."""
+    (tmp_path / "docs/swarm-ops/logs").mkdir(parents=True)
+    (tmp_path / "docs/swarm-ops/logs/KC Review Log.jsonl").write_text("", encoding="utf-8")
+    mainb = tmp_path / "docs/swarm-ops/logs/KC Main Brain Log.jsonl"
+    mainb.write_text(
+        # 1. original bootstrap ledger format: event/timestamp/details (dict)
+        '{"timestamp":"2026-05-25T19:40:00Z","event":"mao_studio_integration",'
+        '"phase":"p","details":{"completed":["x"]},"proof":"tsc 0"}\n'
+        # 2. legacy kind-only record (no schema) with per-agent fields
+        '{"ts":"2026-06-23T22:55:26Z","kind":"black_mask_drill",'
+        '"agent_id":"kasilink","summary":"SHIP","verdict":"SHIP"}\n'
+        # 3. schema'd record with evolved per-kind field (verdict, no summary)
+        '{"schema":"kc_main_brain_log_v1","ts":"2026-06-22T05:12:36Z",'
+        '"kind":"oz_lattice_bleed","source":"gui","target":"crud",'
+        '"verdict":"BLEED_DETECTED","seal":"s","exit_code":1}\n'
+        # 4. schema'd internal adapter receipt (no evidence_urls)
+        '{"schema":"kc_main_brain_log_v1","ts":"2026-08-16T05:06:33Z",'
+        '"kind":"agent_build_poc_ci_adapter","summary":"governance=POC_VALIDATED",'
+        '"exit_code":0}\n',
+        encoding="utf-8",
+    )
+
+    v = _run(tmp_path, "validate")
+    assert v.returncode == 0, v.stderr
+
+
 def test_proof_check_fails_without_student_audit(tmp_path: Path) -> None:
     (tmp_path / "docs/swarm-ops/logs").mkdir(parents=True)
     (tmp_path / "docs/swarm-ops/logs/KC Review Log.jsonl").write_text(
