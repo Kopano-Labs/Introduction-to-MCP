@@ -44,11 +44,18 @@ def test_closure_internal_complete():
 
 @pytest.mark.integration
 def test_closure_reports_operating_mesh_hold():
-    """The operating mesh is external evidence; when unseeded it must surface
-    as a HOLD, not block internal KPEFS completion."""
+    """Operating-mesh HOLD must mirror the live phase-3 evidence state.
+
+    CI may intentionally seed an ephemeral 10/10 operating mesh before this
+    test runs, while a standalone local run may be unseeded.  The semantic
+    contract is therefore the relationship between the two fields, not a
+    hard-coded assumption that phase 3 is always false.
+    """
     c = kpefs_closure_status()
     assert "operating_mesh_held" in c
     assert isinstance(c["operating_mesh_held"], bool)
-    assert c["operating_mesh"]["phase3_exit_met"] is False
-    # internal completion honours the CI verdict adapter, not the raw verdict
+    phase3_exit_met = bool(c["operating_mesh"]["phase3_exit_met"])
+    assert c["operating_mesh_held"] is (not phase3_exit_met)
+    # Internal completion honours the CI verdict adapter, not the raw verdict,
+    # and is intentionally independent of the external operating-mesh HOLD.
     assert c["internal_kpefs_complete"] is True
