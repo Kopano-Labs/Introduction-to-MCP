@@ -305,10 +305,21 @@ async fn finish_and_drain_peer(
     send.finish()?;
     let mut trailing = [0_u8; 1];
     match recv.read(&mut trailing).await? {
+        None => {}
+        Some(_) => {
+            return Err(IoError::new(
+                ErrorKind::InvalidData,
+                "peer sent bytes after the terminal zero-frame",
+            )
+            .into())
+        }
+    }
+
+    match send.stopped().await? {
         None => Ok(()),
-        Some(_) => Err(IoError::new(
-            ErrorKind::InvalidData,
-            "peer sent bytes after the terminal zero-frame",
+        Some(error_code) => Err(IoError::new(
+            ErrorKind::ConnectionAborted,
+            format!("peer stopped terminal sync stream with error code {error_code:?}"),
         )
         .into()),
     }
