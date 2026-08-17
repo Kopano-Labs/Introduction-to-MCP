@@ -298,6 +298,22 @@ async fn read_frame(recv: &mut RecvStream) -> Result<Option<Message>, BoxError> 
     Ok(Some(Message::decode(&payload)?))
 }
 
+async fn finish_and_drain_peer(
+    send: &mut SendStream,
+    recv: &mut RecvStream,
+) -> Result<(), BoxError> {
+    send.finish()?;
+    let mut trailing = [0_u8; 1];
+    match recv.read(&mut trailing).await? {
+        None => Ok(()),
+        Some(_) => Err(IoError::new(
+            ErrorKind::InvalidData,
+            "peer sent bytes after the terminal zero-frame",
+        )
+        .into()),
+    }
+}
+
 async fn client_turns(
     mut send: SendStream,
     mut recv: RecvStream,
@@ -312,7 +328,7 @@ async fn client_turns(
             replica.receive_sync_message(message)?;
         }
         if !sent && !received {
-            send.finish()?;
+            finish_and_drain_peer(&mut send, &mut recv).await?;
             return Ok(round);
         }
     }
@@ -333,7 +349,7 @@ async fn server_turns(
         let outbound = replica.generate_sync_message();
         let sent = write_frame(&mut send, outbound).await?;
         if !received && !sent {
-            send.finish()?;
+            finish_and_drain_peer(&mut send, &mut recv).await?;
             return Ok(round);
         }
     }
