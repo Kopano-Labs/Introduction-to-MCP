@@ -12,7 +12,12 @@ Core invariants encoded here:
 - autonomy may increase after validated execution and decrease after failure;
 - conceptual convergence may include both user and agent targets;
 - autonomy stops at genuine ambiguity, insufficient evidence/authority, or
-  high-risk / hard-to-reverse actions without confirmation.
+  high-risk / hard-to-reverse actions without confirmation;
+- nodes hold state while membranes govern state transitions;
+- authority is not abundance, relevance is not permission, observation is not
+  mutation, and a new idea is not automatically the current task;
+- execution velocity decreases as a transition approaches mutation,
+  irreversibility, or external consequence.
 """
 
 from __future__ import annotations
@@ -34,6 +39,22 @@ class TransitionDecision(str, Enum):
     CLARIFY = "CLARIFY"
     CONFIRM = "CONFIRM"
     HOLD = "HOLD"
+
+
+class TransitionVelocity(str, Enum):
+    """Risk-governed execution speed for a transition boundary.
+
+    The labels intentionally preserve the human driving analogy:
+    - HIGHWAY: low-risk inspection/read work may move quickly;
+    - URBAN: ambiguity requires slower interpretation;
+    - SCHOOL_ZONE: state mutation requires bounded movement and inspection;
+    - CHECKPOINT: high-risk or hard-to-reverse effects require confirmation.
+    """
+
+    HIGHWAY = "HIGHWAY"
+    URBAN = "URBAN"
+    SCHOOL_ZONE = "SCHOOL_ZONE"
+    CHECKPOINT = "CHECKPOINT"
 
 
 def _ratio(name: str, value: float) -> float:
@@ -278,6 +299,221 @@ class GovernedTransition:
         ) and not self.explicit_confirmation:
             return TransitionDecision.CONFIRM
         return TransitionDecision.EXECUTE
+
+
+@dataclass(frozen=True)
+class InformationMembrane:
+    """Selective-permeability gate between context and mutation authority.
+
+    High-volume or highly relevant context may influence interpretation, but it
+    cannot manufacture authority or permission. Observation is evidence intake,
+    not mutation authority. Novel ideas remain outside the active task unless
+    they are necessary to satisfy the requested change.
+    """
+
+    authority: float
+    abundance: float
+    relevance: float
+    permission: float
+    observation: bool
+    mutation_requested: bool
+    new_idea: bool = False
+    required_change: bool = False
+
+    def __post_init__(self) -> None:
+        for name in ("authority", "abundance", "relevance", "permission"):
+            _ratio(name, getattr(self, name))
+
+    def mutation_reasons(
+        self,
+        *,
+        authority_floor: float = 0.8,
+        permission_floor: float = 0.8,
+    ) -> tuple[str, ...]:
+        _ratio("authority_floor", authority_floor)
+        _ratio("permission_floor", permission_floor)
+
+        reasons: list[str] = []
+        if self.authority < authority_floor:
+            reasons.append(
+                "Authority is below the mutation threshold; abundance cannot substitute for authority."
+            )
+        if self.permission < permission_floor:
+            reasons.append(
+                "Permission is below the mutation threshold; relevance cannot substitute for permission."
+            )
+        if not self.mutation_requested:
+            reasons.append(
+                "Observation is not mutation authority; no mutation was requested."
+            )
+        if self.new_idea and not self.required_change:
+            reasons.append(
+                "A new idea is not the current task unless it is required for the requested change."
+            )
+        return tuple(reasons)
+
+    def mutation_eligible(
+        self,
+        *,
+        authority_floor: float = 0.8,
+        permission_floor: float = 0.8,
+    ) -> bool:
+        return not self.mutation_reasons(
+            authority_floor=authority_floor,
+            permission_floor=permission_floor,
+        )
+
+
+@dataclass(frozen=True)
+class MembraneVerdict:
+    """Deterministic result of a state-transition membrane evaluation."""
+
+    decision: TransitionDecision
+    velocity: TransitionVelocity
+    reasons: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class StateTransitionMembrane:
+    """Govern the membrane between one state node and the next.
+
+    Nodes hold state. The arrow between nodes is not free movement: the membrane
+    validates object identity, requested scope, evidence, selective permeability,
+    state cost, objective homeostasis, ambiguity, risk, and reversibility before
+    allowing a transition to execute.
+
+    `requested_delta` is the normalized amount of change the caller wants to
+    cross the boundary. `permitted_delta` is the maximum change authorized for
+    this transition. A requested change larger than that budget fails closed.
+    """
+
+    same_object: bool
+    scope_match: bool
+    information: InformationMembrane
+    evidence: float
+    requested_delta: float
+    permitted_delta: float
+    state_cost: float
+    homeostasis: float
+    ambiguity: float
+    risk: float
+    irreversibility: float
+    explicit_confirmation: bool = False
+
+    def __post_init__(self) -> None:
+        for name in (
+            "evidence",
+            "requested_delta",
+            "permitted_delta",
+            "state_cost",
+            "homeostasis",
+            "ambiguity",
+            "risk",
+            "irreversibility",
+        ):
+            _ratio(name, getattr(self, name))
+
+    def velocity(
+        self,
+        *,
+        ambiguity_ceiling: float = 0.4,
+        confirmation_risk: float = 0.7,
+        confirmation_irreversibility: float = 0.7,
+    ) -> TransitionVelocity:
+        _ratio("ambiguity_ceiling", ambiguity_ceiling)
+        _ratio("confirmation_risk", confirmation_risk)
+        _ratio("confirmation_irreversibility", confirmation_irreversibility)
+
+        if (
+            self.risk >= confirmation_risk
+            or self.irreversibility >= confirmation_irreversibility
+        ):
+            return TransitionVelocity.CHECKPOINT
+        if self.requested_delta > 0.0 or self.state_cost > 0.0:
+            return TransitionVelocity.SCHOOL_ZONE
+        if self.ambiguity > ambiguity_ceiling:
+            return TransitionVelocity.URBAN
+        return TransitionVelocity.HIGHWAY
+
+    def evaluate(
+        self,
+        *,
+        authority_floor: float = 0.8,
+        permission_floor: float = 0.8,
+        evidence_floor: float = 0.6,
+        homeostasis_floor: float = 0.6,
+        state_cost_ceiling: float = 0.6,
+        ambiguity_ceiling: float = 0.4,
+        confirmation_risk: float = 0.7,
+        confirmation_irreversibility: float = 0.7,
+    ) -> MembraneVerdict:
+        for name, value in {
+            "authority_floor": authority_floor,
+            "permission_floor": permission_floor,
+            "evidence_floor": evidence_floor,
+            "homeostasis_floor": homeostasis_floor,
+            "state_cost_ceiling": state_cost_ceiling,
+            "ambiguity_ceiling": ambiguity_ceiling,
+            "confirmation_risk": confirmation_risk,
+            "confirmation_irreversibility": confirmation_irreversibility,
+        }.items():
+            _ratio(name, value)
+
+        velocity = self.velocity(
+            ambiguity_ceiling=ambiguity_ceiling,
+            confirmation_risk=confirmation_risk,
+            confirmation_irreversibility=confirmation_irreversibility,
+        )
+        reasons: list[str] = []
+
+        if not self.same_object:
+            reasons.append(
+                "Transition target identity changed; repair the existing object before creating replacement state."
+            )
+        if not self.scope_match:
+            reasons.append(
+                "Proposed state change is outside the requested scope."
+            )
+        reasons.extend(
+            self.information.mutation_reasons(
+                authority_floor=authority_floor,
+                permission_floor=permission_floor,
+            )
+        )
+        if self.evidence < evidence_floor:
+            reasons.append("Evidence is below the transition threshold.")
+        if self.requested_delta > self.permitted_delta:
+            reasons.append(
+                "Requested state delta exceeds membrane permeability for this transition."
+            )
+        if self.state_cost > state_cost_ceiling:
+            reasons.append(
+                "State cost exceeds the transition budget; reduce state proliferation before execution."
+            )
+        if self.homeostasis < homeostasis_floor:
+            reasons.append(
+                "Transition does not sufficiently restore or preserve the active objective."
+            )
+
+        if reasons:
+            return MembraneVerdict(TransitionDecision.HOLD, velocity, tuple(reasons))
+        if self.ambiguity > ambiguity_ceiling:
+            return MembraneVerdict(
+                TransitionDecision.CLARIFY,
+                velocity,
+                ("Ambiguity exceeds the governed interpretation threshold.",),
+            )
+        if velocity is TransitionVelocity.CHECKPOINT and not self.explicit_confirmation:
+            return MembraneVerdict(
+                TransitionDecision.CONFIRM,
+                velocity,
+                ("High-risk or hard-to-reverse transition requires explicit confirmation.",),
+            )
+        return MembraneVerdict(
+            TransitionDecision.EXECUTE,
+            velocity,
+            ("State-transition membrane admitted the bounded change.",),
+        )
 
 
 def converge_targets(
