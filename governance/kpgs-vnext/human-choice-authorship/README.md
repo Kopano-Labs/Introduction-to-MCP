@@ -40,7 +40,7 @@ CDP answers **“What could this become?”** It widens a governed possibility f
 
 CCP answers **“What consistently works / survives the evidence?”** It narrows after divergence and evaluation. Only its `Accepted` state is canonical in the current Project Jennifer implementation.
 
-Therefore the correct composition for human-choice exploration is not “RIVM decides the choice.” RIVM guards the truth/agency/source membrane around the interaction; CDP generates alternative explanations or futures; evidence/evaluation tests them; the human independently supplies or withholds consent; CCP may govern conceptual convergence, but CCP still does not possess authority to make the human's life decision.
+Therefore the correct composition for human-choice exploration is not “RIVM decides the choice.” RIVM guards the truth/agency/source membrane around the interaction; CDP generates alternative explanations or futures; evidence/evaluation tests them; CCP may optionally converge the conceptual understanding; **then the human independently supplies or withholds consent**. CCP still does not possess authority to make the human's life decision.
 
 ## Proposed concept: root algorithm
 
@@ -96,18 +96,23 @@ flowchart TD
     C --> RA[Root Algorithm Candidates<br/>PROPOSED / hypothesis]
     RA --> RIVM[RIVM membrane<br/>claim + source + agency separation]
     RIVM --> CDP[CDP divergence<br/>2+ distinct candidates + UNKNOWN]
-    CDP --> EV[Evaluation + POC-vs-FOC evidence]
-    EV --> HG{Human Consent Gate}
-    HG -->|endorse| CCP[CCP convergence candidate]
+    CDP --> EV[CEEP + POC-vs-FOC evidence]
+    EV --> CQ{Conceptual convergence requested?}
+    CQ -->|yes| CCP[CCP conceptual state<br/>Accepted / Experimental / Refine / Rejected]
+    CQ -->|no| US[Evidence + uncertainty summary]
+    CCP --> HG{Human Consent Gate}
+    US --> HG
+    HG -->|endorse| AC[Human-endorsed choice candidate]
     HG -->|reject| RJ[Release / Reject desire]
     HG -->|hold / unanswered| H[Remain unresolved]
-    CCP --> AC[Authored Choice Candidate]
     AC --> AU{Human Action Authority}
     AU -->|authorize| ACT[Action / Non-action]
     AU -->|do not authorize| H
     ACT --> OR[Outcome Receipt]
     OR --> C
 ```
+
+This ordering prevents a preferred answer from being smuggled into conceptual truth. CCP may converge an explanation, remain experimental, or return `Refine`; the human can still endorse, reject, hold or act under uncertainty. **Conceptual confidence and personal authority are different axes.**
 
 ## State-of-mind rule
 
@@ -120,7 +125,8 @@ The protocol does **not** treat a state as a separate person and does not declar
 The human can always:
 
 - reject a root-algorithm interpretation;
-- refuse convergence;
+- refuse conceptual convergence;
+- choose while conceptual uncertainty remains visible;
 - leave the consent gate unanswered;
 - endorse a desire while declining action;
 - change an earlier endorsement without rewriting the historical receipt;
@@ -135,8 +141,8 @@ RIVM  -> Is the inference truthful, source-separated, warm and agency-preserving
 CDP   -> What structurally different explanations / futures could this become?
 CEEP  -> How do the candidates evaluate?
 POC/FOC -> What evidence actually exists versus what merely appears coherent?
-HUMAN CONSENT -> Do I still consent to carrying this desire?
-CCP   -> What conceptual pattern survives the evidence strongly enough to converge?
+CCP (optional) -> What conceptual pattern survives the evidence strongly enough to converge?
+HUMAN CONSENT -> Now that I can see this, do I still consent to carrying it?
 HUMAN AUTHORITY -> Do I actually act, refuse, defer or revise?
 ```
 
@@ -149,6 +155,7 @@ This POC fails governance if it:
 - suppresses the unknown branch to force completeness;
 - lets historical context override current human instruction;
 - infers human consent instead of receiving it explicitly;
+- lets human preference retroactively determine which hypothesis counts as fact;
 - equates CCP conceptual acceptance with authority to execute a life decision;
 - assigns a hidden identity, diagnosis, motive or “true self” to the person;
 - treats intoxicated or emotionally intense testimony as automatically more truthful;
