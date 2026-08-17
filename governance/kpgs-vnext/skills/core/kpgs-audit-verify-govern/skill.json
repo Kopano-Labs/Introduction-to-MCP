@@ -10,11 +10,11 @@
     "languages": ["markdown", "json"]
   },
   "inputs": {
-    "schema_ref": "../../agent-governance/build-spec.schema.json",
+    "schema_ref": "../../../agent-governance/build-spec.schema.json",
     "description": "A governing build/workflow specification plus implementation and verifier evidence references."
   },
   "outputs": {
-    "schema_ref": "../../evidence/evidence-bundle.schema.json",
+    "schema_ref": "../../../evidence/evidence-bundle.schema.json",
     "description": "A correlated evidence bundle with an allow, deny, promote, hold, or rollback decision."
   },
   "required_capabilities": [
