@@ -1,0 +1,40 @@
+name: KPGS vNext Phase 0 Gate
+
+on:
+  push:
+    paths:
+      - "governance/kpgs-vnext/**"
+      - ".github/workflows/kpgs-vnext-phase0-gate.yml"
+  pull_request:
+    paths:
+      - "governance/kpgs-vnext/**"
+      - ".github/workflows/kpgs-vnext-phase0-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kpgs-vnext-phase0-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  truth-contracts:
+    name: Validate KPGS truth and contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate Phase 0 contracts
+        run: python governance/kpgs-vnext/validate_phase0.py
+
+      - name: Compile validator
+        run: python -m py_compile governance/kpgs-vnext/validate_phase0.py
