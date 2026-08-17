@@ -27,7 +27,7 @@ The renter receives only the governed context required for the task. Hydration d
 The renter performs the bounded task. Every side effect MUST be idempotent or protected by an idempotency key.
 
 ### emit
-Progress, decisions, tool outcomes and failures are emitted as typed events with tenant/task/correlation identifiers.
+Progress, decisions, tool outcomes and failures are emitted as typed events with tenant/session/task/correlation identifiers.
 
 ### checkpoint
 A renter may emit a checkpoint reference into canonical storage. A checkpoint is evidence/state owned by the Hub or declared canonical domain store; it is not renter-local authority.
@@ -41,6 +41,7 @@ Every governed execution MUST carry:
 
 - `tenant_id`
 - `domain_id`
+- `session_id`
 - `task_id`
 - `renter_id`
 - `correlation_id`
@@ -72,6 +73,7 @@ Hydration SHOULD include:
 
 - governing specification reference;
 - accepted input payload;
+- tenant/domain/session/task/correlation identifiers;
 - task policy/capability scope;
 - required skill versions;
 - current checkpoint reference if resuming;
@@ -187,7 +189,7 @@ The suite proves:
 2. capability denial before the workload handler can execute;
 3. replay suppression across different renter instances;
 4. identical rehydration semantics across two domain workloads;
-5. provenance/correlation metadata on emitted results;
+5. tenant/session/task/correlation provenance on emitted results;
 6. deterministic protocol failure/recovery mapping;
 7. graceful eviction followed by replacement-renter continuation;
 8. no renter-local database is required for canonical continuity.
