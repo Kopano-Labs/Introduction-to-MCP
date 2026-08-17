@@ -1,0 +1,28 @@
+{
+  "protocol_version": "1.0",
+  "event_id": "evt-phase0-0001",
+  "event_kind": "task.progress",
+  "tenant_id": "kopano-labs",
+  "domain_id": "introduction-to-mcp",
+  "task_id": "kpgs-vnext-phase0",
+  "renter_id": "reference-renter",
+  "correlation_id": "corr-kpgs-vnext-phase0",
+  "lease_id": "lease-example-non-production",
+  "issued_at": "2026-08-17T06:34:00Z",
+  "idempotency_key": "phase0-progress-0001",
+  "sequence": 1,
+  "governing_spec_ref": "governance/kpgs-vnext/examples/phase0-build-spec.json",
+  "skill_versions": {
+    "kpgs-specification-first": "1.0"
+  },
+  "payload": {
+    "status": "contracts_written",
+    "message": "Phase 0 canonical governance contracts are being validated."
+  },
+  "evidence": [
+    {
+      "kind": "repository-path",
+      "ref": "governance/kpgs-vnext/stateless-renter/PROTOCOL.md"
+    }
+  ]
+}
