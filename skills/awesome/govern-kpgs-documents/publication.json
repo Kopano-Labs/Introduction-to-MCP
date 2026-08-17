@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "name": "govern-kpgs-documents",
+  "title": "KPGS Document Governance",
+  "slug": "kpgs-document-governance",
+  "version": "1.0.0",
+  "category": "agent-governance",
+  "status": "candidate",
+  "author": "Kholofelo Robyn Rababalela",
+  "license": "MIT",
+  "source_repository": "RobynAwesome/Introduction-to-MCP",
+  "source_branch": "master",
+  "skill_path": "skills/awesome/govern-kpgs-documents/SKILL.md",
+  "registry_intent": "AwesomeSkills.dev publication",
+  "publication_state": "unknown",
+  "external_discovery": "unknown",
+  "summary": "Creates and governs typed KPGS documents with authority/evidence separation, KPEFS activity routing, PKA UNKNOWN preservation, proof-gated promotion, WYC-01 causal boundaries, receipts, and Agent Skills-compatible packaging.",
+  "tags": [
+    "kpgs",
+    "kpefs",
+    "pka",
+    "blackmask",
+    "governance",
+    "documentation",
+    "agent-skills",
+    "awesomeskills",
+    "provenance",
+    "receipts",
+    "stateless-renter"
+  ],
+  "triggers": [
+    "create a KPGS specification or manual",
+    "turn a governance document into a reusable skill",
+    "validate whether a document may be promoted",
+    "classify a KPGS report, SOP, incident, architecture, learning or release document",
+    "preserve unknown evidence during document authoring",
+    "prepare an AwesomeSkills-compatible KPGS document skill"
+  ],
+  "invariants": [
+    "authority is separate from evidence",
+    "unknown is never silently coerced into proof",
+    "operating is not graduation",
+    "publication intent is not public discovery",
+    "skill-only changes do not authorize production deployment",
+    "external acknowledgements are never fabricated",
+    "receipts rather than confidence move proof state"
+  ],
+  "validation": {
+    "schema_contract": "specified",
+    "eval_cases": "specified",
+    "external_registry_indexing": "unknown"
+  },
+  "signature": "/s/ Kholofelo Robyn Rababalela"
+}
