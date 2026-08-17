@@ -1,0 +1,12 @@
+{
+  "event_id": "fillout-demo-001",
+  "submitted_at": "2026-08-17T14:48:00Z",
+  "form_id": "kpgs-frontier-intake-demo",
+  "answers": {
+    "capability": "summarize",
+    "purpose": "Demonstrate provider-independent capability routing with synthetic input.",
+    "modality": "text",
+    "content": "Synthetic frontier input: explain why provider capability must not become protocol authority."
+  },
+  "classification": "synthetic"
+}

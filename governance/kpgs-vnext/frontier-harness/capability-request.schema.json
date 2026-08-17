@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/frontier/capability-request.schema.json",
+  "title": "KPGS Capability Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_id", "created_at", "source", "capability", "policy", "semantic_input"],
+  "properties": {
+    "schema_version": {"const": "kpgs.capability_request.v1"},
+    "request_id": {"type": "string", "minLength": 8},
+    "created_at": {"type": "string", "format": "date-time"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "event_id", "trust"],
+      "properties": {
+        "provider": {"enum": ["fillout", "zite", "manual", "other"]},
+        "event_id": {"type": "string", "minLength": 1},
+        "trust": {"const": "untrusted-input"}
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "purpose", "preferred_provider", "requested_modality"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "purpose": {"type": "string", "minLength": 1},
+        "preferred_provider": {"enum": ["google-ai", "elevenlabs", "local", "none"]},
+        "requested_modality": {"enum": ["text", "visual", "speech", "haptic-event"]}
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["data_classification", "allow_external_processing", "allow_public_anchor", "governing_spec_ref", "capability_lease_ref"],
+      "properties": {
+        "data_classification": {"enum": ["public", "synthetic", "internal", "confidential", "restricted"]},
+        "allow_external_processing": {"type": "boolean"},
+        "allow_public_anchor": {"type": "boolean"},
+        "governing_spec_ref": {"type": "string", "minLength": 1},
+        "capability_lease_ref": {"type": ["string", "null"]}
+      }
+    },
+    "semantic_input": {"type": "string", "minLength": 1, "maxLength": 4000}
+  }
+}

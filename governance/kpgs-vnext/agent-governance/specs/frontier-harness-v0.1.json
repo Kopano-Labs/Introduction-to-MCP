@@ -1,0 +1,68 @@
+{
+  "spec_id": "kpgs-frontier-harness-v0.1",
+  "title": "KPGS Frontier Harness — Provider-Independent Capability POC",
+  "outcome": "Prove one governed vertical slice in which a disposable intake surface requests a rented capability while KPGS retains routing, evaluation, receipts, durable-state authority, modality authority and rollback control.",
+  "scope": {
+    "included": [
+      "Normalize a synthetic Fillout/Zite-style event into kpgs.capability_request.v1",
+      "Route a permitted synthetic request through a deterministic Google AI mock renter",
+      "Emit kpgs.capability_receipt.v1 with non-canonical provider output",
+      "Prepare a Snowflake analytical-copy row without semantic input",
+      "Compute a local SHA-256 commitment and Solana devnet anchor intent",
+      "Emit kpgs.modality_contract.v1 with renderer authority explicitly false",
+      "Provide dependency-free executable validation"
+    ],
+    "excluded": [
+      "Production provider credentials or durable secrets",
+      "Live Google AI, ElevenLabs, Snowflake or Solana calls",
+      "Mainnet anchoring or token transfer",
+      "Publishing private or restricted input to external providers",
+      "Replacing local sovereign storage with Snowflake",
+      "Giving renderers or rented models semantic authority"
+    ]
+  },
+  "interfaces": [
+    {"name": "Structured intake", "contract": "Fillout/Zite-style events are untrusted input and are normalized before routing.", "version": "kpgs.capability_request.v1"},
+    {"name": "Rented capability", "contract": "Provider adapter output is non-canonical until KPGS evaluates it; v0.1 uses a deterministic Google AI mock.", "version": "kpgs.capability_receipt.v1"},
+    {"name": "Analytics copy", "contract": "Snowflake receives governed metadata/digests only; local sovereign state remains canonical.", "version": "kpgs.frontier_telemetry.v1"},
+    {"name": "Public proof", "contract": "Solana devnet receives only a SHA-256 commitment payload and no private data.", "version": "kpgs.anchor_intent.v1"},
+    {"name": "Modality", "contract": "Renderer choice is governed separately from semantic authority and always retains a text fallback in v0.1.", "version": "kpgs.modality_contract.v1"}
+  ],
+  "constraints": [
+    "Provider capability must remain replaceable and cannot become KPGS dependency.",
+    "Provider output cannot self-canonicalize.",
+    "External processing must be policy-gated by data classification.",
+    "No durable secret may be committed to the repository.",
+    "Public anchors may contain commitment material only.",
+    "Snowflake is an analytical copy and not local sovereign state.",
+    "ElevenLabs is a renderer capability and cannot own semantic authority.",
+    "Input is never treated as authority merely because a human-facing form supplied it."
+  ],
+  "acceptance_criteria": [
+    {"id": "FH-01", "statement": "Synthetic Fillout-style input normalizes into a strict capability request with untrusted source status and explicit policy.", "hard_gate": true, "verification_methods": ["schema", "unit"]},
+    {"id": "FH-02", "statement": "The capability router selects a replaceable provider adapter and v0.1 cannot claim live model execution.", "hard_gate": true, "verification_methods": ["unit"]},
+    {"id": "FH-03", "statement": "Provider output is digest-bound, non-canonical, and KPGS remains semantic evaluator/authority.", "hard_gate": true, "verification_methods": ["schema", "unit"]},
+    {"id": "FH-04", "statement": "Snowflake telemetry contains metadata/digests but no semantic input or private payload.", "hard_gate": true, "verification_methods": ["schema", "human-review"]},
+    {"id": "FH-05", "statement": "Solana anchor intent is devnet-only, commitment-only, and structurally excludes private data.", "hard_gate": true, "verification_methods": ["schema", "unit"]},
+    {"id": "FH-06", "statement": "Modality contracts separate rendering from semantic authority and retain a native text fallback.", "hard_gate": true, "verification_methods": ["schema", "unit"]},
+    {"id": "FH-07", "statement": "A dependency-free validator executes the full synthetic vertical slice and verifies governing invariants.", "hard_gate": false, "verification_methods": ["integration"]}
+  ],
+  "verification_plan": [
+    {"criterion_id": "FH-01", "evidence": "capability-request.schema.json + example.fillout-event.json + normalization assertions.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/validate.py"},
+    {"criterion_id": "FH-02", "evidence": "router decision must report adapter_mode=mock until a live capability lease is supplied.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/validate.py"},
+    {"criterion_id": "FH-03", "evidence": "capability-receipt.schema.json hard-codes provider_result.canonical=false and evaluation.semantic_authority=kpgs.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/validate.py"},
+    {"criterion_id": "FH-04", "evidence": "snowflake/bootstrap.sql defines only metadata/digest columns and validation forbids SEMANTIC_INPUT.", "command_or_procedure": "Review bootstrap.sql and run validate.py."},
+    {"criterion_id": "FH-05", "evidence": "anchor-intent.schema.json fixes network=solana-devnet and contains_private_data=false.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/validate.py"},
+    {"criterion_id": "FH-06", "evidence": "modality-contract.schema.json fixes renderer_has_semantic_authority=false; dry-run preserves native-text fallback.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/validate.py"},
+    {"criterion_id": "FH-07", "evidence": "Dependency-free validator imports frontier_harness.py, runs synthetic fixture, and verifies receipt/telemetry/anchor/modality invariants.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/validate.py"}
+  ],
+  "rollback_plan": {
+    "trigger": "Any provider becomes a hidden authority/dependency, private data can reach the public anchor, or the POC conflicts with existing KPGS vNext invariants.",
+    "procedure": "Revert the Frontier Harness commit/PR. No production provider credential, mainnet state, or estate release depends on v0.1.",
+    "target_ref": "master@f409d2b9854a1cba4f8b3e5c84dd36c488080258"
+  },
+  "risk_class": "R1",
+  "required_capabilities": [],
+  "lifecycle_state": "draft",
+  "related_issues": [46]
+}
