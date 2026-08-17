@@ -31,7 +31,7 @@ kpgs.modality_contract.v1
         |
         +--> text
         +--> visual
-        +--> speech
+        +--> speech --> ElevenLabs v0.4 live-capable renderer
         `--> haptic/event
 ```
 
@@ -44,7 +44,8 @@ kpgs.modality_contract.v1
 5. **External analytics != local sovereign state.**
 6. **Input != authority.**
 7. **Secret reference != secret custody.**
-8. A provider adapter MUST be replaceable without changing the capability request/receipt authority model.
+8. **Speech output != canonical meaning.**
+9. A provider adapter MUST be replaceable without changing the capability request/receipt authority model.
 
 ## Provider promotion map
 
@@ -54,7 +55,7 @@ kpgs.modality_contract.v1
 | Google AI | rented model/multimodal capability | v0.3 live-capable adapter; no live credential receipt yet |
 | Snowflake | analytical copy / evidence telemetry | v0.2 live-capable SQL API adapter; no live write receipt yet |
 | Solana | public commitment anchoring | devnet-ready intent only |
-| ElevenLabs | speech renderer | modality contract declaration only |
+| ElevenLabs | speech renderer | v0.4 live-capable renderer; native-text fallback mandatory; no live credential receipt yet |
 
 No vendor credential is stored in this directory. Provider promotion requires a current capability lease plus an external secret-provider reference. A live-capable adapter does not become a claimed live integration until a credential-backed execution receipt exists.
 
@@ -64,9 +65,10 @@ No vendor credential is stored in this directory. Provider promotion requires a 
 python governance/kpgs-vnext/frontier-harness/validate.py
 python governance/kpgs-vnext/frontier-harness/snowflake/validate_snowflake_adapter.py
 python governance/kpgs-vnext/frontier-harness/google-ai/validate_google_ai_adapter.py
+python governance/kpgs-vnext/frontier-harness/elevenlabs/validate_elevenlabs_adapter.py
 ```
 
-The baseline v0.1 harness remains deterministic and provider-independent. Provider-specific promotion adapters sit behind the same KPGS authority boundary and can fail back to the local/mock path.
+The baseline v0.1 harness remains deterministic and provider-independent. Provider-specific promotion adapters sit behind the same KPGS authority boundary and can fail back to local/mock or native rendering paths.
 
 ## Promotion boundary
 
@@ -74,4 +76,8 @@ A provider may move from `mock`/`prepared` to a claimed `live` state only when K
 
 `request -> governing spec -> capability lease -> external secret resolution -> provider execution -> receipt -> KPGS evaluation -> local checkpoint -> optional external copy/anchor -> rollback`
 
-The local KPGS receipt remains authoritative for the execution record. Snowflake is an analytical copy, Google AI is a rented capability, Solana receives only commitments, and renderers never receive semantic authority.
+For renderers the chain additionally requires:
+
+`evaluated semantic output -> modality contract -> accessibility fallback -> renderer execution -> digest receipt`
+
+The local KPGS receipt remains authoritative for the execution record. Snowflake is an analytical copy, Google AI is a rented capability, Solana receives only commitments, and ElevenLabs renders speech without receiving semantic authority.

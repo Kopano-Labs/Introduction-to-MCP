@@ -1,0 +1,152 @@
+{
+  "spec_id": "kpgs-frontier-harness-elevenlabs-v0.4",
+  "title": "KPGS Frontier Harness — ElevenLabs Governed Speech Renderer v0.4",
+  "outcome": "Promote the ElevenLabs leg from a declared speech renderer to a live-capable text-to-speech modality adapter while preserving KPGS semantic authority, accessibility fallback, secret isolation, and provider replaceability.",
+  "scope": {
+    "included": [
+      "Add a dependency-free ElevenLabs text-to-speech REST adapter",
+      "Require a current capability lease scoped to an exact voice/model renderer",
+      "Require a kpgs.modality_contract.v1 selecting speech and elevenlabs-speech",
+      "Require native-text fallback and text-equivalent accessibility",
+      "Resolve the ElevenLabs API key only from an external env:// secret reference",
+      "Allow only public or synthetic external rendering in v0.4",
+      "Digest-bind semantic text and returned audio without storing either in execution receipts",
+      "Provide a network-free executable governance gate"
+    ],
+    "excluded": [
+      "Committing or persisting an ElevenLabs API key",
+      "Sending private or restricted KPGS semantic content to ElevenLabs",
+      "Treating generated audio as canonical meaning or consent",
+      "Giving a renderer authority to edit semantic content",
+      "Voice cloning or voice identity creation",
+      "Claiming a live ElevenLabs execution receipt without a real credential-backed call"
+    ]
+  },
+  "interfaces": [
+    {
+      "name": "KPGS modality contract",
+      "contract": "Speech rendering requires primary=speech, renderer=elevenlabs-speech, renderer_has_semantic_authority=false, and native-text fallback.",
+      "version": "kpgs.modality_contract.v1"
+    },
+    {
+      "name": "Capability lease",
+      "contract": "elevenlabs.tts.generate is leased to an adapter/service/renter and bound to an exact voice/<voice_id>/model/<model_id> scope.",
+      "version": "capability-lease.schema.json"
+    },
+    {
+      "name": "ElevenLabs Text to Speech",
+      "contract": "The adapter uses POST /v1/text-to-speech/{voice_id} and sends the runtime API key only in the xi-api-key header.",
+      "version": "v1"
+    },
+    {
+      "name": "KPGS renderer receipt",
+      "contract": "Execution receipts contain text/audio digests and metadata but no raw semantic text, audio bytes, or API key; renderer semantic authority remains false.",
+      "version": "kpgs.elevenlabs_execution_receipt.v1"
+    }
+  ],
+  "constraints": [
+    "Modality != semantic authority.",
+    "Speech renderer != human consent.",
+    "Every speech path must preserve a native text equivalent in v0.4.",
+    "Only public or synthetic data may be sent to ElevenLabs in v0.4.",
+    "Every live call requires a current capability lease and exactly one external env:// secret reference.",
+    "Voice/model selection must be lease-scoped.",
+    "Receipts may contain text/audio digests and byte counts but not raw text or audio.",
+    "No live provider execution may be claimed without a credential-backed execution receipt."
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "EL-01",
+      "statement": "ElevenLabs execution requires a current lease scoped to elevenlabs.tts.generate and the exact voice/model renderer.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "EL-02",
+      "statement": "Speech rendering requires a valid modality contract with renderer_has_semantic_authority=false and native-text fallback.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "accessibility"]
+    },
+    {
+      "id": "EL-03",
+      "statement": "Only public or synthetic requests with allow_external_processing=true can reach TTS request preparation.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "EL-04",
+      "statement": "The API key remains external and is transmitted only through xi-api-key at execution time.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "EL-05",
+      "statement": "The governed model allow-list contains current TTS models and excludes deprecated Turbo identifiers.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "human-review"]
+    },
+    {
+      "id": "EL-06",
+      "statement": "Execution receipts exclude raw text, raw audio, and secret while preserving digests, model, voice, byte count, and HTTP evidence.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "EL-07",
+      "statement": "The network-free validator proves the live-capable speech path without claiming a real provider call.",
+      "hard_gate": false,
+      "verification_methods": ["integration"]
+    }
+  ],
+  "verification_plan": [
+    {
+      "criterion_id": "EL-01",
+      "evidence": "validate_elevenlabs_adapter.py proves valid scoped lease acceptance and expired lease rejection.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/elevenlabs/validate_elevenlabs_adapter.py"
+    },
+    {
+      "criterion_id": "EL-02",
+      "evidence": "Validator requires speech + elevenlabs-speech + native-text fallback and separately proves missing fallback rejection.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/elevenlabs/validate_elevenlabs_adapter.py"
+    },
+    {
+      "criterion_id": "EL-03",
+      "evidence": "Validator proves private/non-external requests fail closed before renderer request preparation.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/elevenlabs/validate_elevenlabs_adapter.py"
+    },
+    {
+      "criterion_id": "EL-04",
+      "evidence": "Request body is credential-free and a fake opener verifies xi-api-key header injection only at submit time.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/elevenlabs/validate_elevenlabs_adapter.py"
+    },
+    {
+      "criterion_id": "EL-05",
+      "evidence": "Adapter allow-list contains eleven_flash_v2_5, eleven_multilingual_v2 and eleven_v3; deprecated Turbo IDs are absent.",
+      "command_or_procedure": "Review current ElevenLabs model documentation and run validator."
+    },
+    {
+      "criterion_id": "EL-06",
+      "evidence": "Fake execution creates SHA-256 audio digest and byte count while contains_text=false, contains_audio=false, contains_secret=false.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/elevenlabs/validate_elevenlabs_adapter.py"
+    },
+    {
+      "criterion_id": "EL-07",
+      "evidence": "Dependency-free fake audio response exercises request and response handling without network access.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/elevenlabs/validate_elevenlabs_adapter.py"
+    }
+  ],
+  "rollback_plan": {
+    "trigger": "The renderer gains semantic authority, a speech path can omit its text fallback, private data can leave KPGS, or credentials can enter repository/receipts.",
+    "procedure": "Revert the ElevenLabs v0.4 adapter commit/PR. The modality contract falls back to native-text and no sovereign state depends on ElevenLabs.",
+    "target_ref": "master@0b42221b177fee5fc770c5d898ee410d2352c11e"
+  },
+  "risk_class": "R2",
+  "required_capabilities": [
+    {
+      "capability": "elevenlabs.tts.generate",
+      "scope": "voice/<voice_id>/model/eleven_flash_v2_5"
+    }
+  ],
+  "lifecycle_state": "draft",
+  "related_issues": [46]
+}
