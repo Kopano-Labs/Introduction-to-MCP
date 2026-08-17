@@ -152,13 +152,46 @@ def validate_skills() -> None:
     require(all(item.get("resource_scope") for item in required_capabilities), "every skill capability must declare a resource scope")
 
 
+def validate_realtime() -> None:
+    schema = load_json("realtime/connection-session.schema.json")
+    validate_schema(
+        schema,
+        "realtime connection schema",
+        {"connection_id", "tenant_id", "domain_id", "session_id", "transport", "user_state", "connected_at"},
+    )
+    transports = set(schema["properties"]["transport"]["enum"])
+    require({"websocket", "sse", "polling"} <= transports, "realtime contract must include streaming and constrained-network fallback transports")
+    user_states = set(schema["properties"]["user_state"]["enum"])
+    require({"working", "waiting-for-approval", "offline", "reconnecting", "done", "failed"} <= user_states, "realtime contract is missing an everyday recovery/status state")
+    require("resume_cursor" in schema["properties"], "realtime contract must support resume cursor semantics")
+    require("checkpoint_ref" in schema["properties"], "realtime contract must link to canonical checkpoint state")
+
+
+def validate_pwa() -> None:
+    schema = load_json("pwa/interaction-profile.schema.json")
+    validate_schema(schema, "interaction profile schema", {"profile_version", "preferences", "storage", "updated_at"})
+
+    preferences = schema["properties"]["preferences"]
+    expected_preferences = {"warmth", "formality", "detail_density", "pace", "initiative", "explanation_style"}
+    require(expected_preferences <= set(preferences.get("required", [])), "interaction profile must keep bounded adaptation dimensions explicit")
+
+    model_gateway = schema["properties"]["model_gateway"]["properties"]
+    require(model_gateway.get("model_weight_training", {}).get("const") is False, "runtime interaction profile must explicitly forbid representing preference adaptation as model-weight training")
+
+    storage = schema["properties"]["storage"]["properties"]
+    require(storage.get("resettable", {}).get("const") is True, "interaction preferences must be resettable")
+    require(bool(schema.get("allOf")), "account-synced interaction preferences must have a consent constraint")
+
+
 def main() -> None:
     validate_security()
     validate_estate()
     validate_evidence()
     validate_skills()
-    print("KPGS-VNEXT PASS: governance substrate contracts are structurally coherent.")
-    print("Validated: capability leases, DNS estate seed, evidence bundles, governed skill package/reference paths.")
+    validate_realtime()
+    validate_pwa()
+    print("KPGS-VNEXT PASS: governance/runtime-facing contracts are structurally coherent.")
+    print("Validated: capability leases, DNS estate seed, evidence, governed skills, realtime recovery, adaptive PWA profile.")
 
 
 if __name__ == "__main__":
