@@ -30,6 +30,7 @@ RECOVERABILITY_VALUES = {"retry", "rehydrate", "user_action", "operator_action",
 class TaskContext:
     tenant_id: str
     domain_id: str
+    session_id: str
     task_id: str
     correlation_id: str
     governing_spec_ref: str
@@ -315,6 +316,7 @@ class StatelessRenter:
             "event_kind": event_kind,
             "tenant_id": context.tenant_id,
             "domain_id": context.domain_id,
+            "session_id": context.session_id,
             "task_id": context.task_id,
             "renter_id": self.renter_id,
             "correlation_id": context.correlation_id,
