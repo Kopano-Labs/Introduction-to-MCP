@@ -22,6 +22,36 @@ skills/<category>/<skill-name>/
   tests/                   # optional conformance/eval fixtures
 ```
 
+## Canonical registry and discovery
+
+`governance/kpgs-vnext/skills/registry.json` is the canonical discovery index. Registration means KPGS may discover and inspect a package; **registration does not grant execution authority**.
+
+Registry entries declare:
+
+- package identity and version;
+- category and repository-relative package path;
+- authority class (`canonical-core` or `publication-adapter`);
+- plain-language discovery summary and tags.
+
+Validate the registry and every registered package with:
+
+```bash
+python scripts/ci/validate_skill_registry.py
+```
+
+Search registered skills without loading them:
+
+```bash
+python scripts/ci/validate_skill_registry.py --discover governance
+python scripts/ci/validate_skill_registry.py --discover "" --platform stateless-renter
+```
+
+The validator rejects duplicate identities, missing package files, manifest/registry identity drift, missing provenance/license state, missing capability declarations and missing validation contracts. CI runs the same conformance logic through `tests/test_skill_registry.py`.
+
+A registered package is production-selectable only when its manifest state is `validated` or `approved`. The caller must still separately obtain a capability lease equal to or narrower than the package requirements. `draft`, `blocked` and `deprecated` packages remain non-production-loadable even when discoverable.
+
+Publication adapters may be indexed so external package surfaces can be found and validated, but their `authority_class` must remain `publication-adapter`; registry presence must never be interpreted as a second canonical runtime.
+
 ## Required `SKILL.md` frontmatter
 
 ```yaml
