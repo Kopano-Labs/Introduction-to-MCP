@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.1",
+  "record_id": "choice-example-education-path-001",
+  "subject_authority": "human",
+  "recorded_at": null,
+  "current_state": {
+    "label": "reflective",
+    "source_class": "human-declared",
+    "authority": "current-human",
+    "notes": "Example state label only; no claim that this state is a separate identity or more truthful state."
+  },
+  "context_claims": [
+    {
+      "claim_id": "claim-1",
+      "text": "The person was taught a default sequence of school, university, employment and stability.",
+      "classification": "INFERENCE",
+      "source_class": "current-human",
+      "source_ref": "example-human-statement",
+      "current_authority_eligible": true
+    },
+    {
+      "claim_id": "claim-2",
+      "text": "The person currently wants to decide whether university remains useful for reasons they endorse now.",
+      "classification": "PREFERENCE",
+      "source_class": "current-human",
+      "source_ref": "example-human-statement",
+      "current_authority_eligible": true
+    }
+  ],
+  "root_algorithm_candidates": [
+    {
+      "candidate_id": "root-education-default",
+      "description": "A socially inherited education-to-employment sequence may have shaped expectations before conscious authorship.",
+      "proof_state": "hypothesis",
+      "canonical": false,
+      "source_claim_ids": ["claim-1"],
+      "evidence_needed": ["current human confirmation", "relevant historical evidence if the human wants to provide it"],
+      "contradictions": []
+    }
+  ],
+  "cdp": {
+    "candidate_families": [
+      {
+        "candidate_id": "candidate-conditioned-continuation",
+        "hypothesis": "The current education desire primarily continues an inherited default sequence.",
+        "difference": "Explains the desire mainly through inherited conditioning.",
+        "proof_state": "hypothesis",
+        "canonical": false
+      },
+      {
+        "candidate_id": "candidate-reflective-reendorsement",
+        "hypothesis": "The person understands the inherited sequence and independently re-endorses education as useful now.",
+        "difference": "Explains the same action as reflective re-endorsement rather than automatic continuation.",
+        "proof_state": "hypothesis",
+        "canonical": false
+      },
+      {
+        "candidate_id": "cdp-unknown-possibility",
+        "hypothesis": "Another explanation remains possible because the available context is incomplete.",
+        "difference": "Preserves incompleteness rather than forcing the available stories to be exhaustive.",
+        "proof_state": "hypothesis",
+        "canonical": false
+      }
+    ],
+    "unknown_branch_preserved": true,
+    "canonicalized": false,
+    "runtime_execution_proven": false,
+    "runtime_receipt_ref": null
+  },
+  "evaluation": {
+    "evidence_level": "low",
+    "poc_state": "candidate",
+    "evidence_refs": [],
+    "unknowns": ["The relative weight of conditioning and current endorsement is not established by this example."]
+  },
+  "human_consent": {
+    "question": "Now that I can see what shaped this desire, do I still consent to carrying it?",
+    "response": "unanswered",
+    "explicitly_human_supplied": false,
+    "human_statement_ref": null,
+    "notes": "The protocol must not infer an answer."
+  },
+  "convergence": {
+    "protocol": "CCP",
+    "decision": "not-requested",
+    "canonical": false,
+    "runtime_execution_proven": false,
+    "receipt_ref": null
+  },
+  "authorship_status": "exploring",
+  "action_authority": {
+    "authority_holder": "human",
+    "authorized": false,
+    "action_ref": null
+  },
+  "outcome": null,
+  "re_evaluation_required": true
+}
