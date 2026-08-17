@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0.0",
+  "id": "kpgs-document-governance",
+  "name": "govern-kpgs-documents",
+  "title": "KPGS Document Governance",
+  "version": "1.0.0",
+  "status": "poc",
+  "author": "Kholofelo Robyn Rababalela",
+  "license": "MIT",
+  "document_type": "KDT-06",
+  "renter_assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "source": {
+    "repository": "RobynAwesome/Introduction-to-MCP",
+    "branch": "master",
+    "manual_source_snapshot": "42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90",
+    "integration_baseline": "002f0a2ba430e52db94c448cbcf2e71ac8eb2400"
+  },
+  "kpefs": {
+    "primary_vector": "V4_DIASPORA",
+    "secondary_vectors": ["V2_ANIMAL", "V3_HOMO_SAPIENS"]
+  },
+  "capabilities": [
+    "classify_kpgs_document_type",
+    "separate_authority_from_evidence",
+    "route_kpefs_document_activity",
+    "preserve_pka_unknown_state",
+    "apply_document_promotion_gate",
+    "apply_wyc01_causal_boundary",
+    "package_agent_skill_documentation",
+    "govern_publication_state",
+    "emit_document_receipt"
+  ],
+  "document_types": [
+    "KDT-01",
+    "KDT-02",
+    "KDT-03",
+    "KDT-04",
+    "KDT-05",
+    "KDT-06",
+    "KDT-07",
+    "KDT-08",
+    "KDT-09",
+    "KDT-10"
+  ],
+  "authority_classes": [
+    "operator_directive",
+    "repo_canonical",
+    "governance_receipt",
+    "verified_live",
+    "personal_context",
+    "external_reference",
+    "unknown"
+  ],
+  "evidence_classes": [
+    "verified-source",
+    "verified-live",
+    "site-stated",
+    "demo-display",
+    "planned",
+    "privileged",
+    "transactional",
+    "unknown"
+  ],
+  "document_states": [
+    "draft",
+    "watch",
+    "operating",
+    "graduated",
+    "deprecated",
+    "archived"
+  ],
+  "proof_states": [
+    "unknown",
+    "foc",
+    "poc",
+    "verified_production"
+  ],
+  "protocol_bindings": {
+    "repo_canonical": ["KPP", "ALP", "CBP", "BMP", "PKAP", "PvF", "USTP"],
+    "context_bound": ["CCP", "CDP", "RIVM"]
+  },
+  "contracts": {
+    "human_spec": "references/KPGS_DTS_SPEC.md",
+    "manifest_schema": "references/kpgs-document-manifest.schema.json",
+    "template": "templates/KPGS_DOCUMENT_TEMPLATE.md",
+    "eval_cases": "evals/cases.json"
+  },
+  "promotion": {
+    "default_requires": ["PROOF-01", "PROOF-02", "PROOF-03"],
+    "production_or_agent_control_requires": ["PROOF-01", "PROOF-02", "PROOF-03", "PROOF-04"],
+    "laws": [
+      "no promotion without proof",
+      "drill is not graduation",
+      "operating is not verified production",
+      "publication intent is not public discovery",
+      "receipts move state"
+    ]
+  },
+  "security": {
+    "production_deploy_authorization_from_skill_change": false,
+    "external_ack_fabrication_allowed": false,
+    "secret_material_allowed": false
+  },
+  "provenance": {
+    "manual_document_id": "KPGS-DTS-001",
+    "manual_version": "1.0.0",
+    "origin_skill_example": "skills/pka/watch-what-you-call/SKILL.md",
+    "promotion_law": "Structure/07-Agents/PROMOTION_LAW.json",
+    "kpefs_plan": "docs/swarm-ops/KPEFS_IMPLEMENTATION_PLAN.md"
+  },
+  "signature": "/s/ Kholofelo Robyn Rababalela"
+}
