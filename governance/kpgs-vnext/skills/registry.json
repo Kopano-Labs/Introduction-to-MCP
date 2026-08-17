@@ -1,0 +1,45 @@
+{
+  "registry_version": "1.0.0",
+  "authority": "governance/kpgs-vnext/skills",
+  "selection_policy": {
+    "production_states": ["validated", "approved"],
+    "require_capability_lease": true,
+    "require_provenance": true,
+    "require_license_status": true
+  },
+  "skills": [
+    {
+      "name": "kpgs-audit-verify-govern",
+      "version": "0.1.0",
+      "category": "governance",
+      "package_path": "governance/kpgs-vnext/skills/core/kpgs-audit-verify-govern",
+      "authority_class": "canonical-core",
+      "discovery": {
+        "summary": "Audit KPGS claims against governing specifications and evidence before promotion or release.",
+        "tags": ["audit", "evidence", "governance", "promotion", "verification"]
+      }
+    },
+    {
+      "name": "kpgs-human-choice-authorship",
+      "version": "0.1.0",
+      "category": "human-governance",
+      "package_path": "governance/kpgs-vnext/skills/core/kpgs-human-choice-authorship",
+      "authority_class": "canonical-core",
+      "discovery": {
+        "summary": "Preserve human choice authority while exploring hypotheses, alternatives, consent and convergence state.",
+        "tags": ["authorship", "consent", "governance", "human-choice", "pka"]
+      }
+    },
+    {
+      "name": "govern-kpgs-documents",
+      "version": "1.0.0",
+      "category": "governance",
+      "package_path": "skills/awesome/govern-kpgs-documents",
+      "authority_class": "publication-adapter",
+      "discovery": {
+        "summary": "Create and validate typed KPGS document artifacts while preserving KPEFS, PKA, evidence and promotion boundaries.",
+        "tags": ["documents", "dts", "governance", "kpefs", "publication"]
+      }
+    }
+  ]
+}
