@@ -1,0 +1,130 @@
+{
+  "spec_id": "kpgs-human-choice-authorship-poc-v0.1",
+  "title": "Human Choice Authorship Membrane — RIVM × CDP × CCP POC",
+  "outcome": "Create a non-coercive KPGS POC that models bounded human authorship inside inherited conditions while preserving Project Jennifer RIVM/CDP/CCP semantics and keeping personal consent and action authority exclusively human.",
+  "scope": {
+    "included": [
+      "Define the proposed root-algorithm concept as a hypothesis rather than fact",
+      "Define a machine-readable choice-authorship record",
+      "Encode CDP multiple-candidate and unknown-branch requirements",
+      "Encode an explicit human consent gate",
+      "Keep CCP conceptual convergence separate from human action authority",
+      "Publish a governed KPGS skill package and structural validation checks",
+      "Pin Project Jennifer source provenance"
+    ],
+    "excluded": [
+      "Psychological diagnosis or clinical assessment",
+      "Automated life decisions or coercive behavioural steering",
+      "Claims that altered states expose a true self or inherently superior truth",
+      "Redefinition of Project Jennifer RIVM, CDP, CEEP or CCP",
+      "Foundation-model training or weight updates",
+      "Production deployment or automatic ecosystem-wide activation"
+    ]
+  },
+  "interfaces": [
+    {
+      "name": "Project Jennifer conceptual protocol lineage",
+      "contract": "RIVM preserves truth/source/agency boundaries; CDP widens non-canonical hypotheses; CCP owns evidence-bearing conceptual convergence.",
+      "version": "Project-Jennifer@5328a8449bad509150f73fe9aafeabc6c17c983b"
+    },
+    {
+      "name": "KPGS governed skill package",
+      "contract": "SKILL.md + skill.json + schema references under governance/kpgs-vnext/skills/core/kpgs-human-choice-authorship.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "Human consent boundary",
+      "contract": "Endorse/reject/hold/unanswered must be explicitly human supplied; no renter or protocol may manufacture consent.",
+      "version": "0.1"
+    }
+  ],
+  "constraints": [
+    "Human remains context, consent and personal action authority.",
+    "Root algorithms remain proposed hypotheses until evidence supports any stronger claim.",
+    "CDP must preserve at least two structurally different candidate families and an unknown possibility.",
+    "CDP cannot self-canonicalize.",
+    "CCP conceptual acceptance does not grant personal execution authority.",
+    "Historical or state-tagged context cannot silently override current human authority.",
+    "No private autobiographical example is committed as public training or documentation material without explicit transformation consent.",
+    "CI evidence may not be fabricated while GitHub Actions is blocked under issue #48."
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "HC-01",
+      "statement": "Project Jennifer RIVM/CDP/CCP source lineage is pinned and the POC does not redefine those protocols.",
+      "hard_gate": true,
+      "verification_methods": ["human-review", "schema"]
+    },
+    {
+      "id": "HC-02",
+      "statement": "Choice records preserve claim classes, root-algorithm hypotheses, divergent candidate families and explicit unknowns.",
+      "hard_gate": true,
+      "verification_methods": ["schema", "human-review"]
+    },
+    {
+      "id": "HC-03",
+      "statement": "No authored-choice or authorized-action state can be represented without explicit human endorsement.",
+      "hard_gate": true,
+      "verification_methods": ["schema", "unit"]
+    },
+    {
+      "id": "HC-04",
+      "statement": "CCP canonical state requires Accepted plus proven runtime execution and remains separate from human action authority.",
+      "hard_gate": true,
+      "verification_methods": ["schema", "unit"]
+    },
+    {
+      "id": "HC-05",
+      "statement": "The example is non-identifying and does not silently publish private autobiographical material.",
+      "hard_gate": true,
+      "verification_methods": ["human-review"]
+    },
+    {
+      "id": "HC-06",
+      "statement": "The KPGS contract validator includes structural checks for the choice-authorship POC and skill package.",
+      "hard_gate": false,
+      "verification_methods": ["unit", "integration"]
+    }
+  ],
+  "verification_plan": [
+    {
+      "criterion_id": "HC-01",
+      "evidence": "README and skill provenance reference Project Jennifer commit 5328a8449bad509150f73fe9aafeabc6c17c983b and preserve protocol responsibilities.",
+      "command_or_procedure": "Review human-choice-authorship/README.md and skills/core/kpgs-human-choice-authorship/skill.json."
+    },
+    {
+      "criterion_id": "HC-02",
+      "evidence": "choice-authorship-record.schema.json plus example.choice-authorship.json preserve hypothesis/non-canonical fields and unknown branch.",
+      "command_or_procedure": "Run python governance/kpgs-vnext/validate_contracts.py when an executable environment is available."
+    },
+    {
+      "criterion_id": "HC-03",
+      "evidence": "Schema conditional gates and validator assertions require response=endorse plus explicitly_human_supplied=true for endorsed/authored/authorized states.",
+      "command_or_procedure": "Test valid and invalid consent fixtures; CI execution remains blocked by #48 until GitHub runner access is restored."
+    },
+    {
+      "criterion_id": "HC-04",
+      "evidence": "Schema and validator require CCP decision Accepted plus runtime_execution_proven=true before canonical=true.",
+      "command_or_procedure": "Test canonical convergence fixtures once runtime/CI execution is available."
+    },
+    {
+      "criterion_id": "HC-05",
+      "evidence": "Committed example uses a generic educational-path scenario with no private names, locations, family identities or autobiographical event record.",
+      "command_or_procedure": "Human review of example.choice-authorship.json."
+    },
+    {
+      "criterion_id": "HC-06",
+      "evidence": "validate_contracts.py loads the new schema, example and skill and checks authority/divergence/convergence invariants.",
+      "command_or_procedure": "python governance/kpgs-vnext/validate_contracts.py"
+    }
+  ],
+  "rollback_plan": {
+    "trigger": "The POC violates source lineage, human consent authority, privacy boundaries or existing KPGS validation contracts.",
+    "procedure": "Close the POC PR without merge or revert the POC commit set; no production runtime or estate migration depends on this branch.",
+    "target_ref": "master@c5c2d13164b5ac808e5c8f25fcb0d6574424f7aa"
+  },
+  "risk_class": "R2",
+  "required_capabilities": [],
+  "lifecycle_state": "draft",
+  "related_issues": [46, 37, 38, 39, 41, 45, 47, 48, 49]
+}
