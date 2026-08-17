@@ -98,6 +98,62 @@ This encodes the preferred operating pattern:
 
 with clarification or confirmation as **governed exceptions**, not a default dependency on repeated user instruction.
 
+### 7a. Every arrow has a membrane
+
+A workflow arrow is not free movement between nodes.
+
+```text
+state A
+  |
+  v
+[ state-transition membrane ]
+  |
+  v
+state B
+```
+
+**Nodes hold state. Membranes govern state transition.**
+
+Runtime implementations:
+
+- `InformationMembrane`
+- `StateTransitionMembrane`
+- `MembraneVerdict`
+- `TransitionVelocity`
+
+The membrane evaluates what happens *between* states:
+
+- **identity receptor** — is the transition still modifying the same governed object?
+- **scope receptor** — is the proposed mutation part of the requested task?
+- **evidence receptor** — is there enough evidence to justify crossing the boundary?
+- **selective permeability** — is the requested state delta within the authorized change budget?
+- **state-cost / energy check** — is the transition creating excessive extra state to accomplish the objective?
+- **homeostasis check** — does the new state restore or preserve the active objective?
+- **ambiguity gate** — does interpretation need to slow and clarify before mutation?
+- **risk / reversibility gate** — does the transition require explicit confirmation?
+
+The information membrane makes four laws executable:
+
+```text
+AUTHORITY != ABUNDANCE
+RELEVANCE != PERMISSION
+OBSERVATION != MUTATION
+NEW IDEA != CURRENT TASK
+```
+
+A large volume of context can therefore increase interpretation pressure without increasing mutation authority. A relevant observation may enter working context while still being blocked from state mutation.
+
+#### Velocity is terrain-dependent
+
+The runtime does not have one execution speed:
+
+- `HIGHWAY` — low-risk inspection/read work can move quickly;
+- `URBAN` — ambiguity slows interpretation;
+- `SCHOOL_ZONE` — mutation requires bounded change and inspection;
+- `CHECKPOINT` — high-risk or hard-to-reverse effects require confirmation.
+
+More tools or more available context do **not** imply permission to accelerate. A larger mutation surface should generally strengthen the membrane.
+
 ### 8. Conceptual convergence can include both parties
 
 `converged_target = (user_target×user_weight + agent_target×agent_weight) / total_weight`
@@ -125,7 +181,11 @@ POC requires:
 3. tests for autonomy increase/decrease;
 4. fail-closed behavior on invalid inputs;
 5. explicit confirmation for high-risk / hard-to-reverse transitions;
-6. deterministic receipts.
+6. deterministic receipts;
+7. mutation authority that cannot be manufactured from context abundance or relevance;
+8. bounded state deltas and state-cost limits before mutation;
+9. objective-homeostasis checks at the transition boundary;
+10. execution velocity that decreases as consequence and irreversibility increase.
 
 FOC occurs if the runtime:
 
@@ -134,7 +194,11 @@ FOC occurs if the runtime:
 - silently changes weights or thresholds;
 - interprets a heuristic score as scientific truth;
 - uses convergence to erase authority boundaries;
-- treats autonomy as permission to bypass evidence or confirmation gates.
+- treats autonomy as permission to bypass evidence or confirmation gates;
+- treats an observed or relevant fact as permission to mutate state;
+- creates replacement state instead of repairing the governed object without an explicit identity transition;
+- expands a requested mutation beyond the membrane's permitted delta;
+- accelerates mutation merely because more tools or context are available.
 
 ## Downstream integration rule
 
