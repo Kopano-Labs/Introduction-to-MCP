@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/offline-replication/replicated-state.schema.json",
+  "title": "KPGS Non-Authoritative Replicated State v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "document_id",
+    "replica_id",
+    "principal_id",
+    "state_class",
+    "authority_effect",
+    "sync_status",
+    "content_sha256",
+    "last_merge_sha256",
+    "governing_task_receipt_ref",
+    "provenance_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kpgs.replica.v0.1"
+    },
+    "document_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "replica_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "principal_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "state_class": {
+      "enum": [
+        "non_authoritative",
+        "derived_projection",
+        "pending_proposal"
+      ]
+    },
+    "authority_effect": {
+      "const": "none"
+    },
+    "sync_status": {
+      "enum": [
+        "local_only",
+        "pending",
+        "synced",
+        "conflict_observed",
+        "quarantined"
+      ]
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "last_merge_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "governing_task_receipt_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenance_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sha256",
+          "ref",
+          "content_captured"
+        ],
+        "properties": {
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "content_captured": {
+            "const": false
+          }
+        }
+      }
+    }
+  }
+}
