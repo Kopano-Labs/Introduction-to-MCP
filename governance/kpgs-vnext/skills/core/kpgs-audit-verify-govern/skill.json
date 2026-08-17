@@ -1,0 +1,88 @@
+{
+  "name": "kpgs-audit-verify-govern",
+  "version": "0.1.0",
+  "description": "Audit a governed KPGS change, verify the strongest available evidence, enforce hard gates, and return an auditable decision or safe next action.",
+  "category": "governance",
+  "state": "draft",
+  "runtime": {
+    "renter_protocol": "1.0",
+    "platforms": ["human", "agent", "stateless-renter", "server"],
+    "languages": ["markdown", "json"]
+  },
+  "inputs": {
+    "schema_ref": "../../agent-governance/build-spec.schema.json",
+    "description": "A governing build/workflow specification plus implementation and verifier evidence references."
+  },
+  "outputs": {
+    "schema_ref": "../../evidence/evidence-bundle.schema.json",
+    "description": "A correlated evidence bundle with an allow, deny, promote, hold, or rollback decision."
+  },
+  "required_capabilities": [
+    {
+      "name": "evidence.read",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "governance.decision.emit",
+      "resource_scope": "active-task",
+      "optional": false
+    }
+  ],
+  "dependencies": [
+    {
+      "kind": "runtime",
+      "name": "kpgs-stateless-renter-protocol",
+      "version_constraint": "1.0"
+    }
+  ],
+  "provenance": {
+    "origin": "kpgs-original",
+    "license_status": "unknown",
+    "license_spdx": null,
+    "sources": [
+      {
+        "ref": "RobynAwesome/Skills",
+        "relationship": "inspiration",
+        "commit": null
+      },
+      {
+        "ref": "MengTo/Skills",
+        "relationship": "reference",
+        "commit": null
+      }
+    ]
+  },
+  "validation": {
+    "hard_gates": [
+      "No promote decision when a hard acceptance criterion fails",
+      "No fabricated execution evidence",
+      "No raw secrets in evidence output",
+      "No fork import while provenance/license gate is unresolved"
+    ],
+    "methods": ["schema", "human-review"],
+    "evidence_refs": []
+  },
+  "failures": [
+    {
+      "code": "SPEC_MISSING",
+      "recoverability": "user-action",
+      "user_message": "The governing specification is missing. Add or select the specification before this change can be approved."
+    },
+    {
+      "code": "EVIDENCE_INSUFFICIENT",
+      "recoverability": "retry",
+      "user_message": "There is not enough verified evidence yet. Run the declared checks and try the governance decision again."
+    },
+    {
+      "code": "HARD_GATE_FAILED",
+      "recoverability": "operator-action",
+      "user_message": "A required safety or governance check failed, so this change cannot be promoted."
+    },
+    {
+      "code": "VERIFIER_UNAVAILABLE",
+      "recoverability": "operator-action",
+      "user_message": "The required verifier could not run. The result remains unproven until verification is available."
+    }
+  ]
+}
