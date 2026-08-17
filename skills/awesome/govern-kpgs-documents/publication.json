@@ -59,7 +59,7 @@
     "canonical_skill_contract": "bound",
     "schema_contract": "specified",
     "eval_cases": "specified",
-    "external_registry_indexing": "registered",
+    "external_registry_indexing": "unknown",
     "runtime_load_authorization": "pending"
   },
   "signature": "/s/ Kholofelo Robyn Rababalela"
