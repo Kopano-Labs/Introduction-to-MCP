@@ -1,0 +1,114 @@
+{
+  "name": "govern-kpgs-documents",
+  "version": "1.0.0",
+  "description": "Create, edit, classify, validate, version, review and package KPGS documents as typed governance artifacts while preserving evidence boundaries, KPEFS routing, PKA uncertainty, promotion gates and causal provenance.",
+  "category": "governance",
+  "state": "draft",
+  "runtime": {
+    "renter_protocol": "1.0",
+    "platforms": ["human", "agent", "stateless-renter", "cli", "server"],
+    "languages": ["markdown", "json"]
+  },
+  "inputs": {
+    "schema_ref": "references/kpgs-document-manifest.schema.json",
+    "description": "A current operator directive plus a KPGS document or document-control manifest, with canonical repository/ref and available evidence when durable governance is requested."
+  },
+  "outputs": {
+    "schema_ref": "references/kpgs-document-manifest.schema.json",
+    "description": "A governed human-readable document with a machine-readable KPGS document manifest, explicit unresolved state, evidence references and receipts required by any requested state transition."
+  },
+  "required_capabilities": [
+    {
+      "name": "repository.read",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "evidence.read",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "artifact.write",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "governance.receipt.emit",
+      "resource_scope": "active-task",
+      "optional": true
+    }
+  ],
+  "dependencies": [
+    {
+      "kind": "runtime",
+      "name": "kpgs-stateless-renter-protocol",
+      "version_constraint": "1.0"
+    }
+  ],
+  "provenance": {
+    "origin": "kpgs-original",
+    "license_status": "unknown",
+    "license_spdx": null,
+    "sources": [
+      {
+        "ref": "governance/kpgs-vnext/skills/SKILL_PACKAGE.md",
+        "relationship": "upstream",
+        "commit": "002f0a2ba430e52db94c448cbcf2e71ac8eb2400"
+      },
+      {
+        "ref": "RobynAwesome/Introduction-to-MCP",
+        "relationship": "reference",
+        "commit": "42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90"
+      },
+      {
+        "ref": "skills/pka/watch-what-you-call/SKILL.md",
+        "relationship": "reference",
+        "commit": "42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90"
+      }
+    ]
+  },
+  "validation": {
+    "hard_gates": [
+      "No promotion without the declared proof receipts",
+      "UNKNOWN or MAYBE must not be silently coerced into proof",
+      "Operating must not be represented as graduation or verified production",
+      "Public indexing must not be represented without an external discovery receipt",
+      "A skill-only change must not authorize production deployment",
+      "External acknowledgements must never be fabricated"
+    ],
+    "methods": ["schema", "unit", "human-review"],
+    "evidence_refs": [
+      "scripts/validate_package.py",
+      "tests/test_contract.py",
+      "evals/cases.json"
+    ]
+  },
+  "failures": [
+    {
+      "code": "DOCUMENT_MANIFEST_INVALID",
+      "recoverability": "user-action",
+      "user_message": "The KPGS document control manifest is missing required fields or violates a declared state, proof, KPEFS, evidence or promotion invariant."
+    },
+    {
+      "code": "EVIDENCE_INSUFFICIENT",
+      "recoverability": "retry",
+      "user_message": "The requested claim or state transition remains unproven. Keep it UNKNOWN or WATCH until the declared evidence is available."
+    },
+    {
+      "code": "PUBLICATION_UNVERIFIED",
+      "recoverability": "operator-action",
+      "user_message": "The package may be prepared for publication, but public indexing or discovery cannot be claimed without an external discovery receipt."
+    },
+    {
+      "code": "PRODUCTION_SCOPE_UNAUTHORIZED",
+      "recoverability": "operator-action",
+      "user_message": "This document or skill change does not authorize production execution. Narrow the call graph or obtain explicit production-affecting authorization."
+    },
+    {
+      "code": "AUTHORITY_CONFLICT",
+      "recoverability": "operator-action",
+      "user_message": "Current operator or repository authority conflicts with lower-priority context. Preserve the conflict explicitly and use the higher-priority governed source."
+    }
+  ]
+}

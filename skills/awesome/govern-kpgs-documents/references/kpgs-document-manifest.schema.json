@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs-document-manifest-v1.json",
+  "title": "KPGS Document Manifest v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "document_id",
+    "canonical_id",
+    "title",
+    "version",
+    "status",
+    "proof_state",
+    "owner",
+    "author",
+    "source",
+    "authority_class",
+    "evidence_class",
+    "kpefs",
+    "protocols",
+    "promotion_gate",
+    "linked_evidence",
+    "renter_assertion"
+  ],
+  "properties": {
+    "schema": {
+      "const": "kpgs_document_manifest_v1"
+    },
+    "document_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "canonical_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "status": {
+      "enum": ["draft", "watch", "operating", "graduated", "deprecated", "archived"]
+    },
+    "proof_state": {
+      "enum": ["unknown", "foc", "poc", "verified_production"]
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signature": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "ref"],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[^/]+/[^/]+$"
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_class": {
+          "$ref": "#/$defs/evidenceClass"
+        }
+      }
+    },
+    "authority_class": {
+      "enum": [
+        "operator_directive",
+        "repo_canonical",
+        "governance_receipt",
+        "verified_live",
+        "personal_context",
+        "external_reference",
+        "unknown"
+      ]
+    },
+    "evidence_class": {
+      "$ref": "#/$defs/evidenceClass"
+    },
+    "kpefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary_vector", "secondary_vectors"],
+      "properties": {
+        "primary_vector": {
+          "$ref": "#/$defs/kpefsVector"
+        },
+        "secondary_vectors": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/kpefsVector"
+          }
+        }
+      }
+    },
+    "protocols": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "context_bound_protocols": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "promotion_gate": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["requires"],
+      "properties": {
+        "requires": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": ["PROOF-01", "PROOF-02", "PROOF-03", "PROOF-04"]
+          }
+        }
+      }
+    },
+    "linked_evidence": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"type": "string"},
+          {"type": "object"}
+        ]
+      }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "state"],
+        "properties": {
+          "claim": {"type": "string"},
+          "state": {"enum": ["unknown", "maybe", "watch"]},
+          "needed_evidence": {"type": "string"}
+        }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "registry_target": {"type": "string"},
+        "state": {"enum": ["unknown", "candidate", "submitted", "indexed", "deprecated"]},
+        "discovery_receipt": {}
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "renter_assertion": {
+      "const": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+    }
+  },
+  "$defs": {
+    "evidenceClass": {
+      "enum": [
+        "verified-source",
+        "verified-live",
+        "site-stated",
+        "demo-display",
+        "planned",
+        "privileged",
+        "transactional",
+        "unknown"
+      ]
+    },
+    "kpefsVector": {
+      "enum": ["V1_PLANT", "V2_ANIMAL", "V3_HOMO_SAPIENS", "V4_DIASPORA"]
+    }
+  }
+}
