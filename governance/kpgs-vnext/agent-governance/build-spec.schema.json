@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/agent-governance/build-spec.schema.json",
+  "title": "KPGS Governed Build Specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spec_id",
+    "title",
+    "outcome",
+    "scope",
+    "interfaces",
+    "constraints",
+    "acceptance_criteria",
+    "verification_plan",
+    "rollback_plan",
+    "risk_class",
+    "required_capabilities",
+    "lifecycle_state"
+  ],
+  "properties": {
+    "spec_id": { "type": "string", "minLength": 4, "maxLength": 200 },
+    "title": { "type": "string", "minLength": 4, "maxLength": 300 },
+    "outcome": { "type": "string", "minLength": 8, "maxLength": 4000 },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["included", "excluded"],
+      "properties": {
+        "included": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "excluded": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "contract"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "contract": { "type": "string", "minLength": 1 },
+          "version": { "type": "string" }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement", "hard_gate", "verification_methods"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "statement": { "type": "string", "minLength": 4 },
+          "hard_gate": { "type": "boolean" },
+          "verification_methods": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": ["unit", "integration", "e2e", "schema", "security", "performance", "accessibility", "human-review", "model-eval"]
+            }
+          }
+        }
+      }
+    },
+    "verification_plan": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion_id", "evidence"],
+        "properties": {
+          "criterion_id": { "type": "string", "minLength": 1 },
+          "evidence": { "type": "string", "minLength": 1 },
+          "command_or_procedure": { "type": "string" }
+        }
+      }
+    },
+    "rollback_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trigger", "procedure"],
+      "properties": {
+        "trigger": { "type": "string", "minLength": 1 },
+        "procedure": { "type": "string", "minLength": 1 },
+        "target_ref": { "type": "string" }
+      }
+    },
+    "risk_class": {
+      "type": "string",
+      "enum": ["R0", "R1", "R2", "R3"]
+    },
+    "required_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["capability", "scope"],
+        "properties": {
+          "capability": { "type": "string", "minLength": 1 },
+          "scope": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": ["draft", "verified", "approved", "released", "rejected", "rolled-back"]
+    },
+    "related_issues": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 1 }
+    }
+  }
+}
