@@ -9,6 +9,7 @@ import re
 import urllib.error
 import urllib.parse
 import urllib.request
+import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Callable
@@ -51,10 +52,14 @@ class PreparedInsert:
     token_type: str
     secret_ref: str
 
+    def sql_request_id(self) -> str:
+        return str(uuid.uuid5(uuid.NAMESPACE_URL, f"kpgs:{self.request_id}"))
+
     def safe_receipt(self) -> dict[str, Any]:
         return {
             "schema_version": "kpgs.snowflake_request_receipt.v1",
             "request_id": self.request_id,
+            "sql_request_id": self.sql_request_id(),
             "endpoint": self.endpoint,
             "binding_count": len(self.body["bindings"]),
             "token_type": self.token_type,
@@ -64,7 +69,10 @@ class PreparedInsert:
 
 
 def _parse_time(value: str) -> datetime:
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise GovernanceError("invalid lease timestamp") from exc
     if parsed.tzinfo is None:
         raise GovernanceError("lease timestamps must include timezone")
     return parsed.astimezone(timezone.utc)
@@ -78,10 +86,7 @@ def validate_lease(lease: dict[str, Any], *, now: datetime | None = None) -> Non
     if subject.get("kind") not in {"adapter", "service", "renter"}:
         raise GovernanceError("Snowflake capability must be leased to an adapter/service/renter")
     capabilities = lease.get("capabilities") or []
-    permitted = any(
-        item.get("name") == REQUIRED_CAPABILITY and item.get("resource_scope") == RESOURCE_SCOPE
-        for item in capabilities
-    )
+    permitted = any(item.get("name") == REQUIRED_CAPABILITY and item.get("resource_scope") == RESOURCE_SCOPE for item in capabilities)
     if not permitted:
         raise GovernanceError("lease does not permit governed Snowflake telemetry append")
     issued = _parse_time(str(lease.get("issued_at", "")))
@@ -94,6 +99,8 @@ def validate_lease(lease: dict[str, Any], *, now: datetime | None = None) -> Non
 
 
 def resolve_env_secret(secret_ref: str, env: dict[str, str] | None = None) -> str:
+    if not secret_ref.startswith("env://"):
+        raise GovernanceError("unsupported secret provider reference")
     name = secret_ref.removeprefix("env://")
     if not re.fullmatch(r"[A-Z][A-Z0-9_]{2,127}", name):
         raise GovernanceError("invalid env secret reference")
@@ -132,14 +139,14 @@ def prepare_telemetry_insert(row: dict[str, Any], lease: dict[str, Any], target:
         "warehouse": target.warehouse,
         "role": target.role,
         "bindings": bindings,
-        "parameters": {"QUERY_TAG": f"kpgs-frontier:{row['request_id']}"},
+        "parameters": {"query_tag": f"kpgs-frontier:{row['request_id']}"},
     }
     return PreparedInsert(str(row["request_id"]), target.endpoint(), body, token_type, str(lease["secret_provider_refs"][0]))
 
 
 def submit_prepared(prepared: PreparedInsert, *, secret_resolver: Callable[[str], str] = resolve_env_secret, opener: Callable[..., Any] = urllib.request.urlopen) -> dict[str, Any]:
     token = secret_resolver(prepared.secret_ref)
-    url = f"{prepared.endpoint}?requestId={urllib.parse.quote(prepared.request_id, safe='')}"
+    url = f"{prepared.endpoint}?requestId={urllib.parse.quote(prepared.sql_request_id(), safe='')}"
     payload = json.dumps(prepared.body, separators=(",", ":")).encode("utf-8")
     request = urllib.request.Request(url, data=payload, method="POST", headers={
         "Authorization": f"Bearer {token}",
@@ -152,11 +159,43 @@ def submit_prepared(prepared: PreparedInsert, *, secret_resolver: Callable[[str]
         with opener(request, timeout=30) as response:
             raw = response.read().decode("utf-8")
             result = json.loads(raw) if raw else {}
-            return {"schema_version": "kpgs.snowflake_execution_receipt.v1", "request_id": prepared.request_id, "http_status": getattr(response, "status", 200), "statement_handle": result.get("statementHandle"), "code": result.get("code"), "message": result.get("message"), "contains_secret": False}
+            return {
+                "schema_version": "kpgs.snowflake_execution_receipt.v1",
+                "request_id": prepared.request_id,
+                "sql_request_id": prepared.sql_request_id(),
+                "http_status": getattr(response, "status", 200),
+                "statement_handle": result.get("statementHandle"),
+                "code": result.get("code"),
+                "message": result.get("message"),
+                "execution_state": "response-received",
+                "contains_secret": False,
+            }
     except urllib.error.HTTPError as exc:
         raw = exc.read().decode("utf-8", errors="replace")
         try:
             detail = json.loads(raw)
         except json.JSONDecodeError:
             detail = {"message": raw[:500]}
-        return {"schema_version": "kpgs.snowflake_execution_receipt.v1", "request_id": prepared.request_id, "http_status": exc.code, "statement_handle": detail.get("statementHandle"), "code": detail.get("code"), "message": detail.get("message"), "contains_secret": False}
+        return {
+            "schema_version": "kpgs.snowflake_execution_receipt.v1",
+            "request_id": prepared.request_id,
+            "sql_request_id": prepared.sql_request_id(),
+            "http_status": exc.code,
+            "statement_handle": detail.get("statementHandle"),
+            "code": detail.get("code"),
+            "message": detail.get("message"),
+            "execution_state": "rejected",
+            "contains_secret": False,
+        }
+    except urllib.error.URLError as exc:
+        return {
+            "schema_version": "kpgs.snowflake_execution_receipt.v1",
+            "request_id": prepared.request_id,
+            "sql_request_id": prepared.sql_request_id(),
+            "http_status": None,
+            "statement_handle": None,
+            "code": "NETWORK_ERROR",
+            "message": str(exc.reason)[:300],
+            "execution_state": "transport-failed",
+            "contains_secret": False,
+        }
