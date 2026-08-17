@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/frontier/capability-receipt.schema.json",
+  "title": "KPGS Capability Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "receipt_id", "request_id", "created_at", "router_decision", "provider_result", "evaluation", "analytics_copy", "public_anchor", "boundaries"],
+  "properties": {
+    "schema_version": {"const": "kpgs.capability_receipt.v1"},
+    "receipt_id": {"type": "string", "minLength": 8},
+    "request_id": {"type": "string", "minLength": 8},
+    "created_at": {"type": "string", "format": "date-time"},
+    "router_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selected_provider", "adapter_mode", "reason"],
+      "properties": {
+        "selected_provider": {"enum": ["google-ai", "elevenlabs", "local", "none"]},
+        "adapter_mode": {"enum": ["mock", "live", "blocked"]},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "provider_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "output_digest", "output_ref", "canonical"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "output_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "output_ref": {"type": ["string", "null"]},
+        "canonical": {"const": false}
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluator", "decision", "semantic_authority"],
+      "properties": {
+        "evaluator": {"const": "kpgs"},
+        "decision": {"enum": ["accepted", "rejected", "held"]},
+        "semantic_authority": {"const": "kpgs"}
+      }
+    },
+    "analytics_copy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "status", "row_digest"],
+      "properties": {
+        "provider": {"const": "snowflake"},
+        "status": {"enum": ["prepared", "committed", "not-configured"]},
+        "row_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "public_anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "status", "commitment", "contains_private_data"],
+      "properties": {
+        "provider": {"const": "solana"},
+        "status": {"enum": ["ready", "not-authorized", "anchored"]},
+        "commitment": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "contains_private_data": {"const": false}
+      }
+    },
+    "boundaries": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string"}}
+  }
+}

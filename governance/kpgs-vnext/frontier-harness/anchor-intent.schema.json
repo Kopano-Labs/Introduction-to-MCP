@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/frontier/anchor-intent.schema.json",
+  "title": "KPGS Public Anchor Intent v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "intent_id", "request_id", "network", "commitment", "status", "contains_private_data", "payload"],
+  "properties": {
+    "schema_version": {"const": "kpgs.anchor_intent.v1"},
+    "intent_id": {"type": "string", "minLength": 8},
+    "request_id": {"type": "string", "minLength": 8},
+    "network": {"const": "solana-devnet"},
+    "commitment": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"enum": ["ready", "not-authorized", "anchored"]},
+    "contains_private_data": {"const": false},
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "commitment"],
+      "properties": {
+        "schema": {"const": "kpgs.anchor_commitment.v1"},
+        "commitment": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
