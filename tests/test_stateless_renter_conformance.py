@@ -56,6 +56,7 @@ def make_context(domain_id: str, task_id: str) -> TaskContext:
     return TaskContext(
         tenant_id="tenant-kopano",
         domain_id=domain_id,
+        session_id=f"session-{task_id}",
         task_id=task_id,
         correlation_id=f"corr-{task_id}",
         governing_spec_ref="governance/kpgs-vnext/stateless-renter/PROTOCOL.md",
@@ -79,6 +80,7 @@ def assert_envelope_provenance(event: Mapping[str, Any], context: TaskContext) -
     assert event["protocol_version"] == "1.0"
     assert event["tenant_id"] == context.tenant_id
     assert event["domain_id"] == context.domain_id
+    assert event["session_id"] == context.session_id
     assert event["task_id"] == context.task_id
     assert event["correlation_id"] == context.correlation_id
     assert event["governing_spec_ref"] == context.governing_spec_ref
