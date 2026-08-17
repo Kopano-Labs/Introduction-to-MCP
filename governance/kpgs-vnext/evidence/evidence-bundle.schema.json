@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/evidence/evidence-bundle.schema.json",
+  "title": "KPGS Governance Evidence Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bundle_id",
+    "created_at",
+    "estate_property",
+    "release_ref",
+    "task_id",
+    "correlation_id",
+    "artifacts",
+    "verifications",
+    "governance_decision"
+  ],
+  "properties": {
+    "bundle_id": { "type": "string", "minLength": 8 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "estate_property": { "type": "string", "minLength": 3 },
+    "release_ref": { "type": ["string", "null"] },
+    "adapter": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "implementation": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "renter": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "renter_id": { "type": "string" },
+        "protocol_version": { "type": "string" }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "version"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "version": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "task_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": ["string", "null"] },
+    "correlation_id": { "type": "string", "minLength": 1 },
+    "governing_spec_ref": { "type": ["string", "null"] },
+    "capability_lease_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "ref"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "specification",
+              "policy-decision",
+              "capability-lease",
+              "execution",
+              "verification",
+              "security",
+              "performance",
+              "accessibility",
+              "deployment",
+              "rollback",
+              "user-outcome"
+            ]
+          },
+          "ref": { "type": "string", "minLength": 1 },
+          "sha256": { "type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$" }
+        }
+      }
+    },
+    "verifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["verifier_id", "criterion_id", "method", "hard_gate", "passed", "evidence_ref"],
+        "properties": {
+          "verifier_id": { "type": "string", "minLength": 1 },
+          "criterion_id": { "type": "string", "minLength": 1 },
+          "method": {
+            "type": "string",
+            "enum": ["unit", "integration", "e2e", "schema", "security", "performance", "accessibility", "human-review", "model-eval"]
+          },
+          "hard_gate": { "type": "boolean" },
+          "passed": { "type": "boolean" },
+          "score": { "type": ["number", "null"] },
+          "evidence_ref": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "aggregate_scores": {
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    },
+    "governance_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "reason", "decided_at"],
+      "properties": {
+        "decision": { "type": "string", "enum": ["allow", "deny", "promote", "rollback", "hold"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "decided_at": { "type": "string", "format": "date-time" },
+        "decision_ref": { "type": ["string", "null"] }
+      }
+    },
+    "retention_policy_ref": { "type": ["string", "null"] },
+    "redaction_policy_ref": { "type": ["string", "null"] }
+  },
+  "allOf": [
+    {
+      "not": {
+        "properties": {
+          "governance_decision": {
+            "properties": {
+              "decision": { "const": "promote" }
+            }
+          },
+          "verifications": {
+            "contains": {
+              "properties": {
+                "hard_gate": { "const": true },
+                "passed": { "const": false }
+              },
+              "required": ["hard_gate", "passed"]
+            }
+          }
+        },
+        "required": ["governance_decision", "verifications"]
+      }
+    }
+  ]
+}
