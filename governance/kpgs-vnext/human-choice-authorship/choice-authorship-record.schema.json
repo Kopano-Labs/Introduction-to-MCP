@@ -86,7 +86,13 @@
               "proof_state": { "const": "hypothesis" },
               "canonical": { "const": false }
             }
-          }
+          },
+          "contains": {
+            "type": "object",
+            "properties": { "candidate_id": { "const": "cdp-unknown-possibility" } },
+            "required": ["candidate_id"]
+          },
+          "minContains": 1
         },
         "unknown_branch_preserved": { "const": true },
         "canonicalized": { "const": false },
@@ -153,17 +159,64 @@
   "allOf": [
     {
       "if": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "enum": ["endorse", "reject", "hold"] } },
+            "required": ["response"]
+          }
+        },
+        "required": ["human_consent"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": {
+              "explicitly_human_supplied": { "const": true },
+              "human_statement_ref": { "type": "string", "minLength": 1 }
+            },
+            "required": ["explicitly_human_supplied", "human_statement_ref"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
         "properties": { "authorship_status": { "enum": ["human-endorsed", "authored-choice-candidate"] } },
         "required": ["authorship_status"]
       },
       "then": {
         "properties": {
           "human_consent": {
-            "properties": {
-              "response": { "const": "endorse" },
-              "explicitly_human_supplied": { "const": true }
-            },
-            "required": ["response", "explicitly_human_supplied"]
+            "properties": { "response": { "const": "endorse" } },
+            "required": ["response"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorship_status": { "const": "human-rejected" } },
+        "required": ["authorship_status"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "const": "reject" } },
+            "required": ["response"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorship_status": { "const": "human-held" } },
+        "required": ["authorship_status"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "const": "hold" } },
+            "required": ["response"]
           }
         }
       }
@@ -181,11 +234,46 @@
       "then": {
         "properties": {
           "human_consent": {
-            "properties": {
-              "response": { "const": "endorse" },
-              "explicitly_human_supplied": { "const": true }
-            },
-            "required": ["response", "explicitly_human_supplied"]
+            "properties": { "response": { "const": "endorse" } },
+            "required": ["response"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "cdp": {
+            "properties": { "runtime_execution_proven": { "const": true } },
+            "required": ["runtime_execution_proven"]
+          }
+        },
+        "required": ["cdp"]
+      },
+      "then": {
+        "properties": {
+          "cdp": {
+            "properties": { "runtime_receipt_ref": { "type": "string", "minLength": 1 } },
+            "required": ["runtime_receipt_ref"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "convergence": {
+            "properties": { "runtime_execution_proven": { "const": true } },
+            "required": ["runtime_execution_proven"]
+          }
+        },
+        "required": ["convergence"]
+      },
+      "then": {
+        "properties": {
+          "convergence": {
+            "properties": { "receipt_ref": { "type": "string", "minLength": 1 } },
+            "required": ["receipt_ref"]
           }
         }
       }
@@ -208,6 +296,28 @@
               "runtime_execution_proven": { "const": true }
             },
             "required": ["decision", "runtime_execution_proven"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "convergence": {
+            "properties": { "decision": { "const": "not-requested" } },
+            "required": ["decision"]
+          }
+        },
+        "required": ["convergence"]
+      },
+      "then": {
+        "properties": {
+          "convergence": {
+            "properties": {
+              "canonical": { "const": false },
+              "runtime_execution_proven": { "const": false }
+            },
+            "required": ["canonical", "runtime_execution_proven"]
           }
         }
       }
