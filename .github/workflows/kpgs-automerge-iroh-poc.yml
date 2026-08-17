@@ -1,0 +1,47 @@
+name: KPGS Automerge iroh POC
+
+on:
+  pull_request:
+    paths:
+      - "governance/kpgs-vnext/offline-replication/iroh-automerge-poc/**"
+      - ".github/workflows/kpgs-automerge-iroh-poc.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-loopback-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: governance/kpgs-vnext/offline-replication/iroh-automerge-poc
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust 1.91
+        run: |
+          rustup toolchain install 1.91.0 --profile minimal
+          rustup default 1.91.0
+          rustc --version
+          cargo --version
+
+      - name: Generate dependency lock
+        run: cargo generate-lockfile
+
+      - name: Compile
+        run: cargo test --no-run
+
+      - name: Live loopback convergence tests
+        run: cargo test -- --nocapture
+
+      - name: Upload generated Cargo lock
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kpgs-automerge-iroh-cargo-lock
+          path: governance/kpgs-vnext/offline-replication/iroh-automerge-poc/Cargo.lock
+          if-no-files-found: warn
+          retention-days: 7
