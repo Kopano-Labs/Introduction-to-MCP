@@ -134,14 +134,15 @@ def validate_fork_matrix() -> None:
         "notes",
     }
     forbidden_auto_import = {"import", "vendor", "canonical-import"}
+    unverified_license_states = {"pending_audit", "unverified_reference_only", "no_github_detected_license"}
     for item in forks:
         require(required_fields <= set(item), f"{item.get('repository')} missing assimilation fields")
         require(item["target_layers"], f"{item['repository']} needs at least one target layer")
-        if item["license_status"] in {"pending_audit", "unverified_reference_only"}:
+        if item["license_status"] in unverified_license_states:
             require(item["disposition"] not in forbidden_auto_import, f"{item['repository']} cannot be imported before license verification")
 
     kage = next(item for item in forks if item["repository"] == "RobynAwesome/kage")
-    require(kage["disposition"] == "reference", "kage must remain reference-only while reuse rights are unverified")
+    require(kage["disposition"] == "no-import", "kage must remain no-import while reuse rights are unverified")
     require(kage["license_status"] == "unverified_reference_only", "kage license state must explicitly block reuse")
 
 
