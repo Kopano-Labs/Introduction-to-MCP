@@ -1,0 +1,49 @@
+{
+  "schema": "kpgs_document_manifest_v1",
+  "document_id": "KPGS-DTS-001",
+  "canonical_id": "kpgs_document_type_set",
+  "title": "KPGS Document Type Set",
+  "version": "1.0.0",
+  "status": "operating",
+  "proof_state": "poc",
+  "owner": "Kholofelo Robyn Rababalela",
+  "author": "Kholofelo Robyn Rababalela",
+  "signature": "/s/ Kholofelo Robyn Rababalela",
+  "renter_assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "source": {
+    "repository": "RobynAwesome/Introduction-to-MCP",
+    "ref": "42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90",
+    "evidence_class": "verified-source"
+  },
+  "authority_class": "repo_canonical",
+  "evidence_class": "verified-source",
+  "kpefs": {
+    "primary_vector": "V4_DIASPORA",
+    "secondary_vectors": ["V2_ANIMAL", "V3_HOMO_SAPIENS"]
+  },
+  "protocols": ["KPP", "ALP", "CBP", "BMP", "PKAP", "PvF"],
+  "context_bound_protocols": ["CCP", "CDP", "RIVM"],
+  "promotion_gate": {
+    "requires": ["PROOF-01", "PROOF-02", "PROOF-03"]
+  },
+  "linked_evidence": [
+    "Structure/07-Agents/PROMOTION_LAW.json",
+    "docs/swarm-ops/KPEFS_IMPLEMENTATION_PLAN.md",
+    "docs/swarm-ops/KPEFS_FOUR_VECTOR_DOCTRINE.json",
+    "skills/pka/watch-what-you-call/SKILL.md"
+  ],
+  "unresolved": [
+    {
+      "claim": "AwesomeSkills.dev public discovery",
+      "state": "unknown",
+      "needed_evidence": "External registry discovery receipt"
+    }
+  ],
+  "publication": {
+    "registry_target": "AwesomeSkills.dev",
+    "state": "candidate",
+    "discovery_receipt": null
+  },
+  "created_at": "2026-08-13T00:00:00Z",
+  "updated_at": "2026-08-17T16:09:00Z"
+}
