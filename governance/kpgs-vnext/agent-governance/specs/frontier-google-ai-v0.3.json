@@ -1,0 +1,152 @@
+{
+  "spec_id": "kpgs-frontier-harness-google-ai-v0.3",
+  "title": "KPGS Frontier Harness — Google AI Governed Renter v0.3",
+  "outcome": "Promote the Google AI leg from deterministic mock routing to a live-capable Gemini GenerateContent renter while preserving KPGS routing, policy, semantic authority, receipt authority, secret isolation, and rollback control.",
+  "scope": {
+    "included": [
+      "Add a dependency-free Gemini GenerateContent REST adapter",
+      "Require a current capability lease scoped to an exact Gemini model resource",
+      "Resolve the API key only from an external env:// secret reference",
+      "Allow only public or synthetic external processing in v0.3",
+      "Digest-bind input and provider output without storing either in execution receipts",
+      "Capture provider usage metadata and finish reasons for KPGS evaluation",
+      "Reject deprecated/non-allow-listed model identifiers",
+      "Provide a network-free executable governance gate"
+    ],
+    "excluded": [
+      "Committing or persisting a Google API key",
+      "Sending private, restricted, confidential, or autobiographical KPGS state to Google AI",
+      "Treating model output as canonical truth or human consent",
+      "Granting Gemini durable state authority",
+      "Using Google hosted agents as the KPGS landlord/control plane",
+      "Claiming a live Gemini execution receipt without a real credential-backed call"
+    ]
+  },
+  "interfaces": [
+    {
+      "name": "KPGS capability request",
+      "contract": "Input arrives through kpgs.capability_request.v1 and external processing must already be policy-authorized.",
+      "version": "kpgs.capability_request.v1"
+    },
+    {
+      "name": "Capability lease",
+      "contract": "google-ai.generate-content is leased to an adapter/service/renter and bound to an exact models/<model>:generateContent resource scope.",
+      "version": "capability-lease.schema.json"
+    },
+    {
+      "name": "Gemini GenerateContent",
+      "contract": "The adapter uses the Gemini REST GenerateContent endpoint and sends the runtime API key only in the x-goog-api-key header.",
+      "version": "v1beta"
+    },
+    {
+      "name": "KPGS provider receipt",
+      "contract": "Request/execution receipts contain digests and usage metadata but no raw prompt, raw model output, or API key; provider output remains non-canonical.",
+      "version": "kpgs.google_ai_execution_receipt.v1"
+    }
+  ],
+  "constraints": [
+    "Provider output != KPGS truth.",
+    "Model execution != semantic authority.",
+    "Only public or synthetic data may be sent to Google AI in v0.3.",
+    "Every live call requires a current capability lease and exactly one external env:// secret reference.",
+    "The model identifier must be in the governed allow-list.",
+    "Receipts may contain input/output digests and token usage but not raw semantic content.",
+    "No deprecated sampling controls are required for the adapter.",
+    "No live provider execution may be claimed without a credential-backed execution receipt."
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "GA-01",
+      "statement": "Google AI execution requires a current lease scoped to google-ai.generate-content and the exact model resource.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "GA-02",
+      "statement": "Only public or synthetic requests with allow_external_processing=true can reach request preparation.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "GA-03",
+      "statement": "The API key remains external and is transmitted only through x-goog-api-key at execution time.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "GA-04",
+      "statement": "The adapter permits current governed stable model identifiers and rejects deprecated/non-allow-listed identifiers.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "human-review"]
+    },
+    {
+      "id": "GA-05",
+      "statement": "Provider output is digest-bound, non-canonical, and KPGS remains semantic authority.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "schema"]
+    },
+    {
+      "id": "GA-06",
+      "statement": "Execution receipts exclude raw prompt, raw output, and secret while preserving model, finish, and usage evidence.",
+      "hard_gate": true,
+      "verification_methods": ["unit", "security"]
+    },
+    {
+      "id": "GA-07",
+      "statement": "The network-free validator proves the live-capable request/receipt path without claiming a real provider call.",
+      "hard_gate": false,
+      "verification_methods": ["integration"]
+    }
+  ],
+  "verification_plan": [
+    {
+      "criterion_id": "GA-01",
+      "evidence": "validate_google_ai_adapter.py constructs a scoped current lease and separately proves expired lease rejection.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/google-ai/validate_google_ai_adapter.py"
+    },
+    {
+      "criterion_id": "GA-02",
+      "evidence": "Validator proves private/non-external requests fail closed before provider request preparation.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/google-ai/validate_google_ai_adapter.py"
+    },
+    {
+      "criterion_id": "GA-03",
+      "evidence": "Request body is checked for credential absence and a fake opener verifies x-goog-api-key header injection only at submit time.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/google-ai/validate_google_ai_adapter.py"
+    },
+    {
+      "criterion_id": "GA-04",
+      "evidence": "Adapter allow-list contains gemini-3.6-flash and gemini-3.5-flash-lite; validator rejects gemini-2.0-flash.",
+      "command_or_procedure": "Review current Google AI model/deprecation documentation and run validator."
+    },
+    {
+      "criterion_id": "GA-05",
+      "evidence": "Safe request and fake execution receipts assert canonical=false and semantic_authority=kpgs.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/google-ai/validate_google_ai_adapter.py"
+    },
+    {
+      "criterion_id": "GA-06",
+      "evidence": "Fake execution captures token usage while receipts carry contains_input=false, contains_output=false, contains_secret=false and SHA-256 output digest.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/google-ai/validate_google_ai_adapter.py"
+    },
+    {
+      "criterion_id": "GA-07",
+      "evidence": "Dependency-free fake HTTP response exercises request and provider-response handling without network access.",
+      "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/google-ai/validate_google_ai_adapter.py"
+    }
+  ],
+  "rollback_plan": {
+    "trigger": "Google AI gains hidden authority, a non-permitted classification can leave KPGS, credentials can enter repository/receipts, or model policy diverges from current provider support.",
+    "procedure": "Revert the Google AI v0.3 adapter commit/PR. The Frontier Harness falls back to the deterministic v0.1 mock/local path and no sovereign state depends on Gemini.",
+    "target_ref": "master@a441d61285fea9396eb0ed1e3c055bbe25675045"
+  },
+  "risk_class": "R2",
+  "required_capabilities": [
+    {
+      "capability": "google-ai.generate-content",
+      "scope": "models/gemini-3.6-flash:generateContent"
+    }
+  ],
+  "lifecycle_state": "draft",
+  "related_issues": [46]
+}
