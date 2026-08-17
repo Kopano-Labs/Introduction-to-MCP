@@ -1,0 +1,113 @@
+{
+  "spec_id": "KPGS-VNEXT-PHASE0-2026-08-17",
+  "title": "KPGS vNext Phase 0 — Truth and Contracts",
+  "outcome": "Establish canonical machine-readable and human-readable contracts for Stateless Renters, specification-first agent governance, and fork assimilation before runtime implementation begins.",
+  "scope": {
+    "included": [
+      "Canonical Stateless Renter lifecycle and event envelope",
+      "Specification-first build governance contract",
+      "Machine-readable build specification schema",
+      "Machine-readable fork assimilation matrix",
+      "Phase 0 validation gate"
+    ],
+    "excluded": [
+      "Production Sovereign Hub runtime",
+      "Production capability-token issuer",
+      "Domain DNS mutation",
+      "Model-weight fine-tuning",
+      "Bulk copying of forked repositories"
+    ]
+  },
+  "interfaces": [
+    {
+      "name": "Stateless Renter Event Envelope",
+      "contract": "governance/kpgs-vnext/stateless-renter/renter-envelope.schema.json",
+      "version": "1.0"
+    },
+    {
+      "name": "Governed Build Specification",
+      "contract": "governance/kpgs-vnext/agent-governance/build-spec.schema.json",
+      "version": "1.0"
+    }
+  ],
+  "constraints": [
+    "No renter-local canonical business state",
+    "No ambient long-lived credentials",
+    "No fork-derived code import before provenance and license compatibility are verified",
+    "No production domain rewrites during Phase 0",
+    "All artifacts must be inspectable as plain text in the repository"
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-01",
+      "statement": "The Stateless Renter protocol defines destroy-and-rehydrate continuity without duplicate durable side effects.",
+      "hard_gate": true,
+      "verification_methods": ["human-review", "schema"]
+    },
+    {
+      "id": "AC-02",
+      "statement": "The renter event envelope contains tenant, domain, task, renter, correlation and lease identifiers.",
+      "hard_gate": true,
+      "verification_methods": ["schema"]
+    },
+    {
+      "id": "AC-03",
+      "statement": "The build specification schema requires explicit scope, acceptance criteria, verification and rollback plans.",
+      "hard_gate": true,
+      "verification_methods": ["schema"]
+    },
+    {
+      "id": "AC-04",
+      "statement": "The fork matrix contains the 15 repositories in the 2026-08-14 through 2026-08-17 assimilation window with explicit disposition and audit status.",
+      "hard_gate": true,
+      "verification_methods": ["schema", "human-review"]
+    },
+    {
+      "id": "AC-05",
+      "statement": "No fork marked with pending or unverified licensing is automatically classified for canonical import.",
+      "hard_gate": true,
+      "verification_methods": ["security", "schema"]
+    }
+  ],
+  "verification_plan": [
+    {
+      "criterion_id": "AC-01",
+      "evidence": "Protocol lifecycle and rehydration test section",
+      "command_or_procedure": "Inspect stateless-renter/PROTOCOL.md and run the Phase 0 validator."
+    },
+    {
+      "criterion_id": "AC-02",
+      "evidence": "Required properties in renter-envelope.schema.json",
+      "command_or_procedure": "Run the Phase 0 validator."
+    },
+    {
+      "criterion_id": "AC-03",
+      "evidence": "Required properties in build-spec.schema.json",
+      "command_or_procedure": "Run the Phase 0 validator."
+    },
+    {
+      "criterion_id": "AC-04",
+      "evidence": "evolution-matrix.json unique repository inventory",
+      "command_or_procedure": "Run the Phase 0 validator."
+    },
+    {
+      "criterion_id": "AC-05",
+      "evidence": "Assimilation policy and per-fork license/disposition fields",
+      "command_or_procedure": "Run the Phase 0 validator and review any audit-blocked entries."
+    }
+  ],
+  "rollback_plan": {
+    "trigger": "Phase 0 contracts create an invalid governance assumption or break repository CI.",
+    "procedure": "Revert the Phase 0 commits as a unit, restore the previous governance tree, and reopen the affected acceptance criterion before reimplementation.",
+    "target_ref": "master before KPGS vNext Phase 0"
+  },
+  "risk_class": "R1",
+  "required_capabilities": [
+    {
+      "capability": "repository.write",
+      "scope": "RobynAwesome/Introduction-to-MCP governance/kpgs-vnext and validation workflow"
+    }
+  ],
+  "lifecycle_state": "draft",
+  "related_issues": [34, 39, 43, 46]
+}
