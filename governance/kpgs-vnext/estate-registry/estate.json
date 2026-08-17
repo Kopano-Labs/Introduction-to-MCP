@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "estate_id": "kopano-sovereign-estate",
+  "generated_at": "2026-08-17T06:40:00Z",
+  "properties": [
+    {
+      "domain": "KasiLink.com",
+      "status": "declared_pending_witness",
+      "ownership_evidence": [],
+      "repositories": [],
+      "deployment": { "provider": null, "environment": null, "target": null },
+      "adapter": { "required": true, "implementation": null, "version": null },
+      "renter_compatibility": { "status": "unknown", "protocol_version": null },
+      "governance": { "policy_ref": null, "risk_class": null },
+      "release": { "live_ref": null, "evidence_ref": null },
+      "rollback": { "target_ref": null, "procedure_ref": null },
+      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+    },
+    {
+      "domain": "FivesArena.com",
+      "status": "declared_pending_witness",
+      "ownership_evidence": [],
+      "repositories": [],
+      "deployment": { "provider": null, "environment": null, "target": null },
+      "adapter": { "required": true, "implementation": null, "version": null },
+      "renter_compatibility": { "status": "unknown", "protocol_version": null },
+      "governance": { "policy_ref": null, "risk_class": null },
+      "release": { "live_ref": null, "evidence_ref": null },
+      "rollback": { "target_ref": null, "procedure_ref": null },
+      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+    },
+    {
+      "domain": "starfallsalvage.kopanolabs.com",
+      "status": "declared_pending_witness",
+      "ownership_evidence": [],
+      "repositories": [],
+      "deployment": { "provider": null, "environment": null, "target": null },
+      "adapter": { "required": true, "implementation": null, "version": null },
+      "renter_compatibility": { "status": "unknown", "protocol_version": null },
+      "governance": { "policy_ref": null, "risk_class": null },
+      "release": { "live_ref": null, "evidence_ref": null },
+      "rollback": { "target_ref": null, "procedure_ref": null },
+      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+    },
+    {
+      "domain": "crisisconnect.kopanolabs.com",
+      "status": "declared_pending_witness",
+      "ownership_evidence": [],
+      "repositories": [],
+      "deployment": { "provider": null, "environment": null, "target": null },
+      "adapter": { "required": true, "implementation": null, "version": null },
+      "renter_compatibility": { "status": "unknown", "protocol_version": null },
+      "governance": { "policy_ref": null, "risk_class": null },
+      "release": { "live_ref": null, "evidence_ref": null },
+      "rollback": { "target_ref": null, "procedure_ref": null },
+      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+    },
+    {
+      "domain": "KopanoLabs.com",
+      "status": "declared_pending_witness",
+      "ownership_evidence": [],
+      "repositories": [],
+      "deployment": { "provider": null, "environment": null, "target": null },
+      "adapter": { "required": true, "implementation": null, "version": null },
+      "renter_compatibility": { "status": "unknown", "protocol_version": null },
+      "governance": { "policy_ref": null, "risk_class": null },
+      "release": { "live_ref": null, "evidence_ref": null },
+      "rollback": { "target_ref": null, "procedure_ref": null },
+      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+    },
+    {
+      "domain": "KRRababalela.com",
+      "status": "declared_pending_witness",
+      "ownership_evidence": [],
+      "repositories": [],
+      "deployment": { "provider": null, "environment": null, "target": null },
+      "adapter": { "required": true, "implementation": null, "version": null },
+      "renter_compatibility": { "status": "unknown", "protocol_version": null },
+      "governance": { "policy_ref": null, "risk_class": null },
+      "release": { "live_ref": null, "evidence_ref": null },
+      "rollback": { "target_ref": null, "procedure_ref": null },
+      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+    }
+  ]
+}
