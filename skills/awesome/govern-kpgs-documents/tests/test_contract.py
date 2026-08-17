@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import copy
+import json
 import runpy
 from pathlib import Path
 
@@ -11,6 +13,22 @@ VALIDATOR = runpy.run_path(str(ROOT / "scripts" / "validate_package.py"))
 def test_kpgs_dts_package_contract() -> None:
     errors = VALIDATOR["validate_package"](ROOT)
     assert errors == []
+
+
+def test_skill_manifest_rejects_parallel_runtime_fields() -> None:
+    skill = json.loads((ROOT / "skill.json").read_text(encoding="utf-8"))
+    invalid = copy.deepcopy(skill)
+    invalid["proof_state"] = "poc"
+    errors = VALIDATOR["validate_skill_manifest"](invalid)
+    assert any("unexpected top-level keys" in error for error in errors)
+
+
+def test_skill_manifest_is_draft_under_canonical_contract() -> None:
+    skill = json.loads((ROOT / "skill.json").read_text(encoding="utf-8"))
+    errors = VALIDATOR["validate_skill_manifest"](skill)
+    assert errors == []
+    assert skill["state"] == "draft"
+    assert skill["runtime"]["renter_protocol"] == "1.0"
 
 
 def test_graduation_requires_verified_production() -> None:
