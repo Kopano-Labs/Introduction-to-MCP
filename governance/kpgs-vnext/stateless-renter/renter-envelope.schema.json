@@ -10,6 +10,7 @@
     "event_kind",
     "tenant_id",
     "domain_id",
+    "session_id",
     "task_id",
     "renter_id",
     "correlation_id",
@@ -44,6 +45,7 @@
     },
     "tenant_id": { "type": "string", "minLength": 1 },
     "domain_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
     "task_id": { "type": "string", "minLength": 1 },
     "renter_id": { "type": "string", "minLength": 1 },
     "correlation_id": { "type": "string", "minLength": 1 },
@@ -70,9 +72,7 @@
       "type": "object",
       "additionalProperties": { "type": "string", "minLength": 1 }
     },
-    "payload": {
-      "type": "object"
-    },
+    "payload": { "type": "object" },
     "evidence": {
       "type": "array",
       "items": {
@@ -82,10 +82,7 @@
         "properties": {
           "kind": { "type": "string", "minLength": 1 },
           "ref": { "type": "string", "minLength": 1 },
-          "sha256": {
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{64}$"
-          }
+          "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
         }
       }
     },
@@ -111,23 +108,14 @@
           "type": "string",
           "enum": ["retry", "rehydrate", "user_action", "operator_action", "not_recoverable"]
         },
-        "message": {
-          "type": "string",
-          "maxLength": 2000
-        }
+        "message": { "type": "string", "maxLength": 2000 }
       }
     }
   },
   "allOf": [
     {
-      "if": {
-        "properties": {
-          "event_kind": { "const": "task.failed" }
-        }
-      },
-      "then": {
-        "required": ["failure"]
-      }
+      "if": { "properties": { "event_kind": { "const": "task.failed" } } },
+      "then": { "required": ["failure"] }
     }
   ]
 }
