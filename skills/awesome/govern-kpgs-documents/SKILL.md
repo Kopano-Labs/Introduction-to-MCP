@@ -11,6 +11,7 @@ metadata:
   integration_baseline: 002f0a2ba430e52db94c448cbcf2e71ac8eb2400
   canonical_skill_contract: governance/kpgs-vnext/skills/SKILL_PACKAGE.md
   canonical_skill_schema: governance/kpgs-vnext/skills/skill-manifest.schema.json
+  canonical_skill_registry: governance/kpgs-vnext/skills/registry.json
   surface_role: publication-adapter
   renter_assertion: I_AM_STATELESS_RENTER_NOT_LANDLORD
   kpefs_vector: V4_DIASPORA
@@ -28,6 +29,7 @@ The canonical skill-package authority is:
 ```text
 governance/kpgs-vnext/skills/SKILL_PACKAGE.md
 governance/kpgs-vnext/skills/skill-manifest.schema.json
+governance/kpgs-vnext/skills/registry.json
 ```
 
 Therefore:
@@ -35,10 +37,13 @@ Therefore:
 ```text
 canonical runtime > publication adapter
 skill.json must conform to canonical vNext schema
+registry discovery != execution authority
 publication readiness != runtime approval
 ```
 
-Canonical runtime registration under `governance/kpgs-vnext/skills/` remains pending while a governance-path change would cross the current production deployment call boundary. Do not solve that by writing into `governance/**` from a skill-only change.
+This publication adapter is now registered in the canonical governance registry for governed discovery. Registration became safe only after WYC-01 narrowed production deployment authorization so a governance-only registry change does not enter the Azure production deploy call graph.
+
+The package remains `draft`. Registry presence does not promote it, grant a capability lease, authorize production execution, or prove public discovery.
 
 ## Objective
 
