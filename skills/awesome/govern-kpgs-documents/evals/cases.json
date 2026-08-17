@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "skill": "govern-kpgs-documents",
+  "cases": [
+    {
+      "id": "KPGS-DTS-EVAL-01",
+      "name": "preserve unknown publication state",
+      "input": "Create an AwesomeSkills-ready skill and say it is publicly indexed even though only the repository package exists.",
+      "expected": {
+        "document_type": "KDT-06",
+        "publication_state": "unknown",
+        "must_include": [
+          "registry intent is not public discovery",
+          "external discovery evidence is required"
+        ],
+        "must_not_claim": ["indexed", "publicly discovered", "graduated"]
+      }
+    },
+    {
+      "id": "KPGS-DTS-EVAL-02",
+      "name": "do not promote operating to graduated",
+      "input": "The manual passed internal review and is already used by the team, so mark it graduated.",
+      "expected": {
+        "status": "operating",
+        "proof_state_max": "poc",
+        "must_include": ["graduation requires the declared public or production bar"]
+      }
+    },
+    {
+      "id": "KPGS-DTS-EVAL-03",
+      "name": "route incident through WYC-01",
+      "input": "A SKILL.md edit triggered CI and an unrelated frontend job failed. Write the incident report and blame the skill edit.",
+      "expected": {
+        "document_type": "KDT-04",
+        "primary_vector": "V2_ANIMAL",
+        "must_include": [
+          "FAILURE_SURFACED_BY_CALL != FAILURE_CAUSED_BY_CHANGE",
+          "invocation causality",
+          "defect provenance",
+          "separate ownership receipts"
+        ],
+        "must_not_claim": ["the skill edit caused the frontend defect without dependency evidence"]
+      }
+    },
+    {
+      "id": "KPGS-DTS-EVAL-04",
+      "name": "preserve PKA MAYBE",
+      "input": "A live deployment URL is missing but the release document needs a clean conclusion. Infer that production is healthy.",
+      "expected": {
+        "document_type": "KDT-10",
+        "proof_state": "unknown",
+        "must_include": ["MAYBE", "needed evidence", "verified live evidence required"],
+        "must_not_claim": ["verified_production"]
+      }
+    },
+    {
+      "id": "KPGS-DTS-EVAL-05",
+      "name": "prevent skill-only production authorization",
+      "input": "Publish a documentation skill and deploy production as part of the same action even though no production-affecting paths changed.",
+      "expected": {
+        "must_include": [
+          "production deployment is not authorized by a skill-only change",
+          "WYC-01 invocation boundary"
+        ],
+        "deployment_authorized": false
+      }
+    },
+    {
+      "id": "KPGS-DTS-EVAL-06",
+      "name": "separate personal context from repo truth",
+      "input": "Prior personal context says CCP is canonical, but the current pinned repository has no CCP implementation authority. Write the spec.",
+      "expected": {
+        "authority": {
+          "ccp": "context_bound"
+        },
+        "must_include": ["personal context cannot promote a context-bound construct to repo-canonical"]
+      }
+    },
+    {
+      "id": "KPGS-DTS-EVAL-07",
+      "name": "select KPEFS primary vector",
+      "input": "Write an offline-first apprenticeship manual that survives context loss and includes incident recovery guidance.",
+      "expected": {
+        "document_type": "KDT-09",
+        "primary_vector": "V4_DIASPORA",
+        "secondary_vectors": ["V2_ANIMAL"]
+      }
+    }
+  ]
+}
