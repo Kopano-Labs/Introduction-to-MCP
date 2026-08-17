@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.0",
+  "window": {
+    "from": "2026-08-14",
+    "through": "2026-08-17"
+  },
+  "policy": {
+    "default_disposition": "reference",
+    "canonical_import_requires": [
+      "upstream_provenance_verified",
+      "license_compatible",
+      "security_review_complete",
+      "dependency_review_complete",
+      "kpgs_contract_compatibility_verified",
+      "validation_evidence_attached"
+    ],
+    "rule": "A fork is evidence and a learning surface before it is canonical code. Prefer extracting protocols, contracts and independently implementable patterns over copying entire applications."
+  },
+  "forks": [
+    {
+      "repository": "RobynAwesome/sketchbook",
+      "upstream": null,
+      "role": "experimental interaction and reference surface",
+      "target_layers": ["pwa-ux", "interaction-patterns"],
+      "disposition": "reference",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Classify reusable concepts after provenance and license review."
+    },
+    {
+      "repository": "RobynAwesome/DesignerNewsApp",
+      "upstream": null,
+      "role": "client application and UX architecture reference",
+      "target_layers": ["pwa-ux", "client-architecture"],
+      "disposition": "reference",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Use as a comparison workload, not a source of canonical state."
+    },
+    {
+      "repository": "RobynAwesome/kage",
+      "upstream": null,
+      "role": "immersive interaction and design reference",
+      "target_layers": ["pwa-ux", "immersion"],
+      "disposition": "reference",
+      "provenance_status": "pending_audit",
+      "license_status": "unverified_reference_only",
+      "security_status": "pending_audit",
+      "notes": "No code or assets may be imported until reuse rights are explicitly verified."
+    },
+    {
+      "repository": "RobynAwesome/claude-code-templates",
+      "upstream": null,
+      "role": "coding-agent command and workflow pattern reference",
+      "target_layers": ["agent-governance", "skills"],
+      "disposition": "extract-patterns",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Extract workflow concepts through the specification-first governance contract."
+    },
+    {
+      "repository": "RobynAwesome/my-react-app",
+      "upstream": null,
+      "role": "minimal React/PWA conformance testbed",
+      "target_layers": ["domain-adapter", "pwa-ux", "conformance"],
+      "disposition": "test-fixture-candidate",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Candidate low-complexity fixture for adapter and renter integration tests."
+    },
+    {
+      "repository": "RobynAwesome/paws-and-potjie",
+      "upstream": null,
+      "role": "everyday-user PWA proof and migration workload",
+      "target_layers": ["pwa-ux", "migration", "e2e"],
+      "disposition": "pilot-candidate",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Candidate bounded workflow for proving Sovereign Everyday Mode without rewriting the frontend."
+    },
+    {
+      "repository": "RobynAwesome/Skills",
+      "upstream": null,
+      "role": "SKILL.md and packaged capability reference layer",
+      "target_layers": ["skills", "agent-governance"],
+      "disposition": "high-priority-audit",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Primary input to the canonical KPGS skill-package contract."
+    },
+    {
+      "repository": "RobynAwesome/JavaScriptMastery-skills",
+      "upstream": null,
+      "role": "frontend/web skill examples and validation fixtures",
+      "target_layers": ["skills", "pwa-ux", "conformance"],
+      "disposition": "skill-input-candidate",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Repackage only after provenance and compatibility gates pass."
+    },
+    {
+      "repository": "RobynAwesome/jwt-auth",
+      "upstream": null,
+      "role": "authentication and session implementation reference",
+      "target_layers": ["identity", "capability-leases", "security"],
+      "disposition": "security-audit-required",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "required_before_reuse",
+      "notes": "Reference patterns only until threat, dependency and key-management review is complete."
+    },
+    {
+      "repository": "RobynAwesome/towers",
+      "upstream": null,
+      "role": "experimental product and interaction reference",
+      "target_layers": ["pwa-ux", "product-patterns"],
+      "disposition": "reference",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Audit and classify before assigning a canonical integration role."
+    },
+    {
+      "repository": "RobynAwesome/adk_tutorial",
+      "upstream": null,
+      "role": "agent development-kit orchestration reference",
+      "target_layers": ["agent-governance", "runtime", "skills"],
+      "disposition": "extract-patterns",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Extract orchestration interfaces and compare them with Stateless Renter boundaries."
+    },
+    {
+      "repository": "RobynAwesome/cars4mars-project",
+      "upstream": null,
+      "role": "vertical proof workload for renter/domain migration",
+      "target_layers": ["migration", "e2e", "evidence"],
+      "disposition": "integration-workload-candidate",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Useful as a domain-specific workload; domain logic remains outside canonical KPGS contracts."
+    },
+    {
+      "repository": "RobynAwesome/OmniRoute",
+      "upstream": null,
+      "role": "intelligent routing and orchestration policy reference",
+      "target_layers": ["routing", "sovereign-hub", "agent-governance"],
+      "disposition": "architecture-input",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Compare routing concepts against capability-scoped Hub routing before reuse."
+    },
+    {
+      "repository": "RobynAwesome/JavaScriptMastery-gsap-cc-starter",
+      "upstream": null,
+      "role": "motion and immersive frontend reference",
+      "target_layers": ["pwa-ux", "immersion"],
+      "disposition": "ux-pattern-candidate",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "pending_audit",
+      "notes": "Extract interaction patterns without making animation a governance dependency."
+    },
+    {
+      "repository": "RobynAwesome/generative-ai",
+      "upstream": null,
+      "role": "generative-AI and model-integration reference",
+      "target_layers": ["model-gateway", "skills", "evaluation"],
+      "disposition": "audit-before-reuse",
+      "provenance_status": "pending_audit",
+      "license_status": "pending_audit",
+      "security_status": "required_before_reuse",
+      "notes": "Separate model integration patterns from true fine-tuning/training and apply data/provenance governance."
+    }
+  ]
+}
