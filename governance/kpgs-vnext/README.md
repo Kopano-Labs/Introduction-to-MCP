@@ -74,6 +74,10 @@ Tools / APIs / Domain Systems
 - `agent-governance/SPECIFICATION.md`
 - `agent-governance/build-spec.schema.json`
 - `fork-assimilation/evolution-matrix.json`
+- `task-contract/README.md`
+- `task-contract/principal-envelope.schema.json`
+- `task-contract/task-receipt.schema.json`
+- `task-contract/adapter.py`
 
 ## Definition of done
 
