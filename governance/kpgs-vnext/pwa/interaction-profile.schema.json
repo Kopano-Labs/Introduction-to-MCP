@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/pwa/interaction-profile.schema.json",
+  "title": "KPGS Sovereign Everyday Interaction Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile_version", "preferences", "storage", "updated_at"],
+  "properties": {
+    "profile_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["warmth", "formality", "detail_density", "pace", "initiative", "explanation_style"],
+      "properties": {
+        "warmth": { "type": "number", "minimum": 0, "maximum": 1 },
+        "formality": { "type": "number", "minimum": 0, "maximum": 1 },
+        "detail_density": { "type": "number", "minimum": 0, "maximum": 1 },
+        "pace": { "type": "string", "enum": ["fast", "balanced", "deliberate"] },
+        "initiative": { "type": "string", "enum": ["reactive", "guided", "proactive-within-lease"] },
+        "explanation_style": { "type": "string", "enum": ["plain", "visual", "stepwise", "technical-when-opened"] }
+      }
+    },
+    "model_gateway": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "allow_prompt_adaptation": { "type": "boolean" },
+        "allow_sampling_adaptation": { "type": "boolean" },
+        "temperature_min": { "type": "number", "minimum": 0, "maximum": 2 },
+        "temperature_max": { "type": "number", "minimum": 0, "maximum": 2 },
+        "top_p_min": { "type": "number", "minimum": 0, "maximum": 1 },
+        "top_p_max": { "type": "number", "minimum": 0, "maximum": 1 },
+        "model_weight_training": { "const": false }
+      }
+    },
+    "storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "account_sync_consent"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["local-only", "account-synced", "session-only"] },
+        "account_sync_consent": { "type": "boolean" },
+        "exportable": { "type": "boolean", "default": true },
+        "resettable": { "type": "boolean", "const": true }
+      }
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "storage": {
+            "properties": {
+              "mode": { "const": "account-synced" }
+            },
+            "required": ["mode"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "storage": {
+            "properties": {
+              "account_sync_consent": { "const": true }
+            },
+            "required": ["account_sync_consent"]
+          }
+        }
+      }
+    }
+  ]
+}
