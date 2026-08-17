@@ -1,112 +1,114 @@
 {
-  "schema_version": "1.0.0",
-  "id": "kpgs-document-governance",
   "name": "govern-kpgs-documents",
-  "title": "KPGS Document Governance",
   "version": "1.0.0",
-  "status": "poc",
-  "author": "Kholofelo Robyn Rababalela",
-  "license": "MIT",
-  "document_type": "KDT-06",
-  "renter_assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
-  "source": {
-    "repository": "RobynAwesome/Introduction-to-MCP",
-    "branch": "master",
-    "manual_source_snapshot": "42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90",
-    "integration_baseline": "002f0a2ba430e52db94c448cbcf2e71ac8eb2400"
+  "description": "Create, edit, classify, validate, version, review and package KPGS documents as typed governance artifacts while preserving evidence boundaries, KPEFS routing, PKA uncertainty, promotion gates and causal provenance.",
+  "category": "governance",
+  "state": "draft",
+  "runtime": {
+    "renter_protocol": "1.0",
+    "platforms": ["human", "agent", "stateless-renter", "cli", "server"],
+    "languages": ["markdown", "json"]
   },
-  "kpefs": {
-    "primary_vector": "V4_DIASPORA",
-    "secondary_vectors": ["V2_ANIMAL", "V3_HOMO_SAPIENS"]
+  "inputs": {
+    "schema_ref": "references/kpgs-document-manifest.schema.json",
+    "description": "A current operator directive plus a KPGS document or document-control manifest, with canonical repository/ref and available evidence when durable governance is requested."
   },
-  "capabilities": [
-    "classify_kpgs_document_type",
-    "separate_authority_from_evidence",
-    "route_kpefs_document_activity",
-    "preserve_pka_unknown_state",
-    "apply_document_promotion_gate",
-    "apply_wyc01_causal_boundary",
-    "package_agent_skill_documentation",
-    "govern_publication_state",
-    "emit_document_receipt"
-  ],
-  "document_types": [
-    "KDT-01",
-    "KDT-02",
-    "KDT-03",
-    "KDT-04",
-    "KDT-05",
-    "KDT-06",
-    "KDT-07",
-    "KDT-08",
-    "KDT-09",
-    "KDT-10"
-  ],
-  "authority_classes": [
-    "operator_directive",
-    "repo_canonical",
-    "governance_receipt",
-    "verified_live",
-    "personal_context",
-    "external_reference",
-    "unknown"
-  ],
-  "evidence_classes": [
-    "verified-source",
-    "verified-live",
-    "site-stated",
-    "demo-display",
-    "planned",
-    "privileged",
-    "transactional",
-    "unknown"
-  ],
-  "document_states": [
-    "draft",
-    "watch",
-    "operating",
-    "graduated",
-    "deprecated",
-    "archived"
-  ],
-  "proof_states": [
-    "unknown",
-    "foc",
-    "poc",
-    "verified_production"
-  ],
-  "protocol_bindings": {
-    "repo_canonical": ["KPP", "ALP", "CBP", "BMP", "PKAP", "PvF", "USTP"],
-    "context_bound": ["CCP", "CDP", "RIVM"]
+  "outputs": {
+    "schema_ref": "references/kpgs-document-manifest.schema.json",
+    "description": "A governed human-readable document with a machine-readable KPGS document manifest, explicit unresolved state, evidence references and receipts required by any requested state transition."
   },
-  "contracts": {
-    "human_spec": "references/KPGS_DTS_SPEC.md",
-    "manifest_schema": "references/kpgs-document-manifest.schema.json",
-    "template": "templates/KPGS_DOCUMENT_TEMPLATE.md",
-    "eval_cases": "evals/cases.json"
-  },
-  "promotion": {
-    "default_requires": ["PROOF-01", "PROOF-02", "PROOF-03"],
-    "production_or_agent_control_requires": ["PROOF-01", "PROOF-02", "PROOF-03", "PROOF-04"],
-    "laws": [
-      "no promotion without proof",
-      "drill is not graduation",
-      "operating is not verified production",
-      "publication intent is not public discovery",
-      "receipts move state"
+  "required_capabilities": [
+    {
+      "name": "repository.read",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "evidence.read",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "artifact.write",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "governance.receipt.emit",
+      "resource_scope": "active-task",
+      "optional": true
+    }
+  ],
+  "dependencies": [
+    {
+      "kind": "runtime",
+      "name": "kpgs-stateless-renter-protocol",
+      "version_constraint": "1.0"
+    }
+  ],
+  "provenance": {
+    "origin": "kpgs-original",
+    "license_status": "unknown",
+    "license_spdx": null,
+    "sources": [
+      {
+        "ref": "governance/kpgs-vnext/skills/SKILL_PACKAGE.md",
+        "relationship": "upstream",
+        "commit": "002f0a2ba430e52db94c448cbcf2e71ac8eb2400"
+      },
+      {
+        "ref": "RobynAwesome/Introduction-to-MCP",
+        "relationship": "reference",
+        "commit": "42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90"
+      },
+      {
+        "ref": "skills/pka/watch-what-you-call/SKILL.md",
+        "relationship": "reference",
+        "commit": "42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90"
+      }
     ]
   },
-  "security": {
-    "production_deploy_authorization_from_skill_change": false,
-    "external_ack_fabrication_allowed": false,
-    "secret_material_allowed": false
+  "validation": {
+    "hard_gates": [
+      "No promotion without the declared proof receipts",
+      "UNKNOWN or MAYBE must not be silently coerced into proof",
+      "Operating must not be represented as graduation or verified production",
+      "Public indexing must not be represented without an external discovery receipt",
+      "A skill-only change must not authorize production deployment",
+      "External acknowledgements must never be fabricated"
+    ],
+    "methods": ["schema", "unit", "human-review"],
+    "evidence_refs": [
+      "scripts/validate_package.py",
+      "tests/test_contract.py",
+      "evals/cases.json"
+    ]
   },
-  "provenance": {
-    "manual_document_id": "KPGS-DTS-001",
-    "manual_version": "1.0.0",
-    "origin_skill_example": "skills/pka/watch-what-you-call/SKILL.md",
-    "promotion_law": "Structure/07-Agents/PROMOTION_LAW.json",
-    "kpefs_plan": "docs/swarm-ops/KPEFS_IMPLEMENTATION_PLAN.md"
-  },
-  "signature": "/s/ Kholofelo Robyn Rababalela"
+  "failures": [
+    {
+      "code": "DOCUMENT_MANIFEST_INVALID",
+      "recoverability": "user-action",
+      "user_message": "The KPGS document control manifest is missing required fields or violates a declared state, proof, KPEFS, evidence or promotion invariant."
+    },
+    {
+      "code": "EVIDENCE_INSUFFICIENT",
+      "recoverability": "retry",
+      "user_message": "The requested claim or state transition remains unproven. Keep it UNKNOWN or WATCH until the declared evidence is available."
+    },
+    {
+      "code": "PUBLICATION_UNVERIFIED",
+      "recoverability": "operator-action",
+      "user_message": "The package may be prepared for publication, but public indexing or discovery cannot be claimed without an external discovery receipt."
+    },
+    {
+      "code": "PRODUCTION_SCOPE_UNAUTHORIZED",
+      "recoverability": "operator-action",
+      "user_message": "This document or skill change does not authorize production execution. Narrow the call graph or obtain explicit production-affecting authorization."
+    },
+    {
+      "code": "AUTHORITY_CONFLICT",
+      "recoverability": "operator-action",
+      "user_message": "Current operator or repository authority conflicts with lower-priority context. Preserve the conflict explicitly and use the higher-priority governed source."
+    }
+  ]
 }
