@@ -43,6 +43,7 @@ def context() -> TaskContext:
     return TaskContext(
         tenant_id="tenant-1",
         domain_id="recovery",
+        session_id="session-recovery",
         task_id="task-recovery",
         correlation_id="corr-recovery",
         governing_spec_ref="governance/kpgs-vnext/stateless-renter/PROTOCOL.md",
@@ -94,6 +95,7 @@ def test_typed_workload_failures_emit_deterministic_recovery_contract(code: str,
         "recoverability": recoverability,
         "message": f"deterministic {code}",
     }
+    assert event["session_id"] == task.session_id
     assert event["correlation_id"] == task.correlation_id
     assert event["governing_spec_ref"] == task.governing_spec_ref
 
@@ -159,4 +161,5 @@ def test_graceful_eviction_stops_new_work_and_replacement_can_continue():
         idempotency_key="replacement",
     )
     assert completed["event_kind"] == "task.completed"
+    assert completed["session_id"] == task.session_id
     assert completed["renter_id"] == "renter-replacement"
