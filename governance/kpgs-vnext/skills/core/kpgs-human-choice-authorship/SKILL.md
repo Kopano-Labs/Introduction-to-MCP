@@ -44,7 +44,7 @@ RIVM -> truth / source / agency membrane around consequential inference
 CDP  -> governed widening; hypotheses only; no self-canonicalization
 CEEP -> candidate evaluation
 POC-vs-FOC -> evidence boundary
-CCP  -> conceptual convergence after evidence
+CCP  -> optional conceptual convergence after evidence
 HUMAN -> consent and personal action authority
 ```
 
@@ -125,9 +125,17 @@ Compare candidates against current testimony, authorized history, contradictions
 
 Keep POC and FOC separate. A powerful story is not proof.
 
-### 6. Stop at the human consent gate
+### 6. Converge conceptually only when convergence is requested
 
-Present the human with the governing question:
+If the human wants conceptual convergence and adequate evidence exists, pass the evidence-bearing proposal through the governed CCP boundary. If convergence is not requested, preserve the evidence and uncertainty summary instead.
+
+Do not fabricate a CCP execution receipt. Do not call an `Experimental`, `Refine`, `Rejected` or unexecuted state canonical.
+
+CCP is an understanding/evidence boundary, not a life-authority boundary. A human remains free to make a choice while uncertainty is explicit; `Refine` is not a prohibition on living.
+
+### 7. Stop at the human consent gate
+
+After presenting the best available conceptual/evidence state, ask:
 
 > **Now that I can see what shaped this desire, do I still consent to carrying it?**
 
@@ -142,29 +150,23 @@ unanswered
 
 The response is valid only when explicitly supplied by the human. Never infer `endorse` from repetition, enthusiasm, intoxication, affection, silence, compliance, historical behavior or model prediction.
 
-### 7. Converge only when convergence is actually requested
-
-If the human wants conceptual convergence and adequate evidence exists, pass the evidence-bearing proposal through the governed CCP boundary.
-
-Do not fabricate a CCP execution receipt. Do not call an `Experimental`, `Refine`, `Rejected` or unexecuted state canonical.
+The human response must not be used retroactively to alter which candidate counted as better evidenced.
 
 ### 8. Preserve human action authority
 
 Even after human endorsement or conceptual convergence, action remains a separate decision.
 
 ```text
-concept understood
+conceptual understanding state
     !=
 human endorses desire
-    !=
-CCP conceptual acceptance
     !=
 human authorizes action
     !=
 action executed
 ```
 
-The human may endorse a desire and still choose not to act.
+The human may endorse a desire and still choose not to act. The human may also choose under explicit uncertainty without pretending CCP reached `Accepted`.
 
 ### 9. Record consequence and re-enter the loop
 
@@ -174,7 +176,7 @@ Outcome becomes new context for another cycle:
 
 ```text
 conditions -> interpretation -> divergence -> evaluation
--> consent -> choice -> consequence -> revised understanding
+-> optional convergence -> consent -> choice -> consequence -> revised understanding
 ```
 
 ## State-of-mind boundary
@@ -201,6 +203,7 @@ Return `hold` or correct the workflow when any of these occur:
 - `SOURCE_COLLAPSE`
 - `HUMAN_CONSENT_INFERRED`
 - `HUMAN_AUTHORITY_CAPTURED`
+- `PREFERENCE_RETROACTIVELY_DEFINES_TRUTH`
 - `STATE_SALIENCE_PROMOTED_TO_TRUTH`
 - `CCP_EXECUTION_UNPROVEN`
 - `CONCEPTUAL_ACCEPTANCE_USED_AS_ACTION_AUTHORITY`
@@ -214,8 +217,8 @@ Produce or update a record conforming to:
 
 `../../../human-choice-authorship/choice-authorship-record.schema.json`
 
-Plain-language output should tell the human what conditions are visible, which explanations remain possible, what is inferred versus evidenced, where uncertainty remains, and whether the workflow is waiting on explicit human consent.
+Plain-language output should tell the human what conditions are visible, which explanations remain possible, what is inferred versus evidenced, where uncertainty remains, the conceptual convergence state if one was requested, and whether the workflow is waiting on explicit human consent.
 
 ## Success condition
 
-The skill succeeds when it expands self-understanding **without capturing self-authorship**: conditions remain visible, alternative explanations remain inspectable, unknowns survive, consent belongs to the human, and no renter can promote an interpretation into identity or action authority on the person's behalf.
+The skill succeeds when it expands self-understanding **without capturing self-authorship**: conditions remain visible, alternative explanations remain inspectable, unknowns survive, conceptual confidence stays separate from preference, consent belongs to the human, and no renter can promote an interpretation into identity or action authority on the person's behalf.
