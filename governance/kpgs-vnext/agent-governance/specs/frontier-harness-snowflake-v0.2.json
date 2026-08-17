@@ -1,0 +1,61 @@
+{
+  "spec_id": "kpgs-frontier-harness-snowflake-v0.2",
+  "title": "KPGS Frontier Harness v0.2 — Snowflake Live-Capable Evidence Adapter",
+  "outcome": "Promote the v0.1 Snowflake prepared analytical copy into a fail-closed SQL API adapter that can perform a real telemetry append only when KPGS supplies an explicit short-lived capability lease and an external secret reference.",
+  "scope": {
+    "included": [
+      "Implement dependency-free Snowflake SQL API request preparation",
+      "Require an exact snowflake.telemetry.append capability and resource scope",
+      "Reject expired or wrong-spec capability leases",
+      "Resolve authentication only through external secret references",
+      "Use bind variables for all telemetry values",
+      "Reject semantic input, raw prompts, provider response text and private payload fields",
+      "Emit secret-free request and execution receipts",
+      "Add an executable local governance gate"
+    ],
+    "excluded": [
+      "Storing Snowflake credentials in GitHub",
+      "Treating Snowflake as canonical sovereign state",
+      "Sending semantic input or private payloads to the telemetry table",
+      "Automatically provisioning production Snowflake roles or network policies",
+      "Claiming a successful live Snowflake write without an execution receipt"
+    ]
+  },
+  "interfaces": [
+    {"name": "KPGS capability lease", "contract": "Exact append capability, exact telemetry table scope, current validity window, governing spec reference and one external secret-provider reference are mandatory.", "version": "capability-lease.schema.json"},
+    {"name": "Snowflake SQL API", "contract": "POST /api/v2/statements with bearer authentication, JSON request body and bind variables; response produces a secret-free local execution receipt.", "version": "v2"},
+    {"name": "Snowflake evidence table", "contract": "KPGS_FRONTIER.EVIDENCE.FRONTIER_TELEMETRY stores metadata and digests only and is never canonical application state.", "version": "kpgs.frontier_telemetry.v1"}
+  ],
+  "constraints": [
+    "Snowflake remains an analytical copy, never local sovereign state.",
+    "No token, password, private key or OAuth secret may be committed.",
+    "A live request must fail closed without a currently valid capability lease.",
+    "A live request must fail closed if the secret reference cannot resolve.",
+    "Telemetry values must use SQL API bind variables rather than string interpolation.",
+    "Semantic input and private payload fields are forbidden at the adapter boundary.",
+    "A Snowflake response cannot overwrite the local KPGS receipt or provider evaluation."
+  ],
+  "acceptance_criteria": [
+    {"id": "SF-01", "statement": "The adapter cannot prepare a Snowflake request without an exact, currently valid governed capability lease.", "hard_gate": true, "verification_methods": ["unit", "integration"]},
+    {"id": "SF-02", "statement": "Authentication material remains external to the repository and request receipts contain no token.", "hard_gate": true, "verification_methods": ["security", "human-review"]},
+    {"id": "SF-03", "statement": "Telemetry values are bound and semantic/private fields are rejected before request creation.", "hard_gate": true, "verification_methods": ["unit", "security"]},
+    {"id": "SF-04", "statement": "The target remains KPGS_FRONTIER.EVIDENCE.FRONTIER_TELEMETRY and Snowflake is represented only as an analytical evidence copy.", "hard_gate": true, "verification_methods": ["schema", "human-review"]},
+    {"id": "SF-05", "statement": "The local gate executes without Snowflake credentials or network access and proves fail-closed behavior.", "hard_gate": false, "verification_methods": ["integration"]}
+  ],
+  "verification_plan": [
+    {"criterion_id": "SF-01", "evidence": "validate_snowflake_adapter.py proves valid scoped lease acceptance and expired lease rejection.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/snowflake/validate_snowflake_adapter.py"},
+    {"criterion_id": "SF-02", "evidence": "lease.template.json contains only an env secret reference and safe receipts explicitly exclude secrets.", "command_or_procedure": "Review lease.template.json and sql_api_adapter.py."},
+    {"criterion_id": "SF-03", "evidence": "Prepared request uses eight SQL API bindings and the adapter rejects forbidden semantic/private keys.", "command_or_procedure": "Run validate_snowflake_adapter.py."},
+    {"criterion_id": "SF-04", "evidence": "RESOURCE_SCOPE and INSERT_SQL are pinned to KPGS_FRONTIER.EVIDENCE.FRONTIER_TELEMETRY.", "command_or_procedure": "Review sql_api_adapter.py and bootstrap.sql."},
+    {"criterion_id": "SF-05", "evidence": "Dependency-free gate executes with an in-memory lease fixture and does not invoke the network.", "command_or_procedure": "python governance/kpgs-vnext/frontier-harness/snowflake/validate_snowflake_adapter.py"}
+  ],
+  "rollback_plan": {
+    "trigger": "The adapter permits ambient authority, leaks semantic/private data, embeds a credential, or allows Snowflake to become canonical state.",
+    "procedure": "Revert the v0.2 commit or PR. The v0.1 prepared analytical-copy path remains intact and no production estate release depends on this adapter.",
+    "target_ref": "master@f5899e5ca958523f394c89c965d30a8649921f29"
+  },
+  "risk_class": "R2",
+  "required_capabilities": [{"capability": "snowflake.telemetry.append", "scope": "KPGS_FRONTIER.EVIDENCE.FRONTIER_TELEMETRY"}],
+  "lifecycle_state": "draft",
+  "related_issues": [46]
+}

@@ -1,0 +1,20 @@
+{
+  "lease_id": "lease_REPLACE_BEFORE_USE",
+  "subject": {"id": "frontier-snowflake-adapter", "kind": "adapter"},
+  "tenant_id": "kopano-labs",
+  "domain_id": "Introduction-to-MCP",
+  "task_id": "frontier-snowflake-v0.2",
+  "capabilities": [
+    {
+      "name": "snowflake.telemetry.append",
+      "resource_scope": "KPGS_FRONTIER.EVIDENCE.FRONTIER_TELEMETRY",
+      "constraints": ["append-only", "metadata-and-digests-only", "no-semantic-input", "no-private-payload"]
+    }
+  ],
+  "issued_at": "1970-01-01T00:00:00Z",
+  "expires_at": "1970-01-01T00:00:01Z",
+  "policy_decision_ref": "policy://REPLACE_BEFORE_USE",
+  "governing_spec_ref": "kpgs-frontier-harness-snowflake-v0.2",
+  "secret_provider_refs": ["env://KPGS_SNOWFLAKE_PAT"],
+  "audit": {"correlation_id": "REPLACE_BEFORE_USE", "evidence_ref": "evidence://REPLACE_BEFORE_USE"}
+}
