@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/realtime/connection-session.schema.json",
+  "title": "KPGS Realtime Connection Session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "connection_id",
+    "tenant_id",
+    "domain_id",
+    "session_id",
+    "transport",
+    "user_state",
+    "connected_at"
+  ],
+  "properties": {
+    "connection_id": { "type": "string", "minLength": 8 },
+    "tenant_id": { "type": "string", "minLength": 1 },
+    "domain_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": ["string", "null"] },
+    "correlation_id": { "type": ["string", "null"] },
+    "transport": { "type": "string", "enum": ["websocket", "sse", "polling"] },
+    "user_state": {
+      "type": "string",
+      "enum": ["ready", "working", "waiting-for-approval", "offline", "reconnecting", "done", "failed"]
+    },
+    "connected_at": { "type": "string", "format": "date-time" },
+    "last_seen_at": { "type": ["string", "null"], "format": "date-time" },
+    "resume_cursor": { "type": ["string", "null"] },
+    "checkpoint_ref": { "type": ["string", "null"] },
+    "lease_ref": { "type": ["string", "null"] },
+    "backpressure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "queue_limit": { "type": "integer", "minimum": 1 },
+        "strategy": { "type": "string", "enum": ["reject", "coalesce", "drop-noncritical", "pause-producer"] }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attempt": { "type": "integer", "minimum": 0 },
+        "max_attempts": { "type": ["integer", "null"], "minimum": 1 },
+        "fallback_transport": { "type": ["string", "null"], "enum": ["sse", "polling", null] },
+        "canonical_snapshot_required": { "type": "boolean" }
+      }
+    }
+  }
+}
