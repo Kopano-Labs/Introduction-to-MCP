@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/kc/sub-membrane.schema.json",
+  "title": "KC Sub-Membrane Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","registry_id","canonical_landlord","canonical_governance_repository","observation_window","discovery","authority_law","sub_membranes"],
+  "properties": {
+    "schema_version": {"const":"kpgs.kc_submembrane_registry.v1"},
+    "registry_id": {"type":"string","minLength":8},
+    "canonical_landlord": {"const":"KC"},
+    "canonical_governance_repository": {"const":"RobynAwesome/Introduction-to-MCP"},
+    "observation_window": {"type":"object","additionalProperties":false,"required":["from","to"],"properties":{"from":{"type":"string","format":"date-time"},"to":{"type":"string","format":"date-time"}}},
+    "discovery": {"type":"object","additionalProperties":false,"required":["provider","query","repository_count","seeded_count"],"properties":{"provider":{"const":"github"},"query":{"type":"string"},"repository_count":{"type":"integer","minimum":1},"seeded_count":{"type":"integer","minimum":1}}},
+    "authority_law": {"type":"string","minLength":20},
+    "sub_membranes": {"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["id","repository","default_branch","revision","authority","ingestion_state","semantic_state","logic_facets","notes"],"properties":{"id":{"type":"string","minLength":3},"repository":{"type":"string","pattern":"^[^/]+/[^/]+$"},"default_branch":{"type":"string","minLength":1},"revision":{"type":["string","null"],"pattern":"^[0-9a-f]{40}$"},"authority":{"enum":["canonical","reference","experimental","external-reference"]},"ingestion_state":{"enum":["pinned-observed","discovered-pending-pin"]},"semantic_state":{"enum":["deep-sampled","sampled","pending-deep-extraction"]},"logic_facets":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"notes":{"type":"string","minLength":1}}}}
+  }
+}

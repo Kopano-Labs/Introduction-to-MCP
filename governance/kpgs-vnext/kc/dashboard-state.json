@@ -1,0 +1,36 @@
+{
+  "schema_version": "kpgs.kc_dashboard_state.v1",
+  "generated_at": "2026-08-17T18:05:00Z",
+  "mode": "snapshot",
+  "kc": {
+    "seat": 1,
+    "role": "observer-landlord",
+    "stateful": true,
+    "can_execute": false,
+    "can_orchestrate": false,
+    "can_validate": false,
+    "publishes": ["CONTEXT_SOURCE_LOCK", "CONTEXT_GAP", "URGENCY_PING", "EMOTIONAL_FUEL", "STATE_UPDATED"]
+  },
+  "context_lock": {
+    "source": "kc-weekend-2026-08-14--2026-08-17",
+    "freshness": "snapshot",
+    "urgency": "P2",
+    "boundary": "KC observes, correlates and publishes. APEX orchestrates; KHELOS validates; human authority remains human."
+  },
+  "frontier_lanes": [
+    {"id":"snowflake","label":"Snowflake","role":"evidence-copy","version":"v0.2","state":"live-capable","live_receipt":false,"authority":"non-canonical"},
+    {"id":"google-ai","label":"Google AI","role":"rented-intelligence","version":"v0.3","state":"live-capable","live_receipt":false,"authority":"non-canonical"},
+    {"id":"elevenlabs","label":"ElevenLabs","role":"speech-renderer","version":"v0.4","state":"live-capable","live_receipt":false,"authority":"renderer-only"},
+    {"id":"solana","label":"Solana","role":"public-proof-anchor","version":"v0.1","state":"intent-ready","live_receipt":false,"authority":"commitment-only"},
+    {"id":"offline-replication","label":"Offline Replication","role":"non-authoritative-convergence","version":"v0.1","state":"poc-merged","live_receipt":false,"authority":"non-authoritative"}
+  ],
+  "gates": [
+    {"id":"KC-GATE-01","severity":"P1","label":"Live provider receipts absent","owner":"APEX + KHELOS","status":"open"},
+    {"id":"KC-GATE-02","severity":"P2","label":"3 weekend Sub-Membranes still need source pin + deep ingestion","owner":"KC ingestion + KHELOS","status":"open"},
+    {"id":"KC-GATE-03","severity":"P2","label":"Dashboard is repository-source POC; no deployed/live realtime feed receipt yet","owner":"APEX","status":"open"}
+  ],
+  "skills": [
+    {"name":"design-first-ui-prompting","source":"RobynAwesome/Skills/agent-skills/ui/design-first-ui-prompting/SKILL.md","application":"stable shell, explicit hierarchy, one accent, no decorative ambiguity"},
+    {"name":"animation-systems","source":"RobynAwesome/Skills/agent-skills/web-design/animation-systems/SKILL.md","application":"motion only for hierarchy/feedback/continuity; reduced motion mandatory"}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "kpgs.kc_ingestion_window.v1",
+  "user_literal": "14 August 2026 to 17 August 2025",
+  "normalized": {
+    "from": "2026-08-14T00:00:00Z",
+    "to": "2026-08-17T23:59:59Z",
+    "timezone_basis": "UTC"
+  },
+  "normalization_reason": "The literal years reverse chronology. Because the request concerns the just-completed 14-17 August weekend on 17 August 2026, KC normalizes the ingestion window to 14-17 August 2026 instead of silently performing a cross-year sweep.",
+  "discovery_query": "user:RobynAwesome pushed:2026-08-14..2026-08-17",
+  "repository_count": 13,
+  "seed_policy": "Seed every discovered repository as a Sub-Membrane descriptor. Pinned source evidence and semantic extraction determine promotion; discovery alone never creates canonical authority."
+}

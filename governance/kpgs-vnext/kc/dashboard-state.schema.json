@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/kc/dashboard-state.schema.json",
+  "title": "KC Dashboard State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","generated_at","mode","kc","context_lock","frontier_lanes","gates","skills"],
+  "properties": {
+    "schema_version": {"const":"kpgs.kc_dashboard_state.v1"},
+    "generated_at": {"type":"string","format":"date-time"},
+    "mode": {"const":"snapshot"},
+    "kc": {"type":"object","additionalProperties":false,"required":["seat","role","stateful","can_execute","can_orchestrate","can_validate","publishes"],"properties":{"seat":{"const":1},"role":{"const":"observer-landlord"},"stateful":{"const":true},"can_execute":{"const":false},"can_orchestrate":{"const":false},"can_validate":{"const":false},"publishes":{"type":"array","minItems":1,"items":{"type":"string"}}}},
+    "context_lock": {"type":"object"},
+    "frontier_lanes": {"type":"array"},
+    "gates": {"type":"array"},
+    "skills": {"type":"array"}
+  }
+}
