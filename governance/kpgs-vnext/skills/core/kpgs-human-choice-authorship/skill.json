@@ -1,0 +1,103 @@
+{
+  "name": "kpgs-human-choice-authorship",
+  "version": "0.1.0",
+  "description": "Explore inherited conditions, proposed root algorithms, state-tagged testimony, divergent interpretations and explicit human consent without assigning identity or capturing personal action authority.",
+  "category": "human-governance",
+  "state": "draft",
+  "runtime": {
+    "renter_protocol": "1.0",
+    "platforms": ["human", "agent", "stateless-renter"],
+    "languages": ["markdown", "json"]
+  },
+  "inputs": {
+    "schema_ref": "../../../human-choice-authorship/choice-authorship-record.schema.json",
+    "description": "A governed human-choice exploration record with current authority, context claims, root-algorithm hypotheses, CDP candidate families and explicit human consent state."
+  },
+  "outputs": {
+    "schema_ref": "../../../human-choice-authorship/choice-authorship-record.schema.json",
+    "description": "An updated non-coercive authorship record preserving hypotheses, unknowns, consent, conceptual convergence state and separate human action authority."
+  },
+  "required_capabilities": [
+    {
+      "name": "governed-context.read",
+      "resource_scope": "active-human-choice-record",
+      "optional": false
+    },
+    {
+      "name": "choice-record.write",
+      "resource_scope": "active-human-choice-record",
+      "optional": false
+    }
+  ],
+  "dependencies": [
+    {
+      "kind": "runtime",
+      "name": "kpgs-stateless-renter-protocol",
+      "version_constraint": "1.0"
+    },
+    {
+      "kind": "skill",
+      "name": "Project Jennifer RIVM/CDP/CCP protocol lineage",
+      "version_constraint": null
+    }
+  ],
+  "provenance": {
+    "origin": "adapted",
+    "license_status": "unknown",
+    "license_spdx": null,
+    "sources": [
+      {
+        "ref": "RobynAwesome/Project-Jennifer",
+        "relationship": "adaptation",
+        "commit": "5328a8449bad509150f73fe9aafeabc6c17c983b"
+      },
+      {
+        "ref": "RobynAwesome/Introduction-to-MCP#49",
+        "relationship": "reference",
+        "commit": null
+      }
+    ]
+  },
+  "validation": {
+    "hard_gates": [
+      "Human consent may never be inferred or delegated",
+      "Root algorithms remain hypotheses until evidence supports promotion",
+      "CDP requires structurally distinct alternatives and preserves an unknown branch",
+      "CCP conceptual convergence never grants authority to make or execute a human life decision",
+      "State salience may not be promoted to truth without evidence",
+      "Historical context cannot override current human authority"
+    ],
+    "methods": ["schema", "human-review"],
+    "evidence_refs": [
+      "RobynAwesome/Project-Jennifer@5328a8449bad509150f73fe9aafeabc6c17c983b",
+      "RobynAwesome/Introduction-to-MCP#49"
+    ]
+  },
+  "failures": [
+    {
+      "code": "HUMAN_CONSENT_INFERRED",
+      "recoverability": "user-action",
+      "user_message": "The system cannot decide that you endorse this desire. Your explicit response is required."
+    },
+    {
+      "code": "PREMATURE_CONVERGENCE",
+      "recoverability": "retry",
+      "user_message": "The available explanations are too narrow or insufficiently evaluated. Preserve alternatives and continue divergence."
+    },
+    {
+      "code": "ROOT_ALGORITHM_UNPROVEN",
+      "recoverability": "retry",
+      "user_message": "This inherited-sequence explanation is still a hypothesis and cannot be presented as fact yet."
+    },
+    {
+      "code": "CCP_EXECUTION_UNPROVEN",
+      "recoverability": "operator-action",
+      "user_message": "Conceptual convergence has not been proven by a runtime receipt, so it remains non-canonical."
+    },
+    {
+      "code": "ACTION_AUTHORITY_CAPTURE",
+      "recoverability": "user-action",
+      "user_message": "The system cannot make this personal choice for you. Action authority remains with you."
+    }
+  ]
+}
