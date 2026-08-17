@@ -1,4 +1,4 @@
-name: KPGS vNext Phase 0 Gate
+name: KPGS vNext Contract Gate
 
 on:
   push:
@@ -15,12 +15,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: kpgs-vnext-phase0-${{ github.ref }}
+  group: kpgs-vnext-contracts-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   truth-contracts:
-    name: Validate KPGS truth and contracts
+    name: Validate KPGS truth and governance contracts
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -33,8 +33,14 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Validate Phase 0 contracts
+      - name: Validate Phase 0 truth contracts
         run: python governance/kpgs-vnext/validate_phase0.py
 
-      - name: Compile validator
-        run: python -m py_compile governance/kpgs-vnext/validate_phase0.py
+      - name: Validate governance substrate contracts
+        run: python governance/kpgs-vnext/validate_contracts.py
+
+      - name: Compile validators
+        run: >-
+          python -m py_compile
+          governance/kpgs-vnext/validate_phase0.py
+          governance/kpgs-vnext/validate_contracts.py
