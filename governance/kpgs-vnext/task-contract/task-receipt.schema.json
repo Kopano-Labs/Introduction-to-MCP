@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/task-contract/task-receipt.schema.json",
+  "title": "KPGS Task Receipt v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "receipt_id",
+    "sequence",
+    "tenant_id",
+    "domain_id",
+    "principal_id",
+    "capability_grant_id",
+    "governing_spec_ref",
+    "policy_version",
+    "state",
+    "idempotency_key",
+    "operation",
+    "resource",
+    "created_at",
+    "updated_at",
+    "protocol",
+    "checkpoint_ref",
+    "result_ref",
+    "failure_code",
+    "previous_receipt_sha256",
+    "evidence_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kpgs.task_receipt.v0.1"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^kpgs-task-[0-9a-f]{24}$"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "principal_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "capability_grant_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "governing_spec_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "accepted",
+        "started",
+        "awaiting_approval",
+        "checkpointed",
+        "completed",
+        "failed",
+        "cancelled",
+        "held"
+      ]
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resource": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "transport",
+        "external_task_id"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "mcp",
+            "a2a",
+            "local",
+            "other"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transport": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "external_task_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "checkpoint_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "result_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "failure_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous_receipt_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sha256",
+          "ref",
+          "content_captured"
+        ],
+        "properties": {
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "content_captured": {
+            "const": false
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/kpgs/task-contract/principal-envelope.schema.json",
+  "title": "KPGS Principal Envelope v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "principal_id",
+    "principal_type",
+    "identity",
+    "capability_grants"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kpgs.principal.v0.1"
+    },
+    "principal_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "principal_type": {
+      "enum": [
+        "human",
+        "agent",
+        "service",
+        "device",
+        "runtime"
+      ]
+    },
+    "accountable_principal_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scheme",
+        "subject",
+        "public_key_ref"
+      ],
+      "properties": {
+        "scheme": {
+          "enum": [
+            "local-key",
+            "did",
+            "x509",
+            "oauth-subject",
+            "workload",
+            "other"
+          ]
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_key_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "capability_grants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "grant_id",
+          "operations",
+          "resources",
+          "issued_at",
+          "expires_at",
+          "parent_grant_id",
+          "revocation_ref"
+        ],
+        "properties": {
+          "grant_id": {
+            "type": "string",
+            "minLength": 3
+          },
+          "operations": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "resources": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "parent_grant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "revocation_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
