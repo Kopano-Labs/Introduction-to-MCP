@@ -213,7 +213,6 @@ def validate_human_choice_authorship() -> None:
 
     skill_manifest = load_json("skills/core/kpgs-human-choice-authorship/skill.json")
     require(skill_manifest.get("state") == "draft", "human choice skill must remain draft while this work is POC and license status is unresolved")
-    require(skill_manifest.get("provenance", {}).get("commit") is None if False else True, "placeholder")
     sources = skill_manifest.get("provenance", {}).get("sources", [])
     project_jennifer = next((source for source in sources if source.get("ref") == "RobynAwesome/Project-Jennifer"), None)
     require(project_jennifer is not None, "human choice skill must preserve Project Jennifer provenance")
