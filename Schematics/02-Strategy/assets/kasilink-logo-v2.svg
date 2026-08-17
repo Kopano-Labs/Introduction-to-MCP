@@ -1,0 +1,30 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">KasiLink mark</title>
+  <desc id="desc">A simplified location pin and chain link connecting two people.</desc>
+  <defs>
+    <linearGradient id="g" x1="86" y1="92" x2="430" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFB000"/>
+      <stop offset="0.34" stop-color="#FF6A00"/>
+      <stop offset="0.61" stop-color="#5EDF28"/>
+      <stop offset="0.82" stop-color="#00D6B8"/>
+      <stop offset="1" stop-color="#1C8DFF"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .24 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <path d="M256 54C151.1 54 66 138.9 66 243.6c0 133.5 142.6 219.8 178.6 239.4a23.8 23.8 0 0 0 22.8 0C303.4 463.4 446 377.1 446 243.6 446 138.9 360.9 54 256 54Z" fill="#071221" stroke="url(#g)" stroke-width="26"/>
+  <circle cx="256" cy="244" r="128" fill="#0A1827" stroke="#FFFFFF" stroke-opacity=".06" stroke-width="2"/>
+  <g filter="url(#glow)">
+    <path d="M177 305 302 180c26-26 68-26 94 0 26 26 26 68 0 94l-53 53c-26 26-68 26-94 0" stroke="url(#g)" stroke-width="34" stroke-linecap="round"/>
+    <path d="m335 207-125 125c-26 26-68 26-94 0-26-26-26-68 0-94l53-53c26-26 68-26 94 0" stroke="url(#g)" stroke-width="34" stroke-linecap="round"/>
+  </g>
+  <g fill="#F7FCFF">
+    <circle cx="141" cy="357" r="15"/>
+    <path d="M118 385c0-13 10-23 23-23s23 10 23 23v28h-46v-28Z" opacity=".96"/>
+    <circle cx="369" cy="155" r="15"/>
+    <path d="M346 183c0-13 10-23 23-23s23 10 23 23v28h-46v-28Z" opacity=".96"/>
+  </g>
+</svg>
