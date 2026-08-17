@@ -1,7 +1,6 @@
 ---
 name: govern-kpgs-documents
 description: Create, edit, classify, validate, version, review, and package KPGS documents as typed governance artifacts using KPGS-DTS, KPEFS routing, Partial Knowable Algebra, BlackMask/promotion law, receipts, and WYC-01 causal boundaries. Use for KPGS specifications, manuals, SOPs, POC reports, incident reports, governance decisions, skill packages, architecture documents, public narratives, apprenticeship materials, and release/publication documents. Preserve UNKNOWN and never treat publication or polished prose as proof.
-license: MIT
 metadata:
   author: Kholofelo Robyn Rababalela
   version: "1.0.0"
@@ -10,12 +9,36 @@ metadata:
   source_repository: RobynAwesome/Introduction-to-MCP
   manual_source_snapshot: 42d23ec0774d9dfb8cc6034ae4ceb42f1f8f3d90
   integration_baseline: 002f0a2ba430e52db94c448cbcf2e71ac8eb2400
+  canonical_skill_contract: governance/kpgs-vnext/skills/SKILL_PACKAGE.md
+  canonical_skill_schema: governance/kpgs-vnext/skills/skill-manifest.schema.json
+  surface_role: publication-adapter
   renter_assertion: I_AM_STATELESS_RENTER_NOT_LANDLORD
   kpefs_vector: V4_DIASPORA
-  proof_state: poc
+  skill_state: draft
 ---
 
 # KPGS Document Governance
+
+## Source authority
+
+This package lives under `skills/awesome/` as an **AwesomeSkills/publication adapter**. It is not a second KPGS skill runtime.
+
+The canonical skill-package authority is:
+
+```text
+governance/kpgs-vnext/skills/SKILL_PACKAGE.md
+governance/kpgs-vnext/skills/skill-manifest.schema.json
+```
+
+Therefore:
+
+```text
+canonical runtime > publication adapter
+skill.json must conform to canonical vNext schema
+publication readiness != runtime approval
+```
+
+Canonical runtime registration under `governance/kpgs-vnext/skills/` remains pending while a governance-path change would cross the current production deployment call boundary. Do not solve that by writing into `governance/**` from a skill-only change.
 
 ## Objective
 
@@ -235,7 +258,9 @@ linked_evidence: []
 renter_assertion: I_AM_STATELESS_RENTER_NOT_LANDLORD
 ```
 
-Machine manifests SHOULD validate against `references/kpgs-document-manifest.schema.json`.
+Machine document manifests SHOULD validate against `references/kpgs-document-manifest.schema.json`.
+
+The skill package itself MUST conform to `governance/kpgs-vnext/skills/skill-manifest.schema.json`.
 
 ## Required outputs
 
