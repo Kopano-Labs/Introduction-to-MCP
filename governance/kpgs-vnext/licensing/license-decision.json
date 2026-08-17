@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "repository": "RobynAwesome/Introduction-to-MCP",
+  "issue": 47,
+  "decision_status": "AWAITING_HUMAN_DECISION",
+  "current_repository_state": {
+    "root_license_file_present": false,
+    "canonical_spdx": null,
+    "repository_wide_license_claim_allowed": false
+  },
+  "recommendation": {
+    "spdx": "MIT",
+    "status": "RECOMMENDED_NOT_AUTHORIZED",
+    "basis": [
+      "Existing FivesArena skill packaging in the user's governed ecosystem declares MIT.",
+      "Existing KRRababalela skill packaging in the user's governed ecosystem declares MIT.",
+      "A permissive single SPDX identifier would simplify KPGS skill/package compatibility checks if the human owner chooses it."
+    ],
+    "non_claim": "This recommendation does not license this repository and must not be treated as owner consent."
+  },
+  "allowed_human_decisions": [
+    "MIT",
+    "Apache-2.0",
+    "PROPRIETARY",
+    "UNLICENSED",
+    "PATH_SPECIFIC"
+  ],
+  "promotion_rule": "No repository-authored artifact may move from license_status unknown/pending to verified-compatible solely from this recommendation. A current human-approved decision and corresponding repository/path license evidence are required.",
+  "third_party_rule": "Existing or imported third-party licenses must be preserved exactly and may never be overwritten by a repository-wide declaration.",
+  "generated_material_rule": "Generated code, documentation and assets require provenance and human review; generation does not erase upstream rights, attribution duties or source-license constraints.",
+  "updated_at": "2026-08-17T15:47:00+02:00"
+}

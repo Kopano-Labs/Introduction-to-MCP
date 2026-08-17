@@ -4,10 +4,16 @@ on:
   push:
     paths:
       - "governance/kpgs-vnext/**"
+      - "CONTRIBUTING.md"
+      - "THIRD_PARTY_NOTICES.md"
+      - "LICENSE"
       - ".github/workflows/kpgs-vnext-phase0-gate.yml"
   pull_request:
     paths:
       - "governance/kpgs-vnext/**"
+      - "CONTRIBUTING.md"
+      - "THIRD_PARTY_NOTICES.md"
+      - "LICENSE"
       - ".github/workflows/kpgs-vnext-phase0-gate.yml"
   workflow_dispatch:
 
@@ -39,8 +45,12 @@ jobs:
       - name: Validate governance substrate contracts
         run: python governance/kpgs-vnext/validate_contracts.py
 
+      - name: Validate license and provenance policy
+        run: python governance/kpgs-vnext/licensing/validate_license_policy.py
+
       - name: Compile validators
         run: >-
           python -m py_compile
           governance/kpgs-vnext/validate_phase0.py
           governance/kpgs-vnext/validate_contracts.py
+          governance/kpgs-vnext/licensing/validate_license_policy.py
