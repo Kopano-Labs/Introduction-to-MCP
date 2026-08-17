@@ -1,0 +1,46 @@
+{
+  "spec_id": "kc-submembrane-dashboard-v0.1",
+  "title": "KC Sub-Membrane Ingestion + TypeScript 7 Dashboard POC",
+  "outcome": "Evolve KC from a context publisher into a read-only estate observer that can correlate governed Sub-Membranes, receipts, capability lanes and unresolved gates without taking orchestration, validation or human action authority.",
+  "scope": {
+    "included": ["Normalize the 14–17 August 2026 weekend ingestion window while preserving the user's literal range","Seed every GitHub repository discovered in that window as a governed Sub-Membrane descriptor","Preserve canonical authority exclusively in Introduction-to-MCP","Expose KC context-lock, gate, provenance, canonicality, ingestion and frontier-lane state","Create a React 19 + Vite 8 + TypeScript 7 dashboard POC","Apply design-first-ui-prompting and animation-systems SKILL.md guidance","Provide a dependency-free structural validator"],
+    "excluded": ["Copying whole repositories into Introduction-to-MCP","Claiming deep semantic ingestion where only discovery/pinning occurred","Giving KC APEX orchestration, KHELOS validation, or human choice authority","Live provider execution, live GitHub polling, deployment, or fabricated realtime receipts","Production write actions from the dashboard"]
+  },
+  "interfaces": [
+    {"name":"KC RTCP lineage","contract":"KC publishes governed context and urgency state as Observer/Landlord; dashboard surfaces that state without expanding authority.","version":"kc-rtcp"},
+    {"name":"Sub-Membrane registry","contract":"Repository logic is seeded by source identity and evidence; no membrane self-canonicalizes.","version":"kpgs.kc_submembrane_registry.v1"},
+    {"name":"Dashboard state","contract":"Snapshot-first read model with explicit authority and freshness boundaries.","version":"kpgs.kc_dashboard_state.v1"},
+    {"name":"Skills lineage","contract":"UI/motion guidance is referenced from RobynAwesome/Skills and remains external/reference material.","version":"2026-08-17-observed"},
+    {"name":"TypeScript stack","contract":"React 19.2.4 + Vite 8.1.5 + TypeScript 7.0.2 aligned with Kopano-Labs-Website precedent.","version":"ts7"}
+  ],
+  "constraints": ["KC may observe, correlate and publish but cannot execute, orchestrate or validate.","Only RobynAwesome/Introduction-to-MCP may be authority=canonical in the registry.","Missing source pins must remain explicit and block semantic promotion.","Dashboard must label snapshot state and cannot imply realtime data without a receipt.","Motion must support prefers-reduced-motion and exist only for hierarchy, feedback or continuity.","Imported skills and external repositories require provenance/license/security/compatibility review before canonical admission."],
+  "acceptance_criteria": [
+    {"id":"KC-01","statement":"KC authority is structurally observer-landlord with execute/orchestrate/validate false.","hard_gate":true,"verification_methods":["schema","unit"]},
+    {"id":"KC-02","statement":"All 13 weekend-discovered repositories are represented exactly once as Sub-Membranes.","hard_gate":true,"verification_methods":["schema","unit"]},
+    {"id":"KC-03","statement":"Only Introduction-to-MCP is canonical; unpinned membranes remain pending.","hard_gate":true,"verification_methods":["unit","human-review"]},
+    {"id":"KC-04","statement":"Dashboard stack pins TypeScript 7.0.2, React 19.2.4 and Vite 8.1.5.","hard_gate":true,"verification_methods":["unit"]},
+    {"id":"KC-05","statement":"Dashboard documents and applies design-first and animation-system skill provenance.","hard_gate":false,"verification_methods":["human-review","accessibility"]},
+    {"id":"KC-06","statement":"Dashboard surfaces context lock, unresolved gates, Sub-Membranes, frontier lanes and authority boundaries.","hard_gate":true,"verification_methods":["unit","human-review"]},
+    {"id":"KC-07","statement":"Dashboard is read-only and does not manufacture APEX/KHELOS/human authority.","hard_gate":true,"verification_methods":["security","human-review"]},
+    {"id":"KC-08","statement":"Mobile layout and reduced-motion fallback are implemented.","hard_gate":true,"verification_methods":["accessibility","human-review"]},
+    {"id":"KC-09","statement":"Dependency-free validator checks registry, authority, source pins, dashboard state and TS7 surface.","hard_gate":false,"verification_methods":["unit","integration"]},
+    {"id":"KC-10","statement":"Realtime/deployed status remains unclaimed until runtime receipts exist.","hard_gate":true,"verification_methods":["human-review"]}
+  ],
+  "verification_plan": [
+    {"criterion_id":"KC-01","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-02","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-03","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-04","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-05","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-06","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-07","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-08","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-09","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"},
+    {"criterion_id":"KC-10","evidence":"governance/kpgs-vnext/kc + apps/kc-dashboard","command_or_procedure":"python governance/kpgs-vnext/kc/validate_kc.py"}
+  ],
+  "rollback_plan": {"trigger":"KC gains execution authority, source provenance is ambiguous, registry canonicality drifts, or dashboard claims unproven realtime state.","procedure":"Revert the KC dashboard/Sub-Membrane commit set; no production runtime or provider depends on this POC.","target_ref":"master@002f0a2ba430e52db94c448cbcf2e71ac8eb2400"},
+  "risk_class":"R1",
+  "required_capabilities":[],
+  "lifecycle_state":"draft",
+  "related_issues":[46]
+}

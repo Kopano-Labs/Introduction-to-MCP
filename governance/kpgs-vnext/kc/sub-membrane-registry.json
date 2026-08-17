@@ -1,0 +1,162 @@
+{
+  "schema_version": "kpgs.kc_submembrane_registry.v1",
+  "registry_id": "kc-weekend-2026-08-14--2026-08-17",
+  "canonical_landlord": "KC",
+  "canonical_governance_repository": "RobynAwesome/Introduction-to-MCP",
+  "observation_window": {
+    "from": "2026-08-14T00:00:00Z",
+    "to": "2026-08-17T23:59:59Z"
+  },
+  "discovery": {
+    "provider": "github",
+    "query": "user:RobynAwesome pushed:2026-08-14..2026-08-17",
+    "repository_count": 13,
+    "seeded_count": 13
+  },
+  "authority_law": "Sub-Membrane source logic may inform KPGS but cannot self-canonicalize; only Introduction-to-MCP owns canonical governance admission.",
+  "sub_membranes": [
+    {
+      "id": "profile-identity",
+      "repository": "RobynAwesome/RobynAwesome",
+      "default_branch": "main",
+      "revision": "bbe2c91f19cd039006299979d2649f6ea6280edb",
+      "authority": "reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "sampled",
+      "logic_facets": ["identity-surface", "active-systems-index", "stack-signals"],
+      "notes": "Identity/profile membrane; observed head is inside the normalized weekend window."
+    },
+    {
+      "id": "canonical-introduction-to-mcp",
+      "repository": "RobynAwesome/Introduction-to-MCP",
+      "default_branch": "master",
+      "revision": "002f0a2ba430e52db94c448cbcf2e71ac8eb2400",
+      "authority": "canonical",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "deep-sampled",
+      "logic_facets": ["canonical-spec", "capability-leases", "frontier-harness", "offline-replication", "evidence", "stateless-renter", "human-choice-authorship"],
+      "notes": "Canonical KPGS specification/governance membrane. Revision pins the meaningful pre-dashboard weekend state."
+    },
+    {
+      "id": "project-jennifer",
+      "repository": "RobynAwesome/Project-Jennifer",
+      "default_branch": "main",
+      "revision": "3270e48d8a807b72aa1924d3a236380a12b44c5c",
+      "authority": "reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "deep-sampled",
+      "logic_facets": ["rivm", "cdp", "ccp", "relationship-persistence", "evidence-boundary", "react-readthrough"],
+      "notes": "Governed intelligence/runtime reference membrane."
+    },
+    {
+      "id": "bookit-5s-arena",
+      "repository": "RobynAwesome/Bookit-5s-Arena",
+      "default_branch": "main",
+      "revision": "d4b9d0a574173abbeed3b190a958698dcbbeaeff",
+      "authority": "reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "sampled",
+      "logic_facets": ["adaptive-pwa", "threejs-physics", "offline-privacy", "deterministic-simulation", "ts7-compatibility"],
+      "notes": "Experience/runtime membrane for governed adaptive 3D and deterministic physics."
+    },
+    {
+      "id": "partial-knowable-algebra",
+      "repository": "RobynAwesome/Partial-Knowable-Algebra",
+      "default_branch": "main",
+      "revision": "400526faba10443892ce5ff0cfd31705202a4af4",
+      "authority": "reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "deep-sampled",
+      "logic_facets": ["partial-knowability", "poc-vs-foc", "recovery-loop", "deterministic-proof", "definition-authority"],
+      "notes": "Epistemic membrane. POCvsFOC remains a taxonomy/proof discipline, not a cosmetic label."
+    },
+    {
+      "id": "claude-code-templates",
+      "repository": "RobynAwesome/claude-code-templates",
+      "default_branch": "main",
+      "revision": null,
+      "authority": "external-reference",
+      "ingestion_state": "discovered-pending-pin",
+      "semantic_state": "pending-deep-extraction",
+      "logic_facets": ["template-reference", "pending-deep-extraction"],
+      "notes": "Weekend-discovered template membrane; no semantic authority until provenance and pinned-head review complete."
+    },
+    {
+      "id": "paws-and-potjie",
+      "repository": "RobynAwesome/paws-and-potjie",
+      "default_branch": "main",
+      "revision": "e0d6944b22c909af1f24b77c8f22648860ffdc30",
+      "authority": "experimental",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "deep-sampled",
+      "logic_facets": ["typescript-7", "adaptive-pwa", "lazy-threejs", "reduced-motion", "offline-cache", "kpgs-scene-boundary"],
+      "notes": "Challenge surface retained as an adaptive-runtime/provenance experiment membrane."
+    },
+    {
+      "id": "kmec",
+      "repository": "RobynAwesome/kpgs-morning-engine-core--kmec-",
+      "default_branch": "main",
+      "revision": "b1684f12dcc31ed6139a13227bdc1f4bcfda6cbe",
+      "authority": "reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "deep-sampled",
+      "logic_facets": ["kc-rtcp", "context-freshness", "gate-hunting", "urgency", "immutable-context-publication", "pka-consumer"],
+      "notes": "KC operational engine membrane. KC remains observer/landlord; orchestration belongs to APEX."
+    },
+    {
+      "id": "awesome-skills",
+      "repository": "RobynAwesome/Skills",
+      "default_branch": "main",
+      "revision": "22bacc4c4b5094001462d639df553a49a7642770",
+      "authority": "external-reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "sampled",
+      "logic_facets": ["design-first-ui", "animation-systems", "web-design-catalog", "skill-provenance"],
+      "notes": "Skill-source membrane. SKILL.md files are referenced and never silently promoted to canonical law."
+    },
+    {
+      "id": "sovereign-hub",
+      "repository": "RobynAwesome/kopano-sovereign-hub",
+      "default_branch": "main",
+      "revision": "8bcaa8d4f7a0f25a3750bb69264bd279a5241c43",
+      "authority": "reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "sampled",
+      "logic_facets": ["sovereign-hub", "receipt-closure", "control-plane-reference"],
+      "notes": "Sovereign Hub implementation/evidence membrane."
+    },
+    {
+      "id": "kopano-labs-website",
+      "repository": "RobynAwesome/Kopano-Labs-Website",
+      "default_branch": "main",
+      "revision": "b3bc6c230b84e73be8947548d8b8d136b6854284",
+      "authority": "reference",
+      "ingestion_state": "pinned-observed",
+      "semantic_state": "deep-sampled",
+      "logic_facets": ["typescript-7", "adaptive-runtime", "scene-contract", "css-lite-fallback", "performance-budget", "receipt-surface"],
+      "notes": "Primary TypeScript 7/adaptive experience-system reference for the KC dashboard."
+    },
+    {
+      "id": "cars4mars-project",
+      "repository": "RobynAwesome/cars4mars-project",
+      "default_branch": "main",
+      "revision": null,
+      "authority": "experimental",
+      "ingestion_state": "discovered-pending-pin",
+      "semantic_state": "pending-deep-extraction",
+      "logic_facets": ["project-evidence-reference", "pending-deep-extraction"],
+      "notes": "Weekend-discovered project membrane; seeded pending current-head and contract deep-ingestion."
+    },
+    {
+      "id": "omniroute",
+      "repository": "RobynAwesome/OmniRoute",
+      "default_branch": "release/v3.8.50",
+      "revision": null,
+      "authority": "external-reference",
+      "ingestion_state": "discovered-pending-pin",
+      "semantic_state": "pending-deep-extraction",
+      "logic_facets": ["routing-reference", "pending-deep-extraction"],
+      "notes": "Weekend-discovered external/reference membrane pending provenance and compatibility review."
+    }
+  ]
+}
