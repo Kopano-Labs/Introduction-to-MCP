@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/stateless-renter/renter-envelope.schema.json",
+  "title": "KPGS Stateless Renter Event Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "event_id",
+    "event_kind",
+    "tenant_id",
+    "domain_id",
+    "task_id",
+    "renter_id",
+    "correlation_id",
+    "lease_id",
+    "issued_at",
+    "payload"
+  ],
+  "properties": {
+    "protocol_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 200
+    },
+    "event_kind": {
+      "type": "string",
+      "enum": [
+        "task.accepted",
+        "task.started",
+        "task.progress",
+        "task.awaiting_approval",
+        "task.checkpointed",
+        "task.completed",
+        "task.failed",
+        "policy.denied",
+        "capability.expired",
+        "evidence.emitted"
+      ]
+    },
+    "tenant_id": { "type": "string", "minLength": 1 },
+    "domain_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "renter_id": { "type": "string", "minLength": 1 },
+    "correlation_id": { "type": "string", "minLength": 1 },
+    "lease_id": { "type": "string", "minLength": 1 },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "checkpoint_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governing_spec_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skill_versions": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "payload": {
+      "type": "object"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "ref"],
+        "properties": {
+          "kind": { "type": "string", "minLength": 1 },
+          "ref": { "type": "string", "minLength": 1 },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          }
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "recoverability"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "input_invalid",
+            "policy_denied",
+            "capability_expired",
+            "dependency_unavailable",
+            "timeout",
+            "execution_failed",
+            "verification_failed",
+            "cancelled"
+          ]
+        },
+        "recoverability": {
+          "type": "string",
+          "enum": ["retry", "rehydrate", "user_action", "operator_action", "not_recoverable"]
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_kind": { "const": "task.failed" }
+        }
+      },
+      "then": {
+        "required": ["failure"]
+      }
+    }
+  ]
+}
