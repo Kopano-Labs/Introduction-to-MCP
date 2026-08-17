@@ -3,17 +3,72 @@ name: "Kopano Context: Production Hardening Deployment"
 on:
   push:
     branches: [ "master" ]
-    paths-ignore:
-      - "skills/**"
   workflow_dispatch:
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
-  deploy:
+  authorize:
+    name: Authorize production invocation
     runs-on: ubuntu-latest
+    outputs:
+      authorized: ${{ steps.gate.outputs.authorized }}
+      reason: ${{ steps.gate.outputs.reason }}
+      production_paths: ${{ steps.gate.outputs.production_paths }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Classify deploy authorization
+        id: gate
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            python scripts/ci/production_deploy_gate.py \
+              --explicit-release \
+              --github-output "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          changed_files="${RUNNER_TEMP}/production-deploy-changed-files.txt"
+
+          if [[ -z "${BEFORE_SHA}" || "${BEFORE_SHA}" == "0000000000000000000000000000000000000000" ]]; then
+            git show --pretty="" --name-only "$GITHUB_SHA" > "$changed_files"
+          else
+            git diff --name-only "$BEFORE_SHA" "$GITHUB_SHA" > "$changed_files"
+          fi
+
+          python scripts/ci/production_deploy_gate.py \
+            --github-output "$GITHUB_OUTPUT" \
+            < "$changed_files"
+
+      - name: Record invocation decision
+        shell: bash
+        run: |
+          echo "### WYC-01 production invocation" >> "$GITHUB_STEP_SUMMARY"
+          echo "- authorized: ${{ steps.gate.outputs.authorized }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- reason: ${{ steps.gate.outputs.reason }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- production paths: ${{ steps.gate.outputs.production_paths || 'none' }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- invariant: FAILURE_SURFACED_BY_CALL != FAILURE_CAUSED_BY_CHANGE" >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    name: Deploy authorized production change
+    needs: authorize
+    if: needs.authorize.outputs.authorized == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
