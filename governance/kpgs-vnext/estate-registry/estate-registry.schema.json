@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/estate-registry/estate-registry.schema.json",
+  "title": "KPGS Sovereign DNS Estate Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "estate_id", "properties"],
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "estate_id": { "type": "string", "minLength": 1 },
+    "generated_at": { "type": ["string", "null"], "format": "date-time" },
+    "properties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "domain",
+          "status",
+          "ownership_evidence",
+          "repositories",
+          "deployment",
+          "adapter",
+          "renter_compatibility",
+          "governance",
+          "release",
+          "rollback"
+        ],
+        "properties": {
+          "domain": { "type": "string", "minLength": 3 },
+          "status": {
+            "type": "string",
+            "enum": [
+              "declared_pending_witness",
+              "witnessed",
+              "registered",
+              "staging",
+              "production",
+              "suspended",
+              "decommissioned"
+            ]
+          },
+          "ownership_evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "ref", "verified_at"],
+              "properties": {
+                "kind": { "type": "string", "enum": ["registrar", "dns", "deployment", "repository", "domain-control", "other"] },
+                "ref": { "type": "string", "minLength": 1 },
+                "verified_at": { "type": ["string", "null"], "format": "date-time" }
+              }
+            }
+          },
+          "repositories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["repository", "role", "ref"],
+              "properties": {
+                "repository": { "type": "string", "minLength": 1 },
+                "role": { "type": "string", "minLength": 1 },
+                "ref": { "type": ["string", "null"] }
+              }
+            }
+          },
+          "deployment": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["provider", "environment", "target"],
+            "properties": {
+              "provider": { "type": ["string", "null"] },
+              "environment": { "type": ["string", "null"] },
+              "target": { "type": ["string", "null"] }
+            }
+          },
+          "adapter": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["required", "implementation", "version"],
+            "properties": {
+              "required": { "type": "boolean" },
+              "implementation": { "type": ["string", "null"] },
+              "version": { "type": ["string", "null"] }
+            }
+          },
+          "renter_compatibility": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["status", "protocol_version"],
+            "properties": {
+              "status": { "type": "string", "enum": ["unknown", "not-ready", "partial", "conformant"] },
+              "protocol_version": { "type": ["string", "null"] }
+            }
+          },
+          "governance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["policy_ref", "risk_class"],
+            "properties": {
+              "policy_ref": { "type": ["string", "null"] },
+              "risk_class": { "type": ["string", "null"], "enum": ["R0", "R1", "R2", "R3", null] }
+            }
+          },
+          "release": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["live_ref", "evidence_ref"],
+            "properties": {
+              "live_ref": { "type": ["string", "null"] },
+              "evidence_ref": { "type": ["string", "null"] }
+            }
+          },
+          "rollback": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["target_ref", "procedure_ref"],
+            "properties": {
+              "target_ref": { "type": ["string", "null"] },
+              "procedure_ref": { "type": ["string", "null"] }
+            }
+          },
+          "notes": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}
