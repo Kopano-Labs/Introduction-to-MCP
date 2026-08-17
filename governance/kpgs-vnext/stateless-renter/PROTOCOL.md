@@ -153,6 +153,8 @@ Failures MUST be classified at least as:
 
 A failure MUST include a machine code and a plain-language recoverability hint. Sensitive internals MUST NOT be exposed to end users.
 
+The normative recovery mapping is documented in `FAILURE_MATRIX.md`.
+
 ## 11. Conformance
 
 A conformant renter MUST demonstrate:
@@ -167,3 +169,27 @@ A conformant renter MUST demonstrate:
 - recovery after process destruction.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD` remains a semantic invariant, not merely a banner string.
+
+## 12. Reference implementation and executable proof
+
+The repository reference runtime is `kopano-core/kopano/stateless_renter.py`.
+
+It deliberately accepts a caller-supplied canonical store interface for checkpoints and idempotency records. The renter process therefore owns only transient execution/readiness state; replacement renters hydrate through the same external store contract.
+
+Executable conformance evidence lives in:
+
+- `tests/test_stateless_renter_conformance.py`
+- `tests/test_stateless_renter_failure_recovery.py`
+
+The suite proves:
+
+1. destroy/recreate continuation against externally owned checkpoint state;
+2. capability denial before the workload handler can execute;
+3. replay suppression across different renter instances;
+4. identical rehydration semantics across two domain workloads;
+5. provenance/correlation metadata on emitted results;
+6. deterministic protocol failure/recovery mapping;
+7. graceful eviction followed by replacement-renter continuation;
+8. no renter-local database is required for canonical continuity.
+
+The in-memory Hub used by tests is a test double for an external canonical store, not an authorization to use renter-local memory as production truth.
