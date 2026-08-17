@@ -13,6 +13,17 @@ from typing import Any, Callable, Mapping, Protocol
 from uuid import uuid4
 
 PROTOCOL_VERSION = "1.0"
+FAILURE_CODES = {
+    "input_invalid",
+    "policy_denied",
+    "capability_expired",
+    "dependency_unavailable",
+    "timeout",
+    "execution_failed",
+    "verification_failed",
+    "cancelled",
+}
+RECOVERABILITY_VALUES = {"retry", "rehydrate", "user_action", "operator_action", "not_recoverable"}
 
 
 @dataclass(frozen=True)
@@ -81,6 +92,20 @@ class IdempotencyRecord:
     evidence: tuple[Mapping[str, str], ...] = ()
 
 
+class RenterFailure(Exception):
+    """Typed workload failure that maps directly onto the protocol failure envelope."""
+
+    def __init__(self, code: str, recoverability: str, message: str) -> None:
+        if code not in FAILURE_CODES:
+            raise ValueError(f"unsupported renter failure code: {code}")
+        if recoverability not in RECOVERABILITY_VALUES:
+            raise ValueError(f"unsupported renter recoverability: {recoverability}")
+        super().__init__(message)
+        self.code = code
+        self.recoverability = recoverability
+        self.message = message[:2000]
+
+
 class CanonicalRenterStore(Protocol):
     """Minimal Hub/domain-store contract required by the reference renter."""
 
@@ -110,6 +135,20 @@ class StatelessRenter:
         self.renter_id = renter_id
         self.store = store
         self.protocol_version = protocol_version
+        self._accepting_work = True
+
+    def readiness(self) -> dict[str, Any]:
+        """Return process-local readiness without claiming canonical task ownership."""
+        return {
+            "renter_id": self.renter_id,
+            "protocol_version": self.protocol_version,
+            "accepting_work": self._accepting_work,
+            "state_authority": "external-canonical-store",
+        }
+
+    def begin_eviction(self) -> None:
+        """Stop accepting new work; replacement renters can hydrate from the external store."""
+        self._accepting_work = False
 
     def execute(
         self,
@@ -132,6 +171,20 @@ class StatelessRenter:
         event_time = now or datetime.now(timezone.utc)
         if event_time.tzinfo is None:
             raise ValueError("now must be timezone-aware")
+
+        if not self._accepting_work:
+            return self._event(
+                event_kind="task.failed",
+                context=context,
+                lease=lease,
+                payload={"operation": operation, "resource": resource},
+                now=event_time,
+                failure={
+                    "code": "cancelled",
+                    "recoverability": "rehydrate",
+                    "message": "renter is draining for eviction; retry on a replacement renter",
+                },
+            )
 
         authorization_failure = lease.authorization_failure(
             context,
@@ -187,7 +240,21 @@ class StatelessRenter:
         checkpoint = self.store.load_checkpoint(context)
         try:
             outcome = handler(checkpoint, payload)
-        except Exception as exc:  # pragma: no cover - behavior is exercised by contract tests via a deterministic handler
+        except RenterFailure as exc:
+            return self._event(
+                event_kind="task.failed",
+                context=context,
+                lease=lease,
+                payload={"operation": operation, "resource": resource},
+                now=event_time,
+                idempotency_key=idempotency_key,
+                failure={
+                    "code": exc.code,
+                    "recoverability": exc.recoverability,
+                    "message": exc.message,
+                },
+            )
+        except Exception as exc:
             return self._event(
                 event_kind="task.failed",
                 context=context,
