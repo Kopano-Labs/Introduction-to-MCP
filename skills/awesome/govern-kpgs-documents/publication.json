@@ -16,8 +16,9 @@
   "canonical_contract_path": "governance/kpgs-vnext/skills/SKILL_PACKAGE.md",
   "canonical_skill_schema_path": "governance/kpgs-vnext/skills/skill-manifest.schema.json",
   "canonical_registry_path": "governance/kpgs-vnext/skills/registry.json",
-  "canonical_runtime_registration": "registered",
-  "canonical_runtime_registration_reason": "Registered for governed discovery after WYC-01 production deployment authorization was narrowed; publication-adapter authority remains unchanged.",
+  "canonical_registry_registration": "registered",
+  "canonical_runtime_registration": "pending",
+  "canonical_runtime_registration_reason": "Canonical registry discovery is registered after WYC-01 deployment authorization hardening, but runtime registration remains pending while the package is draft and no capability lease or production-load authorization has been proven.",
   "registry_intent": "AwesomeSkills.dev publication",
   "publication_state": "unknown",
   "external_discovery": "unknown",
@@ -49,6 +50,7 @@
     "unknown is never silently coerced into proof",
     "operating is not graduation",
     "publication intent is not public discovery",
+    "registry discovery is not runtime authorization",
     "skill-only changes do not authorize production deployment",
     "external acknowledgements are never fabricated",
     "receipts rather than confidence move proof state"
@@ -57,7 +59,8 @@
     "canonical_skill_contract": "bound",
     "schema_contract": "specified",
     "eval_cases": "specified",
-    "external_registry_indexing": "unknown"
+    "external_registry_indexing": "registered",
+    "runtime_load_authorization": "pending"
   },
   "signature": "/s/ Kholofelo Robyn Rababalela"
 }
