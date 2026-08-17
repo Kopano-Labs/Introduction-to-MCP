@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/security/capability-lease.schema.json",
+  "title": "KPGS Capability Lease",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "lease_id",
+    "subject",
+    "tenant_id",
+    "domain_id",
+    "task_id",
+    "capabilities",
+    "issued_at",
+    "expires_at",
+    "policy_decision_ref",
+    "governing_spec_ref"
+  ],
+  "properties": {
+    "lease_id": { "type": "string", "minLength": 8, "maxLength": 200 },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "enum": ["renter", "adapter", "skill", "agent", "human", "service"] }
+      }
+    },
+    "tenant_id": { "type": "string", "minLength": 1 },
+    "domain_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "resource_scope"],
+        "properties": {
+          "name": { "type": "string", "minLength": 3 },
+          "resource_scope": { "type": "string", "minLength": 1 },
+          "constraints": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "nonce": { "type": "string", "minLength": 8 },
+    "policy_decision_ref": { "type": "string", "minLength": 1 },
+    "governing_spec_ref": { "type": "string", "minLength": 1 },
+    "revocation_ref": { "type": "string", "minLength": 1 },
+    "secret_provider_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "correlation_id": { "type": "string", "minLength": 1 },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
