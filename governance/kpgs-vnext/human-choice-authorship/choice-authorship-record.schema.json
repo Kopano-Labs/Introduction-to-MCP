@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/human-choice-authorship/choice-authorship-record.schema.json",
+  "title": "KPGS Human Choice Authorship Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "subject_authority",
+    "current_state",
+    "context_claims",
+    "root_algorithm_candidates",
+    "cdp",
+    "human_consent",
+    "convergence",
+    "authorship_status",
+    "action_authority",
+    "re_evaluation_required"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "record_id": { "type": "string", "minLength": 4, "maxLength": 200 },
+    "subject_authority": { "const": "human" },
+    "recorded_at": { "type": ["string", "null"], "format": "date-time" },
+    "current_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "source_class", "authority"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "source_class": { "type": "string", "enum": ["human-declared", "observed", "inferred", "unknown"] },
+        "authority": { "type": "string", "enum": ["current-human", "supporting-evidence", "historical-evidence", "unknown"] },
+        "notes": { "type": ["string", "null"], "maxLength": 4000 }
+      }
+    },
+    "context_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim_id", "text", "classification", "source_class", "current_authority_eligible"],
+        "properties": {
+          "claim_id": { "type": "string", "minLength": 1 },
+          "text": { "type": "string", "minLength": 1, "maxLength": 8000 },
+          "classification": { "type": "string", "enum": ["FACT", "FEELING", "FANTASY", "PERFORMANCE", "INFERENCE", "UNKNOWN", "PERSONALITY", "PREFERENCE", "BOUNDARY"] },
+          "source_class": { "type": "string", "enum": ["current-human", "prior-context", "governed-memory", "repository", "external-retrieval", "model-generated", "unknown"] },
+          "source_ref": { "type": ["string", "null"] },
+          "current_authority_eligible": { "type": "boolean" }
+        }
+      }
+    },
+    "root_algorithm_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id", "description", "proof_state", "canonical", "source_claim_ids", "evidence_needed", "contradictions"],
+        "properties": {
+          "candidate_id": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 8, "maxLength": 8000 },
+          "proof_state": { "const": "hypothesis" },
+          "canonical": { "const": false },
+          "source_claim_ids": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "evidence_needed": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "contradictions": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "cdp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_families", "unknown_branch_preserved", "canonicalized", "runtime_execution_proven"],
+      "properties": {
+        "candidate_families": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["candidate_id", "hypothesis", "difference", "proof_state", "canonical"],
+            "properties": {
+              "candidate_id": { "type": "string", "minLength": 1 },
+              "hypothesis": { "type": "string", "minLength": 4 },
+              "difference": { "type": "string", "minLength": 4 },
+              "proof_state": { "const": "hypothesis" },
+              "canonical": { "const": false }
+            }
+          },
+          "contains": {
+            "type": "object",
+            "properties": { "candidate_id": { "const": "cdp-unknown-possibility" } },
+            "required": ["candidate_id"]
+          },
+          "minContains": 1
+        },
+        "unknown_branch_preserved": { "const": true },
+        "canonicalized": { "const": false },
+        "runtime_execution_proven": { "type": "boolean" },
+        "runtime_receipt_ref": { "type": ["string", "null"] }
+      }
+    },
+    "evaluation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "evidence_level": { "type": "string", "enum": ["none", "low", "moderate", "high"] },
+        "poc_state": { "type": "string", "enum": ["unproven", "candidate", "evidence-bearing", "validated", "rejected"] },
+        "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "unknowns": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "human_consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question", "response", "explicitly_human_supplied"],
+      "properties": {
+        "question": { "const": "Now that I can see what shaped this desire, do I still consent to carrying it?" },
+        "response": { "type": "string", "enum": ["endorse", "reject", "hold", "unanswered"] },
+        "explicitly_human_supplied": { "type": "boolean" },
+        "human_statement_ref": { "type": ["string", "null"] },
+        "notes": { "type": ["string", "null"], "maxLength": 4000 }
+      }
+    },
+    "convergence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol", "decision", "canonical", "runtime_execution_proven"],
+      "properties": {
+        "protocol": { "const": "CCP" },
+        "decision": { "type": "string", "enum": ["not-requested", "Accepted", "Experimental", "Refine", "Rejected", "Deprecated"] },
+        "canonical": { "type": "boolean" },
+        "runtime_execution_proven": { "type": "boolean" },
+        "receipt_ref": { "type": ["string", "null"] }
+      }
+    },
+    "authorship_status": { "type": "string", "enum": ["exploring", "human-endorsed", "human-rejected", "human-held", "authored-choice-candidate"] },
+    "action_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority_holder", "authorized"],
+      "properties": {
+        "authority_holder": { "const": "human" },
+        "authorized": { "type": "boolean" },
+        "action_ref": { "type": ["string", "null"] }
+      }
+    },
+    "outcome": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "type": "string", "minLength": 1 },
+        "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "recorded_by": { "type": "string", "enum": ["human", "system-receipt", "mixed"] }
+      }
+    },
+    "re_evaluation_required": { "type": "boolean" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "enum": ["endorse", "reject", "hold"] } },
+            "required": ["response"]
+          }
+        },
+        "required": ["human_consent"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": {
+              "explicitly_human_supplied": { "const": true },
+              "human_statement_ref": { "type": "string", "minLength": 1 }
+            },
+            "required": ["explicitly_human_supplied", "human_statement_ref"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorship_status": { "enum": ["human-endorsed", "authored-choice-candidate"] } },
+        "required": ["authorship_status"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "const": "endorse" } },
+            "required": ["response"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorship_status": { "const": "human-rejected" } },
+        "required": ["authorship_status"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "const": "reject" } },
+            "required": ["response"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorship_status": { "const": "human-held" } },
+        "required": ["authorship_status"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "const": "hold" } },
+            "required": ["response"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action_authority": {
+            "properties": { "authorized": { "const": true } },
+            "required": ["authorized"]
+          }
+        },
+        "required": ["action_authority"]
+      },
+      "then": {
+        "properties": {
+          "human_consent": {
+            "properties": { "response": { "const": "endorse" } },
+            "required": ["response"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "cdp": {
+            "properties": { "runtime_execution_proven": { "const": true } },
+            "required": ["runtime_execution_proven"]
+          }
+        },
+        "required": ["cdp"]
+      },
+      "then": {
+        "properties": {
+          "cdp": {
+            "properties": { "runtime_receipt_ref": { "type": "string", "minLength": 1 } },
+            "required": ["runtime_receipt_ref"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "convergence": {
+            "properties": { "runtime_execution_proven": { "const": true } },
+            "required": ["runtime_execution_proven"]
+          }
+        },
+        "required": ["convergence"]
+      },
+      "then": {
+        "properties": {
+          "convergence": {
+            "properties": { "receipt_ref": { "type": "string", "minLength": 1 } },
+            "required": ["receipt_ref"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "convergence": {
+            "properties": { "canonical": { "const": true } },
+            "required": ["canonical"]
+          }
+        },
+        "required": ["convergence"]
+      },
+      "then": {
+        "properties": {
+          "convergence": {
+            "properties": {
+              "decision": { "const": "Accepted" },
+              "runtime_execution_proven": { "const": true }
+            },
+            "required": ["decision", "runtime_execution_proven"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "convergence": {
+            "properties": { "decision": { "const": "not-requested" } },
+            "required": ["decision"]
+          }
+        },
+        "required": ["convergence"]
+      },
+      "then": {
+        "properties": {
+          "convergence": {
+            "properties": {
+              "canonical": { "const": false },
+              "runtime_execution_proven": { "const": false }
+            },
+            "required": ["canonical", "runtime_execution_proven"]
+          }
+        }
+      }
+    }
+  ]
+}

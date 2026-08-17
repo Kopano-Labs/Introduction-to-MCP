@@ -107,6 +107,30 @@ def validate_evidence() -> None:
     require(bool(schema.get("allOf")), "evidence schema must contain a structural promotion/hard-gate constraint")
 
 
+def validate_skill_package(skill_name: str) -> None:
+    skill_dir = ROOT / f"skills/core/{skill_name}"
+    manifest = json.loads((skill_dir / "skill.json").read_text(encoding="utf-8"))
+    skill_md = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+
+    require(skill_md.startswith(f"---\nname: {skill_name}\n"), f"{skill_name} SKILL.md must start with matching frontmatter")
+    require(manifest["name"] == skill_name, f"{skill_name} manifest and SKILL.md identity must match")
+    require(manifest["runtime"]["renter_protocol"] == "1.0", f"{skill_name} must declare renter protocol compatibility")
+
+    license_status = manifest["provenance"]["license_status"]
+    if license_status in {"unknown", "pending", "incompatible"}:
+        require(manifest["state"] not in {"validated", "approved"}, f"{skill_name} cannot be validated/approved while license status blocks promotion")
+
+    for key in ("inputs", "outputs"):
+        ref = manifest[key].get("schema_ref")
+        if ref:
+            resolved = (skill_dir / ref).resolve()
+            require(resolved.is_file(), f"{skill_name} {key} schema_ref does not resolve: {ref}")
+            require(ROOT in resolved.parents, f"{skill_name} {key} schema_ref escapes the KPGS vNext governance root")
+
+    required_capabilities = manifest.get("required_capabilities", [])
+    require(all(item.get("resource_scope") for item in required_capabilities), f"every {skill_name} capability must declare a resource scope")
+
+
 def validate_skills() -> None:
     schema = load_json("skills/skill-manifest.schema.json")
     validate_schema(
@@ -129,27 +153,103 @@ def validate_skills() -> None:
         },
     )
 
-    skill_dir = ROOT / "skills/core/kpgs-audit-verify-govern"
-    manifest = json.loads((skill_dir / "skill.json").read_text(encoding="utf-8"))
-    skill_md = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+    validate_skill_package("kpgs-audit-verify-govern")
+    validate_skill_package("kpgs-human-choice-authorship")
 
-    require(skill_md.startswith("---\nname: kpgs-audit-verify-govern\n"), "canonical skill SKILL.md must start with declared frontmatter")
-    require(manifest["name"] == "kpgs-audit-verify-govern", "skill manifest and SKILL.md identity must match")
-    require(manifest["runtime"]["renter_protocol"] == "1.0", "canonical skill must declare renter protocol compatibility")
 
-    license_status = manifest["provenance"]["license_status"]
-    if license_status in {"unknown", "pending", "incompatible"}:
-        require(manifest["state"] not in {"validated", "approved"}, "skill cannot be validated/approved while license status blocks promotion")
+def validate_human_choice_authorship() -> None:
+    schema = load_json("human-choice-authorship/choice-authorship-record.schema.json")
+    record = load_json("human-choice-authorship/example.choice-authorship.json")
+    build_spec = load_json("agent-governance/specs/human-choice-authorship-poc.json")
 
-    for key in ("inputs", "outputs"):
-        ref = manifest[key].get("schema_ref")
-        if ref:
-            resolved = (skill_dir / ref).resolve()
-            require(resolved.is_file(), f"skill {key} schema_ref does not resolve: {ref}")
-            require(ROOT in resolved.parents, f"skill {key} schema_ref escapes the KPGS vNext governance root")
+    validate_schema(
+        schema,
+        "human choice authorship schema",
+        {
+            "schema_version",
+            "record_id",
+            "subject_authority",
+            "current_state",
+            "context_claims",
+            "root_algorithm_candidates",
+            "cdp",
+            "human_consent",
+            "convergence",
+            "authorship_status",
+            "action_authority",
+            "re_evaluation_required",
+        },
+    )
 
-    required_capabilities = manifest.get("required_capabilities", [])
-    require(all(item.get("resource_scope") for item in required_capabilities), "every skill capability must declare a resource scope")
+    candidate_schema = schema["properties"]["cdp"]["properties"]["candidate_families"]
+    unknown_id = candidate_schema.get("contains", {}).get("properties", {}).get("candidate_id", {}).get("const")
+    require(unknown_id == "cdp-unknown-possibility", "choice-authorship schema must structurally require an explicit CDP unknown branch")
+    require(bool(schema.get("allOf")), "choice-authorship schema must encode consent and runtime hard gates")
+
+    require(record.get("subject_authority") == "human", "personal choice authority must remain human")
+
+    root_candidates = record.get("root_algorithm_candidates", [])
+    for candidate in root_candidates:
+        require(candidate.get("proof_state") == "hypothesis", "root algorithm candidates must remain hypotheses")
+        require(candidate.get("canonical") is False, "root algorithm candidates cannot self-canonicalize")
+
+    cdp = record.get("cdp", {})
+    candidates = cdp.get("candidate_families", [])
+    require(len(candidates) >= 2, "choice-authorship CDP needs at least two candidate families")
+    differences = [candidate.get("difference", "").strip().lower() for candidate in candidates]
+    require(all(differences), "every choice-authorship CDP candidate needs a structural difference")
+    require(len(differences) == len(set(differences)), "choice-authorship CDP candidates cannot be cosmetic duplicates")
+    require(cdp.get("unknown_branch_preserved") is True, "choice-authorship CDP must preserve an unknown branch")
+    require(cdp.get("canonicalized") is False, "CDP cannot self-canonicalize")
+    require(any(candidate.get("candidate_id") == "cdp-unknown-possibility" for candidate in candidates), "example must contain an explicit unknown possibility")
+    require(all(candidate.get("proof_state") == "hypothesis" and candidate.get("canonical") is False for candidate in candidates), "CDP candidate families must remain non-canonical hypotheses")
+    if cdp.get("runtime_execution_proven") is True:
+        require(bool(cdp.get("runtime_receipt_ref")), "proven CDP runtime execution requires a receipt reference")
+
+    consent = record.get("human_consent", {})
+    consent_response = consent.get("response")
+    authorship_status = record.get("authorship_status")
+    action = record.get("action_authority", {})
+
+    if consent_response in {"endorse", "reject", "hold"}:
+        require(consent.get("explicitly_human_supplied") is True, "non-empty human consent cannot be inferred by the system")
+        require(bool(consent.get("human_statement_ref")), "human consent requires a current human statement reference")
+    if authorship_status in {"human-endorsed", "authored-choice-candidate"}:
+        require(consent_response == "endorse", "endorsed/authored state requires human endorsement")
+    if authorship_status == "human-rejected":
+        require(consent_response == "reject", "human-rejected state requires explicit rejection")
+    if authorship_status == "human-held":
+        require(consent_response == "hold", "human-held state requires explicit hold")
+    if action.get("authorized") is True:
+        require(consent_response == "endorse", "authorized personal action requires human endorsement")
+    require(action.get("authority_holder") == "human", "action authority cannot be assigned to a renter or model")
+
+    convergence = record.get("convergence", {})
+    if convergence.get("runtime_execution_proven") is True:
+        require(bool(convergence.get("receipt_ref")), "proven CCP runtime execution requires a receipt reference")
+    if convergence.get("canonical") is True:
+        require(convergence.get("decision") == "Accepted", "only CCP Accepted may be represented as canonical")
+        require(convergence.get("runtime_execution_proven") is True, "canonical CCP state requires a runtime execution receipt")
+    if convergence.get("decision") == "not-requested":
+        require(convergence.get("canonical") is False, "CCP cannot be canonical when convergence was not requested")
+        require(convergence.get("runtime_execution_proven") is False, "CCP execution cannot be proven when convergence was not requested")
+
+    skill_manifest = load_json("skills/core/kpgs-human-choice-authorship/skill.json")
+    require(skill_manifest.get("state") == "draft", "human choice skill must remain draft while this work is POC and license status is unresolved")
+    sources = skill_manifest.get("provenance", {}).get("sources", [])
+    project_jennifer = next((source for source in sources if source.get("ref") == "RobynAwesome/Project-Jennifer"), None)
+    require(project_jennifer is not None, "human choice skill must preserve Project Jennifer provenance")
+    require(project_jennifer.get("commit") == "5328a8449bad509150f73fe9aafeabc6c17c983b", "Project Jennifer provenance must be pinned to the reviewed revision")
+
+    require(build_spec.get("spec_id") == "kpgs-human-choice-authorship-poc-v0.1", "choice-authorship build spec identity mismatch")
+    require(build_spec.get("risk_class") == "R2", "identity-sensitive choice-authorship POC must retain its declared R2 risk class")
+    require(build_spec.get("lifecycle_state") == "draft", "choice-authorship build spec must remain draft until executable validation exists")
+    require(49 in build_spec.get("related_issues", []), "choice-authorship build spec must link issue #49")
+    criteria = build_spec.get("acceptance_criteria", [])
+    criterion_ids = [criterion.get("id") for criterion in criteria]
+    require(len(criterion_ids) == len(set(criterion_ids)), "choice-authorship acceptance criterion IDs must be unique")
+    plan_ids = {item.get("criterion_id") for item in build_spec.get("verification_plan", [])}
+    require(set(criterion_ids) <= plan_ids, "choice-authorship verification plan must cover every acceptance criterion")
 
 
 def validate_realtime() -> None:
@@ -188,10 +288,11 @@ def main() -> None:
     validate_estate()
     validate_evidence()
     validate_skills()
+    validate_human_choice_authorship()
     validate_realtime()
     validate_pwa()
     print("KPGS-VNEXT PASS: governance/runtime-facing contracts are structurally coherent.")
-    print("Validated: capability leases, DNS estate seed, evidence, governed skills, realtime recovery, adaptive PWA profile.")
+    print("Validated: capability leases, DNS estate seed, evidence, governed skills, human choice authorship, realtime recovery, adaptive PWA profile.")
 
 
 if __name__ == "__main__":
