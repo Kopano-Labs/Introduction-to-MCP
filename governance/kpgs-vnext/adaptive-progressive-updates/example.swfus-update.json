@@ -1,0 +1,14 @@
+{
+  "schema": "kpgs.swfus.update.v1",
+  "nodeId": "fivesarena:locality:province",
+  "action": "UPDATE",
+  "telemetryValue": 0,
+  "data": {
+    "provinceSlug": "western-cape",
+    "source": "manual"
+  },
+  "expectedRevision": 3,
+  "correlationId": "example-locality-update-001",
+  "capabilityLeaseId": null,
+  "observedAt": "2026-08-18T08:00:00Z"
+}
