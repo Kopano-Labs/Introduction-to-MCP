@@ -39,6 +39,7 @@ This is **CRUD evolved**, not CRUD replaced. `CREATE | READ | UPDATE | DELETE` r
 9. **Adaptive rendering cannot weaken data governance.** A Lite/Mobile/Enhanced/Immersive UI may render the same update differently, but the CRUD/SWFUS contract remains identical.
 10. **Stateless renters do not own durable truth.** The runtime may execute a transition; durable authority belongs to the governed witness/canonical storage boundary.
 11. **Reconnect retries are idempotent.** Repeating the same payload with the same non-empty `correlation_id` returns the previously recorded verdict without executing CRUD again. Reusing a correlation ID for different content is severed.
+12. **READ is observation, not mutation.** READ returns the active witness without rewriting state or calling a synchronization adapter. Its `sync_state` is `not_applicable`.
 
 ## SWFUS stages
 
@@ -66,6 +67,8 @@ The accepted local state is written to an offline-capable witness store with:
 - observed timestamp;
 - deterministic evidence fingerprint.
 
+A READ observes this witness without rewriting it.
+
 This is the minimum state that lets an Adaptive PWA remain coherent through disconnect/reconnect.
 
 ### 3. Fluid Vectoring
@@ -74,7 +77,7 @@ CRUD becomes an explicit transition:
 
 ```text
 CREATE  -> new active revision
-READ    -> current active witness
+READ    -> current active witness; no mutation; sync not applicable
 UPDATE  -> merge into next revision
 DELETE  -> next revision + tombstone
 ```
@@ -83,15 +86,16 @@ Legacy `TELEMETRY_INGESTION` is a compatibility lane only and resolves to `CREAT
 
 ### 4. Unified Synchronization
 
-An injected sync adapter may attempt propagation to the canonical external boundary.
+An injected sync adapter may attempt propagation to the canonical external boundary for mutating actions.
 
 ```text
-observed success -> synced
-no adapter        -> pending_sync
-transport failure -> pending_sync
+observed mutation sync success -> synced
+no adapter                      -> pending_sync
+transport failure               -> pending_sync
+READ                             -> not_applicable
 ```
 
-The local witness remains intact in all three cases. External synchronization should be retried by the PWA/adapter/event-plane workflow under its own policy. Retry must preserve the original correlation ID so successful prior execution can be replayed safely instead of mutating twice.
+The local witness remains intact through transport degradation. External synchronization should be retried by the PWA/adapter/event-plane workflow under its own policy. Retry must preserve the original correlation ID so successful prior execution can be replayed safely instead of mutating twice.
 
 ### 5. Severance
 
@@ -101,7 +105,7 @@ Severance does **not** delete a previously accepted witness. This makes failures
 
 ## Progressive Update state exposed to a PWA
 
-An everyday UI should map receipts to simple state:
+An everyday UI should map mutation receipts to simple state:
 
 ```text
 accepted + synced        -> Saved
@@ -110,6 +114,8 @@ severed                  -> Could not apply · review/retry
 revision conflict        -> Newer change exists · refresh
 local witness failure    -> Change visible · recovery save failed
 ```
+
+READ receipts are normally internal/technical observations and do not need a save-status surface.
 
 The user does not need to see the terms SWFUS, CRUD, capability lease or synchronization adapter unless they open a technical/governance view.
 
