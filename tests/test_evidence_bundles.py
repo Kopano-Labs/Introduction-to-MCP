@@ -238,6 +238,18 @@ class EvidenceBundleTests(unittest.TestCase):
         self.assertEqual(everyday["status"], "blocked")
         self.assertIn("tenant-isolation", everyday["hard_gate_failures"])
 
+    def test_security_verification_cannot_be_downgraded_to_soft_gate(self):
+        builder = self.builder()
+        with self.assertRaises(mod.EvidenceError):
+            builder.add_verification(
+                verifier_id="verifier:security",
+                criterion_id="tenant-isolation",
+                method="security",
+                hard_gate=False,
+                passed=False,
+                evidence_ref="verification://security/softened",
+            )
+
     def test_trace_must_cover_pwa_adapter_hub_renter_skill_and_verifier(self):
         builder = self.builder()
         builder.add_capability_lease_ref("lease://kpgs/001")
@@ -315,6 +327,10 @@ class EvidenceBundleTests(unittest.TestCase):
             builder.add_artifact(
                 kind="security",
                 ref="log://contains/sk-proj-abcdefghijklmnop",
+            )
+        with self.assertRaises(mod.EvidenceError):
+            builder.add_capability_lease_ref(
+                "lease://eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyLTEyMyJ9.signature12345678"
             )
 
     def test_policy_and_lease_fields_must_be_references_not_embedded_values(self):
