@@ -35,12 +35,15 @@
   },
   "public_projection": {
     "repository": "RobynAwesome/Kopano-Labs-Website",
-    "pull_request": 28,
-    "merged_commit": "fe6239b1cf2107c5faaf2c57d7bc773a319e4a67",
+    "state_projection_pull_request": 28,
+    "state_projection_merged_commit": "fe6239b1cf2107c5faaf2c57d7bc773a319e4a67",
+    "artifact_provenance_sync_pull_request": 29,
+    "final_merged_commit": "e7128c65086a0c6f8c9b9416efbcafb3d50404cd",
     "projection_gate": {
       "workflow": "experiment-projection-gate",
-      "run_id": 32166859989,
+      "run_id": 32167491786,
       "conclusion": "success",
+      "verified_head_commit": "7a064fb8abc00bfea05028dd12797231821b90cf",
       "verified_steps": [
         "experiment projection / relation / privacy gates",
         ".NET-parsed public evidence contract",
@@ -52,6 +55,7 @@
       ]
     },
     "projected_copy": "DFR-01 locked. P-001 wheel interface active.",
+    "artifact_provenance_pinned": true,
     "retired_report_route_reactivated": false
   },
   "retired_projection_containment": {
