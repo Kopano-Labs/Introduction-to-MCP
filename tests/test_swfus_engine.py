@@ -48,6 +48,40 @@ def test_crud_progression_is_revisioned_and_delete_is_a_tombstone():
     assert engine.local_offline_db["province-context"].tombstoned is True
 
 
+def test_read_is_side_effect_free_and_sync_not_applicable():
+    sync_calls = []
+
+    def sync_adapter(record, receipt):
+        sync_calls.append((record.node_id, receipt.resolved_action))
+        return True
+
+    engine = SwfusHierarchy(sync_adapter=sync_adapter)
+    engine.execute_with_receipt(
+        SwfusPayload(
+            node_id="read-safe",
+            action_type="CREATE",
+            data={"state": "current"},
+            correlation_id="create-read-safe",
+        )
+    )
+    sync_calls.clear()
+    before = engine.read("read-safe")
+
+    receipt = engine.execute_with_receipt(
+        SwfusPayload(
+            node_id="read-safe",
+            action_type="READ",
+            correlation_id="read-001",
+        )
+    )
+
+    assert receipt.accepted is True
+    assert receipt.sync_state == "not_applicable"
+    assert receipt.revision == 1
+    assert engine.read("read-safe") == before
+    assert sync_calls == []
+
+
 def test_revision_conflict_is_severed_without_rewriting_witnessed_state():
     engine = SwfusHierarchy()
     engine.execute_with_receipt(
