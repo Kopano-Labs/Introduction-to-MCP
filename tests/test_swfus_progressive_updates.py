@@ -206,6 +206,25 @@ class SwfusProgressiveUpdateTests(unittest.TestCase):
         self.assertNotIn("bad-node", self.engine.projection_store)
         self.assertEqual(len(self.engine.distribution_log), 1)
 
+    def test_legacy_exact_retry_reuses_prior_receipt_without_update_side_effect(self):
+        payload = mod.SwfusPayload(
+            "legacy-retry-node",
+            "TELEMETRY_INGESTION",
+            21.0,
+            False,
+        )
+        self.assertTrue(self.engine.execute(payload))
+        first_record = dict(self.engine.projection_store["legacy-retry-node"])
+        first_events = len(self.engine.distribution_log)
+
+        self.assertTrue(self.engine.execute(payload))
+        self.assertEqual(
+            self.engine.projection_store["legacy-retry-node"],
+            first_record,
+        )
+        self.assertEqual(len(self.engine.distribution_log), first_events)
+        self.assertEqual(first_record["version"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
