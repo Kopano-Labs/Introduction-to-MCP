@@ -1,11 +1,16 @@
-name: "KPGS Web Deploy — All Domains"
+name: "KPGS Web Deploy — Governed IONOS Surfaces"
 
 # ──────────────────────────────────────────────────────────────────────
 # KPGS Governance: Schematics MAIN BRAIN · ALP #168 · ce3519483f5eff54
-# Deploys:
-#   kopanolabs.com       → public/
-#   careers.kopanolabs.com → public/careers/  (IONOS subdir or subdomain)
-#   kasilink.com         → KasiLink/
+# Deploys from THIS repository:
+#   kopanolabs.com         → public/
+#   careers.kopanolabs.com → public/careers/
+#
+# KasiLink is NOT deployed from this repository.
+# Runtime truth (2026-08-18): canonical source = Kopano-Labs/KasiLink,
+# canonical current Vercel project = kasi-link.
+# See: Schematics/02-Strategy/KasiLink Runtime Source DNS Truth Lock 2026-08-18.md
+#
 # CrisisConnect deploys via its own repo to Vercel (separate pipeline).
 # I_AM_STATELESS_RENTER_NOT_LANDLORD
 # ──────────────────────────────────────────────────────────────────────
@@ -15,12 +20,11 @@ on:
     branches: [master, codex/kc-sovereign-gui-full-dev, jiro/stap-session4]
     paths:
       - "public/**"
-      - "KasiLink/**"
       - "kopano-labs-web/**"
   workflow_dispatch:
     inputs:
       target:
-        description: "Deploy target (all | kopanolabs | kasilink | careers)"
+        description: "Deploy target (all | kopanolabs | careers)"
         required: false
         default: "all"
 
@@ -28,20 +32,17 @@ permissions:
   contents: read
 
 env:
-  # ── IONOS FTP credentials — stored in GitHub Secrets ──────────────
-  IONOS_HOST:     ${{ secrets.IONOS_FTP_HOST }}
-  IONOS_USER:     ${{ secrets.IONOS_FTP_USER }}
-  IONOS_PASS:     ${{ secrets.IONOS_FTP_PASS }}
+  # IONOS credentials apply only to the surfaces owned by this workflow.
+  IONOS_HOST: ${{ secrets.IONOS_FTP_HOST }}
+  IONOS_USER: ${{ secrets.IONOS_FTP_USER }}
+  IONOS_PASS: ${{ secrets.IONOS_FTP_PASS }}
 
-  # ── Remote paths on IONOS web space ──────────────────────────────
-  # Adjust these to match your IONOS directory layout
-  REMOTE_KOPANOLABS: "/"            # apex public_html root
-  REMOTE_CAREERS:    "/careers"     # careers subdirectory (or separate domain root)
-  REMOTE_KASILINK:   "/"            # kasilink.com public_html root (set IONOS_KASILINK_* secrets separately)
+  REMOTE_KOPANOLABS: "/"
+  REMOTE_CAREERS: "/careers"
 
 jobs:
   # ──────────────────────────────────────────────────────────────────
-  # JOB 1 — KPGS Gate: run lint + governance check before any deploy
+  # JOB 1 — KPGS Gate: run governance checks before any deploy
   # ──────────────────────────────────────────────────────────────────
   kpgs-gate:
     name: "KPGS Gate (ALP + IKP)"
@@ -76,14 +77,13 @@ jobs:
           cd kopano-core
           python -m kopano.gsmb_auto_runner --once 2>&1 | grep -E "TICK|verdict|POC_CLOSED|CLEAN|hash"
 
-      - name: Validate HTML files exist
+      - name: Validate governed HTML surfaces exist
         run: |
-          test -f public/index.html      && echo "✅ public/index.html"
+          test -f public/index.html && echo "✅ public/index.html"
           test -f public/careers/index.html && echo "✅ public/careers/index.html"
-          test -f KasiLink/index.html    && echo "✅ KasiLink/index.html"
 
   # ──────────────────────────────────────────────────────────────────
-  # JOB 2 — Deploy KopanoLabs.com (public/) to IONOS
+  # JOB 2 — Deploy KopanoLabs.com / careers to IONOS
   # ──────────────────────────────────────────────────────────────────
   deploy-kopanolabs:
     name: "Deploy → kopanolabs.com"
@@ -92,6 +92,7 @@ jobs:
     if: |
       github.event.inputs.target == 'all' ||
       github.event.inputs.target == 'kopanolabs' ||
+      github.event.inputs.target == 'careers' ||
       github.event.inputs.target == ''
     environment:
       name: kopanolabs-production
@@ -131,58 +132,12 @@ jobs:
           if [ "$STATUS" = "200" ]; then echo "✅ kopanolabs.com LIVE"; else echo "⚠️ Status $STATUS — DNS may still be propagating"; fi
 
   # ──────────────────────────────────────────────────────────────────
-  # JOB 3 — Deploy KasiLink.com (KasiLink/) to IONOS
-  # Uses separate IONOS_KASILINK_* secrets (different hosting space)
-  # ──────────────────────────────────────────────────────────────────
-  deploy-kasilink:
-    name: "Deploy → kasilink.com"
-    runs-on: ubuntu-latest
-    needs: kpgs-gate
-    if: |
-      github.event.inputs.target == 'all' ||
-      github.event.inputs.target == 'kasilink' ||
-      github.event.inputs.target == ''
-    environment:
-      name: kasilink-production
-      url: https://kasilink.com
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
-
-      - name: Upload KasiLink/ → IONOS (kasilink.com root)
-        env:
-          FTP_HOST: ${{ secrets.IONOS_KASILINK_FTP_HOST }}
-          FTP_USER: ${{ secrets.IONOS_KASILINK_FTP_USER }}
-          FTP_PASS: ${{ secrets.IONOS_KASILINK_FTP_PASS }}
-        run: |
-          lftp -c "
-            set ftp:ssl-allow yes;
-            set ssl:verify-certificate no;
-            set net:timeout 30;
-            set net:max-retries 3;
-            open -u '$FTP_USER','$FTP_PASS' '$FTP_HOST';
-            mirror --reverse --delete --verbose \
-              --exclude='.git/' \
-              KasiLink/ /
-          "
-
-      - name: Verify deployment
-        run: |
-          sleep 10
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://kasilink.com || echo "000")
-          echo "KasiLink.com HTTP: $STATUS"
-          if [ "$STATUS" = "200" ]; then echo "✅ kasilink.com LIVE"; else echo "⚠️ Status $STATUS"; fi
-
-  # ──────────────────────────────────────────────────────────────────
-  # JOB 4 — Post-deploy KPGS governance receipt
+  # JOB 3 — Post-deploy KPGS governance receipt
   # ──────────────────────────────────────────────────────────────────
   kpgs-receipt:
     name: "KPGS Post-Deploy Receipt"
     runs-on: ubuntu-latest
-    needs: [deploy-kopanolabs, deploy-kasilink]
+    needs: [kpgs-gate, deploy-kopanolabs]
     if: always()
 
     steps:
@@ -206,5 +161,6 @@ jobs:
           echo "Run ID:   ${{ github.run_id }}"
           echo "ALP hash: ${{ needs.kpgs-gate.outputs.alp_hash }}"
           echo "NCCNP:    4/4 POC_CLOSED (pre-deploy gate)"
+          echo "KasiLink: external canonical runtime — Kopano-Labs/KasiLink -> Vercel"
           echo "I_AM_STATELESS_RENTER_NOT_LANDLORD"
           echo "──────────────────────────────────────────"
