@@ -38,6 +38,7 @@ This is **CRUD evolved**, not CRUD replaced. `CREATE | READ | UPDATE | DELETE` r
 8. **Capability reference is evidence, not ambient authority.** A `capability_lease_id` may be attached to a receipt; validating and issuing the lease remains the responsibility of the canonical Hub/security boundary.
 9. **Adaptive rendering cannot weaken data governance.** A Lite/Mobile/Enhanced/Immersive UI may render the same update differently, but the CRUD/SWFUS contract remains identical.
 10. **Stateless renters do not own durable truth.** The runtime may execute a transition; durable authority belongs to the governed witness/canonical storage boundary.
+11. **Reconnect retries are idempotent.** Repeating the same payload with the same non-empty `correlation_id` returns the previously recorded verdict without executing CRUD again. Reusing a correlation ID for different content is severed.
 
 ## SWFUS stages
 
@@ -49,7 +50,8 @@ Validate the request before mutation:
 - action is governed;
 - telemetry is finite and within declared bounds;
 - explicitly untrusted/hallucinated payloads are rejected;
-- revision expectations are structurally valid.
+- revision expectations are structurally valid;
+- a supplied correlation ID is non-empty and not being reused for a different payload.
 
 No claim of cryptographic identity is made merely because a payload passed this stage.
 
@@ -89,7 +91,7 @@ no adapter        -> pending_sync
 transport failure -> pending_sync
 ```
 
-The local witness remains intact in all three cases. External synchronization should be retried by the PWA/adapter/event-plane workflow under its own policy.
+The local witness remains intact in all three cases. External synchronization should be retried by the PWA/adapter/event-plane workflow under its own policy. Retry must preserve the original correlation ID so successful prior execution can be replayed safely instead of mutating twice.
 
 ### 5. Severance
 
@@ -103,9 +105,10 @@ An everyday UI should map receipts to simple state:
 
 ```text
 accepted + synced        -> Saved
-accepted + pending_sync  -> Saved on this device · syncing
+accepted + pending_sync  -> Saved on this device · sync pending
 severed                  -> Could not apply · review/retry
 revision conflict        -> Newer change exists · refresh
+local witness failure    -> Change visible · recovery save failed
 ```
 
 The user does not need to see the terms SWFUS, CRUD, capability lease or synchronization adapter unless they open a technical/governance view.
