@@ -82,10 +82,10 @@ def main() -> None:
     require(receipt.synchronized, "valid progressive update did not distribute")
     require(not receipt.canonical_authority_changed, "synchronization changed canonical authority")
     require(len(engine.distribution_log) == 1, "distribution receipt missing")
-    require(
-        engine.distribution_log[0]["transport_grants_authority"] is False,
-        "transport gained authority",
-    )
+    event = engine.distribution_log[0]
+    require(event["canonical"] is False, "distribution self-canonicalized")
+    require(event["authority_effect"] == "none", "distribution widened authority")
+    require(event["transport_grants_authority"] is False, "transport gained authority")
 
     blocked = engine.execute_update(
         runtime.ProgressiveUpdate(
@@ -105,10 +105,10 @@ def main() -> None:
     )
     require(blocked.disposition == "REJECTED", "APU RED escaped governance")
     require("blocked-node" not in engine.projection_store, "rejected update mutated projection")
+    require(len(engine.distribution_log) == 1, "rejected update emitted a distribution event")
 
     require("SYNC_AZURE" not in kessa_source, "legacy provider-specific sync claim remains")
     require("azure_sync_id=\"6962519\"" not in runtime_source, "hard-coded Azure sync authority remains")
-    require("Synchronization is not authority" in runtime_source, "authority boundary missing")
     require("Availability and synchronization are not authority" in docs, "offline authority law missing")
     require("#NB" in docs and "does **not** invent an expansion" in docs, "#NB boundary not preserved")
 
