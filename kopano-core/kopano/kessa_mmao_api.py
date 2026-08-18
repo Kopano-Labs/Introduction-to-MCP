@@ -11,6 +11,7 @@ from typing import Any, Dict
 import hashlib
 import json
 import logging
+import math
 
 from .swfus_engine import (
     CrudOperation,
@@ -23,7 +24,11 @@ log = logging.getLogger("KESSA_MMAO_API")
 
 
 class KessaMMAOAgent:
-    def __init__(self, agent_id: str = "kessa", swfus_engine: SwfusHierarchy | None = None):
+    def __init__(
+        self,
+        agent_id: str = "kessa",
+        swfus_engine: SwfusHierarchy | None = None,
+    ):
         self.agent_id = agent_id
         self.swfus_engine = swfus_engine or SwfusHierarchy()
         log.info("KESSA MMAO Agent initialized: %s", self.agent_id)
@@ -38,41 +43,53 @@ class KessaMMAOAgent:
 
         The legacy public method is preserved, but the result now exposes the
         canonical SWFUS receipt instead of pretending success means an Azure
-        write occurred.
+        write occurred. Exact retries reuse the prior receipt before operation
+        inference so CREATE cannot accidentally become UPDATE on replay.
         """
 
-        exists = target_node_id in self.swfus_engine.projection_store
-        operation = CrudOperation.UPDATE if exists else CrudOperation.CREATE
+        valid_numeric = (
+            isinstance(raw_telemetry, (int, float))
+            and not isinstance(raw_telemetry, bool)
+            and math.isfinite(float(raw_telemetry))
+        )
+        numeric_value = float(raw_telemetry) if valid_numeric else None
+        is_foc = hallucinated or not valid_numeric or numeric_value > 100
+
         canonical_seed = json.dumps(
             {
                 "target_node_id": target_node_id,
-                "raw_telemetry": raw_telemetry,
+                "raw_telemetry": repr(raw_telemetry),
                 "hallucinated": hallucinated,
             },
             sort_keys=True,
             separators=(",", ":"),
         )
         digest = hashlib.sha256(canonical_seed.encode("utf-8")).hexdigest()
-        is_foc = hallucinated or raw_telemetry > 100
+        idempotency_key = f"kessa-{digest}"
 
-        update = ProgressiveUpdate(
-            update_id=f"kessa-{digest[:16]}",
-            node_id=target_node_id,
-            operation=operation,
-            lane="mmao.telemetry",
-            context_route="kessa.telemetry",
-            protocol="APU->CRUD->SWFUS",
-            idempotency_key=f"kessa-{digest}",
-            value=raw_telemetry,
-            apu_status="RED" if is_foc else "GREEN",
-            poc_validated=not is_foc,
-            foc_detected=is_foc,
-            evidence_refs=(f"kessa-telemetry-check:sha256:{digest}",),
-            correlation_id=digest[:24],
-            source="kessa-mmao",
-            boundary_marker="#NB",
-        )
-        receipt = self.swfus_engine.execute_update(update)
+        receipt = self.swfus_engine.receipt_for_idempotency(idempotency_key)
+        if receipt is None:
+            exists = target_node_id in self.swfus_engine.projection_store
+            operation = CrudOperation.UPDATE if exists else CrudOperation.CREATE
+            update = ProgressiveUpdate(
+                update_id=f"kessa-{digest[:16]}",
+                node_id=target_node_id,
+                operation=operation,
+                lane="mmao.telemetry",
+                context_route="kessa.telemetry",
+                protocol="APU->CRUD->SWFUS",
+                idempotency_key=idempotency_key,
+                value=raw_telemetry,
+                apu_status="RED" if is_foc else "GREEN",
+                poc_validated=not is_foc,
+                foc_detected=is_foc,
+                evidence_refs=(f"kessa-telemetry-check:sha256:{digest}",),
+                correlation_id=digest[:24],
+                source="kessa-mmao",
+                boundary_marker="#NB",
+            )
+            receipt = self.swfus_engine.execute_update(update)
+
         shipped = receipt.disposition == UpdateDisposition.APPLIED.value
 
         return {
@@ -80,7 +97,11 @@ class KessaMMAOAgent:
             "target_node": target_node_id,
             "swfus_verdict": "SHIP" if shipped else receipt.disposition,
             "telemetry_recorded": raw_telemetry,
-            "action": "DISTRIBUTE_FRAMEWORK_STATE" if receipt.synchronized else "NO_DISTRIBUTION",
+            "action": (
+                "DISTRIBUTE_FRAMEWORK_STATE"
+                if receipt.synchronized
+                else "NO_DISTRIBUTION"
+            ),
             "receipt_id": receipt.receipt_id,
             "disposition": receipt.disposition,
             "synchronized": receipt.synchronized,
