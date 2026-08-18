@@ -42,7 +42,6 @@ ALLOWED_STATE_CLASSES = {
     "derived_projection",
     "pending_proposal",
 }
-MUTATING_OPERATIONS = {"CREATE", "UPDATE", "DELETE"}
 
 
 class CrudOperation(str, Enum):
@@ -192,8 +191,27 @@ class SwfusHierarchy:
         seen = {stage.stage for stage in stages}
         for stage in SWFUS_STAGE_ORDER:
             if stage not in seen:
-                stages.append(StageReceipt(stage, "NOT_REACHED", "prior governance gate stopped progression"))
+                stages.append(
+                    StageReceipt(
+                        stage,
+                        "NOT_REACHED",
+                        "prior governance gate stopped progression",
+                    )
+                )
         return tuple(stages)
+
+    def receipt_for_idempotency(self, idempotency_key: str) -> SwfusReceipt | None:
+        """Return a prior receipt without replaying side effects.
+
+        Compatibility adapters use this before reconstructing a ProgressiveUpdate
+        because live projection state may change the operation they would infer
+        (for example CREATE on first delivery vs UPDATE on retry). The canonical
+        execute_update API remains strict: callers that submit an explicit
+        ProgressiveUpdate must replay the same governed request.
+        """
+
+        previous = self._idempotency.get(idempotency_key)
+        return previous[1] if previous else None
 
     def _finalize(
         self,
@@ -238,7 +256,13 @@ class SwfusHierarchy:
 
         # TELEMETRY: establish deterministic update + idempotency identity.
         if not self._valid_text(update.update_id) or not self._valid_text(update.node_id):
-            stages.append(StageReceipt("TELEMETRY", "REJECT", "update_id and node_id are required"))
+            stages.append(
+                StageReceipt(
+                    "TELEMETRY",
+                    "REJECT",
+                    "update_id and node_id are required",
+                )
+            )
             return self._finalize(update, digest, UpdateDisposition.REJECTED, stages)
         if operation not in {item.value for item in CrudOperation}:
             stages.append(StageReceipt("TELEMETRY", "REJECT", "unsupported CRUD operation"))
@@ -258,12 +282,20 @@ class SwfusHierarchy:
 
         # CLASSIFICATION: lane + state class + APU status.
         if not self._valid_text(update.lane):
-            stages.append(StageReceipt("CLASSIFICATION", "REJECT", "lane classification is required"))
+            stages.append(
+                StageReceipt("CLASSIFICATION", "REJECT", "lane classification is required")
+            )
             receipt = self._finalize(update, digest, UpdateDisposition.REJECTED, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
         if update.state_class not in ALLOWED_STATE_CLASSES:
-            stages.append(StageReceipt("CLASSIFICATION", "REJECT", "authoritative state classes are not admitted"))
+            stages.append(
+                StageReceipt(
+                    "CLASSIFICATION",
+                    "REJECT",
+                    "authoritative state classes are not admitted",
+                )
+            )
             receipt = self._finalize(update, digest, UpdateDisposition.REJECTED, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
@@ -273,7 +305,13 @@ class SwfusHierarchy:
             receipt = self._finalize(update, digest, UpdateDisposition.REJECTED, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
-        stages.append(StageReceipt("CLASSIFICATION", "PASS", f"lane={update.lane}; apu={apu_status}"))
+        stages.append(
+            StageReceipt(
+                "CLASSIFICATION",
+                "PASS",
+                f"lane={update.lane}; apu={apu_status}",
+            )
+        )
 
         # ROUTING: context must be explicit before reads or mutations.
         if not self._valid_text(update.context_route):
@@ -286,23 +324,57 @@ class SwfusHierarchy:
         # READ is allowed after context routing. Remaining governance stages are
         # explicit no-op receipts; no state mutation or distribution occurs.
         if operation == CrudOperation.READ.value:
-            stages.append(StageReceipt("PROTOCOL_SELECTION", "SKIP", "read requires no mutation protocol"))
-            stages.append(StageReceipt("INVARIANT_AUDIT", "SKIP", "observation is not mutation"))
-            stages.append(StageReceipt("POC_FOC_CHECK", "SKIP", "read cannot promote state"))
+            stages.append(
+                StageReceipt(
+                    "PROTOCOL_SELECTION",
+                    "SKIP",
+                    "read requires no mutation protocol",
+                )
+            )
+            stages.append(
+                StageReceipt("INVARIANT_AUDIT", "SKIP", "observation is not mutation")
+            )
+            stages.append(
+                StageReceipt("POC_FOC_CHECK", "SKIP", "read cannot promote state")
+            )
             record = self.projection_store.get(update.node_id)
             stages.append(StageReceipt("STATE_UPDATE", "OBSERVE", "projection read only"))
-            stages.append(StageReceipt("DISTRIBUTION", "SKIP", "reads are not synchronized mutations"))
-            receipt = self._finalize(update, digest, UpdateDisposition.OBSERVED, stages, state_record=record)
+            stages.append(
+                StageReceipt(
+                    "DISTRIBUTION",
+                    "SKIP",
+                    "reads are not synchronized mutations",
+                )
+            )
+            receipt = self._finalize(
+                update,
+                digest,
+                UpdateDisposition.OBSERVED,
+                stages,
+                state_record=record,
+            )
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
 
         # PROTOCOL SELECTION: mutations require an explicit governed protocol.
         if not self._valid_text(update.protocol):
-            stages.append(StageReceipt("PROTOCOL_SELECTION", "REJECT", "mutation protocol is required"))
+            stages.append(
+                StageReceipt(
+                    "PROTOCOL_SELECTION",
+                    "REJECT",
+                    "mutation protocol is required",
+                )
+            )
             receipt = self._finalize(update, digest, UpdateDisposition.REJECTED, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
-        stages.append(StageReceipt("PROTOCOL_SELECTION", "PASS", f"protocol={update.protocol}"))
+        stages.append(
+            StageReceipt(
+                "PROTOCOL_SELECTION",
+                "PASS",
+                f"protocol={update.protocol}",
+            )
+        )
 
         # INVARIANT AUDIT: synchronization cannot widen authority.
         invariant_failures: list[str] = []
@@ -317,29 +389,65 @@ class SwfusHierarchy:
         if update.expected_version is not None and update.expected_version < 0:
             invariant_failures.append("expected_version cannot be negative")
         if invariant_failures:
-            stages.append(StageReceipt("INVARIANT_AUDIT", "REJECT", "; ".join(invariant_failures)))
+            stages.append(
+                StageReceipt(
+                    "INVARIANT_AUDIT",
+                    "REJECT",
+                    "; ".join(invariant_failures),
+                )
+            )
             receipt = self._finalize(update, digest, UpdateDisposition.REJECTED, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
-        stages.append(StageReceipt("INVARIANT_AUDIT", "PASS", "authority and update invariants preserved"))
+        stages.append(
+            StageReceipt(
+                "INVARIANT_AUDIT",
+                "PASS",
+                "authority and update invariants preserved",
+            )
+        )
 
         # POC/FOC CHECK: APU YELLOW holds, RED/FOC rejects, mutation requires proof.
         if apu_status == "RED" or update.foc_detected:
-            stages.append(StageReceipt("POC_FOC_CHECK", "REJECT", "FOC/RED update cannot mutate or distribute"))
+            stages.append(
+                StageReceipt(
+                    "POC_FOC_CHECK",
+                    "REJECT",
+                    "FOC/RED update cannot mutate or distribute",
+                )
+            )
             receipt = self._finalize(update, digest, UpdateDisposition.REJECTED, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
         if apu_status == "YELLOW":
-            stages.append(StageReceipt("POC_FOC_CHECK", "HOLD", "APU YELLOW requires review before mutation"))
+            stages.append(
+                StageReceipt(
+                    "POC_FOC_CHECK",
+                    "HOLD",
+                    "APU YELLOW requires review before mutation",
+                )
+            )
             receipt = self._finalize(update, digest, UpdateDisposition.HELD, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
         if not update.poc_validated or not update.evidence_refs:
-            stages.append(StageReceipt("POC_FOC_CHECK", "HOLD", "mutation requires POC validation and evidence refs"))
+            stages.append(
+                StageReceipt(
+                    "POC_FOC_CHECK",
+                    "HOLD",
+                    "mutation requires POC validation and evidence refs",
+                )
+            )
             receipt = self._finalize(update, digest, UpdateDisposition.HELD, stages)
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
-        stages.append(StageReceipt("POC_FOC_CHECK", "PASS", "POC evidence admitted; FOC absent"))
+        stages.append(
+            StageReceipt(
+                "POC_FOC_CHECK",
+                "PASS",
+                "POC evidence admitted; FOC absent",
+            )
+        )
 
         # STATE UPDATE: mutate only the non-authoritative projection.
         before = self.projection_store.get(update.node_id)
@@ -347,15 +455,39 @@ class SwfusHierarchy:
         if update.expected_version is not None:
             current_version = int(before.get("version", 0)) if before else 0
             if current_version != update.expected_version:
-                stages.append(StageReceipt("STATE_UPDATE", "HOLD", "expected_version does not match projection"))
-                receipt = self._finalize(update, digest, UpdateDisposition.HELD, stages, state_record=before)
+                stages.append(
+                    StageReceipt(
+                        "STATE_UPDATE",
+                        "HOLD",
+                        "expected_version does not match projection",
+                    )
+                )
+                receipt = self._finalize(
+                    update,
+                    digest,
+                    UpdateDisposition.HELD,
+                    stages,
+                    state_record=before,
+                )
                 self._idempotency[update.idempotency_key] = (digest, receipt)
                 return receipt
 
         if operation == CrudOperation.CREATE.value:
             if before is not None:
-                stages.append(StageReceipt("STATE_UPDATE", "HOLD", "CREATE target already exists"))
-                receipt = self._finalize(update, digest, UpdateDisposition.HELD, stages, state_record=before)
+                stages.append(
+                    StageReceipt(
+                        "STATE_UPDATE",
+                        "HOLD",
+                        "CREATE target already exists",
+                    )
+                )
+                receipt = self._finalize(
+                    update,
+                    digest,
+                    UpdateDisposition.HELD,
+                    stages,
+                    state_record=before,
+                )
                 self._idempotency[update.idempotency_key] = (digest, receipt)
                 return receipt
             record = {
@@ -368,8 +500,19 @@ class SwfusHierarchy:
             self.projection_store[update.node_id] = record
         elif operation == CrudOperation.UPDATE.value:
             if before is None:
-                stages.append(StageReceipt("STATE_UPDATE", "HOLD", "UPDATE target does not exist"))
-                receipt = self._finalize(update, digest, UpdateDisposition.HELD, stages)
+                stages.append(
+                    StageReceipt(
+                        "STATE_UPDATE",
+                        "HOLD",
+                        "UPDATE target does not exist",
+                    )
+                )
+                receipt = self._finalize(
+                    update,
+                    digest,
+                    UpdateDisposition.HELD,
+                    stages,
+                )
                 self._idempotency[update.idempotency_key] = (digest, receipt)
                 return receipt
             record = {
@@ -382,13 +525,30 @@ class SwfusHierarchy:
             self.projection_store[update.node_id] = record
         else:  # DELETE
             if before is None:
-                stages.append(StageReceipt("STATE_UPDATE", "HOLD", "DELETE target does not exist"))
-                receipt = self._finalize(update, digest, UpdateDisposition.HELD, stages)
+                stages.append(
+                    StageReceipt(
+                        "STATE_UPDATE",
+                        "HOLD",
+                        "DELETE target does not exist",
+                    )
+                )
+                receipt = self._finalize(
+                    update,
+                    digest,
+                    UpdateDisposition.HELD,
+                    stages,
+                )
                 self._idempotency[update.idempotency_key] = (digest, receipt)
                 return receipt
             del self.projection_store[update.node_id]
             record = None
-        stages.append(StageReceipt("STATE_UPDATE", "PASS", "bounded non-authoritative projection updated"))
+        stages.append(
+            StageReceipt(
+                "STATE_UPDATE",
+                "PASS",
+                "bounded non-authoritative projection updated",
+            )
+        )
 
         # DISTRIBUTION: emit alignment evidence only after all gates and state update.
         event = {
@@ -412,12 +572,31 @@ class SwfusHierarchy:
                 self.projection_store.pop(update.node_id, None)
             else:
                 self.projection_store[update.node_id] = before_copy
-            stages.append(StageReceipt("DISTRIBUTION", "HOLD", f"distribution failed; projection rolled back: {type(exc).__name__}"))
-            receipt = self._finalize(update, digest, UpdateDisposition.HELD, stages, state_record=before_copy)
+            stages.append(
+                StageReceipt(
+                    "DISTRIBUTION",
+                    "HOLD",
+                    "distribution failed; projection rolled back: "
+                    f"{type(exc).__name__}",
+                )
+            )
+            receipt = self._finalize(
+                update,
+                digest,
+                UpdateDisposition.HELD,
+                stages,
+                state_record=before_copy,
+            )
             self._idempotency[update.idempotency_key] = (digest, receipt)
             return receipt
 
-        stages.append(StageReceipt("DISTRIBUTION", "PASS", "framework alignment event emitted without authority widening"))
+        stages.append(
+            StageReceipt(
+                "DISTRIBUTION",
+                "PASS",
+                "framework alignment event emitted without authority widening",
+            )
+        )
         receipt = self._finalize(
             update,
             digest,
@@ -434,7 +613,6 @@ class SwfusHierarchy:
 
         value = payload.telemetry_value
         is_foc = payload.is_hallucinated or not self._finite_if_number(value) or value > 100
-        operation = CrudOperation.UPDATE if payload.node_id in self.projection_store else CrudOperation.CREATE
         legacy_seed = self._stable_json(
             {
                 "node_id": payload.node_id,
@@ -444,6 +622,17 @@ class SwfusHierarchy:
             }
         )
         legacy_digest = hashlib.sha256(legacy_seed.encode("utf-8")).hexdigest()
+        idempotency_key = f"legacy-{legacy_digest}"
+
+        prior = self.receipt_for_idempotency(idempotency_key)
+        if prior is not None:
+            return prior.disposition == UpdateDisposition.APPLIED.value
+
+        operation = (
+            CrudOperation.UPDATE
+            if payload.node_id in self.projection_store
+            else CrudOperation.CREATE
+        )
         update = ProgressiveUpdate(
             update_id=f"legacy-{legacy_digest[:16]}",
             node_id=payload.node_id,
@@ -451,7 +640,7 @@ class SwfusHierarchy:
             lane="legacy.telemetry",
             context_route="kessa.telemetry",
             protocol="SWFUS-vNext/legacy-telemetry-adapter",
-            idempotency_key=f"legacy-{legacy_digest}",
+            idempotency_key=idempotency_key,
             value=value,
             apu_status="RED" if is_foc else "GREEN",
             poc_validated=not is_foc,
