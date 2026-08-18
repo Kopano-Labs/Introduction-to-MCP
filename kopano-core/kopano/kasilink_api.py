@@ -7,6 +7,12 @@ from typing import Any, Dict, List, Optional
 from .bridge import bridge
 from .config import settings
 from .database import get_db_connection
+from .kasilink_realtime import (
+    begin_match,
+    complete_match,
+    fail_match,
+    router as realtime_router,
+)
 from .tools.gig_matcher import match_gig
 from .tools.loadshedding import get_loadshedding_status, is_gig_safe
 
@@ -19,6 +25,9 @@ class GigMatchRequest(BaseModel):
     category: str
     skills: List[str] = Field(default_factory=list)
     providers: List[Dict[str, Any]] = Field(default_factory=list)
+    session_id: Optional[str] = None
+    task_id: Optional[str] = None
+    correlation_id: Optional[str] = None
 
 
 class SentimentRequest(BaseModel):
@@ -54,14 +63,68 @@ def health() -> dict:
     return {
         "status": "ok",
         "service": "kasilink-cassy",
-        "features": ["match", "sentiment", "forecast", "loadshedding", "moderate", "dashboard", "notify"],
+        "features": [
+            "match",
+            "sentiment",
+            "forecast",
+            "loadshedding",
+            "moderate",
+            "dashboard",
+            "notify",
+            "realtime",
+        ],
     }
 
 
 @router.post("/match")
-def gig_match(request: GigMatchRequest, authorization: Optional[str] = Header(default=None)) -> dict:
+def gig_match(
+    request: GigMatchRequest,
+    authorization: Optional[str] = Header(default=None),
+) -> dict:
     _require_bridge_auth(authorization)
-    return match_gig(request.description, request.location, request.category, request.skills, request.providers)
+
+    live = None
+    try:
+        live = begin_match(
+            request.session_id,
+            request.task_id,
+            request.correlation_id,
+        )
+    except Exception:
+        # Realtime is an observable read plane, not business authority.
+        # A journal/transport fault cannot prevent the existing match workflow.
+        live = None
+
+    try:
+        result = match_gig(
+            request.description,
+            request.location,
+            request.category,
+            request.skills,
+            request.providers,
+        )
+    except Exception as exc:
+        if live is not None:
+            try:
+                fail_match(live, exc)
+            except Exception:
+                pass
+        raise
+
+    response = dict(result)
+    if live is not None:
+        try:
+            response["realtime"] = complete_match(live, response)
+        except Exception:
+            response["realtime"] = {
+                "session_id": live["session_id"],
+                "task_id": live["task_id"],
+                "correlation_id": live["correlation_id"],
+                "resume_cursor": live["resume_cursor"],
+                "state": "degraded",
+                "transport_authority": "none",
+            }
+    return response
 
 
 @router.post("/sentiment")
@@ -127,7 +190,7 @@ def dashboard() -> dict:
     return {
         "ai": "transparent",
         "status": "ready",
-        "features": ["match", "sentiment", "forecast", "loadshedding", "moderate", "notify"],
+        "features": ["match", "sentiment", "forecast", "loadshedding", "moderate", "notify", "realtime"],
         "metrics": {
             "discussions": discussions,
             "audit_logs": audit_logs,
@@ -147,5 +210,7 @@ async def notify(request: NotifyRequest, authorization: Optional[str] = Header(d
         success = await bridge.send_message(request.message or "KasiLink notification", request.recipient)
     return {"sent": success}
 
+
+router.include_router(realtime_router)
+
 # merge: dev 2026-06-22
- 
