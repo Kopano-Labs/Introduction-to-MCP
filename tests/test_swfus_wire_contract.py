@@ -13,6 +13,18 @@ def test_portable_fixture_matches_canonical_wire_shape():
     fixture = json.loads((CONTRACT_DIR / "example.swfus-update.json").read_text(encoding="utf-8"))
 
     assert schema["properties"]["schema"]["const"] == "kpgs.swfus.update.v1"
+    assert set(schema["required"]) == {
+        "schema",
+        "nodeId",
+        "action",
+        "telemetryValue",
+        "data",
+        "expectedRevision",
+        "correlationId",
+        "capabilityLeaseId",
+        "observedAt",
+    }
+    assert set(schema["required"]) <= set(fixture)
     assert fixture["schema"] == "kpgs.swfus.update.v1"
     assert fixture["action"] in schema["properties"]["action"]["enum"]
     assert fixture["nodeId"]
@@ -25,8 +37,13 @@ def test_receipt_wire_contract_separates_acceptance_from_sync_state():
     schema = json.loads((CONTRACT_DIR / "swfus-update.schema.json").read_text(encoding="utf-8"))
     receipt = schema["$defs"]["receipt"]
 
-    assert "accepted" in receipt["required"]
-    assert "syncState" in receipt["required"]
+    assert {
+        "accepted",
+        "syncState",
+        "correlationId",
+        "capabilityLeaseId",
+        "reason",
+    } <= set(receipt["required"])
     assert set(receipt["properties"]["syncState"]["enum"]) == {
         "synced",
         "pending_sync",
