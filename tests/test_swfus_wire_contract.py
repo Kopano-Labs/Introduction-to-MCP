@@ -31,4 +31,5 @@ def test_receipt_wire_contract_separates_acceptance_from_sync_state():
         "synced",
         "pending_sync",
         "severed",
+        "not_applicable",
     }
