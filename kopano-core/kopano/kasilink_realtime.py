@@ -9,6 +9,7 @@ from __future__ import annotations
 import asyncio
 import os
 from pathlib import Path
+import threading
 import uuid
 from typing import Any
 
@@ -25,12 +26,32 @@ from .realtime_event_plane import (
 )
 
 router = APIRouter()
+_plane_instance: RealtimeEventPlane | None = None
+_plane_lock = threading.Lock()
 
-realtime_event_plane = RealtimeEventPlane(
-    Path(os.environ.get("KPGS_REALTIME_DB", ".orch_data/realtime-events.db")),
-    max_events_per_stream=int(os.environ.get("KPGS_REALTIME_HISTORY", "1000")),
-    queue_limit=int(os.environ.get("KPGS_REALTIME_QUEUE_LIMIT", "64")),
-)
+
+def _event_plane() -> RealtimeEventPlane:
+    """Lazily initialize the journal so optional realtime cannot break startup."""
+
+    global _plane_instance
+    if _plane_instance is not None:
+        return _plane_instance
+    with _plane_lock:
+        if _plane_instance is None:
+            _plane_instance = RealtimeEventPlane(
+                Path(
+                    os.environ.get(
+                        "KPGS_REALTIME_DB", ".orch_data/realtime-events.db"
+                    )
+                ),
+                max_events_per_stream=int(
+                    os.environ.get("KPGS_REALTIME_HISTORY", "1000")
+                ),
+                queue_limit=int(
+                    os.environ.get("KPGS_REALTIME_QUEUE_LIMIT", "64")
+                ),
+            )
+    return _plane_instance
 
 
 def _principal(authorization: str | None) -> dict[str, Any]:
@@ -52,20 +73,20 @@ def _principal(authorization: str | None) -> dict[str, Any]:
 def _publish(
     *,
     kind: str,
-    ids: dict[str, str],
+    ids: dict[str, Any],
     suffix: str,
     payload: dict[str, Any],
     **canonical_fields: Any,
 ):
-    return realtime_event_plane.publish(
+    return _event_plane().publish(
         make_event(
             event_id=f"kasilink-{ids['task_id']}-{suffix}",
             event_kind=kind,
             tenant_id="kopano",
             domain_id="kasilink",
-            session_id=ids["session_id"],
-            task_id=ids["task_id"],
-            correlation_id=ids["correlation_id"],
+            session_id=str(ids["session_id"]),
+            task_id=str(ids["task_id"]),
+            correlation_id=str(ids["correlation_id"]),
             renter_id="kasilink.domain-adapter",
             lease_id="lease:kasilink-domain-adapter",
             idempotency_key=f"{ids['task_id']}:{suffix}",
@@ -83,7 +104,7 @@ def begin_match(
 ) -> dict[str, Any]:
     """Start observable state for the existing KasiLink gig-match workflow."""
 
-    ids = {
+    ids: dict[str, Any] = {
         "session_id": session_id or f"session-{uuid.uuid4().hex}",
         "task_id": task_id or f"match-{uuid.uuid4().hex}",
         "correlation_id": correlation_id or f"corr-{uuid.uuid4().hex}",
@@ -94,13 +115,21 @@ def begin_match(
         suffix="accepted",
         payload={"state": "working", "workflow": "gig-match"},
     )
-    _publish(
-        kind="task.started",
-        ids=ids,
-        suffix="started",
-        payload={"state": "working", "workflow": "gig-match"},
-    )
-    return {**ids, "resume_cursor": accepted.cursor}
+    ids["resume_cursor"] = accepted.cursor
+    ids["realtime_state"] = "ready"
+    try:
+        started = _publish(
+            kind="task.started",
+            ids=ids,
+            suffix="started",
+            payload={"state": "working", "workflow": "gig-match"},
+        )
+        ids["resume_cursor"] = started.cursor
+    except Exception:
+        # accepted is already durable, so preserve the identity and let the
+        # domain workflow continue. Completion may later restore the stream.
+        ids["realtime_state"] = "degraded"
+    return ids
 
 
 def complete_match(ids: dict[str, Any], result: dict[str, Any]) -> dict[str, Any]:
@@ -115,6 +144,7 @@ def complete_match(ids: dict[str, Any], result: dict[str, Any]) -> dict[str, Any
         "task_id": ids["task_id"],
         "correlation_id": ids["correlation_id"],
         "resume_cursor": completed.cursor,
+        "state": "done",
         "transport_authority": "none",
     }
 
@@ -133,6 +163,20 @@ def fail_match(ids: dict[str, Any], exc: Exception) -> None:
     )
 
 
+def _http_plane() -> RealtimeEventPlane:
+    try:
+        return _event_plane()
+    except Exception as exc:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "realtime_unavailable",
+                "state": "offline",
+                "canonical_business_state_affected": False,
+            },
+        ) from exc
+
+
 @router.get("/events")
 def polling_fallback(
     session_id: str,
@@ -143,7 +187,7 @@ def polling_fallback(
 ) -> dict[str, Any]:
     scope = EventScope("kopano", "kasilink", session_id, task_id)
     try:
-        return realtime_event_plane.polling_fallback(
+        return _http_plane().polling_fallback(
             _principal(authorization),
             scope,
             after_cursor=after_cursor,
@@ -180,6 +224,12 @@ async def websocket_events(websocket: WebSocket) -> None:
         await websocket.close(code=4400)
         return
 
+    try:
+        plane = _event_plane()
+    except Exception:
+        await websocket.close(code=1013)
+        return
+
     await websocket.accept()
     try:
         auth = await asyncio.wait_for(websocket.receive_json(), timeout=8)
@@ -205,7 +255,7 @@ async def websocket_events(websocket: WebSocket) -> None:
     subscription_id = f"ws-{uuid.uuid4().hex}"
 
     try:
-        subscription, replay = realtime_event_plane.subscribe(
+        subscription, replay = plane.subscribe(
             principal,
             scope,
             after_cursor=after_cursor,
@@ -226,22 +276,24 @@ async def websocket_events(websocket: WebSocket) -> None:
         await websocket.close(code=4409)
         return
 
+    receive_task: asyncio.Task[Any] | None = None
+    event_task: asyncio.Task[Any] | None = None
     highwater = after_cursor
-    for event in replay:
-        await websocket.send_json({"type": "event", "event": event.as_dict()})
-        highwater = max(highwater, event.cursor)
-    await websocket.send_json(
-        {
-            "type": "ready",
-            "state": "ready",
-            "resume_cursor": highwater,
-            "transport": "websocket",
-        }
-    )
-
-    receive_task = asyncio.create_task(websocket.receive_json())
-    event_task = asyncio.create_task(subscription.queue.get())
     try:
+        for event in replay:
+            await websocket.send_json({"type": "event", "event": event.as_dict()})
+            highwater = max(highwater, event.cursor)
+        await websocket.send_json(
+            {
+                "type": "ready",
+                "state": "ready",
+                "resume_cursor": highwater,
+                "transport": "websocket",
+            }
+        )
+
+        receive_task = asyncio.create_task(websocket.receive_json())
+        event_task = asyncio.create_task(subscription.queue.get())
         while True:
             if subscription.overflowed:
                 await websocket.send_json(
@@ -279,7 +331,7 @@ async def websocket_events(websocket: WebSocket) -> None:
                 kind = message.get("type")
                 if kind == "ack":
                     try:
-                        realtime_event_plane.acknowledge(
+                        plane.acknowledge(
                             subscription, int(message.get("cursor", -1))
                         )
                     except (RealtimeEventError, TypeError, ValueError) as exc:
@@ -299,7 +351,7 @@ async def websocket_events(websocket: WebSocket) -> None:
                         domain_id="kasilink",
                         allowed_domains=("kasilink",),
                     )
-                    if not realtime_event_plane.authorizer(check, scope):
+                    if not plane.authorizer(check, scope):
                         await websocket.close(code=4403)
                         return
                     await websocket.send_json(
@@ -320,12 +372,17 @@ async def websocket_events(websocket: WebSocket) -> None:
             if event_task in done:
                 event = event_task.result()
                 event_task = asyncio.create_task(subscription.queue.get())
+                # subscribe-before-replay intentionally tolerates a racing
+                # duplicate. Suppress only the duplicate frame, never state.
                 if event.cursor <= highwater:
                     continue
                 await websocket.send_json(
                     {"type": "event", "event": event.as_dict()}
                 )
+                highwater = event.cursor
     finally:
-        receive_task.cancel()
-        event_task.cancel()
-        realtime_event_plane.unsubscribe(subscription_id)
+        if receive_task is not None:
+            receive_task.cancel()
+        if event_task is not None:
+            event_task.cancel()
+        plane.unsubscribe(subscription_id)
