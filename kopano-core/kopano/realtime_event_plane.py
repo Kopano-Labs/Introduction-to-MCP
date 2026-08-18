@@ -1,15 +1,15 @@
 """Persistent, transport-neutral KPGS realtime event plane.
 
-The event plane is a read/distribution surface. It never owns canonical business
-state and never retries authoritative CRUD mutations. Events are persisted so a
-socket disconnect can be recovered with a server-issued cursor.
+The event plane is an observable distribution surface. It never owns canonical
+business state and never retries CRUD mutations. Durable journal persistence
+supports reconnect/resume while live transports remain disposable.
 """
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass
 from datetime import datetime, timezone
-import asyncio
 import hashlib
 import json
 from pathlib import Path
@@ -23,7 +23,7 @@ class RealtimeEventError(ValueError):
 
 
 class UnauthorizedScope(RealtimeEventError):
-    """Raised when a principal requests a scope it is not allowed to observe."""
+    """Raised when a principal requests an unauthorized stream scope."""
 
 
 class EventConflict(RealtimeEventError):
@@ -57,55 +57,41 @@ class EventScope:
 
 @dataclass(frozen=True)
 class PersistedEvent:
+    """Canonical renter envelope plus a server-issued replay cursor."""
+
     cursor: int
-    event_id: str
-    event_kind: str
-    tenant_id: str
-    domain_id: str
-    session_id: str
-    task_id: str
-    correlation_id: str
-    renter_id: str
-    lease_id: str
-    issued_at: str
-    payload: Mapping[str, Any]
-    idempotency_key: str | None = None
-    source_sequence: int | None = None
-    checkpoint_ref: str | None = None
-    evidence: tuple[Mapping[str, Any], ...] = ()
-    extras: Mapping[str, Any] | None = None
+    envelope: Mapping[str, Any]
+
+    @property
+    def event_id(self) -> str:
+        return str(self.envelope["event_id"])
+
+    @property
+    def event_kind(self) -> str:
+        return str(self.envelope["event_kind"])
+
+    @property
+    def tenant_id(self) -> str:
+        return str(self.envelope["tenant_id"])
+
+    @property
+    def domain_id(self) -> str:
+        return str(self.envelope["domain_id"])
+
+    @property
+    def session_id(self) -> str:
+        return str(self.envelope["session_id"])
+
+    @property
+    def task_id(self) -> str:
+        return str(self.envelope["task_id"])
 
     def as_dict(self) -> dict[str, Any]:
-        data: dict[str, Any] = {
-            "protocol_version": "1.0",
-            "event_id": self.event_id,
-            "event_kind": self.event_kind,
-            "tenant_id": self.tenant_id,
-            "domain_id": self.domain_id,
-            "session_id": self.session_id,
-            "task_id": self.task_id,
-            "renter_id": self.renter_id,
-            "correlation_id": self.correlation_id,
-            "lease_id": self.lease_id,
-            "issued_at": self.issued_at,
-            "payload": dict(self.payload),
-            "cursor": self.cursor,
-            "sequence": (
-                self.source_sequence
-                if self.source_sequence is not None
-                else self.cursor
-            ),
-        }
-        if self.idempotency_key:
-            data["idempotency_key"] = self.idempotency_key
-        if self.checkpoint_ref:
-            data["checkpoint_ref"] = self.checkpoint_ref
-        if self.evidence:
-            data["evidence"] = [dict(item) for item in self.evidence]
-        if self.extras:
-            for key, value in self.extras.items():
-                if key not in data and key != "cursor":
-                    data[key] = value
+        data = dict(self.envelope)
+        data["cursor"] = self.cursor
+        # The renter schema's optional sequence belongs to the producer. If it
+        # is absent, expose the replay cursor as transport ordering metadata.
+        data.setdefault("sequence", self.cursor)
         return data
 
 
@@ -125,11 +111,7 @@ Authorizer = Callable[[Mapping[str, Any], EventScope], bool]
 def default_scope_authorizer(
     principal: Mapping[str, Any], scope: EventScope
 ) -> bool:
-    """Fail-closed default scope authorization.
-
-    Admin/God principals may observe all domains. Other principals must carry a
-    matching tenant and either an exact domain or an allowed_domains grant.
-    """
+    """Fail closed unless the principal can observe this tenant/domain."""
 
     if not principal or not principal.get("is_active", True):
         return False
@@ -146,7 +128,7 @@ def default_scope_authorizer(
 
 
 class RealtimeEventPlane:
-    """SQLite-backed replay journal with bounded live subscribers."""
+    """SQLite replay journal with bounded, non-authoritative live fan-out."""
 
     NONCRITICAL_EVENT_KINDS = {"task.progress", "presence", "domain.health"}
     REQUIRED_FIELDS = (
@@ -229,8 +211,14 @@ class RealtimeEventPlane:
 
     @staticmethod
     def _fingerprint(envelope: Mapping[str, Any]) -> str:
-        canonical = dict(envelope)
-        canonical.pop("cursor", None)
+        # issued_at is observation time, not idempotency identity. A retried
+        # producer may reconstruct the same governed event later without turning
+        # that harmless timestamp difference into an event conflict.
+        canonical = {
+            key: value
+            for key, value in envelope.items()
+            if key not in {"cursor", "issued_at"}
+        }
         encoded = json.dumps(
             canonical,
             sort_keys=True,
@@ -241,9 +229,7 @@ class RealtimeEventPlane:
 
     @classmethod
     def _validate_envelope(cls, envelope: Mapping[str, Any]) -> None:
-        missing = [
-            field for field in cls.REQUIRED_FIELDS if field not in envelope
-        ]
+        missing = [field for field in cls.REQUIRED_FIELDS if field not in envelope]
         if missing:
             raise RealtimeEventError(
                 f"missing required event fields: {', '.join(missing)}"
@@ -255,12 +241,18 @@ class RealtimeEventPlane:
             raise RealtimeEventError("payload must be an object")
 
     @staticmethod
-    def _stream_params(scope: EventScope) -> tuple[str, str, str]:
+    def _stream(scope: EventScope) -> tuple[str, str, str]:
         scope.validate()
         return scope.tenant_id, scope.domain_id, scope.session_id
 
+    @staticmethod
+    def _decode(row: sqlite3.Row | Mapping[str, Any]) -> PersistedEvent:
+        payload = json.loads(str(row["event_json"]))
+        cursor = int(payload.pop("cursor"))
+        return PersistedEvent(cursor=cursor, envelope=payload)
+
     def publish(self, envelope: Mapping[str, Any]) -> PersistedEvent:
-        """Persist one observation and fan it out without blocking producer work."""
+        """Persist one observation and fan it out without blocking producers."""
 
         self._validate_envelope(envelope)
         scope = EventScope(
@@ -268,29 +260,33 @@ class RealtimeEventPlane:
             str(envelope["domain_id"]),
             str(envelope["session_id"]),
         )
-        stream = self._stream_params(scope)
+        stream = self._stream(scope)
         fingerprint = self._fingerprint(envelope)
-        idempotency_key = envelope.get("idempotency_key")
+        event_id = str(envelope["event_id"])
+        idempotency_key = (
+            str(envelope["idempotency_key"])
+            if envelope.get("idempotency_key")
+            else None
+        )
 
         with self._lock:
             existing = self._connection.execute(
-                "SELECT fingerprint, event_json FROM realtime_events "
-                "WHERE event_id = ?",
-                (str(envelope["event_id"]),),
+                "SELECT fingerprint, event_json FROM realtime_events WHERE event_id = ?",
+                (event_id,),
             ).fetchone()
-            if existing is None and idempotency_key:
+            if existing is None and idempotency_key is not None:
                 existing = self._connection.execute(
                     """SELECT fingerprint, event_json FROM realtime_events
                        WHERE tenant_id = ? AND domain_id = ? AND session_id = ?
                          AND idempotency_key = ?""",
-                    (*stream, str(idempotency_key)),
+                    (*stream, idempotency_key),
                 ).fetchone()
             if existing is not None:
-                if existing["fingerprint"] != fingerprint:
+                if str(existing["fingerprint"]) != fingerprint:
                     raise EventConflict(
                         "event or idempotency key was reused with different content"
                     )
-                return self._event_from_json(existing["event_json"])
+                return self._decode(existing)
 
             next_cursor = int(
                 self._connection.execute(
@@ -300,68 +296,15 @@ class RealtimeEventPlane:
                     stream,
                 ).fetchone()["next_cursor"]
             )
-            issued_at = str(
+            stored = dict(envelope)
+            stored.setdefault("protocol_version", "1.0")
+            stored["issued_at"] = str(
                 envelope.get("issued_at")
                 or datetime.now(timezone.utc).isoformat()
             )
-            event = PersistedEvent(
-                cursor=next_cursor,
-                event_id=str(envelope["event_id"]),
-                event_kind=str(envelope["event_kind"]),
-                tenant_id=scope.tenant_id,
-                domain_id=scope.domain_id,
-                session_id=scope.session_id,
-                task_id=str(envelope["task_id"]),
-                renter_id=str(envelope["renter_id"]),
-                correlation_id=str(envelope["correlation_id"]),
-                lease_id=str(envelope["lease_id"]),
-                issued_at=issued_at,
-                payload=dict(envelope["payload"]),
-                idempotency_key=(
-                    str(idempotency_key) if idempotency_key else None
-                ),
-                source_sequence=(
-                    int(envelope["sequence"])
-                    if envelope.get("sequence") is not None
-                    else None
-                ),
-                checkpoint_ref=(
-                    str(envelope["checkpoint_ref"])
-                    if envelope.get("checkpoint_ref")
-                    else None
-                ),
-                evidence=tuple(
-                    dict(item)
-                    for item in envelope.get("evidence", ())
-                    if isinstance(item, Mapping)
-                ),
-                extras={
-                    key: value
-                    for key, value in envelope.items()
-                    if key
-                    not in {
-                        "protocol_version",
-                        "event_id",
-                        "event_kind",
-                        "tenant_id",
-                        "domain_id",
-                        "session_id",
-                        "task_id",
-                        "renter_id",
-                        "correlation_id",
-                        "lease_id",
-                        "issued_at",
-                        "payload",
-                        "idempotency_key",
-                        "sequence",
-                        "checkpoint_ref",
-                        "evidence",
-                        "cursor",
-                    }
-                },
-            )
+            stored["cursor"] = next_cursor
             event_json = json.dumps(
-                event.as_dict(), sort_keys=True, separators=(",", ":")
+                stored, sort_keys=True, separators=(",", ":"), default=str
             )
             self._connection.execute(
                 """INSERT INTO realtime_events
@@ -370,10 +313,10 @@ class RealtimeEventPlane:
                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     *stream,
-                    event.task_id,
+                    str(envelope["task_id"]),
                     next_cursor,
-                    event.event_id,
-                    event.idempotency_key,
+                    event_id,
+                    idempotency_key,
                     fingerprint,
                     event_json,
                 ),
@@ -389,6 +332,10 @@ class RealtimeEventPlane:
                 (*stream, self.max_events_per_stream, *stream),
             )
             self._connection.commit()
+            event = PersistedEvent(
+                cursor=next_cursor,
+                envelope={key: value for key, value in stored.items() if key != "cursor"},
+            )
             subscribers = tuple(self._subscribers.values())
 
         for subscription in subscribers:
@@ -400,8 +347,8 @@ class RealtimeEventPlane:
                 if event.event_kind in self.NONCRITICAL_EVENT_KINDS:
                     subscription.dropped_noncritical += 1
                 else:
-                    # Never block an authoritative producer. A slow consumer
-                    # reconnects and replays from its last acknowledged cursor.
+                    # The event is durable. Force reconnect/replay instead of
+                    # blocking producer work or pretending delivery succeeded.
                     subscription.overflowed = True
         return event
 
@@ -414,48 +361,6 @@ class RealtimeEventPlane:
             and (scope.task_id is None or scope.task_id == event.task_id)
         )
 
-    @staticmethod
-    def _event_from_json(raw: str) -> PersistedEvent:
-        data = json.loads(raw)
-        known = {
-            "protocol_version",
-            "event_id",
-            "event_kind",
-            "tenant_id",
-            "domain_id",
-            "session_id",
-            "task_id",
-            "renter_id",
-            "correlation_id",
-            "lease_id",
-            "issued_at",
-            "payload",
-            "idempotency_key",
-            "sequence",
-            "checkpoint_ref",
-            "evidence",
-            "cursor",
-        }
-        return PersistedEvent(
-            cursor=int(data["cursor"]),
-            event_id=data["event_id"],
-            event_kind=data["event_kind"],
-            tenant_id=data["tenant_id"],
-            domain_id=data["domain_id"],
-            session_id=data["session_id"],
-            task_id=data["task_id"],
-            renter_id=data["renter_id"],
-            correlation_id=data["correlation_id"],
-            lease_id=data["lease_id"],
-            issued_at=data["issued_at"],
-            payload=data.get("payload", {}),
-            idempotency_key=data.get("idempotency_key"),
-            source_sequence=data.get("sequence"),
-            checkpoint_ref=data.get("checkpoint_ref"),
-            evidence=tuple(data.get("evidence", ())),
-            extras={key: value for key, value in data.items() if key not in known},
-        )
-
     def replay(
         self,
         scope: EventScope,
@@ -463,13 +368,14 @@ class RealtimeEventPlane:
         after_cursor: int = 0,
         limit: int = 200,
     ) -> list[PersistedEvent]:
-        """Replay retained observations after a server-issued cursor."""
+        """Replay retained observations after a server-issued stream cursor."""
 
-        stream = self._stream_params(scope)
+        stream = self._stream(scope)
         if after_cursor < 0:
             raise RealtimeEventError("after_cursor must be >= 0")
         if limit < 1 or limit > 1000:
             raise RealtimeEventError("limit must be between 1 and 1000")
+
         with self._lock:
             bounds = self._connection.execute(
                 """SELECT MIN(cursor) AS oldest, MAX(cursor) AS newest
@@ -484,6 +390,7 @@ class RealtimeEventPlane:
                 and after_cursor < int(oldest) - 1
             ):
                 raise CursorExpired(int(oldest))
+
             if scope.task_id is None:
                 rows = self._connection.execute(
                     """SELECT event_json FROM realtime_events
@@ -500,10 +407,10 @@ class RealtimeEventPlane:
                        ORDER BY cursor ASC LIMIT ?""",
                     (*stream, scope.task_id, after_cursor, limit),
                 ).fetchall()
-        return [self._event_from_json(row["event_json"]) for row in rows]
+        return [self._decode(row) for row in rows]
 
     def latest_cursor(self, scope: EventScope) -> int:
-        stream = self._stream_params(scope)
+        stream = self._stream(scope)
         with self._lock:
             if scope.task_id is None:
                 row = self._connection.execute(
@@ -538,15 +445,15 @@ class RealtimeEventPlane:
         if not subscription_id.strip():
             raise RealtimeEventError("subscription_id is required")
 
-        # Register first. A concurrent publish may then be both in replay and
-        # the live queue, but duplicates are safe; registering after replay
-        # would create a loss window, which is not acceptable.
         subscription = Subscription(
             subscription_id=subscription_id,
             scope=scope,
             queue=asyncio.Queue(maxsize=self.queue_limit),
             last_cursor=after_cursor,
         )
+        # Register first. A racing event may appear both in replay and the live
+        # queue, but a duplicate is recoverable; registering after replay would
+        # create an unrecoverable event-loss window.
         with self._lock:
             self._subscribers[subscription_id] = subscription
         try:
@@ -562,9 +469,7 @@ class RealtimeEventPlane:
 
     def acknowledge(self, subscription: Subscription, cursor: int) -> None:
         if cursor < subscription.last_cursor:
-            raise RealtimeEventError(
-                "acknowledged cursor cannot move backwards"
-            )
+            raise RealtimeEventError("acknowledged cursor cannot move backwards")
         if cursor > self.latest_cursor(subscription.scope):
             raise RealtimeEventError(
                 "acknowledged cursor is ahead of the server stream"
@@ -631,6 +536,6 @@ def make_event(
     if idempotency_key:
         event["idempotency_key"] = idempotency_key
     for key, value in canonical_fields.items():
-        if key != "cursor" and value is not None:
+        if key not in {"cursor", "issued_at"} and value is not None:
             event[key] = value
     return event
