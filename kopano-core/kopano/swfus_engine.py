@@ -4,8 +4,8 @@ SWFUS = Sovereign Ingestion -> Witness Isolation -> Fluid Vectoring ->
 Unified Synchronization -> Severance.
 
 The runtime preserves local truth and evidence when transport is unavailable.
-A sync failure is not automatically a governance failure, and rejected updates
-never erase previously witnessed state.
+A sync failure is not automatically a governance failure, rejected updates never
+erase witnessed state, and correlation-bound retries never duplicate mutation.
 """
 
 from __future__ import annotations
@@ -100,6 +100,8 @@ class SwfusHierarchy:
         self.quarantine_ledger: list[SwfusReceipt] = []
         self.receipt_ledger: list[SwfusReceipt] = []
         self.last_receipt: SwfusReceipt | None = None
+        self._correlation_receipts: dict[str, SwfusReceipt] = {}
+        self._correlation_fingerprints: dict[str, str] = {}
         log.info(
             "SWFUS Engine initialized; sync=%s",
             "configured" if sync_adapter else "offline-pending",
@@ -111,14 +113,30 @@ class SwfusHierarchy:
 
     def execute_with_receipt(self, payload: SwfusPayload) -> SwfusReceipt:
         """Run one payload through all governed SWFUS stages."""
+        request_fingerprint = self._request_fingerprint(payload)
+        replay = self._idempotent_replay(payload, request_fingerprint)
+        if replay is not None:
+            return replay
+
         ingest_reason = self._validate_ingestion(payload)
         if ingest_reason:
-            return self._severance_execution(payload, ingest_reason, stage="sovereign_ingestion")
+            return self._severance_execution(
+                payload,
+                ingest_reason,
+                stage="sovereign_ingestion",
+                request_fingerprint=request_fingerprint,
+            )
 
         resolved_action = self._resolve_action(payload)
         transition = self._fluid_vectoring(payload, resolved_action)
         if isinstance(transition, str):
-            return self._severance_execution(payload, transition, stage="fluid_vectoring", resolved_action=resolved_action)
+            return self._severance_execution(
+                payload,
+                transition,
+                stage="fluid_vectoring",
+                resolved_action=resolved_action,
+                request_fingerprint=request_fingerprint,
+            )
 
         record = transition
         self._witness_isolation(record)
@@ -146,6 +164,7 @@ class SwfusHierarchy:
             evidence_hash=record.evidence_hash,
         )
         self._record_receipt(receipt)
+        self._remember_idempotency(payload, request_fingerprint, receipt)
         return receipt
 
     def read(self, node_id: str) -> WitnessRecord | None:
@@ -154,12 +173,66 @@ class SwfusHierarchy:
             return None
         return record
 
+    def _request_fingerprint(self, payload: SwfusPayload) -> str:
+        return _fingerprint(
+            {
+                "node_id": payload.node_id,
+                "action_type": payload.action_type.strip().upper(),
+                "telemetry_value": payload.telemetry_value,
+                "is_hallucinated": payload.is_hallucinated,
+                "data": dict(payload.data),
+                "expected_revision": payload.expected_revision,
+                "capability_lease_id": payload.capability_lease_id,
+            }
+        )
+
+    def _idempotent_replay(
+        self,
+        payload: SwfusPayload,
+        request_fingerprint: str,
+    ) -> SwfusReceipt | None:
+        correlation_id = payload.correlation_id
+        if not correlation_id or not correlation_id.strip():
+            return None
+
+        previous = self._correlation_receipts.get(correlation_id)
+        if previous is None:
+            return None
+
+        if self._correlation_fingerprints[correlation_id] == request_fingerprint:
+            # Same intent + same correlation is a retry. Return the original verdict
+            # without executing CRUD/vectoring again or incrementing revision.
+            self.last_receipt = previous
+            return previous
+
+        return self._severance_execution(
+            payload,
+            "correlation_id cannot be reused for a different payload",
+            stage="sovereign_ingestion",
+            request_fingerprint=request_fingerprint,
+            remember_idempotency=False,
+        )
+
+    def _remember_idempotency(
+        self,
+        payload: SwfusPayload,
+        request_fingerprint: str,
+        receipt: SwfusReceipt,
+    ) -> None:
+        correlation_id = payload.correlation_id
+        if not correlation_id or not correlation_id.strip():
+            return
+        self._correlation_fingerprints[correlation_id] = request_fingerprint
+        self._correlation_receipts[correlation_id] = receipt
+
     def _validate_ingestion(self, payload: SwfusPayload) -> str | None:
         if not payload.node_id.strip():
             return "node_id is required"
         action = payload.action_type.strip().upper()
         if action not in CRUD_ACTIONS | LEGACY_ACTIONS:
             return f"unsupported action_type: {payload.action_type}"
+        if payload.correlation_id is not None and not payload.correlation_id.strip():
+            return "correlation_id must be non-empty when supplied"
         if payload.is_hallucinated:
             return "payload explicitly marked hallucinated/untrusted"
         if not math.isfinite(payload.telemetry_value):
@@ -270,6 +343,8 @@ class SwfusHierarchy:
         *,
         stage: str,
         resolved_action: str | None = None,
+        request_fingerprint: str | None = None,
+        remember_idempotency: bool = True,
     ) -> SwfusReceipt:
         """Quarantine the rejected attempt without deleting witnessed prior state."""
         evidence_hash = _fingerprint(
@@ -296,6 +371,12 @@ class SwfusHierarchy:
         )
         self.quarantine_ledger.append(receipt)
         self._record_receipt(receipt)
+        if remember_idempotency:
+            self._remember_idempotency(
+                payload,
+                request_fingerprint or self._request_fingerprint(payload),
+                receipt,
+            )
         log.warning(
             "[SWFUS SEVERED] node=%s stage=%s reason=%s",
             payload.node_id,
