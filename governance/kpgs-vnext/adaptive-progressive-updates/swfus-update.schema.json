@@ -46,7 +46,7 @@
             "unified_synchronization"
           ]
         },
-        "syncState": { "enum": ["synced", "pending_sync", "severed"] },
+        "syncState": { "enum": ["synced", "pending_sync", "severed", "not_applicable"] },
         "revision": { "type": ["integer", "null"], "minimum": 1 },
         "correlationId": { "type": ["string", "null"] },
         "capabilityLeaseId": { "type": ["string", "null"] },
