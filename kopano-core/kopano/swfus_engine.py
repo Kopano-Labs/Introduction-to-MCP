@@ -139,6 +139,23 @@ class SwfusHierarchy:
             )
 
         record = transition
+        if resolved_action == "READ":
+            # READ observes the current witness. It must not rewrite that witness or
+            # invoke a synchronization adapter with mutation-like side effects.
+            receipt = self._make_receipt(
+                payload,
+                resolved_action=resolved_action,
+                accepted=True,
+                stage="witness_isolation",
+                sync_state="not_applicable",
+                revision=record.revision,
+                reason="read observed current local witness; synchronization not applicable",
+                evidence_hash=record.evidence_hash,
+            )
+            self._record_receipt(receipt)
+            self._remember_idempotency(payload, request_fingerprint, receipt)
+            return receipt
+
         self._witness_isolation(record)
 
         provisional = self._make_receipt(
