@@ -110,6 +110,12 @@
         }
       }
     },
+    "action_gates": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Named approval/policy gates available to authorize high-risk or destructive delegation."
+    },
     "lifecycle_state": {
       "type": "string",
       "enum": ["draft", "verified", "approved", "released", "rejected", "rolled-back"]
