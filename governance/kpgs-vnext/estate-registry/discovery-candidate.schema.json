@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/estate-registry/discovery-candidate.schema.json",
+  "title": "KPGS Estate Discovery Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "candidate_id",
+    "domain",
+    "status",
+    "provenance",
+    "witness_evidence",
+    "classification",
+    "discovered_at",
+    "registered_at"
+  ],
+  "properties": {
+    "schema": { "const": "kpgs.estate-candidate.v1" },
+    "candidate_id": { "type": "string", "minLength": 8 },
+    "domain": { "type": "string", "minLength": 3 },
+    "status": {
+      "enum": ["unwitnessed", "witnessed", "classified", "rejected", "registered"]
+    },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "ref", "observed_at"],
+        "properties": {
+          "kind": {
+            "enum": ["registrar", "dns", "deployment", "repository", "domain-control", "other"]
+          },
+          "ref": { "type": "string", "minLength": 1 },
+          "observed_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "witness_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "ref", "verified_at"],
+        "properties": {
+          "kind": {
+            "enum": ["registrar", "dns", "deployment", "repository", "domain-control", "other"]
+          },
+          "ref": { "type": "string", "minLength": 1 },
+          "verified_at": { "type": ["string", "null"], "format": "date-time" }
+        }
+      }
+    },
+    "classification": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["owner_ref", "governance_tier", "risk_class"],
+          "properties": {
+            "owner_ref": { "type": "string", "minLength": 1 },
+            "governance_tier": { "type": "string", "minLength": 1 },
+            "risk_class": { "enum": ["R0", "R1", "R2", "R3"] }
+          }
+        }
+      ]
+    },
+    "discovered_at": { "type": "string", "format": "date-time" },
+    "registered_at": { "type": ["string", "null"], "format": "date-time" },
+    "rejection_reason": { "type": "string", "minLength": 1 }
+  }
+}
