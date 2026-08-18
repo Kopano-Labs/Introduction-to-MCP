@@ -1,0 +1,112 @@
+{
+  "schema": "kpgs.cars4mars.distribution-receipt.v1",
+  "timestamp": "2026-08-18T19:17:00+02:00",
+  "baseline": "DFR-01",
+  "active_p_step": "P-001A_dimension_wheel_hub_interface",
+  "distribution_type": "governed_state_projection",
+  "authority_effect": "none",
+  "physical_state_promoted": false,
+  "projected_physical_state": "DESIGNED_LOCKED__P001_DIMENSIONING",
+  "progressive_update": {
+    "apu_state": "YELLOW",
+    "nb_boundary": true,
+    "crud_decision": "HOLD_PHYSICAL_PROMOTION",
+    "swfus": {
+      "projection_synchronized": true,
+      "physical_state_promotion_emitted": false,
+      "rule": "SWFUS synchronizes admitted state; it does not create authority or evidence."
+    }
+  },
+  "source_receipt": {
+    "repository": "RobynAwesome/Introduction-to-MCP",
+    "pull_request": 78,
+    "merged_commit": "a064929dcca43b1d78dc11ff7b289e2d76fbbdb1",
+    "contract": "governance/kpgs-vnext/domain-contracts/cars4mars/README.md"
+  },
+  "engineering_projection": {
+    "repository": "RobynAwesome/cars4mars-project",
+    "baseline_pull_request": 5,
+    "baseline_merged_commit": "e7d5a3d1ef797693e03f382a3c9900bc50de6f6a",
+    "artifact_provenance_pull_request": 7,
+    "artifact_provenance_merged_commit": "74fa057fed4a5a68ab9a0b9370b5f01b2be954a8",
+    "active_issue": 6,
+    "ledger_rows": ["C4M-MECH-0001", "C4M-MECH-0002"],
+    "state": "P-001A active; no dimensioned CAD, fabricated wheel, fit test or physical mobility evidence"
+  },
+  "public_projection": {
+    "repository": "RobynAwesome/Kopano-Labs-Website",
+    "state_projection_pull_request": 28,
+    "state_projection_merged_commit": "fe6239b1cf2107c5faaf2c57d7bc773a319e4a67",
+    "artifact_provenance_sync_pull_request": 29,
+    "final_merged_commit": "e7128c65086a0c6f8c9b9416efbcafb3d50404cd",
+    "projection_gate": {
+      "workflow": "experiment-projection-gate",
+      "run_id": 32167491786,
+      "conclusion": "success",
+      "verified_head_commit": "7a064fb8abc00bfea05028dd12797231821b90cf",
+      "verified_steps": [
+        "experiment projection / relation / privacy gates",
+        ".NET-parsed public evidence contract",
+        "human evidence contract",
+        "RTCP council and domain invariants",
+        "TypeScript 7 proof",
+        "full Adaptive PWA build",
+        "generated public receipts"
+      ]
+    },
+    "projected_copy": "DFR-01 locked. P-001 wheel interface active.",
+    "artifact_provenance_pinned": true,
+    "retired_report_route_reactivated": false
+  },
+  "retired_projection_containment": {
+    "repository": "RobynAwesome/cars4mars-landingpage",
+    "pull_request": 5,
+    "state": "closed_without_merge",
+    "reason": "canonical KopanoLabs.com governance explicitly classifies this repository as retired and non-production",
+    "production_dependency": false,
+    "report_route_reactivated": false
+  },
+  "session_artifact_identity": {
+    "register": "RobynAwesome/cars4mars-project@74fa057fed4a5a68ab9a0b9370b5f01b2be954a8:engineering/mechanical/P-001_ARTIFACT_REGISTER.json",
+    "generated_design_references": [
+      {
+        "name": "Cars4Mars Axle Module Concept Board",
+        "sha256": "d984850dc85cce87a5f5ca19f51279d6624d93b1ae8c64048b67a79a017bbb26"
+      },
+      {
+        "name": "Cars4Mars Axle Module Assembly Guide",
+        "sha256": "73d2236c7b8dffe0973aac5b76e7623af6990239217274ed758a6fe9e6896073"
+      },
+      {
+        "name": "Cars4Mars Part 1 - Wheel Concept Poster",
+        "sha256": "9750117f4d658ab9d8cf972ec8460cf0d34c44ef72d0f7b20cba262ed8dc78fe"
+      }
+    ],
+    "facility_context_photos": [
+      {
+        "sha256": "0a99b9ca82ebb90392b377bc76157116ae3f7118a78cf948773b0334ec648eb4"
+      },
+      {
+        "sha256": "4a0007a24d1d304678b04ef840d7719ce7e3b39bedc6679e4fbde99b4e834584"
+      }
+    ]
+  },
+  "next_gate": {
+    "id": "P-001A",
+    "required": [
+      "rough hand sketch",
+      "front view",
+      "side view",
+      "top or section view",
+      "actual machine/process identity",
+      "actual available material",
+      "proposed wheel width",
+      "proposed hub mounting-face diameter",
+      "proposed center bore",
+      "proposed bolt pattern / PCD / fastener",
+      "proposed tread-pocket dimensions and retention"
+    ],
+    "next_physical_artifact": "small hub / bolt-pattern fit coupon",
+    "full_wheel_release_allowed_now": false
+  }
+}
