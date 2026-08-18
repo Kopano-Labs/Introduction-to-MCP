@@ -246,6 +246,22 @@
       }
     },
     {
+      "not": {
+        "properties": {
+          "verifications": {
+            "contains": {
+              "properties": {
+                "method": { "const": "security" },
+                "hard_gate": { "const": false }
+              },
+              "required": ["method", "hard_gate"]
+            }
+          }
+        },
+        "required": ["verifications"]
+      }
+    },
+    {
       "if": {
         "properties": {
           "governance_decision": {
