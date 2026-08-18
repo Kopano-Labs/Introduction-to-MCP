@@ -1,0 +1,100 @@
+{
+  "schema": "kpgs.cars4mars.progressive-update.receipt.v1",
+  "update_id": "C4M-P001-20260818-1917-SAST",
+  "timestamp": "2026-08-18T19:17:00+02:00",
+  "part_id": "P-001",
+  "revision": "concept-r0",
+  "lane": "mechanical/wheel",
+  "black_mask_preflight": {
+    "version": "v0.5",
+    "status": "PASS_FOR_SANDBOX_ONLY",
+    "production_graduation": false,
+    "fake_ack": false
+  },
+  "apu": {
+    "state": "YELLOW",
+    "reason": "concept is coherent but critical interface dimensions are still TBD"
+  },
+  "nb_boundary_present": true,
+  "crud": {
+    "operation": "CREATE",
+    "target": "non_authoritative/prototypes/P-001/concept-r0",
+    "authority_effect": "none",
+    "poc_validated": false,
+    "mutation_decision": "HOLD"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "telemetry",
+      "status": "PASS",
+      "evidence": ["timestamp", "part_id", "revision", "session-generated concept artifacts"]
+    },
+    {
+      "stage": 2,
+      "name": "classification",
+      "status": "PASS",
+      "classification": "generated_design_reference"
+    },
+    {
+      "stage": 3,
+      "name": "routing",
+      "status": "PASS",
+      "route": "Cars4Mars/mechanical/wheel/P-001"
+    },
+    {
+      "stage": 4,
+      "name": "protocol_selection",
+      "status": "PASS",
+      "protocol": "Cars4Mars P-step / P-001 wheel interface"
+    },
+    {
+      "stage": 5,
+      "name": "invariant_audit",
+      "status": "PASS_WITH_TBD",
+      "preserved": [
+        "six-wheel DFR-01 architecture",
+        "250 mm wheel diameter baseline",
+        "separate deterministic safety authority",
+        "generated imagery is not physical evidence"
+      ]
+    },
+    {
+      "stage": 6,
+      "name": "poc_foc_check",
+      "status": "HOLD",
+      "reason": "no dimensioned CAD, slicer/toolpath receipt, fabricated part or fit test exists"
+    },
+    {
+      "stage": 7,
+      "name": "state_update",
+      "status": "NOT_REACHED"
+    },
+    {
+      "stage": 8,
+      "name": "distribution",
+      "status": "NOT_REACHED",
+      "swfus_event_emitted": false
+    }
+  ],
+  "hypothesis": "A 250 mm open-spoke wheel with a separate removable hub interface and replaceable compliant tread inserts can reduce prototype mass and allow traction geometry/material experiments without reprinting the whole wheel.",
+  "falsification_questions": [
+    "Does the hub interface deform or loosen under representative radial and drive loads?",
+    "Do the tread insert pockets trap stones instead of shedding them?",
+    "Does the flexible insert improve traction relative to the rigid body on representative rough terrain?",
+    "Can a damaged insert be replaced without damaging the wheel shell?",
+    "Is the wheel printable/fabricatable with the actual lab process and tolerances?"
+  ],
+  "required_to_turn_green": [
+    "rough sketch captured",
+    "front/side/top-or-section views captured",
+    "wheel width proposed",
+    "center bore proposed from hub/shaft interface",
+    "bolt pattern proposed",
+    "tread pocket dimensions proposed",
+    "prototype material and printer/process named",
+    "dimensioned CAD revision released",
+    "small interface coupon or first wheel revision fabricated and measured"
+  ],
+  "next_gate": "P-001A_dimension_wheel_hub_interface"
+}

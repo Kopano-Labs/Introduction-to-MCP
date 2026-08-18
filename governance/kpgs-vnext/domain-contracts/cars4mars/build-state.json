@@ -1,0 +1,151 @@
+{
+  "schema": "kpgs.cars4mars.build-state.v1",
+  "timestamp": "2026-08-18T19:17:00+02:00",
+  "baseline": {
+    "id": "DFR-01",
+    "date": "2026-08-02",
+    "status": "locked_design_baseline",
+    "physical_validation_complete": false
+  },
+  "canonical_sources": [
+    "ARC 2026 Rulebook Rev 2.0",
+    "Cars4Mars DFR-01 Verified Final Design Report",
+    "RobynAwesome/cars4mars-project"
+  ],
+  "runtime_contract": {
+    "chain": ["APU", "Progressive Update", "#NB", "bounded CRUD", "SWFUS"],
+    "stage_order": [
+      "telemetry",
+      "classification",
+      "routing",
+      "protocol_selection",
+      "invariant_audit",
+      "poc_foc_check",
+      "state_update",
+      "distribution"
+    ],
+    "authority_effect": "none",
+    "swfus_is_authority": false
+  },
+  "black_mask": {
+    "preflight_version": "v0.5",
+    "sandbox_after_preflight": true,
+    "fake_ack_allowed": false,
+    "proof_before_narrative": true
+  },
+  "locked_y": {
+    "wheel_count": 6,
+    "wheel_diameter_mm": 250,
+    "mobility": "six-wheel skid-steer + passive rocker-bogie",
+    "target_envelope_mm": [700, 650, 500],
+    "bom_target_kg": 28,
+    "engineering_load_case_kg": 30,
+    "competition_max_mass_kg": 40,
+    "payload_tray_mm": [350, 300, 180],
+    "payload_object_max_kg": 1,
+    "control_authority": "Teensy 4.1",
+    "perception_compute": "Jetson Orin Nano Super"
+  },
+  "changeable_x": [
+    "wheel_width",
+    "spoke_count",
+    "spoke_geometry",
+    "hub_bolt_count",
+    "hub_pitch_circle_diameter",
+    "axle_shaft_diameter",
+    "bearing_selection",
+    "bearing_housing_geometry",
+    "tread_pocket_count",
+    "tread_pocket_dimensions",
+    "tread_insert_material",
+    "prototype_body_material",
+    "tolerances",
+    "clearances",
+    "rocker_bogie_link_thickness",
+    "fastener_size"
+  ],
+  "facility_context": {
+    "location": "HPI d-school fabrication / 3D lab",
+    "source_state": "user_reported_and_visually_shown_in_session",
+    "lightburn_2_available": true,
+    "fabricated_part_claim": false
+  },
+  "active_p_step": {
+    "id": "P-001",
+    "name": "wheel_interface",
+    "status": "generated_concept_requires_dimensioning",
+    "next_gate": "P-001A_dimension_wheel_hub_interface",
+    "required_inputs": [
+      "rough_hand_sketch",
+      "front_view",
+      "side_view",
+      "top_or_section_view",
+      "proposed_wheel_width_mm",
+      "proposed_center_bore_mm",
+      "proposed_hub_mounting_face_mm",
+      "proposed_bolt_pattern",
+      "proposed_tread_pocket_dimensions_mm",
+      "prototype_material",
+      "printer_or_process"
+    ]
+  },
+  "wheel_concept": {
+    "outer_diameter_mm": 250,
+    "open_spoke_structure": "concept_admitted",
+    "separate_hub_mounting_face": "concept_admitted",
+    "removable_fastener_interface": "concept_admitted",
+    "replaceable_tread_insert_pockets": "concept_admitted",
+    "axle_directly_bears_in_bare_wheel_shell": false,
+    "prototype_material_candidates": {
+      "wheel_body": ["PLA", "PETG"],
+      "traction_insert": ["TPU", "rubber-like material"],
+      "later_strength_candidate": ["nylon", "reinforced filament"]
+    },
+    "final_material_locked": false
+  },
+  "part_sequence": [
+    "P-001 wheel interface",
+    "P-002 hub",
+    "P-003 axle shaft",
+    "P-004 bearing housing",
+    "P-005 mounting bracket",
+    "P-006 bogie/rocker link",
+    "P-007 dry assembly",
+    "P-008 rolling/load prototype"
+  ],
+  "part_evidence_ladder": [
+    "GENERATED",
+    "DIMENSIONED",
+    "CAD_RELEASED",
+    "SLICED_OR_TOOLPATH_REVIEWED",
+    "FABRICATED",
+    "FIT_TESTED",
+    "ROLL_TESTED",
+    "LOAD_TESTED",
+    "ACCEPTED_OR_REVISE"
+  ],
+  "generated_artifacts": [
+    {
+      "name": "Cars4Mars Axle Module Concept Board",
+      "state": "generated_design_reference"
+    },
+    {
+      "name": "Cars4Mars Axle Module Assembly Guide",
+      "state": "generated_design_reference"
+    },
+    {
+      "name": "Cars4Mars Part 1 - Wheel Concept Poster",
+      "state": "generated_design_reference"
+    }
+  ],
+  "drift_blockers": [
+    "wheel_count_change_without_governed_baseline_change",
+    "generated_measurement_presented_as_physical_measurement",
+    "lab_access_presented_as_fabrication",
+    "LightBurn_availability_presented_as_cut_part_evidence",
+    "software_simulation_presented_as_physical_mobility_evidence",
+    "AI_or_cloud_motor_authority",
+    "DFR_locked_constant_changed_without_design_change_record",
+    "public_distribution_before_evidence_receipt"
+  ]
+}
