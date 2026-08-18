@@ -1,6 +1,6 @@
 # KPGS vNext — Sovereign Hub Re-engineering
 
-Status: **Phase 1 — Governance Substrate / Evidence Completion**
+Status: **Phase 1 — Governance Substrate Complete**
 Epic: #46
 
 KPGS vNext makes `Introduction-to-MCP` the canonical specification and governance layer for the Kopano DNS estate. Existing frontends may remain React/Next/Vite/PWA or other appropriate stacks; the canonical integration boundary is a governed domain adapter, Sovereign Hub, Stateless Renter protocol, skill runtime, realtime event plane and evidence system.
@@ -139,7 +139,7 @@ See `evidence/EVIDENCE.md`, `evidence/evidence-bundle.schema.json`, and `evidenc
 ## Phase map
 
 - **Phase 0 — Truth and contracts:** fork assimilation, renter protocol, specification-first governance. **Complete.**
-- **Phase 1 — Governance substrate:** identity/capability leases, Sovereign Hub registry, evidence model. **Implementation complete on this branch; final evidence CI/promotion pending.**
+- **Phase 1 — Governance substrate:** identity/capability leases, Sovereign Hub registry, evidence model. **Complete.**
 - **Phase 2 — Runtime packages:** .NET domain adapter, skill runtime, realtime event plane.
 - **Phase 3 — Validation + human experience:** evaluation loop and Sovereign Everyday Mode.
 - **Phase 4 — Estate proof:** migrate one bounded low-risk workflow, prove rollback, then expand.
