@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/progressive-update.schema.json",
+  "title": "KPGS Progressive Update",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "update_id",
+    "node_id",
+    "operation",
+    "lane",
+    "context_route",
+    "protocol",
+    "idempotency_key",
+    "apu_status",
+    "poc_validated",
+    "foc_detected",
+    "invariant_passed",
+    "authority_effect",
+    "state_class",
+    "evidence_refs",
+    "boundary_marker"
+  ],
+  "properties": {
+    "schema": { "const": "kpgs.progressive-update.v1" },
+    "update_id": { "type": "string", "minLength": 1 },
+    "node_id": { "type": "string", "minLength": 1 },
+    "operation": { "enum": ["CREATE", "READ", "UPDATE", "DELETE"] },
+    "lane": { "type": "string", "minLength": 1 },
+    "context_route": { "type": "string", "minLength": 1 },
+    "protocol": { "type": "string", "minLength": 1 },
+    "idempotency_key": { "type": "string", "minLength": 1 },
+    "value": true,
+    "apu_status": { "enum": ["GREEN", "YELLOW", "RED", "UNSPECIFIED"] },
+    "poc_validated": { "type": "boolean" },
+    "foc_detected": { "type": "boolean" },
+    "invariant_passed": { "type": "boolean" },
+    "authority_effect": { "const": "none" },
+    "state_class": {
+      "enum": ["non_authoritative", "derived_projection", "pending_proposal"]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "correlation_id": { "type": "string" },
+    "source": { "type": "string" },
+    "expected_version": { "type": ["integer", "null"], "minimum": 0 },
+    "boundary_marker": {
+      "const": "#NB",
+      "description": "Literal operator boundary marker. No expansion is invented by this schema."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "operation": { "enum": ["CREATE", "UPDATE", "DELETE"] }
+        }
+      },
+      "then": {
+        "properties": {
+          "poc_validated": { "const": true },
+          "foc_detected": { "const": false },
+          "evidence_refs": { "minItems": 1 }
+        }
+      }
+    }
+  ]
+}
