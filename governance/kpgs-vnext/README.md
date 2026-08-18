@@ -1,6 +1,6 @@
 # KPGS vNext — Sovereign Hub Re-engineering
 
-Status: **Phase 0 — Truth and Contracts**
+Status: **Phase 1 — Governance Substrate**
 Epic: #46
 
 KPGS vNext makes `Introduction-to-MCP` the canonical specification and governance layer for the Kopano DNS estate. Existing frontends may remain React/Next/Vite/PWA or other appropriate stacks; the canonical integration boundary is a governed domain adapter, Sovereign Hub, Stateless Renter protocol, skill runtime, realtime event plane and evidence system.
@@ -46,6 +46,8 @@ Tools / APIs / Domain Systems
 10. Newly discovered DNS properties remain `unwitnessed` until ownership and governance admission are validated.
 11. Availability, replication and synchronization MUST NOT be interpreted as authority.
 12. Mutating CRUD MUST NOT occur before invariant and POC/FOC governance has passed.
+13. Authentication establishes identity; privileged execution additionally requires a live, exact-scoped capability lease.
+14. Lease signing material and durable provider credentials MUST NOT be owned by a Stateless Renter or frontend.
 
 ## Control loops
 
@@ -79,15 +81,33 @@ CRUD mutates only admitted bounded state. SWFUS distributes/aligns the resulting
 
 See `progressive-updates/README.md` and `progressive-updates/progressive-update.schema.json`.
 
+### Capability authority
+
+```text
+authenticated identity
+  -> policy + governing specification
+  -> short-lived capability lease
+  -> exact tenant/domain/task/capability/resource check
+  -> sensitive operation nonce
+  -> execution
+  -> audit/evidence
+```
+
+The reference capability runtime is intentionally server-side. OIDC/JWT/session identity may exist upstream, but no identity token alone becomes ambient execution authority. Key rotation is resolved by the issuing authority through signed lease `kid` metadata; an Adaptive PWA does not need redeployment to rotate Sovereign Hub signing keys.
+
+See `security/CAPABILITY_LEASE.md`, `security/capability-lease.schema.json`, and `security/capability_lease.py`.
+
 ## Phase map
 
-- **Phase 0 — Truth and contracts:** fork assimilation, renter protocol, specification-first governance.
-- **Phase 1 — Governance substrate:** identity/capability leases, Sovereign Hub registry, evidence model.
+- **Phase 0 — Truth and contracts:** fork assimilation, renter protocol, specification-first governance. **Complete.**
+- **Phase 1 — Governance substrate:** identity/capability leases, Sovereign Hub registry, evidence model. **In progress.**
 - **Phase 2 — Runtime packages:** .NET domain adapter, skill runtime, realtime event plane.
 - **Phase 3 — Validation + human experience:** evaluation loop and Sovereign Everyday Mode.
 - **Phase 4 — Estate proof:** migrate one bounded low-risk workflow, prove rollback, then expand.
 
-## Phase 0 artifacts
+## Canonical artifacts
+
+### Phase 0 / shared substrate
 
 - `stateless-renter/PROTOCOL.md`
 - `stateless-renter/renter-envelope.schema.json`
@@ -100,6 +120,15 @@ See `progressive-updates/README.md` and `progressive-updates/progressive-update.
 - `task-contract/adapter.py`
 - `progressive-updates/README.md`
 - `progressive-updates/progressive-update.schema.json`
+
+### Phase 1 / governance substrate
+
+- `security/CAPABILITY_LEASE.md`
+- `security/capability-lease.schema.json`
+- `security/capability_lease.py`
+- `estate-registry/estate-registry.schema.json`
+- `estate-registry/estate.json`
+- `evidence/evidence-bundle.schema.json`
 
 ## Definition of done
 
