@@ -1,6 +1,6 @@
 # KPGS vNext — Sovereign Hub Re-engineering
 
-Status: **Phase 1 — Governance Substrate**
+Status: **Phase 1 — Governance Substrate Complete**
 Epic: #46
 
 KPGS vNext makes `Introduction-to-MCP` the canonical specification and governance layer for the Kopano DNS estate. Existing frontends may remain React/Next/Vite/PWA or other appropriate stacks; the canonical integration boundary is a governed domain adapter, Sovereign Hub, Stateless Renter protocol, skill runtime, realtime event plane and evidence system.
@@ -48,6 +48,8 @@ Tools / APIs / Domain Systems
 12. Mutating CRUD MUST NOT occur before invariant and POC/FOC governance has passed.
 13. Authentication establishes identity; privileged execution additionally requires a live, exact-scoped capability lease.
 14. Lease signing material and durable provider credentials MUST NOT be owned by a Stateless Renter or frontend.
+15. Aggregate scores MUST NOT hide a failed hard governance or security gate.
+16. Production promotion MUST identify the exact release/commit and the canonical evidence bundle that justified it.
 
 ## Control loops
 
@@ -97,10 +99,47 @@ The reference capability runtime is intentionally server-side. OIDC/JWT/session 
 
 See `security/CAPABILITY_LEASE.md`, `security/capability-lease.schema.json`, and `security/capability_lease.py`.
 
+### Sovereign estate authority
+
+```text
+discover
+  -> unwitnessed queue
+  -> witness
+  -> classify
+  -> register
+  -> staging
+  -> production
+  -> observe
+  -> rollback | suspend | decommission
+```
+
+The estate registry is canonical control-plane state. Unknown properties never self-promote from connector visibility, public search or transport discovery. Production transitions require release evidence and rollback receipts, while realtime/SWFUS distribution remains non-authoritative projection alignment.
+
+See `estate-registry/README.md`, `estate-registry/registry.py`, `estate-registry/estate-registry.schema.json`, and `estate-registry/discovery-candidate.schema.json`.
+
+### Evidence and scorecards
+
+```text
+estate property
+  -> exact release + commit
+  -> adapter
+  -> renter
+  -> skill
+  -> task/session
+  -> verifier
+  -> governance decision
+  -> engineering scorecard
+  `-> everyday governance scorecard
+```
+
+One canonical evidence bundle feeds both scorecards. Hard gates remain independent from aggregate scores. Secret-bearing material is rejected from bundle metadata, retention/redaction policy references are mandatory, and rollback assessment can recommend—but never directly execute—a rollback without the separately governed rollback capability.
+
+See `evidence/EVIDENCE.md`, `evidence/evidence-bundle.schema.json`, and `evidence/evidence.py`.
+
 ## Phase map
 
 - **Phase 0 — Truth and contracts:** fork assimilation, renter protocol, specification-first governance. **Complete.**
-- **Phase 1 — Governance substrate:** identity/capability leases, Sovereign Hub registry, evidence model. **In progress.**
+- **Phase 1 — Governance substrate:** identity/capability leases, Sovereign Hub registry, evidence model. **Complete.**
 - **Phase 2 — Runtime packages:** .NET domain adapter, skill runtime, realtime event plane.
 - **Phase 3 — Validation + human experience:** evaluation loop and Sovereign Everyday Mode.
 - **Phase 4 — Estate proof:** migrate one bounded low-risk workflow, prove rollback, then expand.
@@ -126,9 +165,14 @@ See `security/CAPABILITY_LEASE.md`, `security/capability-lease.schema.json`, and
 - `security/CAPABILITY_LEASE.md`
 - `security/capability-lease.schema.json`
 - `security/capability_lease.py`
+- `estate-registry/README.md`
 - `estate-registry/estate-registry.schema.json`
+- `estate-registry/discovery-candidate.schema.json`
 - `estate-registry/estate.json`
+- `estate-registry/registry.py`
+- `evidence/EVIDENCE.md`
 - `evidence/evidence-bundle.schema.json`
+- `evidence/evidence.py`
 
 ## Definition of done
 
