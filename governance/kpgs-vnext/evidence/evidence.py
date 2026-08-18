@@ -98,6 +98,9 @@ SECRET_VALUE_PATTERNS = (
     re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{12,}"),
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+    re.compile(
+        r"\b[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\b"
+    ),
 )
 
 
@@ -136,6 +139,7 @@ def _require_ref(value: str, field_name: str) -> str:
     cleaned = value.strip()
     if "://" not in cleaned:
         raise EvidenceError(f"{field_name} must be a governed reference")
+    _assert_secret_safe(cleaned, field_name)
     return cleaned
 
 
@@ -168,7 +172,10 @@ def hard_gate_failures(bundle: Mapping[str, Any]) -> list[dict[str, Any]]:
         deepcopy(item)
         for item in bundle.get("verifications", [])
         if isinstance(item, Mapping)
-        and item.get("hard_gate") is True
+        and (
+            item.get("hard_gate") is True
+            or item.get("method") == "security"
+        )
         and item.get("passed") is False
     ]
 
@@ -273,6 +280,7 @@ class EvidenceBundleBuilder:
             raise EvidenceCorrelationError("trace ref is required")
         if duration_ms is not None and duration_ms < 0:
             raise EvidenceCorrelationError("trace duration cannot be negative")
+        _assert_secret_safe(ref, f"trace.{layer}.ref")
         metadata_copy = deepcopy(dict(metadata or {}))
         _assert_secret_safe(metadata_copy, f"trace.{layer}.metadata")
         self._base["trace_hops"].append(
@@ -335,6 +343,9 @@ class EvidenceBundleBuilder:
             raise EvidenceError("unknown verification method")
         if not verifier_id.strip() or not criterion_id.strip() or not evidence_ref.strip():
             raise EvidenceError("verification identity, criterion and evidence are required")
+        if method == "security" and not hard_gate:
+            raise EvidenceError("security verification must be a hard gate")
+        _assert_secret_safe(evidence_ref, "verification.evidence_ref")
         self._base["verifications"].append(
             {
                 "verifier_id": verifier_id.strip(),
@@ -362,6 +373,7 @@ class EvidenceBundleBuilder:
             raise EvidenceError("metric value must be scalar")
         if not evidence_ref.strip():
             raise EvidenceError("metric evidence ref is required")
+        _assert_secret_safe(evidence_ref, f"metric.{name}.evidence_ref")
         self._base["metrics"].append(
             {
                 "name": name,
