@@ -75,7 +75,7 @@ The canonical SWFUS stage law is:
 
 `telemetry -> classification -> routing -> protocol selection -> invariant audit -> POC/FOC check -> state update -> distribution`
 
-CRUD mutates only admitted bounded state. SWFUS distributes/alines the resulting framework projection only after governance; it is not canonical authority and it does not replace the Sovereign Hub, evidence system, capability leases, realtime event plane or durable domain stores. `#NB` is preserved as an explicit boundary marker without inventing an expansion.
+CRUD mutates only admitted bounded state. SWFUS distributes/aligns the resulting framework projection only after governance; it is not canonical authority and it does not replace the Sovereign Hub, evidence system, capability leases, realtime event plane or durable domain stores. `#NB` is preserved as an explicit boundary marker without inventing an expansion.
 
 See `progressive-updates/README.md` and `progressive-updates/progressive-update.schema.json`.
 
