@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "governance/kpgs-vnext/**"
+      - "kopano-core/kopano/swfus_engine.py"
+      - "kopano-core/kopano/kessa_mmao_api.py"
+      - "tests/test_swfus_progressive_updates.py"
       - "CONTRIBUTING.md"
       - "THIRD_PARTY_NOTICES.md"
       - "LICENSE"
@@ -11,6 +14,9 @@ on:
   pull_request:
     paths:
       - "governance/kpgs-vnext/**"
+      - "kopano-core/kopano/swfus_engine.py"
+      - "kopano-core/kopano/kessa_mmao_api.py"
+      - "tests/test_swfus_progressive_updates.py"
       - "CONTRIBUTING.md"
       - "THIRD_PARTY_NOTICES.md"
       - "LICENSE"
@@ -48,9 +54,18 @@ jobs:
       - name: Validate license and provenance policy
         run: python governance/kpgs-vnext/licensing/validate_license_policy.py
 
-      - name: Compile validators
+      - name: Validate APU progressive CRUD SWFUS contract
+        run: python governance/kpgs-vnext/progressive-updates/validate.py
+
+      - name: Prove SWFUS runtime conformance
+        run: python -m unittest discover -s tests -p 'test_swfus_progressive_updates.py' -v
+
+      - name: Compile validators and SWFUS runtime
         run: >-
           python -m py_compile
           governance/kpgs-vnext/validate_phase0.py
           governance/kpgs-vnext/validate_contracts.py
           governance/kpgs-vnext/licensing/validate_license_policy.py
+          governance/kpgs-vnext/progressive-updates/validate.py
+          kopano-core/kopano/swfus_engine.py
+          kopano-core/kopano/kessa_mmao_api.py
