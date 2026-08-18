@@ -9,17 +9,26 @@
     "created_at",
     "estate_property",
     "release_ref",
+    "commit_sha",
     "task_id",
     "correlation_id",
+    "trace_hops",
     "artifacts",
     "verifications",
-    "governance_decision"
+    "metrics",
+    "governance_decision",
+    "retention_policy_ref",
+    "redaction_policy_ref"
   ],
   "properties": {
     "bundle_id": { "type": "string", "minLength": 8 },
     "created_at": { "type": "string", "format": "date-time" },
     "estate_property": { "type": "string", "minLength": 3 },
     "release_ref": { "type": ["string", "null"] },
+    "commit_sha": {
+      "type": ["string", "null"],
+      "pattern": "^[a-fA-F0-9]{40}$"
+    },
     "adapter": {
       "type": ["object", "null"],
       "additionalProperties": false,
@@ -56,6 +65,46 @@
       "type": "array",
       "items": { "type": "string", "minLength": 1 }
     },
+    "trace_hops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["layer", "ref", "status", "at"],
+        "properties": {
+          "layer": {
+            "enum": [
+              "pwa",
+              "adapter",
+              "sovereign-hub",
+              "renter",
+              "skill",
+              "verifier",
+              "deployment"
+            ]
+          },
+          "ref": { "type": "string", "minLength": 1 },
+          "status": {
+            "enum": [
+              "started",
+              "succeeded",
+              "failed",
+              "blocked",
+              "recovered",
+              "abandoned"
+            ]
+          },
+          "at": { "type": "string", "format": "date-time" },
+          "duration_ms": { "type": ["number", "null"], "minimum": 0 },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": ["string", "number", "boolean", "null"]
+            }
+          }
+        }
+      }
+    },
     "artifacts": {
       "type": "array",
       "items": {
@@ -80,7 +129,10 @@
             ]
           },
           "ref": { "type": "string", "minLength": 1 },
-          "sha256": { "type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$" }
+          "sha256": {
+            "type": ["string", "null"],
+            "pattern": "^[a-fA-F0-9]{64}$"
+          }
         }
       }
     },
@@ -89,17 +141,62 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["verifier_id", "criterion_id", "method", "hard_gate", "passed", "evidence_ref"],
+        "required": [
+          "verifier_id",
+          "criterion_id",
+          "method",
+          "hard_gate",
+          "passed",
+          "evidence_ref"
+        ],
         "properties": {
           "verifier_id": { "type": "string", "minLength": 1 },
           "criterion_id": { "type": "string", "minLength": 1 },
           "method": {
             "type": "string",
-            "enum": ["unit", "integration", "e2e", "schema", "security", "performance", "accessibility", "human-review", "model-eval"]
+            "enum": [
+              "unit",
+              "integration",
+              "e2e",
+              "schema",
+              "security",
+              "performance",
+              "accessibility",
+              "human-review",
+              "model-eval"
+            ]
           },
           "hard_gate": { "type": "boolean" },
           "passed": { "type": "boolean" },
           "score": { "type": ["number", "null"] },
+          "evidence_ref": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "value", "evidence_ref"],
+        "properties": {
+          "name": {
+            "enum": [
+              "latency",
+              "realtime-health",
+              "cost",
+              "usage",
+              "reliability",
+              "error-rate",
+              "recovery-rate",
+              "task-completion",
+              "task-abandonment",
+              "accessibility",
+              "mobile"
+            ]
+          },
+          "value": { "type": ["number", "string", "boolean"] },
+          "unit": { "type": ["string", "null"] },
           "evidence_ref": { "type": "string", "minLength": 1 }
         }
       }
@@ -113,14 +210,18 @@
       "additionalProperties": false,
       "required": ["decision", "reason", "decided_at"],
       "properties": {
-        "decision": { "type": "string", "enum": ["allow", "deny", "promote", "rollback", "hold"] },
+        "decision": {
+          "type": "string",
+          "enum": ["allow", "deny", "promote", "rollback", "hold"]
+        },
         "reason": { "type": "string", "minLength": 1 },
         "decided_at": { "type": "string", "format": "date-time" },
-        "decision_ref": { "type": ["string", "null"] }
+        "decision_ref": { "type": ["string", "null"] },
+        "next_action": { "type": ["string", "null"] }
       }
     },
-    "retention_policy_ref": { "type": ["string", "null"] },
-    "redaction_policy_ref": { "type": ["string", "null"] }
+    "retention_policy_ref": { "type": "string", "minLength": 1 },
+    "redaction_policy_ref": { "type": "string", "minLength": 1 }
   },
   "allOf": [
     {
@@ -128,7 +229,7 @@
         "properties": {
           "governance_decision": {
             "properties": {
-              "decision": { "const": "promote" }
+              "decision": { "enum": ["promote", "allow"] }
             }
           },
           "verifications": {
@@ -142,6 +243,47 @@
           }
         },
         "required": ["governance_decision", "verifications"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "governance_decision": {
+            "properties": {
+              "decision": { "const": "promote" }
+            },
+            "required": ["decision"]
+          }
+        },
+        "required": ["governance_decision"]
+      },
+      "then": {
+        "properties": {
+          "release_ref": { "type": "string", "minLength": 1 },
+          "commit_sha": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{40}$"
+          },
+          "adapter": { "type": "object" },
+          "renter": { "type": "object" },
+          "skills": { "minItems": 1 },
+          "session_id": { "type": "string", "minLength": 1 },
+          "verifications": { "minItems": 1 },
+          "artifacts": {
+            "contains": {
+              "properties": { "kind": { "const": "deployment" } },
+              "required": ["kind"]
+            }
+          }
+        },
+        "required": [
+          "release_ref",
+          "commit_sha",
+          "adapter",
+          "renter",
+          "skills",
+          "session_id"
+        ]
       }
     }
   ]
