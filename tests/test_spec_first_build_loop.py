@@ -94,6 +94,7 @@ def test_same_governance_loop_supports_human_and_agent_authored_implementations(
         requested_capabilities=["repository.write"],
     )
     assert receipt.actor_kind == actor_kind
+    assert receipt.requested_capabilities == ("repository.write",)
     assert build.verify(passing_results(receipt.implementation_revision)) == "verified"
     assert build.release() == "released"
 
@@ -135,6 +136,60 @@ def test_verification_evidence_must_target_exact_implementation_revision():
         build.verify(results)
 
 
+def test_duplicate_criterion_results_are_rejected_instead_of_overwritten():
+    build = SpecificationFirstBuild(make_spec())
+    build.delegate(
+        actor_kind="agent",
+        implementation_revision="dup-rev",
+        requested_scope=["runtime"],
+        requested_capabilities=["repository.write"],
+    )
+    duplicate = [
+        VerificationResult("AC-01", False, "dup-rev", "evidence://first", "verifier-a"),
+        VerificationResult("AC-01", True, "dup-rev", "evidence://second", "verifier-b"),
+        VerificationResult("AC-02", True, "dup-rev", "evidence://third", "verifier-c"),
+    ]
+    with pytest.raises(BuildGovernanceError, match="duplicate acceptance criterion"):
+        build.verify(duplicate)
+
+
+def test_redelegation_invalidates_previous_revision_verification_and_approval():
+    build = SpecificationFirstBuild(make_spec())
+    build.delegate(
+        actor_kind="agent",
+        implementation_revision="revision-a",
+        requested_scope=["runtime"],
+        requested_capabilities=["repository.write"],
+    )
+    assert build.verify(passing_results("revision-a")) == "verified"
+    assert build.approve() == "approved"
+
+    receipt = build.delegate(
+        actor_kind="agent",
+        implementation_revision="revision-b",
+        requested_scope=["runtime"],
+        requested_capabilities=["repository.write"],
+    )
+    assert receipt.implementation_revision == "revision-b"
+    assert build.state == "draft"
+    with pytest.raises(BuildGovernanceError, match="release requires"):
+        build.release()
+
+    assert build.verify(passing_results("revision-b")) == "verified"
+    assert build.release() == "released"
+
+
+def test_declared_verified_state_cannot_approve_or_release_without_runtime_receipts():
+    spec = make_spec()
+    spec["lifecycle_state"] = "verified"
+    build = SpecificationFirstBuild(spec)
+
+    with pytest.raises(BuildGovernanceError, match="delegated implementation revision"):
+        build.approve()
+    with pytest.raises(BuildGovernanceError, match="delegated implementation revision"):
+        build.release()
+
+
 def test_failed_hard_criterion_prevents_released_state():
     build = SpecificationFirstBuild(make_spec())
     build.delegate(
@@ -151,7 +206,16 @@ def test_failed_hard_criterion_prevents_released_state():
         build.release()
 
 
-def test_rollback_uses_declared_recovery_plan():
+def test_rollback_requires_a_delegated_revision_and_declared_recovery_plan():
     spec = deepcopy(make_spec())
     build = SpecificationFirstBuild(spec)
+    with pytest.raises(BuildGovernanceError, match="delegated implementation revision"):
+        build.rollback()
+
+    build.delegate(
+        actor_kind="human",
+        implementation_revision="rollback-rev",
+        requested_scope=["runtime"],
+        requested_capabilities=["repository.write"],
+    )
     assert build.rollback() == "rolled-back"
