@@ -12,7 +12,7 @@ availability and synchronization remain separate from authority.
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -42,7 +42,14 @@ ALLOWED_TRANSITIONS = {
     "suspended": {"registered", "decommissioned"},
     "decommissioned": set(),
 }
-SOURCE_KINDS = {"registrar", "dns", "deployment", "repository", "domain-control", "other"}
+SOURCE_KINDS = {
+    "registrar",
+    "dns",
+    "deployment",
+    "repository",
+    "domain-control",
+    "other",
+}
 RISK_CLASSES = {"R0", "R1", "R2", "R3"}
 
 
@@ -66,6 +73,25 @@ class MutationContext:
     task_id: str
     operation_nonce: str
     correlation_id: str
+
+
+def _parse_iso8601(value: Any, field_name: str) -> str:
+    """Validate and normalize an ISO-8601 timestamp to UTC text."""
+
+    if not isinstance(value, str) or not value.strip():
+        raise RegistryError(f"{field_name} is required")
+    try:
+        parsed = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise RegistryError(f"{field_name} is not valid ISO-8601") from exc
+    if parsed.tzinfo is None:
+        raise RegistryError(f"{field_name} must include timezone")
+    return (
+        parsed.astimezone(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
 
 
 class SovereignEstateRegistry:
@@ -97,8 +123,17 @@ class SovereignEstateRegistry:
         if not isinstance(domain, str):
             raise RegistryError("domain must be a string")
         cleaned = domain.strip().rstrip(".")
-        if len(cleaned) < 3 or "." not in cleaned or " " in cleaned:
+        if (
+            len(cleaned) < 3
+            or "." not in cleaned
+            or " " in cleaned
+            or cleaned.startswith(".")
+            or cleaned.endswith(".")
+        ):
             raise RegistryError("domain is invalid")
+        labels = cleaned.split(".")
+        if any(not label or len(label) > 63 for label in labels):
+            raise RegistryError("domain labels are invalid")
         return cleaned
 
     @staticmethod
@@ -125,7 +160,9 @@ class SovereignEstateRegistry:
                 raise RegistryConflict(f"duplicate domain: {domain}")
             seen.add(key)
             if record.get("status") not in PROPERTY_STATUSES:
-                raise RegistryError(f"invalid property status: {record.get('status')}")
+                raise RegistryError(
+                    f"invalid property status: {record.get('status')}"
+                )
 
     @property
     def estate_id(self) -> str:
@@ -172,9 +209,16 @@ class SovereignEstateRegistry:
             raise RegistryError("witness kind is invalid")
         if not isinstance(ref, str) or not ref.strip():
             raise RegistryError("witness ref is required")
-        if verified_at is not None and not isinstance(verified_at, str):
-            raise RegistryError("verified_at must be timestamp text or null")
-        return {"kind": kind, "ref": ref.strip(), "verified_at": verified_at}
+        normalized_time = (
+            None
+            if verified_at is None
+            else _parse_iso8601(verified_at, "verified_at")
+        )
+        return {
+            "kind": kind,
+            "ref": ref.strip(),
+            "verified_at": normalized_time,
+        }
 
     def _emit(
         self,
@@ -189,6 +233,9 @@ class SovereignEstateRegistry:
         evidence_refs: list[str] | None = None,
         details: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
+        canonical_registry_changed = action.startswith("property-") or action in {
+            "candidate-registered"
+        }
         event = {
             "schema": "kpgs.estate-registry.event.v1",
             "event_id": "estate_evt_" + secrets.token_urlsafe(12),
@@ -202,8 +249,7 @@ class SovereignEstateRegistry:
             "correlation_id": correlation_id,
             "evidence_refs": list(evidence_refs or []),
             "details": deepcopy(dict(details or {})),
-            "canonical_registry_changed": action
-            not in {"candidate-discovered", "candidate-observed"},
+            "canonical_registry_changed": canonical_registry_changed,
             "transport_grants_authority": False,
             "distribution_status": "not-configured",
             "created_at": self._now(self._clock),
@@ -246,12 +292,10 @@ class SovereignEstateRegistry:
             raise RegistryError("discovery source kind is invalid")
         if not isinstance(source_ref, str) or not source_ref.strip():
             raise RegistryError("discovery source ref is required")
-        if not isinstance(observed_at, str) or not observed_at.strip():
-            raise RegistryError("discovery observed_at is required")
         source = {
             "kind": source_kind,
             "ref": source_ref.strip(),
-            "observed_at": observed_at,
+            "observed_at": _parse_iso8601(observed_at, "observed_at"),
         }
 
         existing_id = self._candidate_by_domain.get(key)
@@ -270,7 +314,10 @@ class SovereignEstateRegistry:
             )
             return deepcopy(candidate)
 
-        candidate_id = "candidate_" + hashlib.sha256(key.encode("utf-8")).hexdigest()[:20]
+        candidate_id = (
+            "candidate_"
+            + hashlib.sha256(key.encode("utf-8")).hexdigest()[:20]
+        )
         candidate = {
             "schema": "kpgs.estate-candidate.v1",
             "candidate_id": candidate_id,
@@ -310,7 +357,9 @@ class SovereignEstateRegistry:
             resource_scope=self._property_scope(candidate["domain"]),
         )
         if candidate["status"] not in {"unwitnessed", "witnessed"}:
-            raise RegistryTransitionDenied("candidate cannot be witnessed from current state")
+            raise RegistryTransitionDenied(
+                "candidate cannot be witnessed from current state"
+            )
         witness = self._witness(evidence)
         if witness not in candidate["witness_evidence"]:
             candidate["witness_evidence"].append(witness)
@@ -346,14 +395,18 @@ class SovereignEstateRegistry:
             resource_scope=self._property_scope(candidate["domain"]),
         )
         if candidate["status"] != "witnessed":
-            raise RegistryTransitionDenied("candidate must be witnessed before classification")
-        if not owner_ref.strip() or not governance_tier.strip():
-            raise RegistryError("owner and governance tier are required")
+            raise RegistryTransitionDenied(
+                "candidate must be witnessed before classification"
+            )
+        if not isinstance(owner_ref, str) or not owner_ref.strip():
+            raise RegistryError("owner reference is required")
+        if not isinstance(governance_tier, str) or not governance_tier.strip():
+            raise RegistryError("governance tier is required")
         if risk_class not in RISK_CLASSES:
             raise RegistryError("risk class is invalid")
         candidate["classification"] = {
-            "owner_ref": owner_ref,
-            "governance_tier": governance_tier,
+            "owner_ref": owner_ref.strip(),
+            "governance_tier": governance_tier.strip(),
             "risk_class": risk_class,
         }
         candidate["status"] = "classified"
@@ -371,19 +424,28 @@ class SovereignEstateRegistry:
 
     @staticmethod
     def _validate_registered_record(record: Mapping[str, Any]) -> None:
-        required_arrays = [
+        for field_name in (
             "ownership_evidence",
             "repositories",
             "capabilities",
             "health_endpoints",
-        ]
-        for field_name in required_arrays:
+        ):
             value = record.get(field_name)
             if not isinstance(value, list) or not value:
-                raise RegistryError(f"registered property requires {field_name}")
+                raise RegistryError(
+                    f"registered property requires {field_name}"
+                )
+
         deployment = record.get("deployment")
-        if not isinstance(deployment, dict) or not deployment.get("provider") or not deployment.get("target"):
-            raise RegistryError("registered property requires deployment provider and target")
+        if (
+            not isinstance(deployment, dict)
+            or not deployment.get("provider")
+            or not deployment.get("target")
+        ):
+            raise RegistryError(
+                "registered property requires deployment provider and target"
+            )
+
         governance = record.get("governance")
         if (
             not isinstance(governance, dict)
@@ -391,13 +453,54 @@ class SovereignEstateRegistry:
             or governance.get("risk_class") not in RISK_CLASSES
             or not governance.get("tier")
         ):
-            raise RegistryError("registered property requires governance policy, risk class and tier")
+            raise RegistryError(
+                "registered property requires governance policy, risk class and tier"
+            )
+
         owner = record.get("owner")
         if not isinstance(owner, dict) or not owner.get("ref"):
             raise RegistryError("registered property requires owner reference")
-        secret_refs = record.get("secret_provider_refs", [])
-        if any(not isinstance(ref, str) or "://" not in ref for ref in secret_refs):
-            raise RegistryError("secret provider entries must be references, never raw secrets")
+
+        for ref in record.get("secret_provider_refs", []):
+            if not isinstance(ref, str) or "://" not in ref:
+                raise RegistryError(
+                    "secret provider entries must be references, never raw secrets"
+                )
+
+    @staticmethod
+    def _apply_candidate_classification(
+        property_record: dict[str, Any],
+        classification: Mapping[str, Any],
+    ) -> None:
+        """Make witnessed classification authoritative over submitted metadata."""
+
+        supplied_owner = property_record.get("owner")
+        if (
+            isinstance(supplied_owner, dict)
+            and supplied_owner.get("ref")
+            and supplied_owner.get("ref") != classification["owner_ref"]
+        ):
+            raise RegistryConflict(
+                "registration owner conflicts with witnessed classification"
+            )
+        property_record["owner"] = {
+            "ref": classification["owner_ref"],
+            "kind": "classified-owner",
+        }
+
+        governance = property_record.setdefault("governance", {})
+        supplied_risk = governance.get("risk_class")
+        supplied_tier = governance.get("tier")
+        if supplied_risk not in {None, classification["risk_class"]}:
+            raise RegistryConflict(
+                "registration risk class conflicts with classification"
+            )
+        if supplied_tier not in {None, classification["governance_tier"]}:
+            raise RegistryConflict(
+                "registration governance tier conflicts with classification"
+            )
+        governance["risk_class"] = classification["risk_class"]
+        governance["tier"] = classification["governance_tier"]
 
     def register_candidate(
         self,
@@ -410,30 +513,46 @@ class SovereignEstateRegistry:
         if candidate is None:
             raise RegistryError("unknown discovery candidate")
         if candidate["status"] != "classified":
-            raise RegistryTransitionDenied("candidate must be classified before registration")
+            raise RegistryTransitionDenied(
+                "candidate must be classified before registration"
+            )
         decision = self._authorize(
             context,
             capability="estate.registry.write",
             resource_scope=self._property_scope(candidate["domain"]),
         )
         property_record = deepcopy(dict(record))
-        if self._domain_key(property_record.get("domain", "")) != self._domain_key(candidate["domain"]):
-            raise RegistryConflict("candidate and property domain must match")
+        if self._domain_key(property_record.get("domain", "")) != self._domain_key(
+            candidate["domain"]
+        ):
+            raise RegistryConflict(
+                "candidate and property domain must match"
+            )
         property_record["domain"] = candidate["domain"]
         property_record["status"] = "registered"
-        property_record["ownership_evidence"] = deepcopy(candidate["witness_evidence"])
-        classification = candidate["classification"]
-        property_record.setdefault("owner", {"ref": classification["owner_ref"], "kind": "declared-owner"})
-        governance = property_record.setdefault("governance", {})
-        governance.setdefault("risk_class", classification["risk_class"])
-        governance.setdefault("tier", classification["governance_tier"])
+        property_record["ownership_evidence"] = deepcopy(
+            candidate["witness_evidence"]
+        )
+        classification = candidate.get("classification")
+        if not isinstance(classification, dict):
+            raise RegistryTransitionDenied(
+                "candidate classification is missing"
+            )
+        self._apply_candidate_classification(
+            property_record,
+            classification,
+        )
         self._validate_registered_record(property_record)
+
         try:
             self._property(candidate["domain"])
         except RegistryError:
             pass
         else:
-            raise RegistryConflict("candidate domain already exists in registry")
+            raise RegistryConflict(
+                "candidate domain already exists in registry"
+            )
+
         self._document["properties"].append(property_record)
         candidate["status"] = "registered"
         candidate["registered_at"] = self._now(self._clock)
@@ -445,7 +564,9 @@ class SovereignEstateRegistry:
             candidate_id=candidate_id,
             before_status="classified",
             after_status="registered",
-            evidence_refs=[item["ref"] for item in candidate["witness_evidence"]],
+            evidence_refs=[
+                item["ref"] for item in candidate["witness_evidence"]
+            ],
         )
         return deepcopy(property_record)
 
@@ -462,8 +583,13 @@ class SovereignEstateRegistry:
             capability="estate.registry.witness",
             resource_scope=self._property_scope(record["domain"]),
         )
-        if record["status"] not in {"declared_pending_witness", "witnessed"}:
-            raise RegistryTransitionDenied("property cannot accept witness in current state")
+        if record["status"] not in {
+            "declared_pending_witness",
+            "witnessed",
+        }:
+            raise RegistryTransitionDenied(
+                "property cannot accept witness in current state"
+            )
         witness = self._witness(evidence)
         if witness not in record["ownership_evidence"]:
             record["ownership_evidence"].append(witness)
@@ -494,7 +620,9 @@ class SovereignEstateRegistry:
             resource_scope=self._property_scope(record["domain"]),
         )
         if record["status"] != "witnessed":
-            raise RegistryTransitionDenied("property must be witnessed before registration")
+            raise RegistryTransitionDenied(
+                "property must be witnessed before registration"
+            )
         before = deepcopy(record)
         preserved_evidence = deepcopy(record["ownership_evidence"])
         for key, value in metadata.items():
@@ -516,7 +644,9 @@ class SovereignEstateRegistry:
             domain=record["domain"],
             before_status="witnessed",
             after_status="registered",
-            evidence_refs=[item["ref"] for item in record["ownership_evidence"]],
+            evidence_refs=[
+                item["ref"] for item in record["ownership_evidence"]
+            ],
         )
         return deepcopy(record)
 
@@ -541,23 +671,42 @@ class SovereignEstateRegistry:
         if target_status not in PROPERTY_STATUSES:
             raise RegistryTransitionDenied("target status is invalid")
         if target_status not in ALLOWED_TRANSITIONS.get(current, set()):
-            raise RegistryTransitionDenied(f"transition {current} -> {target_status} is not admitted")
+            raise RegistryTransitionDenied(
+                f"transition {current} -> {target_status} is not admitted"
+            )
 
         if target_status == "production":
-            release_ref = release_ref or record.get("release", {}).get("live_ref")
-            evidence_ref = evidence_ref or record.get("release", {}).get("evidence_ref")
-            rollback_target_ref = rollback_target_ref or record.get("rollback", {}).get("target_ref")
-            rollback_procedure_ref = rollback_procedure_ref or record.get("rollback", {}).get("procedure_ref")
+            release_ref = release_ref or record.get("release", {}).get(
+                "live_ref"
+            )
+            evidence_ref = evidence_ref or record.get("release", {}).get(
+                "evidence_ref"
+            )
+            rollback_target_ref = rollback_target_ref or record.get(
+                "rollback", {}
+            ).get("target_ref")
+            rollback_procedure_ref = rollback_procedure_ref or record.get(
+                "rollback", {}
+            ).get("procedure_ref")
             if not all(
-                [release_ref, evidence_ref, rollback_target_ref, rollback_procedure_ref]
+                [
+                    release_ref,
+                    evidence_ref,
+                    rollback_target_ref,
+                    rollback_procedure_ref,
+                ]
             ):
                 raise RegistryTransitionDenied(
                     "production promotion requires live/evidence and rollback receipts"
                 )
             record.setdefault("release", {})["live_ref"] = release_ref
             record["release"]["evidence_ref"] = evidence_ref
-            record.setdefault("rollback", {})["target_ref"] = rollback_target_ref
-            record["rollback"]["procedure_ref"] = rollback_procedure_ref
+            record.setdefault("rollback", {})[
+                "target_ref"
+            ] = rollback_target_ref
+            record["rollback"][
+                "procedure_ref"
+            ] = rollback_procedure_ref
 
         record["status"] = target_status
         self._emit(
@@ -585,12 +734,16 @@ class SovereignEstateRegistry:
             resource_scope=self._property_scope(record["domain"]),
         )
         if record["status"] != "production":
-            raise RegistryTransitionDenied("rollback requires a production property")
+            raise RegistryTransitionDenied(
+                "rollback requires a production property"
+            )
         rollback = record.get("rollback", {})
         target = rollback.get("target_ref")
         procedure = rollback.get("procedure_ref")
         if not target or not procedure:
-            raise RegistryTransitionDenied("rollback target and procedure are required")
+            raise RegistryTransitionDenied(
+                "rollback target and procedure are required"
+            )
         previous_live = record.get("release", {}).get("live_ref")
         record.setdefault("release", {})["live_ref"] = target
         record["status"] = "staging"
@@ -602,7 +755,10 @@ class SovereignEstateRegistry:
             before_status="production",
             after_status="staging",
             evidence_refs=[procedure],
-            details={"from_live_ref": previous_live, "to_ref": target},
+            details={
+                "from_live_ref": previous_live,
+                "to_ref": target,
+            },
         )
         return deepcopy(record)
 
@@ -622,12 +778,14 @@ class SovereignEstateRegistry:
             resource_scope=self._property_scope(candidate["domain"]),
         )
         if candidate["status"] == "registered":
-            raise RegistryTransitionDenied("registered candidate cannot be rejected")
-        if not reason.strip():
+            raise RegistryTransitionDenied(
+                "registered candidate cannot be rejected"
+            )
+        if not isinstance(reason, str) or not reason.strip():
             raise RegistryError("rejection reason is required")
         before = candidate["status"]
         candidate["status"] = "rejected"
-        candidate["rejection_reason"] = reason
+        candidate["rejection_reason"] = reason.strip()
         self._emit(
             action="candidate-rejected",
             decision=decision,
@@ -636,12 +794,14 @@ class SovereignEstateRegistry:
             candidate_id=candidate_id,
             before_status=before,
             after_status="rejected",
-            details={"reason": reason},
+            details={"reason": reason.strip()},
         )
         return deepcopy(candidate)
 
     def candidates(self) -> tuple[dict[str, Any], ...]:
-        return tuple(deepcopy(item) for item in self._candidates.values())
+        return tuple(
+            deepcopy(item) for item in self._candidates.values()
+        )
 
     def events(self) -> tuple[dict[str, Any], ...]:
         return tuple(deepcopy(event) for event in self._events)
@@ -654,7 +814,12 @@ class SovereignEstateRegistry:
     def explain_property(self, domain: str) -> str:
         record = self._property(domain)
         repos = record.get("repositories", [])
-        repo_text = ", ".join(item.get("repository", "unknown") for item in repos) or "not witnessed"
+        repo_text = (
+            ", ".join(
+                item.get("repository", "unknown") for item in repos
+            )
+            or "not witnessed"
+        )
         deployment = record.get("deployment", {})
         deployment_text = (
             f"{deployment.get('provider')}:{deployment.get('target')}"
@@ -663,23 +828,45 @@ class SovereignEstateRegistry:
         )
         adapter = record.get("adapter", {})
         adapter_text = adapter.get("version") or (
-            "required / version unknown" if adapter.get("required") else "not required"
+            "required / version unknown"
+            if adapter.get("required")
+            else "not required"
         )
-        renter = record.get("renter_compatibility", {})
-        renter_text = renter.get("status", "unknown")
-        governance = record.get("governance", {})
-        governance_text = governance.get("policy_ref") or "not classified"
-        live_ref = record.get("release", {}).get("live_ref") or "not promoted"
-        rollback_ref = record.get("rollback", {}).get("target_ref") or "not recorded"
+        renter_text = record.get("renter_compatibility", {}).get(
+            "status", "unknown"
+        )
+        governance_text = record.get("governance", {}).get(
+            "policy_ref"
+        ) or "not classified"
+        capabilities = record.get("capabilities", [])
+        capability_text = ", ".join(capabilities) or "not granted"
+        health = record.get("health_endpoints", [])
+        health_text = ", ".join(health) or "not witnessed"
+        live_ref = record.get("release", {}).get(
+            "live_ref"
+        ) or "not promoted"
+        evidence_ref = record.get("release", {}).get(
+            "evidence_ref"
+        ) or "not recorded"
+        rollback_ref = record.get("rollback", {}).get(
+            "target_ref"
+        ) or "not recorded"
         return (
             f"{record['domain']} is {record['status']}. "
             f"Repositories: {repo_text}. Deployment: {deployment_text}. "
-            f"Adapter: {adapter_text}. Stateless Renter compatibility: {renter_text}. "
-            f"Governance policy: {governance_text}. Live version: {live_ref}. "
-            f"Rollback target: {rollback_ref}."
+            f"Adapter: {adapter_text}. Stateless Renter compatibility: "
+            f"{renter_text}. Governance policy: {governance_text}. "
+            f"Capabilities: {capability_text}. Health/evidence endpoints: "
+            f"{health_text}. Live version: {live_ref}. Release evidence: "
+            f"{evidence_ref}. Rollback target: {rollback_ref}."
         )
 
 
 def registry_digest(document: Mapping[str, Any]) -> str:
-    payload = json.dumps(document, sort_keys=True, separators=(",", ":"), default=str)
+    payload = json.dumps(
+        document,
+        sort_keys=True,
+        separators=(",", ":"),
+        default=str,
+    )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
