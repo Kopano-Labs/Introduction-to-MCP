@@ -13,8 +13,10 @@
     "capabilities",
     "issued_at",
     "expires_at",
+    "nonce",
     "policy_decision_ref",
-    "governing_spec_ref"
+    "governing_spec_ref",
+    "audit"
   ],
   "properties": {
     "lease_id": { "type": "string", "minLength": 8, "maxLength": 200 },
@@ -52,11 +54,17 @@
     "revocation_ref": { "type": "string", "minLength": 1 },
     "secret_provider_refs": {
       "type": "array",
-      "items": { "type": "string", "minLength": 1 }
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 5,
+        "pattern": "^[A-Za-z][A-Za-z0-9+.-]*://.+$"
+      }
     },
     "audit": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["correlation_id", "evidence_ref"],
       "properties": {
         "correlation_id": { "type": "string", "minLength": 1 },
         "evidence_ref": { "type": "string", "minLength": 1 }
