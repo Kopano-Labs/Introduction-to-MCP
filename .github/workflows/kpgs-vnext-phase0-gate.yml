@@ -8,6 +8,7 @@ on:
       - "kopano-core/kopano/kessa_mmao_api.py"
       - "tests/test_swfus_progressive_updates.py"
       - "tests/test_capability_lease_runtime.py"
+      - "tests/test_sovereign_estate_registry.py"
       - "CONTRIBUTING.md"
       - "THIRD_PARTY_NOTICES.md"
       - "LICENSE"
@@ -19,6 +20,7 @@ on:
       - "kopano-core/kopano/kessa_mmao_api.py"
       - "tests/test_swfus_progressive_updates.py"
       - "tests/test_capability_lease_runtime.py"
+      - "tests/test_sovereign_estate_registry.py"
       - "CONTRIBUTING.md"
       - "THIRD_PARTY_NOTICES.md"
       - "LICENSE"
@@ -36,7 +38,7 @@ jobs:
   truth-contracts:
     name: Validate KPGS truth and governance contracts
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
 
     steps:
       - name: Checkout
@@ -68,6 +70,12 @@ jobs:
       - name: Prove capability lease runtime conformance
         run: python -m unittest discover -s tests -p 'test_capability_lease_runtime.py' -v
 
+      - name: Validate sovereign estate registry contract
+        run: python governance/kpgs-vnext/estate-registry/validate_registry.py
+
+      - name: Prove sovereign estate registry conformance
+        run: python -m unittest discover -s tests -p 'test_sovereign_estate_registry.py' -v
+
       - name: Compile validators and governed runtimes
         run: >-
           python -m py_compile
@@ -77,5 +85,7 @@ jobs:
           governance/kpgs-vnext/progressive-updates/validate.py
           governance/kpgs-vnext/security/validate_capability_lease.py
           governance/kpgs-vnext/security/capability_lease.py
+          governance/kpgs-vnext/estate-registry/validate_registry.py
+          governance/kpgs-vnext/estate-registry/registry.py
           kopano-core/kopano/swfus_engine.py
           kopano-core/kopano/kessa_mmao_api.py
