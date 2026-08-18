@@ -41,6 +41,15 @@
               "decommissioned"
             ]
           },
+          "owner": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "kind"],
+            "properties": {
+              "ref": { "type": "string", "minLength": 1 },
+              "kind": { "type": "string", "minLength": 1 }
+            }
+          },
           "ownership_evidence": {
             "type": "array",
             "items": {
@@ -74,7 +83,20 @@
             "properties": {
               "provider": { "type": ["string", "null"] },
               "environment": { "type": ["string", "null"] },
-              "target": { "type": ["string", "null"] }
+              "target": { "type": ["string", "null"] },
+              "environments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["name", "provider", "target"],
+                  "properties": {
+                    "name": { "type": "string", "minLength": 1 },
+                    "provider": { "type": "string", "minLength": 1 },
+                    "target": { "type": "string", "minLength": 1 }
+                  }
+                }
+              }
             }
           },
           "adapter": {
@@ -102,8 +124,31 @@
             "required": ["policy_ref", "risk_class"],
             "properties": {
               "policy_ref": { "type": ["string", "null"] },
-              "risk_class": { "type": ["string", "null"], "enum": ["R0", "R1", "R2", "R3", null] }
+              "risk_class": { "type": ["string", "null"], "enum": ["R0", "R1", "R2", "R3", null] },
+              "tier": { "type": ["string", "null"] }
             }
+          },
+          "skills": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "capabilities": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "secret_provider_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z0-9+.-]*://.+$"
+            }
+          },
+          "health_endpoints": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
           },
           "release": {
             "type": "object",
