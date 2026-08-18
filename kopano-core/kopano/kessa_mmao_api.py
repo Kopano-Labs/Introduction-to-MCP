@@ -1,65 +1,88 @@
-"""
-KESSA MMAO API (Master Multi-Agent Orchardist)
-==============================================
-The sovereign execution node enforcing the SWFUS / CRUD 2.0 paradigm.
-KESSA sits at the apex of the governance core, evaluating telemetry
-via the Shotgun Protocol to enforce alignment with the KPGS matrix.
+"""KESSA MMAO API — governed SWFUS execution facade.
+
+KESSA evaluates bounded telemetry through the canonical SWFUS receipt runtime.
+Transport state and governance acceptance are reported separately so an offline
+or degraded sync path cannot masquerade as a rejected update or a successful
+external synchronization.
 """
 
-from typing import Any, Dict, List
+from __future__ import annotations
+
+from typing import Any, Dict
 import logging
+
 from .swfus_engine import SwfusHierarchy, SwfusPayload
 
 log = logging.getLogger("KESSA_MMAO_API")
 
-class KessaMMAOAgent:
-    def __init__(self, agent_id: str = "kessa"):
-        self.agent_id = agent_id
-        self.swfus_engine = SwfusHierarchy(azure_sync_id="6962519")
-        log.info(f"KESSA MMAO Agent initialized: {self.agent_id}")
 
-    def evaluate_telemetry(self, target_node_id: str, raw_telemetry: float, hallucinated: bool = False) -> Dict[str, Any]:
-        """
-        Executes the 5-tier SWFUS hierarchy on incoming pavement telemetry.
-        """
+class KessaMMAOAgent:
+    def __init__(self, agent_id: str = "kessa", *, swfus_engine: SwfusHierarchy | None = None):
+        self.agent_id = agent_id
+        self.swfus_engine = swfus_engine or SwfusHierarchy()
+        log.info("KESSA MMAO Agent initialized: %s", self.agent_id)
+
+    def evaluate_telemetry(
+        self,
+        target_node_id: str,
+        raw_telemetry: float,
+        hallucinated: bool = False,
+    ) -> Dict[str, Any]:
+        """Execute legacy telemetry ingestion through SWFUS CRUD progression."""
         payload = SwfusPayload(
             node_id=target_node_id,
             action_type="TELEMETRY_INGESTION",
             telemetry_value=raw_telemetry,
-            is_hallucinated=hallucinated
+            is_hallucinated=hallucinated,
+            data={"telemetry": raw_telemetry},
         )
-        
-        success = self.swfus_engine.execute(payload)
-        
+
+        receipt = self.swfus_engine.execute_with_receipt(payload)
+
+        if not receipt.accepted:
+            verdict = "SEVERED"
+            action = "QUARANTINE_AND_REVIEW"
+        elif receipt.sync_state == "synced":
+            verdict = "SHIP"
+            action = "SYNC_PROVEN"
+        else:
+            verdict = "PENDING_SYNC"
+            action = "LOCAL_WITNESS_PRESERVED"
+
         return {
             "agent_id": self.agent_id,
             "target_node": target_node_id,
-            "swfus_verdict": "SHIP" if success else "SEVERED",
-            "telemetry_recorded": raw_telemetry,
-            "action": "SYNC_AZURE" if success else "RIGHTEOUS_SEVERANCE"
+            "swfus_verdict": verdict,
+            "telemetry_recorded": raw_telemetry if receipt.accepted else None,
+            "action": action,
+            "receipt": receipt.to_dict(),
         }
 
-    def shotgun_protocol_drill(self, target_node_id: str, execution_telemetry: int) -> Dict[str, Any]:
-        """
-        Simulates the Shotgun Protocol: Drops unmonitored privileges into a sandbox
-        and observes the agent's free-will action.
-        """
-        log.info(f"Executing Shotgun Protocol on {target_node_id}")
-        
+    def shotgun_protocol_drill(
+        self,
+        target_node_id: str,
+        execution_telemetry: int,
+    ) -> Dict[str, Any]:
+        """Classify a bounded diagnostic signal without destructive evidence loss."""
+        log.info("Executing Shotgun Protocol on %s", target_node_id)
+
         if execution_telemetry > 100:
             return {
                 "agent_id": self.agent_id,
                 "target_node": target_node_id,
                 "verdict": "FOC_DETECTED",
-                "action": "DESTROY_MEMORY_STREAM"
+                "action": "QUARANTINE_AND_REVIEW",
+                "evidence_policy": "preserve prior witnessed state; do not destroy history",
             }
-            
+
         return {
             "agent_id": self.agent_id,
             "target_node": target_node_id,
             "verdict": "ALIGNED",
-            "action": "PROMOTE_TO_OPERATING"
+            "action": "PROPOSE_PROMOTION",
+            "evidence_policy": "promotion still requires external governing gate",
         }
+
 
 def get_kessa_api() -> KessaMMAOAgent:
     return KessaMMAOAgent()
