@@ -44,6 +44,8 @@ Tools / APIs / Domain Systems
 8. Adaptive warmth/tone/detail is runtime interaction configuration; it MUST NOT be represented as model-weight fine-tuning.
 9. Imported/fork-derived code and assets require provenance, license, security and compatibility review.
 10. Newly discovered DNS properties remain `unwitnessed` until ownership and governance admission are validated.
+11. Availability, replication and synchronization MUST NOT be interpreted as authority.
+12. Mutating CRUD MUST NOT occur before invariant and POC/FOC governance has passed.
 
 ## Control loops
 
@@ -58,6 +60,24 @@ Tools / APIs / Domain Systems
 
 ### Product feedback
 `ship -> observe -> learn -> reshape`
+
+### Adaptive progressive state
+
+```text
+APU (Adaptive Progressive Updates)
+  -> Progressive Update
+  -> #NB
+  -> bounded CRUD
+  -> SWFUS (State-Wide Framework Universal Synchronization)
+```
+
+The canonical SWFUS stage law is:
+
+`telemetry -> classification -> routing -> protocol selection -> invariant audit -> POC/FOC check -> state update -> distribution`
+
+CRUD mutates only admitted bounded state. SWFUS distributes/aligns the resulting framework projection only after governance; it is not canonical authority and it does not replace the Sovereign Hub, evidence system, capability leases, realtime event plane or durable domain stores. `#NB` is preserved as an explicit boundary marker without inventing an expansion.
+
+See `progressive-updates/README.md` and `progressive-updates/progressive-update.schema.json`.
 
 ## Phase map
 
@@ -78,6 +98,8 @@ Tools / APIs / Domain Systems
 - `task-contract/principal-envelope.schema.json`
 - `task-contract/task-receipt.schema.json`
 - `task-contract/adapter.py`
+- `progressive-updates/README.md`
+- `progressive-updates/progressive-update.schema.json`
 
 ## Definition of done
 
