@@ -29,11 +29,12 @@ class DelegationReceipt:
     actor_kind: str
     implementation_revision: str
     requested_scope: tuple[str, ...]
+    requested_capabilities: tuple[str, ...]
     gate_id: str | None
 
 
 class SpecificationFirstBuild:
-    """Govern one implementation revision through specify/delegate/verify/ship."""
+    """Govern iterative implementation revisions through specify/delegate/verify/ship."""
 
     def __init__(self, spec: Mapping[str, Any]) -> None:
         self.spec = dict(spec)
@@ -75,20 +76,26 @@ class SpecificationFirstBuild:
             str(item["capability"])
             for item in self.spec.get("required_capabilities", [])
         }
-        requested = set(requested_capabilities)
-        if not requested <= allowed_capabilities:
+        requested = tuple(requested_capabilities)
+        if not set(requested) <= allowed_capabilities:
             raise BuildGovernanceError("delegation requested capability outside the governing specification")
 
         gate_required = destructive or self.spec["risk_class"] in HIGH_RISK
         if gate_required and (not gate_id or gate_id not in self.declared_gates):
             raise BuildGovernanceError("high-risk/destructive delegation requires a declared action gate")
 
+        # Every delegation is a new implementation attempt. Previous verification or
+        # approval can never survive a revision/lease change and authorize the new attempt.
         self._delegated_revision = implementation_revision
+        self._verification = {}
+        self.state = "draft"
+
         return DelegationReceipt(
             spec_id=str(self.spec["spec_id"]),
             actor_kind=actor_kind,
             implementation_revision=implementation_revision,
             requested_scope=scope,
+            requested_capabilities=requested,
             gate_id=gate_id,
         )
 
@@ -100,6 +107,8 @@ class SpecificationFirstBuild:
         for result in results:
             if result.criterion_id not in self.criteria:
                 raise BuildGovernanceError(f"unknown acceptance criterion: {result.criterion_id}")
+            if result.criterion_id in received:
+                raise BuildGovernanceError(f"duplicate acceptance criterion result: {result.criterion_id}")
             if result.implementation_revision != self._delegated_revision:
                 raise BuildGovernanceError("verification evidence must target the exact implementation revision")
             if not result.evidence_ref.strip() or not result.verifier.strip():
@@ -121,22 +130,45 @@ class SpecificationFirstBuild:
     def approve(self) -> str:
         if self.state != "verified":
             raise BuildGovernanceError("only a verified implementation may be approved")
+        self._assert_current_verification_complete(require_all_pass=False)
         self.state = "approved"
         return self.state
 
     def release(self) -> str:
         if self.state not in {"verified", "approved"}:
             raise BuildGovernanceError("release requires verified or approved state")
-        if any(not result.passed for result in self._verification.values()):
-            raise BuildGovernanceError("failed acceptance criteria prevent released state")
+        self._assert_current_verification_complete(require_all_pass=True)
         self.state = "released"
         return self.state
 
     def rollback(self) -> str:
+        if self._delegated_revision is None:
+            raise BuildGovernanceError("rollback requires a delegated implementation revision")
         if not self.spec.get("rollback_plan", {}).get("procedure"):
             raise BuildGovernanceError("rollback requires the declared rollback procedure")
         self.state = "rolled-back"
         return self.state
+
+    def _assert_current_verification_complete(self, *, require_all_pass: bool) -> None:
+        if self._delegated_revision is None:
+            raise BuildGovernanceError("lifecycle advancement requires a delegated implementation revision")
+
+        missing = set(self.criteria) - set(self._verification)
+        if missing:
+            raise BuildGovernanceError(f"lifecycle advancement is missing acceptance criteria: {sorted(missing)}")
+
+        stale = [
+            criterion_id
+            for criterion_id, result in self._verification.items()
+            if result.implementation_revision != self._delegated_revision
+        ]
+        if stale:
+            raise BuildGovernanceError(
+                f"lifecycle advancement has stale verification for current implementation revision: {sorted(stale)}"
+            )
+
+        if require_all_pass and any(not result.passed for result in self._verification.values()):
+            raise BuildGovernanceError("failed acceptance criteria prevent released state")
 
     def _validate_spec(self) -> None:
         required = {
