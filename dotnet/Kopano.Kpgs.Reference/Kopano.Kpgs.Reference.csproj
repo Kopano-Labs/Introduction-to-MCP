@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Kopano.Kpgs.Adapter/Kopano.Kpgs.Adapter.csproj" />
+    <ProjectReference Include="../Kopano.Kpgs.Contracts/Kopano.Kpgs.Contracts.csproj" />
+    <ProjectReference Include="../Kopano.Kpgs.Evidence/Kopano.Kpgs.Evidence.csproj" />
+  </ItemGroup>
+</Project>
