@@ -6,10 +6,15 @@ on:
       - "governance/kpgs-vnext/**"
       - "kopano-core/kopano/swfus_engine.py"
       - "kopano-core/kopano/kessa_mmao_api.py"
+      - "kopano-core/kopano/skill_runtime.py"
+      - "scripts/ci/validate_skill_registry.py"
+      - "scripts/ci/manage_skill_package.py"
       - "tests/test_swfus_progressive_updates.py"
       - "tests/test_capability_lease_runtime.py"
       - "tests/test_sovereign_estate_registry.py"
       - "tests/test_evidence_bundles.py"
+      - "tests/test_canonical_skill_runtime.py"
+      - "tests/test_skill_package_workflow.py"
       - "CONTRIBUTING.md"
       - "THIRD_PARTY_NOTICES.md"
       - "LICENSE"
@@ -19,10 +24,15 @@ on:
       - "governance/kpgs-vnext/**"
       - "kopano-core/kopano/swfus_engine.py"
       - "kopano-core/kopano/kessa_mmao_api.py"
+      - "kopano-core/kopano/skill_runtime.py"
+      - "scripts/ci/validate_skill_registry.py"
+      - "scripts/ci/manage_skill_package.py"
       - "tests/test_swfus_progressive_updates.py"
       - "tests/test_capability_lease_runtime.py"
       - "tests/test_sovereign_estate_registry.py"
       - "tests/test_evidence_bundles.py"
+      - "tests/test_canonical_skill_runtime.py"
+      - "tests/test_skill_package_workflow.py"
       - "CONTRIBUTING.md"
       - "THIRD_PARTY_NOTICES.md"
       - "LICENSE"
@@ -40,7 +50,7 @@ jobs:
   truth-contracts:
     name: Validate KPGS truth and governance contracts
     runs-on: ubuntu-latest
-    timeout-minutes: 7
+    timeout-minutes: 8
 
     steps:
       - name: Checkout
@@ -84,6 +94,15 @@ jobs:
       - name: Prove evidence bundle runtime conformance
         run: python -m unittest discover -s tests -p 'test_evidence_bundles.py' -v
 
+      - name: Validate canonical skill registry
+        run: python scripts/ci/validate_skill_registry.py
+
+      - name: Prove canonical skill execution membrane
+        run: python -m unittest discover -s tests -p 'test_canonical_skill_runtime.py' -v
+
+      - name: Prove canonical skill package developer workflow
+        run: python -m unittest discover -s tests -p 'test_skill_package_workflow.py' -v
+
       - name: Compile validators and governed runtimes
         run: >-
           python -m py_compile
@@ -99,3 +118,6 @@ jobs:
           governance/kpgs-vnext/evidence/evidence.py
           kopano-core/kopano/swfus_engine.py
           kopano-core/kopano/kessa_mmao_api.py
+          kopano-core/kopano/skill_runtime.py
+          scripts/ci/validate_skill_registry.py
+          scripts/ci/manage_skill_package.py
