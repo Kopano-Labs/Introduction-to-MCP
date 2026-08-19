@@ -1,0 +1,101 @@
+name: KPGS Sovereign Everyday Mode Proof
+
+on:
+  push:
+    branches:
+      - "feat/sovereign-everyday-mode-close-41"
+    paths:
+      - "apps/kc-dashboard/**"
+      - "governance/kpgs-vnext/everyday-mode/**"
+      - "tests/test_sovereign_everyday_mode.py"
+      - ".github/workflows/kpgs-everyday-mode-proof.yml"
+  pull_request:
+    branches: [master]
+    paths:
+      - "apps/kc-dashboard/**"
+      - "governance/kpgs-vnext/everyday-mode/**"
+      - "tests/test_sovereign_everyday_mode.py"
+      - ".github/workflows/kpgs-everyday-mode-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kpgs-everyday-mode-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: State model · Accessibility · Typecheck · Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: apps/kc-dashboard
+
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dashboard dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Compile pure Everyday state model for execution proof
+        run: |
+          rm -rf .proof
+          npx tsc src/everyday-model.ts \
+            --target ES2022 \
+            --module ES2022 \
+            --moduleResolution Bundler \
+            --strict \
+            --skipLibCheck \
+            --outDir .proof
+
+      - name: Execute interaction-profile and pilot model tests
+        run: node --test tests/everyday-model.test.mjs
+
+      - name: Run repository-level UX/accessibility invariants
+        working-directory: .
+        run: python -m unittest discover -s tests -p 'test_sovereign_everyday_mode.py' -v
+
+      - name: Typecheck reference dashboard
+        run: npm run typecheck
+
+      - name: Build reference dashboard
+        run: npm run build
+
+      - name: Prove generated build does not contain default infrastructure jargon entrypoint
+        shell: python
+        run: |
+          from pathlib import Path
+
+          app = Path('src/App.tsx').read_text(encoding='utf-8')
+          everyday = Path('src/EverydayMode.tsx').read_text(encoding='utf-8').casefold()
+          model = Path('src/everyday-model.ts').read_text(encoding='utf-8')
+          css = Path('src/everyday.css').read_text(encoding='utf-8')
+
+          assert 'useState<ViewMode>("everyday")' in app
+          for forbidden in ('kpgs', 'mcp', '.net', 'websocket', 'sub-membrane'):
+              assert forbidden not in everyday, forbidden
+          assert 'modelWeightTraining: false' in model
+          assert 'canonicalWorkflowState: false' in model
+          assert '@media (max-width: 620px)' in css
+          assert 'prefers-reduced-motion: reduce' in css
+          assert Path('dist/index.html').is_file()
+          print('Sovereign Everyday Mode promotion proof: PASS')
+
+      - name: Remove transient model proof output
+        if: always()
+        run: rm -rf .proof
