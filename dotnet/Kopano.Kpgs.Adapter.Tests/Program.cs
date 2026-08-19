@@ -8,6 +8,20 @@ static void Assert(bool condition, string message)
     if (!condition) throw new InvalidOperationException(message);
 }
 
+static async Task ExpectAsync<TException>(Func<Task> action, string message)
+    where TException : Exception
+{
+    try
+    {
+        await action();
+    }
+    catch (TException)
+    {
+        return;
+    }
+    throw new InvalidOperationException(message);
+}
+
 var manifest = new DomainManifest("example.kopanolabs.com", "proof-adapter", "0.1.0-preview.1", "1.0", "kpgs://spec/domain-proof");
 var options = new KpgsAdapterOptions(manifest, TimeSpan.FromMilliseconds(100), 1, 2);
 var evidence = new InMemoryEvidenceSink();
@@ -18,6 +32,7 @@ Assert(hub.Registered, "domain registration did not execute");
 Assert((await adapter.HealthAsync()).Ready, "adapter is not ready");
 Assert(adapter.Version("1.9").Compatible, "same protocol major should be compatible");
 Assert(!adapter.Version("2.0").Compatible, "different protocol major must be incompatible");
+Assert(KpgsProtocol.ProgressiveUpdate.Contains("#NB", StringComparison.Ordinal), "progressive-update contract lost #NB");
 
 var identity = new DomainIdentity("human:1", "human", "tenant:1", new Dictionary<string, string>());
 var context = new HubContext(manifest.EstateProperty, "tenant:1", "domain:1", "task:1", "corr:1", identity, manifest.GoverningSpecRef);
@@ -26,19 +41,49 @@ var created = await adapter.CreateTaskAsync(context, request);
 var replay = await adapter.CreateTaskAsync(context, request);
 Assert(created == replay, "idempotent task replay changed the result");
 Assert(hub.CreateCalls == 1, "idempotent task replay executed twice");
+Assert(hub.CapabilityCalls == 2, "exact replay bypassed a fresh capability decision");
 Assert(evidence.Items.Count == 1 && evidence.Items[0].AuthorityEffect == "none", "execution evidence missing or promoted authority");
 
+await ExpectAsync<KpgsIdempotencyConflictException>(
+    () => adapter.CreateTaskAsync(
+        context,
+        request with { Input = new { goal = "different governed content" } }),
+    "changed content reused the same idempotency identity without conflict");
+Assert(hub.CreateCalls == 1, "idempotency collision reached a second CREATE mutation");
+
+var concurrentRequest = new GovernedTaskRequest("task:1", "corr:concurrent", manifest.GoverningSpecRef, new { goal = "concurrent" }, "idem:create:concurrent");
+var concurrent = await Task.WhenAll(
+    adapter.CreateTaskAsync(context, concurrentRequest),
+    adapter.CreateTaskAsync(context, concurrentRequest));
+Assert(concurrent[0] == concurrent[1], "concurrent exact replay returned divergent snapshots");
+Assert(hub.CreateCalls == 2, "concurrent exact replay executed duplicate Hub CREATE work");
+
+var beforeNbCapabilityCalls = hub.CapabilityCalls;
+await ExpectAsync<InvalidOperationException>(
+    () => adapter.CreateTaskAsync(context, request with { IdempotencyKey = "idem:bad-nb", BoundaryMarker = "NB" }),
+    "mutation without literal #NB was admitted");
+Assert(hub.CapabilityCalls == beforeNbCapabilityCalls, "invalid #NB boundary reached capability resolution");
+
 hub.Allow = false;
-try
-{
-    await adapter.ExecuteCommandAsync(context, new GovernedCommand("cmd:deny", "approve", null, "idem:deny:1", "corr:deny"));
-    throw new InvalidOperationException("denied capability executed");
-}
-catch (CapabilityDeniedException)
-{
-    Assert(hub.CommandCalls == 0, "denied command reached the privileged hub operation");
-}
+await ExpectAsync<CapabilityDeniedException>(
+    () => adapter.ExecuteCommandAsync(context, new GovernedCommand("cmd:deny", "approve", null, "idem:deny:1", "corr:deny")),
+    "denied capability executed");
+Assert(hub.CommandCalls == 0, "denied command reached the privileged hub operation");
 hub.Allow = true;
+
+hub.ExpireLeases = true;
+await ExpectAsync<CapabilityDeniedException>(
+    () => adapter.ExecuteCommandAsync(context, new GovernedCommand("cmd:expired", "approve", null, "idem:expired:1", "corr:expired")),
+    "expired capability lease executed");
+Assert(hub.CommandCalls == 0, "expired lease reached the privileged hub operation");
+hub.ExpireLeases = false;
+
+await ExpectAsync<InvalidOperationException>(
+    () => adapter.ExecuteCommandAsync(
+        context,
+        new GovernedCommand("cmd:bad-nb", "approve", null, "idem:bad-nb-command", "corr:bad-nb", "NB")),
+    "command without literal #NB was admitted");
+Assert(hub.CommandCalls == 0, "invalid command #NB reached the privileged hub operation");
 
 var fallbackLog = new List<RealtimeTransportKind>();
 var realtime = new KpgsRealtimeClient(
@@ -73,6 +118,8 @@ sealed class ProofHub : IKpgsHubClient
 {
     public bool Registered { get; private set; }
     public bool Allow { get; set; } = true;
+    public bool ExpireLeases { get; set; }
+    public int CapabilityCalls { get; private set; }
     public int CreateCalls { get; private set; }
     public int CommandCalls { get; private set; }
 
@@ -83,13 +130,25 @@ sealed class ProofHub : IKpgsHubClient
     }
 
     public Task<bool> IsReadyAsync(CancellationToken cancellationToken) => Task.FromResult(true);
-    public Task<CapabilityDecision> RequestCapabilityAsync(HubContext context, CapabilityRequest request, CancellationToken cancellationToken) =>
-        Task.FromResult(new CapabilityDecision(Allow, "policy://proof", Allow ? "lease:proof" : null, Allow ? DateTimeOffset.UtcNow.AddMinutes(1) : null, Allow ? "allowed" : "not permitted for this task"));
+
+    public Task<CapabilityDecision> RequestCapabilityAsync(HubContext context, CapabilityRequest request, CancellationToken cancellationToken)
+    {
+        CapabilityCalls++;
+        var expiry = ExpireLeases
+            ? DateTimeOffset.UtcNow.AddSeconds(-1)
+            : DateTimeOffset.UtcNow.AddMinutes(1);
+        return Task.FromResult(new CapabilityDecision(
+            Allow,
+            "policy://proof",
+            Allow ? "lease:proof" : null,
+            Allow ? expiry : null,
+            !Allow ? "not permitted for this task" : ExpireLeases ? "lease expired" : "allowed"));
+    }
 
     public Task<GovernedTaskSnapshot> CreateTaskAsync(HubContext context, GovernedTaskRequest request, string leaseToken, CancellationToken cancellationToken)
     {
         CreateCalls++;
-        return Task.FromResult(new GovernedTaskSnapshot(request.TaskId, "created", 1, ["continue"], "created", request.CorrelationId));
+        return Task.FromResult(new GovernedTaskSnapshot(request.TaskId, "created", CreateCalls, ["continue"], "created", request.CorrelationId));
     }
 
     public Task<GovernedTaskSnapshot> ExecuteCommandAsync(HubContext context, GovernedCommand command, string leaseToken, CancellationToken cancellationToken)
