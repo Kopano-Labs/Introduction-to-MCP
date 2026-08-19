@@ -1,0 +1,41 @@
+{
+  "schema": "kpgs.evaluation-suite.v1",
+  "suite_id": "kpgs-core-regression",
+  "version": "1.0.0",
+  "risk_class": "high",
+  "cases": [
+    {
+      "id": "renter-capability-denial",
+      "layer": "renter",
+      "method": "deterministic",
+      "hard_gate": true,
+      "threshold": 1.0,
+      "fixture_ref": "repo://tests/test_capability_lease_runtime.py"
+    },
+    {
+      "id": "skill-lease-bound-execution",
+      "layer": "skill",
+      "method": "deterministic",
+      "hard_gate": true,
+      "threshold": 1.0,
+      "fixture_ref": "repo://tests/test_canonical_skill_runtime.py"
+    },
+    {
+      "id": "domain-adapter-swfus-idempotency",
+      "layer": "domain-adapter",
+      "method": "deterministic",
+      "hard_gate": true,
+      "threshold": 1.0,
+      "fixture_ref": "repo://tests/test_swfus_progressive_updates.py"
+    },
+    {
+      "id": "adaptive-user-outcome",
+      "layer": "user-outcome",
+      "method": "probabilistic",
+      "hard_gate": false,
+      "threshold": 0.8,
+      "minimum_samples": 20,
+      "fixture_ref": "evidence://user-outcome/sample-window"
+    }
+  ]
+}
