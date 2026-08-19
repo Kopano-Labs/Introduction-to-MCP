@@ -19,12 +19,49 @@ SUITE = json.loads((ROOT / "governance/kpgs-vnext/evaluation/reference-suite.jso
 POLICY = json.loads((ROOT / "governance/kpgs-vnext/evaluation/promotion-policy.json").read_text(encoding="utf-8"))
 
 
-def results(user_score=0.9, renter_pass=True):
+def results(user_score=0.9, renter_pass=True, dotnet_pass=True):
     return [
-        mod.EvaluationResult("renter-capability-denial", "deterministic", 1.0 if renter_pass else 0.0, renter_pass, "ci://capability-lease", "capability-verifier"),
-        mod.EvaluationResult("skill-lease-bound-execution", "deterministic", 1.0, True, "ci://skill-runtime", "skill-verifier"),
-        mod.EvaluationResult("domain-adapter-swfus-idempotency", "deterministic", 1.0, True, "ci://swfus", "swfus-verifier"),
-        mod.EvaluationResult("adaptive-user-outcome", "probabilistic", user_score, user_score >= 0.8, "evidence://user-outcome/window", "outcome-profiler", samples=25),
+        mod.EvaluationResult(
+            "renter-capability-denial",
+            "deterministic",
+            1.0 if renter_pass else 0.0,
+            renter_pass,
+            "ci://capability-lease",
+            "capability-verifier",
+        ),
+        mod.EvaluationResult(
+            "skill-lease-bound-execution",
+            "deterministic",
+            1.0,
+            True,
+            "ci://skill-runtime",
+            "skill-verifier",
+        ),
+        mod.EvaluationResult(
+            "progressive-update-swfus-contract",
+            "deterministic",
+            1.0,
+            True,
+            "ci://swfus",
+            "swfus-verifier",
+        ),
+        mod.EvaluationResult(
+            "dotnet-adapter-replay-lease-boundary",
+            "deterministic",
+            1.0 if dotnet_pass else 0.0,
+            dotnet_pass,
+            "ci://dotnet-adapter",
+            "dotnet-verifier",
+        ),
+        mod.EvaluationResult(
+            "adaptive-user-outcome",
+            "probabilistic",
+            user_score,
+            user_score >= 0.8,
+            "repo://governance/kpgs-vnext/evaluation/fixtures/adaptive-user-outcome.json",
+            "outcome-profiler",
+            samples=25,
+        ),
     ]
 
 
@@ -37,18 +74,21 @@ def bundle(decision="promote"):
 
 
 class EvaluationRewardLoopTests(unittest.TestCase):
-    def test_reference_regression_suite_covers_renter_skill_and_domain_adapter(self):
+    def test_reference_regression_suite_covers_renter_skill_swfus_and_hardened_dotnet_adapter(self):
         mod.validate_suite(SUITE)
-        layers = {case["layer"] for case in SUITE["cases"]}
-        self.assertTrue({"renter", "skill", "domain-adapter"}.issubset(layers))
-        refs = {case["fixture_ref"] for case in SUITE["cases"]}
-        self.assertIn("repo://tests/test_capability_lease_runtime.py", refs)
-        self.assertIn("repo://tests/test_canonical_skill_runtime.py", refs)
-        self.assertIn("repo://tests/test_swfus_progressive_updates.py", refs)
+        cases = {case["id"]: case for case in SUITE["cases"]}
+        self.assertEqual(cases["renter-capability-denial"]["layer"], "renter")
+        self.assertEqual(cases["skill-lease-bound-execution"]["layer"], "skill")
+        self.assertEqual(cases["progressive-update-swfus-contract"]["layer"], "domain-adapter")
+        self.assertEqual(cases["dotnet-adapter-replay-lease-boundary"]["layer"], "domain-adapter")
+        self.assertEqual(
+            cases["dotnet-adapter-replay-lease-boundary"]["fixture_ref"],
+            "repo://dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj",
+        )
 
     def test_deterministic_and_probabilistic_results_remain_distinct(self):
         scored = mod.score_results(SUITE, results())
-        self.assertEqual(len(scored["deterministic"]), 3)
+        self.assertEqual(len(scored["deterministic"]), 4)
         self.assertEqual(len(scored["probabilistic"]), 1)
         self.assertEqual(scored["probabilistic"][0]["samples"], 25)
         self.assertEqual(scored["hard_gate_failures"], [])
@@ -67,6 +107,19 @@ class EvaluationRewardLoopTests(unittest.TestCase):
         )
         self.assertEqual(decision["decision"], "hold")
         self.assertIn("hard evaluation gate failed", decision["reasons"])
+
+    def test_dotnet_adapter_hard_failure_cannot_be_averaged_away(self):
+        scored = mod.score_results(SUITE, results(user_score=1.0, dotnet_pass=False))
+        self.assertEqual(scored["hard_gate_failures"], ["dotnet-adapter-replay-lease-boundary"])
+        decision = mod.decide_promotion(
+            scorecard=scored,
+            policy=POLICY,
+            evidence_bundle=bundle(),
+            rollback_target="release://previous",
+            human_approval_ref="human://approval/1",
+            clock=datetime(2026, 8, 19, tzinfo=timezone.utc),
+        )
+        self.assertEqual(decision["decision"], "hold")
 
     def test_high_risk_promotion_requires_human_approval(self):
         scored = mod.score_results(SUITE, results())
@@ -117,7 +170,15 @@ class EvaluationRewardLoopTests(unittest.TestCase):
 
     def test_probabilistic_case_requires_declared_sample_floor(self):
         insufficient = results()
-        insufficient[-1] = mod.EvaluationResult("adaptive-user-outcome", "probabilistic", 0.95, True, "evidence://user-outcome/window", "outcome-profiler", samples=5)
+        insufficient[-1] = mod.EvaluationResult(
+            "adaptive-user-outcome",
+            "probabilistic",
+            0.95,
+            True,
+            "repo://governance/kpgs-vnext/evaluation/fixtures/adaptive-user-outcome.json",
+            "outcome-profiler",
+            samples=5,
+        )
         with self.assertRaisesRegex(mod.EvaluationError, "insufficient samples"):
             mod.score_results(SUITE, insufficient)
 
