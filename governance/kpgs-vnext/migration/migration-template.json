@@ -1,0 +1,38 @@
+{
+  "schema": "kpgs.estate-migration-plan.v1",
+  "estate_id": "kopano-sovereign-estate",
+  "domain": "example.kopanolabs.com",
+  "workflow_id": "bounded-workflow-id",
+  "classification": "TEMPLATE_NOT_EVIDENCE",
+  "baseline": {
+    "repository_ref": null,
+    "deployment_provider": null,
+    "deployment_target": null,
+    "critical_journey_ref": null,
+    "auth_session_ref": null,
+    "api_data_ref": null,
+    "offline_pwa_ref": null,
+    "health_ref": null,
+    "known_mobile_defects_ref": null,
+    "rollback_target_ref": null,
+    "rollback_procedure_ref": null
+  },
+  "adapter": {
+    "implementation": "Kopano.Kpgs.Adapter",
+    "version": null,
+    "protocol_version": "1.0"
+  },
+  "renter": {
+    "status": "unknown",
+    "protocol_version": null
+  },
+  "capability_map": [],
+  "evaluation_receipt_ref": null,
+  "rollback_drill_ref": null,
+  "production_promotion_ref": null,
+  "notes": [
+    "This template is not witness evidence and cannot promote an estate property.",
+    "Migrate one bounded workflow before expanding domain coverage.",
+    "Rollback must be proven before production promotion."
+  ]
+}

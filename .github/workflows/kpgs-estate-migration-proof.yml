@@ -1,0 +1,77 @@
+name: KPGS Estate Migration Proof
+
+on:
+  push:
+    branches:
+      - "feat/estate-migration-playbook-close-44"
+    paths:
+      - "governance/kpgs-vnext/migration/**"
+      - "tests/test_estate_migration.py"
+      - ".github/workflows/kpgs-estate-migration-proof.yml"
+  pull_request:
+    branches: [master]
+    paths:
+      - "governance/kpgs-vnext/migration/**"
+      - "tests/test_estate_migration.py"
+      - ".github/workflows/kpgs-estate-migration-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kpgs-estate-migration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    name: Compile · Reuse · Canonical HOLD
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile migration runtime
+        run: |
+          python -m compileall -q governance/kpgs-vnext/migration tests/test_estate_migration.py
+
+      - name: Run migration regression proof
+        run: python -m unittest discover -s tests -p 'test_estate_migration.py' -v
+
+      - name: Assess canonical estate without mutation
+        run: |
+          before="$(sha256sum governance/kpgs-vnext/estate-registry/estate.json | awk '{print $1}')"
+          python governance/kpgs-vnext/migration/assess_estate.py \
+            --workflow-id bounded-pilot \
+            --output artifacts/estate-migration-assessment.json
+          after="$(sha256sum governance/kpgs-vnext/estate-registry/estate.json | awk '{print $1}')"
+          test "$before" = "$after"
+
+      - name: Verify current live estate remains truthful HOLD
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path('artifacts/estate-migration-assessment.json').read_text(encoding='utf-8'))
+          assert payload['canonical_registry_changed'] is False
+          assert payload['authority_effect'] == 'none'
+          assert len(payload['assessments']) == 6
+          assert all(item['recommendation'] == 'HOLD' for item in payload['assessments'])
+          assert all(item['ready_for_staging'] is False for item in payload['assessments'])
+          assert all(item['stages']['register']['status'] == 'HOLD' for item in payload['assessments'])
+          print('Canonical estate migration state: HOLD pending authoritative witness evidence')
+
+      - name: Upload migration assessment
+        uses: actions/upload-artifact@v4
+        with:
+          name: kpgs-estate-migration-assessment
+          path: artifacts/estate-migration-assessment.json
+          if-no-files-found: error
