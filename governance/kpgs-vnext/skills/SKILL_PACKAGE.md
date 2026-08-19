@@ -17,7 +17,7 @@ skills/<category>/<skill-name>/
   REFERENCES.md            # optional links and provenance notes
   ARTICLE.md               # optional long explanation
   scripts/                 # optional helpers
-  assets/                  # optional reusable assets
+  assets/                   # optional reusable assets
   examples/                # optional fixtures
   tests/                   # optional conformance/eval fixtures
 ```
@@ -46,9 +46,14 @@ python scripts/ci/validate_skill_registry.py --discover governance
 python scripts/ci/validate_skill_registry.py --discover "" --platform stateless-renter
 ```
 
-The validator rejects duplicate identities, missing package files, manifest/registry identity drift, missing provenance/license state, missing capability declarations and missing validation contracts. CI runs the same conformance logic through `tests/test_skill_registry.py`.
+The validator rejects duplicate identities, repository-path escapes, missing package files, manifest/registry identity drift, invalid manifest state/provenance/license/source relationships, missing local schema references, missing capability declarations and invalid validation contracts. CI runs the same conformance logic through `tests/test_skill_registry.py`.
 
-A registered package is production-selectable only when its manifest state is `validated` or `approved`. The caller must still separately obtain a capability lease equal to or narrower than the package requirements. `draft`, `blocked` and `deprecated` packages remain non-production-loadable even when discoverable.
+A registered package is production-selectable only when **both** conditions are true:
+
+1. its manifest state is `validated` or `approved`; and
+2. its provenance `license_status` is `verified-compatible`.
+
+The caller must still separately obtain a capability lease equal to or narrower than the package requirements. `draft`, `blocked` and `deprecated` packages remain non-production-loadable even when discoverable. A `validated` or `approved` package with `pending`, `unknown` or `incompatible` licensing also remains non-production-loadable.
 
 Publication adapters may be indexed so external package surfaces can be found and validated, but their `authority_class` must remain `publication-adapter`; registry presence must never be interpreted as a second canonical runtime.
 
@@ -68,7 +73,7 @@ python scripts/ci/manage_skill_package.py create \
   --tag governance
 ```
 
-The command deliberately leaves the package in `draft`. **Scaffolded + registered + conformance-valid is not approved for production execution.** Promotion to `validated`/`approved` remains a separate evidence/governance decision.
+The command deliberately leaves the package in `draft` with unresolved licensing. **Scaffolded + registered + conformance-valid is not approved for production execution.** Promotion to `validated`/`approved` and promotion of licensing to `verified-compatible` remain separate evidence/governance decisions.
 
 Re-run canonical package validation independently with:
 
@@ -110,7 +115,7 @@ The schema is `skill-manifest.schema.json`.
 ```text
 discover
   -> resolve policy
-  -> verify package/provenance
+  -> verify package/provenance/license
   -> lease capabilities
   -> load bounded handler
   -> execute
@@ -124,19 +129,21 @@ The reference execution membrane is `kopano-core/kopano/skill_runtime.py`.
 It enforces the following order:
 
 1. Resolve an exact registered `name@version`.
-2. Refuse production execution unless the package state is `validated` or `approved`.
-3. Verify the selected runtime platform and package/provenance boundary.
+2. Refuse production execution unless the package state is `validated` or `approved` **and** its license status is `verified-compatible`.
+3. Verify registry selection policy, selected runtime platform, package path containment and provenance sources.
 4. Resolve every non-optional declared capability through the injected Sovereign Hub capability authorizer.
 5. Refuse to call the handler when any required capability/resource scope is denied.
 6. Execute only a handler explicitly registered for the exact skill identity.
 7. Run the deterministic output validator when one is registered.
-8. Emit `kpgs.skill-execution-receipt.v1` containing skill version, manifest digest, input/output digests, lease IDs, capability decisions, validation result and correlation ID.
+8. Emit `kpgs.skill-execution-receipt.v1` containing skill version, manifest digest, license status, input/output digests, lease IDs, capability decisions, validation result, correlation ID and execution-context release state.
 
 The runtime does not issue its own lease and does not make registry discovery an authorization mechanism. The injected authorizer is the membrane to the canonical capability-lease authority defined under `governance/kpgs-vnext/security/`.
 
+`execution_context.released=true` means only that the skill runtime has released its execution-local context after the bounded call. It does **not** claim that the upstream capability lease was revoked; upstream lease lifetime and revocation remain owned by the capability-lease authority.
+
 ### Execution receipt boundary
 
-A successful execution receipt proves the bounded handler ran under the recorded lease decisions and validation path. It does **not** make the skill a new authority source and does not promote its package state.
+A successful execution receipt proves the bounded handler ran under the recorded lease decisions and validation path. It does **not** make the skill a new authority source and does not promote its package state or license state.
 
 ```text
 SKILL DISCOVERY != AUTHORITY
@@ -151,7 +158,7 @@ EXECUTION RECEIPT != CANONICAL BUSINESS TRUTH
 2. The active capability lease MUST be equal to or narrower than the skill's declared capability requirements.
 3. A renter MUST reject a skill whose runtime/protocol compatibility is not satisfied.
 4. Imported or fork-derived skill material MUST carry provenance and license metadata.
-5. `pending`, `unknown` or incompatible license status blocks canonical vendoring/import.
+5. `pending`, `unknown` or `incompatible` license status blocks production loading and canonical vendoring/import.
 6. Skills MUST NOT contain raw secrets, private client data or machine-specific absolute paths as required runtime assumptions.
 7. Skill promotion requires declared validation evidence.
 8. Breaking behavior changes require a major-version compatibility decision or migration note.
@@ -164,14 +171,14 @@ EXECUTION RECEIPT != CANONICAL BUSINESS TRUTH
 - `deprecated`
 - `blocked`
 
-Only `validated` or `approved` skills may be selected for governed production execution, subject to domain policy.
+Only `validated` or `approved` skills with `verified-compatible` licensing may be selected for governed production execution, subject to domain policy and a valid capability lease.
 
 ## Validation dimensions
 
 A skill MAY use several verification methods, but each package MUST declare at least one:
 
 - schema/contract validation
-- deterministic test fixture
+- deterministic unit test fixture
 - integration test
 - end-to-end workflow test
 - security review
