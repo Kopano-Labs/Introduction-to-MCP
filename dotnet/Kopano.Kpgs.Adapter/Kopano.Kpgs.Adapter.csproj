@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageId>Kopano.Kpgs.Adapter</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Kopano Labs</Authors>
+    <Description>ASP.NET Core KPGS domain adapter with capability, idempotency and evidence boundaries.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="../Kopano.Kpgs.Contracts/Kopano.Kpgs.Contracts.csproj" />
+    <ProjectReference Include="../Kopano.Kpgs.Evidence/Kopano.Kpgs.Evidence.csproj" />
+    <ProjectReference Include="../Kopano.Kpgs.Realtime/Kopano.Kpgs.Realtime.csproj" />
+  </ItemGroup>
+</Project>
