@@ -52,6 +52,32 @@ A registered package is production-selectable only when its manifest state is `v
 
 Publication adapters may be indexed so external package surfaces can be found and validated, but their `authority_class` must remain `publication-adapter`; registry presence must never be interpreted as a second canonical runtime.
 
+## One-command package workflow
+
+Create a versioned draft package, register it in canonical discovery and run the registry/package conformance gate in one workflow:
+
+```bash
+python scripts/ci/manage_skill_package.py create \
+  --name example-governed-skill \
+  --version 0.1.0 \
+  --category governance \
+  --summary "Explain and execute one bounded governed example." \
+  --capability example.execute \
+  --resource-scope active-task \
+  --tag example \
+  --tag governance
+```
+
+The command deliberately leaves the package in `draft`. **Scaffolded + registered + conformance-valid is not approved for production execution.** Promotion to `validated`/`approved` remains a separate evidence/governance decision.
+
+Re-run canonical package validation independently with:
+
+```bash
+python scripts/ci/manage_skill_package.py validate
+```
+
+If registration/conformance fails during `create`, the new registry entry is removed so a partial workflow cannot poison canonical discovery. The generated package remains on disk for inspection and repair.
+
 ## Required `SKILL.md` frontmatter
 
 ```yaml
@@ -86,11 +112,37 @@ discover
   -> resolve policy
   -> verify package/provenance
   -> lease capabilities
-  -> load
+  -> load bounded handler
   -> execute
   -> validate output
   -> emit evidence
-  -> release capabilities
+  -> release execution context
+```
+
+The reference execution membrane is `kopano-core/kopano/skill_runtime.py`.
+
+It enforces the following order:
+
+1. Resolve an exact registered `name@version`.
+2. Refuse production execution unless the package state is `validated` or `approved`.
+3. Verify the selected runtime platform and package/provenance boundary.
+4. Resolve every non-optional declared capability through the injected Sovereign Hub capability authorizer.
+5. Refuse to call the handler when any required capability/resource scope is denied.
+6. Execute only a handler explicitly registered for the exact skill identity.
+7. Run the deterministic output validator when one is registered.
+8. Emit `kpgs.skill-execution-receipt.v1` containing skill version, manifest digest, input/output digests, lease IDs, capability decisions, validation result and correlation ID.
+
+The runtime does not issue its own lease and does not make registry discovery an authorization mechanism. The injected authorizer is the membrane to the canonical capability-lease authority defined under `governance/kpgs-vnext/security/`.
+
+### Execution receipt boundary
+
+A successful execution receipt proves the bounded handler ran under the recorded lease decisions and validation path. It does **not** make the skill a new authority source and does not promote its package state.
+
+```text
+SKILL DISCOVERY != AUTHORITY
+REGISTERED != PRODUCTION-LOADABLE
+LEASED CAPABILITY != AMBIENT POWER
+EXECUTION RECEIPT != CANONICAL BUSINESS TRUTH
 ```
 
 ## Governance rules
