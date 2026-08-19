@@ -2,6 +2,7 @@ import { useState } from "react";
 import dashboardState from "../../../governance/kpgs-vnext/kc/dashboard-state.json";
 import EverydayMode from "./EverydayMode";
 import OperatorMode from "./OperatorMode";
+import "./everyday.css";
 
 type ViewMode = "everyday" | "operator";
 
