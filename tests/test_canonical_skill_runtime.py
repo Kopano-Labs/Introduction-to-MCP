@@ -22,7 +22,9 @@ from kopano.skill_runtime import (  # noqa: E402
 
 def load_capability_module():
     path = ROOT / "governance/kpgs-vnext/security/capability_lease.py"
-    spec = importlib.util.spec_from_file_location("kpgs_capability_lease_for_skill_test", path)
+    spec = importlib.util.spec_from_file_location(
+        "kpgs_capability_lease_for_skill_test", path
+    )
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
@@ -30,7 +32,12 @@ def load_capability_module():
     return module
 
 
-def write_fixture(repo: Path, *, state: str = "validated") -> None:
+def write_fixture(
+    repo: Path,
+    *,
+    state: str = "validated",
+    license_status: str = "verified-compatible",
+) -> None:
     package = repo / "skills/demo/demo-skill"
     package.mkdir(parents=True)
     (package / "SKILL.md").write_text(
@@ -53,18 +60,28 @@ def write_fixture(repo: Path, *, state: str = "validated") -> None:
                 "inputs": {"schema_ref": None, "description": "integer"},
                 "outputs": {"schema_ref": None, "description": "integer"},
                 "required_capabilities": [
-                    {"name": "demo.execute", "resource_scope": "active-task", "optional": False}
+                    {
+                        "name": "demo.execute",
+                        "resource_scope": "active-task",
+                        "optional": False,
+                    }
                 ],
                 "dependencies": [],
                 "provenance": {
                     "origin": "kpgs-original",
-                    "license_status": "compatible",
-                    "license_spdx": "MIT",
-                    "sources": [{"ref": "test-fixture", "relationship": "origin", "commit": None}],
+                    "license_status": license_status,
+                    "license_spdx": "MIT" if license_status == "verified-compatible" else None,
+                    "sources": [
+                        {
+                            "ref": "test-fixture",
+                            "relationship": "reference",
+                            "commit": None,
+                        }
+                    ],
                 },
                 "validation": {
                     "hard_gates": ["output must be an even integer"],
-                    "methods": ["deterministic-test"],
+                    "methods": ["unit"],
                     "evidence_refs": ["tests/test_canonical_skill_runtime.py"],
                 },
                 "failures": [
@@ -124,7 +141,11 @@ def authority_and_token(capability: str = "demo.execute"):
         domain_id="domain:test",
         task_id="task:test",
         capabilities=[
-            {"name": capability, "resource_scope": "active-task", "constraints": ["test-only"]}
+            {
+                "name": capability,
+                "resource_scope": "active-task",
+                "constraints": ["test-only"],
+            }
         ],
         policy_decision_ref="policy:test",
         governing_spec_ref="spec:test",
@@ -135,7 +156,9 @@ def authority_and_token(capability: str = "demo.execute"):
 
 
 class CanonicalSkillRuntimeTests(unittest.TestCase):
-    def test_skill_executes_only_after_capability_authorization_and_emits_bound_receipt(self) -> None:
+    def test_skill_executes_only_after_capability_authorization_and_emits_bound_receipt(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)
             write_fixture(repo)
@@ -177,16 +200,28 @@ class CanonicalSkillRuntimeTests(unittest.TestCase):
 
             self.assertEqual(result.output, 42)
             self.assertEqual(calls, 1)
-            self.assertEqual(result.receipt["schema"], "kpgs.skill-execution-receipt.v1")
+            self.assertEqual(
+                result.receipt["schema"], "kpgs.skill-execution-receipt.v1"
+            )
             self.assertEqual(result.receipt["skill"]["name"], "demo-skill")
             self.assertEqual(result.receipt["skill"]["version"], "1.2.3")
+            self.assertEqual(
+                result.receipt["skill"]["license_status"], "verified-compatible"
+            )
             self.assertTrue(result.receipt["input_digest"])
             self.assertTrue(result.receipt["output_digest"])
             self.assertTrue(result.receipt["capability_lease_ids"])
-            self.assertEqual(result.receipt["capability_decisions"][0]["capability"], "demo.execute")
+            self.assertEqual(
+                result.receipt["capability_decisions"][0]["capability"],
+                "demo.execute",
+            )
             self.assertIs(result.receipt["validation"]["passed"], True)
             self.assertEqual(result.receipt["outcome"], "completed")
             self.assertEqual(result.receipt["authority_effect"], "none")
+            self.assertIs(result.receipt["execution_context"]["released"], True)
+            self.assertIs(
+                result.receipt["execution_context"]["upstream_lease_revoked"], False
+            )
             self.assertEqual(evidence, [result.receipt])
 
     def test_undeclared_capability_blocks_before_handler(self) -> None:
@@ -195,7 +230,9 @@ class CanonicalSkillRuntimeTests(unittest.TestCase):
             write_fixture(repo)
             authority, token = authority_and_token("different.execute")
             calls = 0
-            runtime = CanonicalSkillRuntime(repo_root=repo, capability_authorizer=authority.authorize)
+            runtime = CanonicalSkillRuntime(
+                repo_root=repo, capability_authorizer=authority.authorize
+            )
 
             def handler(value):
                 nonlocal calls
@@ -203,7 +240,9 @@ class CanonicalSkillRuntimeTests(unittest.TestCase):
                 return value
 
             runtime.register_handler("demo-skill", "1.2.3", handler)
-            with self.assertRaisesRegex(SkillAuthorizationDenied, "capability denied before execution"):
+            with self.assertRaisesRegex(
+                SkillAuthorizationDenied, "capability denied before execution"
+            ):
                 runtime.execute(
                     name="demo-skill",
                     version="1.2.3",
@@ -222,11 +261,15 @@ class CanonicalSkillRuntimeTests(unittest.TestCase):
             repo = Path(directory)
             write_fixture(repo, state="draft")
             authority, token = authority_and_token()
-            runtime = CanonicalSkillRuntime(repo_root=repo, capability_authorizer=authority.authorize)
+            runtime = CanonicalSkillRuntime(
+                repo_root=repo, capability_authorizer=authority.authorize
+            )
             runtime.register_handler("demo-skill", "1.2.3", lambda value: value)
 
             self.assertEqual(runtime.discover("demo")[0]["name"], "demo-skill")
-            with self.assertRaisesRegex(SkillNotLoadable, "not production-loadable: draft"):
+            with self.assertRaisesRegex(
+                SkillNotLoadable, "not production-loadable: draft"
+            ):
                 runtime.execute(
                     name="demo-skill",
                     version="1.2.3",
@@ -238,6 +281,40 @@ class CanonicalSkillRuntimeTests(unittest.TestCase):
                     correlation_id="corr:test",
                     input_value=1,
                 )
+
+    def test_validated_skill_with_unresolved_license_is_not_loadable(self) -> None:
+        for license_status in ("unknown", "pending", "incompatible"):
+            with self.subTest(license_status=license_status):
+                with tempfile.TemporaryDirectory() as directory:
+                    repo = Path(directory)
+                    write_fixture(
+                        repo,
+                        state="validated",
+                        license_status=license_status,
+                    )
+                    authority, token = authority_and_token()
+                    runtime = CanonicalSkillRuntime(
+                        repo_root=repo,
+                        capability_authorizer=authority.authorize,
+                    )
+                    runtime.register_handler(
+                        "demo-skill", "1.2.3", lambda value: value
+                    )
+                    with self.assertRaisesRegex(
+                        SkillNotLoadable,
+                        "license status is not production-compatible",
+                    ):
+                        runtime.execute(
+                            name="demo-skill",
+                            version="1.2.3",
+                            platform="stateless-renter",
+                            lease_token=token,
+                            tenant_id="tenant:test",
+                            domain_id="domain:test",
+                            task_id="task:test",
+                            correlation_id="corr:test",
+                            input_value=1,
+                        )
 
 
 if __name__ == "__main__":
