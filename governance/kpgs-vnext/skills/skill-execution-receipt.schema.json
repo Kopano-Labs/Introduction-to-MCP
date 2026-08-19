@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpgs.local/schemas/skill-execution-receipt.schema.json",
+  "title": "KPGS Skill Execution Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "execution_id",
+    "skill",
+    "correlation_id",
+    "input_digest",
+    "output_digest",
+    "capability_lease_ids",
+    "capability_decisions",
+    "validation",
+    "outcome",
+    "failure",
+    "authority_effect",
+    "created_at"
+  ],
+  "properties": {
+    "schema": { "const": "kpgs.skill-execution-receipt.v1" },
+    "execution_id": { "type": "string", "minLength": 8 },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "package_path", "authority_class", "manifest_digest"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" },
+        "package_path": { "type": "string", "minLength": 1 },
+        "authority_class": { "enum": ["canonical-core", "publication-adapter"] },
+        "manifest_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "correlation_id": { "type": "string", "minLength": 1 },
+    "input_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "output_digest": {
+      "oneOf": [
+        { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        { "type": "null" }
+      ]
+    },
+    "capability_lease_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "capability_decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["capability", "resource_scope"],
+        "properties": {
+          "lease_id": { "type": "string" },
+          "capability": { "type": "string", "minLength": 1 },
+          "resource_scope": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passed", "reason", "kind"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "reason": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["deterministic", "execution"] }
+      }
+    },
+    "outcome": { "enum": ["completed", "rejected", "failed"] },
+    "failure": { "type": ["string", "null"] },
+    "authority_effect": { "const": "none" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
