@@ -1,0 +1,62 @@
+name: KPGS .NET Domain Adapter Proof
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'dotnet/Kopano.Kpgs.**'
+      - 'governance/kpgs-vnext/dotnet/**'
+      - '.github/workflows/kpgs-dotnet-domain-adapter-proof.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'dotnet/Kopano.Kpgs.**'
+      - 'governance/kpgs-vnext/dotnet/**'
+      - '.github/workflows/kpgs-dotnet-domain-adapter-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kpgs-dotnet-adapter-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore canonical adapter graph
+        run: dotnet restore dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj
+
+      - name: Build reusable packages and proof harness
+        run: dotnet build dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj --configuration Release --no-restore -warnaserror
+
+      - name: Build reference ASP.NET adapter
+        run: dotnet build dotnet/Kopano.Kpgs.ReferenceAdapter/Kopano.Kpgs.ReferenceAdapter.csproj --configuration Release -warnaserror
+
+      - name: Prove lifecycle, lease denial, idempotency, realtime fallback and rollback
+        run: dotnet run --project dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj --configuration Release --no-build
+
+      - name: Pack canonical preview packages
+        run: |
+          mkdir -p artifacts/nuget
+          dotnet pack dotnet/Kopano.Kpgs.Contracts/Kopano.Kpgs.Contracts.csproj --configuration Release --no-build --output artifacts/nuget
+          dotnet pack dotnet/Kopano.Kpgs.Evidence/Kopano.Kpgs.Evidence.csproj --configuration Release --no-build --output artifacts/nuget
+          dotnet pack dotnet/Kopano.Kpgs.Realtime/Kopano.Kpgs.Realtime.csproj --configuration Release --no-build --output artifacts/nuget
+          dotnet pack dotnet/Kopano.Kpgs.Adapter/Kopano.Kpgs.Adapter.csproj --configuration Release --no-build --output artifacts/nuget
+
+      - name: Upload preview package evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: kpgs-dotnet-adapter-preview-${{ github.sha }}
+          path: artifacts/nuget/*.nupkg
+          if-no-files-found: error
+          retention-days: 14
