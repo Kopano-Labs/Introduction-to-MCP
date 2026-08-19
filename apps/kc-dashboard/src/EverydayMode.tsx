@@ -5,7 +5,6 @@ import {
   friendlyGate,
   nextPilotState,
   permissionExplanation,
-  runtimeAdaptation,
   serializeProfile,
   type DetailDensity,
   type ExplanationStyle,
@@ -70,7 +69,6 @@ export default function EverydayMode({
   const online = useOnlineStatus();
   const connection = connectionMessage({ online, reconnecting: false });
   const permission = permissionExplanation();
-  const adaptation = useMemo(() => runtimeAdaptation(profile), [profile]);
   const friendlyItems = useMemo(
     () => attentionItems.map(friendlyGate),
     [attentionItems],
@@ -294,12 +292,9 @@ export default function EverydayMode({
         <details className="adaptation-details">
           <summary>How these settings affect responses</summary>
           <p>
-            They can change response warmth, length, pace, initiative, and supported inference hints at runtime.
-            They do not retrain model weights. Training or fine-tuning is a separate governed process and is not active here.
+            They can change how warm, short, detailed, fast, or proactive responses feel while a response is being generated.
+            They do not retrain the model. Training or fine-tuning is a separate governed process and is not active here.
           </p>
-          <code aria-label="Current runtime adaptation summary">
-            {JSON.stringify(adaptation, null, 2)}
-          </code>
         </details>
       </section>
 
