@@ -1,0 +1,96 @@
+name: KPGS Evaluation Live Evidence Proof
+
+on:
+  push:
+    branches:
+      - "fix/evaluation-live-evidence-loop"
+    paths:
+      - "governance/kpgs-vnext/evaluation/**"
+      - "tests/test_evaluation_reward_loop.py"
+      - ".github/workflows/kpgs-evaluation-live-proof.yml"
+  pull_request:
+    branches: [master]
+    paths:
+      - "governance/kpgs-vnext/evaluation/**"
+      - "tests/test_evaluation_reward_loop.py"
+      - ".github/workflows/kpgs-evaluation-live-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kpgs-evaluation-live-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  live-evidence:
+    name: Execute fixtures · Bundle evidence · Profile HOLD
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Setup .NET 10 LTS
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Execute live reference suite into canonical evidence bundle
+        run: |
+          python governance/kpgs-vnext/evaluation/run_live_reference_suite.py \
+            --output artifacts/evaluation-live-reference.json
+
+      - name: Run deterministic profiler regression tests
+        run: python -m unittest discover -s tests -p 'test_evaluation_reward_loop.py' -v
+
+      - name: Verify emitted receipt is evidence-bound and truthfully held
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(Path('artifacts/evaluation-live-reference.json').read_text(encoding='utf-8'))
+          assert receipt['classification'] == 'CI_REGRESSION_EXECUTION_NOT_PRODUCTION_TELEMETRY'
+          assert len(receipt['commit_sha']) == 40
+          assert receipt['evaluation']['hard_gates_passed'] is True
+          assert receipt['profile']['recommendation'] == 'hold'
+          assert 'human approval' in ' '.join(receipt['profile']['reasons']).lower()
+
+          executions = receipt['executions']
+          for case_id in (
+              'renter-capability-denial',
+              'skill-lease-bound-execution',
+              'progressive-update-swfus-contract',
+              'dotnet-adapter-replay-lease-boundary',
+          ):
+              assert executions[case_id]['returncode'] == 0, case_id
+              assert len(executions[case_id]['output_sha256']) == 64, case_id
+
+          bundle = receipt['evidence_bundle']
+          assert bundle['commit_sha'] == receipt['commit_sha']
+          assert bundle['governance_decision']['decision'] == 'allow'
+          assert bundle['adapter']['implementation'] == 'Kopano.Kpgs.Adapter'
+          assert bundle['renter']['protocol_version']
+          assert bundle['skills']
+          assert bundle['authority_effect'] == 'none'
+          assert bundle['canonical'] is False
+          assert bundle['execution_context']['released'] is True
+
+          layers = {hop['layer'] for hop in bundle['trace']['hops']}
+          assert {'pwa', 'adapter', 'sovereign-hub', 'renter', 'skill', 'verifier'} <= layers
+          print('KPGS evaluation live evidence receipt: PASS')
+
+      - name: Upload live evaluation receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: kpgs-evaluation-live-evidence
+          path: artifacts/evaluation-live-reference.json
+          if-no-files-found: error
