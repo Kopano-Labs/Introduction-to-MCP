@@ -3,6 +3,8 @@ namespace Kopano.Kpgs.Contracts;
 public static class KpgsProtocol
 {
     public const string Current = "1.0";
+    public const string BoundaryMarker = "#NB";
+    public const string ProgressiveUpdate = "APU -> Progressive Update -> #NB -> bounded CRUD -> SWFUS";
 
     public static bool IsCompatible(string requested, string supported = Current)
     {
@@ -50,7 +52,9 @@ public sealed record GovernedTaskRequest(
     string CorrelationId,
     string GoverningSpecRef,
     object Input,
-    string IdempotencyKey);
+    string IdempotencyKey,
+    string BoundaryMarker = KpgsProtocol.BoundaryMarker,
+    string CrudIntent = "CREATE");
 
 public sealed record GovernedTaskSnapshot(
     string TaskId,
@@ -65,7 +69,8 @@ public sealed record GovernedCommand(
     string Name,
     object? Payload,
     string IdempotencyKey,
-    string CorrelationId);
+    string CorrelationId,
+    string BoundaryMarker = KpgsProtocol.BoundaryMarker);
 
 public sealed record EvidenceSummary(
     string TaskId,
