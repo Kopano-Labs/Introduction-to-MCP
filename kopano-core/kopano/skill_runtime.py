@@ -17,6 +17,7 @@ import secrets
 from typing import Any, Callable, Mapping, Protocol
 
 PRODUCTION_STATES = {"validated", "approved"}
+PRODUCTION_LICENSE_STATUS = "verified-compatible"
 
 
 class SkillRuntimeError(Exception):
@@ -75,7 +76,13 @@ class SkillExecutionResult:
 
 
 def _canonical_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, default=str)
+    return json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        default=str,
+    )
 
 
 def _digest(value: Any) -> str:
@@ -83,7 +90,12 @@ def _digest(value: Any) -> str:
 
 
 def _iso_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return (
+        datetime.now(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
 
 
 def _decision_dict(decision: Any) -> dict[str, Any]:
@@ -113,8 +125,9 @@ class CanonicalSkillRuntime:
     """Discover, authorize, execute, validate and receipt one registered skill.
 
     The runtime never interprets registry presence as permission. A package must
-    already be in a production-loadable state and every non-optional capability
-    must be authorized by the injected lease authority before the handler runs.
+    already be in a production-loadable state with verified-compatible licensing,
+    and every non-optional capability must be authorized by the injected lease
+    authority before the handler runs.
     """
 
     def __init__(
@@ -171,6 +184,18 @@ class CanonicalSkillRuntime:
 
     def select(self, name: str, version: str, *, platform: str) -> SkillSelection:
         registry = self._read_json(self.registry_path)
+        policy = registry.get("selection_policy")
+        if not isinstance(policy, dict):
+            raise SkillNotLoadable("registry selection_policy is missing")
+        if set(policy.get("production_states", [])) != PRODUCTION_STATES:
+            raise SkillNotLoadable("registry production-state policy drift detected")
+        if policy.get("require_capability_lease") is not True:
+            raise SkillNotLoadable("registry no longer requires capability leases")
+        if policy.get("require_provenance") is not True:
+            raise SkillNotLoadable("registry no longer requires provenance")
+        if policy.get("require_license_status") is not True:
+            raise SkillNotLoadable("registry no longer requires license status")
+
         entries = [
             entry
             for entry in registry.get("skills", [])
@@ -186,7 +211,7 @@ class CanonicalSkillRuntime:
         if not isinstance(package_path, str) or not package_path:
             raise SkillNotLoadable("registry package_path is invalid")
         package_dir = (self.repo_root / package_path).resolve()
-        if self.repo_root not in package_dir.parents:
+        if package_dir != self.repo_root and self.repo_root not in package_dir.parents:
             raise SkillNotLoadable("package path escapes repository root")
 
         manifest = self._read_json(package_dir / "skill.json")
@@ -199,9 +224,18 @@ class CanonicalSkillRuntime:
         platforms = manifest.get("runtime", {}).get("platforms", [])
         if platform not in platforms:
             raise SkillNotLoadable(f"runtime platform is not declared: {platform}")
-        provenance = manifest.get("provenance", {})
-        if not provenance.get("origin") or not provenance.get("license_status"):
-            raise SkillNotLoadable("provenance/license status is incomplete")
+
+        provenance = manifest.get("provenance")
+        if not isinstance(provenance, dict) or not provenance.get("origin"):
+            raise SkillNotLoadable("provenance is incomplete")
+        license_status = provenance.get("license_status")
+        if license_status != PRODUCTION_LICENSE_STATUS:
+            raise SkillNotLoadable(
+                f"{name}@{version} license status is not production-compatible: {license_status}"
+            )
+        sources = provenance.get("sources")
+        if not isinstance(sources, list) or not sources:
+            raise SkillNotLoadable("provenance sources are incomplete")
         if not (package_dir / "SKILL.md").is_file():
             raise SkillNotLoadable("SKILL.md is missing")
 
@@ -260,7 +294,7 @@ class CanonicalSkillRuntime:
                 )
             except Exception as exc:
                 raise SkillAuthorizationDenied(
-                    f"capability denied before execution: {capability}@{resource_scope}: {exc}"
+                    f"capability denied before execution: {capability}@{resource_scope}: {type(exc).__name__}"
                 ) from exc
             capability_decisions.append(_decision_dict(decision))
 
@@ -275,16 +309,23 @@ class CanonicalSkillRuntime:
                 input_digest=input_digest,
                 output_digest=None,
                 capability_decisions=capability_decisions,
-                validation={"passed": False, "reason": "handler raised", "kind": "execution"},
+                validation={
+                    "passed": False,
+                    "reason": "bounded handler raised",
+                    "kind": "execution",
+                },
                 outcome="failed",
-                failure=str(exc),
+                failure=f"HANDLER_FAILED:{type(exc).__name__}",
             )
             self._emit(receipt)
             raise
 
         validator = self._validators.get(identity)
         if validator is None:
-            passed, reason = True, "handler completed; no additional runtime output validator registered"
+            passed, reason = (
+                True,
+                "handler completed; no additional runtime output validator registered",
+            )
         else:
             passed, reason = validator(output)
         if not passed:
@@ -295,7 +336,11 @@ class CanonicalSkillRuntime:
                 input_digest=input_digest,
                 output_digest=_digest(output),
                 capability_decisions=capability_decisions,
-                validation={"passed": False, "reason": reason, "kind": "deterministic"},
+                validation={
+                    "passed": False,
+                    "reason": reason,
+                    "kind": "deterministic",
+                },
                 outcome="rejected",
                 failure="output validation failed",
             )
@@ -346,6 +391,7 @@ class CanonicalSkillRuntime:
                 "package_path": selection.package_path,
                 "authority_class": selection.authority_class,
                 "manifest_digest": _digest(manifest),
+                "license_status": manifest.get("provenance", {}).get("license_status"),
             },
             "correlation_id": correlation_id,
             "input_digest": input_digest,
@@ -356,6 +402,10 @@ class CanonicalSkillRuntime:
             "outcome": outcome,
             "failure": failure,
             "authority_effect": "none",
+            "execution_context": {
+                "released": True,
+                "upstream_lease_revoked": False,
+            },
             "created_at": _iso_now(),
         }
 
