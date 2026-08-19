@@ -4,13 +4,13 @@ on:
   pull_request:
     branches: [master]
     paths:
-      - 'dotnet/Kopano.Kpgs.**'
+      - 'dotnet/Kopano.Kpgs.*/**'
       - 'governance/kpgs-vnext/dotnet/**'
       - '.github/workflows/kpgs-dotnet-domain-adapter-proof.yml'
   push:
     branches: [master]
     paths:
-      - 'dotnet/Kopano.Kpgs.**'
+      - 'dotnet/Kopano.Kpgs.*/**'
       - 'governance/kpgs-vnext/dotnet/**'
       - '.github/workflows/kpgs-dotnet-domain-adapter-proof.yml'
   workflow_dispatch:
