@@ -1,4 +1,7 @@
 using System.Collections.Concurrent;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 using Kopano.Kpgs.Contracts;
 using Kopano.Kpgs.Evidence;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +33,7 @@ public interface IKpgsHubClient
 }
 
 public sealed class CapabilityDeniedException(string message) : InvalidOperationException(message);
+public sealed class KpgsIdempotencyConflictException(string message) : InvalidOperationException(message);
 
 public sealed class KpgsResiliencePolicy(KpgsAdapterOptions options)
 {
@@ -70,7 +74,11 @@ public sealed class KpgsDomainAdapter(
     IKpgsHubClient hub,
     IKpgsEvidenceSink evidence)
 {
-    private readonly ConcurrentDictionary<string, GovernedTaskSnapshot> _idempotentResults = new(StringComparer.Ordinal);
+    private sealed record IdempotencyEntry(
+        string Fingerprint,
+        Lazy<Task<GovernedTaskSnapshot>> Operation);
+
+    private readonly ConcurrentDictionary<string, IdempotencyEntry> _idempotentResults = new(StringComparer.Ordinal);
     private readonly KpgsResiliencePolicy _resilience = new(options);
 
     public DomainManifest Manifest => options.Manifest;
@@ -94,24 +102,76 @@ public sealed class KpgsDomainAdapter(
 
     public async Task<GovernedTaskSnapshot> CreateTaskAsync(HubContext context, GovernedTaskRequest request, CancellationToken cancellationToken = default)
     {
-        if (_idempotentResults.TryGetValue(request.IdempotencyKey, out var replay)) return replay;
-        var lease = await RequireLeaseAsync(context, new CapabilityRequest("task.create", $"task:{request.TaskId}", request.IdempotencyKey), cancellationToken);
-        // Non-idempotent business execution is never transparently retried here. The
-        // caller-supplied key and Hub remain the durable replay authority.
-        var result = await hub.CreateTaskAsync(context, request, lease, cancellationToken);
-        _idempotentResults.TryAdd(request.IdempotencyKey, result);
-        await evidence.EmitAsync(EvidenceFactory.Create(context, "task-created", $"kpgs://task/{request.TaskId}", result), cancellationToken);
-        return result;
+        ValidateCreateBoundary(request);
+
+        // Replays do not bypass authorization: every privileged invocation resolves
+        // a current Hub decision before it may reuse or execute governed work.
+        var lease = await RequireLeaseAsync(
+            context,
+            new CapabilityRequest("task.create", $"task:{request.TaskId}", request.IdempotencyKey),
+            cancellationToken);
+
+        var scopedKey = $"create:{context.TenantId}:{context.DomainId}:{request.TaskId}:{request.IdempotencyKey}";
+        var fingerprint = Fingerprint(new
+        {
+            context.TenantId,
+            context.DomainId,
+            request.TaskId,
+            request.CorrelationId,
+            request.GoverningSpecRef,
+            request.Input,
+            request.BoundaryMarker,
+            request.CrudIntent,
+        });
+
+        return await ExecuteOnceAsync(
+            scopedKey,
+            fingerprint,
+            async () =>
+            {
+                // Non-idempotent business execution is never transparently retried here.
+                // The caller key + this collision membrane + Hub/domain state form the replay boundary.
+                var result = await hub.CreateTaskAsync(context, request, lease, cancellationToken);
+                await evidence.EmitAsync(
+                    EvidenceFactory.Create(context, "task-created", $"kpgs://task/{request.TaskId}", result),
+                    cancellationToken);
+                return result;
+            });
     }
 
     public async Task<GovernedTaskSnapshot> ExecuteCommandAsync(HubContext context, GovernedCommand command, CancellationToken cancellationToken = default)
     {
-        if (_idempotentResults.TryGetValue(command.IdempotencyKey, out var replay)) return replay;
-        var lease = await RequireLeaseAsync(context, new CapabilityRequest($"task.command.{command.Name}", $"task:{context.TaskId}", command.IdempotencyKey), cancellationToken);
-        var result = await hub.ExecuteCommandAsync(context, command, lease, cancellationToken);
-        _idempotentResults.TryAdd(command.IdempotencyKey, result);
-        await evidence.EmitAsync(EvidenceFactory.Create(context, "task-command", $"kpgs://command/{command.CommandId}", result), cancellationToken);
-        return result;
+        ValidateCommandBoundary(command);
+
+        var lease = await RequireLeaseAsync(
+            context,
+            new CapabilityRequest($"task.command.{command.Name}", $"task:{context.TaskId}", command.IdempotencyKey),
+            cancellationToken);
+
+        var scopedKey = $"command:{context.TenantId}:{context.DomainId}:{context.TaskId}:{command.IdempotencyKey}";
+        var fingerprint = Fingerprint(new
+        {
+            context.TenantId,
+            context.DomainId,
+            context.TaskId,
+            command.CommandId,
+            command.Name,
+            command.Payload,
+            command.CorrelationId,
+            command.BoundaryMarker,
+        });
+
+        return await ExecuteOnceAsync(
+            scopedKey,
+            fingerprint,
+            async () =>
+            {
+                var result = await hub.ExecuteCommandAsync(context, command, lease, cancellationToken);
+                await evidence.EmitAsync(
+                    EvidenceFactory.Create(context, "task-command", $"kpgs://command/{command.CommandId}", result),
+                    cancellationToken);
+                return result;
+            });
     }
 
     public Task<GovernedTaskSnapshot?> GetSessionAsync(HubContext context, CancellationToken cancellationToken = default) =>
@@ -123,9 +183,74 @@ public sealed class KpgsDomainAdapter(
     private async Task<string> RequireLeaseAsync(HubContext context, CapabilityRequest request, CancellationToken cancellationToken)
     {
         var decision = await _resilience.ExecuteSafeAsync(ct => hub.RequestCapabilityAsync(context, request, ct), cancellationToken);
-        if (!decision.Allowed || string.IsNullOrWhiteSpace(decision.LeaseToken))
-            throw new CapabilityDeniedException(decision.UserSafeReason);
+        if (!decision.Allowed ||
+            string.IsNullOrWhiteSpace(decision.LeaseToken) ||
+            decision.ExpiresAt is null ||
+            decision.ExpiresAt <= DateTimeOffset.UtcNow)
+        {
+            throw new CapabilityDeniedException(
+                string.IsNullOrWhiteSpace(decision.UserSafeReason)
+                    ? "Capability lease is missing, denied, or expired."
+                    : decision.UserSafeReason);
+        }
         return decision.LeaseToken;
+    }
+
+    private async Task<GovernedTaskSnapshot> ExecuteOnceAsync(
+        string scopedKey,
+        string fingerprint,
+        Func<Task<GovernedTaskSnapshot>> action)
+    {
+        while (true)
+        {
+            if (_idempotentResults.TryGetValue(scopedKey, out var existing))
+            {
+                if (!string.Equals(existing.Fingerprint, fingerprint, StringComparison.Ordinal))
+                {
+                    throw new KpgsIdempotencyConflictException(
+                        "Idempotency key is already bound to different governed content.");
+                }
+                return await existing.Operation.Value;
+            }
+
+            var candidate = new IdempotencyEntry(
+                fingerprint,
+                new Lazy<Task<GovernedTaskSnapshot>>(
+                    action,
+                    LazyThreadSafetyMode.ExecutionAndPublication));
+
+            if (!_idempotentResults.TryAdd(scopedKey, candidate)) continue;
+
+            try
+            {
+                return await candidate.Operation.Value;
+            }
+            catch
+            {
+                _idempotentResults.TryRemove(scopedKey, out _);
+                throw;
+            }
+        }
+    }
+
+    private static void ValidateCreateBoundary(GovernedTaskRequest request)
+    {
+        if (!string.Equals(request.BoundaryMarker, KpgsProtocol.BoundaryMarker, StringComparison.Ordinal))
+            throw new InvalidOperationException("Literal #NB boundary is required before governed task CREATE.");
+        if (!string.Equals(request.CrudIntent, "CREATE", StringComparison.Ordinal))
+            throw new InvalidOperationException("The reference task mutation is bounded to CRUD CREATE.");
+    }
+
+    private static void ValidateCommandBoundary(GovernedCommand command)
+    {
+        if (!string.Equals(command.BoundaryMarker, KpgsProtocol.BoundaryMarker, StringComparison.Ordinal))
+            throw new InvalidOperationException("Literal #NB boundary is required before governed task command mutation.");
+    }
+
+    private static string Fingerprint(object value)
+    {
+        var json = JsonSerializer.Serialize(value);
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(json))).ToLowerInvariant();
     }
 }
 
@@ -143,11 +268,15 @@ public static class KpgsAdapterEndpointExtensions
         {
             try { return Results.Ok(await adapter.CreateTaskAsync(contextFactory(http), request, ct)); }
             catch (CapabilityDeniedException ex) { return Results.Json(new { error = ex.Message }, statusCode: StatusCodes.Status403Forbidden); }
+            catch (KpgsIdempotencyConflictException ex) { return Results.Json(new { error = ex.Message }, statusCode: StatusCodes.Status409Conflict); }
+            catch (InvalidOperationException ex) { return Results.Json(new { error = ex.Message }, statusCode: StatusCodes.Status422UnprocessableEntity); }
         });
         endpoints.MapPost("/kpgs/tasks/{id}/commands", async (HttpContext http, GovernedCommand command, CancellationToken ct) =>
         {
             try { return Results.Ok(await adapter.ExecuteCommandAsync(contextFactory(http), command, ct)); }
             catch (CapabilityDeniedException ex) { return Results.Json(new { error = ex.Message }, statusCode: StatusCodes.Status403Forbidden); }
+            catch (KpgsIdempotencyConflictException ex) { return Results.Json(new { error = ex.Message }, statusCode: StatusCodes.Status409Conflict); }
+            catch (InvalidOperationException ex) { return Results.Json(new { error = ex.Message }, statusCode: StatusCodes.Status422UnprocessableEntity); }
         });
         return endpoints;
     }
