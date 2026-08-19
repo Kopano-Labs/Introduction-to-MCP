@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageId>Kopano.Kpgs.Evidence</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Kopano Labs</Authors>
+    <Description>Correlation and evidence emission helpers for KPGS domain adapters.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Kopano.Kpgs.Contracts/Kopano.Kpgs.Contracts.csproj" />
+  </ItemGroup>
+</Project>
