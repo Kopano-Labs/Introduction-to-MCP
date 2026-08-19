@@ -1,7 +1,7 @@
 {
   "schema": "kpgs.evaluation-suite.v1",
   "suite_id": "kpgs-core-regression",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "risk_class": "high",
   "cases": [
     {
@@ -21,12 +21,20 @@
       "fixture_ref": "repo://tests/test_canonical_skill_runtime.py"
     },
     {
-      "id": "domain-adapter-swfus-idempotency",
+      "id": "progressive-update-swfus-contract",
       "layer": "domain-adapter",
       "method": "deterministic",
       "hard_gate": true,
       "threshold": 1.0,
       "fixture_ref": "repo://tests/test_swfus_progressive_updates.py"
+    },
+    {
+      "id": "dotnet-adapter-replay-lease-boundary",
+      "layer": "domain-adapter",
+      "method": "deterministic",
+      "hard_gate": true,
+      "threshold": 1.0,
+      "fixture_ref": "repo://dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj"
     },
     {
       "id": "adaptive-user-outcome",
@@ -35,7 +43,7 @@
       "hard_gate": false,
       "threshold": 0.8,
       "minimum_samples": 20,
-      "fixture_ref": "evidence://user-outcome/sample-window"
+      "fixture_ref": "repo://governance/kpgs-vnext/evaluation/fixtures/adaptive-user-outcome.json"
     }
   ]
 }
