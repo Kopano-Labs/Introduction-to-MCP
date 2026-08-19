@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Execute the KPGS reference suite and feed real receipts into the profiler.
+"""Execute the KPGS reference suite and feed observed receipts into profiling.
 
-This is a CI/regression live workflow, not production telemetry. Deterministic
-cases execute their repository fixtures; the probabilistic case consumes a
-versioned regression sample window. The resulting canonical evidence bundle is
-then scored by the existing evaluation/profiler engine.
+This is a CI/regression proof path, not production telemetry. Deterministic
+cases execute repository fixtures. The probabilistic case consumes a versioned
+regression sample window that is explicitly labelled as synthetic CI evidence.
 """
 
 from __future__ import annotations
@@ -24,10 +23,12 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[3]
 EVALUATION_DIR = ROOT / "governance/kpgs-vnext/evaluation"
-EVIDENCE_PATH = ROOT / "governance/kpgs-vnext/evidence/evidence.py"
 EVALUATION_PATH = EVALUATION_DIR / "evaluation.py"
+EVIDENCE_PATH = ROOT / "governance/kpgs-vnext/evidence/evidence.py"
 SUITE_PATH = EVALUATION_DIR / "reference-suite.json"
 POLICY_PATH = EVALUATION_DIR / "promotion-policy.json"
+ROLLBACK_TARGET = "release://previous-known-good"
+VERIFIER_ID = "ci://evaluation-reference-suite"
 
 
 def _load_module(name: str, path: Path):
@@ -52,7 +53,8 @@ def _repo_path(ref: str) -> Path:
     if not ref.startswith("repo://"):
         raise ValueError(f"reference is not repository-local: {ref}")
     path = (ROOT / ref.removeprefix("repo://")).resolve()
-    if ROOT.resolve() not in path.parents and path != ROOT.resolve():
+    root = ROOT.resolve()
+    if path != root and root not in path.parents:
         raise ValueError(f"fixture escapes repository root: {ref}")
     if not path.exists():
         raise FileNotFoundError(path)
@@ -101,8 +103,7 @@ def _execute(command: list[str]) -> dict[str, Any]:
 def _adapter_version() -> str:
     project = ROOT / "dotnet/Kopano.Kpgs.Adapter/Kopano.Kpgs.Adapter.csproj"
     tree = ET.parse(project)
-    version = tree.findtext(".//Version")
-    return (version or "0.0.0-unversioned").strip()
+    return (tree.findtext(".//Version") or "0.0.0-unversioned").strip()
 
 
 def _skill_identity() -> tuple[str, str, str]:
@@ -121,16 +122,16 @@ def _skill_identity() -> tuple[str, str, str]:
 
 def _commit_sha() -> str:
     candidate = os.getenv("GITHUB_SHA", "").strip()
-    if len(candidate) == 40:
-        return candidate
-    result = subprocess.run(
+    if len(candidate) == 40 and all(ch in "0123456789abcdefABCDEF" for ch in candidate):
+        return candidate.lower()
+    completed = subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=ROOT,
         text=True,
         capture_output=True,
         check=True,
     )
-    return result.stdout.strip()
+    return completed.stdout.strip().lower()
 
 
 def _utc_now() -> str:
@@ -142,36 +143,62 @@ def _utc_now() -> str:
     )
 
 
+def _case_passed(case: dict[str, Any], *, score: float, samples: int | None) -> bool:
+    """Use the suite contract as the single pass/fail law."""
+    threshold_ok = score >= float(case["threshold"])
+    if case["method"] == "deterministic":
+        return threshold_ok
+    minimum = int(case["minimum_samples"])
+    return threshold_ok and (samples or 0) >= minimum
+
+
+def _result_method(case_id: str, declared_method: str) -> str:
+    if case_id == "dotnet-adapter-replay-lease-boundary":
+        return "integration"
+    if declared_method == "deterministic":
+        return "unit"
+    return "integration"
+
+
 def run(output_path: Path) -> dict[str, Any]:
     evaluation = _load_module("kpgs_live_evaluation", EVALUATION_PATH)
     evidence = _load_module("kpgs_live_evidence", EVIDENCE_PATH)
 
     suite = evaluation.load_json(SUITE_PATH)
     policy = evaluation.load_json(POLICY_PATH)
+    evaluation.validate_suite(suite)
+    evaluation.validate_policy(policy)
+
     results = []
     executions: dict[str, dict[str, Any]] = {}
+    cases_by_id = {str(case["id"]): case for case in suite["cases"]}
 
     for case in suite["cases"]:
         case_id = str(case["id"])
-        fixture_path = _repo_path(str(case["fixture_ref"]))
         method = str(case["method"])
+        fixture_path = _repo_path(str(case["fixture_ref"]))
 
         if method == "deterministic":
             execution = _execute(_command_for_fixture(fixture_path))
             score = 1.0 if execution["returncode"] == 0 else 0.0
+            passed = _case_passed(case, score=score, samples=1)
+            evidence_ref = f"ci://evaluation/{case_id}/{execution['output_sha256']}"
             executions[case_id] = {
                 **execution,
                 "fixture_ref": case["fixture_ref"],
                 "classification": "EXECUTED_REPOSITORY_FIXTURE",
+                "score": score,
+                "passed": passed,
             }
             results.append(
                 evaluation.EvaluationResult(
                     case_id=case_id,
                     method=method,
                     score=score,
-                    sample_size=1,
-                    evidence_ref=f"ci://evaluation/{case_id}/{execution['output_sha256']}",
-                    verifier="ci://evaluation-reference-suite",
+                    passed=passed,
+                    evidence_ref=evidence_ref,
+                    verifier_id=VERIFIER_ID,
+                    samples=None,
                 )
             )
             continue
@@ -182,46 +209,37 @@ def run(output_path: Path) -> dict[str, Any]:
             if not samples:
                 raise RuntimeError(f"probabilistic fixture has no samples: {fixture_path}")
             score = sum(samples) / len(samples)
+            passed = _case_passed(case, score=score, samples=len(samples))
+            evidence_ref = f"repo://{fixture_path.relative_to(ROOT).as_posix()}"
             executions[case_id] = {
                 "fixture_ref": case["fixture_ref"],
                 "fixture_sha256": _sha256_file(fixture_path),
                 "classification": fixture.get("classification"),
                 "sample_size": len(samples),
                 "score": score,
+                "passed": passed,
             }
             results.append(
                 evaluation.EvaluationResult(
                     case_id=case_id,
                     method=method,
                     score=score,
-                    sample_size=len(samples),
-                    evidence_ref=f"repo://{fixture_path.relative_to(ROOT).as_posix()}",
-                    verifier="ci://evaluation-reference-suite",
+                    passed=passed,
+                    evidence_ref=evidence_ref,
+                    verifier_id=VERIFIER_ID,
+                    samples=len(samples),
                 )
             )
             continue
 
         raise RuntimeError(f"live runner has no governed fixture adapter for {method}")
 
-    evidence_refs = {
-        "trace_ref": "ci://evaluation/reference-suite/trace",
-        "task_ref": "task://kpgs-core-regression",
-        "spec_ref": "repo://governance/kpgs-vnext/evaluation/reference-suite.json",
-        "skill_ref": "repo://governance/kpgs-vnext/skills/core/kpgs-audit-verify-govern/skill.json",
-        "renter_ref": "repo://governance/kpgs-vnext/security/capability_lease.py",
-        "verifier_ref": "ci://evaluation-reference-suite",
-    }
-    evaluation_result = evaluation.evaluate_run(
-        suite=suite,
-        results=results,
-        evidence_refs=evidence_refs,
-        governance_admitted=True,
-    )
-
+    scorecard = evaluation.score_results(suite, results)
     commit_sha = _commit_sha()
     run_id = os.getenv("GITHUB_RUN_ID", "local")
     skill_name, skill_version, renter_protocol = _skill_identity()
     correlation_id = f"evaluation:{commit_sha[:12]}"
+
     builder = evidence.EvidenceBundleBuilder(
         estate_property="kopanolabs.com",
         release_ref=f"ci://github-actions/{run_id}",
@@ -248,13 +266,11 @@ def run(output_path: Path) -> dict[str, Any]:
     )
 
     now = _utc_now()
-    deterministic = [
-        result for result in results if result.method == "deterministic"
-    ]
     by_id = {result.case_id: result for result in results}
-    trace_status = lambda case_id: (
-        "succeeded" if by_id[case_id].score >= 1.0 else "failed"
-    )
+
+    def trace_status(case_id: str) -> str:
+        return "succeeded" if by_id[case_id].passed else "failed"
+
     builder.add_trace_hop(
         layer="pwa",
         ref="ci://evaluation/reference-client",
@@ -291,15 +307,15 @@ def run(output_path: Path) -> dict[str, Any]:
     )
     builder.add_trace_hop(
         layer="verifier",
-        ref="ci://evaluation-reference-suite",
-        status="succeeded" if evaluation_result.hard_gates_passed else "failed",
+        ref=VERIFIER_ID,
+        status="succeeded" if not scorecard["hard_gate_failures"] else "failed",
         at=now,
     )
 
-    suite_ref = "repo://governance/kpgs-vnext/evaluation/reference-suite.json"
-    user_fixture_ref = "repo://governance/kpgs-vnext/evaluation/fixtures/adaptive-user-outcome.json"
     builder.add_artifact(
-        kind="specification", ref=suite_ref, sha256=_sha256_file(SUITE_PATH)
+        kind="specification",
+        ref="repo://governance/kpgs-vnext/evaluation/reference-suite.json",
+        sha256=_sha256_file(SUITE_PATH),
     )
     builder.add_artifact(
         kind="capability-lease",
@@ -310,10 +326,10 @@ def run(output_path: Path) -> dict[str, Any]:
         kind="execution",
         ref="repo://dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj",
         sha256=_sha256_file(
-            ROOT
-            / "dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj"
+            ROOT / "dotnet/Kopano.Kpgs.Adapter.Tests/Kopano.Kpgs.Adapter.Tests.csproj"
         ),
     )
+
     result_digest = _sha256_bytes(
         json.dumps(
             [
@@ -321,9 +337,10 @@ def run(output_path: Path) -> dict[str, Any]:
                     "case_id": result.case_id,
                     "method": result.method,
                     "score": result.score,
-                    "sample_size": result.sample_size,
+                    "passed": result.passed,
+                    "samples": result.samples,
                     "evidence_ref": result.evidence_ref,
-                    "verifier": result.verifier,
+                    "verifier_id": result.verifier_id,
                 }
                 for result in results
             ],
@@ -336,37 +353,30 @@ def run(output_path: Path) -> dict[str, Any]:
         ref=f"ci://evaluation/reference-suite/results/{result_digest}",
         sha256=result_digest,
     )
-    user_fixture_path = _repo_path(user_fixture_ref)
+    user_fixture_path = _repo_path(
+        str(cases_by_id["adaptive-user-outcome"]["fixture_ref"])
+    )
     builder.add_artifact(
         kind="user-outcome",
-        ref=user_fixture_ref,
+        ref=f"repo://{user_fixture_path.relative_to(ROOT).as_posix()}",
         sha256=_sha256_file(user_fixture_path),
     )
 
     for result in results:
-        method = (
-            "integration"
-            if result.case_id == "dotnet-adapter-replay-lease-boundary"
-            else "unit"
-            if result.method == "deterministic"
-            else "integration"
-        )
+        case = cases_by_id[result.case_id]
         builder.add_verification(
-            verifier_id="ci://evaluation-reference-suite",
+            verifier_id=VERIFIER_ID,
             criterion_id=result.case_id,
-            method=method,
-            hard_gate=bool(
-                next(case["hard_gate"] for case in suite["cases"] if case["id"] == result.case_id)
-            ),
+            method=_result_method(result.case_id, result.method),
+            hard_gate=bool(case.get("hard_gate")),
             passed=result.passed,
             evidence_ref=result.evidence_ref,
             score=result.score,
         )
 
+    deterministic = [result for result in results if result.method == "deterministic"]
+    hard_pass_ratio = sum(1 for result in deterministic if result.passed) / len(deterministic)
     probabilistic = by_id["adaptive-user-outcome"]
-    hard_pass_ratio = (
-        sum(1 for result in deterministic if result.passed) / len(deterministic)
-    )
     builder.add_metric(
         name="task-completion",
         value=probabilistic.score,
@@ -385,29 +395,28 @@ def run(output_path: Path) -> dict[str, Any]:
         unit="ratio",
         evidence_ref="ci://evaluation/deterministic-error-ratio",
     )
-    builder.set_aggregate_score("deterministic", evaluation_result.deterministic_score)
-    builder.set_aggregate_score("probabilistic", evaluation_result.probabilistic_score)
-    builder.set_aggregate_score("model", evaluation_result.model_score)
+    builder.set_aggregate_score("reference-suite", scorecard["aggregate_score"])
 
-    governance_decision = "allow" if evaluation_result.hard_gates_passed else "hold"
+    evidence_decision = "allow" if not scorecard["hard_gate_failures"] else "hold"
     bundle = builder.finalize(
-        decision=governance_decision,
+        decision=evidence_decision,
         reason=(
-            "Executed CI regression evidence is admitted for profiler evaluation; this is not a release promotion."
-            if governance_decision == "allow"
-            else "One or more executed deterministic hard gates failed; profiler must hold."
+            "Executed CI regression evidence is governance-admitted for profiler evaluation; this is not a release promotion."
+            if evidence_decision == "allow"
+            else "Executed deterministic hard gates failed; promotion evaluation is held."
         ),
         decision_ref=f"ci://github-actions/{run_id}/evaluation",
-        next_action="Apply promotion policy; high-risk release still requires human approval.",
+        next_action="Apply the high-risk promotion policy; human approval remains separate.",
     )
     engineering = evidence.engineering_scorecard(bundle)
-    decision = evaluation.decide_promotion(
-        evaluation=evaluation_result,
+
+    promotion_decision = evaluation.decide_promotion(
+        scorecard=scorecard,
         policy=policy,
         evidence_bundle=bundle,
+        rollback_target=ROLLBACK_TARGET,
         human_approval_ref=None,
     )
-    profile = evaluation.profile_evaluation(evaluation_result, decision)
 
     payload = {
         "schema": "kpgs.evaluation-live-reference-receipt.v1",
@@ -416,28 +425,27 @@ def run(output_path: Path) -> dict[str, Any]:
         "suite_id": suite["suite_id"],
         "suite_version": suite["version"],
         "executions": executions,
-        "evaluation": {
-            "hard_gates_passed": evaluation_result.hard_gates_passed,
-            "deterministic_score": evaluation_result.deterministic_score,
-            "probabilistic_score": evaluation_result.probabilistic_score,
-            "model_score": evaluation_result.model_score,
-            "evidence_refs": evaluation_result.evidence_refs,
-        },
+        "scorecard": scorecard,
         "evidence_bundle": bundle,
         "engineering_scorecard": engineering,
-        "profile": profile,
+        "promotion_decision": promotion_decision,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    output_path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
-    # The suite is high-risk. Even with every executable regression green, an
-    # unattended CI run must HOLD rather than manufacture human approval.
-    if not evaluation_result.hard_gates_passed:
-        raise SystemExit("executed deterministic hard gate failed")
-    if decision.recommendation != evaluation.Recommendation.HOLD:
+    if scorecard["hard_gate_failures"]:
+        raise SystemExit(
+            "executed deterministic hard gate failed: "
+            + ", ".join(scorecard["hard_gate_failures"])
+        )
+    if promotion_decision["decision"] != "hold":
         raise SystemExit("high-risk CI evaluation unexpectedly bypassed human approval HOLD")
-    if "human approval" not in " ".join(decision.reasons).lower():
-        raise SystemExit("high-risk HOLD did not identify missing human approval")
+    if "human approval required for risk class" not in promotion_decision["reasons"]:
+        raise SystemExit("high-risk HOLD did not identify the missing human approval gate")
+
     return payload
 
 
@@ -453,7 +461,7 @@ def main(argv: list[str] | None = None) -> int:
     print(
         "KPGS evaluation live reference PASS: "
         f"bundle={payload['evidence_bundle']['bundle_id']} "
-        f"recommendation={payload['profile']['recommendation']}"
+        f"decision={payload['promotion_decision']['decision']}"
     )
     return 0
 
