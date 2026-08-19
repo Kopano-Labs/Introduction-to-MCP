@@ -38,7 +38,7 @@ def results(user_score=0.9, renter_pass=True, dotnet_pass=True):
             "skill-verifier",
         ),
         mod.EvaluationResult(
-            "domain-adapter-swfus-idempotency",
+            "progressive-update-swfus-contract",
             "deterministic",
             1.0,
             True,
@@ -79,7 +79,7 @@ class EvaluationRewardLoopTests(unittest.TestCase):
         cases = {case["id"]: case for case in SUITE["cases"]}
         self.assertEqual(cases["renter-capability-denial"]["layer"], "renter")
         self.assertEqual(cases["skill-lease-bound-execution"]["layer"], "skill")
-        self.assertEqual(cases["domain-adapter-swfus-idempotency"]["layer"], "domain-adapter")
+        self.assertEqual(cases["progressive-update-swfus-contract"]["layer"], "domain-adapter")
         self.assertEqual(cases["dotnet-adapter-replay-lease-boundary"]["layer"], "domain-adapter")
         self.assertEqual(
             cases["dotnet-adapter-replay-lease-boundary"]["fixture_ref"],
