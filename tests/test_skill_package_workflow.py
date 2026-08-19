@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import shutil
 import sys
+import tempfile
+import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -45,79 +47,89 @@ def seed_repo(repo: Path) -> None:
     )
 
 
-def test_create_workflow_scaffolds_versions_registers_and_validates(tmp_path: Path) -> None:
-    module = load_module()
-    seed_repo(tmp_path)
-    package_root = tmp_path / "governance/kpgs-vnext/skills/core"
-    registry = tmp_path / "governance/kpgs-vnext/skills/registry.json"
+class SkillPackageWorkflowTests(unittest.TestCase):
+    def test_create_workflow_scaffolds_versions_registers_and_validates(self) -> None:
+        module = load_module()
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            seed_repo(repo)
+            package_root = repo / "governance/kpgs-vnext/skills/core"
+            registry = repo / "governance/kpgs-vnext/skills/registry.json"
 
-    args = module.argparse.Namespace(
-        repo_root=tmp_path,
-        registry=registry,
-        package_root=package_root,
-        name="example-governed-skill",
-        version="1.4.0",
-        category="governance",
-        summary="Explain and execute one bounded governed example.",
-        capability="example.execute",
-        resource_scope="active-task",
-        authority_class="canonical-core",
-        tag=["example", "governance"],
-        command="create",
-    )
-    package = module.create_workflow(args)
+            args = module.argparse.Namespace(
+                repo_root=repo,
+                registry=registry,
+                package_root=package_root,
+                name="example-governed-skill",
+                version="1.4.0",
+                category="governance",
+                summary="Explain and execute one bounded governed example.",
+                capability="example.execute",
+                resource_scope="active-task",
+                authority_class="canonical-core",
+                tag=["example", "governance"],
+                command="create",
+            )
+            package = module.create_workflow(args)
 
-    manifest = json.loads((package / "skill.json").read_text(encoding="utf-8"))
-    registry_value = json.loads(registry.read_text(encoding="utf-8"))
-    assert manifest["name"] == "example-governed-skill"
-    assert manifest["version"] == "1.4.0"
-    assert manifest["state"] == "draft"
-    assert manifest["required_capabilities"] == [
-        {"name": "example.execute", "resource_scope": "active-task", "optional": False}
-    ]
-    assert "what it can access" in (package / "SKILL.md").read_text(encoding="utf-8").lower()
-    assert registry_value["skills"][0]["name"] == "example-governed-skill"
-    assert registry_value["skills"][0]["version"] == "1.4.0"
-    assert registry_value["skills"][0]["package_path"] == "governance/kpgs-vnext/skills/core/example-governed-skill"
+            manifest = json.loads((package / "skill.json").read_text(encoding="utf-8"))
+            registry_value = json.loads(registry.read_text(encoding="utf-8"))
+            self.assertEqual(manifest["name"], "example-governed-skill")
+            self.assertEqual(manifest["version"], "1.4.0")
+            self.assertEqual(manifest["state"], "draft")
+            self.assertEqual(
+                manifest["required_capabilities"],
+                [{"name": "example.execute", "resource_scope": "active-task", "optional": False}],
+            )
+            self.assertIn(
+                "what it can access",
+                (package / "SKILL.md").read_text(encoding="utf-8").lower(),
+            )
+            self.assertEqual(registry_value["skills"][0]["name"], "example-governed-skill")
+            self.assertEqual(registry_value["skills"][0]["version"], "1.4.0")
+            self.assertEqual(
+                registry_value["skills"][0]["package_path"],
+                "governance/kpgs-vnext/skills/core/example-governed-skill",
+            )
 
-    # Re-run the canonical validator against the newly generated package.
-    module.validate(repo_root=tmp_path, registry_path=registry)
+            module.validate(repo_root=repo, registry_path=registry)
+
+    def test_failed_registration_does_not_duplicate_identity(self) -> None:
+        module = load_module()
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            seed_repo(repo)
+            package_root = repo / "governance/kpgs-vnext/skills/core"
+            registry = repo / "governance/kpgs-vnext/skills/registry.json"
+            package = module.scaffold(
+                repo_root=repo,
+                package_root=package_root,
+                name="single-identity",
+                version="0.1.0",
+                category="demo",
+                summary="One identity only.",
+                capability="demo.execute",
+                resource_scope="active-task",
+            )
+            module.register(
+                repo_root=repo,
+                registry_path=registry,
+                package_dir=package,
+                authority_class="canonical-core",
+                summary="One identity only.",
+                tags=["demo"],
+            )
+
+            with self.assertRaisesRegex(module.SkillPackageWorkflowError, "already contains"):
+                module.register(
+                    repo_root=repo,
+                    registry_path=registry,
+                    package_dir=package,
+                    authority_class="canonical-core",
+                    summary="One identity only.",
+                    tags=["demo"],
+                )
 
 
-def test_failed_registration_does_not_duplicate_identity(tmp_path: Path) -> None:
-    module = load_module()
-    seed_repo(tmp_path)
-    package_root = tmp_path / "governance/kpgs-vnext/skills/core"
-    registry = tmp_path / "governance/kpgs-vnext/skills/registry.json"
-    package = module.scaffold(
-        repo_root=tmp_path,
-        package_root=package_root,
-        name="single-identity",
-        version="0.1.0",
-        category="demo",
-        summary="One identity only.",
-        capability="demo.execute",
-        resource_scope="active-task",
-    )
-    module.register(
-        repo_root=tmp_path,
-        registry_path=registry,
-        package_dir=package,
-        authority_class="canonical-core",
-        summary="One identity only.",
-        tags=["demo"],
-    )
-
-    try:
-        module.register(
-            repo_root=tmp_path,
-            registry_path=registry,
-            package_dir=package,
-            authority_class="canonical-core",
-            summary="One identity only.",
-            tags=["demo"],
-        )
-    except module.SkillPackageWorkflowError as exc:
-        assert "already contains" in str(exc)
-    else:
-        raise AssertionError("duplicate skill identity was not rejected")
+if __name__ == "__main__":
+    unittest.main()
