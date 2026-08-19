@@ -60,9 +60,9 @@ jobs:
           receipt = json.loads(Path('artifacts/evaluation-live-reference.json').read_text(encoding='utf-8'))
           assert receipt['classification'] == 'CI_REGRESSION_EXECUTION_NOT_PRODUCTION_TELEMETRY'
           assert len(receipt['commit_sha']) == 40
-          assert receipt['evaluation']['hard_gates_passed'] is True
-          assert receipt['profile']['recommendation'] == 'hold'
-          assert 'human approval' in ' '.join(receipt['profile']['reasons']).lower()
+          assert receipt['scorecard']['hard_gate_failures'] == []
+          assert receipt['promotion_decision']['decision'] == 'hold'
+          assert 'human approval required for risk class' in receipt['promotion_decision']['reasons']
 
           executions = receipt['executions']
           for case_id in (
@@ -72,7 +72,13 @@ jobs:
               'dotnet-adapter-replay-lease-boundary',
           ):
               assert executions[case_id]['returncode'] == 0, case_id
+              assert executions[case_id]['passed'] is True, case_id
               assert len(executions[case_id]['output_sha256']) == 64, case_id
+
+          user = executions['adaptive-user-outcome']
+          assert user['classification'] == 'REGRESSION_FIXTURE_NOT_PRODUCTION_TELEMETRY'
+          assert user['sample_size'] >= 20
+          assert user['passed'] is True
 
           bundle = receipt['evidence_bundle']
           assert bundle['commit_sha'] == receipt['commit_sha']
@@ -80,12 +86,14 @@ jobs:
           assert bundle['adapter']['implementation'] == 'Kopano.Kpgs.Adapter'
           assert bundle['renter']['protocol_version']
           assert bundle['skills']
-          assert bundle['authority_effect'] == 'none'
-          assert bundle['canonical'] is False
-          assert bundle['execution_context']['released'] is True
+          assert bundle['capability_lease_refs']
 
-          layers = {hop['layer'] for hop in bundle['trace']['hops']}
+          layers = {hop['layer'] for hop in bundle['trace_hops']}
           assert {'pwa', 'adapter', 'sovereign-hub', 'renter', 'skill', 'verifier'} <= layers
+          verifier_refs = {hop['ref'] for hop in bundle['trace_hops'] if hop['layer'] == 'verifier'}
+          verification_ids = {item['verifier_id'] for item in bundle['verifications']}
+          assert verifier_refs & verification_ids
+          assert receipt['engineering_scorecard']['hard_gate_clear'] is True
           print('KPGS evaluation live evidence receipt: PASS')
 
       - name: Upload live evaluation receipt
