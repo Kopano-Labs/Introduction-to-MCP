@@ -48,11 +48,14 @@ def _read_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def _write_json(path: Path, value: MappingLike) -> None:
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-
-
 MappingLike = dict[str, Any]
+
+
+def _write_json(path: Path, value: MappingLike) -> None:
+    path.write_text(
+        json.dumps(value, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
 
 
 def scaffold(
@@ -127,13 +130,27 @@ If authority, evidence or validation is missing, stop before consequential execu
             "platforms": ["human", "agent", "stateless-renter", "server"],
             "languages": ["markdown", "json"],
         },
-        "inputs": {"schema_ref": None, "description": "Task-scoped input supplied by the caller."},
-        "outputs": {"schema_ref": None, "description": "Validated task-scoped output plus an execution receipt."},
+        "inputs": {
+            "schema_ref": None,
+            "description": "Task-scoped input supplied by the caller.",
+        },
+        "outputs": {
+            "schema_ref": None,
+            "description": "Validated task-scoped output plus an execution receipt.",
+        },
         "required_capabilities": [
-            {"name": capability, "resource_scope": resource_scope, "optional": False}
+            {
+                "name": capability,
+                "resource_scope": resource_scope,
+                "optional": False,
+            }
         ],
         "dependencies": [
-            {"kind": "runtime", "name": "kpgs-stateless-renter-protocol", "version_constraint": "1.0"}
+            {
+                "kind": "runtime",
+                "name": "kpgs-stateless-renter-protocol",
+                "version_constraint": "1.0",
+            }
         ],
         "provenance": {
             "origin": "kpgs-original",
@@ -142,7 +159,10 @@ If authority, evidence or validation is missing, stop before consequential execu
             "sources": [
                 {
                     "ref": "human-authored-scaffold",
-                    "relationship": "origin",
+                    # `origin` is intentionally not a source relationship in the
+                    # canonical manifest schema. The package's origin is already
+                    # declared above; this source entry records the scaffold event.
+                    "relationship": "reference",
                     "commit": None,
                 }
             ],
@@ -194,8 +214,14 @@ def register(
     if not isinstance(entries, list):
         raise SkillPackageWorkflowError("registry skills must be an array")
     identity = (manifest.get("name"), manifest.get("version"))
-    if any((entry.get("name"), entry.get("version")) == identity for entry in entries if isinstance(entry, dict)):
-        raise SkillPackageWorkflowError(f"registry already contains {identity[0]}@{identity[1]}")
+    if any(
+        (entry.get("name"), entry.get("version")) == identity
+        for entry in entries
+        if isinstance(entry, dict)
+    ):
+        raise SkillPackageWorkflowError(
+            f"registry already contains {identity[0]}@{identity[1]}"
+        )
     entries.append(
         {
             "name": manifest["name"],
@@ -263,7 +289,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--package-root", type=Path, default=DEFAULT_ROOT)
     sub = parser.add_subparsers(dest="command", required=True)
 
-    create = sub.add_parser("create", help="Scaffold, register and conformance-validate a new draft skill.")
+    create = sub.add_parser(
+        "create",
+        help="Scaffold, register and conformance-validate a new draft skill.",
+    )
     create.add_argument("--name", required=True)
     create.add_argument("--version", default="0.1.0")
     create.add_argument("--category", required=True)
@@ -273,15 +302,24 @@ def main(argv: list[str] | None = None) -> int:
     create.add_argument("--authority-class", default="canonical-core")
     create.add_argument("--tag", action="append", required=True)
 
-    validate_cmd = sub.add_parser("validate", help="Validate the canonical registry and registered packages.")
+    sub.add_parser(
+        "validate",
+        help="Validate the canonical registry and registered packages.",
+    )
 
     args = parser.parse_args(argv)
     try:
         if args.command == "create":
             package_dir = create_workflow(args)
-            print(f"KPGS skill package CREATED+DRAFT+REGISTERED+CONFORMANCE-PASS: {package_dir}")
+            print(
+                "KPGS skill package CREATED+DRAFT+REGISTERED+CONFORMANCE-PASS: "
+                f"{package_dir}"
+            )
         elif args.command == "validate":
-            validate(repo_root=args.repo_root.resolve(), registry_path=args.registry.resolve())
+            validate(
+                repo_root=args.repo_root.resolve(),
+                registry_path=args.registry.resolve(),
+            )
             print("KPGS skill package registry PASS")
         else:
             raise SkillPackageWorkflowError("unsupported command")
