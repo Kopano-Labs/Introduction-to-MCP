@@ -20,6 +20,8 @@ export type KpgsTaskRequest = {
   governingSpecRef: string;
   input: unknown;
   idempotencyKey: string;
+  boundaryMarker?: '#NB';
+  crudIntent?: 'CREATE';
 };
 
 export class KpgsAdapterClient {
@@ -46,14 +48,20 @@ export class KpgsAdapterClient {
         'X-KPGS-Task': request.taskId,
         'X-Correlation-ID': request.correlationId,
       },
-      body: JSON.stringify(request),
+      body: JSON.stringify({ boundaryMarker: '#NB', crudIntent: 'CREATE', ...request }),
     });
   }
 
   async command(
     taskId: string,
     correlationId: string,
-    command: { commandId: string; name: string; payload?: unknown; idempotencyKey: string },
+    command: {
+      commandId: string;
+      name: string;
+      payload?: unknown;
+      idempotencyKey: string;
+      boundaryMarker?: '#NB';
+    },
   ): Promise<KpgsTaskSnapshot> {
     return this.json(`/kpgs/tasks/${encodeURIComponent(taskId)}/commands`, {
       method: 'POST',
@@ -62,7 +70,7 @@ export class KpgsAdapterClient {
         'X-KPGS-Task': taskId,
         'X-Correlation-ID': correlationId,
       },
-      body: JSON.stringify({ ...command, correlationId }),
+      body: JSON.stringify({ boundaryMarker: '#NB', ...command, correlationId }),
     });
   }
 
