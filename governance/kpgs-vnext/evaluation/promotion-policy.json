@@ -1,0 +1,21 @@
+{
+  "schema": "kpgs.promotion-policy.v1",
+  "policy_id": "kpgs-core-promotion",
+  "version": "1.0.0",
+  "minimum_aggregate_score": 0.9,
+  "human_approval_required_for": ["high", "critical"],
+  "observation_window_seconds": 3600,
+  "rollback_target_required": true,
+  "rollback_thresholds": {
+    "error-rate": { "operator": "gt", "value": 0.05 },
+    "reliability": { "operator": "lt", "value": 0.99 },
+    "task-completion": { "operator": "lt", "value": 0.8 }
+  },
+  "rules": [
+    "hard governance/security/evaluation gates cannot be averaged away",
+    "probabilistic cases must satisfy minimum sample requirements",
+    "promotion evidence bundle must be machine-readable and tied to exact commit",
+    "high and critical risk promotions require recorded human approval",
+    "rollback execution requires its own capability lease"
+  ]
+}
