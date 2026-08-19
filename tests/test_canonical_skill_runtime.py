@@ -5,8 +5,8 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
-
-import pytest
+import tempfile
+import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "kopano-core"
@@ -134,99 +134,111 @@ def authority_and_token(capability: str = "demo.execute"):
     return authority, token
 
 
-def test_skill_executes_only_after_capability_authorization_and_emits_bound_receipt(tmp_path: Path) -> None:
-    write_fixture(tmp_path)
-    authority, token = authority_and_token()
-    evidence: list[dict] = []
-    calls = 0
+class CanonicalSkillRuntimeTests(unittest.TestCase):
+    def test_skill_executes_only_after_capability_authorization_and_emits_bound_receipt(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            write_fixture(repo)
+            authority, token = authority_and_token()
+            evidence: list[dict] = []
+            calls = 0
 
-    runtime = CanonicalSkillRuntime(
-        repo_root=tmp_path,
-        capability_authorizer=authority.authorize,
-        evidence_sink=lambda receipt: evidence.append(dict(receipt)),
-    )
+            runtime = CanonicalSkillRuntime(
+                repo_root=repo,
+                capability_authorizer=authority.authorize,
+                evidence_sink=lambda receipt: evidence.append(dict(receipt)),
+            )
 
-    def handler(value: int) -> int:
-        nonlocal calls
-        calls += 1
-        return value * 2
+            def handler(value: int) -> int:
+                nonlocal calls
+                calls += 1
+                return value * 2
 
-    runtime.register_handler(
-        "demo-skill",
-        "1.2.3",
-        handler,
-        output_validator=lambda output: (isinstance(output, int) and output % 2 == 0, "output is even integer"),
-    )
-    result = runtime.execute(
-        name="demo-skill",
-        version="1.2.3",
-        platform="stateless-renter",
-        lease_token=token,
-        tenant_id="tenant:test",
-        domain_id="domain:test",
-        task_id="task:test",
-        correlation_id="corr:test",
-        input_value=21,
-    )
+            runtime.register_handler(
+                "demo-skill",
+                "1.2.3",
+                handler,
+                output_validator=lambda output: (
+                    isinstance(output, int) and output % 2 == 0,
+                    "output is even integer",
+                ),
+            )
+            result = runtime.execute(
+                name="demo-skill",
+                version="1.2.3",
+                platform="stateless-renter",
+                lease_token=token,
+                tenant_id="tenant:test",
+                domain_id="domain:test",
+                task_id="task:test",
+                correlation_id="corr:test",
+                input_value=21,
+            )
 
-    assert result.output == 42
-    assert calls == 1
-    assert result.receipt["schema"] == "kpgs.skill-execution-receipt.v1"
-    assert result.receipt["skill"]["name"] == "demo-skill"
-    assert result.receipt["skill"]["version"] == "1.2.3"
-    assert result.receipt["input_digest"]
-    assert result.receipt["output_digest"]
-    assert result.receipt["capability_lease_ids"]
-    assert result.receipt["capability_decisions"][0]["capability"] == "demo.execute"
-    assert result.receipt["validation"]["passed"] is True
-    assert result.receipt["outcome"] == "completed"
-    assert result.receipt["authority_effect"] == "none"
-    assert evidence == [result.receipt]
+            self.assertEqual(result.output, 42)
+            self.assertEqual(calls, 1)
+            self.assertEqual(result.receipt["schema"], "kpgs.skill-execution-receipt.v1")
+            self.assertEqual(result.receipt["skill"]["name"], "demo-skill")
+            self.assertEqual(result.receipt["skill"]["version"], "1.2.3")
+            self.assertTrue(result.receipt["input_digest"])
+            self.assertTrue(result.receipt["output_digest"])
+            self.assertTrue(result.receipt["capability_lease_ids"])
+            self.assertEqual(result.receipt["capability_decisions"][0]["capability"], "demo.execute")
+            self.assertIs(result.receipt["validation"]["passed"], True)
+            self.assertEqual(result.receipt["outcome"], "completed")
+            self.assertEqual(result.receipt["authority_effect"], "none")
+            self.assertEqual(evidence, [result.receipt])
+
+    def test_undeclared_capability_blocks_before_handler(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            write_fixture(repo)
+            authority, token = authority_and_token("different.execute")
+            calls = 0
+            runtime = CanonicalSkillRuntime(repo_root=repo, capability_authorizer=authority.authorize)
+
+            def handler(value):
+                nonlocal calls
+                calls += 1
+                return value
+
+            runtime.register_handler("demo-skill", "1.2.3", handler)
+            with self.assertRaisesRegex(SkillAuthorizationDenied, "capability denied before execution"):
+                runtime.execute(
+                    name="demo-skill",
+                    version="1.2.3",
+                    platform="stateless-renter",
+                    lease_token=token,
+                    tenant_id="tenant:test",
+                    domain_id="domain:test",
+                    task_id="task:test",
+                    correlation_id="corr:test",
+                    input_value={"unsafe": False},
+                )
+            self.assertEqual(calls, 0)
+
+    def test_draft_registered_skill_is_discoverable_but_not_loadable(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            write_fixture(repo, state="draft")
+            authority, token = authority_and_token()
+            runtime = CanonicalSkillRuntime(repo_root=repo, capability_authorizer=authority.authorize)
+            runtime.register_handler("demo-skill", "1.2.3", lambda value: value)
+
+            self.assertEqual(runtime.discover("demo")[0]["name"], "demo-skill")
+            with self.assertRaisesRegex(SkillNotLoadable, "not production-loadable: draft"):
+                runtime.execute(
+                    name="demo-skill",
+                    version="1.2.3",
+                    platform="stateless-renter",
+                    lease_token=token,
+                    tenant_id="tenant:test",
+                    domain_id="domain:test",
+                    task_id="task:test",
+                    correlation_id="corr:test",
+                    input_value=1,
+                )
 
 
-def test_undeclared_capability_blocks_before_handler(tmp_path: Path) -> None:
-    write_fixture(tmp_path)
-    authority, token = authority_and_token("different.execute")
-    calls = 0
-    runtime = CanonicalSkillRuntime(repo_root=tmp_path, capability_authorizer=authority.authorize)
-
-    def handler(value):
-        nonlocal calls
-        calls += 1
-        return value
-
-    runtime.register_handler("demo-skill", "1.2.3", handler)
-    with pytest.raises(SkillAuthorizationDenied, match="capability denied before execution"):
-        runtime.execute(
-            name="demo-skill",
-            version="1.2.3",
-            platform="stateless-renter",
-            lease_token=token,
-            tenant_id="tenant:test",
-            domain_id="domain:test",
-            task_id="task:test",
-            correlation_id="corr:test",
-            input_value={"unsafe": False},
-        )
-    assert calls == 0
-
-
-def test_draft_registered_skill_is_discoverable_but_not_loadable(tmp_path: Path) -> None:
-    write_fixture(tmp_path, state="draft")
-    authority, token = authority_and_token()
-    runtime = CanonicalSkillRuntime(repo_root=tmp_path, capability_authorizer=authority.authorize)
-    runtime.register_handler("demo-skill", "1.2.3", lambda value: value)
-
-    assert runtime.discover("demo")[0]["name"] == "demo-skill"
-    with pytest.raises(SkillNotLoadable, match="not production-loadable: draft"):
-        runtime.execute(
-            name="demo-skill",
-            version="1.2.3",
-            platform="stateless-renter",
-            lease_token=token,
-            tenant_id="tenant:test",
-            domain_id="domain:test",
-            task_id="task:test",
-            correlation_id="corr:test",
-            input_value=1,
-        )
+if __name__ == "__main__":
+    unittest.main()
