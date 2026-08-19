@@ -1,0 +1,15 @@
+{
+  "schema": "kpgs.evaluation-user-outcome-fixture.v1",
+  "fixture_id": "adaptive-user-outcome-regression-window",
+  "version": "1.0.0",
+  "classification": "REGRESSION_FIXTURE_NOT_PRODUCTION_TELEMETRY",
+  "metric": "task-completion",
+  "samples": [
+    1.0, 1.0, 1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0, 0.0, 0.0
+  ],
+  "notes": "Versioned CI regression fixture only. It proves probabilistic sample-floor/profile mechanics and must never be represented as live user telemetry or production outcome evidence."
+}
