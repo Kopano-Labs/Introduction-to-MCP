@@ -1,0 +1,91 @@
+{
+  "schema": "kpgs_kopano_context_legacy_v1",
+  "document_id": "KPGS-KC-LEGACY-2026",
+  "title": "KC — Kopano Context Legacy",
+  "authority": "Schematics MAIN BRAIN",
+  "bracket": "[KPGS_LEGACY]",
+  "doctrine_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md",
+  "skill_ref": "skills/pka/kopano-context-legacy/SKILL.md",
+  "runtime_module": "kopano-core/kopano/kpgs_legacy.py",
+  "invariants": {
+    "kc": "Kopano Context Legacy",
+    "renter_assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+    "precedence": "KPGS_LEGACY > RENTER_IDENTITY",
+    "mission": "Reduce unemployment globally through context-aware, governed capability pathways.",
+    "mission_is_not_completion_claim": true,
+    "global_impact_requires_global_scale_evidence": true,
+    "model_memory_is_not_legacy": true,
+    "local_adaptation_is_not_governance_drift": true
+  },
+  "pka": {
+    "equation": "X + Y = MAYBE",
+    "x": "changeable local context",
+    "y": "KPGS legacy invariants",
+    "unknown_policy": "Unknown remains unknown until evidence promotes it."
+  },
+  "capability_chain": [
+    "LOCAL_CONTEXT",
+    "CONSTRAINTS_AND_OPPORTUNITIES_CLASSIFIED",
+    "LEARNING_PATHWAY",
+    "PRACTICE",
+    "PROOF_ARTIFACT",
+    "VALIDATION",
+    "ECONOMIC_PATHWAY",
+    "ECONOMIC_PARTICIPATION",
+    "CONTRIBUTOR",
+    "CAPABILITY_MULTIPLIER"
+  ],
+  "learning_loop": [
+    "ENCOUNTER",
+    "UNDERSTAND",
+    "BUILD",
+    "VALIDATE",
+    "TEACH",
+    "PRESERVE",
+    "REVISIT"
+  ],
+  "economic_pathway_classes": [
+    "EMPLOYMENT",
+    "PAID_WORK",
+    "CONTRACTING",
+    "ENTREPRENEURSHIP",
+    "PRODUCTIVE_OWNERSHIP",
+    "OTHER_VALIDATED_LIVELIHOOD"
+  ],
+  "impact_claim_required_fields": [
+    "claim",
+    "geography",
+    "cohort",
+    "denominator",
+    "time_window",
+    "baseline",
+    "observed_change",
+    "methodology",
+    "evidence_refs",
+    "attribution_basis"
+  ],
+  "dispositions": [
+    "KC_HOLD",
+    "KC_POC_CANDIDATE",
+    "KC_ALIGNED_POC",
+    "KC_FOC_CANDIDATE",
+    "KC_FOC_BLOCK"
+  ],
+  "routing": {
+    "fabricated_or_unverifiable_proof": "KC_FOC_BLOCK",
+    "claim_exceeds_evidence": "KC_FOC_CANDIDATE",
+    "validated_capability_and_observed_pathway": "KC_ALIGNED_POC",
+    "bounded_local_evidence": "KC_POC_CANDIDATE",
+    "missing_critical_proof": "KC_HOLD"
+  },
+  "succession_required": [
+    "problem_reconstructable",
+    "context_reconstructable",
+    "governance_reconstructable",
+    "implementation_reconstructable",
+    "failures_preserved",
+    "evidence_reconstructable",
+    "unresolved_unknowns_preserved",
+    "continuation_path_available"
+  ]
+}
