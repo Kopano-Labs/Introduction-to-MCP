@@ -1,0 +1,39 @@
+{
+  "schema": "kpgs_kopano_context_legacy_v1",
+  "authority": "Schematics MAIN BRAIN",
+  "schematics_authority": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_LEGACY.json",
+  "bracket": "[KPGS_LEGACY]",
+  "kc": "Kopano Context Legacy",
+  "precedence": "KPGS_LEGACY > RENTER_IDENTITY",
+  "mission": "Reduce unemployment globally through context-aware, governed capability pathways.",
+  "mission_is_not_completion_claim": true,
+  "pka": "X + Y = MAYBE",
+  "capability_chain": [
+    "LOCAL_CONTEXT",
+    "CONSTRAINTS_AND_OPPORTUNITIES_CLASSIFIED",
+    "LEARNING_PATHWAY",
+    "PRACTICE",
+    "PROOF_ARTIFACT",
+    "VALIDATION",
+    "ECONOMIC_PATHWAY",
+    "ECONOMIC_PARTICIPATION",
+    "CONTRIBUTOR",
+    "CAPABILITY_MULTIPLIER"
+  ],
+  "learning_loop": [
+    "ENCOUNTER",
+    "UNDERSTAND",
+    "BUILD",
+    "VALIDATE",
+    "TEACH",
+    "PRESERVE",
+    "REVISIT"
+  ],
+  "dispositions": [
+    "KC_HOLD",
+    "KC_POC_CANDIDATE",
+    "KC_ALIGNED_POC",
+    "KC_FOC_CANDIDATE",
+    "KC_FOC_BLOCK"
+  ]
+}

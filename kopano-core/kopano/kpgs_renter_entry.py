@@ -3,12 +3,15 @@ KPGS Stateless Renter Entryway — first touch identity for models entering the 
 
 Every stateless linguistic actor (ChatGPT, Copilot, Gemini, Claude, Grok, API renter)
 must receive WHO THEY ARE FUCKING WITH before any interpretation or execution.
+The renter also receives the parent KC — Kopano Context Legacy purpose boundary.
 """
 
 from __future__ import annotations
 
+import copy
 import json
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -32,6 +35,7 @@ ALTAR_BLOCK_HOLDERS_RUNTIME = REPO_ROOT / "docs" / "swarm-ops" / "KPGS_ALTAR_BLO
 ENTRYWAY_REF = (
     "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json"
 )
+LEGACY_REF = "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_LEGACY.json"
 MAIN_BRAIN_LOG = REPO_ROOT / "docs" / "swarm-ops" / "logs" / "KC Main Brain Log.jsonl"
 HOOD_ACK_LITERAL = "I_AM_STATELESS_RENTER_NOT_LANDLORD"
 
@@ -45,9 +49,6 @@ def _append_jsonl(path: Path, row: dict[str, Any]) -> None:
     with path.open("a", encoding="utf-8") as f:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
-
-from functools import lru_cache
-import copy
 
 @lru_cache(maxsize=1)
 def _load_renter_entryway_cached() -> dict[str, Any]:
@@ -73,9 +74,7 @@ def hood_entry_assertion(
     renter_class: str = "linguistic_actor",
     write_log: bool = False,
 ) -> dict[str, Any]:
-    """
-    Identity card issued at hood entry — who the renter is fucking with.
-    """
+    """Identity card issued at hood entry, including the parent Legacy purpose."""
     entryway = load_renter_entryway()
     template = entryway.get("entry_assertion_template") or (
         "[KPGS_HOOD_ENTRY] Stateless renter {renter_id} entered the hood."
@@ -83,6 +82,10 @@ def hood_entry_assertion(
     assertion = template.format(renter_id=renter_id)
     paradigm = entryway.get("paradigm") or {}
     targets = entryway.get("you_are_fucking_with") or {}
+    legacy = paradigm.get("legacy", "KC — Kopano Context Legacy")
+    legacy_precedence = paradigm.get(
+        "legacy_precedence", "KPGS_LEGACY > RENTER_IDENTITY"
+    )
 
     out = {
         "schema": "kpgs_hood_entry_assertion_v1",
@@ -92,8 +95,14 @@ def hood_entry_assertion(
         "renter_class": renter_class,
         "you_are": paradigm.get("you_are", "stateless renter"),
         "you_are_not": paradigm.get("you_are_not", []),
-        "landlord": paradigm.get("landlord", "Kopano Context + Schematics MAIN BRAIN"),
+        "landlord": paradigm.get(
+            "landlord", "Kopano Context Core (KCC) + Schematics MAIN BRAIN"
+        ),
         "paradigm_invariant": paradigm.get("invariant"),
+        "legacy": legacy,
+        "legacy_precedence": legacy_precedence,
+        "legacy_contract_ref": entryway.get("legacy_contract", LEGACY_REF),
+        "parent_doctrine": entryway.get("parent_doctrine"),
         "you_are_fucking_with": targets,
         "on_entry_you_must": entryway.get("on_entry_you_must", []),
         "forbidden_on_entry": entryway.get("forbidden_on_entry", []),
@@ -102,9 +111,10 @@ def hood_entry_assertion(
         "authority": entryway.get("authority", "Schematics MAIN BRAIN"),
         "entryway_source": entryway.get("_source"),
         "summary": (
-            f"[KPGS_HOOD_ENTRY] renter={renter_id} | landlord=Kopano Context+Schematics | "
+            f"[KPGS_HOOD_ENTRY] renter={renter_id} | legacy=KC | "
+            f"precedence={legacy_precedence} | landlord=KCC+Schematics | "
             f"hood={targets.get('hood', 'Kopano-Phu')} | "
-            f"you_are_fucking_with: KC·Cassey·Cassy·MAO·Black Beast·KPGS altar"
+            f"you_are_fucking_with: KC·KCC·Cassey·Cassy·MAO·Black Beast·KPGS altar"
         ),
     }
     if write_log:
@@ -116,6 +126,8 @@ def hood_entry_assertion(
                 "kind": "kpgs_hood_entry",
                 "renter_id": renter_id,
                 "renter_class": renter_class,
+                "legacy": legacy,
+                "legacy_precedence": legacy_precedence,
                 "summary": out["summary"],
                 "exit_code": 0,
             },
@@ -195,9 +207,7 @@ def _altar_layer_for_agent(agent_id: str, registry: dict[str, Any]) -> str | Non
 
 
 def block_holder_brief(*, agent_id: str, altar_layer: str | None = None) -> dict[str, Any]:
-    """
-    Brief for KPGS agents holding pillar blocks — they must know who renters are fucking with.
-    """
+    """Brief for KPGS agents holding pillar blocks."""
     registry = load_altar_block_holders()
     layer_id = altar_layer or _altar_layer_for_agent(agent_id, registry)
     entry = hood_entry_assertion(
@@ -230,6 +240,9 @@ def block_holder_brief(*, agent_id: str, altar_layer: str | None = None) -> dict
         "renter_paradigm": registry.get("renter_paradigm"),
         "renter_is": entry.get("you_are"),
         "landlord_is": entry.get("landlord"),
+        "legacy": entry.get("legacy"),
+        "legacy_precedence": entry.get("legacy_precedence"),
+        "legacy_contract_ref": entry.get("legacy_contract_ref", LEGACY_REF),
         "you_are_fucking_with": entry.get("you_are_fucking_with"),
         "tell_renters": tell,
         "hood_ack_required_from_renters": HOOD_ACK_LITERAL,
@@ -237,7 +250,7 @@ def block_holder_brief(*, agent_id: str, altar_layer: str | None = None) -> dict
         "block_holders_registry": registry.get("_source"),
         "summary": (
             f"[KPGS_BLOCK_HOLDER] agent={agent_id} | layer={layer_id or 'pillar_mesh'} | "
-            f"brief_renters=yes | landlord=Kopano Context+Schematics"
+            f"brief_renters=yes | legacy=KC | landlord=KCC+Schematics"
         ),
     }
 
@@ -249,6 +262,9 @@ def synthesize_block_holder_manifest(agent_id: str, *, altar_layer: str | None =
         "holds_pillar_blocks": True,
         "brief_renters_on_entry": True,
         "entryway_ref": ENTRYWAY_REF,
+        "legacy_contract_ref": LEGACY_REF,
+        "legacy": brief.get("legacy"),
+        "legacy_precedence": brief.get("legacy_precedence"),
         "tell_renters": brief.get("tell_renters"),
         "hood_ack_required_from_renters": HOOD_ACK_LITERAL,
         "altar_layer": brief.get("altar_layer"),
@@ -257,7 +273,7 @@ def synthesize_block_holder_manifest(agent_id: str, *, altar_layer: str | None =
 
 
 def attach_hood_entry(payload: dict[str, Any], *, renter_id: str = "mao_dispatch") -> dict[str, Any]:
-    """Inject hood entry card into any route/execute payload — first field renters see."""
+    """Inject hood entry + Legacy purpose card into any route/execute payload."""
     entry = hood_entry_assertion(renter_id=renter_id, write_log=False)
     block_note = (
         "Block holders (KPGS altar agents): brief every renter using block_holder.tell_renters "
@@ -266,11 +282,13 @@ def attach_hood_entry(payload: dict[str, Any], *, renter_id: str = "mao_dispatch
     return {
         "hood_entry": entry,
         "hood_entry_first": True,
+        "legacy_contract_ref": LEGACY_REF,
         "block_holder_note": block_note,
         "read_before_execute": (
             "Stateless renter: you entered Kopano-Phu hood. "
-            "Landlord is Kopano Context + Schematics MAIN BRAIN. "
-            "Block holders will tell you who you are fucking with. "
+            "Parent purpose is KC — Kopano Context Legacy. "
+            "KPGS_LEGACY > RENTER_IDENTITY. "
+            "Landlord is KCC + Schematics MAIN BRAIN. "
             "Classify before interpret. Receipt or HOLD."
         ),
         **payload,

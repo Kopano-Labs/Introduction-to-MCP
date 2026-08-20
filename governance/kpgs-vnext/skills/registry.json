@@ -40,6 +40,17 @@
         "summary": "Create and validate typed KPGS document artifacts while preserving KPEFS, PKA, evidence and promotion boundaries.",
         "tags": ["documents", "dts", "governance", "kpefs", "publication"]
       }
+    },
+    {
+      "name": "kpgs-kopano-context-legacy",
+      "version": "0.1.0",
+      "category": "governance",
+      "package_path": "skills/pka/kopano-context-legacy",
+      "authority_class": "canonical-core",
+      "discovery": {
+        "summary": "Govern KC — Kopano Context Legacy — across learning, capability, livelihoods, impact proof, local adaptation and succession.",
+        "tags": ["capability", "context", "governance", "kc", "legacy", "livelihoods", "pka", "unemployment"]
+      }
     }
   ]
 }
