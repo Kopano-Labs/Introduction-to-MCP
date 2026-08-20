@@ -1,0 +1,85 @@
+{
+  "name": "kpgs-kopano-context-legacy",
+  "version": "0.1.0",
+  "description": "Apply KC — Kopano Context Legacy — to local learning, capability, livelihood and unemployment-impact claims while preventing claims from exceeding evidence.",
+  "category": "governance",
+  "state": "draft",
+  "runtime": {
+    "renter_protocol": "1.0",
+    "platforms": ["human", "agent", "stateless-renter", "server"],
+    "languages": ["markdown", "json", "python"]
+  },
+  "inputs": {
+    "schema_ref": null,
+    "description": "A local-context, capability-pathway, succession or unemployment-impact packet plus provenance-bearing evidence references."
+  },
+  "outputs": {
+    "schema_ref": null,
+    "description": "A bounded KCL-01 receipt with KC_HOLD, KC_POC_CANDIDATE, KC_ALIGNED_POC, KC_FOC_CANDIDATE or KC_FOC_BLOCK disposition."
+  },
+  "required_capabilities": [
+    {
+      "name": "governance.context.classify",
+      "resource_scope": "active-task",
+      "optional": false
+    },
+    {
+      "name": "evidence.read",
+      "resource_scope": "active-task",
+      "optional": false
+    }
+  ],
+  "dependencies": [
+    {
+      "kind": "doctrine",
+      "name": "kpgs-kopano-context-legacy",
+      "version_constraint": "2026-08-20"
+    },
+    {
+      "kind": "runtime",
+      "name": "kpgs-stateless-renter-protocol",
+      "version_constraint": "1.0"
+    }
+  ],
+  "provenance": {
+    "origin": "kpgs-original",
+    "license_status": "unknown",
+    "license_spdx": null,
+    "sources": [
+      {
+        "ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md",
+        "relationship": "reference",
+        "commit": "e63f4bbdb7324b6a187e11d7c3fc7f966f7ef20e"
+      }
+    ]
+  },
+  "validation": {
+    "hard_gates": [
+      "Mission is not treated as completed impact",
+      "Global claims require global-scale evidence",
+      "Unknown local context remains unknown",
+      "KC_ALIGNED_POC requires a verifier receipt",
+      "Fabricated or unverifiable proof routes to KC_FOC_BLOCK",
+      "Renter identity cannot redefine Legacy authority"
+    ],
+    "methods": ["schema", "unit", "human-review"],
+    "evidence_refs": []
+  },
+  "failures": [
+    {
+      "code": "KC_CONTEXT_UNKNOWN",
+      "recoverability": "user-action",
+      "user_message": "Critical local context is still unknown. Preserve the unknowns and collect evidence before promotion."
+    },
+    {
+      "code": "KC_EVIDENCE_INSUFFICIENT",
+      "recoverability": "retry",
+      "user_message": "The Legacy claim is stronger than the currently verified evidence. Keep it bounded or add proof."
+    },
+    {
+      "code": "KC_FOC_BLOCK",
+      "recoverability": "operator-action",
+      "user_message": "The submitted proof is fabricated, hidden, or unverifiable, so Legacy promotion is blocked."
+    }
+  ]
+}
