@@ -55,6 +55,18 @@
       "type": "string",
       "enum": ["mao", "mmao"]
     },
+    "decision_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "consequence_class": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_mode": {
+      "type": "string",
+      "enum": ["validation", "execution"]
+    },
     "trust_grant_id": {
       "type": "string",
       "minLength": 1,
@@ -106,6 +118,7 @@
             "input_invalid",
             "policy_denied",
             "trust_not_earned",
+            "role_not_fit",
             "capability_expired",
             "dependency_unavailable",
             "timeout",
@@ -135,14 +148,19 @@
         "required": ["orchestration_cycle"]
       },
       "then": {
+        "required": ["authority_mode"],
         "anyOf": [
-          { "required": ["trust_grant_id"] },
+          {
+            "required": ["trust_grant_id", "decision_domain", "consequence_class"]
+          },
           {
             "required": ["failure"],
             "properties": {
               "failure": {
                 "properties": {
-                  "code": { "const": "trust_not_earned" }
+                  "code": {
+                    "enum": ["trust_not_earned", "role_not_fit"]
+                  }
                 }
               }
             }
