@@ -1,6 +1,6 @@
 ---
 name: kpgs-stateless-renter-consistency
-description: Preserve KPGS persistence, consistency, context provenance and proof-gated trust across stateless AI renters; parse CCP Accepted receipts into explicit PKA admission requests without treating conceptual acceptance, model capability or discovery as execution authority.
+description: Preserve KPGS persistence, consistency, context provenance, proof-gated trust and role-fit across stateless AI renters; parse CCP Accepted receipts into explicit PKA admission requests without treating conceptual acceptance, model capability, validation standing or discovery as execution authority.
 tags:
   - kpgs
   - pka
@@ -12,6 +12,8 @@ tags:
   - receipts
   - provenance
   - trust
+  - role-fit
+  - peer-validation
   - mao
   - mmao
 allowed-tools: []
@@ -45,6 +47,8 @@ SEMANTIC_SIMILARITY != CURRENT_AUTHORITY
 CCP_ACCEPTED != PKA_ADMITTED
 PKA_PROPOSE != DOWNSTREAM_EXECUTION_AUTHORITY
 MODEL_CAPABILITY != KPGS_TRUST
+CAPABILITY != ROLE_FIT != AUTHORITY
+PEER_VALIDATION_STANDING != EXECUTION_AUTHORITY
 DISCOVERY_SUCCESS != MAO_MMAO_ADMISSION
 CI_TRIGGER != DEFECT_CAUSALITY
 ```
@@ -74,6 +78,9 @@ task:
   ref: <commit>
   current_instruction: <instruction>
   orchestration_cycle: null | mao | mmao
+  decision_domain: null | <bounded-domain>
+  consequence_class: null | <bounded-consequence>
+  authority_mode: validation | execution
 context:
   current_human: []
   repository: []
@@ -89,6 +96,9 @@ proof_state:
 trust:
   state: untrusted
   grant_id: null
+  allowed_decision_domains: []
+  allowed_consequence_classes: []
+  allowed_authority_modes: []
   evidence_refs: []
   expires_at: null
 receipts:
@@ -123,7 +133,7 @@ SEATS CARRY AUTHORITY
 KPGS GOVERNS THE DIFFERENCE
 ```
 
-Admission is fail-closed:
+Trust admission is fail-closed:
 
 ```text
 cycle in {mao, mmao}
@@ -134,7 +144,7 @@ AND trust_grant tenant/domain == current tenant/domain
 AND cycle in trust_grant.allowed_cycles
 AND trust_grant.expires_at > now
 AND trust_grant.evidence_refs is non-empty
--> ELIGIBLE_FOR_ORCHESTRATION_ENTRY
+-> TRUST_PASS
 ```
 
 Otherwise:
@@ -183,10 +193,102 @@ self-declared trust
 
 A replacement model/runtime does not inherit authority merely because it inherits a name. The governed seat/context may persist; the runtime must rehydrate valid trust evidence or receive a fresh grant.
 
+## Role-fit membrane
+
+Passing trust is necessary but not sufficient.
+
+Before MAO/MMAO work proceeds, classify:
+
+```text
+D = decision_domain
+C = consequence_class
+M = authority_mode
+```
+
+Then evaluate:
+
+```text
+TRUST_PASS
+AND D in trust_grant.allowed_decision_domains
+AND C in trust_grant.allowed_consequence_classes
+AND M in trust_grant.allowed_authority_modes
+-> ROLE_FIT_PASS
+```
+
+If trust passes but fit fails:
+
+```text
+POLICY_DENIED
+failure.code = role_not_fit
+handler_execution = false
+```
+
+This preserves specialization. A renter can be excellent at repository mutation and still be the wrong authority for forensic sociology, intern welfare, identity decisions or other human-consequence lanes.
+
+The governing authority equation is:
+
+```text
+AUTHORITY = KPGS_TRUST ∩ ROLE_FIT ∩ CAPABILITY_LEASE
+```
+
+Do not collapse these into one score.
+
+## Validation plane vs execution plane
+
+MMAO uses two geometries.
+
+### Validation plane
+
+When `authority_mode == validation`:
+
+```text
+peer inference surface A ─┐
+peer inference surface B ─┼─> evidence -> convergence | divergence
+peer inference surface C ─┘
+```
+
+Rules:
+
+- validators have peer standing for the current validation question;
+- no validator wins because it speaks last;
+- convergence is evidence, not automatic authority;
+- divergence remains visible until governed resolution;
+- validation-only trust MUST NOT authorize consequential mutation;
+- a validation result may feed the next governed gate.
+
+### Execution plane
+
+When `authority_mode == execution`:
+
+```text
+human/root authority
+-> trusted seat
+-> bounded delegated authority
+-> worker/spawn
+```
+
+Rules:
+
+- hierarchy is permitted;
+- the renter must have execution-mode role fit;
+- consequential mutation still requires capability-scope admission;
+- validation standing never silently promotes into execution authority.
+
+Therefore:
+
+```text
+EQUAL_IN_VALIDATION
+AND
+BOUNDED_HIERARCHY_IN_EXECUTION
+```
+
+are compatible.
+
 Canonical runtime law:
 
 - `governance/kpgs-vnext/stateless-renter/PROTOCOL.md`
 - `governance/kpgs-vnext/stateless-renter/trust-grant.schema.json`
+- `governance/kpgs-vnext/stateless-renter/renter-envelope.schema.json`
 - `Structure/07-Agents/PROMOTION_LAW.json`
 
 ## CCP → PKA parser
@@ -321,8 +423,8 @@ For each repository:
 
 ## Success condition
 
-A fresh renter can determine from evidence: current authority, current vs historical context, exact evaluated commit/runtime, CCP decision, whether PKA actually ran, the resulting receipt, downstream eligibility, orchestration-cycle eligibility, KPGS trust-grant provenance and unresolved unknowns.
+A fresh renter can determine from evidence: current authority, current vs historical context, exact evaluated commit/runtime, CCP decision, whether PKA actually ran, the resulting receipt, downstream eligibility, orchestration-cycle eligibility, KPGS trust-grant provenance, role-fit boundaries, validation-vs-execution mode and unresolved unknowns.
 
-> **Persist receipts, not renter identity. Preserve provenance, not hidden continuity. Capability does not equal authority. CCP may accept a concept; PKA may propose admission; KPGS trust gates MAO/MMAO entry; the consumer runtime owns later consequential execution.**
+> **Persist receipts, not renter identity. Preserve provenance, not hidden continuity. Capability does not equal authority. Trust does not erase specialization. Peer validation does not imply execution authority. CCP may accept a concept; PKA may propose admission; KPGS trust and role-fit gate MAO/MMAO entry; the consumer runtime owns later consequential execution.**
 
 /s/ Kholofelo Robyn Rababalela
