@@ -1,6 +1,6 @@
 ---
 name: kpgs-stateless-renter-consistency
-description: Preserve KPGS persistence, consistency and context provenance across stateless AI renters, and parse CCP Accepted receipts into explicit PKA admission requests without treating conceptual acceptance as execution authority.
+description: Preserve KPGS persistence, consistency, context provenance and proof-gated trust across stateless AI renters; parse CCP Accepted receipts into explicit PKA admission requests without treating conceptual acceptance, model capability or discovery as execution authority.
 tags:
   - kpgs
   - pka
@@ -11,6 +11,9 @@ tags:
   - context-awareness
   - receipts
   - provenance
+  - trust
+  - mao
+  - mmao
 allowed-tools: []
 license: MIT
 author: Kholofelo Robyn Rababalela
@@ -41,6 +44,8 @@ MODEL_MEMORY != PERSISTENCE
 SEMANTIC_SIMILARITY != CURRENT_AUTHORITY
 CCP_ACCEPTED != PKA_ADMITTED
 PKA_PROPOSE != DOWNSTREAM_EXECUTION_AUTHORITY
+MODEL_CAPABILITY != KPGS_TRUST
+DISCOVERY_SUCCESS != MAO_MMAO_ADMISSION
 CI_TRIGGER != DEFECT_CAUSALITY
 ```
 
@@ -68,6 +73,7 @@ task:
   repository: <owner/repo>
   ref: <commit>
   current_instruction: <instruction>
+  orchestration_cycle: null | mao | mmao
 context:
   current_human: []
   repository: []
@@ -80,6 +86,11 @@ proof_state:
   inferred: []
   validated: []
   runtime_proven: []
+trust:
+  state: untrusted
+  grant_id: null
+  evidence_refs: []
+  expires_at: null
 receipts:
   inputs: []
   outputs: []
@@ -98,6 +109,85 @@ new evidence or governance              -> new action_id + new receipt
 ```
 
 Never rewrite an old receipt to make it appear the system knew later evidence earlier.
+
+## KPGS trust admission for MAO / MMAO
+
+Stateless renters do **not** enter an MAO or MMAO cycle merely because they can reason, call tools, route tasks, use a frontier model, carry a persona, or have previously participated in the ecosystem.
+
+The renter must first **earn KPGS trust**.
+
+```text
+MODELS COMPETE FOR CAPABILITY
+AGENTS EARN TRUST
+SEATS CARRY AUTHORITY
+KPGS GOVERNS THE DIFFERENCE
+```
+
+Admission is fail-closed:
+
+```text
+cycle in {mao, mmao}
+AND trust_state == trusted
+AND trust_grant.issuer == kpgs
+AND trust_grant.renter_id == renter_id
+AND trust_grant tenant/domain == current tenant/domain
+AND cycle in trust_grant.allowed_cycles
+AND trust_grant.expires_at > now
+AND trust_grant.evidence_refs is non-empty
+-> ELIGIBLE_FOR_ORCHESTRATION_ENTRY
+```
+
+Otherwise:
+
+```text
+POLICY_DENIED
+failure.code = trust_not_earned
+handler_execution = false
+```
+
+### What may earn trust
+
+KPGS trust is receipt-driven. Valid evidence can include the governed proof lane already present in the repository, for example:
+
+- BlackMask `SHIP` evidence;
+- teacher/reviewer approval;
+- deterministic execution receipts;
+- verified recovery after failure;
+- capability-scope compliance;
+- correct escalation/HOLD behavior;
+- domain-specific production evidence;
+- other proof explicitly admitted by current KPGS governance.
+
+The governing law remains:
+
+```text
+No promotion without proof. Drill is not graduation.
+```
+
+Trust admission is not public graduation. A renter may be trusted for a bounded MAO/MMAO lane without being globally promoted or permanently authoritative.
+
+### What never earns trust by itself
+
+```text
+benchmark rank
+provider reputation
+parameter count
+context-window size
+model release recency
+persona/name
+prior chat continuity
+discovery handshake
+cached credentials
+self-declared trust
+```
+
+A replacement model/runtime does not inherit authority merely because it inherits a name. The governed seat/context may persist; the runtime must rehydrate valid trust evidence or receive a fresh grant.
+
+Canonical runtime law:
+
+- `governance/kpgs-vnext/stateless-renter/PROTOCOL.md`
+- `governance/kpgs-vnext/stateless-renter/trust-grant.schema.json`
+- `Structure/07-Agents/PROMOTION_LAW.json`
 
 ## CCP → PKA parser
 
@@ -231,8 +321,8 @@ For each repository:
 
 ## Success condition
 
-A fresh renter can determine from evidence: current authority, current vs historical context, exact evaluated commit/runtime, CCP decision, whether PKA actually ran, the resulting receipt, downstream eligibility and unresolved unknowns.
+A fresh renter can determine from evidence: current authority, current vs historical context, exact evaluated commit/runtime, CCP decision, whether PKA actually ran, the resulting receipt, downstream eligibility, orchestration-cycle eligibility, KPGS trust-grant provenance and unresolved unknowns.
 
-> **Persist receipts, not renter identity. Preserve provenance, not hidden continuity. CCP may accept a concept; PKA may propose admission; the consumer runtime owns later consequential execution.**
+> **Persist receipts, not renter identity. Preserve provenance, not hidden continuity. Capability does not equal authority. CCP may accept a concept; PKA may propose admission; KPGS trust gates MAO/MMAO entry; the consumer runtime owns later consequential execution.**
 
 /s/ Kholofelo Robyn Rababalela
