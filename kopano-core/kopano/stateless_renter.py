@@ -5,7 +5,9 @@ idempotency records are delegated to a caller-supplied canonical store so replac
 this process does not transfer or lose authority.
 
 MAO/MMAO admission is fail-closed: a stateless renter must present an earned,
-evidence-backed KPGS trust grant before an orchestration cycle may execute.
+evidence-backed KPGS trust grant before an orchestration cycle may execute. Trust
+alone is not enough: the renter must also be fit for the decision domain,
+consequence class, and authority mode of the current task.
 """
 
 from __future__ import annotations
@@ -15,13 +17,15 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Mapping, Protocol
 from uuid import uuid4
 
-PROTOCOL_VERSION = "1.1"
+PROTOCOL_VERSION = "1.2"
 ORCHESTRATION_CYCLES = frozenset({"mao", "mmao"})
+AUTHORITY_MODES = frozenset({"validation", "execution"})
 TRUST_STATE = "trusted"
 FAILURE_CODES = {
     "input_invalid",
     "policy_denied",
     "trust_not_earned",
+    "role_not_fit",
     "capability_expired",
     "dependency_unavailable",
     "timeout",
@@ -42,15 +46,19 @@ class TaskContext:
     governing_spec_ref: str
     skill_versions: Mapping[str, str] = field(default_factory=dict)
     orchestration_cycle: str | None = None
+    decision_domain: str | None = None
+    consequence_class: str | None = None
+    authority_mode: str = "execution"
 
 
 @dataclass(frozen=True)
 class KPGSTrustGrant:
-    """Evidence-backed admission grant issued after KPGS trust is earned.
+    """Evidence-backed, role-fit admission grant issued after KPGS trust is earned.
 
-    Trust is bound to a renter identity, tenant/domain boundary and explicit
-    orchestration cycles. A model name, benchmark score, provider reputation or
-    successful discovery handshake is never sufficient admission evidence.
+    Trust is bound to a renter identity, tenant/domain boundary, explicit
+    orchestration cycles, decision domains, consequence classes and authority
+    modes. A model name, benchmark score, provider reputation or successful
+    discovery handshake is never sufficient admission evidence.
     """
 
     grant_id: str
@@ -58,6 +66,9 @@ class KPGSTrustGrant:
     tenant_id: str
     domain_id: str
     allowed_cycles: frozenset[str]
+    allowed_decision_domains: frozenset[str]
+    allowed_consequence_classes: frozenset[str]
+    allowed_authority_modes: frozenset[str]
     evidence_refs: tuple[str, ...]
     expires_at: datetime
     issuer: str = "kpgs"
@@ -70,25 +81,54 @@ class KPGSTrustGrant:
         renter_id: str,
         cycle: str,
         now: datetime,
-    ) -> str | None:
+    ) -> tuple[str, str] | None:
         if self.expires_at.tzinfo is None:
             raise ValueError("KPGSTrustGrant.expires_at must be timezone-aware")
         if now >= self.expires_at:
-            return "KPGS trust grant has expired"
+            return ("trust_not_earned", "KPGS trust grant has expired")
         if self.trust_state != TRUST_STATE:
-            return f"KPGS trust_state must be {TRUST_STATE!r}"
+            return ("trust_not_earned", f"KPGS trust_state must be {TRUST_STATE!r}")
         if not self.grant_id:
-            return "KPGS trust grant_id is required"
+            return ("trust_not_earned", "KPGS trust grant_id is required")
         if self.issuer.lower() != "kpgs":
-            return "KPGS trust grant must be issued by KPGS"
+            return ("trust_not_earned", "KPGS trust grant must be issued by KPGS")
         if self.renter_id != renter_id:
-            return "KPGS trust grant is bound to a different renter"
+            return ("trust_not_earned", "KPGS trust grant is bound to a different renter")
         if (self.tenant_id, self.domain_id) != (context.tenant_id, context.domain_id):
-            return "KPGS trust grant is bound to a different tenant/domain"
+            return ("trust_not_earned", "KPGS trust grant is bound to a different tenant/domain")
         if cycle not in self.allowed_cycles:
-            return f"KPGS trust grant does not authorize {cycle.upper()} entry"
+            return ("trust_not_earned", f"KPGS trust grant does not authorize {cycle.upper()} entry")
         if not self.evidence_refs or any(not ref.strip() for ref in self.evidence_refs):
-            return "KPGS trust requires at least one non-empty proof receipt"
+            return ("trust_not_earned", "KPGS trust requires at least one non-empty proof receipt")
+
+        decision_domain = (context.decision_domain or "").strip()
+        consequence_class = (context.consequence_class or "").strip()
+        authority_mode = (context.authority_mode or "").strip().lower()
+
+        if not decision_domain:
+            return ("role_not_fit", "MAO/MMAO entry requires an explicit decision_domain")
+        if not consequence_class:
+            return ("role_not_fit", "MAO/MMAO entry requires an explicit consequence_class")
+        if authority_mode not in AUTHORITY_MODES:
+            return (
+                "role_not_fit",
+                f"authority_mode must be one of {sorted(AUTHORITY_MODES)}",
+            )
+        if decision_domain not in self.allowed_decision_domains:
+            return (
+                "role_not_fit",
+                f"renter is trusted but not fit for decision_domain {decision_domain!r}",
+            )
+        if consequence_class not in self.allowed_consequence_classes:
+            return (
+                "role_not_fit",
+                f"renter is trusted but not fit for consequence_class {consequence_class!r}",
+            )
+        if authority_mode not in self.allowed_authority_modes:
+            return (
+                "role_not_fit",
+                f"renter is trusted but not authorized for {authority_mode!r} authority mode",
+            )
         return None
 
 
@@ -200,7 +240,7 @@ class StatelessRenter:
             "protocol_version": self.protocol_version,
             "accepting_work": self._accepting_work,
             "state_authority": "external-canonical-store",
-            "orchestration_entry_policy": "kpgs-earned-trust-required-for-mao-mmao",
+            "orchestration_entry_policy": "kpgs-trust-plus-domain-consequence-fit-required",
         }
 
     def begin_eviction(self) -> None:
@@ -227,7 +267,9 @@ class StatelessRenter:
         renter keeps no checkpoint or deduplication ledger of its own.
 
         If ``context.orchestration_cycle`` is MAO or MMAO, an earned KPGS trust
-        grant is required before capability-scope evaluation or handler execution.
+        grant plus role-fit for the current decision domain, consequence class and
+        authority mode is required before capability-scope evaluation or handler
+        execution.
         """
         event_time = now or datetime.now(timezone.utc)
         if event_time.tzinfo is None:
@@ -241,7 +283,6 @@ class StatelessRenter:
                 lease=lease,
                 payload={"operation": operation, "resource": resource},
                 now=event_time,
-                orchestration_cycle=cycle,
                 failure={
                     "code": "input_invalid",
                     "recoverability": "operator_action",
@@ -278,6 +319,7 @@ class StatelessRenter:
                 now=event_time,
             )
             if trust_failure:
+                failure_code, message = trust_failure
                 return self._event(
                     event_kind="policy.denied",
                     context=context,
@@ -287,9 +329,9 @@ class StatelessRenter:
                     orchestration_cycle=cycle,
                     trust_grant_id=trust_grant.grant_id or None,
                     failure={
-                        "code": "trust_not_earned",
+                        "code": failure_code,
                         "recoverability": "operator_action",
-                        "message": trust_failure,
+                        "message": message,
                     },
                 )
             trust_grant_id = trust_grant.grant_id
@@ -466,6 +508,12 @@ class StatelessRenter:
         }
         if orchestration_cycle:
             envelope["orchestration_cycle"] = orchestration_cycle
+        if context.decision_domain:
+            envelope["decision_domain"] = context.decision_domain
+        if context.consequence_class:
+            envelope["consequence_class"] = context.consequence_class
+        if context.orchestration_cycle:
+            envelope["authority_mode"] = context.authority_mode
         if trust_grant_id:
             envelope["trust_grant_id"] = trust_grant_id
         if idempotency_key:
