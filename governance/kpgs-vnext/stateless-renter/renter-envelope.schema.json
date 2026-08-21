@@ -51,6 +51,27 @@
     "correlation_id": { "type": "string", "minLength": 1 },
     "lease_id": { "type": "string", "minLength": 1 },
     "issued_at": { "type": "string", "format": "date-time" },
+    "orchestration_cycle": {
+      "type": "string",
+      "enum": ["mao", "mmao"]
+    },
+    "decision_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "consequence_class": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_mode": {
+      "type": "string",
+      "enum": ["validation", "execution"]
+    },
+    "trust_grant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
     "idempotency_key": {
       "type": "string",
       "minLength": 1,
@@ -96,6 +117,8 @@
           "enum": [
             "input_invalid",
             "policy_denied",
+            "trust_not_earned",
+            "role_not_fit",
             "capability_expired",
             "dependency_unavailable",
             "timeout",
@@ -116,6 +139,34 @@
     {
       "if": { "properties": { "event_kind": { "const": "task.failed" } } },
       "then": { "required": ["failure"] }
+    },
+    {
+      "if": {
+        "properties": {
+          "orchestration_cycle": { "enum": ["mao", "mmao"] }
+        },
+        "required": ["orchestration_cycle"]
+      },
+      "then": {
+        "required": ["authority_mode"],
+        "anyOf": [
+          {
+            "required": ["trust_grant_id", "decision_domain", "consequence_class"]
+          },
+          {
+            "required": ["failure"],
+            "properties": {
+              "failure": {
+                "properties": {
+                  "code": {
+                    "enum": ["trust_not_earned", "role_not_fit"]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
     }
   ]
 }

@@ -8,6 +8,7 @@ import pytest
 from kopano.stateless_renter import (
     CapabilityLease,
     IdempotencyRecord,
+    KPGSTrustGrant,
     RenterFailure,
     StatelessRenter,
     StepOutcome,
@@ -46,7 +47,17 @@ class MemoryHubStore:
         return self.effects[key]
 
 
-def make_context(domain: str) -> TaskContext:
+def make_context(
+    domain: str,
+    *,
+    orchestration_cycle: str | None = None,
+    decision_domain: str | None = None,
+    consequence_class: str | None = None,
+    authority_mode: str = "execution",
+) -> TaskContext:
+    if orchestration_cycle:
+        decision_domain = decision_domain or "software_delivery"
+        consequence_class = consequence_class or "technical_change"
     return TaskContext(
         tenant_id="tenant-kopano",
         domain_id=domain,
@@ -55,6 +66,10 @@ def make_context(domain: str) -> TaskContext:
         correlation_id=f"corr-{domain}",
         governing_spec_ref="governance/kpgs-vnext/stateless-renter/PROTOCOL.md",
         skill_versions={"kpgs-audit-verify-govern": "0.1.0"},
+        orchestration_cycle=orchestration_cycle,
+        decision_domain=decision_domain,
+        consequence_class=consequence_class,
+        authority_mode=authority_mode,
     )
 
 
@@ -67,6 +82,36 @@ def make_lease(context: TaskContext, operation: str, resource: str) -> Capabilit
         allowed_operations=frozenset({operation}),
         allowed_resources=frozenset({resource}),
         expires_at=datetime.now(timezone.utc) + timedelta(minutes=5),
+    )
+
+
+def make_trust_grant(
+    context: TaskContext,
+    *,
+    renter_id: str,
+    cycle: str,
+    expires_in: timedelta = timedelta(minutes=5),
+    allowed_decision_domains: frozenset[str] | None = None,
+    allowed_consequence_classes: frozenset[str] | None = None,
+    allowed_authority_modes: frozenset[str] | None = None,
+) -> KPGSTrustGrant:
+    return KPGSTrustGrant(
+        grant_id=f"trust-{renter_id}-{cycle}",
+        renter_id=renter_id,
+        tenant_id=context.tenant_id,
+        domain_id=context.domain_id,
+        allowed_cycles=frozenset({cycle}),
+        allowed_decision_domains=allowed_decision_domains
+        or frozenset({context.decision_domain or "software_delivery"}),
+        allowed_consequence_classes=allowed_consequence_classes
+        or frozenset({context.consequence_class or "technical_change"}),
+        allowed_authority_modes=allowed_authority_modes
+        or frozenset({context.authority_mode}),
+        evidence_refs=(
+            f"hub://evidence/{renter_id}/blackmask-ship",
+            f"hub://evidence/{renter_id}/teacher-review",
+        ),
+        expires_at=datetime.now(timezone.utc) + expires_in,
     )
 
 
@@ -259,3 +304,228 @@ def test_failure_classification_and_graceful_eviction_are_deterministic():
     )
     assert denied["failure"]["code"] == "cancelled"
     assert denied["failure"]["recoverability"] == "rehydrate"
+
+
+@pytest.mark.parametrize("cycle", ["mao", "mmao"])
+def test_orchestration_cycle_denies_untrusted_stateless_renter_before_handler(cycle: str):
+    hub = MemoryHubStore()
+    context = make_context("orchestration", orchestration_cycle=cycle)
+    lease = make_lease(context, "work.execute", "work:item")
+    called = False
+
+    def should_not_run(_checkpoint: Mapping[str, Any] | None, _payload: Mapping[str, Any]) -> StepOutcome:
+        nonlocal called
+        called = True
+        return StepOutcome(payload={"should": "not run"}, completed=True)
+
+    event = StatelessRenter("renter-candidate", hub).execute(
+        context=context,
+        lease=lease,
+        operation="work.execute",
+        resource="work:item",
+        payload={},
+        handler=should_not_run,
+        idempotency_key=f"{cycle}-candidate",
+    )
+
+    assert event["event_kind"] == "policy.denied"
+    assert event["failure"]["code"] == "trust_not_earned"
+    assert event["orchestration_cycle"] == cycle
+    assert called is False
+
+
+def test_earned_kpgs_trust_allows_mmao_entry_and_receipts_role_fit():
+    hub = MemoryHubStore()
+    context = make_context("orchestration", orchestration_cycle="mmao")
+    lease = make_lease(context, "work.execute", "work:item")
+    renter_id = "renter-proven"
+    trust = make_trust_grant(context, renter_id=renter_id, cycle="mmao")
+
+    event = StatelessRenter(renter_id, hub).execute(
+        context=context,
+        lease=lease,
+        operation="work.execute",
+        resource="work:item",
+        payload={},
+        handler=lambda _checkpoint, _payload: StepOutcome(payload={"ok": True}, completed=True),
+        idempotency_key="mmao-proven",
+        trust_grant=trust,
+    )
+
+    assert event["event_kind"] == "task.completed"
+    assert event["orchestration_cycle"] == "mmao"
+    assert event["decision_domain"] == "software_delivery"
+    assert event["consequence_class"] == "technical_change"
+    assert event["authority_mode"] == "execution"
+    assert event["trust_grant_id"] == trust.grant_id
+
+
+@pytest.mark.parametrize(
+    "grant_mutation",
+    ["wrong_renter", "wrong_cycle", "expired", "missing_evidence"],
+)
+def test_kpgs_trust_is_identity_scoped_cycle_scoped_fresh_and_evidence_backed(grant_mutation: str):
+    hub = MemoryHubStore()
+    context = make_context("orchestration", orchestration_cycle="mao")
+    lease = make_lease(context, "work.execute", "work:item")
+    renter_id = "renter-scoped"
+    base = make_trust_grant(context, renter_id=renter_id, cycle="mao")
+
+    values = {
+        "grant_id": base.grant_id,
+        "renter_id": base.renter_id,
+        "tenant_id": base.tenant_id,
+        "domain_id": base.domain_id,
+        "allowed_cycles": base.allowed_cycles,
+        "allowed_decision_domains": base.allowed_decision_domains,
+        "allowed_consequence_classes": base.allowed_consequence_classes,
+        "allowed_authority_modes": base.allowed_authority_modes,
+        "evidence_refs": base.evidence_refs,
+        "expires_at": base.expires_at,
+        "issuer": base.issuer,
+        "trust_state": base.trust_state,
+    }
+    if grant_mutation == "wrong_renter":
+        values["renter_id"] = "someone-else"
+    elif grant_mutation == "wrong_cycle":
+        values["allowed_cycles"] = frozenset({"mmao"})
+    elif grant_mutation == "expired":
+        values["expires_at"] = datetime.now(timezone.utc) - timedelta(seconds=1)
+    elif grant_mutation == "missing_evidence":
+        values["evidence_refs"] = ()
+
+    event = StatelessRenter(renter_id, hub).execute(
+        context=context,
+        lease=lease,
+        operation="work.execute",
+        resource="work:item",
+        payload={},
+        handler=lambda _checkpoint, _payload: StepOutcome(payload={"should": "not run"}, completed=True),
+        idempotency_key=f"mao-{grant_mutation}",
+        trust_grant=KPGSTrustGrant(**values),
+    )
+
+    assert event["event_kind"] == "policy.denied"
+    assert event["failure"]["code"] == "trust_not_earned"
+
+
+@pytest.mark.parametrize(
+    ("context_kwargs", "grant_kwargs"),
+    [
+        (
+            {"decision_domain": "forensic_sociology"},
+            {"allowed_decision_domains": frozenset({"software_delivery"})},
+        ),
+        (
+            {"consequence_class": "human_welfare"},
+            {"allowed_consequence_classes": frozenset({"technical_change"})},
+        ),
+    ],
+)
+def test_trusted_renter_is_denied_when_role_fit_does_not_match_consequence(
+    context_kwargs: dict[str, str],
+    grant_kwargs: dict[str, frozenset[str]],
+):
+    hub = MemoryHubStore()
+    context = make_context(
+        "orchestration",
+        orchestration_cycle="mmao",
+        **context_kwargs,
+    )
+    lease = make_lease(context, "work.execute", "work:item")
+    renter_id = "renter-trusted-wrong-role"
+    trust = make_trust_grant(
+        context,
+        renter_id=renter_id,
+        cycle="mmao",
+        **grant_kwargs,
+    )
+    called = False
+
+    def should_not_run(_checkpoint: Mapping[str, Any] | None, _payload: Mapping[str, Any]) -> StepOutcome:
+        nonlocal called
+        called = True
+        return StepOutcome(payload={"should": "not run"}, completed=True)
+
+    event = StatelessRenter(renter_id, hub).execute(
+        context=context,
+        lease=lease,
+        operation="work.execute",
+        resource="work:item",
+        payload={},
+        handler=should_not_run,
+        idempotency_key="wrong-role",
+        trust_grant=trust,
+    )
+
+    assert event["event_kind"] == "policy.denied"
+    assert event["failure"]["code"] == "role_not_fit"
+    assert called is False
+
+
+def test_validation_authority_is_peer_surface_not_execution_authority():
+    hub = MemoryHubStore()
+    renter_id = "renter-validator"
+
+    validation_context = make_context(
+        "orchestration",
+        orchestration_cycle="mmao",
+        decision_domain="forensic_sociology",
+        consequence_class="human_welfare",
+        authority_mode="validation",
+    )
+    validation_lease = make_lease(validation_context, "review.validate", "case:42")
+    validation_trust = make_trust_grant(
+        validation_context,
+        renter_id=renter_id,
+        cycle="mmao",
+        allowed_decision_domains=frozenset({"forensic_sociology"}),
+        allowed_consequence_classes=frozenset({"human_welfare"}),
+        allowed_authority_modes=frozenset({"validation"}),
+    )
+
+    validated = StatelessRenter(renter_id, hub).execute(
+        context=validation_context,
+        lease=validation_lease,
+        operation="review.validate",
+        resource="case:42",
+        payload={},
+        handler=lambda _checkpoint, _payload: StepOutcome(
+            payload={"disposition": "independent_validation"},
+            completed=True,
+        ),
+        idempotency_key="validate-case-42",
+        trust_grant=validation_trust,
+    )
+    assert validated["event_kind"] == "task.completed"
+    assert validated["authority_mode"] == "validation"
+
+    execution_context = make_context(
+        "orchestration",
+        orchestration_cycle="mmao",
+        decision_domain="forensic_sociology",
+        consequence_class="human_welfare",
+        authority_mode="execution",
+    )
+    execution_lease = make_lease(execution_context, "case.mutate", "case:42")
+    executed = False
+
+    def should_not_execute(_checkpoint: Mapping[str, Any] | None, _payload: Mapping[str, Any]) -> StepOutcome:
+        nonlocal executed
+        executed = True
+        return StepOutcome(payload={"mutated": True}, completed=True)
+
+    denied = StatelessRenter(renter_id, hub).execute(
+        context=execution_context,
+        lease=execution_lease,
+        operation="case.mutate",
+        resource="case:42",
+        payload={},
+        handler=should_not_execute,
+        idempotency_key="mutate-case-42",
+        trust_grant=validation_trust,
+    )
+
+    assert denied["event_kind"] == "policy.denied"
+    assert denied["failure"]["code"] == "role_not_fit"
+    assert executed is False
