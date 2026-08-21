@@ -3,6 +3,9 @@
 The renter intentionally owns no canonical task database. Durable checkpoints and
 idempotency records are delegated to a caller-supplied canonical store so replacing
 this process does not transfer or lose authority.
+
+MAO/MMAO admission is fail-closed: a stateless renter must present an earned,
+evidence-backed KPGS trust grant before an orchestration cycle may execute.
 """
 
 from __future__ import annotations
@@ -12,10 +15,13 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Mapping, Protocol
 from uuid import uuid4
 
-PROTOCOL_VERSION = "1.0"
+PROTOCOL_VERSION = "1.1"
+ORCHESTRATION_CYCLES = frozenset({"mao", "mmao"})
+TRUST_STATE = "trusted"
 FAILURE_CODES = {
     "input_invalid",
     "policy_denied",
+    "trust_not_earned",
     "capability_expired",
     "dependency_unavailable",
     "timeout",
@@ -35,6 +41,55 @@ class TaskContext:
     correlation_id: str
     governing_spec_ref: str
     skill_versions: Mapping[str, str] = field(default_factory=dict)
+    orchestration_cycle: str | None = None
+
+
+@dataclass(frozen=True)
+class KPGSTrustGrant:
+    """Evidence-backed admission grant issued after KPGS trust is earned.
+
+    Trust is bound to a renter identity, tenant/domain boundary and explicit
+    orchestration cycles. A model name, benchmark score, provider reputation or
+    successful discovery handshake is never sufficient admission evidence.
+    """
+
+    grant_id: str
+    renter_id: str
+    tenant_id: str
+    domain_id: str
+    allowed_cycles: frozenset[str]
+    evidence_refs: tuple[str, ...]
+    expires_at: datetime
+    issuer: str = "kpgs"
+    trust_state: str = TRUST_STATE
+
+    def authorization_failure(
+        self,
+        context: TaskContext,
+        *,
+        renter_id: str,
+        cycle: str,
+        now: datetime,
+    ) -> str | None:
+        if self.expires_at.tzinfo is None:
+            raise ValueError("KPGSTrustGrant.expires_at must be timezone-aware")
+        if now >= self.expires_at:
+            return "KPGS trust grant has expired"
+        if self.trust_state != TRUST_STATE:
+            return f"KPGS trust_state must be {TRUST_STATE!r}"
+        if not self.grant_id:
+            return "KPGS trust grant_id is required"
+        if self.issuer.lower() != "kpgs":
+            return "KPGS trust grant must be issued by KPGS"
+        if self.renter_id != renter_id:
+            return "KPGS trust grant is bound to a different renter"
+        if (self.tenant_id, self.domain_id) != (context.tenant_id, context.domain_id):
+            return "KPGS trust grant is bound to a different tenant/domain"
+        if cycle not in self.allowed_cycles:
+            return f"KPGS trust grant does not authorize {cycle.upper()} entry"
+        if not self.evidence_refs or any(not ref.strip() for ref in self.evidence_refs):
+            return "KPGS trust requires at least one non-empty proof receipt"
+        return None
 
 
 @dataclass(frozen=True)
@@ -145,6 +200,7 @@ class StatelessRenter:
             "protocol_version": self.protocol_version,
             "accepting_work": self._accepting_work,
             "state_authority": "external-canonical-store",
+            "orchestration_entry_policy": "kpgs-earned-trust-required-for-mao-mmao",
         }
 
     def begin_eviction(self) -> None:
@@ -163,15 +219,80 @@ class StatelessRenter:
         idempotency_key: str | None,
         side_effecting: bool = True,
         now: datetime | None = None,
+        trust_grant: KPGSTrustGrant | None = None,
     ) -> dict[str, Any]:
         """Execute one governed step and return a typed protocol event envelope.
 
         The caller supplies all task authority and durable state dependencies. The
         renter keeps no checkpoint or deduplication ledger of its own.
+
+        If ``context.orchestration_cycle`` is MAO or MMAO, an earned KPGS trust
+        grant is required before capability-scope evaluation or handler execution.
         """
         event_time = now or datetime.now(timezone.utc)
         if event_time.tzinfo is None:
             raise ValueError("now must be timezone-aware")
+
+        cycle = (context.orchestration_cycle or "").strip().lower()
+        if context.orchestration_cycle and cycle not in ORCHESTRATION_CYCLES:
+            return self._event(
+                event_kind="policy.denied",
+                context=context,
+                lease=lease,
+                payload={"operation": operation, "resource": resource},
+                now=event_time,
+                orchestration_cycle=cycle,
+                failure={
+                    "code": "input_invalid",
+                    "recoverability": "operator_action",
+                    "message": (
+                        f"unsupported orchestration_cycle {context.orchestration_cycle!r}; "
+                        f"expected one of {sorted(ORCHESTRATION_CYCLES)}"
+                    ),
+                },
+            )
+
+        trust_grant_id: str | None = None
+        if cycle in ORCHESTRATION_CYCLES:
+            if trust_grant is None:
+                return self._event(
+                    event_kind="policy.denied",
+                    context=context,
+                    lease=lease,
+                    payload={"operation": operation, "resource": resource},
+                    now=event_time,
+                    orchestration_cycle=cycle,
+                    failure={
+                        "code": "trust_not_earned",
+                        "recoverability": "operator_action",
+                        "message": (
+                            f"{cycle.upper()} entry denied: stateless renter must earn KPGS trust "
+                            "and present an evidence-backed trust grant"
+                        ),
+                    },
+                )
+            trust_failure = trust_grant.authorization_failure(
+                context,
+                renter_id=self.renter_id,
+                cycle=cycle,
+                now=event_time,
+            )
+            if trust_failure:
+                return self._event(
+                    event_kind="policy.denied",
+                    context=context,
+                    lease=lease,
+                    payload={"operation": operation, "resource": resource},
+                    now=event_time,
+                    orchestration_cycle=cycle,
+                    trust_grant_id=trust_grant.grant_id or None,
+                    failure={
+                        "code": "trust_not_earned",
+                        "recoverability": "operator_action",
+                        "message": trust_failure,
+                    },
+                )
+            trust_grant_id = trust_grant.grant_id
 
         if not self._accepting_work:
             return self._event(
@@ -180,6 +301,8 @@ class StatelessRenter:
                 lease=lease,
                 payload={"operation": operation, "resource": resource},
                 now=event_time,
+                orchestration_cycle=cycle or None,
+                trust_grant_id=trust_grant_id,
                 failure={
                     "code": "cancelled",
                     "recoverability": "rehydrate",
@@ -203,6 +326,8 @@ class StatelessRenter:
                 lease=lease,
                 payload={"operation": operation, "resource": resource},
                 now=event_time,
+                orchestration_cycle=cycle or None,
+                trust_grant_id=trust_grant_id,
                 failure={
                     "code": failure_code,
                     "recoverability": recoverability,
@@ -217,6 +342,8 @@ class StatelessRenter:
                 lease=lease,
                 payload={"operation": operation, "resource": resource},
                 now=event_time,
+                orchestration_cycle=cycle or None,
+                trust_grant_id=trust_grant_id,
                 failure={
                     "code": "policy_denied",
                     "recoverability": "operator_action",
@@ -236,6 +363,8 @@ class StatelessRenter:
                     idempotency_key=idempotency_key,
                     checkpoint_ref=existing.checkpoint_ref,
                     evidence=existing.evidence,
+                    orchestration_cycle=cycle or None,
+                    trust_grant_id=trust_grant_id,
                 )
 
         checkpoint = self.store.load_checkpoint(context)
@@ -249,6 +378,8 @@ class StatelessRenter:
                 payload={"operation": operation, "resource": resource},
                 now=event_time,
                 idempotency_key=idempotency_key,
+                orchestration_cycle=cycle or None,
+                trust_grant_id=trust_grant_id,
                 failure={
                     "code": exc.code,
                     "recoverability": exc.recoverability,
@@ -263,6 +394,8 @@ class StatelessRenter:
                 payload={"operation": operation, "resource": resource},
                 now=event_time,
                 idempotency_key=idempotency_key,
+                orchestration_cycle=cycle or None,
+                trust_grant_id=trust_grant_id,
                 failure={
                     "code": "execution_failed",
                     "recoverability": "retry",
@@ -295,6 +428,8 @@ class StatelessRenter:
             idempotency_key=idempotency_key,
             checkpoint_ref=checkpoint_ref,
             evidence=outcome.evidence,
+            orchestration_cycle=cycle or None,
+            trust_grant_id=trust_grant_id,
         )
 
     def _event(
@@ -309,6 +444,8 @@ class StatelessRenter:
         checkpoint_ref: str | None = None,
         evidence: tuple[Mapping[str, str], ...] = (),
         failure: Mapping[str, str] | None = None,
+        orchestration_cycle: str | None = None,
+        trust_grant_id: str | None = None,
     ) -> dict[str, Any]:
         envelope: dict[str, Any] = {
             "protocol_version": self.protocol_version,
@@ -327,6 +464,10 @@ class StatelessRenter:
             "payload": dict(payload),
             "evidence": [dict(item) for item in evidence],
         }
+        if orchestration_cycle:
+            envelope["orchestration_cycle"] = orchestration_cycle
+        if trust_grant_id:
+            envelope["trust_grant_id"] = trust_grant_id
         if idempotency_key:
             envelope["idempotency_key"] = idempotency_key
         if checkpoint_ref:
