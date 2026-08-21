@@ -1,7 +1,7 @@
 {
   "name": "Stateless Renter Consistency + CCP to PKA Admission",
   "slug": "kpgs-stateless-renter-consistency",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Kholofelo Robyn Rababalela",
   "license": "MIT",
   "source_repository": "RobynAwesome/Introduction-to-MCP",
@@ -18,9 +18,12 @@
     "consistency",
     "context-awareness",
     "receipts",
-    "provenance"
+    "provenance",
+    "trust",
+    "mao",
+    "mmao"
   ],
-  "summary": "Makes persistence receipt-based, context provenance explicit, and CCP Accepted a deterministic input to PKA evaluation rather than an execution shortcut.",
+  "summary": "Makes persistence receipt-based, context provenance explicit, CCP Accepted a deterministic input to PKA evaluation rather than an execution shortcut, and requires evidence-backed KPGS trust before stateless renters enter MAO or MMAO cycles.",
   "registry_intent": "AwesomeSkills.dev publication",
   "signature": "/s/ Kholofelo Robyn Rababalela"
 }
