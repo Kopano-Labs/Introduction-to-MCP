@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/stateless-renter/trust-grant.schema.json",
+  "title": "KPGS Stateless Renter Trust Grant",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "grant_id",
+    "renter_id",
+    "tenant_id",
+    "domain_id",
+    "allowed_cycles",
+    "evidence_refs",
+    "expires_at",
+    "issuer",
+    "trust_state"
+  ],
+  "properties": {
+    "grant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "renter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "allowed_cycles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["mao", "mmao"]
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "issuer": {
+      "const": "kpgs"
+    },
+    "trust_state": {
+      "const": "trusted"
+    }
+  }
+}
