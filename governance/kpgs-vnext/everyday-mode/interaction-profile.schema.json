@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/everyday-mode/interaction-profile.schema.json",
+  "title": "KPGS Everyday Interaction Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "profile"
+  ],
+  "properties": {
+    "schema": {
+      "const": "kc.everyday.interaction-profile.v1"
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "warmth",
+        "detailDensity",
+        "pace",
+        "initiative",
+        "explanationStyle",
+        "accountSyncConsent"
+      ],
+      "properties": {
+        "warmth": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "detailDensity": { "type": "string", "enum": ["compact", "balanced", "detailed"] },
+        "pace": { "type": "string", "enum": ["calm", "normal", "fast"] },
+        "initiative": { "type": "string", "enum": ["low", "balanced", "high"] },
+        "explanationStyle": { "type": "string", "enum": ["plain", "steps", "why"] },
+        "accountSyncConsent": { "type": "boolean", "default": false }
+      }
+    }
+  },
+  "x-kpgs-boundary": {
+    "canonicalAuthority": false,
+    "mayGrantCapabilities": false,
+    "mayMutateWorkflowState": false,
+    "runtimeAdaptationOnly": true,
+    "modelWeightTraining": false
+  }
+}
