@@ -24,7 +24,7 @@
 **Full-Stack Multi-Agent Orchestration & South African Impact Ecosystem**
 **Official Reference Implementation for the Model Context Protocol (MCP)**
 
-📧 **Contact:** [rkholofelo@context.kopanolabs.com](mailto:rkholofelo@context.kopanolabs.com)
+📧 **Contact:** [rkholofelo@gmail.com](mailto:rkholofelo@gmail.com)
 
 > *Orchestrating intelligent discussions. Unifying social context. Empowering South African innovation.*
 >
