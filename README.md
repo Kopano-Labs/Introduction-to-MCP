@@ -73,7 +73,7 @@
 ---
 
 ## 🌐 Production Surface
-- **Kopano Context Studio:** [www.kopanolabs.com](https://www.context.kopanolabs.com)
+- **Kopano Context Studio:** [www.kopanolabs.com](https://www.kopanolabs.com)
 - **Kasilink Market:** [www.kasilink.com](https://www.kasilink.com) (Beta)
 - **Support & Governance:** [rkholofelo@gmail.com](mailto:rkholofelo@gmail.com)
 
