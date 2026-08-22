@@ -293,7 +293,7 @@ export default function EverydayMode({
           <summary>How these settings affect responses</summary>
           <p>
             They can change how warm, short, detailed, fast, or proactive responses feel while a response is being generated.
-            They do not retrain the model. Training or fine-tuning is a separate governed process and is not active here.
+            They do not retrain model weights. Training or fine-tuning is a separate governed process and is not active here.
           </p>
         </details>
       </section>
