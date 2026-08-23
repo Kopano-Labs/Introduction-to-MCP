@@ -22,6 +22,23 @@ one clear next action
 
 Progressive disclosure hides jargon, not governance.
 
+## Companion presentation layer
+
+The additive public interaction contract lives in:
+
+- [`COMPANION_INTERACTION_PROTOCOL.md`](./COMPANION_INTERACTION_PROTOCOL.md)
+- [`companion-interaction-contract.json`](./companion-interaction-contract.json)
+
+It extends Everyday Mode from a plain-language dashboard into a companion-first interaction law for RTCP/MMAO and public product surfaces:
+
+```text
+USER <-> COMPANION -> GUARD -> SYSTEM -> RECEIPT
+```
+
+The companion talks to the user; RTCP/council routing stays behind it. Operator/proof detail remains available on demand.
+
+A safe public breach visual stops at the guard and explains the block without exposing secrets, credential structure, private infrastructure or exploit recipes.
+
 ## Reference pilot
 
 The KC dashboard reference pilot is intentionally read-only:
