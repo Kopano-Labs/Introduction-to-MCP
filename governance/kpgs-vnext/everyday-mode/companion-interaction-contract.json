@@ -1,0 +1,60 @@
+{
+  "schema": "kpgs.companion.interaction.v1",
+  "authority": "RobynAwesome/Introduction-to-MCP",
+  "extends": "kc.everyday.interaction-profile.v1",
+  "default_mode": "COMPANION",
+  "operator_mode": "SECONDARY",
+  "dialogue_states": [
+    "HELLO",
+    "UNDERSTAND",
+    "OFFER",
+    "PERMISSION",
+    "ROUTING",
+    "RESULT",
+    "PROOF"
+  ],
+  "public_security_graph": {
+    "nodes": ["YOU", "COMPANION", "GUARD", "SYSTEM", "RECEIPT"],
+    "invalid_bypass": ["COMPANION", "SYSTEM"],
+    "bypass_outcome": "BLOCKED_AT_GUARD",
+    "public_exclusions": [
+      "secrets",
+      "tokens",
+      "credential_structure",
+      "private_addresses",
+      "exploit_recipes"
+    ]
+  },
+  "execution_claims": [
+    "ROUTE_ONLY",
+    "PROVIDER_EXECUTED",
+    "TOOL_EXECUTED",
+    "BLOCKED"
+  ],
+  "companion_turn": {
+    "required": [
+      "speaker",
+      "message",
+      "goal_summary",
+      "actions",
+      "route_summary",
+      "proof_available",
+      "execution_claim"
+    ],
+    "max_primary_actions": 3
+  },
+  "visual_rules": {
+    "concept_before_paragraph": true,
+    "webgl_required": false,
+    "semantic_fallback_required": true,
+    "reduced_motion_required": true,
+    "save_data_lite_required": true,
+    "fork_no_import_policy": "governance/kpgs-vnext/fork-assimilation/FORK_REUSE_INVENTORY.md"
+  },
+  "authority_invariants": {
+    "preferences_grant_authority": false,
+    "route_receipt_equals_execution_receipt": false,
+    "game_progress_equals_real_progress": false,
+    "simulation_equals_physical_evidence": false
+  }
+}
