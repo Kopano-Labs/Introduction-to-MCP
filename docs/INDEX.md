@@ -20,11 +20,22 @@
 |----------|-------------|--------|
 | [NAMED_GUILD_IDENTITY.md](NAMED_GUILD_IDENTITY.md) | IRIS 150-word bio + Named Guild 500-word 4Ws biography | ✅ LIVE |
 
+## Swarm / Admission Protocols
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [swarm-ops/BLACK_MASS_PROTOCOL.md](swarm-ops/BLACK_MASS_PROTOCOL.md) | Black Mask / BlackMass pre-flight and mass-movement doctrine | ✅ LIVE |
+| [swarm-ops/BRACKET_PROTOCOL.md](swarm-ops/BRACKET_PROTOCOL.md) | Breaking-point receipt and Main Brain/sub-brain alignment | ✅ LIVE |
+| [swarm-ops/OZ_CONTEXT_BLEED_PROTOCOL.md](swarm-ops/OZ_CONTEXT_BLEED_PROTOCOL.md) | Structural domain-boundary enforcement and sealed crossings | ✅ LIVE |
+| [swarm-ops/TESTIMONY_PROTOCOL.md](swarm-ops/TESTIMONY_PROTOCOL.md) | Earned convergence: observe/infer/validate without manufacturing the testimony | 🟡 INGRESS / REVIEW |
+| [swarm-ops/ZERO_TRUST_STATE_ADMISSION_PROTOCOL.md](swarm-ops/ZERO_TRUST_STATE_ADMISSION_PROTOCOL.md) | Privileged-state admission contract using provenance, PKA and KMEC routing | 🟡 INGRESS / REVIEW |
+| [swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md](swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md) | Isolated adversarial containment / honeypot evidence lane | 🟡 INGRESS / REVIEW |
+
 ## Operational Directories
 
 | Directory | Description |
 |-----------|-------------|
-| `swarm-ops/` | Black Mask Commandments, agent deployment ops |
+| `swarm-ops/` | Black Mask Commandments, agent deployment ops, admission/boundary protocols |
 | `portfolio/` | Project portfolio documentation |
 
 ## Cross-References
