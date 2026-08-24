@@ -1,20 +1,77 @@
 {
   "schema_version": "1.0",
   "estate_id": "kopano-sovereign-estate",
-  "generated_at": "2026-08-17T06:40:00Z",
+  "generated_at": "2026-08-24T00:24:25Z",
   "properties": [
     {
       "domain": "KasiLink.com",
-      "status": "declared_pending_witness",
-      "ownership_evidence": [],
-      "repositories": [],
-      "deployment": { "provider": null, "environment": null, "target": null },
+      "status": "witnessed",
+      "ownership_evidence": [
+        {
+          "kind": "domain-control",
+          "ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_07Q4oRr2okeBiPO12YotAzHZM10b/domain/kasilink.com",
+          "verified_at": "2026-08-24T00:24:25Z"
+        },
+        {
+          "kind": "domain-control",
+          "ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_A1AvVl5WYRyTergoEcMsvEmMM3uX/domain/www.kasilink.com",
+          "verified_at": "2026-08-24T00:24:25Z"
+        },
+        {
+          "kind": "deployment",
+          "ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_9PMFHyTv9jP78sASJaZD5hGX47yr",
+          "verified_at": "2026-08-24T00:24:25Z"
+        },
+        {
+          "kind": "deployment",
+          "ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_AA9iSMwcpHPGvqtRc5mEFjMpywha",
+          "verified_at": "2026-08-24T00:24:25Z"
+        },
+        {
+          "kind": "repository",
+          "ref": "github://RobynAwesome/KasiLink/commit/1080fb18096cb2b5c9f8a9ea0d12b442b80329f4",
+          "verified_at": "2026-08-24T00:24:25Z"
+        }
+      ],
+      "repositories": [
+        {
+          "repository": "RobynAwesome/KasiLink",
+          "role": "application",
+          "ref": "commit://1080fb18096cb2b5c9f8a9ea0d12b442b80329f4"
+        }
+      ],
+      "deployment": {
+        "provider": "Vercel",
+        "environment": "production-split",
+        "target": null,
+        "environments": [
+          {
+            "name": "production-apex",
+            "provider": "Vercel",
+            "target": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_07Q4oRr2okeBiPO12YotAzHZM10b/deployment/dpl_9PMFHyTv9jP78sASJaZD5hGX47yr"
+          },
+          {
+            "name": "production-www",
+            "provider": "Vercel",
+            "target": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_A1AvVl5WYRyTergoEcMsvEmMM3uX/deployment/dpl_AA9iSMwcpHPGvqtRc5mEFjMpywha"
+          }
+        ]
+      },
       "adapter": { "required": true, "implementation": null, "version": null },
       "renter_compatibility": { "status": "unknown", "protocol_version": null },
       "governance": { "policy_ref": null, "risk_class": null },
-      "release": { "live_ref": null, "evidence_ref": null },
+      "release": {
+        "live_ref": null,
+        "evidence_ref": "repo://governance/kpgs-vnext/estate-registry/evidence/live-provider-witness-2026-08-24.json#KasiLink.com"
+      },
       "rollback": { "target_ref": null, "procedure_ref": null },
-      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+      "notes": [
+        "Witnessed through connected Vercel and GitHub account surfaces on 2026-08-24; public HTTP alone was not used as ownership proof.",
+        "Apex kasilink.com and www.kasilink.com remain split across two Vercel project identities even though both current deployments resolve to commit 1080fb18096cb2b5c9f8a9ea0d12b442b80329f4.",
+        "Connected Vercel runtime aggregation reports MongoDB Atlas authentication failures on both project identities; migration remains HOLD.",
+        "No provider-domain mutation action is exposed by the currently connected Vercel surface, so no cutover was performed.",
+        "Adapter, renter compatibility, capability map, governance classification, evaluation and rollback-drill evidence remain explicitly unknown/incomplete."
+      ]
     },
     {
       "domain": "FivesArena.com",
@@ -31,16 +88,54 @@
     },
     {
       "domain": "starfallsalvage.kopanolabs.com",
-      "status": "declared_pending_witness",
-      "ownership_evidence": [],
-      "repositories": [],
-      "deployment": { "provider": null, "environment": null, "target": null },
+      "status": "witnessed",
+      "ownership_evidence": [
+        {
+          "kind": "domain-control",
+          "ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_rik2lQSlmHm7CIUhEGZMprZ5CFcN/domain/starfallsalvage.kopanolabs.com",
+          "verified_at": "2026-08-24T00:24:25Z"
+        },
+        {
+          "kind": "deployment",
+          "ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_8Myns9BqgPovBtTaC1ZsrjtNwCuP",
+          "verified_at": "2026-08-24T00:24:25Z"
+        },
+        {
+          "kind": "repository",
+          "ref": "github://RobynAwesome/starfall-salvage/commit/fea307d09a8552cec72e0a6bcb5440cd173bef41",
+          "verified_at": "2026-08-24T00:24:25Z"
+        }
+      ],
+      "repositories": [
+        {
+          "repository": "RobynAwesome/starfall-salvage",
+          "role": "application",
+          "ref": "commit://fea307d09a8552cec72e0a6bcb5440cd173bef41"
+        }
+      ],
+      "deployment": {
+        "provider": "Vercel",
+        "environment": "production",
+        "target": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_rik2lQSlmHm7CIUhEGZMprZ5CFcN/deployment/dpl_8Myns9BqgPovBtTaC1ZsrjtNwCuP"
+      },
       "adapter": { "required": true, "implementation": null, "version": null },
       "renter_compatibility": { "status": "unknown", "protocol_version": null },
       "governance": { "policy_ref": null, "risk_class": null },
-      "release": { "live_ref": null, "evidence_ref": null },
-      "rollback": { "target_ref": null, "procedure_ref": null },
-      "notes": ["Declared as an initial KPGS DNS estate member. Await authoritative witness evidence before promotion."]
+      "release": {
+        "live_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_8Myns9BqgPovBtTaC1ZsrjtNwCuP",
+        "evidence_ref": "repo://governance/kpgs-vnext/estate-registry/evidence/live-provider-witness-2026-08-24.json#starfallsalvage.kopanolabs.com"
+      },
+      "rollback": {
+        "target_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_9X3gbZpWuRWK5N3XC7Unvtd1doDR",
+        "procedure_ref": "repo://governance/kpgs-vnext/estate-registry/evidence/LIVE_PROVIDER_WITNESS_2026-08-24.md#starfall-rollback-procedure"
+      },
+      "notes": [
+        "Witnessed through connected Vercel and GitHub account surfaces on 2026-08-24; public HTTP alone was not used as ownership proof.",
+        "Connected GitHub currently resolves stable repository id 1229480004 as RobynAwesome/starfall-salvage while Vercel deployment metadata retains the historical Kopano-Labs organization label; stable repo id + exact commit anchor the identity seam.",
+        "Connected Vercel runtime-error aggregation returned no error groups in the selected seven-day window.",
+        "Rollback target records a real prior READY production deployment candidate but no rollback drill or automatic rollback authority is claimed.",
+        "Adapter, renter compatibility, capability map, governance classification, health/evidence endpoint and exact-commit KPGS evaluation remain explicitly unknown/incomplete, so migration remains HOLD."
+      ]
     },
     {
       "domain": "crisisconnect.kopanolabs.com",
