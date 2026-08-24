@@ -256,9 +256,8 @@ class SovereignEstateRegistryTests(unittest.TestCase):
 
     def test_initial_six_domains_remain_present_and_unpromoted(self):
         snapshot = self.registry.snapshot()
-        domains = {
-            item["domain"] for item in snapshot["properties"]
-        }
+        properties = {item["domain"]: item for item in snapshot["properties"]}
+        domains = set(properties)
         self.assertEqual(
             domains,
             {
@@ -270,10 +269,24 @@ class SovereignEstateRegistryTests(unittest.TestCase):
                 "KRRababalela.com",
             },
         )
+        self.assertEqual(properties["KasiLink.com"]["status"], "witnessed")
+        self.assertEqual(
+            properties["starfallsalvage.kopanolabs.com"]["status"], "witnessed"
+        )
+        for domain in (
+            "FivesArena.com",
+            "crisisconnect.kopanolabs.com",
+            "KopanoLabs.com",
+            "KRRababalela.com",
+        ):
+            self.assertEqual(
+                properties[domain]["status"], "declared_pending_witness"
+            )
+
+        promoted_states = {"registered", "staging", "production"}
         self.assertTrue(
             all(
-                item["status"]
-                == "declared_pending_witness"
+                item["status"] not in promoted_states
                 for item in snapshot["properties"]
             )
         )
