@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpgs.local/schemas/mzansi/inference-request.schema.json",
+  "title": "KPGS Mzansi Sociolinguistic Inference Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "request_id", "input", "target", "user_contract", "execution", "created_at"],
+  "properties": {
+    "schema": { "const": "kpgs.mzansi.inference-request.v1" },
+    "request_id": { "type": "string", "minLength": 8 },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "language_tag", "register"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "language_tag": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+        "register": { "enum": ["formal", "conversational", "street", "mxit", "mixed", "unknown"] }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["language_tag", "register", "meaning_preservation_required", "code_switch_ratio", "mxit_mode", "speech"],
+      "properties": {
+        "language_tag": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+        "register": { "enum": ["formal", "conversational", "street", "mxit", "mixed"] },
+        "meaning_preservation_required": { "const": true },
+        "code_switch_ratio": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "mxit_mode": { "enum": ["off", "prefer", "required"] },
+        "speech": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "voice_id", "high_fidelity"],
+          "properties": {
+            "required": { "type": "boolean" },
+            "voice_id": { "type": ["string", "null"] },
+            "high_fidelity": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "user_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context_source", "preferred_language_tag", "street_formal_ratio", "code_switch_tolerance", "region", "accessibility_notes"],
+      "properties": {
+        "context_source": { "const": "explicit_user_input" },
+        "preferred_language_tag": { "type": ["string", "null"], "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+        "street_formal_ratio": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "code_switch_tolerance": { "enum": ["none", "low", "medium", "high", "user_defined"] },
+        "region": { "type": ["string", "null"] },
+        "accessibility_notes": { "type": ["string", "null"] }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locality", "max_cost_zar", "allow_teacher_review", "allow_human_review"],
+      "properties": {
+        "locality": { "enum": ["require_local", "prefer_local", "allow_cloud"] },
+        "max_cost_zar": { "type": ["number", "null"], "minimum": 0 },
+        "allow_teacher_review": { "type": "boolean" },
+        "allow_human_review": { "type": "boolean" }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
