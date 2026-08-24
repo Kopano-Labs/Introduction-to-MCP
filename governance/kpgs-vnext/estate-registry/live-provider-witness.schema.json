@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/estate-registry/live-provider-witness.schema.json",
+  "title": "KPGS Live Provider Witness Receipt",
+  "description": "Connected-account evidence for DNS/repository/deployment facts. A witness receipt records observed provider state; it does not grant registry transition or production authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "captured_at", "estate_id", "authority_effect", "properties"],
+  "properties": {
+    "schema": { "const": "kpgs.live-provider-witness.v1" },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "estate_id": { "type": "string", "minLength": 1 },
+    "authority_effect": { "const": "witness-only" },
+    "provider_mutation_performed": { "type": "boolean" },
+    "properties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "domain",
+          "repository",
+          "provider",
+          "domain_bindings",
+          "deployments",
+          "runtime_observation",
+          "admission_recommendation",
+          "unknowns"
+        ],
+        "properties": {
+          "domain": { "type": "string", "minLength": 3 },
+          "repository": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["full_name", "commit_sha", "evidence_ref"],
+            "properties": {
+              "full_name": { "type": "string", "minLength": 3 },
+              "commit_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+              "stable_repository_id": { "type": ["string", "null"] },
+              "evidence_ref": { "type": "string", "minLength": 1 }
+            }
+          },
+          "provider": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "team_ref"],
+            "properties": {
+              "name": { "const": "Vercel" },
+              "team_ref": { "type": "string", "minLength": 1 }
+            }
+          },
+          "domain_bindings": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["hostname", "project_id", "project_name", "evidence_ref"],
+              "properties": {
+                "hostname": { "type": "string", "minLength": 3 },
+                "project_id": { "type": "string", "pattern": "^prj_" },
+                "project_name": { "type": "string", "minLength": 1 },
+                "evidence_ref": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "deployments": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "deployment_id", "project_id", "state", "target", "commit_sha", "evidence_ref"],
+              "properties": {
+                "role": { "type": "string", "enum": ["current", "rollback-candidate", "split-current"] },
+                "deployment_id": { "type": "string", "pattern": "^dpl_" },
+                "project_id": { "type": "string", "pattern": "^prj_" },
+                "state": { "type": "string", "minLength": 1 },
+                "target": { "type": ["string", "null"] },
+                "commit_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+                "evidence_ref": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "runtime_observation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["window", "status", "summary"],
+            "properties": {
+              "window": { "type": "string", "minLength": 1 },
+              "status": { "type": "string", "enum": ["NO_ERRORS_OBSERVED", "ERRORS_OBSERVED", "NOT_CHECKED"] },
+              "summary": { "type": "string", "minLength": 1 }
+            }
+          },
+          "admission_recommendation": {
+            "type": "string",
+            "enum": ["WITNESS", "HOLD", "REJECT"]
+          },
+          "unknowns": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true
+          },
+          "notes": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
