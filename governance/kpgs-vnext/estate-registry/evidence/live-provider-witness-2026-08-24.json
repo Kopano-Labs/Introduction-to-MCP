@@ -1,0 +1,138 @@
+{
+  "schema": "kpgs.live-provider-witness.v1",
+  "captured_at": "2026-08-24T00:24:25Z",
+  "estate_id": "kopano-sovereign-estate",
+  "authority_effect": "witness-only",
+  "provider_mutation_performed": false,
+  "properties": [
+    {
+      "domain": "starfallsalvage.kopanolabs.com",
+      "repository": {
+        "full_name": "RobynAwesome/starfall-salvage",
+        "commit_sha": "fea307d09a8552cec72e0a6bcb5440cd173bef41",
+        "stable_repository_id": "1229480004",
+        "evidence_ref": "github://RobynAwesome/starfall-salvage/commit/fea307d09a8552cec72e0a6bcb5440cd173bef41"
+      },
+      "provider": {
+        "name": "Vercel",
+        "team_ref": "vercel://team/team_w8Z8foT3ccswOxMiB4LypZ59"
+      },
+      "domain_bindings": [
+        {
+          "hostname": "starfallsalvage.kopanolabs.com",
+          "project_id": "prj_rik2lQSlmHm7CIUhEGZMprZ5CFcN",
+          "project_name": "starfall-salvage",
+          "evidence_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_rik2lQSlmHm7CIUhEGZMprZ5CFcN/domain/starfallsalvage.kopanolabs.com"
+        }
+      ],
+      "deployments": [
+        {
+          "role": "current",
+          "deployment_id": "dpl_8Myns9BqgPovBtTaC1ZsrjtNwCuP",
+          "project_id": "prj_rik2lQSlmHm7CIUhEGZMprZ5CFcN",
+          "state": "READY",
+          "target": "production",
+          "commit_sha": "fea307d09a8552cec72e0a6bcb5440cd173bef41",
+          "evidence_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_8Myns9BqgPovBtTaC1ZsrjtNwCuP"
+        },
+        {
+          "role": "rollback-candidate",
+          "deployment_id": "dpl_9X3gbZpWuRWK5N3XC7Unvtd1doDR",
+          "project_id": "prj_rik2lQSlmHm7CIUhEGZMprZ5CFcN",
+          "state": "READY",
+          "target": "production",
+          "commit_sha": "b3253e44a7e129d5d2f323d579666f6e5182fd94",
+          "evidence_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_9X3gbZpWuRWK5N3XC7Unvtd1doDR"
+        }
+      ],
+      "runtime_observation": {
+        "window": "7d",
+        "status": "NO_ERRORS_OBSERVED",
+        "summary": "Connected Vercel runtime-error aggregation returned no runtime errors for the Starfall project in the selected seven-day window."
+      },
+      "admission_recommendation": "WITNESS",
+      "unknowns": [
+        "versioned KPGS domain adapter implementation",
+        "Stateless Renter conformance and protocol version",
+        "governance policy/risk/tier for registration",
+        "bounded capability map",
+        "governed health/evidence endpoint",
+        "exact-commit KPGS evaluation receipt",
+        "executed rollback-drill receipt"
+      ],
+      "notes": [
+        "Connected Vercel deployment metadata records the source organization as Kopano-Labs/starfall-salvage, while connected GitHub currently resolves stable repository id 1229480004 as RobynAwesome/starfall-salvage. The stable repository id and exact commit are preserved as the cross-provider identity seam.",
+        "Witness admission does not imply staging or production promotion inside KPGS."
+      ]
+    },
+    {
+      "domain": "KasiLink.com",
+      "repository": {
+        "full_name": "RobynAwesome/KasiLink",
+        "commit_sha": "1080fb18096cb2b5c9f8a9ea0d12b442b80329f4",
+        "stable_repository_id": "1195618604",
+        "evidence_ref": "github://RobynAwesome/KasiLink/commit/1080fb18096cb2b5c9f8a9ea0d12b442b80329f4"
+      },
+      "provider": {
+        "name": "Vercel",
+        "team_ref": "vercel://team/team_w8Z8foT3ccswOxMiB4LypZ59"
+      },
+      "domain_bindings": [
+        {
+          "hostname": "kasilink.com",
+          "project_id": "prj_07Q4oRr2okeBiPO12YotAzHZM10b",
+          "project_name": "kasi-link.rsa",
+          "evidence_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_07Q4oRr2okeBiPO12YotAzHZM10b/domain/kasilink.com"
+        },
+        {
+          "hostname": "www.kasilink.com",
+          "project_id": "prj_A1AvVl5WYRyTergoEcMsvEmMM3uX",
+          "project_name": "kasi-link",
+          "evidence_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/project/prj_A1AvVl5WYRyTergoEcMsvEmMM3uX/domain/www.kasilink.com"
+        }
+      ],
+      "deployments": [
+        {
+          "role": "split-current",
+          "deployment_id": "dpl_9PMFHyTv9jP78sASJaZD5hGX47yr",
+          "project_id": "prj_07Q4oRr2okeBiPO12YotAzHZM10b",
+          "state": "READY",
+          "target": "production",
+          "commit_sha": "1080fb18096cb2b5c9f8a9ea0d12b442b80329f4",
+          "evidence_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_9PMFHyTv9jP78sASJaZD5hGX47yr"
+        },
+        {
+          "role": "split-current",
+          "deployment_id": "dpl_AA9iSMwcpHPGvqtRc5mEFjMpywha",
+          "project_id": "prj_A1AvVl5WYRyTergoEcMsvEmMM3uX",
+          "state": "READY",
+          "target": "production",
+          "commit_sha": "1080fb18096cb2b5c9f8a9ea0d12b442b80329f4",
+          "evidence_ref": "vercel://team_w8Z8foT3ccswOxMiB4LypZ59/deployment/dpl_AA9iSMwcpHPGvqtRc5mEFjMpywha"
+        }
+      ],
+      "runtime_observation": {
+        "window": "7d",
+        "status": "ERRORS_OBSERVED",
+        "summary": "Connected Vercel aggregation reports MongoDB Atlas authentication failures on both project identities. The apex project reports repeated /api/incidents, /api/water-alerts and /api/gigs failures; the www project reports a current /api/gigs authentication failure plus an older Clerk publishable-key middleware error in the sampled window."
+      },
+      "admission_recommendation": "WITNESS",
+      "unknowns": [
+        "single canonical Vercel project owning both apex and www",
+        "supported provider-domain mutation action in the currently connected Vercel tool surface",
+        "versioned KPGS domain adapter implementation",
+        "Stateless Renter conformance and protocol version",
+        "governance policy/risk/tier for registration",
+        "bounded capability map",
+        "governed health/evidence endpoint",
+        "exact-commit KPGS evaluation receipt",
+        "rollback drill for a future domain cutover"
+      ],
+      "notes": [
+        "Both Vercel projects currently deploy the same Git commit, but they remain distinct provider project identities and own different public hostnames.",
+        "The provider split remains a governed HOLD even though the source commit has converged.",
+        "The currently exposed Vercel connector has read/observe/deploy capabilities but no domain assignment/removal mutation action; no cutover was performed."
+      ]
+    }
+  ]
+}
