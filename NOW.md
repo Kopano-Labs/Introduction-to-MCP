@@ -106,4 +106,16 @@ Implement these tests in `kopano-core/kopano/test_adaptiveness.py` and execute t
 
 ---
 
+## 2026-08-24T02:10 SAST — PHASE 7 / SOCIOLINGUISTIC INFERENCE AI TRUTH LOCK
+- **Status:** DONE (planning/truth-lock scope)
+- **WHO:** DPF/Forge stateless renter under explicit SSE continuation instruction; canonical repository actor: `RobynAwesome`.
+- **WHAT:** Recovered repository-root `NOW.md`, recovered canonical continuity Issue #101, confirmed no existing open Phase-7 sociolinguistic issue, and created the Phase-7 truth lock for Sociolinguistic Inference AI.
+- **WHERE:** `RobynAwesome/Introduction-to-MCP` Issue #103 — `Phase 7 Truth Lock — Sociolinguistic Inference AI (Sepedi street/code-switch/MXIT + speech receipts)`.
+- **WHY:** Preserve the intern invention as governed Phase-7 architecture rather than allowing it to collapse into generic translation/TTS or become a disconnected prototype.
+- **Evidence / receipts:** Issue #103 created successfully on 2026-08-24; Issue #101 remains the canonical NOW.md/stateless-renter continuity contract.
+- **POC/FOC:** POC_VALIDATED for canonical capture only. Runtime/model/data/speech capability is NOT yet POC-validated.
+- **Known errors / uncertainty:** The `Kopano-Labs/Introduction-to-MCP` organization view allowed reads but returned GitHub integration `403 Resource not accessible by integration` for issue/branch writes. The canonical `RobynAwesome/Introduction-to-MCP` repository accepted the issue write. No implementation branch or schema/runtime code has been created in this lane.
+- **Current governance boundary:** Existing repo header still states `PLAN MODE ONLY — no free execution`. This entry therefore records planning state without silently promoting to implementation.
+- **Next admissible action:** On explicit SSE promotion within current NOW governance, begin PR1 as a small contracts-only slice: evidence provenance enum + linguistic record schema + inference request schema + validation receipt schema. Do not start model training, multi-language expansion, or production TTS first.
 
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
