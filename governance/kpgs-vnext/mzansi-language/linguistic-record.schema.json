@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpgs.local/schemas/mzansi/linguistic-record.schema.json",
+  "title": "KPGS Mzansi Linguistic Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "record_id",
+    "source",
+    "aligned_forms",
+    "code_switch",
+    "speaker_context",
+    "evidence",
+    "validation",
+    "created_at"
+  ],
+  "properties": {
+    "schema": { "const": "kpgs.mzansi.linguistic-record.v1" },
+    "record_id": { "type": "string", "minLength": 8 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["language_tag", "text", "register"],
+      "properties": {
+        "language_tag": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+        "text": { "type": "string", "minLength": 1 },
+        "register": { "enum": ["formal", "conversational", "street", "mxit", "mixed", "unknown"] }
+      }
+    },
+    "aligned_forms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["formal", "conversational", "street", "mxit", "semantic_gloss"],
+      "properties": {
+        "formal": { "type": ["string", "null"] },
+        "conversational": { "type": ["string", "null"] },
+        "street": { "type": ["string", "null"] },
+        "mxit": { "type": ["string", "null"] },
+        "semantic_gloss": { "type": ["string", "null"] }
+      }
+    },
+    "code_switch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present", "segments"],
+      "properties": {
+        "present": { "type": "boolean" },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["start_char", "end_char", "language_tag", "text"],
+            "properties": {
+              "start_char": { "type": "integer", "minimum": 0 },
+              "end_char": { "type": "integer", "minimum": 1 },
+              "language_tag": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+              "text": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "speaker_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context_source", "region", "age_band"],
+      "properties": {
+        "context_source": { "enum": ["user_supplied", "speaker_declared", "annotator_declared", "none"] },
+        "region": { "type": ["string", "null"] },
+        "age_band": { "enum": ["minor", "youth", "adult", "older_adult", "unknown", null] }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "provenance_uri", "speaker_consent", "license", "synthetic"],
+      "properties": {
+        "class": { "$ref": "evidence-class.schema.json" },
+        "provenance_uri": { "type": ["string", "null"], "format": "uri-reference" },
+        "speaker_consent": { "type": "boolean" },
+        "license": { "type": ["string", "null"] },
+        "synthetic": { "type": "boolean" }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "validator_ids", "notes"],
+      "properties": {
+        "status": { "enum": ["pending", "validated", "rejected", "disputed"] },
+        "validator_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
