@@ -1,7 +1,7 @@
 # NOW.md — Active Working Log
 
 > **Current-state authority:** repository-root `NOW.md`
-> **Updated:** 2026-08-24T02:15:04+02:00 (SAST)
+> **Updated:** 2026-08-24T02:21:31+02:00 (SAST)
 > **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 > **Doctrine boundary:** durable governance informs this file; it does not replace this file.
 > **Rule:** recover current state before execution; receipt material changes before handoff.
@@ -12,35 +12,44 @@
 
 ### Current objective
 
-Preserve KPGS execution continuity while completing the explicitly assigned `Introduction-to-MCP` governance lane in issue #101. Do not manufacture activity merely to look productive. After bounded repository work, the near-term human priority remains education / Coursera learning while the full local development hub is constrained.
+Issue #101 is complete and merged. Under the human's explicit `Next / proceed` instruction, the next bounded repository lane is #102 live estate/provider admission work. Preserve HOLD wherever exact provider authority, adapter/renter conformance, or production evidence is absent. Do not let speed erase governance.
 
 ### Active lanes
 
 | Lane | State | Current truth |
 |---|---|---|
 | `RobynAwesome/Introduction-to-MCP#94` | **MAYBE / OPEN** | A second external skill directory beyond AwesomeSkills has not been proven. Do not fabricate the forgotten registry or publication receipt. |
-| `RobynAwesome/Introduction-to-MCP#101` | **IN-PROGRESS / PR #104 OPEN** | Canonicalize root `NOW.md`, stateless-renter NOW entry/exit law, situational CCP/CDP governance, Capability Factory, KasiLink Employment Engine, Vanguard C and the reality-feedback loop. |
-| `RobynAwesome/Introduction-to-MCP#102` | **OPEN / OPERATIONAL HOLD WHERE REQUIRED** | Live estate/provider continuation. Starfall has witnessed Vercel/GitHub deployment evidence; KasiLink apex/`www` remain split across two Vercel projects and must not be falsely promoted. |
+| `RobynAwesome/Introduction-to-MCP#102` | **OPEN / ACTIVE BOUNDED ESTATE OPS** | Admit witnessed Starfall/KasiLink repository + Vercel evidence into canonical estate state without inventing adapter/renter conformance. KasiLink apex/`www` split remains HOLD until provider cutover is actually supported and receipted. |
 | `RobynAwesome/Introduction-to-MCP#103` | **PR1 MERGED / PR2 NEXT WHEN ASSIGNED** | Phase 7 Sociolinguistic Inference AI truth lock and contracts-only PR1 are canonical. Dataset/model/speech/runtime POC remains UNKNOWN; PR2 is the Mzansi Data Engine foundation, not foundation-model training. |
 
-### Current implementation receipt — #101 / PR #104
+### Completed continuity receipt — #101 / PR #104
 
-- **Branch:** `forge/now-situational-transition-101`
-- **Original base:** `4e1e2c208a6f535d4fc36449bbe8c65e7184c15d`
-- **Current master observed:** `d806ef6d896426f9a6000645094ebad2f96f80fb`; PR #104 must preserve all concurrent Phase 7 receipts while reconciling.
-- **PR:** #104 — `governance: canonicalize NOW continuity and situational PKA transitions`
-- **Completed on branch:** root `AGENTS.md` now requires reading repository-root `NOW.md` before work and updating it after material state changes.
-- **Completed on branch:** canonical `STATELESS_RENTER_ENTRYWAY.md` now routes renters through root `NOW.md` and treats stale/contradictory current state as a HOLD/reconcile condition.
-- **Completed on branch:** canonical and runtime `STATELESS_RENTER_ENTRYWAY.json` now expose `current_state_authority: NOW.md`, mandatory read/update behavior, and explicit anti-bypass rules.
-- **Completed on branch:** `governance/kpgs-vnext/continuity/` specifies situational CCP/CDP transitions, first-class HOLD, Capability Factory, KasiLink Employment Engine, Vanguard C and the reality-feedback loop.
-- **Completed on branch:** focused regression test `tests/test_now_situational_continuity.py` exists.
-- **Concurrency receipts preserved:** master commits `426dc846ddd60e8c30bc16ddb038c4ba9f80f8d7` (Phase 7 truth lock), `b994272453d7384969a80bf1f37504c8ee53416e` (PR #105 contracts merge), and `d806ef6d896426f9a6000645094ebad2f96f80fb` (NOW receipt for PR #105) are not to be overwritten.
-- **POC/FOC:** **IN-PROGRESS / NOT YET PROMOTED.** PR #104 must reconcile current master, pass exact-head CI, and merge before completion may be claimed.
+- **Issue:** #101 — CLOSED / completed.
+- **PR:** #104 — `governance: canonicalize NOW continuity and situational PKA transitions`.
+- **Exact reviewed head:** `f4931848a826a3579605bf58608e12a8d801ab74`.
+- **Canonical squash merge:** `75c6d71caa106b5bb305e6d9797a5beac2f7413a`.
+- **Reconciliation:** PR #104 was rebased onto `d806ef6d896426f9a6000645094ebad2f96f80fb` before merge, preserving Phase 7 PR #105 files and NOW receipts.
+- **KPGS vNext Contract Gate:** run `32676139222` ✅.
+- **CodeQL Advanced:** run `32676139220` ✅.
+- **Swarm proof gate:** run `32676139221` ✅.
+- **Kopano CI Pipeline:** run `32676139835` ✅, including Python 3.11/3.12 test lanes, GUI, CLI and Agent/KPEFS proof lanes.
+- **Vercel status:** success ✅.
+- **Issue closure receipt:** comment `5389337821`.
+- **POC/FOC:** **POC_VALIDATED for governance/specification + repository continuity implementation.** No claim is made that every downstream PKA/KMEC edge, reusable primitive, KasiLink economic outcome, or Vanguard C field result is already validated.
+
+### What #101 made canonical
+
+- repository-root `NOW.md` is the volatile/current-state authority;
+- root `AGENTS.md` requires renters to read root NOW before execution and update it after material handoff;
+- canonical/runtime Stateless Renter Entryway JSON + MD carry the same NOW invariant and `HOLD_AND_RECONCILE` behavior for stale/contradictory state;
+- `governance/kpgs-vnext/continuity/README.md` defines situational transition governance rather than fixed CCP/CDP order;
+- `situational-transition.schema.json` admits `CCP | CDP | CONVERGE | DIVERGE | HOLD` and receipts trigger/evidence/invariant/authority/decision/receipts;
+- KPGS Capability Factory, KasiLink Employment Engine, Intern Vanguard C and the reality -> evidence -> KMEC/PKA loop are now canonical doctrine;
+- focused regression tests prevent silent erosion of those invariants.
 
 ### Recent canonical receipts
 
 - PR #100 merged as `4e1e2c208a6f535d4fc36449bbe8c65e7184c15d`, ingressing Testimony, Zero Trust State Admission and Security Playground protocols.
-- PR #100 exact-head `79f7a0878171a72022a989a3f294d3bf1b4c4ae1` passed CodeQL `32631383599`, Swarm proof gate `32631383725`, and Kopano CI `32631383607`.
 - #93, #95, #96, #97 and #98 were reconciled/closed on 2026-08-24 after receipts proved their bounded work complete.
 - Older KPGS vNext architecture issues #44 and #46 were closed after the remaining live provider work was narrowed into fresh operational issue #102.
 - Phase 7 truth lock: master commit `426dc846ddd60e8c30bc16ddb038c4ba9f80f8d7`, issue #103.
@@ -51,23 +60,24 @@ Preserve KPGS execution continuity while completing the explicitly assigned `Int
 - Heavy repository work has already been committed over recent weeks.
 - The human was sick over the weekend; preserved ideas were intentionally captured instead of forcing low-quality execution.
 - Laptop charger is expected from China around **2026-09-01**.
-- Until the full laptop/tool hub is restored, **education / Coursera learning is the default near-term priority unless the human explicitly assigns repository execution.** The current #101 work is explicitly assigned.
+- Education / Coursera remains the near-term default when repository execution is not explicitly assigned; the current `proceed` instruction explicitly admits bounded repository continuation.
 
 ### Known uncertainty / blockers
 
 - External skills registry beyond the verified AwesomeSkills evidence remains unresolved: **MAYBE**, not negative proof.
 - KasiLink apex and `www` provider ownership remain split: **HOLD** until a supported provider-domain mutation path and post-cutover receipts exist.
-- #101 is not complete until PR #104 is reconciled to current master, exact-head CI is green, and the PR is merged.
+- Starfall has connected Vercel/GitHub deployment evidence, but canonical estate admission must not infer `.NET` adapter or Stateless Renter conformance that has not been evidenced.
 - Phase 7 PR1 proves contract structure/persistence only; dataset quality, native-speaker naturalness, ASR/TTS quality, inference routing and end-to-end runtime remain unproven.
 - No model memory, personal `Now.md`, nested `Schematics/00-Home/Now.md`, or chat window may silently override this current-state record.
 
 ### Next admissible action
 
-1. Reconcile PR #104 with current master `d806ef6d896426f9a6000645094ebad2f96f80fb` without losing Phase 7 PR1 files or receipts.
-2. Inspect exact-head CI; fix failures rather than narrating around them.
-3. Merge only when the receipt supports the claimed proof state.
-4. Update this `NOW.md` entry with the final PR/CI/merge receipt before handoff.
-5. Leave #94 as MAYBE and #102/#103 in their bounded lanes unless separately assigned.
+1. Re-read #102 and current canonical estate registry after #101 merge.
+2. Admit only witnessed Starfall/KasiLink repository/deployment/domain evidence with explicit evidence refs.
+3. Preserve missing adapter/renter/capability gates as UNKNOWN/HOLD.
+4. Run canonical registry + migration tests and assessment.
+5. Use a reviewable PR and exact-head receipts before merge.
+6. Do not perform or claim KasiLink provider-domain cutover unless an actual supported mutation surface is available.
 
 ---
 
@@ -182,7 +192,7 @@ Historical instruction: implement these tests in `kopano-core/kopano/test_adapti
 - **WHAT:** Recovered repository-root `NOW.md`, recovered canonical continuity Issue #101, confirmed no existing open Phase-7 sociolinguistic issue, and created the Phase-7 truth lock for Sociolinguistic Inference AI.
 - **WHERE:** `RobynAwesome/Introduction-to-MCP` Issue #103 — `Phase 7 Truth Lock — Sociolinguistic Inference AI (Sepedi street/code-switch/MXIT + speech receipts)`.
 - **WHY:** Preserve the intern invention as governed Phase-7 architecture rather than allowing it to collapse into generic translation/TTS or become a disconnected prototype.
-- **Evidence / receipts:** master commit `426dc846ddd60e8c30bc16ddb038c4ba9f80f8d7`; Issue #103 created successfully on 2026-08-24; Issue #101 remains the canonical NOW.md/stateless-renter continuity contract.
+- **Evidence / receipts:** master commit `426dc846ddd60e8c30bc16ddb038c4ba9f80f8d7`; Issue #103 created successfully on 2026-08-24; Issue #101 remained the canonical NOW.md/stateless-renter continuity contract.
 - **POC/FOC:** POC_VALIDATED for canonical capture only. Runtime/model/data/speech capability is NOT yet POC-validated.
 - **Known errors / uncertainty:** The `Kopano-Labs/Introduction-to-MCP` organization view allowed reads but returned GitHub integration `403 Resource not accessible by integration` for issue/branch writes. The canonical `RobynAwesome/Introduction-to-MCP` repository accepted the issue write. No implementation branch or schema/runtime code had been created in this lane at this point.
 - **Current governance boundary:** Planning capture does not silently promote Phase 7 to implementation or runtime proof.
@@ -204,5 +214,21 @@ Historical instruction: implement these tests in `kopano-core/kopano/test_adapti
 - **POC/FOC:** POC_VALIDATED for contract structure/persistence only. Dataset quality, native-speaker naturalness, ASR/TTS quality, inference routing, and end-to-end runtime remain UNKNOWN / not yet promoted.
 - **Known errors / uncertainty:** No governed top-level JSON-Schema validation dependency/CI gate was added in PR1; validation was performed against Draft 2020-12 during execution. Organization mirror write permissions remain separately constrained by GitHub integration 403s observed earlier.
 - **Next admissible action:** PR2 — governed Mzansi Data Engine foundation: schema-backed record persistence, provenance/consent/validation state, small non-canonical fixtures, and deterministic contract tests. Do not start foundation-model training, multi-language expansion, or production TTS provider coupling first.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## 2026-08-24T02:21 SAST — #101 CONTINUITY + SITUATIONAL PKA MERGED
+
+- **Status:** DONE
+- **WHO:** DPF/Forge stateless renter under explicit human `proceed` instruction.
+- **WHAT:** Canonicalized repository-root NOW continuity, renter entry/exit routing, situational CCP/CDP/HOLD governance, KPGS Capability Factory, KasiLink Employment Engine, Vanguard C, and the reality-feedback loop.
+- **WHERE:** `RobynAwesome/Introduction-to-MCP` PR #104; `AGENTS.md`; root `NOW.md`; Stateless Renter Entryway MD/JSON; `governance/kpgs-vnext/continuity/`; `tests/test_now_situational_continuity.py`.
+- **WHY:** Make continuity survive stateless-renter/model/tool turnover and prevent observed CCP/CDP patterns from becoming false universal pipelines.
+- **Evidence / receipts:** PR #104 exact head `f4931848a826a3579605bf58608e12a8d801ab74`; merge `75c6d71caa106b5bb305e6d9797a5beac2f7413a`; KPGS gate `32676139222`; CodeQL `32676139220`; Swarm proof `32676139221`; Kopano CI `32676139835`; issue receipt comment `5389337821`.
+- **POC/FOC:** POC_VALIDATED for the bounded governance/specification + repository-continuity implementation. Downstream socio-economic/runtime claims remain separately governed.
+- **Known errors / uncertainty:** #94 remains MAYBE; KasiLink provider split remains HOLD; Starfall/KasiLink adapter+renter conformance must not be invented.
+- **Next admissible action:** #102 bounded live-estate evidence admission through a reviewable PR, retaining HOLD for unsupported provider cutover or missing conformance evidence.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
