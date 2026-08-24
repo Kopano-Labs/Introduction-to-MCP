@@ -5,6 +5,24 @@
 > "There are different kinds of gifts, but the same Spirit distributes them." — 1 Corinthians 12:4
 > Generated: 2026-06-24T07:42:01.913052+00:00
 
+## Canonical renter continuity
+
+Every agent, model, tool-driven worker, and stateless renter entering this repository MUST recover current state before acting.
+
+Canonical entry order:
+
+1. Assert `I_AM_STATELESS_RENTER_NOT_LANDLORD` and identify the renter/actor.
+2. Read `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` for the durable purpose boundary.
+3. **Read repository-root `NOW.md` before execution.** `NOW.md` is the volatile/current-state authority for active objectives, blockers, receipts, errors, pauses, and handoffs.
+4. Classify telemetry/evidence before interpretation.
+5. Recover the currently admitted lane and execute only within its authority.
+6. Produce receipts for material work; chat narration is not proof.
+7. Before handoff/exit, update repository-root `NOW.md` when material state changed, including status, evidence, uncertainty, and the next admissible action.
+
+Persistent doctrine, model memory, `Schematics/00-Home/Now.md`, personal vault files, or prior conversation state may inform a renter, but **none substitutes for repository-root `NOW.md` as current-state truth**.
+
+Full entry doctrine: `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md`.
+
 ## Domain: kopanolabs.com
 ## NSO Group: ALL
 ## Total Agents: 56 (6 named + 50 utility)

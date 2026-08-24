@@ -1,7 +1,9 @@
 # KPGS vNext — Sovereign Hub Re-engineering
 
-Status: **Phase 1 — Governance Substrate Complete**
-Epic: #46
+Status: **Architecture substrate complete; live estate operations continue under fresh receipts**
+Epic: #46 (closed 2026-08-24)
+Continuity lane: #101
+Live estate operations: #102
 
 KPGS vNext makes `Introduction-to-MCP` the canonical specification and governance layer for the Kopano DNS estate. Existing frontends may remain React/Next/Vite/PWA or other appropriate stacks; the canonical integration boundary is a governed domain adapter, Sovereign Hub, Stateless Renter protocol, skill runtime, realtime event plane and evidence system.
 
@@ -50,6 +52,10 @@ Tools / APIs / Domain Systems
 14. Lease signing material and durable provider credentials MUST NOT be owned by a Stateless Renter or frontend.
 15. Aggregate scores MUST NOT hide a failed hard governance or security gate.
 16. Production promotion MUST identify the exact release/commit and the canonical evidence bundle that justified it.
+17. Repository-root `NOW.md` is the volatile/current-state authority for work in this repository; model memory and nested/personal `Now.md` files do not supersede it.
+18. CCP/CDP direction MUST NOT be encoded as a universal pipeline. Situational transitions admit `CCP | CDP | CONVERGE | DIVERGE | HOLD` from current state, knowable evidence and governance invariants.
+19. `HOLD` is a valid governance outcome when evidence, authority or continuity is insufficiently knowable.
+20. Socio-technical POC MUST NOT be inferred from software tests alone; external human/economic claims require field evidence.
 
 ## Control loops
 
@@ -64,6 +70,83 @@ Tools / APIs / Domain Systems
 
 ### Product feedback
 `ship -> observe -> learn -> reshape`
+
+### Continuity / temporal state
+
+```text
+assert stateless renter
+  -> load durable Legacy purpose
+  -> read repository-root NOW.md
+  -> classify evidence before interpretation
+  -> recover admitted lane + blockers + receipts
+  -> execute within authority
+  -> receipt material work
+  -> update NOW.md before material handoff
+```
+
+See `continuity/README.md`, `continuity/situational-transition.schema.json`, root `NOW.md`, root `AGENTS.md`, and the canonical Stateless Renter Entryway.
+
+### Situational PKA transition law
+
+```text
+S_t = current state
+K_t = currently knowable evidence
+G   = governance invariants
+
+T(S_t, K_t, G)
+  -> CCP
+  -> CDP
+  -> CONVERGE
+  -> DIVERGE
+  -> HOLD
+```
+
+Every bounded transition is explainable as:
+
+`trigger -> evidence -> invariant -> authority -> transition -> receipt`
+
+The invariant is not a fixed CCP/CDP direction. The invariant is the law deciding whether the situational edge is admissible.
+
+Canonical doctrine: **Do not prescribe the universe. Govern the transition.**
+
+### Capability Factory
+
+KPGS should graduate reusable web/system capabilities rather than rebuild identical infrastructure per DNS:
+
+```text
+Capability
+  -> Contract
+  -> Implementation
+  -> Test
+  -> Receipt
+  -> POC
+  -> Reusable Primitive
+```
+
+Candidate classes include components, auth, commerce, dashboards, CMS/content, deployment, telemetry, testing, SEO/indexing and APWA/offline/adaptive primitives. Reuse without proof metadata is not yet a KPGS-graduated primitive.
+
+### KasiLink employment feedback
+
+```text
+Discover
+  -> Access
+  -> Understand
+  -> Learn
+  -> Validate capability
+  -> Trust validation
+  -> Transact
+  -> Get paid
+  -> Telemetry
+  -> Improve
+```
+
+The proof surface must eventually include weak-device/low-data access, fraud resistance, trusted validation, completed transactions/payment, scale and reproducibility. Agent observation does not grant ambient production authority.
+
+### Vanguard C reality validation
+
+Kopano Labs Intern Vanguard C is the field-validation lane for claims that leave the software boundary: human trust, procurement, manufacturing, regulation, education, organizational adoption, capital formation, physical logistics, relationships and market demand.
+
+Field observations return as evidence/receipts; they do not automatically promote universal claims.
 
 ### Adaptive progressive state
 
@@ -140,9 +223,10 @@ See `evidence/EVIDENCE.md`, `evidence/evidence-bundle.schema.json`, and `evidenc
 
 - **Phase 0 — Truth and contracts:** fork assimilation, renter protocol, specification-first governance. **Complete.**
 - **Phase 1 — Governance substrate:** identity/capability leases, Sovereign Hub registry, evidence model. **Complete.**
-- **Phase 2 — Runtime packages:** .NET domain adapter, skill runtime, realtime event plane.
-- **Phase 3 — Validation + human experience:** evaluation loop and Sovereign Everyday Mode.
-- **Phase 4 — Estate proof:** migrate one bounded low-risk workflow, prove rollback, then expand.
+- **Phase 2 — Runtime packages:** .NET domain adapter, skill runtime, realtime event plane. **Complete as architecture/runtime substrate.**
+- **Phase 3 — Validation + human experience:** evaluation loop and Sovereign Everyday Mode. **Complete as architecture/reference proof.**
+- **Phase 4 — Estate migration architecture:** reusable migration membrane/playbook. **Complete.**
+- **Ongoing estate operations:** real provider/DNS admission, cutover, observation and rollback receipts continue per-property in fresh operational lanes such as #102.
 
 ## Canonical artifacts
 
@@ -174,6 +258,15 @@ See `evidence/EVIDENCE.md`, `evidence/evidence-bundle.schema.json`, and `evidenc
 - `evidence/evidence-bundle.schema.json`
 - `evidence/evidence.py`
 
+### Continuity / situational governance
+
+- `continuity/README.md`
+- `continuity/situational-transition.schema.json`
+- repository-root `NOW.md`
+- repository-root `AGENTS.md`
+- `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md`
+- `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json`
+
 ## Definition of done
 
 A meaningful user workflow is only `released` when KPGS can prove:
@@ -181,3 +274,5 @@ A meaningful user workflow is only `released` when KPGS can prove:
 `request -> governing spec -> capability lease -> renter/skill execution -> evidence -> governance decision -> live release -> rollback path`
 
 That proof MUST survive destruction and recreation of the executing renter.
+
+A socio-technical outcome is only POC-validated when the corresponding real-world consequence has its own admissible evidence; deployment success alone cannot substitute for human/economic validation.
