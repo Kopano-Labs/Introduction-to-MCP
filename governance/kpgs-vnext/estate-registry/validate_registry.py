@@ -13,6 +13,8 @@ ROOT = HERE.parents[2]
 ESTATE = HERE / "estate.json"
 REGISTRY_SCHEMA = HERE / "estate-registry.schema.json"
 CANDIDATE_SCHEMA = HERE / "discovery-candidate.schema.json"
+LIVE_WITNESS_SCHEMA = HERE / "live-provider-witness.schema.json"
+LIVE_WITNESS_DIR = HERE / "evidence"
 REGISTRY_RUNTIME = HERE / "registry.py"
 LEASE_RUNTIME = HERE.parent / "security" / "capability_lease.py"
 
@@ -44,13 +46,37 @@ def main() -> None:
     estate = json.loads(ESTATE.read_text(encoding="utf-8"))
     registry_schema = json.loads(REGISTRY_SCHEMA.read_text(encoding="utf-8"))
     candidate_schema = json.loads(CANDIDATE_SCHEMA.read_text(encoding="utf-8"))
+    live_witness_schema = json.loads(LIVE_WITNESS_SCHEMA.read_text(encoding="utf-8"))
 
     domains = {item["domain"] for item in estate["properties"]}
     require(domains == INITIAL_DOMAINS, "initial canonical DNS estate drifted")
-    require(
-        all(item["status"] == "declared_pending_witness" for item in estate["properties"]),
-        "unwitnessed initial property was silently promoted",
+
+    allowed_property_states = set(
+        registry_schema["properties"]["properties"]["items"]["properties"]["status"]["enum"]
     )
+    for item in estate["properties"]:
+        status = item.get("status")
+        evidence = item.get("ownership_evidence") or []
+        require(status in allowed_property_states, f"{item['domain']} has invalid lifecycle status")
+        if status == "declared_pending_witness":
+            require(not evidence, f"{item['domain']} is pending but already carries ownership evidence")
+            require(
+                item.get("release", {}).get("live_ref") is None,
+                f"{item['domain']} must not claim a governed live release before witnessing",
+            )
+        elif status in {"witnessed", "registered", "staging", "production"}:
+            require(bool(evidence), f"{item['domain']} cannot be {status} without ownership/control evidence")
+        if status == "production":
+            release = item.get("release") or {}
+            rollback = item.get("rollback") or {}
+            require(
+                bool(release.get("live_ref") and release.get("evidence_ref")),
+                f"{item['domain']} production state requires exact live/evidence refs",
+            )
+            require(
+                bool(rollback.get("target_ref") and rollback.get("procedure_ref")),
+                f"{item['domain']} production state requires rollback refs",
+            )
 
     property_schema = registry_schema["properties"]["properties"]["items"]["properties"]
     for required_link in (
@@ -69,6 +95,44 @@ def main() -> None:
         "://" in property_schema["secret_provider_refs"]["items"]["pattern"],
         "secret provider fields no longer require references",
     )
+
+    require(
+        live_witness_schema.get("$schema") == "https://json-schema.org/draft/2020-12/schema",
+        "live provider witness schema must use draft 2020-12",
+    )
+    require(
+        live_witness_schema.get("properties", {}).get("authority_effect", {}).get("const")
+        == "witness-only",
+        "live provider witness must remain non-promoting",
+    )
+
+    receipt_witnessed_domains: set[str] = set()
+    for receipt_path in sorted(LIVE_WITNESS_DIR.glob("live-provider-witness-*.json")):
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        require(receipt.get("schema") == "kpgs.live-provider-witness.v1", f"invalid witness receipt schema in {receipt_path.name}")
+        require(receipt.get("authority_effect") == "witness-only", f"{receipt_path.name} widened witness authority")
+        require(
+            isinstance(receipt.get("provider_mutation_performed"), bool),
+            f"{receipt_path.name} must explicitly state provider mutation effect",
+        )
+        for observed in receipt.get("properties") or []:
+            domain = observed.get("domain")
+            require(domain in INITIAL_DOMAINS, f"{receipt_path.name} references unknown estate domain {domain}")
+            require(bool(observed.get("domain_bindings")), f"{domain} witness lacks provider domain binding")
+            require(bool(observed.get("deployments")), f"{domain} witness lacks deployment evidence")
+            if observed.get("admission_recommendation") == "WITNESS":
+                receipt_witnessed_domains.add(domain)
+
+    estate_by_domain = {item["domain"]: item for item in estate["properties"]}
+    for domain in receipt_witnessed_domains:
+        require(
+            estate_by_domain[domain]["status"] != "declared_pending_witness",
+            f"{domain} has admitted witness receipt but registry was not advanced to witnessed-or-later",
+        )
+        require(
+            bool(estate_by_domain[domain]["ownership_evidence"]),
+            f"{domain} witness admission lost ownership/control evidence",
+        )
 
     candidate_states = set(candidate_schema["properties"]["status"]["enum"])
     require(
@@ -182,8 +246,8 @@ def main() -> None:
     )
 
     print(
-        "KPGS-ESTATE PASS: discovery is unwitnessed-by-default, lease-scoped, "
-        "promotion-gated and plain-language queryable."
+        "KPGS-ESTATE PASS: discovery is unwitnessed-by-default, connected witness "
+        "receipts remain non-promoting, and lifecycle state is evidence-gated."
     )
 
 
