@@ -119,3 +119,19 @@ Implement these tests in `kopano-core/kopano/test_adaptiveness.py` and execute t
 - **Next admissible action:** On explicit SSE promotion within current NOW governance, begin PR1 as a small contracts-only slice: evidence provenance enum + linguistic record schema + inference request schema + validation receipt schema. Do not start model training, multi-language expansion, or production TTS first.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## 2026-08-24T02:14 SAST — PHASE 7 PR1 / SOCIOLINGUISTIC CONTRACTS MERGED
+- **Status:** DONE
+- **WHO:** DPF/Forge stateless renter under explicit SSE continuation instruction.
+- **WHAT:** Implemented and merged the first contracts-only vertical slice for the Phase-7 Sociolinguistic Inference AI lane.
+- **WHERE:** `RobynAwesome/Introduction-to-MCP` PR #105; `governance/kpgs-vnext/mzansi-language/`.
+- **WHY:** Convert Issue #103 from prose-only truth lock into machine-checkable governance boundaries before any dataset/model/speech implementation.
+- **Evidence / receipts:** PR #105 merged by squash as `b994272453d7384969a80bf1f37504c8ee53416e`; 5 files added, 358 additions, 0 deletions; branch was 0 commits behind `master`; Vercel status reported `success`; all four schemas passed JSON Schema Draft 2020-12 `check_schema` before merge; Issue #103 comment receipt ID `5389289449` records the merge.
+- **Contracts merged:** `evidence-class.schema.json`, `linguistic-record.schema.json`, `inference-request.schema.json`, `validation-receipt.schema.json`, and Phase-7 contract `README.md`.
+- **POC/FOC:** POC_VALIDATED for contract structure/persistence only. Dataset quality, native-speaker naturalness, ASR/TTS quality, inference routing, and end-to-end runtime remain UNKNOWN / not yet promoted.
+- **Known errors / uncertainty:** No governed top-level JSON-Schema validation dependency/CI gate was added in PR1; validation was performed against Draft 2020-12 during execution. Organization mirror write permissions remain separately constrained by GitHub integration 403s observed earlier.
+- **Next admissible action:** PR2 — governed Mzansi Data Engine foundation: schema-backed record persistence, provenance/consent/validation state, small non-canonical fixtures, and deterministic contract tests. Do not start foundation-model training, multi-language expansion, or production TTS provider coupling first.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
