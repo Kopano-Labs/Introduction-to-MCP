@@ -1,6 +1,7 @@
 # KPGS Canonical DNS Estate Migration Playbook
 
 Issue: #44
+Operational witness continuation: #102
 
 ## Purpose
 
@@ -74,6 +75,8 @@ The migration engine respects the canonical Estate Registry. `declared_pending_w
 
 A property may not be considered registered from memory, public search, repository visibility, or an application screenshot. The canonical registry requires witnessed ownership/domain-control evidence and the registration completeness contract from `../estate-registry/`.
 
+A `witnessed` property can still remain HOLD when registration completeness is missing. Connected provider evidence proves observed control/deployment facts; it does not manufacture owner/governance/capability/health/adapter/renter state.
+
 ## Adapter gate
 
 A property must declare a versioned adapter implementation. The reference implementation is:
@@ -137,6 +140,8 @@ A passing drill must:
 
 The drill proves recoverability. It does not grant rollback authority.
 
+A recorded provider rollback **candidate** is useful baseline evidence, but it is not the same thing as an executed rollback drill.
+
 ## Production eligibility
 
 Production remains `NOT_REACHED` until all of the following are present:
@@ -161,11 +166,15 @@ The capability-gated Estate Registry still owns the production transition.
 
 ## Current canonical estate behavior
 
-The six declared properties in `../estate-registry/estate.json` are intentionally `declared_pending_witness`.
+As of the connected-provider witness receipt on 2026-08-24:
 
-Therefore, running the migration assessor against the live canonical registry must currently produce **HOLD**, not auto-enrichment or migration claims.
+- `KasiLink.com` is `witnessed` with exact GitHub/Vercel evidence, but its apex and `www` hostnames remain attached to **two different Vercel project identities**. The singular deployment target remains intentionally `null`; both provider environments are preserved explicitly. Runtime authentication errors are also witnessed. Migration remains **HOLD**.
+- `starfallsalvage.kopanolabs.com` is `witnessed` with exact repository, Vercel project, current READY deployment, live release evidence and a real prior deployment recorded as rollback target. Adapter/renter/capability/governance/health/evaluation and rollback-drill evidence remain incomplete. Migration remains **HOLD**.
+- The other four declared estate properties remain `declared_pending_witness` until authoritative evidence is admitted.
 
-This is expected governance behavior until authoritative witness data is supplied.
+Machine evidence: `../estate-registry/evidence/live-provider-witness-2026-08-24.json`.
+
+Therefore, running the migration assessor against the current canonical registry must still produce **HOLD for all six properties**. The reason is now situational per property rather than the old blanket claim that every property lacks witness evidence.
 
 ## CI reference proof
 
@@ -183,12 +192,14 @@ These fixtures are not production registry state and are not DNS ownership evide
 - produce deterministic migration IDs for the same property/workflow;
 - apply the identical playbook to a second property.
 
+The live witness regression test separately proves that real provider evidence can advance a property to `witnessed` while missing KPGS gates still produce HOLD.
+
 ## Operator workflow
 
 1. Copy `migration-template.json` for the bounded workflow.
 2. Populate baseline references from witnessed/current systems.
-3. Update the canonical Estate Registry only through its capability-gated witness/register operations.
-4. Add adapter/renter/capability/health declarations to the registered property.
+3. Update the canonical Estate Registry only through admitted governance/review surfaces; runtime production mutations still require the capability-gated registry operation.
+4. Add adapter/renter/capability/health declarations only when their evidence exists.
 5. Run the exact-commit evaluation/evidence loop.
 6. Run migration assessment.
 7. If staging-eligible, request the separately authorized staging transition.
@@ -202,5 +213,6 @@ These fixtures are not production registry state and are not DNS ownership evide
 
 ```bash
 python -m unittest discover -s tests -p 'test_estate_migration.py' -v
+python -m unittest discover -s tests -p 'test_live_estate_witness_admission.py' -v
 python governance/kpgs-vnext/migration/assess_estate.py
 ```
