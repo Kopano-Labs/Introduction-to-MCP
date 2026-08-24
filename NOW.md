@@ -1,7 +1,7 @@
 # NOW.md — Active Working Log
 
 > **Current-state authority:** repository-root `NOW.md`
-> **Updated:** 2026-08-24T02:21:31+02:00 (SAST)
+> **Updated:** 2026-08-24T03:31:21+02:00 (SAST)
 > **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 > **Doctrine boundary:** durable governance informs this file; it does not replace this file.
 > **Rule:** recover current state before execution; receipt material changes before handoff.
@@ -12,14 +12,14 @@
 
 ### Current objective
 
-Issue #101 is complete and merged. Under the human's explicit `Next / proceed` instruction, the next bounded repository lane is #102 live estate/provider admission work. Preserve HOLD wherever exact provider authority, adapter/renter conformance, or production evidence is absent. Do not let speed erase governance.
+Issue #102 witness admission is merged through PR #106. Starfall Salvage and KasiLink are canonically `witnessed`, not registered/staging/production. Preserve HOLD for all missing adapter/renter/capability/governance/evaluation/rollback-drill evidence, KasiLink runtime authentication failures, and the unsupported apex/`www` provider cutover.
 
 ### Active lanes
 
 | Lane | State | Current truth |
 |---|---|---|
 | `RobynAwesome/Introduction-to-MCP#94` | **MAYBE / OPEN** | A second external skill directory beyond AwesomeSkills has not been proven. Do not fabricate the forgotten registry or publication receipt. |
-| `RobynAwesome/Introduction-to-MCP#102` | **OPEN / ACTIVE BOUNDED ESTATE OPS** | Admit witnessed Starfall/KasiLink repository + Vercel evidence into canonical estate state without inventing adapter/renter conformance. KasiLink apex/`www` split remains HOLD until provider cutover is actually supported and receipted. |
+| `RobynAwesome/Introduction-to-MCP#102` | **WITNESS PR MERGED / FOLLOW-UP HOLD** | PR #106 canonically admitted Starfall/KasiLink repository + Vercel evidence without inventing adapter/renter conformance. KasiLink apex/`www` split and runtime authentication failures remain HOLD; Starfall rollback is only a candidate until drilled and receipted. |
 | `RobynAwesome/Introduction-to-MCP#103` | **PR1 MERGED / PR2 NEXT WHEN ASSIGNED** | Phase 7 Sociolinguistic Inference AI truth lock and contracts-only PR1 are canonical. Dataset/model/speech/runtime POC remains UNKNOWN; PR2 is the Mzansi Data Engine foundation, not foundation-model training. |
 
 ### Completed continuity receipt — #101 / PR #104
@@ -197,6 +197,22 @@ Historical instruction: implement these tests in `kopano-core/kopano/test_adapti
 - **Known errors / uncertainty:** The `Kopano-Labs/Introduction-to-MCP` organization view allowed reads but returned GitHub integration `403 Resource not accessible by integration` for issue/branch writes. The canonical `RobynAwesome/Introduction-to-MCP` repository accepted the issue write. No implementation branch or schema/runtime code had been created in this lane at this point.
 - **Current governance boundary:** Planning capture does not silently promote Phase 7 to implementation or runtime proof.
 - **Next admissible action at that receipt:** PR1 as a small contracts-only slice.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## 2026-08-24T03:31 SAST — #102 STARFALL + KASILINK WITNESS ADMISSION MERGED
+
+- **Status:** DONE for witness-only admission; operational follow-ups remain HOLD.
+- **WHO:** DPF/Forge stateless renter under explicit human `Next / proceed` instruction.
+- **WHAT:** Reviewed PR #106, found and corrected a stale canonical test that still required all six estate properties to be pending, proved the witness boundary across the affected estate suites, and squash-merged the bounded admission.
+- **WHERE:** `RobynAwesome/Introduction-to-MCP` PR #106; `governance/kpgs-vnext/estate-registry/`; `governance/kpgs-vnext/migration/`; `tests/test_sovereign_estate_registry.py`; `tests/test_live_estate_witness_admission.py`.
+- **WHY:** Admit exact connected GitHub/Vercel facts for Starfall Salvage and KasiLink without falsely promoting provider READY state into KPGS registration, staging or production.
+- **Evidence / receipts:** corrected exact head `e8d0d4359f6722585652a90b9b7d53b8eab2034a`; canonical squash merge `ce7fe6fe58d74602c8f49f6779e76875beba3d64`; KPGS truth gates `32679786744` and `32679784167` ✅; estate migration proof `32679786740` ✅; CodeQL `32679786763` ✅; Kopano CI `32679786729` ✅ including Python 3.11/3.12, GUI, CLI and Agent/KPEFS lanes; GitGuardian and Vercel checks ✅.
+- **POC/FOC:** **POC_VALIDATED for bounded witness admission and HOLD enforcement.** Runtime health, provider cutover, KPGS adapter/renter conformance, registration, staging and production remain separately unvalidated.
+- **Known errors / uncertainty:** KasiLink apex and `www` remain split across two Vercel projects and both report MongoDB Atlas authentication failures; Starfall's prior READY deployment is only a rollback candidate, not an executed rollback drill; witness receipt references preserve provider IDs but do not embed replayable provider response payloads.
+- **Next admissible action:** receipt this merge on Issue #102; keep operational work bounded to KasiLink authentication repair, supported/reversible provider consolidation with before/after receipts, Starfall rollback drill, and missing adapter/renter/capability/governance/evaluation evidence. Do not silently promote either property.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 
