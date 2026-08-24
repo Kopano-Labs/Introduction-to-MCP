@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpgs.local/schemas/mzansi/validation-receipt.schema.json",
+  "title": "KPGS Mzansi Sociolinguistic Validation Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "receipt_id", "request_id", "outcome", "transformation", "metrics", "evidence", "route", "flags", "poc_verdict", "created_at"],
+  "properties": {
+    "schema": { "const": "kpgs.mzansi.validation-receipt.v1" },
+    "receipt_id": { "type": "string", "minLength": 8 },
+    "request_id": { "type": "string", "minLength": 8 },
+    "outcome": { "enum": ["completed", "hold", "rejected", "failed"] },
+    "transformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_language", "target_language", "source_register", "target_register", "output_text"],
+      "properties": {
+        "source_language": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+        "target_language": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+        "source_register": { "enum": ["formal", "conversational", "street", "mxit", "mixed", "unknown"] },
+        "target_register": { "enum": ["formal", "conversational", "street", "mxit", "mixed"] },
+        "output_text": { "type": ["string", "null"] }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["meaning_preservation", "code_switch_ratio", "pronunciation_confidence", "human_naturalness_score"],
+      "properties": {
+        "meaning_preservation": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "code_switch_ratio": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "pronunciation_confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "human_naturalness_score": { "type": ["integer", "null"], "minimum": 1, "maximum": 5 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["human_validated", "validator_count", "synthetic_segments", "source_record_ids"],
+      "properties": {
+        "human_validated": { "type": "boolean" },
+        "validator_count": { "type": "integer", "minimum": 0 },
+        "synthetic_segments": { "type": "integer", "minimum": 0 },
+        "source_record_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 8 } }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inference_location", "providers", "fallback_used"],
+      "properties": {
+        "inference_location": { "enum": ["local_device", "edge_node", "cloud_teacher", "cloud_speech", "human_review", "mixed"] },
+        "providers": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "fallback_used": { "type": "boolean" }
+      }
+    },
+    "flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "SEMANTIC_LOSS",
+          "INVENTED_SLANG",
+          "INAPPROPRIATE_REGISTER",
+          "STEREOTYPE_RISK",
+          "EXCESSIVE_LANGUAGE_SUBSTITUTION",
+          "PRONUNCIATION_RISK",
+          "UNLICENSED_VOICE",
+          "CONSENT_MISSING",
+          "UNVERIFIED_EVIDENCE"
+        ]
+      }
+    },
+    "poc_verdict": { "enum": ["POC_VALIDATED", "FOC_FLAGGED", "BLOCKED", "UNKNOWN"] },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}

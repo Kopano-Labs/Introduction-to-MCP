@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpgs.local/schemas/mzansi/evidence-class.schema.json",
+  "title": "KPGS Mzansi Linguistic Evidence Class",
+  "description": "Canonical provenance class for sociolinguistic evidence. Model output never self-promotes into human-validated truth.",
+  "type": "string",
+  "enum": [
+    "HUMAN_RECORDED",
+    "HUMAN_VALIDATED",
+    "AI_GENERATED",
+    "AI_TRANSFORMED",
+    "UNVERIFIED",
+    "REJECTED"
+  ]
+}
