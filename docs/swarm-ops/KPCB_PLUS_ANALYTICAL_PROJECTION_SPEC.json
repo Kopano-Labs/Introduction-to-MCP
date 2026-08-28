@@ -1,0 +1,93 @@
+{
+  "schema": "kpcb_plus_analytical_projection_v1",
+  "document_id": "KPCB-ANALYTICS-2026",
+  "title": "KPCB+ Analytical Projection Protocol",
+  "authority": "Schematics MAIN BRAIN / Issue #108",
+  "status": "POC_CANDIDATE",
+  "testimony": {
+    "origin": "KPGS/GSMB/KPCB+ Markdown governance predates the user's formal study of Pandas groupby, pivot_table and heatmaps.",
+    "formal_learning_role": "Data-science study supplies computational vocabulary and falsifiable operators for strengthening existing information-governance intuitions; it is not claimed as the origin of the architecture.",
+    "canonical_protocol": "docs/swarm-ops/TESTIMONY_PROTOCOL.md",
+    "commandment_15": "Do not manufacture the testimony you are trying to observe.",
+    "sequence": ["OBSERVE", "RETAIN", "COMPARE_RECURRENCE", "INFER", "RISK_BEING_WRONG", "VALIDATE_AGAINST_FUTURE_REALITY"],
+    "classification_before_interpret": true,
+    "classification_rule": "Preserve source/provenance and distinguish current-human testimony, historical context, telemetry, model inference and repository state. Missing classification remains UNKNOWN rather than being guessed."
+  },
+  "kpcb_plus_boundary": {
+    "canonical_channels_unchanged": ["PP", "BP", "EP", "GP", "SP", "dotP", "IP"],
+    "algebra": "[EP] + [BP] * [PP] + [GP] + [SP] + [.P] + [IP] = KPCB+",
+    "analytical_operators_are_channels": false,
+    "reason": "GROUP, PIVOT and ATTENTION operate over governed KPCB+/GSMB records; they do not replace the seven semantic communication channels."
+  },
+  "operators": {
+    "GROUP": {
+      "question": "What governed knowledge belongs together under selected semantic dimensions?",
+      "properties": ["deterministic", "multi-dimension", "multi-value-explodable", "provenance-preserving"]
+    },
+    "PIVOT": {
+      "question": "How does the same governed corpus look when re-projected across row and column dimensions?",
+      "aggregations": ["count", "sum"],
+      "properties": ["same-source-corpus", "cell-provenance", "non-authoritative"]
+    },
+    "ATTENTION_MATRIX": {
+      "question": "Where does evidence density, UNKNOWN testimony, contradiction, staleness or activity concentrate?",
+      "render_hint": "heatmap",
+      "properties": ["attention-only", "heatmap-ready", "no-action-permission"]
+    }
+  },
+  "epistemic_invariants": [
+    "UNKNOWN != VIOLATED",
+    "absence_of_evidence != evidence_of_absence",
+    "deep_path != low_importance",
+    "shallow_path != high_authority",
+    "hot_cell != truth",
+    "aggregate != source_evidence",
+    "projection != mutation_permission",
+    "every_aggregate_must_trace_to_source",
+    "analytical_recurrence != manufactured_understanding"
+  ],
+  "record_contract": {
+    "required": ["record_id", "path"],
+    "optional_source_dimensions": ["source_class", "source_reference"],
+    "source_classes": ["CURRENT_HUMAN_TESTIMONY", "HISTORICAL_CONTEXT", "TELEMETRY", "MODEL_INFERENCE", "REPOSITORY_STATE", "UNKNOWN"],
+    "governed_defaults": {
+      "title": "UNKNOWN",
+      "depth": "UNKNOWN",
+      "canonical_index": "UNKNOWN",
+      "project": "UNKNOWN",
+      "protocol_channels": [],
+      "artifact_type": "UNKNOWN",
+      "authority": "UNKNOWN",
+      "validation_state": "UNKNOWN",
+      "testimony_state": "UNKNOWN",
+      "sprint": "UNKNOWN",
+      "ecosystem": "UNKNOWN",
+      "evidence_count": 0
+    },
+    "rule": "Missing epistemic or source-class metadata remains UNKNOWN. The analytical layer must not manufacture negative proof or manufacture the testimony being evaluated."
+  },
+  "reality_cloud_reflection": {
+    "human_surface": "Markdown/KPCB+ testimony remains directly inspectable.",
+    "machine_surface": "GROUP/PIVOT/ATTENTION projections are deterministic machine views over those records.",
+    "validation": "A machine projection fails governance if a human cannot trace it back to source record IDs/paths. Analytical hypotheses remain open to later reality falsification."
+  },
+  "runtime": {
+    "module": "kopano-core/kopano/kpcb_analytics.py",
+    "dependency_posture": "standard-library-only inside Introduction-to-MCP",
+    "kmec_boundary": "KMEC owns scalable Pandas/NumPy/Dask execution and may consume/produce compatible governed record contracts after this POC validates.",
+    "pka_boundary": "PKA remains responsible for epistemic admission; this analytical layer does not redefine PKA verdict law."
+  },
+  "validation": {
+    "test_file": "tests/test_kpcb_analytics.py",
+    "required_cases": [
+      "deep important artifact remains discoverable and traceable",
+      "shallow artifact receives no inferred authority",
+      "input order does not change grouping result",
+      "pivot cells preserve source record IDs",
+      "UNKNOWN remains distinct from VIOLATED",
+      "attention matrix cannot grant action permission",
+      "projection does not mutate source corpus",
+      "KPCB+ protocol channels become dimensions without inventing testimony"
+    ]
+  }
+}

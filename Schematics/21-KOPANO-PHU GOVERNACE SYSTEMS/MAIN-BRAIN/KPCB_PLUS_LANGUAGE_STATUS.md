@@ -1,7 +1,7 @@
 ---
 title: "KPCB+ Language Status — Kopano-Phu Code Blocks Plus"
 created: 2026-06-16
-updated: 2026-06-16
+updated: 2026-08-28
 tags:
   - kpcb-plus
   - language
@@ -127,18 +127,62 @@ Python · JavaScript · TypeScript · Rust · Go · C# · Java · HTML/CSS · SQ
 
 ---
 
+## Analytical Projection Protocol — 2026-08-28 POC Candidate
+
+KPCB+ now has a bounded candidate analytical layer for governed Markdown/KPCB records. The seven communication channels above remain unchanged. The new operations are **operators over the corpus**, not new protocol channels.
+
+The testimony matters: KPGS/GSMB/KPCB+ Markdown governance existed before formal study of Python `groupby()`, pivot tables and heatmaps. Formal data-science vocabulary is being used to challenge, measure and strengthen the pre-existing architecture rather than rewrite its origin.
+
+| Operator | Question | Governance boundary |
+|----------|----------|---------------------|
+| `GROUP` | What governed knowledge belongs together under selected semantic dimensions? | deterministic grouping must preserve source IDs/paths |
+| `PIVOT` | How does the same source corpus look when re-projected across row/column dimensions? | projection is not new source truth |
+| `ATTENTION_MATRIX` | Where does evidence, UNKNOWN testimony, contradiction, staleness or activity concentrate? | heat/attention is not authority or action permission |
+
+Core invariants:
+
+```text
+UNKNOWN != VIOLATED
+absence of evidence != evidence of absence
+deep_path != low_importance
+shallow_path != high_authority
+hot_cell != truth
+aggregate != source_evidence
+projection != mutation_permission
+```
+
+Every grouped or pivoted result must remain traceable to the human-readable source testimony that produced it. This is the reality ↔ cloud reflection boundary.
+
+Canonical GSMB indexes remain the boot/navigation surface. Analytical projections help KC remember **that knowledge exists**, locate it and decide where deeper inspection is useful without hydrating the entire Markdown corpus into active context.
+
+Runtime candidate: `kopano-core/kopano/kpcb_analytics.py`
+
+Contract: `docs/swarm-ops/KPCB_PLUS_ANALYTICAL_PROJECTION_SPEC.json`
+
+Durable testimony: `KPCB_PLUS_ANALYTICAL_PROJECTION_PROTOCOL.md`
+
+Issue: `#108`
+
+Promotion remains conditional on executable tests and canonical CI; document existence alone is not POC validation.
+
+---
+
 ## Runtime Artifacts
 
 | Artifact | Path |
 |----------|------|
 | Spec | `docs/swarm-ops/KPCB_PLUS_SPEC.json` |
+| Analytical projection spec | `docs/swarm-ops/KPCB_PLUS_ANALYTICAL_PROJECTION_SPEC.json` |
 | Runtime | `kopano-core/kopano/kpcb_plus.py` |
+| Analytical runtime | `kopano-core/kopano/kpcb_analytics.py` |
+| Analytical tests | `tests/test_kpcb_analytics.py` |
 | Schematic | `Schematics/.../KPCB_PLUS_LANGUAGE_STATUS.md` |
 
 ---
 
 ## Links
 
+- [[KPCB_PLUS_ANALYTICAL_PROJECTION_PROTOCOL|KPCB+ Analytical Projection Protocol]]
 - [[THARI_MAO_STATUS|THARI MAO Status]]
 - [[KPGS_THESIS_MMAO|MMAO Core Thesis]]
 - [[KPGS_GOVERNANCE_CORE|Governance Core]]
