@@ -146,6 +146,34 @@ def test_missing_testimony_stays_unknown_not_violated():
     assert record["canonical_index"] == UNKNOWN
 
 
+def test_classification_before_interpret_keeps_human_and_model_sources_distinct():
+    corpus = KPCBAnalyticalCorpus(
+        [
+            {
+                "record_id": "human-claim",
+                "path": "testimony/human.md",
+                "project": "A",
+                "testimony_state": "SATISFIED",
+                "source_class": "CURRENT_HUMAN_TESTIMONY",
+            },
+            {
+                "record_id": "model-claim",
+                "path": "inference/model.md",
+                "project": "A",
+                "testimony_state": "SATISFIED",
+                "source_class": "MODEL_INFERENCE",
+            },
+        ]
+    )
+
+    grouped = corpus.group_by("source_class", "testimony_state")
+    keys = [group["key"] for group in grouped["groups"]]
+
+    assert {"source_class": "CURRENT_HUMAN_TESTIMONY", "testimony_state": "SATISFIED"} in keys
+    assert {"source_class": "MODEL_INFERENCE", "testimony_state": "SATISFIED"} in keys
+    assert len(grouped["groups"]) == 2
+
+
 def test_pivot_reprojects_same_corpus_and_preserves_cell_provenance(gsm_b_records):
     corpus = KPCBAnalyticalCorpus(gsm_b_records)
     pivot = corpus.pivot("project", "testimony_state")
