@@ -56,7 +56,7 @@ Canonical algebra remains:
 
 > What governed knowledge belongs together under the dimensions relevant to the current investigation?
 
-Dimensions may include project, KPCB+ protocol channel, artifact type, authority, validation state, testimony state, sprint, ecosystem, canonical status or filesystem depth.
+Dimensions may include project, KPCB+ protocol channel, artifact type, authority, validation state, testimony state, source class, sprint, ecosystem, canonical status or filesystem depth.
 
 Sequence-valued dimensions such as `protocol_channels` may be exploded: one artifact may legitimately participate in multiple semantic groups.
 
@@ -78,6 +78,7 @@ Examples:
 PROJECT × TESTIMONY_STATE
 PROJECT × PROTOCOL_CHANNEL
 SPRINT × VALIDATION_STATE
+SOURCE_CLASS × TESTIMONY_STATE
 ECOSYSTEM × ARTIFACT_TYPE
 AUTHORITY × CANONICAL_STATUS
 ```
@@ -111,9 +112,28 @@ A deeply nested receipt may preserve a three-month sprint. A shallow random note
 
 Canonical indexes remain the deterministic boot/navigation surface. Analytical projections support selective discovery behind that boot surface; they do not flatten or replace GSMB.
 
-## Commandment 15 — Testimony Protocol
+## Commandment 15 — canonical Testimony Protocol alignment
 
-Analytical code must preserve why a result exists and where it came from.
+The governing source is `docs/swarm-ops/TESTIMONY_PROTOCOL.md`.
+
+Its command is:
+
+> **Do not manufacture the testimony you are trying to observe.**
+
+Its core sequence is:
+
+```text
+OBSERVE
+→ RETAIN
+→ COMPARE RECURRENCE
+→ INFER
+→ RISK BEING WRONG
+→ VALIDATE AGAINST FUTURE REALITY
+```
+
+Therefore GROUP/PIVOT/ATTENTION must not become an answer-key generator that manufactures the pattern it later claims to have discovered.
+
+Before interpreting an analytical signal, classify what was actually observed and preserve source/provenance. Where supplied, `source_class` should distinguish current-human testimony, historical context, telemetry, model inference and repository state. If classification is missing, retain UNKNOWN rather than guessing.
 
 Missing testimony must not silently become failure:
 
@@ -123,6 +143,8 @@ absence of evidence != evidence of absence
 ```
 
 An operational gate may still refuse action when state is UNKNOWN, but the epistemic record must remain UNKNOWN/HOLD rather than manufacturing negative proof.
+
+A convergence claim is stronger when recurrence survives changed context **without the evaluator feeding the subject the exact answer being tested**. Analytical recurrence is evidence to investigate, not automatic proof of understanding.
 
 ## Reality ↔ cloud reflection
 
@@ -137,10 +159,12 @@ human opens Markdown → sees title/context/testimony/evidence
 Cloud/runtime lane:
 
 ```text
-machine parses governed record → GROUP/PIVOT/ATTENTION → returns source IDs/paths
+machine parses governed record → classify source → GROUP/PIVOT/ATTENTION → returns source IDs/paths
 ```
 
 Validation requires that the machine view can be traced back to the human view. An opaque aggregate that cannot identify its contributing testimony violates this protocol.
+
+The analytical layer may form a hypothesis from recurrence, but it must remain willing to be wrong and validate that hypothesis against future reality. This is where the cloud must reflect reality and reality must be allowed to falsify the cloud.
 
 ## Runtime split
 
@@ -165,6 +189,8 @@ canonical GSMB boot
         ↓
 governed Markdown / KPCB+ records
         ↓
+classify observation + preserve provenance
+        ↓
 GROUP — belonging
         ↓
 PIVOT — re-projection
@@ -174,6 +200,10 @@ ATTENTION MATRIX — where to inspect
 trace cell → source record IDs / paths
         ↓
 selective retrieval of testimony
+        ↓
+compare recurrence / infer / risk being wrong
+        ↓
+validate against future reality
         ↓
 PKA / governance evaluation
         ↓
