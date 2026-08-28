@@ -18,7 +18,8 @@
 | KC Swarm Console (wireframe HTML) | [tools/kc-swarm-console-wireframe.html](./tools/kc-swarm-console-wireframe.html) | Studio or Next shell: KC→Cassey, BFF, proof strip; aligns CI with `swarm-proof.yml` |
 | KC Swarm Console (architecture prose) | [KC_SWARM_CONSOLE_ARCHITECTURE.md](./KC_SWARM_CONSOLE_ARCHITECTURE.md) | BFF model, flow, CI vs optional `proof_gate`, citations |
 | KC Swarm Console (GUI IA spec) | [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md) | Four-column layout, flows, branch protection notes |
-| KC Swarm Console (Studio + API) | `GET /api/kc/swarm-console/status` · `kopano-core/studio/src/pages/ConsolePage.tsx` | Context / Swarm / Proof / CI modes; BFF for git + JSONL gates |
+| KC Swarm Console (Studio + API) | `GET /api/kc/swarm-console/status` · `kopano-core/studio/src/pages/ConsolePage.tsx` | Current implementation: Context / Swarm / MAO / KPEFS / Proof / CI / Sovereign SIM; BFF for git + JSONL gates |
+| KC GUI reconciliation lane | [Issue #110](https://github.com/RobynAwesome/Introduction-to-MCP/issues/110) | Current UI/UX truth audit and bounded remediation; replaces the obsolete `codex/kc-sovereign-gui-full-dev` compare pointer |
 | Windows desktop binary | `scripts/build_kopano_context.ps1` → `dist/KopanoContext.exe` | API + bundled Studio; DB under `%LOCALAPPDATA%\\KopanoContext\\` |
 | Unified guard CLI | `scripts/kc_guard.py` | `status` / `validate` / `proof` / `all` / `watch`; delegates to `git_sync_monitor` + `kc_log_append` |
 | Servitude Triad (unified modes) | [SERVITUDE_TRIAD.md](./SERVITUDE_TRIAD.md) | Grit + Realism + Aesthetics — not split |
@@ -35,6 +36,8 @@
 | Main Brain / vault audit | [apprenticeship/MAIN_BRAIN_AUDIT.md](./apprenticeship/MAIN_BRAIN_AUDIT.md) | Canonical vs Schematics mirror |
 | Mirror logs to Schematics vault | `python scripts/kc_sync_vault_logs.py` | After JSONL append |
 
+**GUI branch truth (2026-08-28):** `codex/kc-sovereign-gui-full-dev` is retained only as historical testimony. Git comparison against `master` shows it is `0` commits ahead and `347` commits behind. Do not resurrect or present it as an open implementation lane. Current GUI work starts from `master` and the Studio/API surfaces above.
+
 **CLI quick reference**
 
 ```bash
@@ -50,9 +53,6 @@ python scripts/kc_cassy_activate.py --seed-wit  # Cassy lead student + WIT 25 ba
 python scripts/kc_cassy_wit_steward.py --promote # steward WIT phase 11
 python scripts/kc_main_brain_roadmap.py gate    # production entry gate
 python scripts/kc_apprenticeship_activate.py   # manifest + seed kopano-core/.kc/context_store.json
-```
-
-**Open PR:** https://github.com/Kopano-Labs/Introduction-to-MCP/compare/master...codex/kc-sovereign-gui-full-dev?expand=1
 python scripts/kc_log_append.py review --strict-proof --role student --phase audit --summary "..." --commands ... --exit-code 0 --evidence-url https://...
 python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md --status acknowledged --notes "Swarm initiated" --evidence-url https://...
 ```
