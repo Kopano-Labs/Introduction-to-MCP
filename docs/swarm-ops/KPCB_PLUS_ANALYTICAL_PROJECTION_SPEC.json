@@ -7,7 +7,11 @@
   "testimony": {
     "origin": "KPGS/GSMB/KPCB+ Markdown governance predates the user's formal study of Pandas groupby, pivot_table and heatmaps.",
     "formal_learning_role": "Data-science study supplies computational vocabulary and falsifiable operators for strengthening existing information-governance intuitions; it is not claimed as the origin of the architecture.",
-    "commandment_15": "Why the work exists must travel with what the work does so future stateless renters can investigate claims from evidence rather than reconstructing intent by guesswork."
+    "canonical_protocol": "docs/swarm-ops/TESTIMONY_PROTOCOL.md",
+    "commandment_15": "Do not manufacture the testimony you are trying to observe.",
+    "sequence": ["OBSERVE", "RETAIN", "COMPARE_RECURRENCE", "INFER", "RISK_BEING_WRONG", "VALIDATE_AGAINST_FUTURE_REALITY"],
+    "classification_before_interpret": true,
+    "classification_rule": "Preserve source/provenance and distinguish current-human testimony, historical context, telemetry, model inference and repository state. Missing classification remains UNKNOWN rather than being guessed."
   },
   "kpcb_plus_boundary": {
     "canonical_channels_unchanged": ["PP", "BP", "EP", "GP", "SP", "dotP", "IP"],
@@ -39,10 +43,13 @@
     "hot_cell != truth",
     "aggregate != source_evidence",
     "projection != mutation_permission",
-    "every_aggregate_must_trace_to_source"
+    "every_aggregate_must_trace_to_source",
+    "analytical_recurrence != manufactured_understanding"
   ],
   "record_contract": {
     "required": ["record_id", "path"],
+    "optional_source_dimensions": ["source_class", "source_reference"],
+    "source_classes": ["CURRENT_HUMAN_TESTIMONY", "HISTORICAL_CONTEXT", "TELEMETRY", "MODEL_INFERENCE", "REPOSITORY_STATE", "UNKNOWN"],
     "governed_defaults": {
       "title": "UNKNOWN",
       "depth": "UNKNOWN",
@@ -57,12 +64,12 @@
       "ecosystem": "UNKNOWN",
       "evidence_count": 0
     },
-    "rule": "Missing epistemic metadata remains UNKNOWN. The analytical layer must not manufacture negative proof."
+    "rule": "Missing epistemic or source-class metadata remains UNKNOWN. The analytical layer must not manufacture negative proof or manufacture the testimony being evaluated."
   },
   "reality_cloud_reflection": {
     "human_surface": "Markdown/KPCB+ testimony remains directly inspectable.",
     "machine_surface": "GROUP/PIVOT/ATTENTION projections are deterministic machine views over those records.",
-    "validation": "A machine projection fails governance if a human cannot trace it back to source record IDs/paths."
+    "validation": "A machine projection fails governance if a human cannot trace it back to source record IDs/paths. Analytical hypotheses remain open to later reality falsification."
   },
   "runtime": {
     "module": "kopano-core/kopano/kpcb_analytics.py",
