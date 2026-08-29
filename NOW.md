@@ -1,14 +1,38 @@
 # NOW.md — Active Working Log
 
 > **Current-state authority:** repository-root `NOW.md`
-> **Updated:** 2026-08-24T03:31:21+02:00 (SAST)
+> **Updated:** 2026-08-29T03:55:00+02:00 (SAST)
 > **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 > **Doctrine boundary:** durable governance informs this file; it does not replace this file.
 > **Rule:** recover current state before execution; receipt material changes before handoff.
 
 ---
 
-## CURRENT STATE — 2026-08-24
+## CURRENT STATE — 2026-08-29
+
+### Current objective
+
+**ESTATE DIRECTIVE `ESTATE-ISSUE-2026-08-29-01`: FIVESARENA 3D LIVING ARENA & KPGS-RTCP SWFUS vNEXT**
+1. **Canonical Issue Spec:** All stateless renters must read `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/ESTATE_ACTIVE_ISSUE_FIVESARENA_AND_KPGS_SWFUS_VNEXT.md` before executing.
+2. **Phase 1 Priority (Active):** Implement `Bookit-5s-Arena` 3D Pitch Stadium Scene (`components/3d/PitchStadiumScene.jsx`) and 5v5 Tactical Board (`components/tactics/TacticalBoard.jsx`) using Master Robyn's forked assets (`three.js`, `threeui`, `kage`, `towers`, `GSAP`).
+3. **Phase 2 Priority (Active):** Expand `skills/awesome/govern-kpgs-documents` to route multi-registry skill discovery across internet repos via KMEC observation engine.
+4. **Hard Invariant:** Invariant 12 mutating CRUD hold, Black Mass $\le 16.67\text{ ms}$ frame budget, zero PII leak, and local physical test receipts required for all PRs.
+
+### Active lanes
+
+| Lane | State | Current truth |
+|---|---|---|
+| `RTCP / KPGS Pipeline` | **POC_VALIDATED / OPERATIONAL** | 5-stage pipeline (`CRUD -> SWFUS -> BP -> BMP -> POCvsFOC`) fully implemented in `rtcp_pipeline.py` and validated by unit tests. Invariant 12 enforced. |
+| `DIRISA Cornerstone` | **CANONICAL GROUND TRUTH** | Talk 26 and `Where You Fit in the African & South African Context` verified in vault `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/`. |
+| `UJ IKM Thesis Paper 2` | **MANUSCRIPT DRAFT 1.0 COMPLETE** | Full academic paper draft completed for UJ IKM. Empirical lab: Project Jennifer. Code bridge `pka_kmec_jennifer_bridge.py` tested and passing (4/4). |
+| `GSMB Local Heavy Seeding` | **SEEDED / LOCAL RE-ENGINEERED** | 22 key architecture files from 12 external repos ingested into `Schematics/MAIN-BRAIN/External-Estate-Seeds/`. Manifest signed. Local is stronger. |
+| `GitHub Estate Issues/PRs` | **100% HARVESTED & INVENTORIED** | Full inventory via authenticated Edge session: 16 open issues, 15 open PRs, top 20 closed issues across all 98 repos. Manifest signed. |
+| `FivesArena Mobile Remediation` | **REMEDIATED & PUSHED TO PR** | Enforced 1 persistent mobile control surface (hid competing floaters), gated Blackbox/internal shields OFF in production, added dedicated discoverable `/play` route, progressive 3D disclosure with 2D mobile fallback. Pushed commit `4eb2611` to `feat/boat-3d-tactics-experience`. |
+| `RobynAwesome/Introduction-to-MCP#102` | **PULLED TO HEAD** | Master branch pulled to `7973d64b` (`ledger: add MMAO session failures and Forge case 001`). |
+
+---
+
+## PRIOR STATE — 2026-08-24
 
 ### Current objective
 

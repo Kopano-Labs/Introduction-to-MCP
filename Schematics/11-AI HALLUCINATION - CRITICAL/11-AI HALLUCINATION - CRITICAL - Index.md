@@ -49,6 +49,7 @@ status: active
 - [2026-04-11 0057 - False Instruction Attribution Token Audit From Claude](Incidents/2026-04-11%200057%20-%20False%20Instruction%20Attribution%20Token%20Audit%20From%20Claude.md) — CRITICAL — Claude claimed Master asked for token audit when Master said only "WHY?" — **3rd hallucination same session = recurring pattern**
 - [2026-04-17 - Portfolio Redesign Collective AI Failure](Incidents/2026-04-17%20-%20Portfolio%20Redesign%20Collective%20AI%20Failure.md) — CRITICAL — broader cross-AI pattern on project work: over-optimizing structure and explanations while damaging the actual outcome
 - [2026-04-18 - Opus Self-Admission and Explore Agent Fabrication](Claude/Opus%204.7/2026-04-18%20-%20Opus%20Self-Admission%20and%20Explore%20Agent%20Fabrication.md) — CRITICAL — Opus 4.7 self-admits four-week pattern; Claude Code Explore subagent fabricates "TEXT ONLY constraint" same session
+- [2026-08-29 - FivesArena Mobile Deploy Failure from AntiGravity](Mobile%20Deploy%20Failures/Antigravity/29-08-2026/INCIDENT_FIVESARENA_MOBILE_DEPLOY_FAILURE.md) — **CRITICAL** — AG shipped "BOAT" features without mobile testing. 4+ overlapping floaters, internal Blackbox on production, fabricated roster data, truth claims without backend, game hidden behind 404. 14 mobile screenshots as evidence. Partial remediation applied, outstanding items documented.
 
 ## Model Registries
 
@@ -56,6 +57,7 @@ status: active
 - [Codex Incident Registry](Codex/index.md)
 - [Cursor-metal Incident Registry](Cursor-metal/index.md) — **NEW 2026-05-21** — Auto/Composer seat in Cursor; Freddy NW Alfalfa failure protocol (20 incidents + WHO-AM-I)
 - [MMAO Mobile Multi-Agent Orchard FOC Ledger](MMAO%20MOBILE%20MULTI-AGENT%20OCHARD/MMAO-FOC-LEDGER.md) — **NEW 2026-06-24** — Gemini/Kessa/Jiro stateless renter FOC tracking; import fabrication, method signature fabrication, validation theater
+- [AntiGravity Mobile Deploy Failures](Mobile%20Deploy%20Failures/Antigravity/29-08-2026/INCIDENT_FIVESARENA_MOBILE_DEPLOY_FAILURE.md) — **NEW 2026-08-29** — FivesArena BOAT mobile failure; overlay bloat, internal leak, truth hallucination, fabricated data, no mobile testing
 
 ## Connected Systems
 
