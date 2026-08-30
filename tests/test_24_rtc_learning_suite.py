@@ -214,6 +214,29 @@ class Test24RtcLearningSuite(unittest.TestCase):
         self.assertEqual(receipt.btth_alchemical_score, 1.0)
         self.assertEqual(len(self.p2p_engine.receipt_ledger), 1)
 
+    # =========================================================================
+    # 5. CANONICAL DATA GOVERNANCE & MULTI-AGENT ORCHESTRATION TESTS
+    # =========================================================================
+
+    def test_canonical_data_governance_orchestrator_full_pipeline(self):
+        from kopano.canonical_data_governance_orchestrator import CanonicalDataGovernanceOrchestrator
+        orchestrator = CanonicalDataGovernanceOrchestrator()
+
+        result = orchestrator.orchestrate_task(
+            task_title="Canonical Phase 8 Mzansi Speech Architecture",
+            submitting_agent_id="Kessa_Mobile_Orchard",
+            operating_mode=DeviceOperatingMode.MOBILE_GEMINI_MMAO,
+            raw_code_proposal="from kopano import PossibilityToProofEngine\n engine = PossibilityToProofEngine()",
+            human_testimony_claim="Master designated Phase 8 as the Mzansi Speech Foundation.",
+            disk_artifact_path="Schematics/24-RTC Learning/From_Possibility_to_Proof_POCvsFOC_PKA_CDP_CCP_Genealogy_2026-08-30.md"
+        )
+
+        self.assertIsNotNone(result.action_id)
+        self.assertEqual(result.bracket_type, "[]")
+        self.assertEqual(result.btth_purity_score, 1.0)
+        self.assertTrue(result.persisted_to_disk)
+        self.assertEqual(len(orchestrator.canonical_ledger), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
