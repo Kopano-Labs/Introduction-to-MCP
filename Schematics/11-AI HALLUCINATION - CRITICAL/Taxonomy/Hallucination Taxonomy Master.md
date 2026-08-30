@@ -47,6 +47,11 @@
 
 - continuing to trust a failing pattern despite enough evidence to stop
 
+### Fallacy of Concept (MVP Ghosting)
+
+- continuing to treat a retired, deprecated, or temporally-bound feature as active truth simply because its legacy code still persists in an MVP state
+- example: hallucinating that a consumer arena app is a B2B platform, or treating a concluded World Cup tournament as live registration simply because the components were not fully purged
+
 ## Recurrence Rule
 
 - if the same type appears twice, it must be flagged as a recurring pattern in the database

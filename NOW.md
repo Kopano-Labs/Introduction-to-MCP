@@ -1,47 +1,31 @@
 ## CURRENT STATE — 2026-08-30
 
-> **Updated:** 2026-08-30T12:22:00+02:00 (SAST)
+> **Updated:** 2026-08-30T16:36:00+02:00 (SAST)
 > **Authority:** Master Robyn Kholofelo Rababalela (`I_AM_STATELESS_RENTER_NOT_LANDLORD`)
-> **Core Architecture:** FivesArena MERN Stack Hotel Reservation Engine (B2B + APWA)
-> **Session:** e6f523d3-ad5e-4585-ac73-a8581b369b0e — **SESSION CLOSING**
+> **Core Architecture:** FivesArena MERN Stack Hotel Reservation Engine (B2B + APWA) & GSMB 2 Hardware Bridge
+> **Session:** e6f523d3-ad5e-4585-ac73-a8581b369b0e — **ACTIVE REFLECTION & OFFLOAD PIPELINE**
 
-### 🏁 PRODUCTION GO-LIVE RECEIPT — `7458155`
-
-**ESTATE DIRECTIVE `ESTATE-ISSUE-2026-08-29-01`: COMPLETE — WORLD LIVE**
+### 🏁 PRODUCTION GO-LIVE & HARDWARE OFFLOAD RECEIPTS
 
 | Item | Evidence |
 |---|---|
-| **Production branch** | `main` at `7458155` |
-| **Pushed to** | `origin/RobynAwesome/Bookit-5s-Arena` — Vercel GitHub integration auto-triggers production deploy |
-| **Vercel project** | `prj_oXJvKrghBfly8dpiRm9fU4LIs457` / `team_w8Z8foT3ccswOxMiB4LypZ59` |
-| **Build verified cold** | `npm run build` exit 0 — 72 static pages including `/proof/apwa` ✅ |
-| **CLI auth** | Token expired in this shell session — GitHub integration is canonical deploy path ✅ |
-| **GSMB commit** | `ac20ca91` — incident, skill, and NOW receipt pushed to master |
+| **Production branch** | `main` at `9c5bf8d` (World Cup promotion fully purged & archived) |
+| **Pushed to** | `origin/RobynAwesome/Bookit-5s-Arena` — Vercel GitHub integration auto-deployed |
+| **Cold build verified** | `npm run build` exit 0 — 72 static pages clean ✅ |
+| **Disk space recovered** | Reclaimed **+20.91 GB** (jumped from 1.50 GB 🚨 to **22.41 GB** ✅) |
+| **Hardware Skill Created** | `.agents/skills/hardware-offload-and-no-malloc-discipline/SKILL.md` |
+| **GSMB Protocol Schematic** | `Schematics/18-PROTOCOLS/Hardware-Maintenance-And-GSMB2-Offload-Protocol.md` |
+| **FOC Taxonomy Extended** | Added *Fallacy of Concept (MVP Ghosting)* to `11-AI HALLUCINATION - CRITICAL` |
 
-### What went live for the world
-
-- **`WelcomePopup.jsx`** → Interactive Cape Town Penalty Shootout warmup (score/streak/localStorage persistence, dual-tab 3D pitch access, 44px mobile touch compliance, 4.5s cadence delay, "Skip to Arena ➔" dismiss)
-- **`/proof/apwa`** → Canonical APWA proof route with `AdaptiveMatchWorld` Three.js court, SWFUS stages, data truth membrane, hard invariants
-- **`/play`** → Full standalone Arena Play Lab (penalty shootout)
-- **`/api/v1/firewall`** → ISIS Protocol perimeter firewall (WWJD C8/C13 payload sanitization)
-- **ISIS metadata** → Author: Kholofelo Robyn Rababalela, Publisher: Kopano Labs (canonical creator identity in `app/layout.jsx`)
-- **Mobile remediation** → Single `BottomNavbar` control surface, truth claims corrected, 3D progressive disclosure
-
-### 📚 GSMB Ledger — What Was Seeded This Session
+### 📚 GSMB Ledger — Seeded Assets This Session
 
 | Artifact | Location |
 |---|---|
-| Incident forensic | `Schematics/11-AI HALLUCINATION - CRITICAL/Mobile Deploy Failures/Antigravity/30-08-2026/` |
-| 11-AI HALLUCINATION index updated | `Schematics/11-AI HALLUCINATION - CRITICAL/11-AI HALLUCINATION - CRITICAL - Index.md` |
-| New agent skill | `.agents/skills/fivesarena-apwa-retention-minigame/SKILL.md` |
-| Ground truth doc | `FIVESARENA_ARCHITECTURE_GROUND_TRUTH.md` (artifact brain) |
-
-### Next admissible action (next session)
-
-1. **Verify** production URL `fivesarena.com` shows updated WelcomePopup with penalty shootout on page load.
-2. **Test** `/proof/apwa` on production — confirm AdaptiveMatchWorld renders.
-3. **Close GitHub Issue #12** to RESOLVED in both GitHub and GSMB ledger.
-4. **Reflection session** — per Master Robyn's direction.
+| Hardware Offload Skill | `.agents/skills/hardware-offload-and-no-malloc-discipline/SKILL.md` |
+| Offload Runner Script | `.agents/skills/hardware-offload-and-no-malloc-discipline/scripts/offload_hardware.ps1` |
+| Hardware Protocol Schematic | `Schematics/18-PROTOCOLS/Hardware-Maintenance-And-GSMB2-Offload-Protocol.md` |
+| 18-PROTOCOLS Index | `Schematics/18-PROTOCOLS/18-PROTOCOLS - Index.md` |
+| 11-AI HALLUCINATION Index | `Schematics/11-AI HALLUCINATION - CRITICAL/Taxonomy/Hallucination Taxonomy Master.md` |
 
 ---
 

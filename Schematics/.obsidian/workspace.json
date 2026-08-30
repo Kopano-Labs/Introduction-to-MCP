@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-Home/00-Home - Index.md",
+                "file": "00-Home/Now.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "00-Home - Index"
+              "title": "Now"
             }
           }
         ]
@@ -90,7 +90,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 666.2999877929688
+    "width": 342.3000183105469,
+    "collapsed": true
   },
   "right": {
     "id": "891cb4bfa988de8c",
@@ -240,7 +241,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.5
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -267,17 +269,19 @@
       "smart-lookup:Smart Lookup: Open lookup view": false
     }
   },
-  "active": "aa8722547db9246a",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "00-Home/Dashboard.md",
+    "18-PROTOCOLS/Hardware-Maintenance-And-GSMB2-Offload-Protocol.md",
+    "21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/ROADMAP/ROADMAP-index.md",
+    "18-PROTOCOLS/18-PROTOCOLS - Index.md",
     "00-Home/00-Home - Index.md",
     "00-Home/All Projects Registry.md",
     "09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md",
-    "00-Home/Dashboard.md",
     "18-PROTOCOLS/Token_Governance_Overrides.md",
     "18-PROTOCOLS/Data_Science_Lifecycle.md",
     "Sandbox/2026-05-02-kc-crud-activation-payload.md",
     "18-PROTOCOLS/KC Stewardship And Tenant AI Doctrine.md",
-    "18-PROTOCOLS/18-PROTOCOLS - Index.md",
     "06-Reference/kopano-code-implementation/tests/__pycache__/test_kc_mcp_stress.cpython-314.pyc",
     "06-Reference/kopano-code-implementation/tests/test_kc_mcp_stress.py",
     "07-Sessions By Day/2026-05-02 - KC MCP CRUD Activation.md",
@@ -303,8 +307,6 @@
     "19-TOKEN USUAGE/Probation Records/Probation Records - Index.md",
     "07-Sessions By Day/2026-04-22/MAIN-BRAIN Token Governance Closeout.md",
     "11-AI HALLUCINATION - CRITICAL/Codex/GPT-5 Codex/2026-04-17 - Portfolio Redesign Drift and Rollback Failure.md",
-    "19-TOKEN USUAGE/Templates/Templates - Index.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Model Capability Cards - Index.md",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",
