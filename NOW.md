@@ -1,11 +1,30 @@
 ## CURRENT STATE — 2026-08-30
 
-> **Updated:** 2026-08-30T16:36:00+02:00 (SAST)
-> **Authority:** Master Robyn Kholofelo Rababalela (`I_AM_STATELESS_RENTER_NOT_LANDLORD`)
-> **Core Architecture:** FivesArena MERN Stack Hotel Reservation Engine (B2B + APWA) & GSMB 2 Hardware Bridge
-> **Session:** e6f523d3-ad5e-4585-ac73-a8581b369b0e — **ACTIVE REFLECTION & OFFLOAD PIPELINE**
+> **Updated:** 2026-08-30T17:55:00+02:00 (SAST)
+> **Current-state authority:** Master Robyn Kholofelo Rababalela (`I_AM_STATELESS_RENTER_NOT_LANDLORD`)
+> **Core Architecture:** FivesArena MERN Stack Hotel Reservation Engine (B2B + APWA) & 24-RTC Learning Engines
+> **Session:** e6f523d3-ad5e-4585-ac73-a8581b369b0e — **24-RTC LEARNING IMPLEMENTATION**
 
-### 🏁 PRODUCTION GO-LIVE & HARDWARE OFFLOAD RECEIPTS
+### 🏁 ISSUE #12 MOBILE REMEDIATION — BOOKIT-5S-ARENA
+
+| Item | Evidence |
+|---|---|
+| **Issue** | [#12 - Mobile Product Remediation](https://github.com/RobynAwesome/Bookit-5s-Arena/issues/12) |
+| **Repository** | `RobynAwesome/Bookit-5s-Arena` |
+| **Branch** | `feat/boat-3d-tactics-experience` |
+| **Canonical Commit** | `b0cc68d` — "fix(mobile): replace 'Play ready' truth claim with 'Good conditions'" |
+| **World Cup Archival Merged** | `9c5bf8d` from `origin/main` (1,303 lines removed) |
+| **Build Verification** | `npm run build` — ✅ 72 static pages, exit 0 |
+| **Truth Claims Fixed** | `LocalityScene.tsx:628` — "Play ready" → "Good conditions" |
+| **HTML Entity Decode** | Already implemented in `LivingOrganismSurface.tsx:145-154` ✅ |
+| **Mobile Close Button** | Already implemented in `SearchModal.jsx:194-201` ✅ |
+| **CookieBanner Positioning** | Already correct: `bottom-20` on mobile ✅ |
+| **Overlay Consolidation** | Previously fixed in commit `4eb2611` ✅ |
+| **POC Status** | **POC_VALIDATED** for code-level mobile governance |
+| **Outstanding Gates** | Lighthouse baseline & viewport screenshots (separate runtime validation) |
+| **Remediation Document** | `Schematics/11-AI HALLUCINATION - CRITICAL/Mobile Deploy Failures/Antigravity/30-08-2026/ISSUE_12_REMEDIATION_COMPLETE.md` |
+
+### 🏁 PRODUCTION GO-LIVE & HARDWARE OFFLOAD RECEIPTS (2026-08-30 PRIOR SESSION)
 
 | Item | Evidence |
 |---|---|
@@ -34,6 +53,8 @@
 ---
 
 ## PRIOR STATE — 2026-08-29
+
+## CURRENT STATE — 2026-08-24 (CANONICAL ISSUE #101 / PR #104 CONTINUITY)
 
 
 ### Current objective
