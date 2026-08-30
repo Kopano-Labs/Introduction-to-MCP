@@ -1,35 +1,40 @@
 ## CURRENT STATE — 2026-08-30
 
-> **Updated:** 2026-08-30T07:56:00+02:00 (SAST)
-> **Server restart:** All background tasks were killed at 2026-08-30T05:53 UTC. Recovered cleanly.
+> **Updated:** 2026-08-30T11:45:00+02:00 (SAST)
+> **Authority:** Master Robyn Kholofelo Rababalela (`I_AM_STATELESS_RENTER_NOT_LANDLORD`)
+> **Core Architecture:** FivesArena MERN Stack Hotel Reservation Engine (B2B + APWA)
 
 ### Current objective
 
-**ESTATE DIRECTIVE `ESTATE-ISSUE-2026-08-29-01`: FIVESARENA 3D LIVING ARENA — MOBILE REMEDIATION PHASE COMPLETE**
+**ESTATE DIRECTIVE `ESTATE-ISSUE-2026-08-29-01`: FIVESARENA APWA RETENTION HUB & CANONICAL PROOF SHIP**
 
-All five phases of the FivesArena Mobile Product Remediation are executed and pushed.
+1. **APWA Minigame Elevated:** Penalty Shootout minigame moved from 404 boundary into `WelcomePopup.jsx` as primary onboarding retention hub with score/streak persistence, dual-tab 3D pitch view, and 44px mobile touch compliance.
+2. **Dedicated Route:** Created `app/proof/apwa/page.tsx` resolving `/proof/apwa` with AdaptiveMatchWorld, deterministic physics, and SWFUS receipts.
+3. **PR #28 Synchronized:** Clean merge from `kopano-labs` (`918a938`), cold build verified, commit `7458155` pushed to both `origin` and `kopano-labs`.
+4. **Forensic Incident Documented:** Complete failure analysis and evolution logged in `Schematics/11-AI HALLUCINATION - CRITICAL/Mobile Deploy Failures/Antigravity/30-08-2026/INCIDENT_FIVESARENA_B2B_DRIFT_AND_APWA_EVOLUTION.md`.
+5. **Reusable Skill Created:** `fivesarena-apwa-retention-minigame` ratified in `.agents/skills/`.
 
 ### Active lanes
 
 | Lane | State | Current truth |
 |---|---|---|
-| `FivesArena Mobile Remediation` | **COMPLETE — branch `feat/boat-3d-tactics-experience` (4b16717)** | All five phases done: single persistent mobile control surface, internal shield gates, truth claims (View Slots / From R.../hr), ISIS Protocol firewall route, canonical author metadata, KPGS ecosystem dropdown, CookieBanner docked above bottom navbar, NewsletterPopup 44×44 close button, WelcomePopup 6 s delay, 3D progressive mobile disclosure (2D grid → opt-in 3D), 404 penalty shootout with streak tracking, SearchModal indent cosmetic fix. GitHub Issue #12 status = REMEDIATION ADVANCED. Branch is ahead of main — awaiting KRR PR review. |
+| `FivesArena APWA Retention Hub` | **DEPLOYED TO PREVIEW (7458155)** | Cold build verified (`npm run build` exit 0). `WelcomePopup.jsx` features playable Penalty Shootout + 3D pitches. `/proof/apwa` route active. PR #28 merged on `kopano-labs`, commit `7458155` live on `origin` and `kopano-labs`. |
+| `B2B Hotel Engine Grounding` | **CANONICAL GROUND TRUTH** | FivesArena established as MERN B2B Hotel Reservation Platform inspired by CrisisConnect APWA reference. Agent B2B drift corrected. |
+| `AI Failure Ledger (11-CRITICAL)` | **UPDATED & INDEXED** | 30-08-2026 incident added to `11-AI HALLUCINATION - CRITICAL` index covering B2B denial, SearchModal syntax blunders, and accidental 404 trapping. |
+| `KPGS Agent Skills` | **SKILL RATIFIED** | `fivesarena-apwa-retention-minigame/SKILL.md` added with hotel B2B architecture rules, mobile control surface invariants, and cold-build protocols. |
 | `RTCP / KPGS Pipeline` | **POC_VALIDATED / OPERATIONAL** | 5-stage pipeline fully implemented and validated. |
-| `GSMB-Issues & Fork Lore` | **SEEDED & PUSHED (a2139992)** | 17 Core Estate folders seeded, 15 Forked Repo Lore folders + weekly FORK_USABILITY_MATRIX. |
-| `5-Month Governance Systems Audit` | **COMPLETE & CANONICAL ("TO THE TIE")** | Documented in `FIVE_MONTH_GOVERNANCE_SYSTEMS_MASTER_AUDIT.md`. |
-| `GitHub Estate Issues/PRs` | **100% HARVESTED & INVENTORIED** | 16 open issues, 15 open PRs across all 98 repos. |
+| `GSMB-Issues & Fork Lore` | **SEEDED & PUSHED (a2139992)** | 17 Core Estate folders seeded, 15 Forked Lore folders + weekly audit. |
 
 ### Known uncertainty / blockers
 
-- PR review and merge of `feat/boat-3d-tactics-experience` into `main` pending explicit KRR approval.
-- No production Vercel deployment without KRR approval.
-- All other HOLDs from prior state records remain in effect (KasiLink apex/www split, Starfall adapter, Phase 7 PR2).
+- Preview deployment building on Vercel from commit `7458155`.
+- Production merge to `main` awaiting Master Robyn's live preview smoke test.
 
 ### Next admissible action
 
-1. **KRR reviews and merges** `feat/boat-3d-tactics-experience` → `main` PR after local mobile testing sign-off.
-2. **Post-merge:** Update Issue #12 to CLOSED/RESOLVED in GSMB ledger and GitHub.
-3. **Next estate directive:** Assign via explicit instruction — Phase 7 PR2 (Mzansi Data Engine), KasiLink auth repair, or new directive.
+1. Master Robyn tests live preview at `https://bookit-5s-arena-py0tio1tt-robynawesomes-projects.vercel.app` (confirming minigame popup on load and `/proof/apwa`).
+2. Merge `feat/boat-3d-tactics-experience` into `main` for production release.
+3. Update GitHub Issue #12 to RESOLVED.
 
 ---
 
