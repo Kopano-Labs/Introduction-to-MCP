@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-Home/All Projects Registry.md",
+                "file": "00-Home/00-Home - Index.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "All Projects Registry"
+              "title": "00-Home - Index"
             }
           }
         ]
@@ -51,7 +51,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -88,7 +90,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 233.5
+    "width": 666.2999877929688
   },
   "right": {
     "id": "891cb4bfa988de8c",
@@ -265,9 +267,10 @@
       "smart-lookup:Smart Lookup: Open lookup view": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "aa8722547db9246a",
   "lastOpenFiles": [
     "00-Home/00-Home - Index.md",
+    "00-Home/All Projects Registry.md",
     "09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md",
     "00-Home/Dashboard.md",
     "18-PROTOCOLS/Token_Governance_Overrides.md",
@@ -290,7 +293,6 @@
     "19-TOKEN USUAGE/19-TOKEN USUAGE - Index.md",
     "17-KC-JOURNAL/Non-KC Scaffolding/2026-05-01 - KC Memory Renter Reflection Prompt.md",
     "18-PROTOCOLS/KC Memory-Renter Doctrine.md",
-    "00-Home/All Projects Registry.md",
     "16-PORTFOLIO AND KOPANO LABS/Handbook/00-Handbook Index.md",
     "19-TOKEN USUAGE/Weekly Reviews/Weekly Token Review - 2026-04-24.md",
     "19-TOKEN USUAGE/Probation Records/Kimi - First Task Output.md",

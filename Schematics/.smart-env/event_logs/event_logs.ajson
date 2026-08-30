@@ -61,3 +61,4 @@
 "event_logs:source:initial_scan_started": {"key":"source:initial_scan_started","ct":1,"first_at":1782251251737,"last_at":1782251251737,"class_name":"EventLog","event_sources":{"init_items":1}},
 "event_logs:connections:opened": {"key":"connections:opened","ct":1,"first_at":1782251773219,"last_at":1782251773219,"class_name":"EventLog"},
 "event_logs:milestones:first_achieved": {"key":"milestones:first_achieved","ct":1,"first_at":1782251773223,"last_at":1782251773223,"class_name":"EventLog","event_sources":{"onboarding_events":1}},
+"event_logs:source:initial_scan_started": {"key":"source:initial_scan_started","ct":1,"first_at":1787931553159,"last_at":1787931553159,"class_name":"EventLog","event_sources":{"init_items":1}},
