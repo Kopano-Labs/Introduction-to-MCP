@@ -1,40 +1,40 @@
-# NOW.md — Active Working Log
+## CURRENT STATE — 2026-08-30
 
-> **Current-state authority:** repository-root `NOW.md`
-> **Updated:** 2026-08-29T03:55:00+02:00 (SAST)
-> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
-> **Doctrine boundary:** durable governance informs this file; it does not replace this file.
-> **Rule:** recover current state before execution; receipt material changes before handoff.
-
----
-
-## CURRENT STATE — 2026-08-29
+> **Updated:** 2026-08-30T07:56:00+02:00 (SAST)
+> **Server restart:** All background tasks were killed at 2026-08-30T05:53 UTC. Recovered cleanly.
 
 ### Current objective
 
-**ESTATE DIRECTIVE `ESTATE-ISSUE-2026-08-29-01`: FIVESARENA 3D LIVING ARENA & KPGS-RTCP SWFUS vNEXT**
-1. **Canonical Issue Spec:** All stateless renters must read `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/ESTATE_ACTIVE_ISSUE_FIVESARENA_AND_KPGS_SWFUS_VNEXT.md` before executing.
-2. **Phase 1 Priority (Active):** Implement `Bookit-5s-Arena` 3D Pitch Stadium Scene (`components/3d/PitchStadiumScene.jsx`) and 5v5 Tactical Board (`components/tactics/TacticalBoard.jsx`) using Master Robyn's forked assets (`three.js`, `threeui`, `kage`, `towers`, `GSAP`).
-3. **Phase 2 Priority (Active):** Expand `skills/awesome/govern-kpgs-documents` to route multi-registry skill discovery across internet repos via KMEC observation engine.
-4. **Hard Invariant:** Invariant 12 mutating CRUD hold, Black Mass $\le 16.67\text{ ms}$ frame budget, zero PII leak, and local physical test receipts required for all PRs.
+**ESTATE DIRECTIVE `ESTATE-ISSUE-2026-08-29-01`: FIVESARENA 3D LIVING ARENA — MOBILE REMEDIATION PHASE COMPLETE**
+
+All five phases of the FivesArena Mobile Product Remediation are executed and pushed.
 
 ### Active lanes
 
 | Lane | State | Current truth |
 |---|---|---|
-| `RTCP / KPGS Pipeline` | **POC_VALIDATED / OPERATIONAL** | 5-stage pipeline (`CRUD -> SWFUS -> BP -> BMP -> POCvsFOC`) fully implemented in `rtcp_pipeline.py` and validated by unit tests. Invariant 12 enforced. |
-| `DIRISA Cornerstone` | **CANONICAL GROUND TRUTH** | Talk 26 and `Where You Fit in the African & South African Context` verified in vault `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/`. |
-| `UJ IKM Thesis Paper 2` | **MANUSCRIPT DRAFT 1.0 COMPLETE** | Full academic paper draft completed for UJ IKM. Empirical lab: Project Jennifer. Code bridge `pka_kmec_jennifer_bridge.py` tested and passing (4/4). |
-| `GSMB Local Heavy Seeding` | **SEEDED / LOCAL RE-ENGINEERED** | 22 key architecture files from 12 external repos ingested into `Schematics/MAIN-BRAIN/External-Estate-Seeds/`. Manifest signed. Local is stronger. |
-| `GitHub Estate Issues/PRs` | **100% HARVESTED & INVENTORIED** | Full inventory via authenticated Edge session: 16 open issues, 15 open PRs, top 20 closed issues across all 98 repos. Manifest signed. |
-| `FivesArena Mobile Remediation` | **REMEDIATED & PUSHED (4e9a250, 3aedea7)** | Enforced 1 persistent mobile control surface, gated internal leaks, prominent mobile search close button, HTML entity decoder, court card truth claims ('View Slots', 'From R.../hr'), ISIS Protocol firewall route (`/api/v1/firewall`), canonical author/alternates metadata, KPGS ecosystem dropdown, CookieBanner docked above bottom navbar, NewsletterPopup 44x44 close button, WelcomePopup 6s delay, Hero3DScene small mobile scaling. Verified on GitHub Issue #12. |
-| `5-Month Governance Systems Audit` | **COMPLETE & CANONICAL ("TO THE TIE")** | Exhaustive forensic audit of `21-KOPANO-PHU GOVERNACE SYSTEMS` (1,232 files, 737 subdirs, 4.16 GB). Seven pillars codified: legal ground truth (CIPC/SARS), Black Mass kinetic engine (15 commands), Blackbox binary QA, multimodal swarms, physical/civil engineering (Mowbray 188MB, Cars4Mars 3.68GB Adams), academic footprint (DIRISA, JBSA, Falling Walls, Johns Hopkins), sub-brain matrix. Documented in `FIVE_MONTH_GOVERNANCE_SYSTEMS_MASTER_AUDIT.md`. |
-| `GSMB-Issues & Fork Lore` | **51 LEDGERS SEEDED & PUSHED (a2139992)** | Blockchain Smart Ledger design re-engineered into KPGS through PKA/KMEC. 17 Core Estate folders fully seeded with `OPEN_ISSUES.md`, `PR_STATUS.md`, and `CLOSED_MILESTONES.md`. 15 Forked Repo Lore folders + `FORK_USABILITY_MATRIX.md` (1 FOC, 12 POC, 2 ARCHIVE) + `SKILL.md` weekly audit automation. Commits `56ca2a71` and `a2139992` pushed. |
-| `RobynAwesome/Introduction-to-MCP#102` | **PULLED TO HEAD** | Master branch pulled to `7973d64b` (`ledger: add MMAO session failures and Forge case 001`). |
+| `FivesArena Mobile Remediation` | **COMPLETE — branch `feat/boat-3d-tactics-experience` (4b16717)** | All five phases done: single persistent mobile control surface, internal shield gates, truth claims (View Slots / From R.../hr), ISIS Protocol firewall route, canonical author metadata, KPGS ecosystem dropdown, CookieBanner docked above bottom navbar, NewsletterPopup 44×44 close button, WelcomePopup 6 s delay, 3D progressive mobile disclosure (2D grid → opt-in 3D), 404 penalty shootout with streak tracking, SearchModal indent cosmetic fix. GitHub Issue #12 status = REMEDIATION ADVANCED. Branch is ahead of main — awaiting KRR PR review. |
+| `RTCP / KPGS Pipeline` | **POC_VALIDATED / OPERATIONAL** | 5-stage pipeline fully implemented and validated. |
+| `GSMB-Issues & Fork Lore` | **SEEDED & PUSHED (a2139992)** | 17 Core Estate folders seeded, 15 Forked Repo Lore folders + weekly FORK_USABILITY_MATRIX. |
+| `5-Month Governance Systems Audit` | **COMPLETE & CANONICAL ("TO THE TIE")** | Documented in `FIVE_MONTH_GOVERNANCE_SYSTEMS_MASTER_AUDIT.md`. |
+| `GitHub Estate Issues/PRs` | **100% HARVESTED & INVENTORIED** | 16 open issues, 15 open PRs across all 98 repos. |
+
+### Known uncertainty / blockers
+
+- PR review and merge of `feat/boat-3d-tactics-experience` into `main` pending explicit KRR approval.
+- No production Vercel deployment without KRR approval.
+- All other HOLDs from prior state records remain in effect (KasiLink apex/www split, Starfall adapter, Phase 7 PR2).
+
+### Next admissible action
+
+1. **KRR reviews and merges** `feat/boat-3d-tactics-experience` → `main` PR after local mobile testing sign-off.
+2. **Post-merge:** Update Issue #12 to CLOSED/RESOLVED in GSMB ledger and GitHub.
+3. **Next estate directive:** Assign via explicit instruction — Phase 7 PR2 (Mzansi Data Engine), KasiLink auth repair, or new directive.
 
 ---
 
-## PRIOR STATE — 2026-08-24
+## PRIOR STATE — 2026-08-29
+
 
 ### Current objective
 
