@@ -23,6 +23,7 @@ from .kc_swarm_console_api import router as swarm_console_router
 from .kc_god_api import router as god_router
 from .kc_phu_legacy_api import router as phu_legacy_router
 from .labs_api import router as labs_router
+from .rtc_learning_api import router as rtc_learning_router
 from .telemetry import configure_server_telemetry, log_demo_event
 
 logger = logging.getLogger("kopano.api")
@@ -80,6 +81,7 @@ app.include_router(swarm_console_router)
 app.include_router(god_router)
 app.include_router(phu_legacy_router)
 app.include_router(labs_router)
+app.include_router(rtc_learning_router)
 
 # Shared memory for real-time updates (Broadcast Protocol)
 class State:

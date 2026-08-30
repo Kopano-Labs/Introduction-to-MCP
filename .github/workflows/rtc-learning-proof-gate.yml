@@ -1,0 +1,38 @@
+name: 24-RTC Learning Proof Gate
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  verify-rtc-learning:
+    name: 24-RTC Learning & Epistemic Gate Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Core Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi uvicorn pydantic typer rich
+
+      - name: Execute 24-RTC Learning Test Suite
+        run: |
+          python -m unittest tests/test_24_rtc_learning_suite.py
+
+      - name: Execute Full GSMB Verification Suite
+        run: |
+          python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Execute Standalone End-to-End Workflow Runner
+        run: |
+          python scripts/run_24_rtc_learning_workflow.py

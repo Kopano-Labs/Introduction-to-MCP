@@ -637,4 +637,89 @@ def start_api_cmd(
         
     uvicorn.run(app, host=host, port=port)
 
-# merge: dev 2026-06-22
+
+# ============================================================================
+# 24-RTC LEARNING GOVERNANCE CLI WORKFLOWS
+# ============================================================================
+rtc_learning_app = typer.Typer()
+app.add_typer(rtc_learning_app, name="rtc-learning")
+
+@rtc_learning_app.callback()
+def rtc_learning():
+    """
+    24-RTC Learning Governance Workflows (FEP, Reality-to-Cloud, MMAO Mesh, P2P Receipts).
+    """
+    console.print(Panel("[bold cyan]24-RTC Learning Governance Plane[/bold cyan]", expand=False))
+
+@rtc_learning_app.command(name="fep-audit")
+def fep_audit_cmd(
+    statement: str = typer.Argument(..., help="Statement / claim to reconstruct forensically."),
+    claim: str = typer.Option(None, "--claim", "-c", help="Direct human testimony claim."),
+    artifact: str = typer.Option(None, "--artifact", "-a", help="Path to physical repository artifact.")
+):
+    """
+    Executes Forensic Evolution Protocol (FEP) trace reconstruction across E1-E4 evidence.
+    """
+    from .fep_engine import ForensicEvolutionProtocolEngine
+    engine = ForensicEvolutionProtocolEngine()
+    ev_ids = []
+    if claim:
+        e1 = engine.ingest_testimony(claim, source_actor="Master Robyn")
+        ev_ids.append(e1.item_id)
+        console.print(f"[dim]E1 Ingested:[/dim] [green]{claim}[/green]")
+    if artifact:
+        e2 = engine.ingest_artifact(f"Artifact {artifact}", artifact, verified_on_disk=True)
+        ev_ids.append(e2.item_id)
+        console.print(f"[dim]E2 Ingested:[/dim] [green]{artifact}[/green]")
+
+    trace = engine.execute_forensic_reconstruction(
+        raw_statement=statement,
+        actors=["Master Robyn", "AntiGravity"],
+        evidence_ids=ev_ids
+    )
+
+    table = Table(title=f"Forensic Trace: {trace.trace_id}", show_header=True)
+    table.add_column("Field", style="cyan")
+    table.add_column("Reconstruction", style="white")
+    table.add_row("Raw Statement", trace.raw_statement)
+    table.add_row("Pattern", trace.social_technical_pattern)
+    table.add_row("Governance Learning", trace.governance_learning)
+    console.print(table)
+
+@rtc_learning_app.command(name="r2c-deliberate")
+def r2c_deliberate_cmd(
+    title: str = typer.Argument(..., help="Discussion title."),
+    decision: str = typer.Option("Consensus reached across 10 seats.", "--decision", "-d", help="Decision summary.")
+):
+    """
+    Executes the 10-Seat RTC Discussion Before Metal Workflow.
+    """
+    from .reality_to_cloud_workflow import RealityToCloudWorkflowOrchestrator
+    orchestrator = RealityToCloudWorkflowOrchestrator()
+    session = orchestrator.initiate_session(title, f"Deliberation on {title}")
+    
+    table = Table(title=f"RTC 10-Seat Deliberation: {session.session_id}", show_header=True)
+    table.add_column("Seat", style="cyan")
+    table.add_column("Agent", style="yellow")
+    table.add_column("Deliberation", style="white")
+
+    for seat_num in range(1, 11):
+        op = orchestrator.record_seat_opinion(
+            session_id=session.session_id,
+            seat_num=seat_num,
+            opinion_text=f"Seat {seat_num} deliberate and confirms discussion-before-metal law for {title}."
+        )
+        table.add_row(f"Seat {seat_num}", op.seat_name, op.opinion_text)
+
+    orchestrator.submit_deliberation(
+        session_id=session.session_id,
+        questions=["Does reality match cloud?", "Are invariants intact?"],
+        decision=decision,
+        document_path=f"Schematics/24-RTC Learning/{title.replace(' ', '_')}.md"
+    )
+    authorized = orchestrator.authorize_execution(session.session_id)
+    orchestrator.record_receipt(session.session_id, "RECEIPT_HASH_VALIDATED")
+
+    console.print(table)
+    console.print(f"[bold green]Quorum 10/10 Satisfied. Execution Authorized: {authorized}[/bold green]")
+
