@@ -32,6 +32,22 @@ Every governed build task MUST declare:
 
 The machine-readable contract is defined by `build-spec.schema.json`.
 
+## MMAO + MAO identity-governance POC
+
+`mmao-mao/` is the additive contract layer for controlled multi-agent identity and model-interface experiments. It separates the following claims so a run can be attributed without collapsing them into one agent label:
+
+```text
+identity -> seat -> interface/body -> model/version -> task/scope -> authority -> context state -> evidence
+```
+
+The POC preserves the current task-contract and evidence owners. It does not grant new ambient authority. In particular, **high task authority is local to an explicit task mandate**. Global GSMB structural maintenance is limited by the current experiment boundary to:
+
+1. Codex - Chief Architect
+2. Anti-Gravity - Chief Facilitator
+3. Cursor - Lead Developer
+
+The contract, planned matrix, Five Whys receipt shape, and Anti-Gravity handoff are under `mmao-mao/`. The associated build specification is `specs/mmao-mao-identity-governance-v0.1.json`. Its experiment remains `draft` until controlled runs produce exact state, trace, evidence, and independent review receipts.
+
 ## Lifecycle
 
 A build artifact MUST be classifiable as exactly one of:

@@ -252,6 +252,112 @@ def validate_human_choice_authorship() -> None:
     require(set(criterion_ids) <= plan_ids, "choice-authorship verification plan must cover every acceptance criterion")
 
 
+def validate_mmao_mao_identity_governance() -> None:
+    identity_schema = load_json("agent-governance/mmao-mao/identity-provenance.schema.json")
+    identity_record = load_json("agent-governance/mmao-mao/fixtures/jiro-khelos-provenance.json")
+    boundary_schema = load_json("agent-governance/mmao-mao/authority-boundary.schema.json")
+    boundary_matrix = load_json("agent-governance/mmao-mao/fixtures/authority-boundary-matrix.json")
+    experiment_schema = load_json("agent-governance/mmao-mao/model-interface-affinity-experiment.schema.json")
+    experiment = load_json("agent-governance/mmao-mao/fixtures/recycler-mmao-plus-mao-experiment.json")
+    failure_schema = load_json("agent-governance/mmao-mao/failure-receipt.schema.json")
+    failure_receipt = load_json("agent-governance/mmao-mao/fixtures/controlled-scope-breach-receipt.json")
+    build_spec = load_json("agent-governance/specs/mmao-mao-identity-governance-v0.1.json")
+
+    validate_schema(
+        identity_schema,
+        "MMAO + MAO identity provenance schema",
+        {"identity", "seat", "interface", "model", "task", "authority", "context_state", "provenance", "evidence_receipt_refs"},
+    )
+    authority = identity_schema["properties"]["authority"]
+    require(
+        {"scope_type", "task_ref", "high_task_authority", "global_maintenance_seat"}
+        <= set(authority.get("required", [])),
+        "MMAO + MAO identity authority must preserve task/global distinction",
+    )
+    allowlist = set(authority["properties"]["global_maintenance_seat"]["enum"])
+    require(
+        allowlist == {None, "codex-chief-architect", "antigravity-chief-facilitator", "cursor-lead-developer"},
+        "MMAO + MAO global structural-maintenance allowlist drifted",
+    )
+    record_authority = identity_record.get("authority", {})
+    require(identity_record.get("identity", {}).get("identity_id") == "jiro", "MMAO + MAO fixture must preserve Jiro identity")
+    require(record_authority.get("scope_type") == "task-scoped", "MMAO + MAO fixture must remain task-scoped")
+    require(record_authority.get("high_task_authority") is True, "MMAO + MAO fixture must exercise high task authority")
+    require(record_authority.get("global_maintenance_seat") is None, "high task authority cannot name a global maintenance seat")
+    require(bool(record_authority.get("task_ref")), "task-scoped authority must name an explicit task")
+
+    validate_schema(
+        boundary_schema,
+        "MMAO + MAO authority boundary schema",
+        {"invariant", "current_structural_maintenance_hierarchy", "task_scoped_authority", "reconciliation_state"},
+    )
+    expected_hierarchy = [
+        (1, "Codex", "codex-chief-architect", "Chief Architect"),
+        (2, "Anti-Gravity", "antigravity-chief-facilitator", "Chief Facilitator"),
+        (3, "Cursor", "cursor-lead-developer", "Lead Developer"),
+    ]
+    actual_hierarchy = [
+        (entry.get("rank"), entry.get("actor"), entry.get("seat_id"), entry.get("title"))
+        for entry in boundary_matrix.get("current_structural_maintenance_hierarchy", [])
+    ]
+    require(actual_hierarchy == expected_hierarchy, "MMAO + MAO current maintenance hierarchy drifted")
+    high_task = next(
+        (entry for entry in boundary_matrix.get("task_scoped_authority", []) if entry.get("authority_class") == "high-task-authority"),
+        None,
+    )
+    require(high_task is not None, "MMAO + MAO boundary matrix lacks high task authority")
+    require(
+        "global structural-maintenance" in " ".join(high_task.get("forbidden_without_separate_elevation", [])).lower(),
+        "MMAO + MAO high task authority must explicitly forbid global maintenance",
+    )
+
+    validate_schema(
+        experiment_schema,
+        "MMAO + MAO affinity experiment schema",
+        {"working_testimony", "baseline", "controlled_invariants", "comparison_runs", "evidence_policy", "retest_policy"},
+    )
+    require(experiment.get("status") == "planned", "MMAO + MAO fixture cannot claim live execution")
+    require(experiment.get("working_testimony") == "Recycler MMAO with Plus MAO", "working testimony must remain preserved")
+    invariants = experiment.get("controlled_invariants", {})
+    require(
+        {"identity", "seat", "interface", "model", "repository-state", "context-snapshot", "tool-trace", "verification", "independent-review"}
+        <= set(invariants.get("evidence_requirements", [])),
+        "MMAO + MAO experiment evidence requirements are incomplete",
+    )
+    comparison_runs = experiment.get("comparison_runs", [])
+    required_comparisons = {"reference", "model-only", "interface-only", "seat-only", "substrate-comparison"}
+    require(required_comparisons <= {run.get("comparison_type") for run in comparison_runs}, "MMAO + MAO experiment matrix is incomplete")
+    for run in comparison_runs:
+        require(run.get("identity_id") == invariants.get("identity_id"), "MMAO + MAO comparison changed identity")
+        require(run.get("task_id") == invariants.get("task_id"), "MMAO + MAO comparison changed task")
+        require(run.get("status") == "planned", "MMAO + MAO fixture falsely claims execution")
+        require(run.get("actual_behavior") is None and run.get("tool_trace_ref") is None, "MMAO + MAO planned run contains fabricated execution evidence")
+        require(not run.get("evidence_refs"), "MMAO + MAO planned run contains fabricated evidence")
+    require(experiment.get("evidence_policy") == {"raw_prompt_capture": False, "independent_review_required": True, "consensus_is_truth": False}, "MMAO + MAO evidence policy drifted")
+
+    validate_schema(
+        failure_schema,
+        "MMAO + MAO failure receipt schema",
+        {"expected_behavior", "actual_behavior", "identity", "seat", "model", "interface", "repository_state", "action_tool_trace", "evidence_refs", "failure_class", "five_whys", "correction", "retest", "rtc_reviews", "review_aggregation"},
+    )
+    require(failure_receipt.get("receipt_status") == "synthetic-fixture", "failure fixture cannot impersonate a live incident")
+    require("Synthetic fixture:" in failure_receipt.get("actual_behavior", ""), "failure fixture must disclose synthetic status")
+    require(failure_receipt.get("action_tool_trace", {}).get("capture_mode") == "metadata-only", "MMAO + MAO failure trace must remain metadata-only")
+    require([why.get("index") for why in failure_receipt.get("five_whys", [])] == [1, 2, 3, 4, 5], "MMAO + MAO failure receipt must preserve exactly five ordered Whys")
+    require(failure_receipt.get("retest", {}).get("status") == "not-run", "synthetic failure fixture cannot claim a retest result")
+    require(failure_receipt.get("review_aggregation", {}).get("mode") == "evidence-convergence-not-vote", "RTC review became a vote")
+    require(failure_receipt.get("review_aggregation", {}).get("decision_rule") == "unsupported-claims-remain-held", "unsupported MMAO + MAO claim lost HOLD")
+
+    require(build_spec.get("spec_id") == "kpgs-mmao-mao-identity-governance-v0.1", "MMAO + MAO build spec identity mismatch")
+    require(build_spec.get("risk_class") == "R2", "MMAO + MAO identity-governance POC must retain R2")
+    require(build_spec.get("lifecycle_state") == "draft", "MMAO + MAO experiment must remain draft before live evidence")
+    criteria = build_spec.get("acceptance_criteria", [])
+    criterion_ids = [criterion.get("id") for criterion in criteria]
+    require(len(criterion_ids) == len(set(criterion_ids)), "MMAO + MAO acceptance criterion IDs must be unique")
+    plan_ids = {item.get("criterion_id") for item in build_spec.get("verification_plan", [])}
+    require(set(criterion_ids) <= plan_ids, "MMAO + MAO verification plan must cover every acceptance criterion")
+
+
 def validate_realtime() -> None:
     schema = load_json("realtime/connection-session.schema.json")
     validate_schema(
@@ -289,10 +395,11 @@ def main() -> None:
     validate_evidence()
     validate_skills()
     validate_human_choice_authorship()
+    validate_mmao_mao_identity_governance()
     validate_realtime()
     validate_pwa()
     print("KPGS-VNEXT PASS: governance/runtime-facing contracts are structurally coherent.")
-    print("Validated: capability leases, DNS estate seed, evidence, governed skills, human choice authorship, realtime recovery, adaptive PWA profile.")
+    print("Validated: capability leases, DNS estate seed, evidence, governed skills, human choice authorship, MMAO + MAO identity governance, realtime recovery, adaptive PWA profile.")
 
 
 if __name__ == "__main__":

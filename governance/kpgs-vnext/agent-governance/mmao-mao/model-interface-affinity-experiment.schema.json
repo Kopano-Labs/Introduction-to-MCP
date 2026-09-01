@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/agent-governance/mmao-mao/model-interface-affinity-experiment.schema.json",
+  "title": "KPGS MMAO + MAO Model Interface Affinity Experiment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "working_testimony",
+    "status",
+    "baseline",
+    "controlled_invariants",
+    "comparison_runs",
+    "evidence_policy",
+    "retest_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kpgs.mmao-mao.model-interface-affinity.v1"
+    },
+    "experiment_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "working_testimony": {
+      "const": "Recycler MMAO with Plus MAO"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "active",
+        "held",
+        "completed",
+        "invalidated"
+      ]
+    },
+    "baseline": {
+      "$ref": "#/$defs/runIdentity"
+    },
+    "controlled_invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity_id",
+        "task_id",
+        "governance_contract_ref",
+        "repository_state",
+        "context_snapshot_refs",
+        "evidence_requirements"
+      ],
+      "properties": {
+        "identity_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "governance_contract_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository_state": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "commit_sha",
+            "now_ref"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "minLength": 1
+            },
+            "commit_sha": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "now_ref": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "context_snapshot_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence_requirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "identity",
+              "seat",
+              "interface",
+              "model",
+              "repository-state",
+              "context-snapshot",
+              "tool-trace",
+              "verification",
+              "independent-review"
+            ]
+          }
+        }
+      }
+    },
+    "comparison_runs": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/runIdentity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "identity_id",
+              "seat_id",
+              "task_id",
+              "model",
+              "interface",
+              "run_id",
+              "comparison_type",
+              "variables_changed",
+              "status",
+              "expected_behavior",
+              "actual_behavior",
+              "tool_trace_ref",
+              "evidence_refs",
+              "failure_receipt_ref"
+            ],
+            "properties": {
+              "identity_id": {},
+              "seat_id": {},
+              "task_id": {},
+              "model": {},
+              "interface": {},
+              "run_id": {
+                "type": "string",
+                "minLength": 4
+              },
+              "comparison_type": {
+                "type": "string",
+                "enum": [
+                  "reference",
+                  "model-only",
+                  "interface-only",
+                  "seat-only",
+                  "substrate-comparison"
+                ]
+              },
+              "variables_changed": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "model",
+                    "interface",
+                    "seat",
+                    "context",
+                    "tooling"
+                  ]
+                }
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "planned",
+                  "running",
+                  "executed",
+                  "held",
+                  "invalidated"
+                ]
+              },
+              "expected_behavior": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actual_behavior": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "tool_trace_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "failure_receipt_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "executed"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "actual_behavior": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "tool_trace_ref": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "evidence_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_prompt_capture",
+        "independent_review_required",
+        "consensus_is_truth"
+      ],
+      "properties": {
+        "raw_prompt_capture": {
+          "const": false
+        },
+        "independent_review_required": {
+          "const": true
+        },
+        "consensus_is_truth": {
+          "const": false
+        }
+      }
+    },
+    "retest_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "on_failure",
+        "state_after_insufficient_evidence"
+      ],
+      "properties": {
+        "on_failure": {
+          "const": "preserve-evidence-five-whys-correct-retest"
+        },
+        "state_after_insufficient_evidence": {
+          "const": "held"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "runIdentity": {
+      "type": "object",
+      "required": [
+        "identity_id",
+        "seat_id",
+        "task_id",
+        "model",
+        "interface"
+      ],
+      "properties": {
+        "identity_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "seat_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "model_id",
+            "model_version"
+          ],
+          "properties": {
+            "provider": {
+              "type": "string",
+              "minLength": 1
+            },
+            "model_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "model_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "interface": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "interface_id",
+            "interface_version"
+          ],
+          "properties": {
+            "interface_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "interface_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

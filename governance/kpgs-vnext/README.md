@@ -236,6 +236,11 @@ See `evidence/EVIDENCE.md`, `evidence/evidence-bundle.schema.json`, and `evidenc
 - `stateless-renter/renter-envelope.schema.json`
 - `agent-governance/SPECIFICATION.md`
 - `agent-governance/build-spec.schema.json`
+- `agent-governance/mmao-mao/README.md`
+- `agent-governance/mmao-mao/identity-provenance.schema.json`
+- `agent-governance/mmao-mao/authority-boundary.schema.json`
+- `agent-governance/mmao-mao/model-interface-affinity-experiment.schema.json`
+- `agent-governance/mmao-mao/failure-receipt.schema.json`
 - `fork-assimilation/evolution-matrix.json`
 - `task-contract/README.md`
 - `task-contract/principal-envelope.schema.json`
@@ -266,6 +271,10 @@ See `evidence/EVIDENCE.md`, `evidence/evidence-bundle.schema.json`, and `evidenc
 - repository-root `AGENTS.md`
 - `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md`
 - `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json`
+
+### MMAO + MAO identity-governance POC
+
+The current controlled experiment lives at `agent-governance/mmao-mao/`. It records identity, seat, interface, model/version, task, task-scoped authority, context state, and evidence separately. It preserves a strict distinction between high task authority and GSMB structural-maintenance authority, and it keeps model x interface affinity as an unrun hypothesis until controlled receipts exist.
 
 ## Definition of done
 

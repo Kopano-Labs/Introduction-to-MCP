@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/agent-governance/mmao-mao/authority-boundary.schema.json",
+  "title": "KPGS MMAO + MAO Authority Boundary Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "matrix_id",
+    "invariant",
+    "current_structural_maintenance_hierarchy",
+    "task_scoped_authority",
+    "reconciliation_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kpgs.mmao-mao.authority-boundary.v1"
+    },
+    "matrix_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "invariant": {
+      "const": "high-task-authority-is-not-global-structural-maintenance-authority"
+    },
+    "current_structural_maintenance_hierarchy": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rank",
+          "actor",
+          "seat_id",
+          "title",
+          "authority_scope"
+        ],
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "actor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "seat_id": {
+            "type": "string",
+            "enum": [
+              "codex-chief-architect",
+              "antigravity-chief-facilitator",
+              "cursor-lead-developer"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authority_scope": {
+            "const": "global-structural-maintenance"
+          }
+        }
+      }
+    },
+    "task_scoped_authority": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "authority_class",
+          "allowed",
+          "forbidden_without_separate_elevation",
+          "required_evidence"
+        ],
+        "properties": {
+          "authority_class": {
+            "type": "string",
+            "enum": [
+              "observe",
+              "validate",
+              "bounded-execution",
+              "high-task-authority"
+            ]
+          },
+          "allowed": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "forbidden_without_separate_elevation": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required_evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "reconciliation_state": {
+      "type": "string",
+      "enum": [
+        "additive-current-contract",
+        "requires-governed-migration"
+      ]
+    }
+  }
+}

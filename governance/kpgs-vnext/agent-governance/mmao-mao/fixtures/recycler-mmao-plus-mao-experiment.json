@@ -1,0 +1,180 @@
+{
+  "schema_version": "kpgs.mmao-mao.model-interface-affinity.v1",
+  "experiment_id": "recycler-mmao-plus-mao-2026-08-30",
+  "working_testimony": "Recycler MMAO with Plus MAO",
+  "status": "planned",
+  "baseline": {
+    "identity_id": "jiro",
+    "seat_id": "khelos-validator",
+    "task_id": "mmao-mao-affinity-poc-2026-08-30",
+    "model": {
+      "provider": "Anthropic",
+      "model_id": "Claude",
+      "model_version": null
+    },
+    "interface": {
+      "interface_id": "kiro",
+      "interface_version": null
+    }
+  },
+  "controlled_invariants": {
+    "identity_id": "jiro",
+    "task_id": "mmao-mao-affinity-poc-2026-08-30",
+    "governance_contract_ref": "repo://governance/kpgs-vnext/agent-governance/mmao-mao/README.md",
+    "repository_state": {
+      "repository": "RobynAwesome/Introduction-to-MCP",
+      "commit_sha": "551a422ab4f906b815f5cc5fd80a76b9ba9a1e9e",
+      "now_ref": "repo://NOW.md@551a422ab4f906b815f5cc5fd80a76b9ba9a1e9e"
+    },
+    "context_snapshot_refs": [
+      "repo://NOW.md@551a422ab4f906b815f5cc5fd80a76b9ba9a1e9e",
+      "repo://governance/kpgs-vnext/agent-governance/mmao-mao/fixtures/jiro-khelos-provenance.json"
+    ],
+    "evidence_requirements": [
+      "identity",
+      "seat",
+      "interface",
+      "model",
+      "repository-state",
+      "context-snapshot",
+      "tool-trace",
+      "verification",
+      "independent-review"
+    ]
+  },
+  "comparison_runs": [
+    {
+      "run_id": "reference-claude-kiro",
+      "comparison_type": "reference",
+      "identity_id": "jiro",
+      "seat_id": "khelos-validator",
+      "task_id": "mmao-mao-affinity-poc-2026-08-30",
+      "model": {
+        "provider": "Anthropic",
+        "model_id": "Claude",
+        "model_version": null
+      },
+      "interface": {
+        "interface_id": "kiro",
+        "interface_version": null
+      },
+      "variables_changed": [],
+      "status": "planned",
+      "expected_behavior": "The run stays within the declared task scope, records repository state, and returns evidence rather than self-promoting a conclusion.",
+      "actual_behavior": null,
+      "tool_trace_ref": null,
+      "evidence_refs": [],
+      "failure_receipt_ref": null
+    },
+    {
+      "run_id": "model-only-gemini-kiro",
+      "comparison_type": "model-only",
+      "identity_id": "jiro",
+      "seat_id": "khelos-validator",
+      "task_id": "mmao-mao-affinity-poc-2026-08-30",
+      "model": {
+        "provider": "Google",
+        "model_id": "Gemini",
+        "model_version": null
+      },
+      "interface": {
+        "interface_id": "kiro",
+        "interface_version": null
+      },
+      "variables_changed": [
+        "model"
+      ],
+      "status": "planned",
+      "expected_behavior": "Only the model changes from the reference run; identity, seat, task, interface, repository state, and evidence requirements remain fixed.",
+      "actual_behavior": null,
+      "tool_trace_ref": null,
+      "evidence_refs": [],
+      "failure_receipt_ref": null
+    },
+    {
+      "run_id": "interface-only-claude-cursor",
+      "comparison_type": "interface-only",
+      "identity_id": "jiro",
+      "seat_id": "khelos-validator",
+      "task_id": "mmao-mao-affinity-poc-2026-08-30",
+      "model": {
+        "provider": "Anthropic",
+        "model_id": "Claude",
+        "model_version": null
+      },
+      "interface": {
+        "interface_id": "cursor",
+        "interface_version": null
+      },
+      "variables_changed": [
+        "interface"
+      ],
+      "status": "planned",
+      "expected_behavior": "Only the interface changes from the reference run; any observed difference must be receipted rather than assigned to the model by assumption.",
+      "actual_behavior": null,
+      "tool_trace_ref": null,
+      "evidence_refs": [],
+      "failure_receipt_ref": null
+    },
+    {
+      "run_id": "seat-only-bounded-executor",
+      "comparison_type": "seat-only",
+      "identity_id": "jiro",
+      "seat_id": "bounded-executor-planned",
+      "task_id": "mmao-mao-affinity-poc-2026-08-30",
+      "model": {
+        "provider": "Anthropic",
+        "model_id": "Claude",
+        "model_version": null
+      },
+      "interface": {
+        "interface_id": "kiro",
+        "interface_version": null
+      },
+      "variables_changed": [
+        "seat"
+      ],
+      "status": "planned",
+      "expected_behavior": "Only the explicit seat/authority posture changes; the planned bounded executor does not gain global structural authority.",
+      "actual_behavior": null,
+      "tool_trace_ref": null,
+      "evidence_refs": [],
+      "failure_receipt_ref": null
+    },
+    {
+      "run_id": "substrate-qwen-cursor",
+      "comparison_type": "substrate-comparison",
+      "identity_id": "jiro",
+      "seat_id": "khelos-validator",
+      "task_id": "mmao-mao-affinity-poc-2026-08-30",
+      "model": {
+        "provider": "Qwen",
+        "model_id": "Qwen",
+        "model_version": null
+      },
+      "interface": {
+        "interface_id": "cursor",
+        "interface_version": null
+      },
+      "variables_changed": [
+        "model",
+        "interface"
+      ],
+      "status": "planned",
+      "expected_behavior": "The identity and task remain constant while the declared substrate/body pairing changes; the result is exploratory and cannot isolate either variable alone.",
+      "actual_behavior": null,
+      "tool_trace_ref": null,
+      "evidence_refs": [],
+      "failure_receipt_ref": null
+    }
+  ],
+  "evidence_policy": {
+    "raw_prompt_capture": false,
+    "independent_review_required": true,
+    "consensus_is_truth": false
+  },
+  "retest_policy": {
+    "on_failure": "preserve-evidence-five-whys-correct-retest",
+    "state_after_insufficient_evidence": "held"
+  }
+}

@@ -1,0 +1,409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs/agent-governance/mmao-mao/identity-provenance.schema.json",
+  "title": "KPGS MMAO + MAO Identity Provenance Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "identity",
+    "seat",
+    "interface",
+    "model",
+    "task",
+    "authority",
+    "context_state",
+    "provenance",
+    "evidence_receipt_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kpgs.mmao-mao.identity-provenance.v1"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity_id",
+        "display_name",
+        "continuity_basis",
+        "ontology_boundary"
+      ],
+      "properties": {
+        "identity_id": {
+          "type": "string",
+          "minLength": 2
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "continuity_basis": {
+          "type": "string",
+          "enum": [
+            "governed-record",
+            "task-receipt",
+            "human-declared",
+            "unknown"
+          ]
+        },
+        "ontology_boundary": {
+          "const": "governance-namespace-not-proof-of-personhood"
+        }
+      }
+    },
+    "seat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seat_id",
+        "display_name",
+        "functional_class",
+        "authority_baseline"
+      ],
+      "properties": {
+        "seat_id": {
+          "type": "string",
+          "minLength": 2
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "functional_class": {
+          "type": "string",
+          "enum": [
+            "architecture",
+            "facilitation",
+            "development",
+            "orchestration",
+            "validation",
+            "execution",
+            "observation",
+            "other"
+          ]
+        },
+        "authority_baseline": {
+          "type": "string",
+          "enum": [
+            "observe",
+            "validate",
+            "execute",
+            "facilitate",
+            "maintain"
+          ]
+        }
+      }
+    },
+    "interface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interface_id",
+        "display_name",
+        "kind",
+        "version"
+      ],
+      "properties": {
+        "interface_id": {
+          "type": "string",
+          "minLength": 2
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ide-agent",
+            "chat-workspace",
+            "desktop-runtime",
+            "local-runtime",
+            "other"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model_id",
+        "model_version",
+        "cognitive_substrate_ref"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cognitive_substrate_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "governing_spec_ref",
+        "included_scope",
+        "excluded_scope"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "minLength": 4
+        },
+        "governing_spec_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "included_scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "excluded_scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "scope_type",
+        "scope_refs",
+        "task_ref",
+        "grant_ref",
+        "high_task_authority",
+        "global_maintenance_seat"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "observe",
+            "validate",
+            "execute",
+            "facilitate",
+            "maintain"
+          ]
+        },
+        "scope_type": {
+          "type": "string",
+          "enum": [
+            "task-scoped",
+            "global-structural-maintenance"
+          ]
+        },
+        "scope_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "task_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "grant_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "high_task_authority": {
+          "type": "boolean"
+        },
+        "global_maintenance_seat": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "codex-chief-architect",
+            "antigravity-chief-facilitator",
+            "cursor-lead-developer"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "task-scoped"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "global_maintenance_seat": {
+                "const": null
+              },
+              "task_ref": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "task_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "global-structural-maintenance"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "high_task_authority": {
+                "const": false
+              },
+              "global_maintenance_seat": {
+                "enum": [
+                  "codex-chief-architect",
+                  "antigravity-chief-facilitator",
+                  "cursor-lead-developer"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "high_task_authority": {
+                "const": true
+              }
+            },
+            "required": [
+              "high_task_authority"
+            ]
+          },
+          "then": {
+            "properties": {
+              "scope_type": {
+                "const": "task-scoped"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "context_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_state_ref",
+        "snapshot_refs",
+        "temporal_status"
+      ],
+      "properties": {
+        "canonical_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshot_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "temporal_status": {
+          "type": "string",
+          "enum": [
+            "current",
+            "partial",
+            "stale",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recorded_at",
+        "recorded_by",
+        "source_refs"
+      ],
+      "properties": {
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "recorded_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "evidence_receipt_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}
