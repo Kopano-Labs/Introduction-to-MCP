@@ -11,24 +11,10 @@
             "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00-Home/Now.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Now"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -271,6 +257,7 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "00-Home/Now.md",
     "24-RTC Learning/24-RTC-LEARNING-MASTER-IMPLEMENTATION-RECEIPT.md",
     "24-RTC Learning/RTC_EVOLUTION_CANONICAL_GOVERNANCE_2026-08-30.md",
     "24-RTC Learning/From_Possibility_to_Proof_POCvsFOC_PKA_CDP_CCP_Genealogy_2026-08-30.md",
@@ -306,7 +293,6 @@
     "19-TOKEN USUAGE/Probation Records/Kimi - First Task Output.md",
     "19-TOKEN USUAGE/Probation Records/Kimi - First Task Closeout.md",
     "19-TOKEN USUAGE/First Tasks/Kimi - First Probation Task.md",
-    "19-TOKEN USUAGE/Probation Records/Kimi - Probation Record.md",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",
