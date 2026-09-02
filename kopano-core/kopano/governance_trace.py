@@ -52,10 +52,20 @@ class CanonicalEvidenceClass(str, Enum):
     E4_UNKNOWN_AUDIT_REQUIRED = "E4_Unknown_Requires_Forensic_Audit"
 
 
+class ClaimType(str, Enum):
+    """Claim categories for claim-type-aware epistemic derivation."""
+    USER_INTENT_OR_TESTIMONY = "USER_INTENT_OR_TESTIMONY"
+    REPOSITORY_STATE = "REPOSITORY_STATE"
+    RUNTIME_OR_METAL = "RUNTIME_OR_METAL"
+    MODEL_INTERPRETATION = "MODEL_INTERPRETATION"
+    EXTERNAL_FACT = "EXTERNAL_FACT"
+    GENERAL_QUERY = "GENERAL_QUERY"
+
+
 class EpistemicState(str, Enum):
-    PROVEN = "PROVEN"          # E1 verified testimony OR verified E2 artifact on metal
-    SUPPORTED = "SUPPORTED"    # Grounded in verified E2 repository artifacts with supporting E3
-    INFERRED = "INFERRED"      # E3 working inferences without hard E1/E2 proof
+    PROVEN = "PROVEN"          # Verified claim-fit evidence (E1 for intent, E2 for repo/metal)
+    SUPPORTED = "SUPPORTED"    # Grounded in supporting evidence but lacks claim-fit proof
+    INFERRED = "INFERRED"      # E3 working inferences without hard proof
     UNKNOWN = "UNKNOWN"        # Unverified claims, unresolved contradictions, or E4 items
 
 
@@ -85,6 +95,9 @@ class GovernanceTrace:
     session_id: str
     speaker_seat: str  # e.g., "SEAT_01_KC", "SEAT_02_CASSEY", "SEAT_10_ANTIGRAVITY", "FORGE"
     question_or_intent: str
+    claim_type: ClaimType = ClaimType.GENERAL_QUERY
+    supersedes_trace_id: Optional[str] = None
+    superseded_by_trace_id: Optional[str] = None
     where_looked: List[str] = field(default_factory=list)
     what_remembered: List[str] = field(default_factory=list)
     what_validated: List[str] = field(default_factory=list)
@@ -103,6 +116,8 @@ class GovernanceTrace:
             "session_id": self.session_id,
             "speaker_seat": self.speaker_seat,
             "question_or_intent": self.question_or_intent,
+            "claim_type": self.claim_type.value,
+            "supersedes_trace_id": self.supersedes_trace_id,
             "where_looked": self.where_looked,
             "what_remembered": self.what_remembered,
             "what_validated": self.what_validated,
@@ -122,6 +137,9 @@ class GovernanceTrace:
             "session_id": self.session_id,
             "speaker_seat": self.speaker_seat,
             "question_or_intent": self.question_or_intent,
+            "claim_type": self.claim_type.value,
+            "supersedes_trace_id": self.supersedes_trace_id,
+            "superseded_by_trace_id": self.superseded_by_trace_id,
             "where_looked": self.where_looked,
             "what_remembered": self.what_remembered,
             "what_validated": self.what_validated,
@@ -199,6 +217,9 @@ class GovernanceTraceEngine:
                     speaker_seat TEXT NOT NULL,
                     question_or_intent TEXT NOT NULL,
                     which_brain TEXT NOT NULL,
+                    claim_type TEXT NOT NULL DEFAULT 'GENERAL_QUERY',
+                    supersedes_trace_id TEXT,
+                    superseded_by_trace_id TEXT,
                     epistemic_state TEXT NOT NULL,
                     why_trust TEXT NOT NULL,
                     content_hash TEXT NOT NULL,
@@ -213,7 +234,9 @@ class GovernanceTraceEngine:
         speaker_seat: str,
         question_or_intent: str,
         session_id: str = "default_session",
-        which_brain: str = "LOCAL_MAO_BLACK_BEAST"
+        which_brain: str = "LOCAL_MAO_BLACK_BEAST",
+        claim_type: ClaimType = ClaimType.GENERAL_QUERY,
+        supersedes_trace_id: Optional[str] = None
     ) -> GovernanceTrace:
         trace_id = f"trace:{int(time.time()*1000)}:{hashlib.sha256(question_or_intent.encode('utf-8')).hexdigest()[:8]}"
         return GovernanceTrace(
@@ -221,7 +244,27 @@ class GovernanceTraceEngine:
             session_id=session_id,
             speaker_seat=speaker_seat,
             question_or_intent=question_or_intent,
-            which_brain_consulted=which_brain
+            which_brain_consulted=which_brain,
+            claim_type=claim_type,
+            supersedes_trace_id=supersedes_trace_id
+        )
+
+    def create_superseding_trace(
+        self,
+        old_trace: GovernanceTrace,
+        question_or_intent: Optional[str] = None,
+        speaker_seat: Optional[str] = None
+    ) -> GovernanceTrace:
+        """
+        Creates a new trace that links backward to an older trace without overwriting history.
+        """
+        return self.start_trace(
+            speaker_seat=speaker_seat or old_trace.speaker_seat,
+            question_or_intent=question_or_intent or old_trace.question_or_intent,
+            session_id=old_trace.session_id,
+            which_brain=old_trace.which_brain_consulted,
+            claim_type=old_trace.claim_type,
+            supersedes_trace_id=old_trace.trace_id
         )
 
     def record_search(self, trace: GovernanceTrace, source: str) -> None:
@@ -271,11 +314,13 @@ class GovernanceTraceEngine:
 
     def derive_epistemic_state(self, trace: GovernanceTrace) -> EpistemicState:
         """
-        Policy-driven epistemic state calculation (Anti-'Trust Me Bro' Gate):
-        - PROVEN requires: verified E1 Direct Testimony OR (>=1 verified E2 Artifacts on metal with zero unverified E4).
-        - SUPPORTED requires: >=1 verified E2 Artifacts (may include E3 inferences).
-        - INFERRED requires: >=1 E3 Inferences without hard proof.
-        - UNKNOWN requires: zero verified evidence, unverified E4 items, or empty trace.
+        Policy-driven claim-type-aware epistemic state calculation (Anti-'Trust Me Bro' Gate v2):
+        - USER_INTENT_OR_TESTIMONY: Verified E1 is required & sufficient to derive PROVEN.
+        - REPOSITORY_STATE: Verified E2 repository artifact is REQUIRED to derive PROVEN. E1 alone is SUPPORTED.
+        - RUNTIME_OR_METAL: Verified E2 test receipt on metal is REQUIRED to derive PROVEN. E1 alone is SUPPORTED.
+        - MODEL_INTERPRETATION: E3 inferences can never be PROVEN by themselves (max SUPPORTED/INFERRED).
+        - EXTERNAL_FACT: Requires verified promotion; otherwise UNKNOWN.
+        - GENERAL_QUERY: Verified E2 artifact derives PROVEN; E1 derives SUPPORTED.
         """
         if not trace.evidence_items:
             return EpistemicState.UNKNOWN
@@ -285,25 +330,48 @@ class GovernanceTraceEngine:
         unverified_e4 = [e for e in trace.evidence_items if e.evidence_class == CanonicalEvidenceClass.E4_UNKNOWN_AUDIT_REQUIRED or not e.verified]
 
         # If any item is marked E4 or unverified, state cannot be PROVEN
-        if unverified_e4 and not verified_e1:
+        if unverified_e4:
             if verified_e2:
                 return EpistemicState.SUPPORTED
             return EpistemicState.UNKNOWN
 
-        if verified_e1:
-            return EpistemicState.PROVEN
+        claim = trace.claim_type
 
-        if len(verified_e2) >= 1 and not unverified_e4:
-            return EpistemicState.PROVEN
-
-        if len(verified_e2) >= 1:
-            return EpistemicState.SUPPORTED
-
-        e3_items = [e for e in trace.evidence_items if e.evidence_class == CanonicalEvidenceClass.E3_WORKING_INFERENCE]
-        if e3_items:
+        if claim == ClaimType.USER_INTENT_OR_TESTIMONY:
+            if verified_e1:
+                return EpistemicState.PROVEN
+            if verified_e2:
+                return EpistemicState.SUPPORTED
             return EpistemicState.INFERRED
 
-        return EpistemicState.UNKNOWN
+        elif claim in (ClaimType.REPOSITORY_STATE, ClaimType.RUNTIME_OR_METAL):
+            # Physical repo/metal claims REQUIRE verified E2 artifact. E1 alone is hearsay/intent, yielding SUPPORTED.
+            if verified_e2:
+                return EpistemicState.PROVEN
+            if verified_e1:
+                return EpistemicState.SUPPORTED
+            return EpistemicState.INFERRED
+
+        elif claim == ClaimType.MODEL_INTERPRETATION:
+            # Model inference can never be PROVEN alone
+            if verified_e2 or verified_e1:
+                return EpistemicState.SUPPORTED
+            return EpistemicState.INFERRED
+
+        elif claim == ClaimType.EXTERNAL_FACT:
+            if verified_e2:
+                return EpistemicState.PROVEN
+            return EpistemicState.UNKNOWN
+
+        else:  # GENERAL_QUERY
+            if verified_e2:
+                return EpistemicState.PROVEN
+            if verified_e1:
+                return EpistemicState.SUPPORTED
+            e3_items = [e for e in trace.evidence_items if e.evidence_class == CanonicalEvidenceClass.E3_WORKING_INFERENCE]
+            if e3_items:
+                return EpistemicState.INFERRED
+            return EpistemicState.UNKNOWN
 
     def seal_and_persist_trace(
         self,
@@ -311,21 +379,31 @@ class GovernanceTraceEngine:
         why_trust: str
     ) -> GovernanceTrace:
         """
-        Seals the trace by deriving the epistemic state from evidence policy,
-        computes the tamper-evident SHA-256 seal, and persists it to append-only SQLite store.
+        Seals the trace by deriving the epistemic state from claim-type evidence policy,
+        computes the tamper-evident SHA-256 seal, and persists it via strict append-only INSERT.
+        Fails hard on duplicate trace_id.
         """
         trace.epistemic_state = self.derive_epistemic_state(trace)
         trace.why_trust_reason = why_trust
         trace.content_hash = trace.compute_hash()
 
-        # Append to durable SQLite Activity Ledger
+        # Append to durable SQLite Activity Ledger (Strict Plain INSERT)
         with sqlite3.connect(str(self.db_path)) as conn:
+            # Check for duplicate trace_id to enforce strict immutability
+            cur = conn.execute("SELECT trace_id FROM rtc_activity_traces WHERE trace_id = ?", (trace.trace_id,))
+            if cur.fetchone() is not None:
+                raise ValueError(
+                    f"Immutable Activity Ledger violation: Trace {trace.trace_id} already exists. "
+                    f"To record updates, create a new trace with supersedes_trace_id instead of overwriting."
+                )
+
             conn.execute(
                 """
-                INSERT OR REPLACE INTO rtc_activity_traces (
+                INSERT INTO rtc_activity_traces (
                     trace_id, session_id, speaker_seat, question_or_intent, which_brain,
+                    claim_type, supersedes_trace_id, superseded_by_trace_id,
                     epistemic_state, why_trust, content_hash, trace_json, created_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     trace.trace_id,
@@ -333,6 +411,9 @@ class GovernanceTraceEngine:
                     trace.speaker_seat,
                     trace.question_or_intent,
                     trace.which_brain_consulted,
+                    trace.claim_type.value,
+                    trace.supersedes_trace_id,
+                    trace.superseded_by_trace_id,
                     trace.epistemic_state.value,
                     trace.why_trust_reason,
                     trace.content_hash,
@@ -340,6 +421,14 @@ class GovernanceTraceEngine:
                     trace.timestamp,
                 )
             )
+
+            # If this trace supersedes an older trace, link backward
+            if trace.supersedes_trace_id:
+                conn.execute(
+                    "UPDATE rtc_activity_traces SET superseded_by_trace_id = ? WHERE trace_id = ?",
+                    (trace.trace_id, trace.supersedes_trace_id)
+                )
+
             conn.commit()
 
         return trace
@@ -348,7 +437,10 @@ class GovernanceTraceEngine:
         """Loads and reconstructs a trace from durable SQLite storage, validating hash seal."""
         with sqlite3.connect(str(self.db_path)) as conn:
             conn.row_factory = sqlite3.Row
-            cursor = conn.execute("SELECT trace_json FROM rtc_activity_traces WHERE trace_id = ?", (trace_id,))
+            cursor = conn.execute(
+                "SELECT trace_json, supersedes_trace_id, superseded_by_trace_id, claim_type FROM rtc_activity_traces WHERE trace_id = ?",
+                (trace_id,)
+            )
             row = cursor.fetchone()
             if not row:
                 return None
@@ -370,6 +462,9 @@ class GovernanceTraceEngine:
                 session_id=data["session_id"],
                 speaker_seat=data["speaker_seat"],
                 question_or_intent=data["question_or_intent"],
+                claim_type=ClaimType(row["claim_type"] or data.get("claim_type", ClaimType.GENERAL_QUERY.value)),
+                supersedes_trace_id=row["supersedes_trace_id"] or data.get("supersedes_trace_id"),
+                superseded_by_trace_id=row["superseded_by_trace_id"] or data.get("superseded_by_trace_id"),
                 where_looked=data.get("where_looked", []),
                 what_remembered=data.get("what_remembered", []),
                 what_validated=data.get("what_validated", []),

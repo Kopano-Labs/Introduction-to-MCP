@@ -77,14 +77,18 @@ class KMECTraceAdapter:
     def trace_to_dict(trace: GovernanceTrace) -> Dict[str, Any]:
         """Flattens a GovernanceTrace into a single tabular observation row."""
         verified_ev_count = sum(1 for e in trace.evidence_items if e.verified)
+        unverified_ev_count = sum(1 for e in trace.evidence_items if not e.verified)
         has_e4 = any(e.evidence_class == CanonicalEvidenceClass.E4_UNKNOWN_AUDIT_REQUIRED for e in trace.evidence_items)
-        has_unverified = any(not e.verified for e in trace.evidence_items)
+        has_unverified = unverified_ev_count > 0
 
         return {
             "trace_id": trace.trace_id,
             "session_id": trace.session_id,
             "speaker_seat": trace.speaker_seat,
             "which_brain": trace.which_brain_consulted,
+            "claim_type": trace.claim_type.value,
+            "supersedes_trace_id": trace.supersedes_trace_id,
+            "superseded_by_trace_id": trace.superseded_by_trace_id,
             "epistemic_state": trace.epistemic_state.value,
             "sources_count": len(trace.where_looked),
             "memories_count": len(trace.what_remembered),
@@ -92,6 +96,7 @@ class KMECTraceAdapter:
             "contradictions_count": len(trace.contradictions_resolved),
             "evidence_count": len(trace.evidence_items),
             "verified_evidence_count": verified_ev_count,
+            "unverified_evidence_count": unverified_ev_count,
             "has_unverified_e4": has_e4,
             "has_unverified_evidence": has_unverified,
             "content_hash": trace.content_hash,
@@ -107,9 +112,11 @@ class KMECTraceAdapter:
         """Converts a sequence of GovernanceTraces into a typed Pandas DataFrame."""
         if not traces:
             return pd.DataFrame(columns=[
-                "trace_id", "session_id", "speaker_seat", "which_brain", "epistemic_state",
+                "trace_id", "session_id", "speaker_seat", "which_brain", "claim_type",
+                "supersedes_trace_id", "superseded_by_trace_id", "epistemic_state",
                 "sources_count", "memories_count", "validations_count", "contradictions_count",
-                "evidence_count", "verified_evidence_count", "has_unverified_e4", "has_unverified_evidence",
+                "evidence_count", "verified_evidence_count", "unverified_evidence_count",
+                "has_unverified_e4", "has_unverified_evidence",
                 "content_hash", "timestamp", "question_or_intent", "why_trust_reason",
                 "evidence_ids", "evidence_classes"
             ])
@@ -137,6 +144,20 @@ class KMECTraceAdapter:
         return grouped.to_dict(orient="records")
 
     @classmethod
+    def group_summary_by_brain(cls, df: pd.DataFrame) -> List[Dict[str, Any]]:
+        """Groups trace observations by brain architecture consulted."""
+        if df.empty:
+            return []
+        grouped = df.groupby("which_brain").agg(
+            total_queries=("trace_id", "count"),
+            avg_sources=("sources_count", "mean"),
+            avg_contradictions=("contradictions_count", "mean"),
+            proven_count=("epistemic_state", lambda s: (s == EpistemicState.PROVEN.value).sum()),
+            unknown_count=("epistemic_state", lambda s: (s == EpistemicState.UNKNOWN.value).sum()),
+        ).reset_index()
+        return grouped.to_dict(orient="records")
+
+    @classmethod
     def pivot_brain_by_epistemic_state(cls, traces: List[GovernanceTrace]) -> Dict[str, Any]:
         """
         Generates a 2D Pivot Table of (which_brain × epistemic_state)
@@ -146,11 +167,9 @@ class KMECTraceAdapter:
         if df.empty:
             return {"pivot_table": {}, "cell_lineage": {}}
 
-        # Cross-tabulation count
         ctab = pd.crosstab(df["which_brain"], df["epistemic_state"])
         pivot_dict = ctab.to_dict(orient="index")
 
-        # Cell lineage back-tracing: mapping (brain, state) -> List[trace_id]
         lineage_map: Dict[str, List[str]] = {}
         for t in traces:
             key = f"{t.which_brain_consulted}::{t.epistemic_state.value}"
@@ -160,6 +179,62 @@ class KMECTraceAdapter:
 
         return {
             "pivot_table": pivot_dict,
+            "cell_lineage": lineage_map
+        }
+
+    @classmethod
+    def pivot_seat_by_epistemic_state(cls, traces: List[GovernanceTrace]) -> Dict[str, Any]:
+        """
+        Generates a 2D Pivot Table of (speaker_seat × epistemic_state)
+        with cell-level backward provenance mapping.
+        """
+        df = cls.to_dataframe(traces)
+        if df.empty:
+            return {"pivot_table": {}, "cell_lineage": {}}
+
+        ctab = pd.crosstab(df["speaker_seat"], df["epistemic_state"])
+        pivot_dict = ctab.to_dict(orient="index")
+
+        lineage_map: Dict[str, List[str]] = {}
+        for t in traces:
+            key = f"{t.speaker_seat}::{t.epistemic_state.value}"
+            if key not in lineage_map:
+                lineage_map[key] = []
+            lineage_map[key].append(t.trace_id)
+
+        return {
+            "pivot_table": pivot_dict,
+            "cell_lineage": lineage_map
+        }
+
+    @classmethod
+    def pivot_source_class_by_verification(cls, traces: List[GovernanceTrace]) -> Dict[str, Any]:
+        """
+        Generates a 2D Pivot Table of (CanonicalEvidenceClass × verification_state).
+        """
+        flat_evidence = []
+        lineage_map: Dict[str, List[str]] = {}
+        for t in traces:
+            for e in t.evidence_items:
+                v_state = "VERIFIED" if e.verified else "UNVERIFIED"
+                flat_evidence.append({
+                    "evidence_class": e.evidence_class.value,
+                    "verification_state": v_state,
+                    "trace_id": t.trace_id,
+                    "evidence_id": e.evidence_id
+                })
+                key = f"{e.evidence_class.value}::{v_state}"
+                if key not in lineage_map:
+                    lineage_map[key] = []
+                lineage_map[key].append(t.trace_id)
+
+        if not flat_evidence:
+            return {"pivot_table": {}, "cell_lineage": {}}
+
+        ev_df = pd.DataFrame(flat_evidence)
+        ctab = pd.crosstab(ev_df["evidence_class"], ev_df["verification_state"])
+        return {
+            "pivot_table": ctab.to_dict(orient="index"),
             "cell_lineage": lineage_map
         }
 

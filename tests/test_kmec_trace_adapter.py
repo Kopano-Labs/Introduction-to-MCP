@@ -18,6 +18,7 @@ from pathlib import Path
 from kopano.governance_trace import (
     GovernanceTraceEngine,
     CanonicalEvidenceClass,
+    ClaimType,
     EpistemicState,
     GovernanceTrace,
 )
@@ -38,7 +39,8 @@ def populated_engine(tmp_path):
         speaker_seat="SEAT_01_KC",
         question_or_intent="Trace 1: Validate local governance continuity",
         session_id="sess_analytics_01",
-        which_brain="LOCAL_MAO_BLACK_BEAST"
+        which_brain="LOCAL_MAO_BLACK_BEAST",
+        claim_type=ClaimType.USER_INTENT_OR_TESTIMONY
     )
     engine.record_search(t1, "Schematics/21-KOPANO-PHU")
     engine.record_validation(t1, "Zero-FOC verified")
@@ -183,3 +185,46 @@ def test_attention_matrix_hotspot_nomination(populated_engine):
     # Verify that Trace 4 (UNKNOWN + E4 + Contradictions) is nominated for KC inspection
     t4 = next(t for t in traces if t.speaker_seat == "SEAT_08_KHELOS")
     assert t4.trace_id in matrix["nominated_for_kc_inspection"]
+
+
+def test_fep_poc_003_complete_multi_pivot_and_governed_observation_cycle(populated_engine):
+    """
+    Full FEP-POC-003 Cycle Test:
+    1. Traces persisted to SQLite ledger.
+    2. Group by Brain & Seat summaries.
+    3. 2D Pivot of (Seat × Epistemic State).
+    4. 2D Pivot of (Source Class × Verification State).
+    5. Cell Provenance Back-Tracing to original raw receipts.
+    """
+    traces = populated_engine.list_session_traces("sess_analytics_01")
+    df = KMECTraceAdapter.to_dataframe(traces)
+
+    # 1. Group by brain summary
+    brain_summary = KMECTraceAdapter.group_summary_by_brain(df)
+    assert len(brain_summary) == 3
+    local_mao = next(b for b in brain_summary if b["which_brain"] == "LOCAL_MAO_BLACK_BEAST")
+    assert local_mao["total_queries"] == 2
+    assert local_mao["proven_count"] == 2
+
+    # 2. Pivot Seat by Epistemic State
+    seat_pivot = KMECTraceAdapter.pivot_seat_by_epistemic_state(traces)
+    assert "SEAT_01_KC" in seat_pivot["pivot_table"]
+    assert seat_pivot["pivot_table"]["SEAT_01_KC"]["PROVEN"] == 1
+    assert "SEAT_01_KC::PROVEN" in seat_pivot["cell_lineage"]
+
+    # 3. Pivot Source Class by Verification
+    src_pivot = KMECTraceAdapter.pivot_source_class_by_verification(traces)
+    assert CanonicalEvidenceClass.E1_DIRECT_TESTIMONY.value in src_pivot["pivot_table"]
+    assert CanonicalEvidenceClass.E2_REPOSITORY_ARTIFACT.value in src_pivot["pivot_table"]
+    assert CanonicalEvidenceClass.E4_UNKNOWN_AUDIT_REQUIRED.value in src_pivot["pivot_table"]
+    assert src_pivot["pivot_table"][CanonicalEvidenceClass.E4_UNKNOWN_AUDIT_REQUIRED.value]["UNVERIFIED"] >= 1
+
+    # 4. Prove that analytical cell traces back to exact raw cryptographic evidence
+    cell_trace_ids = seat_pivot["cell_lineage"]["SEAT_01_KC::PROVEN"]
+    reconstructed = KMECTraceAdapter.trace_cell_lineage(traces, cell_trace_ids)
+    assert reconstructed["matched_trace_count"] == 1
+    assert reconstructed["lineage_sealed"] is True
+    assert reconstructed["traces"][0]["claim_type"] == ClaimType.USER_INTENT_OR_TESTIMONY.value
+    assert reconstructed["traces"][0]["speaker_seat"] == "SEAT_01_KC"
+    assert len(reconstructed["surviving_evidence"]) == 1
+    assert reconstructed["surviving_evidence"][0]["evidence_class"] == CanonicalEvidenceClass.E1_DIRECT_TESTIMONY.value

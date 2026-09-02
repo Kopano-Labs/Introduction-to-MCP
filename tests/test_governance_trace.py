@@ -18,6 +18,7 @@ from kopano.governance_trace import (
     GovernanceTraceEngine,
     GovernanceTrace,
     CanonicalEvidenceClass,
+    ClaimType,
     EpistemicState,
     TraceEvidenceItem
 )
@@ -199,3 +200,137 @@ def test_durable_sqlite_persistence_and_cold_restart_replay(tmp_path):
     session_timeline = engine_b.list_session_traces("session_restart_99")
     assert len(session_timeline) == 1
     assert session_timeline[0].trace_id == trace_id
+
+
+def test_strict_append_only_immutability_and_superseding_traces(ledger_engine):
+    """
+    Khelos Edge 1: Plain INSERT fails hard on duplicate trace_id.
+    Trace updates must produce superseding traces linked forward/backward.
+    """
+    t1 = ledger_engine.start_trace(
+        speaker_seat="SEAT_01_KC",
+        question_or_intent="Initial hypothesis on memory architecture",
+        session_id="session_immut_01"
+    )
+    ledger_engine.add_evidence(
+        t1,
+        evidence_class=CanonicalEvidenceClass.E2_REPOSITORY_ARTIFACT,
+        source_location="Schematics/00-Home",
+        description="Initial file check",
+        verified=True
+    )
+    sealed_1 = ledger_engine.seal_and_persist_trace(t1, why_trust="First check")
+
+    # Attempting to re-insert sealed_1 MUST raise ValueError (No overwriting!)
+    with pytest.raises(ValueError, match="Immutable Activity Ledger violation"):
+        ledger_engine.seal_and_persist_trace(sealed_1, why_trust="overwrite attempt")
+
+    # Amendment must be a superseding trace
+    t2 = ledger_engine.create_superseding_trace(
+        sealed_1,
+        question_or_intent="Refined memory architecture with cold-restart persistence"
+    )
+    ledger_engine.add_evidence(
+        t2,
+        evidence_class=CanonicalEvidenceClass.E2_REPOSITORY_ARTIFACT,
+        source_location="kopano-core/kopano/governance_trace.py",
+        description="Persistent SQLite Activity Ledger implementation",
+        verified=True
+    )
+    sealed_2 = ledger_engine.seal_and_persist_trace(t2, why_trust="Superseding implementation")
+
+    assert sealed_2.supersedes_trace_id == sealed_1.trace_id
+
+    # Verify both traces exist in SQLite history and t1 links forward to t2
+    reloaded_1 = ledger_engine.load_trace(sealed_1.trace_id)
+    reloaded_2 = ledger_engine.load_trace(sealed_2.trace_id)
+    assert reloaded_1.superseded_by_trace_id == sealed_2.trace_id
+    assert reloaded_2.supersedes_trace_id == sealed_1.trace_id
+
+
+def test_claim_type_aware_epistemic_derivation(ledger_engine):
+    """
+    Khelos Edge 2: Evidence must be fit for the claim type.
+    - USER_INTENT_OR_TESTIMONY: Verified E1 is required & sufficient to derive PROVEN.
+    - REPOSITORY_STATE: Verified E2 repository artifact is REQUIRED to derive PROVEN (E1 alone is SUPPORTED).
+    - RUNTIME_OR_METAL: Verified E2 test receipt on metal is REQUIRED to derive PROVEN (E1 alone is SUPPORTED).
+    - MODEL_INTERPRETATION: E3 inferences can never be PROVEN alone.
+    """
+    # 1. User Intent Claim: Verified E1 alone => PROVEN
+    t_intent = ledger_engine.start_trace(
+        speaker_seat="SEAT_01_KC",
+        question_or_intent="What did Master Robyn direct regarding Seat 10?",
+        claim_type=ClaimType.USER_INTENT_OR_TESTIMONY
+    )
+    ledger_engine.add_evidence(
+        t_intent,
+        evidence_class=CanonicalEvidenceClass.E1_DIRECT_TESTIMONY,
+        source_location="USER_CHAT",
+        description="Master Robyn explicit directive",
+        verified=True
+    )
+    s_intent = ledger_engine.seal_and_persist_trace(t_intent, why_trust="Direct testimony")
+    assert s_intent.epistemic_state == EpistemicState.PROVEN
+
+    # 2. Repository State Claim: Verified E1 alone => SUPPORTED (not PROVEN without physical repo artifact)
+    t_repo_e1 = ledger_engine.start_trace(
+        speaker_seat="FORGE",
+        question_or_intent="Does the repo contain the FEP-POC-002 receipt?",
+        claim_type=ClaimType.REPOSITORY_STATE
+    )
+    ledger_engine.add_evidence(
+        t_repo_e1,
+        evidence_class=CanonicalEvidenceClass.E1_DIRECT_TESTIMONY,
+        source_location="USER_CHAT",
+        description="User testimony that file exists",
+        verified=True
+    )
+    s_repo_e1 = ledger_engine.seal_and_persist_trace(t_repo_e1, why_trust="Human memory")
+    assert s_repo_e1.epistemic_state == EpistemicState.SUPPORTED  # Human testimony cannot independently PROVE repo state!
+
+    # 3. Repository State Claim: Verified E2 artifact => PROVEN
+    t_repo_e2 = ledger_engine.start_trace(
+        speaker_seat="FORGE",
+        question_or_intent="Does the repo contain the FEP-POC-002 receipt on disk?",
+        claim_type=ClaimType.REPOSITORY_STATE
+    )
+    ledger_engine.add_evidence(
+        t_repo_e2,
+        evidence_class=CanonicalEvidenceClass.E2_REPOSITORY_ARTIFACT,
+        source_location="docs/governance/FEP_POC_002_SEMANTIC_DRIFT_AND_DURABLE_LEDGER_REPAIR.md",
+        description="Physical file on disk with valid path",
+        verified=True
+    )
+    s_repo_e2 = ledger_engine.seal_and_persist_trace(t_repo_e2, why_trust="Physical artifact on disk")
+    assert s_repo_e2.epistemic_state == EpistemicState.PROVEN
+
+    # 4. Runtime / Metal Claim: Verified E1 alone => SUPPORTED; Verified E2 => PROVEN
+    t_metal_e1 = ledger_engine.start_trace(
+        speaker_seat="ANTIGRAVITY",
+        question_or_intent="Did all 29 tests pass on metal?",
+        claim_type=ClaimType.RUNTIME_OR_METAL
+    )
+    ledger_engine.add_evidence(
+        t_metal_e1,
+        evidence_class=CanonicalEvidenceClass.E1_DIRECT_TESTIMONY,
+        source_location="USER_CHAT",
+        description="User says tests passed",
+        verified=True
+    )
+    s_metal_e1 = ledger_engine.seal_and_persist_trace(t_metal_e1, why_trust="User testimony")
+    assert s_metal_e1.epistemic_state == EpistemicState.SUPPORTED
+
+    t_metal_e2 = ledger_engine.start_trace(
+        speaker_seat="ANTIGRAVITY",
+        question_or_intent="Did all 29 tests pass on metal via pytest?",
+        claim_type=ClaimType.RUNTIME_OR_METAL
+    )
+    ledger_engine.add_evidence(
+        t_metal_e2,
+        evidence_class=CanonicalEvidenceClass.E2_REPOSITORY_ARTIFACT,
+        source_location="tests/test_api_extensions.py",
+        description="pytest execution exit code 0",
+        verified=True
+    )
+    s_metal_e2 = ledger_engine.seal_and_persist_trace(t_metal_e2, why_trust="Physical test execution receipt")
+    assert s_metal_e2.epistemic_state == EpistemicState.PROVEN
