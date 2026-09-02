@@ -1,11 +1,29 @@
 {
-  "ledger_id": "MMAO-SESSION-FAILURES",
-  "case_id": "CASE-001-FORGE-AG-HOMECOMING",
-  "actor_accountable": "Forge",
-  "date_opened": "2026-08-29",
-  "branch": "forge/mmao-session-failures-ledger-20260829",
-  "base_sha": "6f967590ad15680a5303051ad9bdcef468357ce6",
-  "status": "FAILURE_LEDGER_CREATED",
-  "proof_of_improvement": "PENDING_FUTURE_BEHAVIOR",
-  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+  "cases": [
+    {
+      "ledger_id": "MMAO-SESSION-FAILURES",
+      "case_id": "CASE-001-FORGE-AG-HOMECOMING",
+      "actor_accountable": "Forge",
+      "date_opened": "2026-08-29",
+      "branch": "forge/mmao-session-failures-ledger-20260829",
+      "base_sha": "6f967590ad15680a5303051ad9bdcef468357ce6",
+      "status": "FAILURE_LEDGER_CREATED",
+      "proof_of_improvement": "PENDING_FUTURE_BEHAVIOR",
+      "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+    },
+    {
+      "ledger_id": "MMAO-SESSION-FAILURES",
+      "case_id": "CASE-002-LEFA-FEATHERLESS-AUTH-OVEREXPLAIN",
+      "actor_accountable": "Copilot CLI (stateless renter)",
+      "date_opened": "2026-09-02",
+      "branch": "master",
+      "case_folder": "MMAO Session Failures/04-LEFA-Featherless-Auth-OverExplain",
+      "fix_repo": "RobynAwesome/lefa-ai",
+      "fix_commit": "8acd8f9d0a01b47a499794b4fa1c2a919d9d1370",
+      "status": "FAILURE_LEDGER_APPENDED",
+      "proof_of_improvement": "WITNESSED_LIVE_AUTH_RECEIPT_PENDING",
+      "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+    }
+  ],
+  "ledger_id": "MMAO-SESSION-FAILURES"
 }
