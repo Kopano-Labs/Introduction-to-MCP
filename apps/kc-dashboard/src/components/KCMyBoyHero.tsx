@@ -4,11 +4,13 @@ import { KCMascot3D, MascotMood } from "./KCMascot3D";
 interface KCMyBoyHeroProps {
   onOpenOperatorMode?: () => void;
   onNavigateToContextStudio?: () => void;
+  onOpenSpatialLab?: () => void;
 }
 
 export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
   onOpenOperatorMode,
   onNavigateToContextStudio,
+  onOpenSpatialLab,
 }) => {
   const [query, setQuery] = useState("");
   const [mascotMood, setMascotMood] = useState<MascotMood>("idle");
@@ -75,6 +77,15 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
         </div>
 
         <div className="flex items-center space-x-3">
+          {onOpenSpatialLab && (
+            <button
+              onClick={onOpenSpatialLab}
+              className="text-xs font-mono px-3 py-1.5 rounded-lg border border-cyan-500/40 bg-cyan-950/40 text-cyan-300 hover:border-cyan-400 hover:bg-cyan-900/60 transition-colors flex items-center gap-1.5"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+              Spatial World (/kc-lab)
+            </button>
+          )}
           {onOpenOperatorMode && (
             <button
               onClick={onOpenOperatorMode}

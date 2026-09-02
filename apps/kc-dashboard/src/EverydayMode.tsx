@@ -26,6 +26,7 @@ type EverydayModeProps = {
   attentionItems: string[];
   snapshotLabel: string;
   onOpenOperatorMode: () => void;
+  onOpenSpatialLab?: () => void;
 };
 
 const detailOptions: Array<{ value: DetailDensity; label: string }> = [
@@ -63,6 +64,7 @@ export default function EverydayMode({
   attentionItems,
   snapshotLabel,
   onOpenOperatorMode,
+  onOpenSpatialLab,
 }: EverydayModeProps) {
   const reduceMotion = useReducedMotion();
   const profile = useInteractionProfile();
@@ -81,7 +83,10 @@ export default function EverydayMode({
 
   return (
     <main className="everyday-shell">
-      <KCMyBoyHero onOpenOperatorMode={onOpenOperatorMode} />
+      <KCMyBoyHero
+        onOpenOperatorMode={onOpenOperatorMode}
+        onOpenSpatialLab={onOpenSpatialLab}
+      />
 
       <section
         className={`connection-card ${online ? "is-online" : "is-offline"}`}
