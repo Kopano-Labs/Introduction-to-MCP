@@ -529,7 +529,95 @@ def mao_philosophy(action_description: str, has_proof: bool, survives_constraint
         return {"error": str(e)}
 
 
-# --- STATIC FILE SERVING (GUI) ---
+# --- OBSERVABLE COGNITION SURFACE & GOVERNANCE TRACES ---
+@app.get("/api/governance-traces")
+def get_governance_traces():
+    from .governance_trace import GovernanceTraceEngine
+    engine = GovernanceTraceEngine()
+    return {"traces": [t.to_dict() for t in engine.traces]}
+
+
+class NewTraceRequest(BaseModel):
+    speaker_seat: str
+    question_or_intent: str
+    which_brain: str = "LOCAL_MAO_BLACK_BEAST"
+    sources: List[str] = []
+    validations: List[str] = []
+    why_trust: str = ""
+    epistemic_state: str = "SUPPORTED"
+
+
+@app.post("/api/governance-traces")
+def create_governance_trace(req: NewTraceRequest):
+    from .governance_trace import GovernanceTraceEngine, EpistemicState
+    engine = GovernanceTraceEngine()
+    trace = engine.start_trace(
+        speaker_seat=req.speaker_seat,
+        question_or_intent=req.question_or_intent,
+        which_brain=req.which_brain
+    )
+    for s in req.sources:
+        engine.record_search(trace, s)
+    for v in req.validations:
+        engine.record_validation(trace, v)
+    
+    state_enum = EpistemicState(req.epistemic_state) if req.epistemic_state in EpistemicState.__members__ else EpistemicState.SUPPORTED
+    sealed = engine.seal_trace(trace, state=state_enum, why_trust=req.why_trust)
+    return {"trace": sealed.to_dict(), "visual_card": sealed.to_visual_card()}
+
+
+# --- GOOGLE DRIVE MCP ENDPOINTS ---
+@app.get("/api/gdrive/search")
+def gdrive_search(query: str, limit: int = 10):
+    from .tools.google_drive_mcp import GoogleDriveMCPTool
+    tool = GoogleDriveMCPTool()
+    return {"query": query, "results": tool.search_drive(query, limit=limit)}
+
+
+@app.get("/api/gdrive/read/{file_id}")
+def gdrive_read_doc(file_id: str):
+    from .tools.google_drive_mcp import GoogleDriveMCPTool
+    tool = GoogleDriveMCPTool()
+    doc = tool.read_document(file_id)
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found in Google Drive datalake")
+    return {"file_id": doc.file_id, "name": doc.name, "mime_type": doc.mime_type, "content": doc.content_text, "link": doc.web_view_link}
+
+
+# --- RTC VOICE & SEAT ROUTING ENDPOINTS ---
+class VoiceTurnRequest(BaseModel):
+    session_id: str
+    user_input: str
+    speaker: str = "MASTER_ROBYN"
+    modality: str = "text"
+
+
+@app.post("/api/rtc/voice-turn")
+def rtc_voice_turn(req: VoiceTurnRequest):
+    from .rtc_voice_bridge import RTCVoiceBridge
+    bridge = RTCVoiceBridge()
+    turn = bridge.process_turn(
+        session_id=req.session_id,
+        user_input=req.user_input,
+        speaker=req.speaker,
+        modality=req.modality
+    )
+    payload = bridge.format_gemini_live_payload(req.user_input)
+    return {
+        "turn_id": turn.turn_id,
+        "foc_check_passed": turn.foc_check_passed,
+        "active_seat": bridge.active_seat,
+        "gemini_live_payload": payload
+    }
+
+
+@app.post("/api/rtc/switch-seat")
+def rtc_switch_seat(seat_id: str):
+    from .rtc_voice_bridge import RTCVoiceBridge
+    bridge = RTCVoiceBridge()
+    return bridge.switch_active_seat(seat_id)
+
+
 # Mount the React build directory if it exists
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
     # Running in a PyInstaller bundle
