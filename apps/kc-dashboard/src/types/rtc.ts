@@ -5,6 +5,7 @@
 
 export type RTCIdentityKey =
   | "GUEST_SEEKER"
+  | "UY_SCUTI_FORGE"
   | "APPRENTICE"
   | "SYSTEM_TELEMETRY"
   | "OPERATOR_SOVEREIGN";
@@ -48,6 +49,19 @@ export const RTC_IDENTITY_PROFILES: Record<RTCIdentityKey, RTCIdentityProfile> =
     dampingFactor: 0.85,
     description: "Your daily companion for work, football, smart mobility, and everyday questions.",
     promptPlaceholder: "Ask KC anything in plain words..."
+  },
+  UY_SCUTI_FORGE: {
+    key: "UY_SCUTI_FORGE",
+    label: "Forge Sovereign",
+    emoji: "🌌",
+    tagline: "Hypergiant stellar convergence & multi-model depth",
+    primaryColor: "#FF2A4D", // Stellar Red
+    secondaryColor: "#00F0FF", // Cyan
+    glowColor: "#FF2A4D",
+    ringSpeedMultiplier: 2.8,
+    dampingFactor: 0.65,
+    description: "Multi-model reasoning substrate linking Forge, AG, and the Round Table Council.",
+    promptPlaceholder: "Synthesize multi-agent flows or explore UY Scuti hypergiant mechanics..."
   },
   APPRENTICE: {
     key: "APPRENTICE",
