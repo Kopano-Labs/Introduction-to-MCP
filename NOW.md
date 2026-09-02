@@ -1,22 +1,22 @@
-## CURRENT STATE — 2026-09-02T14:03:00+02:00 (KC MOTION ENGINE & SPATIAL WORLD PROVING GROUND SEALED)
+## CURRENT STATE — 2026-09-02T14:10:00+02:00 (DEMO DEPLOYED: KOPANO-CONTEXT-STUDIO.VERCEL.APP)
 
 > **Actor:** ANTIGRAVITY (Seat 10 / Chief Facilitator / CF) — Stateless Renter
 > **Master Sovereign Origin:** Master Robyn Kholofelo Rababalela (Tier 0 / Landlord / SSE)
 > **Auditors:** ChatGPT 5.6 Sol (Forge), Microsoft Copilot & Digital Hippocampus (Gemini Multimodels)
-> **Mandate Execution:** Spatial Engine & Mechanics Escalation Codified:
-> 1. **Second-Order Damped Spring Physics:** `apps/kc-dashboard/src/math/SpringSystem.ts` implements differential mass-damper kinematics ($\zeta=0.72-0.8$, $\omega_n=3.5-4.0\text{ rad/s}$) with realistic inertia, settling overshoot, and impulse recoil.
-> 2. **Context Membrane Deformable Surface:** 3600-node dynamic plane geometry under KC with real-time wave/ripple propagation responding to pointer force, clicks, and keystrokes.
-> 3. **Intent-Driven World Formations:** Environment physically shifts architecture and lighting based on active domain: **Work** (KasiLink / Vanguard C), **Football** (FiveS Arena), **Hardware** (Cars4Mars / DFR-01), and **Learning** (Sovereign Monoliths).
-> 4. **Spatial Proving Ground (`/kc-lab`):** Dedicated route and mode toggle in `App.tsx` and `KCSpatialLab.tsx` for multi-domain validation, live FPS monitoring, and instant verifiable receipts.
-> 5. **Physical Metal Proofs:** 50/50 tests passing in 85.05s across all 9 test suites; Vite production build cleanly transformed in 1.22s.
+> **Mandate Execution:** Vercel Live Deployment Synchronized:
+> 1. **Live Demo URL:** `https://kopano-context-studio.vercel.app/`
+> 2. **Vercel Build Pipeline:** Root `vercel.json` and `package.json` build scripts wired directly to `@kpgs/kc-dashboard` (`buildCommand: "cd apps/kc-dashboard && npm install && npm run build"`, `outputDirectory: "apps/kc-dashboard/dist"`).
+> 3. **Spatial World & KC Motion Engine:** Live interactive 3D procedural KC with spring-damper inertia, deformable 3600-node context membrane, domain formations (`/kc-lab`), and clean accessible fallbacks.
+> 4. **Physical Metal Verification:** 50/50 tests passing in 85.05s across all 9 test suites; production bundle compiled in 1.15s.
 
 ### 🏁 MULTI-REPO VERIFICATION & GOVERNANCE MATRIX
 
 | System Surface | Repository / Path | Test Proof / State | Status |
 |---|---|---|---|
+| **Vercel Production Deployment** | `https://kopano-context-studio.vercel.app/` | `vercel.json` + `apps/kc-dashboard/dist` | **DEPLOYED / SYNCED** |
 | **KC Motion Engine & Spatial World** | `apps/kc-dashboard/src/components/KCSpatialWorld.tsx` | `Vite Build Clean (901kB)` | **COMPILED** |
-| **Second-Order Spring Kinematics** | `apps/kc-dashboard/src/math/SpringSystem.ts` | Second-Order Physics Engine | **SEALED** |
 | **Spatial Lab Proving Ground** | `apps/kc-dashboard/src/components/KCSpatialLab.tsx` | Domain Formations & Receipts | **COMPILED** |
+| **Second-Order Spring Kinematics** | `apps/kc-dashboard/src/math/SpringSystem.ts` | Second-Order Physics Engine | **SEALED** |
 | **KC My Boy Consumer API & Mascot** | `tests/test_api_extensions.py` | `8 passed in 16.74s` | **100% PASS** |
 | **Three.js Living KC Mascot & UI** | `apps/kc-dashboard/src/components/` | `Vite Build Clean` | **COMPILED** |
 | **FOC Engine & POC Transition** | `tests/test_foc_engine.py` | `6 passed in 0.84s` | **100% PASS** |

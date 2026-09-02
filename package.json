@@ -12,6 +12,8 @@
     "test": "tests"
   },
   "scripts": {
+    "build": "npm --prefix apps/kc-dashboard install && npm --prefix apps/kc-dashboard run build",
+    "build:studio": "npm --prefix apps/kc-dashboard run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
