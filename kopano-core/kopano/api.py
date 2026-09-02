@@ -999,6 +999,81 @@ def rtc_switch_seat(seat_id: str):
     return bridge.switch_active_seat(seat_id)
 
 
+# --- SMART LEDGER & OFFLINE RECONCILIATION ENDPOINTS ---
+class SmartLedgerAppendRequest(BaseModel):
+    actor_seat: str = "SEAT_01_KC"
+    embodiment: str = "Apple_CryptoKit_SecureEnclave"
+    pka_verdict: str = "ALLOW"
+    claim_type: str = "USER_INTENT_OR_TESTIMONY"
+    idempotency_key: str
+    payload: dict
+    evidence_refs: Optional[List[str]] = None
+
+
+class OfflineReconciliationRequest(BaseModel):
+    candidate_envelopes: List[dict]
+
+
+@app.get("/api/smart-ledger/chain")
+def get_smart_ledger_chain():
+    from .pka_kmec_jennifer_bridge import SmartLedgerEngine
+    ledger = SmartLedgerEngine()
+    chain = ledger.list_chain()
+    valid, errors = ledger.verify_chain_integrity()
+    return {
+        "total_receipts": len(chain),
+        "chain_valid": valid,
+        "integrity_errors": errors,
+        "chain": [r.to_dict() for r in chain]
+    }
+
+
+@app.post("/api/smart-ledger/append")
+def append_smart_ledger_receipt(req: SmartLedgerAppendRequest):
+    from .pka_kmec_jennifer_bridge import SmartLedgerEngine, PlatformEmbodiment
+    ledger = SmartLedgerEngine()
+    try:
+        receipt = ledger.append_receipt(
+            actor_seat=req.actor_seat,
+            embodiment=PlatformEmbodiment(req.embodiment),
+            pka_verdict=req.pka_verdict,
+            claim_type=req.claim_type,
+            idempotency_key=req.idempotency_key,
+            payload=req.payload,
+            evidence_refs=req.evidence_refs
+        )
+        return {"status": "SUCCESS", "receipt": receipt.to_dict()}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/api/smart-ledger/reconcile-offline")
+def reconcile_offline_batch(req: OfflineReconciliationRequest):
+    from .pka_kmec_jennifer_bridge import SmartLedgerEngine, PkaKmecJenniferBridge, OfflineReconciliationEngine
+    ledger = SmartLedgerEngine()
+    bridge = PkaKmecJenniferBridge(ledger=ledger)
+    reconciler = OfflineReconciliationEngine(ledger, bridge)
+    report = reconciler.reconcile_batch(req.candidate_envelopes)
+    return {
+        "batch_id": report.batch_id,
+        "total_candidates": report.total_candidates,
+        "admitted_count": report.admitted_count,
+        "conflict_count": report.conflict_count,
+        "admitted_receipt_ids": list(report.admitted_receipt_ids),
+        "conflict_receipt_ids": list(report.conflict_receipt_ids),
+        "rebuilt_projection_keys": list(report.rebuilt_projection_keys),
+        "chain_valid": report.chain_valid
+    }
+
+
+@app.get("/api/smart-ledger/integrity")
+def check_smart_ledger_integrity():
+    from .pka_kmec_jennifer_bridge import SmartLedgerEngine
+    ledger = SmartLedgerEngine()
+    valid, errors = ledger.verify_chain_integrity()
+    return {"chain_valid": valid, "error_count": len(errors), "errors": errors}
+
+
 # Mount the React build directory if it exists
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
     # Running in a PyInstaller bundle

@@ -15,9 +15,11 @@ def client(tmp_path, monkeypatch):
     test_gdrive_db = tmp_path / "test_api_gdrive.db"
     test_voice_db = tmp_path / "test_api_voice.db"
     test_ledger_db = tmp_path / "test_api_ledger.db"
+    test_smart_ledger_db = tmp_path / "test_api_smart_ledger.db"
     monkeypatch.setenv("DRIVE_CACHE_DB", str(test_gdrive_db))
     monkeypatch.setenv("RTC_VOICE_DB", str(test_voice_db))
     monkeypatch.setenv("RTC_ACTIVITY_LEDGER_DB", str(test_ledger_db))
+    monkeypatch.setenv("SMART_LEDGER_DB", str(test_smart_ledger_db))
     with TestClient(app) as test_client:
         yield test_client
 
@@ -122,3 +124,51 @@ def test_api_observability_html_dashboard(client):
     assert "Observable Cognition Surface" in res.text
     assert "KMEC Dataset Engine" in res.text
     assert "cell-interactive" in res.text
+
+
+def test_api_smart_ledger_and_reconciliation_flow(client):
+    # 1. Append receipt via API
+    res_append = client.post("/api/smart-ledger/append", json={
+        "actor_seat": "SEAT_01_KC",
+        "embodiment": "Apple_CryptoKit_SecureEnclave",
+        "pka_verdict": "ALLOW",
+        "claim_type": "USER_INTENT_OR_TESTIMONY",
+        "idempotency_key": "api_idemp_001",
+        "payload": {"directive": "Execute cross-repo governance"},
+        "evidence_refs": ["USER_CHAT"]
+    })
+    assert res_append.status_code == 200
+    r_data = res_append.json()
+    assert r_data["status"] == "SUCCESS"
+    assert r_data["receipt"]["sequence_number"] == 1
+
+    # 2. Get chain
+    res_chain = client.get("/api/smart-ledger/chain")
+    assert res_chain.status_code == 200
+    c_data = res_chain.json()
+    assert c_data["total_receipts"] == 1
+    assert c_data["chain_valid"] is True
+
+    # 3. Check integrity
+    res_integ = client.get("/api/smart-ledger/integrity")
+    assert res_integ.status_code == 200
+    assert res_integ.json()["chain_valid"] is True
+
+    # 4. Reconcile offline batch
+    res_reconcile = client.post("/api/smart-ledger/reconcile-offline", json={
+        "candidate_envelopes": [
+            {
+                "idempotency_key": "api_off_001",
+                "actor_seat": "SEAT_10_ANTIGRAVITY",
+                "embodiment": "Android_Keystore_WorkManager",
+                "claim_type": "RUNTIME_OR_METAL",
+                "payload": {"tests": "all green"},
+                "evidence_refs": ["tests/test_api_extensions.py"],
+                "pka_verdict": "ALLOW"
+            }
+        ]
+    })
+    assert res_reconcile.status_code == 200
+    rec_data = res_reconcile.json()
+    assert rec_data["admitted_count"] == 1
+    assert rec_data["chain_valid"] is True
