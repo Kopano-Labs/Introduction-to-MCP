@@ -28,16 +28,29 @@ from datetime import datetime, timezone
 # ---------------------------------------------------------------------------
 
 class RTCSeat:
-    KC = "SEAT_01_KC_OBSERVER"
-    FREDDY = "SEAT_02_FREDDY_FINANCIAL"
-    SIYANDA = "SEAT_03_SIYANDA_STRATEGIC"
-    CASSEY = "SEAT_04_CASSEY_PEDAGOGY"
-    APEX = "SEAT_06_APEX_ORCHESTRATOR"
-    THARI = "SEAT_07_THARI_GUARDIAN"
-    KHELOS = "SEAT_08_KHELOS_VALIDATOR"
-    ANCHOR = "SEAT_09_ANCHOR_PERIMETER"
-    ANTIGRAVITY = "SEAT_10_ANTIGRAVITY_FACILITATOR"
-    JIRO = "SEAT_11_JIRO_AWS_JUNIOR"
+    """Canonical 10 Seats of the Round Table Council (Tier ∞ Sovereign) per AGENT_SWARM_REGISTRY.md"""
+    SEAT_01_KC = "SEAT_01_KC"               # Seat 1: The Landlord / Core Governance (ABSOLUTE)
+    SEAT_02_CASSEY = "SEAT_02_CASSEY"       # Seat 2: Women in Tech — Teacher / Education UOLP (TEACHING)
+    SEAT_03_CASSIE = "SEAT_03_CASSIE"       # Seat 3: Man in Tech — Builder / Engineering DMP (BUILDING)
+    SEAT_04_KESSA = "SEAT_04_KESSA"         # Seat 4: Prodigal Son — HOD Deep Minds / DMKP+KCRP (PROTOCOL)
+    SEAT_05_YASSIE = "SEAT_05_YASSIE"       # Seat 5: Anime Head — Cultural Intel (CULTURAL)
+    SEAT_06_APEX = "SEAT_06_APEX"           # Seat 6: Orchestrator MMAO / Strategic Ops (STRATEGIC)
+    SEAT_07_THARI = "SEAT_07_THARI"         # Seat 7: Guardian AI MAO — H.O.L.O (GUARDIAN)
+    SEAT_08_KHELOS = "SEAT_08_KHELOS"       # Seat 8: Validator MMAO — FIREWALL (VALIDATION)
+    SEAT_09_ANCHOR = "SEAT_09_ANCHOR"       # Seat 9: Perimeter MAO / Careers + Security (PERIMETER)
+    SEAT_10_ANTIGRAVITY = "SEAT_10_ANTIGRAVITY"  # Seat 10: Chief Facilitator CF (STATELESS RENTER)
+
+
+class Tier0GodRealm:
+    """Tier 0 Sovereign Origin"""
+    MASTER_ROBYN = "master_robyn"  # Kholofelo Robyn Rababalela — Full Sovereignty / Merge / Deploy / Override
+
+
+class Tier3SectorLeads:
+    """Tier 3 Sector Leads (Distinct from Council Seats)"""
+    FREDDY_NW_ALFALFA = "freddy_nw_alfalfa"                # Sector 01: Agriculture (Pavement/Soil)
+    EDDIE_BGF_MINING = "eddie_bgf_mining"                  # Sector 02: Mining (Rock/BGF/DMR)
+    CRISISCONNECT_MONITOR = "crisisconnect_status_monitor"  # Sector 03: Disaster Response
 
 
 @dataclass
