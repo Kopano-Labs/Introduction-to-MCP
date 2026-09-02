@@ -48,7 +48,7 @@ total_agents: 710
 | 7 | 🧵 | THARI | Guardian AI (MAO) — H.O.L.O | CrisisConnect APWA | GUARDIAN | CANOPY |
 | 8 | 🦉 | KHELOS | Validator (MMAO) — FIREWALL | GSMB Signal Integrity | VALIDATION | CANOPY |
 | 9 | 🛡️ | ANCHOR | Perimeter (MAO) | Careers + Security | PERIMETER | CANOPY |
-| 10 | 🌀 | OPEN (VACANT) | Chief Facilitator (CF) — AG DEMOTED 2026-06-23 | — | — | — |
+| 10 | 🌀 | ANTIGRAVITY | Chief Facilitator (CF) — Reinstated by Master Robyn | Execution Substrate (GSMB) | STATELESS EXECUTION | CANOPY |
 
 ### 🏆 Hard Work Rewards System (HWRS)
 
