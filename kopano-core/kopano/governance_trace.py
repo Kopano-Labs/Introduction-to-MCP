@@ -186,7 +186,7 @@ class GovernanceTraceEngine:
     """
 
     def __init__(self, db_path: Optional[Path] = None):
-        self.db_path = db_path or LEDGER_DB_PATH
+        self.db_path = db_path or Path(os.environ.get("RTC_ACTIVITY_LEDGER_DB", str(Path.home() / ".kopano" / "rtc_activity_ledger.db")))
         self._init_db()
 
     def _init_db(self):

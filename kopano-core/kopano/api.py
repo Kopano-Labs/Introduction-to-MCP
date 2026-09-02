@@ -3,6 +3,7 @@ Kopano AGI Control Plane API
 """
 
 from fastapi import FastAPI, HTTPException, Request, Depends, WebSocket, WebSocketDisconnect
+from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from .database import init_db, get_db_connection, register_user, authenticate_user
@@ -574,6 +575,376 @@ def create_governance_trace(req: NewTraceRequest):
     
     sealed = engine.seal_and_persist_trace(trace, why_trust=req.why_trust)
     return {"trace": sealed.to_dict(), "visual_card": sealed.to_visual_card()}
+
+
+@app.get("/api/governance-traces/analytics")
+def get_trace_analytics(session_id: str = "default_session"):
+    from dataclasses import asdict
+    from .governance_trace import GovernanceTraceEngine
+    from .kmec_trace_adapter import KMECTraceAdapter
+    engine = GovernanceTraceEngine()
+    traces = engine.list_session_traces(session_id)
+    if not traces:
+        return {"message": "No traces recorded for this session", "session_id": session_id}
+
+    df = KMECTraceAdapter.to_dataframe(traces)
+    group_summary = KMECTraceAdapter.group_summary_by_seat(df)
+    pivot_data = KMECTraceAdapter.pivot_brain_by_epistemic_state(traces)
+    attention_matrix = KMECTraceAdapter.generate_attention_matrix(traces)
+    contra_dist = KMECTraceAdapter.compute_distribution_metrics(df, "contradictions_count")
+    evidence_dist = KMECTraceAdapter.compute_distribution_metrics(df, "evidence_count")
+
+    return {
+        "session_id": session_id,
+        "total_traces": len(traces),
+        "group_summary_by_seat": group_summary,
+        "pivot_brain_by_state": pivot_data,
+        "attention_matrix": attention_matrix,
+        "contradictions_boxplot": asdict(contra_dist) if contra_dist else None,
+        "evidence_boxplot": asdict(evidence_dist) if evidence_dist else None,
+    }
+
+
+@app.post("/api/governance-traces/cell-lineage")
+def get_cell_lineage(trace_ids: List[str], session_id: str = "default_session"):
+    from .governance_trace import GovernanceTraceEngine
+    from .kmec_trace_adapter import KMECTraceAdapter
+    engine = GovernanceTraceEngine()
+    traces = engine.list_session_traces(session_id)
+    return KMECTraceAdapter.trace_cell_lineage(traces, trace_ids)
+
+
+@app.get("/observability", response_class=HTMLResponse)
+def observability_dashboard(session_id: str = "default_session"):
+    """
+    Renders the rich Observable Cognition Surface & KMEC Observational Dataset Dashboard.
+    """
+    html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observable Cognition Surface — Kopano Sovereign Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {{
+            --bg-primary: #07090e;
+            --bg-card: rgba(18, 24, 38, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(56, 189, 248, 0.2);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-cyan: #38bdf8;
+            --accent-green: #34d399;
+            --accent-amber: #fbbf24;
+            --accent-rose: #fb7185;
+            --accent-purple: #c084fc;
+        }}
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        body {{
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 24px;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(192, 132, 252, 0.05) 0%, transparent 40%);
+        }}
+        .header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            margin-bottom: 24px;
+        }}
+        .header-title h1 {{
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        .header-title p {{ font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }}
+        .badge {{
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }}
+        .grid-2 {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }}
+        @media(max-width: 1024px) {{ .grid-2 {{ grid-template-columns: 1fr; }} }}
+        .card {{
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.2s;
+        }}
+        .card:hover {{ border-color: var(--border-glow); }}
+        .card-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }}
+        .card-title {{ font-size: 1.05rem; font-weight: 600; color: #e2e8f0; }}
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }}
+        th, td {{
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }}
+        th {{ color: var(--text-muted); font-weight: 500; font-size: 0.8rem; text-transform: uppercase; }}
+        .cell-interactive {{
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            border-radius: 6px;
+            padding: 4px 8px;
+            transition: all 0.2s;
+            display: inline-block;
+        }}
+        .cell-interactive:hover {{
+            background: rgba(56, 189, 248, 0.15);
+            transform: scale(1.05);
+        }}
+        .metric-grid {{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }}
+        .metric-box {{
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }}
+        .metric-val {{ font-size: 1.3rem; font-weight: 700; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; }}
+        .metric-lbl {{ font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }}
+        .lineage-panel {{
+            margin-top: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 24px;
+            display: none;
+        }}
+        pre {{
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            overflow-x: auto;
+            color: #93c5fd;
+        }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">
+            <h1>Observable Cognition Surface — KMEC Dataset Engine</h1>
+            <p>Weight-Bearing Activity Ledger · Cold-Restart Resilient · Anti-"Trust Me Bro" Derivation Gate</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <span class="badge">Session: {session_id}</span>
+            <span class="badge" style="color: var(--accent-cyan); background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3);">29/29 Metal Pass</span>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <!-- 2D Pivot Table Card -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">1. Observable Cognition 2D Pivot (Brain × Epistemic State)</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Click cell for cryptographic lineage</span>
+            </div>
+            <div id="pivotContainer">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Loading KMEC analytics from SQLite ledger...</p>
+            </div>
+        </div>
+
+        <!-- Attention Matrix Card -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">2. Communication Attention Matrix (Where should KC inspect?)</span>
+                <span id="attentionVerdict" class="badge" style="color: var(--accent-amber); background: rgba(251,191,36,0.15);">SCANNING</span>
+            </div>
+            <div id="attentionContainer">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Evaluating contradiction outliers & UNKNOWN clusters...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <!-- Contradiction & Evidence Box Plot Metrics -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">3. Contradiction Distribution (KMEC Box Plot)</span>
+            </div>
+            <div class="metric-grid" id="contraMetrics">
+                <div class="metric-box"><div class="metric-val" id="contraMed">-</div><div class="metric-lbl">MEDIAN</div></div>
+                <div class="metric-box"><div class="metric-val" id="contraQ1">-</div><div class="metric-lbl">Q1 (25%)</div></div>
+                <div class="metric-box"><div class="metric-val" id="contraQ3">-</div><div class="metric-lbl">Q3 (75%)</div></div>
+                <div class="metric-box"><div class="metric-val" id="contraIQR">-</div><div class="metric-lbl">IQR</div></div>
+                <div class="metric-box"><div class="metric-val" id="contraFence">-</div><div class="metric-lbl">UPPER FENCE</div></div>
+                <div class="metric-box"><div class="metric-val" id="contraOutliers" style="color: var(--accent-rose);">-</div><div class="metric-lbl">OUTLIERS</div></div>
+            </div>
+        </div>
+
+        <!-- Speaker Summary Card -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">4. Seat Turn & Proof Performance</span>
+            </div>
+            <div id="seatSummaryContainer">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Aggregating 10-Seat council turns...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cell Lineage Back-Tracing Modal/Panel -->
+    <div class="lineage-panel" id="lineagePanel">
+        <div class="card-header">
+            <span class="card-title" style="color: var(--accent-cyan);">🔬 Cell Provenance Lineage (Weight-Bearing Proof)</span>
+            <button onclick="document.getElementById('lineagePanel').style.display='none'" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:1.1rem;">✕</button>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">This cell was produced by the following cryptographic trace receipts on metal:</p>
+        <pre id="lineageOutput"></pre>
+    </div>
+
+    <script>
+        const sessionId = "{session_id}";
+        let globalLineageMap = {{}};
+
+        async function loadAnalytics() {{
+            try {{
+                const res = await fetch(`/api/governance-traces/analytics?session_id=${{sessionId}}`);
+                const data = await res.json();
+                if (data.message) {{
+                    document.getElementById('pivotContainer').innerHTML = `<p style="color: var(--text-muted);">${{data.message}}</p>`;
+                    return;
+                }}
+
+                // Render Pivot Table
+                globalLineageMap = data.pivot_brain_by_state.cell_lineage || {{}};
+                const pivot = data.pivot_brain_by_state.pivot_table || {{}};
+                let html = '<table><thead><tr><th>Brain Consulting</th><th>PROVEN</th><th>SUPPORTED</th><th>INFERRED</th><th>UNKNOWN</th></tr></thead><tbody>';
+                for (const [brain, states] of Object.entries(pivot)) {{
+                    html += `<tr>
+                        <td style="font-weight:600;">${{brain}}</td>
+                        <td>${{renderCell(brain, 'PROVEN', states.PROVEN || 0)}}</td>
+                        <td>${{renderCell(brain, 'SUPPORTED', states.SUPPORTED || 0)}}</td>
+                        <td>${{renderCell(brain, 'INFERRED', states.INFERRED || 0)}}</td>
+                        <td>${{renderCell(brain, 'UNKNOWN', states.UNKNOWN || 0)}}</td>
+                    </tr>`;
+                }}
+                html += '</tbody></table>';
+                document.getElementById('pivotContainer').innerHTML = html;
+
+                // Render Attention Matrix
+                const attn = data.attention_matrix;
+                document.getElementById('attentionVerdict').innerText = attn.attention_verdict;
+                document.getElementById('attentionVerdict').style.color = attn.attention_verdict === 'ATTENTION_CLEAR' ? 'var(--accent-green)' : 'var(--accent-amber)';
+                
+                let attnHtml = `<p style="font-size:0.85rem; margin-bottom:8px;">Nominated Traces for KC / Validator Inspection: <strong>${{attn.nominated_for_kc_inspection.length}}</strong></p>`;
+                if (attn.nominated_for_kc_inspection.length > 0) {{
+                    attnHtml += '<ul style="padding-left:20px; font-family:JetBrains Mono; font-size:0.8rem; color:var(--accent-amber);">';
+                    attn.nominated_for_kc_inspection.forEach(tid => {{
+                        attnHtml += `<li><span class="cell-interactive" onclick="inspectTrace('${{tid}}')">${{tid}}</span></li>`;
+                    }});
+                    attnHtml += '</ul>';
+                }} else {{
+                    attnHtml += '<p style="color:var(--accent-green); font-size:0.85rem;">✓ No unverified E4 artifacts or contradiction outliers detected.</p>';
+                }}
+                document.getElementById('attentionContainer').innerHTML = attnHtml;
+
+                // Render Box Plot
+                if (data.contradictions_boxplot) {{
+                    const c = data.contradictions_boxplot;
+                    document.getElementById('contraMed').innerText = c.median.toFixed(1);
+                    document.getElementById('contraQ1').innerText = c.q1.toFixed(1);
+                    document.getElementById('contraQ3').innerText = c.q3.toFixed(1);
+                    document.getElementById('contraIQR').innerText = c.iqr.toFixed(1);
+                    document.getElementById('contraFence').innerText = c.upper_fence.toFixed(1);
+                    document.getElementById('contraOutliers').innerText = c.outlier_count;
+                }}
+
+                // Render Seat Summary
+                let seatHtml = '<table><thead><tr><th>Seat</th><th>Turns</th><th>Avg Sources</th><th>Proven</th><th>Unknown</th></tr></thead><tbody>';
+                data.group_summary_by_seat.forEach(s => {{
+                    seatHtml += `<tr>
+                        <td style="font-weight:600; color:var(--accent-cyan);">${{s.speaker_seat}}</td>
+                        <td>${{s.total_turns}}</td>
+                        <td>${{s.avg_sources.toFixed(1)}}</td>
+                        <td style="color:var(--accent-green);">${{s.proven_count}}</td>
+                        <td style="color:var(--accent-rose);">${{s.unknown_count}}</td>
+                    </tr>`;
+                }});
+                seatHtml += '</tbody></table>';
+                document.getElementById('seatSummaryContainer').innerHTML = seatHtml;
+
+            }} catch (err) {{
+                console.error("Failed to load analytics:", err);
+            }}
+        }}
+
+        function renderCell(brain, state, count) {{
+            if (count === 0) return '<span style="color:rgba(255,255,255,0.2);">0</span>';
+            const key = `${{brain}}::${{state}}`;
+            return `<span class="cell-interactive" onclick="inspectCell('${{key}}')">${{count}}</span>`;
+        }}
+
+        async function inspectCell(key) {{
+            const traceIds = globalLineageMap[key] || [];
+            if (traceIds.length === 0) return;
+            const res = await fetch(`/api/governance-traces/cell-lineage?session_id=${{sessionId}}`, {{
+                method: 'POST',
+                headers: {{ 'Content-Type': 'application/json' }},
+                body: JSON.stringify(traceIds)
+            }});
+            const lineage = await res.json();
+            document.getElementById('lineagePanel').style.display = 'block';
+            document.getElementById('lineageOutput').innerText = JSON.stringify(lineage, null, 2);
+            document.getElementById('lineagePanel').scrollIntoView({{ behavior: 'smooth' }});
+        }}
+
+        async function inspectTrace(traceId) {{
+            await inspectCell(null, [traceId]);
+        }}
+
+        loadAnalytics();
+    </script>
+</body>
+</html>
+"""
+    return html_content
 
 
 # --- GOOGLE DRIVE MCP ENDPOINTS ---

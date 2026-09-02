@@ -14,8 +14,10 @@ from kopano.api import app
 def client(tmp_path, monkeypatch):
     test_gdrive_db = tmp_path / "test_api_gdrive.db"
     test_voice_db = tmp_path / "test_api_voice.db"
+    test_ledger_db = tmp_path / "test_api_ledger.db"
     monkeypatch.setenv("DRIVE_CACHE_DB", str(test_gdrive_db))
     monkeypatch.setenv("RTC_VOICE_DB", str(test_voice_db))
+    monkeypatch.setenv("RTC_ACTIVITY_LEDGER_DB", str(test_ledger_db))
     with TestClient(app) as test_client:
         yield test_client
 
@@ -80,3 +82,43 @@ def test_api_rtc_voice_and_seat_switch(client):
     turn_data = res_turn.json()
     assert turn_data["foc_check_passed"] is True
     assert "gemini_live_payload" in turn_data
+
+
+def test_api_trace_analytics_and_cell_lineage(client):
+    # 1. Post a trace with specific session
+    client.post("/api/governance-traces", json={
+        "speaker_seat": "SEAT_01_KC",
+        "question_or_intent": "Validate analytics pipeline",
+        "session_id": "api_test_sess_01",
+        "which_brain": "LOCAL_MAO_BLACK_BEAST",
+        "sources": ["Schematics/21-KOPANO-PHU"],
+        "validations": ["Zero-FOC Passed"],
+        "why_trust": "Verified on metal"
+    })
+
+    # 2. Query trace analytics
+    res_analytics = client.get("/api/governance-traces/analytics?session_id=api_test_sess_01")
+    assert res_analytics.status_code == 200
+    adata = res_analytics.json()
+    assert adata["total_traces"] >= 1
+    assert "group_summary_by_seat" in adata
+    assert "pivot_brain_by_state" in adata
+    assert "attention_matrix" in adata
+
+    # 3. Query cell lineage for the trace
+    trace_id = adata["group_summary_by_seat"][0]["speaker_seat"]
+    res_lineage = client.post("/api/governance-traces/cell-lineage?session_id=api_test_sess_01", json=[
+        adata["pivot_brain_by_state"]["cell_lineage"]["LOCAL_MAO_BLACK_BEAST::PROVEN"][0]
+    ])
+    assert res_lineage.status_code == 200
+    ldata = res_lineage.json()
+    assert ldata["matched_trace_count"] == 1
+    assert ldata["lineage_sealed"] is True
+
+
+def test_api_observability_html_dashboard(client):
+    res = client.get("/observability?session_id=api_test_sess_01")
+    assert res.status_code == 200
+    assert "Observable Cognition Surface" in res.text
+    assert "KMEC Dataset Engine" in res.text
+    assert "cell-interactive" in res.text
