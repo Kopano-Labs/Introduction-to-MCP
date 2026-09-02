@@ -202,3 +202,37 @@ def test_api_foc_discovery_and_sealing_flow(client):
     assert res_seal.status_code == 200
     assert res_seal.json()["status"] == "SUCCESS"
     assert res_seal.json()["receipt"]["pka_verdict"] in ["ALLOW", "HOLD"]
+
+
+def test_api_kc_my_boy_consumer_and_mascot_endpoints(client):
+    # 1. Test KC Chat (General)
+    res_chat1 = client.post("/api/kc/chat", json={"message": "Hey KC, what are we building today?"})
+    assert res_chat1.status_code == 200
+    d1 = res_chat1.json()
+    assert d1["mascot"] == "KC"
+    assert d1["slogan"] == "KC My Boy"
+    assert "KC here, my boy!" in d1["reply"]
+    assert d1["mascot_state"] == "listening"
+
+    # 2. Test KC Chat (Work query)
+    res_chat2 = client.post("/api/kc/chat", json={"message": "I need a job in the township"})
+    assert res_chat2.status_code == 200
+    d2 = res_chat2.json()
+    assert "Vanguard C" in d2["reply"]
+    assert d2["mascot_state"] == "celebrating"
+
+    # 3. Test Mascot State Endpoint
+    res_mascot = client.get("/api/kc/mascot-state")
+    assert res_mascot.status_code == 200
+    m_data = res_mascot.json()
+    assert m_data["mascot_name"] == "KC"
+    assert m_data["animation"]["halo_pulse"] is True
+    assert m_data["color_palette"]["electric_cyan"] == "#00F0FF"
+
+    # 4. Test Ecosystem Summary Endpoint
+    res_summary = client.get("/api/kc/summary")
+    assert res_summary.status_code == 200
+    s_data = res_summary.json()
+    assert s_data["master_brand"] == "Kopano Labs"
+    assert len(s_data["ecosystem_lanes"]) >= 3
+    assert any(lane["name"] == "Cars4Mars" for lane in s_data["ecosystem_lanes"])

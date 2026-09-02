@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import KCMyBoyHero from "./components/KCMyBoyHero";
 import {
   connectionMessage,
   friendlyGate,
@@ -80,18 +81,7 @@ export default function EverydayMode({
 
   return (
     <main className="everyday-shell">
-      <header className="everyday-topbar">
-        <div className="everyday-brand">
-          <div className="everyday-mark" aria-hidden="true">K</div>
-          <div>
-            <p className="everyday-kicker">Your system</p>
-            <h1>What needs your attention?</h1>
-          </div>
-        </div>
-        <button type="button" className="quiet-button" onClick={onOpenOperatorMode}>
-          Operator view
-        </button>
-      </header>
+      <KCMyBoyHero onOpenOperatorMode={onOpenOperatorMode} />
 
       <section
         className={`connection-card ${online ? "is-online" : "is-offline"}`}

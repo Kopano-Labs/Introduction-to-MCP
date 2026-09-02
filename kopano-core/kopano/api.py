@@ -15,6 +15,7 @@ import asyncio
 import os
 import sys
 import logging
+from datetime import datetime, timezone
 from pathlib import Path
 from contextlib import asynccontextmanager
 from .kasilink_api import router as kasilink_router
@@ -1122,6 +1123,118 @@ def seal_foc_group_admission(req: FocSealRequest):
     return {
         "status": "SUCCESS",
         "receipt": receipt.to_dict()
+    }
+
+
+# --- KC MY BOY CONSUMER & MASCOT EXPERIENCE ENDPOINTS ---
+class KcChatRequest(BaseModel):
+    message: str
+    user_id: Optional[str] = "guest_user"
+    context_hint: Optional[str] = "everyday"
+
+
+@app.post("/api/kc/chat")
+def kc_my_boy_chat(req: KcChatRequest):
+    """
+    Friendly, non-developer front-door conversation with KC.
+    Speaks simply, guides with warmth, and avoids technical jargon.
+    Slogan: 'KC My Boy'.
+    """
+    lower = req.message.lower()
+
+    if any(w in lower for w in ["work", "job", "career", "earn"]):
+        reply = "I got you, my boy. Through Vanguard C and KasiLink, we have active digital and township opportunities. Let me queue up your capability profile so we can match you with real work."
+        mascot_state = "celebrating"
+        suggested_actions = ["Explore KasiLink Work", "Check My Capability Profile", "Connect to Vanguard C"]
+    elif any(w in lower for w in ["football", "soccer", "fives", "play"]):
+        reply = "Let's kick it! FiveSArena is live. We've got 3D physics courts and instant match reservations ready for you."
+        mascot_state = "celebrating"
+        suggested_actions = ["Open FiveS Arena", "Book a Match", "View Leaderboard"]
+    elif any(w in lower for w in ["cars4mars", "car", "ev", "hardware"]):
+        reply = "Cars4Mars is our flagship smart mobility division powered by Kopano Labs. We're building real electric vehicle telematics and smart hardware right here in South Africa."
+        mascot_state = "thinking"
+        suggested_actions = ["Explore Cars4Mars", "View DFR-01 Telematics", "Hardware Specs"]
+    elif any(w in lower for w in ["learn", "study", "code", "curriculum"]):
+        reply = "You're in the right place. Our classroom takes you step-by-step from zero to building sovereign software, without confusing tech jargon."
+        mascot_state = "thinking"
+        suggested_actions = ["Start Learning Module", "Ask Cassey", "View Progress"]
+    else:
+        reply = f"KC here, my boy! I'm tracking '{req.message}'. Let's turn that into clean progress without the chaos. Where should we start?"
+        mascot_state = "listening"
+        suggested_actions = ["Organize Workspace", "Talk to KC", "Explore Kopano Labs"]
+
+    return {
+        "mascot": "KC",
+        "slogan": "KC My Boy",
+        "reply": reply,
+        "mascot_state": mascot_state,
+        "energy_pulse": 0.95,
+        "suggested_actions": suggested_actions,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get("/api/kc/mascot-state")
+def get_kc_mascot_state():
+    """Returns the real-time procedural Three.js mascot mood and animation parameters."""
+    return {
+        "mascot_name": "KC",
+        "title": "Your Kopano Companion",
+        "slogan": "KC My Boy",
+        "current_mood": "ready_and_listening",
+        "animation": {
+            "hover_amplitude": 0.15,
+            "hover_frequency": 1.2,
+            "energy_ring_speed": 0.8,
+            "halo_pulse": True,
+            "eye_tracking": True
+        },
+        "color_palette": {
+            "obsidian": "#0A0D14",
+            "midnight_blue": "#0F172A",
+            "electric_cyan": "#00F0FF",
+            "copper_gold": "#D97706",
+            "soft_white": "#F8FAFC"
+        },
+        "greeting": "KC My Boy — Build Better. Think Clearer. Move Faster."
+    }
+
+
+@app.get("/api/kc/summary")
+def get_kc_ecosystem_summary():
+    """Returns simplified, non-developer ecosystem summary."""
+    return {
+        "master_brand": "Kopano Labs",
+        "tagline": "Build Better. Think Clearer. Move Faster.",
+        "mascot": "KC (KC My Boy)",
+        "ecosystem_lanes": [
+            {
+                "name": "Kopano Context Studio",
+                "role": "Experience Layer",
+                "tagline": "Human-AI collaboration that makes sense.",
+                "url": "https://kopano-context-studio.vercel.app"
+            },
+            {
+                "name": "Cars4Mars",
+                "role": "Hardware & Mobility Division",
+                "tagline": "Smart electric mobility experiences powered by Kopano Labs.",
+                "url": "https://cars4mars.com"
+            },
+            {
+                "name": "KasiLink & Vanguard C",
+                "role": "Economic Opportunity Grid",
+                "tagline": "Real work and verified capability for African youth.",
+                "url": "https://kasilink.co.za"
+            },
+            {
+                "name": "FiveSArena",
+                "role": "Retention & Sports Gaming",
+                "tagline": "Mobile-first 3D physics courts and community gaming.",
+                "url": "https://fivesarena.co.za"
+            }
+        ],
+        "system_status": "ONLINE",
+        "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
 
