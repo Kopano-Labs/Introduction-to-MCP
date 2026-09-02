@@ -16,10 +16,9 @@ from kopano.tools.google_drive_mcp import GoogleDriveMCPTool, DriveDocument
 
 
 @pytest.fixture
-def drive_tool(tmp_path, monkeypatch):
+def drive_tool(tmp_path):
     test_db = tmp_path / "test_gdrive_cache.db"
-    monkeypatch.setenv("DRIVE_CACHE_DB", str(test_db))
-    tool = GoogleDriveMCPTool()
+    tool = GoogleDriveMCPTool(db_path=test_db)
     return tool
 
 

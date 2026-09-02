@@ -47,13 +47,14 @@ class GoogleDriveMCPTool:
     MCP-compliant Google Drive Integration Tool for Kopano Sovereign Studio.
     """
 
-    def __init__(self, token_or_key: Optional[str] = None):
+    def __init__(self, token_or_key: Optional[str] = None, db_path: Optional[Path] = None):
         self.auth_token = token_or_key or os.environ.get("GOOGLE_DRIVE_TOKEN") or os.environ.get("GOOGLE_DRIVE_MCP_KEY")
+        self.db_path = db_path or Path(os.environ.get("DRIVE_CACHE_DB", str(Path.home() / ".kopano" / "gdrive_cache.db")))
         self._init_cache()
 
     def _init_cache(self):
-        DRIVE_CACHE_DB.parent.mkdir(parents=True, exist_ok=True)
-        with sqlite3.connect(str(DRIVE_CACHE_DB)) as conn:
+        self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        with sqlite3.connect(str(self.db_path)) as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS drive_documents (
                     file_id TEXT PRIMARY KEY,
@@ -69,7 +70,7 @@ class GoogleDriveMCPTool:
 
     def cache_document(self, doc: DriveDocument) -> None:
         """Caches a document in the local SQLite database."""
-        with sqlite3.connect(str(DRIVE_CACHE_DB)) as conn:
+        with sqlite3.connect(str(self.db_path)) as conn:
             conn.execute("""
                 INSERT OR REPLACE INTO drive_documents (
                     file_id, name, mime_type, content_text, web_view_link, modified_time, cached_at
@@ -90,7 +91,7 @@ class GoogleDriveMCPTool:
         Searches Google Drive cached datalake and live API if available.
         """
         results = []
-        with sqlite3.connect(str(DRIVE_CACHE_DB)) as conn:
+        with sqlite3.connect(str(self.db_path)) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute(
                 """
@@ -117,7 +118,7 @@ class GoogleDriveMCPTool:
         """
         Retrieves full document text by file ID.
         """
-        with sqlite3.connect(str(DRIVE_CACHE_DB)) as conn:
+        with sqlite3.connect(str(self.db_path)) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute(
                 "SELECT file_id, name, mime_type, content_text, web_view_link, modified_time FROM drive_documents WHERE file_id = ?",
@@ -138,7 +139,7 @@ class GoogleDriveMCPTool:
     def list_recent_files(self, limit: int = 20) -> List[Dict[str, Any]]:
         """Lists recently indexed Google Drive files."""
         results = []
-        with sqlite3.connect(str(DRIVE_CACHE_DB)) as conn:
+        with sqlite3.connect(str(self.db_path)) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute(
                 "SELECT file_id, name, mime_type, modified_time FROM drive_documents ORDER BY modified_time DESC LIMIT ?",

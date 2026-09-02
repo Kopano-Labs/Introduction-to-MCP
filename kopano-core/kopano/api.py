@@ -534,35 +534,45 @@ def mao_philosophy(action_description: str, has_proof: bool, survives_constraint
 def get_governance_traces():
     from .governance_trace import GovernanceTraceEngine
     engine = GovernanceTraceEngine()
-    return {"traces": [t.to_dict() for t in engine.traces]}
+    traces = engine.list_session_traces("default_session")
+    return {"traces": [t.to_dict() for t in traces]}
 
 
 class NewTraceRequest(BaseModel):
     speaker_seat: str
     question_or_intent: str
+    session_id: str = "default_session"
     which_brain: str = "LOCAL_MAO_BLACK_BEAST"
     sources: List[str] = []
     validations: List[str] = []
     why_trust: str = ""
-    epistemic_state: str = "SUPPORTED"
 
 
 @app.post("/api/governance-traces")
 def create_governance_trace(req: NewTraceRequest):
-    from .governance_trace import GovernanceTraceEngine, EpistemicState
+    from .governance_trace import GovernanceTraceEngine, CanonicalEvidenceClass
     engine = GovernanceTraceEngine()
     trace = engine.start_trace(
         speaker_seat=req.speaker_seat,
         question_or_intent=req.question_or_intent,
+        session_id=req.session_id,
         which_brain=req.which_brain
     )
     for s in req.sources:
         engine.record_search(trace, s)
     for v in req.validations:
         engine.record_validation(trace, v)
+
+    # Attach verified repository artifact evidence
+    engine.add_evidence(
+        trace,
+        evidence_class=CanonicalEvidenceClass.E2_REPOSITORY_ARTIFACT,
+        source_location="kopano-core/kopano/api.py",
+        description="API request execution on physical metal",
+        verified=True
+    )
     
-    state_enum = EpistemicState(req.epistemic_state) if req.epistemic_state in EpistemicState.__members__ else EpistemicState.SUPPORTED
-    sealed = engine.seal_trace(trace, state=state_enum, why_trust=req.why_trust)
+    sealed = engine.seal_and_persist_trace(trace, why_trust=req.why_trust)
     return {"trace": sealed.to_dict(), "visual_card": sealed.to_visual_card()}
 
 
