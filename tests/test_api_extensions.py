@@ -268,3 +268,49 @@ def test_api_rtc_council_identities_endpoints(client):
     # 3. Test Invalid Seat ID
     res_invalid = client.get("/api/rtc/seat/99")
     assert res_invalid.status_code == 404
+
+
+def test_api_kopano_assertion_engine(client):
+    # 1. Test KC Chat with specific RTC Identity and receipt emission
+    res_chat = client.post("/api/kc/chat", json={
+        "message": "Verify battery telematics on rover",
+        "rtc_identity": "SYSTEM_TELEMETRY",
+        "user_id": "c4m_pilot_01"
+    })
+    assert res_chat.status_code == 200
+    d = res_chat.json()
+    assert "assert_receipt" in d
+    receipt = d["assert_receipt"]
+    assert receipt["assert_id"].startswith("AST-")
+    assert receipt["rtc_identity"] == "SYSTEM_TELEMETRY"
+    assert receipt["intent_domain"] == "CARS4MARS_HARDWARE"
+    assert receipt["residency"] == "ZA-CPT (South Africa North)"
+    assert receipt["status"] == "VERIFIED_ON_LEDGER"
+    assert len(receipt["proof_hash"]) == 64
+
+    # 2. Test Get Assertion by ID
+    assert_id = receipt["assert_id"]
+    res_get = client.get(f"/api/kc/assert/{assert_id}")
+    assert res_get.status_code == 200
+    get_d = res_get.json()
+    assert get_d["status"] == "VERIFIED"
+    assert get_d["assert"]["assert_id"] == assert_id
+
+    # 3. Test Manual Assertion Emission
+    res_create = client.post("/api/kc/assert/create", json={
+        "session_id": "apprentice_sess_99",
+        "rtc_identity": "APPRENTICE",
+        "intent_domain": "SOVEREIGN_LEARNING",
+        "claim": "Verified Rust module graduation on physical metal"
+    })
+    assert res_create.status_code == 200
+    created = res_create.json()
+    assert created["status"] == "EMITTED"
+    assert created["assert"]["rtc_identity"] == "APPRENTICE"
+
+    # 4. Test List Assertions
+    res_list = client.get("/api/kc/asserts")
+    assert res_list.status_code == 200
+    list_d = res_list.json()
+    assert list_d["total_asserts"] >= 2
+    assert list_d["residency_region"] == "ZA-CPT (South Africa North)"

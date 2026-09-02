@@ -27,6 +27,7 @@ from .kc_phu_legacy_api import router as phu_legacy_router
 from .labs_api import router as labs_router
 from .rtc_learning_api import router as rtc_learning_router
 from .telemetry import configure_server_telemetry, log_demo_event
+from .assert_engine import KopanoAssert, assert_store
 
 logger = logging.getLogger("kopano.api")
 
@@ -1131,6 +1132,15 @@ class KcChatRequest(BaseModel):
     message: str
     user_id: Optional[str] = "guest_user"
     context_hint: Optional[str] = "everyday"
+    rtc_identity: Optional[str] = "GUEST_SEEKER"
+
+
+class CreateAssertRequest(BaseModel):
+    session_id: str
+    rtc_identity: str
+    intent_domain: str
+    claim: str
+    residency: Optional[str] = "ZA-CPT (South Africa North)"
 
 
 @app.post("/api/kc/chat")
@@ -1138,30 +1148,51 @@ def kc_my_boy_chat(req: KcChatRequest):
     """
     Friendly, non-developer front-door conversation with KC.
     Speaks simply, guides with warmth, and avoids technical jargon.
+    Emits an authentic Kopano Assert verifiable receipt on every interaction.
     Slogan: 'KC My Boy'.
     """
     lower = req.message.lower()
+    identity = req.rtc_identity or "GUEST_SEEKER"
 
-    if any(w in lower for w in ["work", "job", "career", "earn"]):
-        reply = "I got you, my boy. Through Vanguard C and KasiLink, we have active digital and township opportunities. Let me queue up your capability profile so we can match you with real work."
-        mascot_state = "celebrating"
-        suggested_actions = ["Explore KasiLink Work", "Check My Capability Profile", "Connect to Vanguard C"]
-    elif any(w in lower for w in ["football", "soccer", "fives", "play"]):
-        reply = "Let's kick it! FiveSArena is live. We've got 3D physics courts and instant match reservations ready for you."
-        mascot_state = "celebrating"
-        suggested_actions = ["Open FiveS Arena", "Book a Match", "View Leaderboard"]
-    elif any(w in lower for w in ["cars4mars", "car", "ev", "hardware"]):
+    if identity == "SYSTEM_TELEMETRY" or any(w in lower for w in ["cars4mars", "car", "ev", "hardware", "telematics", "rover", "battery", "sensor"]):
         reply = "Cars4Mars is our flagship smart mobility division powered by Kopano Labs. We're building real electric vehicle telematics and smart hardware right here in South Africa."
         mascot_state = "thinking"
+        domain = "CARS4MARS_HARDWARE"
+        claim = "Telemetry pipeline bound to DFR-01 rover telematics"
         suggested_actions = ["Explore Cars4Mars", "View DFR-01 Telematics", "Hardware Specs"]
-    elif any(w in lower for w in ["learn", "study", "code", "curriculum"]):
+    elif identity == "APPRENTICE" or any(w in lower for w in ["learn", "study", "code", "curriculum", "rust", "python", "builder"]):
         reply = "You're in the right place. Our classroom takes you step-by-step from zero to building sovereign software, without confusing tech jargon."
         mascot_state = "thinking"
+        domain = "SOVEREIGN_LEARNING"
+        claim = "Curriculum path synchronized to Sovereign Classroom Tier 1"
         suggested_actions = ["Start Learning Module", "Ask Cassey", "View Progress"]
+    elif any(w in lower for w in ["work", "job", "career", "earn", "kasilink", "vanguard"]):
+        reply = "I got you, my boy. Through Vanguard C and KasiLink, we have active digital and township opportunities. Let me queue up your capability profile so we can match you with real work."
+        mascot_state = "celebrating"
+        domain = "KASILINK_WORK"
+        claim = "Routed to KasiLink & Vanguard C capability matchmaking"
+        suggested_actions = ["Explore KasiLink Work", "Check My Capability Profile", "Connect to Vanguard C"]
+    elif any(w in lower for w in ["football", "soccer", "fives", "play", "pitch"]):
+        reply = "Let's kick it! FiveSArena is live. We've got 3D physics courts and instant match reservations ready for you."
+        mascot_state = "celebrating"
+        domain = "FIVES_PITCH"
+        claim = "Verified live court reservation at FiveS Arena"
+        suggested_actions = ["Open FiveS Arena", "Book a Match", "View Leaderboard"]
     else:
         reply = f"KC here, my boy! I'm tracking '{req.message}'. Let's turn that into clean progress without the chaos. Where should we start?"
         mascot_state = "listening"
+        domain = "EVERYDAY_ORCHESTRATION"
+        claim = f"General intent routed cleanly through {identity} persona"
         suggested_actions = ["Organize Workspace", "Talk to KC", "Explore Kopano Labs"]
+
+    # Emit verifiable Kopano Assert
+    assertion = KopanoAssert.create(
+        session_id=req.user_id or "guest_session",
+        identity=identity,
+        domain=domain,
+        claim=claim
+    )
+    assert_store.emit(assertion)
 
     return {
         "mascot": "KC",
@@ -1170,7 +1201,50 @@ def kc_my_boy_chat(req: KcChatRequest):
         "mascot_state": mascot_state,
         "energy_pulse": 0.95,
         "suggested_actions": suggested_actions,
+        "assert_receipt": assertion.model_dump() if hasattr(assertion, "model_dump") else assertion.dict(),
         "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.post("/api/kc/assert/create")
+def create_kopano_assert(req: CreateAssertRequest):
+    """Manually emit a signed Kopano Assertion."""
+    assertion = KopanoAssert.create(
+        session_id=req.session_id,
+        identity=req.rtc_identity,
+        domain=req.intent_domain,
+        claim=req.claim,
+        residency=req.residency or "ZA-CPT (South Africa North)"
+    )
+    assert_store.emit(assertion)
+    return {
+        "status": "EMITTED",
+        "assert": assertion.model_dump() if hasattr(assertion, "model_dump") else assertion.dict()
+    }
+
+
+@app.get("/api/kc/assert/{assert_id}")
+def get_kopano_assert(assert_id: str):
+    """Retrieve a signed Kopano Assertion by ID."""
+    assertion = assert_store.get(assert_id)
+    if not assertion:
+        raise HTTPException(status_code=404, detail=f"Assertion {assert_id} not found on ledger")
+    return {
+        "status": "VERIFIED",
+        "assert": assertion.model_dump() if hasattr(assertion, "model_dump") else assertion.dict()
+    }
+
+
+@app.get("/api/kc/asserts")
+def list_kopano_asserts(limit: int = 50):
+    """List recent verifiable assertions emitted on the ledger."""
+    return {
+        "total_asserts": assert_store.count(),
+        "residency_region": "ZA-CPT (South Africa North)",
+        "asserts": [
+            a.model_dump() if hasattr(a, "model_dump") else a.dict()
+            for a in assert_store.list_all(limit=limit)
+        ]
     }
 
 

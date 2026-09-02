@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
+import { RTCIdentityKey, RTC_IDENTITY_PROFILES } from "../types/rtc";
 
 export type MascotMood = "idle" | "listening" | "thinking" | "celebrating";
 
@@ -8,6 +9,7 @@ interface KCMascot3DProps {
   size?: number;
   interactive?: boolean;
   className?: string;
+  activeIdentity?: RTCIdentityKey;
   onMascotClick?: () => void;
 }
 
@@ -16,6 +18,7 @@ export const KCMascot3D: React.FC<KCMascot3DProps> = ({
   size = 320,
   interactive = true,
   className = "",
+  activeIdentity = "GUEST_SEEKER",
   onMascotClick,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -301,8 +304,11 @@ export const KCMascot3D: React.FC<KCMascot3DProps> = ({
       pupilMesh.position.x = mouse.x * 0.08;
       pupilMesh.position.y = mouse.y * 0.08;
 
-      // C. Gyroscopic Gimbal Spin Velocities by Mood
-      const spinSpeed = mood === "thinking" ? 4.5 : (mood === "celebrating" ? 6.0 : (mood === "listening" ? 1.8 : 1.0));
+      // C. Gyroscopic Gimbal Spin Velocities by Mood & Active RTC Identity
+      const rtcProfile = RTC_IDENTITY_PROFILES[activeIdentity] || RTC_IDENTITY_PROFILES.GUEST_SEEKER;
+      const baseSpin = mood === "thinking" ? 4.5 : (mood === "celebrating" ? 6.0 : (mood === "listening" ? 1.8 : 1.0));
+      const spinSpeed = baseSpin * rtcProfile.ringSpeedMultiplier;
+
       ring1.rotation.z = time * 0.6 * spinSpeed;
       ring1.rotation.x = Math.sin(time * 0.5) * 0.4;
 
@@ -312,7 +318,7 @@ export const KCMascot3D: React.FC<KCMascot3DProps> = ({
       ring3.rotation.x = -time * 0.4 * spinSpeed;
       ring3.rotation.z = Math.sin(time * 0.6) * 0.35;
 
-      cageMesh.rotation.y = -time * 0.25;
+      cageMesh.rotation.y = -time * 0.25 * rtcProfile.ringSpeedMultiplier;
       cageMesh.rotation.x = time * 0.15;
 
       // D. Orbital Satellites Motion
