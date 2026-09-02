@@ -161,4 +161,6 @@ Each case must separate **what happened**, **why the available capabilities were
 
 **Case 001 — Forge / AntiGravity Homecoming:** LEDGERED ON BRANCH `forge/mmao-session-failures-ledger-20260829`.
 
+**Case 002 — LEFA-AI Featherless Auth + Over-Explanation:** LEDGERED ON `master` under `04-LEFA-Featherless-Auth-OverExplain/` (seed commits `93494da`, `de9def9`; fix `8acd8f9` in `RobynAwesome/lefa-ai@robynawesome-fix-backend-seed`, 57/57 pytest PASS). Latent placeholder credential shipped as real + debug detail narrated to a non-technical user — studied, fixed, receipted.
+
 This index is the required starting file for the failure ledger.
