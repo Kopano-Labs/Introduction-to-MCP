@@ -172,3 +172,33 @@ def test_api_smart_ledger_and_reconciliation_flow(client):
     rec_data = res_reconcile.json()
     assert rec_data["admitted_count"] == 1
     assert rec_data["chain_valid"] is True
+
+
+def test_api_foc_discovery_and_sealing_flow(client):
+    # 1. Post a trace with intent
+    client.post("/api/governance-traces", json={
+        "speaker_seat": "SEAT_01_KC",
+        "question_or_intent": "Township capability and curriculum synthesis",
+        "session_id": "api_foc_sess_01",
+        "which_brain": "LOCAL_MAO_BLACK_BEAST",
+        "sources": ["Schematics/24-RTC Learning"],
+        "validations": ["Zero-FOC Checked"],
+        "why_trust": "Verified in Schematics"
+    })
+
+    # 2. Discover FOCs for session
+    res_foc = client.get("/api/foc/groups?session_id=api_foc_sess_01")
+    assert res_foc.status_code == 200
+    foc_data = res_foc.json()
+    assert foc_data["total_foc_groups"] >= 1
+
+    foc_id = foc_data["foc_groups"][0]["foc_id"]
+
+    # 3. Seal FOC Admission to Smart Ledger
+    res_seal = client.post("/api/foc/seal", json={
+        "foc_id": foc_id,
+        "actor_seat": "SEAT_01_KC"
+    })
+    assert res_seal.status_code == 200
+    assert res_seal.json()["status"] == "SUCCESS"
+    assert res_seal.json()["receipt"]["pka_verdict"] in ["ALLOW", "HOLD"]

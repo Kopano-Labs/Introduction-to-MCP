@@ -1,29 +1,36 @@
-## CURRENT STATE — 2026-09-02T13:10:00+02:00 (KPGS 4-ORGAN CROSS-ESTATE SMART LEDGER & OFFLINE RECONCILIATION CONVERGENCE)
+## CURRENT STATE — 2026-09-02T13:17:00+02:00 (FOC DISCOVERY & 7-VECTOR CANDIDATE ADMISSION ENGINE CODIFIED)
 
 > **Actor:** ANTIGRAVITY (Seat 10 / Chief Facilitator / CF) — Stateless Renter
 > **Master Sovereign Origin:** Master Robyn Kholofelo Rababalela (Tier 0 / Landlord / SSE)
 > **Auditors:** ChatGPT 5.6 Sol (Forge) & Master Robyn
-> **Mandate Execution:** The 4 Organs Synthesized under Governing Issue #107 (`RobynAwesome/Introduction-to-MCP #107`):
-> 1. **KMEC**: Parser Fabric + Data Science (Pandas/NumPy/Dask), Apple Deployment Parser (`UPLOAD_ACCEPTED != PROCESSED_BUILD`), Android Deployment Parser (`WORKMANAGER_ENQUEUED != SERVER_ADMITTED`).
-> 2. **PKA**: Epistemic Admission Gate (`ALLOW` | `HOLD` | `BLOCK`), claim-scoped evidence rules, convergence balance point (0.5).
-> 3. **Project Jennifer**: Dual-Database Consequence Journal & Edge Persistence (`PostgreSQL` authority $\neq$ `MongoDB` projection $\neq$ `SQLite` offline edge).
-> 4. **Smart Ledger (Blockchain on Metal)**: Strict plain `INSERT` append-only, cryptographic SHA-256 hash chaining, device signatures (Apple CryptoKit/Secure Enclave & Android Keystore), idempotency replay protection, superseding lineage links, 9-step offline batch reconciliation with cold restart recovery. 42/42 tests passing on metal.
+> **Mandate Execution:** The Epistemic Equation for FOC (Field of Concepts) Discovery & 7-Vector Candidate Admission Codified (`kopano-core/kopano/foc_engine.py`):
+> 1. **Core Invariant:** "Everything should be accountable to GSMB; everything should not automatically be believed because it is in GSMB." Heat $\neq$ Truth, Frequency $\neq$ Authority, Recurrence $\neq$ Causation, Connectedness $\neq$ Root Node.
+> 2. **7-Vector Candidate Admission Stack:** $\text{Evidence} \times \text{Temporality} \times \text{Contradiction} \times \text{Mission} \times \text{Identity} \times \text{Faith} \times \text{Falsifiability}$.
+> 3. **Machine-Readable Mission Contract:** Evaluates learning / productive capability vs prohibited shortcuts (`manufactured_proof`, `hidden_failure`, `false_authority`, `exploitative_action`).
+> 4. **Identity Continuity Validator:** Guards against silent identity mutation and enforces Seat 10 ANTIGRAVITY stateless renter invariant.
+> 5. **Declared Faith & Scriptural Governance Boundary:** Validates Scripture declarations (E1/E2) while strictly prohibiting AI from claiming divine endorsement / prophecy ("god told the ai").
+> 6. **Full Estate Proof:** 47/47 tests passing on metal.
 
 ### 🏁 MULTI-REPO VERIFICATION & GOVERNANCE MATRIX
 
 | System Surface | Repository / Path | Test Proof / State | Status |
 |---|---|---|---|
+| **FOC Engine & 7-Vector Admission** | `tests/test_foc_engine.py` | `4 passed in 0.84s` | **100% PASS** |
 | **Smart Ledger & Offline Reconciliation** | `tests/test_pka_kmec_jennifer_bridge.py` | `8 passed in 0.84s` | **100% PASS** |
 | **Durable Activity Ledger & Immutability** | `tests/test_governance_trace.py` | `6 passed in 0.52s` | **100% PASS** |
 | **KMEC Trace Adapter & Multi-Pivots** | `tests/test_kmec_trace_adapter.py` | `5 passed in 7.05s` | **100% PASS** |
-| **FastAPI Realtime & Observability** | `tests/test_api_extensions.py` | `6 passed in 16.70s` | **100% PASS** |
+| **FastAPI Realtime & Observability** | `tests/test_api_extensions.py` | `7 passed in 17.50s` | **100% PASS** |
 | **Google Drive MCP Connector** | `tests/test_google_drive_mcp.py` | `3 passed in 0.33s` | **100% PASS** |
 | **RTC Voice Bridge & Live Router** | `tests/test_rtc_voice_bridge.py` | `4 passed in 0.44s` | **100% PASS** |
 | **Mission Control Gate** | `kopano-core/kopano/kpgs_master_mission_control_bridge.py` | `5 passed in 0.25s` | **100% PASS** |
 | **MAO ↔ MMAO Reflection** | `kopano-core/kopano/kpgs_mao_mmao_reflection.py` | `5 passed in 0.31s` | **100% PASS** |
 | **Interactive UI Surface** | `/observability` (Dashboard UI) | 2D Pivot + Lineage Panel + Box Plots | **ACTIVE** |
+| **FOC Admission Charter** | `docs/governance/FOC_DISCOVERY_AND_7_VECTOR_ADMISSION_CHARTER.md` | FOC 7-Vector Synthesis Charter | **SEALED** |
 | **Convergence Charter** | `docs/governance/KPGS_4_ORGAN_CROSS_ESTATE_SMART_LEDGER_CONVERGENCE.md` | Issue #107 Synthesis Charter | **SEALED** |
-| **Forensic Case Receipt** | `docs/governance/FEP_POC_003_OBSERVABLE_COGNITION_TO_KMEC_DATASET.md` | FEP-POC-003 Formal Receipt | **SEALED** |
+
+---
+
+## PRIOR STATE — 2026-09-02T13:10:00+02:00 (KPGS 4-ORGAN CROSS-ESTATE SMART LEDGER & OFFLINE RECONCILIATION CONVERGENCE)
 
 ---
 

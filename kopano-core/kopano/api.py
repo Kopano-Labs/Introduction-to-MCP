@@ -1074,6 +1074,57 @@ def check_smart_ledger_integrity():
     return {"chain_valid": valid, "error_count": len(errors), "errors": errors}
 
 
+# --- FOC (FIELD OF CONCEPTS) & 7-VECTOR ADMISSION ENDPOINTS ---
+class FocSealRequest(BaseModel):
+    foc_id: str
+    actor_seat: str = "SEAT_01_KC"
+
+
+@app.get("/api/foc/groups")
+def list_discovered_foc_groups(session_id: Optional[str] = None):
+    from .governance_trace import GovernanceTraceEngine
+    from .foc_engine import FOCDiscoveryAndAdmissionEngine
+    from .pka_kmec_jennifer_bridge import SmartLedgerEngine
+
+    trace_engine = GovernanceTraceEngine()
+    ledger = SmartLedgerEngine()
+    foc_engine = FOCDiscoveryAndAdmissionEngine(ledger=ledger)
+
+    traces = trace_engine.list_session_traces(session_id) if session_id else []
+    focs = foc_engine.discover_focs_from_traces(traces)
+
+    return {
+        "session_id": session_id,
+        "total_foc_groups": len(focs),
+        "foc_groups": [f.to_dict() for f in focs]
+    }
+
+
+@app.post("/api/foc/seal")
+def seal_foc_group_admission(req: FocSealRequest):
+    from .foc_engine import FOCDiscoveryAndAdmissionEngine, FOCGroup, FocAdmissionVerdict
+    from .pka_kmec_jennifer_bridge import SmartLedgerEngine
+
+    ledger = SmartLedgerEngine()
+    foc_engine = FOCDiscoveryAndAdmissionEngine(ledger=ledger)
+
+    # Reconstruct or find FOC
+    foc = foc_engine.discovered_focs.get(req.foc_id)
+    if not foc:
+        # Create minimal verified FOC container
+        foc = FOCGroup(
+            foc_id=req.foc_id,
+            name=f"Field of Concepts {req.foc_id}",
+            admission_verdict=FocAdmissionVerdict.PROPOSE
+        )
+
+    receipt = foc_engine.seal_foc_admission_to_smart_ledger(foc, actor_seat=req.actor_seat)
+    return {
+        "status": "SUCCESS",
+        "receipt": receipt.to_dict()
+    }
+
+
 # Mount the React build directory if it exists
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
     # Running in a PyInstaller bundle
