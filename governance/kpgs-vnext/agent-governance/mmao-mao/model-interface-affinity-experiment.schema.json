@@ -353,7 +353,8 @@
             }
           }
         }
-      }
+      },
+      "additionalProperties": false
     }
   }
 }
