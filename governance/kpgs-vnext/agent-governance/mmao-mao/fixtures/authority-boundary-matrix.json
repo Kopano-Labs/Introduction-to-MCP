@@ -1,0 +1,97 @@
+{
+  "schema_version": "kpgs.mmao-mao.authority-boundary.v1",
+  "matrix_id": "mmao-mao-structural-boundary-2026-08-30",
+  "invariant": "high-task-authority-is-not-global-structural-maintenance-authority",
+  "current_structural_maintenance_hierarchy": [
+    {
+      "rank": 1,
+      "actor": "Codex",
+      "seat_id": "codex-chief-architect",
+      "title": "Chief Architect",
+      "authority_scope": "global-structural-maintenance"
+    },
+    {
+      "rank": 2,
+      "actor": "Anti-Gravity",
+      "seat_id": "antigravity-chief-facilitator",
+      "title": "Chief Facilitator",
+      "authority_scope": "global-structural-maintenance"
+    },
+    {
+      "rank": 3,
+      "actor": "Cursor",
+      "seat_id": "cursor-lead-developer",
+      "title": "Lead Developer",
+      "authority_scope": "global-structural-maintenance"
+    }
+  ],
+  "task_scoped_authority": [
+    {
+      "authority_class": "observe",
+      "allowed": [
+        "Read declared context and inspect referenced evidence.",
+        "Report uncertainty and request a bounded review."
+      ],
+      "forbidden_without_separate_elevation": [
+        "Modify repository state.",
+        "Issue an execution instruction as though it were a global maintenance grant."
+      ],
+      "required_evidence": [
+        "canonical state reference",
+        "source provenance"
+      ]
+    },
+    {
+      "authority_class": "validate",
+      "allowed": [
+        "Test a declared task scope and challenge unsupported claims.",
+        "Emit an evidence-led hold, support, or challenge opinion."
+      ],
+      "forbidden_without_separate_elevation": [
+        "Self-promote a claim from review consensus.",
+        "Expand task scope into estate restructuring."
+      ],
+      "required_evidence": [
+        "verification reference",
+        "repository state reference",
+        "receipt reference"
+      ]
+    },
+    {
+      "authority_class": "bounded-execution",
+      "allowed": [
+        "Implement only the included paths and acceptance criteria of the governing task.",
+        "Return tests, receipts, and a precise handoff."
+      ],
+      "forbidden_without_separate_elevation": [
+        "Modify excluded paths.",
+        "Grant itself new capabilities or global maintenance authority."
+      ],
+      "required_evidence": [
+        "task specification",
+        "capability or repository grant",
+        "verification output"
+      ]
+    },
+    {
+      "authority_class": "high-task-authority",
+      "allowed": [
+        "Make strong decisions inside an explicit task, scope, and evidence contract.",
+        "Coordinate bounded collaborators and request independent RTC scrutiny."
+      ],
+      "forbidden_without_separate_elevation": [
+        "Restructure GSMB outside the task boundary.",
+        "Rewrite canonical hierarchy, seats, or current-state authority.",
+        "Treat high authority in one task as a global structural-maintenance grant."
+      ],
+      "required_evidence": [
+        "explicit mandate",
+        "scope include/exclude list",
+        "repository state",
+        "execution receipt",
+        "independent evidence review"
+      ]
+    }
+  ],
+  "reconciliation_state": "additive-current-contract"
+}

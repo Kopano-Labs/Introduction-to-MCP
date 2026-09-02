@@ -1,0 +1,72 @@
+{
+  "schema_version": "kpgs.mmao-mao.identity-provenance.v1",
+  "record_id": "identity-jiro-khelos-2026-08-30",
+  "identity": {
+    "identity_id": "jiro",
+    "display_name": "Jiro",
+    "continuity_basis": "governed-record",
+    "ontology_boundary": "governance-namespace-not-proof-of-personhood"
+  },
+  "seat": {
+    "seat_id": "khelos-validator",
+    "display_name": "Khelos",
+    "functional_class": "validation",
+    "authority_baseline": "validate"
+  },
+  "interface": {
+    "interface_id": "kiro",
+    "display_name": "Kiro",
+    "kind": "ide-agent",
+    "version": null
+  },
+  "model": {
+    "provider": "Anthropic",
+    "model_id": "Claude",
+    "model_version": null,
+    "cognitive_substrate_ref": "provider://anthropic/claude"
+  },
+  "task": {
+    "task_id": "mmao-mao-affinity-poc-2026-08-30",
+    "governing_spec_ref": "repo://governance/kpgs-vnext/agent-governance/specs/mmao-mao-identity-governance-v0.1.json",
+    "included_scope": [
+      "governance/kpgs-vnext/agent-governance/mmao-mao/",
+      "tests/test_mmao_mao_identity_governance.py"
+    ],
+    "excluded_scope": [
+      "estate-wide GSMB restructuring",
+      "provider account changes",
+      "production deployment"
+    ]
+  },
+  "authority": {
+    "mode": "validate",
+    "scope_type": "task-scoped",
+    "scope_refs": [
+      "repo://governance/kpgs-vnext/agent-governance/mmao-mao/",
+      "repo://tests/test_mmao_mao_identity_governance.py"
+    ],
+    "task_ref": "mmao-mao-affinity-poc-2026-08-30",
+    "grant_ref": "human-instruction://2026-08-30/mmao-mao-identity-governance",
+    "high_task_authority": true,
+    "global_maintenance_seat": null
+  },
+  "context_state": {
+    "canonical_state_ref": "repo://NOW.md",
+    "snapshot_refs": [
+      "repo://AGENTS.md",
+      "repo://Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md",
+      "repo://Structure/07-Agents/AGENT_MESH.json"
+    ],
+    "temporal_status": "current"
+  },
+  "provenance": {
+    "recorded_at": "2026-08-30T15:42:50+02:00",
+    "recorded_by": "Codex stateless renter",
+    "source_refs": [
+      "repo://upload/MMAO_MAO_Identity_Governance_Work_Prompt_2026-08-30.md",
+      "repo://Structure/07-Agents/AGENT_MESH.json",
+      "repo://docs/swarm-ops/RTCP_SPEC.json"
+    ]
+  },
+  "evidence_receipt_refs": []
+}

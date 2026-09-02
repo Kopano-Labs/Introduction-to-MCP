@@ -37,8 +37,9 @@ class NowContinuityTests(unittest.TestCase):
         )
 
     def test_root_now_is_current_state_authority_and_preserves_history(self):
-        self.assertIn("Current-state authority", self.now)
-        self.assertIn("CURRENT STATE — 2026-08-24", self.now)
+        self.assertIn("## CURRENT STATE —", self.now)
+        self.assertIn("Repository-root `NOW.md` is the **volatile salience / temporal truth** layer.", self.now)
+        self.assertIn("## PRIOR STATE —", self.now)
         self.assertIn("HISTORICAL LOG — PRESERVED PROVENANCE", self.now)
         self.assertIn("2026-06-22T06:39 SAST", self.now)
         self.assertIn("repo root NOW.md is the comms lane", self.now)

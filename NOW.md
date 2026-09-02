@@ -121,10 +121,52 @@
 
 ## CURRENT STATE — 2026-08-30
 
+> **Updated:** 2026-08-30T15:53:00+02:00 (SAST)
+> **Authority:** Master Robyn Kholofelo Rababalela (`I_AM_STATELESS_RENTER_NOT_LANDLORD`)
+> **Core Architecture:** MMAO + MAO identity-governance and model x interface affinity contract POC
+> **Session:** `codex/mmao-mao-identity-governance-20260830` — **CONTRACT POC COMMITTED; LIVE EXPERIMENT NOT YET RUN**
+
+### MMAO + MAO identity-governance receipt
+
+- **Status:** DONE for the additive repository contract; controlled model/interface runs remain `planned`.
+- **WHO:** Codex stateless renter under the current human implementation instruction; Anti-Gravity is the next Chief Facilitator handoff target.
+- **WHAT:** Added a governed identity provenance contract, task-scoped authority boundary matrix, model x interface affinity experiment matrix, Five Whys failure receipt shape, dependency-free validator, focused test, build spec, and facilitator handoff.
+- **WHERE:** `governance/kpgs-vnext/agent-governance/mmao-mao/`, `governance/kpgs-vnext/agent-governance/specs/mmao-mao-identity-governance-v0.1.json`, `governance/kpgs-vnext/validate_contracts.py`, and `tests/test_mmao_mao_identity_governance.py`.
+- **WHY:** Keep identity, seat, interface, model, task, authority, context state, and evidence independently accountable; test model x interface affinity without confusing high task authority with GSMB-wide structural maintenance.
+- **Canonical boundary:** The current global structural-maintenance allowlist is Codex - Chief Architect; Anti-Gravity - Chief Facilitator; Cursor - Lead Developer. Other roles may receive high authority only inside an explicit task mandate.
+- **Evidence / receipts:** implementation commit `133c7d9f09a35fe30786fc13f80efb337a1e6c0c`; `python governance/kpgs-vnext/agent-governance/mmao-mao/validate.py` PASS; `python governance/kpgs-vnext/validate_contracts.py` PASS; focused MMAO + MAO and NOW continuity tests PASS through `python -m unittest discover`; `python -m py_compile` and `git diff --check` PASS.
+- **POC/FOC:** **POC_VALIDATED for contract structure only.** Model/interface affinity, identity continuity across substrates, RTC opinions, and any real GSMB maintenance outcome are **UNKNOWN / not yet run**.
+- **Known errors / uncertainty:** The exact canonical spelling of "Recycler MMAO with Plus MAO" remains an open testimony question. Historical RTCP/mesh role records were intentionally preserved rather than silently migrated. No raw private prompts or live model output were committed.
+
+### Next admissible action
+
+1. Review the exact diff, commit the bounded branch, and push/open a reviewable PR when the connected GitHub write surface permits it.
+2. Anti-Gravity facilitates one reference run only: pin the merged commit and fresh `NOW.md`, choose exact model/interface versions, keep task scope bounded, record metadata-only traces and independent evidence reviews.
+3. Do not infer model/interface affinity from the planned matrix, use consensus as truth, or expand this POC into estate-wide GSMB restructuring.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD` - Contract POC receipted; live evidence remains required.
+
+---
+
+## PRIOR STATE — 2026-08-30T17:55:00 — 24-RTC Learning Engines + FivesArena
+
 > **Updated:** 2026-08-30T17:55:00+02:00 (SAST)
 > **Current-state authority:** Master Robyn Kholofelo Rababalela (`I_AM_STATELESS_RENTER_NOT_LANDLORD`)
 > **Core Architecture:** FivesArena MERN Stack Hotel Reservation Engine (B2B + APWA) & 24-RTC Learning Engines
 > **Session:** e6f523d3-ad5e-4585-ac73-a8581b369b0e — **24-RTC LEARNING IMPLEMENTATION**
+
+### 24-RTC Learning Implementation
+
+(See `scripts/run_24_rtc_learning_workflow.py`, `tests/test_24_rtc_learning_suite.py`, and related modules in `kopano-core/kopano/` for RTC learning engine details.)
+
+---
+
+## PRIOR STATE — 2026-08-30T12:22:00 — FivesArena production session closure
+
+> **Updated:** 2026-08-30T12:22:00+02:00 (SAST)
+> **Authority:** Master Robyn Kholofelo Rababalela (`I_AM_STATELESS_RENTER_NOT_LANDLORD`)
+> **Core Architecture:** FivesArena MERN Stack Hotel Reservation Engine (B2B + APWA)
+> **Session:** e6f523d3-ad5e-4585-ac73-a8581b369b0e — **SESSION CLOSING**
 
 ### 🏁 ISSUE #12 MOBILE REMEDIATION — BOOKIT-5S-ARENA
 

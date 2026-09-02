@@ -1,0 +1,156 @@
+{
+  "spec_id": "kpgs-mmao-mao-identity-governance-v0.1",
+  "title": "MMAO + MAO Identity-Governance and Model Interface Affinity POC",
+  "outcome": "Create an additive, machine-checkable governance layer that distinguishes identity, seat, interface, model, task, scope, authority, context state, provenance, and receipts; preserves task-scoped high authority; and prepares controlled model x interface affinity runs without claiming results before evidence exists.",
+  "scope": {
+    "included": [
+      "MMAO + MAO identity provenance schema and example",
+      "Task-scoped authority boundary matrix and current three-seat structural-maintenance allowlist",
+      "Model x interface affinity experiment schema and planned comparison matrix",
+      "Evidence-led Five Whys failure receipt schema and synthetic non-production fixture",
+      "Dependency-free structural validator and focused regression test",
+      "Root NOW.md current-state receipt and Anti-Gravity facilitator handoff"
+    ],
+    "excluded": [
+      "Estate-wide GSMB restructuring",
+      "Changing historical MAO/MMAO/RTCP registries without a separately governed migration",
+      "Live provider account, model routing, tool-permission, or production deployment changes",
+      "Claims that a planned run has executed or that an identity proves machine personhood",
+      "Treating RTC agreement as truth without independent evidence"
+    ]
+  },
+  "interfaces": [
+    {
+      "name": "Identity provenance",
+      "contract": "A governed identity remains an accountability namespace across model/interface changes while retaining substrate provenance.",
+      "version": "kpgs.mmao-mao.identity-provenance.v1"
+    },
+    {
+      "name": "Task authority",
+      "contract": "High task authority is constrained to the explicit task mandate; global GSMB structural maintenance is limited to the named three-seat hierarchy.",
+      "version": "kpgs.mmao-mao.authority-boundary.v1"
+    },
+    {
+      "name": "Affinity experiment",
+      "contract": "A run records the invariant identity/task/repository state and declares changed variables before any result is evaluated.",
+      "version": "kpgs.mmao-mao.model-interface-affinity.v1"
+    },
+    {
+      "name": "Failure receipt",
+      "contract": "Failure classification, Five Whys, correction, retest, and role-based review remain evidence-led and metadata-only by default.",
+      "version": "kpgs.mmao-mao.failure-receipt.v1"
+    }
+  ],
+  "constraints": [
+    "Repository-root NOW.md remains the volatile current-state authority.",
+    "Existing MAO, MMAO, RTCP, task-contract, evidence, and failure-ledger owners remain intact.",
+    "Identity is not model, interface, seat, or proof of personhood.",
+    "The current structural-maintenance hierarchy is Codex Chief Architect, Anti-Gravity Chief Facilitator, then Cursor Lead Developer.",
+    "High task authority cannot silently broaden into GSMB structural-maintenance authority.",
+    "No comparison is treated as executed without exact repository state, a metadata-only tool trace, and evidence references.",
+    "RTC reviews support evidence convergence and cannot manufacture truth through majority vote.",
+    "The spoken working testimony Recycler MMAO with Plus MAO remains preserved until a governed naming correction exists.",
+    "No raw private prompt, credential, or personal context is captured by the experiment fixtures."
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "MM-01",
+      "statement": "The contract distinctly represents identity, seat, interface, model, task, authority, context state, provenance, and receipts.",
+      "hard_gate": true,
+      "verification_methods": [
+        "schema",
+        "unit"
+      ]
+    },
+    {
+      "id": "MM-02",
+      "statement": "A task-scoped high-authority record cannot name a global structural-maintenance seat, while a global record is constrained to the three-seat allowlist.",
+      "hard_gate": true,
+      "verification_methods": [
+        "schema",
+        "unit"
+      ]
+    },
+    {
+      "id": "MM-03",
+      "statement": "The planned matrix covers model-only, interface-only, seat-only, and substrate comparisons while preserving the declared identity and task invariants.",
+      "hard_gate": true,
+      "verification_methods": [
+        "schema",
+        "unit"
+      ]
+    },
+    {
+      "id": "MM-04",
+      "statement": "A failure receipt records exactly five Five Whys, metadata-only trace handling, correction, retest, and independent evidence review without majority-vote truth claims.",
+      "hard_gate": true,
+      "verification_methods": [
+        "schema",
+        "unit"
+      ]
+    },
+    {
+      "id": "MM-05",
+      "statement": "The current-state record and Anti-Gravity handoff state what is canonical, what is planned, and what requires validation next.",
+      "hard_gate": true,
+      "verification_methods": [
+        "human-review",
+        "unit"
+      ]
+    },
+    {
+      "id": "MM-06",
+      "statement": "The POC remains additive and does not claim live model-interface affinity or authorize structural migration before evidence exists.",
+      "hard_gate": true,
+      "verification_methods": [
+        "human-review",
+        "unit"
+      ]
+    }
+  ],
+  "verification_plan": [
+    {
+      "criterion_id": "MM-01",
+      "evidence": "identity-provenance.schema.json plus jiro-khelos-provenance.json distinguish all required identity and substrate fields.",
+      "command_or_procedure": "python governance/kpgs-vnext/agent-governance/mmao-mao/validate.py"
+    },
+    {
+      "criterion_id": "MM-02",
+      "evidence": "authority-boundary schema and matrix preserve the task/global distinction and exact allowlist.",
+      "command_or_procedure": "python governance/kpgs-vnext/agent-governance/mmao-mao/validate.py"
+    },
+    {
+      "criterion_id": "MM-03",
+      "evidence": "recycler-mmao-plus-mao-experiment.json declares the four comparison types and no fabricated execution results.",
+      "command_or_procedure": "python governance/kpgs-vnext/agent-governance/mmao-mao/validate.py"
+    },
+    {
+      "criterion_id": "MM-04",
+      "evidence": "controlled-scope-breach-receipt.json has exactly five evidence-linked Five Whys and no raw trace capture.",
+      "command_or_procedure": "python governance/kpgs-vnext/agent-governance/mmao-mao/validate.py"
+    },
+    {
+      "criterion_id": "MM-05",
+      "evidence": "root NOW.md and handoffs/ANTIGRAVITY_CHIEF_FACILITATOR_2026-08-30.md preserve operational continuity.",
+      "command_or_procedure": "Review the handoff; run pytest -q tests/test_mmao_mao_identity_governance.py."
+    },
+    {
+      "criterion_id": "MM-06",
+      "evidence": "README and fixtures label all comparison runs planned and retain historical owners rather than rewriting them.",
+      "command_or_procedure": "Human review and python governance/kpgs-vnext/validate_contracts.py"
+    }
+  ],
+  "rollback_plan": {
+    "trigger": "The contract expands authority beyond the declared hierarchy, falsely records a planned experiment as executed, captures private/raw context, or conflicts with an existing canonical owner.",
+    "procedure": "Revert the MMAO + MAO identity-governance commit set. No production runtime, provider account, or estate migration depends on this POC.",
+    "target_ref": "master@551a422ab4f906b815f5cc5fd80a76b9ba9a1e9e"
+  },
+  "risk_class": "R2",
+  "required_capabilities": [],
+  "lifecycle_state": "draft",
+  "related_issues": [
+    38,
+    39,
+    45
+  ]
+}
