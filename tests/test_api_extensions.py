@@ -236,3 +236,35 @@ def test_api_kc_my_boy_consumer_and_mascot_endpoints(client):
     assert s_data["master_brand"] == "Kopano Labs"
     assert len(s_data["ecosystem_lanes"]) >= 3
     assert any(lane["name"] == "Cars4Mars" for lane in s_data["ecosystem_lanes"])
+
+
+def test_api_rtc_council_identities_endpoints(client):
+    # 1. Test Get All 12 Canonical RTC Seats
+    res = client.get("/api/rtc/council")
+    assert res.status_code == 200
+    data = res.json()
+    assert data["total_seats"] == 12
+    assert data["status"] == "RATIFIED & SEALED"
+    seats = data["seats"]
+    assert len(seats) == 12
+
+    # Check Seat 0 (Master Robyn) and Seat 1 (KC)
+    seat0 = next(s for s in seats if s["seat"] == 0)
+    assert seat0["name"] == "MASTER ROBYN"
+    assert "Sovereign" in seat0["title"]
+
+    seat1 = next(s for s in seats if s["seat"] == 1)
+    assert seat1["name"] == "KC"
+    assert "Companion" in seat1["title"]
+
+    # 2. Test Get Specific Seat by ID
+    res_thari = client.get("/api/rtc/seat/7")
+    assert res_thari.status_code == 200
+    thari_data = res_thari.json()
+    assert thari_data["name"] == "THARI"
+    assert thari_data["emoji"] == "🧵"
+    assert "CrisisConnect" in thari_data["department"]
+
+    # 3. Test Invalid Seat ID
+    res_invalid = client.get("/api/rtc/seat/99")
+    assert res_invalid.status_code == 404

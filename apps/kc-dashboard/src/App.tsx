@@ -3,14 +3,19 @@ import dashboardState from "../../../governance/kpgs-vnext/kc/dashboard-state.js
 import EverydayMode from "./EverydayMode";
 import OperatorMode from "./OperatorMode";
 import { KCSpatialLab } from "./components/KCSpatialLab";
+import { RTCCouncilIdentities } from "./components/RTCCouncilIdentities";
 import "./everyday.css";
 
-type ViewMode = "everyday" | "operator" | "spatial_lab";
+type ViewMode = "everyday" | "operator" | "spatial_lab" | "rtc_council";
 
 export default function App() {
   // Everyday Mode is intentionally the default.
-  // Spatial Lab and Operator Mode are accessible on-demand.
+  // RTC Council, Spatial Lab and Operator Mode are accessible on-demand.
   const [mode, setMode] = useState<ViewMode>("everyday");
+
+  if (mode === "rtc_council") {
+    return <RTCCouncilIdentities onBackToEveryday={() => setMode("everyday")} />;
+  }
 
   if (mode === "spatial_lab") {
     return (
@@ -31,6 +36,7 @@ export default function App() {
       snapshotLabel="saved system snapshot"
       onOpenOperatorMode={() => setMode("operator")}
       onOpenSpatialLab={() => setMode("spatial_lab")}
+      onOpenRtcCouncil={() => setMode("rtc_council")}
     />
   );
 }

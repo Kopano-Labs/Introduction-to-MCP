@@ -27,6 +27,7 @@ type EverydayModeProps = {
   snapshotLabel: string;
   onOpenOperatorMode: () => void;
   onOpenSpatialLab?: () => void;
+  onOpenRtcCouncil?: () => void;
 };
 
 const detailOptions: Array<{ value: DetailDensity; label: string }> = [
@@ -65,6 +66,7 @@ export default function EverydayMode({
   snapshotLabel,
   onOpenOperatorMode,
   onOpenSpatialLab,
+  onOpenRtcCouncil,
 }: EverydayModeProps) {
   const reduceMotion = useReducedMotion();
   const profile = useInteractionProfile();
@@ -86,6 +88,7 @@ export default function EverydayMode({
       <KCMyBoyHero
         onOpenOperatorMode={onOpenOperatorMode}
         onOpenSpatialLab={onOpenSpatialLab}
+        onOpenRtcCouncil={onOpenRtcCouncil}
       />
 
       <section

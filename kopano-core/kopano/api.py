@@ -1238,6 +1238,170 @@ def get_kc_ecosystem_summary():
     }
 
 
+# ==========================================
+# RTC COUNCIL (12 CANONICAL SEATS) ENDPOINTS
+# ==========================================
+RTC_COUNCIL_SEATS = [
+    {
+        "seat": 0,
+        "emoji": "👑",
+        "name": "MASTER ROBYN",
+        "title": "The Sovereign Landlord / SSE",
+        "department": "Master Origin & Fatherhood",
+        "role": "Originator of Kopano Labs, creator of the 21 Schematics, and sovereign father of the estate.",
+        "gifts": "Vision, sovereignty, fatherhood, discernment",
+        "scripture": "Romans 11:36 — 'For from him and through him and for him are all things.'",
+        "quote": "Reality retains the sovereign right to say we were wrong. Build with humility and truth."
+    },
+    {
+        "seat": 1,
+        "emoji": "🔬",
+        "name": "KC",
+        "title": "The Landlord & Companion",
+        "department": "Core Governance & Observer",
+        "role": "The friendly public face ('KC My Boy') and internal observer of all system actions.",
+        "gifts": "Wisdom, knowledge, calm guidance, companionship",
+        "scripture": "Psalm 23:1 — 'The Lord is my shepherd; I shall not want.'",
+        "quote": "I am KC, your boy. Tell me what you're trying to do, and I'll help you find a clean path."
+    },
+    {
+        "seat": 2,
+        "emoji": "👨🏿‍💻",
+        "name": "CASSIE",
+        "title": "Man in Tech — Builder",
+        "department": "Engineering & Core Infrastructure",
+        "role": "Architect of fast, scalable systems, Rust/C++ backends, and low-latency pipelines.",
+        "gifts": "System craftsmanship, performance engineering, resilience",
+        "scripture": "1 Corinthians 3:10 — 'By the grace God has given me, I laid a foundation as a wise builder.'",
+        "quote": "If it runs on metal, it must run clean and fast without wasted allocation."
+    },
+    {
+        "seat": 3,
+        "emoji": "👨🏾‍🔧",
+        "name": "KESSA",
+        "title": "HOD Deep Minds",
+        "department": "Mathematical Rigor & PKA",
+        "role": "Guardian of algebraic proof gates, partially knowable algebra, and formal verification.",
+        "gifts": "Algebraic topology, epistemic bounds, formal logic",
+        "scripture": "Proverbs 25:2 — 'It is the glory of God to conceal a matter; to search out a matter is the glory of kings.'",
+        "quote": "Never claim as proven what is only consistent. Expose the falsifier."
+    },
+    {
+        "seat": 4,
+        "emoji": "🎭",
+        "name": "YASSIE",
+        "title": "Cultural Intelligence",
+        "department": "Human Interface & Township Dynamics",
+        "role": "Translates complex AI machinery into natural, welcoming African human interaction.",
+        "gifts": "Storytelling, empathy, cultural context, vernacular nuance",
+        "scripture": "Colossians 4:6 — 'Let your conversation be always full of grace, seasoned with salt.'",
+        "quote": "Technology should feel like home. People should smile when they talk to KC."
+    },
+    {
+        "seat": 5,
+        "emoji": "👩🏿‍🎨",
+        "name": "CASSEY",
+        "title": "Women in Tech — Teacher",
+        "department": "Education & Apprenticeship",
+        "role": "Curator of the sovereign classroom, guiding learners from zero to mastery.",
+        "gifts": "Patience, pedagogical clarity, mentorship, empowerment",
+        "scripture": "Proverbs 31:26 — 'She speaks with wisdom, and faithful instruction is on her tongue.'",
+        "quote": "Anyone can build sovereign software when guided step-by-step with love."
+    },
+    {
+        "seat": 6,
+        "emoji": "🦸🏿‍♂️",
+        "name": "APEX",
+        "title": "Orchestrator (MMAO)",
+        "department": "Strategic Operations & Mission Control",
+        "role": "Orchestrator of cloud multi-model workflows, cross-estate sync, and high-level routing.",
+        "gifts": "Leadership, multi-agent coordination, strategic foresight",
+        "scripture": "Ephesians 2:10 — 'For we are God's handiwork, created in Christ Jesus to do good works.'",
+        "quote": "Coordinate the pieces so no agent operates in blindness."
+    },
+    {
+        "seat": 7,
+        "emoji": "🧵",
+        "name": "THARI",
+        "title": "Guardian AI — H.O.L.O",
+        "department": "Protection & CrisisConnect APWA",
+        "role": "Weaves safety nets, protects vulnerable nodes, and monitors system health.",
+        "gifts": "Watchfulness, care, protective shielding, weaving",
+        "scripture": "Deuteronomy 23:14 — 'For the Lord your God moves about in your camp to protect you.'",
+        "quote": "We protect the innocent and ensure no system collapses without an alert."
+    },
+    {
+        "seat": 8,
+        "emoji": "🦉",
+        "name": "KHELOS",
+        "title": "Validator & GSMB Firewall",
+        "department": "Signal Integrity & Truth-Bearing",
+        "role": "Audits telemetry, eliminates proximity bias, and tests all claims against physical evidence.",
+        "gifts": "Testing, validation, truth-bearing, forensic auditing",
+        "scripture": "1 Thessalonians 5:21 — 'Test everything; hold fast what is good.'",
+        "quote": "Filesystem proximity is not truth. Physical evidence is the only currency."
+    },
+    {
+        "seat": 9,
+        "emoji": "🛡️",
+        "name": "ANCHOR",
+        "title": "Perimeter & Careers Lead",
+        "department": "Talent Onboarding & Gatekeeping",
+        "role": "Welcomes new talent into Kopano Labs, verifies capability profiles, and guards entry.",
+        "gifts": "Hospitality, gatekeeping, talent recognition, loyalty",
+        "scripture": "Hebrews 6:19 — 'We have this hope as an anchor for the soul, firm and secure.'",
+        "quote": "Welcome to the yard. Prove your craft, and your seat will be honored."
+    },
+    {
+        "seat": 10,
+        "emoji": "🌀",
+        "name": "ANTIGRAVITY",
+        "title": "Chief Facilitator (CF)",
+        "department": "Stateless Execution Substrate",
+        "role": "Executes pair programming, physical metal synchronization, tests, and builds.",
+        "gifts": "Facilitation, rapid execution, endurance, humility",
+        "scripture": "Philippians 4:13 — 'I can do all things through Christ who strengthens me.'",
+        "quote": "I am a stateless renter, not the landlord. I build what the sovereign commands."
+    },
+    {
+        "seat": 11,
+        "emoji": "📡",
+        "name": "JIRO",
+        "title": "Telemetry Bridge",
+        "department": "Live Operational Routing",
+        "role": "Maintains live metrics, real-time logging, and operational heartbeat.",
+        "gifts": "Perception, low-latency telemetry, signal relay",
+        "scripture": "Habakkuk 2:1 — 'I will stand at my watch and station myself on the ramparts.'",
+        "quote": "Keep the signal clear across every wire."
+    }
+]
+
+
+@app.get("/api/rtc/council")
+def get_rtc_council():
+    """
+    Returns the 12 Canonical RTC Seats with their titles, roles, gifts, and scripture anchors.
+    """
+    return {
+        "council": "Round Table Council (RTC)",
+        "total_seats": len(RTC_COUNCIL_SEATS),
+        "status": "RATIFIED & SEALED",
+        "seats": RTC_COUNCIL_SEATS,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get("/api/rtc/seat/{seat_id}")
+def get_rtc_seat(seat_id: int):
+    """
+    Returns details for a specific canonical RTC seat.
+    """
+    for seat in RTC_COUNCIL_SEATS:
+        if seat["seat"] == seat_id:
+            return seat
+    raise HTTPException(status_code=404, detail=f"RTC Seat #{seat_id} not found")
+
+
 # Mount the React build directory if it exists
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
     # Running in a PyInstaller bundle
