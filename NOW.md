@@ -1,21 +1,20 @@
-## CURRENT STATE — 2026-09-02T13:17:00+02:00 (FOC DISCOVERY & 7-VECTOR CANDIDATE ADMISSION ENGINE CODIFIED)
+## CURRENT STATE — 2026-09-02T13:23:00+02:00 (THE FOC vs POC EPISTEMIC CONSTITUTION & DEEP GSMB TRAVERSAL)
 
 > **Actor:** ANTIGRAVITY (Seat 10 / Chief Facilitator / CF) — Stateless Renter
 > **Master Sovereign Origin:** Master Robyn Kholofelo Rababalela (Tier 0 / Landlord / SSE)
 > **Auditors:** ChatGPT 5.6 Sol (Forge) & Master Robyn
-> **Mandate Execution:** The Epistemic Equation for FOC (Field of Concepts) Discovery & 7-Vector Candidate Admission Codified (`kopano-core/kopano/foc_engine.py`):
-> 1. **Core Invariant:** "Everything should be accountable to GSMB; everything should not automatically be believed because it is in GSMB." Heat $\neq$ Truth, Frequency $\neq$ Authority, Recurrence $\neq$ Causation, Connectedness $\neq$ Root Node.
-> 2. **7-Vector Candidate Admission Stack:** $\text{Evidence} \times \text{Temporality} \times \text{Contradiction} \times \text{Mission} \times \text{Identity} \times \text{Faith} \times \text{Falsifiability}$.
-> 3. **Machine-Readable Mission Contract:** Evaluates learning / productive capability vs prohibited shortcuts (`manufactured_proof`, `hidden_failure`, `false_authority`, `exploitative_action`).
-> 4. **Identity Continuity Validator:** Guards against silent identity mutation and enforces Seat 10 ANTIGRAVITY stateless renter invariant.
-> 5. **Declared Faith & Scriptural Governance Boundary:** Validates Scripture declarations (E1/E2) while strictly prohibiting AI from claiming divine endorsement / prophecy ("god told the ai").
-> 6. **Full Estate Proof:** 47/47 tests passing on metal.
+> **Mandate Execution:** The FOC vs POC Epistemic Constitution Codified in `Schematics/24-RTC Learning/POCvsFOC Groups/` and `kopano-core/kopano/foc_engine.py`:
+> 1. **Epistemic Invariant:** *"Not every claim must be empirically falsifiable. Every empirical claim must be."*
+> 2. **Three Claim Families:** Declarative (Robyn E1 testimony), Textual (Scripture/source E2), Empirical (metal reality + falsifier). Divine transcendence remains strictly outside machine authority (no AI divination / prophecy).
+> 3. **The Continuum:** GSMB remembers $\rightarrow$ FOC asks $\rightarrow$ POC tests with explicit falsifier $\rightarrow$ FEP watches temporal survival through time $\rightarrow$ PKA governs admissibility $\rightarrow$ Smart Ledger records consequences $\rightarrow$ Reality retains the sovereign right to say we were wrong.
+> 4. **Deep GSMB Traversal (Anti-Proximity Bias):** Filesystem nesting is a location fact, not an epistemic ranking. Bounded traversal across Tiers 1–3 extracting all 8 provenance dimensions.
+> 5. **Full Estate Proof:** 49/49 tests passing on physical metal.
 
 ### 🏁 MULTI-REPO VERIFICATION & GOVERNANCE MATRIX
 
 | System Surface | Repository / Path | Test Proof / State | Status |
 |---|---|---|---|
-| **FOC Engine & 7-Vector Admission** | `tests/test_foc_engine.py` | `4 passed in 0.84s` | **100% PASS** |
+| **FOC Engine & POC Transition** | `tests/test_foc_engine.py` | `6 passed in 0.84s` | **100% PASS** |
 | **Smart Ledger & Offline Reconciliation** | `tests/test_pka_kmec_jennifer_bridge.py` | `8 passed in 0.84s` | **100% PASS** |
 | **Durable Activity Ledger & Immutability** | `tests/test_governance_trace.py` | `6 passed in 0.52s` | **100% PASS** |
 | **KMEC Trace Adapter & Multi-Pivots** | `tests/test_kmec_trace_adapter.py` | `5 passed in 7.05s` | **100% PASS** |
@@ -25,8 +24,13 @@
 | **Mission Control Gate** | `kopano-core/kopano/kpgs_master_mission_control_bridge.py` | `5 passed in 0.25s` | **100% PASS** |
 | **MAO ↔ MMAO Reflection** | `kopano-core/kopano/kpgs_mao_mmao_reflection.py` | `5 passed in 0.31s` | **100% PASS** |
 | **Interactive UI Surface** | `/observability` (Dashboard UI) | 2D Pivot + Lineage Panel + Box Plots | **ACTIVE** |
+| **FOC vs POC Epistemic Constitution** | `Schematics/24-RTC Learning/POCvsFOC Groups/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md` | Canonical Epistemic Law | **SEALED** |
 | **FOC Admission Charter** | `docs/governance/FOC_DISCOVERY_AND_7_VECTOR_ADMISSION_CHARTER.md` | FOC 7-Vector Synthesis Charter | **SEALED** |
 | **Convergence Charter** | `docs/governance/KPGS_4_ORGAN_CROSS_ESTATE_SMART_LEDGER_CONVERGENCE.md` | Issue #107 Synthesis Charter | **SEALED** |
+
+---
+
+## PRIOR STATE — 2026-09-02T13:17:00+02:00 (FOC DISCOVERY & 7-VECTOR CANDIDATE ADMISSION ENGINE CODIFIED)
 
 ---
 

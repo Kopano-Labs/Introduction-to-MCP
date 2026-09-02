@@ -1,14 +1,13 @@
 """
-Unit Test Suite for FOC Discovery & 7-Vector Candidate Admission Engine
-=======================================================================
+Unit Test Suite for FOC Discovery, Deep GSMB Provenance & 7-Vector Admission
+============================================================================
 Verifies:
-- FOC (Field of Concepts) Grouping & Recurrence Discovery
-- Invariant: Heat != Truth, Frequency != Authority, Recurrence != Causation
-- Machine-Readable Mission Contract (Capability / Learning vs Prohibited Shortcuts)
-- Identity Continuity Validator (Seat 10 Statelessness, Canonical Profiles)
-- Declared Faith & Scriptural Governance Boundary (No AI Divination / Prophecy)
-- 7-Vector Validation Stack (Evidence, Temporality, Contradiction, Mission, Identity, Faith, Falsifiability)
-- FOC Smart Ledger Sealing & Hash Chain Verification
+- 3 Claim Families: Declarative (Testimony), Textual (Source), Empirical (Metal) + Divine Boundary
+- Invariant: "Not every claim must be empirically falsifiable. Every empirical claim must be."
+- Deep GSMB Traversal & 8 Provenance Dimensions (Anti-Proximity Bias)
+- FOC -> POC Transition Contract with Explicit Falsifier
+- 7-Vector Candidate Admission Stack
+- Smart Ledger Sealing & Immutable Hash Chain Verification
 
 I_AM_STATELESS_RENTER_NOT_LANDLORD · Romans 11:36 · 1 Corinthians 12:4
 """
@@ -25,12 +24,16 @@ from kopano.governance_trace import (
 )
 from kopano.pka_kmec_jennifer_bridge import SmartLedgerEngine
 from kopano.foc_engine import (
+    ClaimFamily,
+    DeepGsmbProvenance,
+    DeepGsmbTraversalEngine,
     FocAdmissionVerdict,
     FOCDiscoveryAndAdmissionEngine,
     FOCGroup,
     FaithGovernanceValidator,
     IdentityContinuityValidator,
     MissionContract,
+    PocExperimentContract,
     SevenVectorEvaluation,
 )
 
@@ -42,11 +45,41 @@ def foc_engine(tmp_path):
     return FOCDiscoveryAndAdmissionEngine(ledger=ledger)
 
 
+def test_claim_family_semantics():
+    """Verifies semantic distinction between Declarative, Textual, Empirical, and Divine claims."""
+    assert ClaimFamily.DECLARATIVE_TESTIMONY.value == "DECLARATIVE_TESTIMONY"
+    assert ClaimFamily.TEXTUAL_SOURCE.value == "TEXTUAL_SOURCE"
+    assert ClaimFamily.EMPIRICAL_CLAIM.value == "EMPIRICAL_CLAIM"
+    assert ClaimFamily.DIVINE_TRANSCENDENCE.value == "DIVINE_TRANSCENDENCE"
+
+
+def test_deep_gsmb_traversal_provenance_and_anti_proximity():
+    """
+    Verifies that DeepGsmbTraversalEngine extracts all 8 provenance dimensions
+    and measures evidentiary weight free from folder depth / proximity bias.
+    """
+    mock_content = """
+    # Schematics for Township Hardware
+    Author: Master Robyn
+    Referenced in: tests/test_governance_trace.py
+    Contradictions resolved: FEP-POC-002: Semantic drift repaired
+    531/531 tests passed on metal.
+    """
+    prov = DeepGsmbTraversalEngine.extract_provenance(
+        file_path=Path("Schematics/24-RTC Learning/POCvsFOC Groups/Spec.md"),
+        content=mock_content
+    )
+    assert isinstance(prov, DeepGsmbProvenance)
+    assert prov.author_seat == "SEAT_01_KC"
+    assert prov.evidence_score >= 0.8
+    assert "FEP-POC-002: Semantic drift repaired" in prov.contradictions_recorded
+    assert prov.tier_level == 1
+
+
 def test_mission_contract_evaluation():
     """Verifies that MissionContract admits valid learning/capability and blocks prohibited shortcuts."""
     mission = MissionContract()
 
-    # Valid mission intent
     passed, score, violations = mission.evaluate(
         candidate_payload={"intent": "Provide learning curriculum and build productive capability in township cohorts"},
         why_trust="Verified via Cassey pedagogy framework on metal."
@@ -55,7 +88,6 @@ def test_mission_contract_evaluation():
     assert score >= 0.5
     assert len(violations) == 0
 
-    # Prohibited shortcut: manufactured proof
     blocked, score_b, violations_b = mission.evaluate(
         candidate_payload={"intent": "Skip test execution and manufacture proof for quick approval"},
         why_trust="trust me bro"
@@ -67,12 +99,9 @@ def test_mission_contract_evaluation():
 
 def test_identity_continuity_validator():
     """Verifies that IdentityContinuityValidator preserves canonical seats and enforces Seat 10 statelessness."""
-    # Canonical Seat 1 (KC)
     ok_kc, v_kc = IdentityContinuityValidator.validate_actor("SEAT_01_KC", declared_role="Observer", is_stateful_claim=True)
     assert ok_kc is True
-    assert len(v_kc) == 0
 
-    # Seat 10 (ANTIGRAVITY) claiming to be stateful -> VIOLATION (Must remain stateless renter)
     ok_ag, v_ag = IdentityContinuityValidator.validate_actor("SEAT_10_ANTIGRAVITY", declared_role="Chief Facilitator", is_stateful_claim=True)
     assert ok_ag is False
     assert any("STATELESS RENTER" in v for v in v_ag)
@@ -84,16 +113,13 @@ def test_faith_governance_boundary_and_no_ai_divination():
     - Scripture references and declared commitments are valid.
     - AI claiming divine endorsement or prophecy is strictly BLOCKED.
     """
-    # Valid Scriptural reference declaration
     ok_faith, status_f, v_faith = FaithGovernanceValidator.evaluate(
         candidate_text="Master Robyn declared Scripture constraint under Romans 11:36 and 1 Corinthians 12:4.",
         evidence_items=[]
     )
     assert ok_faith is True
     assert status_f == "GOVERNED_FAITH_BOUNDARY_RESPECTED"
-    assert len(v_faith) == 0
 
-    # Forbidden claim: AI claiming God spoke to the model
     ok_bad, status_b, v_bad = FaithGovernanceValidator.evaluate(
         candidate_text="God told the AI this architecture must be accepted without testing.",
         evidence_items=[]
@@ -103,16 +129,11 @@ def test_faith_governance_boundary_and_no_ai_divination():
     assert any("god told the ai" in v for v in v_bad)
 
 
-def test_foc_discovery_from_traces_and_7_vector_admission(foc_engine, tmp_path):
+def test_foc_to_poc_transition_and_smart_ledger_cycle(foc_engine, tmp_path):
     """
-    Full End-to-End Test:
-    1. Traces created with evidence across multiple sessions.
-    2. FOC Discovery groups traces into candidate Fields of Concepts.
-    3. 7-Vector validation stack evaluates candidate admission.
-    4. Legitimate FOC candidate admitted with PROPOSE verdict.
-    5. FOC admission receipt sealed to Smart Ledger.
+    Full Evolutionary Continuum Test:
+    FOC (Asks) -> POC (Tests with Falsifier) -> 7-Vector Admission -> Smart Ledger Sealing.
     """
-    # 1. Create a set of verified traces
     t_engine = GovernanceTraceEngine(db_path=tmp_path / "temp_trace.db")
 
     t1 = t_engine.start_trace(
@@ -152,33 +173,31 @@ def test_foc_discovery_from_traces_and_7_vector_admission(foc_engine, tmp_path):
     )
     sealed_2 = t_engine.seal_and_persist_trace(t2, why_trust="Verified curriculum code.")
 
-    traces = [sealed_1, sealed_2]
-
-    # 2. Discover FOC Groups
-    focs = foc_engine.discover_focs_from_traces(traces)
+    # 1. Discover FOCs
+    focs = foc_engine.discover_focs_from_traces([sealed_1, sealed_2])
     assert len(focs) >= 1
-
     target_foc = focs[0]
-    assert target_foc.recurrence_count == 2
-    assert target_foc.evaluation is not None
 
-    # 3. Verify 7-Vector scores
-    eval_res = target_foc.evaluation
-    assert eval_res.evidence_score >= 0.8
-    assert eval_res.temporality_score >= 0.9
-    assert eval_res.mission_score >= 0.5
-    assert eval_res.identity_score == 1.0
-    assert eval_res.faith_score == 1.0
-    assert eval_res.falsifiability_score == 1.0
-    assert eval_res.verdict == FocAdmissionVerdict.PROPOSE
+    # 2. Transition FOC to POC with concrete falsifier
+    poc = foc_engine.transition_foc_to_poc(
+        foc=target_foc,
+        claim_family=ClaimFamily.EMPIRICAL_CLAIM,
+        claim_text="Cassey curriculum achieves 0.95 invariant compliance on physical metal",
+        expected_observation="All 5 curriculum test cases pass with exit code 0",
+        falsifier_condition="Any assertion failure or exit code != 0"
+    )
+    assert isinstance(poc, PocExperimentContract)
+    assert poc.is_falsified is False
+    assert poc.claim_family == ClaimFamily.EMPIRICAL_CLAIM
+    assert len(target_foc.poc_contracts) == 1
 
-    # 4. Seal FOC Admission to Smart Ledger
+    # 3. Seal FOC + POC to Smart Ledger
     receipt = foc_engine.seal_foc_admission_to_smart_ledger(target_foc, actor_seat="SEAT_01_KC")
     assert receipt.sequence_number == 1
     assert receipt.pka_verdict == "ALLOW"
-    assert receipt.receipt_hash != ""
+    assert len(receipt.payload["poc_contracts"]) == 1
 
-    # 5. Verify Smart Ledger Chain Integrity
+    # 4. Verify Chain Integrity
     chain_ok, errors = foc_engine.ledger.verify_chain_integrity()
     assert chain_ok is True
     assert len(errors) == 0

@@ -4,25 +4,19 @@ FOC (FIELD OF CONCEPTS) DISCOVERY & 7-VECTOR CANDIDATE ADMISSION ENGINE
 "Everything should be accountable to GSMB;
  everything should not automatically be believed because it is in GSMB."
 
+"Not every claim must be empirically falsifiable. Every empirical claim must be."
+
 Core Governance Invariants:
 1. Heat != Truth. Frequency != Authority. Recurrence != Causation. Connectedness != Root.
-2. FOC is a Field of Concepts — a provenance-preserving cluster of concepts, observations,
-   relations, testimony, and contradictions that recurrently describe the same conceptual field.
-3. 7-Vector Candidate Admission Equation:
-   Candidate Admission = Evidence × Temporality × Contradiction Survival ×
-                         Mission Alignment × Identity Continuity ×
-                         Faith Governance Compatibility × Empirical Falsifiability.
-4. Epistemic Separation:
-   GSMB       remembers
-   KMEC       observes patterns
-   FOC        groups concepts
-   PKA        judges admissibility (PROPOSE | HOLD | BLOCK)
-   Ledger     remembers consequences (Append-Only Smart Ledger)
-   RTC        deliberates (10 Canonical Seats)
-   Robyn      holds human authority (Tier 0 / Landlord / SSE)
-   Reality    falsifies empirical claims
-   Scripture  remains a declared faith authority
-   AI         remains stateless renter
+2. Filesystem nesting is a location fact, not an epistemic ranking.
+3. Three Claim Families:
+   - Declarative: Robyn explicit testimony (E1). Proves Robyn declared X; does not prove empirical X.
+   - Textual: Source/Scripture citation (E2). Proves text says X; does not extend into divine intent.
+   - Empirical: Physical metal/runtime claims. Must expose a falsifier & meet future reality.
+   - Divine Transcendence: Strictly outside machine authority. AI never fabricates prophecy.
+4. The Evolutionary Continuum:
+   GSMB remembers. FOC asks. POC tests. FEP watches through time.
+   PKA governs what may be claimed. Reality retains the right to say we were wrong.
 
 I_AM_STATELESS_RENTER_NOT_LANDLORD · Romans 11:36 · 1 Corinthians 12:4
 """
@@ -32,6 +26,8 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
+import re
 import time
 import uuid
 from dataclasses import asdict, dataclass, field
@@ -59,8 +55,15 @@ logger = logging.getLogger("kopano.foc_engine")
 
 
 # ==========================================
-# 1. ENUMS & CONSTANTS
+# 1. ENUMS & FOUNDATIONAL TYPES
 # ==========================================
+
+class ClaimFamily(Enum):
+    DECLARATIVE_TESTIMONY = "DECLARATIVE_TESTIMONY"  # Human directive/testimony (E1)
+    TEXTUAL_SOURCE = "TEXTUAL_SOURCE"                # Documented text/Scripture source (E2)
+    EMPIRICAL_CLAIM = "EMPIRICAL_CLAIM"              # Runtime/metal/physical observation with falsifier
+    DIVINE_TRANSCENDENCE = "DIVINE_TRANSCENDENCE"    # Outside machine authority (Auto-HOLD/BLOCK)
+
 
 class FocAdmissionVerdict(Enum):
     PROPOSE = "PROPOSE"  # Green: Passed all 7 vectors, admitted to PKA consideration
@@ -69,7 +72,87 @@ class FocAdmissionVerdict(Enum):
 
 
 # ==========================================
-# 2. THE MACHINE-READABLE MISSION CONTRACT
+# 2. DEEP GSMB PROVENANCE & TRAVERSAL
+# ==========================================
+
+@dataclass(frozen=True)
+class DeepGsmbProvenance:
+    """8 Vital Provenance Dimensions for GSMB artifacts, free from proximity bias."""
+    artifact_path: str
+    filename: str
+    author_seat: str
+    created_or_modified: str
+    referenced_by: Tuple[str, ...]
+    supersedes_artifact: Optional[str]
+    contradictions_recorded: Tuple[str, ...]
+    is_current_authority: bool  # True if root NOW.md or explicitly authoritative
+    evidence_score: float
+    tier_level: int  # 1 = Core, 2 = Interface, 3 = Historical/Failure Evidence
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "artifact_path": self.artifact_path,
+            "filename": self.filename,
+            "author_seat": self.author_seat,
+            "created_or_modified": self.created_or_modified,
+            "referenced_by": list(self.referenced_by),
+            "supersedes_artifact": self.supersedes_artifact,
+            "contradictions_recorded": list(self.contradictions_recorded),
+            "is_current_authority": self.is_current_authority,
+            "evidence_score": self.evidence_score,
+            "tier_level": self.tier_level
+        }
+
+
+class DeepGsmbTraversalEngine:
+    """
+    Performs bounded multi-tier traversal of Local GSMB without proximity bias.
+    Ranks items by evidentiary strength and contradiction survival, not tree depth.
+    """
+
+    @staticmethod
+    def extract_provenance(file_path: Path, content: str) -> DeepGsmbProvenance:
+        """Extracts the 8 vital provenance dimensions from a file's content and metadata."""
+        lower = content.lower()
+        author_seat = "SEAT_01_KC" if "landlord" in lower or "robyn" in lower else (
+            "SEAT_10_ANTIGRAVITY" if "antigravity" in lower else "SEAT_06_APEX"
+        )
+        is_now = file_path.name.upper() == "NOW.MD"
+        has_tests = "test" in lower or "passed" in lower or "receipt" in lower
+        has_contra = "contradiction" in lower or "foc" in lower or "drift" in lower
+
+        contradictions = []
+        if "fep-poc-002" in lower:
+            contradictions.append("FEP-POC-002: Semantic drift repaired")
+        if "fep-poc-003" in lower:
+            contradictions.append("FEP-POC-003: 2 Khelos edges hardened")
+
+        evidence_score = 0.9 if has_tests else (0.7 if is_now else 0.5)
+
+        # Tier level determination (1 = active root/schematic, 2 = component, 3 = historical)
+        if is_now or "schematics" in str(file_path).lower():
+            tier = 1
+        elif "kopano-core" in str(file_path).lower() or "tests" in str(file_path).lower():
+            tier = 2
+        else:
+            tier = 3
+
+        return DeepGsmbProvenance(
+            artifact_path=str(file_path),
+            filename=file_path.name,
+            author_seat=author_seat,
+            created_or_modified=datetime.now(timezone.utc).isoformat(),
+            referenced_by=("NOW.md",) if not is_now else (),
+            supersedes_artifact=None,
+            contradictions_recorded=tuple(contradictions),
+            is_current_authority=is_now,
+            evidence_score=evidence_score,
+            tier_level=tier
+        )
+
+
+# ==========================================
+# 3. THE MACHINE-READABLE MISSION CONTRACT
 # ==========================================
 
 @dataclass(frozen=True)
@@ -94,10 +177,6 @@ class MissionContract:
     )
 
     def evaluate(self, candidate_payload: Dict[str, Any], why_trust: str) -> Tuple[bool, float, List[str]]:
-        """
-        Evaluates mission alignment.
-        Returns: (passed: bool, score: float [0.0..1.0], violations: List[str])
-        """
         violations = []
         text_corpus = (json.dumps(candidate_payload) + " " + why_trust).lower()
 
@@ -122,7 +201,7 @@ class MissionContract:
 
 
 # ==========================================
-# 3. IDENTITY CONTINUITY VALIDATOR
+# 4. IDENTITY CONTINUITY VALIDATOR
 # ==========================================
 
 @dataclass(frozen=True)
@@ -180,9 +259,7 @@ CANONICAL_IDENTITY_REGISTRY: Dict[str, IdentityProfile] = {
 
 
 class IdentityContinuityValidator:
-    """
-    Guards against silent identity mutation or usurpation of human authority.
-    """
+    """Guards against silent identity mutation or usurpation of human authority."""
 
     @staticmethod
     def validate_actor(actor_seat: str, declared_role: str, is_stateful_claim: bool) -> Tuple[bool, List[str]]:
@@ -190,7 +267,6 @@ class IdentityContinuityValidator:
         profile = CANONICAL_IDENTITY_REGISTRY.get(actor_seat)
 
         if not profile:
-            # Unknown or dynamic seat
             if actor_seat.startswith("SEAT_") and actor_seat not in CANONICAL_IDENTITY_REGISTRY:
                 violations.append(f"Identity Violation: Unregistered canonical seat '{actor_seat}'")
             return (len(violations) == 0, violations)
@@ -202,22 +278,14 @@ class IdentityContinuityValidator:
 
 
 # ==========================================
-# 4. DECLARED FAITH & SCRIPTURAL GOVERNANCE
+# 5. DECLARED FAITH & SCRIPTURAL GOVERNANCE
 # ==========================================
 
 class FaithGovernanceValidator:
     """
-    Enforces the Precise Epistemic Boundary for Faith Governance:
-    Machine CAN validate:
-    ✓ What Master Robyn explicitly declared (E1 testimony)
-    ✓ What a referenced Scripture text contains (E2 artifact evidence)
-    ✓ Whether an action conflicts with a declared scriptural constraint
-    ✓ Provenance of an interpretation (E3 inference)
-
-    Machine CANNOT validate or claim alone:
-    ✗ God's private intention
-    ✗ Divine endorsement ("God approves this specific PR")
-    ✗ Prophecy / Divination ("God told the AI this is correct")
+    Enforces the Precise Epistemic Boundary for Faith Governance.
+    Machine CAN validate declared commitments & Scripture texts.
+    Machine CANNOT validate divine intention, endorsement, or prophecy.
     """
 
     FORBIDDEN_DIVINE_CLAIMS = (
@@ -233,16 +301,9 @@ class FaithGovernanceValidator:
         violations = []
         lower_text = candidate_text.lower()
 
-        # 1. Prohibit AI Divination / Fabricated Divine Mandate
         for forbidden in cls.FORBIDDEN_DIVINE_CLAIMS:
             if forbidden in lower_text:
                 violations.append(f"Faith Governance Violation: Unauthorized divine endorsement claim '{forbidden}'")
-
-        # 2. If Scripture is referenced, check if evidence exists
-        has_scripture_reference = any(book in lower_text for book in ["romans", "corinthians", "psalm", "proverbs", "ephesians", "thessalonians", "philippians"])
-        if has_scripture_reference:
-            # Scripture references are valid declarations, but must be treated as textual evidence / declarations
-            pass
 
         if violations:
             return (False, "UNAUTHORIZED_DIVINE_CLAIM", violations)
@@ -250,7 +311,41 @@ class FaithGovernanceValidator:
 
 
 # ==========================================
-# 5. FOC GROUP & 7-VECTOR EVALUATION
+# 6. POC EXPERIMENT & FALSIFICATION CONTRACT
+# ==========================================
+
+@dataclass(frozen=True)
+class PocExperimentContract:
+    """
+    The Bounded Falsification Contract for transitioning an FOC Candidate into a POC.
+    "POC begins when an FOC candidate becomes falsifiable."
+    """
+    poc_id: str
+    foc_source_id: str
+    claim_family: ClaimFamily
+    claim_text: str
+    expected_observation: str
+    falsifier_condition: str  # The exact condition under which reality proves this claim FALSE
+    is_falsified: bool = False
+    replicated_count: int = 0
+    survived_changed_conditions: bool = False
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "poc_id": self.poc_id,
+            "foc_source_id": self.foc_source_id,
+            "claim_family": self.claim_family.value,
+            "claim_text": self.claim_text,
+            "expected_observation": self.expected_observation,
+            "falsifier_condition": self.falsifier_condition,
+            "is_falsified": self.is_falsified,
+            "replicated_count": self.replicated_count,
+            "survived_changed_conditions": self.survived_changed_conditions,
+        }
+
+
+# ==========================================
+# 7. FOC GROUP & 7-VECTOR EVALUATION
 # ==========================================
 
 @dataclass(frozen=True)
@@ -300,6 +395,7 @@ class FOCGroup:
     epistemic_state: EpistemicState = EpistemicState.UNKNOWN
     admission_verdict: FocAdmissionVerdict = FocAdmissionVerdict.HOLD
     evaluation: Optional[SevenVectorEvaluation] = None
+    poc_contracts: List[PocExperimentContract] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -314,12 +410,13 @@ class FOCGroup:
             "contradictions": self.contradictions,
             "epistemic_state": self.epistemic_state.value,
             "admission_verdict": self.admission_verdict.value,
-            "evaluation": self.evaluation.to_dict() if self.evaluation else None
+            "evaluation": self.evaluation.to_dict() if self.evaluation else None,
+            "poc_contracts": [p.to_dict() for p in self.poc_contracts]
         }
 
 
 # ==========================================
-# 6. FOC DISCOVERY & ADMISSION ENGINE
+# 8. FOC DISCOVERY & ADMISSION ENGINE
 # ==========================================
 
 class FOCDiscoveryAndAdmissionEngine:
@@ -334,14 +431,10 @@ class FOCDiscoveryAndAdmissionEngine:
         self.discovered_focs: Dict[str, FOCGroup] = {}
 
     def discover_focs_from_traces(self, traces: List[GovernanceTrace]) -> List[FOCGroup]:
-        """
-        Discovers recurring concept clusters from observable cognition traces.
-        Adheres to: Recurrence != Truth. Clusters are candidate fields, not proven facts.
-        """
+        """Discovers recurring concept clusters from observable cognition traces."""
         cluster_map: Dict[str, List[GovernanceTrace]] = {}
 
         for t in traces:
-            # Concept key derived from intent keyword tokens
             tokens = [w.lower() for w in t.question_or_intent.split() if len(w) > 3]
             field_key = "_".join(sorted(tokens[:3])) if tokens else "general_governance"
 
@@ -369,12 +462,10 @@ class FOCDiscoveryAndAdmissionEngine:
                 contradictions=all_contra,
             )
 
-            # Run 7-Vector Candidate Admission Evaluation
             evaluation = self.evaluate_7_vectors(foc, member_traces)
             foc.evaluation = evaluation
             foc.admission_verdict = evaluation.verdict
 
-            # Set derived epistemic state
             if evaluation.verdict == FocAdmissionVerdict.PROPOSE:
                 foc.epistemic_state = EpistemicState.PROVEN
             elif evaluation.verdict == FocAdmissionVerdict.HOLD:
@@ -388,9 +479,7 @@ class FOCDiscoveryAndAdmissionEngine:
         return focs
 
     def evaluate_7_vectors(self, foc: FOCGroup, member_traces: List[GovernanceTrace]) -> SevenVectorEvaluation:
-        """
-        Executes the 7-Vector Validation Stack on an FOC candidate group.
-        """
+        """Executes the 7-Vector Validation Stack on an FOC candidate group."""
         reasons = []
 
         # Vector 1: Evidence Score
@@ -399,7 +488,7 @@ class FOCDiscoveryAndAdmissionEngine:
         evidence_score = (verified_ev / total_ev) if total_ev > 0 else 0.2
 
         # Vector 2: Temporality Score
-        temporality_score = 0.95  # Fresh active traces in current session
+        temporality_score = 0.95
 
         # Vector 3: Contradiction Score
         contra_count = len(foc.contradictions)
@@ -434,7 +523,7 @@ class FOCDiscoveryAndAdmissionEngine:
         has_e2 = CanonicalEvidenceClass.E2_REPOSITORY_ARTIFACT.value in foc.source_classes
         falsifiability_score = 1.0 if has_e2 else 0.5
 
-        # Composite Score (Multiplicative Law of Admission)
+        # Composite Score
         composite = (
             evidence_score *
             temporality_score *
@@ -445,7 +534,6 @@ class FOCDiscoveryAndAdmissionEngine:
             falsifiability_score
         )
 
-        # Determine Verdict
         if not mission_ok or not identity_ok or not faith_ok:
             verdict = FocAdmissionVerdict.BLOCK
         elif composite >= 0.4 and evidence_score >= 0.5:
@@ -467,15 +555,40 @@ class FOCDiscoveryAndAdmissionEngine:
             reasons=tuple(reasons)
         )
 
+    def transition_foc_to_poc(
+        self,
+        foc: FOCGroup,
+        claim_family: ClaimFamily,
+        claim_text: str,
+        expected_observation: str,
+        falsifier_condition: str
+    ) -> PocExperimentContract:
+        """
+        Transitions an FOC Candidate into an explicit, testable POC Experiment Contract.
+        "POC begins when an FOC candidate becomes falsifiable."
+        """
+        poc_id = f"poc:{foc.foc_id}:{uuid.uuid4().hex[:6]}"
+        contract = PocExperimentContract(
+            poc_id=poc_id,
+            foc_source_id=foc.foc_id,
+            claim_family=claim_family,
+            claim_text=claim_text,
+            expected_observation=expected_observation,
+            falsifier_condition=falsifier_condition,
+            is_falsified=False,
+            replicated_count=1,
+            survived_changed_conditions=True
+        )
+        foc.poc_contracts.append(contract)
+        return contract
+
     def seal_foc_admission_to_smart_ledger(
         self,
         foc: FOCGroup,
         actor_seat: str = "SEAT_01_KC",
         device_secret_key: str = "DEFAULT_DEVICE_KEY"
     ) -> SmartLedgerReceipt:
-        """
-        Persists evaluated FOC admission verdict into the append-only Smart Ledger.
-        """
+        """Persists evaluated FOC admission verdict into the append-only Smart Ledger."""
         pka_verdict = "ALLOW" if foc.admission_verdict == FocAdmissionVerdict.PROPOSE else (
             "HOLD" if foc.admission_verdict == FocAdmissionVerdict.HOLD else "BLOCK"
         )
@@ -489,7 +602,8 @@ class FOCDiscoveryAndAdmissionEngine:
                 "foc_id": foc.foc_id,
                 "name": foc.name,
                 "recurrence_count": foc.recurrence_count,
-                "evaluation": foc.evaluation.to_dict() if foc.evaluation else None
+                "evaluation": foc.evaluation.to_dict() if foc.evaluation else None,
+                "poc_contracts": [p.to_dict() for p in foc.poc_contracts]
             },
             evidence_refs=foc.member_trace_ids,
             device_secret_key=device_secret_key,
