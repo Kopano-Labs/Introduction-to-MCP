@@ -1,0 +1,31 @@
+name: KPGS Browser MCP POC
+
+on:
+  push:
+    branches:
+      - forge/kpgs-browser-mcp-poc
+  pull_request:
+    paths:
+      - "tools/kpgs-browser-mcp/**"
+      - ".github/workflows/kpgs-browser-mcp-poc.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/kpgs-browser-mcp
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: Build and governance tests
+        run: npm run check
