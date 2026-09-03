@@ -8,7 +8,7 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "approve": "node dist/approve.js",
-    "test": "npm run build && node --test dist/governance.test.js",
+    "test": "npm run build && node --test dist/governance.test.js dist/ledger.test.js",
     "check": "npm run test"
   },
   "dependencies": {
