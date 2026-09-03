@@ -63,7 +63,7 @@ export type BrowserReceipt = {
   pageIndex: number;
   executedAt: string;
   pageBefore: BrowserPageContext;
-  pageAfter: Omit<BrowserPageContext, "element"> & { element?: null };
+  pageAfter: BrowserPageContext;
   result: Record<string, unknown>;
   previousReceiptHash: string | null;
   receiptHash: string;
