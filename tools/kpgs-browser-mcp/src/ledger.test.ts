@@ -30,10 +30,13 @@ function context(): BrowserPageContext {
     name: null,
     id: "save",
     role: null,
-    formAction: null
+    formAction: null,
+    href: null,
+    textDigest: sha256Binding("Save")
   };
   return {
     pageIndex: 0,
+    targetId: "target-ledger-test",
     url: "https://example.com/settings",
     origin: "https://example.com",
     title: "Settings",
