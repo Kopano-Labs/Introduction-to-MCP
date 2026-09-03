@@ -1,5 +1,10 @@
 import puppeteer, { type Browser, type KeyInput, type Page } from "puppeteer-core";
-import type { BrowserActionInput } from "./governance.js";
+import {
+  sha256Binding,
+  type BrowserActionInput,
+  type BrowserElementContext,
+  type BrowserPageContext
+} from "./governance.js";
 
 const DEBUG_URL = process.env.KPGS_CHROME_DEBUG_URL ?? "http://127.0.0.1:9222";
 let browserPromise: Promise<Browser> | undefined;
@@ -27,6 +32,62 @@ export async function getPage(pageIndex: number): Promise<Page> {
   const page = pages[pageIndex];
   if (!page) throw new Error(`No Chromium page exists at index ${pageIndex}`);
   return page;
+}
+
+function originOf(rawUrl: string): string {
+  try {
+    return new URL(rawUrl).origin;
+  } catch {
+    return `OPAQUE:${rawUrl}`;
+  }
+}
+
+async function captureElementContext(page: Page, selector: string): Promise<BrowserElementContext> {
+  await page.waitForSelector(selector, { visible: true, timeout: 10_000 });
+  const observed = await page.$eval(selector, (element) => {
+    const html = element as HTMLElement;
+    const input = element instanceof HTMLInputElement ? element : null;
+    const formAction =
+      element instanceof HTMLButtonElement || element instanceof HTMLInputElement
+        ? element.formAction || element.getAttribute("formaction")
+        : element.getAttribute("formaction");
+    return {
+      tagName: element.tagName.toLowerCase(),
+      inputType: input?.type?.toLowerCase() ?? null,
+      autocomplete: element.getAttribute("autocomplete"),
+      name: element.getAttribute("name"),
+      id: html.id || null,
+      role: element.getAttribute("role"),
+      formAction: formAction || null
+    };
+  });
+  const basis = { selector, ...observed };
+  return { ...basis, fingerprint: sha256Binding(basis) };
+}
+
+export async function capturePageSnapshot(pageIndex: number): Promise<BrowserPageContext> {
+  const page = await getPage(pageIndex);
+  const url = page.url();
+  return {
+    pageIndex,
+    url,
+    origin: originOf(url),
+    title: await page.title(),
+    element: null
+  };
+}
+
+export async function captureInteractionContext(input: BrowserActionInput): Promise<BrowserPageContext> {
+  const page = await getPage(input.pageIndex);
+  const url = page.url();
+  const element = input.selector ? await captureElementContext(page, input.selector) : null;
+  return {
+    pageIndex: input.pageIndex,
+    url,
+    origin: originOf(url),
+    title: await page.title(),
+    element
+  };
 }
 
 export async function browserStatus(): Promise<Record<string, unknown>> {
