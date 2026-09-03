@@ -8,7 +8,10 @@
       "env": {
         "KPGS_CHROME_DEBUG_URL": "http://127.0.0.1:9222",
         "KPGS_BROWSER_LEDGER_DIR": "C:\\PATH\\TO\\Introduction-to-MCP\\tools\\kpgs-browser-mcp\\.kpgs-browser-ledger",
-        "KPGS_BROWSER_APPROVAL_TTL_MS": "600000"
+        "KPGS_BROWSER_APPROVAL_TTL_MS": "600000",
+        "KPGS_BROWSER_STAGED_TTL_MS": "900000",
+        "KPGS_BROWSER_ALLOWED_HOSTS": "github.com,*.github.com,kopanolabs.com,*.kopanolabs.com",
+        "KPGS_BROWSER_ALLOW_INSECURE_HTTP": "0"
       }
     }
   }
