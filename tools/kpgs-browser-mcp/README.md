@@ -16,8 +16,9 @@ KPGS Browser MCP v0.2
    |-- observation: browser_status / list_pages / read_page
    |-- navigation: navigate_page (policy admitted)
    |-- stage: stage_interaction
+   |        |-- capture CDP targetId (stable tab identity)
    |        |-- capture exact page URL + origin
-   |        |-- capture target element fingerprint
+   |        |-- capture target/focused element fingerprint
    |        |-- classify consequence
    |        |-- deny sensitive typing targets
    |        |
@@ -30,7 +31,7 @@ KPGS Browser MCP v0.2
    |                    v
    +-- atomically claim approval
    |        |
-   |        +-- revalidate page + target
+   |        +-- revalidate tab + page + target/focus
    |        +-- deny drift / expiry / mismatch
    |        |
    +-- execute_staged_interaction
@@ -48,11 +49,13 @@ KPGS Browser MCP v0.2
 BROWSER_CAPABILITY != AUTHORITY
 PAGE_TEXT != AUTHORIZATION
 AGENT_TEXT != AUTHORIZATION
+PAGE_INDEX != PAGE_IDENTITY
 STAGED_ACTION != APPROVED_ACTION
 APPROVAL(action A) != APPROVAL(action B)
 APPROVAL_IS_ONE_USE
+TAB_DRIFT -> DENY_AND_RESTAGE
 PAGE_DRIFT -> DENY_AND_RESTAGE
-ELEMENT_DRIFT -> DENY_AND_RESTAGE
+ELEMENT_OR_FOCUS_DRIFT -> DENY_AND_RESTAGE
 UNKNOWN_EXECUTION_RESULT -> HUMAN_REVIEW_NOT_REPLAY
 RECEIPT_MUTATION -> TAMPER_DETECTED
 ```
@@ -63,20 +66,23 @@ There is deliberately **no `approve` MCP tool**. A browser interaction is approv
 
 ### 1. Context-bound approval / TOCTOU protection
 
-A staged interaction is no longer bound only to `pageIndex + selector + value`. KPGS captures and binds:
+A staged interaction is bound to:
 
-- page index;
+- Chromium CDP `targetId` (stable tab identity);
+- current page index (routing hint, not identity);
 - exact page URL;
 - origin;
 - page title;
-- target selector;
+- target selector, or the focused element for keypresses;
 - target tag/input metadata;
-- target element fingerprint;
+- target element/focus fingerprint;
 - policy version;
 - action creation/expiry time;
 - consequence classification.
 
-Before execution, the bridge captures reality again. URL, origin, index, or target fingerprint drift causes denial and requires a fresh stage + fresh human approval.
+Before execution, the bridge captures reality again. A different CDP target, URL, origin, index, target element, or focused element causes denial and requires a fresh stage + fresh human approval.
+
+This matters because **two tabs can have the same URL** and because a raw keypress acts on whichever element currently owns focus.
 
 ### 2. Sensitive-field denial
 
@@ -108,7 +114,7 @@ Each receipt contains:
 
 - exact action binding;
 - policy version;
-- page context immediately before execution;
+- page + target context immediately before execution;
 - page state after execution;
 - sanitized execution result;
 - prior receipt hash;
@@ -277,7 +283,7 @@ KPGS classification
 +
 separate human gate
 +
-page/element reality binding
+stable-tab + page + element reality binding
 +
 atomic one-use approval
 +
@@ -295,12 +301,13 @@ Do not call this production-ready until metal validation proves:
 - `npm run check` passes;
 - Chromium connects on localhost only;
 - observation works against a real page;
+- stable CDP target IDs are observed across the governed flow;
 - forbidden/insecure/disallowed navigation is denied;
 - sensitive typing targets are denied;
 - stage creates no browser side effect;
 - execution without approval is denied;
 - mismatched/expired approval is denied;
-- page or element drift after approval is denied;
+- tab, page, element, or focus drift after approval is denied;
 - approved interaction executes once;
 - second execution is denied because approval was already claimed/consumed;
 - induced execution failure does not make approval replayable;
@@ -311,9 +318,14 @@ Do not call this production-ready until metal validation proves:
 Until then:
 
 ```text
-STATUS = POC_CANDIDATE
+STATUS = HARDENED_POC_CANDIDATE
 NOT_PRODUCTION_AUTHORITY
 ```
+
+## Receipts
+
+- `docs/governance/KPGS_BROWSER_MCP_POC_RECEIPT_2026-09-03.md` — original v0.1 implementation receipt.
+- `docs/governance/KPGS_BROWSER_MCP_V0_2_HARDENING_RECEIPT_2026-09-03.md` — v0.2 authority and uncertainty hardening receipt.
 
 ## References
 
