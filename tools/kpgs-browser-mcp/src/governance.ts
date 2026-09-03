@@ -24,11 +24,14 @@ export type BrowserElementContext = {
   id: string | null;
   role: string | null;
   formAction: string | null;
+  href: string | null;
+  textDigest: string | null;
   fingerprint: string;
 };
 
 export type BrowserPageContext = {
   pageIndex: number;
+  targetId: string;
   url: string;
   origin: string;
   title: string;
@@ -141,6 +144,7 @@ const DENIED_AUTOCOMPLETE_TOKENS = new Set([
 
 export function assertInteractionContextAdmissible(input: BrowserActionInput, context: BrowserPageContext): void {
   if (context.pageIndex !== input.pageIndex) throw new Error("PAGE_CONTEXT_INDEX_MISMATCH");
+  if (!context.targetId) throw new Error("PAGE_TARGET_ID_REQUIRED");
   if (!context.url || !context.origin) throw new Error("PAGE_CONTEXT_INVALID");
 
   if (input.operation === "type") {
@@ -156,6 +160,10 @@ export function assertInteractionContextAdmissible(input: BrowserActionInput, co
     if (autocompleteTokens.some((token) => DENIED_AUTOCOMPLETE_TOKENS.has(token))) {
       throw new Error("SENSITIVE_AUTOCOMPLETE_DENIED");
     }
+  }
+
+  if (input.operation === "press" && !context.element) {
+    throw new Error("FOCUSED_ELEMENT_CONTEXT_REQUIRED");
   }
 }
 
@@ -235,12 +243,13 @@ export function validateExecutionContext(
   staged: StagedBrowserAction,
   live: BrowserPageContext
 ): { allowed: true } | { allowed: false; reason: string } {
+  if (live.targetId !== staged.context.targetId) return { allowed: false, reason: "PAGE_TARGET_DRIFT" };
   if (live.pageIndex !== staged.context.pageIndex) return { allowed: false, reason: "PAGE_INDEX_DRIFT" };
   if (live.origin !== staged.context.origin) return { allowed: false, reason: "PAGE_ORIGIN_DRIFT" };
   if (live.url !== staged.context.url) return { allowed: false, reason: "PAGE_URL_DRIFT" };
 
-  if (staged.selector) {
-    if (!live.element || !staged.context.element) return { allowed: false, reason: "ELEMENT_CONTEXT_MISSING" };
+  if (staged.context.element) {
+    if (!live.element) return { allowed: false, reason: "ELEMENT_CONTEXT_MISSING" };
     if (live.element.fingerprint !== staged.context.element.fingerprint) {
       return { allowed: false, reason: "ELEMENT_CONTEXT_DRIFT" };
     }
@@ -263,6 +272,7 @@ export function publicActionSummary(staged: StagedBrowserAction): Record<string,
     expiresAt: staged.expiresAt,
     page: {
       index: staged.context.pageIndex,
+      targetId: staged.context.targetId,
       url: staged.context.url,
       origin: staged.context.origin,
       title: staged.context.title,
