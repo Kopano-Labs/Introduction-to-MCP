@@ -1,25 +1,15 @@
 import puppeteer, { type Browser, type KeyInput, type Page } from "puppeteer-core";
 import {
+  assertLoopbackDebugUrl,
   sha256Binding,
   type BrowserActionInput,
   type BrowserElementContext,
   type BrowserPageContext
 } from "./governance.js";
 
-function isLoopbackHost(hostname: string): boolean {
-  const normalized = hostname.toLowerCase();
-  return normalized === "localhost" || normalized === "127.0.0.1" || normalized === "[::1]" || normalized === "::1";
-}
-
-function assertLoopbackDebugUrl(rawUrl: string): string {
-  const url = new URL(rawUrl);
-  if (url.protocol !== "http:" && url.protocol !== "https:") throw new Error("CDP_DEBUG_SCHEME_DENIED");
-  if (!isLoopbackHost(url.hostname)) throw new Error("REMOTE_CDP_ENDPOINT_DENIED");
-  if (url.username || url.password) throw new Error("CDP_EMBEDDED_CREDENTIALS_DENIED");
-  return url.toString().replace(/\/$/, "");
-}
-
-const DEBUG_URL = assertLoopbackDebugUrl(process.env.KPGS_CHROME_DEBUG_URL ?? "http://127.0.0.1:9222");
+const DEBUG_URL = assertLoopbackDebugUrl(process.env.KPGS_CHROME_DEBUG_URL ?? "http://127.0.0.1:9222")
+  .toString()
+  .replace(/\/$/, "");
 let browserPromise: Promise<Browser> | undefined;
 
 type ObservedElement = {
