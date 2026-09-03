@@ -9,6 +9,18 @@ import {
 const DEBUG_URL = process.env.KPGS_CHROME_DEBUG_URL ?? "http://127.0.0.1:9222";
 let browserPromise: Promise<Browser> | undefined;
 
+type ObservedElement = {
+  tagName: string;
+  inputType: string | null;
+  autocomplete: string | null;
+  name: string | null;
+  id: string | null;
+  role: string | null;
+  formAction: string | null;
+  href: string | null;
+  text: string | null;
+};
+
 export async function getBrowser(): Promise<Browser> {
   if (!browserPromise) {
     browserPromise = puppeteer.connect({ browserURL: DEBUG_URL, defaultViewport: null }).catch((error) => {
@@ -42,6 +54,55 @@ function originOf(rawUrl: string): string {
   }
 }
 
+async function targetIdOf(page: Page): Promise<string> {
+  const session = await page.createCDPSession();
+  try {
+    const { targetInfo } = await session.send("Target.getTargetInfo");
+    return targetInfo.targetId;
+  } finally {
+    await session.detach();
+  }
+}
+
+function finalizeElementContext(selector: string, observed: ObservedElement): BrowserElementContext {
+  const textDigest = observed.text === null ? null : sha256Binding(observed.text);
+  const basis = {
+    selector,
+    tagName: observed.tagName,
+    inputType: observed.inputType,
+    autocomplete: observed.autocomplete,
+    name: observed.name,
+    id: observed.id,
+    role: observed.role,
+    formAction: observed.formAction,
+    href: observed.href,
+    textDigest
+  };
+  return { ...basis, fingerprint: sha256Binding(basis) };
+}
+
+function observeElementInPage(element: Element): ObservedElement {
+  const html = element as HTMLElement;
+  const input = element instanceof HTMLInputElement ? element : null;
+  const formAction =
+    element instanceof HTMLButtonElement || element instanceof HTMLInputElement
+      ? element.formAction || element.getAttribute("formaction")
+      : element.getAttribute("formaction");
+  const href = element instanceof HTMLAnchorElement ? element.href : element.getAttribute("href");
+  const text = (html.innerText || element.textContent || "").trim().slice(0, 512) || null;
+  return {
+    tagName: element.tagName.toLowerCase(),
+    inputType: input?.type?.toLowerCase() ?? null,
+    autocomplete: element.getAttribute("autocomplete"),
+    name: element.getAttribute("name"),
+    id: html.id || null,
+    role: element.getAttribute("role"),
+    formAction: formAction || null,
+    href: href || null,
+    text
+  };
+}
+
 async function captureElementContext(page: Page, selector: string): Promise<BrowserElementContext> {
   await page.waitForSelector(selector, { visible: true, timeout: 10_000 });
   const observed = await page.$eval(selector, (element) => {
@@ -51,6 +112,8 @@ async function captureElementContext(page: Page, selector: string): Promise<Brow
       element instanceof HTMLButtonElement || element instanceof HTMLInputElement
         ? element.formAction || element.getAttribute("formaction")
         : element.getAttribute("formaction");
+    const href = element instanceof HTMLAnchorElement ? element.href : element.getAttribute("href");
+    const text = (html.innerText || element.textContent || "").trim().slice(0, 512) || null;
     return {
       tagName: element.tagName.toLowerCase(),
       inputType: input?.type?.toLowerCase() ?? null,
@@ -58,11 +121,39 @@ async function captureElementContext(page: Page, selector: string): Promise<Brow
       name: element.getAttribute("name"),
       id: html.id || null,
       role: element.getAttribute("role"),
-      formAction: formAction || null
+      formAction: formAction || null,
+      href: href || null,
+      text
     };
   });
-  const basis = { selector, ...observed };
-  return { ...basis, fingerprint: sha256Binding(basis) };
+  return finalizeElementContext(selector, observed);
+}
+
+async function captureFocusedElementContext(page: Page): Promise<BrowserElementContext | null> {
+  const observed = await page.evaluate(() => {
+    const element = document.activeElement;
+    if (!element) return null;
+    const html = element as HTMLElement;
+    const input = element instanceof HTMLInputElement ? element : null;
+    const formAction =
+      element instanceof HTMLButtonElement || element instanceof HTMLInputElement
+        ? element.formAction || element.getAttribute("formaction")
+        : element.getAttribute("formaction");
+    const href = element instanceof HTMLAnchorElement ? element.href : element.getAttribute("href");
+    const text = (html.innerText || element.textContent || "").trim().slice(0, 512) || null;
+    return {
+      tagName: element.tagName.toLowerCase(),
+      inputType: input?.type?.toLowerCase() ?? null,
+      autocomplete: element.getAttribute("autocomplete"),
+      name: element.getAttribute("name"),
+      id: html.id || null,
+      role: element.getAttribute("role"),
+      formAction: formAction || null,
+      href: href || null,
+      text
+    };
+  });
+  return observed ? finalizeElementContext(":focus", observed) : null;
 }
 
 export async function capturePageSnapshot(pageIndex: number): Promise<BrowserPageContext> {
@@ -70,6 +161,7 @@ export async function capturePageSnapshot(pageIndex: number): Promise<BrowserPag
   const url = page.url();
   return {
     pageIndex,
+    targetId: await targetIdOf(page),
     url,
     origin: originOf(url),
     title: await page.title(),
@@ -80,9 +172,14 @@ export async function capturePageSnapshot(pageIndex: number): Promise<BrowserPag
 export async function captureInteractionContext(input: BrowserActionInput): Promise<BrowserPageContext> {
   const page = await getPage(input.pageIndex);
   const url = page.url();
-  const element = input.selector ? await captureElementContext(page, input.selector) : null;
+  const element = input.selector
+    ? await captureElementContext(page, input.selector)
+    : input.operation === "press"
+      ? await captureFocusedElementContext(page)
+      : null;
   return {
     pageIndex: input.pageIndex,
+    targetId: await targetIdOf(page),
     url,
     origin: originOf(url),
     title: await page.title(),
@@ -106,6 +203,7 @@ export async function listPages(): Promise<Array<Record<string, unknown>>> {
   return Promise.all(
     pages.map(async (page, index) => ({
       index,
+      targetId: await targetIdOf(page),
       url: page.url(),
       title: await page.title()
     }))
@@ -120,6 +218,7 @@ export async function readPage(pageIndex: number, maxChars = 20_000): Promise<Re
   }, maxChars);
   return {
     pageIndex,
+    targetId: await targetIdOf(page),
     url: page.url(),
     title: await page.title(),
     text,
@@ -129,9 +228,11 @@ export async function readPage(pageIndex: number, maxChars = 20_000): Promise<Re
 
 export async function navigatePage(pageIndex: number, url: string): Promise<Record<string, unknown>> {
   const page = await getPage(pageIndex);
+  const targetId = await targetIdOf(page);
   const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30_000 });
   return {
     pageIndex,
+    targetId,
     url: page.url(),
     title: await page.title(),
     httpStatus: response?.status() ?? null
