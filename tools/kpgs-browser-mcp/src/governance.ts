@@ -294,7 +294,7 @@ export function verifyReceiptIntegrity(receipt: BrowserReceipt): boolean {
   return sha256Binding(unsigned) === receiptHash;
 }
 
-function isLoopbackHost(hostname: string): boolean {
+export function isLoopbackHost(hostname: string): boolean {
   const normalized = hostname.toLowerCase();
   return normalized === "localhost" || normalized === "127.0.0.1" || normalized === "[::1]" || normalized === "::1";
 }
@@ -308,6 +308,14 @@ function hostMatchesPattern(hostname: string, pattern: string): boolean {
     return host.endsWith(suffix) && host !== suffix.slice(1);
   }
   return host === normalized;
+}
+
+export function assertLoopbackDebugUrl(rawUrl: string): URL {
+  const url = new URL(rawUrl);
+  if (url.protocol !== "http:" && url.protocol !== "https:") throw new Error("CDP_DEBUG_SCHEME_DENIED");
+  if (!isLoopbackHost(url.hostname)) throw new Error("REMOTE_CDP_ENDPOINT_DENIED");
+  if (url.username || url.password) throw new Error("CDP_EMBEDDED_CREDENTIALS_DENIED");
+  return url;
 }
 
 export function assertGovernedNavigationUrl(
