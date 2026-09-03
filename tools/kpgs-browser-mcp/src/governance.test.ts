@@ -4,6 +4,7 @@ import {
   POLICY_VERSION,
   assertGovernedNavigationUrl,
   assertInteractionContextAdmissible,
+  assertLoopbackDebugUrl,
   buildReceipt,
   canonicalJson,
   sha256Binding,
@@ -180,6 +181,15 @@ test("sensitive password file payment and OTP typing targets are denied", () => 
     })
   });
   assert.throws(() => assertInteractionContextAdmissible(input, context), /SENSITIVE_INPUT_DENIED/);
+});
+
+test("CDP endpoint is loopback-only and credential-free", () => {
+  assert.equal(assertLoopbackDebugUrl("http://127.0.0.1:9222").hostname, "127.0.0.1");
+  assert.equal(assertLoopbackDebugUrl("http://localhost:9222").hostname, "localhost");
+  assert.throws(() => assertLoopbackDebugUrl("http://192.168.1.10:9222"), /REMOTE_CDP_ENDPOINT_DENIED/);
+  assert.throws(() => assertLoopbackDebugUrl("https://example.com:9222"), /REMOTE_CDP_ENDPOINT_DENIED/);
+  assert.throws(() => assertLoopbackDebugUrl("http://user:pass@127.0.0.1:9222"), /CDP_EMBEDDED_CREDENTIALS_DENIED/);
+  assert.throws(() => assertLoopbackDebugUrl("ws://127.0.0.1:9222"), /CDP_DEBUG_SCHEME_DENIED/);
 });
 
 test("navigation is HTTPS by default, loopback HTTP only, and can be host constrained", () => {
