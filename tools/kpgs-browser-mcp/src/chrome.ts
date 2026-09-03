@@ -6,7 +6,20 @@ import {
   type BrowserPageContext
 } from "./governance.js";
 
-const DEBUG_URL = process.env.KPGS_CHROME_DEBUG_URL ?? "http://127.0.0.1:9222";
+function isLoopbackHost(hostname: string): boolean {
+  const normalized = hostname.toLowerCase();
+  return normalized === "localhost" || normalized === "127.0.0.1" || normalized === "[::1]" || normalized === "::1";
+}
+
+function assertLoopbackDebugUrl(rawUrl: string): string {
+  const url = new URL(rawUrl);
+  if (url.protocol !== "http:" && url.protocol !== "https:") throw new Error("CDP_DEBUG_SCHEME_DENIED");
+  if (!isLoopbackHost(url.hostname)) throw new Error("REMOTE_CDP_ENDPOINT_DENIED");
+  if (url.username || url.password) throw new Error("CDP_EMBEDDED_CREDENTIALS_DENIED");
+  return url.toString().replace(/\/$/, "");
+}
+
+const DEBUG_URL = assertLoopbackDebugUrl(process.env.KPGS_CHROME_DEBUG_URL ?? "http://127.0.0.1:9222");
 let browserPromise: Promise<Browser> | undefined;
 
 type ObservedElement = {
@@ -79,28 +92,6 @@ function finalizeElementContext(selector: string, observed: ObservedElement): Br
     textDigest
   };
   return { ...basis, fingerprint: sha256Binding(basis) };
-}
-
-function observeElementInPage(element: Element): ObservedElement {
-  const html = element as HTMLElement;
-  const input = element instanceof HTMLInputElement ? element : null;
-  const formAction =
-    element instanceof HTMLButtonElement || element instanceof HTMLInputElement
-      ? element.formAction || element.getAttribute("formaction")
-      : element.getAttribute("formaction");
-  const href = element instanceof HTMLAnchorElement ? element.href : element.getAttribute("href");
-  const text = (html.innerText || element.textContent || "").trim().slice(0, 512) || null;
-  return {
-    tagName: element.tagName.toLowerCase(),
-    inputType: input?.type?.toLowerCase() ?? null,
-    autocomplete: element.getAttribute("autocomplete"),
-    name: element.getAttribute("name"),
-    id: html.id || null,
-    role: element.getAttribute("role"),
-    formAction: formAction || null,
-    href: href || null,
-    text
-  };
 }
 
 async function captureElementContext(page: Page, selector: string): Promise<BrowserElementContext> {
@@ -193,6 +184,7 @@ export async function browserStatus(): Promise<Record<string, unknown>> {
   return {
     connected: browser.connected,
     debugUrl: DEBUG_URL,
+    debugScope: "LOOPBACK_ONLY",
     browserVersion: await browser.version(),
     pageCount: pages.length
   };
