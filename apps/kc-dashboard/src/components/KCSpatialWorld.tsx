@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { SpringDamper3D } from "../math/SpringSystem";
 
-export type WorldDomain = "general" | "work" | "football" | "cars4mars" | "learning";
+export type WorldDomain = "general" | "work" | "football" | "cars4mars" | "learning" | "uyscuti";
 export type MascotMood = "idle" | "listening" | "thinking" | "celebrating";
 
 interface KCSpatialWorldProps {
@@ -330,11 +330,38 @@ export const KCSpatialWorld: React.FC<KCSpatialWorldProps> = ({
     roverGroup.add(hex);
     worldGroup.add(roverGroup);
 
+    // Formation D: UY Scuti Hypergiant Stellar Accretion Disc (Red / Cyan Corona)
+    const scutiGroup = new THREE.Group();
+    const scutiRingGeo = new THREE.TorusGeometry(3.8, 0.045, 16, 80);
+    const scutiRingMat = new THREE.MeshStandardMaterial({
+      color: 0xff2a4d,
+      emissive: 0xff2a4d,
+      emissiveIntensity: 1.4,
+      metalness: 0.9,
+    });
+    const scutiRing = new THREE.Mesh(scutiRingGeo, scutiRingMat);
+    scutiRing.rotation.x = Math.PI / 3;
+    scutiGroup.add(scutiRing);
+
+    const scutiInnerGeo = new THREE.RingGeometry(1.8, 2.2, 32);
+    const scutiInnerMat = new THREE.MeshBasicMaterial({
+      color: 0x00f0ff,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending,
+    });
+    const scutiInner = new THREE.Mesh(scutiInnerGeo, scutiInnerMat);
+    scutiInner.rotation.x = -Math.PI / 4;
+    scutiGroup.add(scutiInner);
+    worldGroup.add(scutiGroup);
+
     // Formation Visibility & Animation Weight
     const updateWorldFormations = (targetDomain: WorldDomain) => {
       workGroup.visible = targetDomain === "work" || targetDomain === "general";
       footballGroup.visible = targetDomain === "football" || targetDomain === "general";
       roverGroup.visible = targetDomain === "cars4mars" || targetDomain === "general";
+      scutiGroup.visible = targetDomain === "uyscuti" || targetDomain === "general";
 
       if (targetDomain === "work") {
         domainLight.color.setHex(0xd97706);
@@ -348,6 +375,9 @@ export const KCSpatialWorld: React.FC<KCSpatialWorldProps> = ({
       } else if (targetDomain === "learning") {
         domainLight.color.setHex(0x8b5cf6);
         membraneMat.emissive.setHex(0x6d28d9);
+      } else if (targetDomain === "uyscuti") {
+        domainLight.color.setHex(0xff2a4d);
+        membraneMat.emissive.setHex(0xd90429);
       } else {
         domainLight.color.setHex(0x00f0ff);
         membraneMat.emissive.setHex(0x0284c7);
@@ -459,6 +489,7 @@ export const KCSpatialWorld: React.FC<KCSpatialWorldProps> = ({
       workGroup.rotation.y = time * 0.1;
       footballGroup.rotation.z = Math.sin(time * 0.3) * 0.1;
       roverGroup.rotation.z = time * 0.15;
+      scutiGroup.rotation.z = time * 0.25;
 
       renderer.render(scene, camera);
     };
@@ -507,6 +538,10 @@ export const KCSpatialWorld: React.FC<KCSpatialWorldProps> = ({
       pitchArcMat.dispose();
       hexGeo.dispose();
       hexMat.dispose();
+      scutiRingGeo.dispose();
+      scutiRingMat.dispose();
+      scutiInnerGeo.dispose();
+      scutiInnerMat.dispose();
     };
   }, [domain, mood]);
 
