@@ -298,6 +298,9 @@ export default function EverydayMode({
 
       <footer className="everyday-footer">
         <span>Simple by default · details when you ask</span>
+        <button type="button" className="quiet-button" onClick={onOpenOperatorMode}>
+          Operator view
+        </button>
         <span>Your local preferences are not authority.</span>
       </footer>
     </main>
