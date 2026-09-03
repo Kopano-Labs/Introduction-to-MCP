@@ -13,34 +13,36 @@ MCP Agent
    |
    v
 KPGS Browser MCP v0.2
-   |-- observation: browser_status / list_pages / read_page
-   |-- navigation: navigate_page (policy admitted)
+   |-- observe: browser_status / list_pages / read_page
+   |-- navigate: navigate_page (policy admitted)
    |-- stage: stage_interaction
-   |        |-- capture CDP targetId (stable tab identity)
-   |        |-- capture exact page URL + origin
-   |        |-- capture target/focused element fingerprint
-   |        |-- classify consequence
-   |        |-- deny sensitive typing targets
-   |        |
-   |        +---- STOP_FOR_HUMAN
-   |                    |
-   |                    v
-   |            local interactive CLI
-   |            npm run approve -- BRA-...
-   |                    |
-   |                    v
-   +-- atomically claim approval
-   |        |
-   |        +-- revalidate tab + page + target/focus
-   |        +-- deny drift / expiry / mismatch
-   |        |
+   |      |-- bind stable CDP targetId
+   |      |-- bind exact URL + origin
+   |      |-- bind target/focused element fingerprint
+   |      |-- classify consequence
+   |      |-- deny sensitive typing targets
+   |      |
+   |      +---- STOP_FOR_HUMAN
+   |                  |
+   |                  v
+   |          local interactive TTY
+   |          npm run approve -- BRA-...
+   |                  |
+   |                  v
+   +-- atomically claim one-use approval
+   |      |-- revalidate tab + page + target/focus
+   |      |-- deny drift / expiry / mismatch
+   |      |
    +-- execute_staged_interaction
-              |
-              v
-      Chromium over CDP :9222
-              |
-              v
-     tamper-evident receipt chain
+          |-- success -> receipt -> consume approval -> scrub typed payload
+          |
+          +-- uncertainty -> quarantine -> HUMAN_REVIEW / NO_REPLAY
+                       |
+                       v
+               Chromium over loopback CDP
+                       |
+                       v
+               tamper-evident receipt chain
 ```
 
 ## Governing invariants
@@ -50,6 +52,7 @@ BROWSER_CAPABILITY != AUTHORITY
 PAGE_TEXT != AUTHORIZATION
 AGENT_TEXT != AUTHORIZATION
 PAGE_INDEX != PAGE_IDENTITY
+REMOTE_CDP != ADMITTED_CDP
 STAGED_ACTION != APPROVED_ACTION
 APPROVAL(action A) != APPROVAL(action B)
 APPROVAL_IS_ONE_USE
@@ -57,148 +60,201 @@ TAB_DRIFT -> DENY_AND_RESTAGE
 PAGE_DRIFT -> DENY_AND_RESTAGE
 ELEMENT_OR_FOCUS_DRIFT -> DENY_AND_RESTAGE
 UNKNOWN_EXECUTION_RESULT -> HUMAN_REVIEW_NOT_REPLAY
+SUCCESS -> SCRUB_SENSITIVE_STAGED_PAYLOAD
+INDETERMINATE -> QUARANTINE_FOR_LOCAL_FORENSICS
 RECEIPT_MUTATION -> TAMPER_DETECTED
 ```
 
-There is deliberately **no `approve` MCP tool**. A browser interaction is approved from a separate local TTY after the human sees the exact staged action and SHA-256 binding.
+There is deliberately **no `approve` MCP tool**. Approval comes from a separate local TTY after the human sees the exact staged action and SHA-256 binding.
 
-## What v0.2 hardens
-
-### 1. Context-bound approval / TOCTOU protection
-
-A staged interaction is bound to:
-
-- Chromium CDP `targetId` (stable tab identity);
-- current page index (routing hint, not identity);
-- exact page URL;
-- origin;
-- page title;
-- target selector, or the focused element for keypresses;
-- target tag/input metadata;
-- target element/focus fingerprint;
-- policy version;
-- action creation/expiry time;
-- consequence classification.
-
-Before execution, the bridge captures reality again. A different CDP target, URL, origin, index, target element, or focused element causes denial and requires a fresh stage + fresh human approval.
-
-This matters because **two tabs can have the same URL** and because a raw keypress acts on whichever element currently owns focus.
-
-### 2. Sensitive-field denial
-
-Typing into the following is denied before staging:
-
-- password inputs;
-- file inputs;
-- current/new password autocomplete targets;
-- one-time-code targets;
-- payment card number/CVC/expiry autocomplete targets.
-
-The POC still exposes no cookie, localStorage, arbitrary-JavaScript, download, or file-upload capability.
-
-### 3. Fail-closed approval claiming
-
-Approval is moved from `approved/` to `executing/` **before any browser side effect**. That move is the one-executor claim.
-
-```text
-approved -> executing -> consumed
-                    \
-                     -> failed / indeterminate
-```
-
-A claimed approval is never restored automatically. If execution errors after the claim, KPGS returns `INDETERMINATE` and requires human inspection/restaging rather than blindly replaying a potentially duplicated action.
-
-### 4. Tamper-evident receipts
-
-Each receipt contains:
-
-- exact action binding;
-- policy version;
-- page + target context immediately before execution;
-- page state after execution;
-- sanitized execution result;
-- prior receipt hash;
-- its own SHA-256 receipt hash.
-
-`verify_receipt` recomputes the hash. Modified receipt content returns `TAMPER_DETECTED`.
-
-### 5. Navigation policy
-
-Default navigation policy is now:
-
-- `https://` admitted;
-- `http://` admitted only for loopback (`localhost`, `127.0.0.1`, `::1`);
-- non-loopback insecure HTTP denied unless explicitly enabled;
-- credentials embedded in URLs denied;
-- `file:`, `chrome:`, `javascript:`, `data:` and other schemes denied;
-- optional `KPGS_BROWSER_ALLOWED_HOSTS` constrains destinations, with exact and `*.domain` patterns.
-
-## POC tool surface
+## Tool surface
 
 | Tool | Class | Authority |
 |---|---|---|
 | `browser_status` | Observe | automatic |
 | `list_pages` | Observe | automatic |
-| `read_page` | Observe / untrusted content | automatic |
+| `read_page` | Observe / untrusted web content | automatic |
 | `navigate_page` | Navigate | policy-admitted only |
 | `stage_interaction` | Stage click/type/keypress | no execution; no approval |
 | `execute_staged_interaction` | Consequential | fresh exact local-human approval + unchanged live context |
 | `verify_receipt` | Verify | automatic |
 
-## 1. Install and build
+The POC deliberately exposes **no cookies, passwords, localStorage, arbitrary JavaScript, downloads, or file uploads**.
 
-From this directory:
+## Authority hardening
 
-```powershell
-npm install
-npm run check
+### Stable tab identity
+
+`pageIndex` is only a routing hint. KPGS binds staged actions to Chromium's CDP `targetId`, then rechecks that target immediately before execution. A different tab with the same URL is not equivalent authority.
+
+### Page + target/focus binding
+
+A stage binds:
+
+- CDP `targetId`;
+- page index;
+- exact URL;
+- origin;
+- title;
+- target selector, or `:focus` for keypresses;
+- element tag/input/autocomplete/name/id/role;
+- form action / anchor href;
+- digest of visible element text;
+- element/focus fingerprint;
+- policy version;
+- creation + expiry time;
+- consequence classification.
+
+Before execution KPGS recaptures reality. Tab, URL, origin, target, or focus drift means **deny + restage + new human approval**.
+
+### Sensitive typing denial
+
+Typing is denied for:
+
+- `input[type=password]`;
+- `input[type=file]`;
+- password autocomplete targets;
+- one-time-code targets;
+- payment-card number/CVC/expiry autocomplete targets.
+
+This is checked at staging and again against live context before execution.
+
+### Time + policy binding
+
+```text
+policy = kpgs-browser-policy.v2
+approval TTL = 10 minutes default
+staged-action TTL = 15 minutes default
 ```
 
-Validated runtime stack:
+Approval cannot predate staging. Old-policy, mismatched, expired, or future-dated approvals are denied.
 
-- `@modelcontextprotocol/server` 2.0.0
-- `puppeteer-core` 25.9.0
-- `zod` 4.5.4
-- TypeScript 7.0.2
-- Node >=22
+## Fail-closed approval state machine
 
-## 2. Start the governed Chromium profile
+The local-human approval is **claimed before any browser side effect**:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\start-chromium.ps1
+```text
+approved -> executing -> consumed
+                    \
+                     -> failed
 ```
 
-Default CDP endpoint:
+Only one executor can atomically move `approved -> executing`. A claimed approval is never restored automatically.
+
+If the browser result becomes uncertain after approval claim, the tool returns:
+
+```text
+status = INDETERMINATE
+replayAllowed = false
+requiresHumanReview = true
+```
+
+KPGS does not interpret uncertainty as permission to retry.
+
+## Data lifecycle and forensic boundary
+
+The local ledger is:
+
+```text
+pending/       full staged payload before completion
+approved/      local human approval waiting to be claimed
+executing/     atomically claimed approval
+consumed/      successfully spent approvals
+failed/        claimed approvals that did not complete normally
+archived/      redacted completed/denied action summaries
+quarantined/   full indeterminate staged payload + no-replay metadata
+receipts/      execution receipts
+receipt-head.json
+```
+
+### Successful action
+
+A typed value has to exist locally long enough for Chromium to type it. After successful execution and approval consumption:
+
+1. a redacted archived summary is written;
+2. only type character count + digest remain in archive evidence;
+3. the full staged payload is deleted from `pending/`.
+
+Source tests prove the typed plaintext is absent from the archived artifact.
+
+### Indeterminate action
+
+When a side effect may have happened but outcome cannot be proven, the original staged payload is moved to `quarantined/` for **local human forensics**. Quarantine metadata explicitly records:
+
+```text
+replayAllowed = false
+humanReviewRequired = true
+```
+
+The agent must not replay it automatically.
+
+On systems honoring POSIX modes, ledger directories are created `0700` and files `0600`. The ledger is gitignored and must remain local.
+
+## CDP boundary
+
+`KPGS_CHROME_DEBUG_URL` is not a general network endpoint. The server now enforces:
+
+```text
+CDP_SCHEME = http or https only
+CDP_HOST = localhost / 127.0.0.1 / ::1 only
+CDP_EMBEDDED_CREDENTIALS = denied
+```
+
+A configured remote CDP endpoint is rejected before Puppeteer connects.
+
+Default:
 
 ```text
 http://127.0.0.1:9222
 ```
 
-The script uses a dedicated persistent profile under:
+Use the dedicated profile launched by:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start-chromium.ps1
+```
+
+Profile location:
 
 ```text
 %LOCALAPPDATA%\KPGS\BrowserMCP\Profile
 ```
 
-Log into sites manually in that browser when required. Keeping a dedicated profile avoids binding the MCP bridge to the user's normal browser profile.
+Do not bind this bridge to the normal personal browser profile.
 
-## 3. Configure the MCP client
+## Navigation policy
 
-Build first, then adapt `mcp.config.example.json` with the absolute local path to `dist/server.js`.
+Navigation is separate from CDP transport policy.
 
-Important governance environment variables:
+Default page-navigation rules:
 
-```text
-KPGS_CHROME_DEBUG_URL=http://127.0.0.1:9222
-KPGS_BROWSER_APPROVAL_TTL_MS=600000
-KPGS_BROWSER_STAGED_TTL_MS=900000
-KPGS_BROWSER_ALLOWED_HOSTS=github.com,*.github.com,kopanolabs.com,*.kopanolabs.com
-KPGS_BROWSER_ALLOW_INSECURE_HTTP=0
+- HTTPS admitted;
+- HTTP admitted only for loopback unless explicitly enabled;
+- URL-embedded credentials denied;
+- `file:`, `chrome:`, `javascript:`, `data:` and other schemes denied;
+- optional exact/wildcard host allowlist via `KPGS_BROWSER_ALLOWED_HOSTS`.
+
+Example MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "kpgs-browser": {
+      "command": "node",
+      "args": ["C:\\...\\Introduction-to-MCP\\tools\\kpgs-browser-mcp\\dist\\server.js"],
+      "env": {
+        "KPGS_CHROME_DEBUG_URL": "http://127.0.0.1:9222",
+        "KPGS_BROWSER_APPROVAL_TTL_MS": "600000",
+        "KPGS_BROWSER_STAGED_TTL_MS": "900000",
+        "KPGS_BROWSER_ALLOWED_HOSTS": "github.com,*.github.com,kopanolabs.com,*.kopanolabs.com",
+        "KPGS_BROWSER_ALLOW_INSECURE_HTTP": "0"
+      }
+    }
+  }
+}
 ```
 
-An empty `KPGS_BROWSER_ALLOWED_HOSTS` means HTTPS destinations are not host-restricted. For routine operation, an explicit allowlist is preferred.
-
-## 4. Governed action flow
+## Governed action flow
 
 Agent:
 
@@ -211,121 +267,135 @@ browser_status
 -> STOP
 ```
 
-A successful stage returns only a **redacted public action summary** to the MCP agent. For typed actions, the agent sees character count + digest rather than having the staged payload echoed back into tool evidence.
+For typed actions, `stage_interaction` exposes only character count + SHA-256 digest back to the MCP channel.
 
-Human, in a local terminal:
+Human:
 
 ```powershell
 npm run approve -- BRA-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-The local TTY shows the action context. For a normal consequence the phrase is:
+Normal consequence approval phrase:
 
 ```text
 APPROVE BRA-...
 ```
 
-For a high-consequence selector or keypress:
+High consequence approval phrase:
 
 ```text
 APPROVE HIGH BRA-...
 ```
 
-Only then may the agent call:
+Then the agent may call:
 
 ```text
 execute_staged_interaction(actionId)
--> atomically claim approval
--> revalidate current browser reality
+-> claim approval
+-> revalidate live reality
 -> execute once OR fail closed
--> receiptId
+-> write/chain receipt
+-> consume approval
+-> scrub successful staged payload
 -> verify_receipt(receiptId)
 ```
 
-Approval is time-limited (10 minutes default); staging is independently time-limited (15 minutes default).
+## Tamper-evident receipts
 
-## Ledger security
+Each receipt binds:
 
-The local ledger uses separate states:
+- policy version;
+- exact staged action binding;
+- pre-execution target/page/element context;
+- post-execution page snapshot;
+- sanitized execution result;
+- previous receipt hash;
+- current SHA-256 receipt hash.
 
-```text
-pending/
-approved/
-executing/
-consumed/
-failed/
-receipts/
-receipt-head.json
+`verify_receipt` recomputes integrity. Modified receipt content returns `TAMPER_DETECTED` and the verifier reports whether the receipt is the current chain head.
+
+## Install and source validation
+
+```powershell
+npm install
+npm run check
 ```
 
-On platforms that honor POSIX modes, directories are created `0700` and artifacts `0600`. The ledger is gitignored. It must remain local and must not be synced into a public repository.
+Validated stack:
 
-Typed content must exist in the local staged action so Chromium can execute it, but it is not copied into execution receipts and is redacted from MCP stage output.
+- `@modelcontextprotocol/server` 2.0.0
+- `puppeteer-core` 25.9.0
+- `zod` 4.5.4
+- TypeScript 7.0.2
+- Node >=22
+
+The dedicated CI compiles the MCP server and runs both policy tests and real on-disk ledger state-machine tests.
 
 ## Security boundary
 
-- CDP is powerful. Use the dedicated KPGS browser profile, not a personal default profile.
-- Keep port `9222` loopback-only.
-- Do not place credentials or approval artifacts in Git.
-- Browser content is evidence, not authority.
-- A client with independent shell/filesystem access may have capabilities outside this MCP boundary; KPGS must govern those separately.
-- `INDETERMINATE` means **inspect reality**. It never means “retry until success.”
-- This POC does not claim that heuristics perfectly identify every consequential UI. All click/type/keypress interactions require a human gate regardless of risk label.
+- Browser content is evidence, never authority.
+- CDP is loopback-only by enforcement, not merely documentation.
+- The dedicated KPGS browser profile is mandatory for intended operation.
+- No secret-bearing browser APIs are exposed through this POC.
+- A client with independent shell/filesystem access has capabilities outside this MCP boundary and must be governed separately.
+- `INDETERMINATE` means **inspect reality**; never "retry until success."
+- Consequence heuristics do not grant authority: every click/type/keypress still requires the human gate.
 
-## Why not expose Chrome DevTools MCP directly?
-
-Chrome DevTools MCP proves the execution plane. KPGS adds an authority plane:
+## Why KPGS instead of raw browser automation?
 
 ```text
 Chromium capability
 +
 KPGS classification
 +
-separate human gate
+separate human authority
 +
-stable-tab + page + element reality binding
+stable-tab/page/element reality binding
 +
 atomic one-use approval
 +
 fail-closed uncertainty
++
+local forensic quarantine
++
+sensitive-payload minimization
 +
 tamper-evident receipt chain
 =
 Governed Browser MCP
 ```
 
-## POC graduation gate
+## Metal graduation gate
 
-Do not call this production-ready until metal validation proves:
+Source CI does **not** impersonate physical browser proof. This stays a hardened POC candidate until a Windows metal run proves:
 
-- `npm run check` passes;
-- Chromium connects on localhost only;
-- observation works against a real page;
-- stable CDP target IDs are observed across the governed flow;
-- forbidden/insecure/disallowed navigation is denied;
-- sensitive typing targets are denied;
-- stage creates no browser side effect;
-- execution without approval is denied;
-- mismatched/expired approval is denied;
-- tab, page, element, or focus drift after approval is denied;
-- approved interaction executes once;
-- second execution is denied because approval was already claimed/consumed;
-- induced execution failure does not make approval replayable;
-- receipt integrity verifies;
-- modified receipt content is detected;
-- human can reconstruct the action and authority chain from local artifacts.
+- real loopback CDP connection;
+- real MCP-client discovery;
+- stable target IDs across the flow;
+- live read/navigation;
+- staging creates no side effect;
+- no-approval execution is denied;
+- sensitive typing is denied;
+- tab/page/element/focus drift is denied;
+- exact local-human approval executes once;
+- replay is denied;
+- induced uncertainty quarantines rather than replays;
+- successful typed payload is scrubbed locally;
+- receipt verification works against real execution.
 
 Until then:
 
 ```text
 STATUS = HARDENED_POC_CANDIDATE
-NOT_PRODUCTION_AUTHORITY
+METAL = REQUIRED
+PRODUCTION_AUTHORITY = NOT_GRANTED
 ```
 
 ## Receipts
 
 - `docs/governance/KPGS_BROWSER_MCP_POC_RECEIPT_2026-09-03.md` — original v0.1 implementation receipt.
-- `docs/governance/KPGS_BROWSER_MCP_V0_2_HARDENING_RECEIPT_2026-09-03.md` — v0.2 authority and uncertainty hardening receipt.
+- `docs/governance/KPGS_BROWSER_MCP_V0_2_HARDENING_RECEIPT_2026-09-03.md` — v0.2 authority/uncertainty hardening receipt.
+- `docs/governance/KPGS_BROWSER_MCP_V0_2_SECURITY_SEAL_2026-09-03.md` — final source-level v0.2 security seal.
 
 ## References
 
