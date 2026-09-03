@@ -1,6 +1,12 @@
-import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { verifyReceiptIntegrity, type BrowserReceipt, type HumanApproval, type StagedBrowserAction } from "./governance.js";
+import {
+  publicActionSummary,
+  verifyReceiptIntegrity,
+  type BrowserReceipt,
+  type HumanApproval,
+  type StagedBrowserAction
+} from "./governance.js";
 
 const ROOT = path.resolve(process.env.KPGS_BROWSER_LEDGER_DIR ?? ".kpgs-browser-ledger");
 const PENDING = path.join(ROOT, "pending");
@@ -9,6 +15,8 @@ const EXECUTING = path.join(ROOT, "executing");
 const RECEIPTS = path.join(ROOT, "receipts");
 const CONSUMED = path.join(ROOT, "consumed");
 const FAILED = path.join(ROOT, "failed");
+const ARCHIVED = path.join(ROOT, "archived");
+const QUARANTINED = path.join(ROOT, "quarantined");
 const RECEIPT_HEAD = path.join(ROOT, "receipt-head.json");
 
 function assertActionId(actionId: string): void {
@@ -22,7 +30,7 @@ function assertReceiptId(receiptId: string): void {
 async function ensureLedger(): Promise<void> {
   await mkdir(ROOT, { recursive: true, mode: 0o700 });
   await Promise.all(
-    [PENDING, APPROVED, EXECUTING, RECEIPTS, CONSUMED, FAILED].map((dir) =>
+    [PENDING, APPROVED, EXECUTING, RECEIPTS, CONSUMED, FAILED, ARCHIVED, QUARANTINED].map((dir) =>
       mkdir(dir, { recursive: true, mode: 0o700 })
     )
   );
@@ -55,6 +63,38 @@ export async function readStagedAction(actionId: string): Promise<StagedBrowserA
   await ensureLedger();
   assertActionId(actionId);
   return readJson<StagedBrowserAction>(path.join(PENDING, `${actionId}.json`));
+}
+
+export async function archiveStagedAction(actionId: string, disposition: string): Promise<void> {
+  await ensureLedger();
+  assertActionId(actionId);
+  const pendingPath = path.join(PENDING, `${actionId}.json`);
+  const staged = await readJson<StagedBrowserAction>(pendingPath);
+  if (!staged) return;
+  await writeNewJson(path.join(ARCHIVED, `${actionId}.json`), {
+    disposition,
+    closedAt: new Date().toISOString(),
+    action: publicActionSummary(staged)
+  });
+  await unlink(pendingPath);
+}
+
+export async function quarantineStagedAction(actionId: string, reason: string): Promise<void> {
+  await ensureLedger();
+  assertActionId(actionId);
+  const from = path.join(PENDING, `${actionId}.json`);
+  const to = path.join(QUARANTINED, `${actionId}.json`);
+  try {
+    await rename(from, to);
+    await writeNewJson(path.join(QUARANTINED, `${actionId}.meta.json`), {
+      reason,
+      quarantinedAt: new Date().toISOString(),
+      replayAllowed: false,
+      humanReviewRequired: true
+    });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
 }
 
 export async function writeHumanApproval(approval: HumanApproval): Promise<void> {
