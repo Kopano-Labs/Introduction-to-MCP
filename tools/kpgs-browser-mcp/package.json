@@ -1,0 +1,26 @@
+{
+  "name": "@kopano/kpgs-browser-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Governed MCP bridge from agents to a user-controlled Chromium instance.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "approve": "node dist/approve.js",
+    "test": "npm run build && node --test dist/governance.test.js",
+    "check": "npm run test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "puppeteer-core": "25.9.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
