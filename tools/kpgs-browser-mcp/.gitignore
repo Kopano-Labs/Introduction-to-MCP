@@ -1,0 +1,4 @@
+node_modules/
+dist/
+.kpgs-browser-ledger/
+*.log
