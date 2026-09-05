@@ -1,6 +1,6 @@
 """
 Kopano Types Package
 """
-from .assert import KopanoAssert
+from .assert_type import KopanoAssert
 
 __all__ = ["KopanoAssert"]
