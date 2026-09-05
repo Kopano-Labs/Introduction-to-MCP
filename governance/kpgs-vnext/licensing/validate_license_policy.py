@@ -29,8 +29,15 @@ def require_apache_2_license(path: Path) -> None:
         "Grant of Patent License",
         "Submission of Contributions",
         "END OF TERMS AND CONDITIONS",
+        "APPENDIX: How to apply the Apache License to your work.",
+        "http://www.apache.org/licenses/LICENSE-2.0",
     ):
         require(marker in text, f"root LICENSE is missing canonical Apache-2.0 marker: {marker}")
+
+
+def normalize_markdown_text(text: str) -> str:
+    """Normalize lightweight Markdown emphasis before semantic phrase checks."""
+    return text.replace("**", "").replace("__", "").lower()
 
 
 def main() -> None:
@@ -81,8 +88,8 @@ def main() -> None:
     require("provenance" in contributing.lower(), "contribution policy must preserve provenance")
     require("license" in contributing.lower(), "contribution policy must state license handling")
 
-    notices = NOTICES.read_text(encoding="utf-8")
-    require("does **not** relicense" in notices or "does not relicense" in notices.lower(), "third-party notice registry must state that root licensing does not relicense upstream material")
+    notices = normalize_markdown_text(NOTICES.read_text(encoding="utf-8"))
+    require("does not relicense" in notices, "third-party notice registry must state that root licensing does not relicense upstream material")
 
     policy = POLICY.read_text(encoding="utf-8")
     for phrase in ("Existing third-party material", "Generated code and assets", "KPGS skill promotion gate"):
