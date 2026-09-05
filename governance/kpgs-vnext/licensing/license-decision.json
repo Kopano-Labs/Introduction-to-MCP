@@ -1,22 +1,35 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "repository": "RobynAwesome/Introduction-to-MCP",
   "issue": 47,
-  "decision_status": "AWAITING_HUMAN_DECISION",
+  "decision_status": "HUMAN_APPROVED",
   "current_repository_state": {
-    "root_license_file_present": false,
-    "canonical_spdx": null,
-    "repository_wide_license_claim_allowed": false
+    "root_license_file_present": true,
+    "canonical_spdx": "Apache-2.0",
+    "repository_wide_license_claim_allowed": true,
+    "scope": "Repository-authored material for which the repository owner has legal authority to license. Existing or imported third-party, vendored, fork-derived, path-specific, or otherwise separately licensed material retains its own governing terms."
   },
-  "recommendation": {
+  "human_decision": {
+    "spdx": "Apache-2.0",
+    "status": "AUTHORIZED",
+    "authorized_by": "Kholofelo Robyn Rababalela",
+    "authorization_source": "Explicit human-owner instruction to plan and implement Apache-2.0 licensing through the canonical repository on 2026-09-05.",
+    "authorized_at": "2026-09-05T18:14:00+02:00",
+    "rationale": [
+      "Apache-2.0 remains permissive while adding an explicit patent grant and patent-termination mechanism relevant to long-lived KPGS protocols, runtimes, SDKs and multi-contributor infrastructure.",
+      "The repository already has provenance, attribution and compatibility governance that maps cleanly to Apache-2.0 redistribution and contribution requirements.",
+      "The decision preserves third-party and path-specific licensing rather than treating a root license as authority over material the owner does not control."
+    ]
+  },
+  "superseded_recommendation": {
     "spdx": "MIT",
-    "status": "RECOMMENDED_NOT_AUTHORIZED",
+    "status": "SUPERSEDED_BY_HUMAN_DECISION",
     "basis": [
-      "Existing FivesArena skill packaging in the user's governed ecosystem declares MIT.",
-      "Existing KRRababalela skill packaging in the user's governed ecosystem declares MIT.",
-      "A permissive single SPDX identifier would simplify KPGS skill/package compatibility checks if the human owner chooses it."
+      "Existing FivesArena skill packaging in the governed ecosystem declared MIT.",
+      "Existing KRRababalela skill packaging in the governed ecosystem declared MIT.",
+      "A permissive single SPDX identifier simplified compatibility checks."
     ],
-    "non_claim": "This recommendation does not license this repository and must not be treated as owner consent."
+    "non_claim": "The earlier MIT recommendation was never authorization and did not license this repository."
   },
   "allowed_human_decisions": [
     "MIT",
@@ -25,8 +38,8 @@
     "UNLICENSED",
     "PATH_SPECIFIC"
   ],
-  "promotion_rule": "No repository-authored artifact may move from license_status unknown/pending to verified-compatible solely from this recommendation. A current human-approved decision and corresponding repository/path license evidence are required.",
-  "third_party_rule": "Existing or imported third-party licenses must be preserved exactly and may never be overwritten by a repository-wide declaration.",
+  "promotion_rule": "Repository-authored material may move from license_status unknown/pending to verified-compatible only when the relevant human-authorized repository/path decision, provenance, compatibility and attribution evidence are all satisfied.",
+  "third_party_rule": "Existing or imported third-party licenses must be preserved exactly and may never be overwritten by the repository-wide Apache-2.0 declaration.",
   "generated_material_rule": "Generated code, documentation and assets require provenance and human review; generation does not erase upstream rights, attribution duties or source-license constraints.",
-  "updated_at": "2026-08-17T15:47:00+02:00"
+  "updated_at": "2026-09-05T18:14:00+02:00"
 }
