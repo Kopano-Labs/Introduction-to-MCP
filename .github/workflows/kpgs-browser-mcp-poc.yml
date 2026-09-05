@@ -9,6 +9,9 @@ on:
       - "tools/kpgs-browser-mcp/**"
       - ".github/workflows/kpgs-browser-mcp-poc.yml"
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
