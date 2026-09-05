@@ -2,6 +2,8 @@
 
 This file records third-party attribution required by material admitted into `RobynAwesome/Introduction-to-MCP`.
 
+The root `Apache-2.0` license governs only repository-authored material that the repository owner has legal authority to license. It does **not** relicense, replace, weaken, or erase upstream licenses, copyright notices, attribution requirements, path-specific terms, or other third-party rights.
+
 The presence of an entry here does not replace source-level notices or license files required by an upstream license.
 
 ## Registry
